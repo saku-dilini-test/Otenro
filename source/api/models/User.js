@@ -103,6 +103,12 @@ module.exports = {
     loginPin: {
         type: 'string'
     },
+    isMobileVerified: {
+      type: 'boolean'
+    },
+    mobileVerificationPin: {
+      type: 'string'
+    },
 
     toJSON: function() {
       var obj = this.toObject();

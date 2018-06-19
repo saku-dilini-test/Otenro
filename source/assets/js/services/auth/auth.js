@@ -50,10 +50,18 @@ angular.module('app')
         LocalService.unset('satellizer_token');
         var register = $http.post('/auth/register', formData);
         register.success(function(result) {
-          LocalService.set('satellizer_token', result.token );
-          LocalService.set('user', result.user);
+          // LocalService.set('satellizer_token', result.token );
+          // LocalService.set('user', result.user);
         });
         return register;
+      },
+      verifyMobile: function (user) {
+          var verifyMobile = $http.post('/auth/verifyMobileNumber', user);
+          verifyMobile.success(function (result) {
+              LocalService.set('satellizer_token', result.token );
+              LocalService.set('user', result.user);
+          });
+          return verifyMobile;
       },
       //Authentication for password forgot users
       forgotPassword: function(formData) {

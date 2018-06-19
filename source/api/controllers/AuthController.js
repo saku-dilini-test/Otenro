@@ -150,6 +150,26 @@ module.exports = {
 
   register: function(req, res) {
 
+      function pinGenerator() {
+          this.length = 6;
+          this.timestamp = +new Date;
+          var _getRandomInt = function( min, max ) {
+              return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
+          };
+          this.generate = function() {
+              var ts = this.timestamp.toString();
+              var parts = ts.split( "" ).reverse();
+              var pin = "";
+              for( var i = 0; i < this.length; ++i ) {
+                  var index = _getRandomInt( 0, parts.length - 1 );
+                  pin += parts[index];
+              }
+              return pin;
+          }
+      }
+      var pGenerator = new pinGenerator();
+      var mobileVerificationPin = pGenerator.generate();
+
 
 //      console.log("req.body.cap "+req.body.cap);
 
@@ -184,7 +204,9 @@ module.exports = {
                           bankCode: req.body.bankCode,
                           branchCode: req.body.branchCode,
                           branchName: req.body.branchName,
-                          accountNumber: req.body.accountNumber
+                          accountNumber: req.body.accountNumber,
+                          isMobileVerified: false,
+                          mobileVerificationPin: mobileVerificationPin
                       };
                       if(req.body.adagent){
                           newUserDetails.adagent = req.body.adagent;
@@ -206,8 +228,31 @@ module.exports = {
                                 console.log(msg);
                                 res.send(msg);
                           });
+                          // Send mobile number verification pin
+                          url = 'https://sms.textware.lk:5001/sms/send_sms.php';
+                          queryString = {
+                              username: 'simato',
+                              password: 'Si324Mt',
+                              src: 'Balamu',
+                              dst: user.mobile,
+                              msg: 'Your registration pin is ' + mobileVerificationPin,
+                              dr: '1'
+                          };
+                          request({url: url, qs: queryString}, function(err, response, body) {
+                              if (err) {
+                                  sails.log(err);
+                              } else if (typeof response !== "undefined") {
+                                  if (response.statusCode === 200) {
+                                      return res.send({ message: 'success', id: user.id });
+                                  } else {
+                                      return res.send({ message: 'error' });
+                                  }
+                              } else {
+                                  return res.send({ message: 'error' });
+                              }
+                          });
                            sails.config.logging.custom.info({message:'User Registered Successfully! emailId:' + req.body.email});
-                              createToken(user,res);
+                              // createToken(user,res);
                           }
                       });
                   });
@@ -220,6 +265,29 @@ module.exports = {
 
 
   },
+    /**
+     * Verify mobile number
+     * @param req - userId and mobileVerificationPin in req.body
+     * @param res
+     **/
+    verifyMobileNumber: function (req, res) {
+        var id = req.body.id;
+        var pin = req.body.pin;
+        User.findOne({ id: id }).exec(function (err, user) {
+            if (err) return res.send({ message : 'error' });
+            if (!user) return res.send({ message: 'user not found' });
+            if (user) {
+                if ( user.mobileVerificationPin === pin ) {
+                   User.update({ id: id }, { isMobileVerified: true }).exec(function (err) {
+                       if (err) sails.log.error('Update Failed => mobilePinVerificationPin is Correct => In verifyMobileNumber => AuthController.js');
+                       createToken(user,res);
+                   });
+                } else {
+                    return res.send({ message: 'wrong pin' });
+                }
+            }
+        });
+    },
     sendAgentInfo: function(req, res) {
         var retUrl = req.body.returnUrl;
         var paramseperator = "?";
