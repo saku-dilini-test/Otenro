@@ -97,13 +97,15 @@ module.exports = {
                    "allowedRoles": [
                      "admin",
                      "superAdmin"
-                   ]
+                   ],
+                   "color":"rgb(146, 240, 146)"
                  },
                  {
                    "code": "REJECTED",
                    "description": "Rejected",
                    "nextAvailable": [],
-                   "allowedRoles": []
+                   "allowedRoles": [],
+                   "color":"rgb(253, 108, 108)"
                  },
                  {
                    "code": "SUSPENDED",
@@ -114,7 +116,8 @@ module.exports = {
                    "allowedRoles": [
                      "admin",
                      "superAdmin"
-                   ]
+                   ],
+                   "color":"rgb(240, 248, 120)"
                  },
                  {
                    "code": "TERMINATED",
@@ -123,7 +126,8 @@ module.exports = {
                    "allowedRoles": [
                      "admin",
                      "superAdmin"
-                   ]
+                   ],
+                   "color" : "rgb(253, 108, 108)"
                  }
                ]
             }

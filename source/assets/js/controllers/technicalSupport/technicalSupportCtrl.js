@@ -498,6 +498,17 @@
                 return count;
           }
 
+          $scope.getColor = function(status){
+
+            if(status){
+                 var curStatusObj = $filter('filter')($scope.appStatusArr,{ "code": status });
+                 if(curStatusObj){
+                      return curStatusObj[0].color;
+                 }
+            }
+
+          }
+
 
     }
 

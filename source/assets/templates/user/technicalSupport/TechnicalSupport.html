@@ -83,7 +83,7 @@
                             <div data-ng-repeat="user in userList">
                                 <div ng-if="user.id==app.userId">
                             <div class="col-sm-8">
-                                <select ng-model= "publishStatus">
+                                <select ng-model= "publishStatus" ng-style ="{'background-color': getColor(publishStatus)}">
                                     <option ng-repeat="sts in getArr(publishStatus,app.publishStatus)" value="{{sts.code}}" >{{sts.description}}</option>
                                 </select>
                             </div>
