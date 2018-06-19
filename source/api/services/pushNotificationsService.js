@@ -17,13 +17,19 @@ module.exports = {
         }
      * @param message
      */
-    sendPushNotifications: function(messagesArray){
+    sendPushNotifications: function(deviceId ,message){
+        //console.log("json " + JSON.stringify(json));
         sails.log.debug("Call sendPushNotifications");
 
-        messagesArray.forEach(function(message){
+        //messagesArray.forEach(function(message){
             request.post(
                 PushUrl,{
-                    json: message,
+                    json:{
+                        "to":deviceId,
+                        "notification" : {
+                            "body" : message
+                        }
+                    },
                     headers:{
                         'Authorization' : Authorization,
                         'Content-Type' : 'application/json'
@@ -36,7 +42,7 @@ module.exports = {
                         sails.log("push message send failed =>", response.statusCode);
                     }
                 });
-        });
+       // });
     },
 
     sendPushNotification: function(req,res){

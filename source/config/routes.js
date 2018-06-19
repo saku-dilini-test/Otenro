@@ -407,6 +407,12 @@ module.exports.routes = {
     'GET  /edit/getAdNetwork': 'technicalSupport/TechnicalSupportController.getAddNetwork',
     'POST  /edit/sendApkEmail': 'technicalSupport/TechnicalSupportController.sendApkEmail',
     'GET /getApk' : 'technicalSupport/TechnicalSupportController.getApk',
+    'GET /edit/getAllPublishDetails' : 'technicalSupport/TechnicalSupportController.getAllPublishDetails',
+    'GET /edit/getOperators' : 'technicalSupport/TechnicalSupportController.getOperators',
+    'GET /edit/getAppStatus' : 'technicalSupport/TechnicalSupportController.getAppStatus',
+    'POST /edit/setOperators' : 'technicalSupport/TechnicalSupportController.setOperators',
+    'POST /edit/setComments' : 'technicalSupport/TechnicalSupportController.setComments',
+    'POST /edit/setAppstatus' : 'technicalSupport/TechnicalSupportController.setAppstatus',
 
     /**
      * IPG Controller

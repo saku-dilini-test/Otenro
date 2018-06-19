@@ -5,46 +5,40 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
-
 module.exports = {
 
   schema: true,
 
   attributes: {
 
-    msisdn:{
-
-       type: 'string'
+    date:{
+       type: 'date'
     },
-    appId:{
+    appID:{
+      type: 'string'
+    },
+    msisdn:{
         type: 'string'
     },
-
     serviceId:{
-          type: 'string'
-      },
-
-    status:{
-
         type: 'string'
     },
     subscriptionStatus:{
-
         type: 'string'
     },
-    lastAccessTime:{
-
-        type: 'date'
+    byUser:{
+        type: 'string'
     },
-    registeredDate:{
-
-        type:'string'
+    note:{
+      type: 'string'
     },
-    deviceUUID:{
-
-      type:'string'
-
+    method:{
+        type: 'string'
+    },
+    messageBody: {
+        type: 'json'
     }
+
   }
 
 

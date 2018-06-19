@@ -7,6 +7,7 @@ var fs = require('fs-extra'),
     email  = require('../../../node_modules/emailjs/email');
 
     const nodemailer = require('nodemailer');
+var sentMails = require('../../services/emailService');
 
 
 
@@ -19,13 +20,16 @@ var server  = email.server.connect({
 
     // create reusable transporter object using the default SMTP transport
  var transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false, // true for 465, false for other ports
+        host: 'appmaker.lk',
+        port: 465,
+        secure: true, // true for 465, false for other ports
         auth: {
-            user: 'communications@otenro.com', // generated ethereal user
-            pass: 'R&3%ee=r1'  // generated ethereal password
-        }
+            user: 'support@appmaker.lk', // generated ethereal user
+            pass: '7hJvsYiU'  // generated ethereal password
+        },
+        tls:{
+                rejectUnauthorized: false
+            }
     });
 
 
@@ -37,8 +41,10 @@ module.exports = {
      */
     getAllAppsData: function (req, res) {
         Application.find().where({ or : [ { status  : 'PENDING' },
-                                        { status   : 'PUBLISHED' },
-                                        { status   : 'UPLOADING' } ]}).exec(function (err, appsData) {
+                                        { status  : 'REJECTED' },
+                                        { status   : 'APPROVED' },
+                                        { status   : 'SUSPENDED' },
+                                         { status   : 'TERMINATED' }]}).exec(function (err, appsData) {
             if (err) res.send(err);
             res.json(appsData);
 
@@ -127,6 +133,15 @@ module.exports = {
             if (err) res.send(err);
             res.json(publishedData);
 
+        });
+
+    },
+
+    getAllPublishDetails : function (req, res) {
+
+        PublishDetails.find().exec(function (err, publishedData) {
+            if (err) res.send(err);
+            res.send(publishedData);
         });
 
     },
@@ -354,12 +369,27 @@ module.exports = {
     console.log(config.server.host);
     var apkFile = config.server.host +'/getApk';
         var email = req.body.email;
+        var emailBody = "<html><br>Hi " +  req.body.fName + " " + req.body.lName + ",<br><br>"+
+
+                       "Good news! " + req.body.appName + " App has been approved for launch! Users can access the web app<br> using the following URL: <a href=" + req.body.appView + "> App view</a><br><br>" +
+
+                       "You can download the apk file of the application from " + "<a href=" + apkFile + "> download APK </a><br><br>" +
+
+                       "<br>If you need any technical support in uploading the app to an app store, please contact<br> us at support@appmaker.lk. To upload the app on Google Play Store you can follow the<br> instructions we have given on publishing page " + "<a href='http://developer.appmaker.lk'>developer.appmaker.lk</a>" +
+
+                       "<br><br>For any assistance required in marketing the application please contact<br> marketing@appmaker.lk<br><br>" +
+
+                       "Regards,<br><br>"+
+
+                       "Appmaker Team</html>";
 
                  mailOptions = {
-                    from: 'ideabiz@dialog.lk', // sender address
+                    from: 'support@appmaker.lk', // sender address
                     to: email, // list of receivers
-                    subject: 'Test email', // Subject line
-                    html: "<h1>Test email</h1><br><a href=" + apkFile + ">Download APK</a>"
+                    subject: 'App Approve', // Subject line
+                    html:emailBody
+
+//                    <h1>Test email</h1><br><a href=" + apkFile + ">Download APK</a>"
 
                 };
 
@@ -380,5 +410,53 @@ module.exports = {
 
     getApk : function(req,res){
         res.sendfile(config.ME_SERVER + "test.apk");
+    },
+
+    getOperators : function(req,res){
+        res.send(config.IDEABIZ_USER_NETWORK_CLIENTS);
+    },
+    getAppStatus : function(req,res){
+        res.send(config.IDEABIZ_ADMIN_APP_STATUS);
+    },
+    setOperators : function(req,res){
+
+        var id = {appId:req.body.id}
+
+        PublishDetails.update(id,{operators:req.body.operators}).exec(function(err,result){
+            res.send('ok');
+        })
+
+    },
+    setComments : function(req,res){
+    console.log(req.body);
+
+        var id = {appId:req.body.id}
+
+        PublishDetails.update(id,{comment:req.body.comment}).exec(function(err,result){
+            res.send('ok');
+        })
+
+    },
+    setAppstatus : function(req,res){
+    console.log(req.body);
+
+        var id = {id:req.body.id}
+        var status = {status:req.body.status, publishStatus:req.body.publishStatus}
+
+        Application.update(id,status).exec(function(err,result){
+
+            if (err){res.send(err);}
+
+            sentMails.sendApkEmail(req.body,function (err,msg) {
+               sails.log.info(err);
+               if (err) {
+                   return  res.send(500);
+               }
+
+               res.send('ok');
+           });
+           res.send('ok');
+        });
+
     }
 };

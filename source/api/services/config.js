@@ -32,6 +32,14 @@ module.exports = {
         'UNSUBSCRIBED': {
             'code': 'UNSUBSCRIBED',
             'desc': 'Unsubscribed'
+        },
+        'RENTAL_FAILED': {
+            'code': 'RENTAL_FAILED',
+            'desc': 'Rental Failed'
+        },
+        'RENTAL_CHARGED': {
+            'code': 'RENTAL_CHARGED',
+            'desc': 'Rental Charged'
         }
     },
     APP_USER_STATUS: {
@@ -62,6 +70,66 @@ module.exports = {
             'shareSplit': '40%-60%'
         }
 
-    }
+    },
+         IDEABIZ_ADMIN_APP_STATUS:{
+
+             "PUBLISH_STATUSES": [
+                 {
+                   "code": "PENDING",
+                   "description": "Pending",
+                   "nextAvailable": [
+                     "APPROVED",
+                     "REJECTED"
+                   ],
+                   "allowedRoles": [
+                     "admin",
+                     "superAdmin",
+                     "appCreater"
+                   ]
+                 },
+                 {
+                   "code": "APPROVED",
+                   "description": "Approved",
+                   "nextAvailable": [
+                     "SUSPENDED",
+                     "TERMINATED"
+                   ],
+                   "allowedRoles": [
+                     "admin",
+                     "superAdmin"
+                   ],
+                   "color":"rgb(146, 240, 146)"
+                 },
+                 {
+                   "code": "REJECTED",
+                   "description": "Rejected",
+                   "nextAvailable": [],
+                   "allowedRoles": [],
+                   "color":"rgb(253, 108, 108)"
+                 },
+                 {
+                   "code": "SUSPENDED",
+                   "description": "Suspended",
+                   "nextAvailable": [
+                     "APPROVED"
+                   ],
+                   "allowedRoles": [
+                     "admin",
+                     "superAdmin"
+                   ],
+                   "color":"rgb(240, 248, 120)"
+                 },
+                 {
+                   "code": "TERMINATED",
+                   "description": "Terminated",
+                   "nextAvailable": [],
+                   "allowedRoles": [
+                     "admin",
+                     "superAdmin"
+                   ],
+                   "color" : "rgb(253, 108, 108)"
+                 }
+               ]
+            }
 
 };

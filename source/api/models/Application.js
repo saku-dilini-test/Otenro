@@ -27,6 +27,11 @@ module.exports = {
             type: 'string'
 
         },
+         publishStatus: {
+             type: 'string'
+
+         },
+
         displayImage: {
             type: 'string'
             
@@ -53,6 +58,10 @@ module.exports = {
         },
         appUpdateLocationSetting : {
             type : 'json'
+        },
+
+        id:{
+           type:'ObjectId'
         }
     }
 };

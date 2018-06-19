@@ -12,15 +12,19 @@
     'use strict';
     angular.module('app')
         .controller('technicalSupportCtrl',
-            ['$scope','technicalSupportService','$auth','toastr','$state','$stateParams','SERVER_URL','ME_SERVER',
+            ['$scope','$mdDialog','technicalSupportService','$auth','toastr','$state','$stateParams','SERVER_URL','ME_SERVER','$filter','$window',
                 technicalSupportCtrl
             ]);
 
-    function technicalSupportCtrl($scope,technicalSupportService,$auth,toastr,$state,$stateParams,SERVER_URL,ME_SERVER) {
+    function technicalSupportCtrl($scope,$mdDialog,technicalSupportService,$auth,toastr,$state,$stateParams,SERVER_URL,ME_SERVER,$filter,$window) {
 
             $scope.splash = [];
             $scope.publishSplash = [];
+            $scope.deviceView ="mobile"
+
             var tempImagePath;
+
+//            console.log(initialData);
 
             if($stateParams){
 
@@ -66,7 +70,6 @@
                 });
             })
         }
-
 
 
 
@@ -292,9 +295,21 @@
                
            }
 
-           $scope.sendApkEmail = function(id){
+           $scope.sendApkEmail = function(id,fName,lName,appName,appId,appUserId){
 
-                technicalSupportService.sendApkEmail({email:id}).success(function(data){
+               var appView = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + appUserId
+                             + "&appId=" + appId + "&" + new Date().toISOString() + "/";
+
+
+               var data = {
+                email:id,
+                fName:fName,
+                lName:lName,
+                appName:appName,
+                appView: appView
+               }
+                console.log(data);
+                technicalSupportService.sendApkEmail(data).success(function(data){
                     console.log("success");
                 }).error(function(){
                     console.log("error " + error);
@@ -302,6 +317,198 @@
                 });
 
            }
+
+            technicalSupportService.getAllPublishDetails()
+                .success(function (result) {
+                    $scope.publishAppData = result;
+                    console.log($scope.publishAppData);
+            }).error(function (error) {
+                toastr.error('Loading Error', 'Warning', {
+                  closeButton: true
+                });
+            });
+
+            technicalSupportService.getOperators()
+                .success(function(result){
+
+                    $scope.operators = result
+                    console.log($scope.operators);
+                }).error(function(error){
+                    toastr.error('Loading operators Error', 'Warning', {
+                    closeButton: true
+                });
+            });
+
+           $scope.appDescriptionView = function(appName, appData,appId,userId){
+                console.log(appName);
+                console.log(appData);
+                var data = { appName:appName,appData:appData,id:appId,userId:userId}
+                technicalSupportService.showPublishArticleDescription(data);
+
+           }
+
+          $scope.approvedOperatorsView = function(id,selectedOperators){
+
+                var data = {operators:$scope.operators,id:id, selectedOperators:selectedOperators}
+                technicalSupportService.showApprovedOperators(data);
+
+           }
+
+          $scope.commentView = function(appName,appId,comment,createdData){
+                var data = {appName:appName , appId:appId ,comment:comment,date:createdData}
+                technicalSupportService.showAppcommentView(data);
+
+          }
+
+
+
+          $scope.getDes = function(id,des){
+          var arr = [];
+
+            if($scope.publishAppData){
+                for(var i = 0;i < $scope.publishAppData.length;i++){
+                    if($scope.publishAppData[i].appId == id){
+                        if(des == "full"){
+                            var obj = {
+                                fullDes:$scope.publishAppData[i].fullDescription,
+                                keyword:$scope.publishAppData[i].keyword,
+                                price:$scope.publishAppData[i].price
+                            }
+
+                            return obj;
+                            break;
+                        }else if(des == "short"){
+                            return $scope.publishAppData[i].shortDescription;
+                            break;
+                        }else if(des == "comment"){
+                            if($scope.publishAppData[i].comment){
+
+                                return $scope.publishAppData[i].comment;
+                                break;
+                            }else{
+                                return null;
+                                break;
+                            }
+                        }else{
+                            if($scope.publishAppData[i].operators){
+
+                                return $scope.publishAppData[i].operators;
+                                break;
+                            }else{
+                                return arr;
+                            }
+
+                        }
+                    }
+                }
+            }
+          }
+
+          $scope.myObj = {
+              "width" : "400px",
+              "font-size" : "20px",
+              "margin-top" : "10px",
+              "margin-left" : "20px"
+            }
+
+          $scope.showAppView = function(appId,userId){
+
+            var encUserId = userId + "/";
+            var encAppId = appId + "/";
+
+
+            var encryptedURL = btoa(encUserId + encAppId);
+
+
+            $state.go('anon.appView', {
+                userId: userId,
+                appId: appId,
+                p:encryptedURL
+            });
+
+          }
+
+          $scope.apply = function(appId,status,email,fName,lName,appName,appUserId,operators){
+
+          var appView = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + appUserId
+                                       + "&appId=" + appId + "&" + new Date().toISOString() + "/";
+
+                var data = {
+                    id:appId,
+                    status:status,
+                    publishStatus: status,
+                    email:email,
+                    fName:fName,
+                    lName:lName,
+                    appName:appName,
+                    appView:appView,
+                    operators:operators
+                }
+                console.log(data);
+
+                technicalSupportService.setAppststus(data).success(function(res){
+                    $window.location.reload();
+                }).error(function(error){
+                    console.log(error);
+                })
+          }
+
+          $scope.getStatus = function(status){
+              if(status){
+                var arr = $filter('filter')($scope.appStatusArr,{ "code": status });
+                    if(arr){
+                        return arr[0].description;
+                    }
+              }
+          }
+
+          $scope.statusArray = [];
+
+          $scope.getArr = function(model,status){
+
+                if(status){
+
+                     var curStatusObj = $filter('filter')($scope.appStatusArr,{ "code": status });
+
+                           $scope.statusArray = $filter('filter')($scope.appStatusArr, function(value, index, array){
+                          return curStatusObj[0].nextAvailable.includes(value.code);
+                       });
+
+                }
+
+                return $scope.statusArray;
+          }
+
+          technicalSupportService.getAppStatus().success(function(data){
+            $scope.appStatusArr = data.PUBLISH_STATUSES;
+
+            console.log($scope.appStatusArr);
+            console.log(data);
+          }).error(function(err){
+
+          });
+
+          $scope.getAppsCount = function(id){
+          var count = 1;
+                $scope.appList.forEach(function(ele){
+                    if (ele.userId == id){
+                        count++;
+                    }
+                });
+                return count;
+          }
+
+          $scope.getColor = function(status){
+
+            if(status){
+                 var curStatusObj = $filter('filter')($scope.appStatusArr,{ "code": status });
+                 if(curStatusObj){
+                      return curStatusObj[0].color;
+                 }
+            }
+
+          }
+
 
     }
 
