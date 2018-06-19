@@ -67,6 +67,12 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
+  ngAfterViewChecked() {
+    $('.carousel').carousel({
+      interval: 3000
+    });
+  }
+
   @Input('categories') categories:CategoriesModel;
 
 
