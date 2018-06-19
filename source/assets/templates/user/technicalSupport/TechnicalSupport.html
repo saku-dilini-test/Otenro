@@ -8,10 +8,6 @@
         <div class="obl-dashboard-header clearfix">
             <h2 ng-hide="welcome"> </h2>
             <p  ng-hide="welcome"> Welcome to the technical support area</p>
-            <fieldset >
-                <input type="text" required="" ng-model="search" class="me-search-input" name="name">
-                <input type="submit" value="search" class="me-search-button">
-            </fieldset>
             <div class="obl-dashboard-settings">
                 <button class="user-settings-button" ng-click="profileView()" type="button">
                     <img src="images/user-icon.svg" alt="User Logo" />
@@ -22,10 +18,18 @@
     </div>
 </div>
 
+<fieldset ng-style="myObj">
+    <input type="text" ng-model="searchPublishApps" name="search">
+    <input type="submit" value="search" class="me-search-button">
+</fieldset>
+
 <div class="obl-dashboard-wrapper">
     <!--<div class="obl-dashboard-apps">
      All Applications
     </div>-->
+
+
+
     <div class="md-dialog-main clearfix">
 
         <md-tabs md-center-tabs="false" md-selected="selectedIndex" md-no-ink="true" md-autoselect="false"
@@ -49,7 +53,7 @@
                 </thead>
 
                 <tbody>
-                <tr ng-repeat="app in appList">
+                <tr ng-repeat="app in appList | filter:searchPublishApps">
                     <td ng-click="showAppView(app.id,app.userId)">
                     <!--<a href="{{serverURL}}templates/viewWebTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">-->
                         {{app.id}}
@@ -181,23 +185,22 @@
                     <form class="allItems" novalidate>
                     <table class="table">
                         <thead class="obl-dashboard-apps">
-                        <th>User No</th>
-                        <th>User Name</th>
-                        <th>User Id</th>
-                        <th>About User</th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
                         <th>Created Date</th>
                         <th>Last login</th>
-                        <th>Login Count</th>
+                        <th>Number of Apps</th>
                         </thead>
                            <tbody>
                            <tr ng-repeat="app in userList">
-                            <td> {{$index +1}} </td>
-                            <td>{{app.email}}</td>
-                            <td><a data-ng-click="getUserAppData(app.id)">{{app.id}}</a></td>
-                            <td> {{app.yourselfReason}} </td>
-                            <td> {{app.createdAt}} </td>
-                             <td> {{app.lastLoginTime}} </td>
-                             <td> {{app.loginCount}} </td>
+                            <td> {{app.id}} </td>
+                            <td>{{app.firstName}} {{app.lastName}}</td>
+                               <td> {{app.email}} </td>
+                               <td> {{app.createdAt}} </td>
+                               <td> {{app.lastLoginTime}} </td>
+                               <td> {{getAppsCount(app.id)}} </td>
+                               <!--<td><a data-ng-click="getUserAppData(app.id)">{{app.id}}</a></td>-->
                            </tr>
                            </tbody>
                     </table>

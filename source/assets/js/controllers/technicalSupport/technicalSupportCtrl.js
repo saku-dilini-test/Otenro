@@ -404,6 +404,12 @@
             }
           }
 
+          $scope.myObj = {
+              "width" : "400px",
+              "font-size" : "20px",
+              "margin-top" : "10px",
+              "margin-left" : "20px"
+            }
 
           $scope.showAppView = function(appId,userId){
 
@@ -481,6 +487,16 @@
           }).error(function(err){
 
           });
+
+          $scope.getAppsCount = function(id){
+          var count = 1;
+                $scope.appList.forEach(function(ele){
+                    if (ele.userId == id){
+                        count++;
+                    }
+                });
+                return count;
+          }
 
 
     }
