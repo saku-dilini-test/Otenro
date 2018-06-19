@@ -72,7 +72,7 @@ module.exports = {
                     var appID = app.appId;
                     var queryUser = {
                         'msisdn': msisdn,
-                        'appID': appID
+                        'appId': appID
                     }
 
                     AppUser.findOne(queryUser).exec(function (err, user) {
@@ -117,7 +117,7 @@ module.exports = {
                             //Will create new User if him self is not a subscribed user in the system before
                             var newAppUser = {
                                 'msisdn': msisdn,
-                                'appID': appID,
+                                'appId': appID,
                                 'deviceUUID': deviceUUID,
                                 'status': config.APP_USER_STATUS.INACTIVE,
                                 'serviceID': app.serviceID
@@ -128,8 +128,8 @@ module.exports = {
                                     return res.serverError(err);
                                 }
 
-                                sails.log.debug("New user created for the msisdn: " + msisdn + " serviceID=" + serviceID);
-                                thisController.subscribeUser(req,res,msisdn,serviceID);
+                                sails.log.debug("New user created for the msisdn: " + msisdn + " serviceID=" + app.serviceID);
+                                thisController.subscribeUser(req,res,msisdn,app.serviceID);
 
                                 return res.created(user);
                             });
