@@ -30,15 +30,14 @@
         <input class="input-shadow-border" ng-enter ="submit()" name="mobile" type="text" ng-model="mobile">
       </fieldset>
 
-      <div ng-if="isPinReqSuccess">
+      <div ng-show="isPinReqSuccess">
         <fieldset>
           <label>login pin </label>
-          <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
-          <input class="input-shadow-border" ng-enter ="submitPin(user.pin)" name="pin" type="text" ng-model="user.pin">
+          <input class="input-shadow-border" ng-enter ="submit()" name="pin" type="text" ng-model="loginPin">
         </fieldset>
-          <div style="float: right">
-              <input style="background: #0099FF; text-align: center; color: white;" class="input-shadow-border"  ng-click="submitPin(user.pin)" name="continue" value="continue" />
-          </div>
+          <!--<div style="float: right">-->
+              <!--<input style="background: #0099FF; text-align: center; color: white;" class="input-shadow-border"  ng-click="submitPin(user.pin)" name="continue" value="continue" />-->
+          <!--</div>-->
       </div>
 
       <fieldset>

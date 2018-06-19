@@ -6,6 +6,7 @@
   var email = '';
   var password = '';
   var mobile = '';
+  var loginPin = '';
   var user, isPinReqSuccess = false;
   angular.module('app').directive('preventDefault', function() {
     return function(scope, element, attrs) {
@@ -63,27 +64,55 @@
                   });
                 });
             } else if ($scope.loginMethod === MOBILE) {
-                Auth.login($scope.user)
-                    .success(function(response) {
-                    if (response.message === 'success') {
-                        $scope.isPinReqSuccess = true;
-                        toastr.success('Check your mobile and enter authentication pin', 'Message', {
+                if (!$scope.loginPin) {
+                    Auth.login($scope.user)
+                        .success(function(response) {
+                            if (response.message === 'success') {
+                                $scope.isPinReqSuccess = true;
+                                toastr.success('Check your mobile and enter authentication pin', 'Message', {
+                                    closeButton: true
+                                });
+                            } else if (response.message === 'user not found') {
+                                toastr.error('Mobile number is not registered!', 'Error', {
+                                    closeButton: true
+                                });
+                            } else {
+                                toastr.error('Server Error', 'Error', {
+                                    closeButton: true
+                                });
+                            }
+                        }).error(function(err) {
+                        toastr.error('Please check your Mobile Number', 'Error', {
                             closeButton: true
                         });
-                    } else if (response.message === 'user not found') {
-                        toastr.error('Mobile number is not registered!', 'Error', {
-                            closeButton: true
-                        });
-                    } else {
-                        toastr.error('Server Error', 'Error', {
-                            closeButton: true
-                        });
-                    }
-                }).error(function(err) {
-                    toastr.error('Please check your Mobile Number', 'Error', {
-                        closeButton: true
                     });
-                });
+                } else {
+                    var user = { mobile: $scope.mobile, pin: $scope.loginPin };
+                    Auth.mobileLogin(user)
+                        .success(function(response) {
+                            if (response.message === 'wrong pin') {
+                                toastr.error('Please Enter Correct Pin', 'Error', {
+                                    closeButton: true
+                                });
+                            }
+                            if (response.user.email){
+                                toastr.success('Login Successful ', 'Message', {
+                                    closeButton: true
+                                });
+                                if (response.user.userRoles== 'support'){
+                                    $state.go('user.technicalSupporter');
+                                }else {
+                                    $state.go('user.dashboard');
+                                }
+                            }
+                        })
+                        .error(function(err) {
+                            toastr.error('Please check your Email/Password', 'Error', {
+                                closeButton: true
+                            });
+                        });
+
+                }
             }
         }
     };
