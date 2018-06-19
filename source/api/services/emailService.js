@@ -84,7 +84,7 @@ module.exports = {
         var mailOptions = {
             from: "support@appmaker.lk",
             to: data.email,
-            subject: "Welcome to Otenro ",
+            subject: "Welcome to AppMaker ",
             html: emailBody,
             attachments: [
                 {
