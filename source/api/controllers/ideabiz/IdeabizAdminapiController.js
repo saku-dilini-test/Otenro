@@ -446,31 +446,23 @@ module.exports = {
 
 
         DeviceId.findOne({appId:users[0].appId,deviceUUID:users[0].deviceUUID}).exec(function (err, device) {
+            console.log(JSON.stringify(device));
+            if(device) {
+                Application.findOne({id: users[0].appId}).exec(function (err, app) {
 
-            Application.findOne({id:users[0].appId}).exec(function (err, app) {
+                    var message = {
+                        "to": device.deviceId,
+                        "notification": {
+                            "body": "Your subscription to " + app.appName + " has been successfully renewed. Click to open " + app.appName
+                        }
+                    };
 
-                pushService.sendPushNotifications(device[0].deviceId , "Your subscription to "+ app.appName + " has been successfully renewed. Click to open " +app.appName );
-            });
+                    pushService.sendPushNotification(message);
+                });
+            }else{
+                sails.log.debug("No devices found to send the push notification");
+            }
         });
 
-    },
-
-    sendPushMessage: function(req,res){
-        var messages =  [
-            {
-                "to": "f1lYHGPvvF0:APA91bFrEPln_eCLmchfTG5iGUzxUc-_Zm70yoboxUNI_-pjfM1sKYNb0UNni4BFHSn2VBtlJd5W5cazzIjFvDXvGM-D2Xv8DFZo2xW2D7sXr6h00n2iI9J-sXQ2LfYnwyIQCFeOh9Gi",
-                "notification": {
-                    "body" : "111111111"
-                }
-            }, {
-                "to": "f1lYHGPvvF0:APA91bFrEPln_eCLmchfTG5iGUzxUc-_Zm70yoboxUNI_-pjfM1sKYNb0UNni4BFHSn2VBtlJd5W5cazzIjFvDXvGM-D2Xv8DFZo2xW2D7sXr6h00n2iI9J-sXQ2LfYnwyIQCFeOh9Gi",
-                "notification": {
-                    "body" : "222222222"
-                }
-            }
-        ];
-
-        pushService.sendPushNotifications(messages);
-        return res.ok();
     }
 };

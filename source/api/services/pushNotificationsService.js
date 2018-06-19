@@ -17,19 +17,14 @@ module.exports = {
         }
      * @param message
      */
-    sendPushNotifications: function(deviceId ,message){
-        //console.log("json " + JSON.stringify(json));
-        sails.log.debug("Call sendPushNotifications");
+    sendPushNotifications: function(messagesArray){
+        sails.log.debug("Call sendPushNotifications message length: " + messagesArray.length);
 
-        //messagesArray.forEach(function(message){
+        messagesArray.forEach(function(message){
+            sails.log.debug("Call sendPushNotifications message: " + JSON.stringify(message,null,2));
             request.post(
                 PushUrl,{
-                    json:{
-                        "to":deviceId,
-                        "notification" : {
-                            "body" : message
-                        }
-                    },
+                    json: message,
                     headers:{
                         'Authorization' : Authorization,
                         'Content-Type' : 'application/json'
@@ -37,30 +32,15 @@ module.exports = {
                     if (error) sails.log.info(error);
                     if(response.statusCode === 200){
                         sails.log("push message send success =>", response.statusCode);
-                    }
-                    else{
+                    }else{
                         sails.log("push message send failed =>", response.statusCode);
                     }
-                });
-       // });
+            });
+       });
     },
 
-    sendPushNotification: function(req,res){
-        var messages =  [
-            {
-                "to": "f1lYHGPvvF0:APA91bFrEPln_eCLmchfTG5iGUzxUc-_Zm70yoboxUNI_-pjfM1sKYNb0UNni4BFHSn2VBtlJd5W5cazzIjFvDXvGM-D2Xv8DFZo2xW2D7sXr6h00n2iI9J-sXQ2LfYnwyIQCFeOh9Gi",
-                "notification": {
-                    "body" : "111111111"
-                }
-            }, {
-                "to": "f1lYHGPvvF0:APA91bFrEPln_eCLmchfTG5iGUzxUc-_Zm70yoboxUNI_-pjfM1sKYNb0UNni4BFHSn2VBtlJd5W5cazzIjFvDXvGM-D2Xv8DFZo2xW2D7sXr6h00n2iI9J-sXQ2LfYnwyIQCFeOh9Gi",
-                "notification": {
-                    "body" : "222222222"
-                }
-            }
-        ];
-
-        this.sendPushNotification(messages);
+    sendPushNotification: function(message){
+        this.sendPushNotifications([message]);
     }
 };
 
