@@ -44,7 +44,7 @@
                         <!--</fieldset>-->
                         <fieldset class="text-right">
                             <md-button class="me-default-button" ng-click="close()">Close</md-button>
-                            <md-button class="me-default-button" ng-click="goToEditView(2)">Edit Profile</md-button>
+                            <md-button class="me-default-button" ng-click="goToEditView(1)">Edit Profile</md-button>
                         </fieldset>
                     </div>
                 </md-tab-body>
@@ -131,6 +131,16 @@
                             <input class="input-shadow-border"
                                    type="text" name="email" disabled ng-model="userEdit.email" required />
                         </fieldset>
+                        <!--Mobile number field-->
+                        <fieldset>
+                            <label> Contact Number </label>
+                            <input class="input-shadow-border" name="mobile" type="text" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im"
+                                   style="float:left;" ng-model="userEdit.mobile" required/>
+                            <span class="error help-block" ng-show="editProfile.mobile.$error.required">*</span>
+                            <span class="error help-block" ng-show="editProfile.mobile.$dirty && editProfile.mobile.$invalid">
+                              Enter a valid mobile number
+                            </span>
+                        </fieldset>
                         <div class="clearfix">
                             <fieldset class="col-2">
                                 <label>Current Password</label>
@@ -178,13 +188,57 @@
                                 </span>
                             </fieldset>
                         </div>
-                        <fieldset >
-                            <label>Account type</label>
-                            <md-select aria-label="Account Type" ng-model="userEdit.accountType">
-                                <md-option value="Basic">Basic</md-option>
-                                <md-option value="Advanced">Advanced</md-option>
-                            </md-select>
+                        <!--Beneficiary’s Name-->
+                        <fieldset>
+                            <label>Beneficiary’s Name</label>
+                            <input class="input-shadow-border" type="text" name="beneficiaryName" ng-model="userEdit.beneficiaryName" required/>
+                            <span class="error help-block" ng-show="editProfile.beneficiaryName.$error.required">*</span>
                         </fieldset>
+                            <!--Bank Code-->
+                        <fieldset>
+                            <label> Bank Code </label>
+                            <input class="input-shadow-border" name="bankCode" type="text" ng-pattern="^[1-9]\d*$"
+                                   style="float:left;" ng-model="userEdit.bankCode" required/>
+                            <span class="error help-block" ng-show="editProfile.bankCode.$error.required">*</span>
+                            <span class="error help-block" ng-show="editProfile.bankCode.$dirty && editProfile.bankCode.$invalid">
+                            Enter a valid bank code</span>
+                        </fieldset>
+                        <!--Bank Branch Code-->
+                        <fieldset>
+                            <label> Bank Branch Code </label>
+                            <input class="input-shadow-border" name="branchCode" type="text" ng-pattern="^[1-9]\d*$"
+                                   style="float:left;" ng-model="userEdit.branchCode" required/>
+                            <span class="error help-block" ng-show="editProfile.branchCode.$error.required">*</span>
+                            <span class="error help-block" ng-show="editProfile.branchCode.$dirty && editProfile.branchCode.$invalid">
+                            Enter a valid branch code</span>
+                        </fieldset>
+                        <!--Bank Branch Name-->
+                        <fieldset>
+                            <label>Bank Branch Name</label>
+                            <input class="input-shadow-border" type="text" name="branchName" ng-model="userEdit.branchName" required/>
+                            <span class="error help-block" ng-show="editProfile.branchName.$error.required">*</span>
+                        </fieldset>
+                        <!--Bank Account Number-->
+                        <fieldset>
+                            <label>Bank Account Number</label>
+                            <input class="input-shadow-border" type="text" name="accountNumber" ng-model="userEdit.accountNumber" required/>
+                            <span class="error help-block" ng-show="editProfile.accountNumber.$error.required">*</span>
+                        </fieldset>
+                        <!--<fieldset >-->
+                            <!--<label>Account type</label>-->
+                            <!--<md-select aria-label="Account Type" ng-model="userEdit.accountType">-->
+                                <!--<md-option value="Basic">Basic</md-option>-->
+                                <!--<md-option value="Advanced">Advanced</md-option>-->
+                            <!--</md-select>-->
+                        <!--</fieldset>-->
+                        <!--mobile verification pin field-->
+                            <fieldset ng-if="isPinReqSuccess">
+                                <label>Verification Pin </label>
+                                <input class="input-shadow-border" ng-enter ="updateUserProfileWithMobile(userEdit)" name="mobileVerificationPin" type="text" ng-model="userEdit.mobileVerificationPin">
+                                <div style="float: right">
+                                    <input style="background: #0099FF; text-align: center; color: white; margin-top: 10px" class="input-shadow-border"  ng-click="updateUserProfileWithMobile(userEdit)" name="continue" value="continue" />
+                                </div>
+                            </fieldset>
                         <fieldset class="text-right">
                             <md-button class="me-default-button" ng-click="backToView(0,'userEdit')">Cancel</md-button>
 

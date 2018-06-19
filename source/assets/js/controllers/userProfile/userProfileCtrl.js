@@ -21,9 +21,10 @@
         $scope.maxAddressLength = 50;
         $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
         userProfileResource.getUserProfile().success(function (data) {
-            $scope.original = angular.copy(data);
-            $scope.userEdit = data;
-            $scope.userRole = data.userRole;
+        $scope.original = angular.copy(data);
+        $scope.userEdit = data;
+        $scope.userRole = data.userRole;
+        $scope.isPinReqSuccess = false;
 
         }).error(function (err) {
             /*toastr.error(err.error, 'Error', {
@@ -82,31 +83,35 @@
 
 
         $scope.editUserProfile = function(params){
-            $scope.password = false;
-            $scope.user={
-                email : params.email,
-                password : params.currentPassword
+            if (!params.currentPassword || !params.password) {
+                params.method = 'WITHOUT_PASSWORD';
+            }else {
+                params.method = 'WITH_PASSWORD';
             }
-            Auth.login($scope.user).success(function() {
-                userProfileResource.editUserProfile(params).then(function(data){
-                    // $mdDialog.hide();
-                    toastr.success('Successfully Changed', 'Success', {
+            userProfileResource.editUserProfile(params).then(function(response){
+                if (response.data.message === 'success') {
+                    toastr.success('Successfully updated user details.', 'Success', {
                         closeButton: true
                     });
-                    $scope.userEdit.password = "";
-                    $scope.userEdit.confirmPassword = "";
                     $scope.backToView(0);
-                });
-            }).error(function(err) {
-                $scope.password = true;
-                $log.debug(err);
-                toastr.error('Please check your Email/Password', 'Error', {
-                  closeButton: true
-                });
-            })
-
-            $scope.userEdit.currentPassword = "";
-
+                }
+                if (response.data.message === 'NOT_FOUND') {
+                    toastr.error('Current password is wrong.', 'Error', {
+                        closeButton: true
+                    });
+                }
+                if (response.data.message === 'ERROR') {
+                    toastr.error('Failed to update profile details.', 'Error', {
+                        closeButton: true
+                    });
+                }
+                if (response.data.message === 'verify_mobile') {
+                    toastr.success('Please check your mobile and enter verification pin to update mobile number.', 'Success', {
+                        closeButton: true
+                    });
+                    $scope.isPinReqSuccess = true;
+                }
+            });
         };
         $scope.saveBillings = function(billingEdit){
             billingEdit.userId = $auth.getPayload().id;
@@ -116,7 +121,7 @@
                  });
                 $scope.backToView(1);
             })
-        }
+        };
         $scope.redirectToDashboard = function() {
             return userProfileService.gotoDashboard();
         };
@@ -129,6 +134,37 @@
         };
         $scope.close = function() {
             return userProfileService.closeDialog();
+        };
+        $scope.updateUserProfileWithMobile = function (params) {
+            if (!params.currentPassword || !params.password) {
+                params.method = 'WITHOUT_PASSWORD';
+            }else {
+                params.method = 'WITH_PASSWORD';
+            }
+            userProfileResource.updateUserProfileWithMobile(params).then(function(response){
+                if (response.data.message === 'success') {
+                    toastr.success('Successfully updated user details.', 'Success', {
+                        closeButton: true
+                    });
+                    $scope.isPinReqSuccess = false;
+                    $scope.backToView(0);
+                }
+                if (response.data.message === 'wrong pin') {
+                    toastr.error('You entered a wrong pin. Enter correct!', 'Error', {
+                        closeButton: true
+                    });
+                }
+                if (response.data.message === 'NOT_FOUND') {
+                    toastr.error('Current password is wrong.', 'Error', {
+                        closeButton: true
+                    });
+                }
+                if (response.data.message === 'ERROR') {
+                    toastr.error('Failed to update profile details.', 'Error', {
+                        closeButton: true
+                    });
+                }
+            });
         }
     }
 })();

@@ -24,6 +24,9 @@
             },
             getYourselfReason: function(){
                 return $http.get(SERVER_URL+ 'api/getYourselfReason');
+            },
+            updateUserProfileWithMobile:function(appParams){
+                return $http.post(SERVER_URL +'auth/updateUserProfileWithMobile', appParams);
             }
         }
     }
