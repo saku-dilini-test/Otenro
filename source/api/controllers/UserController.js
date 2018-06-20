@@ -5,6 +5,7 @@
  */
 var Passwords = require('machinepack-passwords');
 var smsService = require('./../services/smsService');
+var randomNumberService = require('./../services/randomNumberService');
 module.exports = {
 
     /**
@@ -83,26 +84,22 @@ module.exports = {
                  **/
                 sails.log.debug('Send mobile verification pin before user update.');
                 var smsPayload;
-                function pinGenerator() {
-                    this.length = 6;
-                    this.timestamp = +new Date;
-                    var _getRandomInt = function( min, max ) {
-                        return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
-                    };
-                    this.generate = function() {
-                        var ts = this.timestamp.toString();
-                        var parts = ts.split( "" ).reverse();
-                        var pin = "";
-                        for( var i = 0; i < this.length; ++i ) {
-                            var index = _getRandomInt( 0, parts.length - 1 );
-                            pin += parts[index];
-                        }
-                        return pin;
+                var mobileVerificationPin = '';
+                /**
+                 * Generate a random number with length 6
+                 **/
+                randomNumberService.generateRandomNumber(6, function (results) {
+                    if (results.message === 'success') {
+                        mobileVerificationPin = results.number;
                     }
-                }
-                var pGenerator = new pinGenerator();
-                var mobileVerificationPin = pGenerator.generate();
+                });
                 smsPayload = {
+                    url: 'https://sms.textware.lk:5001/sms/send_sms.php',
+                    username: 'simato',
+                    password: 'Si324Mt',
+                    src: 'Balamu',
+                    message: 'Your pin is ',
+                    dr: '1',
                     mobile: data.mobile,
                     pin: mobileVerificationPin
                 };
