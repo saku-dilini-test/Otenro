@@ -8,8 +8,8 @@ export class SubscribedDataService {
 
   constructor(private http: Http) { }
 
-  getSubscribedData(){
-    return this.http.get(SERVER_URL + '/templates/getSubscribedData')
+  getSubscribedData(data){
+    return this.http.post(SERVER_URL + '/ideabiz/isSubscribed',data)
       .map(res => res.text() ? res.json() : null);
   }
 }
