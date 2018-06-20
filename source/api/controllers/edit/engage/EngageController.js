@@ -3,6 +3,7 @@ var http = require('http');
 var request = require('request');
 
 var config = require('../../../services/config');
+var pushService = require('../../../services/pushNotificationsService');
 var moment = require('moment');
 var dateFormat = require('dateformat');
 
@@ -21,7 +22,7 @@ module.exports = {
      * @param res
      */
     sendPushMessage: function(req, res){
-
+            var thisCtrl = this;
             var findDevicedQuery = {
                 appId : req.body.appId
             };
@@ -50,60 +51,13 @@ module.exports = {
                                 console.log("count " + count);
 
                                 if(count>7){
-
-                                    sails.log.info(" deviceArray " + deviceArray[i].deviceId);
-                                    request.post(
-                                        PushUrl,
-                                        {
-                                            json:{
-                                                "to":deviceArray[i].deviceId,
-                                                "notification" : {
-                                                    "body" : req.body.message
-                                                }
-                                            },
-                                            headers:{
-                                                'Authorization' : Authorization,
-                                                'Content-Type' : 'application/json'
-                                            }} , function(error, response, body){
-                                            if (error) sails.log.info(error);
-                                            if(response.statusCode === 200){
-                                                sails.log("push message send success =>", response.statusCode);
-                                            }
-                                            else{
-                                                sails.log("push message send failed =>", response.statusCode);
-                                            }
-                                        });
+                                    sails.log.info("my deviceArray " + deviceArray[i].deviceId);
+                                    thisCtrl.sendPushNotification(deviceArray[i].deviceId,null,req.body.message);
                                 }
-
-
-
                             }else {
-
-                                sails.log.info(" deviceArray " + deviceArray[i].deviceId);
-                                request.post(
-                                    PushUrl,
-                                    {
-                                        json:{
-                                            "to":deviceArray[i].deviceId,
-                                            "notification" : {
-                                                "body" : req.body.message
-                                            }
-                                        },
-                                        headers:{
-                                            'Authorization' : Authorization,
-                                            'Content-Type' : 'application/json'
-                                        }} , function(error, response, body){
-                                        if (error) sails.log.info(error);
-                                        if(response.statusCode === 200){
-                                            sails.log("push message send success =>", response.statusCode);
-                                        }
-                                        else{
-                                            sails.log("push message send failed =>", response.statusCode);
-                                        }
-                                    });
-
+                                sails.log.info("my deviceArray " + deviceArray[i].deviceId);
+                                thisCtrl.sendPushNotification(deviceArray[i].deviceId,null,req.body.message);
                             }
-
                         }
                         PushMessage.create(req.body).exec(function(err,data){
                             if(err) return done(err);
@@ -116,7 +70,7 @@ module.exports = {
 
 
     saveSchedulePushMassage : function (req,res) {
-
+                var thisCtrl = this;
                 var criteria = {id:req.body.id,appId:req.body.appId};
                 // Create push collection
                 PushMessage.find(criteria).exec(function(err, result) {
@@ -154,32 +108,12 @@ module.exports = {
                                                 console.log("Error on find DeviceId");
                                             }
                                             var message = data[0].message;
+                                            var article = (data[0].article)? { 'articleId': data[0].article.id } : null;
                                             for (var i = 0; i < deviceArray.length; i++) {
 
                                                 sails.log.info(" deviceArray " + deviceArray[i].deviceId);
 
-                                                request.post(
-                                                    PushUrl,
-                                                    {
-                                                        json: {
-                                                            "to": deviceArray[i].deviceId,
-                                                            "notification": {
-                                                                "body": message
-                                                            }
-                                                        },
-                                                        headers: {
-                                                            'Authorization': Authorization,
-                                                            'Content-Type': 'application/json'
-                                                        }
-                                                    }, function (error, response, body) {
-                                                        if (error) sails.log.info(error);
-                                                        if (response.statusCode === 200) {
-                                                            sails.log("push message send success =>", response.statusCode);
-                                                        }
-                                                        else {
-                                                            sails.log("push message send failed =>", response.statusCode);
-                                                        }
-                                                    });
+                                                thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,message);
                                             }
                                         });
                                         console.log('The world is going to end today.');
@@ -227,31 +161,11 @@ module.exports = {
                                                     console.log("Error on find DeviceId");
                                                 }
                                                 var message = data.message;
+                                                var article = (data.article)? { 'articleId': data.article.id } : null;
                                                 for(var i=0; i<deviceArray.length; i++) {
 
                                                     sails.log.info(" deviceArray " + deviceArray[i].deviceId);
-
-                                                    request.post(
-                                                        PushUrl,
-                                                        {
-                                                            json:{
-                                                                "to":deviceArray[i].deviceId,
-                                                                "notification" : {
-                                                                    "body" : message
-                                                                }
-                                                            },
-                                                            headers:{
-                                                                'Authorization' : Authorization,
-                                                                'Content-Type' : 'application/json'
-                                                            }} , function(error, response, body){
-                                                            if (error) sails.log.info(error);
-                                                            if(response.statusCode === 200){
-                                                                sails.log("push message send success =>", response.statusCode);
-                                                            }
-                                                            else{
-                                                                sails.log("push message send failed =>", response.statusCode);
-                                                            }
-                                                        });
+                                                    thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,message);
                                                 }
                                             });
                                             console.log('The world is going to end today.');
@@ -458,6 +372,7 @@ module.exports = {
     },
 
     persistCSVPushMessages : function(req,res,jsonObj){
+        var thisCtrl = this;
         var type = req.body.type;
 
         var date_diff_indays = function(date1, date2) {
@@ -505,56 +420,18 @@ module.exports = {
                                         console.log("Error on find DeviceId");
                                     }
                                     var message = data.message;
+                                    var article = (data.article)? { 'articleId': data.article.id } : null;
+
                                     for(var i=0; i<deviceArray.length; i++) {
 
                                         sails.log.info(" deviceArray " + deviceArray[i].deviceId);
                                         if (type === "I"){
                                             var count = date_diff_indays(dateFormat(new Date(),"m/d/yy"),dateFormat(deviceArray[i].lastAccessTime,"m/d/yy"));
                                             if (count > 7) {
-                                                request.post(
-                                                    PushUrl,
-                                                    {
-                                                        json:{
-                                                            "to":deviceArray[i].deviceId,
-                                                            "notification" : {
-                                                                "body" : message
-                                                            }
-                                                        },
-                                                        headers:{
-                                                            'Authorization' : Authorization,
-                                                            'Content-Type' : 'application/json'
-                                                        }} , function(error, response, body){
-                                                        if (error) sails.log.info(error);
-                                                        if(response.statusCode === 200){
-                                                            sails.log("push message send success =>", response.statusCode);
-                                                        }
-                                                        else{
-                                                            sails.log("push message send failed =>", response.statusCode);
-                                                        }
-                                                    });
+                                                thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,message);
                                             }
                                         } else {
-                                            request.post(
-                                                PushUrl,
-                                                {
-                                                    json:{
-                                                        "to":deviceArray[i].deviceId,
-                                                        "notification" : {
-                                                            "body" : message
-                                                        }
-                                                    },
-                                                    headers:{
-                                                        'Authorization' : Authorization,
-                                                        'Content-Type' : 'application/json'
-                                                    }} , function(error, response, body){
-                                                    if (error) sails.log.info(error);
-                                                    if(response.statusCode === 200){
-                                                        sails.log("push message send success =>", response.statusCode);
-                                                    }
-                                                    else{
-                                                        sails.log("push message send failed =>", response.statusCode);
-                                                    }
-                                                });
+                                            thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,message);
                                         }
                                     }
                                 });
@@ -604,12 +481,24 @@ module.exports = {
 
     },
 
+    sendPushNotification: function(deviceId,data,message){
+        var msg = {
+            "to": deviceId,
+            "notification" : {
+                "body" : message
+            }
+        };
+
+        if(data){
+            msg.data = data;
+        }
+
+        pushService.sendPushNotification(msg);
+    },
 
     startSchedulingJob : function () {
-
+        var thisCtrl = this;
         console.log("scheduling started ..............");
-
-
 
         PushMessage.find().exec(function(err, pushMessage) {
             if (err) return done(err);
@@ -635,31 +524,13 @@ module.exports = {
                                  console.log("Error on find DeviceId");
                              }
                              var message = data.message;
+                             var article = (data.article)? { 'articleId': data.article.id } : null;
+
                              for(var i=0; i<deviceArray.length; i++) {
 
-                                     sails.log.info(" deviceArray " + deviceArray[i].deviceId);
+                                 sails.log.info(" deviceArray " + deviceArray[i].deviceId);
 
-                                   request.post(
-                                     PushUrl,
-                                     {
-                                         json:{
-                                             "to":deviceArray[i].deviceId,
-                                             "notification" : {
-                                                 "body" : data.message
-                                             }
-                                         },
-                                         headers:{
-                                             'Authorization' : Authorization,
-                                             'Content-Type' : 'application/json'
-                                         }} , function(error, response, body){
-                                         if (error) sails.log.info(error);
-                                         if(response.statusCode === 200){
-                                             sails.log("push message send success =>", response.statusCode);
-                                         }
-                                         else{
-                                             sails.log("push message send failed =>", response.statusCode);
-                                         }
-                                     });
+                                 thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,data.message);
                              }
                          });
                         console.log('The world is going to end today.');
