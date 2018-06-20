@@ -84,7 +84,9 @@ module.exports = {
                  **/
                 sails.log.debug('Send mobile verification pin before user update.');
                 var smsPayload;
+                var queryString;
                 var mobileVerificationPin = '';
+                var url = 'https://sms.textware.lk:5001/sms/send_sms.php';
                 /**
                  * Generate a random number with length 6
                  **/
@@ -93,15 +95,17 @@ module.exports = {
                         mobileVerificationPin = results.number;
                     }
                 });
-                smsPayload = {
-                    url: 'https://sms.textware.lk:5001/sms/send_sms.php',
+                queryString = {
                     username: 'simato',
                     password: 'Si324Mt',
                     src: 'Balamu',
-                    message: 'Your pin is ',
-                    dr: '1',
-                    mobile: data.mobile,
-                    pin: mobileVerificationPin
+                    dst: data.mobile,
+                    msg: 'Your pin is ' + mobileVerificationPin,
+                    dr: '1'
+                };
+                smsPayload = {
+                    url: url,
+                    queryString: queryString
                 };
                 smsService.sendSMS(smsPayload, function (info) {
                     if (info.message === 'success') {
