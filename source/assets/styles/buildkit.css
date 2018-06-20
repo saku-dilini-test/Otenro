@@ -2311,6 +2311,19 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     font-weight:lighter;
     top: 0;
 }
+.footer-beta{
+    background-color: #747474;
+    width: 100%;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-align:center;
+    font-weight:lighter;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+
+}
 
 .add-quantity .md-container-modify{
     margin: 18px 0 0;

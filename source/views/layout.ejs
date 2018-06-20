@@ -58,6 +58,7 @@
    <link rel="stylesheet" href="/vendor/angular-ui-grid/ui-grid.css">
    <link rel="stylesheet" href="/vendor/angular-ui-grid/ui-grid.min.css">
    <link rel="stylesheet" href="/vendor/angular-ui-tree/angular-ui-tree.css">
+   <link rel="stylesheet" href="/vendor/font-awesome/font-awesome.css">
    <link rel="stylesheet" href="/vendor/ng-dialog/ngDialog-theme-default.css">
    <link rel="stylesheet" href="/vendor/ng-dialog/ngDialog.css">
    <link rel="stylesheet" href="/vendor/ng-img-crop-full-extended/ng-img-crop.css">
@@ -67,6 +68,7 @@
    <link rel="stylesheet" href="/vendor/ngDialog/ngDialog-theme-default.css">
    <link rel="stylesheet" href="/vendor/ngDialog/ngDialog.css">
    <link rel="stylesheet" href="/vendor/textAngular/textAngular.css">
+   <link rel="stylesheet" href="/vendor/ui-cropper/ui-cropper.css">
    <link rel="stylesheet" href="/styles/ext-modules/oblFrameWork/oblFramework.css">
    <link rel="stylesheet" href="/styles/ext-modules/oblDashboard/oblDashboard.css">
    <link rel="stylesheet" href="/styles/widgets/appBox.css">
@@ -137,6 +139,7 @@
     <script src="/vendor/angular-loading-bar/loading-bar.js"></script>
     <script src="/vendor/angular-material/angular-material.js"></script>
     <script src="/vendor/angular-messages/angular-messages.js"></script>
+    <script src="/vendor/angular-mocks/angular-mocks.js"></script>
     <script src="/vendor/angular-permission/angular-permission.js"></script>
     <script src="/vendor/angular-resource/angular-resource.js"></script>
     <script src="/vendor/angular-route/angular-route.js"></script>
@@ -148,6 +151,7 @@
     <script src="/vendor/angular-ui-mask/mask.js"></script>
     <script src="/vendor/angular-ui-router/angular-ui-router.js"></script>
     <script src="/vendor/angular-ui-tree/angular-ui-tree.js"></script>
+    <script src="/vendor/angularjs-dropdown-multiselect/angularjs-dropdown-multiselect.js"></script>
     <script src="/vendor/angularUtils-pagination/dirPagination.js"></script>
     <script src="/vendor/hammerjs/hammer.js"></script>
     <script src="/vendor/javascript-detect-element-resize/detect-element-resize.js"></script>
@@ -172,7 +176,10 @@
     <script src="/vendor/textAngular/textAngularSetup.js"></script>
     <script src="/vendor/tinycolor/tinycolor.js"></script>
     <script src="/vendor/tweenlite/TweenLite.min.js"></script>
+    <script src="/vendor/ui-cropper/ui-cropper.js"></script>
     <script src="/js/dependencies/lodash.min.js"></script>
+    <script src="/js/dependencies/aChart.js"></script>
+    <script src="/js/dependencies/angular-chart.js"></script>
     <script src="/js/dependencies/angular-google-maps.min.js"></script>
     <script src="/js/dependencies/ui-bootstrap-tpls-0.11.0.js"></script>
     <script src="/js/app.js"></script>
@@ -200,8 +207,10 @@
     <script src="/js/controllers/dashboard/dashboardCtrl.js"></script>
     <script src="/js/controllers/dashboard/ext-modules/oblFrameWork/oblFrameworkCtrl.js"></script>
     <script src="/js/controllers/dashboard/ext-modules/oblMenu/oblMenuCtrl.js"></script>
+    <script src="/js/controllers/edit/analytics/AnalyticsController.js"></script>
     <script src="/js/controllers/edit/appEditAreaCtrl.js"></script>
     <script src="/js/controllers/edit/article/articleCtrl.js"></script>
+    <script src="/js/controllers/edit/carousel/carouselController.js"></script>
     <script src="/js/controllers/edit/commerce/commerceCtrl.js"></script>
     <script src="/js/controllers/edit/commerce/currencyCtrl.js"></script>
     <script src="/js/controllers/edit/commerce/inventoryCtrl.js"></script>
@@ -215,6 +224,8 @@
     <script src="/js/controllers/edit/engage/salesAndPromotionCtrl.js"></script>
     <script src="/js/controllers/edit/engage/userCtrl.js"></script>
     <script src="/js/controllers/edit/logoandtittle/logoAndTittleCtrl.js"></script>
+    <script src="/js/controllers/edit/mainmenu/addNewCategoryToMaintenceCtrl.js"></script>
+    <script src="/js/controllers/edit/mainmenu/categoryMaintenanceCtrl.js"></script>
     <script src="/js/controllers/edit/mainmenu/editChildCtrl.js"></script>
     <script src="/js/controllers/edit/mainmenu/editChildImageCtrl.js"></script>
     <script src="/js/controllers/edit/mainmenu/editSubChildCtrl.js"></script>
@@ -226,6 +237,7 @@
     <script src="/js/controllers/edit/setting/policies/policiesCtrl.js"></script>
     <script src="/js/controllers/edit/styles/StylesCtrl.js"></script>
     <script src="/js/controllers/edit/styles/webStylesCtrl.js"></script>
+    <script src="/js/controllers/get-assistance/get-assistance.js"></script>
     <script src="/js/controllers/technicalSupport/technicalSupportCtrl.js"></script>
     <script src="/js/controllers/treeSource/controllers/handleCtrl.js"></script>
     <script src="/js/controllers/treeSource/controllers/nodeCtrl.js"></script>
@@ -266,6 +278,7 @@
     <script src="/js/services/common/oblMenuService.js"></script>
     <script src="/js/services/dashboard/dashboardService.js"></script>
     <script src="/js/services/edit/article/articleService.js"></script>
+    <script src="/js/services/edit/carousel/carouselController.js"></script>
     <script src="/js/services/edit/commerce/commerceService.js"></script>
     <script src="/js/services/edit/commerce/currencyService.js"></script>
     <script src="/js/services/edit/commerce/ipgService.js"></script>
@@ -275,6 +288,7 @@
     <script src="/js/services/edit/design/templateService.js"></script>
     <script src="/js/services/edit/engage/engageService.js"></script>
     <script src="/js/services/edit/logoandtittle/logoAndTittleService.js"></script>
+    <script src="/js/services/edit/mainmenu/categoryMaintenanceService.js"></script>
     <script src="/js/services/edit/mainmenu/mainMenuService.js"></script>
     <script src="/js/services/edit/publish/publishService.js"></script>
     <script src="/js/services/edit/service/appEditAreaResource.js"></script>
@@ -285,6 +299,7 @@
     <script src="/js/services/edit/shareUrl/shareUrlService.js"></script>
     <script src="/js/services/edit/styles/stylesService.js"></script>
     <script src="/js/services/edit/styles/webStylesService.js"></script>
+    <script src="/js/services/get-assistance/getAssistanceService.js"></script>
     <script src="/js/services/salesAndPromotion/salesAndPromotionService.js"></script>
     <script src="/js/services/technicalSupport/technicalSupportService.js"></script>
     <script src="/js/services/TempUnavilable/comingSoonService.js"></script>
@@ -345,6 +360,6 @@
     })();
     </script>
     <!--End of Tawk.to Script-->
-
-  </body>
+<div class="footer-beta"><a href = "https://www.simatosolutions.com" target="_blank">built by Simato Solutions</a></div>
+</body>
 </html>
