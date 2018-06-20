@@ -6,7 +6,10 @@ import { CategoriesService } from '../../services/categories/categories.service'
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { TitleService } from '../../services/title.service';
 import {CordovaPluginFirebaseService} from "../../services/cordova-plugin-services/cordova-plugin-firebase.service";
-import {CordovaPluginDeviceService} from "../../services/cordova-plugin-services/cordova-plugin-device.service";
+import { IntervalObservable } from "rxjs/observable/IntervalObservable";
+import { takeWhile } from 'rxjs/operators';
+import 'rxjs/add/operator/takeWhile';
+import { SubscribedDataService } from '../../services/subscribed-data/subscribed-data.service'
 
 var homePageCmp;
 
@@ -34,6 +37,11 @@ export class HomepageComponent implements OnInit {
     private isSliderDataAvailable: boolean = false;
     private isRandomProducts;
     private uuid;
+      private subscriptionStatus;
+      private deviceUUID;
+      private appPublishDetails;
+      private alive = true;
+      private isSubscribing = false;
 
   constructor(private route: Router,
               private dataService: PagebodyServiceModule,
@@ -41,13 +49,23 @@ export class HomepageComponent implements OnInit {
               private categoryService: CategoriesService,
               private device: CordovaPluginDeviceService,
               private title: TitleService,
-              private  push: CordovaPluginFirebaseService) {
+              private  push: CordovaPluginFirebaseService,
+              private subscription:SubscribedDataService,) {
 
         this.title.changeTitle(data.name);
         homePageCmp = this;
     }
 
     ngOnInit() {
+    $('#registerModel').on('hide.bs.modal', ()=>{
+          console.log('close');
+
+          this.alive = false;
+          this.isSubscribing = false;
+        });
+
+        this.isSubscribing = false;
+        this.generatePushToken();
         this.getDeviceUUID();
 
         this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
@@ -76,8 +94,14 @@ export class HomepageComponent implements OnInit {
 
     // Routing Method
     navigateShop(val: string, id, name,image) {
-        this.dataService.catId = id;
-        this.router.navigate(['/' + val, id, name,image]);
+            this.isSubscribing = false;
+
+            if(localStorage.getItem(this.appId+"msisdn")){
+              this.dataService.catId = id;
+              this.router.navigate(['/' + val, id, name]);
+            }else{
+              this.isSubscribing = false;
+              $('#registerModel').modal('show')
     }
 
   pushSuccessCallback(token: any){
@@ -116,6 +140,41 @@ export class HomepageComponent implements OnInit {
   getDeviceUUID(){
     this.device.getUUID(homePageCmp.deviceUUIDCallback);
   }
+onCancel(){
+    this.isSubscribing = false;
+    this.alive = false;
+  }
+    onSubscribe(){
+      let data = {appId:this.appId,uuId:this.dataService.uuid}
+      this.getSubscription(data);
+      // this.getDeviceUUID();
+    }
+    getSubscription(data){
 
+      this.isSubscribing = true;
+
+      IntervalObservable.create(5000)
+        .takeWhile(() => this.alive) // only fires when component is alive
+        .subscribe(() => {
+          this.subscription.getSubscribedData(data).subscribe(data =>{
+            console.log(data);
+            this.subscriptionStatus = data.isSubscribed;
+            if(this.subscriptionStatus == true){
+              this.isSubscribing = false;
+              localStorage.setItem(this.appId+"msisdn",data.msisdn)
+               this.alive = false;
+                //close the model
+                $(function () {
+                  $('#registerModelhome').modal('toggle');
+               });
+               //close the nav bar
+              //  document.getElementById("mySidenav").style.width = "0";
+            }
+          });
+        });
+
+    }
+
+  }
 
 }

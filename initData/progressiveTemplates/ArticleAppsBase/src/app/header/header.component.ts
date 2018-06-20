@@ -61,6 +61,16 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit() {
+    $('#registerModel').on('hide.bs.modal', ()=>{
+      console.log('close');
+
+      this.alive = false;
+      this.isSubscribing = false;
+      this.isUnsubscribing = false;
+  });
+
+    this.isSubscribing = false;
+    this.isUnsubscribing = false;
 
     if(!localStorage.getItem(this.appId+"uuid")){
       localStorage.setItem(this.appId+"uuid",JSON.stringify('e66cd871ef25517a'));
