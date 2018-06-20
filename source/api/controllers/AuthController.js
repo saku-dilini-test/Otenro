@@ -80,7 +80,7 @@ module.exports = {
             var pGenerator = new pinGenerator();
             var loginPin = pGenerator.generate();
 
-            var criteria = { mobile: req.body.mobile };
+            var criteria = {mobile: { 'contains' : req.body.mobile.slice(-9) }};
             var valuesToUpdate = { loginPin: loginPin };
             User.findOne(criteria).exec(function (err, user) {
                 if (err) return res.send({ message: 'error' });
@@ -529,7 +529,7 @@ module.exports = {
      * @param res
      **/
     verifyMobilePin: function (req, res) {
-        var criteria = { mobile: req.body.mobile },
+        var criteria = {mobile: { 'contains' : req.body.mobile.slice(-9) }},
             pin = req.body.pin;
         User.findOne(criteria)
             .exec(function (err, user) {
