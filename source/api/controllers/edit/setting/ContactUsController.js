@@ -162,6 +162,9 @@ module.exports = {
         };
         ApplicationContactUs.findOne(searchApp).exec(function (err, app) {
             if (err) return done(err);
+            if (app) {
+                app.isBeta = sails.config.isBeta;
+            }
             res.send(app);
         });
     }

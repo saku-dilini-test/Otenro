@@ -71,6 +71,9 @@
                         if (ctrlFun == 'showIPGDialog'){
                             return ipgService.showIPGDialog();
                         }
+                        if (ctrlFun == 'showSiteSettingsDialog') {
+                            return contactUsService.showSiteSettingsDialog();
+                        }
                     }
 
                     if(ctrl == 'inventory'){

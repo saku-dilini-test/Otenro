@@ -30,7 +30,11 @@
                     .success(function(result){
                         if (result.email) {
                             if (result.email !== '' && result.email !== undefined) {
-                                dialogService.showDialog(clickTitle);
+                                if (result.isBeta === 0) {
+                                    dialogService.showDialog(clickTitle);
+                                } else {
+                                    toastr.error('You cannot publish apps through Appmaker during the Beta period.','Error', {closeButton: true});
+                                }
                             } else {
                                 toastr.error('Go to site settings and fill contact us details before publishing your app','Error', {closeButton: true});
                             }

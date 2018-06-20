@@ -53,6 +53,10 @@ module.exports = {
   CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789',
   TEMPLATES_PATH : '/home/Ideadroid/Otenro/initData/templates/',
   PROGRESSIVE_TEMPLATES_PATH : '/home/Ideadroid/Otenro/initData/progressiveTemplates/',
-  REDIRECT_URL : 'http://173.82.243.121:1338'
+  REDIRECT_URL : 'http://173.82.243.121:1338',
+  /**
+   * change isBeta to 0 after beta period
+   **/
+  isBeta: 1
 
 };

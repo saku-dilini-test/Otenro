@@ -38,4 +38,8 @@ module.exports = {
   TEMPLATES_PATH : '/home/Otenro/initData/templates/',
   PROGRESSIVE_TEMPLATES_PATH : '/home/Otenro/initData/progressiveTemplates/',
   REDIRECT_URL : 'http://173.82.153.215:1338',
+  /**
+   * change isBeta to 0 after beta period
+   **/
+  isBeta: 1
 };
