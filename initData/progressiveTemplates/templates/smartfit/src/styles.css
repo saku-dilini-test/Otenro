@@ -14,8 +14,6 @@ body{
 a,button{transition: all .3s ease-in-out;outline: none!important;} /* Prevent ugly blue glow on chrome and safari */
 a:hover{text-decoration: none; cursor:pointer;}
 
-#page-loading-blocs-notifaction{position: fixed;top: 0;bottom: 0;width: 100%;z-index:100000;background:#FFFFFF url("img/pageload-spinner.gif") no-repeat center center;}
-
 /* = Blocs
 -------------------------------------------------------------- */
 
@@ -815,30 +813,6 @@ button{
 .contact-row-spacing-{
 	padding-left:44%;
 }
-
-/* = Colour
--------------------------------------------------------------- */
-
-/* Background colour styles */
-
-.bgc-white{
-	background-color:#ffffff;
-}
-.bgc-outer-space{
-	background-color:#47454B;
-}
-.bgc-anti-flash-white{
-	background-color:#EDF2F1;
-}
-.bgc-snow{
-	background-color:#FBFBFB;
-}
-
-/* Bloc image backgrounds */
-
-
-
-
 
 /* = Mobile adjustments
 -------------------------------------------------------------- */
