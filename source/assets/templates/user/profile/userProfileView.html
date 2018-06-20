@@ -176,7 +176,7 @@
                         <!--Mobile number field-->
                         <fieldset>
                             <label> Contact Number </label>
-                            <input class="input-shadow-border" name="mobile" type="text" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im"
+                            <input class="input-shadow-border" name="mobile" type="text" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,6}$/im"
                                    style="float:left;" ng-model="userEdit.mobile" required/>
                             <span class="error help-block" ng-show="editProfile.mobile.$error.required">*</span>
                             <span class="error help-block" ng-show="editProfile.mobile.$dirty && editProfile.mobile.$invalid">
