@@ -103,6 +103,7 @@ export class CheckoutComponent implements OnInit {
   private payHereMID;
   private isCountryChanged = false;
   private selectedCountry;
+  private newUser;
 
   constructor(fb: FormBuilder, private ordersService: OrdersService,
     private shippingService: ShippingService,
@@ -162,7 +163,7 @@ export class CheckoutComponent implements OnInit {
     this.complexForm.controls['country'].setValue(this.dataService.userData.country, { onlySelf: true });
 
     this.pickupForm = fb.group({
-      'name': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
+      'name': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[A-z ]+$/)])),
       'email': new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
       'phone': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/), Validators.minLength(12)])),
 
