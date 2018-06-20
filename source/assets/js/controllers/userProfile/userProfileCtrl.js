@@ -8,6 +8,7 @@
 
 (function() {
     'use strict';
+    var mobileVerificationPin;
     angular.module('app')
         .controller('userProfileCtrl',
       ['$scope', 'userProfileResource', 'CurrentUser', 'userProfileService','Auth','$auth','$state','$mdDialog','toastr','$log',
@@ -148,8 +149,10 @@
                 }else {
                     params.method = 'WITH_PASSWORD';
                 }
+                params.mobileVerificationPin = $scope.mobileVerificationPin;
                 userProfileResource.updateUserProfileWithMobile(params).then(function(response){
                     if (response.data.message === 'success') {
+                        $scope.mobileVerificationPin = null;
                         toastr.success('Successfully updated user details.', 'Success', {
                             closeButton: true
                         });
