@@ -39,4 +39,8 @@ module.exports = {
   TEMPLATES_PATH : 'd:/OfficeWork/Otenro/Otenro/initData/templates/',
   PROGRESSIVE_TEMPLATES_PATH : 'd:/OfficeWork/Otenro/Otenro/initData/progressiveTemplates/',
   REDIRECT_URL : 'http://localhost:1337',
+  /**
+   * change isBeta to 0 after beta period
+   **/
+  isBeta: 1
 };
