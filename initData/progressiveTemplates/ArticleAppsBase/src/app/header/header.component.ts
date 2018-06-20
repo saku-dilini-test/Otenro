@@ -8,6 +8,10 @@ import {CordovaPluginDeviceService} from "../services/cordova-plugin-services/co
 import {Location} from '@angular/common';
 import { SubscribedDataService } from '../services/subscribed-data/subscribed-data.service'
 import {AppDataService} from "../services/appdata-info/appdata-info.service";
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { IntervalObservable } from "rxjs/observable/IntervalObservable";
+import { takeWhile } from 'rxjs/operators';
+import 'rxjs/add/operator/takeWhile';
 
 var headerCmp;
 
@@ -26,6 +30,9 @@ export class HeaderComponent implements OnInit{
   private subscriptionStatus;
   private deviceUUID;
   private appPublishDetails;
+  private alive = true;
+  private isSubscribing = false;
+  private isUnsubscribing = false;
 
   constructor(private subscription:SubscribedDataService,
               private router: Router,
@@ -34,7 +41,8 @@ export class HeaderComponent implements OnInit{
               private location: Location,
               private sms: SMSService,
               private device: CordovaPluginDeviceService,
-              private appDataService: AppDataService) {
+              private appDataService: AppDataService,
+              private spinner:Ng4LoadingSpinnerService) {
     this.cartNo = this.dataService.cart.cartItems.length;
     this.title = 'Your Horoscope';
 
@@ -53,11 +61,30 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit() {
+    $('#registerModel').on('hide.bs.modal', ()=>{
+      console.log('close');
 
-    this.subscription.getSubscribedData().subscribe(data =>{
+      this.alive = false;
+      this.isSubscribing = false;
+      this.isUnsubscribing = false;
+  });
+
+    this.isSubscribing = false;
+    this.isUnsubscribing = false;
+
+    if(!localStorage.getItem(this.appId+"uuid")){
+      localStorage.setItem(this.appId+"uuid",JSON.stringify('e66cd871ef25517a'));
+      this.dataService.uuid = "e66cd871ef25517a"
+    }else{
+      this.dataService.uuid = JSON.parse(localStorage.getItem(this.appId+"uuid"));
+    }
+
+    var msisdn = localStorage.getItem(this.appId+"msisdn");
+     let data = {appId:this.appId,msisdn:msisdn}
+    this.subscription.getSubscribedData(data).subscribe(data =>{
       console.log(data);
       this.subscriptionStatus = data.isSubscribed;
-    })
+    });
 
 
     this.appDataService.getPublishDetails().subscribe(data =>{
@@ -95,6 +122,7 @@ export class HeaderComponent implements OnInit{
     $('.navbar-2').removeClass('in');
     $('.mobileTitle').addClass('visible-xs');
     $('.mobileTitle').removeClass('hidden');
+
   }
 
   openNav() {
@@ -106,8 +134,61 @@ export class HeaderComponent implements OnInit{
   }
 
   onSubscribe(){
-    this.getDeviceUUID();
+    let data = {appId:this.appId,uuId:this.dataService.uuid}
+    this.getSubscription(data);
+    // this.getDeviceUUID();
   }
+  getSubscription(data){
+
+    this.isSubscribing = true;
+
+    IntervalObservable.create(5000)
+      .takeWhile(() => this.alive) // only fires when component is alive
+      .subscribe(() => {
+        this.subscription.getSubscribedData(data).subscribe(data =>{
+          console.log(data);
+          this.subscriptionStatus = data.isSubscribed;
+          if(this.subscriptionStatus == true){
+            this.isSubscribing = false;
+            localStorage.setItem(this.appId+"msisdn",data.msisdn)
+             this.alive = false;
+              //close the model
+              $(function () {
+                $('#registerModel').modal('toggle');
+             });
+             //close the nav bar
+             document.getElementById("mySidenav").style.width = "0";
+          }
+        });
+      });
+
+  }
+
+  onUnsubscribe(){
+    let data = {appId:this.appId,uuId:this.dataService.uuid}
+    this.isUnsubscribing = true;
+
+    IntervalObservable.create(5000)
+      .takeWhile(() => this.alive) // only fires when component is alive
+      .subscribe(() => {
+        this.subscription.getSubscribedData(data).subscribe(data =>{
+          console.log(data);
+          this.subscriptionStatus = data.isSubscribed;
+          if(this.subscriptionStatus == false){
+            this.isUnsubscribing = false;
+            localStorage.removeItem(this.appId+"msisdn")
+             this.alive = false;
+              //close the model
+              $(function () {
+                $('#myAccountModel').modal('toggle');
+             });
+             //close the nav bar
+             document.getElementById("mySidenav").style.width = "0";
+          }
+        });
+      });
+  }
+
 
   deviceUUIDCallback(uuid: any){
     console.log("UUID: " + uuid);
