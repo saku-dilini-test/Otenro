@@ -95,16 +95,22 @@ export class HomepageComponent implements OnInit {
 
     // Routing Method
     navigateShop(val: string, id, name,image) {
-            this.isSubscribing = false;
-
-            if(localStorage.getItem(this.appId+"msisdn")){
-              this.dataService.catId = id;
-              this.router.navigate(['/' + val, id, name]);
-            }else {
-                this.isSubscribing = false;
-                $('#registerModel').modal('show')
-            }
+        this.dataService.catId = id;
+        this.router.navigate(['/' + val, id, name,image]);
     }
+
+    // // Routing Method
+    // navigateShop(val: string, id, name,image) {
+    //         this.isSubscribing = false;
+    //
+    //         if(localStorage.getItem(this.appId+"msisdn")){
+    //           this.dataService.catId = id;
+    //           this.router.navigate(['/' + val, id, name]);
+    //         }else {
+    //             this.isSubscribing = false;
+    //             $('#registerModel').modal('show')
+    //         }
+    // }
 
   pushSuccessCallback(token: any){
     console.log("Push Token: " + token);
