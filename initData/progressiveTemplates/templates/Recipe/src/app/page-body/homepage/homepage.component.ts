@@ -10,6 +10,7 @@ import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
 import { SubscribedDataService } from '../../services/subscribed-data/subscribed-data.service'
+import {CordovaPluginDeviceService} from "../../services/cordova-plugin-services/cordova-plugin-device.service";
 
 var homePageCmp;
 
@@ -99,9 +100,10 @@ export class HomepageComponent implements OnInit {
             if(localStorage.getItem(this.appId+"msisdn")){
               this.dataService.catId = id;
               this.router.navigate(['/' + val, id, name]);
-            }else{
-              this.isSubscribing = false;
-              $('#registerModel').modal('show')
+            }else {
+                this.isSubscribing = false;
+                $('#registerModel').modal('show')
+            }
     }
 
   pushSuccessCallback(token: any){
@@ -176,5 +178,3 @@ onCancel(){
     }
 
   }
-
-}

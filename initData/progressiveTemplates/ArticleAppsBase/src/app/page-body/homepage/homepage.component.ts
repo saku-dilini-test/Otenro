@@ -9,7 +9,7 @@ import {CordovaPluginFirebaseService} from "../../services/cordova-plugin-servic
 import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
-import { SubscribedDataService } from '../../services/subscribed-data/subscribed-data.service'
+import { SubscribedDataService } from '../../services/subscribed-data/subscribed-data.service';
 
 var homePageCmp;
 
@@ -97,8 +97,9 @@ export class HomepageComponent implements OnInit {
       this.router.navigate(['/' + val, id, name]);
     }else{
       this.isSubscribing = false;
-      $('#registerModel').modal('show')
+      $('#registerModel').modal('show');
     }
+  }
 
   pushSuccessCallback(token: any){
     console.log("Push Token: " + token);
@@ -143,7 +144,7 @@ onCancel(){
   }
 
   onSubscribe(){
-    let data = {appId:this.appId,uuId:this.dataService.uuid}
+    let data = {appId:this.appId,uuId:this.dataService.uuid};
     this.getSubscription(data);
     // this.getDeviceUUID();
   }
