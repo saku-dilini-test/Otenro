@@ -68,8 +68,6 @@ module.exports = {
                                  '<p>Thank you for registering for Appmaker, the platform that enables you to create mobile </p>'+
                                  '<p>applications without any coding. The service is currently in beta, and some features of the</p>'+
                                  '<p>platform are currently not enabled. </p><br>'+
-                                 '<p>We have created a starter guide to help you build your first application and familiarize </p>'+
-                                 '<p>yourself with the <a href="http://developer.appmaker.lk">Appmaker interface</a>.</p><br>'+
                                  '<p>As the service is in beta you may encounter bugs or errors. Please report these to</p>'+
                                  '<p>support@appmaker.lk so that we can ensure they are addressed at launch.</p><br>'+
                                  '<p>Good luck on your app creation journey!</p>'+
