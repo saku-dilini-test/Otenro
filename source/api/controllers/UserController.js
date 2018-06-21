@@ -19,6 +19,7 @@ module.exports = {
         var searchQuery = { id : data.id };
         var error = { message : 'ERROR' };
         var notFound = { message: 'NOT_FOUND' };
+        var exists = { message: 'EXISTS' };
 
         User.findOne(searchQuery).exec(function (err, user) {
             if (err) return res.send(error);
@@ -87,37 +88,50 @@ module.exports = {
                 var queryString;
                 var mobileVerificationPin = '';
                 var url = 'https://sms.textware.lk:5001/sms/send_sms.php';
+                var mobileSearchQuery = { mobile : { 'contains' : data.mobile.slice(-9) }};
                 /**
-                 * Generate a random number with length 6
+                 * Check whether mobile number is registered
                  **/
-                randomNumberService.generateRandomNumber(6, function (results) {
-                    if (results.message === 'success') {
-                        mobileVerificationPin = results.number;
+                User.findOne(mobileSearchQuery).exec(function (err, user) {
+                    if (err) {
+                        sails.log.error('Error occurred while mobile number exists in Update user profile, error :' + err)
+                        return res.send(error);
                     }
-                });
-                queryString = {
-                    username: 'simato',
-                    password: 'Si324Mt',
-                    src: 'Balamu',
-                    dst: data.mobile,
-                    msg: 'Your pin is ' + mobileVerificationPin,
-                    dr: '1'
-                };
-                smsPayload = {
-                    url: url,
-                    queryString: queryString
-                };
-                smsService.sendSMS(smsPayload, function (info) {
-                    if (info.message === 'success') {
-                        User.update(searchQuery, {mobileVerificationPin : mobileVerificationPin})
-                            .exec(function (err) {
-                            if (err) {
-                                sails.log.error('Error updating mobileVerificationPin');
-                                return res.send(error);
-                            }
-                            return res.send({ message: 'verify_mobile' });
-                        });
+                    if (user) {
+                        return res.send(exists);
                     }
+                    /**
+                     * Generate a 6 digit random number
+                     **/
+                    randomNumberService.generateRandomNumber(6, function (results) {
+                        if (results.message === 'success') {
+                            mobileVerificationPin = results.number;
+                        }
+                    });
+                    queryString = {
+                        username: 'simato',
+                        password: 'Si324Mt',
+                        src: 'Balamu',
+                        dst: data.mobile,
+                        msg: 'Your pin is ' + mobileVerificationPin,
+                        dr: '1'
+                    };
+                    smsPayload = {
+                        url: url,
+                        queryString: queryString
+                    };
+                    smsService.sendSMS(smsPayload, function (info) {
+                        if (info.message === 'success') {
+                            User.update(searchQuery, {mobileVerificationPin : mobileVerificationPin})
+                                .exec(function (err) {
+                                    if (err) {
+                                        sails.log.error('Error updating mobileVerificationPin');
+                                        return res.send(error);
+                                    }
+                                    return res.send({ message: 'verify_mobile' });
+                                });
+                        }
+                    });
                 });
             }
 

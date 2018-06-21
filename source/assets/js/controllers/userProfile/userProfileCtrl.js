@@ -107,6 +107,11 @@
                            closeButton: true
                        });
                    }
+                   if (response.data.message === 'EXISTS') {
+                       toastr.error('Mobile number is already registered. Try with another mobile number!', 'Error', {
+                           closeButton: true
+                       });
+                   }
                    if (response.data.message === 'verify_mobile') {
                        toastr.success('Please check your mobile and enter verification pin to update mobile number.', 'Success', {
                            closeButton: true
