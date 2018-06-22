@@ -46,7 +46,7 @@ module.exports = {
                 msisdn = appUser.msisdn;
             }
 
-            res.ok({ 'isSubscribed': isSubscribed, 'msisdn':msisdn});
+            res.ok({ 'isSubscribed': true, 'msisdn':msisdn});
         });
 
 
