@@ -489,10 +489,12 @@
           });
 
           $scope.getAppsCount = function(id){
-          var count = 1;
+          var count = 0;
                 $scope.appList.forEach(function(ele){
                     if (ele.userId == id){
-                        count++;
+                        if((ele.status == "APPROVED" || ele.status == "PENDING")){
+                            count++;
+                        }
                     }
                 });
                 return count;

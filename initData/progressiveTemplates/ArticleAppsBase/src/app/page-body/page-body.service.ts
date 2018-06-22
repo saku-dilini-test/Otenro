@@ -22,6 +22,8 @@ export class PagebodyServiceModule {
   catId;
   sign;
   searchArray = [];
+  uuid;
+  subUserArticleData = {id:null,name:null}
   constructor() {
 
     this.parentobj.cartSize = this.cart.cartSize;

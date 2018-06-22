@@ -62,12 +62,16 @@ export class HeaderComponent implements OnInit{
 
   ngOnInit() {
     $('#registerModel').on('hide.bs.modal', ()=>{
-      console.log('close');
-
       this.alive = false;
+      console.log("model close " + this.alive);
       this.isSubscribing = false;
+    });
+
+    $('#myAccountModel').on('hide.bs.modal', ()=>{
+      this.alive = false;
+      console.log("model close " + this.alive);
       this.isUnsubscribing = false;
-  });
+    });
 
     this.isSubscribing = false;
     this.isUnsubscribing = false;
@@ -84,6 +88,7 @@ export class HeaderComponent implements OnInit{
     this.subscription.getSubscribedData(data).subscribe(data =>{
       console.log(data);
       this.subscriptionStatus = data.isSubscribed;
+      this.dataService.subscriptionStatus = data.isSubscribed;
     });
 
 
@@ -105,6 +110,9 @@ export class HeaderComponent implements OnInit{
     });
   }
 
+  ngDoCheck(){
+    this.subscriptionStatus = this.dataService.subscriptionStatus;
+  }
 
   navigate(route: string, name: string) {
     this.title = data.name;
@@ -133,7 +141,12 @@ export class HeaderComponent implements OnInit{
       document.getElementById("mySidenav").style.width = "0";
   }
 
+  close(){
+    this.isUnsubscribing = false;
+    this.isSubscribing = false;
+  }
   onSubscribe(){
+    this.alive = true;
     let data = {appId:this.appId,uuId:this.dataService.uuid}
     this.getSubscription(data);
     // this.getDeviceUUID();
@@ -148,12 +161,13 @@ export class HeaderComponent implements OnInit{
         this.subscription.getSubscribedData(data).subscribe(data =>{
           console.log(data);
           this.subscriptionStatus = data.isSubscribed;
+          this.dataService.subscriptionStatus = data.isSubscribed;
           if(this.subscriptionStatus == true){
             this.isSubscribing = false;
             localStorage.setItem(this.appId+"msisdn",data.msisdn)
              this.alive = false;
               //close the model
-              $(function () {
+              $(() => {
                 $('#registerModel').modal('toggle');
              });
              //close the nav bar
@@ -165,6 +179,7 @@ export class HeaderComponent implements OnInit{
   }
 
   onUnsubscribe(){
+    this.alive = true;
     let data = {appId:this.appId,uuId:this.dataService.uuid}
     this.isUnsubscribing = true;
 
@@ -174,12 +189,13 @@ export class HeaderComponent implements OnInit{
         this.subscription.getSubscribedData(data).subscribe(data =>{
           console.log(data);
           this.subscriptionStatus = data.isSubscribed;
+          this.dataService.subscriptionStatus = data.isSubscribed;
           if(this.subscriptionStatus == false){
             this.isUnsubscribing = false;
             localStorage.removeItem(this.appId+"msisdn")
              this.alive = false;
               //close the model
-              $(function () {
+              $( () => {
                 $('#myAccountModel').modal('toggle');
              });
              //close the nav bar

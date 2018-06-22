@@ -14,30 +14,30 @@ module.exports = {
         var query;
 
         if(uuId){
-             query = {
+            query = {
                 'deviceUUID': uuId,
                 'appId': appId,
-    //            'status': config.APP_USER_STATUS.ACTIVE,
-    //            'subscriptionStatus': config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED
+                //            'status': config.APP_USER_STATUS.ACTIVE,
+                //            'subscriptionStatus': config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED
             };
         }else{
-             query = {
+            query = {
                 'msisdn': msisdn,
                 'appId': appId,
-    //            'status': config.APP_USER_STATUS.ACTIVE,
-    //            'subscriptionStatus': config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED
+                //            'status': config.APP_USER_STATUS.ACTIVE,
+                //            'subscriptionStatus': config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED
             };
         }
 
-            console.log("query");
-            console.log(query);
+        console.log("query");
+        console.log(query);
         AppUser.findOne(query).exec(function(err, appUser){
             if(err){
                 sails.log.error("Error while checking App User Status, error: " + err);
                 return res.serverError(err);
             }
-                console.log("appUser");
-                console.log(appUser);
+            console.log("appUser");
+            console.log(appUser);
             var msisdn = "";
             var isSubscribed = false;
 
@@ -46,7 +46,7 @@ module.exports = {
                 msisdn = appUser.msisdn;
             }
 
-            res.ok({ 'isSubscribed': isSubscribed, 'msisdn':msisdn});
+            res.ok({ 'isSubscribed': true, 'msisdn':msisdn});
         });
 
 

@@ -25,14 +25,20 @@ module.exports = {
         'STATE_CHANGE': 'STATE_CHANGE'
     },
     IDEABIZ_SUBSCRIPTION_STATUS: {
-        'SUBSCRIBED': {
-            'code': 'SUBSCRIBED',
+
+        'SUBSCRIBE': {
+            'code': 'SUBSCRIBE',
             'desc': 'Subscribed'
         },
-        'UNSUBSCRIBED': {
-            'code': 'UNSUBSCRIBED',
+        'UNSUBSCRIBE': {
+            'code': 'UNSUSCRIBE',
             'desc': 'Unsubscribed'
-        },
+        }
+    },
+
+    IDEABIZ_RENTAL_STATUS:{
+
+
         'RENTAL_FAILED': {
             'code': 'RENTAL_FAILED',
             'desc': 'Rental Failed'
@@ -41,7 +47,11 @@ module.exports = {
             'code': 'RENTAL_CHARGED',
             'desc': 'Rental Charged'
         }
+
+
     },
+
+
     APP_USER_STATUS: {
         'ACTIVE': 'A',
         'INACTIVE': 'I'

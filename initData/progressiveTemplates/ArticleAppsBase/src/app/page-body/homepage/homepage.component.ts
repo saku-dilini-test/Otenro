@@ -9,7 +9,7 @@ import {CordovaPluginFirebaseService} from "../../services/cordova-plugin-servic
 import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
-import { SubscribedDataService } from '../../services/subscribed-data/subscribed-data.service';
+import { SubscribedDataService } from '../../services/subscribed-data/subscribed-data.service'
 
 var homePageCmp;
 
@@ -53,7 +53,7 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit() {
 
-    $('#registerModel').on('hide.bs.modal', ()=>{
+    $('#registerModelhome').on('hide.bs.modal', ()=>{
       console.log('close');
 
       this.alive = false;
@@ -96,8 +96,10 @@ export class HomepageComponent implements OnInit {
       this.dataService.catId = id;
       this.router.navigate(['/' + val, id, name]);
     }else{
+      this.dataService.subUserArticleData.id = id;
+      this.dataService.subUserArticleData.name = name;
       this.isSubscribing = false;
-      $('#registerModel').modal('show');
+      $('#registerModelhome').modal('show')
     }
   }
 
@@ -144,12 +146,10 @@ onCancel(){
   }
 
   onSubscribe(){
-    let data = {appId:this.appId,uuId:this.dataService.uuid};
-    this.getSubscription(data);
+    let data = {appId:this.appId,uuId:this.dataService.uuid}
     // this.getDeviceUUID();
-  }
-  getSubscription(data){
-
+    console.log(this.subscriptionStatus);
+    this.alive = true;
     this.isSubscribing = true;
 
     IntervalObservable.create(5000)
@@ -163,15 +163,15 @@ onCancel(){
             localStorage.setItem(this.appId+"msisdn",data.msisdn)
              this.alive = false;
               //close the model
-              $(function () {
-                $('#registerModelhome').modal('toggle');
+              $(()=> {
+                $('#registerModelhome').modal('hide');
+                this.router.navigate(['/' + "shop", this.dataService.subUserArticleData.id, this.subscriptionStatus.name]);
              });
              //close the nav bar
             //  document.getElementById("mySidenav").style.width = "0";
           }
         });
       });
-
-  }
+    }
 
 }
