@@ -2990,5 +2990,7 @@ table.md-calendar-day-header{
     font-weight:lighter;
     margin-top: 1%;
     padding: 5px;
+    position: fixed;
+    bottom: 0;
 
 }
