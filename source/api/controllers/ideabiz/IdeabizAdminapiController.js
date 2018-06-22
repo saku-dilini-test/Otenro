@@ -1,5 +1,6 @@
 var config = require('../../services/config');
 var pushService = require('../../services/pushNotificationsService');
+var dateFormat = require('dateformat');
 
 /**
  * IdeabizAdminapiController
@@ -327,74 +328,133 @@ module.exports = {
         };
         //Checking the incoming status is valid with our Statuses in config.IDEABIZ_SUBSCRIPTION_STATUS <- Should remove once we impliment the renewal api
 
-        if(!actionStateChangeInstance.isSubscriptionStatusValid(subscriptionStatus)){
-            sails.log.error("Incoming status: " + subscriptionStatus + " is not matching any status in config.IDEABIZ_SUBSCRIPTION_STATUS");
+        if(!actionStateChangeInstance.isStatusValid(subscriptionStatus)){
+            sails.log.error("Incoming status: " + subscriptionStatus + " is not matching any status in config.IDEABIZ_STATUS");
             return res.badRequest("Invalid status: " + subscriptionStatus);
         }
 
         try {
-            var queryUser = {
-                'msisdn': msisdn,
-                'serviceId': serviceID
-            }
-
-            console.log(queryUser);
-
-            AppUser.find(queryUser).exec(function (err, user) {
-                console.log(user);
-
-                var appUserStatus = actionStateChangeInstance.getAppUserStatus(subscriptionStatus);
-
-                //Will update the user statuses while receiving a status change call
-                if (user) {
-                            var log = {
-                                'date': new Date(),
-                                'appID': user.appID,
-                                'msisdn': msisdn,
-                                'serviceId': serviceID,
-                                'subscriptionStatus': subscriptionStatus,
-                                'method': method,
-                                'note': note,
-                                'messageBody': reqBody
-                            };
-
-                            sails.log.debug("User exists for the msisdn: " + msisdn + " and will update the statuses");
-                            var currentSubscriptionStatus = user.subscriptionStatus;
-
-                            var setFields = {
-                                'status': appUserStatus,
-                                'subscriptionStatus': subscriptionStatus
-                            };
-
-                            console.log("setFields " + JSON.stringify(setFields));
-
-                            AppUser.update(queryUser, setFields).exec(function(err, users){
-
-                                console.log(users);
-
-                                if(err){
-                                    sails.log.error("Error when update the msisdn: " + msisdn + " error: " + err);
-                                    return res.serverError("Error when update the msisdn: " + msisdn + " error: " + err);
-                                }
-
-                                sails.log.debug("Update users: " + users.length);
-
-                                actionStateChangeInstance.logStateChange(log);
-
-                                //Send the notifications to the AppUser
-                                actionStateChangeInstance.notifyUsers(req,res,users,currentSubscriptionStatus,subscriptionStatus);
-
-                                return res.ok("Status updated");
-                            });
 
 
 
-                }else{
+            if (reqBody.status==config.IDEABIZ_RENTAL_STATUS.RENTAL_CHARGED.code||reqBody.status==config.IDEABIZ_RENTAL_STATUS.RENTAL_FAILED.code ){
+
+                var query = {
+                    'msisdn': msisdn,
+                    'serviceId': serviceID,
+                    'date':dateFormat(new Date().toLocaleString(),"yyyy-mm-dd")
+                }
+
+                SubscriptionPayment.findOne(query).exec(function (err, paymentData) {
+
+                   if (paymentData){
+
+                       var setFields = {
+                           'status': reqBody.status
+                       };
+
+                       SubscriptionPayment.update(query,setFields).exec(function (err, UpdatedPaymentData) {
+
+                           if (err){
+                               sails.log.error("Error when update the msisdn: " + msisdn + " error: " + err);
+                               return res.serverError("Error when update the msisdn: " + msisdn + " error: " + err);
+                           }
+
+                           if (UpdatedPaymentData){
+                               return res.ok("Status updated");
+                           }
+
+                       });
+
+                   } else  {
+
+                       var queryData = {
+                           'msisdn': msisdn,
+                           'serviceId': serviceID,
+                           'date':dateFormat(new Date().toLocaleString(),"yyyy-mm-dd"),
+                           'status': reqBody.status
+                       }
+
+                       SubscriptionPayment.create(queryData).exec(function (err, result) {
+                           if (err) {
+                               sails.log.error("SubscriptionPayment Create Error");
+                               return done(err);
+                           }
+                           res.send(result);
+                       });
+                   }
+                });
+
+
+            }else if(reqBody.status==config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBE.code||reqBody.status==config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBE.code ) {
+
+
+
+                var queryUser = {
+                    'msisdn': msisdn,
+                    'serviceId': serviceID
+                }
+
+                console.log(queryUser);
+
+                AppUser.findOne(queryUser).exec(function (err, user) {
+                    console.log(user);
+
+                    var appUserStatus = actionStateChangeInstance.getAppUserStatus(subscriptionStatus);
+
+                    //Will update the user statuses while receiving a status change call
+                    if (user) {
+                        var log = {
+                            'date': new Date(),
+                            'appID': user.appID,
+                            'msisdn': msisdn,
+                            'serviceId': serviceID,
+                            'subscriptionStatus': subscriptionStatus,
+                            'method': method,
+                            'note': note,
+                            'messageBody': reqBody
+                        };
+
+                        sails.log.debug("User exists for the msisdn: " + msisdn + " and will update the statuses");
+                        var currentSubscriptionStatus = user.subscriptionStatus;
+
+                        var setFields = {
+                            'status': appUserStatus,
+                            'subscriptionStatus': subscriptionStatus
+                        };
+
+
+
+                        AppUser.update(queryUser, setFields).exec(function(err, users){
+
+                            console.log(users);
+
+                            if(err){
+                                sails.log.error("Error when update the msisdn: " + msisdn + " error: " + err);
+                                return res.serverError("Error when update the msisdn: " + msisdn + " error: " + err);
+                            }
+
+                            sails.log.debug("Update users: " + users.length);
+
+                            actionStateChangeInstance.logStateChange(log);
+
+                            //Send the notifications to the AppUser
+                            actionStateChangeInstance.notifyUsers(req,res,users,currentSubscriptionStatus,subscriptionStatus);
+
+                            return res.ok("Status updated");
+                        });
+
+
+
+                    }else{
                         sails.log.error("No user registered for msisdn: " + msisdn + " for the serviceId: " + serviceID);
                         return res.json(notFound);
-                }
-            });
+                    }
+                });
+            }
+
         }catch(err){
+
             sails.log.error("Exception in registerUser, error: " + err);
             res.serverError("Exception in registerUser, error: " + err);
         }
@@ -414,8 +474,8 @@ module.exports = {
         });
     },
 
-    isSubscriptionStatusValid: function(subscriptionStatus){
-        if(config.IDEABIZ_SUBSCRIPTION_STATUS[subscriptionStatus]){
+    isStatusValid: function(status){
+        if(config.IDEABIZ_SUBSCRIPTION_STATUS[status] || config.IDEABIZ_RENTAL_STATUS[status] ){
             return true;
         }else{
             return false;
@@ -424,9 +484,9 @@ module.exports = {
 
     getAppUserStatus: function(subscriptionStatus){
         console.log("subscriptionStatus=" + subscriptionStatus);
-        if(this.isSubscriptionStatusValid(subscriptionStatus)){
+        if(this.isStatusValid(subscriptionStatus)){
             switch (subscriptionStatus){
-                case config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code:
+                case config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBE.code:
                     return config.APP_USER_STATUS.ACTIVE;
                     break;
                 case config.IDEABIZ_SUBSCRIPTION_STATUS.RENTAL_CHARGED.code:
@@ -441,14 +501,13 @@ module.exports = {
 
     notifyUsers: function(req,res,users,oldSubscriptionStatus,newSubscriptionStatus){
 
-        console.log(users[0].msisdn);
+        console.log(users.msisdn);
 
 
-
-        DeviceId.findOne({appId:users[0].appId,deviceUUID:users[0].deviceUUID}).exec(function (err, device) {
+        DeviceId.findOne({appId:users.appId,deviceUUID:users.deviceUUID}).exec(function (err, device) {
             console.log(JSON.stringify(device));
             if(device) {
-                Application.findOne({id: users[0].appId}).exec(function (err, app) {
+                Application.findOne({id: users.appId}).exec(function (err, app) {
 
                     var message = {
                         "to": device.deviceId,
