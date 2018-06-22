@@ -140,8 +140,9 @@ export class HomepageComponent implements OnInit {
     this.device.getUUID(homePageCmp.deviceUUIDCallback);
   }
 
-  onCancel(){
-
+onCancel(){
+    this.isSubscribing = false;
+    this.alive = false;
   }
 
   onSubscribe(){
