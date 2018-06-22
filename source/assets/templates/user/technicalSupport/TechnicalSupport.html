@@ -197,8 +197,8 @@
                             <td> {{app.id}} </td>
                             <td>{{app.firstName}} {{app.lastName}}</td>
                                <td> {{app.email}} </td>
-                               <td> {{app.createdAt}} </td>
-                               <td> {{app.lastLoginTime}} </td>
+                               <td> {{app.createdAt | date:'yyyy-MM-dd HH:mm:ss' }} </td>
+                               <td> {{app.lastLoginTime | date:'yyyy-MM-dd HH:mm:ss'}} </td>
                                <td> {{getAppsCount(app.id)}} </td>
                                <!--<td><a data-ng-click="getUserAppData(app.id)">{{app.id}}</a></td>-->
                            </tr>
