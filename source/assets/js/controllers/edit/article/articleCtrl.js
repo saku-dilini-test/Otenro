@@ -191,16 +191,13 @@
             articleService.getArticleList($scope.appId)
                 .success(function (responseData) {
 
-                    console.log(responseData);
                     $scope.tempArticleList = [];
 
                     responseData.forEach(function (data) {
-
+                        $scope.tempArticleList.push(data);
                         articleService.getCategory(data.categoryId)
                                 .success(function (articleByCategoryResponseData) {
                                     data.categoryName = articleByCategoryResponseData[0].name;
-                                    $scope.tempArticleList.push(data);
-
                         }).error(function (error) {
                             toastr.error('ArticlesLoading Error', 'Message', {
                                 closeButton: true
