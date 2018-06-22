@@ -62,12 +62,16 @@ export class HeaderComponent implements OnInit{
 
   ngOnInit() {
     $('#registerModel').on('hide.bs.modal', ()=>{
-      console.log('close');
-
       this.alive = false;
+      console.log("model close " + this.alive);
       this.isSubscribing = false;
+    });
+
+    $('#myAccountModel').on('hide.bs.modal', ()=>{
+      this.alive = false;
+      console.log("model close " + this.alive);
       this.isUnsubscribing = false;
-  });
+    });
 
     this.isSubscribing = false;
     this.isUnsubscribing = false;
@@ -133,7 +137,12 @@ export class HeaderComponent implements OnInit{
       document.getElementById("mySidenav").style.width = "0";
   }
 
+  close(){
+    this.isUnsubscribing = false;
+    this.isSubscribing = false;
+  }
   onSubscribe(){
+    this.alive = true;
     let data = {appId:this.appId,uuId:this.dataService.uuid}
     this.getSubscription(data);
     // this.getDeviceUUID();
@@ -165,6 +174,7 @@ export class HeaderComponent implements OnInit{
   }
 
   onUnsubscribe(){
+    this.alive = true;
     let data = {appId:this.appId,uuId:this.dataService.uuid}
     this.isUnsubscribing = true;
 

@@ -98,7 +98,7 @@
             </div>
           </div>
         <button type="button" [disabled]="isUnsubscribing == true" class="btn sub-button-sub btn-block" (click)="onUnsubscribe()"> Unsubscibe Now</button>
-        <button type="button" class="btn sub-button-cancel btn-block" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn sub-button-cancel btn-block" data-dismiss="modal" (click)= "close()">Cancel</button>
       </div>
     </div>
   </div>
@@ -134,7 +134,7 @@
         </div>
 
         <button [disabled]="isSubscribing == true" type="button" class="btn sub-button-sub btn-block" (click)="onSubscribe()"> Subscibe Now</button>
-        <button type="button" class="btn sub-button-cancel btn-block" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn sub-button-cancel btn-block" data-dismiss="modal" (click)= "close()">Cancel</button>
       </div>
     </div>
   </div>

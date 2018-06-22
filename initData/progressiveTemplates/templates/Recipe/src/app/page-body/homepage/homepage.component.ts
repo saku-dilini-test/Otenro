@@ -58,7 +58,7 @@ export class HomepageComponent implements OnInit {
     }
 
     ngOnInit() {
-    $('#registerModel').on('hide.bs.modal', ()=>{
+    $('#registerModelhome').on('hide.bs.modal', ()=>{
           console.log('close');
 
           this.alive = false;
@@ -102,7 +102,7 @@ export class HomepageComponent implements OnInit {
               this.router.navigate(['/' + val, id, name]);
             }else {
                 this.isSubscribing = false;
-                $('#registerModel').modal('show')
+                $('#registerModelhome').modal('show')
             }
     }
 
@@ -147,6 +147,7 @@ onCancel(){
     this.alive = false;
   }
     onSubscribe(){
+    this.alive = true;
       let data = {appId:this.appId,uuId:this.dataService.uuid}
       this.getSubscription(data);
       // this.getDeviceUUID();
