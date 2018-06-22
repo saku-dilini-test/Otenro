@@ -88,6 +88,7 @@ export class HeaderComponent implements OnInit{
     this.subscription.getSubscribedData(data).subscribe(data =>{
       console.log(data);
       this.subscriptionStatus = data.isSubscribed;
+      this.dataService.subscriptionStatus = data.isSubscribed;
     });
 
 
@@ -109,6 +110,9 @@ export class HeaderComponent implements OnInit{
     });
   }
 
+  ngDoCheck(){
+    this.subscriptionStatus = this.dataService.subscriptionStatus;
+  }
 
   navigate(route: string, name: string) {
     this.title = data.name;
@@ -157,12 +161,13 @@ export class HeaderComponent implements OnInit{
         this.subscription.getSubscribedData(data).subscribe(data =>{
           console.log(data);
           this.subscriptionStatus = data.isSubscribed;
+          this.dataService.subscriptionStatus = data.isSubscribed;
           if(this.subscriptionStatus == true){
             this.isSubscribing = false;
             localStorage.setItem(this.appId+"msisdn",data.msisdn)
              this.alive = false;
               //close the model
-              $(function () {
+              $(() => {
                 $('#registerModel').modal('toggle');
              });
              //close the nav bar
@@ -184,12 +189,13 @@ export class HeaderComponent implements OnInit{
         this.subscription.getSubscribedData(data).subscribe(data =>{
           console.log(data);
           this.subscriptionStatus = data.isSubscribed;
+          this.dataService.subscriptionStatus = data.isSubscribed;
           if(this.subscriptionStatus == false){
             this.isUnsubscribing = false;
             localStorage.removeItem(this.appId+"msisdn")
              this.alive = false;
               //close the model
-              $(function () {
+              $( () => {
                 $('#myAccountModel').modal('toggle');
              });
              //close the nav bar

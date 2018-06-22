@@ -28,13 +28,6 @@ export class FooterComponent implements OnInit{
               private router: Router,
               private dataService:PagebodyServiceModule) {
 
-    var msisdn = localStorage.getItem(this.appId+"msisdn");
-    let parseData = {appId:this.appId,msisdn:msisdn}
-
-    this.subscription.getSubscribedData(parseData).subscribe(data =>{
-      console.log(data);
-      this.subscriptionStatus = data.isSubscribed;
-  })
   }
 
   ngOnInit(){
@@ -43,6 +36,10 @@ export class FooterComponent implements OnInit{
       console.log("model footer close " + this.alive);
       this.isUnsubscribing = false;
     });
+  }
+
+  ngDoCheck(){
+    this.subscriptionStatus = this.dataService.subscriptionStatus;
   }
 
   navigate(val: string) {
@@ -62,6 +59,7 @@ export class FooterComponent implements OnInit{
         this.subscription.getSubscribedData(data).subscribe(data =>{
           console.log(data);
           this.subscriptionStatus = data.isSubscribed;
+          this.dataService.subscriptionStatus = data.isSubscribed;
           if(this.subscriptionStatus == false){
             this.isUnsubscribing = false;
             localStorage.removeItem(this.appId+"msisdn")
