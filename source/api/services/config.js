@@ -62,22 +62,26 @@ module.exports = {
         'Mobitel': {
             'code': 'MOBITEL',
             'desc': 'Mobitel',
-            'shareSplit': '40%-60%'
+            'shareSplit': '60',
+            'chargingMethod': 'daily'
         },
         'Dialog': {
             'code': 'DIALOG',
             'desc': 'Dialog',
-            'shareSplit': '40%-60%'
+            'shareSplit': '60',
+            'chargingMethod': 'daily'
         },
         'Hutch': {
             'code': 'HUTCH',
             'desc': 'Hutch',
-            'shareSplit': '40%-60%'
+            'shareSplit': '60',
+            'chargingMethod': 'daily'
         },
         'Airtel': {
             'code': 'AIRTEL',
             'desc': 'Airtel',
-            'shareSplit': '40%-60%'
+            'shareSplit': '60',
+            'chargingMethod': 'daily'
         }
 
     },
