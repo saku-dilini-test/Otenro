@@ -125,7 +125,8 @@ module.exports = {
                    "code": "SUSPENDED",
                    "description": "Suspended",
                    "nextAvailable": [
-                     "APPROVED"
+                     "APPROVED",
+                     "TERMINATED"
                    ],
                    "allowedRoles": [
                      "admin",
