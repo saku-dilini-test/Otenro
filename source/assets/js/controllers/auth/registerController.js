@@ -71,9 +71,11 @@
                             }
                         })
                         .error(function(err) {
-                            toastr.error('Please check your Mobile Number', 'Error', {
-                                closeButton: true
-                            });
+                            if (err.error){
+                                toastr.error(err.error, 'Error', {
+                                    closeButton: true
+                                });
+                            }
                         });
                 } else {
                     toastr.error('Please enter verification pin!', 'Error', {

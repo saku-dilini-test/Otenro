@@ -109,6 +109,9 @@ module.exports = {
     mobileVerificationPin: {
       type: 'string'
     },
+    ideaBizPinServerRef: {
+        type: 'string'
+    },
 
     toJSON: function() {
       var obj = this.toObject();

@@ -82,9 +82,14 @@
                                 });
                             }
                         }).error(function(err) {
-                        toastr.error('Please check your Mobile Number', 'Error', {
-                            closeButton: true
-                        });
+                            var errMsg =  'Please check your Mobile Number';
+
+                            if (err.error){
+                                errMsg = err.error;
+                            }
+                            toastr.error(errMsg, 'Error', {
+                                closeButton: true
+                            });
                     });
                 } else {
                     var user = { mobile: $scope.mobile, pin: $scope.loginPin };
@@ -107,7 +112,12 @@
                             }
                         })
                         .error(function(err) {
-                            toastr.error('Please check your Email/Password', 'Error', {
+                            var errMsg =  'Error';
+
+                            if (err.error){
+                                errMsg = err.error;
+                            }
+                            toastr.error(errMsg, 'Error', {
                                 closeButton: true
                             });
                         });
