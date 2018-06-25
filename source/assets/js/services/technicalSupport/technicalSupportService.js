@@ -100,9 +100,9 @@
 
                                  $scope.items = initialData.operators;
                                     $scope.selected = [];
-                                    if(initialData.selectedOperators){
-                                        $scope.selected = initialData.selectedOperators
-                                    }
+//                                    if(initialData.selectedOperators){
+//                                        $scope.selected = initialData.selectedOperators
+//                                    }
 
                                     $scope.toggle = function (item, list) {
                                       var idx = list.indexOf(item.desc);

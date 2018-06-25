@@ -347,9 +347,9 @@
 
            }
 
-          $scope.approvedOperatorsView = function(id,selectedOperators){
+          $scope.approvedOperatorsView = function(operators){
 
-                var data = {operators:$scope.operators,id:id, selectedOperators:selectedOperators}
+                var data = {operators:operators}
                 technicalSupportService.showApprovedOperators(data);
 
            }

@@ -42,12 +42,23 @@ module.exports = {
                 appType: req.body.appType
             }
 
+            details.operators = [];
+
             var searchAppData = {
                 id :req.body.appId
             }
 
             var operators = config.IDEABIZ_USER_NETWORK_CLIENTS;
             console.log(operators);
+
+            for (var key in operators) {
+                if (operators.hasOwnProperty(key)) {
+                    details.operators.push({operator:key,status:"PENDING"})
+                }
+            }
+
+
+
 
         PublishDetails.update(searchApp,details).exec(function(err,app) {
                 if (err) res.send(err);

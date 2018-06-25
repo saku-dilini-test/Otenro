@@ -74,7 +74,7 @@
                         <a ng-click="appDescriptionView(app.appName,getDes(app.id,'full'),app.id,app.userId)">{{getDes(app.id,'short')}}</a>
                     </td>
                     <td>
-                        <button ng-click="approvedOperatorsView(app.id,getDes(app.id,'manage'))" >Manage</button>
+                        <button ng-click="approvedOperatorsView(getDes(app.id,'manage'))" >Manage</button>
 
                     </td>
                     <td>{{getStatus(app.status)}}</td>

@@ -22,13 +22,28 @@
 
                 <h4>Approved operators</h4>
                 <br>
-                <div layout="row" layout-wrap flex>
-                    <div flex="50" ng-repeat="item in items">
-                        <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
-                            {{ item.desc }} <span ng-if="exists(item, selected)">selected</span>
-                        </md-checkbox>
-                    </div>
-                </div>
+
+                <table class="table">
+                    <thead class="obl-dashboard-apps">
+                        <th>Operator</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="op in items">
+                            <td> {{op.operator}} </td>
+                            <td> {{op.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!--<div layout="row" layout-wrap flex>-->
+                    <!--<div flex="50" ng-repeat="item in items">-->
+                        <!--<md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">-->
+                            <!--{{ item.desc }} <span ng-if="exists(item, selected)">selected</span>-->
+                        <!--</md-checkbox>-->
+                    <!--</div>-->
+                <!--</div>-->
 
                 <!--<form class="allItems" novalidate>-->
                     <!--<table class="table">-->
