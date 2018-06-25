@@ -53,7 +53,7 @@ module.exports = {
 
              //var currency = req.param("currency");
              var currency = "LKR";
-             var sever = config.server.host+':'+config.server.port;
+             var sever = config.server.host;
              console.log(sever);
              //var  sever = "http://76c8163f.ngrok.io";
 

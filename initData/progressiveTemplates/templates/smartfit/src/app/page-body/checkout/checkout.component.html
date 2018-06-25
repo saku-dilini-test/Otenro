@@ -507,18 +507,40 @@
       </div>
     </div>
 
-    <form *ngIf="paymentType == 'cashOnPickup' || paymentType == 'cashOnDelivery'" name="cashPaymentFrom" novalidate class="row my-4">
-      <div class="col-sm-12 margin-left">
-        <h5 *ngIf="paymentType == 'cashOnDelivery'">Confirm payment by cash on delivery</h5>
-        <h5 *ngIf="paymentType == 'cashOnPickup'">Confirm payment by cash on pickup</h5>
-        <button  *ngIf="!showSpinner" class="btn main-button btn-lg col-xs-12 col-sm-3" (click)="confirmCashPayment(noteDes)">Confirm</button>
-         <div *ngIf="showSpinner" class="loader"></div>
-        <p *ngIf="showSpinner">Processing...</p>
+      <div *ngIf="payhere" class="mt-3">
+          <div class="radio">
+              <label>
+                  <input type="radio" name="payhere" value="payhere" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input"> PayHere
+              </label>
+          </div>
       </div>
-      <div class="col-sm-12" style="margin: 10px 0">
-        <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-      </div>
-    </form>
+
+                    <form *ngIf="paymentType == 'cashOnPickup' || paymentType == 'cashOnDelivery'" name="cashPaymentFrom" novalidate class="row my-4">
+                      <div class="col-sm-12 margin-left">
+                        <h5 *ngIf="paymentType == 'cashOnDelivery'">Confirm payment by cash on delivery</h5>
+                        <h5 *ngIf="paymentType == 'cashOnPickup'">Confirm payment by cash on pickup</h5>
+                        <button *ngIf="!showSpinner" class="btn main-button btn-lg col-xs-12 col-sm-3" (click)="confirmCashPayment(noteDes)">Confirm</button>
+                        <div *ngIf="showSpinner" class="loader"></div>
+                        <p *ngIf="showSpinner">Processing...</p>
+                      </div>
+                      <div class="col-sm-12" style="margin: 10px 0">
+                        <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                      </div>
+                      <div class="col-sm-12" style="margin: 10px 0">
+                        <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
+                      </div>
+                    </form>
+
+                    <form name="payHereFrom" *ngIf="paymentType == 'payhere'" novalidate>
+                      <div class="col-sm-12 margin-left" >
+                        <span class="col input-label" *ngIf="paymentType == 'payhere'">Confirm payment by payHere</span>
+                        <div class="row cart-buttons">
+                          <div class="col-sm-12"></div>
+                          <button class="btn main-button btn-lg col-xs-12 col-sm-3" (click)="payHere(noteDes)">Confirm</button>
+                        </div>
+                      </div>
+
+                    </form>
 
     <form name="cashPaymentFrom" novalidate class="row my-4" *ngIf="paymentType == 'paypal'">
       <div class="col-sm-12">
