@@ -12,11 +12,11 @@
     'use strict';
     angular.module('app')
         .controller('appViewCtrl',
-            ['$scope','$stateParams','SERVER_URL',
+            ['$scope','$stateParams','SERVER_URL','$window',
                 appViewCtrl
             ]);
 
-    function appViewCtrl($scope,$stateParams,SERVER_URL) {
+    function appViewCtrl($scope,$stateParams,SERVER_URL,$window) {
 
 
         $scope.encParam = $stateParams.p;
@@ -54,6 +54,10 @@
 
 
           };
+
+          $scope.back = function(){
+            $window.history.back();
+          }
     }
 
 })();
