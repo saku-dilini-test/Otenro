@@ -108,6 +108,11 @@
     padding-top: 35px;
     margin-left:35%;
 }
+.mdapp-device-selector3{
+    font-weight: 300;
+    padding-top: 35px;
+    margin-left:10%;
+}
 
 .mdapp-device-selector p{
     margin: 0 0 5px 0;
@@ -222,6 +227,12 @@
     width: 100%;
     margin: 0 auto;
 }
+
+.device-preview-appView{
+    width: 100%;
+    margin-left: -20%;
+}
+
 .device-preview{
     padding-top: 22px;
     width: 100%;
