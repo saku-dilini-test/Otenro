@@ -42,5 +42,10 @@ module.exports = {
   /**
    * change isBeta to 0 after beta period
    **/
-  isBeta: 1
+  isBeta: 1,
+  //IdeaBiz
+  IDEABIZ_AUTH_CONSUMER_KEY: 'fmqgPhGyJ6KFvsLe6cpgxPzlXcca',
+  IDEABIZ_AUTH_CONSUMER_SECRET: 'NZ7OQjZ2yCqsin7kxjbGpUlBsska',
+  IDEABIZ_AUTH_USERNAME: 'Appmaker',
+  IDEABIZ_AUTH_PASSWORD: 'SUperman123'
 };
