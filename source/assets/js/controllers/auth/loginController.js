@@ -147,13 +147,21 @@
           };
           $scope.loginMethod = EMAIL;
           return true;
-      } else if ($scope.mobile !== undefined) {
+      } else if ($scope.mobile !== undefined && !$scope.isPinReqSuccess) {
           $scope.user = {
               mobile: $scope.mobile,
               method: MOBILE
           };
           $scope.loginMethod = MOBILE;
           return true;
+      } else if ($scope.mobile !== undefined && !$scope.loginPin && $scope.isPinReqSuccess) {
+          toastr.error('Please enter your authentication pin', 'Error', {
+              closeButton: true
+          });
+          return false;
+      } else if ($scope.mobile !== undefined && $scope.loginPin && $scope.isPinReqSuccess) {
+          return true;
+
       } else {
             toastr.error('Please enter Email/Password or Mobile number', 'Error', {
               closeButton: true
