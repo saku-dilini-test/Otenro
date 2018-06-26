@@ -59,14 +59,7 @@ module.exports.http = {
     // bodyParser: require('skipper')
 
     myRequestLogger: function (req, res, next) {
-      console.log("Requested :::::: ", req.method, req.url);
-        /*console.log("Requested body :::::: ", req.query.userId);
-
-        var query = {id:req.query.userId};
-
-        User.update(query, { "lastAccessTime" : new Date() }).exec(function(err,user) {
-            if (err) res.send(err);
-        })*/
+      console.log("Requested :::::: " + new Date().toISOString(), req.method, req.url);
       return next();
     }
   },

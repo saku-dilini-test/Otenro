@@ -43,9 +43,9 @@ module.exports = {
   
   /** ****** Custom Config ****** **/
   // HOST URL 
-  HOST_URL : 'http://173.82.243.121:1338',
+  HOST_URL : 'http://developer.appmaker.lk',
   // ME SERVER Config
-  ME_SERVER_URL : 'http://developer.appmaker.lk:8181/meServer/temp/',
+  ME_SERVER_URL : 'http://cdn.appmaker.lk/meServer/temp/',
   ME_SERVER : '/home/milhan/public_html/developer/meServer/temp/',
   ME_SERVER_PORT : 80,
   // APP FILE SERVER Config
@@ -53,10 +53,15 @@ module.exports = {
   CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789',
   TEMPLATES_PATH : '/home/Ideadroid/Otenro/initData/templates/',
   PROGRESSIVE_TEMPLATES_PATH : '/home/Ideadroid/Otenro/initData/progressiveTemplates/',
-  REDIRECT_URL : 'http://173.82.243.121:1338',
+  REDIRECT_URL : 'http://developer.appmaker.lk',
   /**
    * change isBeta to 0 after beta period
    **/
-  isBeta: 1
+  isBeta: 1,
+  //IdeaBiz
+  IDEABIZ_AUTH_CONSUMER_KEY: 'fmqgPhGyJ6KFvsLe6cpgxPzlXcca',
+  IDEABIZ_AUTH_CONSUMER_SECRET: 'NZ7OQjZ2yCqsin7kxjbGpUlBsska',
+  IDEABIZ_AUTH_USERNAME: 'Appmaker',
+  IDEABIZ_AUTH_PASSWORD: 'SUperman123'
 
 };
