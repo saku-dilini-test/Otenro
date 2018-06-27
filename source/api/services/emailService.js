@@ -10,6 +10,7 @@ var request = require('request'),
 var path = require('path');
 const nodemailer = require('nodemailer');
 var transporter = null;
+var ERROR = { message: 'ERROR'};
 
 
 var transporter = nodemailer.createTransport({
@@ -41,7 +42,7 @@ var server  = email.server.connect({
 module.exports = {
 
 
-    sendRegisterConfirmation: function(data, res){
+    sendRegisterConfirmation: function(data, callback){
 
         var approot = path.resolve();
         var imgPath = approot + '/assets/images/emailtemplates/';
@@ -94,17 +95,14 @@ module.exports = {
         };
 
         // send mail with defined transport object
-        transporter.sendMail(mailOptions, (error, info) => {
+        transporter.sendMail(mailOptions, function(error, info){
             if (error) {
-//                return console.log(error);
-                sails.log.error(JSON.stringify('sendRegisterConfirmation - emailService.js' + error));
-                return  res.serverError();
+                sails.log.error('sendRegisterConfirmation - emailService.js , error => ' + JSON.stringify(error));
+                callback(ERROR, null);
+            }else {
+                sails.log.debug('Register confirmation email sent successfully');
+                callback(null, info);
             }
-
-            console.log('Message sent: %s', info.messageId);
-        // Preview only available when sending through an Ethereal account
-//            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-        return res.send('ok');
 
     });
     },

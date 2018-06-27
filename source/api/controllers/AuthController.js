@@ -194,8 +194,15 @@ module.exports = {
                                       lName: user.lastName
                                   };
 
-                                  var msg = sentMails.sendRegisterConfirmation(data, res);
-                                  sails.config.logging.custom.info({message:'User Registered Successfully! emailId:' + req.body.email});
+                                  var msg = sentMails.sendRegisterConfirmation(data, function (err, info) {
+                                      if (err) {
+                                          sails.config.logging.custom.error({message:'Failed sending register confirmation email to ' + req.body.email});
+                                      }
+
+                                      if (info) {
+                                          sails.config.logging.custom.info({message:'Register confirmation email successfully sent to ' + req.body.email});
+                                      }
+                                  });
                                   return res.send({ message: 'success', id: user.id });
                                   // createToken(user,res);
                               }
