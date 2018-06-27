@@ -157,6 +157,10 @@
 
              // Validate, Terms And Condition maximum characters length
              var termsAndCondition = storeSettings.termsAndCondition;
+            if (typeof termsAndCondition === 'undefined' || termsAndCondition === '' ) {
+                toastr.error('Please fill Terms and Conditions','Error', { closeButton: true});
+                return;
+            }
              if((typeof termsAndCondition != 'undefined') &&
                  (termsAndCondition.length > $scope.maxTermsAndCondition)){
                  toastr.error('Terms And Condition, maximum characters length is exceed. ' +
