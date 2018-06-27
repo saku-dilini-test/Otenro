@@ -56,7 +56,7 @@
                 <tr ng-repeat="app in appList | filter:searchPublishApps">
                     <td ng-click="showAppView(app.id,app.userId)">
                     <!--<a href="{{serverURL}}templates/viewWebTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">-->
-                        {{app.id}}
+                        {{app.uniqueAppId}}
                     <!--</a>-->
                     </td>
                     <td>{{app.appName}}</td>

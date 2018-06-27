@@ -62,6 +62,10 @@ module.exports = {
 
         id:{
            type:'ObjectId'
+        },
+
+        uniqueAppId: {
+            type: 'string'
         }
     }
 };

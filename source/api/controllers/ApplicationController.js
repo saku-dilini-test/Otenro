@@ -281,6 +281,10 @@ module.exports = {
                 serverOrg=config.server.host,
                 isAppNameAvailable=false;
 
+        // Number of applications which has same templateId
+        var appCount = 0;
+        var searchByTempIdQuery = { templateId : req.body.templateId };
+
             if(templateCategory=="2") {  
               appBasePath += 'ECommerceAppsBase'; 
             }else if(templateCategory=="3"){
@@ -293,7 +297,19 @@ module.exports = {
                     "userId":userId, 
                     "appName":req.body.appName
                  }
-              
+        Application.find(searchByTempIdQuery)
+            .exec(function (err, apps) {
+
+                if (err) {
+                    sails.log.error('Error occurred when getting Applications which has same templateId , Error : ' + err);
+                }
+                if (apps.length === 0 ) {
+                    appCount = 1;
+                } else {
+                    appCount = apps.length + 1;
+                }
+            });
+
             Application.find(appQuery, function(err, app) { 
                   if (err) res.negotiate(err);
                   if(app.length > 0){
@@ -361,6 +377,7 @@ module.exports = {
                               buttonBorderWidth : "0px",
                               buttonBorderRadius : "0px"
                           },
+                          uniqueAppId: template[0].templateViewName + '_' + appCount,
                           appUpdateLocationSetting : {
                               loginUrl : loginPath
                           }
