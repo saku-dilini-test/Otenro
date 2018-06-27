@@ -4,11 +4,11 @@
 (function(){
     "use strict";
     angular.module('oblMenu').controller('OblMenuCtrl',[
-        '$scope','$rootScope','dialogService','oblMenuService', 'contactUsService', 'toastr',
+        '$scope','$rootScope','dialogService','oblMenuService', 'contactUsService', 'toastr', '$state',
         OblMenuCtrl
     ]);
 
-    function OblMenuCtrl($scope,$rootScope,dialogService,oblMenuService, contactUsService, toastr){
+    function OblMenuCtrl($scope,$rootScope,dialogService,oblMenuService, contactUsService, toastr, $state){
 
         $scope.showMenu = true;
 
@@ -54,5 +54,12 @@
         $scope.$on('obl-menu-show',function(evt, data){
            $scope.showMenu = data.show;
         });
+
+        /**
+         * Show app creator view if user clicked on Home image
+         **/
+        $scope.showAppCreatorView = function() {
+            $state.go('user.dashboard');
+        };
     }
 })();
