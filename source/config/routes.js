@@ -419,7 +419,12 @@ module.exports.routes = {
     'POST /reports/getTaxSummary': 'reports/StoreAnalyticsController.getTaxSummary',
     'POST /reports/getShippingSummary': 'reports/StoreAnalyticsController.getShippingSummary',
     'POST /reports/getOrderData': 'reports/StoreAnalyticsController.getOrderData',
-    'POST /reports/getChartData': 'reports/StoreAnalyticsController.getChartData'
+    'POST /reports/getChartData': 'reports/StoreAnalyticsController.getChartData',
 
-
+    /**
+     *New shipping rules
+     */
+    'GET /get/provinces' : 'edit/commerce/ThirdNavigationController.getProvinces',
+    'GET /get/getMainProdTypes' : 'edit/commerce/ThirdNavigationController.getMainProdTypes',
+    'GET /get/getShippingRules' : 'edit/commerce/ThirdNavigationController.getShippingRules'
 };

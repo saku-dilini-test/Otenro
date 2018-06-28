@@ -63,6 +63,9 @@ module.exports = {
     city:{
         type: 'string'
     },
+    province:{
+        type: 'string'
+    },
     country:{
         type: 'string'
     },

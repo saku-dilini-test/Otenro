@@ -393,7 +393,54 @@ module.exports = {
 
         })
 
-    }
+    },
+
+        getProvinces : function(req,res){
+            var path = require('path');
+              var path2 = path.resolve();
+              console.log(path2);
+
+              fs.readFile("/home/dilakshan/Desktop/Otenro/source/api/services/provinces.json", 'utf8', function (err, data) {
+                  if (err){
+                    console.log(err)
+                  }
+                     // error handling
+                 res.send(data);
+              });
+
+        },
+
+        getMainProdTypes : function(req,res){
+            var path = require('path');
+              var path2 = path.resolve();
+              console.log(path2);
+
+              fs.readFile("/home/dilakshan/Desktop/Otenro/source/api/services/productType.json", 'utf8', function (err, data) {
+                  if (err){
+                    console.log(err)
+                  }
+                  console.log(data);
+                     // error handling
+                 res.json(data);
+              });
+
+        },
+
+        getShippingRules : function(req,res){
+            var path = require('path');
+              var path2 = path.resolve();
+              console.log(path2);
+
+              fs.readFile("/home/dilakshan/Desktop/Otenro/source/api/services/smartFitShippingRules.json", 'utf8', function (err, data) {
+                  if (err){
+                    console.log(err)
+                  }
+                  console.log(data);
+                     // error handling
+                 res.json(data);
+              });
+
+        }
 
 
 };
