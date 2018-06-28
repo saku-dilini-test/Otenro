@@ -1,0 +1,9 @@
+{
+  "name": "Smart Fit",
+  "appId": "5b20e4be8b2e2c155d3179d5",
+  "userId": "5b1903b1071168630caa542c",
+  "serviceApi": {
+    "host": "http://dashboard.otenro.com",
+    "port": 1338
+  }
+}
