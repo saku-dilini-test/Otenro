@@ -72,7 +72,7 @@
                 $scope.billingEdit= data;
                 $scope.originalBillingData = angular.copy(data);
             }).error(function (err) {
-                toastr.error(err.error, 'Error', {
+                toastr.error(err, 'Error', {
                     closeButton: true
                 });
             });

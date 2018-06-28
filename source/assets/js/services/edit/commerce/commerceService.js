@@ -455,6 +455,9 @@
             deleteAboutUsImage : function(data){
                 return $http.post(SERVER_URL+ 'edit/deleteFile',data);
             },
+             getProdTypeData: function(){
+                 return $http.get(SERVER_URL + "get/getMainProdTypes");
+             }
 
         };
     }

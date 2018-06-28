@@ -52,7 +52,7 @@ module.exports = {
                         },
                         // OK.
                         success: function (result){
-                            res.status(200).json({user : { appId: user.appId, email : user.email , sub : user.id, streetNumber : user.streetNumber,streetName : user.streetName,city : user.city, country : user.country, phone: user.phone, name: user.firstName,lname:user.lastName, zip: user.zip },token : result });
+                            res.status(200).json({user : { appId: user.appId, email : user.email , sub : user.id, streetNumber : user.streetNumber,province : user.province,streetName : user.streetName,city : user.city, country : user.country, phone: user.phone, name: user.firstName,lname:user.lastName, zip: user.zip },token : result });
                         }
                     });
                 }
@@ -98,7 +98,7 @@ module.exports = {
                         },
                         // OK.
                         success: function (result){
-                            res.status(200).json({user : { appId: user.appId, email : user.email , sub : user.id, streetNumber : user.streetNumber,streetName : user.streetName,city : user.city, country : user.country, phone: user.phone, name: user.firstName, lname: user.lastName, zip: user.zip },token : result });
+                            res.status(200).json({user : { appId: user.appId, email : user.email , sub : user.id, streetNumber : user.streetNumber,streetName : user.streetName,city : user.city,province : user.province, country : user.country, phone: user.phone, name: user.firstName, lname: user.lastName, zip: user.zip },token : result });
                         }
                     });
                 }
@@ -320,6 +320,7 @@ module.exports = {
                         email:req.body.emailRe,
                         streetNumber: req.body.streetNo,
                         streetName: req.body.streetName,
+                        province: (!req.body.province) ? null: req.body.province,
                         city: req.body.city,
                         country: req.body.country,
                         zip: req.body.zip,
@@ -346,6 +347,7 @@ module.exports = {
                 lastName: req.body.lastName,
                 streetNumber: req.body.streetNo,
                 streetName: req.body.streetName,
+                province: (!req.body.province) ? null: req.body.province,
                 city: req.body.city,
                 country: req.body.country,
                 zip: req.body.zip,

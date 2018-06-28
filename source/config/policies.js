@@ -65,7 +65,9 @@ module.exports.policies = {
     '*': ['jwtAuth']
   },
   'edit/commerce/ThirdNavigationController': {
-    '*': ['jwtAuth']
+    '*': ['jwtAuth'],
+    getProvinces : true,
+    getShippingRules : true
   },
   'edit/publish/publishDetailController':{
    '*': ['jwtAuth']

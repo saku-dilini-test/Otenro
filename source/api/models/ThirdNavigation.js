@@ -50,6 +50,9 @@ module.exports = {
         type : {
             type: 'string'
         },
+        mainType:{
+            type: 'string'
+        },
         published : {
             type: 'string'
         },

@@ -378,7 +378,8 @@ module.exports = {
                                   name : appName,
                                   appId : app.id,
                                   userId : userId,
-                                  serviceApi: config.server
+                                  serviceApi: config.server,
+                                  templateName: templateName
                               };
                               fs.copy(templatePath, tempAppDirPath + app.id, function(err) {
                                   if (err) {

@@ -1,0 +1,9 @@
+@media (max-width: 575px){
+  h4, input, .col-sm-4{
+    text-align: center !important;
+  }
+
+  input{
+    margin:10px 0;
+  }
+}

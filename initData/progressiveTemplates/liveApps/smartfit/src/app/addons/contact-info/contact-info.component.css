@@ -1,0 +1,10 @@
+.main-header-font{
+	border-style: solid;
+    border-width: 0px 0px 1px 0px;
+    padding-bottom: 12px;
+}
+
+.header{
+	border-style: dotted !important;
+	margin:40px 0;
+}
