@@ -222,8 +222,39 @@ module.exports = {
 
         categoryArray.push(mainCatCtrl.getToDeleteCategoryArray(req.body.data,categoryArray,productArray));
 
-        MainCategory.destroy({id:{'$in':categoryArray}}).exec(function (err) {
+        MainCategory.destroy({id:{'$in':categoryArray}}).exec(function (err, deletedNode) {
             if (err) res.send(err);
+
+            // If parentId is not undefined of deleted category
+            if (typeof deletedNode[0].parentId !== 'undefined') {
+                //Find parent category of deleted category
+                MainCategory.findOne({ id: deletedNode[0].parentId }).exec(function (err, category) {
+                    if (err) {
+                        sails.log.error('Error in getting parent category of sub category! , error : ' + err);
+                    }
+                    if (category) {
+                        //Id of the deleted category
+                        var deletedNodeId = req.body.data.id;
+                        //Sub categories array
+                        var nodes = category.nodes;
+                        //Array index of the deleted sub category id in parent category's nodes array
+                        var index = nodes.indexOf(deletedNodeId);
+                        if (index > -1) {
+                            nodes.splice(index, 1);
+                        }
+                        //Set new sub categories' ids to nodes array of the parent category
+                        category.nodes = nodes;
+                        //Save parent category
+                        category.save(function (err) {
+                            if (err) {
+                                sails.log.error('Error occurred while saving category after splice node, error : ' + err);
+
+                            }
+                        });
+
+                    }
+                });
+            }
 
             ThirdNavigation.destroy({id:{'$in':productArray}}).exec(function (err) {
                 if (err) res.send(err);
