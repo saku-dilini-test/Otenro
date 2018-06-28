@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
           "streetNumber": res.user.streetNumber,
           "streetName": res.user.streetName,
           "country": res.user.country,
+          "province": res.user.province,
           "city": res.user.city,
           "zip": res.user.zip,
           "type": 'internal',

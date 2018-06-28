@@ -13,6 +13,7 @@ import { OrdersService } from '../../services/orders/orders.service';
 import { TitleService } from '../../services/title.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { CountryDataService } from '../../services/country-data/country-data.service'
 
 declare let paypal: any;
 
@@ -30,6 +31,7 @@ export class CheckoutComponent implements OnInit {
   errorMessage: string;
   nullMessage: string;
   private showSpinner;
+  private hideConfirm = false;
 
   complexForm: FormGroup;
   pickupForm: FormGroup;
@@ -61,7 +63,7 @@ export class CheckoutComponent implements OnInit {
   public totalPrice;
   public cart;
   public chkShippingCost;
-  countries;
+  countries = [];
   public chkCountry;
   isApplyShippingCharge;
   chkHide; chkTax;
@@ -104,6 +106,13 @@ export class CheckoutComponent implements OnInit {
   private isCountryChanged = false;
   private selectedCountry;
   private newUser;
+  private provinceData = [];
+  private provinces = [];
+  private province;
+  private cityArr;
+  private newCity;
+  private selectedProvinces;
+  private shippingRules;
 
   constructor(fb: FormBuilder, private ordersService: OrdersService,
     private shippingService: ShippingService,
@@ -111,7 +120,8 @@ export class CheckoutComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private dataService: PagebodyServiceModule, private title: TitleService,
-    private spinner: Ng4LoadingSpinnerService) {
+    private spinner: Ng4LoadingSpinnerService,
+    private countryDataService:CountryDataService) {
 
     this.title.changeTitle("Checkout");
 
@@ -132,6 +142,7 @@ export class CheckoutComponent implements OnInit {
         email: "",
         phone: "",
         country: "Sri Lanka",
+        province:"",
         city: "",
         streetName: "",
         streetNumber: "",
@@ -155,22 +166,47 @@ export class CheckoutComponent implements OnInit {
       'phone': new FormControl(this.dataService.userData.phone, Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/)])),
       'streetNo': new FormControl(this.dataService.userData.streetNumber, Validators.compose([Validators.required])),
       'streetName': new FormControl(this.dataService.userData.streetName, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/)])),
-      'city': new FormControl(this.dataService.userData.city, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)])),
+      'province': new FormControl(this.dataService.userData.province),
+      'city': new FormControl(this.dataService.userData.city),
       'zip': new FormControl(this.dataService.userData.zip, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9\-]+\s)*[a-zA-Z0-9\-]+$/)])),
       'country': new FormControl(this.dataService.userData.country)
 
     });
     this.complexForm.controls['country'].setValue(this.dataService.userData.country, { onlySelf: true });
 
-    this.pickupForm = fb.group({
-      'name': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[A-z ]+$/)])),
-      'email': new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
-      'phone': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/), Validators.minLength(12)])),
+    // this.pickupForm = fb.group({
+    //   'name': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[A-z ]+$/)])),
+    //   'email': new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
+    //   'phone': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/), Validators.minLength(12)])),
 
-    });
+    // });
   }
 
   ngOnInit() {
+
+    this.localData = (this.localStorageService.get('appLocalStorageUser' + this.appId));
+
+    this.shippingService.getSmartfitShippingRules().subscribe(data=>{
+      this.shippingRules = JSON.parse(data);
+        if(this.localData){
+          this.getTotal(this.localData.city);
+        }
+    });
+
+    this.countries.push("Sri Lanka");
+
+    console.log(this.province);
+    this.countryDataService.getProvinces().subscribe(data => {
+      this.provinceData = data.provinces;
+      this.provinceData.forEach(ele => {
+        this.provinces.push(ele.name);
+        if (ele.name == this.complexForm.controls['province'].value) {
+          this.cityArr = ele.cities;
+          console.log(this.cityArr);
+        }
+      });
+    });
+
     let date = (new Date()).getFullYear()
     for (let i = 0; i < 100; i++) {
       this.years.push(date++);
@@ -183,27 +219,12 @@ export class CheckoutComponent implements OnInit {
       this.formType = params['type']; // --> Name must match wanted parameter
     });
 
-    this.currencyService.getCountryData()
-      .subscribe((res) => {
-        this.countries = res;
-      }, err => {
-        this.spinner.hide();
-        console.log("Error Retrieving country data!");
-      });
 
     if (this.cartItems.length > 0 && this.formType == 'delivery') {
 
       this.isAdded = true;
 
-
     }
-    this.localData = (this.localStorageService.get('appLocalStorageUser' + this.appId));
-
-    /*if (this.localData == null) {
-      this.router.navigate(['login'])
-    }
-*/
-
 
 
     this.currencyService.getCurrencies().subscribe((data) => {
@@ -217,111 +238,71 @@ export class CheckoutComponent implements OnInit {
     });
 
     //-------- hiding spinner after currencies and countries loaded --------
-    if (this.sign && this.countries) {
+    if (this.sign) {
       this.spinner.hide();
     }
 
-    this.user = (this.localStorageService.get('appLocalStorageUser' + this.appId));
-
-    // get the shipping options
-
-    // if () { }
-
-    if (this.formType == 'delivery') {
-      this.spinner.show();
-      this.getShippingData(this.appId, this.dataService.userData.country);
-
-    } else {
-      this.spinner.show();
-      this.shippingService.getShippingPickupInfo()
-        .subscribe((data) => {
-          this.spinner.hide();
-          this.pickup = data;
-          // this.spinner.hide();
-          /* $scope.header = data.header;
-          $scope.content = data.content;*/
-          //$state.go('app.category');
-        }, (err) => {
-          this.spinner.hide();
-          alert(
-            'Error Retrieving Pickup details!\n Please check your connection.'
-          );
-        });
-    }
-
-    this.amount = this.getTotal();
 
   }
 
-  getShippingData(appId, Country) {
+  selectedProvince(data) {
+    console.log("selected province");
+    console.log(data);
+    this.selectedProvinces = data;
+    this.provinceData.forEach(ele => {
+      if (ele.name == data) {
+        this.cityArr = ele.cities;
+      }
+    });
+    this.newCity = this.cityArr[0];
+    this.complexForm.controls['city'].setValue(this.cityArr[0], { onlySelf: true });
+    console.log(this.cityArr);
+    this.getTotal(this.cityArr[0]);
+  }
 
-    this.shippingData = [];
-
-    let param2 = {
-      'appId': appId,
-      'country': Country
-    }
-
-    this.http.post(SERVER_URL + "/edit/getShippingInfoByCountry", param2)
-      .subscribe((data) => {
-        this.spinner.hide();
-        this.shippingDatas = data;
-        // $log.debug($scope.shippingData);
-        for (var i = 0; i < this.shippingDatas.length; i++) {
-          if (this.shippingDatas[i].shippingOption == "Flat Rate" ||
-            this.shippingDatas[i].shippingOption == "Weight Based") {
-            this.shippingData.push(this.shippingDatas[i]);
-          }
-        }
-      }, (err) => {
-        this.spinner.hide();
-        alert(
-          'Error Retrieving shipping details!\n Please check your connection.'
-        );
-      });
-
+  selectedCity(city) {
+    this.getTotal(city);
   }
 
   check(user, newUserCountry) {
     if (user == 'oldUser') {
       this.oldUser = true;
       this.newUser = false;
-      this.getShippingData(this.appId, this.dataService.userData.country);
       this.isSelected = false;
-      this.shippingForm.controls['shippingOption'].reset();
+
+      this.fname = this.complexForm.controls['fName'].value;
+      this.lname = this.complexForm.controls['lName'].value;
+      this.email = this.complexForm.controls['email'].value;
+      this.phone = this.complexForm.controls['phone'].value;
+      this.country = this.complexForm.controls['country'].value;
+      this.province = this.complexForm.controls['province'].value;
+      this.city = this.complexForm.controls['city'].value;
+      this.streetName = this.complexForm.controls['streetName'].value;
+      this.streetNumber = this.complexForm.controls['streetNo'].value;
+      this.zip = this.complexForm.controls['zip'].value;
+      this.getTotal(this.city);
     }
     if (user == 'newUser') {
       this.oldUser = false;
-      if (!newUserCountry) {
-        this.getShippingData(this.appId, this.selectedCountry);
-      } else {
-        this.getShippingData(this.appId, newUserCountry);
-      }
+      this.fname = this.complexForm.controls['fName'].value;
+      this.lname = this.complexForm.controls['lName'].value;
+      this.email = this.complexForm.controls['email'].value;
+      this.phone = this.complexForm.controls['phone'].value;
+      this.country = this.complexForm.controls['country'].value;
+      this.province = this.complexForm.controls['province'].value;
+      this.city = this.complexForm.controls['city'].value;
+      this.streetName = this.complexForm.controls['streetName'].value;
+      this.streetNumber = this.complexForm.controls['streetNo'].value;
+      this.zip = this.complexForm.controls['zip'].value;
+
     }
     this.isSelected = false;
-    this.shippingForm.controls['shippingOption'].reset();
   }
 
   countryChanged(data) {
     this.hide = true;
     this.isSelected = false;
     this.isCountryChanged = true;
-    this.shippingForm.controls['shippingOption'].reset();
-    // var param = {
-    //   'appId': this.appId,
-    //   'country': data
-    // };
-
-    // this.http.post(SERVER_URL + '/templatesOrder/getTaxInfoByCountry', param).subscribe((data) => {
-    //   if (data == '') {
-    //     this.hide = true;
-    //     this.tax = 0;
-    //   } else {
-    //     this.tax = data[0].taxAmount;
-    //     this.hide = false;
-    //   }
-    // })
-
   }
 
   login() {
@@ -347,312 +328,72 @@ export class CheckoutComponent implements OnInit {
   }
 
 
-  getTotal() {
+  getTotal(city) {
+
+    let main = false;
+    let accessories = false;
+
     var total = 0;
     var amount = 0;
-    var tax = 0;
+
     for (var i = 0; i < this.cartItems.length; i++) {
       var product = this.cartItems[i];
       amount = product.total;
-      total += (amount);
+      total += (amount * product.qty);
+
     }
-    tax = total * this.tax / 100;
-    this.taxTotal = total * this.tax / 100;
-    this.taxTotal = (Math.round(this.taxTotal * 100) / 100);
-    if (tax > 0) {
-      total = total + tax;
-      this.dataService.cart.totalPrice = total;
-      return total;
-    } else {
-      this.dataService.cart.totalPrice = total;
-      return total;
+
+    for (var i = 0; i < this.cartItems.length; i++) {
+      if(!this.cartItems[i].type || this.cartItems[i].type == "Main"){
+        main = true;
+      }else{
+        accessories = true;
+      }
     }
+
+    if(main && accessories){
+      this.getNewRules("main",city,total);
+    }else if(!main && accessories){
+      this.getNewRules("accessories",city,total);
+    }else{
+      this.getNewRules("main",city,total);
+    }
+
   };
 
+  getNewRules(type,cty,total){
 
-  addShipping(shippingDetails, e, formData) {
-    this.spinner.show();
-    this.isSelected = true;
-    this.fname = formData.fName;
-    this.lname = formData.lName;
-    this.email = formData.email;
-    this.phone = formData.phone;
-    this.country = formData.country;
-    this.city = formData.city;
-    this.streetName = formData.streetName;
-    this.streetNumber = formData.streetNo;
-    this.zip = formData.zip;
-
-
-    var total = 0;
-
-    var totalWeight = 0;
-    var shippingCost = 0;
-    var weight = 0; //calculate single item weight
-
-    //there are 3 stated when adding item to cart
-    //position 3 - when add a new item in the begening
-    //position 1 - adding the same item continously
-    //position 2 - when we change the product item adding.
-
-    // if we triggerd the quantity change in the cart
-    if (this.dataService.parseEnable == true) {
-      //getting the parsed selected item index
-      var index = this.dataService.parseIndex;
-
-      //when we added the second item and change its value
-      if (this.dataService.position2 == true) {
-
-        //getting item weight of changed item (with the index)
-        weight = this.dataService.cart.cartItems[index].weight;
-
-        //resetting its total weight.
-        for (var i = 0; i < this.dataService.cart.cartItems.length; i++) {
-          this.dataService.cart.cartItems[index].totWeight = weight * this.dataService.parseQty;;
-        }
-
-        //calculating the whole item total weight
-        for (var i = 0; i < this.dataService.cart.cartItems.length; i++) {
-          var product = this.dataService.cart.cartItems[i];
-          total = product.totWeight;
-          totalWeight += (total);
-
-        }
-
-        // $rootScope.parseEnable=false;
-        this.dataService.position2 = false;
-        //when we add same item without changing the item (with value change)
-      } else {
-
-        var weight2 = 0;
-        //getting the parsed selected item index
-        var index = this.dataService.parseIndex;
-
-
-        //getting item weight of changed item (with the index)
-        weight2 = this.dataService.cart.cartItems[index].weight;
-
-        //resetting its total weight.
-        for (var i = 0; i < this.dataService.cart.cartItems.length; i++) {
-          this.dataService.cart.cartItems[index].totWeight = weight2 * this.dataService.parseQty;
-        }
-
-        //calculating the whole item total weight
-        for (var i = 0; i < this.dataService.cart.cartItems.length; i++) {
-          var product = this.dataService.cart.cartItems[i];
-          total = product.totWeight;
-          totalWeight += (total);
-
-        }
-        // resetting the parsed values.
-        this.dataService.parseEnable = false;
-        this.dataService.parseQty = 0;
-      }
-
-      //Normal way to calculate the total weight, when we did not change
-      //the value from the cart.
-    } else {
-
-      for (var i = 0; i < this.dataService.cart.cartItems.length; i++) {
-        var product = this.dataService.cart.cartItems[i];
-        total = product.totWeight;
-        totalWeight += (total);
-
-      }
-
-    }
-
-    if (shippingDetails.shippingOption == "Flat Rate") {
-
-      var shippingCostPreOrderFee = shippingDetails.preOrderFee;
-      var shippingCostFeePerItem = shippingDetails.feePerItem * this.dataService.cart.cartItems.length;
-      shippingCost = shippingCostPreOrderFee + shippingCostFeePerItem;
-
-    } else if (shippingDetails.shippingOption == "Weight Based") {
-      shippingDetails.overWeight = false;
-      shippingDetails.underWeight = false;
-      // $log.debug(shippingDetails.shipping.weightRanges);
-      for (var i = 0; i < shippingDetails.weightRanges.length; i++) {
-        var weightRange = shippingDetails.weightRanges[i];
-        if (weightRange.startWeight <= totalWeight && weightRange.endWeight >= totalWeight) {
-          shippingCost = shippingDetails.weightRanges[i].cost;
-        }
-        if (i != shippingDetails.weightRanges.length - 1) {
-          if (weightRange.endWeight < totalWeight && shippingDetails.weightRanges[i + 1].startWeight > totalWeight) {
-            shippingCost = shippingDetails.weightRanges[i+1].cost;
+    console.log(this.shippingRules.main);
+    console.log(this.shippingRules);
+    if(type == "main"){
+      this.shippingRules.main.forEach(ele =>{
+        ele.cities.forEach(city=>{
+          if(city == cty){
+            this.chkShippingCost = ele.price;
           }
-        }
-      }
-      if (shippingDetails.weightRanges[0].startWeight > totalWeight) {
-        shippingDetails.underWeight = true;
-      }
-      if (shippingDetails.weightRanges[shippingDetails.weightRanges.length - 1].endWeight < totalWeight) {
-        shippingDetails.overWeight = true;
-      }
-
-    } else {
-      shippingCost = shippingDetails.cost;
-
+        })
+      });
+    }else if(type == "accessories"){
+      this.shippingRules.accessories.forEach(ele =>{
+        ele.cities.forEach(city=>{
+          if(city == cty){
+            this.chkShippingCost = ele.price;
+          }
+        })
+      });
     }
 
-    shippingDetails.delivery = this.dataService.data;
-    shippingDetails.shippingCost = shippingCost;
-    //---------------------- hide spinner after getting shipping cost -------
-    if (shippingDetails.shippingCost) {
+    this.totalPrice = total + this.chkShippingCost;
+    if(this.totalPrice){
       this.spinner.hide();
+      this.pay("001");
     }
-    // this.dataService.finalDetails = shippingDetails;
-    this.chk(shippingDetails);
 
-    // setTimeout(()=>{ this.pay("001"); }, 500);
-
-
+    console.log(this.chkShippingCost);
   }
-
-
-  //------------------------------pickup---------------------------------------
-
-
-
-  checkout(data, details) {
-    this.isSelected = true;
-    this.pickupData = {
-      item: this.dataService.deliverItems,
-      delivery: { location: "Pick up", method: "Pick up" },
-      country: data.country,
-      pickupId: data.id,
-      pickupCost: data.cost,
-      deliverDetails: { name: details.name, email: details.email, number: details.phone },
-
-    }
-    this.chk(this.pickupData);
-    // setTimeout(() => {  }, 500);
-  };
 
   //------------------------------checkout---------------------------------------
-  chk(final) {
 
-    this.finalDetails = final;
-    this.chkShippingCost = parseFloat(this.finalDetails.shippingCost);
-    this.underWeight = this.finalDetails.underWeight;
-    this.overWeight = this.finalDetails.overWeight;
-
-
-    if (typeof this.chkShippingCost == 'undefined') {
-      this.hideShipping = false;
-    }
-
-    if (this.localData) {
-      if (this.oldUser == true) {
-        this.chkCountry = this.localData.country;
-      } else {
-        this.chkCountry = this.selectedCountry;
-      }
-
-    } else {
-      if (this.formType == 'delivery') {
-        this.chkCountry = this.country;
-      } else {
-        if (final.country) {
-          this.chkCountry = final.country;
-        }
-      }
-    }
-
-    var param = {
-      'appId': this.appId,
-      'country': this.chkCountry
-    };
-
-    this.spinner.show();
-
-    this.http.post(SERVER_URL + '/templatesOrder/getTaxInfoByCountry', param)
-      .subscribe((data) => {
-
-        this.spinner.hide();
-
-        if (data == '') {
-          this.chkHide = true;
-          this.chkTax = 0;
-          this.isApplyShippingCharge = false;
-        } else {
-          this.chkTax = data[0].taxAmount;
-          this.isApplyShippingCharge = data[0].isApplyShippingCharge;
-          this.chkHide = false;
-        }
-        var total = 0;
-        var amount = 0;
-        var tax = 0;
-        for (var i = 0; i < this.cartItems.length; i++) {
-          var product = this.cartItems[i];
-          amount = product.total;
-          total += (amount * product.qty);
-        }
-        // $log.debug($scope.isApplyShippingCharge);
-        if (this.isApplyShippingCharge == true && this.formType != 'pickup') {
-          // $log.debug($scope.shippingCost);
-          var shipping = parseFloat(this.chkShippingCost);
-          total = total + shipping;
-          tax = total * this.chkTax / 100;
-          this.taxTotal = total * this.chkTax / 100;
-          this.taxTotal = (Math.round(this.taxTotal * 100) / 100);
-          if (tax > 0) {
-            total = total + tax;
-            this.totalPrice = total;
-            this.totalPrice = Math.round(this.totalPrice * 100) / 100;
-          } else {
-            this.cart.totalPrice = Math.round(total * 100) / 100;
-          }
-        } else {
-          tax = total * this.chkTax / 100;
-          this.taxTotal = total * this.chkTax / 100;
-          this.taxTotal = (Math.round(this.taxTotal * 100) / 100);
-
-          if (!this.finalDetails.pickupCost || this.finalDetails.pickupCost == 0) {
-            this.chkPickupCost = 0;
-          } else {
-            this.chkPickupCost = parseFloat(this.finalDetails.pickupCost);
-          }
-          if (tax > 0) {
-            total = total + tax;
-            if (this.chkPickupCost == 0) {
-              if (this.chkShippingCost) {
-                this.totalPrice = total + parseFloat(this.chkShippingCost);
-                this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
-              } else {
-                this.totalPrice = total;
-                this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
-              }
-            } else {
-              this.totalPrice = total + parseFloat(this.chkPickupCost);
-              this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
-            }
-          } else {
-            if (this.chkPickupCost == 0) {
-              if (this.chkShippingCost) {
-                this.totalPrice = total + parseFloat(this.chkShippingCost);
-                this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
-              } else {
-                this.totalPrice = total;
-                this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
-              }
-            } else {
-              this.totalPrice = total + parseFloat(this.chkPickupCost);
-              this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
-            }
-          }
-        }
-        this.pay("001");
-      }, err => {
-        this.spinner.hide();
-        console.log("Error retrieving TaxInfo!,\n Please check Your connection");
-      });
-
-
-
-
-
-  }
 
   pay(promotionCode) {
 
@@ -676,7 +417,6 @@ export class CheckoutComponent implements OnInit {
     // $log.debug(payInfo);
     // $state.go('app.payment',{item:payInfo});
   }
-
 
 
 
@@ -734,6 +474,7 @@ export class CheckoutComponent implements OnInit {
   makeStripePaymentMethod(cardInformation, note) {
 
     this.showSpinner = true;
+    this.hideConfirm = true;
 
     cardInformation.amount = this.card.amount;
     cardInformation.appId = this.appId;
@@ -755,6 +496,8 @@ export class CheckoutComponent implements OnInit {
       }, (err) => {
         alert('makeStripePayment failed');
         this.showSpinner = false;
+        this.hideConfirm = false;
+
       })
 
   };
@@ -762,6 +505,7 @@ export class CheckoutComponent implements OnInit {
   authorizeCreditCardMethod(cardInformation, note) {
 
     this.showSpinner = true;
+    this.hideConfirm = true;
 
     cardInformation.amount = this.card.amount;
     cardInformation.appId = this.appId;
@@ -792,6 +536,8 @@ export class CheckoutComponent implements OnInit {
       }, (err) => {
         alert('authorizeCreditCard' + err)
         this.showSpinner = false;
+        this.hideConfirm = false;
+
       })
   }
 
@@ -802,88 +548,28 @@ export class CheckoutComponent implements OnInit {
     }
     if (this.formType == "delivery") {
 
-      if (this.user) {
         this.orderDetails = {
           'appId': this.appId,
-          'registeredUser': this.user.registeredUser,
+          'registeredUser': ((!this.localData) ? "Unknown User" :this.localData.registeredUser),
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
-          'customerName': this.user.name,
-          'deliverName': this.fname,
-          'deliveryNo': this.streetNumber,
-          'deliveryStreet': this.streetName,
-          'deliveryCity': this.city,
-          'deliveryCountry': this.country,
-          'deliveryZip': this.zip,
-          'telNumber': this.phone,
+          'customerName': ((!this.oldUser) ? this.complexForm.controls['fName'].value : this.localData.name),
+          'deliverName': ((!this.oldUser) ? this.complexForm.controls['fName'].value : this.localData.name),
+          'deliveryNo': ((!this.oldUser) ? this.complexForm.controls['streetNo'].value : this.localData.streetNumber),
+          'deliveryStreet': ((!this.oldUser) ? this.complexForm.controls['streetName'].value : this.localData.streetName),
+          'deliveryCity': ((!this.oldUser) ? this.complexForm.controls['city'].value : this.localData.city),
+          'deliveryCountry': ((!this.oldUser) ? this.complexForm.controls['country'].value : this.localData.country),
+          'deliveryZip': ((!this.oldUser) ? this.complexForm.controls['zip'].value : this.localData.zip),
+          'telNumber': ((!this.oldUser) ? this.complexForm.controls['phone'].value : this.localData.phone),
           'tax': this.payInfo.taxTotal,
           'shippingCost': this.chkShippingCost,
-          'shippingOpt': this.payInfo.item.shippingOption,
+          'shippingOpt': "smartfit Delivery",
           'email': this.payInfo.userEmail,
           'currency': this.dataService.currency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
           'note': note
         };
-
-      } else {
-        this.orderDetails = {
-          'appId': this.appId,
-          'registeredUser': 'Unknown User',
-          'item': this.payInfo.cart,
-          'amount': this.payInfo.amount,
-          'customerName': this.fname,
-          'deliverName': this.fname,
-          'deliveryNo': this.streetNumber,
-          'deliveryStreet': this.streetName,
-          'deliveryCity': this.city,
-          'deliveryCountry': this.country,
-          'deliveryZip': this.zip,
-          'telNumber': this.phone,
-          'tax': this.payInfo.taxTotal,
-          'shippingCost': this.chkShippingCost,
-          'shippingOpt': this.payInfo.item.shippingOption,
-          'email': this.payInfo.userEmail,
-          'currency': this.dataService.currency,
-          'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
-          'note': note
-        };
-      }
-    } else {
-      if (this.user) {
-        this.orderDetails = {
-          "appId": this.appId,
-          "registeredUser": this.user.registeredUser,
-          "item": this.payInfo.cart,
-          "amount": this.payInfo.amount,
-          "customerName": this.payInfo.item.deliverDetails.name,
-          "telNumber": this.payInfo.item.deliverDetails.number,
-          "tax": this.payInfo.taxTotal,
-          "pickupId": this.payInfo.item.pickupId,
-          "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.userEmail,
-          "currency": this.dataService.paypalCurrency,
-          "promotionCode": this.payInfo.promotionCode,
-          'note': note
-        }
-      } else {
-        this.orderDetails = {
-          "appId": this.appId,
-          "registeredUser": 'Unknown User',
-          "item": this.payInfo.cart,
-          "amount": this.payInfo.amount,
-          "customerName": this.payInfo.item.deliverDetails.name,
-          "telNumber": this.payInfo.item.deliverDetails.number,
-          "tax": this.payInfo.taxTotal,
-          "pickupId": this.payInfo.item.pickupId,
-          "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.item.deliverDetails.email,
-          "currency": this.dataService.paypalCurrency,
-          "promotionCode": this.payInfo.promotionCode,
-          'note': note
-        }
-      }
 
     }
 
@@ -939,32 +625,33 @@ export class CheckoutComponent implements OnInit {
   }
 
 
-  confirmCashPayment(note) {
+  confirmCashPayment(note,data) {
 
     this.showSpinner = true;
+    this.hideConfirm = true;
 
     if (note) {
       note = note.trim();
     }
 
     if (this.formType == "delivery") {
-      if (this.user) {
+
         this.orderDetails = {
           'appId': this.appId,
-          'registeredUser': this.user.registeredUser,
+          'registeredUser': ((!this.localData) ? "Unknown User" :this.localData.registeredUser),
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
-          'customerName': this.user.name,
-          'deliverName': this.fname,
-          'deliveryNo': this.streetNumber,
-          'deliveryStreet': this.streetName,
-          'deliveryCity': this.city,
-          'deliveryCountry': this.country,
-          'deliveryZip': this.zip,
-          'telNumber': this.phone,
+          'customerName': ((!this.oldUser) ? this.complexForm.controls['fName'].value : this.localData.name),
+          'deliverName': ((!this.oldUser) ? this.complexForm.controls['fName'].value : this.localData.name),
+          'deliveryNo': ((!this.oldUser) ? this.complexForm.controls['streetNo'].value : this.localData.streetNumber),
+          'deliveryStreet': ((!this.oldUser) ? this.complexForm.controls['streetName'].value : this.localData.streetName),
+          'deliveryCity': ((!this.oldUser) ? this.complexForm.controls['city'].value : this.localData.city),
+          'deliveryCountry': ((!this.oldUser) ? this.complexForm.controls['country'].value : this.localData.country),
+          'deliveryZip': ((!this.oldUser) ? this.complexForm.controls['zip'].value : this.localData.zip),
+          'telNumber': ((!this.oldUser) ? this.complexForm.controls['phone'].value : this.localData.phone),
           'tax': this.payInfo.taxTotal,
           'shippingCost': this.chkShippingCost,
-          'shippingOpt': this.payInfo.item.shippingOption,
+          'shippingOpt': "smartfit Delivery",
           'email': this.payInfo.userEmail,
           'currency': this.dataService.currency,
           'puckupId': null,
@@ -972,69 +659,10 @@ export class CheckoutComponent implements OnInit {
           'note': note
         };
 
-      } else {
-        this.orderDetails = {
-          'appId': this.appId,
-          'registeredUser': 'Unknown User',
-          'item': this.payInfo.cart,
-          'amount': this.payInfo.amount,
-          'customerName': this.fname,
-          'deliverName': this.fname,
-          'deliveryNo': this.streetNumber,
-          'deliveryStreet': this.streetName,
-          'deliveryCity': this.city,
-          'deliveryCountry': this.country,
-          'deliveryZip': this.zip,
-          'telNumber': this.phone,
-          'tax': this.payInfo.taxTotal,
-          'shippingCost': this.chkShippingCost,
-          'shippingOpt': this.payInfo.item.shippingOption,
-          'email': this.payInfo.userEmail,
-          'currency': this.dataService.currency,
-          'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
-          'note': note
-        };
-      }
-
-
-    } else {
-      if (this.user) {
-        this.orderDetails = {
-
-          "appId": this.appId,
-          "registeredUser": this.user.registeredUser,
-          "item": this.payInfo.cart,
-          "amount": this.payInfo.amount,
-          "customerName": this.payInfo.item.deliverDetails.name,
-          "telNumber": this.payInfo.item.deliverDetails.number,
-          "tax": this.payInfo.taxTotal,
-          "pickupId": this.payInfo.item.pickupId,
-          "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.userEmail,
-          "currency": this.dataService.currency,
-          "promotionCode": this.payInfo.promotionCode,
-          'note': note
-        }
-      } else {
-        this.orderDetails = {
-          "appId": this.appId,
-          "registeredUser": 'Unknown User',
-          "item": this.payInfo.cart,
-          "amount": this.payInfo.amount,
-          "customerName": this.payInfo.item.deliverDetails.name,
-          "telNumber": this.payInfo.item.deliverDetails.number,
-          "tax": this.payInfo.taxTotal,
-          "pickupId": this.payInfo.item.pickupId,
-          "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.item.deliverDetails.email,
-          "currency": this.dataService.currency,
-          "promotionCode": this.payInfo.promotionCode,
-          'note': note
-        }
-      }
     }
-    // console.log(note);
+    console.log(this.orderDetails);
+    console.log(note);
+    console.log(data);
     this.http.post(SERVER_URL + "/templatesOrder/saveOrder", (this.orderDetails), { responseType: 'text' })
       .subscribe((res) => {
         this.orderDetails.id = this.dataService.cart.cartItems[0].id;
@@ -1120,92 +748,33 @@ export class CheckoutComponent implements OnInit {
       note = note.trim();
     }
     if (this.formType == "delivery") {
-      if (this.user) {
         this.orderDetails = {
 
           'appId': this.appId,
-          'registeredUser': this.user.registeredUser,
+          'registeredUser': ((!this.localData) ? "Unknown User" :this.localData.registeredUser),
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
-          'customerName': this.user.name,
-          'deliverName': this.fname,
-          'deliveryNo': this.streetNumber,
-          'deliveryStreet': this.streetName,
-          'deliveryCity': this.city,
-          'deliveryCountry': this.country,
-          'deliveryZip': this.zip,
-          'telNumber': this.phone,
+          'customerName': ((!this.oldUser) ? this.complexForm.controls['fName'].value : this.localData.name),
+          'deliverName': ((!this.oldUser) ? this.complexForm.controls['fName'].value : this.localData.name),
+          'deliveryNo': ((!this.oldUser) ? this.complexForm.controls['streetNo'].value : this.localData.streetNumber),
+          'deliveryStreet': ((!this.oldUser) ? this.complexForm.controls['streetName'].value : this.localData.streetName),
+          'deliveryCity': ((!this.oldUser) ? this.complexForm.controls['city'].value : this.localData.city),
+          'deliveryCountry': ((!this.oldUser) ? this.complexForm.controls['country'].value : this.localData.country),
+          'deliveryZip': ((!this.oldUser) ? this.complexForm.controls['zip'].value : this.localData.zip),
+          'telNumber': ((!this.oldUser) ? this.complexForm.controls['phone'].value : this.localData.phone),
           'tax': this.payInfo.taxTotal,
           'shippingCost': this.chkShippingCost,
-          'shippingOpt': this.payInfo.item.shippingOption,
+          'shippingOpt': "smartfit Delivery",
           'email': this.payInfo.userEmail,
-          'currency': this.dataService.paypalCurrency,
+          'currency': this.dataService.currency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
           'note': note
         };
 
-      } else {
-        this.orderDetails = {
 
-          'appId': this.appId,
-          'registeredUser': "Unknown User",
-          'item': this.payInfo.cart,
-          'amount': this.payInfo.amount,
-          'customerName': this.fname,
-          'deliverName': this.fname,
-          'deliveryNo': this.streetNumber,
-          'deliveryStreet': this.streetName,
-          'deliveryCity': this.city,
-          'deliveryCountry': this.country,
-          'deliveryZip': this.zip,
-          'telNumber': this.phone,
-          'tax': this.payInfo.taxTotal,
-          'shippingCost': this.chkShippingCost,
-          'shippingOpt': this.payInfo.item.shippingOption,
-          'email': this.payInfo.userEmail,
-          'currency': this.dataService.paypalCurrency,
-          'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
-          'note': note
-        };
       }
 
-    } else {
-      if (this.user) {
-        this.orderDetails = {
-          "appId": this.appId,
-          "registeredUser": this.user.registeredUser,
-          "item": this.payInfo.cart,
-          "amount": this.payInfo.amount,
-          "customerName": this.payInfo.item.deliverDetails.name,
-          "telNumber": this.payInfo.item.deliverDetails.number,
-          "tax": this.payInfo.taxTotal,
-          "pickupId": this.payInfo.item.pickupId,
-          "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.userEmail,
-          "currency": this.dataService.paypalCurrency,
-          "promotionCode": this.payInfo.promotionCode,
-          'note': note
-        }
-      } else {
-        this.orderDetails = {
-          "appId": this.appId,
-          "registeredUser": 'Unknown User',
-          "item": this.payInfo.cart,
-          "amount": this.payInfo.amount,
-          "customerName": this.payInfo.item.deliverDetails.name,
-          "telNumber": this.payInfo.item.deliverDetails.number,
-          "tax": this.payInfo.taxTotal,
-          "pickupId": this.payInfo.item.pickupId,
-          "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.item.deliverDetails.email,
-          "currency": this.dataService.paypalCurrency,
-          "promotionCode": this.payInfo.promotionCode,
-          'note': note
-        }
-      }
-    }
 
     this.dataService.payPalDetails = this.orderDetails;
 
@@ -1218,91 +787,31 @@ export class CheckoutComponent implements OnInit {
     }
 
     if (this.formType == "delivery") {
-      if (this.user) {
-        this.orderDetails = {
 
-          'appId': this.appId,
-          'registeredUser': this.user.registeredUser,
-          'item': this.payInfo.cart,
-          'amount': this.payInfo.amount,
-          'customerName': this.user.name,
-          'deliverName': this.fname,
-          'deliveryNo': this.streetNumber,
-          'deliveryStreet': this.streetName,
-          'deliveryCity': this.city,
-          'deliveryCountry': this.country,
-          'deliveryZip': this.zip,
-          'telNumber': this.phone,
-          'tax': this.payInfo.taxTotal,
-          'shippingCost': this.chkShippingCost,
-          'shippingOpt': this.payInfo.item.shippingOption,
-          'email': this.payInfo.userEmail,
-          'currency': this.dataService.paypalCurrency,
-          'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
-          'note': note
+      this.orderDetails = {
+
+        'appId': this.appId,
+        'registeredUser': ((!this.localData) ? "Unknown User" :this.localData.registeredUser),
+        'item': this.payInfo.cart,
+        'amount': this.payInfo.amount,
+        'customerName': ((!this.oldUser) ? this.complexForm.controls['fName'].value : this.localData.name),
+        'deliverName': ((!this.oldUser) ? this.complexForm.controls['fName'].value : this.localData.name),
+        'deliveryNo': ((!this.oldUser) ? this.complexForm.controls['streetNo'].value : this.localData.streetNumber),
+        'deliveryStreet': ((!this.oldUser) ? this.complexForm.controls['streetName'].value : this.localData.streetName),
+        'deliveryCity': ((!this.oldUser) ? this.complexForm.controls['city'].value : this.localData.city),
+        'deliveryCountry': ((!this.oldUser) ? this.complexForm.controls['country'].value : this.localData.country),
+        'deliveryZip': ((!this.oldUser) ? this.complexForm.controls['zip'].value : this.localData.zip),
+        'telNumber': ((!this.oldUser) ? this.complexForm.controls['phone'].value : this.localData.phone),
+        'tax': this.payInfo.taxTotal,
+        'shippingCost': this.chkShippingCost,
+        'shippingOpt': "smartfit Delivery",
+        'email': this.payInfo.userEmail,
+        'currency': this.dataService.currency,
+        'puckupId': null,
+        'promotionCode': this.payInfo.promotionCode,
+        'note': note
         };
 
-      } else {
-        this.orderDetails = {
-
-          'appId': this.appId,
-          'registeredUser': "Unknown User",
-          'item': this.payInfo.cart,
-          'amount': this.payInfo.amount,
-          'customerName': this.fname,
-          'deliverName': this.fname,
-          'deliveryNo': this.streetNumber,
-          'deliveryStreet': this.streetName,
-          'deliveryCity': this.city,
-          'deliveryCountry': this.country,
-          'deliveryZip': this.zip,
-          'telNumber': this.phone,
-          'tax': this.payInfo.taxTotal,
-          'shippingCost': this.chkShippingCost,
-          'shippingOpt': this.payInfo.item.shippingOption,
-          'email': this.payInfo.userEmail,
-          'currency': this.dataService.paypalCurrency,
-          'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
-          'note': note
-        };
-      }
-    }
-    else {
-      if (this.user) {
-        this.orderDetails = {
-          "appId": this.appId,
-          "registeredUser": this.user.registeredUser,
-          "item": this.payInfo.cart,
-          "amount": this.payInfo.amount,
-          "customerName": this.payInfo.item.deliverDetails.name,
-          "telNumber": this.payInfo.item.deliverDetails.number,
-          "tax": this.payInfo.taxTotal,
-          "pickupId": this.payInfo.item.pickupId,
-          "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.userEmail,
-          "currency": this.dataService.paypalCurrency,
-          "promotionCode": this.payInfo.promotionCode,
-          'note': note
-        }
-      } else {
-        this.orderDetails = {
-          "appId": this.appId,
-          "registeredUser": 'Unknown User',
-          "item": this.payInfo.cart,
-          "amount": this.payInfo.amount,
-          "customerName": this.payInfo.item.deliverDetails.name,
-          "telNumber": this.payInfo.item.deliverDetails.number,
-          "tax": this.payInfo.taxTotal,
-          "pickupId": this.payInfo.item.pickupId,
-          "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.item.deliverDetails.email,
-          "currency": this.dataService.paypalCurrency,
-          "promotionCode": this.payInfo.promotionCode,
-          'note': note
-        }
-      }
     }
 
     this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails)

@@ -23,4 +23,9 @@ export class ShippingService {
     return this.http.get(SERVER_URL + "/edit/getShippingPickupInfo?appId=" + this.appId)
       .map(res => res.text() ? res.json() : res);
   }
+
+  getSmartfitShippingRules(){
+    return this.http.get(SERVER_URL + "/get/getShippingRules")
+      .map(res => res.json() ? res.json() : res.json());
+  }
 }
