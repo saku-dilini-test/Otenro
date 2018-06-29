@@ -7,6 +7,7 @@ import * as data from '../../madeEasy.json';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { FormGroup, FormControl, FormArray, NgForm } from '@angular/forms';
 import { TitleService } from '../../services/title.service';
+import { CountryDataService } from '../../services/country-data/country-data.service'
 
 @Component({
   selector: 'app-register',
@@ -18,6 +19,8 @@ export class RegisterComponent implements OnInit {
   passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
   public appId = (<any>data).appId;
   public userId = (<any>data).userId;
+  public templateName = (<any>data).templateName;
+  // public templateName = "outfit";
   public country = [];
   navigate;
   signUpButton;
@@ -34,46 +37,84 @@ export class RegisterComponent implements OnInit {
   private phone;
   private myForm: FormGroup;
   private isEmailDuplicate;
+  private enableNewshippingRules;
+  private provinces = [];
+  private provinceData;
+  private cityArr = [];
+  private newCity;
+  private selectedProvinces = null;
 
-  constructor(private localStorageService: LocalStorageService, private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
-              private title: TitleService) {
+  constructor(private localStorageService: LocalStorageService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
+    private title: TitleService,
+    private CountryDataService: CountryDataService) {
     this.title.changeTitle("Register");
 
   }
 
-  changeCountry(data){
-      this.selectedCountry = data;
+  changeCountry(data) {
+
+    this.selectedCountry = data;
+    console.log(data);
+
+  }
+
+  ngDoCheck() {
+    if (this.selectedCountry == 'Sri Lanka' && this.templateName == "smartfit") {
+      this.enableNewshippingRules = true;
+    } else {
+      this.enableNewshippingRules = false;
+    }
+  }
+
+  selectedProvince(data) {
+    console.log("selected province");
+    console.log(data);
+    this.selectedProvinces = data;
+    this.provinceData.forEach(ele => {
+      if (ele.name == data) {
+        this.cityArr = ele.cities;
+      }
+    });
+    this.newCity = this.cityArr[0];
+    console.log(this.cityArr);
+
+  }
+
+  selectedCity(city) {
+    this.newCity = city;
   }
 
   ngOnInit() {
-    this.country.push('select a country')
+
+    this.country.push('Sri Lanka');
+    this.selectedCountry = 'Sri Lanka';
+
+    this.provinces.push('select a province');
+    this.CountryDataService.getProvinces().subscribe(data => {
+      this.provinceData = data.provinces;
+      this.provinceData.forEach(ele => {
+        this.provinces.push(ele.name);
+      });
+    });
+
+
     this.router.params.subscribe(params => {
       this.navigate = params['type'];
     });
 
-      this.http.get(SERVER_URL+"/edit/getAllCountry")
-      .subscribe((res) => {
-        var data = JSON.stringify(res);
-
-        for (let key in res) {
-          this.country.push(res[key].countryName);
-        }
-
-
-      });
 
 
   }
 
-  modelChanged(e){
+  modelChanged(e) {
     this.isEmailDuplicate = false;
-    if(e == this.email){
+    if (e == this.email) {
       this.isEmailDuplicate = true;
     }
   }
 
 
-  signUp=function(myForm) {
+  signUp = function (myForm) {
 
     this.fname = myForm.fname;
     this.lname = myForm.lname;
@@ -88,58 +129,60 @@ export class RegisterComponent implements OnInit {
 
 
     var data = {
-        firstName: this.fname,
-        lastName: this.lname,
-        email : this.email,
-        password : this.password,
-        streetNumber: this.streetNumber,
-        streetName: this.streetName,
-        city: this.city,
-        zip: this.zip,
-        country: this.selectedCountry,
-        phone: this.phone,
-        appId: this.appId
+      firstName: this.fname,
+      lastName: this.lname,
+      email: this.email,
+      password: this.password,
+      streetNumber: this.streetNumber,
+      streetName: this.streetName,
+      province: this.selectedProvinces,
+      city: (this.templateName == 'smartfit') ? this.newCity : this.city,
+      zip: this.zip,
+      country: this.selectedCountry,
+      phone: this.phone,
+      appId: this.appId
     };
 
-    this.http.post(SERVER_URL+"/templatesAuth/register",data)
-        .subscribe((res) =>{
+    this.http.post(SERVER_URL + "/templatesAuth/register", data)
+      .subscribe((res) => {
 
-                var requestParams = {
-                    "token": res.token,
-                    "email": data.email,
-                    "name": data.firstName,
-                    "lname": data.lastName,
-                    "phone": data.phone,
-                    "streetNumber": data.streetNumber,
-                    "streetName": data.streetName,
-                    "country": data.country,
-                    "city": data.city,
-                    "zip": data.zip,
-                    "type": 'internal',
-                    "appId":data.appId,
-                    "registeredUser": res.user.sub
-                };
+        var requestParams = {
+          "token": res.token,
+          "email": data.email,
+          "name": data.firstName,
+          "lname": data.lastName,
+          "phone": data.phone,
+          "streetNumber": data.streetNumber,
+          "streetName": data.streetName,
+          "country": data.country,
+          "province": data.province,
+          "city": data.city,
+          "zip": data.zip,
+          "type": 'internal',
+          "appId": data.appId,
+          "registeredUser": res.user.sub
+        };
 
-                this.localStorageService.set('appLocalStorageUser'+this.appId,(requestParams));
-                this.dataService.appUserId = requestParams.registeredUser;
-                this.dataService.isUserLoggedIn.check = true;
-                this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
+        this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
+        this.dataService.appUserId = requestParams.registeredUser;
+        this.dataService.isUserLoggedIn.check = true;
+        this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
 
-                if(this.navigate == 'home'){
-                    this.route.navigate(['home']);
-                }else if(this.navigate == 'cart'){
-                  this.route.navigate(['cart']);
-                }else if(this.navigate == 'delivery'){
-                  this.route.navigate(['checkout','delivery']);
-                }else{
-                  this.route.navigate(['checkout','pickup']);
-                }
-            },err =>{
+        if (this.navigate == 'home') {
+          this.route.navigate(['home']);
+        } else if (this.navigate == 'cart') {
+          this.route.navigate(['cart']);
+        } else if (this.navigate == 'delivery') {
+          this.route.navigate(['checkout', 'delivery']);
+        } else {
+          this.route.navigate(['checkout', 'pickup']);
+        }
+      }, err => {
 
-              if(err.status == 409){
-                this.isEmailDuplicate = true;
-              }
-            });
+        if (err.status == 409) {
+          this.isEmailDuplicate = true;
+        }
+      });
   }
 
 }

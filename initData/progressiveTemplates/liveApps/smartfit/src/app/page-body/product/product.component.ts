@@ -93,9 +93,9 @@ export class ProductComponent implements OnInit {
                             break;
                     }
                 });
-                  
+
             });
-           
+
         }
     }
 
@@ -128,7 +128,7 @@ export class ProductComponent implements OnInit {
             this.catName = params['catName'];
         });
 
-      
+
     }
 
     ngAfterViewInit() {
@@ -138,7 +138,7 @@ export class ProductComponent implements OnInit {
           slider_scale_mode: "fit",
           slider_textpanel_bg_color:"rgba(0,0,0,0)",
           slider_textpanel_bg_opacity: 0,
-          gallery_autoplay:true,    
+          gallery_autoplay:true,
         });
 
           for(let i=this.Data.tempImageArray.length-1;i>=0;i--){
@@ -271,7 +271,7 @@ export class ProductComponent implements OnInit {
                 }
             }
             this.lockBuyButton = true;
-           
+
         } else {
 
             // if (variant1 == "Please Select") {
@@ -478,7 +478,7 @@ export class ProductComponent implements OnInit {
         if(this.isBuyBtnDisable){
             if(!(this.selectedVariant.buyQuantity > this.selectedVariant.quantity && this.selectedVariant.quantity > 1)){
                 this.ifNotSelectedVariantOrQuantity = true;
-                setTimeout(() => { 
+                setTimeout(() => {
                      this.ifNotSelectedVariantOrQuantity = false;
                 }, 3100)
             }
@@ -517,7 +517,8 @@ export class ProductComponent implements OnInit {
                             variant: this.selectedVariant.selection,
                             totalQty: this.selectedVariant.quantity,
                             unlimited: this.selectedVariant.unlimited,
-                            weight: this.selectedVariant.weight  //(new) added weight of each product
+                            weight: this.selectedVariant.weight,  //(new) added weight of each product
+                            type: this.Data.mainType
 
                         });
                         this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
@@ -550,8 +551,8 @@ export class ProductComponent implements OnInit {
                     variant: this.selectedVariant.selection,
                     totalQty: this.selectedVariant.quantity,
                     unlimited: this.selectedVariant.unlimited,
-                    weight: this.selectedVariant.weight //(new) added weight of each product
-
+                    weight: this.selectedVariant.weight, //(new) added weight of each product
+                    type: this.Data.mainType
                 });
                 this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
                 this.parentobj.cartSize = this.dataService.cart.cartSize;

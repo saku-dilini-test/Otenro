@@ -8,6 +8,7 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { FormGroup, Validators, FormControl, FormArray, NgForm, FormBuilder } from '@angular/forms';
 import { TitleService } from '../../services/title.service';
 import { CurrencyService } from '../../services/currency/currency.service';
+import { CountryDataService } from '../../services/country-data/country-data.service'
 
 @Component({
   selector: 'app-user',
@@ -23,17 +24,26 @@ export class AppUserComponent implements OnInit {
 
   private selectedCountry;
   private country = [];
-  private countries;
+  private countries = [];
   private passwordEditable;
   private userData;
   private isEmailDuplicate:boolean =false;
   private isInvalidPassword:boolean =false;
   private isSuccessDetails:boolean =false;
   private isSuccessPassword:boolean =false;
+  private provinceData = [];
+  private provinces = [];
+  private province;
+  private cityArr;
+  private newCity;
+  private selectedProvinces;
+  private shippingRules;
 
   constructor(fb: FormBuilder, private localStorageService: LocalStorageService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
-    private title: TitleService, private currencyService: CurrencyService, ) {
+    private title: TitleService, private currencyService: CurrencyService,
+    private countryDataService: CountryDataService) {
     this.title.changeTitle("My Account");
+    this.countries.push("Sri Lanka");
 
     this.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
 
@@ -46,12 +56,13 @@ export class AppUserComponent implements OnInit {
       'phone': new FormControl(this.userData.phone, Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/)])),
       'streetNo': new FormControl(this.userData.streetNumber, Validators.compose([Validators.required])),
       'streetName': new FormControl(this.userData.streetName, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/)])),
-      'city': new FormControl(this.userData.city, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)])),
+      'province': new FormControl(this.userData.province),
+      'city': new FormControl(this.userData.city),
       'zip': new FormControl(this.userData.zip, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9\-]+\s)*[a-zA-Z0-9\-]+$/)])),
       'password': new FormControl('',Validators.compose([Validators.required])),
       'passwordNew': new FormControl('',Validators.compose([Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)])),
       'passwordConfirm': new FormControl('',Validators.compose([Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)])),
-      'country': new FormControl(null)
+      'country': new FormControl(this.userData.country)
 
     },{validator: this.checkIfMatchingPasswords('passwordNew', 'passwordConfirm')});
     this.userEditForm.controls['country'].setValue(this.userData.country, { onlySelf: true });
@@ -74,10 +85,16 @@ checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
 
   ngOnInit() {
 
-    this.currencyService.getCountryData()
-      .subscribe((res) => {
-        this.countries = res;
+    this.countryDataService.getProvinces().subscribe(data => {
+      this.provinceData = data.provinces;
+      this.provinceData.forEach(ele => {
+        this.provinces.push(ele.name);
+        if (ele.name == this.userData.province) {
+          this.cityArr = ele.cities;
+          console.log(this.cityArr);
+        }
       });
+    });
   }
 
   countryChanged(data) {
@@ -88,6 +105,23 @@ checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
       this.passwordEditable = true;
   }
 
+  selectedProvince(data) {
+    console.log("selected province");
+    console.log(data);
+    this.selectedProvinces = data;
+    this.provinceData.forEach(ele => {
+      if (ele.name == data) {
+        this.cityArr = ele.cities;
+      }
+    });
+    this.newCity = this.cityArr[0];
+    this.userEditForm.controls['city'].setValue(this.newCity, { onlySelf: true });
+    console.log(this.cityArr);
+  }
+
+  selectedCity(city) {
+    console.log(city);
+  }
 
   editUserDetails(user) {
     let userData = {
@@ -98,7 +132,8 @@ checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
       'emailRe': user.emailRe,
       'streetNo': user.streetNo,
       'streetName': user.streetName,
-      'city': user.city,
+      'province': user.province,
+      'city': this.userEditForm.controls['city'].value,
       'country': user.country,
       'zip': user.zip,
       'appId': this.appId,
@@ -115,6 +150,7 @@ checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
         }
         this.userData.streetNumber = res[0].streetNumber;
         this.userData.streetName = res[0].streetName;
+        this.userData.province = res[0].province;
         this.userData.city = res[0].city;
         this.userData.country = res[0].country;
         this.userData.zip = res[0].zip;

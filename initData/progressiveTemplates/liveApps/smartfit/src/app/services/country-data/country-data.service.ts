@@ -18,4 +18,8 @@ export class CountryDataService {
         return this.http.get(SERVER_URL + "/edit/getAllCountry")
             .map(res => res.text() ? res.json() : res);
     }
+    getProvinces(){
+        return this.http.get(SERVER_URL + "/get/provinces")
+            .map(res => res.text() ? res.json() : res);
+    }
 }
