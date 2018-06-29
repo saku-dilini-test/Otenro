@@ -46,13 +46,13 @@ module.exports = {
   HOST_URL : 'http://developer.appmaker.lk',
   // ME SERVER Config
   ME_SERVER_URL : 'http://cdn.appmaker.lk/meServer/temp/',
-  ME_SERVER : '/home/milhan/public_html/developer/meServer/temp/',
+  ME_SERVER : '/home/admin/web/developer.appmaker.lk/public_html/developer/meServer/temp/',
   ME_SERVER_PORT : 80,
   // APP FILE SERVER Config
-  APP_FILE_SERVER : '/home/milhan/public_html/developer/appFileServer/',
+  APP_FILE_SERVER : '/home/admin/web/developer.appmaker.lk/public_html/developer/appFileServer/',
   CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789',
-  TEMPLATES_PATH : '/home/Ideadroid/Otenro/initData/templates/',
-  PROGRESSIVE_TEMPLATES_PATH : '/home/Ideadroid/Otenro/initData/progressiveTemplates/',
+  TEMPLATES_PATH : '/home/projects/appmaker/Otenro/initData/templates/',
+  PROGRESSIVE_TEMPLATES_PATH : '/home/projects/appmaker/Otenro/initData/progressiveTemplates/',
   REDIRECT_URL : 'http://developer.appmaker.lk',
   /**
    * change isBeta to 0 after beta period
