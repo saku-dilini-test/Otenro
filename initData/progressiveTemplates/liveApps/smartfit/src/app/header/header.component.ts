@@ -70,6 +70,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.localStorageService.remove('appLocalStorageUser' + this.appId);
+    localStorage.removeItem(this.appId + ":dataServiceData");
     this.dataService.isUserLoggedIn.check = false;
     this.dataService.cart.cartItems = [];
     this.router.navigate(['home']);
@@ -101,6 +102,7 @@ export class HeaderComponent implements OnInit {
  navigateProd(val: String, item: any, catName: String) {
     this.catName = catName;
     this.dataService.data = item;
+    localStorage.setItem(this.appId+":dataServiceData",JSON.stringify(this.dataService.data))
     this.router.navigate([val, this.catName]);
   }
 

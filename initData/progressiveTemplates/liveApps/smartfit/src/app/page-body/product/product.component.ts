@@ -46,7 +46,7 @@ export class ProductComponent implements OnInit {
      private player: Player;
     constructor(private localStorageService: LocalStorageService, private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
 
-        this.Data = this.dataService.data;
+        this.Data = JSON.parse(localStorage.getItem(this.appId+":dataServiceData"));
 
         this.init();
         this.isBuyBtnDisable = true;

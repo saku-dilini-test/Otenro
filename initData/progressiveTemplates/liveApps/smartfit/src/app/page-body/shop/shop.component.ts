@@ -24,9 +24,9 @@ export class ShopComponent implements OnInit {
   constructor(private currencyService: CurrencyService, private productService: ProductsService,
     private dataService: PagebodyServiceModule, private router: Router,
     private title: TitleService) {
-      
+
      this.title.changeTitle("Search");
-      
+
   }
 
   private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
@@ -48,7 +48,7 @@ export class ShopComponent implements OnInit {
     error => {
       console.log('Error shop service all');
     });
-   
+
   }
 
 
@@ -57,6 +57,7 @@ export class ShopComponent implements OnInit {
   navigateProd(val: String, item: any, catName: String) {
     this.catName = catName;
     this.dataService.data = item;
+    localStorage.setItem(this.appId+":dataServiceData",JSON.stringify(this.dataService.data))
     this.router.navigate([val, this.catName]);
   }
 

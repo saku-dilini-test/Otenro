@@ -76,7 +76,7 @@ export class CategoriesComponent implements OnInit {
     });
 
 
-  
+
   }
 
       ngAfterViewChecked() {
@@ -179,6 +179,7 @@ export class CategoriesComponent implements OnInit {
   navigateProd(val: String, item: any, catName: String) {
     this.catName = catName;
     this.dataService.data = item;
+    localStorage.setItem(this.appId+":dataServiceData",JSON.stringify(this.dataService.data))
     this.router.navigate([val, this.catName]);
   }
 
@@ -186,6 +187,7 @@ export class CategoriesComponent implements OnInit {
       if (item.optionals.length == 2) {
         this.catName = item.optionals[0].name
         this.dataService.data = item.optionals[1];
+        localStorage.setItem(this.appId+":dataServiceData",JSON.stringify(this.dataService.data))
         this.router.navigate([val, this.catName]);
       }
     }

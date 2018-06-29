@@ -842,7 +842,7 @@ export class CheckoutComponent implements OnInit {
             this.orderDetails.item[0].name + "&address=" +
             this.orderDetails.deliveryNo + " " + this.orderDetails.deliveryStreet + "&city=" +
             this.orderDetails.deliveryCity + "&appId=" + orderRes.orderData.appId +
-            "&orderId=" + orderRes.orderData.orderId + "&payHereMerchantId=1211173");
+            "&orderId=" + orderRes.orderData.orderId + "&payHereMerchantId=" + this.payHereMID);
           },
           (err) => {
             console.log(err);
