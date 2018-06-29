@@ -363,8 +363,6 @@ export class CheckoutComponent implements OnInit {
 
   getNewRules(type,cty,total){
 
-    console.log(this.shippingRules.main);
-    console.log(this.shippingRules);
     if(type == "main"){
       this.shippingRules.main.forEach(ele =>{
         ele.cities.forEach(city=>{
