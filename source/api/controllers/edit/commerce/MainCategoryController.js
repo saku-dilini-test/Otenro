@@ -71,7 +71,8 @@ module.exports = {
         var mainCatCtrl = this;
         var appId = req.param('appId');
         var searchApp = {
-            appId: appId
+            appId: appId,
+            sort: 'name ASC'
         };
         MainCategory.find(searchApp).sort({ updatedAt: -1 }).exec(function(err, list) {
             if (err) throw err;
@@ -93,12 +94,29 @@ module.exports = {
                         var arr = mainCatCtrl.makeCategoryArray(parentMenuItems, list, products);
 
                         arr.forEach(function(cat){
-                            if(cat.childNodes.length > 0 && cat.childNodes.updatedAt){
+                            // if(cat.childNodes.length > 0 && cat.childNodes.updatedAt){
+                            //     var childNodesArr=cat.childNodes;
+                            //      var childNodesArrSorted = childNodesArr.sort(function(a,b){
+                            //          return b.updatedAt - a.updatedAt;
+                            //      });
+                            //      cat.childNodes = childNodesArrSorted;
+                            // }
+                            if(cat.childNodes.length > 0){
                                 var childNodesArr=cat.childNodes;
-                                 var childNodesArrSorted = childNodesArr.sort(function(a,b){
-                                     return b.updatedAt - a.updatedAt;
-                                 });
-                                 cat.childNodes = childNodesArrSorted;
+
+                                //Child categories sort by
+                                var predicateBy = 'name';
+
+                                //Sort child categories
+                                var childNodesArrSorted = childNodesArr.sort(function (a,b) {
+                                    if( a[predicateBy] > b[predicateBy]){
+                                        return 1;
+                                    }else if( a[predicateBy] < b[predicateBy] ){
+                                        return -1;
+                                    }
+                                    return 0;
+                                });
+                                cat.childNodes = childNodesArrSorted;
                             }
                         });
 
