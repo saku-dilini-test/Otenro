@@ -437,7 +437,7 @@ module.exports = {
                   }
                   console.log(data);
                      // error handling
-                 res.json(data);
+                 res.send(data);
               });
 
         }

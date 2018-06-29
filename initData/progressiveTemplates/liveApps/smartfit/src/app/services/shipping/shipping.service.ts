@@ -26,6 +26,6 @@ export class ShippingService {
 
   getSmartfitShippingRules(){
     return this.http.get(SERVER_URL + "/get/getShippingRules")
-      .map(res => res.json() ? res.json() : res.json());
+    .map(res => res.text() ? res.json() : res);
   }
 }

@@ -49,9 +49,8 @@ export class CartComponent implements OnInit {
 
     this.user = (this.localStorageService.get('appLocalStorageUser' + this.appId));
 
-    if(this.user){
       this.cartItems = !(this.localStorageService.get("cart"+this.user.registeredUser)) ? this.dataService.cart.cartItems: (this.localStorageService.get("cart"+this.user.registeredUser).cartItems);
-    }
+
 
     this.taxService.getTaxInfo().subscribe(data => {
       if (data == '') {

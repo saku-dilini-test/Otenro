@@ -187,7 +187,7 @@ export class CheckoutComponent implements OnInit {
     this.localData = (this.localStorageService.get('appLocalStorageUser' + this.appId));
 
     this.shippingService.getSmartfitShippingRules().subscribe(data=>{
-      this.shippingRules = JSON.parse(data);
+      this.shippingRules = (data);
       if(this.localData){
         this.getTotal(this.localData.city);
       }
