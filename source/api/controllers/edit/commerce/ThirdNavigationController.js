@@ -400,7 +400,7 @@ module.exports = {
               var path2 = path.resolve();
               console.log(path2);
 
-              fs.readFile("../../../services/provinces.json", 'utf8', function (err, data) {
+              fs.readFile(path2 + "/api/services/provinces.json", 'utf8', function (err, data) {
                   if (err){
                     console.log(err)
                   }
@@ -415,7 +415,7 @@ module.exports = {
               var path2 = path.resolve();
               console.log(path2);
 
-              fs.readFile("../../../services/productType.json", 'utf8', function (err, data) {
+              fs.readFile(path2 + "/api/services/productType.json", 'utf8', function (err, data) {
                   if (err){
                     console.log(err)
                   }
@@ -431,7 +431,7 @@ module.exports = {
               var path2 = path.resolve();
               console.log(path2);
 
-              fs.readFile("../../../services/smartFitShippingRules.json", 'utf8', function (err, data) {
+              fs.readFile(path2 + "/api/services/smartFitShippingRules.json", 'utf8', function (err, data) {
                   if (err){
                     console.log(err)
                   }
