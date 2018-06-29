@@ -70,7 +70,7 @@ module.exports = {
                         "</ul> " +
                         "<input type=\"hidden\" name=\"custom_1\" value=\""+req.param("appId")+"\">   " +
                         "<input type=\"hidden\" name=\"merchant_id\" value=\""+req.param("payHereMerchantId")+"\">" +
-                        " <input type=\"hidden\" name=\"return_url\"  value=\""+sever+"/mobile/payHereSuccess?orderId="+req.param("orderId")+"\">" +
+                        " <input type=\"hidden\" name=\"return_url\"  value=\""+sever+"/mobile/payHereSuccess?orderId="+req.param("orderId")+"&appId="+req.param("appId")+"\">" +
                         " <input type=\"hidden\" name=\"cancel_url\" value=\""+sever+"/mobile/cancelUrl\">" +
                         " <input type=\"hidden\" name=\"notify_url\" value=\""+sever+"/mobile/notifyUrl\">" +
                         " <input type=\"hidden\" name=\"order_id\" value=\""+req.param("orderId")+"\">" +
@@ -111,21 +111,33 @@ module.exports = {
 
         console.log("payhere success");
         var oderId = req.param("orderId");
+        var appId = req.param("appId");
+        var userId = req.param("userId");
 
         var searchOrder = {id:oderId};
 
         ApplicationOrder.find(searchOrder, function(err, order) {
             if (err) return done(err);
 
-            var htmlForm = "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> " +
-                "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> " +
-                "<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags --> <title>Pay Here</title> " +
-                "</head> <body class=\"container\" style=\"height: 90vh; vertical-align: middle; display: table-cell;width:100vw\"> " +
-                "<h1 style=\"color:#00a700;text-align:center\">Thank you!</h1>" +
-                "<p style=\"text-align:center\">Your order is " + order[0].paymentStatus + " </p></body></html>";
+            var searchQry ={'id': appId}
+            Application.find(searchQry, function(err, app){
 
-            res.set('Content-Type', 'text/html');
-            res.send(new Buffer(htmlForm));
+                var redirectUrl = sails.config.ME_SERVER_URL + app[0].userId + "/progressiveTemplates/" + appId + "/src"
+                console.log(redirectUrl);
+
+                var htmlForm = "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> " +
+                    "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> " +
+                    "<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags --> <title>Pay Here</title> " +
+                    "</head> <body class=\"container\" style=\"height: 90vh; vertical-align: middle; display: table-cell;width:100vw\"> " +
+                    "<h1 style=\"color:#00a700;text-align:center\">Thank you!</h1>" +
+                    "<p style=\"text-align:center\">Your order is " + order[0].paymentStatus + " </p><br>" +
+                    "<div style=\"text-align:center\"><a href= " + redirectUrl + " >Back to Home</a></div></body></html>";
+
+                res.set('Content-Type', 'text/html');
+                res.send(new Buffer(htmlForm));
+
+                });
+
         });
 
 

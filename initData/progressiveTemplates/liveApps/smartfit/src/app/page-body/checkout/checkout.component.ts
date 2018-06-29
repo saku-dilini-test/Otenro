@@ -188,9 +188,9 @@ export class CheckoutComponent implements OnInit {
 
     this.shippingService.getSmartfitShippingRules().subscribe(data=>{
       this.shippingRules = JSON.parse(data);
-        if(this.localData){
-          this.getTotal(this.localData.city);
-        }
+      if(this.localData){
+        this.getTotal(this.localData.city);
+      }
     });
 
     this.countries.push("Sri Lanka");
@@ -833,18 +833,16 @@ export class CheckoutComponent implements OnInit {
                 this.localStorageService.remove("cart" + appUser.registeredUser);
               }
             }
-
-            showHelp(SERVER_URL + '/mobile/getPayHereForm/?name=' +
-              this.orderDetails.customerName + "&amount=" +
-              this.orderDetails.amount + "&currency=" +
-              this.currency.symbol + "&email=" +
-              this.orderDetails.email + "&telNumber=" +
-              this.orderDetails.telNumber + "&item=" +
-              this.orderDetails.item[0].name + "&address=" +
-              this.orderDetails.deliveryNo + " " + this.orderDetails.deliveryStreet + "&city=" +
-              this.orderDetails.deliveryCity + "&appId=" + orderRes.orderData.appId +
-              "&orderId=" + orderRes.orderData.orderId + "&payHereMerchantId=1211173");
-
+            window.location.href=(SERVER_URL + '/mobile/getPayHereForm/?name=' +
+            this.orderDetails.customerName + "&amount=" +
+            this.orderDetails.amount + "&currency=" +
+            this.currency.symbol + "&email=" +
+            this.orderDetails.email + "&telNumber=" +
+            this.orderDetails.telNumber + "&item=" +
+            this.orderDetails.item[0].name + "&address=" +
+            this.orderDetails.deliveryNo + " " + this.orderDetails.deliveryStreet + "&city=" +
+            this.orderDetails.deliveryCity + "&appId=" + orderRes.orderData.appId +
+            "&orderId=" + orderRes.orderData.orderId + "&payHereMerchantId=1211173");
           },
           (err) => {
             console.log(err);
@@ -858,69 +856,69 @@ export class CheckoutComponent implements OnInit {
       });
 
 
-    var inAppBrowserRef;
+    // var inAppBrowserRef;
 
-    function showHelp(url) {
+    // function showHelp(url) {
 
-      var target = "_blank";
+    //   var target = "_blank";
 
-      var options = "location=yes,hidden=yes";
+    //   var options = "location=yes,hidden=yes";
 
-      inAppBrowserRef = window.open(url, target, options);
+    //   inAppBrowserRef = window.open(url, target, options);
 
-      inAppBrowserRef.addEventListener('loadstart', loadStartCallBack);
+    //   inAppBrowserRef.addEventListener('loadstart', loadStartCallBack);
 
-      inAppBrowserRef.addEventListener('loadstop', loadStopCallBack);
+    //   inAppBrowserRef.addEventListener('loadstop', loadStopCallBack);
 
-      inAppBrowserRef.addEventListener('loaderror', loadErrorCallBack);
+    //   inAppBrowserRef.addEventListener('loaderror', loadErrorCallBack);
 
-    }
+    // }
 
-    function loadStartCallBack() {
+    // function loadStartCallBack() {
 
-      $('#status-message').text("loading please wait ...");
+    //   $('#status-message').text("loading please wait ...");
 
-    }
+    // }
 
-    function loadStopCallBack() {
+    // function loadStopCallBack() {
 
-      if (inAppBrowserRef != undefined) {
+    //   if (inAppBrowserRef != undefined) {
 
-        inAppBrowserRef.insertCSS({ code: "body{font-size: 25px;" });
+    //     inAppBrowserRef.insertCSS({ code: "body{font-size: 25px;" });
 
-        $('#status-message').text("");
+    //     $('#status-message').text("");
 
-        inAppBrowserRef.show();
-      }
+    //     inAppBrowserRef.show();
+    //   }
 
-    }
+    // }
 
-    function loadErrorCallBack(params) {
+    // function loadErrorCallBack(params) {
 
-      $('#status-message').text("");
+    //   $('#status-message').text("");
 
-      var scriptErrorMesssage =
-        "alert('Sorry we cannot open that page. Message from the server is : "
-        + params.message + "');"
+    //   var scriptErrorMesssage =
+    //     "alert('Sorry we cannot open that page. Message from the server is : "
+    //     + params.message + "');"
 
-      inAppBrowserRef.executeScript({ code: scriptErrorMesssage }, executeScriptCallBack);
+    //   inAppBrowserRef.executeScript({ code: scriptErrorMesssage }, executeScriptCallBack);
 
-      inAppBrowserRef.close();
+    //   inAppBrowserRef.close();
 
-      inAppBrowserRef = undefined;
+    //   inAppBrowserRef = undefined;
 
-    }
+    // }
 
-    function executeScriptCallBack(params) {
+    // function executeScriptCallBack(params) {
 
-      if (params[0] == null) {
+    //   if (params[0] == null) {
 
-        $('#status-message').text(
-          "Sorry we couldn't open that page. Message from the server is : '"
-          + params.message + "'");
-      }
+    //     $('#status-message').text(
+    //       "Sorry we couldn't open that page. Message from the server is : '"
+    //       + params.message + "'");
+    //   }
 
-    }
+    // }
   }
 
 }
