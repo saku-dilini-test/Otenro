@@ -26,7 +26,7 @@ export class CartComponent implements OnInit {
   hide: any;
   tax: any;
   user;enableDelivery=false;enablePickup=false;
-
+  cartItems;
   private _success = new Subject<string>();
 
   staticAlertClosed = false;
@@ -36,7 +36,6 @@ export class CartComponent implements OnInit {
     private http: HttpClient, private router: Router, private dataService: PagebodyServiceModule, private title: TitleService) {
     this.title.changeTitle("Shopping Cart");
   }
-  cartItems = this.dataService.cart.cartItems;
 
   currency: string;
 
@@ -47,7 +46,12 @@ export class CartComponent implements OnInit {
   @Output()
 
   ngOnInit() {
+
     this.user = (this.localStorageService.get('appLocalStorageUser' + this.appId));
+
+    if(this.user){
+      this.cartItems = !(this.localStorageService.get("cart"+this.user.registeredUser)) ? this.dataService.cart.cartItems: (this.localStorageService.get("cart"+this.user.registeredUser).cartItems);
+    }
 
     this.taxService.getTaxInfo().subscribe(data => {
       if (data == '') {

@@ -349,7 +349,7 @@
               </form> -->
             </div>
 
-            <div class="padding-vertical main-content-font" *ngIf='complexForm.valid && sign && totalPrice'>
+            <div class="padding-vertical main-content-font" *ngIf='(oldUser && sign && totalPrice) || (!oldUser && complexForm.valid && sign && totalPrice)'>
               <form id="form_33031" novalidate>
                 <div class="row">
                   <div class="col-sm-12">

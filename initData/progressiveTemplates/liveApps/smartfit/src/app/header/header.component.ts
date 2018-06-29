@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
   private categories:any
   private catName: any;
   private imageUrl:any;
+  user;
   constructor(private location: Location,private localStorageService: LocalStorageService,private categoryService: CategoriesService, private router: Router, private dataService: PagebodyServiceModule, private titleServ: TitleService) {
     this.cartNo = this.dataService.cart.cartItems.length;
     this.title = 'Home';
@@ -40,6 +41,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.user = (this.localStorageService.get('appLocalStorageUser' + this.appId));
+
    this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=";
 
@@ -57,8 +60,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngAfterContentChecked() {
-    if (this.dataService.cart.cartItems) {
-      this.cartNo = this.dataService.cart.cartItems.length;
+    if (this.user) {
+      this.cartNo = !(this.localStorageService.get("cart"+this.user.registeredUser)) ? this.dataService.cart.cartItems: (this.localStorageService.get("cart"+this.user.registeredUser).cartSize);
     }
     if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
       this.loginStatus = true;
