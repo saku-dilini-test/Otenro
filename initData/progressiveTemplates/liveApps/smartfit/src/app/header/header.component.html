@@ -66,7 +66,7 @@
 				              <span class="caret"></span></a>
 				              <ul class="dropdown-menu  main-navigation"  role="menu">
 				                <li *ngIf="loginStatus">
-				                  <a   (click)="logout()">Sign Out</a>
+				                  <a   (click)="logout()">Log Out</a>
 				                </li>
 				                <li *ngIf="!loginStatus">
 				                  <a  (click)="navigate('login/home')">Sign In</a>
@@ -104,7 +104,7 @@
 		<a (click)="navigate('complaints', 'Complaints');closeNav()">Service Request</a>
 		<a (click)="navigate('policies', 'Policies');closeNav()">Privacy policy</a>
 		<a (click)="navigate('terms', 'Terms & Conditions');closeNav()">Terms &amp; Conditions</a>
-		<a (click)="logout();closeNav()" *ngIf="loginStatus">Sign Out</a>
+		<a (click)="logout();closeNav()" *ngIf="loginStatus">Log Out</a>
         <a (click)="navigate('login/home');closeNav()"  *ngIf="!loginStatus">Sign In</a>
         <a (click)="navigate('order-history','Order History');closeNav()" *ngIf="loginStatus">Order History</a>
 		<a (click)="navigate('appUser','My Account');closeNav()" *ngIf="loginStatus">My Account</a>
