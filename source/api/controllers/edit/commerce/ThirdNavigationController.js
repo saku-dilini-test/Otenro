@@ -398,7 +398,6 @@ module.exports = {
         getProvinces : function(req,res){
             var path = require('path');
               var path2 = path.resolve();
-              console.log(path2);
 
               fs.readFile(path2 + "/api/services/provinces.json", 'utf8', function (err, data) {
                   if (err){
@@ -413,13 +412,11 @@ module.exports = {
         getMainProdTypes : function(req,res){
             var path = require('path');
               var path2 = path.resolve();
-              console.log(path2);
 
               fs.readFile(path2 + "/api/services/productType.json", 'utf8', function (err, data) {
                   if (err){
                     console.log(err)
                   }
-                  console.log(data);
                      // error handling
                  res.json(data);
               });
@@ -429,13 +426,11 @@ module.exports = {
         getShippingRules : function(req,res){
             var path = require('path');
               var path2 = path.resolve();
-              console.log(path2);
 
               fs.readFile(path2 + "/api/services/smartFitShippingRules.json", 'utf8', function (err, data) {
                   if (err){
                     console.log(err)
                   }
-                  console.log(data);
                      // error handling
                  res.send(data);
               });
