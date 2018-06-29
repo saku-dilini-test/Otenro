@@ -5,8 +5,8 @@
     <div class="container bloc-lg">
       <div class="row">
         <div class="col-sm-3">
-          <p class="links hidden-xs">
-            SIGN IN
+          <p class="links hidden-xs" (click)="singIn()">
+            LOGIN
           </p>
           <p class="links hidden-xs">
             REGISTRATION
@@ -18,7 +18,7 @@
               <form class="main-content-font" #myForm="ngForm" (ngSubmit)="signUp(myForm.value)" novalidate>
                 <div class="col-sm-12">
                   <h2 class="text-center header main-header-font">
-                    User registration
+                    New User Registration
                   </h2>
                 </div>
                 <div class="form-group">

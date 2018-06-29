@@ -103,4 +103,8 @@ export class HeaderComponent implements OnInit {
     this.dataService.data = item;
     this.router.navigate([val, this.catName]);
   }
+
+  goToRegister() {
+    this.router.navigate(['register', this.navigate]);
+  }
 }

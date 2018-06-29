@@ -36,7 +36,7 @@
 							<a  (click)="navigate('aboutus','About Us')">About-us</a>
 						</li> -->
 						<li>
-							<a  (click)="navigate('contact', 'Contact Us')">Contact-us</a>
+							<a  (click)="navigate('contact', 'Contact Us')">Contact us</a>
 						</li>
 						<li>
 							<a (click)="navigate('warranty', 'Warranty')">Warranty</a>
@@ -66,11 +66,14 @@
 				              <span class="caret"></span></a>
 				              <ul class="dropdown-menu  main-navigation"  role="menu">
 				                <li *ngIf="loginStatus">
-				                  <a   (click)="logout()">Sign Out</a>
+				                  <a   (click)="logout()">Log Out</a>
 				                </li>
 				                <li *ngIf="!loginStatus">
-				                  <a  (click)="navigate('login/home')">Sign In</a>
+				                  <a  (click)="navigate('login/home')">Login</a>
 				                </li>
+                        <li *ngIf="!loginStatus">
+                          <a  (click)="goToRegister()">Registration</a>
+                        </li>
 				                <li  *ngIf="loginStatus">
 									<a (click)="navigate('order-history','Order History')">Order History</a>
 								</li>
@@ -98,13 +101,13 @@
     <div  class="closebtn" (click)="closeNav()">&times;</div>
 		<a (click)="navigate('','Home');closeNav()">Home</a>
 		<!-- <a (click)="navigate('aboutus','About Us');closeNav()">About-us</a> -->
-		<a (click)="navigate('contact', 'Contact Us');closeNav()">Contact-us</a>
+		<a (click)="navigate('contact', 'Contact Us');closeNav()">Contact us</a>
 		<a (click)="navigate('warranty', 'Warranty');closeNav()">Warranty</a>
 		<a (click)="navigate('newarivals', 'New Arivals');closeNav()">New Arrivals</a>
 		<a (click)="navigate('complaints', 'Complaints');closeNav()">Service Request</a>
 		<a (click)="navigate('policies', 'Policies');closeNav()">Privacy policy</a>
 		<a (click)="navigate('terms', 'Terms & Conditions');closeNav()">Terms &amp; Conditions</a>
-		<a (click)="logout();closeNav()" *ngIf="loginStatus">Sign Out</a>
+		<a (click)="logout();closeNav()" *ngIf="loginStatus">Log Out</a>
         <a (click)="navigate('login/home');closeNav()"  *ngIf="!loginStatus">Sign In</a>
         <a (click)="navigate('order-history','Order History');closeNav()" *ngIf="loginStatus">Order History</a>
 		<a (click)="navigate('appUser','My Account');closeNav()" *ngIf="loginStatus">My Account</a>

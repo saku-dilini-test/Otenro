@@ -1,14 +1,4 @@
 <section *ngFor="let contact of contacts">
-        <p class="text-center contact-text">
-          {{contact.address}}
-        </p>
-        <p class="text-center contact-text">
-          {{contact.telPhone}}<br>{{contact.email}}<br>
-        </p>
-        <p class="text-center">
-          <a href="{{contact.webSite}}" target="_blank">{{contact.webSite}}</a><br>
-        </p>
-
       <div class="col-sm-12">
         <p class="header text-center  main-header-font">
           Softlogic Max Branches
@@ -195,7 +185,7 @@
             </p>
           </div>
           <div class="col-sm-4">
-            
+
           </div>
         </div>
 
@@ -209,7 +199,7 @@
         </div>
         <div class="row text-center">
           <div class="col-sm-12">
-            <a *ngIf="contact.facebook" href="{{ contact.facebook }}" target="_blank" ><span class="ion ion-social-facebook icon-md icon-spacing-right"></span></a> 
+            <a *ngIf="contact.facebook" href="{{ contact.facebook }}" target="_blank" ><span class="ion ion-social-facebook icon-md icon-spacing-right"></span></a>
             <a *ngIf="contact.linkedin" href="{{ contact.linkedin }}" target="_blank" ><span class="ion ion-social-linkedin icon-md icon-spacing-right"></span></a>
             <a *ngIf="contact.twitter" href="{{ contact.twitter }}" target="_blank" ><span class="ion ion-social-twitter icon-md icon-spacing-right"></span></a>
             <a *ngIf="contact.instagram" href="{{ contact.instagram }}" target="_blank" ><span class="ion ion-social-instagram icon-md icon-spacing-right"></span></a>
