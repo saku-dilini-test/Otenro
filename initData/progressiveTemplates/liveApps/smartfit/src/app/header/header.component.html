@@ -69,8 +69,11 @@
 				                  <a   (click)="logout()">Log Out</a>
 				                </li>
 				                <li *ngIf="!loginStatus">
-				                  <a  (click)="navigate('login/home')">Sign In</a>
+				                  <a  (click)="navigate('login/home')">Log In</a>
 				                </li>
+                        <li *ngIf="!loginStatus">
+                          <a  (click)="goToRegister()">Registration</a>
+                        </li>
 				                <li  *ngIf="loginStatus">
 									<a (click)="navigate('order-history','Order History')">Order History</a>
 								</li>
