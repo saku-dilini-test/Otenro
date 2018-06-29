@@ -13,12 +13,12 @@ echo  'start....'
 #APPFILESERVER='/home/otenro/OtenroTest/appFileServer/';
 
 #prod
-#MESERVER='/home/milhan/public_html/developer/meServer/temp/';
-#NODE='/home/milhan/public_html/developer/meServer/node_modules/';
-#APPFILESERVER='/home/milhan/public_html/developer/appFileServer/';
+MESERVER='/home/admin/web/developer.appmaker.lk/public_html/developer/meServer/temp/';
+NODE='/home/admin/web/developer.appmaker.lk/public_html/developer/meServer/node_modules/';
+APPFILESERVER='/home/admin/web/developer.appmaker.lk/public_html/developer/appFileServer/';
 
-ENV='dev'   #this is for development
-#ENV='pro'  #this is for production
+#ENV='dev'   #this is for development
+ENV='pro'  #this is for production
 #ENV='stag'  #this is for staging
 DB=''
 
