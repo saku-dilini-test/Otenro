@@ -400,7 +400,7 @@ module.exports = {
               var path2 = path.resolve();
               console.log(path2);
 
-              fs.readFile("/home/dilakshan/Desktop/Otenro/source/api/services/provinces.json", 'utf8', function (err, data) {
+              fs.readFile("../../../services/provinces.json", 'utf8', function (err, data) {
                   if (err){
                     console.log(err)
                   }
@@ -415,7 +415,7 @@ module.exports = {
               var path2 = path.resolve();
               console.log(path2);
 
-              fs.readFile("/home/dilakshan/Desktop/Otenro/source/api/services/productType.json", 'utf8', function (err, data) {
+              fs.readFile("../../../services/productType.json", 'utf8', function (err, data) {
                   if (err){
                     console.log(err)
                   }
@@ -431,7 +431,7 @@ module.exports = {
               var path2 = path.resolve();
               console.log(path2);
 
-              fs.readFile("/home/dilakshan/Desktop/Otenro/source/api/services/smartFitShippingRules.json", 'utf8', function (err, data) {
+              fs.readFile("../../../services/smartFitShippingRules.json", 'utf8', function (err, data) {
                   if (err){
                     console.log(err)
                   }
