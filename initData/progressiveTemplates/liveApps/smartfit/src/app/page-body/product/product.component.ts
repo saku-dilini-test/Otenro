@@ -141,21 +141,21 @@ export class ProductComponent implements OnInit {
           gallery_autoplay:true,
         });
 
-          for(let i=this.Data.tempImageArray.length-1;i>=0;i--){
-             if(this.Data.tempImageArray[i].videoUrl){
-                 this.video(this.Data.tempImageArray[i].videoUrl);
-                 $('#videoModal').modal('show');
-                 var x = this;
-                 $('#videoModal').on('hidden.bs.modal', function (e) {
-                      x.player.destroy().then(function() {
-                            // the player was destroyed
-                      }).catch(function(error) {
-                            // an error occurred
-                      });
-                 })
-                 break;
-             }
-         }
+         //  for(let i=this.Data.tempImageArray.length-1;i>=0;i--){
+         //     if(this.Data.tempImageArray[i].videoUrl){
+         //         this.video(this.Data.tempImageArray[i].videoUrl);
+         //         $('#videoModal').modal('show');
+         //         var x = this;
+         //         $('#videoModal').on('hidden.bs.modal', function (e) {
+         //              x.player.destroy().then(function() {
+         //                    // the player was destroyed
+         //              }).catch(function(error) {
+         //                    // an error occurred
+         //              });
+         //         })
+         //         break;
+         //     }
+         // }
 
     }
 
