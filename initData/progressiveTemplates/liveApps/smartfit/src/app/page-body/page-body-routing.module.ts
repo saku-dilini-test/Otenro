@@ -18,6 +18,7 @@ import { RegisterComponent } from './register/register.component'
 import { OrderHistoryComponent } from './order-history/order-history.component'
 import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.component'
 import { AppUserComponent } from './app-user/app-user.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 const routes: Routes = [
  { path: '',
@@ -88,7 +89,7 @@ const routes: Routes = [
     path: 'checkout/:type',
     component: CheckoutComponent,
     data:{title:'Checkout Page'}
-  },  
+  },
   {
     path: 'warranty',
     component: WarrantyComponent,
@@ -117,7 +118,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class PageBodyRoutingModule { }
