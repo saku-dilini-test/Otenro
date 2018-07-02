@@ -25,7 +25,7 @@ module.exports = {
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  port: 1338,
+  port: 1339,
 
   // ssl: {
   //   ca: require('fs').readFileSync(__dirname + '/ssl/ca_bundle.crt'),
@@ -43,7 +43,7 @@ module.exports = {
   
   /** ****** Custom Config ****** **/
   // HOST URL 
-  HOST_URL : 'http://173.82.219.199:1338',
+  HOST_URL : 'http://173.82.219.199:1339',
   // ME SERVER Config
   ME_SERVER_URL : 'http://cdn.appmaker.lk/meServer/temp/',
   ME_SERVER : '/home/admin/web/developer.appmaker.lk/public_html/developer/meServer/temp/',
@@ -53,7 +53,7 @@ module.exports = {
   CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789',
   TEMPLATES_PATH : '/home/projects/appmaker/Otenro/initData/templates/',
   PROGRESSIVE_TEMPLATES_PATH : '/home/projects/appmaker/Otenro/initData/progressiveTemplates/',
-  REDIRECT_URL : 'http://173.82.219.199:1338',
+  REDIRECT_URL : 'http://173.82.219.199:1339',
   /**
    * change isBeta to 0 after beta period
    **/
