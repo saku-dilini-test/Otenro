@@ -43,7 +43,7 @@ module.exports = {
   
   /** ****** Custom Config ****** **/
   // HOST URL 
-  HOST_URL : 'http://developer.appmaker.lk',
+  HOST_URL : 'http://173.82.219.199:1338',
   // ME SERVER Config
   ME_SERVER_URL : 'http://cdn.appmaker.lk/meServer/temp/',
   ME_SERVER : '/home/admin/web/developer.appmaker.lk/public_html/developer/meServer/temp/',
@@ -53,7 +53,7 @@ module.exports = {
   CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789',
   TEMPLATES_PATH : '/home/projects/appmaker/Otenro/initData/templates/',
   PROGRESSIVE_TEMPLATES_PATH : '/home/projects/appmaker/Otenro/initData/progressiveTemplates/',
-  REDIRECT_URL : 'http://developer.appmaker.lk',
+  REDIRECT_URL : 'http://173.82.219.199:1338',
   /**
    * change isBeta to 0 after beta period
    **/
