@@ -23,6 +23,7 @@
         })
         .constant('ME_APP_SERVER',O_MESERVER_URL)
         .constant('ME_SERVER',O_ME_SERVER)
+        .constant('LIVE_APPS',O_LIVE_APPS)
         .config(function($urlRouterProvider,$httpProvider, $authProvider, SERVER_URL,uiGmapGoogleMapApiProvider,$logProvider) {
 
             $logProvider.debugEnabled(false);

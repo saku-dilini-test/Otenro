@@ -3,17 +3,18 @@
  */
 (function(){
     angular.module('appEdit').controller('AppEditAreaCtrl',[
-        '$scope', '$stateParams', '$rootScope', '$auth', 'appEditResource', 'userProfileService', 'ME_APP_SERVER',
+        '$scope','LIVE_APPS', '$stateParams', '$rootScope', '$auth', 'appEditResource', 'userProfileService', 'ME_APP_SERVER',
         'toastr','mySharedService','$interval','dashboardService','$mdDialog','$cookieStore','currencyService',
         'templateService','SERVER_URL','$log','$state','$http',
         AppEditAreaCtrl]);
 
-    function AppEditAreaCtrl($scope,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,
+    function AppEditAreaCtrl($scope,LIVE_APPS,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,
                              toastr,mySharedService,$interval,dashboardService,$mdDialog,$cookieStore,currencyService,
                              templateService,SERVER_URL,$log,$state,$http){
 
         $rootScope.bodyClass = 'appEdit';
         $scope.contentUrl = true;
+        $rootScope.liveApps = false;
         var encParam = $stateParams.p;
         var decParamAppId = atob(encParam);
         var templateCheck = $stateParams.isNew;
@@ -26,6 +27,7 @@
             }
         }
 
+
         $scope.tempIsNew = $stateParams.isNew;
         $scope.appId = decParamAppId; //$stateParams.appId;
         $rootScope.appId = decParamAppId; //$stateParams.appId;
@@ -33,6 +35,12 @@
         $scope.userId = $auth.getPayload().id;
         $rootScope.userId = $auth.getPayload().id;
         $scope.isArticleApp = false;
+
+        LIVE_APPS.forEach(function(ele){
+            if(ele == $rootScope.appId){
+                $rootScope.liveApps = true;
+            }
+        });
 
         //$scope.changeTemplate = $rootScope.changeTemplate;
         var changeTemp = JSON.parse(localStorage.getItem('changeTemplate'));

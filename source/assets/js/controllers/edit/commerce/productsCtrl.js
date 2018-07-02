@@ -21,6 +21,7 @@
         $scope.myVariants = [];
         $scope.tmpSku = [];
         $scope.originalSku = [];
+        $scope.liveApps = $rootScope.liveApps;
         var selectedSku = $scope.product.selectedSku;
 
         $scope.selectedSku = [];
@@ -119,10 +120,20 @@
             $scope.isNewProduct = initialData.isNewItem;
 
         }else if($scope.product.sku){
+            if($scope.liveApps == true){
+                if(!$scope.product.mainType){
+                    $scope.product.mainType = "Main";
+                }
+            }
             $scope.isNewProduct = false;
             $scope.skuFieldEnable = true;
             $scope.initSkuLength = initialData.product.variants.length;
         }
+
+        commerceService.getProdTypeData().success(function (res) {
+                console.log(JSON.parse(res));
+               $scope.types = JSON.parse(res).data;
+        });
 
         $scope.initSku = function(index){
             if(index<$scope.initSkuLength || index == 0){
