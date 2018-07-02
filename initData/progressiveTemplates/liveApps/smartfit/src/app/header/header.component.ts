@@ -27,10 +27,10 @@ export class HeaderComponent implements OnInit {
   private categories:any
   private catName: any;
   private imageUrl:any;
-  user;
+  user;localCart;
   constructor(private location: Location,private localStorageService: LocalStorageService,private categoryService: CategoriesService, private router: Router, private dataService: PagebodyServiceModule, private titleServ: TitleService) {
-    this.cartNo = this.dataService.cart.cartItems.length;
-    this.title = 'Home';
+
+        this.title = 'Home';
     this.dummy = new Date().getTime();
 
     this.categoryService.getCategories().subscribe(data => {
@@ -42,6 +42,17 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.user = (this.localStorageService.get('appLocalStorageUser' + this.appId));
+    this.localCart = this.localStorageService.get("cart"+this.user.registeredUser);
+
+    if (this.user) {
+      if(this.localCart){
+        this.cartNo = (this.localCart).cartSize;
+      }else{
+        this.cartNo = this.dataService.cart.cartSize;
+      }
+    }else{
+      this.cartNo = this.dataService.cart.cartSize;
+    }
 
    this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=";
@@ -61,8 +72,15 @@ export class HeaderComponent implements OnInit {
 
   ngAfterContentChecked() {
     if (this.user) {
-      this.cartNo = !(this.localStorageService.get("cart"+this.user.registeredUser)) ? this.dataService.cart.cartItems: (this.localStorageService.get("cart"+this.user.registeredUser).cartSize);
+      if(this.localCart){
+        this.cartNo = (this.localCart).cartSize;
+      }else{
+        this.cartNo = this.dataService.cart.cartSize;
+      }
+    }else{
+      this.cartNo = this.dataService.cart.cartSize;
     }
+
     if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
       this.loginStatus = true;
     } else {
@@ -76,6 +94,7 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem(this.appId + ":dataServiceData");
     this.dataService.isUserLoggedIn.check = false;
     this.dataService.cart.cartItems = [];
+    this.dataService.cart.cartSize = 0;
     this.router.navigate(['home']);
   }
 
