@@ -42,7 +42,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.user = (this.localStorageService.get('appLocalStorageUser' + this.appId));
-    this.localCart = this.localStorageService.get("cart"+this.user.registeredUser);
+    if(this.user){
+      this.localCart = this.localStorageService.get("cart"+this.user.registeredUser);
+    }
 
     if (this.user) {
       if(this.localCart){
