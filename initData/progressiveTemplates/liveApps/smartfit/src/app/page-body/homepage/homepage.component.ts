@@ -20,7 +20,7 @@ export class HomepageComponent implements OnInit {
   private catName;
   private categories:any
   constructor(private localStorageService: LocalStorageService, private route: Router, private dataService: PagebodyServiceModule,
-   private router: Router, private categoryService: CategoriesService, private title: TitleService,private appdataService: AppDataService) {
+   private categoryService: CategoriesService, private title: TitleService,private appdataService: AppDataService) {
 
 
     this.categoryService.getCategories().subscribe(data => {
@@ -32,7 +32,6 @@ export class HomepageComponent implements OnInit {
     this.title.changeTitle("Home");
 
   }
-
 
 
   ngOnInit() {

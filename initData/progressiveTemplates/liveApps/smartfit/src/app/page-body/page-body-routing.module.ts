@@ -19,6 +19,8 @@ import { OrderHistoryComponent } from './order-history/order-history.component'
 import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.component'
 import { AppUserComponent } from './app-user/app-user.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { BlogsComponent } from './blogs/blogs.component';
+import { BlogViewComponent } from './blog-view/blog-view.component';
 
 const routes: Routes = [
  { path: '',
@@ -74,6 +76,16 @@ const routes: Routes = [
     path: 'order-history',
     component: OrderHistoryComponent,
     data:{title:'Order-History Page'}
+  },
+  {
+    path: 'blogs',
+    component: BlogsComponent,
+    data:{title:'Blog Page'}
+  },
+  {
+    path: 'blogView/:id',
+    component: BlogViewComponent,
+    data:{title:'Blog-View Page'}
   },
   {
     path: 'appUser',

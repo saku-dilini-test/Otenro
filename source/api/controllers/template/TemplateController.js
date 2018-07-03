@@ -198,20 +198,50 @@ module.exports = {
 
 
     },
-        getAllThirdByAppId : function(req,res){
-            var appId = req.param('appId');
-            var searchApp = {
-                appId: appId,
-                published : 'YES'
-            };
-            var thirdNavi = [];
-            ThirdNavigation.find().where(searchApp).exec(function(err, app) {
-                if (err) return done(err);
-                return res.send(app);
-            });
+    getAllThirdByAppId : function(req,res){
+        var appId = req.param('appId');
+        var searchApp = {
+            appId: appId,
+            published : 'YES'
+        };
+        var thirdNavi = [];
+        ThirdNavigation.find().where(searchApp).exec(function(err, app) {
+            if (err) return done(err);
+            return res.send(app);
+        });
 
 
-        },
+    },
+
+    getBlogData : function(req,res){
+        var appId = req.param('appId');
+        var searchApp = {
+            appId: appId,
+        };
+        Blogs.find().where(searchApp).exec(function(err, app) {
+            if (err) return done(err);
+            return res.send(app);
+        });
+
+
+    },
+    getBlogDataById : function(req,res){
+
+        var id = req.param('id');
+        var searchQuery = {
+            id : id
+        };
+
+
+        Blogs.find(searchQuery).exec(function(err,result) {
+            if (err) {
+                sails.log.error("Blog Collection find Error for given Object Id : " + id);
+                return done(err);
+            }
+
+            res.send(result);
+        });
+    },
 
     getSecondByThirdId: function(req,res){
             var Id = req.param('id');

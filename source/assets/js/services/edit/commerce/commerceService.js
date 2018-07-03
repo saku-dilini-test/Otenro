@@ -457,7 +457,64 @@
             },
              getProdTypeData: function(){
                  return $http.get(SERVER_URL + "get/getMainProdTypes");
-             }
+             },
+
+             showPreviewBlogDialog: function(data) {
+                 return $mdDialog.show({
+                     controller: 'BlogCtrl',
+                     templateUrl: 'user/edit/commerce/previewBlogs.html',
+                     clickOutsideToClose: true,
+                     locals : {
+                         initialData : data
+                     }
+                 });
+             },
+            showPublishBlogDialog: function(data) {
+                return $mdDialog.show({
+                    controller: 'BlogCtrl',
+                    templateUrl: 'user/edit/commerce/publishBlogs.html',
+                    clickOutsideToClose: true,
+                    locals : {
+                        initialData : data
+                    }
+                });
+            },
+            getBlogsList: function(){
+                return $http.get(SERVER_URL+ 'edit/getBlogs?appId='+$rootScope.appId);
+            },
+
+            publishBlog: function(file,id,title,desc,appId,isNewBlog,isImageUpdate){
+                var UploadFile = '';
+                if(isImageUpdate == true){
+                var dataURItoBlob = function(dataURI) {
+                    var binary = atob(dataURI.split(',')[1]);
+                    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+                    var array = [];
+                    for(var i = 0; i < binary.length; i++) {
+                        array.push(binary.charCodeAt(i));
+                    }
+                    return new Blob([new Uint8Array(array)], {type: mimeString});
+                };
+                var blob = dataURItoBlob(file);
+                UploadFile = new File([blob], 'imageFileName.png');
+                }
+
+                return Upload.upload({
+                    url: SERVER_URL + 'edit/publishBlog',
+                    fields: {
+                        'id' : id,
+                        'title' : title,
+                        'desc' : desc,
+                        'appId' : appId,
+                        'isNewBlog' : isNewBlog,
+                        'isImageUpdate' : isImageUpdate
+                    },
+                    file: UploadFile
+                });
+            },
+            deleteBlog: function(data){
+                return $http.post(SERVER_URL+ 'edit/deleteBlog',data);
+            },
 
         };
     }

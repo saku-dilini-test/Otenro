@@ -7,7 +7,8 @@ import { fadeInAnimation } from '../animations/fade-in.animation';
 import { TitleService } from "../services/title.service";
 import { CategoriesService } from '../services/categories/categories.service'
 import { SERVER_URL } from '../constantsService';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
+import { ProductsService } from '../services/products/products.service';
 
 @Component({
   selector: 'app-header',
@@ -24,40 +25,53 @@ export class HeaderComponent implements OnInit {
   public title: string;
   public loginStatus;
   private dummy: any;
-  private categories:any
+  private categories: any
   private catName: any;
-  private imageUrl:any;
-  user;localCart;
-  constructor(private location: Location,private localStorageService: LocalStorageService,private categoryService: CategoriesService, private router: Router, private dataService: PagebodyServiceModule, private titleServ: TitleService) {
+  private imageUrl: any;
+  user; localCart; blogData;
+  private enableBlog = false;
 
-        this.title = 'Home';
+  constructor(private location: Location, private localStorageService: LocalStorageService,
+    private categoryService: CategoriesService, private router: Router,
+    private dataService: PagebodyServiceModule, private titleServ: TitleService,
+    private productsService: ProductsService) {
+
+    this.title = 'Home';
     this.dummy = new Date().getTime();
 
     this.categoryService.getCategories().subscribe(data => {
-        this.categories =data;
-      }, err => {
-        console.log(err);
-      });
+      this.categories = data;
+    }, err => {
+      console.log(err);
+    });
   }
 
   ngOnInit() {
     this.user = (this.localStorageService.get('appLocalStorageUser' + this.appId));
-    if(this.user){
-      this.localCart = this.localStorageService.get("cart"+this.user.registeredUser);
+    if (this.user) {
+      this.localCart = this.localStorageService.get("cart" + this.user.registeredUser);
     }
 
     if (this.user) {
-      if(this.localCart){
+      if (this.localCart) {
         this.cartNo = (this.localCart).cartSize;
-      }else{
+      } else {
         this.cartNo = this.dataService.cart.cartSize;
       }
-    }else{
+    } else {
       this.cartNo = this.dataService.cart.cartSize;
     }
 
-   this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
-        + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=";
+    this.productsService.getBlogs().subscribe(res => {
+
+      this.blogData = res;
+      if (this.blogData.length > 0) {
+        this.enableBlog = true;
+      }
+    });
+
+    this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
+      + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=";
 
     this.titleServ.currentTitle.subscribe(message => this.title = message);
 
@@ -74,12 +88,12 @@ export class HeaderComponent implements OnInit {
 
   ngAfterContentChecked() {
     if (this.user) {
-      if(this.localCart){
+      if (this.localCart) {
         this.cartNo = (this.localCart).cartSize;
-      }else{
+      } else {
         this.cartNo = this.dataService.cart.cartSize;
       }
-    }else{
+    } else {
       this.cartNo = this.dataService.cart.cartSize;
     }
 
@@ -108,12 +122,12 @@ export class HeaderComponent implements OnInit {
   goBack() {
     this.location.back();
   }
-   openNav() {
-      document.getElementById("mySidenav").style.width = "100%";
+  openNav() {
+    document.getElementById("mySidenav").style.width = "100%";
   }
 
   closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("mySidenav").style.width = "0";
   }
 
   manualToggle() {
@@ -123,10 +137,10 @@ export class HeaderComponent implements OnInit {
     $('.mobileTitle').removeClass('hidden');
   }
 
- navigateProd(val: String, item: any, catName: String) {
+  navigateProd(val: String, item: any, catName: String) {
     this.catName = catName;
     this.dataService.data = item;
-    localStorage.setItem(this.appId+":dataServiceData",JSON.stringify(this.dataService.data))
+    localStorage.setItem(this.appId + ":dataServiceData", JSON.stringify(this.dataService.data))
     this.router.navigate([val, this.catName]);
   }
 

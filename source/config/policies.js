@@ -69,6 +69,9 @@ module.exports.policies = {
     getProvinces : true,
     getShippingRules : true
   },
+  'edit/commerce/BlogsController': {
+    '*': ['jwtAuth'],
+  },
   'edit/publish/publishDetailController':{
    '*': ['jwtAuth']
   },

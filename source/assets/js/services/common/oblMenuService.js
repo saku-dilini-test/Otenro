@@ -54,6 +54,19 @@
                             return categoryMaintenanceService.showCategoryMaintenanceDialog(ctrlFun);
                         }
 
+
+
+
+                        if(ctrlFun == 'publishBlog'){
+                            return commerceService.showPublishBlogDialog(ctrlFun);
+                        }
+                        if(ctrlFun == 'previewBlog'){
+                            return commerceService.showPreviewBlogDialog(ctrlFun);
+                        }
+
+
+
+
                         if (ctrlFun == 'showOrderDialog') {
                             return commerceService.showOrderDialog();
                         }

@@ -28,4 +28,12 @@ export class ProductsService {
     return this.http.get(SERVER_URL+'/templates/getCategoryByProdId?id='+id)
       .map(res => res.text() ? res.json() : null);
   }
+  getBlogs() {
+    return this.http.get(SERVER_URL+'/templates/getBlogData?appId=' + this.appId)
+                    .map(res => res.text() ? res.json() : null);
+  }
+  getBlogsById(id) {
+    return this.http.get(SERVER_URL+'/templates/getBlogDataById?id=' + id)
+                    .map(res => res.text() ? res.json() : null);
+  }
 }

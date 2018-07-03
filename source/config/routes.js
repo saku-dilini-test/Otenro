@@ -220,6 +220,9 @@ module.exports.routes = {
     'GET /edit/getLanguage': 'edit/publish/publishDetailController.getLanguage',
     'GET /edit/getAllPrimaryCategories': 'edit/publish/publishDetailController.getAllPrimaryCategories',
     'GET /edit/getAllSecondaryCategories': 'edit/publish/publishDetailController.getAllSecondaryCategories',
+    'GET /edit/getBlogs': 'edit/commerce/blogsController.getBlogs',
+    'POST /edit/publishBlog': 'edit/commerce/blogsController.publishBlog',
+    'POST /edit/deleteBlog': 'edit/commerce/blogsController.deleteBlog',
 
     /**
      * Edit / Article Data
@@ -306,6 +309,8 @@ module.exports.routes = {
 
     'GET /templates/getProductsByCatId': 'template/TemplateController.getThirdBySecondId',
     'GET /templates/getProductsByAppId': 'template/TemplateController.getAllThirdByAppId',
+    'GET /templates/getBlogData': 'template/TemplateController.getBlogData',
+    'GET /templates/getBlogDataById': 'template/TemplateController.getBlogDataById',
     'GET /templates/getCategoryByProdId': 'template/TemplateController.getSecondByThirdId',
     'GET /templates/getSliderData': 'template/TemplateController.getSliderData',
 
