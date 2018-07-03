@@ -75,16 +75,8 @@
 
             <fieldset style="clear:both">
                 <label>Description</label>
-                <div class="custom-trix">
-                    <!--<trix-editor class="textEditor input-shadow-border"-->
-                                 <!--name="editorText"-->
-                                 <!--ng-maxlength="1000"-->
-                                 <!--angular-trix ng-model="article.desc"-->
-                                 <!--required></trix-editor>-->
-                    <text-angular name="editorText"
-                                  ng-maxlength="1000"
-                                  ng-model="blog.desc" required></text-angular>
-
+                <div >
+                    <text-angular  rows="4"  name="editorText" ng-maxlength="1000" class="input-shadow-border" ng-model="blog.desc" required></text-angular>
                 </div>
 
             </fieldset>
