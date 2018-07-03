@@ -13,15 +13,15 @@ import { SliderService } from '../../services/slider/slider.service';
   styleUrls: ['./app/addons/categories/categories.component.css'],
 })
 export class CategoriesComponent implements OnInit {
-  private prevCategories:any = [];
-  private prevProducts:any = [];
+  private prevCategories: any = [];
+  private prevProducts: any = [];
   private imageUrl: any;
   private imageUrl1: any;
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
   private catName: any;
-  private products:any = [];
-  private currentViewName:string;
+  private products: any = [];
+  private currentViewName: string;
   private currency: string;
   private sliderData: any;
   private isSliderDataAvailable: boolean = false;
@@ -29,7 +29,7 @@ export class CategoriesComponent implements OnInit {
   private currentCategory;
   private header;
   private content;
-  constructor(private router: Router, private dataService: PagebodyServiceModule,private productService: ProductsService, private currencyService: CurrencyService,private appdataService: AppDataService,
+  constructor(private router: Router, private dataService: PagebodyServiceModule, private productService: ProductsService, private currencyService: CurrencyService, private appdataService: AppDataService,
     private sliderService: SliderService) {
     this.currentViewName = 'Home';
 
@@ -53,47 +53,50 @@ export class CategoriesComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.imageUrlSlider = SERVER_URL + "/templates/viewWebImages?userId="
+    this.imageUrlSlider = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=slider";
     this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
-        + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
+      + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
     this.imageUrl1 = SERVER_URL + "/templates/viewWebImages?userId="
-        + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=thirdNavi";
+      + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=thirdNavi";
 
 
     this.currencyService.getCurrencies().subscribe(data => {
-        this.currency = data.sign;
+      this.currency = data.sign;
     }, error => {
-        console.log('Error retrieving currency');
+      console.log('Error retrieving currency');
     });
 
     this.appdataService.getAboutUs()
       .subscribe((data: any) => {
         this.header = data.header;
         this.content = data.content;
-    }, (err) => {
-      console.log(err);
-    });
+      }, (err) => {
+        console.log(err);
+      });
 
 
 
   }
 
-      ngAfterViewChecked() {
-        $('.carousel').carousel({
-              interval: 3000
-        });
-        // $('.right.carousel-control').trigger('click');
-    }
+  ngAfterContentChecked() {
+    $('.carousel').carousel('cycle');
+    $('.carousel').carousel({
+      interval: 3000
+    });
+    // $('.right.carousel-control').trigger('click');
+  }
+  ngOnDestroy() {
+    $('.carousel').carousel('pause');
+  }
+
+  @Input('categories') categories: CategoriesModel;
 
 
-  @Input('categories') categories:CategoriesModel;
-
-
-  goToNextSubCategory(nextNode, currentNode, nextProducts, currentCategory){
+  goToNextSubCategory(nextNode, currentNode, nextProducts, currentCategory) {
     this.prevCategories.push({
-      cat:currentNode,
-      catName:this.currentViewName,
+      cat: currentNode,
+      catName: this.currentViewName,
       currentCategory: currentCategory
     });
     this.currentCategory = currentCategory;
@@ -101,24 +104,24 @@ export class CategoriesComponent implements OnInit {
     this.categories = nextNode;
     this.prevProducts.push(this.products[0]);
     this.products[0] = nextProducts;
-     window.scrollTo(0, 0)
+    window.scrollTo(0, 0)
   }
 
 
-  goToPreviousCategory(index){
+  goToPreviousCategory(index) {
     this.categories = this.prevCategories[index].cat;
-    if(index != 0){
+    if (index != 0) {
       this.currentViewName = this.prevCategories[index].catName;
-      this.currentCategory = this.prevCategories[index-1].currentCategory;
+      this.currentCategory = this.prevCategories[index - 1].currentCategory;
 
-    }else{
+    } else {
       this.currentViewName = 'Home';
     }
     this.prevCategories.splice(index);
     this.products[0] = this.prevProducts[index];
 
     this.prevProducts.splice(index);
-     window.scrollTo(0, 0)
+    window.scrollTo(0, 0)
   }
 
 
@@ -157,21 +160,21 @@ export class CategoriesComponent implements OnInit {
 
 
   owlOptions = {
-    loop:false,
-    margin:15,
+    loop: false,
+    margin: 15,
     stagePadding: 50,
-    nav:true,
-    dots:true,
-    responsiveClass:true,
-    responsive:{
-      0:{
-        items:1
+    nav: true,
+    dots: true,
+    responsiveClass: true,
+    responsive: {
+      0: {
+        items: 1
       },
-      600:{
-        items:2
+      600: {
+        items: 2
       },
-      1000:{
-        items:3
+      1000: {
+        items: 3
       }
     }
   }
@@ -179,23 +182,23 @@ export class CategoriesComponent implements OnInit {
   navigateProd(val: String, item: any, catName: String) {
     this.catName = catName;
     this.dataService.data = item;
-    localStorage.setItem(this.appId+":dataServiceData",JSON.stringify(this.dataService.data))
+    localStorage.setItem(this.appId + ":dataServiceData", JSON.stringify(this.dataService.data))
     this.router.navigate([val, this.catName]);
   }
 
-    navigateSliderProd(val, item) {
-      if (item.optionals.length == 2) {
-        this.catName = item.optionals[0].name
-        this.dataService.data = item.optionals[1];
-        localStorage.setItem(this.appId+":dataServiceData",JSON.stringify(this.dataService.data))
-        this.router.navigate([val, this.catName]);
-      }
+  navigateSliderProd(val, item) {
+    if (item.optionals.length == 2) {
+      this.catName = item.optionals[0].name
+      this.dataService.data = item.optionals[1];
+      localStorage.setItem(this.appId + ":dataServiceData", JSON.stringify(this.dataService.data))
+      this.router.navigate([val, this.catName]);
     }
+  }
 
 }
 
-export class CategoriesModel{
-  id:number;
-  title:string;
-  nodes:any[];
+export class CategoriesModel {
+  id: number;
+  title: string;
+  nodes: any[];
 }
