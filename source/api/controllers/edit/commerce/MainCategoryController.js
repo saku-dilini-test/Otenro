@@ -160,8 +160,12 @@ module.exports = {
                 // console.log("process child node :: " + childNodes[i]);
                 // var childNodeArray = $filter('filter')(list, {"id": childNodes[i]});
                 var childNodeArray = list.filter(list =>  list.id == childNodes[i]);
-                var childNode = childNodeArray[0];//Will contains only one item
-                childNode.childNodes = [];
+                childNode = childNodeArray[0];//Will contains only one item
+                // console.log(childNode);
+                if(!childNode){
+                    childNode = [];
+                }
+                childNode.childNodes = [ ];
                 // console.log("childNode=>" + JSON.stringify(childNode, null, 2));
                 parentNode.childNodes.push(mainCatCtrl.attachChildCategoriesByParentNode(childNode, list));
                 // console.log("end push");
