@@ -112,7 +112,7 @@
                     'showMap': webInfo.showMap,
                     'coords': $scope.map.markers[0].coords
                 };
-                console.log(basicInfoResponse);
+
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {
                         toastr.success('Contact us updated successfully ', 'Success!', {closeButton: true});
