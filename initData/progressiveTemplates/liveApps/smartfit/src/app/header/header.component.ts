@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
   private categories: any
   private catName: any;
   private imageUrl: any;
-  user; localCart; blogData;
+  user; localCart; blogData;userUkn;
   private enableBlog = false;
 
   constructor(private location: Location, private localStorageService: LocalStorageService,
@@ -48,19 +48,19 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.user = (this.localStorageService.get('appLocalStorageUser' + this.appId));
-    if (this.user) {
-      this.localCart = this.localStorageService.get("cart" + this.user.registeredUser);
-    }
+    this.userUkn = (this.localStorageService.get('cartUnknownUser'));
 
     if (this.user) {
-      if (this.localCart) {
-        this.cartNo = (this.localCart).cartSize;
-      } else {
-        this.cartNo = this.dataService.cart.cartSize;
+      this.localCart = this.localStorageService.get("cart" + this.user.registeredUser);
+      if(this.localCart){
+        this.dataService.cart = this.localCart;
       }
-    } else {
-      this.cartNo = this.dataService.cart.cartSize;
+    }else if(this.userUkn){
+      this.dataService.cart = this.userUkn;
     }
+
+        this.cartNo = this.dataService.cart.cartSize;
+
 
     this.productsService.getBlogs().subscribe(res => {
 
@@ -87,15 +87,15 @@ export class HeaderComponent implements OnInit {
   }
 
   ngAfterContentChecked() {
+
     if (this.user) {
-      if (this.localCart) {
-        this.cartNo = (this.localCart).cartSize;
-      } else {
-        this.cartNo = this.dataService.cart.cartSize;
-      }
-    } else {
-      this.cartNo = this.dataService.cart.cartSize;
+      this.localCart = this.localStorageService.get("cart" + this.user.registeredUser);
+    }else{
+      this.localCart = null;
     }
+
+      this.cartNo = this.dataService.cart.cartSize;
+
 
     if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
       this.loginStatus = true;
@@ -106,11 +106,13 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
+
     this.localStorageService.remove('appLocalStorageUser' + this.appId);
     localStorage.removeItem(this.appId + ":dataServiceData");
     this.dataService.isUserLoggedIn.check = false;
     this.dataService.cart.cartItems = [];
     this.dataService.cart.cartSize = 0;
+    this.cartNo = 0;
     this.router.navigate(['home']);
   }
 

@@ -96,6 +96,15 @@ export class PaypalPaymentComponent implements AfterViewChecked {
                 this.dataService.cart.totalQuantity = 0;
                 this.dataService.payPalDetails = {};
 
+                let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+
+                if (appUser) {
+                  if (this.localStorageService.get("cart" + appUser.registeredUser)) {
+                    this.localStorageService.remove("cart" + appUser.registeredUser);
+                  }
+                }else{
+                  this.localStorageService.remove("cartUnknownUser");
+                }
                 //Pushing into order purchase history
                 // if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
                 //   this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
