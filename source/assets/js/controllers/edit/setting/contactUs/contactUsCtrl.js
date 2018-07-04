@@ -93,45 +93,26 @@
         $scope.addContactUs = function(basicInfo,webInfo,googleMap,tab) {
 
             // If defined basic information address , Check length
-            if((typeof basicInfo.address != 'undefined') && (basicInfo.address.length > $scope.maxBasicInfoAddress)){
-                toastr.error('Address should be less than '+$scope.maxBasicInfoAddress+' letters.',
-                    'Warning',{closeButton: true}
-                );
-                return;
-            }
 
-            if(typeof basicInfo.address == 'undefined' && typeof basicInfo.telPhone == 'undefined'){
-                toastr.error('Updating of basic information failed', { closeButton: true});
-            }else if(typeof basicInfo.address == 'undefined'){
-                toastr.error('Updating of address failed', { closeButton: true});
-            }
-            else if(typeof basicInfo.telPhone == 'undefined'){
-                toastr.error('Updating of Telephone number failed', { closeButton: true});
-            }
-            else if(typeof webInfo.email == 'undefined' && typeof webInfo.webSite == 'undefined'){
-                toastr.error('Updating of Web information failed ', { closeButton: true});
-            }
-            else if(typeof webInfo.email == 'undefined'){
-                toastr.error('Updating of Email address failed', { closeButton: true});
-            }
-            else if(typeof webInfo.webSite == 'undefined'){
-                toastr.error('Updating of web address failed', { closeButton: true});
+            if(typeof webInfo.email == 'undefined'){
+                toastr.error('Please add Email Address', { closeButton: true});
             }
             else{
                 var basicInfoResponse = {
                     'appId': $rootScope.appId,
-                    'address': basicInfo.address,
-                    'telPhone': basicInfo.telPhone,
+                    'address': !(basicInfo.address) ? null: basicInfo.address,
+                    'telPhone': !(basicInfo.telPhone) ? null: basicInfo.telPhone,
                     'email': webInfo.email,
-                    'webSite': webInfo.webSite,
-                    'twitter': webInfo.twitter,
-                    'facebook': webInfo.facebook,
-                    'instagram': webInfo.instagram,
-                    'linkedin': webInfo.linkedin,
-                    'pinterest': webInfo.pinterest,
+                    'webSite': !(basicInfo.webSite) ? null: basicInfo.webSite,
+                    'twitter': !(basicInfo.twitter) ? null: basicInfo.twitter,
+                    'facebook': !(basicInfo.facebook) ? null: basicInfo.facebook,
+                    'instagram': !(basicInfo.instagram) ? null: basicInfo.instagram,
+                    'linkedin': !(basicInfo.linkedin) ? null: basicInfo.linkedin,
+                    'pinterest': !(basicInfo.pinterest) ? null: basicInfo.pinterest,
                     'showMap': webInfo.showMap,
                     'coords': $scope.map.markers[0].coords
                 };
+                console.log(basicInfoResponse);
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {
                         toastr.success('Contact us updated successfully ', 'Success!', {closeButton: true});
