@@ -94,25 +94,25 @@ export class HomepageComponent implements OnInit {
 
 
   // Routing Method
-  navigateShop(val: string, id, name) {
+  navigateShop(val: string, id, name,image) {
 
     this.isSubscribing = false;
 
 
-    if(localStorage.getItem(this.appId+"msisdn")){
-      let data = {appId:this.appId,msisdn:localStorage.getItem(this.appId+"msisdn")}
-      this.subscription.getSubscribedData(data).subscribe(data =>{
-        console.log(data);
-        this.subscriptionStatus = data.isSubscribed;
-        this.dataService.subscriptionStatus = data.isSubscribed;
-        if(this.subscriptionStatus == true){
-          this.isSubscribing = false;
-          localStorage.setItem(this.appId+"msisdn",data.msisdn)
+    if(true){
+      // let data = {appId:this.appId,msisdn:localStorage.getItem(this.appId+"msisdn")}
+      // this.subscription.getSubscribedData(data).subscribe(data =>{
+      //   console.log(data);
+      //   this.subscriptionStatus = data.isSubscribed;
+      //   this.dataService.subscriptionStatus = data.isSubscribed;
+      //   if(this.subscriptionStatus == true){
+      //     this.isSubscribing = false;
+      //     localStorage.setItem(this.appId+"msisdn",data.msisdn)
 
           this.dataService.catId = id;
-          this.router.navigate(['/' + val, id, name]);
-        }
-      });
+          this.router.navigate(['/' + val, id, name,image]);
+      //   }
+      // });
 
     }else{
       this.dataService.subUserArticleData.id = id;
