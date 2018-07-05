@@ -16,10 +16,19 @@ module.exports = {
             type: 'string'
         },
         status :{
-            type: 'string'
+            type: 'int'
         },
         date:{
             type: 'string'
+        },
+        amount:{
+            type:'double'
+        },
+        operator:{
+            type:'string'
+        },
+        appId:{
+            type:'string'
         }
 
 

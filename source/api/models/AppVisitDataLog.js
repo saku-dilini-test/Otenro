@@ -11,6 +11,9 @@ module.exports = {
         },
         viewDate : {
             type: 'string'
+        },
+        operator :{
+            type: 'string'
         }
 
     }
