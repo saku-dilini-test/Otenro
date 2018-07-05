@@ -13,7 +13,7 @@ var Passwords = require('machinepack-passwords'),
     createToken = require('../services/jwt');
 var sentMails = require('./../services/emailService');
 var ideaBizPinVerificationAPI = require('./../services/IdeaBizPINVerificationAPIService');
-
+fs = require('fs-extra');
 
 module.exports = {
 
@@ -134,12 +134,13 @@ module.exports = {
 
   register: function(req, res) {
       var findCriteria = {or: [{ email: req.body.email }, {mobile: { 'contains' : req.body.mobile.slice(-9) }}]};
-
+      var countryCode;
                   User.findOne( findCriteria, function foundUser(err, user) {
                       if (err) return res.negotiate(err);
                       if (user) return res.status(409).json({error: 'already exists'});
 
-                      var msisdn = "94" + req.body.mobile.slice(-9);
+                      countryCode = req.body.countryCode.substring(1, req.body.countryCode.length);
+                      var msisdn = countryCode + req.body.mobile;
 
                       ideaBizPinVerificationAPI.verificationRequest(msisdn,function(response,err){
                           if(err){
@@ -168,9 +169,11 @@ module.exports = {
                               password  : req.body.password,
                               yourselfReason : req.body.yourselfReason,
                               lastLoginTime : new Date(),
-                              mobile: req.body.mobile,
+                              mobile: req.body.countryCode + req.body.mobile,
+                              country: req.body.country,
                               beneficiaryName: req.body.beneficiaryName,
                               bankCode: req.body.bankCode,
+                              swiftCode: req.body.swiftCode,
                               branchCode: req.body.branchCode,
                               branchName: req.body.branchName,
                               accountNumber: req.body.accountNumber,
@@ -555,5 +558,12 @@ module.exports = {
                 }
             });
     },
+    getCountries: function(req,res){
+       fs.readFile(sails.config.appPath+'/api/services/country.json', function(err, data) {
+           if (err)  res.send(err);
+            var ports = JSON.parse(data);
+           res.send(ports);
+       });
+    }
 
 };

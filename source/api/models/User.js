@@ -85,10 +85,16 @@ module.exports = {
     mobile: {
         type: 'string'
     },
+    country:{
+        type: 'string'
+    },
     beneficiaryName: {
         type: 'string'
     },
     bankCode: {
+        type: 'string'
+    },
+    swiftCode:{
         type: 'string'
     },
     branchCode: {

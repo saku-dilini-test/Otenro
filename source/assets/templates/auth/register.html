@@ -93,15 +93,34 @@ chosen link or button. -->
           Enter a proper email
         </span>
       </fieldset>
+      <!--country-->
+      <fieldset>
+        <label>Country</label>
+        <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
+        <!--<input type="text" name="country" ng-pattern="/^[a-zA-Z_ ]*$/" required ng-model="pickup.country" />-->
+        <md-select placeholder="Select Country"  aria-label="Country Name" class="" ng-model="user.country" ng-change = "getCountryCode(user.country)" required>
+          <md-option ng-value="oneCountry.countryName" ng-repeat="oneCountry in countryList | orderBy:'countryName'">{{oneCountry.countryName}}</md-option>
+        </md-select>
+        <br />
+      </fieldset>
       <!--mobile number field-->
       <fieldset>
         <label> Contact Number </label>
-        <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
-        <input class="input-shadow-border" name="mobile" type="text" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,6}$/im"
-               style="float:left;" ng-model="user.mobile" ng-enter ="authSignUp(user);" required/>
-        <span class="error help-block" ng-show="register.mobile.$error.required">
+        <div class="row">
+          <div class="col-sm-2">
+            <input class="input-shadow-border" style="width:50px" name="countryCode" type="text" ng-model="user.countryCode" readonly>
+          </div>
+          <div class="col-sm-6">
+            <input class="input-shadow-border" ng-disabled = "!user.country" name="mobile" type="text" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,6}$/im"
+                   style="float:left;margin-left:-20px" ng-model="user.mobile" ng-enter ="authSignUp(user);" maxlength="{{phoneNoLength}}" required/>
+            <span class="error help-block" ng-show="register.mobile.$error.required">
           *
         </span>
+          </div>
+        </div>
+
+        <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
+
         <span class="error help-block" ng-show="register.mobile.$dirty && register.mobile.$invalid">
           Enter a valid mobile number
         </span>
@@ -151,7 +170,7 @@ chosen link or button. -->
       <fieldset>
         <label> Bank Code </label>
         <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
-        <input class="input-shadow-border" name="bankCode" type="text" ng-pattern="^[1-9]\d*$"
+        <input class="input-shadow-border" name="bankCode" type="text" ng-pattern="/^[1-9]\d*$/"
                style="float:left;" ng-model="user.bankCode" ng-enter ="authSignUp(user);" required/>
         <span class="error help-block" ng-show="register.bankCode.$error.required">
           *
@@ -160,11 +179,23 @@ chosen link or button. -->
           Enter a valid bank code
         </span>
       </fieldset>
+      <fieldset ng-if = "user.country == 'Malaysia'">
+        <label> SWIFT BIC code </label>
+        <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
+        <input class="input-shadow-border" name="swiftCode" type="text" ng-pattern="/^[1-9A-z]\d*$/"
+               style="float:left;" ng-model="user.swiftCode" ng-enter ="authSignUp(user);" required/>
+        <span class="error help-block" ng-show="register.swiftCode.$error.required">
+          *
+        </span>
+        <span class="error help-block" ng-show="register.swiftCode.$dirty && register.swiftCode.$invalid">
+          Enter a valid swift code
+        </span>
+      </fieldset>
       <!--Bank Branch Code-->
       <fieldset>
         <label> Bank Branch Code </label>
         <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
-        <input class="input-shadow-border" name="branchCode" type="text" ng-pattern="^[1-9]\d*$"
+        <input class="input-shadow-border" name="branchCode" type="text" ng-pattern="/^[1-9]\d*$/"
                style="float:left;" ng-model="user.branchCode" ng-enter ="authSignUp(user);" required/>
         <span class="error help-block" ng-show="register.branchCode.$error.required">
           *

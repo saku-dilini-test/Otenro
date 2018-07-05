@@ -55,6 +55,7 @@ module.exports.routes = {
     'POST /auth/verifyMobilePin': 'AuthController.verifyMobilePin',
     'POST /auth/verifyMobileNumber': 'AuthController.verifyMobileNumber',
     'POST /auth/updateUserProfileWithMobile': 'UserController.updateUserProfileWithMobile',
+    'GET /auth/getAllCountry': 'AuthController.getCountries',
 
     /***
      * Billing Data

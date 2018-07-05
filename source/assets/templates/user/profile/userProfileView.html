@@ -239,7 +239,7 @@
                             <!--Bank Code-->
                         <fieldset>
                             <label> Bank Code </label>
-                            <input class="input-shadow-border" name="bankCode" type="text" ng-pattern="^[1-9]\d*$"
+                            <input class="input-shadow-border" name="bankCode" type="text" ng-pattern="/^[1-9]\d*$/"
                                    style="float:left;" ng-model="userEdit.bankCode" required/>
                             <span class="error help-block" ng-show="editProfile.bankCode.$error.required">*</span>
                             <span class="error help-block" ng-show="editProfile.bankCode.$dirty && editProfile.bankCode.$invalid">
@@ -248,7 +248,7 @@
                         <!--Bank Branch Code-->
                         <fieldset>
                             <label> Bank Branch Code </label>
-                            <input class="input-shadow-border" name="branchCode" type="text" ng-pattern="^[1-9]\d*$"
+                            <input class="input-shadow-border" name="branchCode" type="text" ng-pattern="/^[1-9]\d*$/"
                                    style="float:left;" ng-model="userEdit.branchCode" required/>
                             <span class="error help-block" ng-show="editProfile.branchCode.$error.required">*</span>
                             <span class="error help-block" ng-show="editProfile.branchCode.$dirty && editProfile.branchCode.$invalid">

@@ -2,17 +2,47 @@
     'use strict';
     var user;
     angular.module('app')
-        .controller('RegisterController', ['$scope', '$state', 'Auth', 'toastr','initialData','$stateParams','commerceService', RegisterController]);
+        .controller('RegisterController', ['$scope', '$state', 'Auth', 'toastr','initialData','registerService','$stateParams','commerceService', RegisterController]);
 
-    function RegisterController($scope, $state, Auth, toastr,initialData,$stateParams,commerceService) {
+    function RegisterController($scope, $state, Auth, toastr,initialData,registerService,$stateParams,commerceService) {
 
         // -- Config -- 
         // Tell Us About yourself data array
         $scope.isPinReqSuccess = false;
         $scope.verificationPin;
         $scope.yourselfReasonList = initialData.yourselfReasonList.data;
+        $scope.phoneNoLength = 9;
+
+        // Get All Country
+        registerService.getAllCountry().success(function (data) {
+            $scope.countryList = data.platformExtCountries;
+
+        }).error(function (err) {
+            //alert("MainMenu Loading Error : " + err);
+        });
+
+        $scope.getCountryCode = function(country){
+
+            if(country != "Sri Lanka"){
+                $scope.phoneNoLength = 10;
+            }else{
+                $scope.phoneNoLength = 9;
+                $scope.user.mobile = null;
+            }
+
+            var countryCode;
+            $scope.countryList.forEach(function(ele){
+                if(ele.countryName == country){
+                    countryCode = ele.countryCode;
+                    $scope.user.countryCode = countryCode;
+                }
+            });
+
+            return countryCode;
+        }
 
         $scope.authSignUp = function (user) {
+
             if (!$scope.isPinReqSuccess) {
                 user.cap = angular.element('#recaptcha_response_field').val();
 
@@ -20,7 +50,6 @@
                     // user.adagent = $stateParams.data.addname;
                     // user.affid = $stateParams.data.affid;
                 }
-                console.log(user);
 
                 Auth.register(user).success(function (data) {
 
