@@ -1,0 +1,48 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SERVER_URL } from '../../constantsService';
+import * as data from '../../madeEasy.json';
+import { CategoriesService } from '../../services/categories/categories.service'
+import { PagebodyServiceModule } from '../../page-body/page-body.service'
+import { TitleService } from '../../services/title.service';
+import { LocalStorageService } from 'angular-2-local-storage';
+import { AppDataService } from '../../services/appdata-info/appdata-info.service';
+
+@Component({
+  selector: 'app-homepage',
+  templateUrl: './homepage.component.html',
+  styleUrls: ['./homepage.component.css']
+})
+export class HomepageComponent implements OnInit {
+
+  private appId = (<any>data).appId;
+  private userId = (<any>data).userId;
+  private catName;
+  categories:any
+  constructor(private localStorageService: LocalStorageService, private route: Router, private dataService: PagebodyServiceModule,
+   private categoryService: CategoriesService, private title: TitleService,private appdataService: AppDataService) {
+
+
+    this.categoryService.getCategories().subscribe(data => {
+        this.categories =data;
+      }, err => {
+        console.log(err);
+      });
+
+    this.title.changeTitle("Home");
+
+  }
+
+
+  ngOnInit() {
+
+    let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+
+    if (appUser) {
+      if (this.localStorageService.get("cart" + appUser.registeredUser)) {
+        this.dataService.cart = this.localStorageService.get("cart" + appUser.registeredUser);
+      }
+    }
+
+  }
+}
