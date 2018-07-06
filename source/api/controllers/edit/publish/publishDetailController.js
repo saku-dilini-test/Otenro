@@ -42,8 +42,6 @@ module.exports = {
                 appType: req.body.appType
             }
 
-            details.operators = [];
-
             var searchAppData = {
                 id :req.body.appId
             }
@@ -60,6 +58,8 @@ module.exports = {
 
                                 var operators = config.IDEABIZ_USER_NETWORK_CLIENTS;
                                 console.log(operators);
+
+                                details.operators = [];
 
                                 for (var key in operators) {
                                     if (operators.hasOwnProperty(key)) {

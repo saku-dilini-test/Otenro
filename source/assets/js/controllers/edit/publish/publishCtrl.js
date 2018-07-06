@@ -115,6 +115,16 @@
                //alert("MainMenu Loading Error : " + err);
        });
 
+
+        if(item == 'Status'){
+            publishService.getExistingData('GooglePlay').success(function(data){
+                   $scope.publishData = data;
+                   console.log($scope.publishData);
+            }).error(function(err){
+                 //alert("MainMenu Loading Error : " + err);
+            });
+        }
+
         if(item == 'GooglePlay'){
 
            publishService.getExistingData(item).
@@ -157,7 +167,6 @@
 //                                serviceID: $scope.existingData[0].serviceID,
                                 port: $scope.existingData[0].port,
                                 price: $scope.existingData[0].price
-
                             /*  keywords: $scope.existingData[0].keywords,*/
                             };
                      }
@@ -178,6 +187,7 @@
         $scope.addGooglePlayInfo = function(file, playStoreData, splash, allowPlayStore) {
              $scope.isValidFormData = true;
              $scope.count = 0;
+
             if(allowPlayStore == true &&(splash[0] == null || splash[1] == null|| splash[6] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
                 playStoreData.language == null ||
                 playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
@@ -197,6 +207,10 @@
                         });
             }
             else {
+                         if($scope.existingData.length > 0){
+                            playStoreData.operators = $scope.existingData[0].operators;
+                         }
+
                     playStoreData.category = 'GooglePlay';
                     publishService.addGooglePlayInfo(playStoreData,$rootScope.tempNew)
                         .success(function(data, status, headers, config) {
