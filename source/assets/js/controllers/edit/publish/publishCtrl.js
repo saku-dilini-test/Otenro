@@ -125,6 +125,10 @@
             });
         }
 
+        $scope.commentView = function(comnt){
+            console.log("view comment: " + comnt);
+        }
+
         if(item == 'GooglePlay'){
 
            publishService.getExistingData(item).
