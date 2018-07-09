@@ -63,7 +63,7 @@ module.exports = {
 
                                 for (var key in operators) {
                                     if (operators.hasOwnProperty(key)) {
-                                        details.operators.push({operator:key,amount:"",interval:"",isEnabled:false, status:"NOT_SUBMITTED"})
+                                        details.operators.push({operator:operators[key].code,amount:"",interval:"",isEnabled:false, status:"NOT_SUBMITTED"})
                                     }
                                 }
 
