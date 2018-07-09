@@ -481,7 +481,9 @@ module.exports.routes = {
      * RevenueAndTrafficReportController (ideaDroid)
      */
 
-    'POST /appMakerReports/getRevenueAndTrafficSummaryForDateRange': 'appMakerReports/RevenueAndTrafficReportController.getRevenueAndTrafficSummaryForDateRange'
+    'POST /appMakerReports/getRevenueAndTrafficSummaryForDateRange': 'appMakerReports/RevenueAndTrafficReportController.getRevenueAndTrafficSummaryForDateRange',
+    'POST /appMakerReports/getRevenueAndTrafficSummaryForMonthly': 'appMakerReports/RevenueAndTrafficReportController.getRevenueAndTrafficSummaryForMonthly',
+    'POST /appMakerReports/getRevenueAndTrafficSummaryForYearly': 'appMakerReports/RevenueAndTrafficReportController.getRevenueAndTrafficSummaryForYearly'
 
 
 
