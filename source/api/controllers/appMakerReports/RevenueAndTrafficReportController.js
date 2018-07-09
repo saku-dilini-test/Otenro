@@ -9,14 +9,15 @@
 
 
 var dateFormat = require('dateformat');
+var config = require('../../services/config');
+var operator = [];
+
+
 module.exports = {
 
 
 
     insertRevenueAndTrafficDailySummary: function () {
-
-        var operator = ['mobitel', 'dialog', 'airtel','hutch'];
-        var count = 0;
 
 
         var date = new Date();
@@ -24,10 +25,13 @@ module.exports = {
         // add a day
         date.setDate(date.getDate() -1);
 
+        Operator.find().exec(function(err, operatorData){
 
-        operator.forEach(function(operatorData) {
+            if (err) return done(err);
 
-            SubscriptionPayment.find({date: dateFormat(date, "yyyy-mm-dd"), status:1,operator:operatorData},
+            operatorData.forEach(function(operatorData) {
+
+            SubscriptionPayment.find({date: dateFormat(date, "yyyy-mm-dd"), status:1,operator:operatorData.operator},
                                      {groupBy:  ['operator'] , sum: [ 'amount' ] }).
             exec(function(error, subscriptionPaymentData) {
 
@@ -39,7 +43,7 @@ module.exports = {
                         {
                             "$match": {
                                 "viewDate": dateFormat(date, "yyyy-mm-dd"),
-                                "operator":operatorData
+                                "operator":operatorData.operator
                             }
                         },
                         {
@@ -54,7 +58,7 @@ module.exports = {
                         }
                         //console.log(operatorData + " operator.length " + operator.length + " count " + count + "date " + date);
 
-                        var data = {"operator":operatorData ,"revenue":subscriptionPaymentData[0] ? subscriptionPaymentData[0].amount : 0 ,
+                        var data = {"operator":operatorData.operator ,"revenue":subscriptionPaymentData[0] ? subscriptionPaymentData[0].amount : 0 ,
                             "viewCount":appVisitDataLog[0] ?appVisitDataLog[0].count:0 , "date":dateFormat(date, "yyyy-mm-dd")};
 
                         console.log(data);
@@ -69,6 +73,7 @@ module.exports = {
             });
 
           })
+        });
     },
 
 
@@ -78,8 +83,18 @@ module.exports = {
 
         var dateFrom = reqData.dateFrom;
         var dateTo = reqData.dateTo;
+        var operator = reqData.operator;
+        var query="";
 
-        var query = {date:{'>=':dateFormat(dateFrom, "yyyy-mm-dd"),'<=':dateFormat(dateTo, "yyyy-mm-dd")}}
+        if (operator=="all"){
+
+            query = {date:{'>=':dateFormat(dateFrom, "yyyy-mm-dd"),'<=':dateFormat(dateTo, "yyyy-mm-dd")}}
+
+        }else {
+            query = {date:{'>=':dateFormat(dateFrom, "yyyy-mm-dd"),'<=':dateFormat(dateTo, "yyyy-mm-dd")},operator:operator}
+        }
+
+
 
         RevenueAndTrafficDailySummary.find(query).exec(function(err, app){
             if (err) return done(err);
@@ -95,8 +110,19 @@ module.exports = {
         var year = reqData.year;
         var monthFrom = reqData.monthFrom;
         var monthTo = reqData.monthTo;
+        var operator = reqData.operator;
 
-        var query = {month:{'>=':monthFrom,'<=':monthTo},year:year}
+        var query="";
+
+        if (operator=="all"){
+
+            query = {month:{'>=':monthFrom,'<=':monthTo},year:year}
+
+        }else {
+            query = {month:{'>=':monthFrom,'<=':monthTo},year:year,operator:operator}
+        }
+
+
 
         RevenueAndTrafficMonthlySummary.find(query).exec(function(err, data){
             if (err) return done(err);
@@ -111,9 +137,18 @@ module.exports = {
 
         var yearFrom = reqData.yearFrom;
         var yearTo = reqData.yearTo;
+        var operator = reqData.operator;
 
+        var query="";
 
-        var query = {year:{'>=':yearFrom,'<=':yearTo}}
+        if (operator=="all"){
+
+            query = {year:{'>=':yearFrom,'<=':yearTo}}
+
+        }else {
+            query = {year:{'>=':yearFrom,'<=':yearTo},operator:operator}
+        }
+
 
         RevenueAndTrafficYearlySummary.find(query).exec(function(err, data){
             if (err) return done(err);
@@ -128,22 +163,73 @@ module.exports = {
 
         console.log("year " + year + " " + "month " + month);
 
-        var operator = ['mobitel', 'dialog', 'airtel','hutch'];
+        //var operator = ['mobitel', 'dialog', 'airtel','hutch'];
         var date = new Date();
         date.setDate(date.getDate() -1);
 
-        operator.forEach(function(operatorData) {
+        Operator.find().exec(function(err, operatorData){
+
+            operatorData.forEach(function(operatorData) {
 
 
-            RevenueAndTrafficDailySummary.native(function(err, collection) {
+                RevenueAndTrafficDailySummary.native(function(err, collection) {
+
+                        if (err) return res.serverError(err);
+
+                        collection.aggregate([
+                            {
+                                "$match": {
+                                    "date": {$gte: getFirstDayOfMonth(year,month), $lte: getLastDayOfMonth(year,month)},
+                                    "operator":operatorData.operator
+                                }
+                            },
+                            {
+                                "$group": {
+                                    "_id": "$operator",
+                                    "viewCount": { "$sum": "$viewCount" },
+                                    "revenue" : {"$sum": "$revenue" }
+                                }
+                            }
+                        ]).toArray(function (err, dailySummaryData) {
+                            if (err) {
+                                console.log(err);
+                            }
+
+                            var data = {"operator":operatorData.operator ,"revenue":dailySummaryData[0] ? dailySummaryData[0].revenue : 0 ,
+                                "viewCount":dailySummaryData[0] ?dailySummaryData[0].viewCount:0 , "month":month,"year":year};
+
+                            console.log(data);
+
+
+                            RevenueAndTrafficMonthlySummary.create(data).exec(function (err, result) {
+                                if (err) console.log(err);
+                                console.log(result);
+                            });
+                        });
+                });
+            })
+        });
+    },
+
+
+    insertRevenueAndTrafficYearSummary: function (year) {
+
+        console.log("year " + year );
+
+        Operator.find().exec(function(err, operatorData){
+
+            operatorData.forEach(function(operatorData) {
+
+
+                RevenueAndTrafficMonthlySummary.native(function(err, collection) {
 
                     if (err) return res.serverError(err);
 
                     collection.aggregate([
                         {
                             "$match": {
-                                "date": {$gte: getFirstDayOfMonth(year,month), $lte: getLastDayOfMonth(year,month)},
-                                "operator":operatorData
+                                "year": year,
+                                "operator":operatorData.operator
                             }
                         },
                         {
@@ -153,73 +239,27 @@ module.exports = {
                                 "revenue" : {"$sum": "$revenue" }
                             }
                         }
-                    ]).toArray(function (err, dailySummaryData) {
+                    ]).toArray(function (err, monthlySummaryData) {
                         if (err) {
                             console.log(err);
                         }
 
-                        var data = {"operator":operatorData ,"revenue":dailySummaryData[0] ? dailySummaryData[0].revenue : 0 ,
-                            "viewCount":dailySummaryData[0] ?dailySummaryData[0].viewCount:0 , "month":month,"year":year};
+                        var data = {"operator":operatorData.operator ,"revenue":monthlySummaryData[0] ? monthlySummaryData[0].revenue : 0 ,
+                            "viewCount":monthlySummaryData[0] ?monthlySummaryData[0].viewCount:0 ,"year":year};
 
                         console.log(data);
 
 
-                        RevenueAndTrafficMonthlySummary.create(data).exec(function (err, result) {
+                        RevenueAndTrafficYearlySummary.create(data).exec(function (err, result) {
                             if (err) console.log(err);
                             console.log(result);
                         });
                     });
-            });
-        })
-    },
-
-
-    insertRevenueAndTrafficYearSummary: function (year) {
-
-        console.log("year " + year );
-
-        var operator = ['mobitel', 'dialog', 'airtel','hutch'];
-
-        operator.forEach(function(operatorData) {
-
-
-            RevenueAndTrafficMonthlySummary.native(function(err, collection) {
-
-                if (err) return res.serverError(err);
-
-                collection.aggregate([
-                    {
-                        "$match": {
-                            "year": year,
-                            "operator":operatorData
-                        }
-                    },
-                    {
-                        "$group": {
-                            "_id": "$operator",
-                            "viewCount": { "$sum": "$viewCount" },
-                            "revenue" : {"$sum": "$revenue" }
-                        }
-                    }
-                ]).toArray(function (err, monthlySummaryData) {
-                    if (err) {
-                        console.log(err);
-                    }
-
-                    var data = {"operator":operatorData ,"revenue":monthlySummaryData[0] ? monthlySummaryData[0].revenue : 0 ,
-                        "viewCount":monthlySummaryData[0] ?monthlySummaryData[0].viewCount:0 ,"year":year};
-
-                    console.log(data);
-
-
-                    RevenueAndTrafficYearlySummary.create(data).exec(function (err, result) {
-                        if (err) console.log(err);
-                        console.log(result);
-                    });
                 });
-            });
+            })
         })
     }
+
 };
 
 
