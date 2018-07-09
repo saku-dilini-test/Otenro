@@ -103,6 +103,8 @@
                     return publishService.showPublishToAppStoreDialog(clickTitle);
                 if ('googlePlay' == clickTitle)
                     return publishService.showPublishToGooglePlayDialog(clickTitle);
+                if ('status' == clickTitle)
+                    return publishService.showStatusToGooglePlayDialog(clickTitle);
                 if ('pushMessages' == clickTitle)
                     return engageService.showPushMessageDialog(clickTitle);
                 if ('promotionsAndSales'==clickTitle)

@@ -95,17 +95,31 @@ module.exports = {
 
              "PUBLISH_STATUSES": [
                  {
-                   "code": "PENDING",
-                   "description": "Pending",
-                   "nextAvailable": [
-                     "APPROVED",
-                     "REJECTED"
-                   ],
-                   "allowedRoles": [
-                     "admin",
-                     "superAdmin",
-                     "appCreater"
-                   ]
+                     "code": "NOT_SUBMITTED",
+                     "description": "Not Submitted",
+                     "nextAvailable": [
+                         "SUBMITTED_FOR_APPROVAL"
+                     ],
+                     "allowedRoles": [
+                         "admin",
+                         "superAdmin",
+                         "appCreater"
+                     ],
+                     "color":"#ffffff"
+                 },
+                 {
+                     "code": "SUBMITTED_FOR_APPROVAL",
+                     "description": "Submitted for Approval",
+                     "nextAvailable": [
+                         "APPROVED",
+                         "REJECTED"
+                     ],
+                     "allowedRoles": [
+                         "admin",
+                         "superAdmin",
+                         "appCreater"
+                     ],
+                     "color":"#ffffff"
                  },
                  {
                    "code": "APPROVED",
@@ -118,14 +132,14 @@ module.exports = {
                      "admin",
                      "superAdmin"
                    ],
-                   "color":"rgb(146, 240, 146)"
+                   "color":"#c7febc"
                  },
                  {
                    "code": "REJECTED",
                    "description": "Rejected",
                    "nextAvailable": [],
                    "allowedRoles": [],
-                   "color":"rgb(253, 108, 108)"
+                   "color":"#FDAFB0"
                  },
                  {
                    "code": "SUSPENDED",
@@ -138,7 +152,7 @@ module.exports = {
                      "admin",
                      "superAdmin"
                    ],
-                   "color":"rgb(240, 248, 120)"
+                   "color":"#fee5b4"
                  },
                  {
                    "code": "TERMINATED",
@@ -148,7 +162,7 @@ module.exports = {
                      "admin",
                      "superAdmin"
                    ],
-                   "color" : "rgb(253, 108, 108)"
+                   "color" : "#FDAFB0"
                  }
                ]
             }

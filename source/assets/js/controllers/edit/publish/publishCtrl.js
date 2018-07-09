@@ -1,9 +1,9 @@
 (function() {
     'use strict';
-    angular.module("appEdit").controller("PublishCtrl", ['$scope', '$mdDialog','item',
+    angular.module("appEdit").controller("PublishCtrl", ['$scope', '$mdDialog','item','carouselService',
         'toastr', '$rootScope', 'publishService', 'contactUsService', '$http', 'SERVER_URL','$auth','$window', PublishCtrl]);
 
-    function PublishCtrl($scope, $mdDialog, item, toastr, $rootScope, publishService, contactUsService, $http, SERVER_URL,$auth,$window) {
+    function PublishCtrl($scope, $mdDialog, item, carouselService, toastr, $rootScope, publishService, contactUsService, $http, SERVER_URL,$auth,$window) {
 
         // config
         $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
@@ -14,6 +14,16 @@
         $scope.image = [];
         $scope.splash = [];
         $scope.publishSplash = [];
+        $scope.allowPlayStore;
+
+        carouselService.getApplicationData($rootScope.appId).success(function(res){
+            $scope.appData = res;
+        });
+
+        contactUsService.getContactUsInfo().success(function(res){
+            console.log(res);
+            $scope.appContactData = res;
+        });
 
         // Mobile App-App Store-Config
         $scope.maxName = 20;
@@ -105,6 +115,20 @@
                //alert("MainMenu Loading Error : " + err);
        });
 
+
+        if(item == 'Status'){
+            publishService.getExistingData('GooglePlay').success(function(data){
+                   $scope.publishData = data;
+                   console.log($scope.publishData);
+            }).error(function(err){
+                 //alert("MainMenu Loading Error : " + err);
+            });
+        }
+
+        $scope.commentView = function(comnt){
+            console.log("view comment: " + comnt);
+        }
+
         if(item == 'GooglePlay'){
 
            publishService.getExistingData(item).
@@ -112,6 +136,9 @@
                      $scope.existingData = data;
                      if($scope.existingData.length == 0){
                             $scope.playStoreData ={language: $scope.defaultLanguage.language};
+                            $scope.playStoreData.title = $scope.appData.appName;
+                            $scope.playStoreData.email = $scope.appContactData.email
+
                      }
                      else{
                             console.log($scope.existingData)
@@ -144,7 +171,6 @@
 //                                serviceID: $scope.existingData[0].serviceID,
                                 port: $scope.existingData[0].port,
                                 price: $scope.existingData[0].price
-
                             /*  keywords: $scope.existingData[0].keywords,*/
                             };
                      }
@@ -153,45 +179,78 @@
                 });
         }
 
+        $scope.chkPlaystore = function(status){
 
-        $scope.addGooglePlayInfo = function(file, playStoreData, splash) {
+            if(status == false){
+                $scope.playStoreData.language = null;
+                $scope.playStoreData.primaryCat = null;
+
+            }
+        }
+
+        $scope.addGooglePlayInfo = function(file, playStoreData, splash, allowPlayStore) {
              $scope.isValidFormData = true;
              $scope.count = 0;
-            if(splash[0] == null || splash[1] == null|| splash[6] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
+
+            if(allowPlayStore == true &&(splash[0] == null || splash[1] == null|| splash[6] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
                 playStoreData.language == null ||
                 playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
                 playStoreData.email==null || playStoreData.keyword==null || playStoreData.port==null
-                || playStoreData.price==null){
+                || playStoreData.price==null)){
+
+                        toastr.error('Please fill all fields  ', 'Warning', {
+                              closeButton: true
+                        });
+            }else if(!allowPlayStore &&(splash[0] == null || splash[1] == null|| splash[6] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
+                 playStoreData.fullDescription == null  ||
+                 playStoreData.email==null || playStoreData.keyword==null || playStoreData.port==null
+                 || playStoreData.price==null)){
 
                         toastr.error('Please fill all fields  ', 'Warning', {
                               closeButton: true
                         });
             }
             else {
+                         if($scope.existingData.length > 0){
+                            playStoreData.operators = $scope.existingData[0].operators;
+                         }
+
                     playStoreData.category = 'GooglePlay';
                     publishService.addGooglePlayInfo(playStoreData,$rootScope.tempNew)
                         .success(function(data, status, headers, config) {
+
+                                splash.forEach(function(splash,idx){
+                                    if (JSON.stringify(splash).match("blobUrl")){
+                                        publishService.uploadPublishFiles(splash,idx,$rootScope.tempNew)
+                                            .success(function (data, status, headers, config) {
+
+                                            }).error(function (data, status, headers, config) {
+
+                                        });
+                                    }
+
+                                });
+
+                                $scope.activeTabIndex = 1;
+
                             toastr.success('General information has been added successfully', 'Saved', {
                                 closeButton: true
                             });
+//                            $mdDialog.hide();
                         }).error(function(data, status, headers, config) {
-                        toastr.error('Unable to save ', 'Warning', {
-                            closeButton: true
-                        });
+                        if(status == "409"){
+                            toastr.error('Unable to save keyword already exists.', 'Warning', {
+                                closeButton: true
+                            });
+                        }else{
+                            toastr.error('Unable to save ', 'Warning', {
+                                closeButton: true
+                            });
+                            $mdDialog.hide();
+                        }
                     });
 
-                    splash.forEach(function(splash){
-                        if (JSON.stringify(splash).match("blobUrl")){
-                            publishService.uploadPublishFiles(splash,$scope.count,$rootScope.tempNew)
-                                .success(function (data, status, headers, config) {
 
-                                }).error(function (data, status, headers, config) {
-
-                            });
-                        }
-                        $scope.count ++;
-                    })
-                $mdDialog.hide();
             }
         };
 

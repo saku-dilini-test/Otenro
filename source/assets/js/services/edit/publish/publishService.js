@@ -36,6 +36,20 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
+            showStatusToGooglePlayDialog: function() {
+                return $mdDialog.show({
+                    controller: 'PublishCtrl',
+                    templateUrl: 'user/edit/publish/publishStatus.html',
+                    clickOutsideToClose: true,
+                    locals : {
+                      item : 'Status',
+                    }
+                }).then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
             addGooglePlayInfo: function(playStoreData,isNew ){
                 return Upload.upload({
                     url: SERVER_URL + 'edit/setPublishDetails',
