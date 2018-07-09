@@ -5,7 +5,7 @@ module.exports = {
 
     attributes: {
         month:{
-            type: 'String'
+            type: 'Integer'
         },
         operator:{
             type: 'String'
@@ -17,7 +17,7 @@ module.exports = {
             type:'Integer'
         },
         year:{
-            type: 'String'
+            type: 'Integer'
         }
 
     }

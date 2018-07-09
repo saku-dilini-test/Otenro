@@ -11,15 +11,15 @@ module.exports.cron = {
         schedule: '00 07 16 * * *',
         onTick: function () {
             if(sails){
-                var RevenueAndTrafficReportController = require('../api/controllers/appMakerReports/RevenueAndTrafficReportController.js');
-                RevenueAndTrafficReportController.insertRevenueAndTrafficDailySummary();
+                var revenueAndTrafficReportController = require('../api/controllers/appMakerReports/RevenueAndTrafficReportController.js');
+                revenueAndTrafficReportController.insertRevenueAndTrafficDailySummary();
             }
         }
     },
 
     MonthlySummaryJob: {
 
-        schedule: '00 07 16 * * *',
+        schedule: '00 38 11 * * *',
         onTick: function () {
             if(sails){
                 var today = new Date();
@@ -28,8 +28,8 @@ module.exports.cron = {
 
                 if (today.getMonth() !== yesterday.getMonth()) {
 
-                    var RevenueAndTrafficReportController = require('../api/controllers/appMakerReports/RevenueAndTrafficReportController.js');
-                    RevenueAndTrafficReportController.insertRevenueAndTrafficMonthlySummary(yesterday.getYear(),yesterday.getMonth());
+                    var revenueAndTrafficReportController = require('../api/controllers/appMakerReports/RevenueAndTrafficReportController.js');
+                    revenueAndTrafficReportController.insertRevenueAndTrafficMonthlySummary(yesterday.getFullYear(),yesterday.getMonth());
                 }
 
             }
@@ -38,7 +38,7 @@ module.exports.cron = {
 
     YearSummaryJob:{
 
-        schedule: '00 07 16 * * *',
+        schedule: '00 06 12 * * *',
         onTick: function () {
             if(sails){
                 var today = new Date();
@@ -47,8 +47,8 @@ module.exports.cron = {
 
                 if (today.getYear() !== yesterday.getYear()) {
 
-                    var RevenueAndTrafficReportController = require('../api/controllers/appMakerReports/RevenueAndTrafficReportController.js');
-                    RevenueAndTrafficReportController.insertRevenueAndTrafficYearlySummary(yesterday.getYear(),yesterday.getMonth());
+                    var revenueAndTrafficReportController = require('../api/controllers/appMakerReports/RevenueAndTrafficReportController.js');
+                    revenueAndTrafficReportController.insertRevenueAndTrafficYearSummary(yesterday.getFullYear());
                 }
 
             }
