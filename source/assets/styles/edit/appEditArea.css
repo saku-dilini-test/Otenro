@@ -655,3 +655,6 @@ trix-editor {
 a {
     color: inherit !important;
 }
+ .disabled-class{
+     color: #bfbfbf;
+ }

@@ -342,15 +342,61 @@
                 <!--</md-tab-body>-->
             <!--</md-tab>-->
             <md-tab>
-                <md-tab-label>Configure Operators</md-tab-label>
+                <md-tab-label ng-disabled = "!successPublish">operator configuration</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
-                        <h1>APK generation</h1>
+                        <div class="md-dialog-header-nav clearfix">
+                            <h1 class="pull-left">Operator configuration</h1>
+                        </div>
                     </div>
+
                     <div class="md-dialog-main clearfix">
-                        <fieldset class="col-4">
-                    <a ng-click = "downLoadSampleFile()"> download </a>
-                        </fieldset>
+                        <form class="allItems" novalidate>
+                            <table class="table" name="form">
+                                <thead style="background-color:rgba(241, 241, 241, 0.925)">
+                                <th style="text-align:center;" width="15%">Operator</th>
+                                <th style="text-align:center;" width="19%">Amount Rs.</th>
+                                <th style="text-align:center;" width="30%">Renewal Interval</th>
+                                <th style="text-align:center;" width="6%">Enabled</th>
+                                <th style="text-align:center;" width="35%">Status</th>
+
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="operator in playStoreData.operators">
+                                    <td align="center" ng-disabled = "!operator.isEnabled"  ng-class="{'disabled-class': !operator.isEnabled}">{{operator.operator}}</td>
+                                    <td align="center">
+                                        <md-input-container style="margin-bottom:0px;margin-top:0px;">
+                                            <input type="text" maxlength="5" style="width:100%;text-align: center;" name="amount" ng-model="operator.amount" value="{{amount}}" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED'" required/>
+                                        </md-input-container>
+                                    </td>
+                                    <td align="center">
+                                        <select ng-model= "operator.interval" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED'">
+                                            <option ng-repeat="sts in Renewals" >{{sts}}</option>
+                                        </select>
+                                    </td>
+                                    <td align="center">
+                                        <md-checkbox ng-click="toggle(operator,operator.isEnabled, $index)" ng-model = "operator.isEnabled" ng-disabled = "operator.status == 'APPROVED' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'SUSPENDED' || operator.status == 'TERMINATED'">
+
+                                        </md-checkbox>
+                                    </td>
+                                    <td align="center" ng-class="{'disabled-class': !operator.isEnabled}" ng-model="operator.status">{{getDescription(operator.status)}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="row md-dialog-main clearfix">
+                                <!--<div class="col-sm-6">-->
+                                <!--App:<a style="color:rgba(32, 99, 243, 0.925);" href=""> Download</a><br>-->
+                                <!--Website Link:<a style="color:rgba(32, 99, 243, 0.925);" href=""> http://horoscope.com</a>-->
+                                <!--</div>-->
+                                <div class="col-sm-3 md-dialog-buttons">
+                                    <div class="inner-section">
+                                        <md-button class="me-default-button" ng-click="close('cancel')">Close</md-button>
+                                        <md-button class="me-default-button" ng-click="save(playStoreData.operators)">save</md-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
                     </div>
                 </md-tab-body>
             </md-tab>

@@ -210,7 +210,8 @@ module.exports.routes = {
     'GET /edit/getPublishDetails': 'edit/publish/publishDetailController.getPublishDetails',
     'POST /edit/setPublishDetails': 'edit/publish/publishDetailController.setPublishDetails',
     'POST /edit/uploadPublishFiles': 'edit/publish/publishDetailController.uploadPublishFiles',
-    
+    'POST /edit/updateOperators': 'edit/publish/publishDetailController.updateOperators',
+
     'POST /edit/setContentRating': 'edit/publish/publishDetailController.setContentRating',
     'POST /edit/setAppStoreDetails': 'edit/publish/publishDetailController.setAppStoreDetails',
     'POST /edit/setAppReviewInformation': 'edit/publish/publishDetailController.setAppReviewInformation',
