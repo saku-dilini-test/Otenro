@@ -474,7 +474,17 @@ module.exports.routes = {
      */
 
     'POST /adminapi/index': 'ideabiz/IdeabizAdminapiController.takeAction',
-    'POST /adminapi/push': 'ideabiz/IdeabizAdminapiController.sendPushMessage'
+    'POST /adminapi/push': 'ideabiz/IdeabizAdminapiController.sendPushMessage',
+
+
+
+    /**
+     * RevenueAndTrafficReportController (ideaDroid)
+     */
+
+    'POST /appMakerReports/getRevenueAndTrafficSummaryForDateRange': 'appMakerReports/RevenueAndTrafficReportController.getRevenueAndTrafficSummaryForDateRange',
+    'POST /appMakerReports/getRevenueAndTrafficSummaryForMonthly': 'appMakerReports/RevenueAndTrafficReportController.getRevenueAndTrafficSummaryForMonthly',
+    'POST /appMakerReports/getRevenueAndTrafficSummaryForYearly': 'appMakerReports/RevenueAndTrafficReportController.getRevenueAndTrafficSummaryForYearly'
 
 
 
