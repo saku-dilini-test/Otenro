@@ -53,7 +53,7 @@ module.exports = {
     },
     userRole:  {
       type: 'array',
-      defaultsTo : ['beta']
+      defaultsTo : ['APP_CREATOR']
     },
     address:{
         type: 'string'

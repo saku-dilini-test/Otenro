@@ -52,7 +52,7 @@
                     toastr.success('Login Successful ', 'Message', {
                       closeButton: true
                     });
-                    if (response.user.userRoles== 'support'){
+                    if (response.user.userRoles== 'SUPER_ADMIN' || response.user.userRoles== 'OPERATOR'){
                          $state.go('user.technicalSupporter');
                     }else {
                          $state.go('user.dashboard');
@@ -104,7 +104,7 @@
                                 toastr.success('Login Successful ', 'Message', {
                                     closeButton: true
                                 });
-                                if (response.user.userRoles== 'support'){
+                                if (response.user.userRoles== 'SUPER_ADMIN' || response.user.userRoles== 'OPERATOR'){
                                     $state.go('user.technicalSupporter');
                                 }else {
                                     $state.go('user.dashboard');
@@ -183,7 +183,7 @@
                     toastr.success('Login Successful ', 'Message', {
                         closeButton: true
                     });
-                    if (response.user.userRoles== 'support'){
+                    if (response.user.userRoles== 'SUPER_ADMIN' || response.user.userRoles== 'OPERATOR'){
                         $state.go('user.technicalSupporter');
                     }else {
                         $state.go('user.dashboard');
