@@ -122,7 +122,18 @@
 
         technicalSupportService.getAppStatus()
             .success(function (result) {
-                $scope.operators = result.PUBLISH_STATUSES;
+                $scope.statuses = result.PUBLISH_STATUSES;
+
+            }).error(function (error) {
+            toastr.error('Loading Error', 'Warning', {
+                closeButton: true
+            });
+        });
+
+        technicalSupportService.getOperators()
+            .success(function (result) {
+                $scope.operators = Object.keys(result).map(i => result[i]);
+                console.log($scope.operators);
 
             }).error(function (error) {
             toastr.error('Loading Error', 'Warning', {
@@ -210,9 +221,19 @@
         $scope.getDescription = function(status){
 
             if(status){
-                var arr = $filter('filter')($scope.operators,{ "code": status });
+                var arr = $filter('filter')($scope.statuses,{ "code": status });
                     if(arr){
                         return arr[0].description;
+                    }
+            }
+        }
+
+        $scope.operatorDes = function(status){
+
+            if(status){
+                var arr = $filter('filter')($scope.operators,{ "code": status });
+                    if(arr){
+                        return arr[0].desc;
                     }
             }
         }
