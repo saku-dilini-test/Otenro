@@ -13,9 +13,9 @@ echo  'start....'
 #APPFILESERVER='/home/otenro/OtenroTest/appFileServer/';
 
 #prod
-MESERVER='/home/admin/web/developer.appmaker.lk/public_html/developer/meServer/temp/';
-NODE='/home/admin/web/developer.appmaker.lk/public_html/developer/meServer/node_modules/';
-APPFILESERVER='/home/admin/web/developer.appmaker.lk/public_html/developer/appFileServer/';
+MESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/';
+NODE='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/node_modules/';
+APPFILESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/';
 
 #ENV='dev'   #this is for development
 ENV='pro'  #this is for production
