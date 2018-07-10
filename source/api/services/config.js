@@ -156,7 +156,7 @@ module.exports = {
             'code': 'OPERATOR',
             'desc': 'Operator'
         },
-        'AppCreator': {
+        'APP_CREATOR': {
             'code': 'APP_CREATOR',
             'desc': 'App Creator'
         }
