@@ -12,16 +12,16 @@
     'use strict';
     angular.module('app')
         .controller('technicalSupportCtrl',
-            ['$scope','$mdDialog','technicalSupportService','$auth','toastr','$state','$stateParams','SERVER_URL','ME_SERVER','$filter','$window',
+            ['$scope','$mdDialog','technicalSupportService','$auth','toastr','$state','$stateParams','SERVER_URL','ME_SERVER','$filter','$window','userProfileResource',
                 technicalSupportCtrl
             ]);
 
-    function technicalSupportCtrl($scope,$mdDialog,technicalSupportService,$auth,toastr,$state,$stateParams,SERVER_URL,ME_SERVER,$filter,$window) {
+    function technicalSupportCtrl($scope,$mdDialog,technicalSupportService,$auth,toastr,$state,$stateParams,SERVER_URL,ME_SERVER,$filter,$window,userProfileResource) {
 
             $scope.splash = [];
             $scope.publishSplash = [];
             $scope.appList = [];
-            $scope.deviceView ="mobile"
+            $scope.deviceView ="mobile";
 
             var tempImagePath;
 
@@ -31,6 +31,14 @@
 
                 $scope.userId = $stateParams.userId;
                 $scope.appId = $stateParams.appId;
+
+                //Get User Details
+                var profParams = { userId: $stateParams.userId }
+                userProfileResource.getUserProfile(profParams).success(function (data) {
+                    $scope.user = data;
+                }).error(function (err) {
+                    console.err(err);
+                });
 
 
                 // if pushConfigData undefined
@@ -405,8 +413,21 @@
                             }
                         }else{
                             if($scope.publishAppData[i].operators){
+                                var operators = [];
 
-                                return $scope.publishAppData[i].operators;
+                                if($scope.user){
+                                    if($scope.user.userRole){
+                                        var isSuperAdmin = $filter('filter')($scope.user.userRole, "SUPER_ADMIN").length>0;
+                                        var isOperator = $filter('filter')($scope.user.userRole, "OPERATOR").length>0;
+                                        if(isSuperAdmin){
+                                            return $scope.publishAppData[i].operators;
+                                        }else if(isOperator && $scope.user.operator){
+                                            return $filter('filter')($scope.publishAppData[i].operators, {"operator": $scope.user.operator});
+                                        }
+                                    }
+                                }
+
+                                return [];
                                 break;
                             }else{
                                 return arr;

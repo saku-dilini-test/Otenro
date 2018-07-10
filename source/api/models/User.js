@@ -119,7 +119,7 @@ module.exports = {
         type: 'string'
     },
     operator: {
-        type: 'string'
+        type: 'string' //This is the operator from config.IDEABIZ_USER_NETWORK_CLIENTS eg. config.IDEABIZ_USER_NETWORK_CLIENTS.Dialog.code
     },
 
 
