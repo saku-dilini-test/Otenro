@@ -116,8 +116,10 @@
                //alert("MainMenu Loading Error : " + err);
        });
 
-        $scope.commentView = function(comnt){
-            console.log("view comment: " + comnt);
+        $scope.commentView = function(operator){
+
+            publishService.showCommentView($scope.comments,operator,$scope.operators);
+
         }
 
         technicalSupportService.getAppStatus()
@@ -140,6 +142,23 @@
                 closeButton: true
             });
         });
+
+        technicalSupportService.getCommentsApp()
+            .success(function(comments){
+            $scope.comments = comments;
+        }).error(function(error){
+              toastr.error('Comments Loading Error', 'Warning', {
+                    closeButton: true
+              });
+        })
+
+        if(item == 'Status'){
+            publishService.getExistingData("GooglePlay").success(function(data){
+                        $scope.publishData = data;
+            }).error(function(err){
+               //alert("MainMenu Loading Error : " + err);
+            });
+        }
 
         if(item == 'GooglePlay'){
 

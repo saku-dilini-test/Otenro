@@ -2994,3 +2994,8 @@ table.md-calendar-day-header{
     bottom: 0;
 
 }
+.comment-view{
+    height: 200px;
+    background-color: whitesmoke;
+    margin-top:-3%;
+}

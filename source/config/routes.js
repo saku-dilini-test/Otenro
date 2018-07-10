@@ -415,6 +415,7 @@ module.exports.routes = {
     'POST /edit/setOperators' : 'technicalSupport/TechnicalSupportController.setOperators',
     'POST /edit/setComments' : 'technicalSupport/TechnicalSupportController.setComments',
     'POST /edit/setAppstatus' : 'technicalSupport/TechnicalSupportController.setAppstatus',
+    'POST /edit/getCommentsApp' : 'technicalSupport/TechnicalSupportController.getCommentsApp',
 
     /**
      * IPG Controller

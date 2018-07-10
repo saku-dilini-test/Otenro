@@ -36,6 +36,9 @@
             getOperators: function(){
                 return $http.get(SERVER_URL + 'edit/getOperators');
             },
+            getCommentsApp: function(){
+                return $http.post(SERVER_URL + 'edit/getCommentsApp',{appId:$rootScope.appId});
+            },
             getAppStatus: function(){
                 return $http.get(SERVER_URL + 'edit/getAppStatus');
             },
@@ -224,8 +227,8 @@
                     locals : {initialData : data},
                     templateUrl: 'user/technicalSupport/AppComment.html',
                     bindToController: true,
-                    clickOutsideToClose: true,
-                    controller: ['$scope', 'initialData','$mdDialog', function($scope, initialData,$mdDialog) {
+                    clickOutsideToClose: false,
+                    controller: ['$scope', 'initialData','$mdDialog','toastr', function($scope, initialData,$mdDialog,toastr) {
                                     $scope.name = initialData.appName;
                                     $scope.comment = initialData.comment;
                                     var dates = new Date(initialData.date);
@@ -233,7 +236,11 @@
 
                                     $scope.save = function(){
                                         var data = { id:initialData.appId,comment:$scope.comment }
-                                        $http.post(SERVER_URL + 'edit/setComments', data)
+
+                                        if(data.comment == null){
+                                             toastr.error('Please enter comment', 'Warning', {closeButton: true});
+                                        }else{
+                                            $http.post(SERVER_URL + 'edit/setComments', data)
                                                 .success(function (data, status) {
                                                     console.log(data);
                                                     $mdDialog.hide();
@@ -241,6 +248,7 @@
                                                 .error(function (data, status) {
                                                     toastr.error('Error saving Operators', 'Warning', {closeButton: true});
                                                 });
+                                        }
                                     }
 
                                     $scope.cancel = function(){

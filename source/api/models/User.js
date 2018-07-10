@@ -118,6 +118,10 @@ module.exports = {
     ideaBizPinServerRef: {
         type: 'string'
     },
+    operator: {
+        type: 'string'
+    },
+
 
     toJSON: function() {
       var obj = this.toObject();
