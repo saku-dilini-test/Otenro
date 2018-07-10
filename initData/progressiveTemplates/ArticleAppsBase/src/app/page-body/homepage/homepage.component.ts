@@ -92,7 +92,7 @@ export class HomepageComponent implements OnInit {
 
     this.isSubscribing = false;
 
-    if(localStorage.getItem(this.appId+"msisdn")){
+    if(true){
       this.dataService.catId = id;
       this.router.navigate(['/' + val, id, name]);
     }else{
