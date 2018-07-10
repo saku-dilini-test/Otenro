@@ -12,7 +12,7 @@
                 return $mdDialog.show({
                     controller: 'PublishCtrl',
                     templateUrl: 'user/edit/publish/publishToAppStoreView.html',
-                    clickOutsideToClose: true,
+                    clickOutsideToClose: false,
                     locals : {
                       item : 'AppStore',
                     }
@@ -26,7 +26,7 @@
                 return $mdDialog.show({
                     controller: 'PublishCtrl',
                     templateUrl: 'user/edit/publish/publishToGooglePlayView.html',
-                    clickOutsideToClose: true,
+                    clickOutsideToClose: false,
                     locals : {
                       item : 'GooglePlay',
                     }
@@ -101,6 +101,11 @@
                     },
                     file:null
                 });
+            },
+            updateOperators: function(operators ){
+                var obj = {appId : $rootScope.appId,operators:operators}
+                return  $http.post(SERVER_URL + 'edit/updateOperators',obj);
+
             },
 
 

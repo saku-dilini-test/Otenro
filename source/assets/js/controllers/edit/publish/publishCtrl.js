@@ -1,9 +1,9 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("PublishCtrl", ['$scope', '$mdDialog','item','carouselService',
-        'toastr', '$rootScope', 'publishService', 'contactUsService', '$http', 'SERVER_URL','$auth','$window', PublishCtrl]);
+        'toastr', '$rootScope', 'publishService', 'contactUsService', '$http', 'SERVER_URL','$auth','$window','technicalSupportService','$filter', PublishCtrl]);
 
-    function PublishCtrl($scope, $mdDialog, item, carouselService, toastr, $rootScope, publishService, contactUsService, $http, SERVER_URL,$auth,$window) {
+    function PublishCtrl($scope, $mdDialog, item, carouselService, toastr, $rootScope, publishService, contactUsService, $http, SERVER_URL,$auth,$window,technicalSupportService,$filter) {
 
         // config
         $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
@@ -15,7 +15,7 @@
         $scope.splash = [];
         $scope.publishSplash = [];
         $scope.allowPlayStore;
-
+        $scope.successPublish = false;
         carouselService.getApplicationData($rootScope.appId).success(function(res){
             $scope.appData = res;
         });
@@ -96,6 +96,7 @@
        publishService.getAllPorts().
            success(function(data){
                $scope.Ports = data.ports;
+               $scope.Renewals = data.renewalIntervals;
            }).error(function(err){
                //alert("MainMenu Loading Error : " + err);
        });
@@ -115,19 +116,30 @@
                //alert("MainMenu Loading Error : " + err);
        });
 
-
-        if(item == 'Status'){
-            publishService.getExistingData('GooglePlay').success(function(data){
-                   $scope.publishData = data;
-                   console.log($scope.publishData);
-            }).error(function(err){
-                 //alert("MainMenu Loading Error : " + err);
-            });
-        }
-
         $scope.commentView = function(comnt){
             console.log("view comment: " + comnt);
         }
+
+        technicalSupportService.getAppStatus()
+            .success(function (result) {
+                $scope.statuses = result.PUBLISH_STATUSES;
+
+            }).error(function (error) {
+            toastr.error('Loading Error', 'Warning', {
+                closeButton: true
+            });
+        });
+
+        technicalSupportService.getOperators()
+            .success(function (result) {
+                $scope.operators = Object.keys(result).map(i => result[i]);
+                console.log($scope.operators);
+
+            }).error(function (error) {
+            toastr.error('Loading Error', 'Warning', {
+                closeButton: true
+            });
+        });
 
         if(item == 'GooglePlay'){
 
@@ -142,6 +154,7 @@
                      }
                      else{
                             console.log($scope.existingData)
+                            $scope.successPublish = true;
                             var tempImagePath;
                             if($scope.existingData[0].isNew === true) {
 
@@ -170,7 +183,8 @@
                                 keyword: $scope.existingData[0].keyword,
 //                                serviceID: $scope.existingData[0].serviceID,
                                 port: $scope.existingData[0].port,
-                                price: $scope.existingData[0].price
+                                price: $scope.existingData[0].price,
+                                operators: $scope.existingData[0].operators
                             /*  keywords: $scope.existingData[0].keywords,*/
                             };
                      }
@@ -186,6 +200,100 @@
                 $scope.playStoreData.primaryCat = null;
 
             }
+        }
+
+        $scope.toggle = function(operator,flag, index){
+            console.log(operator);
+            console.log(flag);
+            console.log(index);
+
+            if(flag == true){
+                operator.amount = "";
+                operator.interval = "";
+            }
+
+        }
+
+        $scope.close = function(){
+            $mdDialog.hide();
+        }
+
+        $scope.getDescription = function(status){
+
+            if(status){
+                var arr = $filter('filter')($scope.statuses,{ "code": status });
+                    if(arr){
+                        return arr[0].description;
+                    }
+            }
+        }
+
+        $scope.operatorDes = function(status){
+
+            if(status){
+                var arr = $filter('filter')($scope.operators,{ "code": status });
+                    if(arr){
+                        return arr[0].desc;
+                    }
+            }
+        }
+
+        $scope.save = function(data){
+
+            data.forEach(function(ele){
+
+                if(ele.isEnabled == true){
+                    if(ele.status == "NOT_SUBMITTED" || ele.status == "REJECTED"){
+                        if(!ele.amount && !ele.interval){
+                            toastr.error('Please enter the amount and renewal for ' + ele.operator, 'Warning', {
+                                  closeButton: true
+                            });
+                        }else if(!ele.amount){
+                            toastr.error('Please enter the amount for ' + ele.operator, 'Warning', {
+                                  closeButton: true
+                            });
+                        }else if(!ele.interval){
+                            toastr.error('Please select the renewal for ' + ele.operator , 'Warning', {
+                                  closeButton: true
+                            });
+                        }else{
+                            ele.status = "SUBMITTED_FOR_APPROVAL";
+                            publishService.updateOperators(data).success(function(res){
+                                    console.log(res);
+                                toastr.success('Operators information has been added successfully', 'Saved', {
+                                    closeButton: true
+                                });
+                            }).error(function(data, status, headers, config) {
+
+                                      toastr.error('Unable to update operators ', 'Warning', {
+                                          closeButton: true
+                                      });
+                                      $mdDialog.hide();
+
+                            });
+                        }
+                    }
+                }else{
+                    if(ele.status == "REJECTED"){
+                            publishService.updateOperators(data).success(function(res){
+                                    console.log(res);
+                                    toastr.success('Operators information has been updated successfully', 'Saved', {
+                                        closeButton: true
+                                    });
+                            }).error(function(data, status, headers, config) {
+
+                                      toastr.error('Unable to update operators ', 'Warning', {
+                                          closeButton: true
+                                      });
+                                      $mdDialog.hide();
+
+                            });
+                    }
+                }
+
+            });
+
+
         }
 
         $scope.addGooglePlayInfo = function(file, playStoreData, splash, allowPlayStore) {
@@ -219,6 +327,10 @@
                     publishService.addGooglePlayInfo(playStoreData,$rootScope.tempNew)
                         .success(function(data, status, headers, config) {
 
+                        console.log(data);
+                            $scope.playStoreData.operators = data.details.operators;
+
+
                                 splash.forEach(function(splash,idx){
                                     if (JSON.stringify(splash).match("blobUrl")){
                                         publishService.uploadPublishFiles(splash,idx,$rootScope.tempNew)
@@ -231,6 +343,7 @@
 
                                 });
 
+                                $scope.successPublish = true;
                                 $scope.activeTabIndex = 1;
 
                             toastr.success('General information has been added successfully', 'Saved', {

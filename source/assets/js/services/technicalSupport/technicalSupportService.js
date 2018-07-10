@@ -3,10 +3,10 @@
  **/
 (function() {
     angular.module('appEdit').service('technicalSupportService', [
-        '$mdDialog', '$http', '$rootScope', 'SERVER_URL','$q', technicalSupportService
+        '$mdDialog', '$http', '$rootScope', 'SERVER_URL','$q', '$filter', technicalSupportService
     ]);
 
-    function technicalSupportService($mdDialog, $http, $rootScope, SERVER_URL, $q) {
+    function technicalSupportService($mdDialog, $http, $rootScope, SERVER_URL, $q, $filter) {
         return {
 
             getAllAppData: function(){
@@ -94,15 +94,53 @@
                     templateUrl: 'user/technicalSupport/MobileOperators.html',
                     bindToController: true,
                     clickOutsideToClose: true,
-                    controller: ['$scope', 'initialData','SERVER_URL', function($scope, initialData,SERVER_URL) {
+                    controller: ['$scope', 'initialData','SERVER_URL', 'technicalSupportService', '$filter', '$window', function($scope, initialData,SERVER_URL,technicalSupportService,$filter,$window) {
 
 
 
-                                 $scope.items = initialData.operators;
+                                    $scope.items = initialData.operators;
+                                    $scope.app = initialData.app;
+                                    $scope.userList = initialData.userList;
                                     $scope.selected = [];
 //                                    if(initialData.selectedOperators){
 //                                        $scope.selected = initialData.selectedOperators
 //                                    }
+
+
+                                    $scope.statusArray = [];
+
+                                    $scope.getArr = function(status){
+
+                                        if(status){
+
+                                            var curStatusObj = $filter('filter')($scope.appStatusArr,{ "code": status });
+
+                                            $scope.statusArray = $filter('filter')($scope.appStatusArr, function(value, index, array){
+                                                return curStatusObj[0].nextAvailable.includes(value.code);
+                                            });
+
+                                        }
+
+                                        return $scope.statusArray;
+                                    }
+
+                                    technicalSupportService.getAppStatus().success(function(data){
+                                        $scope.appStatusArr = data.PUBLISH_STATUSES;
+
+                                        console.log($scope.appStatusArr);
+                                        console.log(data);
+                                    }).error(function(err){
+
+                                    });
+
+                                    $scope.getStatus = function(status){
+                                        if(status){
+                                            var arr = $filter('filter')($scope.appStatusArr,{ "code": status });
+                                            if(arr && arr.length>0){
+                                                return arr[0].description;
+                                            }
+                                        }
+                                    };
 
                                     $scope.toggle = function (item, list) {
                                       var idx = list.indexOf(item.desc);
@@ -132,7 +170,51 @@
 
                                     $scope.close = function(){
                                                 $mdDialog.hide();
-                                    }
+                                        $window.location.reload();
+                                    };
+
+                                    $scope.apply = function(operator){
+                                        var app = $scope.app;
+                                        var appUserId = app.userId;
+                                        var user = null;
+                                        var appStatus = null;
+
+                                        $scope.items.forEach(function(op){
+                                            if(op.operator==operator.operator){
+                                                if(operator.nextStatus){
+                                                    op.status = operator.nextStatus;
+                                                    delete operator.nextStatus;
+                                                }
+                                            }
+                                        });
+
+                                        $scope.userList.forEach(function(u){
+                                            if(u.id==appUserId){
+                                                user = u;
+                                            }
+                                        });
+
+                                        var appView = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + appUserId
+                                            + "&appId=" + app.id + "&" + new Date().toISOString() + "/";
+
+                                        var data = {
+                                            id:app.id,
+                                            email:user.email,
+                                            fName:user.firstName,
+                                            lName:user.lastName,
+                                            appName:app.appName,
+                                            appView:appView,
+                                            operators:$scope.items
+                                        }
+                                        console.log(data);
+
+                                        technicalSupportService.setAppststus(data).success(function(res){
+                                            console.log(res);
+                                            // $window.location.reload();
+                                        }).error(function(error){
+                                            console.log(error);
+                                        });
+                                    };
 
                                 }]
                 });

@@ -210,7 +210,8 @@ module.exports.routes = {
     'GET /edit/getPublishDetails': 'edit/publish/publishDetailController.getPublishDetails',
     'POST /edit/setPublishDetails': 'edit/publish/publishDetailController.setPublishDetails',
     'POST /edit/uploadPublishFiles': 'edit/publish/publishDetailController.uploadPublishFiles',
-    
+    'POST /edit/updateOperators': 'edit/publish/publishDetailController.updateOperators',
+
     'POST /edit/setContentRating': 'edit/publish/publishDetailController.setContentRating',
     'POST /edit/setAppStoreDetails': 'edit/publish/publishDetailController.setAppStoreDetails',
     'POST /edit/setAppReviewInformation': 'edit/publish/publishDetailController.setAppReviewInformation',
@@ -473,7 +474,17 @@ module.exports.routes = {
      */
 
     'POST /adminapi/index': 'ideabiz/IdeabizAdminapiController.takeAction',
-    'POST /adminapi/push': 'ideabiz/IdeabizAdminapiController.sendPushMessage'
+    'POST /adminapi/push': 'ideabiz/IdeabizAdminapiController.sendPushMessage',
+
+
+
+    /**
+     * RevenueAndTrafficReportController (ideaDroid)
+     */
+
+    'POST /appMakerReports/getRevenueAndTrafficSummaryForDateRange': 'appMakerReports/RevenueAndTrafficReportController.getRevenueAndTrafficSummaryForDateRange',
+    'POST /appMakerReports/getRevenueAndTrafficSummaryForMonthly': 'appMakerReports/RevenueAndTrafficReportController.getRevenueAndTrafficSummaryForMonthly',
+    'POST /appMakerReports/getRevenueAndTrafficSummaryForYearly': 'appMakerReports/RevenueAndTrafficReportController.getRevenueAndTrafficSummaryForYearly'
 
 
 

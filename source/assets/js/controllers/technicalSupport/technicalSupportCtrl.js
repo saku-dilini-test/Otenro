@@ -20,6 +20,7 @@
 
             $scope.splash = [];
             $scope.publishSplash = [];
+            $scope.appList = [];
             $scope.deviceView ="mobile"
 
             var tempImagePath;
@@ -152,8 +153,31 @@
              */
             var getAllAppDataList = function () {
                 technicalSupportService.getAllAppData()
-                    .success(function (result) {
-                        $scope.appList = result;
+                    .success(function (apps) {
+                        technicalSupportService.getAllPublishDetails()
+                            .success(function (details) {
+                                technicalSupportService.getAppStatus().success(function(data){
+                                    $scope.appStatusArr = data.PUBLISH_STATUSES;
+                                    $scope.publishAppData = details;
+                                    details.forEach(function(detail){
+                                        apps.forEach(function(app){
+                                            if(detail.appId===app.id){
+                                                if(detail.publishedStatus!=='') {
+                                                    var curStatusObj = $filter('filter')($scope.appStatusArr, {"code": detail.publishedStatus});
+                                                    app.publishedStatus = curStatusObj[0].description;
+                                                }
+                                                $scope.appList.push(app);
+                                            }
+                                        });
+                                    });
+                                }).error(function(err){
+
+                                });
+                            }).error(function (error) {
+                            toastr.error('Loading Error', 'Warning', {
+                                closeButton: true
+                            });
+                        });
                         $scope.serverURL = SERVER_URL;
                     }).error(function (error) {
                     toastr.error('Loading Error', 'Warning', {
@@ -318,16 +342,6 @@
 
            }
 
-            technicalSupportService.getAllPublishDetails()
-                .success(function (result) {
-                    $scope.publishAppData = result;
-                    console.log($scope.publishAppData);
-            }).error(function (error) {
-                toastr.error('Loading Error', 'Warning', {
-                  closeButton: true
-                });
-            });
-
             technicalSupportService.getOperators()
                 .success(function(result){
 
@@ -347,9 +361,9 @@
 
            }
 
-          $scope.approvedOperatorsView = function(operators){
-
-                var data = {operators:operators}
+          $scope.approvedOperatorsView = function(app,userList,operators){
+                console.log(operators);
+                var data = {app: app, userList: userList, operators:operators}
                 technicalSupportService.showApprovedOperators(data);
 
            }
@@ -450,16 +464,17 @@
                     $window.location.reload();
                 }).error(function(error){
                     console.log(error);
-                })
+                });
           }
 
-          $scope.getStatus = function(status){
-              if(status){
-                var arr = $filter('filter')($scope.appStatusArr,{ "code": status });
-                    if(arr){
-                        return arr[0].description;
-                    }
-              }
+          $scope.getAppOverallStatus = function(appId){
+              var publishedStatus = '';
+              $scope.publishAppData.forEach(function(appData){
+                  if(appData.appId===appId){
+                      publishedStatus = appData.publishedStatus;
+                  }
+              });
+              return publishedStatus;
           }
 
           $scope.statusArray = [];
@@ -478,15 +493,6 @@
 
                 return $scope.statusArray;
           }
-
-          technicalSupportService.getAppStatus().success(function(data){
-            $scope.appStatusArr = data.PUBLISH_STATUSES;
-
-            console.log($scope.appStatusArr);
-            console.log(data);
-          }).error(function(err){
-
-          });
 
           $scope.getAppsCount = function(id){
           var count = 0;

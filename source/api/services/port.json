@@ -1,1 +1,9 @@
-{"ports":[87798]}
+{
+  "ports": [
+    87798
+  ],
+  "renewalIntervals": [
+    "Daily",
+    "Monthly"
+  ]
+}

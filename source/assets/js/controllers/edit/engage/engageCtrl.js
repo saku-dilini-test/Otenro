@@ -16,6 +16,9 @@
         const SCHEDULED = 'scheduled';
         if (initialData){
             $scope.pushMessage = initialData;
+            if($scope.pushMessage.article){
+                $scope.linkArticle = true;
+            }
         }
 
         // //get all app registered user details
@@ -88,7 +91,7 @@
         engageService.getAllArticles().success(function(data){
 
             console.log(data);
-            $scope.articles = data;
+            $scope.linkedArticles = data;
 
         });
 

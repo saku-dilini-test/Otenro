@@ -63,7 +63,7 @@ module.exports = {
 
                                 for (var key in operators) {
                                     if (operators.hasOwnProperty(key)) {
-                                        details.operators.push({operator:key,status:"PENDING"})
+                                        details.operators.push({operator:operators[key].code,amount:"",interval:"",isEnabled:false, status:"NOT_SUBMITTED"})
                                     }
                                 }
 
@@ -71,8 +71,8 @@ module.exports = {
                                 console.log(appDetails);
                                     if (err) res.send(err);
                                     var status = {
-                                                    status :"PENDING",
-                                                    publishStatus :"PENDING"
+                                                    status :"NOT_SUBMITTED",
+                                                    publishStatus :"NOT_SUBMITTED"
                                                 }
                                         Application.update({id:appDetails.appId}, status).exec(function(err,appData){
                                             console.log(appData);
@@ -131,7 +131,7 @@ module.exports = {
 //                                                    return res.send("ok");
                                                 });
                                                     res.send({
-                                                           appId: details.appId,
+                                                           details: appDetails,
                                                            message: "New Publish Details has been created"
                                                        });
 
@@ -158,10 +158,10 @@ module.exports = {
                         else{
                         if(data.length > 0){
                             if(data[0].appId == details.appId){
-                                PublishDetails.update(searchApp,details).exec(function(err,app) {
+                                PublishDetails.update(searchApp,details).exec(function(err,playApp) {
                                         if (err) res.send(err);
                                         else {
-                                            if (app.length==0) {
+                                            if (playApp.length==0) {
 
 
                                             }else{
@@ -174,7 +174,7 @@ module.exports = {
 
                                                                 else{
                                                                     res.send({
-                                                                               appId: details.appId,
+                                                                               details: playApp[0],
                                                                                message: "New Publish Details has been created"
                                                                            });
                                                                 }
@@ -201,7 +201,7 @@ module.exports = {
 
                                                              else{
                                                                  res.send({
-                                                                            appId: details.appId,
+                                                                            details: app[0],
                                                                             message: "New Publish Details has been created"
                                                                         });
                                                              }
@@ -245,6 +245,19 @@ module.exports = {
 //            server.send(emailDetails, function (err, message) {
 //                sails.log(err || message);
 //            });
+    },
+
+    updateOperators: function (req,res){
+        console.log(req.body);
+        var body = req.body;
+
+        PublishDetails.update({appId:body.appId},{operators:body.operators}).exec(function(err,result){
+            if(err) res.send(err);
+            else{
+                res.send(result);
+            }
+        });
+
     },
 
     /* image uploading with validation*/

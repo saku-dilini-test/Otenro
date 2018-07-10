@@ -40,11 +40,7 @@ module.exports = {
      *
      */
     getAllAppsData: function (req, res) {
-        Application.find().where({ or : [ { status  : 'PENDING' },
-                                        { status  : 'REJECTED' },
-                                        { status   : 'APPROVED' },
-                                        { status   : 'SUSPENDED' },
-                                         { status   : 'TERMINATED' }]}).exec(function (err, appsData) {
+        Application.find().exec(function (err, appsData) {
             if (err) res.send(err);
             res.json(appsData);
 
@@ -138,12 +134,49 @@ module.exports = {
     },
 
     getAllPublishDetails : function (req, res) {
+        var techCtrl = this;
 
         PublishDetails.find().exec(function (err, publishedData) {
             if (err) res.send(err);
+
+            techCtrl.populateOverallAppStatus(publishedData);
+
             res.send(publishedData);
         });
 
+    },
+
+    populateOverallAppStatus: function(publishDetailList) {
+        var techCtrl = this;
+
+        publishDetailList.forEach(function(app){
+            app.publishedStatus = '';
+            if(app.operators) {
+                var statusCode = techCtrl.getOverallStatus(app.operators);
+                if(statusCode!==null) {
+                    app.publishedStatus = statusCode;
+                }
+            }
+        });
+    },
+
+    getOverallStatus: function(operators){
+        var appStatus = null;
+
+        for(var i=0;i<operators.length;i++){
+            var op = operators[i];
+
+            if(op.status==='APPROVED'){
+                return 'APPROVED';
+            }
+
+            if(appStatus===null){
+                appStatus = op.status;
+            }else if(appStatus!==op.status){
+                return null;
+            }
+        }
+        return appStatus;
     },
 
     /**
@@ -440,22 +473,22 @@ module.exports = {
     setAppstatus : function(req,res){
     console.log(req.body);
 
-        var id = {id:req.body.id}
-        var status = {status:req.body.status, publishStatus:req.body.publishStatus}
+        var idPD = {appId:req.body.id}
+        var statusPD = { operators: req.body.operators };
 
-        Application.update(id,status).exec(function(err,result){
+        PublishDetails.update(idPD,statusPD).exec(function(err,result){
 
             if (err){res.send(err);}
 
-            sentMails.sendApkEmail(req.body,function (err,msg) {
-               sails.log.info(err);
-               if (err) {
-                   return  res.send(500);
-               }
-
+               //  sentMails.sendApkEmail(req.body,function (err,msg) {
+               //     sails.log.info(err);
+               //     if (err) {
+               //         return  res.send(500);
+               //     }
+               //
+               //     res.send('ok');
+               // });
                res.send('ok');
-           });
-           res.send('ok');
         });
 
     }
