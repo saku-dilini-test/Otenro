@@ -69,102 +69,97 @@ module.exports = {
             'code': 'MOBITEL',
             'desc': 'Mobitel',
             'shareSplit': '60',
-            'chargingMethod': 'daily'
+            'email': 'supportTest@mobitel.com'
         },
         'Dialog': {
             'code': 'DIALOG',
             'desc': 'Dialog',
             'shareSplit': '60',
-            'chargingMethod': 'daily'
+            'email': 'supportTest@dialog.com'
         },
         'Hutch': {
             'code': 'HUTCH',
             'desc': 'Hutch',
             'shareSplit': '60',
-            'chargingMethod': 'daily'
+            'email': 'supportTest@hutch.com'
         },
         'Airtel': {
             'code': 'AIRTEL',
             'desc': 'Airtel',
             'shareSplit': '60',
-            'chargingMethod': 'daily'
+            'email': 'supportTest@airtel.com'
         }
 
     },
-         IDEABIZ_ADMIN_APP_STATUS:{
+     IDEABIZ_ADMIN_APP_STATUS:{
 
-             "PUBLISH_STATUSES": [
-                 {
-                     "code": "NOT_SUBMITTED",
-                     "description": "Not Submitted",
-                     "nextAvailable": [
-                         "SUBMITTED_FOR_APPROVAL"
-                     ],
-                     "allowedRoles": [
-                         "admin",
-                         "superAdmin",
-                         "appCreater"
-                     ],
-                     "color":"#ffffff"
-                 },
-                 {
-                     "code": "SUBMITTED_FOR_APPROVAL",
-                     "description": "Submitted for Approval",
-                     "nextAvailable": [
-                         "APPROVED",
-                         "REJECTED"
-                     ],
-                     "allowedRoles": [
-                         "admin",
-                         "superAdmin",
-                         "appCreater"
-                     ],
-                     "color":"#ffffff"
-                 },
-                 {
-                   "code": "APPROVED",
-                   "description": "Approved",
-                   "nextAvailable": [
-                     "SUSPENDED",
-                     "TERMINATED"
-                   ],
-                   "allowedRoles": [
-                     "admin",
-                     "superAdmin"
-                   ],
-                   "color":"#c7febc"
-                 },
-                 {
-                   "code": "REJECTED",
-                   "description": "Rejected",
-                   "nextAvailable": [],
-                   "allowedRoles": [],
-                   "color":"#FDAFB0"
-                 },
-                 {
-                   "code": "SUSPENDED",
-                   "description": "Suspended",
-                   "nextAvailable": [
+         "PUBLISH_STATUSES": [
+             {
+                 "code": "NOT_SUBMITTED",
+                 "description": "Not Submitted",
+                 "nextAvailable": [
+                     "SUBMITTED_FOR_APPROVAL"
+                 ],
+                 "color":"#ffffff"
+             },
+             {
+                 "code": "SUBMITTED_FOR_APPROVAL",
+                 "description": "Submitted for Approval",
+                 "nextAvailable": [
                      "APPROVED",
-                     "TERMINATED"
-                   ],
-                   "allowedRoles": [
-                     "admin",
-                     "superAdmin"
-                   ],
-                   "color":"#fee5b4"
-                 },
-                 {
-                   "code": "TERMINATED",
-                   "description": "Terminated",
-                   "nextAvailable": [],
-                   "allowedRoles": [
-                     "admin",
-                     "superAdmin"
-                   ],
-                   "color" : "#FDAFB0"
-                 }
-               ]
-            }
+                     "REJECTED"
+                 ],
+                 "color":"#ffffff"
+             },
+             {
+               "code": "APPROVED",
+               "description": "Approved",
+               "nextAvailable": [
+                 "SUSPENDED",
+                 "TERMINATED"
+               ],
+               "color":"#c7febc"
+             },
+             {
+               "code": "REJECTED",
+               "description": "Rejected",
+               "nextAvailable": [],
+               "color":"#FDAFB0"
+             },
+             {
+               "code": "SUSPENDED",
+               "description": "Suspended",
+               "nextAvailable": [
+                 "APPROVED",
+                 "TERMINATED"
+               ],
+               "color":"#fee5b4"
+             },
+             {
+               "code": "TERMINATED",
+               "description": "Terminated",
+               "nextAvailable": [],
+               "color" : "#FDAFB0"
+             }
+           ]
+        },
+    USER_ROLES:{
+        'ADMIN': {
+            'code': 'ADMIN',
+            'desc': 'Admin'
+        },
+        'SUPER_ADMIN': {
+            'code': 'SUPER_ADMIN',
+            'desc': 'Super Admin'
+        },
+        'OPERATOR': {
+            'code': 'OPERATOR',
+            'desc': 'Operator'
+        },
+        'APP_CREATOR': {
+            'code': 'APP_CREATOR',
+            'desc': 'App Creator'
+        }
+    }
 
 };
