@@ -32,7 +32,7 @@ then
 	serverUrl='https://testdashboard.otenro.com:1448'
 else
 	DB='appmaker'
-	serverUrl='http://developer.appmaker.lk'
+	serverUrl='https://developer.appmaker.lk'
 fi
 echo $DB
 echo $serverUrl
