@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit{
   private alive = true;
   private isSubscribing = false;
   private isUnsubscribing = false;
+  private isFromCMSAppView: boolean = false;
 
   constructor(private subscription:SubscribedDataService,
               private router: Router,
@@ -61,6 +62,8 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit() {
+    this.isFromCMSAppView = localStorage.getItem(this.appId + "_isFromCMSAppView")=='1';
+
     $('#registerModel').on('hide.bs.modal', ()=>{
       this.alive = false;
       console.log("model close " + this.alive);
@@ -146,10 +149,12 @@ export class HeaderComponent implements OnInit{
     this.isSubscribing = false;
   }
   onSubscribe(){
-    this.alive = true;
-    let data = {appId:this.appId,uuId:this.dataService.uuid}
-    this.getSubscription(data);
-    // this.getDeviceUUID();
+    if(!this.isFromCMSAppView) {
+      this.alive = true;
+      let data = {appId: this.appId, uuId: this.dataService.uuid}
+      this.getSubscription(data);
+      // this.getDeviceUUID();
+    }
   }
   getSubscription(data){
 
@@ -179,30 +184,32 @@ export class HeaderComponent implements OnInit{
   }
 
   onUnsubscribe(){
-    this.alive = true;
-    let data = {appId:this.appId,uuId:this.dataService.uuid}
-    this.isUnsubscribing = true;
+    if(!this.isFromCMSAppView) {
+      this.alive = true;
+      let data = {appId: this.appId, uuId: this.dataService.uuid}
+      this.isUnsubscribing = true;
 
-    IntervalObservable.create(5000)
-      .takeWhile(() => this.alive) // only fires when component is alive
-      .subscribe(() => {
-        this.subscription.getSubscribedData(data).subscribe(data =>{
-          console.log(data);
-          this.subscriptionStatus = data.isSubscribed;
-          this.dataService.subscriptionStatus = data.isSubscribed;
-          if(this.subscriptionStatus == false){
-            this.isUnsubscribing = false;
-            localStorage.removeItem(this.appId+"msisdn")
-             this.alive = false;
+      IntervalObservable.create(5000)
+        .takeWhile(() => this.alive) // only fires when component is alive
+        .subscribe(() => {
+          this.subscription.getSubscribedData(data).subscribe(data => {
+            console.log(data);
+            this.subscriptionStatus = data.isSubscribed;
+            this.dataService.subscriptionStatus = data.isSubscribed;
+            if (this.subscriptionStatus == false) {
+              this.isUnsubscribing = false;
+              localStorage.removeItem(this.appId + "msisdn")
+              this.alive = false;
               //close the model
-              $( () => {
+              $(() => {
                 $('#myAccountModel').modal('toggle');
-             });
-             //close the nav bar
-             document.getElementById("mySidenav").style.width = "0";
-          }
+              });
+              //close the nav bar
+              document.getElementById("mySidenav").style.width = "0";
+            }
+          });
         });
-      });
+    }
   }
 
 

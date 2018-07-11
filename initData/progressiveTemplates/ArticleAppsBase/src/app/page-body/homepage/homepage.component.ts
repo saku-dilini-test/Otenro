@@ -41,6 +41,7 @@ export class HomepageComponent implements OnInit {
   private appPublishDetails;
   private alive = true;
   private isSubscribing = false;
+  private isFromCMSAppView: boolean = false;
 
   constructor(private route: Router, private dataService: PagebodyServiceModule,
               private router: Router, private categoryService: CategoriesService,
@@ -52,6 +53,7 @@ export class HomepageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isFromCMSAppView = localStorage.getItem(this.appId + "_isFromCMSAppView")=='1';
 
     $('#registerModelhome').on('hide.bs.modal', ()=>{
       console.log('close');
@@ -92,14 +94,26 @@ export class HomepageComponent implements OnInit {
 
     this.isSubscribing = false;
 
-    if(true){
+    if(this.isFromCMSAppView) {
       this.dataService.catId = id;
       this.router.navigate(['/' + val, id, name]);
     }else{
-      this.dataService.subUserArticleData.id = id;
-      this.dataService.subUserArticleData.name = name;
-      this.isSubscribing = false;
-      $('#registerModelhome').modal('show')
+      let data = {appId:this.appId,msisdn:localStorage.getItem(this.appId+"msisdn")}
+      this.subscription.getSubscribedData(data).subscribe(data =>{
+        this.subscriptionStatus = data.isSubscribed;
+        if(this.subscriptionStatus){
+          localStorage.setItem(this.appId+"msisdn",data.msisdn);
+
+          this.dataService.catId = id;
+          this.router.navigate(['/' + val, id, name]);
+        }else{
+          this.dataService.subUserArticleData.id = id;
+          this.dataService.subUserArticleData.name = name;
+          this.isSubscribing = false;
+          $('#registerModelhome').modal('show')
+        }
+      });
+
     }
   }
 

@@ -38,11 +38,12 @@ export class HomepageComponent implements OnInit {
     private isSliderDataAvailable: boolean = false;
     private isRandomProducts;
     private uuid;
-      private subscriptionStatus;
-      private deviceUUID;
-      private appPublishDetails;
-      private alive = true;
-      private isSubscribing = false;
+    private subscriptionStatus;
+    private deviceUUID;
+    private appPublishDetails;
+    private alive = true;
+    private isSubscribing = false;
+    private isFromCMSAppView: boolean = false;
 
   constructor(private route: Router,
               private dataService: PagebodyServiceModule,
@@ -58,6 +59,9 @@ export class HomepageComponent implements OnInit {
     }
 
     ngOnInit() {
+
+    this.isFromCMSAppView = localStorage.getItem(this.appId + "_isFromCMSAppView")=='1';
+
     $('#registerModelhome').on('hide.bs.modal', ()=>{
           console.log('close');
 
@@ -98,27 +102,29 @@ export class HomepageComponent implements OnInit {
 
     this.isSubscribing = false;
 
-
-    if(true){
-      // let data = {appId:this.appId,msisdn:localStorage.getItem(this.appId+"msisdn")}
-      // this.subscription.getSubscribedData(data).subscribe(data =>{
-      //   console.log(data);
-      //   this.subscriptionStatus = data.isSubscribed;
-      //   this.dataService.subscriptionStatus = data.isSubscribed;
-      //   if(this.subscriptionStatus == true){
-      //     this.isSubscribing = false;
-      //     localStorage.setItem(this.appId+"msisdn",data.msisdn)
+    if(this.isFromCMSAppView) {
+      this.dataService.catId = id;
+      this.router.navigate(['/' + val, id, name,image]);
+    }else{
+      let data = {appId:this.appId,msisdn:localStorage.getItem(this.appId+"msisdn")}
+      this.subscription.getSubscribedData(data).subscribe(data =>{
+        console.log(data);
+        this.subscriptionStatus = data.isSubscribed;
+        this.dataService.subscriptionStatus = data.isSubscribed;
+        if(this.subscriptionStatus == true){
+          this.isSubscribing = false;
+          localStorage.setItem(this.appId+"msisdn",data.msisdn);
 
           this.dataService.catId = id;
           this.router.navigate(['/' + val, id, name,image]);
-      //   }
-      // });
+        }else{
+          this.dataService.subUserArticleData.id = id;
+          this.dataService.subUserArticleData.name = name;
+          this.isSubscribing = false;
+          $('#registerModelhome').modal('show')
+        }
+      });
 
-    }else{
-      this.dataService.subUserArticleData.id = id;
-      this.dataService.subUserArticleData.name = name;
-      this.isSubscribing = false;
-      $('#registerModelhome').modal('show')
     }
   }
 

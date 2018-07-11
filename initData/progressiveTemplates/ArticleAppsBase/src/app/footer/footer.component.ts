@@ -23,6 +23,7 @@ export class FooterComponent implements OnInit{
   private alive = true;
   private isSubscribing = false;
   private isUnsubscribing = false;
+  private isFromCMSAppView: boolean = false;
 
   constructor(private subscription:SubscribedDataService,
               private router: Router,
@@ -31,6 +32,8 @@ export class FooterComponent implements OnInit{
   }
 
   ngOnInit(){
+    this.isFromCMSAppView = localStorage.getItem(this.appId + "_isFromCMSAppView")=='1';
+
     $('#myAccountModelfooter').on('hide.bs.modal', ()=>{
       this.alive = false;
       console.log("model footer close " + this.alive);
@@ -39,7 +42,9 @@ export class FooterComponent implements OnInit{
   }
 
   ngDoCheck(){
-    this.subscriptionStatus = this.dataService.subscriptionStatus;
+    if(!this.isFromCMSAppView) {
+      this.subscriptionStatus = this.dataService.subscriptionStatus;
+    }
   }
 
   navigate(val: string) {

@@ -381,7 +381,12 @@ module.exports = {
         res.redirect(config.ME_SERVER_URL + req.param('userId') + '/templates/' + req.param('appId'));
     },
     viewProgUrl : function(req,res){
-        res.redirect(config.ME_SERVER_URL + req.param('userId') + '/progressiveTemplates/' + req.param('appId')+'/src/');
+        var url = config.ME_SERVER_URL + req.param('userId') + '/progressiveTemplates/' + req.param('appId')+'/src/';
+        if(req.param('isFromCMSAppView'))
+        {
+            url += "?isFromCMSAppView=1";//This is to ditect that the app is loading using the iFrame window in cms.
+        }
+        res.redirect(url);
     },
 
     /**
