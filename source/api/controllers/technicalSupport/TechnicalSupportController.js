@@ -461,15 +461,50 @@ module.exports = {
 
     },
     setComments : function(req,res){
-    console.log(req.body);
 
-        var id = {appId:req.body.id}
+        var operator = null;
+        var commentData;
 
-        PublishDetails.update(id,{comment:req.body.comment}).exec(function(err,result){
-            res.send('ok');
-        })
+            User.find({id:req.userId}).exec(function(err, user){
+                if(err) res.send(err);
+                else{
+                    console.log(config.USER_ROLES.OPERATOR.code);
+                    if(user[0].userRole[0] == config.USER_ROLES.OPERATOR.code){
+                        operator = user[0].operator;
+                    }
+
+                    commentData = {
+                            appId:req.body.id,
+                            comment:req.body.comment,
+                            userId:req.userId,
+                            operator: operator
+                    };
+
+                    Comments.create(commentData).exec(function(err,result){
+                        if (err) res.send(err);
+                        else{
+                            res.send("ok");
+                        }
+                    });
+                }
+            });
 
     },
+
+    getCommentsApp : function(req, res){
+
+    console.log(req.body);
+
+        Comments.find({appId:req.body.appId}).exec(function(err, result){
+            if(err) res.send(err);
+            else{
+                console.log(result);
+                res.send(result);
+            }
+        });
+
+    },
+
     setAppstatus : function(req,res){
     console.log(req.body);
 
@@ -491,5 +526,37 @@ module.exports = {
                res.send('ok');
         });
 
-    }
+    },
+
+    getComments : function(req, res){
+
+        var operator;
+
+        User.find({id:req.userId}).exec(function(err, user){
+            if(err) res.send(err);
+            else{
+                if(user[0].userRole[0] == config.USER_ROLES.SUPER_ADMIN.code){
+                    operator = null;
+
+                    Comments.find({operator: operator}).exec(function(err, result){
+                        if(err) res.send(err);
+                        else{
+                            res.send(result);
+                        }
+                    });
+                }else if(user[0].userRole[0] == config.USER_ROLES.OPERATOR.code){
+                    operator = user[0].operator;
+
+                    Comments.find({operator: operator}).exec(function(err, result){
+                        if(err) res.send(err);
+                        else{
+                            res.send(result);
+                        }
+                    });
+                }
+
+            }
+        });
+
+    },
 };

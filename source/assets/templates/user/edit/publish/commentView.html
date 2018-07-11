@@ -8,43 +8,32 @@
 
     <md-dialog-content>
         <md-tab-body>
-            <div class="md-dialog-header">
+            <div class="md-dialog-header" style="background-color:rgba(241, 241, 241, 0.925)">
                 <div class="md-dialog-header-nav clearfix">
-                    <h1 class="pull-left">Status</h1>
+                    <h1 class="pull-left">ADMIN'S COMMENT</h1>
                 </div>
             </div>
-            <div class="md-dialog-main clearfix">
-                APP NAME: {{appData.appName}}<br>
-                APP ID  : {{appData.id}}
-            </div>
-            <div class="md-dialog-main clearfix">
-                <form class="allItems" novalidate>
-                    <table class="table">
-                        <thead>
-                        <th>Mobile Operator</th>
-                        <th>Status</th>
-                        <th>Comments</th>
 
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="operator in publishData[0].operators">
-                            <td>{{operator.operator}}</td>
-                            <td>{{operator.status}}</td>
-                            <td ng-click="commentView()"><u>View</u></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </form>
+            <div class="md-dialog-main clearfix">
+            <div ng-repeat = "comments in commentsAll  | filter:myFilter" >
+                    <div style="margin-top:4%">
+                        <label style="margin-left:1%;">Date: </label>{{comments.createdAt | date:'MM/dd/yyyy'}}
+                    </div>
+                    <div  style="background-color:rgba(241, 241, 241, 0.925);margin-top:1%;">
+                        <label style="margin-left:1%;">User: </label>{{operatorDes(comments.operator)}}<br>
+                        <label style="margin-top:1%;margin-left:1%;">Comment</label>
+                        <div style="margin-left: 3%;">
+                            {{comments.comment}}
+                        </div>
+                    </div>
+            </div>
 
             </div>
+
             <div class="row md-dialog-main clearfix">
-                <div class="col-sm-6">
-                    App:<a href="">Download</a><br>
-                    Website Link:<a href="">http://horoscope.com</a>
-                </div>
                 <div class="col-sm-3 md-dialog-buttons">
                     <div class="inner-section">
-                        <md-button class="me-default-button" ng-click="ok('cancel')">Close</md-button>
+                        <md-button class="me-default-button" ng-click="cancel()">Close</md-button>
                     </div>
                 </div>
             </div>

@@ -57,7 +57,7 @@ module.exports = {
     },
     userRole:  {
       type: 'array',
-      defaultsTo : ['beta']
+      defaultsTo : ['APP_CREATOR']
     },
     address:{
         type: 'string'
@@ -122,6 +122,10 @@ module.exports = {
     ideaBizPinServerRef: {
         type: 'string'
     },
+    operator: {
+        type: 'string' //This is the operator from config.IDEABIZ_USER_NETWORK_CLIENTS eg. config.IDEABIZ_USER_NETWORK_CLIENTS.Dialog.code
+    },
+
 
     toJSON: function() {
       var obj = this.toObject();

@@ -42,8 +42,49 @@
                     templateUrl: 'user/edit/publish/publishStatus.html',
                     clickOutsideToClose: true,
                     locals : {
-                      item : 'Status',
+                      item : 'Status'
                     }
+                }).then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
+            showCommentView: function(comments, operator,operatorList) {
+                return $mdDialog.show({
+                    templateUrl: 'user/edit/publish/commentView.html',
+                    clickOutsideToClose: true,
+                    locals : {initialData : {comments:comments,operator:operator,operatorList:operatorList}},
+                    controller: ['$scope', 'initialData','$mdDialog','toastr','$filter', function($scope, initialData,$mdDialog,toastr,$filter) {
+
+                                    console.log(initialData);
+                                    $scope.commentsAll = initialData.comments;
+                                    console.log($scope.commentsAll);
+                                    $scope.operators = initialData.operatorList;
+                                    console.log($scope.operators);
+
+                                    $scope.myFilter = function (comment) {
+                                        return comment.operator == initialData.operator || comment.operator == null;
+                                    };
+
+                                    $scope.cancel = function(){
+                                        $mdDialog.hide();
+                                    }
+
+                                    $scope.operatorDes = function(comOp){
+                                    console.log(comOp);
+                                        if(comOp){
+                                            var arr = $filter('filter')($scope.operators,{ "code": comOp });
+                                                if(arr){
+                                                    return arr[0].desc;
+                                                }
+                                        }else{
+                                            return "Super Admin"
+                                        }
+                                    }
+
+                                }]
+
                 }).then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function() {

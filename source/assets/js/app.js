@@ -68,7 +68,7 @@ angular.module('app', [
 
   Permission.defineRole('Admin', function (stateParams) {
     // If the returned value is *truthy* then the user has the role, otherwise they don't
-    if ($auth.getPayload().userRoles[0] == 'admin') {
+    if ($auth.getPayload().userRoles[0] == 'ADMIN') {
 
       return true; // Is anonymous
     }
@@ -76,14 +76,14 @@ angular.module('app', [
   });
   Permission.defineRole('Support', function (stateParams) {
     // If the returned value is *truthy* then the user has the role, otherwise they don't
-    if ($auth.getPayload().userRoles[0] == 'support') {
+    if ($auth.getPayload().userRoles[0] == 'SUPER_ADMIN' || $auth.getPayload().userRoles[0] == 'OPERATOR') {
       return true; // Is anonymous
     }
     return false;
   });
   Permission.defineRole('Beta', function (stateParams) {
     // If the returned value is *truthy* then the user has the role, otherwise they don't
-    if ($auth.getPayload().userRoles[0] == 'beta'){
+    if ($auth.getPayload().userRoles[0] == 'APP_CREATOR'){
     //TODO: Replace below 'true' with above line after userRole has been implemented.
 
       return true; // Is anonymous

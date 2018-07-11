@@ -35,8 +35,8 @@
                 </md-checkbox>
             </fieldset>
 
-            <md-select ng-disabled = "!linkArticle" class="" placeholder="Select Article" ng-model="pushMessage.article" required>
-                <md-option ng-value="v" ng-repeat="v in articles ">{{v.title}}
+            <md-select class="" placeholder="Select Article" ng-model="pushMessage.article" ng-model-options="{trackBy: '$value.id'}" required>
+                <md-option ng-value="v" ng-repeat="v in linkedArticles ">{{v.title}}
                 </md-option>
                 <!--// create new catergory-->
                 <!--<md-option ng-click="newcategory ()">Create New Category</md-option>-->

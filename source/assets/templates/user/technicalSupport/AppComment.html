@@ -45,39 +45,31 @@
                     <textarea type="text" class="input-shadow-border" name="TnC" ng-model="comment" required ></textarea>
 
                 </fieldset>
-                <!--<form class="allItems" novalidate>-->
-                    <!--<table class="table">-->
-                        <!--<thead>-->
-                        <!--<th>Title</th>-->
-                        <!--<th>Category</th>-->
-                        <!--<th>Status</th>-->
-                        <!--<th>Publish<br><font style="font-size:9px">Date & Time</font></th>-->
-                        <!--<th>Expiry<br><font style="font-size:9px">Date & Time</font></th>-->
-                        <!--<th>Action</th>-->
-                        <!--</thead>-->
-                        <!--<tbody>-->
-                        <!--<tr dir-paginate="article in articleList | filter:search | itemsPerPage: pageSize">-->
-                            <!--<td>{{article.title}}</td>-->
-                            <!--<td>{{article.categoryName}}</td>-->
-                            <!--<td>{{article.status}}</td>-->
-                            <!--<td>{{article.publishDate}}</td>-->
-                            <!--<td>{{article.expiryDate}}</td>-->
-                            <!--<td>-->
-                                <!--<a data-ng-click="editArticle(article)">Edit</a> /-->
-                                <!--<a data-ng-click="deleteArticle($index,article)">Delete</a>-->
-                            <!--</td>-->
-                        <!--</tr>-->
-                        <!--</tbody>-->
-                    <!--</table>-->
-                <!--</form>-->
-                <!--<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="vendor/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>-->
+              <!--<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="vendor/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>-->
             </div>
 
             <div class="md-dialog-buttons">
-                <div class="inner-section">
+                <div>
                     <!--<md-button class="me-default-button" ng-click="showPublishArticleDialog()">Publish Article</md-button>-->
                     <md-button class="me-default-button" ng-click="cancel('cancel')">Cancel</md-button>
                     <md-button class="me-default-button" ng-click="save('cancel')">Save</md-button>
+                </div>
+            </div>
+            <br>
+            <div class = "md-dialog-main clearfix">
+                <div class="comment-view">
+                    <div ng-repeat = "comments in commentList" >
+                        <div style="margin-top:4%">
+                            <label style="margin-left:1%;">Date: </label>{{comments.createdAt | date:'MM/dd/yyyy'}}
+                        </div>
+                        <div  style="background-color:rgba(241, 241, 241, 0.925);margin-top:1%;">
+                            <!--<label style="margin-left:1%;">User: </label>{{operatorDes(comments.operator)}}<br>-->
+                            <label style="margin-top:1%;margin-left:1%;">Comment</label>
+                            <div style="margin-left: 3%;">
+                                {{comments.comment}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </md-tab-body>

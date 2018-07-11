@@ -116,19 +116,49 @@
                //alert("MainMenu Loading Error : " + err);
        });
 
-        $scope.commentView = function(comnt){
-            console.log("view comment: " + comnt);
+        $scope.commentView = function(operator){
+
+            publishService.showCommentView($scope.comments,operator,$scope.operators);
+
         }
 
         technicalSupportService.getAppStatus()
             .success(function (result) {
-                $scope.operators = result.PUBLISH_STATUSES;
+                $scope.statuses = result.PUBLISH_STATUSES;
 
             }).error(function (error) {
             toastr.error('Loading Error', 'Warning', {
                 closeButton: true
             });
         });
+
+        technicalSupportService.getOperators()
+            .success(function (result) {
+                $scope.operators = Object.keys(result).map(i => result[i]);
+                console.log($scope.operators);
+
+            }).error(function (error) {
+            toastr.error('Loading Error', 'Warning', {
+                closeButton: true
+            });
+        });
+
+        technicalSupportService.getCommentsApp()
+            .success(function(comments){
+            $scope.comments = comments;
+        }).error(function(error){
+              toastr.error('Comments Loading Error', 'Warning', {
+                    closeButton: true
+              });
+        })
+
+        if(item == 'Status'){
+            publishService.getExistingData("GooglePlay").success(function(data){
+                        $scope.publishData = data;
+            }).error(function(err){
+               //alert("MainMenu Loading Error : " + err);
+            });
+        }
 
         if(item == 'GooglePlay'){
 
@@ -210,9 +240,19 @@
         $scope.getDescription = function(status){
 
             if(status){
-                var arr = $filter('filter')($scope.operators,{ "code": status });
+                var arr = $filter('filter')($scope.statuses,{ "code": status });
                     if(arr){
                         return arr[0].description;
+                    }
+            }
+        }
+
+        $scope.operatorDes = function(status){
+
+            if(status){
+                var arr = $filter('filter')($scope.operators,{ "code": status });
+                    if(arr){
+                        return arr[0].desc;
                     }
             }
         }

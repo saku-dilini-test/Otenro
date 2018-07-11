@@ -31,6 +31,9 @@ module.exports.policies = {
     viewTemplate:true,
     getApplicationData:true,
   },
+  'technicalSupport/TechnicalSupportController':{
+    '*': ['jwtAuth']
+  },
 
   'DashboardController': {
     '*': ['jwtAuth']
