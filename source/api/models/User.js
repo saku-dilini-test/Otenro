@@ -13,6 +13,10 @@ module.exports = {
 
   attributes: {
 
+
+    id :{
+        type: 'ObjectId'
+    },
     name:  {
       type: 'string'
     },

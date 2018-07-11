@@ -8,11 +8,14 @@ module.exports.cron = {
 
     DailySummaryJob: {
 
-        schedule: '00 13 15 * * *',
+        schedule: '00 45 11 * * *',
         onTick: function () {
             if(sails){
                 var revenueAndTrafficReportController = require('../api/controllers/appMakerReports/RevenueAndTrafficReportController.js');
-                revenueAndTrafficReportController.insertRevenueAndTrafficDailySummary();
+                var reconciliationReportController = require('../api/controllers/appMakerReports/ReconciliationReportController.js');
+
+               // revenueAndTrafficReportController.insertRevenueAndTrafficDailySummary();
+                reconciliationReportController.insertReconciliationDailySummary()
             }
         }
     },
