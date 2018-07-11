@@ -463,7 +463,7 @@ module.exports = {
     setComments : function(req,res){
 
         var operator = null;
-
+        var commentData;
 
             User.find({id:req.userId}).exec(function(err, user){
                 if(err) res.send(err);
@@ -472,8 +472,13 @@ module.exports = {
                     if(user[0].userRole[0] == config.USER_ROLES.OPERATOR.code){
                         operator = user[0].operator;
                     }
-                console.log(user);
-        var commentData = {appId:req.body.id,comment:req.body.comment,userId:req.userId,operator: operator};
+
+                    commentData = {
+                            appId:req.body.id,
+                            comment:req.body.comment,
+                            userId:req.userId,
+                            operator: operator
+                    };
 
                     Comments.create(commentData).exec(function(err,result){
                         if (err) res.send(err);
@@ -521,5 +526,37 @@ module.exports = {
                res.send('ok');
         });
 
-    }
+    },
+
+    getComments : function(req, res){
+
+        var operator;
+
+        User.find({id:req.userId}).exec(function(err, user){
+            if(err) res.send(err);
+            else{
+                if(user[0].userRole[0] == config.USER_ROLES.SUPER_ADMIN.code){
+                    operator = null;
+
+                    Comments.find({operator: operator}).exec(function(err, result){
+                        if(err) res.send(err);
+                        else{
+                            res.send(result);
+                        }
+                    });
+                }else if(user[0].userRole[0] == config.USER_ROLES.OPERATOR.code){
+                    operator = user[0].operator;
+
+                    Comments.find({operator: operator}).exec(function(err, result){
+                        if(err) res.send(err);
+                        else{
+                            res.send(result);
+                        }
+                    });
+                }
+
+            }
+        });
+
+    },
 };

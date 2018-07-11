@@ -39,6 +39,9 @@
             getCommentsApp: function(){
                 return $http.post(SERVER_URL + 'edit/getCommentsApp',{appId:$rootScope.appId});
             },
+            getComments: function(){
+                return $http.post(SERVER_URL + 'edit/getComments',{});
+            },
             getAppStatus: function(){
                 return $http.get(SERVER_URL + 'edit/getAppStatus');
             },
@@ -229,11 +232,13 @@
                     bindToController: true,
                     clickOutsideToClose: false,
                     controller: ['$scope', 'initialData','$mdDialog','toastr', function($scope, initialData,$mdDialog,toastr) {
+
                                     $scope.name = initialData.appName;
                                     $scope.comment = initialData.comment;
                                     var dates = new Date(initialData.date);
                                     $scope.date = dates.toDateString();
-
+                                    $scope.commentList = initialData.commentList;
+                                    console.log($scope.commentList);
                                     $scope.save = function(){
                                         var data = { id:initialData.appId,comment:$scope.comment }
 

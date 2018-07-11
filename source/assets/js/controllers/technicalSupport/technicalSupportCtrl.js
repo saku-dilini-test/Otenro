@@ -12,11 +12,11 @@
     'use strict';
     angular.module('app')
         .controller('technicalSupportCtrl',
-            ['$scope','$mdDialog','technicalSupportService','$auth','toastr','$state','$stateParams','SERVER_URL','ME_SERVER','$filter','$window','userProfileResource',
+            ['$scope','$mdDialog','$auth','toastr','$state','$stateParams','SERVER_URL','ME_SERVER','$filter','$window','userProfileResource','technicalSupportService',
                 technicalSupportCtrl
             ]);
 
-    function technicalSupportCtrl($scope,$mdDialog,technicalSupportService,$auth,toastr,$state,$stateParams,SERVER_URL,ME_SERVER,$filter,$window,userProfileResource) {
+    function technicalSupportCtrl($scope,$mdDialog,$auth,toastr,$state,$stateParams,SERVER_URL,ME_SERVER,$filter,$window,userProfileResource,technicalSupportService) {
 
             $scope.splash = [];
             $scope.publishSplash = [];
@@ -377,12 +377,15 @@
            }
 
           $scope.commentView = function(appName,appId,comment,createdData){
-                var data = {appName:appName , appId:appId ,comment:comment,date:createdData}
+                var data = {appName:appName , appId:appId ,comment:comment,date:createdData,commentList:$scope.commentsList}
                 technicalSupportService.showAppcommentView(data);
 
           }
 
-
+          technicalSupportService.getComments().success(function(data){
+                console.log(data);
+                $scope.commentsList = data;
+          });
 
           $scope.getDes = function(id,des){
           var arr = [];
