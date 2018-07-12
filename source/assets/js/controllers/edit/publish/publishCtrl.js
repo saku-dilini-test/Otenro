@@ -101,12 +101,12 @@
                //alert("MainMenu Loading Error : " + err);
        });
 
-       publishService.getAllPrice().
-           success(function(data){
-               $scope.Price = data.price;
-           }).error(function(err){
-               //alert("MainMenu Loading Error : " + err);
-       });
+//       publishService.getAllPrice().
+//           success(function(data){
+//               $scope.Price = data.price;
+//           }).error(function(err){
+//               //alert("MainMenu Loading Error : " + err);
+//       });
 
        publishService.getKeywordLength().
            success(function(data){
@@ -322,16 +322,14 @@
             if(allowPlayStore == true &&(splash[0] == null || splash[1] == null|| splash[6] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
                 playStoreData.language == null ||
                 playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
-                playStoreData.email==null || playStoreData.keyword==null || playStoreData.port==null
-                || playStoreData.price==null)){
+                playStoreData.email==null || playStoreData.keyword==null || playStoreData.port==null)){
 
                         toastr.error('Please fill all fields  ', 'Warning', {
                               closeButton: true
                         });
             }else if(!allowPlayStore &&(splash[0] == null || splash[1] == null|| splash[6] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
                  playStoreData.fullDescription == null  ||
-                 playStoreData.email==null || playStoreData.keyword==null || playStoreData.port==null
-                 || playStoreData.price==null)){
+                 playStoreData.email==null || playStoreData.keyword==null || playStoreData.port==null)){
 
                         toastr.error('Please fill all fields  ', 'Warning', {
                               closeButton: true
