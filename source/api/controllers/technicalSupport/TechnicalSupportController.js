@@ -8,6 +8,7 @@ var fs = require('fs-extra'),
 
     const nodemailer = require('nodemailer');
 var sentMails = require('../../services/emailService');
+var pushNotificationService = require('../../services/pushNotificationsService');
 
 
 
@@ -32,6 +33,10 @@ var server  = email.server.connect({
             }
     });
 
+ // Response messages
+ var ERROR = { message: 'ERROR'},
+     NOT_FOUND = { message: 'NOT_FOUND'},
+     SUCCESS = { message: 'SUCCESS'};
 
 module.exports = {
 
@@ -559,4 +564,150 @@ module.exports = {
         });
 
     },
+
+    /**
+     * Sending push messages to end users by notifying app status when app is suspended or terminated
+     **/
+    notifyAppUsers: function (req, res) {
+
+        // Find criteria for operator_code in Operator collection
+        var oCriteria = { select: ['operator_code'], where: { operator : req.body.operator.toLowerCase() }};
+        // Appuser find criteria
+        var aCriteria;
+        // Push device tokens array
+        var deviceTokenArray = [];
+        // payload for sendPushNotifications function in pushNotificationService
+        var pushMessagesArray = [];
+        // Statuses of app
+        var SUSPENDED = 'SUSPENDED';
+        var TERMINATED = 'TERMINATED';
+
+        Operator.find(oCriteria).exec(function (err, codes) {
+            sails.log.debug('operator codes : ' + JSON.stringify(codes[0].operator_code, null,2));
+
+            if (err) {
+                sails.log.error('error :' + err);
+                return res.send(ERROR);
+            }
+
+            if (codes && codes.length > 0) {
+
+                aCriteria = createAppUserCriteria(req.body.appId, codes[0].operator_code);
+
+                AppUser.find(aCriteria).exec(function (err, deviceUUIDs) {
+
+                    sails.log.debug('deviceUUIDs : ' + JSON.stringify(deviceUUIDs, null,2));
+
+                    if (err) {
+                        sails.log.error('error :' + err);
+                        return res.send(ERROR);
+                    }
+
+                    if (deviceUUIDs && deviceUUIDs.length > 0) {
+
+                        generateDeviceTokenArray(deviceUUIDs).then(function (data) {
+                            if (data === 'ok') {
+                               pushMessagesArray = createPushMessageArray(deviceTokenArray, req.body.status);
+                               pushNotificationService.sendPushNotifications(pushMessagesArray);
+                               return res.send(SUCCESS);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+        /**
+         * Responsible for creating AppUser find criteria
+         *
+         * @param appId {String} :: selected appId
+         * @param oCodes {Array} :: operator_code as an array for selected operator
+         *
+         * @return criteria :: find criteria for AppUser
+         **/
+        function createAppUserCriteria(appId, oCodes) {
+
+            var criteria;
+            var orArray = [];
+
+            oCodes.forEach(function (code) {
+               orArray.push({ msisdn: { 'startsWith': code.toString() }})
+            });
+            // AppUser find criteria
+            criteria = { select: ['deviceUUID'], where: { or: orArray, appId: appId }};
+            sails.log.debug('AppUser find query : ' + JSON.stringify(criteria, null,2));
+            return criteria;
+           }
+
+        /**
+         * Generate push device tokens array using deviceUUIDs
+         *
+         * @param deviceUUIDs {Array} :: deviceUUIDs from AppUser collection
+         *
+         * @return Promise
+         **/
+        function generateDeviceTokenArray(deviceUUIDs) {
+
+            return new Promise(function (resolve, reject) {
+
+                // Number of executed findOne query count on DeviceId collection
+                var dbQueryCount = 0;
+
+                deviceUUIDs.forEach(function (deviceUUID) {
+
+                    DeviceId.findOne({ deviceUUID: deviceUUID.deviceUUID })
+                        .exec(function (err, deviceId) {
+
+                            if (err) {
+                                sails.log.error('error :' + err);
+                                reject('error');
+                            }
+
+                            if (deviceId) {
+                                dbQueryCount = dbQueryCount + 1;
+                                deviceTokenArray.push(deviceId.deviceId);
+
+                                // return promise if dbQueryCount is equals to deviceUUIDs count
+                                if (dbQueryCount === deviceUUIDs.length) {
+                                    resolve('ok');
+                                }
+                            }
+                        });
+                });
+            });
+        }
+
+        /**
+         * Responsible for creating payload for sendPushNotifications function in pushNotificationService
+         *
+         * @param deviceTokens {Array} :: push device tokens array
+         * @param status {String} :: status of the app - values => SUSPENDED or TERMINATED
+         *
+         * @return massagesArray {Array}
+         **/
+        function createPushMessageArray(deviceTokens, status) {
+            // message for end users
+            var message;
+            var massagesArray = [];
+
+            if (status === SUSPENDED) {
+                message = 'App has been temporarily suspended!';
+            } else if (status === TERMINATED) {
+                message = 'App is no longer available!';
+            }
+            sails.log.debug('Push message : ' + message);
+
+            deviceTokens.forEach(function (deviceToken) {
+                var mArrayElement = {
+                    "to": deviceToken,
+                    "notification": {
+                        "body" : message
+                    }
+                };
+                massagesArray.push(mArrayElement);
+            });
+            return massagesArray;
+        }
+
+    }
 };

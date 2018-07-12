@@ -3001,3 +3001,50 @@ table.md-calendar-day-header{
     max-height: 230px;
     overflow:auto;
 }
+
+.reports-container{
+}
+
+.technical-support{
+
+}
+
+.reports-type-container {
+    margin-top: 50px;
+}
+
+.reports-period-container {
+    margin-top: 50px;
+}
+.reports-type-container select{
+    font-size: 10px;
+    height: 25px;
+    padding-left: 0;
+    width: 25%;
+}
+
+.period-container{
+    float: left;
+    width: 60%
+}
+
+.period-container input{
+    font-size: 10px;
+    height: 25px;
+    padding-left: 0;
+    width: 42%;
+    margin-right: 10px;
+}
+
+.operator-container select{
+    font-size: 10px;
+    height: 25px;
+    padding-left: 0;
+    width: 60%;
+}
+
+
+.operator-container{
+    float: right;
+    width: 40%
+}
