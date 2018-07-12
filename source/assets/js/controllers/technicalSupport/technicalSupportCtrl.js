@@ -351,16 +351,17 @@
 
            }
 
-            technicalSupportService.getOperators()
-                .success(function(result){
-
-                    $scope.operators = result
-                    console.log($scope.operators);
-                }).error(function(error){
-                    toastr.error('Loading operators Error', 'Warning', {
-                    closeButton: true
-                });
-            });
+        $scope.operators = [];
+            // technicalSupportService.getOperators()
+            //     .success(function(result){
+            //
+            //         $scope.operators = result
+            //         console.log($scope.operators);
+            //     }).error(function(error){
+            //         toastr.error('Loading operators Error', 'Warning', {
+            //         closeButton: true
+            //     });
+            // });
 
            $scope.appDescriptionView = function(appName, appData,appId,userId){
                 console.log(appName);
