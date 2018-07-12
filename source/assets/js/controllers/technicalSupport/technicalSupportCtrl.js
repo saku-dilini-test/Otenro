@@ -22,6 +22,7 @@
             $scope.publishSplash = [];
             $scope.appList = [];
             $scope.deviceView ="mobile";
+            $scope.showSearchField = true;
 
             var tempImagePath;
 
@@ -540,6 +541,31 @@
             }
 
           }
+
+          /**
+           * REPORT GENERATION - START
+           **/
+
+
+          /**
+           * @description Responsible for showing and hiding search field
+           *
+           * @param tabName :: name of the clicked tab
+           **/
+          $scope.showHideSearchField = function ( tabName ) {
+
+              // If user selected tab is equals to reports hide the search field
+              if (tabName === 'reports') {
+                  $scope.showSearchField = false;
+              } else {
+                  $scope.showSearchField = true;
+              }
+          };
+
+
+            /**
+             * REPORT GENERATION - END
+             **/
 
 
     }
