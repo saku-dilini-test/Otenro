@@ -354,7 +354,7 @@
             technicalSupportService.getOperators()
                 .success(function(result){
 
-                    $scope.operators = result
+                    $scope.operators = result;
                     console.log($scope.operators);
                 }).error(function(error){
                     toastr.error('Loading operators Error', 'Warning', {
