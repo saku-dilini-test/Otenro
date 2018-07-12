@@ -134,7 +134,12 @@
 
         technicalSupportService.getOperators()
             .success(function (result) {
-                $scope.operators = Object.keys(result).map(i => result[i]);
+                var op = [];
+                Object.keys(result).map(function(i){
+                    op.push(result[i]);
+                });
+                $scope.operators = op;
+
                 console.log($scope.operators);
 
             }).error(function (error) {
