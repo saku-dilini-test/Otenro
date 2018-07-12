@@ -19,6 +19,8 @@ module.exports = {
 
     insertReconciliationDailySummary: function () {
 
+        var date = new Date();
+        date.setDate(date.getDate() -1);
 
         PublishDetails.find().exec(function(err, publishDetailsData){
 
@@ -32,13 +34,85 @@ module.exports = {
                     User.findOne({id: applicationData.userId}).
                     exec(function(error, userData) {
 
+                        SubscriptionPayment.find({date: dateFormat(date, "yyyy-mm-dd"), status:1,appId:publishDetails.appId},
+                            {groupBy:  ['appId'] , sum: [ 'amount' ] }).
+                        exec(function(error, subscriptionPaymentData) {
 
+                            var data = {date:dateFormat(date, "yyyy-mm-dd"),appId:publishDetails.appId,
+                                revenue:subscriptionPaymentData[0] ? (subscriptionPaymentData[0].amount) : 0 ,userId:userData.id,
+                                name:userData.firstName+ " "+ userData.lastName ,bankCode:userData.bankCode,
+                                branchCode:userData.branchCode,branchName:userData.branchName,bankAccountNumber:userData.accountNumber};
 
+                            ReconciliationDailySummary.create(data).exec(function (err, result) {
+
+                                if (err) console.log(err);
+                                console.log(result);
+
+                            });
+
+                        });
                     });
 
                 });
 
             });
+        });
+    },
+
+
+    insertReconciliationMonthlySummary: function (year ,month) {
+
+        PublishDetails.find().exec(function(err, publishDetailsDataArray){
+
+            publishDetailsDataArray.forEach(function(publishDetailsData) {
+
+                console.log(publishDetailsData);
+
+                    ReconciliationDailySummary.native(function (err, collection) {
+
+                        if (err) return res.serverError(err);
+
+                        collection.aggregate([
+                            {
+                                "$match": {
+                                    "date": {
+                                        $gte: dateFormat(getFirstDayOfMonth(year, month), "yyyy-mm-dd"),
+                                        $lte: dateFormat(getLastDayOfMonth(year, month), "yyyy-mm-dd")
+                                    },
+                                    "appId": publishDetailsData.appId
+                                }
+                            },
+                            {
+                                "$group": {
+                                    "_id": "$appId",
+                                    "revenue": {"$sum": "$revenue"}
+                                }
+                            }
+                        ]).toArray(function (err, dailySummaryData) {
+                            if (err) {
+                                console.log(err);
+                            }
+
+                            console.log(JSON.stringify(dailySummaryData[0]));
+
+                            if (dailySummaryData.length>0){
+
+                                var data = {month:month,year:year,appId:publishDetailsData.appId,
+                                    revenue:dailySummaryData[0] ? (dailySummaryData[0].revenue) : 0 ,userId:publishDetailsData.userId,
+                                    name:publishDetailsData.name ,bankCode:publishDetailsData.bankCode,
+                                    branchCode:publishDetailsData.branchCode,branchName:publishDetailsData.branchName,
+                                    bankAccountNumber:publishDetailsData.accountNumber};
+
+
+                                ReconciliationMonthlySummary.create(data).exec(function (err, result) {
+                                    if (err) console.log(err);
+                                    //console.log(result);
+                                });
+
+                            }
+                        });
+                    });
+                });
         });
     },
 
