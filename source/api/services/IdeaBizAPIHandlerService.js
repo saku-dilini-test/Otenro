@@ -76,15 +76,13 @@ module.exports = {
     },
 
     requestCallbackContinue: function(err, response, body, callback) {
-        console.log("response: " + JSON.stringify(response,null,2));
-        console.log("body: " + body);
-
         if (err) {
             sails.log.error('Error while requesting the IdeaBiz api: ' + this.requestObj.url  + " err: " + err);
             return callback(null,err);
         }
 
-        if (response.statusCode === 401 && body.indexOf('Expired')>0) {
+        if (response.statusCode === 401 && (body.indexOf('Expired')>0 || body.indexOf('Access Token Inactive')>0)){
+            sails.log.debug("body: " + body);
             if(!this.requestObj){
                 sails.log.error('requestObj is null which can not send the request requestObj: ' + JSON.stringify(this.requestObj,null,2));
                 return callback(null,{ message: 'Error' });
