@@ -62,7 +62,7 @@
                 + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
 
             $scope.appTemplateUrl = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
+                + "&appId=" + $rootScope.appId + "&isFromCMSAppView=1" + "&" + new Date().toISOString() + "/";
 
         }else{
 
@@ -72,7 +72,7 @@
 
 
             $scope.appTemplateUrl = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
-                + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
+                + "&appId=" + $rootScope.appId + "&isFromCMSAppView=1" + "&" + new Date().toISOString() + "/";
 
         }
 
