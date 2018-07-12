@@ -262,19 +262,14 @@
                         <div class="clearfix">
                             <fieldset class="col-3">
                                 <label>Select Port</label>
-                                <select class="input-shadow-border form-control"
-                                        ng-model="playStoreData.port"
-                                        ng-options="port for port in Ports"
-                                        required>
-                                </select>
-                            </fieldset>
-                            <fieldset class="col-3">
-                                <label>Select Price</label>
-                                <select class="input-shadow-border form-control"
-                                        ng-model="playStoreData.price"
-                                        ng-options="price for price in Price"
-                                        required>
-                                </select>
+
+                                <md-select class="" placeholder="Select Port" ng-model="playStoreData.port" required>
+                                    <md-option ng-value="port" ng-repeat="port in Ports ">{{port}}
+                                    </md-option>
+                                    <!--// create new catergory-->
+                                    <!--<md-option ng-click="newcategory ()">Create New Category</md-option>-->
+                                </md-select>
+
                             </fieldset>
 
                         </div>
