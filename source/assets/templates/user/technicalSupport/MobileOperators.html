@@ -26,7 +26,7 @@
                             <td> {{op.operator}} </td>
                             <td> {{getStatus(op.status)}}</td>
                             <td>
-                                <div class="row" ng-hide="op.status=='NOT_SUBMITTED'">
+                                <div class="row" ng-hide="op.status=='NOT_SUBMITTED' || op.status=='SUBMITTED_FOR_CONFIG' || op.status=='REJECTED' || op.status=='TERMINATED'">
                                     <div class="col-sm-8">
                                         <select ng-model= "op.nextStatus" ng-style ="{'background-color': getColor(op.status)}">
                                             <option ng-repeat="sts in getArr(op.status)" value="{{sts.code}}" >{{sts.description}}</option>

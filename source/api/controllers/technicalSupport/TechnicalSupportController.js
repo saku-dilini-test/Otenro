@@ -609,13 +609,14 @@ module.exports = {
                             if (data === 'ok') {
                                pushMessagesArray = createPushMessageArray(deviceTokenArray, req.body.status);
                                pushNotificationService.sendPushNotifications(pushMessagesArray);
-                               return res.send(SUCCESS);
                             }
                         });
                     }
                 });
             }
         });
+
+        return res.send(SUCCESS);
 
         /**
          * Responsible for creating AppUser find criteria
