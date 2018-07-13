@@ -565,6 +565,31 @@ module.exports = {
 
     },
 
+    setServiceId : function(req, res){
+        var Query = {appId: req.body.id};
+        var operators;
+
+        PublishDetails.findOne(Query).exec(function(err, findApp){
+            if(err){ res.send(err);}
+            else{
+                operators = findApp.operators;
+                operators.forEach(function(ele){
+
+                    if(ele.status == "SUBMITTED_FOR_CONFIG"){
+                        ele.status = "SUBMITTED_FOR_APPROVAL";
+                    }
+
+                });
+                    PublishDetails.update(Query,{serviceID:req.body.serviceId, operators:operators}).exec(function(err, data){
+                        if(err){ res.send(err);}
+                        else{
+                                res.send("serviceId added");
+                        }
+                    });
+            }
+        });
+    },
+
     /**
      * Sending push messages to end users by notifying app status when app is suspended or terminated
      **/
