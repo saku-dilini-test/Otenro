@@ -54,6 +54,9 @@
             savePushConfigDetails : function(data){
                 return $http.post(SERVER_URL + 'edit/savePushConfigDetails',data);
             },
+            saveServiceId : function(data){
+                return $http.post(SERVER_URL + 'edit/setServiceId',data);
+            },
             changePublishStatus : function(data){
                 return $http.post(SERVER_URL + 'edit/changePublishStatus',data);
             },

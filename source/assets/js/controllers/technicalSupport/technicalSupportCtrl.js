@@ -37,6 +37,7 @@
                 var profParams = { userId: $stateParams.userId }
                 userProfileResource.getUserProfile(profParams).success(function (data) {
                     $scope.user = data;
+                    console.log($scope.user);
                 }).error(function (err) {
                     console.err(err);
                 });
@@ -170,11 +171,24 @@
                                     $scope.publishAppData = details;
                                     details.forEach(function(detail){
                                         apps.forEach(function(app){
-                                            if(detail.appId===app.id){
+                                            if(detail.appId === app.id){
                                                 if(detail.publishedStatus!=='') {
                                                     var curStatusObj = $filter('filter')($scope.appStatusArr, {"code": detail.publishedStatus});
                                                     app.publishedStatus = curStatusObj[0].description;
                                                 }
+                                                if($scope.user){
+                                                    if($scope.user.userRole == "ADMIN"){
+                                                        var checkStatus = $filter('filter')(detail.operators,{status:"SUBMITTED_FOR_CONFIG"});
+                                                        console.log(checkStatus.length)
+                                                        if(checkStatus.length == 0){
+                                                            app.enableSave = false
+                                                        }else{
+                                                            app.enableSave = true;
+                                                        }
+                                                    }
+                                                }
+                                                app.serviceId = detail.serviceID;
+                                                    console.log(app);
                                                 $scope.appList.push(app);
                                             }
                                         });
@@ -194,6 +208,10 @@
                     });
                 })
                 
+            }
+
+            $scope.checkStatus = function(appId){
+
             }
 
            $scope.getUserAppData = function (userId) {
@@ -383,10 +401,24 @@
 
           }
 
-          technicalSupportService.getComments().success(function(data){
-                console.log(data);
-                $scope.commentsList = data;
-          });
+        $scope.saveServiceId = function(data,){
+            technicalSupportService.saveServiceId(data).success(function(result){
+
+//                toastr.error('Service ID added Successfully', 'Success', {closeButton: true});
+                $window.location.reload();
+            }).error(function(error){
+                toastr.error('Error adding Service ID', 'Warning', {closeButton: true});
+            });
+        }
+
+        if($scope.user){
+            if($scope.user.userRole != "ADMIN"){
+              technicalSupportService.getComments().success(function(data){
+                    console.log(data);
+                        $scope.commentsList = data;
+              });
+            }
+        }
 
           $scope.getDes = function(id,des){
           var arr = [];
@@ -415,6 +447,10 @@
                                 return null;
                                 break;
                             }
+                        }else if (des == "serviceId"){
+
+                            return $scope.publishAppData[i].serviceId;
+
                         }else{
                             if($scope.publishAppData[i].operators){
                                 var operators = [];

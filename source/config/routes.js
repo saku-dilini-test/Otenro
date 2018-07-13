@@ -419,6 +419,7 @@ module.exports.routes = {
     'POST /edit/getCommentsApp' : 'technicalSupport/TechnicalSupportController.getCommentsApp',
     'POST /edit/getComments' : 'technicalSupport/TechnicalSupportController.getComments',
     'POST /technicalSupport/notifyAppUsers' : 'technicalSupport/TechnicalSupportController.notifyAppUsers',
+    'POST /edit/setServiceId' : 'technicalSupport/TechnicalSupportController.setServiceId',
 
     /**
      * IPG Controller

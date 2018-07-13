@@ -76,7 +76,7 @@ angular.module('app', [
   });
   Permission.defineRole('Support', function (stateParams) {
     // If the returned value is *truthy* then the user has the role, otherwise they don't
-    if ($auth.getPayload().userRoles[0] == 'SUPER_ADMIN' || $auth.getPayload().userRoles[0] == 'OPERATOR') {
+    if ($auth.getPayload().userRoles[0] == 'SUPER_ADMIN' || $auth.getPayload().userRoles[0] == 'OPERATOR' || $auth.getPayload().userRoles[0] == 'ADMIN') {
       return true; // Is anonymous
     }
     return false;
