@@ -3,7 +3,7 @@
  *
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-
+var adminAPI = require('./IdeabizAdminapiController');
 var config = require('../../services/config');
 
 module.exports = {
@@ -18,37 +18,41 @@ module.exports = {
     onReceivingSMS : function(req,res){
         var reqBody = req.body;
 
-        sails.log.debug("onReceivingSMS message body: " + JSON.stringify(reqBody,null,2));
+        sails.log.debug("Request received to onReceivingSMS message body: " + JSON.stringify(reqBody));
 
         try {
             var inboundSMSMessage = reqBody.inboundSMSMessageNotification.inboundSMSMessage;
             var msisdn = inboundSMSMessage.senderAddress;
             var message = inboundSMSMessage.message;
-            var deviceUUID = reqBody.inboundSMSMessageNotification.callbackData.deviceUUID;
-            // var serviceID = reqBody.inboundSMSMessageNotification.callbackData.serviceID;
-            // var appId = reqBody.inboundSMSMessageNotification.callbackData.appId;
+            var callbackData = reqBody.inboundSMSMessageNotification.callbackData;
+            var deviceUUID = null;
             var thisController = this;
-
             //Make the keyword from message body, format should be <keyword> <reg> or <unreg>
-            var regStr = "reg";
-            var unregStr = "unreg";
+            var regStr = "start";
+            var unregStr = "stop";
             var isRegistration = null;
-            var postfix = '';
+            var prefix = '';
 
-            if(message.indexOf(unregStr)>0){
-                isRegistration = false;
-                postfix = unregStr;
-            }else if(message.indexOf(regStr)>0){
-                isRegistration = true;
-                postfix = regStr;
-            }
+            message = message.toLowerCase();
 
-            if(!isRegistration){
+            if(message.indexOf(unregStr)==-1 && message.indexOf(regStr)==-1){
                 sails.log.error("Message body does not contains '" + regStr + " or " + unregStr);
                 return res.badRequest("SMS body does not contains required data");
             }
 
-            var keyword = message.substring(0, message.indexOf(postfix)-1);
+            if(message.indexOf(unregStr)!=-1){
+                isRegistration = false;
+                prefix = unregStr;
+            }else if(message.indexOf(regStr)!=-1){
+                isRegistration = true;
+                prefix = regStr;
+            }
+
+            if(callbackData){
+                deviceUUID = reqBody.inboundSMSMessageNotification.callbackData.deviceUUID;
+            }
+
+            var keyword = message.substring(message.indexOf(prefix)+prefix.length+1);
 
             if (!keyword || (keyword && keyword.length===0)) {
                 sails.log.error("SMS body does not contains keyword");
@@ -82,11 +86,13 @@ module.exports = {
                                 sails.log.debug("In Registration: User exists for the msisdn: " + msisdn + " and for the appID: " + appID);
 
                                 var setFields = {
-                                    'deviceUUID': deviceUUID
+                                    'status': config.APP_USER_STATUS.ACTIVE
                                 };
 
-                                if (user.status === config.APP_USER_STATUS.ACTIVE) {
-                                    sails.log.info("Active msisdn: " + msisdn + " just update the deviceUUID");
+                                if(!deviceUUID){
+                                    sails.log.info("No deviceUUID returned from msisdn: " + msisdn);
+                                }else{
+                                    setFields.deviceUUID = deviceUUID;
                                 }
 
                                 AppUser.update(queryUser, setFields).exec(function (err, users) {
@@ -95,18 +101,17 @@ module.exports = {
                                         return res.serverError("Error when update the msisdn: " + msisdn + " error: " + err);
                                     }
 
-                                    sails.log.debug("Update users: " + users.length);
-
-                                    if (user.status === config.APP_USER_STATUS.INACTIVE) {
-                                        sails.log.info("Inactive msisdn: " + msisdn + " need to subscribe");
-                                        thisController.subscribeUser(req, res, msisdn, serviceID);
+                                    if(user.deviceUUID) {
+                                        // Send the notifications to the AppUser
+                                        var message = "Your subscription to " + app.appName + " has been success. Click to open " + app.appName;
+                                        adminAPI.notifyUsers(req, res, users, message);
                                     }
 
-                                    return res.ok("User updated");
+                                    return res.ok("User Registered");
                                 });
                             }else{
                                 sails.log.debug("In Un-Registration: User exists for the msisdn: " + msisdn + " and for the appID: " + appID);
-                                thisController.unsubscribeUser(req,res,msisdn,serviceID);
+                                return res.ok("User Unregistered");
                             }
                         }else {
                             if(!isRegistration){
@@ -118,10 +123,13 @@ module.exports = {
                             var newAppUser = {
                                 'msisdn': msisdn,
                                 'appId': appID,
-                                'deviceUUID': deviceUUID,
-                                'status': config.APP_USER_STATUS.INACTIVE,
+                                'status': config.APP_USER_STATUS.ACTIVE,
                                 'serviceID': app.serviceID
                             };
+
+                            if(deviceUUID){
+                                newAppUser.deviceUUID = deviceUUID;
+                            }
 
                             AppUser.create(newAppUser).exec(function (err, user) {
                                 if (err) {
@@ -129,7 +137,7 @@ module.exports = {
                                 }
 
                                 sails.log.debug("New user created for the msisdn: " + msisdn + " serviceID=" + app.serviceID);
-                                thisController.subscribeUser(req,res,msisdn,app.serviceID);
+                                // thisController.subscribeUser(req,res,msisdn,app.serviceID);
 
                                 return res.created(user);
                             });
@@ -144,16 +152,5 @@ module.exports = {
             sails.log.error(err);
             res.serverError(err);
         }
-    },
-
-    subscribeUser: function(req,res,msisdn,serviceID){
-        sails.log.debug("Call subscription api in Ideabiz");
-        //Call User subscription api in Ideabiz
-    },
-    unsubscribeUser: function(req,res,msisdn,serviceID){
-        sails.log.debug("Call unsubscription api in Ideabiz");
-        //Call User unsubscription api in Ideabiz
     }
-
-
 };
