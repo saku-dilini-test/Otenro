@@ -160,6 +160,9 @@ module.exports = {
             'code': 'APP_CREATOR',
             'desc': 'App Creator'
         }
-    }
+    },
+
+    IDEABIZ_EMAIL : sails.config.IDEABIZ_EMAIL,
+
 
 };

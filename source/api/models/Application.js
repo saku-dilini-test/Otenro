@@ -66,6 +66,10 @@ module.exports = {
 
         uniqueAppId: {
             type: 'string'
+        },
+
+        isActive: {
+            type: 'boolean'
         }
     }
 };

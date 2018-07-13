@@ -49,8 +49,8 @@
   <div id="mySidenav" class="sidenav  main-navigation">
     <div class="closebtn" (click)="closeNav()">&times;</div>
     <a (click)="navigate('','Your Horoscope')">Home</a>
-    <a *ngIf="!subscriptionStatus" data-toggle="modal" data-target="#registerModel">Register</a>
-    <a *ngIf="subscriptionStatus" data-toggle="modal" data-target="#myAccountModel">My Account</a>
+    <a *ngIf="!subscriptionStatus" data-toggle="modal" (click) = "openRegisterModel()">Register</a>
+    <a *ngIf="subscriptionStatus" data-toggle="modal" (click) = "openMyAccountModel()">My Account</a>
     <a (click)="navigate('contact','Contact us')">Contact Us</a>
     <a (click)="navigate('policies','Privacy Policy')">Privacy Policy</a>
     <div class="navbar-brand text-center" (click)="navigate('')">
@@ -134,6 +134,20 @@
         </div>
 
         <button [disabled]="isSubscribing == true" type="button" class="btn sub-button-sub btn-block" (click)="onSubscribe()"> Subscibe Now</button>
+        <button type="button" class="btn sub-button-cancel btn-block" data-dismiss="modal" (click)= "close()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- My Account Model -->
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="appStatusModel" tabindex="-1" role="dialog" aria-labelledby="appStatusModelLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <h3 class="padding-bottom">Sorry!</h3>
+        <p>The App is no longer available</p>
+        <br>
         <button type="button" class="btn sub-button-cancel btn-block" data-dismiss="modal" (click)= "close()">Cancel</button>
       </div>
     </div>

@@ -16,7 +16,7 @@
                 <li class="obl-dashboard-createApp">
                     <button type="button" ui-sref="user.templates"></button>
                 </li>
-                <li gridster-item="item" ng-repeat="item in widgets">
+                <li gridster-item="item" ng-repeat="item in widgets | filter: myFilter">
                     <div class="me-app-box-widget">
                         <div class="me-app-box-heading">
                             <img class="me-app-header-icon" ng-src="{{item.appIcon}}">

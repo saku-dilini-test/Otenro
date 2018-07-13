@@ -7,7 +7,6 @@ import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
 import { PagebodyServiceModule } from '../page-body/page-body.service'
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-footer',
@@ -24,6 +23,7 @@ export class FooterComponent implements OnInit{
   private isSubscribing = false;
   private isUnsubscribing = false;
   private isFromCMSAppView: boolean = false;
+  private appStatus;
 
   constructor(private subscription:SubscribedDataService,
               private router: Router,
@@ -45,6 +45,24 @@ export class FooterComponent implements OnInit{
     if(!this.isFromCMSAppView) {
       this.subscriptionStatus = this.dataService.subscriptionStatus;
     }
+  }
+
+  openFooterMyAccount(){
+
+    this.subscription.getAppStatus({ appId: this.appId }).subscribe(data => {
+      this.appStatus = data.isActive;
+      this.dataService.appStatus = this.appStatus;
+      if (this.appStatus == false || this.appStatus == "false") {
+        $(() => {
+          $('#appStatusModel').modal('show');
+        });
+      } else {
+        $( () => {
+          $('#myAccountModelfooter').modal('show');
+       });
+      }
+    });
+
   }
 
   navigate(val: string) {
@@ -70,7 +88,7 @@ export class FooterComponent implements OnInit{
             localStorage.removeItem(this.appId+"msisdn")
              this.alive = false;
               //close the model
-              $(function () {
+              $( () => {
                 $('#myAccountModelfooter').modal('toggle');
              });
              //close the nav bar

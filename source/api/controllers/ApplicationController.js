@@ -348,6 +348,7 @@ module.exports = {
                           status : "DRAFT",
                           displayImage: req.body.templateUrl,
                           templateCategory : templateCategory,
+                          isActive: true,
                           appSettings:{
                               appCurrency:{
                                   sign : "$",

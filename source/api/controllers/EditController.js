@@ -9,10 +9,23 @@ var fs = require('fs-extra'),
     config = require('../services/config'),
     xml2js = require('xml2js'),
     zipFolder = require('zip-folder');
+const nodemailer = require('nodemailer');
 
 gracefulFs.gracefulify(fs);
 var rimraf = require('rimraf');
 
+var transporter = nodemailer.createTransport({
+    host: 'appmaker.lk',
+    port: 465,
+    secure: true, // true for 465, false for other ports
+    auth: {
+        user: 'support@appmaker.lk', // generated ethereal user
+        pass: 'Jza12BTL36' // generated ethereal password
+    },
+    tls:{
+        rejectUnauthorized: false
+    }
+});
 
 module.exports = {
 
@@ -39,67 +52,76 @@ module.exports = {
 
         var appId = req.param('appId');
         var tempNew = req.param('isNew');
+        var operators;
         var searchApp = {
             id: appId
         };
-        Application.findOne(searchApp).exec(function (err, app) {
+        Application.update(searchApp,{isActive: false}).exec(function (err, app) {
             if (err) return res.negotiate(err);
             else {
-                if (app.status=='DRAFT'){
-                    Application.destroy(searchApp).exec(function (err, app) {
-                        if (err) return res.negotiate(err);
+                console.log(app);
+                PublishDetails.findOne({appId: app[0].id}).exec(function (err, publishApp){
+                    if(err) return res.negotiate(err);
+                    else{
+                    console.log(publishApp);
+                    if(publishApp){
+                        console.log("inside if");
+                        console.log("app id");
+                        console.log(app[0].id);
+                           operators = publishApp.operators;
+                           operators.forEach(function(op){
+                                op.status = "TERMINATED";
+                           });
 
-                        var resourcesPath  = [];
-                        var applicationPath;
-                        var appPath;
-                        if(tempNew == 'true'){
-                            applicationPath= config.APP_FILE_SERVER + req.param('userId') + '/progressiveTemplates/' + appId;
-                            appPath= config.ME_SERVER+ req.param('userId') + '/progressiveTemplates/' + appId;
-
-                        }else{
-                            applicationPath= config.APP_FILE_SERVER + req.param('userId') + '/templates/' + appId + '/';
-                            appPath= config.ME_SERVER+ req.param('userId') + '/templates/' + appId + '/';
-                        }
-                        resourcesPath.push(applicationPath);
-                        resourcesPath.push(appPath);
-
-                        resourcesPath.forEach(function(path){
-                        console.log(path)
-                            fs.stat(path, function (err, fileStat) {
-                                if (err) {
-                                    if (err.code == 'ENOENT') {
-                                        sails.log.info('Does not exist.');
-                                    }
-                                } else {
-//                                    if (fileStat.isFile()) {
-                                   rimraf(path, function () {
-                                       console.log('done');
-                                   });
-
-                            //     } else if (fileStat.isDirectory()) {
-//                                        sails.log.info('Directory found.');
-//                                    }
-                                }
-                            });
-                        });
-
-                        Slider.destroy({'appId': req.param('appId')}).exec(function (err, slider){
-                             if (err) return res.negotiate(err);
-                        });
-
-                        ThirdNavigation.destroy({'appId': req.param('appId')}).exec(function (err, thirdNavi){
+                        PublishDetails.update({appId: app[0].id},publishApp).exec(function(err, updatedPbApp){
                             if(err) return res.negotiate(err);
-                        });
+                            else{
+                                User.find({id:app[0].userId}).exec(function(err,userData){
+                                    console.log("user");
+                                    console.log(userData);
+                                    if (err) res.send(err);
+                                    var email = req.body.email;
+                                    var emailBody =
+                                    "<html>" + app[0].appName + " has been deleted by " + userData[0].firstName + " " + userData[0].lastName +
+                                    "<br><br>This email is to notify that the app creator with the user name " +
+                                    userData[0].firstName + " " + userData[0].lastName + " has deleted the app " + app[0].appName + " with the App ID" + app[0].id + "." +
+                                    "<br><br>"+
+                                    "Regards,<br>Appmaker Team</html>";
 
-                        SecondNavigation.destroy({'appId': req.param('appId')}).exec(function (err, thirdNavi){
-                            if(err) return res.negotiate(err);
-                        });
+                                     mailOptions = {
+                                        from: app[0].email, // sender address
+                                        to: config.IDEABIZ_EMAIL, // list of receivers
+                                        subject: 'App has been Deleted!', // Subject line
+                                        html:emailBody
 
-                        res.json(app);
-                    });
-                }else {
-                    res.json({massage:"can not delete"});
-                }
+
+                                    };
+                                console.log(emailBody);
+                                        // send mail with defined transport object
+                                        transporter.sendMail(mailOptions, (error, info) => {
+                                            if (error) {
+                                                //return console.log(error);
+                                                console.log(error);
+                                                return  res.send(500,error);
+
+                                            }
+                                            console.log('Message sent: %s', info.messageId);
+//                                                    return res.send("ok");
+                                    });
+                                });
+                                res.send("app deleted");
+
+                            }
+
+                        });
+                    }else{
+                    console.log("else");
+                        res.send("app deleted");
+                    }
+
+                    }
+
+                });
             }
 
 
