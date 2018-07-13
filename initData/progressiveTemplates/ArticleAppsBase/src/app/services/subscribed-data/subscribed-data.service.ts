@@ -12,4 +12,9 @@ export class SubscribedDataService {
     return this.http.post(SERVER_URL + '/ideabiz/isSubscribed',data)
       .map(res => res.text() ? res.json() : null);
   }
+
+  getAppStatus(data){
+    return this.http.post(SERVER_URL + '/templates/getAppStatus',data)
+      .map(res => res.text() ? res.json() : null);
+  }
 }
