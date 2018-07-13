@@ -281,7 +281,7 @@
                                   closeButton: true
                             });
                         }else{
-                            ele.status = "SUBMITTED_FOR_APPROVAL";
+                            ele.status = "SUBMITTED_FOR_CONFIG";
                             publishService.updateOperators(data).success(function(res){
                                     console.log(res);
                                 toastr.success('Operators information has been added successfully', 'Saved', {

@@ -9,53 +9,6 @@
     <md-dialog-content>
         <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false"
                  md-dynamic-height="true">
-            <!--<md-tab >-->
-                <!--<md-tab-label>Google Developer Account</md-tab-label>-->
-                <!--<md-tab-body >-->
-                    <!--<div class="md-dialog-header">-->
-                        <!--<h1>Developer Account</h1>-->
-                    <!--</div>-->
-                    <!--<div class="md-dialog-main developer-account clearfix">-->
-                        <!--<fieldset>-->
-                            <!--If you are already have a google develper account please click log in to your google developer account and send-->
-                            <!--a invitation to <a>publish@appmaker.com</a>-->
-                        <!--</fieldset>-->
-
-                        <!--<fieldset>-->
-                            <!--<a target="_blank"  href="https://accounts.google.com/" class="btn-material"> Log In to Google</a>-->
-                        <!--</fieldset>-->
-
-                        <!--<fieldset >-->
-                            <!--<ul>How to send an invitation,-->
-
-                                <!--<li>1. Log into your Google Play Developer Account.</li>-->
-                                <!--<li>2. Select Settings.</li>-->
-                                <!--<li>3. Select User Accounts & Rights.</li>-->
-                                <!--<li>4. Press 'Invite new user' buttton.</li>-->
-                                <!--<li class="col-md-12"><img width="100%" src="../images/Google-1.png"></li>-->
-                                <!--<li>5. Enter 'publish@appmaker.com' as your publishing manager.</li>-->
-                                <!--<li class="col-md-12"><img width="100%" src="../images/Google2.png"></li>-->
-                                <!--<li>6. Press 'Send Invitation' Button.</li>-->
-                                <!--<li class="col-md-12"><img width="100%" src="../images/Google3.png"></li>-->
-                            <!--</ul>-->
-                        <!--</fieldset>-->
-
-                        <!--<fieldset>-->
-                            <!--If you don't have an google developer account please Sign Up and send us a invitation-->
-                        <!--</fieldset>-->
-
-                        <!--<fieldset>-->
-                            <!--<a target="_blank" href="https://accounts.google.com/SignUp?continue=https%3A%2F%2Faccounts.google.com%2FManageAccount" class="btn-material">Sign up with google</a>-->
-                        <!--</fieldset>-->
-                    <!--</div>-->
-                    <!--<div class="md-dialog-buttons">-->
-                        <!--<div class="inner-section">-->
-                            <!--<md-button ng-click="hide()" class="me-default-button">cancel</md-button>-->
-                            <!--<md-button class="me-default-button" ng-click="nextStep(1)">Next</md-button>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</md-tab-body>-->
-            <!--</md-tab>-->
             <md-tab ng-disabled="publishToAppStore.general">
                 <md-tab-label>general</md-tab-label>
                 <md-tab-body>
@@ -66,7 +19,6 @@
                     <div class="md-dialog-main">
                         <fieldset>
                             <label>App Name</label>
-                            <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
                             <input class="input-shadow-border" type="text" name="title" ng-model="appData.appName"
                                    maxlength="{{maxTitle}}" required readonly/>
                             <br>
@@ -76,7 +28,6 @@
                         <div class="clearfix">
                             <fieldset>
                                 <label>Short description</label>
-                                <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
                                 <textarea class="input-shadow-border" name="shortDescription" ng-model="playStoreData.shortDescription"
                                        maxlength="{{maxShortDescription}}" required></textarea>
                                 <br>
@@ -91,12 +42,6 @@
                                 <br>
                                 <span class="information">Characters left: {{maxFullDescription - playStoreData.fullDescription.length}}</span>
                             </fieldset>
-                            <!--<fieldset>
-                                <label>keywords</label>
-                                <textarea class="input-shadow-border" ng-model="playStoreData.keywords" rows="2" maxlength="{{maxKeywords}}" required></textarea>
-                                <br>
-                                <span>Characters left: {{maxKeywords - playStoreData.keywords.length}}</span>
-                            </fieldset>-->
                         </div>
                         <div class="row">
                             <fieldset class="col-md-3">
@@ -147,53 +92,6 @@
                                 </a>
                             </fieldset>
                         </div>
-                        <!--<div class="row">-->
-                          <!--<div class="col-md-12">-->
-                            <!--<label class="reset-inline">Screen Shots</label>-->
-                            <!--<label class="reset-inline"> You can leave the screen shots blank if you would Otenro to generate them for you</label>-->
-
-                            <!--<div class="clearfix">-->
-                                <!--<fieldset class="col-4">-->
-                                    <!--<div class="me-file-upload text-right medium">-->
-                                        <!--<div class="upload-wrapper">-->
-                                            <!--<input type="file" ngf-select ng-model="splash[2]" />-->
-                                            <!--<img ng-show="splash[2] != null" ngf-src="splash[2]" width="120" height="120" />-->
-                                            <!--<img ng-show="splash[2]== null" ng-src="{{thumbPic1}}" ng-model="thumbPic1" width="120" height="120" />-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</fieldset>-->
-                                <!--<fieldset class="col-4">-->
-                                    <!--<div class="me-file-upload text-right medium">-->
-                                        <!--<div class="upload-wrapper">-->
-                                            <!--<input type="file" ngf-select ng-model="splash[3]"/>-->
-                                            <!--<img ng-show="splash[3] != null" ngf-src="splash[3]" width="120" height="120" />-->
-                                            <!--<img ng-show="splash[3]== null" ng-src="{{thumbPic2}}" ng-model="thumbPic2" width="120" height="120" />-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</fieldset>-->
-                                <!--<fieldset class="col-4">-->
-                                    <!--<div class="me-file-upload text-right medium">-->
-                                        <!--<div class="upload-wrapper">-->
-                                            <!--<input type="file" ngf-select ng-model="splash[4]"/>-->
-                                            <!--<img ng-show="splash[4] != null" ngf-src="splash[4]" width="120" height="120" />-->
-                                            <!--<img ng-show="splash[4] == null" ng-src="{{thumbPic3}}" ng-model="thumbPic3" width="120" height="120" />-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</fieldset>-->
-                                <!--<fieldset class="col-4 reset-margin">-->
-                                    <!--<div class="me-file-upload text-right medium">-->
-                                        <!--<div class="upload-wrapper">-->
-                                            <!--<input type="file" ngf-select ng-model="splash[5]"/>-->
-                                            <!--<img ng-show="splash[5] != null" ngf-src="splash[5]" width="120" height="120" />-->
-                                            <!--<img ng-show="splash[5] == null" ng-src="{{thumbPic4}}" ng-model="thumbPic4" width="120" height="120" />-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</fieldset>-->
-                            <!--</div>-->
-                          <!--</div>-->
-                        <!--</div>-->
-
-
                         <md-checkbox ng-model="allowPlayStore" ng-change="chkPlaystore(allowPlayStore)">
                             Add to Google Play Store
                         </md-checkbox>
@@ -221,7 +119,6 @@
                         <div class="clearfix">
                             <fieldset>
                                 <label>Email</label>
-                                <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
                                 <input class="input-shadow-border"
                                        type="email"
                                        ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
@@ -234,7 +131,6 @@
                         <div class="clearfix">
                             <fieldset>
                                 <label>Keyword</label>
-                                <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
                                 <input class="input-shadow-border"
                                        type="text"
                                        ng-pattern="/^[0-9A-z]*$/"
@@ -246,19 +142,6 @@
                                 </span>
                                 </fieldset>
                         </div>
-                        <!--<div class="clearfix">-->
-                            <!--<fieldset>-->
-                                <!--<label>Service ID</label>-->
-                                <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
-                                <!--<input class="input-shadow-border"-->
-                                       <!--type="text"-->
-                                       <!--ng-pattern=""-->
-                                       <!--name="serviceID"  ng-model="playStoreData.serviceID" required/>-->
-                                    <!--<br>-->
-                                <!--<span class="information">Characters left: {{8 - playStoreData.serviceID.length}} </span>-->
-
-                                <!--</fieldset>-->
-                        <!--</div>-->
                         <div class="clearfix">
                             <fieldset class="col-3">
                                 <label>Select Port</label>
@@ -266,8 +149,6 @@
                                 <md-select class="" placeholder="Select Port" ng-model="playStoreData.port" required>
                                     <md-option ng-value="port" ng-repeat="port in Ports ">{{port}}
                                     </md-option>
-                                    <!--// create new catergory-->
-                                    <!--<md-option ng-click="newcategory ()">Create New Category</md-option>-->
                                 </md-select>
 
                             </fieldset>
@@ -284,58 +165,6 @@
                     </form>
                 </md-tab-body>
             </md-tab>
-            <!--<md-tab ng-disabled="publishToAppStore.promotions">-->
-                <!--<md-tab-label>promotions</md-tab-label>-->
-                <!--<md-tab-body>-->
-                    <!--<div class="md-dialog-header">-->
-                        <!--<h1>promotions</h1>-->
-                        <!--<label class="font-size-12">-->
-                            <!--please note that the images below have to be screenshots of the app itself, and have to be taken from specified device.-->
-                            <!--images not meeting required resolution will be resized.-->
-                        <!--</label>-->
-                    <!--</div>-->
-                    <!--<div class="md-dialog-main clearfix">-->
-                        <!--<fieldset class="col-4">-->
-                            <!--<label class="reset-inline">iphone 5</label>-->
-                            <!--<div class="me-file-upload medium">-->
-                                <!--<div class="upload-wrapper">-->
-                                    <!--<input type="file" />-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</fieldset>-->
-                        <!--<fieldset class="col-4">-->
-                            <!--<label class="reset-inline">iphone 5s</label>-->
-                            <!--<div class="me-file-upload medium">-->
-                                <!--<div class="upload-wrapper">-->
-                                    <!--<input type="file" />-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</fieldset>-->
-                        <!--<fieldset class="col-4">-->
-                            <!--<label class="reset-inline">iphone 6</label>-->
-                            <!--<div class="me-file-upload medium">-->
-                                <!--<div class="upload-wrapper">-->
-                                    <!--<input type="file" />-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</fieldset>-->
-                        <!--<fieldset class="col-4 reset-margin-right">-->
-                            <!--<label class="reset-inline">iphone 6s</label>-->
-                            <!--<div class="me-file-upload medium">-->
-                                <!--<div class="upload-wrapper">-->
-                                    <!--<input type="file" />-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</fieldset>-->
-                    <!--</div>-->
-                    <!--<div class="md-dialog-buttons">-->
-                        <!--<div class="inner-section">-->
-                            <!--<md-button ng-click="hide()" class="me-default-button">cancel</md-button>-->
-                            <!--<md-button class="me-default-button">save</md-button>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</md-tab-body>-->
-            <!--</md-tab>-->
             <md-tab>
                 <md-tab-label ng-disabled = "!successPublish">operator configuration</md-tab-label>
                 <md-tab-body>
@@ -361,16 +190,16 @@
                                     <td align="center" ng-disabled = "!operator.isEnabled"  ng-class="{'disabled-class': !operator.isEnabled}">{{operatorDes(operator.operator)}}</td>
                                     <td align="center">
                                         <md-input-container style="margin-bottom:0px;margin-top:0px;">
-                                            <input type="text" maxlength="5" style="width:100%;text-align: center;" name="amount" ng-model="operator.amount" value="{{amount}}" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED'" required/>
+                                            <input type="text" maxlength="5" style="width:100%;text-align: center;" name="amount" ng-model="operator.amount" value="{{amount}}" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_CONFIG' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED'" required/>
                                         </md-input-container>
                                     </td>
                                     <td align="center">
-                                        <select ng-model= "operator.interval" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED'">
+                                        <select ng-model= "operator.interval" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_CONFIG' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED'">
                                             <option ng-repeat="sts in Renewals" >{{sts}}</option>
                                         </select>
                                     </td>
                                     <td align="center">
-                                        <md-checkbox ng-click="toggle(operator,operator.isEnabled, $index)" ng-model = "operator.isEnabled" ng-disabled = "operator.status == 'APPROVED' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'SUSPENDED' || operator.status == 'TERMINATED'">
+                                        <md-checkbox ng-click="toggle(operator,operator.isEnabled, $index)" ng-model = "operator.isEnabled" ng-disabled = "operator.status == 'APPROVED' || operator.status == 'SUBMITTED_FOR_CONFIG' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'SUSPENDED' || operator.status == 'TERMINATED'">
 
                                         </md-checkbox>
                                     </td>
@@ -379,10 +208,6 @@
                                 </tbody>
                             </table>
                             <div class="row md-dialog-main clearfix">
-                                <!--<div class="col-sm-6">-->
-                                <!--App:<a style="color:rgba(32, 99, 243, 0.925);" href=""> Download</a><br>-->
-                                <!--Website Link:<a style="color:rgba(32, 99, 243, 0.925);" href=""> http://horoscope.com</a>-->
-                                <!--</div>-->
                                 <div class="col-sm-3 md-dialog-buttons">
                                     <div class="inner-section">
                                         <md-button class="me-default-button" ng-click="close('cancel')">Close</md-button>
