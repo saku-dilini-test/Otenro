@@ -16,13 +16,13 @@ module.exports = {
             type: 'string'
         },
         status :{
-            type: 'int'
+            type: 'Integer'
         },
         date:{
             type: 'string'
         },
         amount:{
-            type:'double'
+            type:'float'
         },
         operator:{
             type:'string'

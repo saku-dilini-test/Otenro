@@ -32,12 +32,12 @@ module.exports = {
     },
     IDEABIZ_SUBSCRIPTION_STATUS: {
 
-        'SUBSCRIBE': {
-            'code': 'SUBSCRIBE',
+        'SUBSCRIBED': {
+            'code': 'SUBSCRIBED',
             'desc': 'Subscribed'
         },
-        'UNSUBSCRIBE': {
-            'code': 'UNSUSCRIBE',
+        'UNSUBSCRIBED': {
+            'code': 'UNSUBSCRIBED',
             'desc': 'Unsubscribed'
         }
     },

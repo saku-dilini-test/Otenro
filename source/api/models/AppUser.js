@@ -44,7 +44,13 @@ module.exports = {
 
       type:'string'
 
-    }
+    },
+      unsubscribeDate:{
+
+          type:'string'
+
+      }
+
   }
 
 

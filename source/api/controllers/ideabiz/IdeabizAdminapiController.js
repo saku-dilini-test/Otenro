@@ -1,6 +1,8 @@
 var config = require('../../services/config');
 var pushService = require('../../services/pushNotificationsService');
 var dateFormat = require('dateformat');
+var IdeaBizPINVerificationAPIService = require('../../services/IdeaBizPINVerificationAPIService');
+
 
 /**
  * IdeabizAdminapiController
@@ -129,13 +131,13 @@ module.exports = {
 
             history.forEach(function(row){
                 responseBody.subscriberHistory.history.push({
-                        "datetime": row.date,
-                        "trigger": "SYSTEM",
-                        "event": row.subscriptionStatus,
-                        "note": row.note,
-                        "status": "SUCCESS",
-                        "serviceID" : serviceID
-                    });
+                    "datetime": row.date,
+                    "trigger": "SYSTEM",
+                    "event": row.subscriptionStatus,
+                    "note": row.note,
+                    "status": "SUCCESS",
+                    "serviceID" : serviceID
+                });
             });
 
             return res.json(responseBody);
@@ -152,7 +154,7 @@ module.exports = {
           "serviceID" : "0401f3c2-d2dd-4a25-bb30-4fe4cabbe988",
           "appID" : "APP001"
         }
-    **/
+     **/
     onStateCheck: function(req,res){
         var reqBody = req.body;
         var msisdn = reqBody.msisdn;
@@ -296,6 +298,8 @@ module.exports = {
         });
     },
 
+
+
     /**
      * State Change Sample api call:
      * http://192.168.8.103:1337/adminapi/index
@@ -334,123 +338,102 @@ module.exports = {
         }
 
         try {
+            if(reqBody.status==config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code||reqBody.status==config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code ) {
+                var queryApp = { 'serviceID': serviceID };
 
+                try {
+                    PublishDetails.findOne(queryApp).exec(function(err,publishDetailsData){
+                        if(err){
+                            sails.log.error("Error when searching for a app using serviceID: " + serviceID + " error: " + err);
+                            return res.serverError(err);
+                        }
 
+                        if(!publishDetailsData){
+                            sails.log.error("No app in the system for the serviceID: " + serviceID);
+                            return res.badRequest("No app in the system for the serviceID: " + serviceID);
+                        }
 
-            if (reqBody.status==config.IDEABIZ_RENTAL_STATUS.RENTAL_CHARGED.code||reqBody.status==config.IDEABIZ_RENTAL_STATUS.RENTAL_FAILED.code ){
-
-                var query = {
-                    'msisdn': msisdn,
-                    'serviceId': serviceID,
-                    'date':dateFormat(new Date().toLocaleString(),"yyyy-mm-dd")
-                }
-
-                SubscriptionPayment.findOne(query).exec(function (err, paymentData) {
-
-                   if (paymentData){
-
-                       var setFields = {
-                           'status': reqBody.status
-                       };
-
-                       SubscriptionPayment.update(query,setFields).exec(function (err, UpdatedPaymentData) {
-
-                           if (err){
-                               sails.log.error("Error when update the msisdn: " + msisdn + " error: " + err);
-                               return res.serverError("Error when update the msisdn: " + msisdn + " error: " + err);
-                           }
-
-                           if (UpdatedPaymentData){
-                               return res.ok("Status updated");
-                           }
-
-                       });
-
-                   } else  {
-
-                       var queryData = {
-                           'msisdn': msisdn,
-                           'serviceId': serviceID,
-                           'date':dateFormat(new Date().toLocaleString(),"yyyy-mm-dd"),
-                           'status': reqBody.status
-                       }
-
-                       SubscriptionPayment.create(queryData).exec(function (err, result) {
-                           if (err) {
-                               sails.log.error("SubscriptionPayment Create Error");
-                               return done(err);
-                           }
-                           res.send(result);
-                       });
-                   }
-                });
-
-
-            }else if(reqBody.status==config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBE.code||reqBody.status==config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBE.code ) {
-
-
-
-                var queryUser = {
-                    'msisdn': msisdn,
-                    'serviceId': serviceID
-                }
-
-                console.log(queryUser);
-
-                AppUser.findOne(queryUser).exec(function (err, user) {
-                    console.log(user);
-
-                    var appUserStatus = actionStateChangeInstance.getAppUserStatus(subscriptionStatus);
-
-                    //Will update the user statuses while receiving a status change call
-                    if (user) {
-                        var log = {
-                            'date': new Date(),
-                            'appID': user.appID,
+                        var appID = publishDetailsData.appId;
+                        var queryUser = {
                             'msisdn': msisdn,
-                            'serviceId': serviceID,
-                            'subscriptionStatus': subscriptionStatus,
-                            'method': method,
-                            'note': note,
-                            'messageBody': reqBody
-                        };
+                            'appId': appID
+                        }
 
-                        sails.log.debug("User exists for the msisdn: " + msisdn + " and will update the statuses");
-                        var currentSubscriptionStatus = user.subscriptionStatus;
+                        AppUser.findOne(queryUser).exec(function (err, user) {
+                            //Will update the user statuses while receiving a status change call
+                            if (user) {
+                                var log = {
+                                    'date': new Date(),
+                                    'appID': user.appID,
+                                    'msisdn': msisdn,
+                                    'serviceId': serviceID,
+                                    'subscriptionStatus': subscriptionStatus,
+                                    'method': method,
+                                    'note': note,
+                                    'messageBody': reqBody
+                                };
 
-                        var setFields = {
-                            'status': appUserStatus,
-                            'subscriptionStatus': subscriptionStatus
-                        };
+                                actionStateChangeInstance.logStateChange(log);
 
 
 
-                        AppUser.update(queryUser, setFields).exec(function(err, users){
+                                if(reqBody.status==config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code) {
+                                    var setFields = {
+                                        'status': config.APP_USER_STATUS.ACTIVE,
+                                        'registeredDate':dateFormat(new Date(), "yyyy-mm-dd"),
+                                        'subscriptionStatus':config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code
+                                    };
+                                    actionStateChangeInstance.sendForCharging(msisdn,serviceID,publishDetailsData);
+                                }else{
+                                    var setFields = {
+                                        'status': config.APP_USER_STATUS.INACTIVE,
+                                        'unsubscribeDate':dateFormat(new Date(), "yyyy-mm-dd"),
+                                        'subscriptionStatus':config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code
+                                    };
+                                }
 
-                            console.log(users);
+                                sails.log.debug("In Subscription: User exists for the msisdn: " + msisdn + " and for the appID: " + appID);
 
-                            if(err){
-                                sails.log.error("Error when update the msisdn: " + msisdn + " error: " + err);
-                                return res.serverError("Error when update the msisdn: " + msisdn + " error: " + err);
+                                AppUser.update(queryUser, setFields).exec(function (err, users) {
+                                    if (err) {
+                                        sails.log.error("Error when update the msisdn: " + msisdn + " error: " + err);
+                                        return res.serverError("Error when update the msisdn: " + msisdn + " error: " + err);
+                                    }
+
+                                    if(users.deviceUUID) {
+                                        // Send the notifications to the AppUser
+                                        var message = "Your subscription to " + app.appName + " has been success. Click to open " + app.appName;
+                                        actionStateChangeInstance.notifyUsers(req, res, users, message);
+                                    }
+
+                                    return res.ok("User updated");
+                                });
+                            }else {
+                                var newAppUser = {
+                                    'msisdn': msisdn,
+                                    'appId': appID,
+                                    'status': config.APP_USER_STATUS.ACTIVE,
+                                    'registeredDate':dateFormat(new Date(), "yyyy-mm-dd"),
+                                    'subscriptionStatus':config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code
+
+                                };
+
+                                AppUser.create(newAppUser).exec(function (err, user) {
+                                    if (err) {
+                                        return res.serverError(err);
+                                    }
+
+                                    sails.log.debug("New user created for the msisdn: " + msisdn + " serviceID=" + publishDetailsData.serviceID);
+                                    actionStateChangeInstance.sendForCharging(msisdn,serviceID,publishDetailsData);
+                                    return res.created(user);
+                                });
                             }
-
-                            sails.log.debug("Update users: " + users.length);
-
-                            actionStateChangeInstance.logStateChange(log);
-
-                            //Send the notifications to the AppUser
-                            actionStateChangeInstance.notifyUsers(req,res,users,currentSubscriptionStatus,subscriptionStatus);
-
-                            return res.ok("Status updated");
                         });
-
-
-
-                    }else{
-                        sails.log.error("No user registered for msisdn: " + msisdn + " for the serviceId: " + serviceID);
-                        return res.json(notFound);
-                    }
-                });
+                    });
+                }catch(err){
+                    sails.log.error("Exception in registerUser, error: " + err);
+                    res.serverError("Exception in registerUser, error: " + err);
+                }
             }
 
         }catch(err){
@@ -482,11 +465,150 @@ module.exports = {
         }
     },
 
+    sendForCharging:function(msisdn,serviceID,publishDetailsData){
+
+        var actionStateChangeInstance =this;
+
+        IdeaBizPINVerificationAPIService.getBalance(msisdn,function(response,err){
+            if(err){
+                sails.log.debug("getBalance failed for the mobile: " + req.body.mobile + " err:" + JSON.stringify(err));
+                return false ;
+            }
+
+           // sails.log.debug("Response after requesting getBalance: " + JSON.stringify(response));
+
+            if(!(response && response.body)){
+                sails.log.debug("Response received in getBalance request seems not valid response: " + JSON.stringify(response));
+                return false;
+            }
+
+            var responseBody = JSON.parse(response.body);
+
+            sails.log.debug("statusCode "+response.statusCode);
+
+
+            if(responseBody && responseBody.statusCode === "ERROR"){
+                sails.log.debug("Error while requesting the getBalance, err:  " + responseBody.message);
+                return false;
+
+            }else if (responseBody && response.statusCode === 200){
+
+                sails.log.debug("responseBody.accountInfo.balance " + responseBody.accountInfo.balance);
+
+
+                actionStateChangeInstance.getChargeAmount(publishDetailsData,msisdn,function(data, err){
+                    if(err){
+                        sails.log.debug("getChargeAmount failed for the mobile: "+ err);
+                        return false;
+                    }
+                    if (responseBody.accountInfo.balance > data.amount){
+
+                        IdeaBizPINVerificationAPIService.chargeUser(
+                            msisdn,serviceID,data.amount,function(response,err){
+                                if(err){
+                                    sails.log.debug("charge failed for the mobile: " + req.body.mobile + " err:" + JSON.stringify(err));
+                                    return false;
+                                }
+
+                                sails.log.debug("Response after requesting charge: " + JSON.stringify(response));
+
+                                if(!(response && response.body)){
+                                    sails.log.debug("Response received in charge request seems not valid response: " + JSON.stringify(response));
+                                    return false;
+                                }
+
+                                var responseBody = JSON.parse(response.body);
+
+                                if(responseBody && responseBody.statusCode === "ERROR"){
+
+                                    sails.log.debug("Error while requesting the charge, err:  " + responseBody.message);
+                                    return false;
+
+                                }else if (responseBody && response.statusCode === 200){
+
+                                   // console.log(responseBody);
+                                    var saveData = {appId:publishDetailsData.appId,msisdn:msisdn,amount:data.amount,
+                                        operator:data.operator,status:1,date:dateFormat(new Date(), "yyyy-mm-dd")};
+
+                                    console.log("saveData " + JSON.stringify(saveData));
+
+                                    SubscriptionPayment.create(saveData).exec(function (err, result) {
+
+                                        if (err) {
+                                            sails.log.error("SubscriptionPayment Create Error");
+                                            return false;
+                                        }
+                                        return true;
+                                    });
+
+                                }
+                            });
+
+
+                    }else {
+
+                        console.log(responseBody);
+                        var data = {appId:publishDetailsData.appId,msisdn:msisdn,
+                            amount:0.0,operator:data.operator,status:0 ,data:dateFormat(new Date(), "yyyy-mm-dd")}
+
+                        SubscriptionPayment.create(data).exec(function (err, result) {
+
+                            if (err) {
+                                sails.log.error("SubscriptionPayment Create Error");
+                                return false;
+                            }
+                            return true;
+                        });
+                    }
+                })
+
+            }
+        });
+
+    },
+
+
+
+    getOperator:function(msisdn,callback){
+          console.log("msisdn.substring(0, 4) " + msisdn.substring(0, 4));
+        Operator.findOne({operator_code:parseInt(msisdn.substring(0, 4))}).exec(function (err, data) {
+            if (err) {
+                sails.log.error("Operator find Error");
+                return callback(null,err);
+            }else {
+                   console.log("operatorData '''''''''''''''''' " + data.operator);
+                return callback( data.operator,err);
+            }
+
+        });
+    },
+
+    getChargeAmount:function(publishDetailsData,msisdn,callback){
+
+        var actionStateChangeInstance =this;
+
+        publishDetailsData.operators.forEach(function(operatorData) {
+
+            actionStateChangeInstance.getOperator(msisdn,function(operator, err){
+
+                console.log("data ----------- " + operator);
+                if (err) {
+                    sails.log.error("Operator find Error");
+                    return callback(null,err);
+
+                }else if (operatorData.operator.toLowerCase()==operator){
+                     return callback({amount:operatorData.amount,operator:operator},err);
+                }
+            });
+        });
+
+    },
+
     getAppUserStatus: function(subscriptionStatus){
         console.log("subscriptionStatus=" + subscriptionStatus);
         if(this.isStatusValid(subscriptionStatus)){
             switch (subscriptionStatus){
-                case config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBE.code:
+                case config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code:
                     return config.APP_USER_STATUS.ACTIVE;
                     break;
                 case config.IDEABIZ_SUBSCRIPTION_STATUS.RENTAL_CHARGED.code:
@@ -499,29 +621,24 @@ module.exports = {
         return config.APP_USER_STATUS.INACTIVE;
     },
 
-    notifyUsers: function(req,res,users,oldSubscriptionStatus,newSubscriptionStatus){
-
-        console.log(users.msisdn);
-
-
-        DeviceId.findOne({appId:users.appId,deviceUUID:users.deviceUUID}).exec(function (err, device) {
+    notifyUsers: function(req,res,user,message){
+        DeviceId.findOne({appId:user.appId,deviceUUID:user.deviceUUID}).exec(function (err, device) {
             console.log(JSON.stringify(device));
             if(device) {
-                Application.findOne({id: users.appId}).exec(function (err, app) {
+                Application.findOne({id: user.appId}).exec(function (err, app) {
 
                     var message = {
                         "to": device.deviceId,
                         "notification": {
-                            "body": "Your subscription to " + app.appName + " has been successfully renewed. Click to open " + app.appName
+                            "body": message
                         }
                     };
 
                     pushService.sendPushNotification(message);
                 });
             }else{
-                sails.log.debug("No devices found to send the push notification");
+                sails.log.debug("No devices found to send the push notification for the msisdn:" + user.msisdn + " appID:" + user.appId + " ");
             }
         });
-
     }
 };
