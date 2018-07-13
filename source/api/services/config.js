@@ -103,6 +103,14 @@ module.exports = {
                  "color":"#ffffff"
              },
              {
+                 "code": "SUBMITTED_FOR_CONFIG",
+                 "description": "Submitted for Configurations",
+                 "nextAvailable": [
+                     "SUBMITTED_FOR_APPROVAL"
+                 ],
+                 "color":"#ffffff"
+             },
+             {
                  "code": "SUBMITTED_FOR_APPROVAL",
                  "description": "Submitted for Approval",
                  "nextAvailable": [
