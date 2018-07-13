@@ -84,11 +84,11 @@ module.exports = {
                                         var email = req.body.email;
                                         var emailBody = "<html><br>Hi,<br><br>" +
 
-                                                       "Please create and revert with the service ID for the below service created through<br> Appmaker. Details are as follows:" +
+                                                       "Please create and revert with the service ID for the below service created through <br> Appmaker. Details are as follows:" +
 
                                                         "<br><br><br>Service Name: " +  appDetails.title +
                                                         "<br>Company Name: " +  userData[0].firstName + " " + userData[0].lastName +
-                                                        "<br>Revenue share split: <br<br>>";
+                                                        "<br>Revenue share split: <br><br>";
 
                                                          for (var p in operators) {
                                                            if( operators.hasOwnProperty(p) ) {

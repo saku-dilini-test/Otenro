@@ -50,5 +50,19 @@ module.exports = {
         });
 
 
+    },
+
+    getAppStatus : function (req,res){
+
+        var appId = req.body.appId;
+        var query = {id:appId};
+
+        Application.findOne(query).exec(function(err, app){
+            if(err) res.send(err);
+            else{
+
+                res.send({isActive : app.isActive});
+            }
+        });
     }
 };

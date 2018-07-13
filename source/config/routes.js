@@ -343,6 +343,7 @@ module.exports.routes = {
     'GET /templates/getAppVisitDataInfo': 'template/AnalyticsController.getAppVisitDataInfo',
 
     'GET /templates/getSubscribedData' : 'ideabiz/IdeabizController.isSubscribed',
+    'POST /templates/getAppStatus' : 'ideabiz/IdeabizController.getAppStatus',
 
     /**
     * Pay by authorizeNet in templates
@@ -417,6 +418,7 @@ module.exports.routes = {
     'POST /edit/setAppstatus' : 'technicalSupport/TechnicalSupportController.setAppstatus',
     'POST /edit/getCommentsApp' : 'technicalSupport/TechnicalSupportController.getCommentsApp',
     'POST /edit/getComments' : 'technicalSupport/TechnicalSupportController.getComments',
+    'POST /technicalSupport/notifyAppUsers' : 'technicalSupport/TechnicalSupportController.notifyAppUsers',
 
     /**
      * IPG Controller
@@ -486,10 +488,14 @@ module.exports.routes = {
 
     'POST /appMakerReports/getRevenueAndTrafficSummaryForDateRange': 'appMakerReports/RevenueAndTrafficReportController.getRevenueAndTrafficSummaryForDateRange',
     'POST /appMakerReports/getRevenueAndTrafficSummaryForMonthly': 'appMakerReports/RevenueAndTrafficReportController.getRevenueAndTrafficSummaryForMonthly',
-    'POST /appMakerReports/getRevenueAndTrafficSummaryForYearly': 'appMakerReports/RevenueAndTrafficReportController.getRevenueAndTrafficSummaryForYearly'
+    'POST /appMakerReports/getRevenueAndTrafficSummaryForYearly': 'appMakerReports/RevenueAndTrafficReportController.getRevenueAndTrafficSummaryForYearly',
 
+    /**
+     * Routes related with ApplicationBaseReportController
+     **/
 
-
+    'GET /appMakerReports/appBaseReport/getAppCreators': 'appMakerReports/ApplicationBaseReportController.getAppCreators',
+    'GET /appMakerReports/appBaseReport/getApplications': 'appMakerReports/ApplicationBaseReportController.getApplications'
 
 
 };

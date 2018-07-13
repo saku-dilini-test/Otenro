@@ -103,6 +103,14 @@ module.exports = {
                  "color":"#ffffff"
              },
              {
+                 "code": "SUBMITTED_FOR_CONFIG",
+                 "description": "Submitted for Configurations",
+                 "nextAvailable": [
+                     "SUBMITTED_FOR_APPROVAL"
+                 ],
+                 "color":"#ffffff"
+             },
+             {
                  "code": "SUBMITTED_FOR_APPROVAL",
                  "description": "Submitted for Approval",
                  "nextAvailable": [
@@ -160,6 +168,9 @@ module.exports = {
             'code': 'APP_CREATOR',
             'desc': 'App Creator'
         }
-    }
+    },
+
+    IDEABIZ_EMAIL : sails.config.IDEABIZ_EMAIL,
+
 
 };

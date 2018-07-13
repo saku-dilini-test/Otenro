@@ -6,6 +6,9 @@
         '$mdDialog', '$http', '$rootScope', 'SERVER_URL','$q', '$filter', technicalSupportService
     ]);
 
+    var SUSPENDED = 'SUSPENDED';
+    var TERMINATED = 'TERMINATED';
+
     function technicalSupportService($mdDialog, $http, $rootScope, SERVER_URL, $q, $filter) {
         return {
 
@@ -120,7 +123,6 @@
                                         if(status){
 
                                             var curStatusObj = $filter('filter')($scope.appStatusArr,{ "code": status });
-
                                             $scope.statusArray = $filter('filter')($scope.appStatusArr, function(value, index, array){
                                                 return curStatusObj[0].nextAvailable.includes(value.code);
                                             });
@@ -220,7 +222,27 @@
                                         }).error(function(error){
                                             console.log(error);
                                         });
+
+                                        // If nextStatus of operator is suspended or terminated
+                                        if (operator.status === SUSPENDED || operator.status === TERMINATED) {
+                                            $scope.notifyAppUsers(operator);
+                                        }
                                     };
+
+                                    /**
+                                     * Notify all app users who registered to an app if the app is suspended or rejected
+                                     **/
+                                    $scope.notifyAppUsers = function (operator) {
+
+                                        // post request body
+                                        var data = { operator: operator.operator, status: operator.status, appId: $scope.app.id };
+
+                                        // api call for sending push message to relevant app users
+                                        $http.post(SERVER_URL + 'technicalSupport/notifyAppUsers', data)
+                                            .success(function (res) {
+                                                console.log('response message' + JSON.stringify(res));
+                                            });
+                                    }
 
                                 }]
                 });

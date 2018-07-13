@@ -5,7 +5,7 @@ import * as data from '../../madeEasy.json';
 import { CategoriesService } from '../../services/categories/categories.service'
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { TitleService } from '../../services/title.service';
-import {CordovaPluginFirebaseService} from "../../services/cordova-plugin-services/cordova-plugin-firebase.service";
+import { CordovaPluginFirebaseService } from "../../services/cordova-plugin-services/cordova-plugin-firebase.service";
 import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
@@ -42,20 +42,21 @@ export class HomepageComponent implements OnInit {
   private alive = true;
   private isSubscribing = false;
   private isFromCMSAppView: boolean = false;
+  private appStatus;
 
   constructor(private route: Router, private dataService: PagebodyServiceModule,
-              private router: Router, private categoryService: CategoriesService,
-              private title: TitleService,private  push: CordovaPluginFirebaseService,
-              private subscription:SubscribedDataService,) {
+    private router: Router, private categoryService: CategoriesService,
+    private title: TitleService, private push: CordovaPluginFirebaseService,
+    private subscription: SubscribedDataService, ) {
 
     this.title.changeTitle(data.name);
     homePageCmp = this;
   }
 
   ngOnInit() {
-    this.isFromCMSAppView = localStorage.getItem(this.appId + "_isFromCMSAppView")=='1';
+    this.isFromCMSAppView = localStorage.getItem(this.appId + "_isFromCMSAppView") == '1';
 
-    $('#registerModelhome').on('hide.bs.modal', ()=>{
+    $('#registerModelhome').on('hide.bs.modal', () => {
       console.log('close');
 
       this.alive = false;
@@ -69,19 +70,19 @@ export class HomepageComponent implements OnInit {
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
 
     this.categoryService.getCategories().subscribe(data => {
-        if (data.length > 0) {
-          // Read the result field from the JSON response.
-          this.results = data;
-          this.dataService.searchArray = [];
-          data.forEach(element => {
-            this.dataService.searchArray.push({ 'name': element.name, 'id': element.id });
-          });
-        } else {
-          this.results = null;
-        }
+      if (data.length > 0) {
+        // Read the result field from the JSON response.
+        this.results = data;
+        this.dataService.searchArray = [];
+        data.forEach(element => {
+          this.dataService.searchArray.push({ 'name': element.name, 'id': element.id });
+        });
+      } else {
+        this.results = null;
+      }
 
 
-      },
+    },
       error => {
         console.log('Error retrieving categories');
       });
@@ -92,32 +93,43 @@ export class HomepageComponent implements OnInit {
   // Routing Method
   navigateShop(val: string, id, name) {
 
-    this.isSubscribing = false;
-
-    if(this.isFromCMSAppView) {
-      this.dataService.catId = id;
-      this.router.navigate(['/' + val, id, name]);
-    }else{
-      let data = {appId:this.appId,msisdn:localStorage.getItem(this.appId+"msisdn")}
-      this.subscription.getSubscribedData(data).subscribe(data =>{
-        this.subscriptionStatus = data.isSubscribed;
-        if(this.subscriptionStatus){
-          localStorage.setItem(this.appId+"msisdn",data.msisdn);
-
-          this.dataService.catId = id;
-          this.router.navigate(['/' + val, id, name]);
-        }else{
-          this.dataService.subUserArticleData.id = id;
-          this.dataService.subUserArticleData.name = name;
+      this.subscription.getAppStatus({ appId: this.appId }).subscribe(data => {
+        this.appStatus = data.isActive;
+        this.dataService.appStatus = this.appStatus;
+        if (this.appStatus == false || this.appStatus == "false") {
+          $(() => {
+            $('#appStatusModel').modal('show');
+          });
+        } else {
           this.isSubscribing = false;
-          $('#registerModelhome').modal('show')
+
+          if (this.isFromCMSAppView) {
+            this.dataService.catId = id;
+            this.router.navigate(['/' + val, id, name]);
+          } else {
+            let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn") }
+            this.subscription.getSubscribedData(data).subscribe(data => {
+              this.subscriptionStatus = data.isSubscribed;
+              if (this.subscriptionStatus) {
+                localStorage.setItem(this.appId + "msisdn", data.msisdn);
+
+                this.dataService.catId = id;
+                this.router.navigate(['/' + val, id, name]);
+              } else {
+                this.dataService.subUserArticleData.id = id;
+                this.dataService.subUserArticleData.name = name;
+                this.isSubscribing = false;
+                $('#registerModelhome').modal('show')
+              }
+            });
+
+          }
         }
       });
 
-    }
   }
 
-  pushSuccessCallback(token: any){
+  pushSuccessCallback(token: any) {
     console.log("Push Token: " + token);
 
     var data = 'deviceId=' + token + '&uuid=' + homePageCmp.uuid;
@@ -125,42 +137,42 @@ export class HomepageComponent implements OnInit {
     console.log(">>>>>>>>>" + data + "<<<<<<<<<<<");
 
     try {
-          homePageCmp.categoryService.sendDeviceToken(data).subscribe(data => {
-        },
+      homePageCmp.categoryService.sendDeviceToken(data).subscribe(data => {
+      },
         error => {
           console.log('error in pushSuccessCallback: ' + error);
         });
-    }catch(err){
+    } catch (err) {
       console.log("Exception in pushSuccessCallback: " + err);
     }
   }
 
-  pushErrorCallback(error: any){
+  pushErrorCallback(error: any) {
     console.log("pushErrorCallback=>" + error);
   }
 
-  generatePushToken(){
+  generatePushToken() {
     homePageCmp.push.getToken(homePageCmp.pushSuccessCallback, homePageCmp.pushErrorCallback);
   }
 
-  deviceUUIDCallback(uuid: any){
+  deviceUUIDCallback(uuid: any) {
     console.log("UUID: " + uuid);
     homePageCmp.uuid = uuid;
 
     homePageCmp.generatePushToken();
   }
 
-  getDeviceUUID(){
+  getDeviceUUID() {
     this.device.getUUID(homePageCmp.deviceUUIDCallback);
   }
 
-onCancel(){
+  onCancel() {
     this.isSubscribing = false;
     this.alive = false;
   }
 
-  onSubscribe(){
-    let data = {appId:this.appId,uuId:this.dataService.uuid}
+  onSubscribe() {
+    let data = { appId: this.appId, uuId: this.dataService.uuid }
     // this.getDeviceUUID();
     console.log(this.subscriptionStatus);
     this.alive = true;
@@ -169,23 +181,23 @@ onCancel(){
     IntervalObservable.create(5000)
       .takeWhile(() => this.alive) // only fires when component is alive
       .subscribe(() => {
-        this.subscription.getSubscribedData(data).subscribe(data =>{
+        this.subscription.getSubscribedData(data).subscribe(data => {
           console.log(data);
           this.subscriptionStatus = data.isSubscribed;
-          if(this.subscriptionStatus == true){
+          if (this.subscriptionStatus == true) {
             this.isSubscribing = false;
-            localStorage.setItem(this.appId+"msisdn",data.msisdn)
-             this.alive = false;
-              //close the model
-              $(()=> {
-                $('#registerModelhome').modal('hide');
-                this.router.navigate(['/' + "shop", this.dataService.subUserArticleData.id, this.subscriptionStatus.name]);
-             });
-             //close the nav bar
+            localStorage.setItem(this.appId + "msisdn", data.msisdn)
+            this.alive = false;
+            //close the model
+            $(() => {
+              $('#registerModelhome').modal('hide');
+              this.router.navigate(['/' + "shop", this.dataService.subUserArticleData.id, this.subscriptionStatus.name]);
+            });
+            //close the nav bar
             //  document.getElementById("mySidenav").style.width = "0";
           }
         });
       });
-    }
+  }
 
 }

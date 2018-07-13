@@ -15,13 +15,17 @@
     function DashboardCtrl($scope, dashboardService,toastr,$state,$auth,ME_APP_SERVER,mySharedService,$rootScope,
             SERVER_URL) {
         dashboardService.getAllApps().success(function (data) {
-            $rootScope.widgets=data;
+            $rootScope.widgets = data;
             $scope.path = ME_APP_SERVER+"temp/";
         }).error(function (err) {
             toastr.error(err.error, 'Error', {
                 closeButton: true
             });
         });
+
+        $scope.myFilter = function (app) {
+            return app.isActive == true || app.isActive == "true" || app.isActive == undefined;
+        };
 
         $scope.goToEdit = function(item){
         if(item.appName == "preview"){
