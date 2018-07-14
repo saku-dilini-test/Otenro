@@ -324,6 +324,8 @@ module.exports = {
         var note = reqBody.note;
         var actionStateChangeInstance = this;
 
+        msisdn = msisdn.substring(msisdn.length-11);
+
         var notFound = {
             "subscription": {
                 "number": msisdn,
