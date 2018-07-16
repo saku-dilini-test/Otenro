@@ -1,3 +1,6 @@
+var config = require('../../services/config');
+var dateFormat = require('dateformat');
+
 /**
  * IdeabizController
  *
@@ -41,12 +44,30 @@ module.exports = {
             var msisdn = "";
             var isSubscribed = false;
 
-            if(appUser){
-                isSubscribed = true;
-                msisdn = appUser.msisdn;
-            }
+            if(appUser && appUser.msisdn && appUser.status===config.APP_USER_STATUS.ACTIVE){
+                var paymentQuery = {
+                    appId: appId,
+                    msisdn: appUser.msisdn,
+                    status: 1,
+                    date: dateFormat(new Date(), "yyyy-mm-dd")
+                };
 
-            res.ok({ 'isSubscribed': isSubscribed, 'msisdn':msisdn});
+                console.log("paymentQuery: " + JSON.stringify(paymentQuery,null,2));
+
+                SubscriptionPayment.findOne(paymentQuery).exec(function (err, payment) {
+                    if (err){
+                        sails.log.error("Error when searching for a payment for the details: " + JSON.stringify(paymentQuery));
+                    }
+
+                    if(payment){
+                        isSubscribed = true;
+                        msisdn = appUser.msisdn;
+                    }
+                    res.ok({ 'isSubscribed': isSubscribed, 'msisdn':msisdn});
+                });
+            }else{
+                res.ok({ 'isSubscribed': isSubscribed, 'msisdn':msisdn});
+            }
         });
 
 

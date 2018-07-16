@@ -82,37 +82,38 @@ module.exports = {
                     AppUser.findOne(queryUser).exec(function (err, user) {
                         //Will update the user statuses while receiving a status change call
                         if (user) {
+                            var setFields = {};
+
                             if(isRegistration) {
                                 sails.log.debug("In Registration: User exists for the msisdn: " + msisdn + " and for the appID: " + appID);
 
-                                var setFields = {
-                                    'status': config.APP_USER_STATUS.ACTIVE
-                                };
+                                setFields.status = config.APP_USER_STATUS.ACTIVE;
 
-                                if(!deviceUUID){
+                                if (!deviceUUID) {
                                     sails.log.info("No deviceUUID returned from msisdn: " + msisdn);
-                                }else{
+                                } else {
                                     setFields.deviceUUID = deviceUUID;
                                 }
-
-                                AppUser.update(queryUser, setFields).exec(function (err, users) {
-                                    if (err) {
-                                        sails.log.error("Error when update the msisdn: " + msisdn + " error: " + err);
-                                        return res.serverError("Error when update the msisdn: " + msisdn + " error: " + err);
-                                    }
-
-                                    if(user.deviceUUID) {
-                                        // Send the notifications to the AppUser
-                                        var message = "Your subscription to " + app.appName + " has been success. Click to open " + app.appName;
-                                        adminAPI.notifyUsers(req, res, users, message);
-                                    }
-
-                                    return res.ok("User Registered");
-                                });
                             }else{
                                 sails.log.debug("In Un-Registration: User exists for the msisdn: " + msisdn + " and for the appID: " + appID);
-                                return res.ok("User Unregistered");
+
+                                setFields.status = config.APP_USER_STATUS.INACTIVE;
                             }
+
+                            AppUser.update(queryUser, setFields).exec(function (err, users) {
+                                if (err) {
+                                    sails.log.error("Error when update the msisdn: " + msisdn + " error: " + err);
+                                    return res.serverError("Error when update the msisdn: " + msisdn + " error: " + err);
+                                }
+
+                                if(user.deviceUUID) {
+                                    // Send the notifications to the AppUser
+                                    var message = "Your subscription to " + app.appName + " has been success. Click to open " + app.appName;
+                                    adminAPI.notifyUsers(req, res, users, message);
+                                }
+
+                                return res.ok("ok");
+                            });
                         }else {
                             if(!isRegistration){
                                 sails.log.debug("In Un-Registration: User does not exists in the System for the msisdn: " + msisdn + " and for the appID: " + appID);
