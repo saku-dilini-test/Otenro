@@ -26,7 +26,7 @@ var server  = email.server.connect({
         secure: true, // true for 465, false for other ports
         auth: {
             user: 'support@appmaker.lk', // generated ethereal user
-            pass: '7hJvsYiU'  // generated ethereal password
+            pass: 'Jza12BTL36'  // generated ethereal password
         },
         tls:{
                 rejectUnauthorized: false
@@ -568,6 +568,8 @@ module.exports = {
     setServiceId : function(req, res){
         var Query = {appId: req.body.id};
         var operators;
+        var toEmail = config.IDEABIZ_GROUP_EMAIL;
+        var fromEmail = config.IDEABIZ_ADMIN_EMAIL;
 
         PublishDetails.findOne(Query).exec(function(err, findApp){
             if(err){ res.send(err);}
@@ -583,6 +585,35 @@ module.exports = {
                     PublishDetails.update(Query,{serviceID:req.body.serviceId, operators:operators}).exec(function(err, data){
                         if(err){ res.send(err);}
                         else{
+
+                            var emailBody = "<html>" + req.body.appName + " is pending approval.<br><br>" +
+
+                                           req.body.appName +  " with App ID " + req.body.id + " has been configured, and is pending approval.<br><br>" +
+                                           "The Appmaker Team" +
+                                            "</html>";
+
+
+                                             mailOptions = {
+                                                from: fromEmail, // sender address
+                                                to: toEmail, // list of receivers
+                                                subject: 'Pending Approval', // Subject line
+                                                html:emailBody
+
+
+                                             };
+
+                                        // send mail with defined transport object
+                                        transporter.sendMail(mailOptions, (error, info) => {
+                                            if (error) {
+                                                //return console.log(error);
+                                                console.log(error);
+                                                return  res.send(500,error);
+
+                                            }
+                                            console.log('Message sent: %s', info.messageId);
+                                                                return res.send("ok");
+                                        });
+
                                 res.send("serviceId added");
                         }
                     });

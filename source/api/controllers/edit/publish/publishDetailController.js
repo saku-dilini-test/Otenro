@@ -268,7 +268,7 @@ module.exports = {
 
                                      mailOptions = {
                                         from: userData[0].email, // sender address
-                                        to: "support@appmaker.lk", // list of receivers
+                                        to: config.IDEABIZ_EMAIL, // list of receivers
                                         subject: 'App Publish', // Subject line
                                         html:emailBody
 
