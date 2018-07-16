@@ -3,9 +3,9 @@ echo  'start....'
 
 #leave and comment other env
 #local
-#MESERVER='/var/www/html/meServer/temp/';
-#NODE='/var/www/html/meServer/node_modules/';
-#APPFILESERVER='/var/www/html/meServer/temp/';
+MESERVER='/Library/WebServer/Documents/meServer/temp/';
+NODE='/Library/WebServer/Documents/meServer/';
+APPFILESERVER='/Users/chamilthushantha/Desktop/appFileServer/';
 
 #stag
 #MESERVER='/home/admin/web/testcdn.otenro.com/public_html/temp/';
@@ -17,15 +17,15 @@ MESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/';
 NODE='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/node_modules/';
 APPFILESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/';
 
-#ENV='dev'   #this is for development
-ENV='pro'  #this is for production
+ENV='dev'   #this is for development
+#ENV='pro'  #this is for production
 #ENV='stag'  #this is for staging
 DB=''
 
 if [ $ENV == 'dev' ]
 then
-	DB='appBuilder'
-	serverUrl='http://173.82.153.215:1338'
+	DB='appmaker'
+	serverUrl='http://192.168.8.101:1337'
 elif [ $ENV == 'stag' ]
 then
 	DB='otenroTest'

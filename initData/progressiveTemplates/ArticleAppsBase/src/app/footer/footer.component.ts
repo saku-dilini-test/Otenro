@@ -7,6 +7,7 @@ import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
 import { PagebodyServiceModule } from '../page-body/page-body.service'
+import {SMSService} from "../services/cordova-plugin-services/sms.service";
 
 @Component({
   selector: 'app-footer',
@@ -27,6 +28,7 @@ export class FooterComponent implements OnInit{
 
   constructor(private subscription:SubscribedDataService,
               private router: Router,
+              private sms: SMSService,
               private dataService:PagebodyServiceModule) {
 
   }
@@ -73,7 +75,12 @@ export class FooterComponent implements OnInit{
   }
   onUnsubscribe(){
     this.alive = true;
-    let data = {appId:this.appId,uuId:this.dataService.uuid}
+
+    //Send Un-Registration SMS
+    this.sms.sendUnRegistrationSMS(this.smsSuccessUnRegistrationCallback, this.smsErrorUnRegistrationCallback);
+    var uuid = localStorage.getItem("UUID");
+
+    let data = {appId:this.appId,uuId:uuid}
     this.isUnsubscribing = true;
 
     IntervalObservable.create(5000)
@@ -96,5 +103,14 @@ export class FooterComponent implements OnInit{
           }
         });
       });
+  }
+
+
+  smsSuccessUnRegistrationCallback(results: any) {
+    console.log("smsSuccessUnRegistrationCallback in Footer Component: " + results);
+  }
+
+  smsErrorUnRegistrationCallback(error: any) {
+    console.log("smsErrorUnRegistrationCallback in Footer Component: " + error);
   }
 }

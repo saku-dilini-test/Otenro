@@ -5,6 +5,8 @@ export class PagebodyServiceModule {
 
   data: object;
   userData: any;
+  subscriptionStatus: any;
+  appStatus: any;
   cart = { cartItems: [], cartSize: 0, totalPrice: 0, totalQuantity: 0 };
   isUserLoggedIn = { check: false };
   parseWeight;

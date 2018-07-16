@@ -6,6 +6,11 @@ var  postabelInstance;
 @Injectable()
 export class SMSService extends IframePostable{
 
+  LOCALSTORAGE_KEYWORD_STRING = 'keyword';
+  LOCALSTORAGE_PORT_STRING = 'port';
+  SERVICE_REGISTRATION_STRING = 'start';
+  SERVICE_UN_REGISTRATION_STRING = 'stop';
+
   constructor() {
     super();
     console.log("SMSService construction...");
@@ -55,5 +60,40 @@ export class SMSService extends IframePostable{
     }finally{
       window.removeEventListener('message', this.receiveMessageInIframe, false);
     }
+  }
+
+  /*
+    This SMS will send to Register/Un-Register the service
+   */
+  sendReg_UNREG_SMS(serviceRegUnregString: string,successCallback: any, errorCallback: any){
+    var options = {
+      replaceLineBreaks: false,
+      android: {
+        // intent: 'INTENT'
+      }
+    };
+
+    var keyword = localStorage.getItem(this.LOCALSTORAGE_KEYWORD_STRING);
+    var port = localStorage.getItem(this.LOCALSTORAGE_PORT_STRING);
+
+    var smsBody = serviceRegUnregString + " " + keyword;
+
+    // this.send(port, smsBody, options, successCallback, errorCallback);
+
+    console.log("Send SMS=> body:" + smsBody + " port:" + port);
+  }
+
+  /*
+   This SMS will send to Register the service
+   */
+  sendRegistrationSMS(successCallback: any, errorCallback: any){
+    this.sendReg_UNREG_SMS(this.SERVICE_REGISTRATION_STRING, successCallback, errorCallback);
+  }
+
+  /*
+   This SMS will send to Un-Register the service
+   */
+  sendUnRegistrationSMS(successCallback: any, errorCallback: any){
+    this.sendReg_UNREG_SMS(this.SERVICE_UN_REGISTRATION_STRING, successCallback, errorCallback);
   }
 }

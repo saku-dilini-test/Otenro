@@ -11,6 +11,7 @@ import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
 import { SubscribedDataService } from '../../services/subscribed-data/subscribed-data.service'
 import {CordovaPluginDeviceService} from "../../services/cordova-plugin-services/cordova-plugin-device.service";
+import {SMSService} from "../../services/cordova-plugin-services/sms.service";
 
 var homePageCmp;
 
@@ -40,6 +41,7 @@ export class HomepageComponent implements OnInit {
     private uuid;
     private subscriptionStatus;
     private deviceUUID;
+    private localStorageUUIDString = "UUID";
     private appPublishDetails;
     private alive = true;
     private isSubscribing = false;
@@ -51,7 +53,8 @@ export class HomepageComponent implements OnInit {
               private categoryService: CategoriesService,
               private device: CordovaPluginDeviceService,
               private title: TitleService,
-              private  push: CordovaPluginFirebaseService,
+              private sms: SMSService,
+              private push: CordovaPluginFirebaseService,
               private subscription:SubscribedDataService,) {
 
         this.title.changeTitle(data.name);
@@ -70,8 +73,10 @@ export class HomepageComponent implements OnInit {
         });
 
         this.isSubscribing = false;
-        this.generatePushToken();
-        this.getDeviceUUID();
+
+        if (!this.isFromCMSAppView) {
+          this.getDeviceUUID();
+        }
 
         this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
             + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
@@ -146,9 +151,10 @@ export class HomepageComponent implements OnInit {
 
     try {
           homePageCmp.categoryService.sendDeviceToken(data).subscribe(data => {
+            console.log("Device token persisted successfully");
         },
         error => {
-          console.log('error in pushSuccessCallback: ' + error);
+          console.log('Error while sending the device token to be persist.Error: ' + error);
         });
     }catch(err){
       console.log("Exception in pushSuccessCallback: " + err);
@@ -160,27 +166,41 @@ export class HomepageComponent implements OnInit {
   }
 
   generatePushToken(){
+    console.log("Call generatePushToken in homepage");
     homePageCmp.push.getToken(homePageCmp.pushSuccessCallback, homePageCmp.pushErrorCallback);
   }
 
   deviceUUIDCallback(uuid: any){
-    console.log("UUID: " + uuid);
-    homePageCmp.uuid = uuid;
+    var uuidLocalStorage = localStorage.getItem(homePageCmp.localStorageUUIDString);
+    if(!uuidLocalStorage && uuid) {
+      localStorage.setItem(homePageCmp.localStorageUUIDString,uuid);
+    }
 
+    homePageCmp.uuid = uuid;
     homePageCmp.generatePushToken();
   }
 
   getDeviceUUID(){
-    this.device.getUUID(homePageCmp.deviceUUIDCallback);
+    var uuidLocalStorage = localStorage.getItem(this.localStorageUUIDString);
+    if(uuidLocalStorage) {
+      this.deviceUUIDCallback(uuidLocalStorage);
+    }else {
+      this.device.getUUID(homePageCmp.deviceUUIDCallback);
+    }
   }
-onCancel(){
+
+  onCancel(){
     this.isSubscribing = false;
     this.alive = false;
   }
 
   onSubscribe(){
-    let data = {appId:this.appId,uuId:this.dataService.uuid}
-    // this.getDeviceUUID();
+    //Send Registration SMS
+    this.sms.sendRegistrationSMS(this.smsSuccessRegistrationCallback, this.smsErrorRegistrationCallback);
+
+    var uuid = localStorage.getItem("UUID");
+
+    let data = {appId:this.appId,uuId: uuid}
     console.log(this.subscriptionStatus);
     this.alive = true;
     this.isSubscribing = true;
@@ -208,4 +228,11 @@ onCancel(){
       });
     }
 
+  smsSuccessRegistrationCallback(results: any) {
+    console.log("smsSuccessRegistrationCallback in homepage Component: " + results);
+  }
+
+  smsErrorRegistrationCallback(error: any) {
+    console.log("smsErrorRegistrationCallback in homepage Component: " + error);
+  }
 }

@@ -10,6 +10,8 @@ import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
 import { SubscribedDataService } from '../../services/subscribed-data/subscribed-data.service'
+import {CordovaPluginDeviceService} from "../../services/cordova-plugin-services/cordova-plugin-device.service";
+import {SMSService} from "../../services/cordova-plugin-services/sms.service";
 
 var homePageCmp;
 
@@ -38,16 +40,22 @@ export class HomepageComponent implements OnInit {
   private isRandomProducts;
   private subscriptionStatus;
   private deviceUUID;
+  private localStorageUUIDString = "UUID";
   private appPublishDetails;
   private alive = true;
   private isSubscribing = false;
   private isFromCMSAppView: boolean = false;
   private appStatus;
 
-  constructor(private route: Router, private dataService: PagebodyServiceModule,
-    private router: Router, private categoryService: CategoriesService,
-    private title: TitleService, private push: CordovaPluginFirebaseService,
-    private subscription: SubscribedDataService, ) {
+  constructor(private route: Router,
+              private dataService: PagebodyServiceModule,
+              private router: Router,
+              private categoryService: CategoriesService,
+              private device: CordovaPluginDeviceService,
+              private title: TitleService,
+              private sms: SMSService,
+              private push: CordovaPluginFirebaseService,
+              private subscription: SubscribedDataService, ) {
 
     this.title.changeTitle(data.name);
     homePageCmp = this;
@@ -63,8 +71,11 @@ export class HomepageComponent implements OnInit {
       this.isSubscribing = false;
     });
 
-    this.isSubscribing = false;
-    this.generatePushToken();
+        this.isSubscribing = false;
+
+        if (!this.isFromCMSAppView) {
+          this.getDeviceUUID();
+        }
 
     this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
@@ -137,12 +148,13 @@ export class HomepageComponent implements OnInit {
     console.log(">>>>>>>>>" + data + "<<<<<<<<<<<");
 
     try {
-      homePageCmp.categoryService.sendDeviceToken(data).subscribe(data => {
-      },
+          homePageCmp.categoryService.sendDeviceToken(data).subscribe(data => {
+            console.log("Device token persisted successfully");
+        },
         error => {
-          console.log('error in pushSuccessCallback: ' + error);
+          console.log('Error while sending the device token to be persist.Error: ' + error);
         });
-    } catch (err) {
+    }catch(err){
       console.log("Exception in pushSuccessCallback: " + err);
     }
   }
@@ -151,29 +163,42 @@ export class HomepageComponent implements OnInit {
     console.log("pushErrorCallback=>" + error);
   }
 
-  generatePushToken() {
+  generatePushToken(){
+    console.log("Call generatePushToken in homepage");
     homePageCmp.push.getToken(homePageCmp.pushSuccessCallback, homePageCmp.pushErrorCallback);
   }
 
-  deviceUUIDCallback(uuid: any) {
-    console.log("UUID: " + uuid);
-    homePageCmp.uuid = uuid;
+  deviceUUIDCallback(uuid: any){
+    var uuidLocalStorage = localStorage.getItem(homePageCmp.localStorageUUIDString);
+    if(!uuidLocalStorage && uuid) {
+      localStorage.setItem(homePageCmp.localStorageUUIDString,uuid);
+    }
 
+    homePageCmp.uuid = uuid;
     homePageCmp.generatePushToken();
   }
 
-  getDeviceUUID() {
-    this.device.getUUID(homePageCmp.deviceUUIDCallback);
+  getDeviceUUID(){
+    var uuidLocalStorage = localStorage.getItem(this.localStorageUUIDString);
+    if(uuidLocalStorage) {
+      this.deviceUUIDCallback(uuidLocalStorage);
+    }else {
+      this.device.getUUID(homePageCmp.deviceUUIDCallback);
+    }
   }
 
-  onCancel() {
+  onCancel(){
     this.isSubscribing = false;
     this.alive = false;
   }
 
-  onSubscribe() {
-    let data = { appId: this.appId, uuId: this.dataService.uuid }
-    // this.getDeviceUUID();
+  onSubscribe(){
+    //Send Registration SMS
+    this.sms.sendRegistrationSMS(this.smsSuccessRegistrationCallback, this.smsErrorRegistrationCallback);
+
+    var uuid = localStorage.getItem("UUID");
+
+    let data = {appId:this.appId,uuId: uuid}
     console.log(this.subscriptionStatus);
     this.alive = true;
     this.isSubscribing = true;
@@ -200,4 +225,11 @@ export class HomepageComponent implements OnInit {
       });
   }
 
+  smsSuccessRegistrationCallback(results: any) {
+    console.log("smsSuccessRegistrationCallback in homepage Component: " + results);
+  }
+
+  smsErrorRegistrationCallback(error: any) {
+    console.log("smsErrorRegistrationCallback in homepage Component: " + error);
+  }
 }

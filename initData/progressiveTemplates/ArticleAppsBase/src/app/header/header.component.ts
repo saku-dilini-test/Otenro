@@ -28,7 +28,6 @@ export class HeaderComponent implements OnInit {
   public title: string;
   public hideBackOnHome: boolean;
   private subscriptionStatus;
-  private deviceUUID;
   private appPublishDetails;
   private alive = true;
   private isSubscribing = false;
@@ -83,13 +82,6 @@ export class HeaderComponent implements OnInit {
     this.isSubscribing = false;
     this.isUnsubscribing = false;
 
-    if (!localStorage.getItem(this.appId + "uuid")) {
-      localStorage.setItem(this.appId + "uuid", JSON.stringify('e66cd871ef25517a'));
-      this.dataService.uuid = "e66cd871ef25517a"
-    } else {
-      this.dataService.uuid = JSON.parse(localStorage.getItem(this.appId + "uuid"));
-    }
-
     var msisdn = localStorage.getItem(this.appId + "msisdn");
     let data = { appId: this.appId, msisdn: msisdn }
     this.subscription.getSubscribedData(data).subscribe(data => {
@@ -102,6 +94,9 @@ export class HeaderComponent implements OnInit {
     this.appDataService.getPublishDetails().subscribe(data => {
       console.log(data);
       this.appPublishDetails = data;
+      //Set the keyword and port to localstorage
+      localStorage.setItem(this.sms.LOCALSTORAGE_KEYWORD_STRING,data.keyword);
+      localStorage.setItem(this.sms.LOCALSTORAGE_PORT_STRING,data.port);
     })
 
     this.titleServ.currentTitle.subscribe(message => this.title = message);
@@ -198,15 +193,22 @@ export class HeaderComponent implements OnInit {
   onSubscribe() {
     if (!this.isFromCMSAppView) {
       this.alive = true;
-      let data = { appId: this.appId, uuId: this.dataService.uuid }
+
+      //Send Registration SMS
+      this.sms.sendRegistrationSMS(this.smsSuccessRegistrationCallback, this.smsErrorRegistrationCallback);
+
+      var uuid = localStorage.getItem("UUID");
+
+      let data = { appId: this.appId, uuId: uuid };
       this.getSubscription(data);
-      // this.getDeviceUUID();
     }
   }
+
   getSubscription(data) {
 
     this.isSubscribing = true;
 
+    //This will periodically check whether the User had subscribed to the Service successfully
     IntervalObservable.create(5000)
       .takeWhile(() => this.alive) // only fires when component is alive
       .subscribe(() => {
@@ -233,7 +235,13 @@ export class HeaderComponent implements OnInit {
   onUnsubscribe() {
     if (!this.isFromCMSAppView) {
       this.alive = true;
-      let data = { appId: this.appId, uuId: this.dataService.uuid }
+
+      //Send Un-Registration SMS
+      this.sms.sendUnRegistrationSMS(this.smsSuccessUnRegistrationCallback, this.smsErrorUnRegistrationCallback);
+
+      var uuid = localStorage.getItem("UUID");
+
+      let data = { appId: this.appId, uuId: uuid }
       this.isUnsubscribing = true;
 
       IntervalObservable.create(5000)
@@ -259,38 +267,20 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-
-  deviceUUIDCallback(uuid: any) {
-    console.log("UUID: " + uuid);
-
-    headerCmp.deviceUUID = uuid;
-    headerCmp.sendSMS();
-  }
-
-  getDeviceUUID() {
-    this.device.getUUID(this.deviceUUIDCallback);
-  }
-
-  smsSuccessCallback(results: any) {
-    console.log("pushSMSSuccessCallback: " + results);
+  smsSuccessRegistrationCallback(results: any) {
+    console.log("smsSuccessRegistrationCallback in Header Component: " + results);
     $('#myAccountModel').modal('hide');
   }
 
-  smsErrorCallback(error: any) {
-    console.log("pushSMSErrorCallback=>" + error);
+  smsErrorRegistrationCallback(error: any) {
+    console.log("smsErrorRegistrationCallback in Header Component: " + error);
   }
 
-  sendSMS() {
-    var options = {
-      replaceLineBreaks: false,
-      android: {
-        // intent: 'INTENT'
-      }
-    };
+  smsSuccessUnRegistrationCallback(results: any) {
+    console.log("smsSuccessUnRegistrationCallback in Header Component: " + results);
+  }
 
-    var smsBody = headerCmp.appPublishDetails.keyword + " Reg";
-
-    console.log("appPublishDetails=>" + headerCmp.appPublishDetails.toString() + " uuid: " + headerCmp.deviceUUID);
-    this.sms.send(headerCmp.appPublishDetails.port, smsBody, options, this.smsSuccessCallback, this.smsErrorCallback);
+  smsErrorUnRegistrationCallback(error: any) {
+    console.log("smsErrorUnRegistrationCallback in Header Component: " + error);
   }
 }
