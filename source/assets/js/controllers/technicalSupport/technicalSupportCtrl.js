@@ -372,7 +372,7 @@
             technicalSupportService.getOperators()
                 .success(function(result){
 
-                    $scope.operators = result
+                    $scope.operators = result;
                     console.log($scope.operators);
                 }).error(function(error){
                     toastr.error('Loading operators Error', 'Warning', {
@@ -401,7 +401,7 @@
 
           }
 
-        $scope.saveServiceId = function(data,){
+        $scope.saveServiceId = function(data){
             technicalSupportService.saveServiceId(data).success(function(result){
 
 //                toastr.error('Service ID added Successfully', 'Success', {closeButton: true});
