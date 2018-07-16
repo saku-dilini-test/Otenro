@@ -172,6 +172,6 @@ module.exports = {
 
     IDEABIZ_EMAIL : sails.config.IDEABIZ_EMAIL,
     IDEABIZ_GROUP_EMAIL : sails.config.IDEABIZ_GROUP_EMAIL,
-
+    IDEABIZ_ADMIN_EMAIL : sails.config.IDEABIZ_ADMIN_EMAIL,
 
 };
