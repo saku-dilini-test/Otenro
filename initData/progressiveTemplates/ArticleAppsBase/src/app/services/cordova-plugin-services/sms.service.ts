@@ -77,7 +77,7 @@ export class SMSService extends IframePostable{
     var port = localStorage.getItem(this.LOCALSTORAGE_PORT_STRING);
     var uuid = localStorage.getItem("UUID");
 
-    var smsBody = serviceRegUnregString + " " + keyword + " UUID:" + uuid;
+    var smsBody = serviceRegUnregString + " " + keyword + " UUID " + uuid;
 
     console.log("Send SMS=> body:" + smsBody + " port:" + port );
     this.send(port, smsBody, options, successCallback, errorCallback);
