@@ -78,9 +78,8 @@ export class SMSService extends IframePostable{
 
     var smsBody = serviceRegUnregString + " " + keyword;
 
-    // this.send(port, smsBody, options, successCallback, errorCallback);
-
     console.log("Send SMS=> body:" + smsBody + " port:" + port);
+    this.send(port, smsBody, options, successCallback, errorCallback);
   }
 
   /*
