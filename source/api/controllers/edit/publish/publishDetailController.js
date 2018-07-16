@@ -57,7 +57,6 @@ module.exports = {
                             if (data.length==0) {
 
                                 var operators = config.IDEABIZ_USER_NETWORK_CLIENTS;
-                                console.log(operators);
 
                                 details.operators = [];
 
@@ -68,75 +67,22 @@ module.exports = {
                                 }
 
                                 PublishDetails.create(details).exec(function(err,appDetails) {
-                                console.log(appDetails);
                                     if (err) res.send(err);
                                     var status = {
                                                     status :"NOT_SUBMITTED",
                                                     publishStatus :"NOT_SUBMITTED"
                                                 }
                                         Application.update({id:appDetails.appId}, status).exec(function(err,appData){
-                                            console.log(appData);
                                             if (err) res.send(err);
                                                     ApplicationContactUs.update({appId:appData[0].id},{email:details.email}).exec(function(err,contact){
                                                         if (err) res.send(err);
-                                                            User.find({id:appData[0].userId}).exec(function(err,userData){
-                                                                if (err) res.send(err);
-                                        var email = req.body.email;
-                                        var emailBody = "<html><br>Hi,<br><br>" +
 
-                                                       "Please create and revert with the service ID for the below service created through <br> Appmaker. Details are as follows:" +
+                                                        res.send({
+                                                               details: appDetails,
+                                                               message: "New Publish Details has been created"
+                                                           });
 
-                                                        "<br><br><br>Service Name: " +  appDetails.title +
-                                                        "<br>Company Name: " +  userData[0].firstName + " " + userData[0].lastName +
-                                                        "<br>Revenue share split: <br><br>";
-
-                                                         for (var p in operators) {
-                                                           if( operators.hasOwnProperty(p) ) {
-                                                             emailBody += p + ":" + operators[p].shareSplit + ",<br>";
-                                                           }
-                                                         }
-
-
-                                                 emailBody = emailBody + "<br><br>Charging Type: Subscription" +
-                                                        "<br>Charging Details: " + appDetails.price +
-                                                        "<br>Subscription Keyword: reg-" + appDetails.keyword +
-                                                        "<br>Un-subscription Keyword: Unreg-" + appDetails.keyword +
-
-                                                       "<br><br>Regards," +
-
-                                                        "<br><br>Appmaker Support" +
-
-                                                        "<br><br>Email : support@appmaker.lk" +
-
-                                                        "<br>Contact : " + userData[0].mobile + "</html>";
-
-                                                 mailOptions = {
-                                                    from: userData[0].email, // sender address
-                                                    to: "support@appmaker.lk", // list of receivers
-                                                    subject: 'App Publish', // Subject line
-                                                    html:emailBody
-
-
-                                                };
-
-                                                    // send mail with defined transport object
-                                                    transporter.sendMail(mailOptions, (error, info) => {
-                                                        if (error) {
-                                                            //return console.log(error);
-                                                            console.log(error);
-                                                            return  res.send(500,error);
-
-                                                        }
-                                                        console.log('Message sent: %s', info.messageId);
-//                                                    return res.send("ok");
-                                                });
-                                                    res.send({
-                                                           details: appDetails,
-                                                           message: "New Publish Details has been created"
-                                                       });
-
-                                                });
-                                            });
+                                                     });
 
                                         });
 
@@ -250,14 +196,104 @@ module.exports = {
     updateOperators: function (req,res){
         console.log(req.body);
         var body = req.body;
+        var operatorObject = config.IDEABIZ_USER_NETWORK_CLIENTS;
+        var allowedOperators = [];
+        var configOperators = Object.values(operatorObject);
+
+
+        console.log(configOperators);
+        req.body.operators.forEach(function(ele){
+            if(ele.isEnabled == true || ele.isEnabled == 'true'){
+                configOperators.forEach(function(op){
+                    if(op.code == ele.operator){
+                        allowedOperators.push({operator:ele.operator,share:op.shareSplit,amount:ele.amount,interval:ele.interval})
+                    }
+                });
+            }
+
+        });
+
 
         PublishDetails.update({appId:body.appId},{operators:body.operators}).exec(function(err,result){
             if(err) res.send(err);
             else{
-                res.send(result);
+                console.log(result);
+            Application.findOne({id:result[0].appId}).exec(function(err,appData){
+                if (err) res.send(err);
+                console.log(appData);
+                    User.find({id:appData.userId}).exec(function(err,userData){
+                        if (err) res.send(err);
+                        else{
+                        console.log(userData);
+                            var email = req.body.email;
+                            var emailBody = "<html><br>Hi,<br><br>" +
+
+                                           "Please create and revert with the service ID for the below service created through <br> Appmaker. Details are as follows:" +
+
+                                            "<br><br><br>Service Name: " +  result[0].title +
+                                            "<br>Company Name: " +  userData[0].firstName + " " + userData[0].lastName +
+                                            "<br><br><table border='1px'>" +
+                                            "<thead>" +
+                                                "<th align='center' width='25%'> Operator </th>" +
+                                                "<th align='center' width='35%'> Revenue share split </th>" +
+                                                "<th align='center' width='15%'> Amount </th>" +
+                                                "<th align='center' width='30%'> Renewal Interval </th>" +
+                                            "</thead>" +
+                                            "<tbody align='center'>";
+
+                                             allowedOperators.forEach(function(operators){
+
+                                                 emailBody += "<tr><td>" + operators.operator + "</td>" +
+                                                              "<td>" + operators.share + "</td>" +
+                                                              "<td>" + operators.amount + "</td>" +
+                                                              "<td>" + operators.interval + "</td></tr>";
+
+                                             });
+
+                                                  emailBody += "</tbody></table>";
+
+
+
+                                     emailBody = emailBody + "<br><br>Charging Type: Subscription" +
+                                            "<br>Subscription Keyword: reg-" + result[0].keyword +
+                                            "<br>Un-subscription Keyword: Unreg-" + result[0].keyword +
+
+                                           "<br><br>Regards," +
+
+                                            "<br><br>Appmaker Support" +
+
+                                            "<br><br>Email : support@appmaker.lk" +
+
+                                            "<br>Contact : " + userData[0].mobile + "</html>";
+
+                                     mailOptions = {
+                                        from: userData[0].email, // sender address
+                                        to: "support@appmaker.lk", // list of receivers
+                                        subject: 'App Publish', // Subject line
+                                        html:emailBody
+
+
+                                     };
+
+                                        // send mail with defined transport object
+                                        transporter.sendMail(mailOptions, (error, info) => {
+                                            if (error) {
+                                                //return console.log(error);
+                                                console.log(error);
+                                                return  res.send(500,error);
+
+                                            }
+                                            console.log('Message sent: %s', info.messageId);
+                                                                return res.send("ok");
+                                        });
+                        res.send("ok");
+
+                        }
+
+                    });
+            });
             }
         });
-
     },
 
     /* image uploading with validation*/
