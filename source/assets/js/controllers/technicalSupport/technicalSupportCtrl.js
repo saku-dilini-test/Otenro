@@ -401,7 +401,7 @@
 
           }
 
-        $scope.saveServiceId = function(data,){
+        $scope.saveServiceId = function(data){
             technicalSupportService.saveServiceId(data).success(function(result){
 
 //                toastr.error('Service ID added Successfully', 'Success', {closeButton: true});
