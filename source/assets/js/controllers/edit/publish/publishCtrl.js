@@ -1,6 +1,25 @@
 (function() {
     'use strict';
-    angular.module("appEdit").controller("PublishCtrl", ['$scope', '$mdDialog','item','carouselService',
+    angular.module("appEdit")
+    .directive('numbersOnly', function () {
+        return {
+            require: 'ngModel',
+            link: function (scope, element, attr, ngModelCtrl) {
+                function fromUser(text) {
+                    if (text) {
+                        var transformedInput = text.replace(/[^0-9.]/g, '');
+                        if (transformedInput !== text) {
+                            ngModelCtrl.$setViewValue(transformedInput);
+                            ngModelCtrl.$render();
+                        }
+                        return transformedInput;
+                    }
+                    return undefined;
+                }
+                ngModelCtrl.$parsers.push(fromUser);
+            }
+        };
+    }).controller("PublishCtrl", ['$scope', '$mdDialog','item','carouselService',
         'toastr', '$rootScope', 'publishService', 'contactUsService', '$http', 'SERVER_URL','$auth','$window','technicalSupportService','$filter', PublishCtrl]);
 
     function PublishCtrl($scope, $mdDialog, item, carouselService, toastr, $rootScope, publishService, contactUsService, $http, SERVER_URL,$auth,$window,technicalSupportService,$filter) {
@@ -260,6 +279,14 @@
                         return arr[0].desc;
                     }
             }
+        }
+
+        $scope.validate = function(evt){
+            console.log(evt);
+             var charCode = (evt.which) ? evt.which : event.keyCode
+                    if (charCode > 31 && (charCode < 48 || charCode > 57))
+                        return false;
+                    return true;
         }
 
         $scope.save = function(data){

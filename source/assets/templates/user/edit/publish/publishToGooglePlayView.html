@@ -179,8 +179,8 @@
                             <table class="table" name="form">
                                 <thead style="background-color:rgba(241, 241, 241, 0.925)">
                                 <th style="text-align:center;" width="15%">Operator</th>
-                                <th style="text-align:center;" width="19%">Amount Rs.</th>
-                                <th style="text-align:center;" width="30%">Renewal Interval</th>
+                                <th style="text-align:center;" width="24%">Amount Rs.</th>
+                                <th style="text-align:center;" width="25%">Renewal Interval</th>
                                 <th style="text-align:center;" width="6%">Enabled</th>
                                 <th style="text-align:center;" width="35%">Status</th>
 
@@ -190,7 +190,7 @@
                                     <td align="center" ng-disabled = "!operator.isEnabled"  ng-class="{'disabled-class': !operator.isEnabled}">{{operatorDes(operator.operator)}}</td>
                                     <td align="center">
                                         <md-input-container style="margin-bottom:0px;margin-top:0px;">
-                                            <input type="text" maxlength="5" style="width:100%;text-align: center;" name="amount" ng-model="operator.amount" value="{{amount}}" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_CONFIG' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED'" required/>
+                                            <input type="text" maxlength="8" style="width:100%;text-align: center;" name="txtAccountNumber" numbers-only ng-model="operator.amount" value="{{amount}}" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_CONFIG' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED'" required/>
                                         </md-input-container>
                                     </td>
                                     <td align="center">
