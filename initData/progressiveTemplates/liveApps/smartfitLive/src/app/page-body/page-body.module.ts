@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-
+import { RouterModule, Routes } from '@angular/router';
 import { PageBodyRoutingModule } from './page-body-routing.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { WarrantyComponent } from './warranty/warranty.component';
@@ -37,7 +37,8 @@ import { BlogViewComponent } from './blog-view/blog-view.component';
     OwlModule,
     AgmCoreModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
 
   ],
    exports:[
