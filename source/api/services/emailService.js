@@ -880,21 +880,34 @@ module.exports = {
 
 
     },
-        sendApkEmail : function(data,res){
+        sendApkEmail : function(data,callback){
 
         console.log("inside send apk email " + data.email);
         console.log(config.server.host);
+        console.log(data);
+
+        var status = data.operator.status;
+        var subject,emailBody,operator;
+        var toEmail = data.email;
+        var fromEmail = config.IDEABIZ_EMAIL;
+        var op = Object.values(config.IDEABIZ_USER_NETWORK_CLIENTS) // config operator object
+
+         op.forEach(function(ele){
+            if(ele.code == data.operator.operator){
+                operator = ele.desc;
+            }
+         });
 
         var apkFile = config.server.host +'/getApk';
             var emailBody,subject;
 
             var email = data.email;
 
-                           if(data.status == "APPROVED"){
+                           if(data.operator.status == "APPROVED"){
 
-                                emailBody = "<html><br>Hi " +  data.fName + " " + data.lName + ",<br><br>"+
+                               emailBody = "<html><br>Hi " +  data.fName + " " + data.lName + ",<br><br>"+
 
-                                           "Good news! " + data.appName + " App has been approved for launch! Users can access the web app<br> using the following URL: <a href=" + data.appView + "> App view</a><br><br>" +
+                                           "Good news! <B>" + data.appName + "</B> App has been approved by <B>" + operator + "</B> for launch! Users can access the web app<br> using the following URL: <a href=" + data.appView + "> App view</a><br><br>" +
 
                                            "You can download the apk file of the application from " + "<a href=" + apkFile + "> download APK </a><br><br>" +
 
@@ -908,19 +921,13 @@ module.exports = {
 
                                 subject = data.appName + " has been approved";
 
-                           }else if(data.status == "SUSPENDED"){
+                           }else if(data.operator.status == "SUSPENDED"){
 
                                 emailBody = "<html><br>Hi " +  data.fName + " " + data.lName + ",<br><br>"+
 
-                                           "This email is to inform you that " + data.appName + " has been suspended for the below operators:<br><br>";
+                                           "This email is to inform you that <B>" + data.appName + "</B> has been suspended by <B>" + operator + "</B>." +
 
-                                           if(data.operators){
-                                                data.operators.forEach(function(ele){
-                                                    emailBody += "*" + ele + "<br>";
-                                                });
-                                           }
-
-                                           emailBody += "<br><br>You can re-submit the app for approval after addressing the concerns<br>" +
+                                           "<br><br>You can re-submit the app for approval after addressing the concerns<br>" +
 
                                            "Regards,<br>"+
 
@@ -928,19 +935,13 @@ module.exports = {
 
                                 subject = data.appName + " has been suspended";
 
-                           }else if(data.status == "REJECTED"){
+                           }else if(data.operator.status == "REJECTED"){
 
                                 emailBody = "<html><br>Hi " +  data.fName + " " + data.lName + ",<br><br>"+
 
-                                           "This email is to inform you that " + data.appName + " has been rejected for the below operators:<br><br>";
+                                           "This email is to inform you that <B>" + data.appName + "</B> has been rejected by <B>" + operator + "</B>." +
 
-                                           if(data.operators){
-                                                data.operators.forEach(function(ele){
-                                                    emailBody += "*" + ele + "<br>";
-                                                });
-                                           }
-
-                                           emailBody += "<br><br>You can re-submit the app for approval after addressing the concerns<br>" +
+                                           "<br><br>You can re-submit the app for approval after addressing the concerns<br>" +
 
                                            "Regards,<br>"+
 
@@ -948,19 +949,13 @@ module.exports = {
 
                                 subject = data.appName + " has been rejected";
 
-                           }else if(data.status == "TERMINATED"){
+                           }else if(data.operator.status == "TERMINATED"){
 
                                            emailBody = "<html><br>Hi " +  data.fName + " " + data.lName + ",<br><br>"+
 
-                                                  "This email is to inform you that " + data.appName + " has been terminated for the below operators:<br><br>";
+                                                  "This email is to inform you that <B>" + data.appName + "</B> has been terminated by <B>" + operator + "</B>." +
 
-                                                  if(data.operators){
-                                                       data.operators.forEach(function(ele){
-                                                           emailBody += "*" + ele + "<br>";
-                                                       });
-                                                  }
-
-                                                  emailBody += "<br><br>You can re-submit the app for approval after addressing the concerns<br>" +
+                                                  "<br><br>You can re-submit the app for approval after addressing the concerns<br>" +
 
                                                   "Regards,<br>"+
 
@@ -971,27 +966,26 @@ module.exports = {
                            }
 
                      mailOptions = {
-                        from: 'support@appmaker.lk', // sender address
-                        to: email, // list of receivers
+                        from: fromEmail, // sender address
+                        to: toEmail, // list of receivers
                         subject: subject, // Subject line
                         html:emailBody
 
-    //                    <h1>Test email</h1><br><a href=" + apkFile + ">Download APK</a>"
 
-                    };
+                     };
 
                         // send mail with defined transport object
                         transporter.sendMail(mailOptions, (error, info) => {
                             if (error) {
                                 //return console.log(error);
                                 console.log(error);
-                                return  res.send(500,error);
+                                return  callback(null,error);
 
                             }
                             console.log('Message sent: %s', info.messageId);
-                        return res.send('ok');
                     });
 
+                        callback(null,"ok");
 
         }
 };

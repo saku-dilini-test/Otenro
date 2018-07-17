@@ -401,48 +401,31 @@ module.exports = {
         });
     },
 
+    setAppstatus : function(req,res){
+
+        var idPD = {appId:req.body.id}
+        var statusPD = { operators: req.body.operators };
+
+        PublishDetails.update(idPD,statusPD).exec(function(err,result){
+
+            if (err){res.send(err);}
+
+
+               res.send('ok');
+        });
+
+    },
+
     sendApkEmail : function(req,res){
 
-    console.log("inside send apk email " + req.body.email);
-    console.log(config.server.host);
-    var apkFile = config.server.host +'/getApk';
-        var email = req.body.email;
-        var emailBody = "<html><br>Hi " +  req.body.fName + " " + req.body.lName + ",<br><br>"+
-
-                       "Good news! " + req.body.appName + " App has been approved for launch! Users can access the web app<br> using the following URL: <a href=" + req.body.appView + "> App view</a><br><br>" +
-
-                       "You can download the apk file of the application from " + "<a href=" + apkFile + "> download APK </a><br><br>" +
-
-                       "<br>If you need any technical support in uploading the app to an app store, please contact<br> us at support@appmaker.lk. To upload the app on Google Play Store you can follow the<br> instructions we have given on publishing page " + "<a href='http://developer.appmaker.lk'>developer.appmaker.lk</a>" +
-
-                       "<br><br>For any assistance required in marketing the application please contact<br> marketing@appmaker.lk<br><br>" +
-
-                       "Regards,<br><br>"+
-
-                       "Appmaker Team</html>";
-
-                 mailOptions = {
-                    from: 'support@appmaker.lk', // sender address
-                    to: email, // list of receivers
-                    subject: 'App Approve', // Subject line
-                    html:emailBody
-
-//                    <h1>Test email</h1><br><a href=" + apkFile + ">Download APK</a>"
-
-                };
-
-                    // send mail with defined transport object
-                    transporter.sendMail(mailOptions, (error, info) => {
-                        if (error) {
-                            //return console.log(error);
-                            console.log(error);
-                            return  res.send(500,error);
-
-                        }
-                        console.log('Message sent: %s', info.messageId);
-                    return res.send('ok');
-                });
-
+        sentMails.sendApkEmail(req.body, function(err,result){
+            if(err){
+                res.send(500);
+            }else{
+            console.log("res. send");
+                res.send("success");
+            }
+        });
 
     },
 
@@ -510,28 +493,6 @@ module.exports = {
 
     },
 
-    setAppstatus : function(req,res){
-    console.log(req.body);
-
-        var idPD = {appId:req.body.id}
-        var statusPD = { operators: req.body.operators };
-
-        PublishDetails.update(idPD,statusPD).exec(function(err,result){
-
-            if (err){res.send(err);}
-
-               //  sentMails.sendApkEmail(req.body,function (err,msg) {
-               //     sails.log.info(err);
-               //     if (err) {
-               //         return  res.send(500);
-               //     }
-               //
-               //     res.send('ok');
-               // });
-               res.send('ok');
-        });
-
-    },
 
     getComments : function(req, res){
 
