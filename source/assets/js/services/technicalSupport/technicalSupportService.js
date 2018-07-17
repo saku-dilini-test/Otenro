@@ -72,7 +72,7 @@
             sendApkEmail: function (data) {
                 return $http.post(SERVER_URL + 'edit/sendApkEmail', data);
             },
-            setAppststus: function (data){
+            setAppStatus: function (data){
                 return $http.post(SERVER_URL + 'edit/setAppstatus', data);
             },
             showPublishArticleDescription: function(data) {
@@ -106,7 +106,7 @@
                     templateUrl: 'user/technicalSupport/MobileOperators.html',
                     bindToController: true,
                     clickOutsideToClose: true,
-                    controller: ['$scope', 'initialData','SERVER_URL', 'technicalSupportService', '$filter', '$window', function($scope, initialData,SERVER_URL,technicalSupportService,$filter,$window) {
+                    controller: ['$scope', 'initialData','SERVER_URL', 'technicalSupportService', '$filter', '$window','toastr', function($scope, initialData,SERVER_URL,technicalSupportService,$filter,$window,toastr) {
 
 
 
@@ -217,10 +217,25 @@
                                             appView:appView,
                                             operators:$scope.items
                                         }
+
+                                        var emailData = {
+                                            id:app.id,
+                                            email:user.email,
+                                            fName:user.firstName,
+                                            lName:user.lastName,
+                                            appName:app.appName,
+                                            appView:appView,
+                                            operator:operator
+                                        }
+
                                         console.log(data);
 
-                                        technicalSupportService.setAppststus(data).success(function(res){
-                                            console.log(res);
+                                        technicalSupportService.setAppStatus(data).success(function(res){
+                                            technicalSupportService.sendApkEmail(emailData).success(function(data){
+                                                 toastr.success('Status successfully changed', 'Success', {closeButton: true});
+                                            }).error(function(error){
+                                              console.log(error);
+                                            });
                                             // $window.location.reload();
                                         }).error(function(error){
                                             console.log(error);
