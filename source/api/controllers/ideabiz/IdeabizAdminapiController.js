@@ -473,7 +473,7 @@ module.exports = {
 
         IdeaBizPINVerificationAPIService.getBalance(msisdn,function(response,err){
             if(err){
-                sails.log.debug("getBalance failed for the mobile: " + req.body.mobile + " err:" + JSON.stringify(err));
+                sails.log.debug("getBalance failed for the mobile: " + msisdn + " err:" + JSON.stringify(err));
                 return false ;
             }
 
@@ -508,7 +508,7 @@ module.exports = {
                         IdeaBizPINVerificationAPIService.chargeUser(
                             msisdn,serviceID,data.amount,function(response,err){
                                 if(err){
-                                    sails.log.debug("charge failed for the mobile: " + req.body.mobile + " err:" + JSON.stringify(err));
+                                    sails.log.debug("charge failed for the mobile: " + msisdn + " err:" + JSON.stringify(err));
                                     return false;
                                 }
 
