@@ -15,7 +15,7 @@
             </div>
             <div class="md-dialog-main clearfix">
                 APP NAME: {{appData.appName}}<br>
-                APP ID  : {{appData.id}}
+                APP ID  : {{appData.uniqueAppId}}
             </div>
             <div class="md-dialog-main clearfix">
                 <form class="allItems" novalidate>
@@ -28,8 +28,8 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="operator in publishData[0].operators">
-                            <td align="center">{{operator.operator}}</td>
-                            <td align="center">{{operator.status}}</td>
+                            <td align="center">{{getOperators(operator.operator)}}</td>
+                            <td align="center">{{getStatus(operator.status)}}</td>
                             <td align="center" ng-click="commentView(operator.operator)"><u style="color:rgba(32, 99, 243, 0.925);">View</u></td>
                         </tr>
                         </tbody>
