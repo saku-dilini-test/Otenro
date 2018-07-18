@@ -215,7 +215,9 @@
                                             lName:user.lastName,
                                             appName:app.appName,
                                             appView:appView,
-                                            operators:$scope.items
+                                            operators:$scope.items,
+                                            userId:appUserId,
+                                            appId:app.id
                                         }
 
                                         var emailData = {
