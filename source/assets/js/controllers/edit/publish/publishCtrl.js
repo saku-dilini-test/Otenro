@@ -347,6 +347,21 @@
 
         }
 
+        $scope.downloadAPK = function(){
+            var data = {
+                appId:$rootScope.appId,
+                userId:$auth.getPayload().id
+            }
+            publishService.sendApk(data).success(function(){
+                toastr.success("apk", "success", {
+                    closeButton: true
+                });
+            });
+
+//            $window.open('http://localhost:1337/getApkPath');
+
+        }
+
         $scope.addGooglePlayInfo = function(file, playStoreData, splash, allowPlayStore) {
              $scope.isValidFormData = true;
              $scope.count = 0;
