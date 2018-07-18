@@ -24,14 +24,15 @@ module.exports = {
             var inboundSMSMessage = reqBody.inboundSMSMessageNotification.inboundSMSMessage;
             var msisdn = inboundSMSMessage.senderAddress;
             var message = inboundSMSMessage.message;
-            var callbackData = reqBody.inboundSMSMessageNotification.callbackData;
             var deviceUUID = null;
+            var uuidStr = "uuid";
             var thisController = this;
             //Make the keyword from message body, format should be <keyword> <reg> or <unreg>
             var regStr = "start";
             var unregStr = "stop";
             var isRegistration = null;
             var prefix = '';
+            var keyword = "";
 
             message = message.toLowerCase();
 
@@ -48,11 +49,15 @@ module.exports = {
                 prefix = regStr;
             }
 
-            if(callbackData){
-                deviceUUID = reqBody.inboundSMSMessageNotification.callbackData.deviceUUID;
+            if(message.indexOf(uuidStr)!=-1){
+                deviceUUID = message.substring(message.indexOf(uuidStr)+uuidStr.length+1);
             }
 
-            var keyword = message.substring(message.indexOf(prefix)+prefix.length+1);
+            if(message.indexOf(uuidStr)==-1){
+                keyword = message.substring(message.indexOf(prefix)+prefix.length+1).trim();
+            }else{
+                keyword = message.substring(message.indexOf(prefix)+prefix.length+1,message.indexOf(uuidStr)-1).trim();
+            }
 
             if (!keyword || (keyword && keyword.length===0)) {
                 sails.log.error("SMS body does not contains keyword");

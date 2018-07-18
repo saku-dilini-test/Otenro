@@ -483,44 +483,27 @@ module.exports = {
 
     getApkPath : function(req,res){
 
-    var file = config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/publish_/' + req.param("appId") + ".zip";
-
-    console.log("inside apk send");
-
     var path = require('path');
     var mime = require('mime');
 
-    var filename = path.basename(req.param("appId") + ".zip");
-    var mimetype = mime.lookup(file);
-    console.log(filename);
-    console.log(mimetype);
+    var zipFile = config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/publish_' + req.param("appId") + ".zip";
 
-    res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-    res.setHeader('Content-type', mimetype);
+    console.log("inside apk send: " + zipFile);
 
-    var filestream = fs.createReadStream(file);
-    sails.log.info('EXCELLENT');
-    filestream.pipe(res);
+    // res.attachment(file);
 
-//        console.log(config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/publish_/' + req.param("appId") + ".zip");
-//
-//        var filename = req.param("appId")+ ".zip";
-//        var filepath = (config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/publish_/' + req.param("appId") + ".zip");
-//
-//        var file = require('path').resolve(filepath)
-//        console.log("************");
-//        console.log(file);
-//        if(fs1.existsSync(file))
-//        {
-//              res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-//
-//              var filestream = fs1.createReadStream(file);
-//              filestream.pipe(res);
-//
-//        }else{
-//            res.json({error : "File not Found"});
-//        }
+        var filename = path.basename(zipFile);
+        var mimetype = mime.lookup(zipFile);
 
+        console.log("filename: " + filename + " mimetype: " + mimetype);
+
+        res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+        res.setHeader('Content-type', mimetype);
+
+        var filestream = fs.createReadStream(zipFile);
+
+        filestream.pipe(res);
+        sails.log.info('EXCELLENT');
 
 
     }

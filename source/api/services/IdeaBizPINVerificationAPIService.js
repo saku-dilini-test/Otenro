@@ -3,8 +3,8 @@ var request = require('request');
 var ideaBizAPIHandlerService = require('./IdeaBizAPIHandlerService');
 var pinVerificationUrl = "https://ideabiz.lk/apicall/pin/verify/v1/verify";
 var submitPinUrl = "https://ideabiz.lk/apicall/pin/verify/v1/submitPin";
-var getBalanceUrl = "https://ideabiz.lk/apicall/balancecheck/v3.1/msisdn/transactions/amount/balance";
-var getPaymentUrl = "https://ideabiz.lk/apicall/payment/v4/msisdn/transactions/amount";
+
+
 
 module.exports = {
 
@@ -41,8 +41,9 @@ module.exports = {
 
 
     getBalance: function(msisdn,callback){
+        var getBalanceUrl = "https://ideabiz.lk/apicall/balancecheck/v3.1/msisdn/transactions/amount/balance";
         var  body = {};
-        getBalanceUrl = getBalanceUrl.replace("msisdn",msisdn)
+        getBalanceUrl = getBalanceUrl.replace("msisdn",msisdn);
         ideaBizAPIHandlerService.sendAPICall(getBalanceUrl,
             'GET',
             JSON.stringify(body),
@@ -54,9 +55,11 @@ module.exports = {
     },
     chargeUser: function(msisdn,serviceID,amount,callback){
 
+        var getPaymentUrl = "https://ideabiz.lk/apicall/payment/v4/msisdn/transactions/amount";
+
         var  body = {
             "amountTransaction": {
-                "clientCorrelator": "54321",
+                "clientCorrelator": Math.floor(Math.random() * 90000000),
                 "endUserId": "tel:+"+msisdn,
                 "paymentAmount": {
                     "chargingInformation": {

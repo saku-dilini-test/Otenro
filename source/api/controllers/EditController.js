@@ -613,13 +613,15 @@ module.exports = {
      * @param res
      */
     buildSourceProg : function(req,res){
+        sails.log.debug("buildSourceProg user:" + req.param('userId') + " appId:" + req.param('appId'));
+
         var userId = req.param('userId'),
             appId = req.param('appId'),
             copyDirPath = config.ME_SERVER + userId + '/buildProg/' + appId + '/',
             moveConfigFile = copyDirPath + 'config.xml',
             homeFile = copyDirPath + 'src/pages/home/home.html',
             appIconFileRES = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/publish/0.png',
-            appSplashFileRES = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/publish/2.png',
+            appSplashFileRES = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/publish/6.png',
             appIconFileDES = copyDirPath + 'resources' + '/' + 'icon.png',
             appSplashFileDES = copyDirPath + 'resources' + '/' + 'splash.png',
             replacePointerAppLink = config.ME_SERVER_URL+userId+'/progressiveTemplates/'+appId,
@@ -634,13 +636,19 @@ module.exports = {
 
                 if(!data || err ){
                     fs.copy(srcPath, copyDirPath, function (err) {
-                        if (err) return res.negotiate(err);
+                        if(err){
+                            sails.log.info("1.Error while building apk: " + err);
+                            return;
+                        }
                         //Success
                         var searchApp = {
                             id: appId
                         };
                         Application.findOne(searchApp).exec(function (err, app) {
-                            if (err) return res.negotiate(err);
+                            if(err){
+                                sails.log.info("2.Error while building apk: " + err);
+                                return;
+                            }
                             replaceAppNameNIcon(app.appName, appIconFileRES, appSplashFileRES);
                         });
                     });
@@ -660,20 +668,29 @@ module.exports = {
                                 var xml = xmlBuilder.buildObject(result);
 
                                 fs.writeFile(moveConfigFile, xml,'utf-8', function(err) {
-                                    if (err) return res.negotiate(err);
+                                    if(err){
+                                        sails.log.info("3.Error while building apk: " + err);
+                                        return;
+                                    }
                                 });
 
                                 var searchApp = {
                                     id: appId
                                 };
                                 Application.findOne(searchApp).exec(function (err, app) {
-                                    if (err) return res.negotiate(err);
+                                    if(err){
+                                        sails.log.info("4.Error while building apk: " + err);
+                                        return;
+                                    }
                                     BuildVersion.create({
                                         appId: appId,
                                         previousVersion: preVersion,
                                         version : version
                                     }).exec(function(err,build){
-                                        if (err) return res.negotiate(err);
+                                        if(err){
+                                            sails.log.info("5.Error while building apk: " + err);
+                                            return;
+                                        }
                                         if(build) {
                                             buildApkFile(copyDirPath,app.appName);
                                         }
@@ -690,8 +707,9 @@ module.exports = {
                     xmlBuilder = new xml2js.Builder();
                 fs.readFile(moveConfigFile, 'utf-8',
                     function(err, data) {
-                        if (err) {
-                            return res.negotiate(err);
+                        if(err){
+                            sails.log.info("6.Error while building apk: " + err);
+                            return;
                         }
 
                         parser.parseString(data, function (err, result) {
@@ -701,21 +719,33 @@ module.exports = {
 
                             fs.writeFile(moveConfigFile, xml,'utf-8', function(err) {
 
-                                if (err) return res.negotiate(err);
+                                if(err){
+                                    sails.log.info("7.Error while building apk: " + err);
+                                    return;
+                                }
                             });
 
                             fs.copy(icon, appIconFileDES, 'base64', function(err) {
-                               if (err) return res.negotiate(err);
+                                if(err){
+                                    sails.log.info("8.Error while building apk: " + err);
+                                    return;
+                                }
                             });
                             fs.copy(splash, appSplashFileDES, 'base64', function(err) {
-                               if (err) return res.negotiate(err);
+                                if(err){
+                                    sails.log.info("9.Error while building apk: " + err);
+                                    return;
+                                }
                             });
                             BuildVersion.create({
                                 appId: appId,
                                 previousVersion:result.widget['$'].version,
                                 version : result.widget['$'].version
                             }).exec(function(err,build){
-                                if (err) return res.negotiate(err);
+                                if(err){
+                                    sails.log.info("10.Error while building apk: " + err);
+                                    return;
+                                }
 
                                     var html='<ion-content>'+
                                         '<iframe class= "webPage" name= "samplePage" id="appframe" src="'+replacePointerAppLink+'/src/index.html">'+
@@ -808,8 +838,8 @@ module.exports = {
                                                 });
                                                 shell.pwd();
                                                 // shell.exec('"C:/Program Files (x86)/android/Android-sdk/build-tools/26.0.2/zipalign" -v 4 android-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
-                                                //  shell.exec('/opt/android-sdk-linux/build-tools/23.0.1/zipalign -v 4 android-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
-                                                 shell.exec('/opt/android-sdk-linux/build-tools/26.0.2/zipalign -v 4 app-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
+                                                shell.exec('/opt/android-sdk/build-tools/26.0.2/zipalign -v 4 app-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
+                                                //  shell.exec('/opt/android-sdk-linux/build-tools/26.0.2/zipalign -v 4 app-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
                                                      if (code5 == 0) {
 
                                                         // var file = appPath + 'platforms/android/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk';
@@ -823,7 +853,7 @@ module.exports = {
                                                             if (err) {
                                                                 if (err.code == 'ENOENT') {
                                                                     sails.log.info('Does not exist.');
-                                                                    res.send(err);
+                                                                    return;
                                                                 }
                                                             } else {
                                                                 if (fileStat.isFile()) {
@@ -836,17 +866,17 @@ module.exports = {
                                                         fs.copy(resourcesPath, publishPath, function (err) {
                                                             if (err) {
                                                                 shell.exit(1);
-                                                                res.send(err);
+                                                                sails.log.info("15.Error while building apk: " + err);
                                                             } else {
                                                                 fs.copy(file, publishPath + "/" + appName.replace(/\s/g, '') + '.apk', function (err) {
                                                                     if (err) {
-                                                                        res.send(err);
+                                                                        sails.log.info("16.Error while building apk: " + err);
                                                                         shell.exit(1);
                                                                     } else {
                                                                         zipFolder(publishPath, zipFile, function (err) {
                                                                             if (err) {
                                                                                 sails.log.info('Zipping error!', err);
-                                                                                res.send(err);
+                                                                                sails.log.info("17.Error while building apk: " + err);
                                                                                 shell.exit(1);
                                                                             } else {
 
@@ -857,18 +887,18 @@ module.exports = {
                                                                                 Application.update(searchAppData, {status: "UPLOADING"}).exec(function (err, app) {
                                                                                     if (err){
                                                                                         shell.exit(1);
-                                                                                        res.send(err);
+                                                                                        sails.log.info("18.Error while building apk: " + err);
                                                                                     }
                                                                                     else {
-                                                                                        var filename = path.basename(zipFile);
-                                                                                        var mimetype = mime.lookup(zipFile);
-
-                                                                                        res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-                                                                                        res.setHeader('Content-type', mimetype);
-
-                                                                                        var filestream = fs.createReadStream(zipFile);
-                                                                                        sails.log.info('EXCELLENT');
-                                                                                        filestream.pipe(res);
+                                                                                        // var filename = path.basename(zipFile);
+                                                                                        // var mimetype = mime.lookup(zipFile);
+                                                                                        //
+                                                                                        // res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+                                                                                        // res.setHeader('Content-type', mimetype);
+                                                                                        //
+                                                                                        // var filestream = fs.createReadStream(zipFile);
+                                                                                        // sails.log.info('EXCELLENT');
+                                                                                        // filestream.pipe(res);
                                                                                     }
                                                                                 });
 
@@ -883,7 +913,7 @@ module.exports = {
                                                         /*res.json('ok');*/
                                                     } else {
                                                         if (stderr){
-                                                            return res.negotiate(stderr);
+                                                            return sails.log.info("20.Error while building apk: " + stderr);
                                                             shell.exit(1);
                                                         }
                                                     }
@@ -892,14 +922,14 @@ module.exports = {
                                             } else {
                                                 if (stderr){
 
-                                                    return res.negotiate(stderr);
+                                                    return sails.log.info("21.Error while building apk: " + stderr);
                                                 }
                                             }
                                             shell.code;
                                         });
                                     } else {
                                         if (stderr){
-                                            return res.negotiate(stderr);
+                                            return sails.log.info("22.Error while building apk: " + stderr);
                                             shell.exit(1);
                                         }
                                     }
@@ -907,7 +937,7 @@ module.exports = {
                                 });
                             } else {
                                 if (stderr){
-                                    return res.negotiate(stderr);
+                                    return sails.log.info("23.Error while building apk: " + stderr);
                                     shell.exit(1);
                                 }
 
@@ -917,13 +947,14 @@ module.exports = {
 
                     } else {
                         if (stderr){
-                            return res.negotiate(stderr);
+                            return sails.log.info("24.Error while building apk: " + stderr);
                             shell.exit(1);
                         }
                     }
                     shell.code;
                 });
             }
+        res.send("apk generation in progress....");
     }
 };
 
