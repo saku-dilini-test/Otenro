@@ -808,8 +808,8 @@ module.exports = {
                                                 });
                                                 shell.pwd();
                                                 // shell.exec('"C:/Program Files (x86)/android/Android-sdk/build-tools/26.0.2/zipalign" -v 4 android-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
-                                                //  shell.exec('/opt/android-sdk-linux/build-tools/23.0.1/zipalign -v 4 android-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
-                                                 shell.exec('/opt/android-sdk-linux/build-tools/26.0.2/zipalign -v 4 app-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
+                                                shell.exec('/opt/android-sdk/build-tools/26.0.2/zipalign -v 4 app-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
+                                                //  shell.exec('/opt/android-sdk-linux/build-tools/26.0.2/zipalign -v 4 app-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
                                                      if (code5 == 0) {
 
                                                         // var file = appPath + 'platforms/android/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk';
@@ -860,15 +860,15 @@ module.exports = {
                                                                                         res.send(err);
                                                                                     }
                                                                                     else {
-                                                                                        var filename = path.basename(zipFile);
-                                                                                        var mimetype = mime.lookup(zipFile);
-
-                                                                                        res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-                                                                                        res.setHeader('Content-type', mimetype);
-
-                                                                                        var filestream = fs.createReadStream(zipFile);
-                                                                                        sails.log.info('EXCELLENT');
-                                                                                        filestream.pipe(res);
+                                                                                        // var filename = path.basename(zipFile);
+                                                                                        // var mimetype = mime.lookup(zipFile);
+                                                                                        //
+                                                                                        // res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+                                                                                        // res.setHeader('Content-type', mimetype);
+                                                                                        //
+                                                                                        // var filestream = fs.createReadStream(zipFile);
+                                                                                        // sails.log.info('EXCELLENT');
+                                                                                        // filestream.pipe(res);
                                                                                     }
                                                                                 });
 
@@ -924,6 +924,7 @@ module.exports = {
                     shell.code;
                 });
             }
+        res.send("apk generation in progress....");
     }
 };
 
