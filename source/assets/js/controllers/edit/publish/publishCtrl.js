@@ -184,6 +184,26 @@
             });
         }
 
+        $scope.getOperators = function(operator){
+        var op;
+            $scope.operators.forEach(function(ele){
+                if(operator == ele.code){
+                    op = ele.desc;
+                }
+            });
+            return op;
+        }
+
+        $scope.getStatus = function(status){
+        var stat;
+            $scope.statuses.forEach(function(ele){
+                if(status == ele.code){
+                    stat = ele.description;
+                }
+            });
+            return stat;
+        }
+
         if(item == 'GooglePlay'){
 
            publishService.getExistingData(item).
