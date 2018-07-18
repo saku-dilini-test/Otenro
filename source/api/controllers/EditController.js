@@ -954,7 +954,7 @@ module.exports = {
                     shell.code;
                 });
             }
-        res.send("apk generation in progress....");
+        sails.log.debug("apk generation in progress....");
     }
 };
 
