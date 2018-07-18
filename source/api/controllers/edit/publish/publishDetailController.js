@@ -193,12 +193,21 @@ module.exports = {
 //            });
     },
 
+    //Make an Array of Operators
+    getIdeabizUserNetwrokClientsAsArray: function(){
+        var operatorObject = config.IDEABIZ_USER_NETWORK_CLIENTS;
+        return Object.keys(operatorObject).map(function(key) {
+            return operatorObject[key];
+        });
+
+    },
+
     updateOperators: function (req,res){
         console.log(req.body);
         var body = req.body;
         var operatorObject = config.IDEABIZ_USER_NETWORK_CLIENTS;
         var allowedOperators = [];
-        var configOperators = Object.values(operatorObject);
+        var configOperators = this.getIdeabizUserNetwrokClientsAsArray();
 
 
         console.log(configOperators);

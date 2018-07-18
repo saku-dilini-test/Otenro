@@ -880,6 +880,16 @@ module.exports = {
 
 
     },
+
+    //Make an Array of Operators
+    getIdeabizUserNetwrokClientsAsArray: function(){
+        var operatorObject = config.IDEABIZ_USER_NETWORK_CLIENTS;
+        return Object.keys(operatorObject).map(function(key) {
+            return operatorObject[key];
+        });
+
+    },
+
         sendApkEmail : function(data,callback){
 
         console.log("inside send apk email " + data.email);
@@ -890,7 +900,7 @@ module.exports = {
         var subject,emailBody,operator;
         var toEmail = data.email;
         var fromEmail = config.IDEABIZ_EMAIL;
-        var op = Object.values(config.IDEABIZ_USER_NETWORK_CLIENTS) // config operator object
+        var op = this.getIdeabizUserNetwrokClientsAsArray();
 
          op.forEach(function(ele){
             if(ele.code == data.operator.operator){
