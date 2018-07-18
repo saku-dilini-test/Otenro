@@ -9,25 +9,25 @@ import { SliderService } from '../../services/slider/slider.service';
 
 @Component({
   selector: 'app-categories',
-  templateUrl: './app/addons/categories/categories.component.html',
-  styleUrls: ['./app/addons/categories/categories.component.css'],
+  templateUrl: './categories.component.html',
+  styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent implements OnInit {
-  private prevCategories:any = [];
-  private prevProducts:any = [];
+  prevCategories: any = [];
+  private prevProducts: any = [];
   private imageUrl: any;
   private imageUrl1: any;
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
   private catName: any;
-  private products:any = [];
-  private currentViewName:string;
+  products: any = [];
+  private currentViewName: string;
   private currency: string;
   private sliderData: any;
-  private isSliderDataAvailable: boolean = false;
+  isSliderDataAvailable: boolean = false;
   private imageUrlSlider;
   private currentCategory;
-  constructor(private router: Router, private dataService: PagebodyServiceModule,private productService: ProductsService, private currencyService: CurrencyService,
+  constructor(private router: Router, private dataService: PagebodyServiceModule, private productService: ProductsService, private currencyService: CurrencyService,
     private sliderService: SliderService) {
     this.currentViewName = 'Home';
 
@@ -55,25 +55,25 @@ export class CategoriesComponent implements OnInit {
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=slider";
 
     this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
-        + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
+      + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
     this.imageUrl1 = SERVER_URL + "/templates/viewWebImages?userId="
-        + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=thirdNavi";
+      + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=thirdNavi";
 
 
     this.currencyService.getCurrencies().subscribe(data => {
-        this.currency = data.sign;
+      this.currency = data.sign;
     }, error => {
-        console.log('Error retrieving currency');
+      console.log('Error retrieving currency');
     });
   }
 
-  @Input('categories') categories:CategoriesModel;
+  @Input('categories') categories: CategoriesModel;
 
 
-  goToNextSubCategory(nextNode, currentNode, nextProducts, currentCategory){
+  goToNextSubCategory(nextNode, currentNode, nextProducts, currentCategory) {
     this.prevCategories.push({
-      cat:currentNode,
-      catName:this.currentViewName,
+      cat: currentNode,
+      catName: this.currentViewName,
       currentCategory: currentCategory
     });
     this.currentCategory = currentCategory;
@@ -83,13 +83,13 @@ export class CategoriesComponent implements OnInit {
     this.products[0] = nextProducts;
   }
 
-  goToPreviousCategory(index){
+  goToPreviousCategory(index) {
     this.categories = this.prevCategories[index].cat;
-    if(index != 0){
+    if (index != 0) {
       this.currentViewName = this.prevCategories[index].catName;
-      this.currentCategory = this.prevCategories[index-1].currentCategory;
+      this.currentCategory = this.prevCategories[index - 1].currentCategory;
 
-    }else{
+    } else {
       this.currentViewName = 'Home';
     }
     this.prevCategories.splice(index);
@@ -133,21 +133,21 @@ export class CategoriesComponent implements OnInit {
 
 
   owlOptions = {
-    loop:false,
-    margin:15,
+    loop: false,
+    margin: 15,
     stagePadding: 50,
-    nav:true,
-    dots:true,
-    responsiveClass:true,
-    responsive:{
-      0:{
-        items:2
+    nav: true,
+    dots: true,
+    responsiveClass: true,
+    responsive: {
+      0: {
+        items: 2
       },
-      600:{
-        items:4
+      600: {
+        items: 4
       },
-      1000:{
-        items:4
+      1000: {
+        items: 4
       }
     }
   }
@@ -158,18 +158,18 @@ export class CategoriesComponent implements OnInit {
     this.router.navigate([val, this.catName]);
   }
 
-    navigateSliderProd(val, item) {
-      if (item.optionals.length == 2) {
-        this.catName = item.optionals[0].name
-        this.dataService.data = item.optionals[1];
-        this.router.navigate([val, this.catName]);
-      }
+  navigateSliderProd(val, item) {
+    if (item.optionals.length == 2) {
+      this.catName = item.optionals[0].name
+      this.dataService.data = item.optionals[1];
+      this.router.navigate([val, this.catName]);
     }
+  }
 
 }
 
-export class CategoriesModel{
-  id:number;
-  title:string;
-  nodes:any[];
+export class CategoriesModel {
+  id: number;
+  title: string;
+  nodes: any[];
 }

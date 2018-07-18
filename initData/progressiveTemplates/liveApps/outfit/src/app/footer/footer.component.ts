@@ -6,8 +6,8 @@ import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
   selector: 'app-footer',
-  templateUrl: './app/footer/footer.component.html',
-  styleUrls: ['./app/footer/footer.component.css']
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.css']
 })
 export class FooterComponent{
 

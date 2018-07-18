@@ -13,8 +13,8 @@ import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-cart',
-  templateUrl: './app/page-body/cart/cart.component.html',
-  styleUrls: ['./app/page-body/cart/cart.component.css']
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
 

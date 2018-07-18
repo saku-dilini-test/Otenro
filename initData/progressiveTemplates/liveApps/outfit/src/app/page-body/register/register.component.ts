@@ -10,8 +10,8 @@ import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './app/page-body/register/register.component.html',
-  styleUrls: ['./app/page-body/register/register.component.css']
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
   // data = {};
@@ -30,10 +30,10 @@ export class RegisterComponent implements OnInit {
   private streetName;
   private city;
   private zip;
-  private selectedCountry = null;
+  selectedCountry = null;
   private phone;
   private myForm: FormGroup;
-  private isEmailDuplicate;
+  isEmailDuplicate;
 
   constructor(private localStorageService: LocalStorageService, private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
               private title: TitleService) {

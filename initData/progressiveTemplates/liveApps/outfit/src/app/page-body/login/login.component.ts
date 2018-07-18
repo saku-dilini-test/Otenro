@@ -9,15 +9,15 @@ import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './app/page-body/login/login.component.html',
-  styleUrls: ['./app/page-body/login/login.component.css']
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
   private params = [];
-  private loginclicked;
+  loginclicked;
 
   name; pass; gate: boolean; navigate;
   ifInvalidUserPassword:boolean;

@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-carousel',
-  templateUrl: './app/addons/carousel/carousel.component.html',
-  styleUrls: ['./app/addons/carousel/carousel.component.css'],
+  templateUrl: './carousel.component.html',
+  styleUrls: ['./carousel.component.css'],
 })
 export class CarouselComponent implements OnInit {
 

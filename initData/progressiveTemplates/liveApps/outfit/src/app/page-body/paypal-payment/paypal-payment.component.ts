@@ -12,8 +12,8 @@ declare let paypal: any;
 
 @Component({
   selector: 'app-paypal-payment',
-  templateUrl: './app/page-body/paypal-payment/paypal-payment.component.html',
-  styleUrls: ['./app/page-body/paypal-payment/paypal-payment.component.css']
+  templateUrl: './paypal-payment.component.html',
+  styleUrls: ['./paypal-payment.component.css']
 })
 export class PaypalPaymentComponent implements AfterViewChecked {
 

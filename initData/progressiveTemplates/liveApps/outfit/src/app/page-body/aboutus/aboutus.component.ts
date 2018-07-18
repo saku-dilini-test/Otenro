@@ -7,20 +7,20 @@ import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'app-aboutus',
-  templateUrl: './app/page-body/aboutus/aboutus.component.html',
-  styleUrls: ['./app/page-body/aboutus/aboutus.component.css']
+  templateUrl: './aboutus.component.html',
+  styleUrls: ['./aboutus.component.css']
 })
 export class AboutusComponent implements OnInit {
 
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
-  private header;
-  private content;
-  private openHours: any;
-  private openWeekdays = "we are closed";
-  private openSunday = "we are closed";
-  private openSaturday = "we are closed";
-  private aboutUsUrl = SERVER_URL + "/templates/viewWebImages?userId="
+  header;
+  content;
+  openHours: any;
+  openWeekdays = "we are closed";
+  openSunday = "we are closed";
+  openSaturday = "we are closed";
+  aboutUsUrl = SERVER_URL + "/templates/viewWebImages?userId="
     + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=';
 
   constructor(private http: HttpClient, private appdataService: AppDataService, private title: TitleService) {

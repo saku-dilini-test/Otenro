@@ -133,7 +133,7 @@
               <label for="username" class="sub-header-text-h2">
                 Country
               </label>
-              <select id="country" class="form-control" formControlName="country" (change)="countryChanged()">
+              <select id="country" class="form-control" formControlName="country" (change)="countryChanged(userEditForm.controls['country'].value)">
                 <option *ngFor="let c of countries" [ngValue]="c.countryName">
                   {{c.countryName}}
                 </option>

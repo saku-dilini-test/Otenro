@@ -13,13 +13,14 @@ import { OrdersService } from '../../services/orders/orders.service';
 import { TitleService } from '../../services/title.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+declare var $:any;
 
 declare let paypal: any;
 
 @Component({
   selector: 'app-checkout',
-  templateUrl: './app/page-body/checkout/checkout.component.html',
-  styleUrls: ['./app/page-body/checkout/checkout.component.css']
+  templateUrl: './checkout.component.html',
+  styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
 

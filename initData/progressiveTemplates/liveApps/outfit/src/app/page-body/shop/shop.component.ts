@@ -11,8 +11,8 @@ import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'app-shop',
-  templateUrl: './app/page-body/shop/shop.component.html',
-  styleUrls: ['./app/page-body/shop/shop.component.css'],
+  templateUrl: './shop.component.html',
+  styleUrls: ['./shop.component.css'],
 })
 
 export class ShopComponent implements OnInit {
@@ -20,12 +20,12 @@ export class ShopComponent implements OnInit {
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
   private currency;
-  private results: {};
+  results: {};
   private catId: any;
   private catName: any;
   private catImage: any;
   private slides: any;
-  private categories;
+  categories;
   private colorArray = ["CFBDAC", "D0DDDE", "EEEEEE", "FFDE8B", "DEBBAF", "C6D3E4"]
 
   constructor(private currencyService: CurrencyService, private productService: ProductsService,

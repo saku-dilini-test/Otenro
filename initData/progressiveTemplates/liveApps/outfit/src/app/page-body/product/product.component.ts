@@ -9,18 +9,19 @@ import { CurrencyService } from '../../services/currency/currency.service';
 import { TitleService } from '../../services/title.service';
 import * as Player from '@vimeo/player';
 import { LocalStorageService } from 'angular-2-local-storage';
+declare var $:any;
 
 @Component({
     selector: 'app-product',
-    templateUrl: './app/page-body/product/product.component.html',
-    styleUrls: ['./app/page-body/product/product.component.css'],
+    templateUrl: './product.component.html',
+    styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
 
     private catName;
     private foodInfo;
     private images;
-    private selectedVariant: any;
+    selectedVariant: any;
     private selectedVariant1;
     private selectedVariant2;
     private selectedVariant3;
@@ -28,18 +29,18 @@ export class ProductComponent implements OnInit {
     private sign;
     private appId = (<any>data).appId;
     private userId = (<any>data).userId;
-    private selection = [];
-    private selection1 = [];
-    private selection2 = [];
-    private selection3 = [];
-    private Data;
-    private isBuyBtnDisable: boolean;
+    selection = [];
+    selection1 = [];
+    selection2 = [];
+    selection3 = [];
+    Data;
+    isBuyBtnDisable: boolean;
     private parentobj = { cartItems: [], cartSize: 0, totalPrice: 0 };
-    private lockBuyButton = false;
-    private dialogVariants;
-    private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
+    lockBuyButton = false;
+    dialogVariants;
+    imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
-    private readMore = false;
+    readMore = false;
     desPart1; desPart2; desPart1_demo;
     name1; name2; name3; name4;
 

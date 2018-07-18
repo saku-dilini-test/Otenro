@@ -7,14 +7,14 @@ import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'app-terms',
-  templateUrl: './app/page-body/terms/terms.component.html',
-  styleUrls: ['./app/page-body/terms/terms.component.css']
+  templateUrl: './terms.component.html',
+  styleUrls: ['./terms.component.css']
 })
 export class TermsComponent implements OnInit {
 
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
-  private terms;
+  terms;
   constructor(private http: HttpClient, private appdataService: AppDataService, private title: TitleService) {
     this.title.changeTitle("Terms & Conditions");
   }

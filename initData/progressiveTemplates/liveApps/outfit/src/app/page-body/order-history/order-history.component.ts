@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-history',
-  templateUrl: './app/page-body/order-history/order-history.component.html',
-  styleUrls: ['./app/page-body/order-history/order-history.component.css']
+  templateUrl: './order-history.component.html',
+  styleUrls: ['./order-history.component.css']
 })
 export class OrderHistoryComponent implements OnInit {
 

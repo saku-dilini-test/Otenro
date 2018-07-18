@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import * as data from '../../madeEasy.json';
 @Component({
 	selector: 'app-contact-info',
-	templateUrl: './app/addons/contact-info/contact-info.component.html',
-	styleUrls: ['./app/addons/contact-info/contact-info.component.css']
+	templateUrl: './contact-info.component.html',
+	styleUrls: ['./contact-info.component.css']
 })
 export class ContactInfoComponent {
 

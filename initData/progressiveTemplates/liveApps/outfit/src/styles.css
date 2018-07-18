@@ -14,7 +14,7 @@ body{
 a,button{transition: all .3s ease-in-out;outline: none!important;} /* Prevent ugly blue glow on chrome and safari */
 a:hover{text-decoration: none; cursor:pointer;}
 
-#page-loading-blocs-notifaction{position: fixed;top: 0;bottom: 0;width: 100%;z-index:100000;background:#FFFFFF url("img/pageload-spinner.gif") no-repeat center center;}
+#page-loading-blocs-notifaction{position: fixed;top: 0;bottom: 0;width: 100%;z-index:100000;}
 
 /* = Blocs
 -------------------------------------------------------------- */
@@ -537,7 +537,7 @@ button{
 	border-color:rgba(255,255,255,0.0);
 }
 .button-woman{
-	background-image:url("img/dp-feat-1.jpg");
+	/* background-image:url("img/dp-feat-1.jpg"); */
 	background-position:center center;
 	background-repeat:no-repeat;
 	background-size:100% 100%;
@@ -545,26 +545,26 @@ button{
 	border-width:0px 0px 0px 0px;
 }
 .button-woman:hover{
-	background-image:url("img/dp-feat-1.jpg");
+	/* background-image:url("img/dp-feat-1.jpg"); */
 	background-size:110% 110%;
 	background-position:center center;
 	background-repeat:no-repeat;
 }
 .button-man{
-	background-image:url("img/mens.jpg");
+	/* background-image:url("img/mens.jpg"); */
 	background-size:100% 100%;
 	background-repeat:no-repeat;
 	font-family:"PT Serif Caption";
 	border-width:0px 0px 0px 0px;
 }
 .button-man:hover{
-	background-image:url("img/mens.jpg");
+	/* background-image:url("img/mens.jpg"); */
 	background-size:110% 110%;
 	background-position:center center;
 	background-repeat:no-repeat;
 }
 .button-kids{
-	background-image:url("img/kids-2.jpg");
+	/* background-image:url("img/kids-2.jpg"); */
 	background-repeat:no-repeat;
 	background-position:center center;
 	background-size:100% 100%;
@@ -575,16 +575,16 @@ button{
 	background-size:110% 110%;
 	background-repeat:no-repeat;
 	background-position:center center;
-	background-image:url("img/kids-2.jpg");
+	/* background-image:url("img/kids-2.jpg"); */
 }
 .footwear{
-	background-image:url("img/footwear.jpg");
+	/* background-image:url("img/footwear.jpg"); */
 }
 .button-footwear{
 	background-position:center center;
 	background-repeat:no-repeat;
 	background-size:100% 100%;
-	background-image:url("img/footwear2.jpg");
+	/* background-image:url("img/footwear2.jpg"); */
 	font-family:"PT Serif Caption";
 	border-width:0px 0px 0px 0px;
 }
@@ -592,7 +592,7 @@ button{
 	background-size:110% 110%;
 	background-position:center center;
 	background-repeat:no-repeat;
-	background-image:url("img/footwear2.jpg");
+	/* background-image:url("img/footwear2.jpg"); */
 }
 .block-space{
 	margin-top:-5px;
@@ -601,7 +601,7 @@ button{
 	padding-top:0px;
 }
 .header-image{
-	background-image:url("img/cum-sa-te-imbraci-elegant.jpg");
+	/* background-image:url("img/cum-sa-te-imbraci-elegant.jpg"); */
 	background-position:center top;
 	background-repeat:no-repeat;
 }
@@ -613,7 +613,8 @@ button{
 .header-text-h1{
 	font-size:20px;
 	font-family:"Lato";
-	background-color:transparentfont-weight:400;
+	background-color:transparent;
+	font-weight:400;
 }
 .sub-header-h1{
 	font-size:18px;
@@ -873,7 +874,7 @@ button{
 	width:100%;
 }
 .mens-fashion{
-	background-image:url("img/6793875 (1).jpg");
+	/* background-image:url("img/6793875 (1).jpg"); */
 	background-size:100% auto;
 	background-repeat:no-repeat;
 }
@@ -1013,12 +1014,12 @@ button{
 
 /* Bloc image backgrounds */
 
-.bg-cum-sa-te-imbraci-elegant{
+/* .bg-cum-sa-te-imbraci-elegant{
 	background-image:url("img/cum-sa-te-imbraci-elegant.jpg");
 }
 .bg-234089942-backgrounds-fashion{
 	background-image:url("img/234089942-backgrounds-fashion.jpg");
-}
+} */
 
 
 
@@ -1200,7 +1201,7 @@ button{
 
 @media (max-width: 991px){
 	.kids-fashion{
-	background-image:url("img/baby_kids_clothing_onepieces.jpg");
+	/* background-image:url("img/baby_kids_clothing_onepieces.jpg"); */
 	background-size:100% auto;
 }
 .size{
@@ -1278,7 +1279,7 @@ button{
 	text-align:center;
 }
 .header-image-mobile{
-	background-image:url("img/cum-sa-te-imbraci-elegant.jpg");
+	/* background-image:url("img/cum-sa-te-imbraci-elegant.jpg"); */
 	background-position:right center;
 }
 .hero-block-text-shadow{
@@ -1288,7 +1289,7 @@ button{
 	background-position:right center;
 }
 .img{
-	background-image:url("img/3.jpg");
+	/* background-image:url("img/3.jpg"); */
 	background-size:100% auto;
 }
 .round-button{
@@ -1333,23 +1334,23 @@ button{
 	background-size:110% 110%;
 	background-repeat:no-repeat;
 	background-position:center center;
-	background-image:url("img/mens.jpg");
+	/* background-image:url("img/mens.jpg"); */
 }
 .mens-fashion{
 	background-size:100% 100%;
-	background-image:url("img/mens.jpg");
+	/* background-image:url("img/mens.jpg"); */
 }
 .mens-fashion:active{
 }
 .kids-fashion{
 	background-size:100% 100%;
 	background-repeat:no-repeat;
-	background-image:url("img/kids-2.jpg");
+	/* background-image:url("img/kids-2.jpg"); */
 }
 .kids-fashion:hover{
 	background-size:110% 110%;
 	background-position:center center;
-	background-image:url("img/kids-2.jpg");
+	/* background-image:url("img/kids-2.jpg"); */
 	background-repeat:no-repeat;
 }
 .padding-bottom{

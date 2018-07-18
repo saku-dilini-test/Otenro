@@ -8,25 +8,27 @@ import { TitleService } from "../services/title.service";
 import { CategoriesService } from '../services/categories/categories.service'
 import { SERVER_URL } from '../constantsService';
 import {Location} from '@angular/common';
+declare var $:any;
 
 @Component({
   selector: 'app-header',
-  templateUrl: './app/header/header.component.html',
-  styleUrls: ['./app/header/header.component.css'],
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css'],
   animations: [fadeInAnimation],
   host: { '[@fadeInAnimation]': '' }
 })
 
 export class HeaderComponent implements OnInit {
+  
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
-  private cartNo: number;
+  cartNo: number;
   public title: string;
   public loginStatus;
-  private dummy: any;
+  dummy: any;
   private categories:any
   private catName: any;
-  private imageUrl:any;
+  imageUrl:any;
   constructor(private location: Location,private localStorageService: LocalStorageService,private categoryService: CategoriesService, private router: Router, private dataService: PagebodyServiceModule, private titleServ: TitleService) {
     this.cartNo = this.dataService.cart.cartItems.length;
     this.title = 'Home';
