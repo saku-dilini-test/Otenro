@@ -22,6 +22,7 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
+
             showPublishToGooglePlayDialog: function() {
                 return $mdDialog.show({
                     controller: 'PublishCtrl',
@@ -36,6 +37,7 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
+
             showStatusToGooglePlayDialog: function() {
                 return $mdDialog.show({
                     controller: 'PublishCtrl',
@@ -50,6 +52,7 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
+
             showCommentView: function(comments, operator,operatorList) {
                 return $mdDialog.show({
                     templateUrl: 'user/edit/publish/commentView.html',
@@ -119,6 +122,13 @@
                      },
                     file:null
                 });
+            },
+
+            sendApk: function(data){
+//                return  $http.post(SERVER_URL + 'edit/getApkPath',data);
+                return $http.get(SERVER_URL + 'getApkPath?appId=' + data.appId + '&userId=' + data.userId, {
+                    responseType: 'arraybuffer'
+                  });
             },
 
             addAppStoreInfo: function(appStoreData,publishSplash){

@@ -483,21 +483,45 @@ module.exports = {
 
     getApkPath : function(req,res){
 
-    var file = '/home/dilakshan/Desktop/test.apk'
+    var file = config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/publish_/' + req.param("appId") + ".zip";
 
-        var path = require('path');
-        var mime = require('mime');
-        var fs = require('fs');
+    console.log("inside apk send");
+
+    var path = require('path');
+    var mime = require('mime');
+
+    var filename = path.basename(req.param("appId") + ".zip");
+    var mimetype = mime.lookup(file);
+    console.log(filename);
+    console.log(mimetype);
+
+    res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+    res.setHeader('Content-type', mimetype);
+
+    var filestream = fs.createReadStream(file);
+    sails.log.info('EXCELLENT');
+    filestream.pipe(res);
+
+//        console.log(config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/publish_/' + req.param("appId") + ".zip");
+//
+//        var filename = req.param("appId")+ ".zip";
+//        var filepath = (config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/publish_/' + req.param("appId") + ".zip");
+//
+//        var file = require('path').resolve(filepath)
+//        console.log("************");
+//        console.log(file);
+//        if(fs1.existsSync(file))
+//        {
+//              res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+//
+//              var filestream = fs1.createReadStream(file);
+//              filestream.pipe(res);
+//
+//        }else{
+//            res.json({error : "File not Found"});
+//        }
 
 
-        var filename = path.basename(file);
-        var mimetype = mime.lookup(file);
-        res.setHeader('x-filename', filename);
-        res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-        res.setHeader('Content-type', mimetype);
-        var filestream = fs.createReadStream(file);
-        filestream.pipe(res);
-        console.log("The file was saved!");
 
     }
 
