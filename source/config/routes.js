@@ -491,12 +491,29 @@ module.exports.routes = {
     'POST /appMakerReports/getRevenueAndTrafficSummaryForMonthly': 'appMakerReports/RevenueAndTrafficReportController.getRevenueAndTrafficSummaryForMonthly',
     'POST /appMakerReports/getRevenueAndTrafficSummaryForYearly': 'appMakerReports/RevenueAndTrafficReportController.getRevenueAndTrafficSummaryForYearly',
 
+
+    /**
+     * ReconciliationReportController (ideaDroid)
+     */
+    'POST /appMakerReports/getReconciliationDataForDateRange': 'appMakerReports/ReconciliationReportController.getReconciliationDataForDateRange',
+    'POST /appMakerReports/getReconciliationDataForMonthly': 'appMakerReports/ReconciliationReportController.getReconciliationDataForMonthly',
+    'POST /appMakerReports/getReconciliationDataForYearly': 'appMakerReports/ReconciliationReportController.getReconciliationDataForYearly',
+
+    /**
+     * CustomerCareReportController (ideaDroid)
+     */
+    'POST /appMakerReports/getPaymentStatusOfUser': 'appMakerReports/CustomerCareReportController.getPaymentStatusOfUser',
+
+
+
+
     /**
      * Routes related with ApplicationBaseReportController
      **/
 
     'GET /appMakerReports/appBaseReport/getAppCreators': 'appMakerReports/ApplicationBaseReportController.getAppCreators',
-    'GET /appMakerReports/appBaseReport/getApplications': 'appMakerReports/ApplicationBaseReportController.getApplications'
+    'GET /appMakerReports/appBaseReport/getApplications': 'appMakerReports/ApplicationBaseReportController.getApplications',
+
 
 
 };

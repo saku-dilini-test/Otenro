@@ -62,88 +62,140 @@ module.exports = {
 
     insertReconciliationMonthlySummary: function (year ,month) {
 
-        PublishDetails.find().exec(function(err, publishDetailsDataArray){
+        ReconciliationDailySummary.native(function (err, collection) {
 
-            publishDetailsDataArray.forEach(function(publishDetailsData) {
+            if (err) return res.serverError(err);
 
-                console.log(publishDetailsData);
+            collection.aggregate([
+                {
+                    "$match": {
+                        "date": {
+                            $gte: dateFormat(getFirstDayOfMonth(year, month), "yyyy-mm-dd"),
+                            $lte: dateFormat(getLastDayOfMonth(year, month), "yyyy-mm-dd")
+                        }
+                    }
+                },
+                {
+                    "$group": {
+                        "_id": "$appId",
+                        "revenue": {"$sum": "$revenue"}
+                    }
+                }
+            ]).toArray(function (err, dailySummaryData) {
+                if (err) {
+                    console.log(err);
+                }
 
-                    ReconciliationDailySummary.native(function (err, collection) {
+                dailySummaryData.forEach(function(dailySummaryResultData) {
 
-                        if (err) return res.serverError(err);
+                    console.log("dailySummaryData " + JSON.stringify(dailySummaryData));
 
-                        collection.aggregate([
-                            {
-                                "$match": {
-                                    "date": {
-                                        $gte: dateFormat(getFirstDayOfMonth(year, month), "yyyy-mm-dd"),
-                                        $lte: dateFormat(getLastDayOfMonth(year, month), "yyyy-mm-dd")
-                                    },
-                                    "appId": publishDetailsData.appId
-                                }
-                            },
-                            {
-                                "$group": {
-                                    "_id": "$appId",
-                                    "revenue": {"$sum": "$revenue"}
-                                }
-                            }
-                        ]).toArray(function (err, dailySummaryData) {
-                            if (err) {
-                                console.log(err);
-                            }
+                    Application.findOne({id:dailySummaryResultData._id}).
+                    exec(function(error, applicationData) {
 
-                            console.log(JSON.stringify(dailySummaryData[0]));
+                        console.log("applicationData " + JSON.stringify(applicationData));
 
-                            if (dailySummaryData.length>0){
+                        User.findOne({id: applicationData.userId}).
+                        exec(function(error, userData) {
 
-                                var data = {month:month,year:year,appId:publishDetailsData.appId,
-                                    revenue:dailySummaryData[0] ? (dailySummaryData[0].revenue) : 0 ,userId:publishDetailsData.userId,
-                                    name:publishDetailsData.name ,bankCode:publishDetailsData.bankCode,
-                                    branchCode:publishDetailsData.branchCode,branchName:publishDetailsData.branchName,
-                                    bankAccountNumber:publishDetailsData.accountNumber};
+                            var data = {month:month,year:year,appId:dailySummaryResultData._id,
+                                revenue:dailySummaryResultData.revenue ,userId:applicationData.userId,
+                                name:userData.firstName+ " "+ userData.lastName ,bankCode:userData.bankCode,
+                                branchCode:userData.branchCode,branchName:userData.branchName,
+                                bankAccountNumber:userData.accountNumber};
 
 
-                                ReconciliationMonthlySummary.create(data).exec(function (err, result) {
-                                    if (err) console.log(err);
-                                    //console.log(result);
-                                });
+                            ReconciliationMonthlySummary.create(data).exec(function (err, result) {
+                                if (err) console.log(err);
+                                console.log(result);
+                            });
+                        })
 
-                            }
-                        });
                     });
-                });
+                })
+            });
         });
     },
 
 
-    getRevenueAndTrafficSummaryForDateRange: function (req,res){
+    insertReconciliationYearlySummary: function (year) {
+
+        ReconciliationMonthlySummary.native(function (err, collection) {
+
+            if (err) return res.serverError(err);
+
+            collection.aggregate([
+                {
+                    "$match": {
+                        "year": year
+                    }
+                },
+                {
+                    "$group": {
+                        "_id": "$appId",
+                        "revenue": {"$sum": "$revenue"}
+                    }
+                }
+            ]).toArray(function (err, monthlySummaryData) {
+                if (err) {
+                    console.log(err);
+                }
+
+                monthlySummaryData.forEach(function(monthlySummaryDataResultData) {
+
+                    console.log("dailySummaryData " + JSON.stringify(monthlySummaryData));
+
+                    Application.findOne({id:monthlySummaryDataResultData._id}).
+                    exec(function(error, applicationData) {
+
+                        console.log("applicationData " + JSON.stringify(applicationData));
+
+                        User.findOne({id: applicationData.userId}).
+                        exec(function(error, userData) {
+
+                            var data = {year:year,appId:monthlySummaryDataResultData._id,
+                                revenue:monthlySummaryDataResultData.revenue ,userId:applicationData.userId,
+                                name:userData.firstName+ " "+ userData.lastName ,bankCode:userData.bankCode,
+                                branchCode:userData.branchCode,branchName:userData.branchName,
+                                bankAccountNumber:userData.accountNumber};
+
+
+                            ReconciliationYearlySummary.create(data).exec(function (err, result) {
+                                if (err) console.log(err);
+                                console.log(result);
+                            });
+                        })
+
+                    });
+                })
+            });
+        });
+    },
+
+
+    getReconciliationDataForDateRange: function (req,res){
 
         var reqData = req.body;
 
         var dateFrom = reqData.dateFrom;
         var dateTo = reqData.dateTo;
-        var operator = reqData.operator;
         var query="";
 
-        if (operator=="all"){
 
             query = {date:{'>=':dateFormat(dateFrom, "yyyy-mm-dd"),'<=':dateFormat(dateTo, "yyyy-mm-dd")}}
 
-        }else {
-            query = {date:{'>=':dateFormat(dateFrom, "yyyy-mm-dd"),'<=':dateFormat(dateTo, "yyyy-mm-dd")},operator:operator}
-        }
 
 
 
-        RevenueAndTrafficDailySummary.find(query).exec(function(err, app){
+
+        ReconciliationDailySummary.find(query).exec(function(err, app){
             if (err) return done(err);
             res.send(app);
         });
 
     },
 
-    getRevenueAndTrafficSummaryForMonthly: function (req,res){
+    getReconciliationDataForMonthly: function (req,res){
 
         var reqData = req.body;
 
@@ -154,160 +206,34 @@ module.exports = {
 
         var query="";
 
-        if (operator=="all"){
-
             query = {month:{'>=':monthFrom,'<=':monthTo},year:year}
 
-        }else {
-            query = {month:{'>=':monthFrom,'<=':monthTo},year:year,operator:operator}
-        }
-
-
-
-        RevenueAndTrafficMonthlySummary.find(query).exec(function(err, data){
+        ReconciliationMonthlySummary.find(query).exec(function(err, data){
             if (err) return done(err);
             res.send(data);
         });
 
     },
 
-    getRevenueAndTrafficSummaryForYearly: function (req,res){
+    getReconciliationDataForYearly: function (req,res){
 
         var reqData = req.body;
 
         var yearFrom = reqData.yearFrom;
         var yearTo = reqData.yearTo;
-        var operator = reqData.operator;
 
         var query="";
 
-        if (operator=="all"){
-
             query = {year:{'>=':yearFrom,'<=':yearTo}}
 
-        }else {
-            query = {year:{'>=':yearFrom,'<=':yearTo},operator:operator}
-        }
-
-
-        RevenueAndTrafficYearlySummary.find(query).exec(function(err, data){
+        ReconciliationYearlySummary.find(query).exec(function(err, data){
             if (err) return done(err);
             res.send(data);
         });
 
-    },
-
-
-
-    insertRevenueAndTrafficMonthlySummary: function (year,month) {
-
-        console.log("year " + year + " " + "month " + month);
-
-        //var operator = ['mobitel', 'dialog', 'airtel','hutch'];
-        var date = new Date();
-        date.setDate(date.getDate() -1);
-
-        Operator.find().exec(function(err, operatorData){
-
-            operatorData.forEach(function(operatorData) {
-
-
-                RevenueAndTrafficDailySummary.native(function(err, collection) {
-
-                    if (err) return res.serverError(err);
-
-                    collection.aggregate([
-                        {
-                            "$match": {
-                                "date": {$gte: getFirstDayOfMonth(year,month), $lte: getLastDayOfMonth(year,month)},
-                                "operator":operatorData.operator
-                            }
-                        },
-                        {
-                            "$group": {
-                                "_id": "$operator",
-                                "viewCount": { "$sum": "$viewCount" },
-                                "revenue" : {"$sum": "$revenue" }
-                            }
-                        }
-                    ]).toArray(function (err, dailySummaryData) {
-                        if (err) {
-                            console.log(err);
-                        }
-
-                        var data = {"operator":operatorData.operator ,"revenue":dailySummaryData[0] ? dailySummaryData[0].revenue : 0 ,
-                            "viewCount":dailySummaryData[0] ?dailySummaryData[0].viewCount:0 , "month":month,"year":year};
-
-                        console.log(data);
-
-
-                        RevenueAndTrafficMonthlySummary.create(data).exec(function (err, result) {
-                            if (err) console.log(err);
-                            console.log(result);
-                        });
-                    });
-                });
-            })
-        });
-    },
-
-
-    insertRevenueAndTrafficYearSummary: function (year) {
-
-        console.log("year " + year );
-
-        Operator.find().exec(function(err, operatorData){
-
-            operatorData.forEach(function(operatorData) {
-
-
-                RevenueAndTrafficMonthlySummary.native(function(err, collection) {
-
-                    if (err) return res.serverError(err);
-
-                    collection.aggregate([
-                        {
-                            "$match": {
-                                "year": year,
-                                "operator":operatorData.operator
-                            }
-                        },
-                        {
-                            "$group": {
-                                "_id": "$operator",
-                                "viewCount": { "$sum": "$viewCount" },
-                                "revenue" : {"$sum": "$revenue" }
-                            }
-                        }
-                    ]).toArray(function (err, monthlySummaryData) {
-                        if (err) {
-                            console.log(err);
-                        }
-
-                        var data = {"operator":operatorData.operator ,"revenue":monthlySummaryData[0] ? monthlySummaryData[0].revenue : 0 ,
-                            "viewCount":monthlySummaryData[0] ?monthlySummaryData[0].viewCount:0 ,"year":year};
-
-                        console.log(data);
-
-
-                        RevenueAndTrafficYearlySummary.create(data).exec(function (err, result) {
-                            if (err) console.log(err);
-                            console.log(result);
-                        });
-                    });
-                });
-            })
-        })
     }
 
 };
-
-
-
-
-
-
-
 
 
 function getFirstDayOfMonth(year,month) {

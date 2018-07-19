@@ -22,21 +22,21 @@ module.exports.cron = {
 
     MonthlySummaryJob: {
 
-        schedule: '00 27 17 * * *',
+        schedule: '00 02 16 * * *',
         onTick: function () {
             if(sails){
                 var today = new Date();
                 var yesterday = new Date();
                 yesterday.setDate(today.getDate() - 1);
 
-                /*if (today.getMonth() !== yesterday.getMonth()) {*/
+                if (today.getMonth() !== yesterday.getMonth()) {
 
                     var revenueAndTrafficReportController = require('../api/controllers/appMakerReports/RevenueAndTrafficReportController.js');
                     var reconciliationReportController = require('../api/controllers/appMakerReports/ReconciliationReportController.js');
 
-                   // revenueAndTrafficReportController.insertRevenueAndTrafficMonthlySummary(yesterday.getFullYear(),yesterday.getMonth());
+                    revenueAndTrafficReportController.insertRevenueAndTrafficMonthlySummary(yesterday.getFullYear(),yesterday.getMonth());
                     reconciliationReportController.insertReconciliationMonthlySummary(yesterday.getFullYear(),yesterday.getMonth());
-               /* }*/
+               }
 
             }
         }
@@ -44,7 +44,7 @@ module.exports.cron = {
 
     YearSummaryJob:{
 
-        schedule: '00 06 12 * * *',
+        schedule: '00 26 17 * * *',
         onTick: function () {
             if(sails){
                 var today = new Date();
@@ -54,13 +54,14 @@ module.exports.cron = {
                 if (today.getYear() !== yesterday.getYear()) {
 
                     var revenueAndTrafficReportController = require('../api/controllers/appMakerReports/RevenueAndTrafficReportController.js');
+                    var reconciliationReportController = require('../api/controllers/appMakerReports/ReconciliationReportController.js');
+
                     revenueAndTrafficReportController.insertRevenueAndTrafficYearSummary(yesterday.getFullYear());
+                    reconciliationReportController.insertReconciliationYearlySummary(yesterday.getFullYear());
                 }
 
             }
         }
     }
-
-
 
 };
