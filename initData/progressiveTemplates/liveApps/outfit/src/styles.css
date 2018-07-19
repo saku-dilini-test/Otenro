@@ -1425,6 +1425,11 @@ button{
 		padding: 20px 0 150px 0;
 	}
 
+	::-webkit-scrollbar{
+	    width: 0px;
+	    height:0;
+	}
+
 }
 
 body{
