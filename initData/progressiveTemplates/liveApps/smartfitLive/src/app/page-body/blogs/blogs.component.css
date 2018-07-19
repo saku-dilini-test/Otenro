@@ -38,7 +38,6 @@
     margin-bottom: 20px;
     height: 160px;
     overflow-x: scroll;
-    white-space: nowrap;
 }
 .main-button {
     background-color: transparent !important;

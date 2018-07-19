@@ -117,6 +117,9 @@ module.exports = {
         desc:{
             type: 'string'
         },
+        shortDesc:{
+            type: 'string'
+        },
         keywords:{
             type: 'string'
         },

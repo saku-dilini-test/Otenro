@@ -188,6 +188,12 @@
                         });
                         return;
                     }
+                    if(!blog.shortDesc){
+                        toastr.error('Please enter an blog title ', 'Warning', {
+                            closeButton: true
+                        });
+                        return;
+                    }
 
                     // If article title not undefined, check maximum letter length is exceed
                     if((typeof blog.title != 'undefined') && (blog.title.length > $scope.maxBlogTitle)){
@@ -215,7 +221,7 @@
                         if($scope.mainImg == $scope.serverImg){
                             isImageUpdate = false;
                         }
-                        commerceService.publishBlog(file,blog.id,blog.title, blog.desc,$rootScope.appId,$scope.isNewBlog,isImageUpdate)
+                        commerceService.publishBlog(file,blog.id,blog.title, blog.desc,blog.shortDesc,$rootScope.appId,$scope.isNewBlog,isImageUpdate)
                             .success(function (result) {
                                 toastr.success('Your Blog has successfully been published ', 'Saved', {
                                     closeButton: true
