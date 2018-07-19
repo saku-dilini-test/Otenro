@@ -483,7 +483,7 @@
                 return $http.get(SERVER_URL+ 'edit/getBlogs?appId='+$rootScope.appId);
             },
 
-            publishBlog: function(file,id,title,desc,appId,isNewBlog,isImageUpdate){
+            publishBlog: function(file,id,title,desc,shortDesc,appId,isNewBlog,isImageUpdate){
                 var UploadFile = '';
                 if(isImageUpdate == true){
                 var dataURItoBlob = function(dataURI) {
@@ -505,6 +505,7 @@
                         'id' : id,
                         'title' : title,
                         'desc' : desc,
+                        'shortDesc' : shortDesc,
                         'appId' : appId,
                         'isNewBlog' : isNewBlog,
                         'isImageUpdate' : isImageUpdate
