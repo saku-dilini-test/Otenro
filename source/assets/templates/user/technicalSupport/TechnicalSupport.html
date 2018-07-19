@@ -228,19 +228,85 @@
                         <md-tabs md-center-tabs="false" md-no-ink="true" md-autoselect="false"
                              md-dynamic-height="true">
 
+
+
+                        <md-tab>
+                            <md-tab-label>Payments</md-tab-label>
+                            <md-tab-body>
+                                   
+
+                                    <table  class="paymentTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Msisdn</th>
+                                                <th>Operator</th>
+                                                <th>Status</th>
+                                                <th>Amount</th>
+                                                <th>App Name</th>
+                                                <th data-ng-click="sortType = name; sortReverse = !sortReverse;">Date</th>
+                                               
+                                            </tr>
+                                        </thead>  
+                                        
+                                        <tbody>
+                                            <tr ng-repeat="payment in subPayments | orderBy:sortType:sortReverse"> 
+                                                <td>{{payment.msisdn}}</td>
+                                                <td>{{payment.operator}}</td>
+                                                <td>{{payment.status}}</td>
+                                                <td>{{payment.amount}}</td>
+                                                <td>{{payment.appName}}</td>
+                                                <td>{{payment.date | date:"yyyy-MM-dd"}}</td>
+                                       
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                        </md-tab-body>
+                            </md-tab> 
                         <md-tab>
                             <md-tab-label>Revenue And Traffic Report</md-tab-label>
                             <md-tab-body>
-                                Revenue And Traffic
+                                 Revenue And Traffic 
+                               
+                                
+                                <!-- <div class="reports-container">
+
+                                <div class="reports-type-container"> -->
+                                <!--<div class="technical-support">-->
+                                <!-- <h6>Select report type</h6>
+                                <select>
+                                </select> -->
+                                <!--</div>-->
+                                <!-- </div>
+
+                                <div class="reports-period-container">
+
+                                <div class="period-container">
+                                <h6>Select period</h6>
+                                <input type="date" placeholder="START DATE">
+                                <input type="date" placeholder="END DATE">
+                                </div>
+
+                                <div class="operator-container">
+                                <h6>Select operator</h6>
+                                <select>
+                                </select>
+                                </div>
+
+                                </div>
+
+                                </div> -->
+
+                               
                             </md-tab-body>
                         </md-tab>
+
 
                         <md-tab>
                             <md-tab-label>Application Base Report</md-tab-label>
                             <md-tab-body>
                                 Application Base Report
                             </md-tab-body>
-                        </md-tab>
+                        </md-tab> 
 
                         <md-tab>
                             <md-tab-label>Failed Transaction Report</md-tab-label>
@@ -256,12 +322,12 @@
                             </md-tab-body>
                         </md-tab>
 
-                        <md-tab>
+                         <md-tab>
                             <md-tab-label>Reconciliation Report</md-tab-label>
                             <md-tab-body>
                                 Reconciliation Report
                             </md-tab-body>
-                        </md-tab>
+                        </md-tab> 
 
                     </md-tabs>
 

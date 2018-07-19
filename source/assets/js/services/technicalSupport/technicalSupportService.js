@@ -286,7 +286,17 @@
                                     }
                                 }]
                 });
+            },
+
+            /*
+            *Subscription Payments
+            */
+  
+            getSubscriptionPayments: function(){
+                return $http.get(SERVER_URL + 'appMakerReports/getSubscriptionPayments');
             }
+
+
 
         };
     }
