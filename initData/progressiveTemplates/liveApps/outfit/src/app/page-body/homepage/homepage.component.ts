@@ -10,8 +10,8 @@ import { AppDataService } from '../../services/appdata-info/appdata-info.service
 
 @Component({
   selector: 'app-homepage',
-  templateUrl: './app/page-body/homepage/homepage.component.html',
-  styleUrls: ['./app/page-body/homepage/homepage.component.css']
+  templateUrl: './homepage.component.html',
+  styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
 

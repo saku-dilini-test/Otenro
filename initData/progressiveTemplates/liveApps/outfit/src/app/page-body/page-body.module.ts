@@ -20,12 +20,6 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { RegisterComponent } from './register/register.component';
 import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.component';
 import { AppUserComponent } from './app-user/app-user.component';
-import { BlogViewComponent } from './blog-view/blog-view.component';
-import { BlogsComponent } from './blogs/blogs.component';
-import { ComplaintsComponent } from './complaints/complaints.component';
-import { NewarivalsComponent } from './newarivals/newarivals.component';
-import { WarrantyComponent } from "./warranty/warranty.component";
-import { SearchPipe } from '.././pipes/search.pipe';
 
 @NgModule({
   imports: [
@@ -55,12 +49,6 @@ import { SearchPipe } from '.././pipes/search.pipe';
      RegisterComponent,
      PaypalPaymentComponent, 
      AppUserComponent, 
-     BlogViewComponent,
-     BlogsComponent,
-     ComplaintsComponent,
-     NewarivalsComponent,
-     WarrantyComponent,
-     SearchPipe
     ]
 })
 export class PageBodyModule { }

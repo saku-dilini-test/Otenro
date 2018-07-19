@@ -1465,3 +1465,7 @@ header{
 .padding-fit-top{
 	padding-top:65px !important;
 }
+
+.owl-theme .owl-nav button{
+	border:0;
+}

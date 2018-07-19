@@ -137,7 +137,7 @@ export class CategoriesComponent implements OnInit {
     margin: 15,
     stagePadding: 50,
     nav: true,
-    dots: true,
+    dots: false,
     responsiveClass: true,
     responsive: {
       0: {
