@@ -405,21 +405,38 @@ module.exports = {
     setAppstatus : function(req,res){
         var thisCtrl = this;
         var idPD = {appId:req.body.id}
-        var statusPD = { operators: req.body.operators };
+        console.log(req.body.operators);
 
-        PublishDetails.update(idPD,statusPD).exec(function(err,details){
+        PublishDetails.findOne(idPD).exec(function(err,data){
 
-            if (err){res.send(err);}
+            console.log(data.operators);
 
-            Application.findOne({ id: req.body.id }).exec(function (err, app) {
-                if (err) sails.log.error("In setAppstatus error:" + err);
+            data.operators.forEach(function(ele){
+                req.body.operators.forEach(function(op){
+                     if(ele.operator == op.operator){
+                           ele.status = op.status;
+                           console.log("ele :" + ele);
+                     }
+                });
 
-                if(app && app.status!='UPLOADING' && thisCtrl.isApproved(req.body.operators)){
-                    sails.log.debug("apk generation started for the appId:" + req.body.id);
-                    editController.buildSourceProg(req,res);
-                }
             });
-            res.send('ok');
+
+        var statusPD = { operators: data.operators };
+
+            PublishDetails.update(idPD,statusPD).exec(function(err,details){
+
+                if (err){res.send(err);}
+
+                Application.findOne({ id: req.body.id }).exec(function (err, app) {
+                    if (err) sails.log.error("In setAppstatus error:" + err);
+
+                    if(app && app.status!='UPLOADING' && thisCtrl.isApproved(req.body.operators)){
+                        sails.log.debug("apk generation started for the appId:" + req.body.id);
+                        editController.buildSourceProg(req,res);
+                    }
+                });
+                res.send('ok');
+            });
         });
 
     },
