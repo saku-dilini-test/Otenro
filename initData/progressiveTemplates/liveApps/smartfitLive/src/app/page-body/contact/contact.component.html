@@ -1,14 +1,19 @@
 <!-- bloc-23 -->
 <div class="bloc bgc-snow l-bloc" id="bloc-23">
-	<div class="container bloc-md padding-top-0">
+  <div class="container bloc-md padding-top-0">
 
-		<div class="row content-row  hidden-xs">
-			<div class="col-sm-12">
-				<h2 class="header text-center  main-header-font">
-					Contact us
-				</h2>
-			</div>
-		</div>
+    <div class="row content-row  hidden-xs">
+      <div class="col-sm-12">
+        <h2 class="header text-center  main-header-font">
+          Contact us
+        </h2>
+      </div>
+
+      <div class="col-sm-12" style="text-align: center;">
+        <p style="margin-bottom: -1px;margin-top: 1%;">Authorized Agent</p>
+        <img src="../../assets/images/Softlogic.png" style="width:20%;">
+      </div>
+    </div>
 
     <div class="row voffset" style="margin-top: 0px;">
       <div class="col-sm-12">
@@ -16,33 +21,51 @@
       </div>
 
     </div>
-		<div class="row">
-			<div class="col-sm-12">
-				<agm-map [latitude]="lat" [longitude]="lng" [zoom]="17">
-					<agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-				</agm-map>
-			</div>
-		</div>
+    <div class="row">
+      <div class="col-sm-12">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="17">
+          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+      </div>
+    </div>
 
     <div class="row voffset">
+      <div class="col-sm-12">
+        <p class="text-center contact-text">
+          Sales Hotline
+          <br>
+          <a class="ion ion-ios-telephone" href="tel:0115705705"> 0115 705 705</a>
+        </p>
+        <p class="text-center contact-text">
+          Service Hotline
+          <br>
+          <a class="ion ion-ios-telephone" href="tel:0772208080"> 0772 208 080</a>
+        </p>
+      </div>
 
       <div class="col-sm-12">
+
+        <p class="text-center contact-text" style="margin-top: 1%;">
+            “SMARTFIT” DRTV PRODUCTS (PVT)LTD.
+        </p>
 
         <div *ngFor="let contact of contactInfo">
           <p class="text-center contact-text">
             {{contact.address}}
           </p>
           <p class="text-center contact-text">
-            {{contact.telPhone}}<br>{{contact.email}}<br>
+            {{contact.telPhone}}
+            <br>{{contact.email}}
+            <br>
           </p>
           <p class="text-center">
-            <a href="{{contact.webSite}}" target="_blank">{{contact.webSite}}</a><br>
+            <a href="{{contact.webSite}}" target="_blank">{{contact.webSite}}</a>
+            <br>
           </p>
         </div>
       </div>
 
     </div>
-	</div>
+  </div>
 </div>
 <!-- bloc-23 END -->
-

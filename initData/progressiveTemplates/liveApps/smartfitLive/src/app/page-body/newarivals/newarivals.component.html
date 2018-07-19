@@ -3,7 +3,7 @@
 
 
 <!-- bloc-4 -->
-<div class="bloc bgc-white l-bloc bloc-md" id="bloc-4" *ngIf="categories">
+<div class="bloc bgc-white l-bloc bloc-md" id="bloc-4">
 	<div class="container">
 		<div class="row content-row">
 			<div class="col-sm-12">
@@ -13,25 +13,32 @@
 			</div>
 		</div>
 		<div class="row voffset row-bottom- row-mobile none animDelay02">
-			<div  class="col-sm-4" *ngFor="let prod of categories.products;">
-				<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
-				<h3 class="mg-md product-name text-center main-content-font">
-					<strong>{{prod.name}}</strong>
-				</h3>
-				<h4 class="mg-md product-price-text text-center main-content-font">
-					Price - {{currency}} {{prod.variants[0].price}}
-				</h4>
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="text-center" *ngIf="!checkSoldOut(prod)">
-							<a (click)="navigateProd('product',prod, prod.name )" class="btn btn-d btn-lg main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span>Details</a>
-						</div>
-						<div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
-							<h4 href="#" class="text-warning">Sold Out!</h4>
+			<div *ngIf = "categories">
+				<div  class="col-sm-4" *ngFor="let prod of categories.products;">
+					<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
+					<h3 class="mg-md product-name text-center main-content-font">
+						<strong>{{prod.name}}</strong>
+					</h3>
+					<h4 class="mg-md product-price-text text-center main-content-font">
+						Price - {{currency}} {{prod.variants[0].price}}
+					</h4>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="text-center" *ngIf="!checkSoldOut(prod)">
+								<a (click)="navigateProd('product',prod, prod.name )" class="btn btn-d btn-lg main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span>Details</a>
+							</div>
+							<div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
+								<h4 href="#" class="text-warning">Sold Out!</h4>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<div *ngIf = "!categories">
+				<h1 style="text-align: center;">COMING SOON!</h1>
+			</div>
+
+
 		</div>
 	</div>
 </div>
