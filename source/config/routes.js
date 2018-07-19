@@ -496,7 +496,17 @@ module.exports.routes = {
      **/
 
     'GET /appMakerReports/appBaseReport/getAppCreators': 'appMakerReports/ApplicationBaseReportController.getAppCreators',
-    'GET /appMakerReports/appBaseReport/getApplications': 'appMakerReports/ApplicationBaseReportController.getApplications'
+    'GET /appMakerReports/appBaseReport/getApplications': 'appMakerReports/ApplicationBaseReportController.getApplications',
+
+
+
+
+    /**
+     * SubscriptionPayment
+     **/
+
+    'GET /appMakerReports/getSubscriptionPayments': 'appMakerReports/ApplicationBaseReportController.getSubscriptionPayments'
+
 
 
 };

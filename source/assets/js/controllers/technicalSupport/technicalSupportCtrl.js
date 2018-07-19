@@ -164,6 +164,7 @@
             var getAllAppDataList = function () {
                 technicalSupportService.getAllAppData()
                     .success(function (apps) {
+
                         technicalSupportService.getAllPublishDetails()
                             .success(function (details) {
                                 technicalSupportService.getAppStatus().success(function(data){
@@ -276,6 +277,9 @@
                 })
             }
             getAllAddNetworks();
+
+         
+         
 
             /**
              * @ngdoc function
@@ -589,7 +593,9 @@
            * @param tabName :: name of the clicked tab
            **/
           $scope.showHideSearchField = function ( tabName ) {
-
+              
+              //get subscription payment details
+                getSubscriptionPayments();
               // If user selected tab is equals to reports hide the search field
               if (tabName === 'reports') {
                   $scope.showSearchField = false;
@@ -597,6 +603,21 @@
                   $scope.showSearchField = true;
               }
           };
+
+             /*
+            Subuscription Payments 
+            */
+
+           $scope.sortType = "name";
+           $scope.sortReverse = true;
+           var getSubscriptionPayments = function () {
+            technicalSupportService.getSubscriptionPayments()
+                .success(function (result){
+                    $scope.subPayments = result;
+                }).error(function (error){
+
+                });
+            }   
 
 
             /**
