@@ -735,17 +735,11 @@ button{
 .product-header-h1{
 	font-family:"Lato";
 	font-weight:700;
-	color:#424242!important;
 	border-style:solid;
 	border-width:0px 0px 1px 0px;
 	padding-bottom:12px;
 }
-.color{
-	color:#929000!important;
-}
-.color-black{
-	color:#424242!important;
-}
+
 .round-button{
 	border-radius:50px 50px 50px 50px;
 	border-style:solid;
@@ -1468,4 +1462,8 @@ header{
 
 .owl-theme .owl-nav button{
 	border:0;
+}
+
+.text-warning{
+	color:#da453a;
 }

@@ -134,7 +134,7 @@ export class CategoriesComponent implements OnInit {
 
   owlOptions = {
     loop: false,
-    margin: 15,
+    margin: 5,
     stagePadding: 50,
     nav: true,
     dots: false,
@@ -153,9 +153,11 @@ export class CategoriesComponent implements OnInit {
   }
 
   navigateProd(val: String, item: any, catName: String) {
-    this.catName = catName;
-    this.dataService.data = item;
-    this.router.navigate([val, this.catName]);
+    if(!this.checkSoldOut(item)){
+      this.catName = catName;
+      this.dataService.data = item;
+      this.router.navigate([val, this.catName]);
+    }
   }
 
   navigateSliderProd(val, item) {
