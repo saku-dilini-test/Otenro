@@ -23,6 +23,9 @@ export class PagebodyServiceModule {
   sign;
   searchArray = [];
   appUserId;
+  currentCategoryImage;
+  categories;
+  products;
 
   constructor() {
 

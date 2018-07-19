@@ -119,8 +119,11 @@ export class HeaderComponent implements OnInit {
 
   navigate(route: string, name: string) {
     this.title = name;
-
-    this.router.navigate([route]);
+    if(this.title == 'Home'){
+      this.router.navigate([route],{ queryParams: { id: 'Home'}});
+    }else{
+      this.router.navigate([route]);
+    }
   }
   goBack() {
     this.location.back();

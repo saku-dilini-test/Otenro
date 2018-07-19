@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import * as data from '../madeEasy.json';
 import { AppDataService } from '../services/appdata-info/appdata-info.service';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { SERVER_URL } from '../constantsService';
 
 @Component({
   selector: 'app-footer',
@@ -15,13 +16,17 @@ export class FooterComponent{
   private userId = (<any>data).userId;
   public loginStatus;
   webInfo: any;
-
+  imageUrl;
+  dummy: any;
   constructor(private router: Router, private appDataService: AppDataService, private localStorageService: LocalStorageService) {
     this.appDataService.getContactUs().subscribe((data: any) => {
       this.webInfo = data;
+       this.dummy = new Date().getTime();
     }),((err) => {
       console.log("Error when fetching ContactUsInfo: " + JSON.stringify(err));
     });
+     this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
+        + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=";
   }
 
 

@@ -63,7 +63,8 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
       apiKey: 'AIzaSyBanVJ_9ViC-HeJruJzhetGXUERg1eYXag'
     }),
     BrowserAnimationsModule,
-    Ng4LoadingSpinnerModule.forRoot()
+    Ng4LoadingSpinnerModule.forRoot(),
+    RouterModule
   ],
   providers: [PagebodyServiceModule,PushNotificationService,
     CategoriesService,

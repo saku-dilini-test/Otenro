@@ -1,46 +1,20 @@
-<div *ngIf="isSliderDataAvailable == true && !(prevCategories && prevCategories.length != 0)" id="carousel-example-generic" class=" carousel no-padding no-shadows slide animated puffIn col-sm-12"
-    data-ride="carousel">
 
-    <div class="carousel-inner" role="listbox">
-      <div class="item active">
-        <img src="{{imageUrlSlider}}/{{sliderData[0].imageUrl}}" (click)="navigateSliderProd('product',sliderData[0])" />
-        <div class="carousel-caption">
-        </div>
-      </div>
-      <div class="item" *ngFor="let slider of sliderData | slice:1;let i = index">
-        <img src="{{imageUrlSlider}}/{{slider.imageUrl}}" (click)="navigateSliderProd('product',sliderData[i+1])" />
-        <div class="carousel-caption">
-        </div>
-      </div>
-    </div>
-     <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
 
-<img class="banner-cat" *ngIf="prevCategories && prevCategories.length != 0" src="{{imageUrl}}/{{currentCategory.imageUrl}}" width="100%" />
+<!--<div class="bloc bgc-white l-bloc padding-top" *ngIf="prevCategories && prevCategories.length != 0">-->
+	<!--<div class="container">-->
+		<!--<ol class="breadcrumb no-margin" *ngIf="prevCategories">-->
+			<!--<li  *ngFor="let prev of prevCategories;let i = index;">-->
+				<!--<a (click)="goToPreviousCategory(i)">-->
+					<!--<span *ngIf="!prev.catName">Home</span>-->
+					<!--<span *ngIf="prev.catName">{{prev.catName}}</span>-->
+				<!--</a>-->
+			<!--</li>-->
+			<!--<li class="active">{{currentViewName}}</li>-->
+		<!--</ol>-->
+	<!--</div>-->
+<!--</div>-->
 
-<div class="bloc bgc-white l-bloc padding-top" *ngIf="prevCategories && prevCategories.length != 0">
-	<div class="container">
-		<ol class="breadcrumb no-margin" *ngIf="prevCategories">
-			<li  *ngFor="let prev of prevCategories;let i = index;">
-				<a (click)="goToPreviousCategory(i)">
-					<span *ngIf="!prev.catName">Home</span>
-					<span *ngIf="prev.catName">{{prev.catName}}</span>
-				</a>
-			</li>
-			<li class="active">{{currentViewName}}</li>
-		</ol>
-	</div>
-</div>
-
-<div class="bloc bgc-white l-bloc" id="bloc-6" *ngIf="products && this.products[0]">
+<div class="bloc bgc-white l-bloc" id="bloc-6" *ngIf="products && products[0]">
 	<div class="container" *ngFor="let node of products;">
 		<div class="row voffset animated fadeInUp">
 			<div class="col-sm-12">
@@ -97,10 +71,11 @@
 			<div class="row">
 				<div class="col-sm-12 text-center">
 					<h1 class="text-center about-us  voffset cursor-p">
-						<span (click)="goToNextSubCategory(node.childNodes, categories, node.products, node)" class=" main-header-font" >{{node.name}}</span><br>
+						<a [routerLink]="['']" [queryParams]="{ id:node.id}" class=" main-header-font" >{{node.name}}</a><br>
 					</h1>
-
-					<img class="cursor-p"  (click)="goToNextSubCategory(node.childNodes, categories, node.products, node)" *ngIf="node.products.length == 0" src="{{imageUrl}}/{{node.imageUrl}}" width="70%" />
+					<a [routerLink]="['']" [queryParams]="{ id:node.id}" >
+						<img class="cursor-p"  *ngIf="node.products.length == 0" src="{{imageUrl}}/{{node.imageUrl}}" width="70%" />
+					</a>
 
 				</div>
 			</div>

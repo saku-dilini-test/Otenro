@@ -4,6 +4,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { MarketingOption1LeftComponent } from './marketing-option1-left/marketing-option1-left.component';
 import { MarketingOption1RightComponent } from './marketing-option1-right/marketing-option1-right.component';
+import { Routes, RouterModule } from '@angular/router';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NewsletterComponent } from './newsletter/newsletter.component';
@@ -16,7 +17,8 @@ import { OwlModule } from 'angular-owl-carousel';
   imports: [
     CommonModule,
     NgbModule,
-    OwlModule
+    OwlModule,
+    RouterModule
   ],
    exports:[
     CarouselComponent,
