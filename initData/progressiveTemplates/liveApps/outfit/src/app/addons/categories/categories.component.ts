@@ -135,7 +135,7 @@ export class CategoriesComponent implements OnInit {
   owlOptions = {
     loop: false,
     margin: 5,
-    stagePadding: 50,
+    stagePadding: 0,
     nav: true,
     dots: false,
     responsiveClass: true,
