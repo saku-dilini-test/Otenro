@@ -138,8 +138,6 @@
                                     technicalSupportService.getAppStatus().success(function(data){
                                         $scope.appStatusArr = data.PUBLISH_STATUSES;
 
-                                        console.log($scope.appStatusArr);
-                                        console.log(data);
                                     }).error(function(err){
 
                                     });
@@ -171,7 +169,6 @@
                                     var data = { id:initialData.id,operators:$scope.selected }
                                     $http.post(SERVER_URL + 'edit/setOperators', data)
                                                 .success(function (data, status) {
-                                                    console.log(data);
                                                     $mdDialog.hide();
                                                 })
                                                 .error(function (data, status) {
@@ -208,6 +205,7 @@
                                         var appView = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + appUserId
                                             + "&appId=" + app.id + "&" + new Date().toISOString() + "/";
 
+                                        console.log($scope.items);
                                         var data = {
                                             id:app.id,
                                             email:user.email,
@@ -215,7 +213,9 @@
                                             lName:user.lastName,
                                             appName:app.appName,
                                             appView:appView,
-                                            operators:$scope.items
+                                            operators:$scope.items,
+                                            userId:appUserId,
+                                            appId:app.id
                                         }
 
                                         var emailData = {
@@ -228,7 +228,6 @@
                                             operator:operator
                                         }
 
-                                        console.log(data);
 
                                         technicalSupportService.setAppStatus(data).success(function(res){
                                             technicalSupportService.sendApkEmail(emailData).success(function(data){
@@ -301,7 +300,17 @@
                                     }
                                 }]
                 });
+            },
+
+            /*
+            *Subscription Payments
+            */
+  
+            getSubscriptionPayments: function(){
+                return $http.get(SERVER_URL + 'appMakerReports/getSubscriptionPayments');
             }
+
+
 
         };
     }

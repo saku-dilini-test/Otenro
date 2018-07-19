@@ -273,9 +273,10 @@ module.exports = {
                     // console.log("row: " + rowNumber + " date: " + jsonObj.dateTime + " msg: " + jsonObj.message);
 
                     if(errorsInCsv == null){
-                        var date = engageCtrl.formatDate(new Date(jsonObj.dateTime));
 
-                        if (!moment(date, "DD/MM/YYYY HH:mm", true).isValid()){
+//                        var date = engageCtrl.formatDate(new Date(jsonObj.dateTime));
+
+                        if (!moment(jsonObj.dateTime, "YYYY/MM/DD HH:mm", true).isValid()){
                             sails.log.debug("Invalid date format in row "  + rowNumber + ".Correct datetime Format is DD/MM/YYYY HH:mm");
                             errorsInCsv = "Invalid date format in row "  + rowNumber + ".Correct datetime Format is DD/MM/YYYY HH:mm";
                         }
@@ -292,12 +293,12 @@ module.exports = {
                     console.log("Looping done");
 
                         if(errorsInCsv!=null){
-                            res.serverError(errorsInCsv);
+                            res.badRequest(errorsInCsv);
                             return;
                         }
 
                         if(csvRows.length == 0){
-                            res.serverError("Now push messages uploaded!");
+                            res.badRequest("No push messages uploaded!");
                             return;
                         }
 

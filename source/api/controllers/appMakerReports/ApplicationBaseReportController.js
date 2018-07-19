@@ -63,7 +63,52 @@ module.exports = {
             }
             return res.send({ message: 'success', applications: applications });
         });
-    }
+    },
+
+
+
+    /*
+    *SubscriptonPayments
+    */
+
+   getSubscriptionPayments :function(req, res) {
+
+        SubscriptionPayment.find().exec(function (errOne, payments){
+        var paymnt = [];
+            if(errOne){
+                return res.send(errOne);
+            }else{
+                if (payments){
+                    Application.find().exec(function (errTwo, appData){
+                      
+                         if(appData){
+                            payments.forEach(function (pay){
+                                appData.forEach(function (apdata){
+                                    if(apdata.id == pay.appId){
+                                        pay.appName = apdata.appName
+                                        paymnt.push(pay);
+
+                                       
+                                    }
+                                });
+                            })
+                        }
+                            return res.send(paymnt);
+                        if(errTwo){
+                           return  res.send(errTwo);
+                        }
+                       
+                    });
+    
+                  
+                }
+            }
+ 
+
+        });
+
+   }
+
 	
 };
 

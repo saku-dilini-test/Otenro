@@ -12,6 +12,7 @@ import 'rxjs/add/operator/takeWhile';
 import { SubscribedDataService } from '../../services/subscribed-data/subscribed-data.service'
 import {CordovaPluginDeviceService} from "../../services/cordova-plugin-services/cordova-plugin-device.service";
 import {SMSService} from "../../services/cordova-plugin-services/sms.service";
+import { AppDataService } from "../../services/appdata-info/appdata-info.service";
 
 var homePageCmp;
 
@@ -55,13 +56,18 @@ export class HomepageComponent implements OnInit {
               private title: TitleService,
               private sms: SMSService,
               private push: CordovaPluginFirebaseService,
-              private subscription:SubscribedDataService,) {
+              private subscription:SubscribedDataService,
+              private appDataService: AppDataService,) {
 
         this.title.changeTitle(data.name);
         homePageCmp = this;
     }
 
     ngOnInit() {
+
+    this.appDataService.getPublishDetails().subscribe(data => {
+      this.appPublishDetails = data;
+    });
 
     this.isFromCMSAppView = localStorage.getItem(this.appId + "_isFromCMSAppView")=='1';
 
