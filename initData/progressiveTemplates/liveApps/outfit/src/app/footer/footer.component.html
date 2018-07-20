@@ -1,6 +1,6 @@
-<footer>
+<footer class="footer-mobile  hidden-sm hidden-lg hidden-md ">
   <!-- Footer - bloc-37 -->
-  <div class="bloc main-footer-back l-bloc hidden-sm hidden-lg hidden-md bottom-mobie-menu" id="bloc-37">
+  <div class="bloc bgc-white l-blocbottom-mobie-menu" id="bloc-37">
     <div class="container">
       <div class="row row-no-gutters">
         <div class="col-xs-3" (click)="navigate('')">
@@ -11,7 +11,7 @@
             Home
           </h6>
         </div>
-        <div class="col-xs-3" (click)="navigate('appUser')">
+        <div class="col-xs-3" (click)="navigate('appUser')" *ngIf="loginStatus">
           <div class="text-center">
             <span class="fa fa-user icon-sm"></span>
           </div>
@@ -47,22 +47,6 @@
     <div class="container bloc-sm cus-padding">
       <div class="row">
         <div class="col-xs-4">
-          <!-- <div class="row margin-top">
-            <div class="col-xs-12 col-sm-6 col-md-4 text-center">
-              <a *ngIf="isFacebookUrlExists()"  href="{{ getFacebookUrl() }}" ><span class="fa fa-facebook icons icon-sm mobile-icons main-footer-font"></span></a>
-              <a  *ngIf="isTwitterUrlExists()" href="{{ getTwitterUrl() }}"><span class="fa fa-twitter icons icon-sm mobile-icons main-footer-font"></span></a>
-              <a  *ngIf="isInstagramUrlExists()" href="{{ getInstagramrUrl() }}"><span class="fa fa-instagram icons icon-sm mobile-icons main-footer-font"></span></a>
-              <a  *ngIf="isPinterestUrlExists()"  href="{{ getPinterestrUrl() }}"><span class="fa fa-pinterest-p icons icon-sm mobile-icons main-footer-font"></span></a>
-              <a *ngIf="isLinkedInUrlExists()" href="{{ getLinkedInUrl() }}"><span class="fa fa-linkedin icons icon-sm mobile-icons main-footer-font"></span></a>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-              <p class="text-center mobile-footer main-footer-header"  (click)="navigate('')">
-                OUTFIT.LK 2018
-              </p>
-            </div>
-            <div class="col-xs-4">
-            </div>
-          </div> -->
           <img  src="{{imageUrl}}/logo.png&dummy={{dummy}}" alt="logo" (click)="navigate('')"/>
         </div>
         <div class="col-xs-4 text-left">
@@ -91,7 +75,7 @@
     </div>
   </div>
 </footer>
-<footer class="bgc-dark-jungle-green padding-vertical">
+<footer class="hidden-xs bgc-dark-jungle-green padding-vertical">
   <div class="text-center">
     <h4 class="main-footer-font">OUTFIT.LK 2018</h4>
   </div>
