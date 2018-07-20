@@ -18,6 +18,9 @@ p{
     line-height: 30px;
     border-bottom: 1px dotted #b3b3b3;
 }
+span{
+  margin-left: 5px;
+}
 .social-media{
   display: flex;
 }
