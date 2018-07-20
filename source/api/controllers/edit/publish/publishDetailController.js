@@ -483,29 +483,36 @@ module.exports = {
 
     getApkPath : function(req,res){
 
-    var path = require('path');
-    var mime = require('mime');
+        var path = require('path');
+        var mime = require('mime');
 
-    var zipFile = config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/publish_' + req.param("appId") + ".zip";
+        var apk = config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/platforms/android/app/build/outputs/apk/release/' + req.param("appName") + ".apk";
+        // var apk = config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/platforms/android/build/outputs/apk/' + req.param("appName") + ".apk";
 
-    console.log("inside apk send: " + zipFile);
+        console.log("inside apk send: " + apk);
 
-    // res.attachment(file);
+        fs.stat(apk, function (err, fileStat) {
+            if (err) {
+                if (err.code == 'ENOENT') {
+                    console.log('File:' + req.param("appName") + ".apk does not exists");
+                }
+            } else {
+                if (fileStat.isFile()) {
+                    var filename = path.basename(apk);
+                    var mimetype = mime.lookup(apk);
 
-        var filename = path.basename(zipFile);
-        var mimetype = mime.lookup(zipFile);
+                    console.log("filename: " + filename + " mimetype: " + mimetype);
 
-        console.log("filename: " + filename + " mimetype: " + mimetype);
+                    res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+                    res.setHeader('Content-type', mimetype);
 
-        res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-        res.setHeader('Content-type', mimetype);
+                    var filestream = fs.createReadStream(apk);
 
-        var filestream = fs.createReadStream(zipFile);
-
-        filestream.pipe(res);
-        sails.log.info('EXCELLENT');
-
-
+                    filestream.pipe(res);
+                    sails.log.info('EXCELLENT');
+                }
+            }
+        });
     }
 
 }

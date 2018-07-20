@@ -13,6 +13,7 @@ const nodemailer = require('nodemailer');
 
 gracefulFs.gracefulify(fs);
 var rimraf = require('rimraf');
+var shell = require('shelljs');
 
 var transporter = nodemailer.createTransport({
     host: 'appmaker.lk',
@@ -619,16 +620,17 @@ module.exports = {
             appId = req.param('appId'),
             copyDirPath = config.ME_SERVER + userId + '/buildProg/' + appId + '/',
             moveConfigFile = copyDirPath + 'config.xml',
-            homeFile = copyDirPath + 'src/pages/home/home.html',
+            homets_File = copyDirPath + 'src/pages/home/home.ts',
             appIconFileRES = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/publish/0.png',
             appSplashFileRES = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/publish/6.png',
             appIconFileDES = copyDirPath + 'resources' + '/' + 'icon.png',
             appSplashFileDES = copyDirPath + 'resources' + '/' + 'splash.png',
-            replacePointerAppLink = config.ME_SERVER_URL+userId+'/progressiveTemplates/'+appId,
+            replacePointerAppLink = config.ME_SERVER_URL+userId+'/progressiveTemplates/'+appId+'/src/',
             selectedTemplatePath= config.ME_SERVER + userId + '/progressiveTemplates/' + appId +'/',
             indexPath = selectedTemplatePath + 'src/index.html',
             srcPath = sails.config.appPath + '/api/src/progPointerApp/',
-            isNew = req.param('isNew');
+            isNew = req.param('isNew'),
+            thisCtrl = this;
 
 
         fs.readFile(moveConfigFile, 'utf-8',
@@ -747,24 +749,28 @@ module.exports = {
                                     return;
                                 }
 
-                                    var html='<ion-content>'+
-                                        '<iframe class= "webPage" name= "samplePage" id="appframe" src="'+replacePointerAppLink+'/src/index.html">'+
-                                        '</iframe>'+
-                                        '</ion-content>'
-                                    fs.writeFile(homeFile, html, function(err) {
+                                //Replacing app url in home.ts file for the appid and user id
+                                fs.readFile(homets_File,'utf8', function (err, data) {
+                                    if(err){
+                                        sails.log.info(err);
+                                    }
+                                    else{
+                                        var result = data.replace(/PointerAppLink/g, replacePointerAppLink);
 
-                                            if (err) return res.negotiate(err);
-                                            buildApkFile(copyDirPath,appName);
-
-                                    });
-
+                                        fs.writeFile(homets_File, result, function (err) {
+                                            if(err){
+                                                sails.log.info(err);
+                                            }
+                                            else{
+                                                buildApkFile(copyDirPath,appName);
+                                            }
+                                        })
+                                    }
+                                });
                             });
                         });
                     }
                 );
-
-
-
             }
 
             function increaseVersion(version){
@@ -786,175 +792,184 @@ module.exports = {
 
 
             function buildApkFile(appPath,appName) {
-                var shell = require('shelljs');
+                console.log('+++++++++++++++++++++++++++++++++++++++++');
+                console.log('Building apk file for the app: ' + appName);
+                console.log('+++++++++++++++++++++++++++++++++++++++++');
+
                 var path = require('path');
                 var mime = require('mime');
+                var apkName = appName.replace(/\s/g, '') + '.apk';
 
                 shell.cd(appPath);
-                console.log('next resourses')
+
+                console.log('Start to generate resources...');
                 shell.exec('ionic cordova resources android --force', {async: true}, function (code, stdout, stderr) {
-
-                    if (code == 0) {
-                        console.log('next build android')
-
+                    console.log('Completed generating resources');
+                    if(code == 0) {
+                        console.log('Start the android debug build');
                         shell.exec('ionic cordova build android', {async: true}, function (code, stdout, stderr) {
-
+                            console.log('Completed android debug build');
                             if (code == 0) {
                                 /*shell.exec('cordova plugin rm cordova-plugin-console', {async: true}, function (code1, stdout, stderr) {
                                  if (code1==0){*/
-                                console.log('next build android --release')
-
+                                console.log('Start the Android release build');
                                 shell.exec('ionic cordova build android  --release', {async: true}, function (code2, stdout, stderr) {
-
+                                    console.log('Completed the Android release build')
                                     if (code2 == 0) {
-                                        console.log('next move cd and execute jarsigner')
+                                        console.log('Running jarsigner');
 
-                                        // shell.mv('-n', 'my-release-key.keystore', appPath + 'platforms/android/build/outputs/apk/release/');
-                                        // shell.cd(appPath + 'platforms/android/build/outputs/apk/release/');
+                                        // shell.mv('-n', 'my-release-key.keystore', appPath + 'platforms/android/build/outputs/apk/');
+                                        // shell.cd(appPath + 'platforms/android/build/outputs/apk/');
                                         shell.mv('-n', 'my-release-key.keystore', appPath + 'platforms/android/app/build/outputs/apk/release/');
                                         shell.cd(appPath + 'platforms/android/app/build/outputs/apk/release/');
+
+                                        console.log('Start jar signing process');
                                         shell.exec('jarsigner -verbose -sigalg SHA1withRSA -digestalg ' +
                                             'SHA1 -keystore my-release-key.keystore app-release-unsigned.apk ' +
                                             // 'SHA1 -keystore my-release-key.keystore android-release-unsigned.apk ' +
                                             'alias_name -storepass abcd1234 -keypass abcd1234 ', {async: true}, function (code4, stdout, stderr) {
+                                            console.log('Completed jar signing process');
                                             if (code4 == 0) {
-                                                console.log('exec ziplign')
+                                                // var apkReleasePath = appPath + '/platforms/android/build/outputs/apk/';
+                                                var apkReleasePath = appPath + '/platforms/android/app/build/outputs/apk/release/';
+                                                console.log('Checking whether the file:' + apkName + " exists in the path:" + apkReleasePath);
 
-                                                // fs.stat(appPath + '/platforms/android/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk', function (err, fileStat) {
-                                                fs.stat(appPath + '/platforms/android/app/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk', function (err, fileStat) {
+                                                fs.stat(apkReleasePath + apkName, function (err, fileStat) {
                                                     if (err) {
                                                         if (err.code == 'ENOENT') {
-                                                            sails.log.info('Does not exist.');
-                                                            shell.exit(1);
+                                                            console.log('File:' + apkName + " does not exists, hence will proceed with the zipalign process");
                                                         }
                                                     } else {
                                                         if (fileStat.isFile()) {
-                                                            // fs.unlinkSync(appPath + '/platforms/android/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk');
-                                                            fs.unlinkSync(appPath + '/platforms/android/app/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk');
+                                                            console.log('File:' + apkName + " Exists and will remove before proceed the zipalign");
+
+                                                            // fs.unlinkSync(appPath + '/platforms/android/build/outputs/apk/' + apkName);
+                                                            fs.unlinkSync(appPath + '/platforms/android/app/build/outputs/apk/release/' + apkName);
                                                         } else if (fileStat.isDirectory()) {
-                                                            sails.log.info('Directory found.');
+                                                            console.log('File:' + apkName + " not found.Found a directory instead.Will not proceed the zipalign/");
+                                                            // shell.exit(1);
+                                                            return;
                                                         }
                                                     }
-                                                });
-                                                shell.pwd();
-                                                // shell.exec('"C:/Program Files (x86)/android/Android-sdk/build-tools/26.0.2/zipalign" -v 4 android-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
-                                                shell.exec('/opt/android-sdk/build-tools/26.0.2/zipalign -v 4 app-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
-                                                //  shell.exec('/opt/android-sdk-linux/build-tools/26.0.2/zipalign -v 4 app-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
-                                                     if (code5 == 0) {
-
-                                                        // var file = appPath + 'platforms/android/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk';
-                                                        var file = appPath + 'platforms/android/app/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk';
-                                                        var resourcesPath = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' +
-                                                            appId + '/src/assets/images/publish/';
-                                                        var publishPath = config.ME_SERVER + userId + '/buildProg/' + appId + '/publish';
-                                                        var zipFile = config.ME_SERVER + userId + '/buildProg/' + appId + '/publish_' + appId + '.zip';
-
-                                                        fs.stat(zipFile, function (err, fileStat) {
-                                                            if (err) {
-                                                                if (err.code == 'ENOENT') {
-                                                                    sails.log.info('Does not exist.');
-                                                                    return;
-                                                                }
-                                                            } else {
-                                                                if (fileStat.isFile()) {
-                                                                    fs.unlinkSync(zipFile);
-                                                                } else if (fileStat.isDirectory()) {
-                                                                    sails.log.info('Directory found.');
-                                                                }
-                                                            }
-                                                        });
-                                                        fs.copy(resourcesPath, publishPath, function (err) {
-                                                            if (err) {
-                                                                shell.exit(1);
-                                                                sails.log.info("15.Error while building apk: " + err);
-                                                            } else {
-                                                                fs.copy(file, publishPath + "/" + appName.replace(/\s/g, '') + '.apk', function (err) {
-                                                                    if (err) {
-                                                                        sails.log.info("16.Error while building apk: " + err);
-                                                                        shell.exit(1);
-                                                                    } else {
-                                                                        zipFolder(publishPath, zipFile, function (err) {
-                                                                            if (err) {
-                                                                                sails.log.info('Zipping error!', err);
-                                                                                sails.log.info("17.Error while building apk: " + err);
-                                                                                shell.exit(1);
-                                                                            } else {
-
-                                                                                var searchAppData = {
-                                                                                    id: appId
-                                                                                }
-
-                                                                                Application.update(searchAppData, {status: "UPLOADING"}).exec(function (err, app) {
-                                                                                    if (err){
-                                                                                        shell.exit(1);
-                                                                                        sails.log.info("18.Error while building apk: " + err);
-                                                                                    }
-                                                                                    else {
-                                                                                        // var filename = path.basename(zipFile);
-                                                                                        // var mimetype = mime.lookup(zipFile);
-                                                                                        //
-                                                                                        // res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-                                                                                        // res.setHeader('Content-type', mimetype);
-                                                                                        //
-                                                                                        // var filestream = fs.createReadStream(zipFile);
-                                                                                        // sails.log.info('EXCELLENT');
-                                                                                        // filestream.pipe(res);
-                                                                                    }
-                                                                                });
-
-
-                                                                            }
-                                                                        });
-
-                                                                    }
-                                                                });
-                                                            }
-                                                        });
-                                                        /*res.json('ok');*/
-                                                    } else {
-                                                        if (stderr){
-                                                            return sails.log.info("20.Error while building apk: " + stderr);
-                                                            shell.exit(1);
-                                                        }
-                                                    }
-                                                    shell.code;
+                                                    //Start Zipalign process
+                                                    thisCtrl.doZipalign(appPath,userId,appId,apkName);
                                                 });
                                             } else {
+                                                thisCtrl.printShellError('Error while Executing: jarsigner process',code, stdout, stderr, userId, appId);
                                                 if (stderr){
-
-                                                    return sails.log.info("21.Error while building apk: " + stderr);
+                                                    // shell.exit(1);
+                                                    return;
                                                 }
                                             }
-                                            shell.code;
                                         });
                                     } else {
+                                        thisCtrl.printShellError('Error while Executing: ionic cordova build android  --release',code, stdout, stderr, userId, appId);
                                         if (stderr){
-                                            return sails.log.info("22.Error while building apk: " + stderr);
-                                            shell.exit(1);
+                                            // shell.exit(1);
+                                            return;
                                         }
                                     }
-                                    shell.code;
                                 });
                             } else {
+                                thisCtrl.printShellError('Error while Executing: ionic cordova build android',code, stdout, stderr, userId, appId);
                                 if (stderr){
-                                    return sails.log.info("23.Error while building apk: " + stderr);
-                                    shell.exit(1);
+                                    // shell.exit(1);
+                                    return;
                                 }
-
                             }
-                            shell.code;
                         });
-
-                    } else {
+                    }else {
+                        thisCtrl.printShellError('Error while Executing: ionic cordova resources android --force',code, stdout, stderr, userId, appId);
                         if (stderr){
-                            return sails.log.info("24.Error while building apk: " + stderr);
-                            shell.exit(1);
+                            // shell.exit(1);
+                            return;
                         }
                     }
-                    shell.code;
                 });
             }
-        res.send("apk generation in progress....");
+        sails.log.debug("apk generation in progress....");
+    },
+
+    doZipalign: function(appPath,userId,appId,apkName){
+        var thisCtrl = this;
+        console.log('Start zipalign process');
+        // shell.exec('"C:/Program Files (x86)/android/Android-sdk/build-tools/26.0.2/zipalign" -v 4 android-release-unsigned.apk ' + apkName, {async: true}, function (code5, stdout, stderr) {
+        // shell.exec('/opt/android-sdk/build-tools/26.0.2/zipalign -v 4 app-release-unsigned.apk ' + apkName, {async: true}, function (code5, stdout, stderr) {
+        // shell.exec('/Users/chamilthushantha/Library/Android/sdk/build-tools/27.0.3/zipalign -v 4 android-release-unsigned.apk ' + apkName, {async: true}, function (code5, stdout, stderr) {
+             shell.exec('/opt/android-sdk-linux/build-tools/26.0.2/zipalign -v 4 app-release-unsigned.apk ' + apkName, {async: true}, function (code5, stdout, stderr) {
+            console.log('Completed zipalign process');
+            if (code5 == 0) {
+                thisCtrl.copyAPKToPublishPath(appPath,userId,appId,apkName);
+            } else {
+                thisCtrl.printShellError('Error while Executing: jarsigner process',code, stdout, stderr, userId, appId);
+                if (stderr){
+                    // shell.exit(1);
+                    return;
+                }
+            }
+        });
+    },
+
+    copyAPKToPublishPath: function(appPath,userId,appId,apkName){
+        // var apkFile = appPath + 'platforms/android/build/outputs/apk/' + apkName;
+        var apkFile = appPath + 'platforms/android/app/build/outputs/apk/release/' + apkName;
+        var apkPublishPath = config.ME_SERVER + userId + '/buildProg/' + appId + '/publish';
+
+        var searchAppData = {
+            id: appId
+        }
+
+        Application.update(searchAppData, {status: "UPLOADING"}).exec(function (err, app) {
+            if (err){
+                console.log("Error while updating the Application for the appId:" + appId + " Error: " + err);
+                // shell.exit(1);
+            }
+            else {
+                console.log("Update Application status as UPLOADING " + appId );
+            }
+        });
+
+        // console.log("Executing copyAPKToPublishPath file:" + apkFile + " publishPath:" + apkPublishPath + " appId:" + appId);
+        // fs.copy(apkFile, apkPublishPath + "/" + apkName, function (err) {
+        //     if (err) {
+        //         console.log("Error while copying file to publish path " + err);
+        //         // shell.exit(1);
+        //     } else {
+        //         var searchAppData = {
+        //             id: appId
+        //         }
+        //
+        //         Application.update(searchAppData, {status: "UPLOADING"}).exec(function (err, app) {
+        //             if (err){
+        //                 console.log("Error while updating the Application for the appId:" + appId + " Error: " + err);
+        //                 // shell.exit(1);
+        //             }
+        //             else {
+        //                 console.log("Update Application status as UPLOADING " + appId );
+        //             }
+        //         });
+        //     }
+        // });
+    },
+
+    printShellError: function(message,code,stdout,stderr,userid,appid){
+        console.log("**************Start - Error Generating APK*************");
+        console.log("UserId:" + userid + " appId:" + appid);
+        console.log("Message:" + message);
+
+        if(code){
+            console.log("shell.exec=>code:" + message);
+        }
+
+        if(stdout){
+            console.log("shell.exec=>stdout:" + stdout);
+        }
+
+        if(stderr){
+            console.log("shell.exec=>stderr:" + stderr);
+        }
+
+        console.log("**************End - Error Generating APK*************");
     }
 };
 

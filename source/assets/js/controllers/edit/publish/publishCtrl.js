@@ -367,8 +367,8 @@
 
         }
 
-        $scope.getAPKFilePath = function(){
-            return '/getApkPath?appId=' + $rootScope.appId + '&userId=' + $auth.getPayload().id;
+        $scope.getAPKFilePath = function(appName){
+            return '/getApkPath?appId=' + $rootScope.appId + '&userId=' + $auth.getPayload().id + "&appName=" + appName;
         }
 
         $scope.addGooglePlayInfo = function(file, playStoreData, splash, allowPlayStore) {
