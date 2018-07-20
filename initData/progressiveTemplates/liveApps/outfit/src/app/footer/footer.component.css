@@ -9,10 +9,19 @@
 }
 
 
-.logo{
-	margin-top: 10px;
-}
 
 .text-left{
 	text-align: left !important
+}
+
+.cus-padding{
+	padding: 40px 0 80px;
+}
+
+div.c-pad{
+	padding: 5px 0;
+}
+
+.padding-vertical{
+	padding:5px 0;
 }
