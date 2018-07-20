@@ -526,7 +526,7 @@ module.exports = {
                                     sails.log.debug("Error while requesting the charge, err:  " + responseBody.message);
                                     return false;
 
-                                }else if (responseBody && response.statusCode === 200){
+                                }else if (responseBody && (response.statusCode === 200 || response.statusCode === 201)){
 
                                    // console.log(responseBody);
                                     var saveData = {appId:publishDetailsData.appId,msisdn:msisdn,amount:data.amount,
