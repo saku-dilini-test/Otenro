@@ -807,15 +807,15 @@ module.exports = {
                     console.log('Completed generating resources');
                     if(code == 0) {
                         console.log('Start the android debug build');
-                        shell.exec('ionic cordova build android', {async: true}, function (code, stdout, stderr) {
+                        shell.exec('ionic cordova build android', {async: true}, function (code2, stdout2, stderr2) {
                             console.log('Completed android debug build');
-                            if (code == 0) {
-                                /*shell.exec('cordova plugin rm cordova-plugin-console', {async: true}, function (code1, stdout, stderr) {
+                            if (code2 == 0) {
+                                /*shell.exec('cordova plugin rm cordova-plugin-console', {async: true}, function (code3, stdout3, stderr3) {
                                  if (code1==0){*/
                                 console.log('Start the Android release build');
-                                shell.exec('ionic cordova build android  --release', {async: true}, function (code2, stdout, stderr) {
+                                shell.exec('ionic cordova build android  --release', {async: true}, function (code3, stdout3, stderr3) {
                                     console.log('Completed the Android release build')
-                                    if (code2 == 0) {
+                                    if (code3 == 0) {
                                         console.log('Running jarsigner');
 
                                         // shell.mv('-n', 'my-release-key.keystore', appPath + 'platforms/android/build/outputs/apk/');
@@ -827,7 +827,7 @@ module.exports = {
                                         shell.exec('jarsigner -verbose -sigalg SHA1withRSA -digestalg ' +
                                             'SHA1 -keystore my-release-key.keystore app-release-unsigned.apk ' +
                                             // 'SHA1 -keystore my-release-key.keystore android-release-unsigned.apk ' +
-                                            'alias_name -storepass abcd1234 -keypass abcd1234 ', {async: true}, function (code4, stdout, stderr) {
+                                            'alias_name -storepass abcd1234 -keypass abcd1234 ', {async: true}, function (code4, stdout4, stderr4) {
                                             console.log('Completed jar signing process');
                                             if (code4 == 0) {
                                                 // var apkReleasePath = appPath + '/platforms/android/build/outputs/apk/';
@@ -855,7 +855,7 @@ module.exports = {
                                                     thisCtrl.doZipalign(appPath,userId,appId,apkName);
                                                 });
                                             } else {
-                                                thisCtrl.printShellError('Error while Executing: jarsigner process',code, stdout, stderr, userId, appId);
+                                                thisCtrl.printShellError('Error while Executing: jarsigner process',code4, stdout4, stderr4, userId, appId);
                                                 if (stderr){
                                                     // shell.exit(1);
                                                     return;
@@ -863,7 +863,7 @@ module.exports = {
                                             }
                                         });
                                     } else {
-                                        thisCtrl.printShellError('Error while Executing: ionic cordova build android  --release',code, stdout, stderr, userId, appId);
+                                        thisCtrl.printShellError('Error while Executing: ionic cordova build android  --release',code3, stdout3, stderr3, userId, appId);
                                         if (stderr){
                                             // shell.exit(1);
                                             return;
@@ -871,7 +871,7 @@ module.exports = {
                                     }
                                 });
                             } else {
-                                thisCtrl.printShellError('Error while Executing: ionic cordova build android',code, stdout, stderr, userId, appId);
+                                thisCtrl.printShellError('Error while Executing: ionic cordova build android',code2, stdout2, stderr2, userId, appId);
                                 if (stderr){
                                     // shell.exit(1);
                                     return;
@@ -893,15 +893,14 @@ module.exports = {
     doZipalign: function(appPath,userId,appId,apkName){
         var thisCtrl = this;
         console.log('Start zipalign process');
-        // shell.exec('"C:/Program Files (x86)/android/Android-sdk/build-tools/26.0.2/zipalign" -v 4 android-release-unsigned.apk ' + apkName, {async: true}, function (code5, stdout, stderr) {
-        // shell.exec('/opt/android-sdk/build-tools/26.0.2/zipalign -v 4 app-release-unsigned.apk ' + apkName, {async: true}, function (code5, stdout, stderr) {
-        // shell.exec('/Users/chamilthushantha/Library/Android/sdk/build-tools/27.0.3/zipalign -v 4 android-release-unsigned.apk ' + apkName, {async: true}, function (code5, stdout, stderr) {
-             shell.exec('/opt/android-sdk-linux/build-tools/26.0.2/zipalign -v 4 app-release-unsigned.apk ' + apkName, {async: true}, function (code5, stdout, stderr) {
+        // shell.exec('"C:/Program Files (x86)/android/Android-sdk/build-tools/26.0.2/zipalign" -v 4 android-release-unsigned.apk ' + apkName, {async: true}, function (code5, stdout5, stderr5) {
+        // shell.exec('/Users/chamilthushantha/Library/Android/sdk/build-tools/27.0.3/zipalign -v 4 android-release-unsigned.apk ' + apkName, {async: true}, function (code5, stdout5, stderr5) {
+            shell.exec('/opt/android-sdk/build-tools/26.0.2/zipalign -v 4 app-release-unsigned.apk ' + apkName, {async: true}, function (code5, stdout5, stderr5) {
             console.log('Completed zipalign process');
             if (code5 == 0) {
                 thisCtrl.copyAPKToPublishPath(appPath,userId,appId,apkName);
             } else {
-                thisCtrl.printShellError('Error while Executing: jarsigner process',code, stdout, stderr, userId, appId);
+                thisCtrl.printShellError('Error while Executing: jarsigner process',code5, stdout5, stderr5, userId, appId);
                 if (stderr){
                     // shell.exit(1);
                     return;
