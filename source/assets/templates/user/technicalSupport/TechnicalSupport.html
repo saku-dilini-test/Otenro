@@ -326,8 +326,99 @@
                             <md-tab-label>Reconciliation Report</md-tab-label>
                             <md-tab-body>
                                 Reconciliation Report
+
+                                <div class="reports-container">
+
+                                    <div class="reports-type-container">
+                                        <div class="technical-support">
+                                             <h6>Select report type</h6>
+                                             <select placeholder="Select Report Type"  aria-label="Country Name"  ng-model="reconciliationReports.report" ng-click="getPeriod(reconciliationReports.report)" required >
+                                                 <option ng-value="oneReport.name" ng-repeat="oneReport in reports">{{oneReport.name}}</option>
+                                             </select>
+                                        </div>
+                                    </div>
+
+                                <div class="reports-period-container">
+
+                                <div class="period-container">
+                                        <h6>Select period</h6>
+
+                                        <form  >
+                                            <div  ng-if="reconciliationReports.report == 'Date Range'" >
+
+                                                <input type="date"  ng-model="reconciliationReports.sdate" placeholder="START DATE">
+                                                <input type="date" ng-model="reconciliationReports.edate" placeholder="END DATE">
+                                                <!--<Button type="button" ng-click="getReconciliation(reconciliationReports)">Search</Button>-->
+                                            </div>
+                                            <div ng-if="reconciliationReports.report == 'Monthly'" >
+                                                <select ng-model="reconciliationReports.fromMonth">
+                                                    <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
+                                                </select>
+                                                <select ng-model="reconciliationReports.toMonth">
+                                                    <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
+                                                </select>
+                                                <select ng-model="reconciliationReports.year">
+                                                    <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                </select>
+
+                                            </div>
+                                            <div ng-if="reconciliationReports.report == 'Yearly'">
+                                                <select placeholder="From Year" ng-model="reconciliationReports.fromYear">
+                                                    <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                </select>
+                                                <select placeholder="To Year" ng-model="reconciliationReports.toYear">
+                                                    <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                </select>
+                                            </div>
+
+                                            <Button type="button" ng-click="getReconciliation(reconciliationReports)">Search</Button>
+                                        </form>
+
+                                </div>
+
+
+
+                                </div>
+                                </div>
+
+
+
+                                <form class="allItems" novalidate>
+                                    <table class="table">
+                                        <thead class="obl-dashboard-apps">
+                                                <tr>
+                                                <th>Service Provider</th>
+                                                <th>App ID</th>
+                                                <th>Name</th>
+                                                <th>Bank Code</th>
+                                                <th>Branch Code</th>
+                                                <th>Branch Name</th>
+                                                <th >Bank A/C No</th>
+                                                <th>Service Provider Earnings (LKR)</th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr ng-repeat="reconciliation in reconciliations">
+                                                <td>{{reconciliation.userId}}</td>
+                                                <td>{{reconciliation.appId}}</td>
+                                                <td>{{reconciliation.name}}</td>
+                                                <td>{{reconciliation.bankCode}}</td>
+                                                <td>{{reconciliation.branchCode}}</td>
+                                                <td>{{reconciliation.branchName}}</td>
+                                                <td>{{reconciliation.bankAccountNumber}}</td>
+                                                <td>{{reconciliation.revenue}}</td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+
+
+
                             </md-tab-body>
-                        </md-tab> 
+                        </md-tab>
 
                     </md-tabs>
 

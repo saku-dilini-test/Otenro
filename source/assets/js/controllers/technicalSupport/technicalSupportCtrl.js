@@ -625,6 +625,119 @@
              **/
 
 
+            var reconciliationReports;
+            $scope.reports = [
+                    {name:"Date Range"},
+                    {name:"Monthly"} ,
+                    {name:"Yearly"}
+            ];
+            $scope.currentYear = new Date().getFullYear();
+            $scope.current =   $scope.currentYear -1;
+            $scope.months  = [
+                    {month:1},
+                    {month:2},
+                    {month:3},
+                    {month:4},
+                    {month:5},
+                    {month:6},
+                    {month:7},
+                    {month:8},
+                    {month:9},
+                    {month:10},
+                    {month:11},
+                    {month:12}
+            ];
+            $scope.years  = [
+                {year:$scope.currentYear},
+                {year:$scope.currentYear-1},
+                {year:$scope.currentYear-2},
+                {year:$scope.currentYear-3}
+            ];
+
+            $scope.master = {};
+            $scope.reset = function(){
+                // $scope.reconciliationReports.sdate == ""
+                // $scope.reconciliationReports.edate == ""
+                // $scope.reconciliationReports.fromMonth == "";
+                // $scope.reconciliationReports.toMonth == "";
+                // $scope.reconciliationReports.year== "";
+                // $scope.reconciliationReports.fromYear == "";
+                // $scope.reconciliationReports.toYear == "";
+
+                $scope.reconciliationReports = angular.copy($scope.master);
+
+            }
+
+
+
+            $scope.getReconciliation = function(Date){
+
+                var dates;
+                if(Date.report == "Date Range"){
+
+                    $scope.year = Date.sdate.getFullYear();
+                    $scope.month = Date.sdate.getMonth() + 1;
+                    $scope.date  = Date.sdate.getDate();
+
+                    var  sdate =  $scope.year + '-' + $scope.month + '-' +  $scope.date;
+
+                    $scope.year = Date.edate.getFullYear();
+                    $scope.month = Date.edate.getMonth() + 1;
+                    $scope.date  = Date.edate.getDate();
+
+                    var edate =  $scope.year + '-' + $scope.month + '-' +  $scope.date;
+
+                    var dates = {dateFrom:sdate,dateTo:edate};
+                    // if (sdate == dateFrom  && edate == dateTo){
+                        technicalSupportService.getReconciliationDataForDateRange(dates)
+                            .success(function(response){
+                                $scope.reconciliations = response;
+
+                            }).
+                        error(function(response){
+                            toastr.error('Ad network Details Loading Error', 'Warning', {closeButton: true});
+                        });
+                    }
+                    // else{
+                    //     toastr.error('Please Enter Valid dates', 'Warning', {closeButton: true});
+                    // }
+
+
+
+
+                else if(Date.report == "Monthly"){
+                    dates = {monthFrom:Date.fromMonth, monthTo:Date.toMonth, year:Date.year}
+                    technicalSupportService.getReconciliationDataForMonthly(dates)
+                        .success(function(response){
+                            $scope.reconciliations = response;
+                        })
+                        .error(function(){
+
+
+                        });
+
+                }
+
+                else{
+
+                    dates = {yearFrom:Date.fromYear, yearTo:Date.toYear};
+                    technicalSupportService. getReconciliationDataForYearly(dates)
+                        .success(function(response){
+                            $scope.reconciliations = response;
+                            $scope.reset();
+                        })
+                        .error(function(response){
+
+                    });
+
+                }
+
+
+            }
+
+
+
+
     }
 
 })();
