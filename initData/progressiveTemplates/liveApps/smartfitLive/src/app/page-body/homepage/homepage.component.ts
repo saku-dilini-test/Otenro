@@ -73,7 +73,7 @@ export class HomepageComponent implements OnInit {
           // console.log(this.primaryCategories,params.id)
               categoryService.getNodeById(this.primaryCategories,params.id).subscribe((result)=>{
           // console.log(result)
-                    console.log(this.dataService.categories)
+                    // console.log(this.dataService.categories)
                     this.currentCategoryImage = this.dataService.currentCategoryImage;
                     this.categories = this.dataService.categories;
                     this.products = this.dataService.products;

@@ -87,6 +87,9 @@
               <p class="text-left product-details-price main-content-font" *ngIf="!selectedVariant.price">
                 <strong>{{currency}}</strong> {{Data.variants[0].price| number: '.2'}}
               </p>
+              <p class="text-left  text-danger">
+                <strong>0% installment schemas available on credit cards</strong>
+              </p>
               <div>
                 <div class="row">
                  <div class="col-xs-12 text-center text-warning" *ngIf="selectedVariant.buyQuantity > selectedVariant.quantity">
