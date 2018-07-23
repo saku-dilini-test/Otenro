@@ -1020,75 +1020,82 @@ button{
 }
  }
 @media (max-width: 767px){
-.navbar-toggle{
-	width:26px;
-	margin-top:-5px;
-	padding-right:0px;
-	margin-right:0px;
-}
-.bloc-mob-center-text{
-	text-align:center;
-}
-.mobile-footer-label{
-	font-size:8px;
-	text-transform:uppercase;
-	line-height:14px;
-	padding-top:5px;
-}
-.orbitrack{
-	font-size:3.1vw;
-}
-.nordic-track{
-	font-size:3.1vw;
-}
-.treadmills{
-	font-size:3.1vw;
-}
-.content-cards{
-	padding:14px 14px 14px 14px;
-	margin-top:9px;
-}
-.content-row{
-	padding:2% 2% 2% 2%;
-}
-.spacing-left{
-	padding-left:11px;
-}
-.header{
-	font-size:18px;
-}
-.contact-row-spacing-{
-	padding-left:38%;
-}
- .sidebar-nav{
-	width:230px;
-}
-.nav-special.sidebar-nav .nav > li{
-	width:80%;
-}
-.nav-invert .sidebar-nav .close-special-menu{
-	left:200px;
-}
-/* = Text Mobile Alignment Classes
--------------------------------------------------------------- */
-.text-left-xs{
-	text-align:left;
-}
-.text-right-xs{
-	text-align:right;
-}
-.text-center-xs{
-	text-align:center;
-}
-.nav-toggle{
-	width:20px;
-}
-.padding-top-0{
-	padding:0;
-}
+  .navbar-toggle{
+    width:26px;
+    margin-top:-5px;
+    padding-right:0px;
+    margin-right:0px;
+  }
+  .bloc-mob-center-text{
+    text-align:center;
+  }
+  .mobile-footer-label{
+    font-size:8px;
+    text-transform:uppercase;
+    line-height:14px;
+    padding-top:5px;
+  }
+  .orbitrack{
+    font-size:3.1vw;
+  }
+  .nordic-track{
+    font-size:3.1vw;
+  }
+  .treadmills{
+    font-size:3.1vw;
+  }
+  .content-cards{
+    padding:14px 14px 14px 14px;
+    margin-top:9px;
+  }
+  .content-row{
+    padding:2% 2% 2% 2%;
+  }
+  .spacing-left{
+    padding-left:11px;
+  }
+  .header{
+    font-size:18px;
+  }
+  .contact-row-spacing-{
+    padding-left:38%;
+  }
+   .sidebar-nav{
+    width:230px;
+  }
+  .nav-special.sidebar-nav .nav > li{
+    width:80%;
+  }
+  .nav-invert .sidebar-nav .close-special-menu{
+    left:200px;
+  }
+  /* = Text Mobile Alignment Classes
+  -------------------------------------------------------------- */
+  .text-left-xs{
+    text-align:left;
+  }
+  .text-right-xs{
+    text-align:right;
+  }
+  .text-center-xs{
+    text-align:center;
+  }
+  .nav-toggle{
+    width:20px;
+  }
+  .padding-top-0{
+    padding:0;
+  }
+  ::-webkit-scrollbar{
+    width: 0px;
+    height:0;
+  }
+
 }
 
 .breadcrumb{
 	background: #eaeaea;
 	margin-bottom: 0;
 }
+
+body, html { overflow-x:hidden; }
