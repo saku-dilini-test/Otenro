@@ -330,28 +330,30 @@
                                 <div class="reports-container">
 
                                     <div class="reports-type-container">
-                                        <div class="technical-support">
-                                             <h6>Select report type</h6>
-                                             <select placeholder="Select Report Type"  aria-label="Country Name"  ng-model="reconciliationReports.report" ng-click="getPeriod(reconciliationReports.report)" required >
+                                        <div layout="column" layout-wrap>
+                                             <h6 flex="100">Select report type</h6>
+
+                                             <select placeholder="Select Report Type"  aria-label="Country Name"  ng-model="reconciliationReports.report" ng-change="reconciliationReportsGet(reconciliationReports.report)" required >
                                                  <option ng-value="oneReport.name" ng-repeat="oneReport in reports">{{oneReport.name}}</option>
                                              </select>
+
                                         </div>
+
                                     </div>
 
                                 <div class="reports-period-container">
 
-                                <div class="period-container">
+                                <div class="reports-container">
                                         <h6>Select period</h6>
 
-                                        <form  >
-                                            <div  ng-if="reconciliationReports.report == 'Date Range'" >
-
-                                                <input type="date"  ng-model="reconciliationReports.sdate" placeholder="START DATE">
-                                                <input type="date" ng-model="reconciliationReports.edate" placeholder="END DATE">
-                                                <!--<Button type="button" ng-click="getReconciliation(reconciliationReports)">Search</Button>-->
+                                        <form name="reconciliationForm">
+                                            <div ng-if="reconciliationReports.report == 'Date Range'">
+                                                <input type="date"  ng-model="reconciliationReports.sdate" placeholder="START DATE" onkeydown="return false" required>
+                                                <input type="date" ng-model="reconciliationReports.edate" placeholder="END DATE" onkeydown="return false" required>
+                                                <Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>
                                             </div>
                                             <div ng-if="reconciliationReports.report == 'Monthly'" >
-                                                <select ng-model="reconciliationReports.fromMonth">
+                                                <select ng-model="reconciliationReports.fromMonth" required>
                                                     <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
                                                 </select>
                                                 <select ng-model="reconciliationReports.toMonth">
@@ -360,7 +362,7 @@
                                                 <select ng-model="reconciliationReports.year">
                                                     <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
                                                 </select>
-
+                                                <Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>
                                             </div>
                                             <div ng-if="reconciliationReports.report == 'Yearly'">
                                                 <select placeholder="From Year" ng-model="reconciliationReports.fromYear">
@@ -369,9 +371,10 @@
                                                 <select placeholder="To Year" ng-model="reconciliationReports.toYear">
                                                     <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
                                                 </select>
+                                                <Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>
                                             </div>
 
-                                            <Button type="button" ng-click="getReconciliation(reconciliationReports)">Search</Button>
+                                            <!--<Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>-->
                                         </form>
 
                                 </div>
@@ -384,9 +387,10 @@
 
 
                                 <form class="allItems" novalidate>
+                                    <button type= "button" ng-click="csvDownload(reconciliation)">CSV</button>
                                     <table class="table">
                                         <thead class="obl-dashboard-apps">
-                                                <tr>
+                                        <tr>
                                                 <th>Service Provider</th>
                                                 <th>App ID</th>
                                                 <th>Name</th>
@@ -409,7 +413,6 @@
                                                 <td>{{reconciliation.branchName}}</td>
                                                 <td>{{reconciliation.bankAccountNumber}}</td>
                                                 <td>{{reconciliation.revenue}}</td>
-
                                             </tr>
                                         </tbody>
                                     </table>

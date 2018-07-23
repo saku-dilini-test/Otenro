@@ -16,6 +16,7 @@
                 technicalSupportCtrl
             ]);
 
+
     function technicalSupportCtrl($scope,$mdDialog,$auth,toastr,$state,$stateParams,SERVER_URL,ME_SERVER,$filter,$window,userProfileResource,technicalSupportService) {
 
             $scope.splash = [];
@@ -655,85 +656,106 @@
             ];
 
             $scope.master = {};
-            $scope.reset = function(){
-                // $scope.reconciliationReports.sdate == ""
-                // $scope.reconciliationReports.edate == ""
-                // $scope.reconciliationReports.fromMonth == "";
-                // $scope.reconciliationReports.toMonth == "";
-                // $scope.reconciliationReports.year== "";
-                // $scope.reconciliationReports.fromYear == "";
-                // $scope.reconciliationReports.toYear == "";
 
-                $scope.reconciliationReports = angular.copy($scope.master);
-
+            $scope.reconciliationReportsGet = function(){
+                $scope.reconciliations = null;
             }
-
-
-
             $scope.getReconciliation = function(Date){
 
                 var dates;
                 if(Date.report == "Date Range"){
+                    $scope.reconciliations = null;
 
-                    $scope.year = Date.sdate.getFullYear();
-                    $scope.month = Date.sdate.getMonth() + 1;
-                    $scope.date  = Date.sdate.getDate();
+                   var sdate = $filter('date')(Date.sdate, "yyyy-MM-dd");
+                   var edate = $filter('date')(Date.edate, "yyyy-MM-dd");
 
-                    var  sdate =  $scope.year + '-' + $scope.month + '-' +  $scope.date;
+                    if(edate >= sdate) {
 
-                    $scope.year = Date.edate.getFullYear();
-                    $scope.month = Date.edate.getMonth() + 1;
-                    $scope.date  = Date.edate.getDate();
+                        var dates = {dateFrom: sdate, dateTo: edate};
 
-                    var edate =  $scope.year + '-' + $scope.month + '-' +  $scope.date;
-
-                    var dates = {dateFrom:sdate,dateTo:edate};
-                    // if (sdate == dateFrom  && edate == dateTo){
                         technicalSupportService.getReconciliationDataForDateRange(dates)
-                            .success(function(response){
+                            .success(function (response) {
                                 $scope.reconciliations = response;
 
-                            }).
-                        error(function(response){
-                            toastr.error('Ad network Details Loading Error', 'Warning', {closeButton: true});
+                            }).error(function (response) {
+                            toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
                         });
+
                     }
-                    // else{
-                    //     toastr.error('Please Enter Valid dates', 'Warning', {closeButton: true});
-                    // }
-
-
-
+                    else{
+                        toastr.error('From Date should less than To Date', 'Warning', {closeButton: true});
+                    }
+                }
 
                 else if(Date.report == "Monthly"){
-                    dates = {monthFrom:Date.fromMonth, monthTo:Date.toMonth, year:Date.year}
-                    technicalSupportService.getReconciliationDataForMonthly(dates)
-                        .success(function(response){
-                            $scope.reconciliations = response;
-                        })
-                        .error(function(){
+
+                    $scope.reconciliations = null;
+                    if(toMonth>fromMoth){
+
+                        var  fromMonth = Date.fromMonth;
+                        var toMonth = Date.toMonth;
+                        var year = Date.year;
+
+                        dates = {monthFrom:fromMonth, monthTo:toMonth, year:year}
+                        technicalSupportService.getReconciliationDataForMonthly(dates)
+                            .success(function(response){
+                                $scope.reconciliations = response;
+                            })
+                            .error(function(){
 
 
-                        });
+                            });
+
+                    }
+                    else{
+                        toastr.error('From Month should less than To Month', 'Warning', {closeButton: true});
+                    }
 
                 }
 
                 else{
+                    $scope.reconciliations = null;
+                    var fromYear = Date.fromYear;
+                    var toYear   = Date.toYear;
 
-                    dates = {yearFrom:Date.fromYear, yearTo:Date.toYear};
-                    technicalSupportService. getReconciliationDataForYearly(dates)
-                        .success(function(response){
-                            $scope.reconciliations = response;
-                            $scope.reset();
-                        })
-                        .error(function(response){
+                    if(toYear>=fromYear){
+                        dates = {yearFrom:fromYear, yearTo:toYear};
+                        technicalSupportService. getReconciliationDataForYearly(dates)
+                            .success(function(response){
+                                $scope.reconciliations = response;
+                            })
+                            .error(function(response){
 
-                    });
+                            });
+
+                    }
+                    else{
+
+                        toastr.error('From Year Should less then To Year', 'Warning' , {closeButton: true});
+                    }
+
 
                 }
 
 
             }
+
+        $scope.csvDownload = function(){
+            $scope.objJson =[];
+            var reconciliationsArray = [];
+            var array = $scope.reconciliations
+            array.forEach(function(obj){
+                    console.log(obj.name);
+                // reconciliationsArray.push[obj];
+                // if(x.hasOwnProperty(obj)){
+                //     reconciliationsArray.push(obj);
+                // }
+                reconciliationsArray.push(obj);
+            });
+
+            $scope.objJson.push({key: reconciliationsArray, values: "" });
+
+        }
 
 
 
