@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
   public title: string;
   public loginStatus;
   dummy: any;
-  private categories:any
+  categories:any
   private catName: any;
   imageUrl:any;
   constructor(private location: Location,private localStorageService: LocalStorageService,private categoryService: CategoriesService, private router: Router, private dataService: PagebodyServiceModule, private titleServ: TitleService) {
@@ -78,9 +78,12 @@ export class HeaderComponent implements OnInit {
   }
 
   navigate(route: string, name: string) {
-    this.title = name;
-
-    this.router.navigate([route]);
+      this.title = name;
+      if(this.title == 'Home'){
+          this.router.navigate([route],{ queryParams: { id: 'Home'}});
+      }else{
+          this.router.navigate([route]);
+      }
   }
   goBack() {
     this.location.back();

@@ -1,11 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router} from '@angular/router';
 import * as data from '../../madeEasy.json';
 import { SERVER_URL } from '../../constantsService';
-import { PagebodyServiceModule } from '../../page-body/page-body.service'
-import { ProductsService } from '../../services/products/products.service';
+import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { CurrencyService } from '../../services/currency/currency.service';
-import { SliderService } from '../../services/slider/slider.service';
+declare var $:any;
 
 @Component({
   selector: 'app-categories',
@@ -13,46 +12,23 @@ import { SliderService } from '../../services/slider/slider.service';
   styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent implements OnInit {
-  prevCategories: any = [];
-  private prevProducts: any = [];
   private imageUrl: any;
   private imageUrl1: any;
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
   private catName: any;
-  products: any = [];
   private currentViewName: string;
   private currency: string;
-  private sliderData: any;
-  isSliderDataAvailable: boolean = false;
-  private imageUrlSlider;
-  private currentCategory;
-  constructor(private router: Router, private dataService: PagebodyServiceModule, private productService: ProductsService, private currencyService: CurrencyService,
-    private sliderService: SliderService) {
+
+  @Input('categories') categories: CategoriesModel;
+  @Input('products') products: any;
+
+  constructor(private router: Router, private dataService: PagebodyServiceModule,private currencyService: CurrencyService) {
     this.currentViewName = 'Home';
 
-    this.sliderService.retrieveSliderData().subscribe(data => {
-      if (data.length > 0) {
-        this.sliderData = data;
-        var size = Object.keys(this.sliderData).length;
-        if (size > 0) {
-          this.isSliderDataAvailable = true;
-        } else {
-          this.isSliderDataAvailable = false;
-        }
-      } else {
-        this.sliderData = null;
-        this.isSliderDataAvailable = false;
-      }
-
-    }, err => {
-      console.log(err);
-    });
   }
 
   ngOnInit() {
-    this.imageUrlSlider = SERVER_URL + "/templates/viewWebImages?userId="
-      + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=slider";
 
     this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
@@ -65,41 +41,23 @@ export class CategoriesComponent implements OnInit {
     }, error => {
       console.log('Error retrieving currency');
     });
+
   }
 
-  @Input('categories') categories: CategoriesModel;
-
-
-  goToNextSubCategory(nextNode, currentNode, nextProducts, currentCategory) {
-    this.prevCategories.push({
-      cat: currentNode,
-      catName: this.currentViewName,
-      currentCategory: currentCategory
+  ngAfterContentChecked() {
+    $('.carousel').carousel('cycle');
+    $('.carousel').carousel({
+      interval: 3000
     });
-    this.currentCategory = currentCategory;
-    this.currentViewName = currentCategory.name;
-    this.categories = nextNode;
-    this.prevProducts.push(this.products[0]);
-    this.products[0] = nextProducts;
+    // $('.right.carousel-control').trigger('click');
   }
-
-  goToPreviousCategory(index) {
-    this.categories = this.prevCategories[index].cat;
-    if (index != 0) {
-      this.currentViewName = this.prevCategories[index].catName;
-      this.currentCategory = this.prevCategories[index - 1].currentCategory;
-
-    } else {
-      this.currentViewName = 'Home';
-    }
-    this.prevCategories.splice(index);
-    this.products[0] = this.prevProducts[index];
-
-    this.prevProducts.splice(index);
+  ngOnDestroy() {
+    $('.carousel').carousel('pause');
   }
 
 
   checkSoldOut(product) {
+
     let count = 0;
     let isSoldOut = false;
     if (product) {
@@ -156,14 +114,6 @@ export class CategoriesComponent implements OnInit {
     if(!this.checkSoldOut(item)){
       this.catName = catName;
       this.dataService.data = item;
-      this.router.navigate([val, this.catName]);
-    }
-  }
-
-  navigateSliderProd(val, item) {
-    if (item.optionals.length == 2) {
-      this.catName = item.optionals[0].name
-      this.dataService.data = item.optionals[1];
       this.router.navigate([val, this.catName]);
     }
   }

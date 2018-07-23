@@ -2,10 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router} from '@angular/router';
 import * as data from '../../madeEasy.json';
 import { SERVER_URL } from '../../constantsService';
-import { PagebodyServiceModule } from '../../page-body/page-body.service'
-import { ProductsService } from '../../services/products/products.service';
+import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { CurrencyService } from '../../services/currency/currency.service';
-import { CategoriesService } from '../../services/categories/categories.service';
 declare var $:any;
 
 @Component({
@@ -25,14 +23,13 @@ export class CategoriesComponent implements OnInit {
   @Input('categories') categories: CategoriesModel;
   @Input('products') products: any;
 
-  constructor(private router: Router, private dataService: PagebodyServiceModule, private productService: ProductsService,
-   private currencyService: CurrencyService, categoryService:CategoriesService) {
+  constructor(private router: Router, private dataService: PagebodyServiceModule,private currencyService: CurrencyService) {
     this.currentViewName = 'Home';
 
   }
 
   ngOnInit() {
-   
+
     this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
     this.imageUrl1 = SERVER_URL + "/templates/viewWebImages?userId="
@@ -44,8 +41,6 @@ export class CategoriesComponent implements OnInit {
     }, error => {
       console.log('Error retrieving currency');
     });
-
-
 
   }
 
@@ -60,7 +55,7 @@ export class CategoriesComponent implements OnInit {
     $('.carousel').carousel('pause');
   }
 
-    
+
   checkSoldOut(product) {
 
     let count = 0;
@@ -118,7 +113,7 @@ export class CategoriesComponent implements OnInit {
   navigateProd(val: String, item: any, catName: String) {
     this.catName = catName;
     this.dataService.data = item;
-    localStorage.setItem(this.appId + ":dataServiceData", JSON.stringify(this.dataService.data))
+    localStorage.setItem(this.appId + ":dataServiceData", JSON.stringify(this.dataService.data));
     this.router.navigate([val, this.catName]);
   }
 

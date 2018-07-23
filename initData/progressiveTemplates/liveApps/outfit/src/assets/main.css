@@ -204,7 +204,7 @@
     background-color: transparent;
     color: #5E5E5E!important;
     font-weight: 500;
-    font-family: "Lato";
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   
     /*font-size: 20px;*/
   }
@@ -212,7 +212,7 @@
     letter-spacing: 0.1em;
     color: #424242!important;
     font-weight: 400;
-    font-family: "Lato";
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     /*font-size: 14px;*/
   }
   .main-background{
@@ -241,7 +241,7 @@
     border-width: 1px !important;
     border: solid;
 
-    font-family: "Josefin Sans";
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 20px;
@@ -254,7 +254,7 @@
     box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.5);
   }
   .main-footer-back{
-    background-color:#212121 !important;
+    background-color:#47454b !important;
   }
   .main-footer-header{
     color:#fff;

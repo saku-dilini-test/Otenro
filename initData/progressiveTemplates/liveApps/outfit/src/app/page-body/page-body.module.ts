@@ -20,6 +20,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { RegisterComponent } from './register/register.component';
 import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.component';
 import { AppUserComponent } from './app-user/app-user.component';
+import { SearchPipe } from '../pipes/search.pipe';
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { AppUserComponent } from './app-user/app-user.component';
      RegisterComponent,
      PaypalPaymentComponent, 
      AppUserComponent, 
+     SearchPipe
     ]
 })
 export class PageBodyModule { }

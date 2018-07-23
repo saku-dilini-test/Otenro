@@ -23,6 +23,17 @@
 
               </a>
             </li>
+              <li>
+                  <div class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories
+                          <span class="caret"></span></a>
+                      <ul class="dropdown-menu  main-navigation"  role="menu">
+                          <li *ngFor="let mainCat of categories">
+                              <a class="nav-link"  [routerLink]="['']" [queryParams]="{ id:mainCat.id}">{{mainCat.name}}</a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
              <li>
               <a (click)="navigate('contact', 'Contact Us')">Contact Us
               </a>
@@ -63,6 +74,9 @@
                   </li>
                 </ul>
               </div>
+            </li>
+            <li>
+              <a (click)="navigate('shop','Search')"><span class="ion ion-search icon-sm"></span></a>
             </li>
             <li>
               <a (click)="navigate('cart', 'Shopping Cart')">

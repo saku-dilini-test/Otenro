@@ -42,7 +42,7 @@ a:hover{text-decoration: none; cursor:pointer;}
 	padding:100px 50px;
 }
 .bloc-lg{
-	padding:0 50px 150px 50px;
+	padding:0 50px 280px 50px;
 }
 .bloc-md{
 	padding:50px;
@@ -176,17 +176,17 @@ a:hover{text-decoration: none; cursor:pointer;}
 /* Bloc text custom styling */
 
 #bloc-2 h1{
-	font-family: Lato;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-weight: 400;
 	font-size: 20px;
 	line-height: 205px;
 }
 #bloc-3 h1{
-	font-family: Lato;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-weight: 400;
 }
 #bloc-3 h3{
-	font-family: Lato;
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-weight: 300;
 }
 #bloc-16 p{
@@ -199,10 +199,10 @@ a:hover{text-decoration: none; cursor:pointer;}
 
 
 #bloc-24 p{
-	font-family: "Josefin Sans";
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 #bloc-26 p{
-	font-family: "Josefin Sans";
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 #bloc-28 p{
 	font-size: 30px;
@@ -541,7 +541,7 @@ button{
 	background-position:center center;
 	background-repeat:no-repeat;
 	background-size:100% 100%;
-	font-family:"PT Serif Caption";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	border-width:0px 0px 0px 0px;
 }
 .button-woman:hover{
@@ -554,7 +554,7 @@ button{
 	/* background-image:url("img/mens.jpg"); */
 	background-size:100% 100%;
 	background-repeat:no-repeat;
-	font-family:"PT Serif Caption";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	border-width:0px 0px 0px 0px;
 }
 .button-man:hover{
@@ -568,7 +568,7 @@ button{
 	background-repeat:no-repeat;
 	background-position:center center;
 	background-size:100% 100%;
-	font-family:"PT Serif Caption";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	border-width:0px 0px 0px 0px;
 }
 .button-kids:hover{
@@ -585,7 +585,7 @@ button{
 	background-repeat:no-repeat;
 	background-size:100% 100%;
 	/* background-image:url("img/footwear2.jpg"); */
-	font-family:"PT Serif Caption";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	border-width:0px 0px 0px 0px;
 }
 .button-footwear:hover{
@@ -612,7 +612,7 @@ button{
 }
 .header-text-h1{
 	font-size:20px;
-	font-family:"Lato";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	background-color:transparent;
 	font-weight:400;
 }
@@ -628,7 +628,7 @@ button{
 }
 .header-text-h2{
 	height: 35px;
-	font-family:"Lato";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-weight:400;
 	text-transform:uppercase;
 	color:#424242!important;
@@ -636,7 +636,7 @@ button{
 	line-height: normal;
 }
 .sub-header-text-h2{
-	font-family:"Lato";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-weight:400;
 	font-size:12px;
 	padding-top:0px;
@@ -649,7 +649,7 @@ button{
 	border-radius:0px 0px 0px ;
 }
 .header-text-h3{
-	font-family:"Lato";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-weight:400;
 	font-size:23px;
 	color:#424242!important;
@@ -683,7 +683,7 @@ button{
 	margin-top:-1px;
 }
 .menu{
-	font-family:"Josefin Sans";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-size:20px;
 	font-weight:lighter;
 	text-align:center;
@@ -692,7 +692,7 @@ button{
 }
 .content-heading{
 	font-size:20px;
-	font-family:"Josefin Sans";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	text-transform:uppercase;
 	color:#5E5E5E!important;
 	font-weight:bold;
@@ -703,11 +703,11 @@ button{
 	margin-top:30px}.content-product{
 	font-size:15px;
 	color:#424242!important;
-	font-family:"Josefin Sans";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	line-height:30px;
 }
 .product-price-text{
-	font-family:"Josefin Sans";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	color:rgba(0,0,0,0.6)!important;
 	border-style:solid;
 	border-width:1px 0px 0px 0px;
@@ -722,7 +722,7 @@ button{
 }
 .button-buy{
 	border-radius:0px 0px 0px 0px;
-	font-family:"Josefin Sans";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-weight:bold;
 	text-transform:uppercase;
 	background-color:transparent;
@@ -734,7 +734,7 @@ button{
 }
 
 .product-header-h1{
-	font-family:"Lato";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-weight:700;
 	border-style:solid;
 	border-width:0px 0px 1px 0px;
@@ -763,7 +763,7 @@ button{
 	font-weight:bold;
 }
 .product-text{
-	font-family:"Josefin Sans";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	color:rgba(0,0,0,0.7)!important;
 	text-transform:uppercase;
 	font-weight:bold;
@@ -790,7 +790,7 @@ button{
 	padding-top:20px;
 }
 .about-us{
-	font-family:"Lato";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-weight:400;
 	text-align:center;
 	border-style:dotted;
@@ -802,7 +802,7 @@ button{
 	text-transform: uppercase;
 }
 .links{
-	font-family:"Josefin Sans";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-weight:bold;
 	border-style:dashed;
 	border-width:0px 0px 1px 0px;
@@ -896,7 +896,7 @@ button{
 .content-about{
 	font-size:15px;
 	font-weight:lighter;
-	font-family:"Josefin Sans";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	text-shadow:0px 0px 0px rgba(0,0,0,0.0);
 }
 .contebt-about-medium{
@@ -931,7 +931,7 @@ button{
 }
 .list-padding{
 	text-align:left;
-	font-family:"Josefin Sans";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	padding:0px 0px 0px 0px;
 }
 .content-div-padding{
@@ -968,7 +968,7 @@ button{
 	color:#929292!important;
 }
 .navigation-lable{
-	font-family:"Lato";
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-weight:700;
 	font-size:15px;
     text-align: center;
@@ -1315,7 +1315,7 @@ button{
 		color:#FEFFFF!important;
 		text-transform:uppercase;
 		font-size:14px;
-		font-family:"lato";
+		font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 		font-weight:400;
 		text-shadow:0px 2px 4px rgba(0,0,0,0.7);
 		width:100%;
@@ -1422,7 +1422,7 @@ button{
 		font-size:10px;
 	}
 	.bloc-lg{
-		padding: 20px 0 150px 0;
+		padding: 20px 20px 150px 20px;
 	}
 
 	::-webkit-scrollbar{
@@ -1466,9 +1466,6 @@ header{
   width: 100%;
 }
 
-.col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
-    text-align: center;
-}
 
 .padding-fit-top{
 	padding-top:65px !important;
@@ -1481,3 +1478,5 @@ header{
 .text-warning{
 	color:#da453a;
 }
+
+body, html { overflow-x:hidden; }
