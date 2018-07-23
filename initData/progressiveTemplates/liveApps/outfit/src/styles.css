@@ -39,13 +39,13 @@ a:hover{text-decoration: none; cursor:pointer;}
 /* Sizes */
 
 .bloc-xl{
-	padding:100px 50px;
+	padding:100px 50px 280px 50px;
 }
 .bloc-lg{
 	padding:0 50px 280px 50px;
 }
 .bloc-md{
-	padding:50px;
+	padding:50px 50px 280px 50px;
 }
 .bloc-sm{
 	padding:5px 50px;
