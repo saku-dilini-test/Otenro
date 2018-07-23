@@ -21,13 +21,6 @@
       </div>
 
     </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="17">
-          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-        </agm-map>
-      </div>
-    </div>
 
     <div class="row voffset">
       <div class="col-sm-12">
@@ -46,7 +39,7 @@
       <div class="col-sm-12">
 
         <p class="text-center contact-text" style="margin-top: 1%;">
-            “SMARTFIT” DRTV PRODUCTS (PVT)LTD.
+          “SMARTFIT” DRTV PRODUCTS (PVT)LTD.
         </p>
 
         <div *ngFor="let contact of contactInfo">
@@ -54,8 +47,8 @@
             {{contact.address}}
           </p>
           <p class="text-center contact-text">
-            {{contact.telPhone}}
-            <br>{{contact.email}}
+            <!-- {{contact.telPhone}} -->
+            {{contact.email}}
             <br>
           </p>
           <p class="text-center">
@@ -66,6 +59,14 @@
       </div>
 
     </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="17">
+          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+      </div>
+    </div>
+
   </div>
 </div>
 <!-- bloc-23 END -->
