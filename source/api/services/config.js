@@ -14,6 +14,10 @@ module.exports = {
     TEMPLATES_PATH :sails.config.TEMPLATES_PATH,
     PROGRESSIVE_TEMPLATES_PATH :sails.config.PROGRESSIVE_TEMPLATES_PATH,
 
+    ANDROID_APK_BUILD_ZIPALIGN_PATH : sails.config.ANDROID_APK_BUILD_ZIPALIGN_PATH,
+    ANDROID_VERSION : sails.config.ANDROID_VERSION,
+    SUPPORT_USER_EMAIL : sails.config.SUPPORT_USER_EMAIL,
+
     PUSH_API_URL : 'https://fcm.googleapis.com/fcm/send',
     AUTHORIZATION : 'key=AAAAJ4YjgQI:APA91bH-TmfU_nC3oKelw9ramCmDN5Mx1MllS3NeMvfJxcHvh-rIvPxqBlC782UU9DO8jrU9qV5hzzPDN1isyCVzhmLyhS7hZQZg_ZQHtoDFZHxMQI3GSp1PqeeVdbn4QccdcQh35uk9',
 
@@ -173,5 +177,21 @@ module.exports = {
     IDEABIZ_EMAIL : sails.config.IDEABIZ_EMAIL,
     IDEABIZ_GROUP_EMAIL : sails.config.IDEABIZ_GROUP_EMAIL,
     IDEABIZ_ADMIN_EMAIL : sails.config.IDEABIZ_ADMIN_EMAIL,
+
+    //APK_BUILD_STATUS use to check the apk generation process is in which stage.This will set in Application.apkStatus
+    APK_BUILD_STATUS: {
+        'PENDING': {
+            'code': 'PENDING',
+            'desc': 'Pending'
+        },
+        'SUCCESS': {
+            'code': 'SUCCESS',
+            'desc': 'Success'
+        },
+        'ERROR': {
+            'code': 'ERROR',
+            'desc': 'Error'
+        }
+    }
 
 };

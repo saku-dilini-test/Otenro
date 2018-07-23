@@ -46,6 +46,7 @@
                 <th width="10%">Email</th>
                 <th width="12%">App Description</th>
                 <th width="6%" ng-if="user.userRole[0] != 'ADMIN'">Billing</th>
+                <th width="6%" ng-if="user.userRole[0] == 'ADMIN'">apk</th>
                 <th width="10%">App Status</th>
                 <!--<th width="20%">Action</th>-->
                 <th width="6%" ng-if="user.userRole[0] != 'ADMIN'">Comments</th>
@@ -73,6 +74,12 @@
                     </td>
                     <td ng-if="user.userRole[0] != 'ADMIN'">
                         <button class="btn-material"  ng-click="approvedOperatorsView(app,userList,getDes(app.id,'manage'))">Manage</button>
+                    </td>
+                    <td align="center"  ng-if="user.userRole[0] == 'ADMIN'">
+                        <md-button class="me-default-button" ng-click = "buildAPK(app)" ng-hide = "app.apkStatus=='PENDING'">
+                            Build
+                        </md-button>
+                        <span ng-show = "app.apkStatus=='PENDING'">Building...</span>
                     </td>
                     <td>{{app.publishedStatus}}</td>
                 <td align="center" ng-if="user.userRole[0] != 'ADMIN'">

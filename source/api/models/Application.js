@@ -70,6 +70,12 @@ module.exports = {
 
         isActive: {
             type: 'boolean'
+        },
+        apkStatus: {
+            type: 'string' //To decide whether the apk build is in PENDING,SUCCESS or ERROR, these statuses has defined in the config.APK_BUILD_STATUS
+        },
+        apkStatusUpdatedAt: {
+            type: 'string' //This is to keep the date which the apk try to build
         }
     }
 };

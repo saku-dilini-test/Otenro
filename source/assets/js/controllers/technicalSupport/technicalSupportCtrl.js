@@ -211,6 +211,19 @@
                 
             }
 
+            $scope.buildAPK = function(app){
+                technicalSupportService.buildApk(app.id,app.userId)
+                    .success(function (result) {
+                        console.log('Start to build the apk');
+                        getAllAppDataList();
+                        toastr.success(result, 'Info', {
+                            closeButton: true
+                        });
+                    }).error(function (error) {
+                        console.log('Start nuild apk error: ' + error);
+                    });
+            }
+
             $scope.checkStatus = function(appId){
 
             }

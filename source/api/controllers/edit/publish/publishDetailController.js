@@ -2,7 +2,8 @@ var fs1 = require('fs');
 
 var fs = require('fs-extra'),
     config = require('../../../services/config'),
-    email = require("../../../../node_modules/emailjs/email");
+    email = require("../../../../node_modules/emailjs/email"),
+    editController = require('../../EditController');
 
 var server  = email.server.connect({
     user:    "onbilabsttest@gmail.com",
@@ -229,6 +230,13 @@ module.exports = {
                 console.log(result);
             Application.findOne({id:result[0].appId}).exec(function(err,appData){
                 if (err) res.send(err);
+
+                if(!appData.apkStatus){
+                    sails.log.debug("apk generation started for the appId:" + body.appId);
+                    req.body.userId = appData.userId;
+                    editController.buildSourceProg(req,res);
+                }
+
                 console.log(appData);
                     User.find({id:appData.userId}).exec(function(err,userData){
                         if (err) res.send(err);
@@ -487,7 +495,13 @@ module.exports = {
         var mime = require('mime');
 
         var apk = config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/platforms/android/app/build/outputs/apk/release/' + req.param("appName") + ".apk";
-        // var apk = config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/platforms/android/build/outputs/apk/' + req.param("appName") + ".apk";
+
+        var androidVersion = config.ANDROID_VERSION;
+        sails.log.debug("in getApkPath config.ANDROID_VERSION: " + androidVersion);
+
+        if(androidVersion<26){
+            apk = config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/platforms/android/build/outputs/apk/' + req.param("appName") + ".apk";
+        }
 
         console.log("inside apk send: " + apk);
 
