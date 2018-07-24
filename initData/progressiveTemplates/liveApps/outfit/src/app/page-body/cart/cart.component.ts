@@ -48,7 +48,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.user = (this.localStorageService.get('appLocalStorageUser' + this.appId));
-
+    this.cartItems = this.dataService.cart.cartItems;
     this.taxService.getTaxInfo().subscribe(data => {
       if (data == '') {
         this.hide = true;
@@ -134,6 +134,8 @@ export class CartComponent implements OnInit {
     this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
     if(this.user){
       this.localStorageService.set("cart" + this.user.registeredUser, (this.dataService.cart));
+    }else{
+      this.localStorageService.set("cartUnknownUser", (this.dataService.cart));
     }
 
   };
