@@ -317,55 +317,114 @@
                 </md-tab-body>
             </md-tab>
 
-            <md-tab ng-if="isDigital==true">
-                <md-tab-label>Pricing & Upload</md-tab-label>
-                <md-tab-body>
-                    <div class="md-dialog-header">
-                        <h1>Pricing & Uploads</h1>
-                    </div>
-                    <div class="md-dialog-main">
-                        <div class="file-upload-wrapper clearfix">
-                            <p class="file-upload-msg">Select a product to upload</p>
-                            <div class="pull-left">
-                                <div class="me-file-upload rounded">
-                                    <div class="upload-wrapper">
-                                        <input type="button" ngf-select ng-model="File" ngf-accept="*"
-                                               aria-invalid="true" ngf-change="changeImage()" required/>
-                                        <span>select product</span>
+            <!--<md-tab ng-if="isDigital==true">-->
+                <!--<md-tab-label>Pricing & Upload</md-tab-label>-->
+                <!--<md-tab-body>-->
+                    <!--<div class="md-dialog-header">-->
+                        <!--<h1>Pricing & Uploads</h1>-->
+                    <!--</div>-->
+                    <!--<div class="md-dialog-main">-->
+                        <!--<div class="file-upload-wrapper clearfix">-->
+                            <!--<p class="file-upload-msg">Select a product to upload</p>-->
+                            <!--<div class="pull-left">-->
+                                <!--<div class="me-file-upload rounded">-->
+                                    <!--<div class="upload-wrapper">-->
+                                        <!--<input type="button" ngf-select ng-model="File" ngf-accept="*"-->
+                                               <!--aria-invalid="true" ngf-change="changeImage()" required/>-->
+                                        <!--<span>select product</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="uploaded-section clearfix">-->
+                            <!--<div class="uploaded-new-image">-->
+                                <!--<p>Selected Product</p>-->
+                                <!--<img ng-if="File == null" ng-src="../../../images/medium-placeholder.png" width="150"-->
+                                     <!--height="150"/>-->
+                                <!--<img ng-if="File != null" ngf-src="File" width="150" height="150"/>-->
+
+                                <!--<button class="me-upload-image-button" ng-click="addFile(File)">Upload Image-->
+                                <!--</button>-->
+                            <!--</div>-->
+                            <!--<div class="uploaded-old-images">-->
+                                <!--<p>Add Pricing</p>-->
+                                <!--<fieldset>-->
+                                    <!--<p>Product Price</p>-->
+                                    <!--<input type="number" name="name" ng-model="variants.price" id="input-price"-->
+                                           <!--class="me-xs-input reset-inline" required ignore-mouse-wheel/>-->
+                                <!--</fieldset>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="md-dialog-buttons">-->
+                        <!--<div class="inner-section">-->
+                            <!--&lt;!&ndash;<md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>&ndash;&gt;-->
+                            <!--<md-button class="me-default-button" ng-click="back()">Cancel</md-button>-->
+                            <!--<md-button class="me-default-button" ng-click="nextStep3Digital(3,product,variants,weight)">Next-->
+                            <!--</md-button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</md-tab-body>-->
+            <!--</md-tab>-->
+
+            <md-tab ng-disabled="addProductsOptionParams.bannerLocked">
+                    <md-tab-label>Upload Banner Image</md-tab-label>
+                    <md-tab-body>
+                        <div class="md-dialog-header">
+                            <h1>Upload Banner Image</h1>
+                        </div>
+                        <div class="md-dialog-main">
+                            <div class="file-upload-wrapper2 clearfix">
+                                <div class="cropArea ">
+
+                                    <ui-cropper image="myBannerImage" area-type="rectangle" aspect-ratio="aspectRatio" result-image="picFile" result-image-size="size"  result-image-format="image/jpeg" result-image-quality="0.5">
+                                    </ui-cropper>
+
+                                </div>
+                                <br>
+
+
+                                <div class="inputField btn-material img-up">
+                                    <span >{{bannerButtonName}}</span>
+                                    <div class="img-up1" ng-if="!picFile">
+                                        <input type="file" value="" ng-click = "cropBannerImage();"  id="fileInputbanner" class="file" size="100">
+
+                                    </div>
+                                    <div  ng-if="picFileBanner" class="img-up1" ng-click="addBannerImage(picFile)"></div>
+                                </div>
+                            </div>
+                        <div class="uploaded-section image-upload clearfix" style="width:35%">
+                            <div class="uploaded-new-image">
+                                <img ng-if="picFileBanner == null" ng-src="../../../images/medium-placeholder.png" width="150"
+                                     height="150" style="display:none" />
+                                <img ng-if="picFileBanner != null" ngf-src="picFileBanner" width="150" height="150" style="display:none" />
+                            </div>
+                            <div class="uploaded-old-images">
+                                <p>Uploaded Product Images</p>
+                                <div class="old-images clearfix">
+                                    <div class="old-image">
+                                        <input type="button" ng-click="deleteBanner(0)" value='delete'
+                                               class="image-delete-button"/>
+                                        <img ng-click="setImage()" ng-if="bannerImage == null"
+                                             src="../../../images/small-placeholder.png" width="80" height="80"/>
+                                        <img ng-click="setImage(0)" ng-if="bannerImage !== null" ngf-src="bannerImage"
+                                             width="80" height="80"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="uploaded-section clearfix">
-                            <div class="uploaded-new-image">
-                                <p>Selected Product</p>
-                                <img ng-if="File == null" ng-src="../../../images/medium-placeholder.png" width="150"
-                                     height="150"/>
-                                <img ng-if="File != null" ngf-src="File" width="150" height="150"/>
-
-                                <button class="me-upload-image-button" ng-click="addFile(File)">Upload Image
-                                </button>
-                            </div>
-                            <div class="uploaded-old-images">
-                                <p>Add Pricing</p>
-                                <fieldset>
-                                    <p>Product Price</p>
-                                    <input type="number" name="name" ng-model="variants.price" id="input-price"
-                                           class="me-xs-input reset-inline" required ignore-mouse-wheel/>
-                                </fieldset>
+                    </div>
+                        <div class="md-dialog-buttons" style="padding:0 39px">
+                            <div class="inner-section">
+                                <md-button class="me-default-button" ng-click="back()">Cancel</md-button>
+                                <!--<md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>-->
+                                <md-button type="submit" ng-disabled="priceAndVariantsForm.$invalid || exist"
+                                           class="me-default-button" ng-click="addBanner(data,4)">Next</md-button>
                             </div>
                         </div>
-                    </div>
-                    <div class="md-dialog-buttons">
-                        <div class="inner-section">
-                            <!--<md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>-->
-                            <md-button class="me-default-button" ng-click="back()">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="nextStep3Digital(3,product,variants,weight)">Next
-                            </md-button>
-                        </div>
-                    </div>
                 </md-tab-body>
             </md-tab>
+
             <md-tab ng-disabled="addProductsOptionParams.imageUploadLocked">
                 <md-tab-label>Upload Image</md-tab-label>
                 <md-tab-body>

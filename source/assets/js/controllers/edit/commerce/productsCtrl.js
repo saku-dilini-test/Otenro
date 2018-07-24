@@ -2,16 +2,17 @@
     'use strict';
     angular.module("appEdit").controller("ProductCtrl", [
         '$scope', '$mdDialog', 'toastr', 'commerceService','productService','inventoryService', '$rootScope', '$auth', 'SERVER_URL','initialData',
-        'mainMenuService','$log','$q','categoryMaintenanceService','$filter','mySharedService', ProductCtrl]);
+        'mainMenuService','$log','$q','categoryMaintenanceService','$filter','mySharedService','carouselService', ProductCtrl]);
 
     function ProductCtrl($scope, $mdDialog, toastr, commerceService, productService,inventoryService, $rootScope,  $auth, SERVER_URL,initialData,
-    mainMenuService,$log,$q,categoryMaintenanceService,$filter,mySharedService) {
+    mainMenuService,$log,$q,categoryMaintenanceService,$filter,mySharedService,carouselService) {
         var size, weight;
         var variants;
         $scope.defaultImage;
         $scope.customPattern =   /^[0-9a-zA-Z ]+$/;
         $scope.qtyPattern = '/^\d+(?:[.]\d{1,}|$)$/';
         $scope.tmpImage = [];
+        $scope.bannerImage = null;
         $scope.product = initialData.product;
         $scope.selection = initialData.product.selection;
         $scope.currency = $rootScope.currency;
@@ -25,7 +26,7 @@
         var selectedSku = $scope.product.selectedSku;
 
         $scope.selectedSku = [];
-
+        console.log(initialData);
         if(!selectedSku){
         console.log($scope.product);
             $scope.selectedSku = [];
@@ -145,18 +146,16 @@
         }
 
         var tempImagePath;
+        var tempImagePathBanner;
         // Third Navigation Image Path ( Image get from server )
-       if($scope.isNew == 'true' || $scope.isNew == true){
 
           tempImagePath =  SERVER_URL +"templates/viewWebImages?userId="+ $auth.getPayload().id
                +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&images=thirdNavi/";
-       }else {
+         tempImagePathBanner =  SERVER_URL +"templates/viewWebImages?userId="+ $auth.getPayload().id
+               +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&images=banner/";
 
-           tempImagePath = SERVER_URL + "templates/viewImages?userId=" + $auth.getPayload().id
-               + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "&img=thirdNavi/";
-       }
 
-        function  disableTabs(selectedTab,tab1,tab2,tab3,tab4) {
+        function  disableTabs(selectedTab,tab1,tab2,tab3,tab4,tab5) {
             $log.debug(selectedTab);
 
             $scope.selectedTab = selectedTab;
@@ -164,12 +163,13 @@
                 firstLocked : tab1,
                 secondLocked: tab2,
                 thirdLocked: tab3,
-                imageUploadLocked : tab4
+                bannerLocked: tab4,
+                imageUploadLocked : tab5
             };
         }
 
 
-            disableTabs(0, false, true, true, true);
+            disableTabs(0, false, true, true, true, true);
 
         if (initialData.product.tempImageArray){
             for (var i=0; i<initialData.product.tempImageArray.length; i++) {
@@ -192,6 +192,13 @@
 
                 $scope.tmpImage.push({'img':tempImageUrl,'videoUrl':tempVideoUrl,'sku':tempImageSku});
             }
+        }
+
+        if(initialData.product.bannerImage){
+            var tempImageUrl = tempImagePathBanner + $scope.product.bannerImage;
+            $scope.bannerImage = tempImageUrl
+            $scope.oldBannerImg = $scope.product.bannerImage;
+            console.log($scope.oldBannerImg);
         }
 
         if(!initialData.product.id){
@@ -235,7 +242,7 @@
          */
         $scope.addType = function (type, current) {
             $scope.product.type = type.type;
-            disableTabs(current,false,false,true,true);
+            disableTabs(current,false,false,true,true,true);
         };
 
         /**
@@ -257,7 +264,7 @@
                                 closeButton: true
                             });
                         }else {
-                            disableTabs(current, true, true, false, true);
+                            disableTabs(current, true, true, false, true ,true);
                         }
                     }
                 }, function(reason) {
@@ -273,7 +280,7 @@
                         closeButton: true
                     });
                 }else {
-                    disableTabs(current, true, true, false, true);
+                    disableTabs(current, true, true, false, true,true);
                 }
             }
 
@@ -405,8 +412,14 @@
                     });
                 }else{
                      $scope.selection = $scope.product.selection;
-                     disableTabs(current,false,false,false,false);
+                     disableTabs(current,false,false,false,false,true);
                 }
+        };
+
+        $scope.addBanner = function (){
+
+
+            disableTabs(4,false,false,false,false,false);
         };
 
         if (typeof $scope.categories === 'undefined') {
@@ -519,7 +532,7 @@
                   $scope.product.selection = $scope.selection;
                   $scope.product.published = 'NO';
                   $scope.product.selectedSku = $scope.selectedSku;
-                  commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product,'isNew': $rootScope.tempNew, 'defImg': $scope.defaultImage}).success(function (result) {
+                  commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product,'isNew': $rootScope.tempNew, 'defImg': $scope.defaultImage,bannerImage: $scope.bannerImage,oldBannerImg: $scope.oldBannerImg}).success(function (result) {
                       toastr.success('Product added successfully', 'Awsome!', {
                           closeButton: true
                       });
@@ -561,7 +574,7 @@
                   $scope.product.selection = $scope.selection;
                   $scope.product.published = 'YES';
                   $scope.product.selectedSku = $scope.selectedSku;
-                  commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product, 'isNew': $rootScope.tempNew, 'defImg': $scope.defaultImage}).success(function (result) {
+                  commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product, 'isNew': $rootScope.tempNew, 'defImg': $scope.defaultImage,bannerImage:$scope.bannerImage,oldBannerImg: $scope.oldBannerImg}).success(function (result) {
                       toastr.success('Products updated successfully', 'Awesome!', {
                           closeButton: true
                       });
@@ -604,8 +617,9 @@
                 toastr.error('Upload Image', 'Warning', {
                     closeButton: true
                 });
-            } else {
+            } else{
                 $scope.picFile = $scope.tmpImage[img];
+                $scope.picFileBanner = $scope.bannerImage;
             }
         };
 
@@ -633,6 +647,7 @@
         };
 
         $scope.buttonName = "Select Image";
+        $scope.bannerButtonName = "Select Image";
 
         $scope.cropImage = function () {
             $scope.setAspectRatio();
@@ -653,6 +668,27 @@
                 $scope.buttonName = "Crop Image";
             };
             angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+        };
+
+        $scope.cropBannerImage = function () {
+            $scope.setAspectRatio();
+            $scope.myBannerImage = null;
+            var handleFileSelect=function(evt) {
+
+                var file=evt.currentTarget.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function (evt) {
+                    $scope.$apply(function($scope){
+                        $scope.myBannerImage=evt.target.result;
+                        $scope.picFileBanner =  $scope.myBannerImage;
+                    });
+                };
+                reader.readAsDataURL(file);
+                $scope.imageSelected =false;
+                $scope.bannerButtonName = "Crop Image";
+            };
+            angular.element(document.querySelector('#fileInputbanner')).on('change',handleFileSelect);
         };
 
         $scope.addImage = function (img,url) {
@@ -678,8 +714,29 @@
                 });
             }
 
+
            $scope.buttonName = "Select Image";
         };
+
+        $scope.addBannerImage = function (img) {
+
+            $scope.bannerImage = img;
+            angular.element('#fileInput').val(null);
+            $scope.picFile = null;
+            $scope.myImage=null;
+            $scope.product.videoUrl = null;
+            toastr.success('Image has been uploaded successfully', 'Awesome', {
+                closeButton: true
+            });
+
+
+
+           $scope.bannerButtonName = "Select Image";
+        };
+
+        $scope.deleteBanner = function(){
+            $scope.bannerImage = null;
+        }
 
         $scope.deleteImg = function (index) {
             $scope.defaultImage = null;
@@ -1046,14 +1103,15 @@
 
         // when product edit start in second tab and enable pagination
         if (initialData.product.id !== undefined || initialData.product.id !== '0'){
+
             if(initialData.addVariant)
             {
-                disableTabs(2, false, false, false, true);
+                disableTabs(2, false, false, false, false,true);
             }else if(initialData.product.id == undefined){
-                disableTabs(0, true, true, true, true);
+                disableTabs(0, true, true, true, true,true);
             }
             else {
-                disableTabs(1, false, false, false, false);
+                disableTabs(1, false, false, false, false, false);
             }
         }
 
@@ -1315,6 +1373,33 @@
                 });
             });
         };
+
+        $scope.getAspectRatio = function () {
+            carouselService.getApplicationData($rootScope.appId)
+                .success(function (data) {
+                    if (data.templateId){
+                        carouselService.getTemplateData(data.templateId)
+                            .success(function (templateData) {
+                            console.log(templateData);
+                                if(templateData.sliderSize){
+                                    $scope.aspectRatio = parseFloat(templateData.sliderSize.aspectRatio);
+                                }
+                                if(templateData.iSizeThird){
+                                    $scope.size={w:templateData.sliderSize.w,h:templateData.sliderSize.h};
+                                }
+                            }).error(function (err) {
+                            toastr.error(err.message, 'Warning', {
+                                closeButton: true
+                            });
+                        });
+                    }
+                }).error(function (err) {
+                toastr.error(err.message, 'Warning', {
+                    closeButton: true
+                });
+            });
+        };
+        $scope.getAspectRatio();
 
 
 

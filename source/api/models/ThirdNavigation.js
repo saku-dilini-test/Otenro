@@ -67,6 +67,9 @@ module.exports = {
         },
         selectedSku:{
             type: 'json'
+        },
+        bannerImage:{
+            type : 'string'
         }
     }
 };

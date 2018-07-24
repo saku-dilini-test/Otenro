@@ -54,6 +54,7 @@ module.exports = {
 
         var  finelImages = [];
         var  tmpImage = req.body.productImages;
+        var  bannerImage = req.body.bannerImage;
         var  product =  req.body.product;
         var isNew = req.body.isNew;
             product.defaultImage = defImg;
@@ -109,6 +110,36 @@ module.exports = {
 
             }
        }
+
+
+       if (!bannerImage.match("http")){
+           var imgeFileName = randomstring.generate()+".png";
+           var data = bannerImage.replace(/^data:image\/\w+;base64,/, "");
+           var buf = new Buffer(data, 'base64');
+           const rimraf = require('rimraf');
+
+            if(req.body.oldBannerImg){
+                fs.unlink(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + '/src/assets/images/banner/' + req.body.oldBannerImg, function(err) {
+                  if (err) throw err;
+                  console.log('path/file.txt was deleted');
+                });
+            }
+
+           // product images copy to app file server
+               fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
+                   req.body.product.appId + '/src/assets/images/banner/' + imgeFileName, buf, function (err) {
+                   if (err) {
+                       return res.send(err);
+                   }
+               });
+
+//           product.tempImageArray.push({img:imgeFileName,videoUrl:videoUrl,sku:sku});
+           product.bannerImage = imgeFileName;
+           finelImages = null;
+       }
+
+
+
 
             product.variants.forEach(function(img, i){
                 product.variants[i].imageUrl = null;
@@ -170,8 +201,10 @@ module.exports = {
                  Sku.create(data,function(err,skuData){
                      if (err) {
                          return res.send(err);
-                     }
+                     }else{
+
                      return res.send(200,data);
+                     }
                  });
             });
         }

@@ -40,6 +40,9 @@ export class ProductComponent implements OnInit {
     dialogVariants;
     imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
+
+        bannerImageUrl = SERVER_URL + "/templates/viewWebImages?userId="
+        + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=banner';
     readMore = false;
     desPart1; desPart2; desPart1_demo;
     name1; name2; name3; name4;
