@@ -473,6 +473,8 @@ export class ProductComponent implements OnInit {
                 }
                 if (this.dataService.appUserId) {
                     this.localStorageService.set("cart" + this.dataService.appUserId, (this.dataService.cart));
+                }else{
+                    this.localStorageService.set("cartUnknownUser", (this.dataService.cart));
                 }
             }
             else {
@@ -500,6 +502,8 @@ export class ProductComponent implements OnInit {
 
                 if (this.dataService.appUserId) {
                     this.localStorageService.set("cart" + this.dataService.appUserId, (this.dataService.cart));
+                }else{
+                    this.localStorageService.set("cartUnknownUser", (this.dataService.cart));
                 }
                 if (navi == "buyNowCart") {
                     this.route.navigate(['cart']);

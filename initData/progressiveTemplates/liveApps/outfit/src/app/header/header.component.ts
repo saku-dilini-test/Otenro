@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit {
   categories:any
   private catName: any;
   imageUrl:any;
+  user; localCart; blogData;userUkn;
   constructor(private location: Location,private localStorageService: LocalStorageService,private categoryService: CategoriesService, private router: Router, private dataService: PagebodyServiceModule, private titleServ: TitleService) {
     this.cartNo = this.dataService.cart.cartItems.length;
     this.title = 'Home';
@@ -42,6 +43,30 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.user = (this.localStorageService.get('appLocalStorageUser' + this.appId));
+    this.userUkn = (this.localStorageService.get('cartUnknownUser'));
+
+    if (this.user) {
+      this.localCart = this.localStorageService.get("cart" + this.user.registeredUser);
+      if(this.localCart){
+        this.dataService.cart = this.localCart;
+      }
+    }else if(this.userUkn){
+      this.dataService.cart = this.userUkn;
+    }
+
+        this.cartNo = this.dataService.cart.cartSize;
+
+
+    // this.productsService.getBlogs().subscribe(res => {
+
+    //   this.blogData = res;
+    //   if (this.blogData.length > 0) {
+    //     this.enableBlog = true;
+    //   }
+    // });
+
    this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=";
 
@@ -75,6 +100,8 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem(this.appId + ":dataServiceData");
     this.dataService.isUserLoggedIn.check = false;
     this.dataService.cart.cartItems = [];
+    this.dataService.cart.cartSize = 0;
+    this.cartNo = 0;
     this.router.navigate(['home']);
   }
 

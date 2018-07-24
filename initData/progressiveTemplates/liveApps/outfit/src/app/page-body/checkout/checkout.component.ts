@@ -916,6 +916,8 @@ export class CheckoutComponent implements OnInit {
               if (this.localStorageService.get("cart" + appUser.registeredUser)) {
                 this.localStorageService.remove("cart" + appUser.registeredUser);
               }
+            }else{
+              this.localStorageService.remove("cartUnknownUser");
             }
 
             this._success.next('Your Order has been successfully processed');
@@ -1066,6 +1068,8 @@ export class CheckoutComponent implements OnInit {
               if (this.localStorageService.get("cart" + appUser.registeredUser)) {
                 this.localStorageService.remove("cart" + appUser.registeredUser);
               }
+            }else{
+              this.localStorageService.remove("cartUnknownUser");
             }
 
             this._success.next('Your Order has been successfully processed');
@@ -1338,6 +1342,8 @@ export class CheckoutComponent implements OnInit {
               if (this.localStorageService.get("cart" + appUser.registeredUser)) {
                 this.localStorageService.remove("cart" + appUser.registeredUser);
               }
+            }else{
+              this.localStorageService.remove("cartUnknownUser");
             }
 
             showHelp(SERVER_URL + '/mobile/getPayHereForm/?name=' +
