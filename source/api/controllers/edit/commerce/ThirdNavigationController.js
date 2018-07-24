@@ -129,7 +129,7 @@ module.exports = {
                fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
                    req.body.product.appId + '/src/assets/images/banner/' + imgeFileName, buf, function (err) {
                    if (err) {
-                       return res.send(err);
+                       console.log(err);
                    }
                });
 
@@ -179,8 +179,9 @@ module.exports = {
                 Sku.update(skuSearchQuery,data,function(err,skuData){
                     if (err){
                         return res.send(err);
+                    }else{
+                        return res.send(200, {message: 'Shipping Collection successfully updated'});
                     }
-                    return res.send(200, {message: 'Shipping Collection successfully updated'});
                 });
 
             });
@@ -202,8 +203,7 @@ module.exports = {
                      if (err) {
                          return res.send(err);
                      }else{
-
-                     return res.send(200,data);
+                         return res.send(200,data);
                      }
                  });
             });

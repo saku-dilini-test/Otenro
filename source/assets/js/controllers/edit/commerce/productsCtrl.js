@@ -1382,10 +1382,10 @@
                             .success(function (templateData) {
                             console.log(templateData);
                                 if(templateData.sliderSize){
-                                    $scope.aspectRatio = parseFloat(templateData.sliderSize.aspectRatio);
+                                    $scope.aspectRatioBanner = parseFloat(templateData.sliderSize.aspectRatio);
                                 }
                                 if(templateData.iSizeThird){
-                                    $scope.size={w:templateData.sliderSize.w,h:templateData.sliderSize.h};
+                                    $scope.sizeBanner={w:templateData.sliderSize.w,h:templateData.sliderSize.h};
                                 }
                             }).error(function (err) {
                             toastr.error(err.message, 'Warning', {

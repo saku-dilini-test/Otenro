@@ -1,5 +1,8 @@
 <div class="bloc bgc-white b-parallax animDelay04" id="bloc-11">
   <div class="container  bloc-xl">
+    <div *ngIf = "Data.bannerImage">
+      <img class="banner-cat" src="{{bannerImageUrl}}/{{Data.bannerImage}}" width="100%" />
+    </div>
     <div class="row bgc-white" id="product">
         <div class="col-sm-6">
              <div id="gallery" style="display:none;">
