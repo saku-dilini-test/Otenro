@@ -295,13 +295,9 @@ module.exports = {
                                         // send mail with defined transport object
                                         transporter.sendMail(mailOptions, (error, info) => {
                                             if (error) {
-                                                //return console.log(error);
                                                 console.log(error);
-                                                return  res.send(500,error);
-
                                             }
-                                            console.log('Message sent: %s', info.messageId);
-                                                                return res.send("ok");
+                                            console.log('Message sent: %s', userData[0].email);
                                         });
                         res.send("ok");
 

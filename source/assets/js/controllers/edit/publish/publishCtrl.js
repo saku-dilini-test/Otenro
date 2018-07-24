@@ -321,7 +321,7 @@
         }
 
         $scope.save = function(data){
-
+            var isRequestUpdate = false;
             data.forEach(function(ele){
 
                 if(ele.isEnabled == true){
@@ -340,40 +340,33 @@
                             });
                         }else{
                             ele.status = "SUBMITTED_FOR_CONFIG";
-                            publishService.updateOperators(data).success(function(res){
-                                    console.log(res);
-                                toastr.success('Operators information has been added successfully', 'Saved', {
-                                    closeButton: true
-                                });
-                            }).error(function(data, status, headers, config) {
-
-                                      toastr.error('Unable to update operators ', 'Warning', {
-                                          closeButton: true
-                                      });
-                                      $mdDialog.hide();
-
-                            });
+                            isRequestUpdate = true;
                         }
                     }
                 }else{
                     if(ele.status == "REJECTED"){
-                            publishService.updateOperators(data).success(function(res){
-                                    console.log(res);
-                                    toastr.success('Operators information has been updated successfully', 'Saved', {
-                                        closeButton: true
-                                    });
-                            }).error(function(data, status, headers, config) {
-
-                                      toastr.error('Unable to update operators ', 'Warning', {
-                                          closeButton: true
-                                      });
-                                      $mdDialog.hide();
-
-                            });
+                        isRequestUpdate = true;
                     }
                 }
 
             });
+
+
+            if(isRequestUpdate){
+                publishService.updateOperators(data).success(function(res){
+                    console.log(res);
+                    toastr.success('Operators information has been added successfully', 'Saved', {
+                        closeButton: true
+                    });
+                }).error(function() {
+
+                    toastr.error('Unable to update operators ', 'Warning', {
+                        closeButton: true
+                    });
+                    $mdDialog.hide();
+
+                });
+            }
 
 
         }
