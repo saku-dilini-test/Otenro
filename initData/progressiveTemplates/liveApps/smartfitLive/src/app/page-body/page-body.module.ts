@@ -13,6 +13,9 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { OwlModule } from 'angular-owl-carousel';
 import { PoliciesComponent } from './policies/policies.component';
+import { ReturnPolicyComponent } from './return-policy/return-policy.component';
+import { DeliveryPolicyComponent } from './delivery-policy/delivery-policy.component';
+import { WarrantyConditionsComponent } from './warranty-conditions/warranty-conditions.component';
 import { TermsComponent } from './terms/terms.component';
 import { ContactComponent } from './contact/contact.component';
 import { AgmCoreModule } from '@agm/core';
@@ -44,9 +47,30 @@ import { BlogViewComponent } from './blog-view/blog-view.component';
    exports:[
     PageBodyComponent
   ],
-  declarations: [HomepageComponent, PageBodyComponent, AboutusComponent, PoliciesComponent,
-   TermsComponent, ContactComponent, ShopComponent, ProductComponent, CartComponent,
-    CheckoutComponent, RegisterComponent,PaypalPaymentComponent, AppUserComponent, WarrantyComponent, ComplaintsComponent, NewarivalsComponent,SearchPipe, BlogsComponent, BlogViewComponent]
+  declarations: [
+    HomepageComponent, 
+    PageBodyComponent, 
+    AboutusComponent, 
+    PoliciesComponent,
+    TermsComponent, 
+    ContactComponent, 
+    ShopComponent, 
+    ProductComponent, 
+    CartComponent,
+    CheckoutComponent,
+    RegisterComponent,
+    PaypalPaymentComponent,
+    AppUserComponent, 
+    WarrantyComponent,
+    ComplaintsComponent,
+    NewarivalsComponent,
+    SearchPipe,
+    BlogsComponent,
+    BlogViewComponent,
+    ReturnPolicyComponent,
+    DeliveryPolicyComponent,
+    WarrantyConditionsComponent
+  ]
 })
 export class PageBodyModule {
 

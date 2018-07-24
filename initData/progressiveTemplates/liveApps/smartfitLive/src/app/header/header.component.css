@@ -86,10 +86,34 @@ ul li a i{
     margin-left: 50px;
 }
 
+.w-100{
+  width:100%;
+}
+
+.site-navigation{
+   margin-left:150px;
+}
+
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
 
 
+.container{
+  max-width: 1300px;
+}
+@media (min-width: 1200px){
+  .container {
+    width:1200px;
+    
+  }
+}
 
+
+@media (min-width: 1300px){
+  .container {
+    width:1300px;
+    
+  }
+}

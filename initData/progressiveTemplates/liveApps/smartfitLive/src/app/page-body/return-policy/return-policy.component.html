@@ -5,12 +5,12 @@
     <div class="container bloc-lg">
       <div class="row">
         <div class="col-sm-12">
-          <h2 class="hidden-xs text-center header main-header-font" >
-            PRIVACY Policy
-          </h2>
-          <div class="row" *ngIf="privacyPolicy">
+          <div class="row" >
             <div class="col-sm-12">
-              <p class="header-spacing-top main-content-font" *ngIf="privacyPolicy"  [innerHTML]="privacyPolicy">
+              <h2 class="hidden-xs  text-center header main-header-font header-spacing-top" *ngIf="returnPolicy">
+                Return Policy
+              </h2>
+              <p class="header-spacing-top main-content-font" *ngIf="returnPolicy"  [innerHTML]="returnPolicy">
               </p>
             </div>
           </div>

@@ -7,6 +7,9 @@ import { WarrantyComponent } from './warranty/warranty.component';
 import { NewarivalsComponent } from './newarivals/newarivals.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { PoliciesComponent } from './policies/policies.component';
+import { ReturnPolicyComponent } from './return-policy/return-policy.component';
+import { DeliveryPolicyComponent } from './delivery-policy/delivery-policy.component';
+import { WarrantyConditionsComponent } from './warranty-conditions/warranty-conditions.component';
 import { TermsComponent } from './terms/terms.component';
 import { ContactComponent } from './contact/contact.component';
 import { ShopComponent } from './shop/shop.component';
@@ -46,6 +49,21 @@ const routes: Routes = [
     path: 'policies',
     component: PoliciesComponent,
     data:{title:'Policies Page'}
+  },  
+  {
+    path: 'return-policy',
+    component: ReturnPolicyComponent,
+    data:{title:'Return Policy Page'}
+  },  
+  {
+    path: 'delivery-policy',
+    component: DeliveryPolicyComponent,
+    data:{title:'Delivery Policy Page'}
+  },  
+  {
+    path: 'warranty-conditions',
+    component: WarrantyConditionsComponent,
+    data:{title:'Warranty Conditions Page'}
   },
   {
     path: 'terms',

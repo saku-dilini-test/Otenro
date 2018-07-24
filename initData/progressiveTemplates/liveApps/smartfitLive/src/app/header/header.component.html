@@ -52,13 +52,19 @@
 						</li>
 						<li>
 				            <div class="dropdown">
-				              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Privacy<span class="caret"></span></a>
+				              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Terms &amp; Conditions<span class="caret"></span></a>
 				              <ul class="dropdown-menu  main-navigation"  role="menu">
 								<li>
-									<a (click)="navigate('policies', 'Policies')">Privacy policy</a>
+									<a (click)="navigate('policies', 'Policies')">Privacy Policy</a>
 								</li>
 								<li>
-									<a (click)="navigate('terms', 'Terms & Conditions')">Terms &amp; Conditions</a>
+									<a (click)="navigate('warranty-conditions', 'Warranty Conditions')">Warranty Conditions</a>
+								</li>
+								<li>
+									<a (click)="navigate('delivery-policy', 'Delivery Policy')">Delivery Policy</a>
+								</li>
+								<li>
+									<a (click)="navigate('return-policy', 'Return Policy')">Return Policy</a>
 								</li>
 				              </ul>
 				            </div>
@@ -109,8 +115,25 @@
 		<a *ngIf = "enableBlog" (click)="navigate('blogs', 'blogs');closeNav()">Blog</a>
 		<a (click)="navigate('newarivals', 'New Arivals');closeNav()">New Arrivals</a>
 		<a (click)="navigate('complaints', 'Complaints');closeNav()">Service Request</a>
-		<a (click)="navigate('policies', 'Policies');closeNav()">Privacy policy</a>
-		<a (click)="navigate('terms', 'Terms & Conditions');closeNav()">Terms &amp; Conditions</a>
+		<a>
+            <div class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Terms &amp; Conditions<span class="caret"></span></a>
+              <ul class="dropdown-menu  main-navigation w-100"  role="menu">
+				<li>
+					<a (click)="navigate('policies', 'Policies');closeNav()">Privacy Policy</a>
+				</li>
+				<li>
+					<a (click)="navigate('warranty-conditions', 'Warranty Conditions');closeNav()">Warranty Conditions</a>
+				</li>
+				<li>
+					<a (click)="navigate('delivery-policy', 'Delivery Policy');closeNav()">Delivery Policy</a>
+				</li>
+				<li>
+					<a (click)="navigate('return-policy', 'Return Policy');closeNav()">Return Policy</a>
+				</li>
+              </ul>
+            </div>
+        </a>
 		<a (click)="logout();closeNav()" *ngIf="loginStatus">Log Out</a>
         <a (click)="navigate('login/home');closeNav()"  *ngIf="!loginStatus">Sign In</a>
         <a (click)="navigate('order-history','Order History');closeNav()" *ngIf="loginStatus">Order History</a>
