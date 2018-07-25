@@ -234,9 +234,9 @@
                             <md-tab-label>Payments</md-tab-label>
                             <md-tab-body>
                                    
-
-                                    <table  class="paymentTable">
-                                        <thead>
+                                <form class="allItems" novalidate>
+                                    <table class="table" >
+                                        <thead class="obl-dashboard-apps">
                                             <tr>
                                                 <th>Msisdn</th>
                                                 <th>Operator</th>
@@ -260,6 +260,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                </form>
                         </md-tab-body>
                             </md-tab> 
                         <md-tab>
@@ -356,19 +357,19 @@
                                                 <select ng-model="reconciliationReports.fromMonth" required>
                                                     <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
                                                 </select>
-                                                <select ng-model="reconciliationReports.toMonth">
+                                                <select ng-model="reconciliationReports.toMonth" required>
                                                     <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
                                                 </select>
-                                                <select ng-model="reconciliationReports.year">
+                                                <select ng-model="reconciliationReports.year" required>
                                                     <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
                                                 </select>
                                                 <Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>
                                             </div>
                                             <div ng-if="reconciliationReports.report == 'Yearly'">
-                                                <select placeholder="From Year" ng-model="reconciliationReports.fromYear">
+                                                <select placeholder="From Year" ng-model="reconciliationReports.fromYear" required>
                                                     <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
                                                 </select>
-                                                <select placeholder="To Year" ng-model="reconciliationReports.toYear">
+                                                <select placeholder="To Year" ng-model="reconciliationReports.toYear" required>
                                                     <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
                                                 </select>
                                                 <Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>
@@ -387,7 +388,7 @@
 
 
                                 <form class="allItems" novalidate>
-                                    <button type= "button" ng-click="csvDownload(reconciliation)">CSV</button>
+                                    <a ng-if="(reconciliations.length > 0)" href="" ng-click='csvReconciliations(reconciliations,{ filename: "RECONCILIATION-REPORT.csv"})'><button style="float: right" type= "button" >CSV</button></a>
                                     <table class="table">
                                         <thead class="obl-dashboard-apps">
                                         <tr>
@@ -404,7 +405,7 @@
                                         </thead>
 
                                         <tbody>
-                                            <tr ng-repeat="reconciliation in reconciliations">
+                                            <tr  ng-repeat="reconciliation in reconciliations">
                                                 <td>{{reconciliation.userId}}</td>
                                                 <td>{{reconciliation.appId}}</td>
                                                 <td>{{reconciliation.name}}</td>

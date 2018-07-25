@@ -24,7 +24,7 @@
             $scope.appList = [];
             $scope.deviceView ="mobile";
             $scope.showSearchField = true;
-
+            $scope.reconciliations = null;
             var tempImagePath;
 
 //            console.log(initialData);
@@ -209,7 +209,7 @@
                         closeButton: true
                     });
                 })
-                
+
             }
 
             $scope.checkStatus = function(appId){
@@ -279,8 +279,8 @@
             }
             getAllAddNetworks();
 
-         
-         
+
+
 
             /**
              * @ngdoc function
@@ -320,7 +320,7 @@
              $scope.cancel = function(){
                  $state.go('user.technicalSupporter');
              }
-        
+
             // View technical user details
 
               $scope.usersview = function(){
@@ -340,7 +340,7 @@
                         toastr.error('Push Config Details Saving Error', 'Warning', {closeButton: true});
                 });
             };
-        
+
            $scope.changePublishStatus = function () {
                technicalSupportService.changePublishStatus({appId : $scope.appId})
                    .success(function (data) {
@@ -348,7 +348,7 @@
                    }).error(function (error) {
                    toastr.error('Send mail Error', 'Warning', {closeButton: true});
                });
-               
+
            }
 
            $scope.sendApkEmail = function(id,fName,lName,appName,appId,appUserId){
@@ -594,7 +594,7 @@
            * @param tabName :: name of the clicked tab
            **/
           $scope.showHideSearchField = function ( tabName ) {
-              
+
               //get subscription payment details
                 getSubscriptionPayments();
               // If user selected tab is equals to reports hide the search field
@@ -606,7 +606,7 @@
           };
 
              /*
-            Subuscription Payments 
+            Subuscription Payments
             */
 
            $scope.sortType = "name";
@@ -618,7 +618,7 @@
                 }).error(function (error){
 
                 });
-            }   
+            }
 
 
             /**
@@ -658,13 +658,14 @@
             $scope.master = {};
 
             $scope.reconciliationReportsGet = function(){
-                $scope.reconciliations = null;
+                $scope.reconciliations = [];
             }
             $scope.getReconciliation = function(Date){
+                $scope.reconciliations = [];
 
                 var dates;
                 if(Date.report == "Date Range"){
-                    $scope.reconciliations = null;
+
 
                    var sdate = $filter('date')(Date.sdate, "yyyy-MM-dd");
                    var edate = $filter('date')(Date.edate, "yyyy-MM-dd");
@@ -689,8 +690,8 @@
 
                 else if(Date.report == "Monthly"){
 
-                    $scope.reconciliations = null;
-                    if(toMonth>fromMoth){
+
+                    if(toMonth>fromMonth){
 
                         var  fromMonth = Date.fromMonth;
                         var toMonth = Date.toMonth;
@@ -702,7 +703,7 @@
                                 $scope.reconciliations = response;
                             })
                             .error(function(){
-
+                                toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
 
                             });
 
@@ -714,7 +715,7 @@
                 }
 
                 else{
-                    $scope.reconciliations = null;
+
                     var fromYear = Date.fromYear;
                     var toYear   = Date.toYear;
 
@@ -725,7 +726,7 @@
                                 $scope.reconciliations = response;
                             })
                             .error(function(response){
-
+                                toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
                             });
 
                     }
@@ -740,22 +741,43 @@
 
             }
 
-        $scope.csvDownload = function(){
-            $scope.objJson =[];
+        $scope.csvReconciliations = function(reconciliationsData,args){
+
             var reconciliationsArray = [];
-            var array = $scope.reconciliations
+            var array = reconciliationsData
+            console.log(array);
+
+            reconciliationsArray.push("Service Provider" +"," + "App Id"+ "," +"Name" + "," + "Bank Code" + "," +"Branch Code" + ","+"Branch Name" + ","+"Bank A/C No" + ","+"Service Provide Earnings" +'\r\n');
             array.forEach(function(obj){
-                    console.log(obj.name);
-                // reconciliationsArray.push[obj];
-                // if(x.hasOwnProperty(obj)){
-                //     reconciliationsArray.push(obj);
-                // }
-                reconciliationsArray.push(obj);
+
+            var str = obj.userId + "," + obj.appId +"," + obj.name + + obj.bankCode +"," + obj.branchCode +"," + obj.branchName +"," + obj.bankAccountNumber+"," + obj.revenue + '\r\n';
+
+            reconciliationsArray.push(str);
+
+
             });
 
-            $scope.objJson.push({key: reconciliationsArray, values: "" });
+            var csv = "";
+
+            for( i=0 ; i<reconciliationsArray.length; i++ ){
+                        csv += reconciliationsArray[i];
+                }
+            var data, filename, csvButton;
+            if (csv == null) return;
+
+            filename = args.filename || 'export.csv';
+
+            if (!csv.match(/^data:text\/csv/i)) {
+                csv = 'data:text/csv;charset=utf-8,' + csv;
+            }
+            data = encodeURI(csv);
+            csvButton = document.createElement('a');
+            csvButton.setAttribute('href', data);
+          //  csvButton.setAttribute('download', filename);
+            csvButton.click();
 
         }
+
 
 
 
