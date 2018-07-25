@@ -3022,6 +3022,13 @@ table.md-calendar-day-header{
     padding-left: 0;
     width: 25%;
 }
+.reports-period-container select,input {
+    font-size: 10px;
+    height: 25px;
+    padding-left: 0;
+    width: 25%;
+    margin-right: 10px;
+}
 
 .period-container{
     float: left;
@@ -3048,3 +3055,6 @@ table.md-calendar-day-header{
     float: right;
     width: 40%
 }
+
+/*reports*/
+

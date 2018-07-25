@@ -311,8 +311,19 @@
   
             getSubscriptionPayments: function(){
                 return $http.get(SERVER_URL + 'appMakerReports/getSubscriptionPayments');
-            }
+            },
 
+            getReconciliationDataForYearly: function(dates){
+                    return $http.post(SERVER_URL + 'appMakerReports/getReconciliationDataForYearly',dates);
+            },
+
+            getReconciliationDataForMonthly: function(dates){
+                return $http.post(SERVER_URL + 'appMakerReports/getReconciliationDataForMonthly',dates);
+            },
+
+            getReconciliationDataForDateRange: function (dates) {
+                return $http.post(SERVER_URL + 'appMakerReports/getReconciliationDataForDateRange', dates);
+            }
 
 
         };

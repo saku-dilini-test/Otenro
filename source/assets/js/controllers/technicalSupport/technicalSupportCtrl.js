@@ -16,6 +16,7 @@
                 technicalSupportCtrl
             ]);
 
+
     function technicalSupportCtrl($scope,$mdDialog,$auth,toastr,$state,$stateParams,SERVER_URL,ME_SERVER,$filter,$window,userProfileResource,technicalSupportService) {
 
             $scope.splash = [];
@@ -23,7 +24,7 @@
             $scope.appList = [];
             $scope.deviceView ="mobile";
             $scope.showSearchField = true;
-
+            $scope.reconciliations = null;
             var tempImagePath;
 
 //            console.log(initialData);
@@ -208,7 +209,7 @@
                         closeButton: true
                     });
                 })
-                
+
             }
 
             $scope.buildAPK = function(app){
@@ -291,8 +292,8 @@
             }
             getAllAddNetworks();
 
-         
-         
+
+
 
             /**
              * @ngdoc function
@@ -332,7 +333,7 @@
              $scope.cancel = function(){
                  $state.go('user.technicalSupporter');
              }
-        
+
             // View technical user details
 
               $scope.usersview = function(){
@@ -352,7 +353,7 @@
                         toastr.error('Push Config Details Saving Error', 'Warning', {closeButton: true});
                 });
             };
-        
+
            $scope.changePublishStatus = function () {
                technicalSupportService.changePublishStatus({appId : $scope.appId})
                    .success(function (data) {
@@ -360,7 +361,7 @@
                    }).error(function (error) {
                    toastr.error('Send mail Error', 'Warning', {closeButton: true});
                });
-               
+
            }
 
            $scope.sendApkEmail = function(id,fName,lName,appName,appId,appUserId){
@@ -606,7 +607,7 @@
            * @param tabName :: name of the clicked tab
            **/
           $scope.showHideSearchField = function ( tabName ) {
-              
+
               //get subscription payment details
                 getSubscriptionPayments();
               // If user selected tab is equals to reports hide the search field
@@ -618,7 +619,7 @@
           };
 
              /*
-            Subuscription Payments 
+            Subuscription Payments
             */
 
            $scope.sortType = "name";
@@ -630,12 +631,168 @@
                 }).error(function (error){
 
                 });
-            }   
+            }
 
 
             /**
              * REPORT GENERATION - END
              **/
+
+
+            var reconciliationReports;
+            $scope.reports = [
+                    {name:"Date Range"},
+                    {name:"Monthly"} ,
+                    {name:"Yearly"}
+            ];
+            $scope.currentYear = new Date().getFullYear();
+            $scope.current =   $scope.currentYear -1;
+            $scope.months  = [
+                    {month:1},
+                    {month:2},
+                    {month:3},
+                    {month:4},
+                    {month:5},
+                    {month:6},
+                    {month:7},
+                    {month:8},
+                    {month:9},
+                    {month:10},
+                    {month:11},
+                    {month:12}
+            ];
+            $scope.years  = [
+                {year:$scope.currentYear},
+                {year:$scope.currentYear-1},
+                {year:$scope.currentYear-2},
+                {year:$scope.currentYear-3}
+            ];
+
+            $scope.master = {};
+
+            $scope.reconciliationReportsGet = function(){
+                $scope.reconciliations = [];
+            }
+            $scope.getReconciliation = function(Date){
+                $scope.reconciliations = [];
+
+                var dates;
+                if(Date.report == "Date Range"){
+
+
+                   var sdate = $filter('date')(Date.sdate, "yyyy-MM-dd");
+                   var edate = $filter('date')(Date.edate, "yyyy-MM-dd");
+
+                    if(edate >= sdate) {
+
+                        var dates = {dateFrom: sdate, dateTo: edate};
+
+                        technicalSupportService.getReconciliationDataForDateRange(dates)
+                            .success(function (response) {
+                                $scope.reconciliations = response;
+
+                            }).error(function (response) {
+                            toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
+                        });
+
+                    }
+                    else{
+                        toastr.error('From Date should less than To Date', 'Warning', {closeButton: true});
+                    }
+                }
+
+                else if(Date.report == "Monthly"){
+
+
+                    if(toMonth>fromMonth){
+
+                        var  fromMonth = Date.fromMonth;
+                        var toMonth = Date.toMonth;
+                        var year = Date.year;
+
+                        dates = {monthFrom:fromMonth, monthTo:toMonth, year:year}
+                        technicalSupportService.getReconciliationDataForMonthly(dates)
+                            .success(function(response){
+                                $scope.reconciliations = response;
+                            })
+                            .error(function(){
+                                toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
+
+                            });
+
+                    }
+                    else{
+                        toastr.error('From Month should less than To Month', 'Warning', {closeButton: true});
+                    }
+
+                }
+
+                else{
+
+                    var fromYear = Date.fromYear;
+                    var toYear   = Date.toYear;
+
+                    if(toYear>=fromYear){
+                        dates = {yearFrom:fromYear, yearTo:toYear};
+                        technicalSupportService. getReconciliationDataForYearly(dates)
+                            .success(function(response){
+                                $scope.reconciliations = response;
+                            })
+                            .error(function(response){
+                                toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
+                            });
+
+                    }
+                    else{
+
+                        toastr.error('From Year Should less then To Year', 'Warning' , {closeButton: true});
+                    }
+
+
+                }
+
+
+            }
+
+        $scope.csvReconciliations = function(reconciliationsData,args){
+
+            var reconciliationsArray = [];
+            var array = reconciliationsData
+            console.log(array);
+
+            reconciliationsArray.push("Service Provider" +"," + "App Id"+ "," +"Name" + "," + "Bank Code" + "," +"Branch Code" + ","+"Branch Name" + ","+"Bank A/C No" + ","+"Service Provide Earnings" +'\r\n');
+            array.forEach(function(obj){
+
+            var str = obj.userId + "," + obj.appId +"," + obj.name + + obj.bankCode +"," + obj.branchCode +"," + obj.branchName +"," + obj.bankAccountNumber+"," + obj.revenue + '\r\n';
+
+            reconciliationsArray.push(str);
+
+
+            });
+
+            var csv = "";
+
+            for( i=0 ; i<reconciliationsArray.length; i++ ){
+                        csv += reconciliationsArray[i];
+                }
+            var data, filename, csvButton;
+            if (csv == null) return;
+
+            filename = args.filename || 'export.csv';
+
+            if (!csv.match(/^data:text\/csv/i)) {
+                csv = 'data:text/csv;charset=utf-8,' + csv;
+            }
+            data = encodeURI(csv);
+            csvButton = document.createElement('a');
+            csvButton.setAttribute('href', data);
+          //  csvButton.setAttribute('download', filename);
+            csvButton.click();
+
+        }
+
+
+
 
 
     }
