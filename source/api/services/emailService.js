@@ -106,6 +106,54 @@ module.exports = {
 
     });
     },
+    /**
+        Method is use to send and email with the provided parameters
+
+        Attachments must be send as an array of objects as in the below format
+         [
+             {
+                 filename: 'appmaker.png',
+                 path: imgPath + 'appmaker.png',
+                 cid: 'appmakerLogo'
+             }
+         ]
+     */
+    sendWithAttachments: function(from,to,subject,htmlBody,attachments,callback){
+
+        if(!from){
+            sails.log.error("No from email address to send the email!");
+        }
+
+        if(!to){
+            sails.log.error("No to email address to send the email!");
+        }
+
+        var mailOptions = {
+            from: from,
+            to: to,
+            subject: subject,
+            html: htmlBody,
+            attachments: attachments
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                sails.log.error('sendWithAttachments - emailService.js , error => ' + JSON.stringify(error));
+                callback(error, null);
+            }else {
+                sails.log.debug('Sent email to ' + to);
+                callback(null, info);
+            }
+
+        });
+    },
+    /**
+         Method is use to send and email without attachments
+     */
+    send: function(from,to,subject,htmlBody,callback){
+        this.sendWithAttachments(from,to,subject,htmlBody,[],callback);
+    },
+
     sendGetAssistance: function(data, callback){
         console.log(data.appName)
         var emailBody = "";

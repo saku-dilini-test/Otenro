@@ -54,6 +54,9 @@ module.exports = {
     TEMPLATES_PATH: '/home/projects/appmaker/Otenro/initData/templates/',
     PROGRESSIVE_TEMPLATES_PATH: '/home/projects/appmaker/Otenro/initData/progressiveTemplates/',
     REDIRECT_URL: 'https://developer.appmaker.lk',
+    ANDROID_APK_BUILD_ZIPALIGN_PATH: '/opt/android-sdk/build-tools/26.0.2/zipalign',//Use to do the zipalign when building android apk.
+    ANDROID_VERSION : 26,
+
     /**
      * change isBeta to 0 after beta period
      **/
@@ -65,5 +68,6 @@ module.exports = {
     IDEABIZ_AUTH_PASSWORD: 'SUperman123',
     IDEABIZ_EMAIL: 'heshan@simatosolutions.com',
     IDEABIZ_GROUP_EMAIL: 'heshan@simatosolutions.com', //To email for dialog super user, when sending approval email for the app configured with the serviceID by Admin.
-    IDEABIZ_ADMIN_EMAIL: 'heshan@simatosolutions.com' //From email address of Admin to send serviceID approval email to dialog super user.
+    IDEABIZ_ADMIN_EMAIL: 'heshan@simatosolutions.com', //From email address of Admin to send serviceID approval email to dialog super user.
+    SUPPORT_USER_EMAIL: 'chamilster@gmail.com'//'support@appmaker.lk' //Simato Support user
 };

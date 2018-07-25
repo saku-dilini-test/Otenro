@@ -35,8 +35,19 @@
         $scope.publishSplash = [];
         $scope.allowPlayStore;
         $scope.successPublish = false;
+        $scope.isApkAvailable =  false;
+
         carouselService.getApplicationData($rootScope.appId).success(function(res){
             $scope.appData = res;
+            technicalSupportService.getPublishDetails({appId: $rootScope.appId})
+                .success(function (appPubishData) {
+                    if(appPubishData.length>0 && appPubishData[0].operators) {
+                        var approvedOperators = $filter('filter')(appPubishData[0].operators, {'status': 'APPROVED'});
+                        $scope.isApkAvailable = approvedOperators && approvedOperators.length>0 && $scope.appData.apkStatus==='SUCCESS';
+                    }
+                }).error(function (error) {
+                  console.log("Error fetching ");
+                });
         });
 
         contactUsService.getContactUsInfo().success(function(res){
@@ -367,8 +378,8 @@
 
         }
 
-        $scope.getAPKFilePath = function(){
-            return '/getApkPath?appId=' + $rootScope.appId + '&userId=' + $auth.getPayload().id;
+        $scope.getAPKFilePath = function(appName){
+            return '/getApkPath?appId=' + $rootScope.appId + '&userId=' + $auth.getPayload().id + "&appName=" + appName;
         }
 
         $scope.addGooglePlayInfo = function(file, playStoreData, splash, allowPlayStore) {

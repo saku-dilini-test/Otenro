@@ -48,6 +48,9 @@
             getAppStatus: function(){
                 return $http.get(SERVER_URL + 'edit/getAppStatus');
             },
+            buildApk: function(appId,userId){
+                return $http.get(SERVER_URL + 'edit/buildSourceProg?appId=' + appId + '&userId=' + userId + '&fromscreen=ts');
+            },
             getAllAddNetworks: function(){
                 return $http.get(SERVER_URL + 'edit/getAllAddNetworksData');
             },

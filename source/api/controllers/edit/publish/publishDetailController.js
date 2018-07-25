@@ -2,7 +2,8 @@ var fs1 = require('fs');
 
 var fs = require('fs-extra'),
     config = require('../../../services/config'),
-    email = require("../../../../node_modules/emailjs/email");
+    email = require("../../../../node_modules/emailjs/email"),
+    editController = require('../../EditController');
 
 var server  = email.server.connect({
     user:    "onbilabsttest@gmail.com",
@@ -229,6 +230,13 @@ module.exports = {
                 console.log(result);
             Application.findOne({id:result[0].appId}).exec(function(err,appData){
                 if (err) res.send(err);
+
+                if(!appData.apkStatus){
+                    sails.log.debug("apk generation started for the appId:" + body.appId);
+                    req.body.userId = appData.userId;
+                    editController.buildSourceProg(req,res);
+                }
+
                 console.log(appData);
                     User.find({id:appData.userId}).exec(function(err,userData){
                         if (err) res.send(err);
@@ -483,29 +491,42 @@ module.exports = {
 
     getApkPath : function(req,res){
 
-    var path = require('path');
-    var mime = require('mime');
+        var path = require('path');
+        var mime = require('mime');
 
-    var zipFile = config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/publish_' + req.param("appId") + ".zip";
+        var apk = config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/platforms/android/app/build/outputs/apk/release/' + req.param("appName") + ".apk";
 
-    console.log("inside apk send: " + zipFile);
+        var androidVersion = config.ANDROID_VERSION;
+        sails.log.debug("in getApkPath config.ANDROID_VERSION: " + androidVersion);
 
-    // res.attachment(file);
+        if(androidVersion<26){
+            apk = config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/platforms/android/build/outputs/apk/' + req.param("appName") + ".apk";
+        }
 
-        var filename = path.basename(zipFile);
-        var mimetype = mime.lookup(zipFile);
+        console.log("inside apk send: " + apk);
 
-        console.log("filename: " + filename + " mimetype: " + mimetype);
+        fs.stat(apk, function (err, fileStat) {
+            if (err) {
+                if (err.code == 'ENOENT') {
+                    console.log('File:' + req.param("appName") + ".apk does not exists");
+                }
+            } else {
+                if (fileStat.isFile()) {
+                    var filename = path.basename(apk);
+                    var mimetype = mime.lookup(apk);
 
-        res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-        res.setHeader('Content-type', mimetype);
+                    console.log("filename: " + filename + " mimetype: " + mimetype);
 
-        var filestream = fs.createReadStream(zipFile);
+                    res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+                    res.setHeader('Content-type', mimetype);
 
-        filestream.pipe(res);
-        sails.log.info('EXCELLENT');
+                    var filestream = fs.createReadStream(apk);
 
-
+                    filestream.pipe(res);
+                    sails.log.info('EXCELLENT');
+                }
+            }
+        });
     }
 
 }

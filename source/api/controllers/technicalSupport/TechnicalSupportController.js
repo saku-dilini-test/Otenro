@@ -9,9 +9,6 @@ var fs = require('fs-extra'),
     const nodemailer = require('nodemailer');
 var sentMails = require('../../services/emailService');
 var pushNotificationService = require('../../services/pushNotificationsService');
-var editController = require('../EditController');
-
-
 
 var server  = email.server.connect({
     user:    "onbilabsttest@gmail.com",
@@ -426,15 +423,6 @@ module.exports = {
             PublishDetails.update(idPD,statusPD).exec(function(err,details){
 
                 if (err){res.send(err);}
-
-                Application.findOne({ id: req.body.id }).exec(function (err, app) {
-                    if (err) sails.log.error("In setAppstatus error:" + err);
-
-                    if(app && app.status!='UPLOADING' && thisCtrl.isApproved(req.body.operators)){
-                        sails.log.debug("apk generation started for the appId:" + req.body.id);
-                        editController.buildSourceProg(req,res);
-                    }
-                });
                 res.send('ok');
             });
         });
