@@ -703,13 +703,10 @@
 
                 else if(Date.report == "Monthly"){
 
-
-                    if(toMonth>fromMonth){
-
-                        var  fromMonth = Date.fromMonth;
+                        var fromMonth = Date.fromMonth;
                         var toMonth = Date.toMonth;
                         var year = Date.year;
-
+                    if(toMonth>fromMonth){
                         dates = {monthFrom:fromMonth, monthTo:toMonth, year:year}
                         technicalSupportService.getReconciliationDataForMonthly(dates)
                             .success(function(response){
