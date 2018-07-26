@@ -45,11 +45,11 @@ module.exports = {
       type:'string'
 
     },
-      unsubscribeDate:{
+    unsubscribeDate:{
 
           type:'string'
 
-      }
+    }
 
   }
 

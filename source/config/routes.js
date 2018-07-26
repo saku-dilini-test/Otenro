@@ -507,12 +507,13 @@ module.exports.routes = {
 
 
 
+
     /**
      * Routes related with ApplicationBaseReportController
      **/
-
-    'GET /appMakerReports/appBaseReport/getAppCreators': 'appMakerReports/ApplicationBaseReportController.getAppCreators',
-    'GET /appMakerReports/appBaseReport/getApplications': 'appMakerReports/ApplicationBaseReportController.getApplications',
+    'POST /appMakerReports/appBaseReport/getApplicationBaseDailySummary': 'appMakerReports/ApplicationBaseReportController.getApplicationBaseDailySummary',
+    'POST /appMakerReports/appBaseReport/getApplicationBaseMonthlySummary': 'appMakerReports/ApplicationBaseReportController.getApplicationBaseMonthlySummary',
+    'POST /appMakerReports/appBaseReport/getApplicationBaseYearlySummary': 'appMakerReports/ApplicationBaseReportController.getApplicationBaseYearlySummary',
 
 
 
@@ -522,5 +523,6 @@ module.exports.routes = {
      **/
 
     'GET /appMakerReports/getSubscriptionPayments': 'appMakerReports/ApplicationBaseReportController.getSubscriptionPayments',
+
 
 };

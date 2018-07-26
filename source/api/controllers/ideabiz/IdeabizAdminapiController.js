@@ -551,7 +551,7 @@ module.exports = {
 
                         console.log(responseBody);
                         var data = {appId:publishDetailsData.appId,msisdn:msisdn,
-                            amount:0.0,operator:data.operator,status:0 ,data:dateFormat(new Date(), "yyyy-mm-dd")}
+                            amount:0.0,operator:data.operator,status:0 ,date:dateFormat(new Date(), "yyyy-mm-dd")}
 
                         SubscriptionPayment.create(data).exec(function (err, result) {
 

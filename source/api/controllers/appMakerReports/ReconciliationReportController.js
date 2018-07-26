@@ -185,9 +185,6 @@ module.exports = {
             query = {date:{'>=':dateFormat(dateFrom, "yyyy-mm-dd"),'<=':dateFormat(dateTo, "yyyy-mm-dd")}}
 
 
-
-
-
         ReconciliationDailySummary.find(query).exec(function(err, app){
             if (err) return done(err);
             res.send(app);
@@ -225,6 +222,8 @@ module.exports = {
         var query="";
 
             query = {year:{'>=':yearFrom,'<=':yearTo}}
+
+            console.log("query "+ query);
 
         ReconciliationYearlySummary.find(query).exec(function(err, data){
             if (err) return done(err);
