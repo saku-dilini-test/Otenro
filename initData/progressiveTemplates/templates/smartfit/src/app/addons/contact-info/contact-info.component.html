@@ -1,23 +1,59 @@
 <section *ngFor="let contact of contacts">
         <p class="text-center contact-text">
-          {{contact.address}}
+          {{contact.contactInfo.address}}
         </p>
         <p class="text-center contact-text">
-          {{contact.telPhone}}<br>{{contact.email}}<br>
+          {{contact.contactInfo.telPhone}}<br>{{contact.contactInfo.email}}<br>
         </p>
         <p class="text-center">
-            <a href="{{contact.webSite}}" target="_blank">{{contact.webSite}}</a><br>
+            <a href="{{contact.contactInfo.webSite}}" target="_blank">{{contact.contactInfo.webSite}}</a><br>
         </p>
+        <br>
+        <div class="col-sm-12">
+          <h3 class="header text-center  main-header-font">
+            Branches
+          </h3>
+        </div>
+
+        <ng-template  *ngFor="let branch of contact.branches;let i = index" [ngIf]="i % 3 == 0">
+          <div class="row voffset row-space-top spacing-top">
+            <div class="col-sm-4" *ngIf="contact.branches[i]">
+              <p class="main-header-font text-center-xs">
+                {{ contact.branches[i].name}}
+              </p>
+              <p class="main-content-font text-center-xs">
+                {{contact.branches[i].address}}
+              </p>
+            </div>
+            <div class="col-sm-4" *ngIf="contact.branches[i+1]">
+              <p class="main-header-font text-center-xs">
+                {{contact.branches[i+1].name}}
+              </p>
+              <p class="main-content-font text-center-xs">
+                {{contact.branches[i+1].address}}
+              </p>
+            </div>
+            <div class="col-sm-4" *ngIf="contact.branches[i+2]">
+              <p class="main-header-font text-center-xs">
+                {{contact.branches[i+2].name}}
+              </p>
+              <p class="main-content-font text-center-xs">
+                {{contact.branches[i+2].address}}
+              </p>
+            </div>
+          </div>
+        </ng-template>
+
         <div class="divider-h">
           <span class="divider"></span>
         </div>
         <div class="row text-center">
           <div class="col-sm-12">
-            <a *ngIf="contact.facebook" href="{{ contact.facebook }}" target="_blank" ><span class="ion ion-social-facebook icon-md icon-spacing-right"></span></a> 
-            <a *ngIf="contact.linkedin" href="{{ contact.linkedin }}" target="_blank" ><span class="ion ion-social-linkedin icon-md icon-spacing-right"></span></a>
-            <a *ngIf="contact.twitter" href="{{ contact.twitter }}" target="_blank" ><span class="ion ion-social-twitter icon-md icon-spacing-right"></span></a>
-            <a *ngIf="contact.instagram" href="{{ contact.instagram }}" target="_blank" ><span class="ion ion-social-instagram icon-md icon-spacing-right"></span></a>
-            <a *ngIf="contact.pinterest" href="{{ contact.pinterest }}" target="_blank" ><span class="ion ion-social-pinterest icon-md icon-spacing-right"></span></a>
+            <a *ngIf="contact.contactInfo.facebook" href="{{ contact.contactInfo.facebook }}" target="_blank" ><span class="ion ion-social-facebook icon-md icon-spacing-right"></span></a>
+            <a *ngIf="contact.contactInfo.linkedin" href="{{ contact.contactInfo.linkedin }}" target="_blank" ><span class="ion ion-social-linkedin icon-md icon-spacing-right"></span></a>
+            <a *ngIf="contact.contactInfo.twitter" href="{{ contact.contactInfo.twitter }}" target="_blank" ><span class="ion ion-social-twitter icon-md icon-spacing-right"></span></a>
+            <a *ngIf="contact.contactInfo.instagram" href="{{ contact.contactInfo.instagram }}" target="_blank" ><span class="ion ion-social-instagram icon-md icon-spacing-right"></span></a>
+            <a *ngIf="contact.contactInfo.pinterest" href="{{ contact.contactInfo.pinterest }}" target="_blank" ><span class="ion ion-social-pinterest icon-md icon-spacing-right"></span></a>
           </div>
         </div>
 </section>

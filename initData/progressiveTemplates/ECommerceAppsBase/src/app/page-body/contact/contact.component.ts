@@ -22,11 +22,11 @@ export class ContactComponent {
     this.appdataService.getContactUs().subscribe(data => {
 
       if(data.contactInfo){
-        this.CONTACNTINFO.push(data.contactInfo);
+        this.CONTACNTINFO.push(data);
       }
 
       this.googleMap = data.branches;
-      if(data.branches){
+      if(data.branches && data.branches.length !== 0){
         this.lat = data.branches[0].branch.latitude;
         this.lng = data.branches[0].branch.longitude;
       }
