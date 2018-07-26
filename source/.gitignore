@@ -63,3 +63,6 @@ node_modules/
 gen/
 nohup.out
 transaction.log
+combined.log/
+error.log/
+exceptions.log/
