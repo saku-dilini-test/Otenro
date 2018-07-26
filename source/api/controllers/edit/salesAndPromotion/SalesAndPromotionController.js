@@ -13,16 +13,23 @@ module.exports = {
         var salesAndPromotionData   = req.body;
         sails.log.info("salesAndPromotionData.appId "+salesAndPromotionData.appId);
 
-        var searchQuery = {
-            appId : salesAndPromotionData.appId,
-            salesAndPromotionType : salesAndPromotionData.salesAndPromotionType
-        };
-        // update Sales And  Promotion for given appId and salesAndPromotionType
-        SalesAndPromotion.update(searchQuery,salesAndPromotionData).exec(function(err,updateResult) {
-            if (err) res.send(err);
-            else {
+        console.log(salesAndPromotionData);
+        if(salesAndPromotionData.id){
+
+            var searchQuery = {
+                id : salesAndPromotionData.id,
+            };
+
+            SalesAndPromotion.update(searchQuery,salesAndPromotionData).exec(function(err,updateResult) {
+                if (err) res.send(err);
+                else {
+
+                        sails.log.info('Successfully Update Sales And Promotion');
+                        res.send(200, updateResult);
+                }
+            });
+        }else{
                 // if not update
-                if (updateResult.length == 0) {
                     // create new Sales And  Promotion Collection
                     SalesAndPromotion.create(salesAndPromotionData).exec(function (err, createResult) {
                         if (err) res.send(err);
@@ -31,13 +38,29 @@ module.exports = {
                             res.send(200, createResult);
                         }
                     });
-                }
-                else {
-                    sails.log.info('Successfully Update Sales And Promotion');
-                    res.send(200, updateResult);
-                }
-            }
-        });
+
+        }
+        // update Sales And  Promotion for given appId and salesAndPromotionType
+//        SalesAndPromotion.update(searchQuery,salesAndPromotionData).exec(function(err,updateResult) {
+//            if (err) res.send(err);
+//            else {
+//                // if not update
+//                if (updateResult.length == 0) {
+//                    // create new Sales And  Promotion Collection
+//                    SalesAndPromotion.create(salesAndPromotionData).exec(function (err, createResult) {
+//                        if (err) res.send(err);
+//                        else {
+//                            sails.log.info('Successfully Create Sales And Promotion');
+//                            res.send(200, createResult);
+//                        }
+//                    });
+//                }
+//                else {
+//                    sails.log.info('Successfully Update Sales And Promotion');
+//                    res.send(200, updateResult);
+//                }
+//            }
+//        });
     },
 
 

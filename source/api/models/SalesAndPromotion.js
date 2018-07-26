@@ -26,6 +26,9 @@ module.exports = {
         discount:{
             type: 'integer'
         },
+        discountPercent:{
+            type: 'integer'
+        }
         dateFrom : {
             type: 'date'
         },

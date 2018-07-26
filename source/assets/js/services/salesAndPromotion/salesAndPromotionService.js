@@ -13,18 +13,54 @@
                 return $mdDialog.show({
                     controller: 'SalesAndPromotionCtrl',
                     templateUrl: 'user/edit/engage/promotionsAndSalesView.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    locals:{
+                        item: null
+                    }
                 }).then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function() {
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
-            showPromotionsAndSalesAddNewDialog: function() {
+            showPromotionsAndSalesAddNewDialog: function(data) {
                 return $mdDialog.show({
                     controller: 'SalesAndPromotionCtrl',
                     templateUrl: 'user/edit/engage/promotionsAndSalesAddNew.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    locals: {
+                        item: null
+                    }
+                    /*resolve:{
+                        productService:'productService',
+                        initialData:['productService','$q', function(productService,$q){
+                            //$log.debug("::P::PPP::PP:P:P "+ item.sku);
+                            if('products'== item) {
+                                item= {'id':'0'};
+                            }
+                            return $q.all({
+                                product:productService.get({'productId':item.id}).$promise.then(function(product){
+                                    product.sku = item.sku;
+                                    return product;
+                                })
+                            });
+                        }]
+                    }*/
+
+                }).then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
+            showPromotionsAndSalesUpdateDialog: function(data) {
+                return $mdDialog.show({
+                    controller: 'SalesAndPromotionCtrl',
+                    templateUrl: 'user/edit/engage/promotionsAndSalesAddNew.html',
+                    clickOutsideToClose: true,
+                    locals: {
+                        item: data
+                    }
                     /*resolve:{
                         productService:'productService',
                         initialData:['productService','$q', function(productService,$q){
