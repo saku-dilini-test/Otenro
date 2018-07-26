@@ -3,9 +3,9 @@ echo  'start....'
 
 #leave and comment other env
 #local
-MESERVER='/Library/WebServer/Documents/meServer/temp/';
-NODE='/Library/WebServer/Documents/meServer/';
-APPFILESERVER='/Users/chamilthushantha/Desktop/appFileServer/';
+MESERVER='C:/xampp/htdocs/meServer/temp/';
+NODE='C:/xampp/htdocs/meServer/node_modules';
+APPFILESERVER='C:/Users/Simato/Desktop/work/appFileServer/';
 
 #stag
 #MESERVER='/home/admin/web/testcdn.otenro.com/public_html/temp/';
@@ -13,9 +13,9 @@ APPFILESERVER='/Users/chamilthushantha/Desktop/appFileServer/';
 #APPFILESERVER='/home/otenro/OtenroTest/appFileServer/';
 
 #prod
-MESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/';
-NODE='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/node_modules/';
-APPFILESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/';
+# MESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/';
+# NODE='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/node_modules/';
+# APPFILESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/';
 
 ENV='dev'   #this is for development
 #ENV='pro'  #this is for production
@@ -24,8 +24,8 @@ DB=''
 
 if [ $ENV == 'dev' ]
 then
-	DB='appmaker'
-	serverUrl='http://192.168.8.101:1337'
+	DB='appBuilder'
+	serverUrl='http://localhost:1337'
 elif [ $ENV == 'stag' ]
 then
 	DB='otenroTest'

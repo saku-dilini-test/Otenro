@@ -1,0 +1,23 @@
+.flex-row{
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.flex-row .flex-col img{
+  width: calc(100vw / 3);
+  padding: 5px 10px;
+}
+
+.flex-row .flex-col div{
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.flex-row:last-child{
+  padding-bottom: 60px;
+}
+.flex-row:first-child{
+  padding-top: 69px;
+}

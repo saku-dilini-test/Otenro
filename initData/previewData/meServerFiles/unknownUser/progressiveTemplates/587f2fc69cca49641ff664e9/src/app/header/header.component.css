@@ -1,0 +1,136 @@
+.mobile-title{
+  margin-top: 9px;
+  margin-right: 0;
+  padding: 5px 0px;
+  width: 100%;
+  text-align: center;
+  margin-left: 0;
+  position: absolute;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.ui-navbar-toggle{
+  z-index: 1;
+  font-size: 18px;
+  margin-top: 5px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.navbar-2 ul, .navbar-2 li{
+  border: 0;
+}
+
+.logo a{
+  width: 100%;
+}
+.logo img{
+  margin: auto;
+}
+
+
+
+
+/*side menu animations*/
+
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(230, 232, 234, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 15px;
+    margin: 5% 10%;
+    text-decoration: none;
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #000;
+    letter-spacing: 2px;
+    display: block;
+    border-radius: 5px;
+    font-weight: 500;
+    text-align: center;
+    transition: 0.3s;
+    background: #fff;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+
+
+/*My account modal css*/
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.sub-button-sub{
+    background-image: linear-gradient(to right, #2ba2fa, #0092fc, #0081fb, #006ff8, #0f5af2);
+    border-width: 0px !important;
+    color: #fff !important;
+    padding: 10px;
+    border-radius: 20px;
+    border-width: 1px !important;
+    letter-spacing: 2px;
+    border: solid;
+    text-transform: uppercase;
+}
+
+.sub-button-cancel{
+    background-image: linear-gradient(to right, #ff8c2b, #ff8328, #ff7a25, #ff7024, #ff6623);
+    border-width: 0px !important;
+    color: #fff !important;
+    padding: 10px;
+    border-radius: 20px;
+    border-width: 1px !important;
+    letter-spacing: 2px;
+    border: solid;
+    text-transform: uppercase;
+}
+.header{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 0px 2px 20px 2px rgba(0, 0, 0, 0.12);
+  z-index: 10;
+}
