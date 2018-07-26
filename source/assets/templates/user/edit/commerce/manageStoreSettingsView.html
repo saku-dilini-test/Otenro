@@ -425,59 +425,115 @@
                             </fieldset>
                             <fieldset>
                                 <label>Twitter</label>
-                                <input class="input-shadow-border" type="text" name="twitter" ng-model="webInfo.twitter" 
+                                <input class="input-shadow-border" type="text" name="twitter" ng-model="webInfo.twitter"
                                        ng-pattern="/^https?:\/\/(.*)$/" />
                                 <br/>
                                 <span class="error" ng-show="basicInfoForm.twitter.$error.pattern">Invalid url!  (https://www.twitter.com/example)</span>
-                            </fieldset> 
+                            </fieldset>
                             <fieldset>
                                 <label>Facebook</label>
-                                <input class="input-shadow-border" type="text" name="facebook" ng-model="webInfo.facebook" 
+                                <input class="input-shadow-border" type="text" name="facebook" ng-model="webInfo.facebook"
                                        ng-pattern="/^https?:\/\/(.*)$/" />
                                 <br/>
                                 <span class="error" ng-show="basicInfoForm.facebook.$error.pattern">Invalid url!  (https://www.facebook.com/example)</span>
-                            </fieldset>  
+                            </fieldset>
                             <fieldset>
                                 <label>Instagram</label>
-                                <input class="input-shadow-border" type="text" name="instagram" ng-model="webInfo.instagram" 
+                                <input class="input-shadow-border" type="text" name="instagram" ng-model="webInfo.instagram"
                                        ng-pattern="/^https?:\/\/(.*)$/" />
                                 <br/>
                                 <span class="error" ng-show="basicInfoForm.instagram.$error.pattern">Invalid url!  (https://www.instagram.com/akiestar)</span>
-                            </fieldset>  
+                            </fieldset>
                             <fieldset>
                                 <label>LinkedIn</label>
-                                <input class="input-shadow-border" type="text" name="linkedin" ng-model="webInfo.linkedin" 
+                                <input class="input-shadow-border" type="text" name="linkedin" ng-model="webInfo.linkedin"
                                        ng-pattern="/^https?:\/\/(.*)$/" />
                                 <br/>
                                 <span class="error" ng-show="basicInfoForm.linkedin.$error.pattern">Invalid url!  (https://www.linkedin.com/example)</span>
-                            </fieldset>    
+                            </fieldset>
                             <fieldset>
                                 <label>Pinterest</label>
-                                <input class="input-shadow-border" type="text" name="pinterest" ng-model="webInfo.pinterest" 
+                                <input class="input-shadow-border" type="text" name="pinterest" ng-model="webInfo.pinterest"
                                        ng-pattern="/^https?:\/\/(.*)$/" />
                                 <br/>
                                 <span class="error" ng-show="basicInfoForm.pinterest.$error.pattern">Invalid url!  (https://www.pinterest.com/example)</span>
-                            </fieldset>                                                                                                                                           
-                            <div class="google-map-wrapper">
-                                <md-checkbox aria-label="Show Map">
-                                    Show the map on the app
-                                </md-checkbox>
-                                <div class="google-map-container">
-                                    <ui-gmap-google-map  center="map.center" zoom="map.zoom" draggable="true" events="map.events">
-                                        <ui-gmap-marker ng-repeat="mp in map.markers" coords="mp.coords" icon="mp.icon" idkey="mp.id"></ui-gmap-marker>
-                                    </ui-gmap-google-map>
-                                </div>
-                            </div>
-                            <fieldset>
-                                {{map.markers[0].coords.latitude}}
-                                <br />
-                                {{map.markers[0].coords.longitude}}
                             </fieldset>
+                            <!--<div class="google-map-wrapper">-->
+                                <!--<md-checkbox aria-label="Show Map">-->
+                                    <!--Show the map on the app-->
+                                <!--</md-checkbox>-->
+                                <!--<div class="google-map-container">-->
+                                    <!--<ui-gmap-google-map  center="map.center" zoom="map.zoom" draggable="true" events="map.events">-->
+                                        <!--<ui-gmap-marker ng-repeat="mp in map.markers" coords="mp.coords" icon="mp.icon" idkey="mp.id"></ui-gmap-marker>-->
+                                    <!--</ui-gmap-google-map>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<fieldset>-->
+                                <!--{{map.markers[0].coords.latitude}}-->
+                                <!--<br />-->
+                                <!--{{map.markers[0].coords.longitude}}-->
+                            <!--</fieldset>-->
                         </div>
                         <div class="md-dialog-buttons">
                             <div class="inner-section">
                                 <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
                                 <md-button class="me-default-button" ng-click="addContactUs(basicInfo,webInfo,googleMap,'save')">save</md-button>
+                                <md-button class="me-default-button" ng-click="addContactUs(basicInfo,webInfo,googleMap,'finish')">Finish</md-button>
+                            </div>
+                        </div>
+                    </form>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>Map Locations</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>Manage Map Locations</h1>
+                    </div>
+                    <!-- Address | Tel Phone -->
+                    <form name="basicInfoForm" novalidate>
+                        <div class="md-dialog-main">
+
+                            <fieldset>
+                                <button class="btn-material" ng-click="addNewMapLocation()">
+                                    Add new location
+                                </button>
+                            </fieldset>
+                            <table class="me-simple-table">
+                                <thead>
+                                <th width="30%" class="simple-column">Name</th>
+                                <th width="40%" class="simple-column">Address</th>
+                                <th width="15%" class="simple-column">Edit</th>
+                                <th width="15%" class="simple-column">Delete</th>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="branch in branches">
+                                    <td>{{branch.name}}</td>
+                                    <td>{{branch.address}}</td>
+                                    <td><img width="15%" src="../../../images/edit-icon.svg" ng-click="addNewMapLocation(branch)"></td>
+                                    <td><img width="15%" src="../../../images/delete-icon.svg" ng-click="deleteBranch(branch.id)"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <!--<div class="google-map-wrapper">-->
+                            <!--<md-checkbox aria-label="Show Map">-->
+                            <!--Show the map on the app-->
+                            <!--</md-checkbox>-->
+                            <!--<div class="google-map-container">-->
+                            <!--<ui-gmap-google-map  center="map.center" zoom="map.zoom" draggable="true" events="map.events">-->
+                            <!--<ui-gmap-marker ng-repeat="mp in map.markers" coords="mp.coords" icon="mp.icon" idkey="mp.id"></ui-gmap-marker>-->
+                            <!--</ui-gmap-google-map>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--<fieldset>-->
+                            <!--{{map.markers[0].coords.latitude}}-->
+                            <!--<br />-->
+                            <!--{{map.markers[0].coords.longitude}}-->
+                            <!--</fieldset>-->
+                        </div>
+                        <div class="md-dialog-buttons">
+                            <div class="inner-section">
+                                <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
                                 <md-button class="me-default-button" ng-click="addContactUs(basicInfo,webInfo,googleMap,'finish')">Finish</md-button>
                             </div>
                         </div>

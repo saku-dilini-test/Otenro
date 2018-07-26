@@ -3,13 +3,12 @@
     angular.module("appEdit").controller("CommerceCtrl", [
         '$scope', '$mdDialog', 'toastr', 'commerceService','carouselService', 'currencyService', 'publishService', '$rootScope',
         'SERVER_URL', '$auth', 'ME_APP_SERVER', '$interval', '$q','aboutUsService','mySharedService','comingSoonService',
-        '$filter','contactUsService','uiGmapGoogleMapApi','uiGridConstants','$templateCache','uiGridExporterConstants','uiGridExporterService','$log',
+        '$filter','contactUsService','uiGmapGoogleMapApi','uiGridConstants','$templateCache','uiGridExporterConstants','uiGridExporterService','$log','selectedTab',
         CommerceCtrl]);
 
     function CommerceCtrl($scope, $mdDialog, toastr, commerceService,carouselService, currencyService, publishService, $rootScope,
              SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService,comingSoonService, $filter,
-             contactUsService,uiGmapGoogleMapApi,uiGridConstants,$templateCache,uiGridExporterConstants,uiGridExporterService,sendDate,$log) {
-
+             contactUsService,uiGmapGoogleMapApi,uiGridConstants,$templateCache,uiGridExporterConstants,uiGridExporterService,$log,selectedTab) {
         $scope.isNew = $rootScope.tempNew;
         $scope.picFileHeader = [];
         $scope.picFileHeader2 = [];
@@ -17,6 +16,8 @@
         $scope.refund = [];
         $scope.unfulfilled = [];
         $scope.fulfill = [];
+
+        $scope.selectedTab = selectedTab;
 
         // Characters length config
         $scope.maxLengthNextOrderNumber = 8; // max characters length of NextOrderNumber in product
@@ -316,8 +317,6 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
         };
 
         $scope.gridOptions1.multiSelect = true;
-
-        $scope.selectedTab = 0;
         $scope.currentPage = 2;
         $scope.pageSize = 5;
         $scope.statusList = [
@@ -1471,47 +1470,12 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
         $scope.maxBasicInfoAddress = 100;
 
         // --- Config ----
-        $scope.coords ="";
         contactUsService.getContactUsInfo().success(function(result){
             //  if(result.appId == $rootScope.appId) {
             $scope.basicInfo = result;
             $scope.webInfo = result;
             $scope.googleMap = result;
-            $scope.coords =result.coords;
 
-            if(!result.coords){
-                $scope.coords={
-                    latitude : 6.9320204155752050,
-                    longitude: 79.8890950584107031
-                };
-            }
-            uiGmapGoogleMapApi.then(function(maps) {
-            $scope.map= {
-                center: $scope.coords,
-                zoom: 11,
-                markers: [{
-                    id: Date.now(),
-                    coords:$scope.coords
-                }],
-                events: {
-                    click: function(map, eventName, originalEventArgs) {
-                        var e = originalEventArgs[0];
-                        var lat = e.latLng.lat(),
-                            lon = e.latLng.lng();
-                        var marker = {
-                            id: Date.now(),
-                            coords: {
-                                latitude: lat,
-                                longitude: lon
-                            }
-                        };
-                        $scope.map.markers=[];
-                        $scope.map.markers.push(marker);
-                        $scope.$apply();
-                            }
-                        }
-                    };
-            });
                // }
         }).error(function (error) {
                 //alert("Contact Us information Loading Error : " + error);
@@ -1577,5 +1541,58 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
             }
 
         };
+
+
+        //Manage locations controller
+        $scope.addNewMapLocation = function(branch) {
+            commerceService.showAddNewLocationDialog(branch);
+        };
+
+
+        $scope.branches;
+        contactUsService.getAppBranchesInfo().success(function(result){
+            $scope.branches = result;
+        });
+
+        $scope.deleteBranch = function (id) {
+            return $mdDialog.show({
+                controllerAs: 'dialogCtrl',
+                controller: function($mdDialog){
+                    this.confirm = function click(){
+                        contactUsService.deleteBranch(id)
+                            .success(function(data) {
+                                toastr.success('Branch Deleted. ', 'Success ', {closeButton: true});
+                                return commerceService.showStoreSettingsDialog(4);
+
+                            }).error(function(data) {
+                            toastr.error('Deleting branch failed','Warning', { closeButton: true});
+                            return commerceService.showStoreSettingsDialog(4);
+                        });
+                    },
+                        this.cancel = function click(){
+                            return commerceService.showStoreSettingsDialog(4);
+                        }
+                },
+                template:'<md-dialog aria-label="Deleting variant">'+
+                '<md-content >' +
+                '<div class="md-dialog-header">' +
+                '<h1>Deleting branch location</h1>' +
+                '</div>' +
+                '<br>'+
+                '<div style="text-align:center">' +
+                '<lable>Are you sure you want to delete this branch?</lable>' +
+                '</div>' +
+                '<br><br>' +
+                '<div class="md-dialog-buttons">'+
+                '<div class="inner-section">'+
+                '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">No</md-button>'+
+                '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Yes</md-button>'+
+                '</div>'+
+                '</div>' +
+                '</md-content>' +
+                '</md-dialog>'
+            })
+        };
+
     }
 })();

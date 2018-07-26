@@ -1,0 +1,62 @@
+<md-dialog aria-label="Store Settings">
+
+    <!--Google Analytics-->
+    <script>
+        ga('set', 'page', 'add-new-locations');
+        ga('send', 'pageview');
+    </script>
+
+    <md-dialog-content>
+        <md-tabs md-center-tabs="false" md-selected="selectedTab" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
+
+            <md-tab>
+                <md-tab-label>{{title}} Location</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>{{title}} Branch Location</h1>
+                    </div>
+                    <!-- Address | Tel Phone -->
+                    <form name="branchLocationForm" novalidate>
+                        <div class="md-dialog-main">
+
+                            <fieldset>
+                                <!-- Name -->
+                                <label>Branch Name</label>
+                                <input class="input-shadow-border" type="text" name="name" ng-model="locationInfo.name"  required />
+                            </fieldset>
+                            <fieldset>
+                                <!-- Address -->
+                                <label>Branch Address</label>
+                                <textarea type="text" class="input-shadow-border" name="address" ng-model="locationInfo.address" required ></textarea>
+
+                            </fieldset>
+                            <div class="google-map-wrapper">
+                                <!--<md-checkbox aria-label="Show Map">-->
+                                <!--Show the map on the app-->
+                                <!--</md-checkbox>-->
+                                <div class="google-map-container">
+                                    <ui-gmap-google-map  center="map.center" zoom="map.zoom" draggable="true" events="map.events">
+                                        <ui-gmap-marker ng-repeat="mp in map.markers" coords="mp.coords" icon="mp.icon" idkey="mp.id"></ui-gmap-marker>
+                                    </ui-gmap-google-map>
+                                </div>
+                            </div>
+                            <fieldset>
+                                {{map.markers[0].coords.latitude}}
+                                <br />
+                                {{map.markers[0].coords.longitude}}
+                            </fieldset>
+                        </div>
+                        <div class="md-dialog-buttons">
+                            <div class="inner-section">
+                                <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
+                                <md-button class="me-default-button" ng-click="addBranchLocation(locationInfo,map)">save</md-button>
+                            </div>
+                        </div>
+                    </form>
+                </md-tab-body>
+            </md-tab>
+
+
+        </md-tabs>
+    </md-dialog-content>
+</md-dialog>

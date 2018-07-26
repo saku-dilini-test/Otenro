@@ -66,7 +66,10 @@
                 return $mdDialog.show({
                     controller: 'CommerceCtrl',
                     templateUrl: 'user/edit/engage/OrderDetailsView.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    locals: {
+                        selectedTab: 0
+                    }
                 }).then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function() {
@@ -120,7 +123,10 @@
                 return $mdDialog.show({
                     controller: 'CommerceCtrl',
                     templateUrl: 'user/edit/commerce/manageOrderView.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    locals: {
+                        selectedTab: 0
+                    }
                 }).then(function (answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 });
@@ -148,18 +154,24 @@
                 return $mdDialog.show({
                     controller: 'CommerceCtrl',
                     templateUrl: 'user/edit/commerce/manageEmailSettingsView.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    locals: {
+                        selectedTab: 0
+                    }
                 }).then(function (answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function () {
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
-            showStoreSettingsDialog: function () {
+            showStoreSettingsDialog: function (selectedTab) {
                 return $mdDialog.show({
                     controller: 'CommerceCtrl',
                     templateUrl: 'user/edit/commerce/manageStoreSettingsView.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    locals: {
+                        selectedTab: selectedTab
+                    }
                 }).then(function (answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function () {
@@ -170,7 +182,10 @@
                 return $mdDialog.show({
                     controller: 'CommerceCtrl',
                     templateUrl: 'user/edit/commerce/addNewUserView.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    locals: {
+                        selectedTab: 0
+                    }
                 }).then(function (answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function () {
@@ -515,6 +530,22 @@
             },
             deleteBlog: function(data){
                 return $http.post(SERVER_URL+ 'edit/deleteBlog',data);
+            },
+
+            showAddNewLocationDialog: function (branch) {
+                return $mdDialog.show({
+                    templateUrl: 'user/edit/commerce/addNewLocation.html',
+                    clickOutsideToClose: false,
+                    locals: {
+                        branch : branch
+                    },
+                    controller: 'BranchCtrl'
+
+                }).then(function (answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function () {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
             },
 
         };

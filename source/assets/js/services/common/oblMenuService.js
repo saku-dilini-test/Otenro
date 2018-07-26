@@ -4,8 +4,7 @@
 (function() {
     angular.module('appEdit').service('oblMenuService', ['stylesService', 'contactUsService', 'commerceService',
         'shippingService','taxService','articleService','mainMenuService', 'currencyService', 'publishService',
-        'engageService', 'logoAndTittleService','ipgService','comingSoonService','$log','categoryMaintenanceService'
-        , oblMenuService]);
+        'engageService', 'logoAndTittleService','ipgService','comingSoonService','$log','categoryMaintenanceService', oblMenuService]);
 
     function oblMenuService(stylesService, contactUsService, commerceService,shippingService,
                             taxService,articleService ,mainMenuService,currencyService, publishService,

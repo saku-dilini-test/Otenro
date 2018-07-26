@@ -42,7 +42,16 @@
 
             saveOpenHoursInfo: function(openHoursResponse){
                 return $http.post(SERVER_URL + 'edit/addOpenHoursInfo',openHoursResponse);
-            }
+            },
+            saveBranchInfo: function(branchInfoResponse){
+                return $http.post(SERVER_URL + 'edit/addNewBranchLocation',branchInfoResponse);
+            },
+            getAppBranchesInfo: function(){
+                return $http.get(SERVER_URL+ 'edit/getAppBranches?appId='+ $rootScope.appId);
+            },
+            deleteBranch: function(id){
+                return $http.post(SERVER_URL + 'edit/deleteBranch',{id:id} );
+            },
         };
     }
 })();

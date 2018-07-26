@@ -154,6 +154,9 @@ module.exports.routes = {
     'POST /edit/addWebInfo': 'edit/setting/ContactUsController.addWebInfo',
     'POST /edit/addGoogleMapInfo': 'edit/setting/ContactUsController.addGoogleMapInfo',
     'POST /edit/addOpenHoursInfo': 'edit/setting/ContactUsController.addOpenHoursInfo',
+    'POST /edit/addNewBranchLocation': 'edit/setting/ContactUsController.addNewBranchLocation',
+    'GET /edit/getAppBranches': 'edit/setting/ContactUsController.getAppBranches',
+    'POST /edit/deleteBranch': 'edit/setting/ContactUsController.deleteBranch',
 
 
 

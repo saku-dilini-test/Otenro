@@ -32,10 +32,15 @@ module.exports = {
         var searchApp = {
             appId: appId
         };
-        sails.log.info(searchApp);
-        ApplicationContactUs.findOne(searchApp).exec(function (err, app) {
+        ApplicationContactUs.findOne(searchApp).exec(function (err, contactInfo) {
             if (err) return err;
-            res.json(app);
+            BranchLocations.find(searchApp).exec(function (err, branches) {
+                if (err) return err;
+
+                res.send({contactInfo:contactInfo,branches:branches});
+
+            });
+
         });
     },
     /**

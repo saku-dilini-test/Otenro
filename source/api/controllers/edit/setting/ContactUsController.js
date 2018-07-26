@@ -156,5 +156,56 @@ module.exports = {
             if (err) return done(err);
             res.send(app);
         });
+    },
+
+    addNewBranchLocation:function(req, res){
+
+        var data = req.body;
+
+        if(!data.id){
+            BranchLocations.create(data).exec(function (err, branch) {
+                if (err) res.send(err);
+
+                res.send({
+                    appId: branch.appId,
+                    message: "Branch record successfully created"
+                });
+            });
+        }else{
+            var searchApp = {
+                id: req.body.id
+            };
+            BranchLocations.update(searchApp, data).exec(function (err, updatedBranch) {
+                if(err) return err;
+
+                res.send({
+                    appId: req.body.appId,
+                    message: "Branch record successfully updated"
+                });
+
+            });
+        }
+    },
+
+    getAppBranches: function (req,res) {
+        var appId = req.param('appId');
+        var searchBranches = {
+            appId: appId
+        };
+        BranchLocations.find(searchBranches).exec(function (err, branches) {
+            if (err) return done(err);
+            res.send(branches);
+        });
+    },
+
+    deleteBranch: function (req,res) {
+        BranchLocations.destroy(req.body).exec(function (err) {
+            if (err) {
+                res.send(err);
+            }
+            else {
+                res.send(200,{message:' Branch deleted'});
+            }
+        });
     }
 };

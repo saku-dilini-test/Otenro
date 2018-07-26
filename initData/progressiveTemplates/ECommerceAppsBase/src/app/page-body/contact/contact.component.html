@@ -2,8 +2,13 @@
 <!-- the component as the initial center of the map: -->
 
 <div class="container">
-  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="17">
-    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="8" >
+    <agm-marker *ngFor="let branch of googleMap" [latitude]="branch.branch.latitude" [longitude]="branch.branch.longitude">
+      <agm-info-window>
+        <h4><strong>{{branch.name}}</strong></h4>
+        <p>{{branch.address}}</p>
+      </agm-info-window>
+    </agm-marker>
   </agm-map>
 	<div class="row">
 		<div class="col-md-6">
