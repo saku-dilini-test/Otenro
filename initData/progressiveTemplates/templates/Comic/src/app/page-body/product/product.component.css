@@ -1,0 +1,21 @@
+.desc{
+  padding: 60px 5px;
+}
+.carousel-control{
+  height: 86%;
+}
+.page-container{
+  padding-top: 58px;
+}
+
+/* /deep/ .ug-gallery-wrapper .ug-slider-wrapper{
+         background-color: rgba(0,0,0,0) !important;
+       }
+
+/deep/.ug-slider-wrapper .ug-item-wrapper{
+        background-color:  rgba(0,0,0,0) !important;
+      }
+
+/deep/ .ug-theme-panel .ug-strip-panel{
+         background-color: rgba(0, 0, 0, 0) !important;
+       } */
