@@ -44,7 +44,7 @@ module.exports = {
             var msisdn = "";
             var isSubscribed = false;
 
-            if(appUser && appUser.msisdn && appUser.status===config.APP_USER_STATUS.ACTIVE){
+            if(appUser && appUser.msisdn && appUser.subscriptionStatus===config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code){
                 var paymentQuery = {
                     appId: appId,
                     msisdn: appUser.msisdn,

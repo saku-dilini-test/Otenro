@@ -615,9 +615,9 @@ module.exports = {
      * @param res
      */
     buildSourceProg : function(req,res){
-        console.log('+++++++++++++++++++++++++++++++++++++++++');
+        sails.log.debug('+++++++++++++++++++++++++++++++++++++++++');
         sails.log.debug("Building apk file for user:" + req.param('userId') + " appId:" + req.param('appId'));
-        console.log('+++++++++++++++++++++++++++++++++++++++++');
+        sails.log.debug('+++++++++++++++++++++++++++++++++++++++++');
 
         var userId = req.param('userId'),
             appId = req.param('appId'),
@@ -651,10 +651,10 @@ module.exports = {
         //Update the status as PENDING
         Application.update({id: appId}, {apkStatus: config.APK_BUILD_STATUS.PENDING.code, apkStatusUpdatedAt: new Date().toLocaleString()}).exec(function (err, app) {
             if (err){
-                console.log("Error while updating the Application Status as PENDING for the appId:" + appId + " Error: " + err);
+                sails.log.error("Error while updating the Application Status as PENDING for the appId:" + appId + " Error: " + err);
             }
             else {
-                console.log("Update Application status as PENDING for appId: " + appId);
+                sails.log.debug("Update Application status as PENDING for appId: " + appId);
             }
         });
 
@@ -772,14 +772,14 @@ module.exports = {
                                 //Replacing app url in home.ts file for the appid and user id
                                 fs.readFile(homets_File,'utf8', function (err, data) {
                                     if(err){
-                                        sails.log.info(err);
+                                        sails.log.error(err);
                                     }
                                     else{
                                         var result = data.replace(/PointerAppLink/g, replacePointerAppLink);
 
                                         fs.writeFile(homets_File, result, function (err) {
                                             if(err){
-                                                sails.log.info(err);
+                                                sails.log.error(err);
                                             }
                                             else{
                                                 buildApkFile(copyDirPath,appName);
@@ -812,7 +812,7 @@ module.exports = {
 
 
             function buildApkFile(appPath,appName) {
-                console.log('Building apk file for the app: ' + appName);
+                sails.log.debug('Building apk file for the app: ' + appName);
 
                 var path = require('path');
                 var mime = require('mime');
@@ -820,59 +820,47 @@ module.exports = {
 
                 shell.cd(appPath);
 
-                console.log('Start to generate resources...');
+                sails.log.debug('Start to generate resources...');
                 shell.exec('ionic cordova resources android --force', {async: true}, function (code, stdout, stderr) {
-                    console.log('Completed generating resources');
+                    sails.log.debug('Completed generating resources');
                     if(code == 0) {
-                        console.log('Start the android debug build');
-                        shell.exec('ionic cordova build android', {async: true}, function (code2, stdout2, stderr2) {
-                            console.log('Completed android debug build');
-                            if (code2 == 0) {
-                                console.log('Start the Android release build');
-                                shell.exec('ionic cordova build android  --release', {async: true}, function (code3, stdout3, stderr3) {
-                                    console.log('Completed the Android release build')
-                                    if (code3 == 0) {
-                                        console.log('Running jarsigner');
+                        sails.log.debug('Start the Android release build');
+                        shell.exec('ionic cordova build android  --release', {async: true}, function (code3, stdout3, stderr3) {
+                            sails.log.debug('Completed the Android release build')
+                            if (code3 == 0) {
+                                sails.log.debug('Running jarsigner');
 
-                                        shell.mv('-n', 'my-release-key.keystore', releasePath);
-                                        shell.cd(releasePath);
+                                shell.mv('-n', 'my-release-key.keystore', releasePath);
+                                shell.cd(releasePath);
 
-                                        console.log('Start jar signing process');
-                                        shell.exec('jarsigner -verbose -sigalg SHA1withRSA -digestalg ' +
-                                            'SHA1 -keystore my-release-key.keystore ' + unsignedApkName + ' ' +
-                                            'alias_name -storepass abcd1234 -keypass abcd1234 ', {async: true}, function (code4, stdout4, stderr4) {
-                                            console.log('Completed jar signing process');
-                                            if (code4 == 0) {
-                                                console.log('Checking whether the file:' + apkName + " exists in the path:" + releasePath);
+                                sails.log.debug('Start jar signing process');
+                                shell.exec('jarsigner -verbose -sigalg SHA1withRSA -digestalg ' +
+                                    'SHA1 -keystore my-release-key.keystore ' + unsignedApkName + ' ' +
+                                    'alias_name -storepass abcd1234 -keypass abcd1234 ', {async: true}, function (code4, stdout4, stderr4) {
+                                    sails.log.debug('Completed jar signing process');
+                                    if (code4 == 0) {
+                                        sails.log.debug('Checking whether the file:' + apkName + " exists in the path:" + releasePath);
 
-                                                fs.stat(releasePath + apkName, function (err, fileStat) {
-                                                    if (err) {
-                                                        if (err.code == 'ENOENT') {
-                                                            console.log('File:' + apkName + " does not exists, hence will proceed with the zipalign process");
-                                                        }
-                                                    } else {
-                                                        if (fileStat.isFile()) {
-                                                            console.log('File:' + apkName + " Exists and will remove before proceed the zipalign");
-                                                            fs.unlinkSync(releasePath + apkName);
-                                                        } else if (fileStat.isDirectory()) {
-                                                            console.log('File:' + apkName + " not found.Found a directory instead.Will not proceed the zipalign/");
-                                                            // shell.exit(1);
-                                                            return;
-                                                        }
-                                                    }
-                                                    //Start Zipalign process
-                                                    thisCtrl.doZipalign(appPath,userId,appId,apkName,unsignedApkName);
-                                                });
+                                        fs.stat(releasePath + apkName, function (err, fileStat) {
+                                            if (err) {
+                                                if (err.code == 'ENOENT') {
+                                                    sails.log.debug('File:' + apkName + " does not exists, hence will proceed with the zipalign process");
+                                                }
                                             } else {
-                                                thisCtrl.printShellError('Error while Executing: jarsigner process',code4, stdout4, stderr4, userId, appId);
-                                                if (stderr){
+                                                if (fileStat.isFile()) {
+                                                    sails.log.debug('File:' + apkName + " Exists and will remove before proceed the zipalign");
+                                                    fs.unlinkSync(releasePath + apkName);
+                                                } else if (fileStat.isDirectory()) {
+                                                    sails.log.debug('File:' + apkName + " not found.Found a directory instead.Will not proceed the zipalign/");
                                                     // shell.exit(1);
                                                     return;
                                                 }
                                             }
+                                            //Start Zipalign process
+                                            thisCtrl.doZipalign(appPath,userId,appId,apkName,unsignedApkName);
                                         });
                                     } else {
-                                        thisCtrl.printShellError('Error while Executing: ionic cordova build android  --release',code3, stdout3, stderr3, userId, appId);
+                                        thisCtrl.printShellError('Error while Executing: jarsigner process',code4, stdout4, stderr4, userId, appId);
                                         if (stderr){
                                             // shell.exit(1);
                                             return;
@@ -880,7 +868,7 @@ module.exports = {
                                     }
                                 });
                             } else {
-                                thisCtrl.printShellError('Error while Executing: ionic cordova build android',code2, stdout2, stderr2, userId, appId);
+                                thisCtrl.printShellError('Error while Executing: ionic cordova build android  --release',code3, stdout3, stderr3, userId, appId);
                                 if (stderr){
                                     // shell.exit(1);
                                     return;
@@ -905,9 +893,9 @@ module.exports = {
 
     doZipalign: function(appPath,userId,appId,apkName,unsignedApkName){
         var thisCtrl = this;
-        console.log('Start zipalign process');
+        sails.log.debug('Start zipalign process');
         shell.exec(config.ANDROID_APK_BUILD_ZIPALIGN_PATH + ' -v 4 ' + unsignedApkName + ' ' + apkName, {async: true}, function (code5, stdout5, stderr5) {
-            console.log('Completed zipalign process');
+            sails.log.debug('Completed zipalign process');
             if (code5 == 0) {
                 thisCtrl.updateApkStatus(appPath,userId,appId);
             } else {
@@ -921,7 +909,7 @@ module.exports = {
     },
 
     updateApkStatus: function(appPath,userId,appId){
-        console.log("Exec updateApkStatus, Update Application appId:" + appId);
+        sails.log.debug("Exec updateApkStatus, Update Application appId:" + appId);
         var searchAppData = {
             id: appId
         }
@@ -930,12 +918,12 @@ module.exports = {
 
         Application.update(searchAppData, {apkStatus: config.APK_BUILD_STATUS.SUCCESS.code, apkStatusUpdatedAt: time}).exec(function (err, apps) {
             if (err){
-                console.log("Error while updating the Application for the appId:" + appId + " Error: " + err);
+                sails.log.error("Error while updating the Application for the appId:" + appId + " Error: " + err);
                 // shell.exit(1);
             }
             else {
                 var app = apps[0];
-                console.log("Update Application status as SUCCESS for the appId: " + appId);
+                sails.log.debug("Update Application status as SUCCESS for the appId: " + appId);
                 emailService.send(config.SUPPORT_USER_EMAIL,
                     config.SUPPORT_USER_EMAIL,
                     'APK build success for the app unique ID: ' + app.uniqueAppId + " for the app Name:" + app.appName,
@@ -991,11 +979,11 @@ module.exports = {
         //Update the status as ERROR
         Application.update({id: appid}, {apkStatus: config.APK_BUILD_STATUS.ERROR.code, apkStatusUpdatedAt: errorTime}).exec(function (err, apps) {
             if (err){
-                console.log("Error while updating the Application Status as ERROR for the appId:" + app.id + " Error: " + err);
+                sails.log.error("Error while updating the Application Status as ERROR for the appId:" + app.id + " Error: " + err);
             }
             else {
                 var app = apps[0];
-                console.log("Update Application status as ERROR for appName: " + app.uniqueAppId );
+                sails.log.debug("Update Application status as ERROR for appName: " + app.uniqueAppId );
                 emailService.send(config.SUPPORT_USER_EMAIL,
                     config.SUPPORT_USER_EMAIL,
                     'Error when building apk for the app unique ID: ' + app.uniqueAppId + " app Name: " + app.appName,
