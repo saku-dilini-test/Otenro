@@ -1482,11 +1482,10 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
         });
         // Save Contact Us Information and move to Web Information
         $scope.addContactUs = function(basicInfo,webInfo,googleMap,type) {
-
             if(basicInfo.telPhone.charAt(0) == '+'){
                 basicInfo.telPhone = basicInfo.telPhone.slice(1, basicInfo.telPhone.length);
             }
-                console.log(basicInfo);
+
 
             // If defined basic information address , Check length
             if((typeof basicInfo.address != 'undefined') && (basicInfo.address.length > $scope.maxBasicInfoAddress)){
@@ -1525,7 +1524,6 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                     'instagram': webInfo.instagram,
                     'linkedin': webInfo.linkedin,
                     'pinterest': webInfo.pinterest,
-                    'coords': $scope.map.markers[0].coords
                 };
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {

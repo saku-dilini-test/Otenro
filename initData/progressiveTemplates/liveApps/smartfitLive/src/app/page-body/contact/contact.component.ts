@@ -21,10 +21,14 @@ export class ContactComponent {
 
     this.appdataService.getContactUs().subscribe(data => {
 
-      this.CONTACNTINFO.push(data);
-      if(data.coords){
-        this.lat = data.coords.latitude;
-        this.lng = data.coords.longitude;
+      if(data.contactInfo){
+        this.CONTACNTINFO.push(data.contactInfo);
+      }
+
+      this.googleMap = data.branches;
+      if(data.branches){
+        this.lat = data.branches[0].branch.latitude;
+        this.lng = data.branches[0].branch.longitude;
       }
 
 
