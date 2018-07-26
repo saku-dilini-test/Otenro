@@ -322,19 +322,23 @@
 
         $scope.save = function(data){
             var isRequestUpdate = false;
+            var showSavedMsg = true;
             data.forEach(function(ele){
 
                 if(ele.isEnabled == true){
                     if(ele.status == "NOT_SUBMITTED" || ele.status == "REJECTED"){
                         if(!ele.amount && !ele.interval){
+                            showSavedMsg = false;
                             toastr.error('Please enter the amount and renewal for ' + ele.operator, 'Warning', {
                                   closeButton: true
                             });
                         }else if(!ele.amount){
+                            showSavedMsg = false;
                             toastr.error('Please enter the amount for ' + ele.operator, 'Warning', {
                                   closeButton: true
                             });
                         }else if(!ele.interval){
+                            showSavedMsg = false;
                             toastr.error('Please select the renewal for ' + ele.operator , 'Warning', {
                                   closeButton: true
                             });
@@ -353,6 +357,7 @@
 
 
             if(isRequestUpdate){
+                showSavedMsg = false;
                 publishService.updateOperators(data).success(function(res){
                     console.log(res);
                     toastr.success('Operators information has been added successfully', 'Saved', {
@@ -368,7 +373,11 @@
                 });
             }
 
-
+            if(showSavedMsg){
+                toastr.success('Operators information has been saved successfully', 'Saved', {
+                    closeButton: true
+                });
+            }
         }
 
         $scope.getAPKFilePath = function(appName){
