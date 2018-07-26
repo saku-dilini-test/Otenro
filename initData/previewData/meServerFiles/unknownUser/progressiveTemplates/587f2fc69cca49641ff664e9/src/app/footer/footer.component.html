@@ -11,7 +11,7 @@
     <button type="button" class="btn btn-default" aria-label="Contact" (click)="navigate('contact')">
       <i class="fa fa-phone fa-lg"></i>
     </button>
-    <button type="button" class="btn btn-default" aria-label="My Account"  data-toggle="modal" data-target="#myAccountModel">
+    <button *ngIf="subscriptionStatus" type="button" class="btn btn-default" aria-label="My Account"  data-toggle="modal" (click) = "openFooterMyAccount()">
       <i class="fa fa-user fa-lg"></i>
     </button>
   </div>
@@ -20,20 +20,32 @@
 
 
 <!-- My Account Model -->
-<div class="modal fade" id="myAccountModel" tabindex="-1" role="dialog" aria-labelledby="myAccountModalLabel">
+<div class="modal fade" id="myAccountModelfooter" tabindex="-1" role="dialog" aria-labelledby="myAccountModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body text-center">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-        <h3 class="padding-bottom">Subscribe</h3>
-        <p>Rs.20+tax per day</p>
-        <p>You will be charged on your Dialog mobile and your subscription will be renewed automatically.</p>
-        <p>You will be charged on your Dialog mobile and your subscription will be renewed automatically.</p>
-        <p>You will be charged on your Dialog mobile and your subscription will be renewed automatically.</p>
+        <div *ngIf = "isUnsubscribing == false">
+          <h3 class="padding-bottom">My Account</h3>
+          <h4>
+            Are you sure you want to unsubscribe from this service?
+          </h4>
+        </div>
+          <div *ngIf="isUnsubscribing == true">
+            <div class="wrapper">
+              <div class="loader-box">
+                <div class="loader">
 
-        <button type="button" class="btn sub-button-sub btn-block"> Unsubscibe Now</button>
-        <button type="button" class="btn sub-button-cancel btn-block" data-dismiss="modal">Cancel</button>
+                </div>
+                <div class="loader-text">
+                  Un-Subscribing...
+                </div>
+              </div>
+            </div>
+          </div>
+        <button type="button" [disabled]="isUnsubscribing == true" class="btn sub-button-sub btn-block" (click)="onUnsubscribe()"> Unsubscibe Now</button>
+        <button type="button" class="btn sub-button-cancel btn-block" data-dismiss="modal" (click)="close()">Cancel</button>
       </div>
     </div>
   </div>

@@ -30,4 +30,12 @@ export class ProductsService {
     return this.http.get(SERVER_URL+'/templates/getCategoryByProdId?id='+id)
       .map(res => res.text() ? res.json() : null);
   }
+
+
+  createArticleViewDataInfo(articleName) {
+    return this.http.get(SERVER_URL + '/templates/createArticleViewDataInfo?appId=' + this.appId+"&articleName="+articleName)
+      .map(res => res.text() ? res.json() : null);
+  }
+
+
 }

@@ -19,6 +19,13 @@ export class CategoriesService {
                     .map(res => res.text() ? res.json() : null);
   }
 
+  sendDeviceToken(data){
+    return this.http.get(SERVER_URL+'/templates/postDeviceId?' + data +"&appId="+this.appId)
+      .map(res => res.text() ? res.json() : null);
+  }
+
+
+
 }
 
 

@@ -35,4 +35,10 @@ export class AppDataService {
             .map(res => res.text() ? res.json() : res);
     }
 
+    getPublishDetails() {
+      return this.http.get(SERVER_URL + "/edit/getPublishDetails?appId="+this.appId)
+        .map(res => res.text() ? res.json() : res);
+    }
+
+
 }

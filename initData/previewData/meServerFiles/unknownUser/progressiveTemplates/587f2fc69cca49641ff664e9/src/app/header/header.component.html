@@ -6,19 +6,22 @@
     <div class="container">
       <nav class="navbar">
         <div class="navbar-header">
-          <button *ngIf="hideBackOnHome" aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle" (click)="goBack()">
+          <button *ngIf="hideBackOnHome" aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle"
+            (click)="goBack()">
             <i class="fa fa-arrow-left"></i>
           </button>
           <button aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle" (click)="openNav()">
             <i class="fa fa-bars lg"></i>
           </button>
-          <div class="mobile-title visible-xs mobileTitle" >{{title}}</div>
+          <div class="mobile-title visible-xs mobileTitle">{{title}}</div>
 
         </div>
         <div class="navbar-1">
           <ul class="site-navigation nav navbar-nav">
             <li>
-              <a class="navbar-brand"  (click)="navigate('')"><img width="100%" src="assets/images/logo.png"></a>
+              <a class="navbar-brand" (click)="navigate('')">
+                <img width="100%" src="assets/images/logo.png">
+              </a>
             </li>
             <li>
               <a class="nav-link" (click)="navigate('')">Your Horoscope
@@ -44,13 +47,15 @@
 
   <!-- Mobile Navigation -->
   <div id="mySidenav" class="sidenav  main-navigation">
-    <div  class="closebtn" (click)="closeNav()">&times;</div>
+    <div class="closebtn" (click)="closeNav()">&times;</div>
     <a (click)="navigate('','Your Horoscope')">Home</a>
-    <a data-toggle="modal" data-target="#registerModel">Register</a>
-    <a  data-toggle="modal" data-target="#myAccountModel">My Account</a>
+    <a *ngIf="!subscriptionStatus" data-toggle="modal" (click) = "openRegisterModel()">Register</a>
+    <a *ngIf="subscriptionStatus" data-toggle="modal" (click) = "openMyAccountModel()">My Account</a>
     <a (click)="navigate('contact','Contact us')">Contact Us</a>
     <a (click)="navigate('policies','Privacy Policy')">Privacy Policy</a>
-    <div class="navbar-brand text-center"   (click)="navigate('')"><img src="assets/images/logo.png"></div>
+    <div class="navbar-brand text-center" (click)="navigate('')">
+      <img src="assets/images/logo.png">
+    </div>
   </div>
 
 
@@ -66,20 +71,34 @@
 
 
 <!-- My Account Model -->
-<div class="modal fade" id="myAccountModel" tabindex="-1" role="dialog" aria-labelledby="myAccountModalLabel">
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="myAccountModel" tabindex="-1" role="dialog" aria-labelledby="myAccountModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body text-center">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
 
-        <h3 class="padding-bottom">My Account</h3>
-        <p>Rs.20+tax per day</p>
-        <p>You will be charged on your Dialog mobile and your subscription will be renewed automatically.</p>
-        <p>You will be charged on your Dialog mobile and your subscription will be renewed automatically.</p>
-        <p>You will be charged on your Dialog mobile and your subscription will be renewed automatically.</p>
+        <div *ngIf = "isUnsubscribing == false">
+          <h3 class="padding-bottom">My Account</h3>
+          <h4>
+            Are you sure you want to unsubscribe from this service?
+          </h4>
+        </div>
+          <div *ngIf="isUnsubscribing == true">
+            <div class="wrapper">
+              <div class="loader-box">
+                <div class="loader">
 
-        <button type="button" class="btn sub-button-sub btn-block"> Unsubscibe Now</button>
-        <button type="button" class="btn sub-button-cancel btn-block" data-dismiss="modal">Cancel</button>
+                </div>
+                <div class="loader-text">
+                  Un-Subscribing...
+                </div>
+              </div>
+            </div>
+          </div>
+        <button type="button" [disabled]="isUnsubscribing == true" class="btn sub-button-sub btn-block" (click)="onUnsubscribe()"> Unsubscibe Now</button>
+        <button type="button" class="btn sub-button-cancel btn-block" data-dismiss="modal" (click)= "close()">Cancel</button>
       </div>
     </div>
   </div>
@@ -87,20 +106,61 @@
 
 
 <!-- My Account Model -->
-<div class="modal fade" id="registerModel" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel">
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="registerModel" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body text-center">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div *ngIf="isSubscribing == false">
+          <h3 class="padding-bottom">Subscribe</h3>
+          <div *ngIf = "appPublishDetails">
+              <div  *ngFor = "let operators of appPublishDetails.operators">
+                  <div *ngIf = "operators.isEnabled == true || operators.isEnabled == 'true'">
+                    <div *ngIf = "operators.interval == 'Daily'">
+                        <p> {{operators.operator | titlecase}} Rs.{{operators.amount}}+tax per day</p>
+                    </div>
+                    <div *ngIf = "operators.interval == 'Monthly'">
+                        <p> {{operators.operator | titlecase}} Rs.{{operators.amount}}+tax per month</p>
+                    </div>
+                  </div>
+              </div>
+          </div>
 
-        <h3 class="padding-bottom">My Account</h3>
-        <p>Rs.20+tax per day</p>
-        <p>You will be charged on your Dialog mobile and your subscription will be renewed automatically.</p>
-        <p>You will be charged on your Dialog mobile and your subscription will be renewed automatically.</p>
-        <p>You will be charged on your Dialog mobile and your subscription will be renewed automatically.</p>
+          <p>The subscription amount will be charged to your mobile phone account and your subscription will be renewed automatically.</p>
+          <p>මෙම සේවාව සදහා දායක මුදල ඔබේ ජංගම දුරකතන ගිණුමෙන් අය කරනු ලැබේ. දායක මුදල් ස්වයංක්‍රීයව නැවත අලුත් කෙරෙනු ලැබේ.</p>
+          <p>இந்த சேவை கட்டணம் உங்கள் தொலைபேசி கணக்கிலிருந்து அறவிடப்படும். உங்களது சேவையானது தானாகவே மீண்டும் மீள் செயட்படுத்தப்படும்.</p>
+        </div>
+        <div *ngIf="isSubscribing == true">
+          <div class="wrapper">
+            <div class="loader-box">
+              <div class="loader">
 
-        <button type="button" class="btn sub-button-sub btn-block"> Subscibe Now</button>
-        <button type="button" class="btn sub-button-cancel btn-block" data-dismiss="modal">Cancel</button>
+              </div>
+              <div class="loader-text">
+                Subscribing...
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button [disabled]="isSubscribing == true" type="button" class="btn sub-button-sub btn-block" (click)="onSubscribe()"> Subscibe Now</button>
+        <button type="button" class="btn sub-button-cancel btn-block" data-dismiss="modal" (click)= "close()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- My Account Model -->
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="appStatusModel" tabindex="-1" role="dialog" aria-labelledby="appStatusModelLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <h3 class="padding-bottom">Sorry!</h3>
+        <p>The App is no longer available</p>
+        <br>
+        <button type="button" class="btn sub-button-cancel btn-block" data-dismiss="modal" (click)= "close()">Cancel</button>
       </div>
     </div>
   </div>
