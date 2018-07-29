@@ -24,11 +24,11 @@ module.exports = {
             type: 'string'
         },
         discount:{
-            type: 'integer'
+            type: 'float'
         },
         discountPercent:{
-            type: 'integer'
-        }
+            type: 'float'
+        },
         dateFrom : {
             type: 'date'
         },

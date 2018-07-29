@@ -415,6 +415,7 @@ module.exports.routes = {
          */  
     'POST /edit/saveSalesAndPromotion': 'edit/salesAndPromotion/SalesAndPromotionController.saveSalesAndPromotion',
     'GET /edit/getListOfSalesAndPromotions': 'edit/salesAndPromotion/SalesAndPromotionController.getListOfSalesAndPromotions',
+    'POST /edit/deleteSalesAndPromotions': 'edit/salesAndPromotion/SalesAndPromotionController.deleteSalesAndPromotions',
 
     'POST /edit/transcationLog': 'TranscationLog.saveSalesAndPromotion',
     'POST /templates/makeStripePayment': 'template/StripeController.makePayment',

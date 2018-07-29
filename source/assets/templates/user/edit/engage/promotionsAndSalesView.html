@@ -30,11 +30,12 @@
                 <tr ng-repeat="salesAndPromotion in salesAndPromotionList">
                     <td>{{salesAndPromotion.name}}</td>
                     <td>{{salesAndPromotion.salesAndPromotionType}}</td>
-                    <td>{{salesAndPromotion.discount}} %</td>
+                    <td ng-if = "salesAndPromotion.discountType == 'discount'">{{salesAndPromotion.discountPercent}} %</td>
+                    <td ng-if = "salesAndPromotion.discountType == 'discountValue'">{{salesAndPromotion.discount}}</td>
                     <td ng-if="salesAndPromotion.dateFrom">{{salesAndPromotion.dateFrom | date : "dd.MM.y"}} to  {{salesAndPromotion.dateTo | date : "dd.MM.y"}}</td>
                     <td ng-if="!salesAndPromotion.dateFrom">-</td>
                     <td><img width="25" src="../../../images/edit-icon.svg" ng-click="editShippingInfo(salesAndPromotion)"></td>
-                    <td><img width="25" src="../../../images/delete-icon.svg" ng-click="deleteShippingInfo($index,item)"></td>
+                    <td><img width="25" src="../../../images/delete-icon.svg" ng-click="deleteShippingInfo($index,salesAndPromotion)"></td>
                 </tr>
                 </tbody>
             </table>

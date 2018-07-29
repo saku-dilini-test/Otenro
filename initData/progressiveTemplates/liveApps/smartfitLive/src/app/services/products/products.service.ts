@@ -36,4 +36,8 @@ export class ProductsService {
     return this.http.get(SERVER_URL+'/templates/getBlogDataById?id=' + id)
                     .map(res => res.text() ? res.json() : null);
   }
+  getSalesAndPromoData(id:any){
+    return this.http.get(SERVER_URL+'/edit/getListOfSalesAndPromotions?appId='+id)
+      .map(res => res.text() ? res.json() : null);
+  }
 }

@@ -21,6 +21,9 @@
             },
             deleteDefaultSliderData: function(params){
                 return  $http.post(SERVER_URL + 'edit/deleteDefaultSliderData',params);
+            },
+            deleteSalesAndPromotions: function(params){
+                return  $http.post(SERVER_URL + 'edit/deleteSalesAndPromotions',params);
             }
         }
     }

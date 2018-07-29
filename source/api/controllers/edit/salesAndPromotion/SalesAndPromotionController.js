@@ -73,5 +73,16 @@ module.exports = {
             if (err) res.send(err);
             res.send(salesAndPromotion);
         });
+    },
+
+    deleteSalesAndPromotions: function(req, res){
+        var id = req.body.id;
+
+        SalesAndPromotion.destroy({id:id}).exec(function(err, data){
+            if(err) res.send(err);
+
+            res.send("success");
+        })
+
     }
 };

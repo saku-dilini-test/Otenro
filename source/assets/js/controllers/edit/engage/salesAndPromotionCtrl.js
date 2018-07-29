@@ -72,6 +72,7 @@
 
                             $scope.singleProduct.name = item.name;
                             $scope.singleProduct.discount = item.discount;
+                            $scope.singleProduct.discountPercent = item.discountPercent;
                             $scope.singleProduct.discountType = item.discountType;
                             $scope.singleProduct.promoCode = item.promoCode;
                             $scope.singleProduct.dateFrom = new Date (item.dateFrom);
@@ -268,6 +269,10 @@
 
             salesAndPromotionService.showPromotionsAndSalesUpdateDialog(item);
 
+        }
+
+        $scope.deleteShippingInfo = function(idx,item){
+            salesAndPromotionService.deleteSalesAndPromotions(item);
         }
 
         $scope.cancel = function(){

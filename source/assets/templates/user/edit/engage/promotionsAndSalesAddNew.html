@@ -448,7 +448,7 @@
                                         </div>
                                     </md-input-container>
 
-                                    <fieldset class="row">
+                                    <fieldset class="row" ng-if = "array.length > 0">
                                         <div class="col-md-6 country-list">
                                             <label>Select Products</label>
                                             <br>
@@ -495,8 +495,11 @@
                                             </div>
                                         </div>
                                     </fieldset>
+                                    <fieldset ng-if="array.length == 0">
+                                        <label> There are no Products left.</label><br><br>
+                                    </fieldset>
 
-                                    <md-input-container class="md-block" flex="50" ng-if = "singleProduct.discountType = 'discountValue'">
+                                    <md-input-container class="md-block" flex="50" ng-if = "singleProduct.discountType == 'discountValue'">
                                         <label>Discount</label>
                                         <input  md-maxlength="15"  ng-required="true" name="discount" ng-model="singleProduct.discount">
                                         <div ng-messages="singleProductForm.discount.$error" ng-show="singleProductForm.discount.$dirty">
@@ -504,9 +507,9 @@
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
                                         </div>
                                     </md-input-container>
-                                    <md-input-container class="md-block" flex="50" ng-if = "singleProduct.discountType = 'discount'">
+                                    <md-input-container class="md-block" flex="50" ng-if = "singleProduct.discountType == 'discount'">
                                         <label>Discount</label>
-                                        <input md-maxlength="3" ng-pattern="/^\d+$/"  ng-required="true" name="discountPercent" ng-model="singleProduct.discountPercent">
+                                        <input md-maxlength="5" maxlength ="5" ng-pattern="/^100$|^\d{0,2}(\.\d{1,2})? *%?$/"  ng-required="true" name="discountPercent" ng-model="singleProduct.discountPercent">
                                         <div ng-messages="singleProductForm.discountPercent.$error" ng-show="singleProductForm.discount.$dirty">
                                             <div ng-message="required">Name is required.</div>
                                         </div>
@@ -517,7 +520,7 @@
                                         <label>Date</label>
                                     </fieldset>
                                     <div class="row">
-                                        <adm-dtp ng-model='singleProduct.dateFrom' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
+                                        <adm-dtp ng-model='singleProduct.dateFrom' options="{default: today, disabled:['2016/1/20', 2017/1/20]}" class="col-md-5"></adm-dtp>
 
                                             <label class="col-md-2 text-center">To</label>
 
@@ -582,7 +585,7 @@
                             <div class="md-dialog-buttons">
                                 <div class="inner-section">
                                     <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                                    <md-button class="me-default-button" ng-disabled="singleProductForm.$invalid || !singleProduct.dateFrom || !singleProduct.dateTo" ng-click="saveSalesAndPromotion(singleProduct,'singleProduct',selected)">Save</md-button>
+                                    <md-button class="me-default-button" ng-disabled="singleProductForm.$invalid || !singleProduct.dateFrom || !singleProduct.dateTo || array.length == 0" ng-click="saveSalesAndPromotion(singleProduct,'singleProduct',selected)">Save</md-button>
                                 </div>
                             </div>
                         </form>

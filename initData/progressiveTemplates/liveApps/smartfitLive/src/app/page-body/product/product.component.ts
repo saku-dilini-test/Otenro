@@ -9,6 +9,7 @@ import { CurrencyService } from '../../services/currency/currency.service';
 import { TitleService } from '../../services/title.service';
 import * as Player from '@vimeo/player';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { ProductsService } from '../../services/products/products.service';
 declare var $:any;
 
 @Component({
@@ -37,7 +38,8 @@ export class ProductComponent implements OnInit {
     isBuyBtnDisable: boolean;
     private parentobj = { cartItems: [], cartSize: 0, totalPrice: 0 };
     lockBuyButton = false;
-    dialogVariants;
+    dialogVariants;discountAvailable;oldPrice;newPrice;
+    promoData = [];
     imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
 
@@ -48,7 +50,9 @@ export class ProductComponent implements OnInit {
     name1; name2; name3; name4;
     ifNotSelectedVariantOrQuantity:boolean;
      private player: Player;
-    constructor(private localStorageService: LocalStorageService, private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
+    constructor(private localStorageService: LocalStorageService, private CurrencyService: CurrencyService, 
+        private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, 
+        private route: Router, private title: TitleService,private productsService:ProductsService) {
 
         this.Data = JSON.parse(localStorage.getItem(this.appId+":dataServiceData"));
 
@@ -115,6 +119,25 @@ export class ProductComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        this.productsService.getSalesAndPromoData(this.appId).subscribe( data =>{
+            
+                        data.forEach(element => {
+                            element.selectedProduct.forEach( variants =>{
+                                if( element.discountType == 'discountValue'){
+                                    variants.discountType = element.discountType;
+                                    variants.discount = element.discount
+                                }else{
+                                    variants.discountType = element.discountType;
+                                    variants.discount = element.discountPercent
+                                }
+            
+                                this.promoData.push(variants);
+                            });
+                        });
+                            console.log(this.promoData);
+                            console.log(data);
+                    });
 
         let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
 
@@ -238,6 +261,8 @@ export class ProductComponent implements OnInit {
     }
 
     changeVariant(variant1) {
+        this.lockBuyButton = false;
+        this.discountAvailable = false;
         this.selection1 = [];
         this.selection2 = [];
         this.selection3 = [];
@@ -274,6 +299,30 @@ export class ProductComponent implements OnInit {
 
                 }
             }
+
+            var BreakException = {};
+            
+            try {
+
+              this.promoData.forEach( prod => {
+                if(prod.sku == this.selectedVariant.sku){
+                    this.discountAvailable=true
+                    if(prod.discountType == "discountValue"){
+                        this.oldPrice = this.selectedVariant.price;
+                        this.newPrice = this.selectedVariant.price - prod.discount;
+                        throw BreakException;
+                    }else{
+                        this.oldPrice = this.selectedVariant.price;
+                        this.newPrice = this.selectedVariant.price -(this.selectedVariant.price(prod.discount/100));
+                        throw BreakException;
+                    }
+                }
+            });
+
+            } catch (e) {
+              if (e !== BreakException) throw e;
+            }
+
             this.lockBuyButton = true;
 
         } else {
@@ -295,6 +344,8 @@ export class ProductComponent implements OnInit {
     };
 
     changeVariant2(variant2) {
+        this.lockBuyButton = false;
+        this.discountAvailable = false;
         this.selection2 = [];
         this.selection3 = [];
         if(this.Data.selection.length == 2){
@@ -327,6 +378,30 @@ export class ProductComponent implements OnInit {
                     this.selectedVariant = this.foodInfo.variants[i];
                 }
             }
+
+            var BreakException = {};
+            
+            try {
+
+              this.promoData.forEach( prod => {
+                if(prod.sku == this.selectedVariant.sku){
+                    this.discountAvailable=true
+                    if(prod.discountType == "discountValue"){
+                        this.oldPrice = this.selectedVariant.price;
+                        this.newPrice = this.selectedVariant.price - prod.discount;
+                        throw BreakException;
+                    }else{
+                        this.oldPrice = this.selectedVariant.price;
+                        this.newPrice = this.selectedVariant.price -(this.selectedVariant.price(prod.discount/100));
+                        throw BreakException;
+                    }
+                }
+            });
+
+            } catch (e) {
+              if (e !== BreakException) throw e;
+            }
+
             this.lockBuyButton = true;
 
         } else {
@@ -345,6 +420,8 @@ export class ProductComponent implements OnInit {
     };
 
     changeVariant3(variant3) {
+        this.lockBuyButton = false;
+        this.discountAvailable = false;
 
         //for IE specific issue
         variant3 = variant3.replace(/\s/g, '');
@@ -377,6 +454,29 @@ export class ProductComponent implements OnInit {
                     this.selectedVariant = this.foodInfo.variants[i];
                 }
             }
+
+            var BreakException = {};
+            
+            try {
+
+              this.promoData.forEach( prod => {
+                if(prod.sku == this.selectedVariant.sku){
+                    this.discountAvailable=true
+                    if(prod.discountType == "discountValue"){
+                        this.oldPrice = this.selectedVariant.price;
+                        this.newPrice = this.selectedVariant.price - prod.discount;
+                        throw BreakException;
+                    }else{
+                        this.oldPrice = this.selectedVariant.price;
+                        this.newPrice = this.selectedVariant.price -(this.selectedVariant.price(prod.discount/100));
+                        throw BreakException;
+                    }
+                }
+            });
+
+            } catch (e) {
+              if (e !== BreakException) throw e;
+            }
             this.lockBuyButton = true;
 
         } else {
@@ -392,6 +492,8 @@ export class ProductComponent implements OnInit {
         }
     };
     changeVariant4(variant4) {
+        this.lockBuyButton = false;
+        this.discountAvailable = false;
         //for IE specific issue
         variant4 = variant4.replace(/\s/g, '');
 
@@ -418,6 +520,30 @@ export class ProductComponent implements OnInit {
 
                 }
             }
+
+            var BreakException = {};
+            
+            try {
+
+              this.promoData.forEach( prod => {
+                if(prod.sku == this.selectedVariant.sku){
+                    this.discountAvailable=true
+                    if(prod.discountType == "discountValue"){
+                        this.oldPrice = this.selectedVariant.price;
+                        this.newPrice = this.selectedVariant.price - prod.discount;
+                        throw BreakException;
+                    }else{
+                        this.oldPrice = this.selectedVariant.price;
+                        this.newPrice = this.selectedVariant.price -(this.selectedVariant.price(prod.discount/100));
+                        throw BreakException;
+                    }
+                }
+            });
+
+            } catch (e) {
+              if (e !== BreakException) throw e;
+            }
+
             this.lockBuyButton = true;
         }
     };
