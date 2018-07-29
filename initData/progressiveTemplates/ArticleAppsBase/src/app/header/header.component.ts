@@ -195,7 +195,7 @@ export class HeaderComponent implements OnInit {
       this.alive = true;
 
       //Send Registration SMS
-      this.sms.sendRegistrationSMS(this.smsSuccessRegistrationCallback, this.smsErrorRegistrationCallback);
+      headerCmp.sms.sendRegistrationSMS(headerCmp.smsSuccessRegistrationCallback, headerCmp.smsErrorRegistrationCallback);
 
       var uuid = localStorage.getItem("UUID");
 
@@ -237,7 +237,7 @@ export class HeaderComponent implements OnInit {
       this.alive = true;
 
       //Send Un-Registration SMS
-      this.sms.sendUnRegistrationSMS(this.smsSuccessUnRegistrationCallback, this.smsErrorUnRegistrationCallback);
+      headerCmp.sms.sendUnRegistrationSMS(headerCmp.smsSuccessUnRegistrationCallback, headerCmp.smsErrorUnRegistrationCallback);
 
       var uuid = localStorage.getItem("UUID");
 

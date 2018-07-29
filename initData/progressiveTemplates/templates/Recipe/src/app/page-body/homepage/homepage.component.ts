@@ -5,7 +5,7 @@ import * as data from '../../madeEasy.json';
 import { CategoriesService } from '../../services/categories/categories.service'
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { TitleService } from '../../services/title.service';
-import {CordovaPluginFirebaseService} from "../../services/cordova-plugin-services/cordova-plugin-firebase.service";
+import { CordovaPluginFirebaseService } from "../../services/cordova-plugin-services/cordova-plugin-firebase.service";
 import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
@@ -13,40 +13,30 @@ import { SubscribedDataService } from '../../services/subscribed-data/subscribed
 import {CordovaPluginDeviceService} from "../../services/cordova-plugin-services/cordova-plugin-device.service";
 import {SMSService} from "../../services/cordova-plugin-services/sms.service";
 import { AppDataService } from "../../services/appdata-info/appdata-info.service";
+import {ProductsService} from "../../services/products/products.service";
 
 var homePageCmp;
 
 @Component({
-    selector: 'app-homepage',
-    templateUrl: './app/page-body/homepage/homepage.component.html',
-    styleUrls: ['./app/page-body/homepage/homepage.component.css'],
+  selector: 'app-homepage',
+  templateUrl: './app/page-body/homepage/homepage.component.html',
+  styleUrls: ['./app/page-body/homepage/homepage.component.css'],
 
 })
 export class HomepageComponent implements OnInit {
 
-    private appId = (<any>data).appId;
-    private userId = (<any>data).userId;
-    private categoryId;
-    private categoryName;
-    private imageUrl: any;
-    private products: any;
-    private results: {};
-    private randomIndex;
-    private imageUrlProd;
-    private randomedArr = [];
-    private sliderData: any;
-    private imageUrlSlider;
-    private catName;
-    private isSliderDataAvailable: boolean = false;
-    private isRandomProducts;
-    private uuid;
-    private subscriptionStatus;
-    private deviceUUID;
-    private localStorageUUIDString = "UUID";
-    private appPublishDetails;
-    private alive = true;
-    private isSubscribing = false;
-    private isFromCMSAppView: boolean = false;
+  private appId = (<any>data).appId;
+  private userId = (<any>data).userId;
+  private imageUrl: any;
+  private results: {};
+  private uuid;
+  private subscriptionStatus;
+  private localStorageUUIDString = "UUID";
+  private appPublishDetails;
+  private alive = true;
+  private isSubscribing = false;
+  private isFromCMSAppView: boolean = false;
+  private appStatus;
 
   constructor(private route: Router,
               private dataService: PagebodyServiceModule,
@@ -56,27 +46,27 @@ export class HomepageComponent implements OnInit {
               private title: TitleService,
               private sms: SMSService,
               private push: CordovaPluginFirebaseService,
-              private subscription:SubscribedDataService,
-              private appDataService: AppDataService,) {
+              private subscription: SubscribedDataService,
+              private productService: ProductsService,
+              private appDataService: AppDataService) {
 
-        this.title.changeTitle(data.name);
-        homePageCmp = this;
-    }
+    this.title.changeTitle(data.name);
+    homePageCmp = this;
+  }
 
-    ngOnInit() {
-
+  ngOnInit() {
     this.appDataService.getPublishDetails().subscribe(data => {
       this.appPublishDetails = data;
     });
 
-    this.isFromCMSAppView = localStorage.getItem(this.appId + "_isFromCMSAppView")=='1';
+    this.isFromCMSAppView = localStorage.getItem(this.appId + "_isFromCMSAppView") == '1';
 
-    $('#registerModelhome').on('hide.bs.modal', ()=>{
-          console.log('close');
+    $('#registerModelhome').on('hide.bs.modal', () => {
+      console.log('close');
 
-          this.alive = false;
-          this.isSubscribing = false;
-        });
+      this.alive = false;
+      this.isSubscribing = false;
+    });
 
         this.isSubscribing = false;
 
@@ -84,34 +74,62 @@ export class HomepageComponent implements OnInit {
           this.getDeviceUUID();
         }
 
-        this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
-            + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
+    this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
+      + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
 
-        this.categoryService.getCategories().subscribe(data => {
-                if (data.length > 0) {
-                    // Read the result field from the JSON response.
-                    this.results = data;
-                    this.dataService.searchArray = [];
-                    data.forEach(element => {
-                        this.dataService.searchArray.push({ 'name': element.name, 'id': element.id });
-                    });
-                } else {
-                    this.results = null;
-                }
+    this.categoryService.getCategories().subscribe(data => {
+      if (data.length > 0) {
+        // Read the result field from the JSON response.
+        this.results = data;
+        this.dataService.searchArray = [];
+        data.forEach(element => {
+          this.dataService.searchArray.push({ 'name': element.name, 'id': element.id });
+        });
+      } else {
+        this.results = null;
+      }
 
 
-            },
-            error => {
-                console.log('Error retrieving categories');
-            });
+    },
+      error => {
+        console.log('Error retrieving categories');
+      });
+  }
 
+  loadArticle(catId,articleId){
+    if(catId && articleId) {
+      console.log("loadArticle for catId: " + catId + " articleId: " + articleId);
+
+      this.dataService.catId = catId;
+      this.productService.getProducts().subscribe(articles => {
+          console.log("<<<<<<<<Articles>>>>>>>>>");
+          console.log(articles);
+          var article = null;
+          for (let i = 0; i < articles.length; i++) {
+            console.log("articles[i].id=>" + articles[i].id)
+            if (articles[i].id === articleId) {
+              article = articles[i];
+            }
+          }
+
+          if (article) {
+            this.dataService.data = article;
+            this.route.navigate(['product', article.title]);
+          } else {
+            console.log("Article not found for the catId: " + catId + " articleId: " + articleId);
+          }
+        },
+        error => {
+          console.log('Error shop service');
+        });
     }
+  }
 
 
   // Routing Method
   navigateShop(val: string, id, name,image) {
 
-    this.subscription.getAppStatus({ appId: this.appId }).subscribe(data => {
+      this.subscription.getAppStatus({ appId: this.appId }).subscribe(data => {
         this.appStatus = data.isActive;
         this.dataService.appStatus = this.appStatus;
         if (this.appStatus == false || this.appStatus == "false") {
@@ -148,7 +166,7 @@ export class HomepageComponent implements OnInit {
 
   }
 
-  pushSuccessCallback(token: any){
+  pushSuccessCallback(token: any) {
     console.log("Push Token: " + token);
 
     var data = 'deviceId=' + token + '&uuid=' + homePageCmp.uuid;
@@ -158,22 +176,40 @@ export class HomepageComponent implements OnInit {
     try {
           homePageCmp.categoryService.sendDeviceToken(data).subscribe(data => {
             console.log("Device token persisted successfully");
+            homePageCmp.callOnNotificationOpen();
         },
         error => {
           console.log('Error while sending the device token to be persist.Error: ' + error);
+          homePageCmp.callOnNotificationOpen();
         });
     }catch(err){
       console.log("Exception in pushSuccessCallback: " + err);
     }
   }
 
-  pushErrorCallback(error: any){
+  pushErrorCallback(error: any) {
     console.log("pushErrorCallback=>" + error);
   }
 
   generatePushToken(){
     console.log("Call generatePushToken in homepage");
     homePageCmp.push.getToken(homePageCmp.pushSuccessCallback, homePageCmp.pushErrorCallback);
+  }
+
+  onNotificationOpenSuccessCallback(notification: any) {
+    console.log("inside onNotificationOpenSuccessCallback notification: " + JSON.stringify(notification));
+    if(notification.tap && notification.categoryId && notification.articleId && localStorage.getItem(homePageCmp.appId + "msisdn")) {
+      homePageCmp.loadArticle(notification.categoryId, notification.articleId);
+    }
+  }
+
+  onNotificationOpenErrorCallback(error: any) {
+    console.log("onNotificationOpenErrorCallback=>" + error);
+  }
+
+  callOnNotificationOpen(){
+    console.log("Call callOnNotificationOpen in homepage");
+    homePageCmp.push.onNotificationOpen(homePageCmp.onNotificationOpenSuccessCallback, homePageCmp.onNotificationOpenErrorCallback);
   }
 
   deviceUUIDCallback(uuid: any){
@@ -202,7 +238,7 @@ export class HomepageComponent implements OnInit {
 
   onSubscribe(){
     //Send Registration SMS
-    this.sms.sendRegistrationSMS(this.smsSuccessRegistrationCallback, this.smsErrorRegistrationCallback);
+    homePageCmp.sms.sendRegistrationSMS(homePageCmp.smsSuccessRegistrationCallback, homePageCmp.smsErrorRegistrationCallback);
 
     var uuid = localStorage.getItem("UUID");
 
@@ -214,25 +250,25 @@ export class HomepageComponent implements OnInit {
     IntervalObservable.create(5000)
       .takeWhile(() => this.alive) // only fires when component is alive
       .subscribe(() => {
-        this.subscription.getSubscribedData(data).subscribe(data =>{
+        this.subscription.getSubscribedData(data).subscribe(data => {
           console.log(data);
           this.subscriptionStatus = data.isSubscribed;
           this.dataService.subscriptionStatus = data.isSubscribed;
-          if(this.subscriptionStatus == true){
+          if (this.subscriptionStatus == true) {
             this.isSubscribing = false;
-            localStorage.setItem(this.appId+"msisdn",data.msisdn)
-             this.alive = false;
-              //close the model
-              $(()=> {
-                $('#registerModelhome').modal('hide');
-                this.router.navigate(['/' + "shop", this.dataService.subUserArticleData.id, this.subscriptionStatus.name]);
-             });
-             //close the nav bar
+            localStorage.setItem(this.appId + "msisdn", data.msisdn)
+            this.alive = false;
+            //close the model
+            $(() => {
+              $('#registerModelhome').modal('hide');
+              this.router.navigate(['/' + "shop", this.dataService.subUserArticleData.id, this.subscriptionStatus.name]);
+            });
+            //close the nav bar
             //  document.getElementById("mySidenav").style.width = "0";
           }
         });
       });
-    }
+  }
 
   smsSuccessRegistrationCallback(results: any) {
     console.log("smsSuccessRegistrationCallback in homepage Component: " + results);

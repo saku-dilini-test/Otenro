@@ -1,23 +1,68 @@
 import { Injectable } from '@angular/core';
-import {IframePostable} from "./iframe-postable";
 
-var  postabelInstance;
+var  smsInstance;
 
 @Injectable()
-export class SMSService extends IframePostable{
-
+export class SMSService {
+  successCallbackFunc: any;
+  errorCallbackFunc: any;
   LOCALSTORAGE_KEYWORD_STRING = 'keyword';
   LOCALSTORAGE_PORT_STRING = 'port';
   SERVICE_REGISTRATION_STRING = 'start';
   SERVICE_UN_REGISTRATION_STRING = 'stop';
 
   constructor() {
-    super();
     console.log("SMSService construction...");
     //Register an Event Listener to listen for the postMessages from the parent window to the iFrame
     // window.addEventListener('message', this.receiveMessageInIframe, false);
 
-    postabelInstance = this;
+    smsInstance = this;
+  }
+
+  getSuccessFunctionToBePost(){
+    let success = function (result) {
+      console.log("result=> " + JSON.stringify(result, null, 2));
+
+      if(result){
+        result = JSON.stringify(result);
+      }else{
+        result = '';
+      }
+
+      var msgSentSuccess = 'function(){ '
+        +  'smsInstance.successCallback(' + result +');'
+        +'}';
+
+      var successFunc = encodeURI(msgSentSuccess.toString());
+
+      var frame = document.getElementById('appframe');
+      frame.contentWindow.postMessage(successFunc, '*');
+    };
+
+    return success;
+  }
+
+  getErrorFunctionToBePost(){
+    let error = function (error) {
+      console.log("error=> " + JSON.stringify(error, null, 2));
+
+      if(error){
+        error = JSON.stringify(error);
+      }else{
+        error = '';
+      }
+
+      var msgSentError = 'function(){ '
+        +  'smsInstance.errorCallback(' + error +');'
+        +'}';
+
+      var errorFunc = encodeURI(msgSentError.toString());
+
+      var frame = document.getElementById('appframe');
+      frame.contentWindow.postMessage(errorFunc, '*');
+    };
+
+    return error;
   }
 
   /*
@@ -31,21 +76,21 @@ export class SMSService extends IframePostable{
    };
    */
   send(number: string, message: string, options: any, successCallback: any, errorCallback: any){
-    this.addEventListnerReceiveMessageInIframe();
+    smsInstance.addEventListnerReceiveMessageInIframe();
 
-    this.setSuccessCallbackFunc(successCallback);
-    this.setErrorCallbackFunc(errorCallback);
+    this.successCallbackFunc = successCallback;
+    this.errorCallbackFunc = errorCallback;
 
     //Need to post the function as a String by encoding since the function itself will be executed in the parent screen.
     let functionToBePost = "function(){"
       + "sms.send('" + number +  "'"
       + ", '" + message +  "'"
       + ", " + JSON.stringify(options)
-      + ", " + this.getSuccessFunctionToBePost().toString()
-      + ", " + this.getErrorFunctionToBePost().toString() + ");"
+      + ", " + smsInstance.getSuccessFunctionToBePost().toString()
+      + ", " + smsInstance.getErrorFunctionToBePost().toString() + ");"
       + "}";
 
-    this.parentPostMessage(functionToBePost);
+    smsInstance.parentPostMessage(functionToBePost);
   }
 
   /*
@@ -53,12 +98,12 @@ export class SMSService extends IframePostable{
    */
   receiveMessageInIframe(evt) {
     try {
-      console.log("Exec receiveMessageInIframe + " + decodeURI(evt.data));
+      console.log("Exec receiveMessageInIframe method in sms service " + decodeURI(evt.data));
       eval('(' + decodeURI(evt.data) + ')();');
     } catch(e) {
-      console.log("Error executing function: " + JSON.stringify(e,null,2));
+      console.log("Error Exec receiveMessageInIframe method in sms service. Error: " + JSON.stringify(e,null,2));
     }finally{
-      window.removeEventListener('message', this.receiveMessageInIframe, false);
+      window.removeEventListener('message', smsInstance.receiveMessageInIframe, false);
     }
   }
 
@@ -73,27 +118,70 @@ export class SMSService extends IframePostable{
       }
     };
 
-    var keyword = localStorage.getItem(this.LOCALSTORAGE_KEYWORD_STRING);
-    var port = localStorage.getItem(this.LOCALSTORAGE_PORT_STRING);
+    var keyword = localStorage.getItem(smsInstance.LOCALSTORAGE_KEYWORD_STRING);
+    var port = localStorage.getItem(smsInstance.LOCALSTORAGE_PORT_STRING);
     var uuid = localStorage.getItem("UUID");
 
     var smsBody = serviceRegUnregString + " " + keyword + " UUID " + uuid;
 
     console.log("Send SMS=> body:" + smsBody + " port:" + port );
-    this.send(port, smsBody, options, successCallback, errorCallback);
+
+    if(keyword && port && uuid) {
+      smsInstance.send(port, smsBody, options, successCallback, errorCallback);
+    }else{
+      alert("Service not yet configured, please contact support.");
+    }
   }
 
   /*
    This SMS will send to Register the service
    */
   sendRegistrationSMS(successCallback: any, errorCallback: any){
-    this.sendReg_UNREG_SMS(this.SERVICE_REGISTRATION_STRING, successCallback, errorCallback);
+    smsInstance.sendReg_UNREG_SMS(smsInstance.SERVICE_REGISTRATION_STRING, successCallback, errorCallback);
   }
 
   /*
    This SMS will send to Un-Register the service
    */
   sendUnRegistrationSMS(successCallback: any, errorCallback: any){
-    this.sendReg_UNREG_SMS(this.SERVICE_UN_REGISTRATION_STRING, successCallback, errorCallback);
+    smsInstance.sendReg_UNREG_SMS(smsInstance.SERVICE_UN_REGISTRATION_STRING, successCallback, errorCallback);
+  }
+
+  addEventListnerReceiveMessageInIframe(){
+    console.log('call smsInstance.addEventListnerReceiveMessageInIframe');
+    window.addEventListener('message', smsInstance.receiveMessageInIframe, false);
+  }
+
+  parentPostMessage(functionToBePost: any){
+    console.log("call smsInstance.parentPostMessage");
+    window.parent.postMessage(smsInstance.serializeFunction(functionToBePost), '*');
+  }
+
+  serializeFunction(f) {
+    return encodeURI(f.toString());
+  }
+
+  errorCallback(error: any){
+    if(!error){
+      error = null;
+    }
+    this.errorCallbackFunc(error);
+  }
+
+  successCallback(result: any){
+    if(!result) {
+      result = null;
+    }
+    this.successCallbackFunc(result);
+  }
+
+  isServiceConfigured(){
+    var keyword = localStorage.getItem(smsInstance.LOCALSTORAGE_KEYWORD_STRING);
+    var port = localStorage.getItem(smsInstance.LOCALSTORAGE_PORT_STRING);
+    var uuid = localStorage.getItem("UUID");
+
+    console.log('localStorage keys and values, keyword=' + keyword + ' port=' + port + ' uuid=' + uuid);
+
+    return keyword && port && uuid;
   }
 }

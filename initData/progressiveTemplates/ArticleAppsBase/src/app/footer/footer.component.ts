@@ -9,6 +9,8 @@ import 'rxjs/add/operator/takeWhile';
 import { PagebodyServiceModule } from '../page-body/page-body.service'
 import {SMSService} from "../services/cordova-plugin-services/sms.service";
 
+var footerCmp;
+
 @Component({
   selector: 'app-footer',
   templateUrl: './app/footer/footer.component.html',
@@ -30,7 +32,7 @@ export class FooterComponent implements OnInit{
               private router: Router,
               private sms: SMSService,
               private dataService:PagebodyServiceModule) {
-
+    footerCmp = this;
   }
 
   ngOnInit(){
@@ -77,7 +79,8 @@ export class FooterComponent implements OnInit{
     this.alive = true;
 
     //Send Un-Registration SMS
-    this.sms.sendUnRegistrationSMS(this.smsSuccessUnRegistrationCallback, this.smsErrorUnRegistrationCallback);
+    footerCmp.sms.sendUnRegistrationSMS(footerCmp.smsSuccessUnRegistrationCallback, footerCmp.smsErrorUnRegistrationCallback);
+
     var uuid = localStorage.getItem("UUID");
 
     let data = {appId:this.appId,uuId:uuid}

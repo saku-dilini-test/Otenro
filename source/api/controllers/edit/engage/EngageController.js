@@ -60,7 +60,7 @@ module.exports = {
                             }
                         }
                         PushMessage.create(req.body).exec(function(err,data){
-                            if(err) return done(err);
+                            if(err) return res.send(err);
                             res.send(data);
                         });
                     });
@@ -78,7 +78,7 @@ module.exports = {
                     if(result[0]){
 
                         PushMessage.update(criteria,req.body).exec(function(err,data){
-                            if(err) return done(err);
+                            if(err) return res.send(err);
                             console.log("date 1 " + data[0].date);
                             var shedDate = new Date(data[0].date);
                             var date = new Date(shedDate.getUTCFullYear(), shedDate.getMonth(), shedDate.getDate(),
@@ -88,7 +88,7 @@ module.exports = {
 
 
                                 PushMessage.find({id:data[0].id}).exec(function(err, pushMessage) {
-                                    if (err) return done(err);
+                                    if (err) return res.send(err);
 
                                     if (pushMessage[0]) {
 
@@ -108,7 +108,7 @@ module.exports = {
                                                 console.log("Error on find DeviceId");
                                             }
                                             var message = data[0].message;
-                                            var article = (data[0].article)? { 'articleId': data[0].article.id } : null;
+                                            var article = (data[0].article)? { 'articleId': data[0].article.id , 'categoryId': data[0].article.categoryId , 'title' : data[0].article.title } : null;
                                             for (var i = 0; i < deviceArray.length; i++) {
 
                                                 sails.log.info(" deviceArray " + deviceArray[i].deviceId);
@@ -132,7 +132,7 @@ module.exports = {
 
 
                         PushMessage.create(req.body).exec(function(err,data){
-                            if(err) return done(err);
+                            if(err) return res.send(err);
 
                                 var shedDate = new Date(data.date);
                                 var date = new Date(shedDate.getUTCFullYear(), shedDate.getMonth(), shedDate.getDate(),
@@ -143,7 +143,7 @@ module.exports = {
                                 schedule.scheduleJob(date, function(){
 
                                     PushMessage.find({id:data.id}).exec(function(err, pushMessage) {
-                                        if (err) return done(err);
+                                        if (err) return res.send(err);
                                         if(pushMessage[0]){
                                         console.log("date--->>>" + pushMessage[0].date);
                                         var Ndate = new Date(pushMessage[0].date);
@@ -161,7 +161,7 @@ module.exports = {
                                                     console.log("Error on find DeviceId");
                                                 }
                                                 var message = data.message;
-                                                var article = (data.article)? { 'articleId': data.article.id } : null;
+                                                var article = (data.article)? { 'articleId': data.article.id , 'categoryId': data.article.categoryId , 'title' : data.article.title } : null;
                                                 for(var i=0; i<deviceArray.length; i++) {
 
                                                     sails.log.info(" deviceArray " + deviceArray[i].deviceId);
@@ -220,7 +220,7 @@ module.exports = {
             sort: 'createdAt DESC'
         };
         PushMessage.find(searchApp).exec(function(err, app) {
-            if (err) return done(err);
+            if (err) return res.send(err);
             res.send(app);
         });
 
@@ -234,7 +234,7 @@ module.exports = {
             registeredUser: registeredUser
         }
         ApplicationOrder.find(searchApp).exec(function (err, app) {
-            if (err) return done(err);
+            if (err) return res.send(err);
             res.send(app);
         })
     }
@@ -313,7 +313,7 @@ module.exports = {
                         }
 
                         PushMessage.find(searchApp).exec(function(err, app) {
-                        if (err) return done(err);
+                        if (err) return res.send(err);
 
                         sails.log.debug("Success upload");
                         res.send(app);
@@ -403,7 +403,7 @@ module.exports = {
                 schedule.scheduleJob(date, function(){
 
                     PushMessage.find({id:data.id}).exec(function(err, pushMessage) {
-                        if (err) return done(err);
+                        if (err) return res.send(err);
                         if(pushMessage[0]){
                             console.log("date--->>>" + pushMessage[0].date);
                             var Ndate = new Date(pushMessage[0].date);
@@ -502,7 +502,7 @@ module.exports = {
         console.log("scheduling started ..............");
 
         PushMessage.find().exec(function(err, pushMessage) {
-            if (err) return done(err);
+            if (err) return res.send(err);
 
             pushMessage.forEach(function(data) {
 

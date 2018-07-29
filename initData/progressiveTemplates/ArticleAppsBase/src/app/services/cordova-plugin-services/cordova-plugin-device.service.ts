@@ -1,24 +1,70 @@
 import { Injectable } from '@angular/core';
-import {IframePostable} from "./iframe-postable";
 
-var  postabelInstance;
+var  deviceServiceInstance;
 
 @Injectable()
-export class CordovaPluginDeviceService extends IframePostable {
+export class CordovaPluginDeviceService {
+  successCallbackFunc: any;
+  errorCallbackFunc: any;
 
   constructor() {
-    super();
     console.log("CordovaPluginDeviceService construction...");
     //Register an Event Listener to listen for the postMessages from the parent window to the iFrame
     // window.addEventListener('message', this.receiveMessageInIframe, false);
 
-    postabelInstance = this;
+    deviceServiceInstance = this;
+  }
+
+  getSuccessFunctionToBePost(){
+    let success = function (result) {
+      console.log("result=> " + JSON.stringify(result, null, 2));
+
+      if(result){
+        result = JSON.stringify(result);
+      }else{
+        result = '';
+      }
+
+      var msgSentSuccess = 'function(){ '
+                          +  'deviceServiceInstance.successCallback(' + result +');'
+                          +'}';
+
+      var successFunc = encodeURI(msgSentSuccess.toString());
+
+      var frame = document.getElementById('appframe');
+      frame.contentWindow.postMessage(successFunc, '*');
+    };
+
+    return success;
+  }
+
+  getErrorFunctionToBePost(){
+    let error = function (error) {
+      console.log("error=> " + JSON.stringify(error, null, 2));
+
+      if(error){
+        error = JSON.stringify(error);
+      }else{
+        error = '';
+      }
+
+      var msgSentError = 'function(){ '
+        +  'deviceServiceInstance.errorCallback(' + error +');'
+        +'}';
+
+      var errorFunc = encodeURI(msgSentError.toString());
+
+      var frame = document.getElementById('appframe');
+      frame.contentWindow.postMessage(errorFunc, '*');
+    };
+
+    return error;
   }
 
   getUUID(successCallback: any){
     this.addEventListnerReceiveMessageInIframe();
 
-    this.setSuccessCallbackFunc(successCallback);
+    this.successCallbackFunc = successCallback;
 
 
     //Need to post the function as a String by encoding since the function itself will be executed in the parent screen.
@@ -32,7 +78,7 @@ export class CordovaPluginDeviceService extends IframePostable {
       + "   }"
       + ""
       + "   var msgSentSuccess = 'function(){ '"
-      + "     +  'postabelInstance.successCallback(' + result +');'"
+      + "     +  'deviceServiceInstance.successCallback(' + result +');'"
       + "     +'}';"
       + ""
       + "   var successFunc = encodeURI(msgSentSuccess.toString());"
@@ -56,6 +102,34 @@ export class CordovaPluginDeviceService extends IframePostable {
     }finally{
       window.removeEventListener('message', this.receiveMessageInIframe, false);
     }
+  }
+
+  addEventListnerReceiveMessageInIframe(){
+    console.log('call deviceServiceInstance.addEventListnerReceiveMessageInIframe');
+    window.addEventListener('message', deviceServiceInstance.receiveMessageInIframe, false);
+  }
+
+  parentPostMessage(functionToBePost: any){
+    console.log("call deviceServiceInstance.parentPostMessage");
+    window.parent.postMessage(deviceServiceInstance.serializeFunction(functionToBePost), '*');
+  }
+
+  serializeFunction(f) {
+    return encodeURI(f.toString());
+  }
+
+  errorCallback(error: any){
+    if(!error){
+      error = null;
+    }
+    this.errorCallbackFunc()(error);
+  }
+
+  successCallback(result: any){
+    if(!result) {
+      result = null;
+    }
+    this.successCallbackFunc(result);
   }
 
 }

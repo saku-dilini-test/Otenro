@@ -13,6 +13,7 @@ import { SubscribedDataService } from '../../services/subscribed-data/subscribed
 import {CordovaPluginDeviceService} from "../../services/cordova-plugin-services/cordova-plugin-device.service";
 import {SMSService} from "../../services/cordova-plugin-services/sms.service";
 import { AppDataService } from "../../services/appdata-info/appdata-info.service";
+import {ProductsService} from "../../services/products/products.service";
 
 var homePageCmp;
 
@@ -26,21 +27,10 @@ export class HomepageComponent implements OnInit {
 
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
-  private categoryId;
-  private categoryName;
   private imageUrl: any;
-  private products: any;
   private results: {};
-  private randomIndex;
-  private imageUrlProd;
-  private randomedArr = [];
-  private sliderData: any;
-  private imageUrlSlider;
-  private catName;
-  private isSliderDataAvailable: boolean = false;
-  private isRandomProducts;
+  private uuid;
   private subscriptionStatus;
-  private deviceUUID;
   private localStorageUUIDString = "UUID";
   private appPublishDetails;
   private alive = true;
@@ -57,14 +47,14 @@ export class HomepageComponent implements OnInit {
               private sms: SMSService,
               private push: CordovaPluginFirebaseService,
               private subscription: SubscribedDataService,
-              private appDataService: AppDataService,) {
+              private productService: ProductsService,
+              private appDataService: AppDataService) {
 
     this.title.changeTitle(data.name);
     homePageCmp = this;
   }
 
   ngOnInit() {
-
     this.appDataService.getPublishDetails().subscribe(data => {
       this.appPublishDetails = data;
     });
@@ -104,7 +94,35 @@ export class HomepageComponent implements OnInit {
       error => {
         console.log('Error retrieving categories');
       });
+  }
 
+  loadArticle(catId,articleId){
+    if(catId && articleId) {
+      console.log("loadArticle for catId: " + catId + " articleId: " + articleId);
+
+      this.dataService.catId = catId;
+      this.productService.getProducts().subscribe(articles => {
+          console.log("<<<<<<<<Articles>>>>>>>>>");
+          console.log(articles);
+          var article = null;
+          for (let i = 0; i < articles.length; i++) {
+            console.log("articles[i].id=>" + articles[i].id)
+            if (articles[i].id === articleId) {
+              article = articles[i];
+            }
+          }
+
+          if (article) {
+            this.dataService.data = article;
+            this.route.navigate(['product', article.title]);
+          } else {
+            console.log("Article not found for the catId: " + catId + " articleId: " + articleId);
+          }
+        },
+        error => {
+          console.log('Error shop service');
+        });
+    }
   }
 
 
@@ -157,9 +175,11 @@ export class HomepageComponent implements OnInit {
     try {
           homePageCmp.categoryService.sendDeviceToken(data).subscribe(data => {
             console.log("Device token persisted successfully");
+            homePageCmp.callOnNotificationOpen();
         },
         error => {
           console.log('Error while sending the device token to be persist.Error: ' + error);
+          homePageCmp.callOnNotificationOpen();
         });
     }catch(err){
       console.log("Exception in pushSuccessCallback: " + err);
@@ -173,6 +193,22 @@ export class HomepageComponent implements OnInit {
   generatePushToken(){
     console.log("Call generatePushToken in homepage");
     homePageCmp.push.getToken(homePageCmp.pushSuccessCallback, homePageCmp.pushErrorCallback);
+  }
+
+  onNotificationOpenSuccessCallback(notification: any) {
+    console.log("inside onNotificationOpenSuccessCallback notification: " + JSON.stringify(notification));
+    if(notification.tap && notification.categoryId && notification.articleId && localStorage.getItem(homePageCmp.appId + "msisdn")) {
+      homePageCmp.loadArticle(notification.categoryId, notification.articleId);
+    }
+  }
+
+  onNotificationOpenErrorCallback(error: any) {
+    console.log("onNotificationOpenErrorCallback=>" + error);
+  }
+
+  callOnNotificationOpen(){
+    console.log("Call callOnNotificationOpen in homepage");
+    homePageCmp.push.onNotificationOpen(homePageCmp.onNotificationOpenSuccessCallback, homePageCmp.onNotificationOpenErrorCallback);
   }
 
   deviceUUIDCallback(uuid: any){
@@ -201,7 +237,7 @@ export class HomepageComponent implements OnInit {
 
   onSubscribe(){
     //Send Registration SMS
-    this.sms.sendRegistrationSMS(this.smsSuccessRegistrationCallback, this.smsErrorRegistrationCallback);
+    homePageCmp.sms.sendRegistrationSMS(homePageCmp.smsSuccessRegistrationCallback, homePageCmp.smsErrorRegistrationCallback);
 
     var uuid = localStorage.getItem("UUID");
 
