@@ -95,9 +95,8 @@ export class ProductComponent implements OnInit {
     }
 
     ngAfterViewInit() {
-
-
-        $("#gallery").unitegallery({
+        var api;
+        api = $("#gallery").unitegallery({
           theme_enable_text_panel: false,
           gallery_background_color: "rgba(0,0,0,0)",
           slider_scale_mode: "fit",
@@ -106,6 +105,9 @@ export class ProductComponent implements OnInit {
           gallery_autoplay:true,
           theme_hide_panel_under_width: null
         });
+        $('#gallery').on({ 'touchstart' : function(){
+            api.stop();
+        } });
     }
 
 
