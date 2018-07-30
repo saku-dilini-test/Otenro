@@ -103,7 +103,8 @@ export class ProductComponent implements OnInit {
           slider_scale_mode: "fit",
           slider_textpanel_bg_color:"#000000",
           slider_textpanel_bg_opacity: 0,
-          gallery_autoplay:true
+          gallery_autoplay:true,
+          theme_hide_panel_under_width: null
         });
     }
 

@@ -143,6 +143,7 @@ export class ProductComponent implements OnInit {
           slider_textpanel_bg_color:"rgba(0,0,0,0)",
           slider_textpanel_bg_opacity: 0,
           gallery_autoplay:true,
+          theme_hide_panel_under_width: null
         });
 
          //  for(let i=this.Data.tempImageArray.length-1;i>=0;i--){
