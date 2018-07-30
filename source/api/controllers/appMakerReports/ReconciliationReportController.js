@@ -16,11 +16,46 @@ var ObjectId = require('mongodb').ObjectID;
 module.exports = {
 
 
+    getShareSplit: function(operatorData,callback){
+
+        console.log("operatorData " + operatorData);
+
+        var operator = operatorData.toLowerCase().charAt(0).toUpperCase()+ operatorData.slice(1);
+        var shareSplit =0;
+
+        if (operator=="Mobitel"){
+
+            shareSplit = config.IDEABIZ_USER_NETWORK_CLIENTS.Mobitel.shareSplit;
+            return callback(shareSplit,"error");
+
+        }else if (operator=="Dialog"){
+
+            shareSplit = config.IDEABIZ_USER_NETWORK_CLIENTS.Dialog.shareSplit;
+            return callback(shareSplit,"error");
+
+        }else if (operator=="Hutch"){
+
+            shareSplit = config.IDEABIZ_USER_NETWORK_CLIENTS.Hutch.shareSplit;
+            return callback(shareSplit,"error");
+
+        }else if (operator=="Airtel"){
+
+            shareSplit = config.IDEABIZ_USER_NETWORK_CLIENTS.Airtel.shareSplit;
+            return callback(shareSplit,"error");
+
+        }else {
+            return callback(shareSplit,"error");
+        }
+
+    },
+
+
 
     insertReconciliationDailySummary: function () {
 
         var date = new Date();
         date.setDate(date.getDate() -1);
+        var reconciliationIntance = this;
 
         PublishDetails.find().exec(function(err, publishDetailsData){
 
@@ -38,23 +73,27 @@ module.exports = {
                             {groupBy:  ['appId'] , sum: [ 'amount' ] }).
                         exec(function(error, subscriptionPaymentData) {
 
-                            var data = {date:dateFormat(date, "yyyy-mm-dd"),appId:publishDetails.appId,
-                                revenue:subscriptionPaymentData[0] ? (subscriptionPaymentData[0].amount) : 0 ,userId:userData.id,
-                                name:userData.firstName+ " "+ userData.lastName ,bankCode:userData.bankCode,
-                                branchCode:userData.branchCode,branchName:userData.branchName,bankAccountNumber:userData.accountNumber};
 
-                            ReconciliationDailySummary.create(data).exec(function (err, result) {
 
-                                if (err) console.log(err);
-                                console.log(result);
+                            reconciliationIntance.getShareSplit("dialog",function(shareSplit, err){
 
+                                console.log(JSON.stringify(subscriptionPaymentData[0] ? subscriptionPaymentData[0].amount/100*shareSplit : 0));
+
+                                var data = {date:dateFormat(date, "yyyy-mm-dd"),appId:publishDetails.appId,
+                                    revenue:subscriptionPaymentData[0] ? subscriptionPaymentData[0].amount/100*shareSplit : 0 ,userId:userData.id,
+                                    name:userData.firstName+ " "+ userData.lastName ,bankCode:userData.bankCode,
+                                    branchCode:userData.branchCode,branchName:userData.branchName,bankAccountNumber:userData.accountNumber};
+
+                                ReconciliationDailySummary.create(data).exec(function (err, result) {
+
+                                    if (err) console.log(err);
+                                    console.log(result);
+
+                                });
                             });
-
                         });
                     });
-
                 });
-
             });
         });
     },

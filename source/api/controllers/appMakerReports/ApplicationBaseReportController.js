@@ -120,7 +120,7 @@ module.exports = {
                                                                             caaTaxable:true,date:dateFormat(date,"yyyy-mm-dd"),
                                                                             operator:operators.operator.toLowerCase(),
                                                                             platformEarning:subscriptionPaymentData[0] ? subscriptionPaymentData[0].amount:0,
-                                                                            spEarning:subscriptionPaymentData[0] ? ((subscriptionPaymentData[0].amount/100)*shareSplit):0,
+                                                                            spEarning:subscriptionPaymentData[0] ? subscriptionPaymentData[0].amount/100*shareSplit:0,
                                                                             appTotRevenue:subscriptionPaymentData[0] ? subscriptionPaymentData[0].amount:0,
                                                                             appTrafficCount:appVisitCount,subscriptionCount:subcount,unSubscriptionCount:unsubcount,
                                                                             totSubs:(subcount-unsubcountDiff)};

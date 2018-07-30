@@ -516,6 +516,9 @@ module.exports.routes = {
     'POST /appMakerReports/appBaseReport/getApplicationBaseYearlySummary': 'appMakerReports/ApplicationBaseReportController.getApplicationBaseYearlySummary',
 
 
+    'POST /appMakerReports/getFailedTransactionReportDataForDateRange': 'appMakerReports/FailedTransactionReportController.getFailedTransactionReportDataForDateRange',
+
+
 
 
     /**
@@ -523,6 +526,7 @@ module.exports.routes = {
      **/
 
     'GET /appMakerReports/getSubscriptionPayments': 'appMakerReports/ApplicationBaseReportController.getSubscriptionPayments',
+    'GET /appMakerReports/appBaseReport/insertFiledTransactionDailySummary': 'appMakerReports/FailedTransactionReportController.insertFiledTransactionDailySummary',
 
 
 };

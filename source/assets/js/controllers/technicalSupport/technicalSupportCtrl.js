@@ -24,7 +24,39 @@
             $scope.appList = [];
             $scope.deviceView ="mobile";
             $scope.showSearchField = true;
-            $scope.reconciliations = null;
+            $scope.responseData = null;
+            $scope.reconciliationResponseData =null;
+
+        $scope
+
+            $scope.reports = [
+                {name:"Date Range"},
+                {name:"Monthly"} ,
+                {name:"Yearly"}
+            ];
+            $scope.currentYear = new Date().getFullYear();
+            // $scope.current =   $scope.currentYear -1;
+            $scope.months  = [
+                {month:1},
+                {month:2},
+                {month:3},
+                {month:4},
+                {month:5},
+                {month:6},
+                {month:7},
+                {month:8},
+                {month:9},
+                {month:10},
+                {month:11},
+                {month:12}
+            ];
+            $scope.years  = [
+                {year:$scope.currentYear},
+                {year:$scope.currentYear-1},
+                {year:$scope.currentYear-2},
+                {year:$scope.currentYear-3}
+            ];
+
             var tempImagePath;
 
 //            console.log(initialData);
@@ -639,42 +671,19 @@
              **/
 
 
-            var reconciliationReports;
-            $scope.reports = [
-                    {name:"Date Range"},
-                    {name:"Monthly"} ,
-                    {name:"Yearly"}
-            ];
-            $scope.currentYear = new Date().getFullYear();
-            $scope.current =   $scope.currentYear -1;
-            $scope.months  = [
-                    {month:1},
-                    {month:2},
-                    {month:3},
-                    {month:4},
-                    {month:5},
-                    {month:6},
-                    {month:7},
-                    {month:8},
-                    {month:9},
-                    {month:10},
-                    {month:11},
-                    {month:12}
-            ];
-            $scope.years  = [
-                {year:$scope.currentYear},
-                {year:$scope.currentYear-1},
-                {year:$scope.currentYear-2},
-                {year:$scope.currentYear-3}
-            ];
 
-            $scope.master = {};
 
-            $scope.reconciliationReportsGet = function(){
-                $scope.reconciliations = [];
-            }
-            $scope.getReconciliation = function(Date){
-                $scope.reconciliations = [];
+
+        $scope.master = {};
+
+        $scope.reconciliationReportsGet = function(){
+            $scope.responseData = [];
+            $scope.reconciliationResponseData =[];
+        };
+
+
+        $scope.getReconciliation = function(Date){
+                $scope.reconciliationResponseData = [];
 
                 var dates;
                 if(Date.report == "Date Range"){
@@ -689,7 +698,7 @@
 
                         technicalSupportService.getReconciliationDataForDateRange(dates)
                             .success(function (response) {
-                                $scope.reconciliations = response;
+                                $scope.reconciliationResponseData = response;
 
                             }).error(function (response) {
                             toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
@@ -706,11 +715,15 @@
                         var fromMonth = Date.fromMonth;
                         var toMonth = Date.toMonth;
                         var year = Date.year;
-                    if(toMonth>fromMonth){
+
+
+                    if(toMonth>=fromMonth){
+
                         dates = {monthFrom:fromMonth, monthTo:toMonth, year:year}
+
                         technicalSupportService.getReconciliationDataForMonthly(dates)
                             .success(function(response){
-                                $scope.reconciliations = response;
+                                $scope.reconciliationResponseData = response;
                             })
                             .error(function(){
                                 toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
@@ -719,11 +732,9 @@
 
                     }
                     else{
-                        toastr.error('From Month should less than To Month', 'Warning', {closeButton: true});
+                        toastr.error('Invalid month range', 'Warning', {closeButton: true});
                     }
-
                 }
-
                 else{
 
                     var fromYear = Date.fromYear;
@@ -733,7 +744,7 @@
                         dates = {yearFrom:fromYear, yearTo:toYear};
                         technicalSupportService. getReconciliationDataForYearly(dates)
                             .success(function(response){
-                                $scope.reconciliations = response;
+                                $scope.reconciliationResponseData = response;
                             })
                             .error(function(response){
                                 toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
@@ -742,35 +753,96 @@
                     }
                     else{
 
-                        toastr.error('From Year Should less then To Year', 'Warning' , {closeButton: true});
+                        toastr.error('Invalid year range', 'Warning' , {closeButton: true});
                     }
-
-
                 }
-
-
             }
 
-        $scope.csvReconciliations = function(reconciliationsData,args){
 
-            var reconciliationsArray = [];
-            var array = reconciliationsData
-            console.log(array);
+        $scope.getFailedTransactionData = function(Date){
+            $scope.responseData = [];
 
-            reconciliationsArray.push("Service Provider" +"," + "App Id"+ "," +"Name" + "," + "Bank Code" + "," +"Branch Code" + ","+"Branch Name" + ","+"Bank A/C No" + ","+"Service Provide Earnings" +'\r\n');
-            array.forEach(function(obj){
-
-            var str = obj.userId + "," + obj.appId +"," + obj.name + + obj.bankCode +"," + obj.branchCode +"," + obj.branchName +"," + obj.bankAccountNumber+"," + obj.revenue + '\r\n';
-
-            reconciliationsArray.push(str);
+            if(Date.report == "Date Range"){
 
 
-            });
+                var fromDate = $filter('date')(Date.fromDate, "yyyy-MM-dd");
+                var toDate = $filter('date')(Date.toDate, "yyyy-MM-dd");
+
+                if(toDate >= fromDate) {
+
+                    var dates = {dateFrom: fromDate, dateTo: toDate};
+
+                    technicalSupportService.getFailedTransactionReportDataForDateRange(dates)
+                        .success(function (response) {
+                            $scope.responseData = response;
+
+                        }).error(function (response) {
+                        toastr.error('FailedTransaction Reports Loading Error', 'Warning', {closeButton: true});
+                    });
+
+                }
+                else{
+                    toastr.error('Invalid date range', 'Warning', {closeButton: true});
+                }
+            }
+        }
+
+        $scope.downloadCsv = function(reportData,args){
+
+            var dataArray = [];
+            var reportDataArray = reportData;
+            var range = "";
+            var rangeValue="";
+
+            if (args.reportRange=="Date Range"){
+                range = "Date";
+            }else if (args.reportRange=="Monthly"){
+                range = "Month";
+            }else {
+                range = "Year"
+            }
+
+            if (args.reportType=="RECONCILIATION"){
+
+                dataArray.push(range +","+"Service Provider" +"," + "App Id"+ "," +"Name" + ","
+                    + "Bank Code" + "," +"Branch Code" + ","+"Branch Name" + ","+"Bank A/C No" +
+                    ","+"Service Provide Earnings" +'\r\n');
+
+                reportDataArray.forEach(function(obj){
+
+                    if (args.reportRange=="Date Range"){
+                        rangeValue = obj.date;
+                    }else if (args.reportRange=="Monthly"){
+                        rangeValue = obj.month;
+                    }else {
+                        rangeValue = obj.year;
+                    }
+
+                    var str = rangeValue +","+obj.userId + "," + obj.appId +"," + obj.name + + obj.bankCode +"," + obj.branchCode +","
+                        + obj.branchName +"," + obj.bankAccountNumber+"," + obj.revenue + '\r\n';
+
+                    dataArray.push(str);
+                });
+
+            }else if (args.reportType=="failedTransaction"){
+
+                dataArray.push(range +"," + "Service Provider"+ "," +"Application Name" + ","
+                    + "Error Code" + "," +"Total"+'\r\n');
+
+
+                reportDataArray.forEach(function(obj){
+
+                    var str = obj.date + "," + obj.operator +"," + obj.appName + "," + obj.statusCode +"," + obj.count +'\r\n';
+
+                    dataArray.push(str);
+                });
+            }
+
 
             var csv = "";
 
-            for( i=0 ; i<reconciliationsArray.length; i++ ){
-                        csv += reconciliationsArray[i];
+            for( i=0 ; i<dataArray.length; i++ ){
+                        csv += dataArray[i];
                 }
             var data, filename, csvButton;
             if (csv == null) return;
@@ -787,10 +859,6 @@
             csvButton.click();
 
         }
-
-
-
-
 
     }
 

@@ -319,7 +319,72 @@
                         <md-tab>
                             <md-tab-label>Failed Transaction Report</md-tab-label>
                             <md-tab-body>
-                                Failed Transaction Report
+                                <div class="reports-container">
+
+                                    <div class="reports-type-container">
+
+                                        <div layout="column" layout-wrap>
+                                            <h6 flex="100">Select report type</h6>
+                                            <select placeholder="Select Report Type"
+                                                    ng-model="failedTransactionReport.report"
+                                                    ng-change="reconciliationReportsGet(failedTransactionReport.report)" required >
+                                                <option ng-value="oneReport.name"
+                                                        ng-repeat="oneReport in reports">{{oneReport.name}}</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="reports-period-container">
+
+                                        <div class="reports-container">
+                                            <h6>Select period</h6>
+
+                                            <form name="reconciliationForm">
+                                                <div ng-if="failedTransactionReport.report == 'Date Range'">
+                                                    <input type="date"  ng-model="failedTransactionReport.fromDate" placeholder="START DATE" onkeydown="return false" required>
+                                                    <input type="date" ng-model="failedTransactionReport.toDate" placeholder="END DATE" onkeydown="return false" required>
+                                                    <Button type="button" class="me-default-button" ng-click="getFailedTransactionData(failedTransactionReport)">Search</Button>
+                                                </div>
+                                                <!--<Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>-->
+                                            </form>
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+
+
+                                <form class="allItems" novalidate>
+                                    <a ng-if="(responseData.length > 0)" href="" ng-click='downloadCsv
+                                    (responseData,{ filename: "failedTransaction.csv",reportType:"failedTransaction",reportRange:failedTransactionReport.report})'>
+                                        <button style="float: right" type= "button" >CSV</button></a>
+                                    <table class="table">
+                                        <thead class="obl-dashboard-apps">
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Service Provider</th>
+                                            <th>Application Name</th>
+                                            <th>Error Code</th>
+                                            <th>Total</th>
+
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <tr  ng-repeat="failedTransaction in responseData">
+                                            <td>{{failedTransaction.date}}</td>
+                                            <td>{{failedTransaction.operator}}</td>
+                                            <td>{{failedTransaction.appName}}</td>
+                                            <td>{{failedTransaction.statusCode}}</td>
+                                            <td>{{failedTransaction.count}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
                             </md-tab-body>
                         </md-tab>
 
@@ -329,12 +394,9 @@
                                 Customer Care Report
                             </md-tab-body>
                         </md-tab>
-
-                         <md-tab>
+                        <md-tab>
                             <md-tab-label>Reconciliation Report</md-tab-label>
                             <md-tab-body>
-                                Reconciliation Report
-
                                 <div class="reports-container">
 
                                     <div class="reports-type-container">
@@ -395,10 +457,16 @@
 
 
                                 <form class="allItems" novalidate>
-                                    <a ng-if="(reconciliations.length > 0)" href="" ng-click='csvReconciliations(reconciliations,{ filename: "RECONCILIATION-REPORT.csv"})'><button style="float: right" type= "button" >CSV</button></a>
+                                    <a ng-if="(reconciliationResponseData.length > 0)" href="" ng-click='downloadCsv
+                                    (reconciliationResponseData,{ filename: "RECONCILIATION-REPORT.csv",reportType:"RECONCILIATION",
+                                    reportRange:reconciliationReports.report})'>
+                                        <button style="float: right" type= "button" >CSV</button></a>
                                     <table class="table">
                                         <thead class="obl-dashboard-apps">
                                         <tr>
+                                                <th ng-if="reconciliationReports.report == 'Date Range'">Date</th>
+                                                <th ng-if="reconciliationReports.report == 'Monthly'">Month</th>
+                                                <th ng-if="reconciliationReports.report == 'Yearly'">Year</th>
                                                 <th>Service Provider</th>
                                                 <th>App ID</th>
                                                 <th>Name</th>
@@ -412,7 +480,10 @@
                                         </thead>
 
                                         <tbody>
-                                            <tr  ng-repeat="reconciliation in reconciliations">
+                                            <tr  ng-repeat="reconciliation in reconciliationResponseData">
+                                                <td ng-if="reconciliationReports.report == 'Date Range'">{{reconciliation.date}}</td>
+                                                <td ng-if="reconciliationReports.report == 'Monthly'">{{reconciliation.month}}</td>
+                                                <td ng-if="reconciliationReports.report == 'Yearly'">{{reconciliation.year}}</td>
                                                 <td>{{reconciliation.userId}}</td>
                                                 <td>{{reconciliation.appId}}</td>
                                                 <td>{{reconciliation.name}}</td>
@@ -420,14 +491,11 @@
                                                 <td>{{reconciliation.branchCode}}</td>
                                                 <td>{{reconciliation.branchName}}</td>
                                                 <td>{{reconciliation.bankAccountNumber}}</td>
-                                                <td>{{reconciliation.revenue}}</td>
+                                                <td>Rs :{{reconciliation.revenue}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </form>
-
-
-
                             </md-tab-body>
                         </md-tab>
 

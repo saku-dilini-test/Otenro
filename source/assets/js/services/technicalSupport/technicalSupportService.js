@@ -323,6 +323,9 @@
 
             getReconciliationDataForDateRange: function (dates) {
                 return $http.post(SERVER_URL + 'appMakerReports/getReconciliationDataForDateRange', dates);
+            },
+            getFailedTransactionReportDataForDateRange: function (dates) {
+                return $http.post(SERVER_URL + 'appMakerReports/getFailedTransactionReportDataForDateRange', dates);
             }
 
 
