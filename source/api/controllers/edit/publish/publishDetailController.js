@@ -231,11 +231,11 @@ module.exports = {
             Application.findOne({id:result[0].appId}).exec(function(err,appData){
                 if (err) res.send(err);
 
-                if(!appData.apkStatus){
-                    sails.log.debug("apk generation started for the appId:" + body.appId);
-                    req.body.userId = appData.userId;
-                    editController.buildSourceProg(req,res);
-                }
+                // if(!appData.apkStatus){
+                //     sails.log.debug("apk generation started for the appId:" + body.appId);
+                //     req.body.userId = appData.userId;
+                //     editController.buildSourceProg(req,res);
+                // }
 
                 console.log(appData);
                     User.find({id:appData.userId}).exec(function(err,userData){

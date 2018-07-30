@@ -76,10 +76,10 @@
                         <button class="btn-material"  ng-click="approvedOperatorsView(app,userList,getDes(app.id,'manage'))">Manage</button>
                     </td>
                     <td align="center"  ng-if="user.userRole[0] == 'ADMIN'">
-                        <md-button class="me-default-button" ng-click = "buildAPK(app)" ng-hide = "app.apkStatus=='PENDING'">
+                        <md-button class="me-default-button" ng-click = "buildAPK(app)">
                             Build
                         </md-button>
-                        <span ng-show = "app.apkStatus=='PENDING'">Building...</span>
+                        <!--<span ng-show = "app.apkStatus=='PENDING'">Building...</span>-->
                     </td>
                     <td>{{app.publishedStatus}}</td>
                 <td align="center" ng-if="user.userRole[0] != 'ADMIN'">
