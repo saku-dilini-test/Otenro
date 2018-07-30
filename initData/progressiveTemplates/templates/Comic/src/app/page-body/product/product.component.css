@@ -1,5 +1,13 @@
 .desc{
-  padding: 60px 5px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
 }
 .carousel-control{
   height: 86%;
