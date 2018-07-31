@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
   private isSubscribing = false;
   private isUnsubscribing = false;
   private isFromCMSAppView: boolean = false;
-  private appStatus;
+  private displayMessage;
 
   constructor(private subscription: SubscribedDataService,
     private router: Router,
@@ -62,9 +62,6 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.checkAppStatus();
-
     this.isFromCMSAppView = localStorage.getItem(this.appId + "_isFromCMSAppView") == '1';
 
     $('#registerModel').on('hide.bs.modal', () => {
@@ -114,15 +111,7 @@ export class HeaderComponent implements OnInit {
 
   ngDoCheck() {
     this.subscriptionStatus = this.dataService.subscriptionStatus;
-  }
-
-  checkAppStatus() {
-
-    this.subscription.getAppStatus({ appId: this.appId }).subscribe(data => {
-      this.appStatus = data.isActive;
-      this.dataService.appStatus = this.appStatus;
-    });
-
+    this.displayMessage = this.dataService.displayMessage;
   }
 
   navigate(route: string, name: string) {
@@ -158,10 +147,10 @@ export class HeaderComponent implements OnInit {
   }
 
   openRegisterModel() {
-    this.subscription.getAppStatus({ appId: this.appId }).subscribe(data => {
-      this.appStatus = data.isActive;
-      this.dataService.appStatus = this.appStatus;
-      if (this.appStatus == false || this.appStatus == "false") {
+    let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn") }
+    this.subscription.getSubscribedData(data).subscribe(data => {
+      if(data.isError){
+        this.dataService.displayMessage = data.displayMessage;
         $(() => {
           $('#appStatusModel').modal('show');
         });
@@ -171,14 +160,13 @@ export class HeaderComponent implements OnInit {
         });
       }
     });
-
   }
 
   openMyAccountModel(){
-    this.subscription.getAppStatus({ appId: this.appId }).subscribe(data => {
-      this.appStatus = data.isActive;
-      this.dataService.appStatus = this.appStatus;
-      if (this.appStatus == false || this.appStatus == "false") {
+    let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn") }
+    this.subscription.getSubscribedData(data).subscribe(data => {
+      if(data.isError){
+        this.dataService.displayMessage = data.displayMessage;
         $(() => {
           $('#appStatusModel').modal('show');
         });

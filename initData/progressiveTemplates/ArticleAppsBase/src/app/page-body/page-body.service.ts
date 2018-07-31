@@ -4,6 +4,7 @@ import { Injectable, OnInit } from '@angular/core';
 export class PagebodyServiceModule {
 
   data: object;
+  displayMessage: string;
   userData: any;
   subscriptionStatus: any;
   appStatus: any;

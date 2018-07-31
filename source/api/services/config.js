@@ -192,6 +192,19 @@ module.exports = {
             'code': 'ERROR',
             'desc': 'Error'
         }
+    },
+
+    //END_USER_MESSAGES are the messages which we will show to the end user(in the mobile app itself)
+    END_USER_MESSAGES: {
+        'SERVER_ERROR': 'Could not provide the service, please contact support.',
+        'OPERATOR_NOT_FOUND': 'Service not available for your network operator.',
+        'APP_TERMINATED': 'The service is no longer available on the network.',
+        'APP_SUSPENDED': 'The service is temporarily unavailable on the network.',
+        'APP_REJECTED': 'The service is currently not available on the network. ',
+        'APP_SUBMITTED_FOR_APPROVAL': 'The service is currently not available on the network.',
+        'APP_SUBMITTED_FOR_CONFIGURATION': 'The service is currently not available on the network.',
+        'APP_NOT_SUBMITTED': 'The service is currently not available on the network.',
+        'APP_DELETED': 'The service is no longer available.'
     }
 
 };

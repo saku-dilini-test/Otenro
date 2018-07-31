@@ -26,7 +26,6 @@ export class FooterComponent implements OnInit{
   private isSubscribing = false;
   private isUnsubscribing = false;
   private isFromCMSAppView: boolean = false;
-  private appStatus;
 
   constructor(private subscription:SubscribedDataService,
               private router: Router,
@@ -52,21 +51,19 @@ export class FooterComponent implements OnInit{
   }
 
   openFooterMyAccount(){
-
-    this.subscription.getAppStatus({ appId: this.appId }).subscribe(data => {
-      this.appStatus = data.isActive;
-      this.dataService.appStatus = this.appStatus;
-      if (this.appStatus == false || this.appStatus == "false") {
+    let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn") };
+    this.subscription.getSubscribedData(data).subscribe(data => {
+      if(data.isError){
+        this.dataService.displayMessage = data.displayMessage;
         $(() => {
           $('#appStatusModel').modal('show');
         });
       } else {
-        $( () => {
+        $(() => {
           $('#myAccountModelfooter').modal('show');
-       });
+        });
       }
     });
-
   }
 
   navigate(val: string) {

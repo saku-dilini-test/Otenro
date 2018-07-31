@@ -36,7 +36,6 @@ export class HomepageComponent implements OnInit {
   private alive = true;
   private isSubscribing = false;
   private isFromCMSAppView: boolean = false;
-  private appStatus;
 
   constructor(private route: Router,
               private dataService: PagebodyServiceModule,
@@ -125,44 +124,38 @@ export class HomepageComponent implements OnInit {
     }
   }
 
-
   // Routing Method
   navigateShop(val: string, id, name) {
+    this.isSubscribing = false;
 
-      this.subscription.getAppStatus({ appId: this.appId }).subscribe(data => {
-        this.appStatus = data.isActive;
-        this.dataService.appStatus = this.appStatus;
-        if (this.appStatus == false || this.appStatus == "false") {
+    if (this.isFromCMSAppView) {
+      this.dataService.catId = id;
+      this.router.navigate(['/' + val, id, name]);
+    } else {
+      let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn") }
+      this.subscription.getSubscribedData(data).subscribe(data => {
+        if(data.isError){
+          this.dataService.displayMessage = data.displayMessage;
           $(() => {
             $('#appStatusModel').modal('show');
           });
         } else {
-          this.isSubscribing = false;
+          this.subscriptionStatus = data.isSubscribed;
+          if (this.subscriptionStatus) {
+            localStorage.setItem(this.appId + "msisdn", data.msisdn);
 
-          if (this.isFromCMSAppView) {
             this.dataService.catId = id;
             this.router.navigate(['/' + val, id, name]);
           } else {
-            let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn") }
-            this.subscription.getSubscribedData(data).subscribe(data => {
-              this.subscriptionStatus = data.isSubscribed;
-              if (this.subscriptionStatus) {
-                localStorage.setItem(this.appId + "msisdn", data.msisdn);
-
-                this.dataService.catId = id;
-                this.router.navigate(['/' + val, id, name]);
-              } else {
-                this.dataService.subUserArticleData.id = id;
-                this.dataService.subUserArticleData.name = name;
-                this.isSubscribing = false;
-                $('#registerModelhome').modal('show')
-              }
-            });
-
+            this.dataService.subUserArticleData.id = id;
+            this.dataService.subUserArticleData.name = name;
+            this.isSubscribing = false;
+            $('#registerModelhome').modal('show')
           }
         }
       });
 
+    }
   }
 
   pushSuccessCallback(token: any) {
@@ -236,6 +229,11 @@ export class HomepageComponent implements OnInit {
   }
 
   onSubscribe(){
+    if(!homePageCmp.sms.isServiceConfigured()){
+      alert("Service not yet configured, please contact support.");
+      return;
+    }
+
     //Send Registration SMS
     homePageCmp.sms.sendRegistrationSMS(homePageCmp.smsSuccessRegistrationCallback, homePageCmp.smsErrorRegistrationCallback);
 
