@@ -212,10 +212,10 @@ export class ProductComponent implements OnInit {
             this.selectedVariant.buyQuantity = '';
         }
 
-        if (this.foodInfo.selection.length == 1 && variant1 != 'Select'+this.name1) {
+        if (this.foodInfo.selection.length == 1 && variant1 != 'Select'+this.name1.replace(/\s/g, '')) {
 
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
+                if (this.foodInfo.variants[i].selection[0].vType.replace(/\s/g, '') == this.selectedVariant1) {
                     this.selectedVariant = this.foodInfo.variants[i];
 
 
@@ -231,7 +231,7 @@ export class ProductComponent implements OnInit {
             // }
 
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
+                if (this.foodInfo.variants[i].selection[0].vType.replace(/\s/g, '') == this.selectedVariant1) {
 
                     this.selection1.push({ 'vType': this.foodInfo.variants[i].selection[1].vType });
                 }
@@ -267,10 +267,10 @@ export class ProductComponent implements OnInit {
             this.selectedVariant.buyQuantity = '';
         }
 
-        if (this.foodInfo.selection.length == 2 && variant2 != 'Select'+this.name2) {
+        if (this.foodInfo.selection.length == 2 && variant2 != 'Select'+this.name2.replace(/\s/g, '')) {
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
-                    this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2) {
+                if (this.foodInfo.variants[i].selection[0].vType.replace(/\s/g, '') == this.selectedVariant1 &&
+                    this.foodInfo.variants[i].selection[1].vType.replace(/\s/g, '') == this.selectedVariant2) {
                     this.selectedVariant = this.foodInfo.variants[i];
                 }
             }
@@ -281,7 +281,7 @@ export class ProductComponent implements OnInit {
             //     this.selection2.push({ 'vType': 'Please Select' });
             // }
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[1].vType == variant2 && this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
+                if (this.foodInfo.variants[i].selection[1].vType.replace(/\s/g, '') == variant2 && this.foodInfo.variants[i].selection[0].vType.replace(/\s/g, '') == this.selectedVariant1) {
                     this.selection2.push({ 'vType': this.foodInfo.variants[i].selection[2].vType });
                 }
             }
@@ -316,11 +316,11 @@ export class ProductComponent implements OnInit {
             this.selectedVariant.buyQuantity = '';
         }
 
-        if (this.foodInfo.selection.length == 3 && variant3 != 'Select'+this.name3) {
+        if (this.foodInfo.selection.length == 3 && variant3 != 'Select'+this.name3.replace(/\s/g, '')) {
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
-                    this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2 &&
-                    this.foodInfo.variants[i].selection[2].vType == this.selectedVariant3) {
+                if (this.foodInfo.variants[i].selection[0].vType.replace(/\s/g, '') == this.selectedVariant1 &&
+                    this.foodInfo.variants[i].selection[1].vType.replace(/\s/g, '') == this.selectedVariant2 &&
+                    this.foodInfo.variants[i].selection[2].vType.replace(/\s/g, '') == this.selectedVariant3) {
                     this.selectedVariant = this.foodInfo.variants[i];
                 }
             }
@@ -331,7 +331,7 @@ export class ProductComponent implements OnInit {
             //     this.selection3.push({ 'vType': 'Please Select' });
             // }
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[2].vType == variant3 && this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 && this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2) {
+                if (this.foodInfo.variants[i].selection[2].vType.replace(/\s/g, '') == variant3 && this.foodInfo.variants[i].selection[0].vType.replace(/\s/g, '') == this.selectedVariant1 && this.foodInfo.variants[i].selection[1].vType.replace(/\s/g, '') == this.selectedVariant2) {
                     this.selection3.push({ 'vType': this.foodInfo.variants[i].selection[3].vType });
                 }
             }
@@ -353,14 +353,14 @@ export class ProductComponent implements OnInit {
 
         }
 
-        if (this.foodInfo.selection.length == 4 && variant4 != 'Select'+this.name4) {
+        if (this.foodInfo.selection.length == 4 && variant4 != 'Select'+this.name4.replace(/\s/g, '')) {
 
 
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
-                    this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2 &&
-                    this.foodInfo.variants[i].selection[2].vType == this.selectedVariant3 &&
-                    this.foodInfo.variants[i].selection[3].vType == this.selectedVariant4) {
+                if (this.foodInfo.variants[i].selection[0].vType.replace(/\s/g, '') == this.selectedVariant1 &&
+                    this.foodInfo.variants[i].selection[1].vType.replace(/\s/g, '') == this.selectedVariant2 &&
+                    this.foodInfo.variants[i].selection[2].vType.replace(/\s/g, '') == this.selectedVariant3 &&
+                    this.foodInfo.variants[i].selection[3].vType.replace(/\s/g, '') == this.selectedVariant4) {
                     this.selectedVariant = this.foodInfo.variants[i];
 
                 }
