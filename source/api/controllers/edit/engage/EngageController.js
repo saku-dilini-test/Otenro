@@ -12,6 +12,8 @@ var Authorization = config.AUTHORIZATION;
 var schedule = require('node-schedule');
 
 var CSV_DATE_TIME_FORMAT = "DD/MM/YY HH:mm";
+var CSV_SEND_TO_ALL = "all";
+var CSV_SEND_TO_INACTIVE = "inactive";
 
 module.exports = {
 
@@ -272,9 +274,6 @@ module.exports = {
                     csv().fromFile(csvFilePath).on('json',(jsonObj)=>{
 
                     if(errorsInCsv == null){
-
-//                        var date = engageCtrl.formatDate(new Date(jsonObj.dateTime));
-
                         if (!moment(jsonObj.dateTime, CSV_DATE_TIME_FORMAT, true).isValid()){
                             sails.log.debug("Invalid date format in row "  + rowNumber + " , correct date/time format is " + CSV_DATE_TIME_FORMAT);
                             errorsInCsv = "Invalid date format in row "  + rowNumber + " ,  correct date/time format is " + CSV_DATE_TIME_FORMAT;
@@ -283,6 +282,16 @@ module.exports = {
                         if (jsonObj.message.length == 0){
                             sails.log.debug("Message is empty in row " + rowNumber);
                             errorsInCsv = "Message is empty in row " + rowNumber;
+                        }
+
+                        if (jsonObj.sendto.length == 0){
+                            sails.log.debug("sendto is empty in row " + rowNumber);
+                            errorsInCsv = "sendto is empty in row " + rowNumber;
+                        }
+
+                        if (!(jsonObj.sendto == CSV_SEND_TO_ALL || jsonObj.sendto == CSV_SEND_TO_INACTIVE)){
+                            sails.log.debug("Value of sendto must be " + CSV_SEND_TO_ALL + "/" + CSV_SEND_TO_INACTIVE +  " in row " + rowNumber);
+                            errorsInCsv = "Value of sendto must be " + CSV_SEND_TO_ALL + "/" + CSV_SEND_TO_INACTIVE +  " in row " + rowNumber;
                         }
                         csvRows.push(jsonObj);
                     }
@@ -373,7 +382,11 @@ module.exports = {
 
     persistCSVPushMessages : function(req,res,jsonObj){
         var thisCtrl = this;
-        var type = req.body.type;
+        var type = 'A';
+
+        if(jsonObj.sendto == CSV_SEND_TO_INACTIVE){
+            type = 'I';
+        }
 
         var date_diff_indays = function(date1, date2) {
             console.log("date1 " + date1);
