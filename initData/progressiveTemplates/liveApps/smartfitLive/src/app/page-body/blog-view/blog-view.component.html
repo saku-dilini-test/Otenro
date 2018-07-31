@@ -1,25 +1,13 @@
-<div class="bloc bgc-white l-bloc" id="bloc-27" *ngIf = "blogViewData">
+<div class="bloc-xl bgc-white l-bloc blog" id="bloc-27" *ngIf = "blogViewData">
 	<div class="container bloc-sm">
 		<div class="row">
 			<div class="col-sm-12">
-        <div style="text-align: center; height: 350px;">
-            <img src="{{imageUrl}}/{{blogViewData[0].imageUrl}}" style="height: -webkit-fill-available; width:80% " alt="">
-          </div>
-
-				<p class="about-us ">
+        <img class="padding-vertical" src="{{imageUrl}}/{{blogViewData[0].imageUrl}}" width="100%" alt="">
+				<h2 class="header main-header-font margin-vertical">
 					{{blogViewData[0].title}}
-				</p>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="bloc bgc-white l-bloc" id="bloc-28" *ngIf = "blogViewData">
-	<div class="container bloc-md">
-		<div class="row">
-			<div class="col-sm-12">
-				<p class=" large-text" [innerHTML] = "blogViewData[0].desc">
-				</p>
+				</h2>
+        <div class="main-content-font" [innerHTML] = "blogViewData[0].desc">
+        </div>
 			</div>
 		</div>
 	</div>
