@@ -170,14 +170,19 @@ export class ProductComponent implements OnInit {
     }
 
     ngAfterViewInit() {
-        $("#gallery").unitegallery({
-            theme_enable_text_panel: false,
-            gallery_background_color: "rgba(0,0,0,0)",
-            slider_scale_mode: "fit",
-            slider_textpanel_bg_color: "rgba(0,0,0,0)",
-            slider_textpanel_bg_opacity: 0,
-            gallery_autoplay: true,
-        });
+      var api;
+      api = $("#gallery").unitegallery({
+        theme_enable_text_panel: false,
+        gallery_background_color: "rgba(0,0,0,0)",
+        slider_scale_mode: "fit",
+        slider_textpanel_bg_color:"#000000",
+        slider_textpanel_bg_opacity: 0,
+        gallery_autoplay:true,
+        theme_hide_panel_under_width: null
+      });
+      $('#gallery').on({ 'touchstart' : function(){
+        api.stop();
+      } });
 
         //  for(let i=this.Data.tempImageArray.length-1;i>=0;i--){
         //     if(this.Data.tempImageArray[i].videoUrl){

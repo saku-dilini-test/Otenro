@@ -565,9 +565,14 @@
                       closeButton: true
                   });
               }if($scope.defaultImage == null || $scope.defaultImage == undefined){
-                  toastr.error('Please select a default Image ', 'Warning', {
+                  return toastr.error('Please select a default Image ', 'Warning', {
                       closeButton: true
                   });
+                }if($scope.bannerImage === 'undefined' || $scope.bannerImage == null){
+                          disableTabs(3, false, false, false, false,false);
+                     return toastr.error('Please add a Banner Image', 'Warning', {
+                          closeButton: true
+                      });
                 }else {
 
 
