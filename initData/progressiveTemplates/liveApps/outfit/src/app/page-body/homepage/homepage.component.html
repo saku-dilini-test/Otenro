@@ -4,12 +4,12 @@
 
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img src="{{imageUrlSlider}}/{{sliderData[0].imageUrl}}" (click)="navigateSliderProd('product',sliderData[0])" />
+        <img src="{{imageUrlSlider}}/{{sliderData[0].imageUrl}}" (click)="navigateSliderProd('product',sliderData[0])" width="100%"/>
         <div class="carousel-caption">
         </div>
       </div>
       <div class="item" *ngFor="let slider of sliderData | slice:1;let i = index">
-        <img src="{{imageUrlSlider}}/{{slider.imageUrl}}" (click)="navigateSliderProd('product',sliderData[i+1])" />
+        <img src="{{imageUrlSlider}}/{{slider.imageUrl}}" (click)="navigateSliderProd('product',sliderData[i+1])"  width="100%"/>
         <div class="carousel-caption">
         </div>
       </div>
