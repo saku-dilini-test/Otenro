@@ -106,12 +106,12 @@
                                                 Weekdays
                                             </td>
                                             <td>
-                                                <input  class="input-shadow-border" type="number" name="weekDayHours" min="0" max="12" step="1" ng-model="openHours.weekDaysOpenHour" ng-pattern="/^([0-9]|0[0-9]|1[0-2]|0?[1-9])$/" ng-required />
+                                                <input  class="input-shadow-border" type="text" name="weekDayHours" min="0" max="12" step="1" ng-model="openHours.weekDaysOpenHour" ng-pattern="/^([0-9]|0[0-9]|1[0-2]|0?[1-9])$/" ng-required />
                                                 <span class="error2" ng-show="storeSettingsForm.weekDayHours.$error.pattern">Invalid time!</span>
                                                 <span class="error2" ng-show="storeSettingsForm.weekDayHours.$error.number">Please enter a number!</span>
                                             </td>
                                             <td>
-                                                <input  class="input-shadow-border" type="number" name="weekDaysOpenMinute" min="00" max="55" step="5" ng-model="openHours.weekDaysOpenMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
+                                                <input  class="input-shadow-border" type="text" name="weekDaysOpenMinute" min="00" max="55" step="5" ng-model="openHours.weekDaysOpenMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
                                                 <span class="error2" ng-show="storeSettingsForm.weekDaysOpenMinute.$error.pattern">Invalid time!</span>
                                                 <span  class="error2" ng-show="storeSettingsForm.weekDaysOpenMinute.$error.number">Please enter a number!</span>
                                             </td>
@@ -119,12 +119,12 @@
                                                 AM to
                                             </td>
                                             <td>
-                                                <input  class="input-shadow-border" type="number" name="weekDaysCloseHour" min="0" max="12" step="1" ng-model="openHours.weekDaysCloseHour" ng-pattern="/^([0-9]|0[0-9]|1[0-2]|0?[1-9])$/" ng-required />
+                                                <input  class="input-shadow-border" type="text" name="weekDaysCloseHour" min="0" max="12" step="1" ng-model="openHours.weekDaysCloseHour" ng-pattern="/^([0-9]|0[0-9]|1[0-2]|0?[1-9])$/" ng-required />
                                                 <span class="error2" ng-show="storeSettingsForm.weekDaysCloseHour.$error.pattern">Invalid time!</span>
                                                 <span class="error2" ng-show="storeSettingsForm.weekDaysCloseHour.$error.number">Please enter a number!</span>
                                             </td>
                                             <td>
-                                                <input  class="input-shadow-border" type="number" name="weekDaysCloseMinute" min="00" max="55" step="5" ng-model="openHours.weekDaysCloseMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
+                                                <input  class="input-shadow-border" type="text" name="weekDaysCloseMinute" min="00" max="55" step="5" ng-model="openHours.weekDaysCloseMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
                                                 <span class="error2" ng-show="storeSettingsForm.weekDaysCloseMinute.$error.pattern">Invalid time!</span>
                                                 <span class="error2" ng-show="storeSettingsForm.weekDaysCloseMinute.$error.number">Please enter a number!</span>
                                             </td>
@@ -137,23 +137,23 @@
                                                 Saturday
                                             </td>
                                             <td>
-                                                <input class="input-shadow-border" type="number" name="saturdayOpenHour" min="0" max="12" step="1" ng-model="openHours.saturdayOpenHour" ng-pattern="/^([0-9]|0[0-9]|1[0-2]|0?[1-9])$/" ng-required />
+                                                <input class="input-shadow-border" type="text" name="saturdayOpenHour" min="0" max="12" step="1" ng-model="openHours.saturdayOpenHour" ng-pattern="/^([0-9]|0[0-9]|1[0-2]|0?[1-9])$/" ng-required />
                                                 <span class="error2" ng-show="storeSettingsForm.saturdayOpenHour.$error.pattern">Invalid time!</span>
                                                 <span class="error2" ng-show="storeSettingsForm.saturdayOpenHour.$error.number">Please enter a number!</span>
                                             </td>
                                             <td>
-                                                <input class="input-shadow-border" type="number" name="saturdayOpenMinute" min="00" max="55" step="5" ng-model="openHours.saturdayOpenMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
+                                                <input class="input-shadow-border" type="text" name="saturdayOpenMinute" min="00" max="55" step="5" ng-model="openHours.saturdayOpenMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
                                                 <span class="error2" ng-show="storeSettingsForm.saturdayOpenMinute.$error.pattern">Invalid time!</span>
                                                 <span class="error2" ng-show="storeSettingsForm.saturdayOpenMinute.$error.number">Please enter a number!</span>
                                             </td>
                                             <td>AM to</td>
                                             <td>
-                                                <input class="input-shadow-border" type="number" name="saturdayCloseHour" min="0" max="12" step="1" ng-model="openHours.saturdayCloseHour" ng-pattern="/^([0-9]|0[0-9]|1[0-2]|0?[1-9])$/" ng-required />
+                                                <input class="input-shadow-border" type="text" name="saturdayCloseHour" min="0" max="12" step="1" ng-model="openHours.saturdayCloseHour" ng-pattern="/^([0-9]|0[0-9]|1[0-2]|0?[1-9])$/" ng-required />
                                                 <span class="error2" ng-show="storeSettingsForm.saturdayCloseHour.$error.pattern">Invalid time!</span>
                                                 <span class="error2" ng-show="storeSettingsForm.saturdayCloseHour.$error.number">Please enter a number!</span>
                                             </td>
                                             <td>
-                                                <input class="input-shadow-border" type="number" name="saturdayCloseMinute" min="00" max="55" step="5" ng-model="openHours.saturdayCloseMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
+                                                <input class="input-shadow-border" type="text" name="saturdayCloseMinute" min="00" max="55" step="5" ng-model="openHours.saturdayCloseMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
                                                 <span class="error2" ng-show="storeSettingsForm.saturdayCloseMinute.$error.pattern">Invalid time!</span>
                                                 <span class="error2" ng-show="storeSettingsForm.saturdayCloseMinute.$error.number">Please enter a number!</span>
                                             </td>
@@ -166,12 +166,12 @@
                                                 Sunday
                                             </td>
                                             <td>
-                                                <input class="input-shadow-border" type="number" name="sundayOpenHour" min="0" max="12" step="1" ng-model="openHours.sundayOpenHour" ng-pattern="/^([0-9]|0[0-9]|1[0-2]|0?[1-9])$/" ng-required />
+                                                <input class="input-shadow-border" type="text" name="sundayOpenHour" min="0" max="12" step="1" ng-model="openHours.sundayOpenHour" ng-pattern="/^([0-9]|0[0-9]|1[0-2]|0?[1-9])$/" ng-required />
                                                 <span class="error2" ng-show="storeSettingsForm.sundayOpenHour.$error.pattern">Invalid time!</span>
                                                 <span class="error2" ng-show="storeSettingsForm.sundayOpenHour.$error.number">Please enter a number!</span>
                                             </td>
                                             <td>
-                                                <input class="input-shadow-border" type="number" name="sundayOpenMinute" min="00" max="55" step="5" ng-model="openHours.sundayOpenMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
+                                                <input class="input-shadow-border" type="text" name="sundayOpenMinute" min="00" max="55" step="5" ng-model="openHours.sundayOpenMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
                                                 <span class="error2" ng-show="storeSettingsForm.sundayOpenMinute.$error.pattern">Invalid time!</span>
                                                 <span class="error2" ng-show="storeSettingsForm.sundayOpenMinute.$error.number">Please enter a number!</span>
                                             </td>
@@ -179,12 +179,12 @@
                                                 AM to
                                             </td>
                                             <td>
-                                                <input class="input-shadow-border" type="number" name="sundayCloseHour" min="0" max="12" step="1" ng-model="openHours.sundayCloseHour" ng-pattern="/^([0-9]|0[0-9]|1[0-2]|0?[1-9])$/" ng-required />
+                                                <input class="input-shadow-border" type="text" name="sundayCloseHour" min="0" max="12" step="1" ng-model="openHours.sundayCloseHour" ng-pattern="/^([0-9]|0[0-9]|1[0-2]|0?[1-9])$/" ng-required />
                                                 <span class="error2" ng-show="storeSettingsForm.sundayCloseHour.$error.pattern">Invalid time!</span>
                                                 <span class="error2" ng-show="storeSettingsForm.sundayCloseHour.$error.number">Please enter a number!</span>
                                             </td>
                                             <td>
-                                                <input class="input-shadow-border" type="number" name="sundayCloseMinute" min="00" max="55" step="5" ng-model="openHours.sundayCloseMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
+                                                <input class="input-shadow-border" type="text" name="sundayCloseMinute" min="00" max="55" step="5" ng-model="openHours.sundayCloseMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
                                                 <span class="error2" ng-show="storeSettingsForm.sundayCloseMinute.$error.pattern">Invalid time!</span>
                                                 <span class="error2" ng-show="storeSettingsForm.sundayCloseMinute.$error.number">Please enter a number!</span>
                                             </td>

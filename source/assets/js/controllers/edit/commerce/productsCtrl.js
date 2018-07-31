@@ -137,7 +137,7 @@
         });
 
         $scope.initSku = function(index){
-            if(index<$scope.initSkuLength || index == 0){
+            if(index < $scope.initSkuLength || index == 0){
                 return true;
             }
             else{

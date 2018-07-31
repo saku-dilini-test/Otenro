@@ -79,6 +79,8 @@
         // save added category
         $scope.saveCategory = function(file,menu,parentId){
 
+            $scope.disableSave = true;
+
             if($scope.tmpImage[0] == null){
                 toastr.error('Please upload an image', 'Warning', {closeButton: true});
                 return;
@@ -93,7 +95,7 @@
             if(!$scope.menu.id){
                 categoryMaintenanceService.saveAddedCategory(file,$rootScope.appId,menu.name,parentId,$rootScope.tempNew).success(function(data) {
                     var urlPath;
-
+                    $scope.disableSave = false;
                     if($rootScope.tempNew == 'true'){
                         urlPath =  SERVER_URL +"progressiveTemplates/viewProgUrl?userId="+ $auth.getPayload().id
                                                                    +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
@@ -126,6 +128,7 @@
             //updating only if name
             else if($scope.mainImg == $scope.serverImage){
                 categoryMaintenanceService.updateCategoryName(menu).success(function() {
+                    $scope.disableSave = false;
                     // update image name set to imageUrl in menu collection
                     var urlPath;
 
@@ -154,6 +157,7 @@
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                     $log.debug('progress: ' + progressPercentage + '% ' + evt.config.file.name);
                 }).success(function() {
+                    $scope.disableSave = false;
                     // update image name set to imageUrl in menu collection
                         var urlPath;
 
@@ -174,6 +178,7 @@
                     categoryMaintenanceService.showCategoryMaintenanceDialog();
 
                 }).error(function(err) {
+
                 })
             }
         };
