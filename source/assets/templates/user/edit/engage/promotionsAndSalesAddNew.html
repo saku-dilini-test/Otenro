@@ -520,11 +520,11 @@
                                         <label>Date</label>
                                     </fieldset>
                                     <div class="row">
-                                        <adm-dtp ng-model='singleProduct.dateFrom' options="{default: today, disabled:['2016/1/20', 2017/1/20]}" class="col-md-5"></adm-dtp>
+                                        <adm-dtp ng-model='singleProduct.dateFrom' options="{default: today,format: 'YYYY/MM/DD',default: today}" class="col-md-5"></adm-dtp>
 
                                             <label class="col-md-2 text-center">To</label>
 
-                                        <adm-dtp ng-model='singleProduct.dateTo' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
+                                        <adm-dtp ng-model='singleProduct.dateTo' options='{calType: "gregorian",format: "YYYY/MM/DD", default: today}' class="col-md-5"></adm-dtp>
                                     </div>
                                     <br>
                                     <fieldset >

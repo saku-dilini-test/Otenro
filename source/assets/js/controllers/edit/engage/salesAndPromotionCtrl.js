@@ -237,12 +237,57 @@
                 salesAndPromotion.selectedProduct = selected;
             }
 
+//            salesAndPromotion.dateTo = new Date(salesAndPromotion.dateTo);
+//            salesAndPromotion.dateFrom = new Date(salesAndPromotion.dateFrom);
+
+            if(salesAndPromotion.selectedProduct.length > 0){
+
+                var price = salesAndPromotion.selectedProduct[0].price;
+                var index;var variantSelection = "\n";
+
+                salesAndPromotion.selectedProduct.forEach(function(ele,idx){
+
+                    if(ele.price <= price){
+                        price = parseFloat(ele.price);
+                        index = idx;
+                    }
+
+                });
+
+                salesAndPromotion.selectedProduct[index].selection.forEach(function(ele){
+                    variantSelection += ele.name + "-" + ele.vType + "\n";
+                });
+
+            }
+
+
+            var fromDate = new Date(salesAndPromotion.dateFrom);
+            var toDate = new Date(salesAndPromotion.dateTo);
 
         if(salesAndPromotion.selectedProduct.length === undefined || salesAndPromotion.selectedProduct.length == 0){
-            toastr.error('Please select a product ', 'Warning', {
+            return toastr.error('Please select a product ', 'Warning', {
                 closeButton: true
             });
-        }else{
+
+        }if(toDate < fromDate){
+
+                toastr.error('Invalid date range', 'Warning', {
+                    closeButton: true
+                });
+                return ;
+        }
+        if(salesAndPromotion.discountType == "discountValue" && salesAndPromotion.discount > price){
+        console.log(salesAndPromotion.discount);
+        console.log(price);
+
+            toastr.error('Invalid discount value for \n\n' + salesAndPromotion.selectedProduct[index].name + variantSelection, 'Warning', {
+                closeButton: true
+            });
+            return ;
+
+        }
+        else{
+
             salesAndPromotion.appId = $rootScope.appId;
             console.log("sales promo");
             console.log(salesAndPromotion);

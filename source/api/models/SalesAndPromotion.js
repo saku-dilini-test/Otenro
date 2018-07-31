@@ -30,10 +30,10 @@ module.exports = {
             type: 'float'
         },
         dateFrom : {
-            type: 'date'
+            type: 'string'
         },
         dateTo : {
-            type: 'date'
+            type: 'string'
         },
         isLimitUsers : {
             type: 'boolean'
