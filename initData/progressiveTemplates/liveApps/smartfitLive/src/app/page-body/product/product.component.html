@@ -88,13 +88,13 @@
               <div class="text-left product-details-price main-content-font" >
                 <p *ngIf="discountAvailable == false"><strong>{{currency}}</strong> {{selectedVariant.price| number: '.2'}}</p>
                 <h5  *ngIf="discountAvailable == true"><p style="text-decoration: line-through">Regular price - <strong >{{currency}}</strong>{{oldPrice| number: '.2'}}</p></h5>
-                <h4 *ngIf="discountAvailable == true">Cash price - <strong>{{currency}}</strong> {{newPrice| number: '.2'}}</h4>                
+                <h4 *ngIf="discountAvailable == true">Cash price - <strong>{{currency}}</strong> {{newPrice| number: '.2'}}</h4>
               </div>
               <p class="text-left product-details-price main-content-font" *ngIf="!selectedVariant.price">
                 <strong>{{currency}}</strong> {{Data.variants[0].price| number: '.2'}}
               </p>
               <p class="text-left  text-danger">
-                <strong>0% installment schemas available on credit cards</strong>
+                <strong>0% installment schemes available on credit cards</strong>
               </p>
               <div>
                 <div class="row">
