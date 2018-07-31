@@ -6,6 +6,7 @@
 
     function BranchCtrl($scope, $mdDialog, toastr, contactUsService, branch, uiGmapGoogleMapApi, $rootScope, commerceService) {
         $scope.title = 'ADD';
+
         if(branch){
             $scope.locationInfo = branch;
             $scope.locationInfo.latitude = branch.branch.latitude;
@@ -16,6 +17,10 @@
             $scope.coords={
                 latitude : 6.9320204155752050,
                 longitude: 79.8890950584107031
+            };
+            $scope.locationInfo = {
+                latitude: '',
+                longitude:''
             };
         }
 
@@ -41,6 +46,8 @@
                         };
                         $scope.map.markers=[];
                         $scope.map.markers.push(marker);
+                        $scope.locationInfo.latitude = lat;
+                        $scope.locationInfo.longitude = lon;
                         $scope.$apply();
                     }
                 }

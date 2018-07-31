@@ -13,7 +13,7 @@ export class ContactComponent {
 
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
-  private googleMap;
+  googleMap;
   lat; lng;
   finish: boolean;
   CONTACNTINFO = [];

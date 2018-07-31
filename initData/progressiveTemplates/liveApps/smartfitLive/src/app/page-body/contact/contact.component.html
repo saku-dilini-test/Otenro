@@ -41,18 +41,17 @@
         <p class="text-center contact-text" style="margin-top: 1%;">
           “SMARTFIT” DRTV PRODUCTS (PVT)LTD.
         </p>
-
         <div *ngFor="let contact of contactInfo">
           <p class="text-center contact-text">
-            {{contact.address}}
+            {{contact.contactInfo.address}}
           </p>
           <p class="text-center contact-text">
             <!-- {{contact.telPhone}} -->
-            {{contact.email}}
+            {{contact.contactInfo.email}}
             <br>
           </p>
           <p class="text-center">
-            <a href="{{contact.webSite}}" target="_blank">{{contact.webSite}}</a>
+            <a href="{{contact.contactInfo.webSite}}" target="_blank">{{contact.contactInfo.webSite}}</a>
             <br>
           </p>
         </div>
