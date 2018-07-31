@@ -11,6 +11,7 @@ var PushUrl = config.PUSH_API_URL;
 var Authorization = config.AUTHORIZATION;
 var schedule = require('node-schedule');
 
+var CSV_DATE_TIME_FORMAT = "DD/MM/YY HH:mm";
 
 module.exports = {
 
@@ -191,7 +192,7 @@ module.exports = {
 
         Article.find(searchQuery).exec(function(err,data){
             if(err) return res.send(err);
-            console.log(data);
+            // console.log(data);
             return res.send(data);
         });
 
@@ -270,20 +271,18 @@ module.exports = {
                     const csv=require('csvtojson');
                     csv().fromFile(csvFilePath).on('json',(jsonObj)=>{
 
-                    // console.log("row: " + rowNumber + " date: " + jsonObj.dateTime + " msg: " + jsonObj.message);
-
                     if(errorsInCsv == null){
 
 //                        var date = engageCtrl.formatDate(new Date(jsonObj.dateTime));
 
-                        if (!moment(jsonObj.dateTime, "YYYY/MM/DD HH:mm", true).isValid()){
-                            sails.log.debug("Invalid date format in row "  + rowNumber + ".Correct datetime Format is DD/MM/YYYY HH:mm");
-                            errorsInCsv = "Invalid date format in row "  + rowNumber + ".Correct datetime Format is DD/MM/YYYY HH:mm";
+                        if (!moment(jsonObj.dateTime, CSV_DATE_TIME_FORMAT, true).isValid()){
+                            sails.log.debug("Invalid date format in row "  + rowNumber + " , correct date/time format is " + CSV_DATE_TIME_FORMAT);
+                            errorsInCsv = "Invalid date format in row "  + rowNumber + " ,  correct date/time format is " + CSV_DATE_TIME_FORMAT;
                         }
 
                         if (jsonObj.message.length == 0){
-                            sails.log.debug("Message is empty in row: " + rowNumber);
-                            errorsInCsv = "Message is empty in row: " + rowNumber;
+                            sails.log.debug("Message is empty in row " + rowNumber);
+                            errorsInCsv = "Message is empty in row " + rowNumber;
                         }
                         csvRows.push(jsonObj);
                     }
@@ -383,11 +382,8 @@ module.exports = {
             var dt2 = new Date(date2);
             return Math.floor((Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) - Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) ) /(1000 * 60 * 60 * 24));
         };
-        // console.log(moment(jsonObj.dateTime, "YYYY/MM/DD HH:mm", true).isValid());
 
-        var date = this.formatDate(new Date(jsonObj.dateTime));
-
-        if (moment(date, "DD/MM/YYYY HH:mm", true).isValid()&&jsonObj.message.length > 0){
+        if (moment(jsonObj.dateTime, CSV_DATE_TIME_FORMAT, true).isValid()&&jsonObj.message.length > 0){
 
             console.log(jsonObj.dateTime + "" + jsonObj.message);
             var data = {date:jsonObj.dateTime,message:jsonObj.message,appId:req.body.appId,userId:req.userId,type:type};
@@ -455,8 +451,7 @@ module.exports = {
                 var mime = require('mime');
                 var fs = require('fs');
 
-                var file = config.ME_SERVER +"sample.csv";
-
+                var file = sails.config.appPath+'/api/services/push_sample.csv';
                 var filename = path.basename(file);
                 var mimetype = mime.lookup(file);
                 res.setHeader('x-filename', filename);
