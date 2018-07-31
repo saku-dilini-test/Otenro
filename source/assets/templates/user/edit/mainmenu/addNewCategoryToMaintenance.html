@@ -59,7 +59,7 @@
             <div class="md-dialog-buttons">
                 <div class="inner-section">
                     <md-button class="me-default-button" ng-click="cancelEdit()">Cancel</md-button>
-                    <md-button class="me-default-button" ng-click="saveCategory(mainImg,menu,initialData.parentId)">Save</md-button>
+                    <md-button class="me-default-button" ng-disabled = "disableSave" ng-click="saveCategory(mainImg,menu,initialData.parentId)">Save</md-button>
                 </div>
             </div>
         </form>
