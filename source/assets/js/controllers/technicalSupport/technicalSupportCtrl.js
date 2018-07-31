@@ -457,7 +457,12 @@
 //                toastr.error('Service ID added Successfully', 'Success', {closeButton: true});
                 $window.location.reload();
             }).error(function(error){
-                toastr.error('Error adding Service ID', 'Warning', {closeButton: true});
+
+                if(error.isError){
+                    toastr.error( error.message , 'Error', {closeButton: true});
+                }else{
+                    toastr.error('Error adding Service ID' , 'Warning', {closeButton: true});
+                }
             });
         }
 
