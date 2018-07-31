@@ -61,6 +61,13 @@ module.exports = {
         if ( typeof product.tempImageArray == 'undefined'){
              product.tempImageArray=[];
         }
+        
+       var fs2 = require('fs');
+       var dir = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + '/src/assets/images/banner';
+
+       if (!fs2.existsSync(dir)){
+           fs2.mkdirSync(dir);
+       }
 
 
         for (var i=0; i<tmpImage.length; i++) {
@@ -113,6 +120,7 @@ module.exports = {
 
 
        if (!bannerImage.match("http")){
+
            var imgeFileName = randomstring.generate()+".png";
            var data = bannerImage.replace(/^data:image\/\w+;base64,/, "");
            var buf = new Buffer(data, 'base64');
