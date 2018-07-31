@@ -25,12 +25,15 @@
         <h3 class="mg-md product-header-h1 animated fadeInUp main-header-font">
           {{Data.name}}
         </h3>
-        <p class="text-left main-content-font" *ngIf="selectedVariant.price">
-          <strong>{{currency}}</strong> {{selectedVariant.price}}
-        </p>
+        <div class="text-left main-content-font" >
+          <p *ngIf="discountAvailable == false"><strong>{{currency}}</strong> {{selectedVariant.price| number: '.2'}}</p>
+          <p style="text-decoration: line-through" *ngIf="discountAvailable == true"><strong>{{currency}}</strong> {{oldPrice| number: '.2'}}</p>
+          <p *ngIf="discountAvailable == true"><strong>{{currency}}</strong> {{newPrice| number: '.2'}}</p>                
+        </div>
         <p class="text-left main-content-font" *ngIf="!selectedVariant.price">
           <strong>{{currency}}</strong> {{Data.variants[0].price}}
         </p>
+
         <p class="color">
           <strong style="color:rgb(153, 15, 15)" *ngIf=" Data.variants.length >= 1 && selectedVariant.quantity == 0 && lockBuyButton">Availability: Out of stock</strong>
           <strong *ngIf=" !(Data.variants.length >= 1 && selectedVariant.quantity == 0 && lockBuyButton)">Availability: In stock</strong>

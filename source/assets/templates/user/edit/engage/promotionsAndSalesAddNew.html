@@ -8,7 +8,7 @@
 
     <md-dialog-content>
         <md-tabs  md-no-ink-bar ="false" md-no-ink="true" md-no-bar  md-center-tabs="false"  md-autoselect="false"
-                  md-dynamic-height="true" >
+                  md-dynamic-height="true" md-selected="selectedTab">
             <!--Choosing a Sales & Promotion Type -->
             <md-tab >
                 <md-tab-label>Sales & Promotion Type</md-tab-label>
@@ -448,22 +448,26 @@
                                         </div>
                                     </md-input-container>
 
-                                    <fieldset class="row">
+                                    <fieldset class="row" ng-if = "array.length > 0">
                                         <div class="col-md-6 country-list">
                                             <label>Select Products</label>
                                             <br>
                                             <md-checkbox aria-label="Select All"
-                                                         ng-checked="isChecked()"
+                                                         ng-checked="isChecked(selectAll)"
+                                                         ng-model = "selectAll"
                                                          md-indeterminate="isIndeterminate()"
                                                          ng-click="toggleAll()">
                                                 <span ng-if="isChecked()">Un-</span>Select All
                                             </md-checkbox>
 
-                                            <div ng-repeat="oneProduct in productsList | orderBy:'name'"
+                                            <div ng-repeat="oneProduct in array | orderBy:'name'"
                                                  ng-model="product"  >
                                                 <md-checkbox ng-checked="exists(oneProduct, selected)"
                                                              ng-click="toggle(oneProduct, selected)"
-                                                             aria-label="oneProduct.name" >{{oneProduct.name}}
+                                                             aria-label="oneProduct.name" >{{oneProduct.name}}<br>
+                                                    <div ng-repeat="select in oneProduct.selection">
+                                                        {{select.name}} - {{select.vType}}
+                                                    </div>
                                                 </md-checkbox>
                                             </div>
                                         </div>
@@ -473,44 +477,61 @@
                                                 <!--<span>{{product.name}}</span>-->
                                                 <md-checkbox ng-checked="exists(product, selected)"
                                                              ng-click="toggle(product, selected)"
-                                                             aria-label="oneProduct.name" >{{product.name}}
+                                                             aria-label="oneProduct.name" >{{product.name}}<br>
+                                                    <div ng-repeat="select in product.selection">
+                                                        {{select.name}} - {{select.vType}}
+                                                    </div>
                                                 </md-checkbox>
                                             </div>
                                             <div ng-if ="IsSingleSelection" class="md-label" ng-repeat="product in selected">
                                                <!-- <span>{{product.name}}</span>-->
                                                 <md-checkbox ng-checked="exists(product, selected)"
                                                              ng-click="toggle(product, selected)"
-                                                             aria-label="oneProduct.name" >{{product.name}}
+                                                             aria-label="oneProduct.name" >{{product.name}}<br>
+                                                    <div ng-repeat="select in product.selection">
+                                                        {{select.name}} - {{select.vType}}
+                                                    </div>
                                                 </md-checkbox>
                                             </div>
                                         </div>
                                     </fieldset>
+                                    <fieldset ng-if="array.length == 0">
+                                        <label> There are no Products left.</label><br><br>
+                                    </fieldset>
 
-                                    <md-input-container class="md-block" flex="50">
+                                    <md-input-container class="md-block" flex="50" ng-if = "singleProduct.discountType == 'discountValue'">
                                         <label>Discount</label>
-                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="singleProduct.discount">
+                                        <input  md-maxlength="15"  ng-required="true" name="discount" ng-model="singleProduct.discount">
                                         <div ng-messages="singleProductForm.discount.$error" ng-show="singleProductForm.discount.$dirty">
                                             <div ng-message="required">Name is required.</div>
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
                                         </div>
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex="50" ng-if = "singleProduct.discountType == 'discount'">
+                                        <label>Discount</label>
+                                        <input md-maxlength="5" maxlength ="5" ng-pattern="/^100$|^\d{0,2}(\.\d{1,2})? *%?$/"  ng-required="true" name="discountPercent" ng-model="singleProduct.discountPercent">
+                                        <div ng-messages="singleProductForm.discountPercent.$error" ng-show="singleProductForm.discount.$dirty">
+                                            <div ng-message="required">Name is required.</div>
+                                        </div>
+                                        <span class="error" ng-show="singleProductForm.discountPercent.$error.pattern">Enter a valid value</span>
                                     </md-input-container>
 
                                     <fieldset>
                                         <label>Date</label>
                                     </fieldset>
                                     <div class="row">
-                                        <adm-dtp ng-model='singleProduct.dataFrom' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
+                                        <adm-dtp ng-model='singleProduct.dateFrom' options="{default: today,format: 'YYYY/MM/DD',default: today}" class="col-md-5"></adm-dtp>
 
                                             <label class="col-md-2 text-center">To</label>
 
-                                        <adm-dtp ng-model='singleProduct.dataTo' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
+                                        <adm-dtp ng-model='singleProduct.dateTo' options='{calType: "gregorian",format: "YYYY/MM/DD", default: today}' class="col-md-5"></adm-dtp>
                                     </div>
                                     <br>
                                     <fieldset >
-                                            <md-checkbox  aria-label="Limit user" ng-model="singleProduct.isLimitUser">
+                                            <md-checkbox  aria-label="Limit user" ng-model="singleProduct.isLimitUsers">
                                                 <label>Limit users</label>
                                             </md-checkbox>
-                                            <md-input-container ng-if="singleProduct.isLimitUser" class="md-block" flex="50">
+                                            <md-input-container ng-if="singleProduct.isLimitUsers" class="md-block" flex="50">
                                                 <input md-maxlength="15"  ng-required="true" name="Limit users" ng-model="singleProduct.limitUsers">
                                                 <div ng-messages="singleProductForm.limitUsers.$error" ng-show="singleProductForm.limitUsers.$dirty">
                                                     <div ng-message="required">Limit Users is required.</div>
@@ -564,7 +585,7 @@
                             <div class="md-dialog-buttons">
                                 <div class="inner-section">
                                     <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                                    <md-button class="me-default-button" ng-disabled="singleProductForm.$invalid " ng-click="saveSalesAndPromotion(singleProduct,'singleProduct')">Save</md-button>
+                                    <md-button class="me-default-button" ng-disabled="singleProductForm.$invalid || !singleProduct.dateFrom || !singleProduct.dateTo || array.length == 0" ng-click="saveSalesAndPromotion(singleProduct,'singleProduct',selected)">Save</md-button>
                                 </div>
                             </div>
                         </form>

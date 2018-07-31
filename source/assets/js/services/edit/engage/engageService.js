@@ -34,7 +34,10 @@
                 return $mdDialog.show({
                     controller: 'SalesAndPromotionCtrl',
                     templateUrl: 'user/edit/engage/promotionsAndSalesView.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    locals:{
+                        item: null
+                    }
                 }).then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function() {
@@ -45,7 +48,10 @@
                 return $mdDialog.show({
                     controller: 'SalesAndPromotionCtrl',
                     templateUrl: 'user/edit/engage/promotionsAndSalesAddNew.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    locals:{
+                        item:null
+                    }
                 }).then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function() {

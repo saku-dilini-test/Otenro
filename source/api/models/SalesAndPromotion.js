@@ -24,13 +24,16 @@ module.exports = {
             type: 'string'
         },
         discount:{
-            type: 'integer'
+            type: 'float'
+        },
+        discountPercent:{
+            type: 'float'
         },
         dateFrom : {
-            type: 'date'
+            type: 'string'
         },
         dateTo : {
-            type: 'date'
+            type: 'string'
         },
         isLimitUsers : {
             type: 'boolean'
