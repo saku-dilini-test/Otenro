@@ -8,6 +8,8 @@
         $scope.title = 'ADD';
         if(branch){
             $scope.locationInfo = branch;
+            $scope.locationInfo.latitude = branch.branch.latitude;
+            $scope.locationInfo.longitude = branch.branch.longitude;
             $scope.coords =branch.branch;
             $scope.title = 'UPDATE';
         }else{
@@ -44,6 +46,18 @@
                 }
             };
         });
+
+        $scope.updateLocation = function (lat, lon) {
+            var marker = {
+                id: Date.now(),
+                coords: {
+                    latitude: lat,
+                    longitude: lon
+                }
+            };
+            $scope.map.markers=[];
+            $scope.map.markers.push(marker);
+        }
 
 
         $scope.addBranchLocation = function(locationInfo,map) {

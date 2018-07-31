@@ -20,7 +20,7 @@ export class FooterComponent{
   dummy: any;
   constructor(private router: Router, private appDataService: AppDataService, private localStorageService: LocalStorageService) {
     this.appDataService.getContactUs().subscribe((data: any) => {
-      this.webInfo = data;
+      this.webInfo = data.contactInfo;
        this.dummy = new Date().getTime();
     }),((err) => {
       console.log("Error when fetching ContactUsInfo: " + JSON.stringify(err));
