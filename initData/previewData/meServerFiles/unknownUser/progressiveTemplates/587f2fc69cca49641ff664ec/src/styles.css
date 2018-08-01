@@ -1049,7 +1049,7 @@ body::-webkit-scrollbar-thumb {
 .main-header-font{
   /*font-size: 6vh;*/
   letter-spacing: 0em;
-  color:#000;
+  color:#403e3e;
   font-family: Arial;
   font-weight: bold;
 }
@@ -1061,16 +1061,16 @@ body::-webkit-scrollbar-thumb {
   font-weight: 400;
 }
 .main-background{
-  background-color: #e6e8ea !important;
+  background-color: #fff !important;
   overflow-x: hidden;
 }
 .made-easy-background-image{
-  background: url("assets/images/background.png");
+  background: null;
   background-repeat: repeat;
   background-size: cover;
 }
 .main-navigation{
-  background-color: rgba(245, 245, 245, 1) !important;
+  background-color: #fff !important;
   color: #000;
 }
 .main-navigation a{
@@ -1093,15 +1093,11 @@ body::-webkit-scrollbar-thumb {
   box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.5);
 }
 .main-footer-back{
-  background-color: #fff !important;
+  background-color: #000 !important;
 }
 .main-footer-header{
-  color:#000;
+  color:#fff;
 }
 .main-footer-font{
-  color:#000;
-}
-
-.main-footer-header:hover{
-  color:#ccc;
+  color:rgb(207, 189, 172);
 }

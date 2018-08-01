@@ -1,0 +1,24 @@
+<div class="page-container">
+  <div class="bloc bgc-white l-bloc" id="bloc-0">
+    <div class="container bloc-sm">
+      <img class="cat-image" src="{{imageUrl1}}/{{catImage}}" width="100%">
+      <div class="grey text-center margin-l">CATEGORY</div>
+      <h3 class="text-center margin-l">{{catName}}</h3>
+      <div class="text-center grey margin-l"  *ngIf="results">{{results.length}} Recipes</div>
+      <div class="row padding" *ngFor="let article of results" (click)="navigateProd('product',article)">
+          <div class="col-xs-12 prod">
+              <img src="{{imageUrl}}/{{article.tempImageArray[0].img}}" width="100%">
+          </div>
+           <div class="col-xs-12 ">
+              <div class="main-header-font name">{{article.title}}</div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ScrollToTop Button -->
+  <a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1')">
+    <span class="fa fa-chevron-up"></span>
+  </a>
+  <!-- ScrollToTop Button END-->
+</div>
