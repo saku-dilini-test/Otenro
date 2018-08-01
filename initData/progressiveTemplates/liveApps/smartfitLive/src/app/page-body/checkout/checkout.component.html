@@ -67,7 +67,7 @@
                       </div>
 
                       <div class="form-group">
-                        <label for="pkPhone" class="col-2 col-form-label">Phone</label>
+                        <label for="pkPhone" class="col-2 col-form-label">Telephone</label>
                         <div class="col-10">
                           <input class="form-control" type="text" maxlength="16" placeholder="+94712345678" [formControl]="pickupForm.controls['phone']">
                         </div>
@@ -291,7 +291,7 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label class="sub-header-text-h2">
-                        E-MAIL ADDRESS
+                        Email Address
                       </label>
                       <input class="form-control" type="text" placeholder="you@example.com" [formControl]="complexForm.controls['email']">
 
@@ -301,24 +301,24 @@
                       </div>
                       <div *ngIf="!complexForm.controls['email'].valid && complexForm.controls['email'].touched && complexForm.controls['email'].dirty"
                         class="alert alert-danger">
-                        invalid Email
+                        Invalid email
                       </div>
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label class="sub-header-text-h2">
-                        TELEPHONE
+                        Telephone
                       </label>
                       <input class="form-control" type="text" placeholder="+94712345678" maxlength="16" [formControl]="complexForm.controls['phone']">
 
                       <div *ngIf="complexForm.controls['phone'].hasError('required')
                                   && complexForm.controls['phone'].touched && complexForm.controls['phone'].dirty" class="alert alert-danger">
-                        You must include a Phone Number.
+                        You must include a phone number.
                       </div>
                       <div *ngIf="!complexForm.controls['phone'].valid && complexForm.controls['phone'].touched && complexForm.controls['phone'].dirty"
                         class="alert alert-danger">
-                        Enter a valid Phone Number (ex: +94123456789)
+                        Enter a valid phone number (ex: +94123456789)
                       </div>
                     </div>
                   </div>
