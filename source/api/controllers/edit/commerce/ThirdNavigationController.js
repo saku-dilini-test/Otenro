@@ -61,7 +61,7 @@ module.exports = {
         if ( typeof product.tempImageArray == 'undefined'){
              product.tempImageArray=[];
         }
-
+    console.log(req.body);
        var fs2 = require('fs');
        var dir = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + '/src/assets/images/banner';
 
@@ -126,10 +126,10 @@ module.exports = {
            var buf = new Buffer(data, 'base64');
            const rimraf = require('rimraf');
 
-            if(req.body.oldBannerImg){
+            if(fs2.existsSync(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + '/src/assets/images/banner/' + req.body.oldBannerImg)){
                 fs.unlink(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + '/src/assets/images/banner/' + req.body.oldBannerImg, function(err) {
                   if (err) throw err;
-                  console.log('path/file.txt was deleted');
+                  console.log(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + '/src/assets/images/banner/' + req.body.oldBannerImg + "deleted");
                 });
             }
 
@@ -161,6 +161,7 @@ module.exports = {
                     }
                 }
            }
+           console.log(product);
 
         var searchQuery = {
             id : req.body.product.id
