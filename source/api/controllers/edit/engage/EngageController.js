@@ -289,7 +289,7 @@ module.exports = {
                             errorsInCsv = "sendto is empty in row " + rowNumber;
                         }
 
-                        if (!(jsonObj.sendto == CSV_SEND_TO_ALL || jsonObj.sendto == CSV_SEND_TO_INACTIVE)){
+                        if (!(jsonObj.sendto.toLowerCase() == CSV_SEND_TO_ALL || jsonObj.sendto.toLowerCase() == CSV_SEND_TO_INACTIVE)){
                             sails.log.debug("Value of sendto must be " + CSV_SEND_TO_ALL + "/" + CSV_SEND_TO_INACTIVE +  " in row " + rowNumber);
                             errorsInCsv = "Value of sendto must be " + CSV_SEND_TO_ALL + "/" + CSV_SEND_TO_INACTIVE +  " in row " + rowNumber;
                         }
@@ -384,7 +384,7 @@ module.exports = {
         var thisCtrl = this;
         var type = 'A';
 
-        if(jsonObj.sendto == CSV_SEND_TO_INACTIVE){
+        if(jsonObj.sendto.toLowerCase() == CSV_SEND_TO_INACTIVE){
             type = 'I';
         }
 
