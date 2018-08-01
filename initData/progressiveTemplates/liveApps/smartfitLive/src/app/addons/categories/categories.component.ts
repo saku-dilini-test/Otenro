@@ -117,14 +117,7 @@ export class CategoriesComponent implements OnInit {
     this.router.navigate([val, this.catName]);
   }
 
-  navigateSliderProd(val, item) {
-    if (item.optionals.length == 2) {
-      this.catName = item.optionals[0].name
-      this.dataService.data = item.optionals[1];
-      localStorage.setItem(this.appId + ":dataServiceData", JSON.stringify(this.dataService.data))
-      this.router.navigate([val, this.catName]);
-    }
-  }
+
 
 }
 

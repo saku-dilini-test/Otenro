@@ -112,6 +112,7 @@
               </span>
             </div>
 
+
             <!-- Modal -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">
@@ -121,10 +122,10 @@
                   </div>
                   <div class="row">
                     <div class="col-xs-6 text-center">
-                      <img src="{{imageUrl}}/{{Data.tempImageArray[0].img}}"  width="100%">
+                      <img src="{{imageUrl}}/{{selectedVariant.imageUrl || Data.tempImageArray[0].img}}"  width="100%">
                     </div>
                     <div class="col-xs-6">
-                      <h4 class="main-header-font padding"><strong> {{Data.name}}</strong></h4>
+                      <h4 class="main-header-font padding-vertical"><strong> {{Data.name}}</strong></h4>
                       <p class="main-content-font" *ngFor="let v of dialogVariants">{{v.name}}:{{v.vType}}</p>
                       <h4 class="main-content-font"><strong> {{currency}} {{selectedVariant.price}}</strong></h4>
                     </div>
