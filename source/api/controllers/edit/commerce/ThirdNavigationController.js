@@ -61,7 +61,7 @@ module.exports = {
         if ( typeof product.tempImageArray == 'undefined'){
              product.tempImageArray=[];
         }
-        
+
        var fs2 = require('fs');
        var dir = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + '/src/assets/images/banner';
 
