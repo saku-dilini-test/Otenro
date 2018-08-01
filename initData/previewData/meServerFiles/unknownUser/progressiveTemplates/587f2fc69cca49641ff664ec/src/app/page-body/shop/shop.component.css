@@ -1,0 +1,33 @@
+
+.container{
+  height: 100vh;
+  background: #fff;
+  border-top:1px solid #ccc;
+}
+
+
+.cat-image{
+  padding-top: 69px;
+}
+
+.name{
+  padding: 10px 5px 20px 5px;
+    text-transform: uppercase;
+}
+
+div .row:last-child{
+  padding-bottom: 60;
+}
+
+.prod img{
+  border-radius: 5px 5px 2px 2px;
+}
+
+.grey{
+  color:#717171;
+  letter-spacing: 0.5px;
+}
+
+.margin-l{
+  margin:8px 5px;
+}

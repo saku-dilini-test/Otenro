@@ -1,19 +1,19 @@
-<footer class="footer">
+<footer class="footer main-footer-back">
 
   <div class="btn-group" role="group" aria-label="footer">
-    <button type="button" class="btn btn-default" aria-label="Home" (click)="navigate('')">
+    <a type="button" class="main-footer-header" aria-label="Home" (click)="navigate('')">
       <i class="fa fa-home fa-lg"></i>
-    </button>
+    </a>
 
-    <button type="button" class="btn btn-default" aria-label="Policies" (click)="navigate('policies')">
+    <a type="button" class="main-footer-header" aria-label="Policies" (click)="navigate('policies')">
       <i class="fa fa-shield fa-lg"></i>
-    </button>
-    <button type="button" class="btn btn-default" aria-label="Contact" (click)="navigate('contact')">
+    </a>
+    <a type="button" class="main-footer-header" aria-label="Contact" (click)="navigate('contact')">
       <i class="fa fa-phone fa-lg"></i>
-    </button>
-    <button *ngIf="subscriptionStatus" type="button" class="btn btn-default" aria-label="My Account"  data-toggle="modal" (click) = "openFooterMyAccount()">
+    </a>
+    <a *ngIf="subscriptionStatus" type="button" class="main-footer-header" aria-label="My Account"  data-toggle="modal" (click) = "openFooterMyAccount()">
       <i class="fa fa-user fa-lg"></i>
-    </button>
+    </a>
   </div>
 </footer>
 

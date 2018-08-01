@@ -1,0 +1,16 @@
+img{
+	height: calc((100vh - 190px) / 3)
+}
+
+div .row:first-child{
+	padding-top: 69px;
+}
+
+.name{
+	padding: 10px 5px 20px 5px;
+    text-transform: uppercase;
+}
+
+div .row:last-child{
+  padding-bottom: 60;
+}
