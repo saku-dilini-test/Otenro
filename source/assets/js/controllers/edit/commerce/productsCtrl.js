@@ -26,9 +26,7 @@
         var selectedSku = $scope.product.selectedSku;
 
         $scope.selectedSku = [];
-        console.log(initialData);
         if(!selectedSku){
-        console.log($scope.product);
             $scope.selectedSku = [];
         }else{
             $scope.selectedSku = selectedSku;
@@ -39,9 +37,9 @@
                 for(var i = 0;i < initialData.product.variants.length;i++){
                     if(initialData.product.variants[i].price){
                     initialData.product.variants[i].price = parseFloat(initialData.product.variants[i].price);
-                    console.log(initialData.product.variants[i].price);
+
                     initialData.product.variants[i].price = initialData.product.variants[i].price.toFixed(2);
-                    console.log(initialData.product.variants[i].price);
+
 
                     }
                 }
@@ -118,6 +116,7 @@
 
         if(initialData.isNewItem)
         {
+            console.log(initialData.isNewItem)
             $scope.isNewProduct = initialData.isNewItem;
 
         }else if($scope.product.sku){
@@ -132,7 +131,7 @@
         }
 
         commerceService.getProdTypeData().success(function (res) {
-                console.log(JSON.parse(res));
+
                $scope.types = JSON.parse(res).data;
         });
 
@@ -198,7 +197,7 @@
             var tempImageUrl = tempImagePathBanner + $scope.product.bannerImage;
             $scope.bannerImage = tempImageUrl
             $scope.oldBannerImg = $scope.product.bannerImage;
-            console.log($scope.oldBannerImg);
+
         }
 
         if(!initialData.product.id){
@@ -1074,7 +1073,7 @@
         };
         
         $scope.back = function(){
-            if($scope.isNewProduct){
+            if(initialData.product.name){
                 return commerceService.showInventoryDialog();
             }else{
                 $mdDialog.hide();
@@ -1385,7 +1384,7 @@
                     if (data.templateId){
                         carouselService.getTemplateData(data.templateId)
                             .success(function (templateData) {
-                            console.log(templateData);
+
                                 if(templateData.sliderSize){
                                     $scope.aspectRatioBanner = parseFloat(templateData.sliderSize.aspectRatio);
                                 }
