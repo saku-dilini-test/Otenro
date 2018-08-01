@@ -1325,7 +1325,7 @@ export class CheckoutComponent implements OnInit {
               }
             }
 
-            showHelp(SERVER_URL + '/mobile/getPayHereForm/?name=' +
+            window.location.href=(SERVER_URL + '/mobile/getPayHereForm/?name=' +
               this.orderDetails.customerName + "&amount=" +
               this.orderDetails.amount + "&currency=" +
               this.currency.symbol + "&email=" +
@@ -1334,7 +1334,7 @@ export class CheckoutComponent implements OnInit {
               this.orderDetails.item[0].name + "&address=" +
               this.orderDetails.deliveryNo + " " + this.orderDetails.deliveryStreet + "&city=" +
               this.orderDetails.deliveryCity + "&appId=" + orderRes.orderData.appId +
-              "&orderId=" + orderRes.orderData.orderId + "&payHereMerchantId=1211173");
+              "&orderId=" + orderRes.orderData.orderId + "&payHereMerchantId=" + this.payHereMID);
 
           },
           (err) => {
@@ -1349,17 +1349,8 @@ export class CheckoutComponent implements OnInit {
       });
 
 
-    var inAppBrowserRef;
 
-    function showHelp(url) {
 
-      var target = "_blank";
-
-      var options = "location=yes,hidden=yes";
-
-      inAppBrowserRef = window.open(url, target, options);
-
-    }
 
 
   }
