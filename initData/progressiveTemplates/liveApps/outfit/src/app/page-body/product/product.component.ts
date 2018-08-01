@@ -224,7 +224,6 @@ export class ProductComponent implements OnInit {
         this.selection1 = [];
         this.selection2 = [];
         this.selection3 = [];
-        console.log(this.promoData);
         if (this.Data.selection.length == 2) {
             this.selection1.push({ 'vType': 'Select ' + this.name2 });
         } else if (this.Data.selection.length == 3) {
@@ -239,13 +238,13 @@ export class ProductComponent implements OnInit {
         variant1 = variant1.replace(/\s/g, '');
 
         if (variant1) {
-            if (variant1 == "Select" + this.name1) {
+            this.selectedVariant1 = variant1;
+            this.selectedVariant2 = null;
+            this.selectedVariant.buyQuantity = null;
+            if (variant1 == "Select" + this.name1 || this.selectedVariant.buyQuantity == null) {
                 this.lockBuyButton = false;
                 this.isBuyBtnDisable = true;
             }
-            this.selectedVariant1 = variant1;
-            this.selectedVariant2 = null;
-            this.selectedVariant.buyQuantity = '';
         }
 
         if (this.foodInfo.selection.length == 1 && variant1 != 'Select' + this.name1) {
@@ -325,13 +324,13 @@ export class ProductComponent implements OnInit {
         variant2 = variant2.replace(/\s/g, '');
 
         if (variant2) {
-            if (variant2 == "Select" + this.name2) {
+            this.selectedVariant2 = variant2;
+            this.selectedVariant.buyQuantity = null;
+            if (variant2 == "Select" + this.name2 || this.selectedVariant.buyQuantity == null) {
                 this.lockBuyButton = false;
                 this.isBuyBtnDisable = true;
 
             }
-            this.selectedVariant2 = variant2;
-            this.selectedVariant.buyQuantity = '';
         }
 
         if (this.foodInfo.selection.length == 2 && variant2 != 'Select' + this.name2) {
@@ -405,12 +404,12 @@ export class ProductComponent implements OnInit {
         }
 
         if (variant3) {
-            if (variant3 == 'Select' + this.name3) {
+            this.selectedVariant3 = variant3;
+            this.selectedVariant.buyQuantity = null;
+            if (variant3 == 'Select' + this.name3 || this.selectedVariant.buyQuantity == null) {
                 this.lockBuyButton = false;
                 this.isBuyBtnDisable = true;
             }
-            this.selectedVariant3 = variant3;
-            this.selectedVariant.buyQuantity = '';
         }
 
         if (this.foodInfo.selection.length == 3 && variant3 != 'Select' + this.name3) {
@@ -469,14 +468,13 @@ export class ProductComponent implements OnInit {
         variant4 = variant4.replace(/\s/g, '');
 
         if (variant4) {
-            if (variant4 == 'Select' + this.name4) {
+            this.selectedVariant4 = variant4;
+            this.selectedVariant.buyQuantity = null;
+            if (variant4 == 'Select' + this.name4 || this.selectedVariant.buyQuantity == null) {
                 this.lockBuyButton = false;
                 this.isBuyBtnDisable = true;
 
             }
-            this.selectedVariant4 = variant4;
-            this.selectedVariant.buyQuantity = '';
-
         }
 
         if (this.foodInfo.selection.length == 4 && variant4 != 'Select' + this.name4) {
@@ -546,7 +544,7 @@ export class ProductComponent implements OnInit {
         if (buyQty > 0) {
             // Get Selected-Variant-Qty value
             var selectVariantAvailableQty = this.selectedVariant.quantity;
-            //If quantity is unlimited enable buy button
+            // If quantity is unlimited enable buy button
             if (this.selectedVariant.unlimited == true) {
                 this.isBuyBtnDisable = false;
             }
@@ -557,13 +555,15 @@ export class ProductComponent implements OnInit {
                 }
             }
         }
-    };
+    }
+
     test(data) {
         this.dialogVariants = data;
-        $('#myModal').modal('show')
+        $('#myModal').modal('show');
     }
+
     close() {
-        $('#myModal').modal('hide')
+        $('#myModal').modal('hide');
     }
 
     goToHome() {
