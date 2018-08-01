@@ -43,6 +43,7 @@ export class ProductComponent implements OnInit {
     discountAvailable = false;
     oldPrice; newPrice;
     promoData = [];
+    availableFirstVariPromo = false;
     imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
     bannerImageUrl = SERVER_URL + "/templates/viewWebImages?userId="
@@ -58,7 +59,30 @@ export class ProductComponent implements OnInit {
 
         this.Data = JSON.parse(localStorage.getItem(this.appId + ":dataServiceData"));
 
-        this.init();
+
+        this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
+
+            data.forEach(element => {
+                element.selectedProduct.forEach(variants => {
+
+                    variants.fromDate = element.dateFrom;
+                    variants.toDate = element.dateTo;
+
+                    if (element.discountType == 'discountValue') {
+                        variants.discountType = element.discountType;
+                        variants.discount = element.discount
+                    } else {
+                        variants.discountType = element.discountType;
+                        variants.discount = element.discountPercent
+                    }
+
+                    this.promoData.push(variants);
+                });
+            });
+
+            this.init();
+        });
+
         this.isBuyBtnDisable = true;
         this.title.changeTitle('Details');
         if (this.Data.detailedDesc.length > 400) {
@@ -190,6 +214,34 @@ export class ProductComponent implements OnInit {
                 }
                 this.selection.push({ 'vType': 'Select ' + this.name1 }); for (var i = 0; i < this.foodInfo.variants.length; i++) {
                     this.selection.push({ 'vType': this.foodInfo.variants[i].selection[0].vType });
+                }
+
+
+                var percentagePrice;
+
+                if (this.promoData.length > 0) {
+                    if (this.foodInfo.selection.length == 1) {
+                        if (this.foodInfo.variants.length == 1) {
+                            for (let i = 0; i < this.promoData.length; i++) {
+                                if (this.promoData[i].sku == this.foodInfo.variants[0].sku) {
+                                    this.availableFirstVariPromo = true;
+                                    if (new Date(this.promoData[i].toDate) >= this.todayDate) {
+                                        if (this.promoData[i].discountType == "discountValue") {
+                                            this.oldPrice = this.selectedVariant.price;
+                                            this.newPrice = this.selectedVariant.price - this.promoData[i].discount;
+                                        } else {
+                                            this.oldPrice = this.selectedVariant.price;
+                                            percentagePrice = this.selectedVariant.price * (this.promoData[i].discount / 100);
+                                            this.newPrice = this.selectedVariant.price - percentagePrice;
+                                        }
+                                    }
+                                    break;
+                                }
+
+                            };
+                        }
+
+                    }
                 }
 
                 this.selection = _.uniqBy(this.selection, 'vType');

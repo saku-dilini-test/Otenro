@@ -1,34 +1,38 @@
 <div class="bloc bgc-white b-parallax animDelay04 " id="bloc-11">
 
   <div class="container  bloc-xl">
-      <div *ngIf = "Data.bannerImage">
-          <img class="banner-cat" src="{{bannerImageUrl}}/{{Data.bannerImage}}" width="100%" />
-      </div>
+    <div *ngIf="Data.bannerImage">
+      <img class="banner-cat" src="{{bannerImageUrl}}/{{Data.bannerImage}}" width="100%" />
+    </div>
     <div class="row bgc-white" id="product">
-        <div class="col-sm-6">
-             <div id="gallery" style="display:none;">
-                    <ng-template *ngFor="let item of Data.tempImageArray" [ngIf]="item">
-                      <img  *ngIf="item.videoUrl == null" alt="{{item.name}}"
-                         src="{{imageUrl}}/{{item.img}}"
-                         [attr.data-image]="imageUrl/item.img">
-                         
-                      <img  *ngIf="item.videoUrl != null" alt="{{item.name}}"
-                         data-type="vimeo"
-                         src="{{imageUrl}}/{{item.img}}"
-                         [attr.data-image]="imageUrl/item.img"
-                         [attr.data-videoid]="item.videoUrl">
-                    </ng-template>
-                  
-              </div>
-        </div>
       <div class="col-sm-6">
+        <div id="gallery" style="display:none;">
+          <ng-template *ngFor="let item of Data.tempImageArray" [ngIf]="item">
+            <img *ngIf="item.videoUrl == null" alt="{{item.name}}" src="{{imageUrl}}/{{item.img}}" [attr.data-image]="imageUrl/item.img">
+
+            <img *ngIf="item.videoUrl != null" alt="{{item.name}}" data-type="vimeo" src="{{imageUrl}}/{{item.img}}" [attr.data-image]="imageUrl/item.img"
+              [attr.data-videoid]="item.videoUrl">
+          </ng-template>
+
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf = "selectedVariant">
         <h3 class="mg-md product-header-h1 animated fadeInUp main-header-font">
           {{Data.name}}
         </h3>
-        <div class="text-left main-content-font" >
-          <p *ngIf="discountAvailable == false"><strong>{{currency}}</strong> {{selectedVariant.price| number: '.2'}}</p>
-          <p style="text-decoration: line-through" *ngIf="discountAvailable == true"><strong>{{currency}}</strong> {{oldPrice| number: '.2'}}</p>
-          <p *ngIf="discountAvailable == true"><strong>{{currency}}</strong> {{newPrice| number: '.2'}}</p>                
+        <div class="text-left main-content-font">
+          <p *ngIf="discountAvailable == false && availableFirstVariPromo == false">
+            <strong>{{currency}}</strong> {{selectedVariant.price| number: '.2'}}</p>
+          <h5 *ngIf="discountAvailable == false && availableFirstVariPromo == true">
+            <strong style="text-decoration: line-through">{{currency}}{{oldPrice| number: '.2'}}</strong>
+          </h5>
+          <h4 *ngIf="discountAvailable == false && availableFirstVariPromo == true">
+            <strong>{{currency}}</strong> {{newPrice| number: '.2'}}</h4>
+
+          <p style="text-decoration: line-through" *ngIf="discountAvailable == true">
+            <strong>{{currency}}</strong> {{oldPrice| number: '.2'}}</p>
+          <p *ngIf="discountAvailable == true">
+            <strong>{{currency}}</strong> {{newPrice| number: '.2'}}</p>
         </div>
         <p class="text-left main-content-font" *ngIf="!selectedVariant.price">
           <strong>{{currency}}</strong> {{Data.variants[0].price}}
@@ -50,7 +54,7 @@
         </p>
         <p class="content-product  main-content-font no-margin" id="details" [innerHTML]="desPart1" style="font-weight: initial;">
         </p>
-       <a class="text-left product-detail padding-bottom" *ngIf="!readMore" (click)="readMoreFunct()" style="font-size: 12px;">Read More...</a>
+        <a class="text-left product-detail padding-bottom" *ngIf="!readMore" (click)="readMoreFunct()" style="font-size: 12px;">Read More...</a>
 
 
         <div class="blocs-custom-html spacing-bottom">
@@ -92,7 +96,8 @@
               <div class="form-group">
                 <input class="form-control main-content-font" type="number" min="1" oninput="validity.valid||(value='');" name="qty" placeholder="QTY"
                   id="qty" value="selectedVariant.buyQuantity" [disabled]="Data.variants.length >= 1 && selectedVariant.quantity == 0 || lockBuyButton == false"
-                  [(ngModel)]="selectedVariant.buyQuantity" (ngModelChange)="changeBuyQuantity(selectedVariant.buyQuantity)" />
+                  [(ngModel)]="selectedVariant.buyQuantity" (ngModelChange)="changeBuyQuantity(selectedVariant.buyQuantity)"
+                />
               </div>
             </div>
 
@@ -122,12 +127,16 @@
                   </div>
                   <div class="row">
                     <div class="col-xs-6 text-center">
-                      <img src="{{imageUrl}}/{{selectedVariant.imageUrl || Data.tempImageArray[0].img}}"  width="100%">
+                      <img src="{{imageUrl}}/{{selectedVariant.imageUrl || Data.tempImageArray[0].img}}" width="100%">
                     </div>
                     <div class="col-xs-6">
-                      <h4 class="main-header-font padding-vertical"><strong> {{Data.name}}</strong></h4>
+                      <h4 class="main-header-font padding-vertical">
+                        <strong> {{Data.name}}</strong>
+                      </h4>
                       <p class="main-content-font" *ngFor="let v of dialogVariants">{{v.name}}:{{v.vType}}</p>
-                      <h4 class="main-content-font"><strong> {{currency}} {{selectedVariant.price}}</strong></h4>
+                      <h4 class="main-content-font">
+                        <strong> {{currency}} {{selectedVariant.price}}</strong>
+                      </h4>
                     </div>
                   </div>
                   <div class="modal-footer">
