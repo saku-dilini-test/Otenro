@@ -100,45 +100,6 @@ export class ProductComponent implements OnInit {
         }
     }
 
-    video(id) {
-
-        var options = {
-            id: id,
-            autoplay: true,
-            background: false,
-            muted: true,
-        };
-        if (id) {
-            var x = this;
-            this.player = new Player('player', options);
-            this.player.ready().then(function () {
-
-                x.player.play().then(function () {
-                    // the video was played
-                }).catch(function (error) {
-                    switch (error.name) {
-                        case 'PasswordError':
-                            // the video is password-protected and the viewer needs to enter the
-                            // password first
-                            break;
-
-                        case 'PrivacyError':
-                            // the video is private
-                            break;
-
-                        default:
-                            // some other error occurred
-                            break;
-                    }
-                });
-
-            });
-
-        }
-    }
-
-
-
     currency: string;
     tests;
 
@@ -185,23 +146,6 @@ export class ProductComponent implements OnInit {
                 api.stop();
             }
         });
-
-        //  for(let i=this.Data.tempImageArray.length-1;i>=0;i--){
-        //     if(this.Data.tempImageArray[i].videoUrl){
-        //         this.video(this.Data.tempImageArray[i].videoUrl);
-        //         $('#videoModal').modal('show');
-        //         var x = this;
-        //         $('#videoModal').on('hidden.bs.modal', function (e) {
-        //              x.player.destroy().then(function() {
-        //                    // the player was destroyed
-        //              }).catch(function(error) {
-        //                    // an error occurred
-        //              });
-        //         })
-        //         break;
-        //     }
-        // }
-
     }
 
 
@@ -332,13 +276,13 @@ export class ProductComponent implements OnInit {
         variant1 = variant1.replace(/\s/g, '');
 
         if (variant1) {
-            if (variant1 == "Select" + this.name1) {
+            this.selectedVariant1 = variant1;
+            this.selectedVariant2 = null;
+            this.selectedVariant.buyQuantity = null;
+            if (variant1 == "Select" + this.name1 || this.selectedVariant.buyQuantity == null) {
                 this.lockBuyButton = false;
                 this.isBuyBtnDisable = true;
             }
-            this.selectedVariant1 = variant1;
-            this.selectedVariant2 = null;
-            this.selectedVariant.buyQuantity = '';
         }
 
         if (this.foodInfo.selection.length == 1 && variant1 != 'Select' + this.name1) {
@@ -346,6 +290,7 @@ export class ProductComponent implements OnInit {
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
                     this.selectedVariant = this.foodInfo.variants[i];
+
 
                 }
             }
@@ -357,6 +302,7 @@ export class ProductComponent implements OnInit {
 
                 this.promoData.forEach(prod => {
                     if (prod.sku == this.selectedVariant.sku) {
+
                         if (new Date(prod.toDate) >= this.todayDate) {
                             this.discountAvailable = true
                             if (prod.discountType == "discountValue") {
@@ -416,13 +362,13 @@ export class ProductComponent implements OnInit {
         variant2 = variant2.replace(/\s/g, '');
 
         if (variant2) {
-            if (variant2 == "Select" + this.name2) {
+            this.selectedVariant2 = variant2;
+            this.selectedVariant.buyQuantity = null;
+            if (variant2 == "Select" + this.name2 || this.selectedVariant.buyQuantity == null) {
                 this.lockBuyButton = false;
                 this.isBuyBtnDisable = true;
 
             }
-            this.selectedVariant2 = variant2;
-            this.selectedVariant.buyQuantity = '';
         }
 
         if (this.foodInfo.selection.length == 2 && variant2 != 'Select' + this.name2) {
@@ -441,6 +387,7 @@ export class ProductComponent implements OnInit {
                 this.promoData.forEach(prod => {
                     if (prod.sku == this.selectedVariant.sku) {
                         if (new Date(prod.toDate) >= this.todayDate) {
+
                             this.discountAvailable = true
                             if (prod.discountType == "discountValue") {
                                 this.oldPrice = this.selectedVariant.price;
@@ -480,8 +427,7 @@ export class ProductComponent implements OnInit {
     changeVariant3(variant3) {
         this.lockBuyButton = false;
         this.discountAvailable = false;
-
-        //for IE specific issue
+        // for IE specific issue
         variant3 = variant3.replace(/\s/g, '');
         this.selection3 = [];
         if (this.Data.selection.length == 2) {
@@ -496,12 +442,12 @@ export class ProductComponent implements OnInit {
         }
 
         if (variant3) {
-            if (variant3 == 'Select' + this.name3) {
+            this.selectedVariant3 = variant3;
+            this.selectedVariant.buyQuantity = null;
+            if (variant3 == 'Select' + this.name3 || this.selectedVariant.buyQuantity == null) {
                 this.lockBuyButton = false;
                 this.isBuyBtnDisable = true;
             }
-            this.selectedVariant3 = variant3;
-            this.selectedVariant.buyQuantity = '';
         }
 
         if (this.foodInfo.selection.length == 3 && variant3 != 'Select' + this.name3) {
@@ -512,7 +458,6 @@ export class ProductComponent implements OnInit {
                     this.selectedVariant = this.foodInfo.variants[i];
                 }
             }
-
             var BreakException = {};
             var percentagePrice;
 
@@ -539,6 +484,7 @@ export class ProductComponent implements OnInit {
             } catch (e) {
                 if (e !== BreakException) throw e;
             }
+
             this.lockBuyButton = true;
 
         } else {
@@ -560,14 +506,13 @@ export class ProductComponent implements OnInit {
         variant4 = variant4.replace(/\s/g, '');
 
         if (variant4) {
-            if (variant4 == 'Select' + this.name4) {
+            this.selectedVariant4 = variant4;
+            this.selectedVariant.buyQuantity = null;
+            if (variant4 == 'Select' + this.name4 || this.selectedVariant.buyQuantity == null) {
                 this.lockBuyButton = false;
                 this.isBuyBtnDisable = true;
 
             }
-            this.selectedVariant4 = variant4;
-            this.selectedVariant.buyQuantity = '';
-
         }
 
         if (this.foodInfo.selection.length == 4 && variant4 != 'Select' + this.name4) {
@@ -637,7 +582,7 @@ export class ProductComponent implements OnInit {
         if (buyQty > 0) {
             // Get Selected-Variant-Qty value
             var selectVariantAvailableQty = this.selectedVariant.quantity;
-            //If quantity is unlimited enable buy button
+            // If quantity is unlimited enable buy button
             if (this.selectedVariant.unlimited == true) {
                 this.isBuyBtnDisable = false;
             }
@@ -671,14 +616,7 @@ export class ProductComponent implements OnInit {
     }
 
     addToCart(navi) {
-        if (this.isBuyBtnDisable) {
-            if (!(this.selectedVariant.buyQuantity > this.selectedVariant.quantity && this.selectedVariant.quantity > 1)) {
-                this.ifNotSelectedVariantOrQuantity = true;
-                setTimeout(() => {
-                    this.ifNotSelectedVariantOrQuantity = false;
-                }, 3100)
-            }
-        } else if (this.selectedVariant.buyQuantity == null) {
+        if (this.selectedVariant.buyQuantity == null) {
             console.log(' error please select buy quantity');
         } else {
             if (this.dataService.cart.cartItems.length != 0) {
