@@ -26,7 +26,7 @@ export class PagebodyServiceModule {
   currentCategoryImage;
   categories;
   products;
-
+  promoData = [];
   constructor() {
 
     this.parentobj.cartSize = this.cart.cartSize;

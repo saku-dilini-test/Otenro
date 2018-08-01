@@ -26,7 +26,7 @@
               </div>
           </div>
 
-          <div class="col-sm-6 padding-top margin-top">
+          <div class="col-sm-6 padding-top margin-top" *ngIf = "selectedVariant">
             <div>
               <p class="text-center product-name main-header-font">
                     {{Data.name}}<br>
@@ -48,28 +48,28 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                       <select class="form-control" (change)="changeVariant($event.target.value)">
-                        <option *ngFor="let v1 of selection" [ngValue]="v1.vType"> {{v1.vType}} </option>
+                        <option  *ngFor="let v1 of selection; let i = index" [ngValue]="v1.vType"> {{v1.vType}} </option>
                       </select>
                     </div>
                 </div>
                 <div class="col-sm-6"  *ngIf="Data.selection[1]">
                     <div class="form-group">
                      <select class="form-control" (change)="changeVariant2($event.target.value)">
-                        <option *ngFor="let v2 of selection1" [ngValue]="v2.vType"> {{v2.vType}} </option>
+                        <option  *ngFor="let v2 of selection1; let i = index" [ngValue]="v2.vType"> {{v2.vType}} </option>
                       </select>
                     </div>
                 </div>
                 <div class="col-sm-6" *ngIf="Data.selection[2]">
                   <div class="form-group">
                      <select class="form-control" (change)="changeVariant3($event.target.value)">
-                        <option *ngFor="let v3 of selection2" [ngValue]="v3.vType"> {{v3.vType}} </option>
+                        <option  *ngFor="let v3 of selection2; let i = index" [ngValue]="v3.vType"> {{v3.vType}} </option>
                       </select>
                   </div>
                 </div>
                 <div class="col-sm-6" *ngIf="Data.selection[3]">
                     <div class="form-group">
                       <select class="form-control" (change)="changeVariant4($event.target.value)">
-                        <option *ngFor="let v4 of selection3" [ngValue]="v4.vType"> {{v4.vType}} </option>
+                        <option  *ngFor="let v4 of selection3; let i = index" [ngValue]="v4.vType"> {{v4.vType}} </option>
                       </select>
                     </div>
                 </div>
@@ -86,8 +86,11 @@
             </div>
             <div>
               <div class="text-left product-details-price main-content-font" >
-                <p *ngIf="discountAvailable == false"><strong>{{currency}}</strong> {{selectedVariant.price| number: '.2'}}</p>
-                <h5  *ngIf="discountAvailable == true"><p style="text-decoration: line-through">Regular price - <strong >{{currency}}</strong>{{oldPrice| number: '.2'}}</p></h5>
+                <p *ngIf="discountAvailable == false && availableFirstVariPromo == false"><strong>{{currency}}</strong> {{selectedVariant.price| number: '.2'}}</p>
+                <h5 *ngIf="discountAvailable == false && availableFirstVariPromo == true">Regular price - <strong style="text-decoration: line-through">{{currency}}{{oldPrice| number: '.2'}}</strong></h5>
+                <h4 *ngIf="discountAvailable == false && availableFirstVariPromo == true">Cash price - <strong>{{currency}}</strong> {{newPrice| number: '.2'}}</h4>
+
+                <h5 *ngIf="discountAvailable == true">Regular price - <strong style="text-decoration: line-through">{{currency}}{{oldPrice| number: '.2'}}</strong></h5>
                 <h4 *ngIf="discountAvailable == true">Cash price - <strong>{{currency}}</strong> {{newPrice| number: '.2'}}</h4>
               </div>
               <p class="text-left product-details-price main-content-font" *ngIf="!selectedVariant.price">

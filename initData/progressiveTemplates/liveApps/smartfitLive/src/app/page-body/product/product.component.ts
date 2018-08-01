@@ -52,6 +52,7 @@ export class ProductComponent implements OnInit {
     desPart1; desPart2; desPart1_demo;
     name1; name2; name3; name4;
     ifNotSelectedVariantOrQuantity: boolean;
+    availableFirstVariPromo = false;
     private player: Player;
     constructor(private localStorageService: LocalStorageService, private CurrencyService: CurrencyService,
         private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute,
@@ -59,7 +60,33 @@ export class ProductComponent implements OnInit {
 
         this.Data = JSON.parse(localStorage.getItem(this.appId + ":dataServiceData"));
 
-        this.init();
+
+        this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
+
+            data.forEach(element => {
+                element.selectedProduct.forEach(variants => {
+
+                    variants.fromDate = element.dateFrom;
+                    variants.toDate = element.dateTo;
+
+                    if (element.discountType == 'discountValue') {
+                        variants.discountType = element.discountType;
+                        variants.discount = element.discount
+                    } else {
+                        variants.discountType = element.discountType;
+                        variants.discount = element.discountPercent
+                    }
+
+                    this.promoData.push(variants);
+                });
+            });
+
+            this.dataService.promoData = this.promoData;
+            console.log(this.dataService.promoData);
+            this.init();
+        });
+
+
         this.isBuyBtnDisable = true;
         this.title.changeTitle('Details');
         if (this.Data.detailedDesc.length > 400) {
@@ -123,33 +150,6 @@ export class ProductComponent implements OnInit {
 
     ngOnInit() {
 
-        this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
-
-            data.forEach(element => {
-                element.selectedProduct.forEach(variants => {
-
-                    variants.fromDate = element.dateFrom;
-                    variants.toDate = element.dateTo;
-
-                    if (element.discountType == 'discountValue') {
-                        variants.discountType = element.discountType;
-                        variants.discount = element.discount
-                    } else {
-                        variants.discountType = element.discountType;
-                        variants.discount = element.discountPercent
-                    }
-
-                    this.promoData.push(variants);
-                });
-            });
-
-        });
-
-
-        var d = new Date();
-        var str = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
-        this.todayDate = new Date(str);
-
         let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
 
         if (appUser) {
@@ -170,19 +170,21 @@ export class ProductComponent implements OnInit {
     }
 
     ngAfterViewInit() {
-      var api;
-      api = $("#gallery").unitegallery({
-        theme_enable_text_panel: false,
-        gallery_background_color: "rgba(0,0,0,0)",
-        slider_scale_mode: "fit",
-        slider_textpanel_bg_color:"#000000",
-        slider_textpanel_bg_opacity: 0,
-        gallery_autoplay:true,
-        theme_hide_panel_under_width: null
-      });
-      $('#gallery').on({ 'touchstart' : function(){
-        api.stop();
-      } });
+        var api;
+        api = $("#gallery").unitegallery({
+            theme_enable_text_panel: false,
+            gallery_background_color: "rgba(0,0,0,0)",
+            slider_scale_mode: "fit",
+            slider_textpanel_bg_color: "#000000",
+            slider_textpanel_bg_opacity: 0,
+            gallery_autoplay: true,
+            theme_hide_panel_under_width: null
+        });
+        $('#gallery').on({
+            'touchstart': function () {
+                api.stop();
+            }
+        });
 
         //  for(let i=this.Data.tempImageArray.length-1;i>=0;i--){
         //     if(this.Data.tempImageArray[i].videoUrl){
@@ -204,6 +206,11 @@ export class ProductComponent implements OnInit {
 
 
     init() {
+
+        var d = new Date();
+        var str = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
+        this.todayDate = new Date(str);
+        // this.promoData = this.dataService.promoData;
 
 
         if (this.Data.selection.length == 1) {
@@ -246,8 +253,36 @@ export class ProductComponent implements OnInit {
                     this.selection2.push({ 'vType': 'Select ' + this.name3 });
                     this.selection3.push({ 'vType': 'Select ' + this.name4 });
                 }
-                this.selection.push({ 'vType': 'Select ' + this.name1 }); for (var i = 0; i < this.foodInfo.variants.length; i++) {
+                this.selection.push({ 'vType': 'Select ' + this.name1 });
+                for (var i = 0; i < this.foodInfo.variants.length; i++) {
                     this.selection.push({ 'vType': this.foodInfo.variants[i].selection[0].vType });
+                }
+
+                var percentagePrice;
+
+                if (this.dataService.promoData.length > 0) {
+                    if (this.foodInfo.selection.length == 1) {
+                        if (this.foodInfo.variants.length == 1) {
+                            for (let i = 0; i < this.dataService.promoData.length; i++) {
+                                if (this.dataService.promoData[i].sku == this.foodInfo.variants[0].sku) {
+                                    this.availableFirstVariPromo = true;
+                                    if (new Date(this.dataService.promoData[i].toDate) >= this.todayDate) {
+                                        if (this.dataService.promoData[i].discountType == "discountValue") {
+                                            this.oldPrice = this.selectedVariant.price;
+                                            this.newPrice = this.selectedVariant.price - this.dataService.promoData[i].discount;
+                                        } else {
+                                            this.oldPrice = this.selectedVariant.price;
+                                            percentagePrice = this.selectedVariant.price * (this.dataService.promoData[i].discount / 100);
+                                            this.newPrice = this.selectedVariant.price - percentagePrice;
+                                        }
+                                    }
+                                    break;
+                                }
+
+                            };
+                        }
+
+                    }
                 }
 
                 this.selection = _.uniqBy(this.selection, 'vType');
