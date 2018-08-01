@@ -11,7 +11,7 @@
         .constant('routesConfig', (function () {
             'use strict';
 
-            var siteURL = 'serverUrl';
+            var siteURL = 'http://localhost:1337';
 
             var rootRoutesConfig = {
                 wpMenuByAppId: siteURL + '/templates/getArticleCategoryByAppId?appId=',  // OK

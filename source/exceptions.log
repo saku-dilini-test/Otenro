@@ -1,0 +1,17 @@
+2018-08-01T11:44:00+05:30 [undefined] error: uncaughtException: Can't set headers after they are sent.
+Error: Can't set headers after they are sent.
+    at validateHeader (_http_outgoing.js:491:11)
+    at ServerResponse.setHeader (_http_outgoing.js:498:3)
+    at ServerResponse.res.setHeader (C:\Users\Simato\AppData\Roaming\npm\node_modules\sails\node_modules\@sailshq\connect\lib\patch.js:134:22)
+    at ServerResponse.res.set.res.header (C:\Users\Simato\Desktop\work\Otenro\source\node_modules\sails\node_modules\@sailshq\express\lib\response.js:595:10)
+    at ServerResponse.res.send (C:\Users\Simato\Desktop\work\Otenro\source\node_modules\sails\node_modules\@sailshq\express\lib\response.js:151:12)
+    at ServerResponse.res.json (C:\Users\Simato\Desktop\work\Otenro\source\node_modules\sails\node_modules\@sailshq\express\lib\response.js:237:15)
+    at sendJSON (C:\Users\Simato\Desktop\work\Otenro\source\api\responses\serverError.js:35:23)
+    at Object.serverError (C:\Users\Simato\Desktop\work\Otenro\source\api\responses\serverError.js:57:12)
+    at ServerResponse.wrapper [as serverError] (C:\Users\Simato\Desktop\work\Otenro\source\node_modules\sails\node_modules\@sailshq\lodash\lib\index.js:3250:19)
+    at Object.negotiate (C:\Users\Simato\Desktop\work\Otenro\source\node_modules\sails\lib\hooks\responses\defaults\negotiate.js:41:14)
+    at ServerResponse.wrapper [as negotiate] (C:\Users\Simato\Desktop\work\Otenro\source\node_modules\sails\node_modules\@sailshq\lodash\lib\index.js:3250:19)
+    at C:\Users\Simato\Desktop\work\Otenro\source\api\controllers\ApplicationController.js:519:35
+    at C:\Users\Simato\Desktop\work\Otenro\source\node_modules\fs-extra\lib\copy\copy.js:29:21
+    at C:\Users\Simato\Desktop\work\Otenro\source\node_modules\fs-extra\node_modules\graceful-fs\polyfills.js:284:29
+    at FSReqWrap.oncomplete (fs.js:152:21)

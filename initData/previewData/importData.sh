@@ -24,7 +24,7 @@ DB=''
 
 if [ $ENV == 'dev' ]
 then
-	DB='appBuilder'
+	DB='appBuilder_otenro'
 	serverUrl='http://localhost:1337'
 elif [ $ENV == 'stag' ]
 then
