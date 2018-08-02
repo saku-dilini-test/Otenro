@@ -48,7 +48,7 @@
 					About
 				</h3>
 				<a  (click)="navigate('', 'Home')"  class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Home</a>
-				<a  *ngIf="!loginStatus" (click)="navigate('login/home')"  class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Login</a>
+				<a  *ngIf="!loginStatus" (click)="navigate('login','home')"  class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Login</a>
 				<a  *ngIf="!loginStatus" (click)="navigate('register', 'Register')"  class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Register</a>
 				<a  (click)="navigate('contact', 'Contact Us')" class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Contact us</a>
 			</div>
