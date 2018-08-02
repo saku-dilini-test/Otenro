@@ -1359,7 +1359,7 @@ export class CheckoutComponent implements OnInit {
               this.orderDetails.item[0].name + "&address=" +
               streetNo + " " + streetName  + "&city=" +
               city + "&appId=" + orderRes.appId +
-              "&orderId=" + orderRes.orderId + "&payHereMerchantId=" + this.payHereMID);
+              "&orderId=" + orderRes.id + "&payHereMerchantId=" + this.payHereMID);
 
           },
           (err) => {
