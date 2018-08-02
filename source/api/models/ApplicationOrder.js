@@ -28,7 +28,7 @@ module.exports = {
             type : 'string'
         },
         telNumber : {
-            type : 'integer'
+            type : 'string'
         },
         no : {
             type : 'integer'

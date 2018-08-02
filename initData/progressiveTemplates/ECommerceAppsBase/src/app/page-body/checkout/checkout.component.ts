@@ -811,7 +811,7 @@ export class CheckoutComponent implements OnInit {
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.user.name,
-          'deliverName': this.fname,
+          'deliverName': this.fname + " " + this.lname,
           'deliveryNo': this.streetNumber,
           'deliveryStreet': this.streetName,
           'deliveryCity': this.city,
@@ -835,7 +835,7 @@ export class CheckoutComponent implements OnInit {
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.fname,
-          'deliverName': this.fname,
+          'deliverName': this.fname + " " + this.lname,
           'deliveryNo': this.streetNumber,
           'deliveryStreet': this.streetName,
           'deliveryCity': this.city,
@@ -957,7 +957,7 @@ export class CheckoutComponent implements OnInit {
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.user.name,
-          'deliverName': this.fname,
+          'deliverName': this.fname + " " + this.lname,
           'deliveryNo': this.streetNumber,
           'deliveryStreet': this.streetName,
           'deliveryCity': this.city,
@@ -981,7 +981,7 @@ export class CheckoutComponent implements OnInit {
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.fname,
-          'deliverName': this.fname,
+          'deliverName': this.fname + " " + this.lname,
           'deliveryNo': this.streetNumber,
           'deliveryStreet': this.streetName,
           'deliveryCity': this.city,
@@ -1130,7 +1130,7 @@ export class CheckoutComponent implements OnInit {
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.user.name,
-          'deliverName': this.fname,
+          'deliverName': this.fname + " " + this.lname,
           'deliveryNo': this.streetNumber,
           'deliveryStreet': this.streetName,
           'deliveryCity': this.city,
@@ -1155,7 +1155,7 @@ export class CheckoutComponent implements OnInit {
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.fname,
-          'deliverName': this.fname,
+          'deliverName': this.fname + " " + this.lname,
           'deliveryNo': this.streetNumber,
           'deliveryStreet': this.streetName,
           'deliveryCity': this.city,
@@ -1228,7 +1228,7 @@ export class CheckoutComponent implements OnInit {
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.user.name,
-          'deliverName': this.fname,
+          'deliverName': this.fname + " " + this.lname,
           'deliveryNo': this.streetNumber,
           'deliveryStreet': this.streetName,
           'deliveryCity': this.city,
@@ -1253,7 +1253,7 @@ export class CheckoutComponent implements OnInit {
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.fname,
-          'deliverName': this.fname,
+          'deliverName': this.fname + " " + this.lname,
           'deliveryNo': this.streetNumber,
           'deliveryStreet': this.streetName,
           'deliveryCity': this.city,
@@ -1309,7 +1309,7 @@ export class CheckoutComponent implements OnInit {
 
     this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails,{ responseType: 'json' })
       .subscribe((orderRes: any) => {
-
+        console.log(orderRes);
         this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
           .subscribe((res) => {
             this.dataService.cart.cartItems = [];
