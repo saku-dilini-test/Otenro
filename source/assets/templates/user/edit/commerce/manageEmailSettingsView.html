@@ -294,9 +294,9 @@
                     <div class="md-dialog-main">
 
                         <div class="row">
-                            <div class="col-lg-7 col-md-7">
+                            <div class="col-lg-8 col-md-8">
                                 <label>Insert Header Image</label><br>
-                                <div class="file-upload-wrapper clearfix">
+                                <div class="file-upload-wrapper clearfix width-100">
                                     <div class="cropArea">
                                         <ui-cropper image="myImageHeaderConfirm" area-type="rectangle" aspect-ratio="aspectRatio" result-image="confirmPic" result-image-size="{w:1000,h:400}"   result-image-format="image/jpeg" result-image-quality="0.5">
                                         </ui-cropper>
@@ -314,8 +314,11 @@
                                         <md-icon md-svg-icon="images/delete-icon.svg"></md-icon>
                                     </md-button>
                                 </div>
-                                <label>Header</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <!--********   edited by .sanira    *************-->
+                                <!--<label>Header</label>-->
+                                <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
+                                <!--..........................-->
+
                                 <div class="custom-trix">
                                     <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="orderConfirmedEmail.orderConfirmedEmail.header" required></text-angular>
                                     <!--<trix-editorsada style="width:75%" angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.header" required></trix-editor>-->
@@ -338,7 +341,7 @@
                                     </md-checkbox>
                                 </p>
                             </div>
-                            <div class="col-lg-5 col-md-5" style="zoom:0.7; background: #ebebeb;">
+                            <div class="col-lg-4 col-md-4" style="zoom:0.7; background: #ebebeb;">
                                 <img ng-if="picFileHeader == null" ng-src="images/1000x200.png"  width="100%" height="80px" style="display: block;margin: 16px auto 0 auto
                                 ;"/><br>
                                 <img ng-if="picFileHeader != null" ngf-src="picFileHeader[0]" width="100%"   height="100px" style="display:block; margin: 16px auto 0 auto"> <br>
