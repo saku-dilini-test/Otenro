@@ -41,7 +41,7 @@
                   <p class="sub-header-text-h2 text-justify  main-content-font">
                     Total Price - {{currency}} {{itemPriceCal(item.total,item.qty)}}
                   </p>
-                <a (click)="removeItem(index)" class="btn btn-d btn-lg pull-left button-mobile spacing-mobile-button main-button">Remove</a>
+                <a (click)="removeItem(i)" class="btn btn-d btn-lg pull-left button-mobile spacing-mobile-button main-button">Remove</a>
               </div>
             </div>
       </div>
@@ -129,7 +129,7 @@
           </div>
           <div class="col-sm-4">
             <div class="text-center">
-              <a (click)="removeItem(index)" class="btn btn-d btn-lg button-mobile spacing-mobile-button button-top-spacing main-button">Remove</a>
+              <a (click)="removeItem(i)" class="btn btn-d btn-lg button-mobile spacing-mobile-button button-top-spacing main-button">Remove</a>
             </div>
           </div>
           <div class="col-sm-3">
