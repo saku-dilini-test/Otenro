@@ -113,6 +113,13 @@ export class PaypalPaymentComponent implements AfterViewChecked {
                 this._success.subscribe((message) => this.successMessage = message);
                 debounceTime.call(this._success, 3000).subscribe(() => this.successMessage = null);
                 this._success.next("Thank You, Your order has been successfully processed");
+                let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+
+                if (appUser) {
+                  if (this.localStorageService.get("cart" + appUser.registeredUser)) {
+                    this.localStorageService.remove("cart" + appUser.registeredUser);
+                  }
+                }
                 setTimeout(() => { this.router.navigate(['home']); }, 3100)
 
               }, (err: HttpErrorResponse) => {
