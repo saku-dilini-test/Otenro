@@ -667,10 +667,9 @@ module.exports = {
             }
         });
 
-        sails.log.debug("Copying sources from <" + srcPath + "> to <" + copyDirPath + ">");
+        sails.log.debug("Copying sources zip from " + srcDirPath + zipFileSources + " to " + copyDirPath);
 
         startTime = new Date().getTime();
-        sails.log.debug('Zipping ' + ionicAppSourceDir + ' as ' + zipFileSources);
 
         // zipFolder(ionicAppSourceDir, srcDirPath + zipFileSources, function (err) {
         //     if (err) {
@@ -683,7 +682,7 @@ module.exports = {
                     fs.stat(srcDirPath + zipFileSources, function (err, fileStat) {
                         if (err) {
                             if (err.code == 'ENOENT') {
-                                thisCtrl.logApkGenerationError('File:' + zipFileSources + " does not exists, Please zip the sources in the dir: " + ionicAppSourceDir + ' Error: ' + err, userId, appId);
+                                thisCtrl.logApkGenerationError('File:' + zipFileSources + " does not exists, Please zip the sources in the dir(progPointerApp): " + ionicAppSourceDir + ' Error: ' + err, userId, appId);
                                 return;
                             }
                         } else {
