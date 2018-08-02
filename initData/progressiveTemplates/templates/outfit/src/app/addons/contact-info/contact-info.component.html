@@ -1,6 +1,5 @@
-<div *ngIf = "contacts.length > 0" style = "height:-webkit-fill-available;">
+<div *ngIf = "contacts.length > 0">
 <!-- <section *ngFor="let contact of contacts"> -->
-
     <h3 class="padding-vertical main-header-font">
       Contact Info:
     </h3>
@@ -46,41 +45,41 @@
           </div>
         </div>
       </div>
-      <ng-template  *ngFor="let branch of contact.branches;let i = index" [ngIf]="i % 3 == 0">
-        <div class="row voffset row-space-top spacing-top">
-          <a class="col-sm-4" *ngIf="contact.branches[i]"  href="https://www.google.com/maps/?q={{contact.branches[i].branch.latitude}},{{contact.branches[i].branch.longitude}}" target="_blank">
+      <ng-template  *ngFor="let branch of contacts[0].branches;let i = index" [ngIf]="i % 3 == 0">
+        <div class="row voffset row-space-top">
+          <a class="col-sm-4" *ngIf="contacts[0].branches[i]"  href="https://www.google.com/maps/?q={{contacts[0].branches[i].branch.latitude}},{{contacts[0].branches[i].branch.longitude}}" target="_blank">
             <p class="main-header-font text-center-xs">
-              {{ contact.branches[i].name}}
+              {{ contacts[0].branches[i].name}}
             </p>
             <p class="main-content-font text-center-xs">
-              {{contact.branches[i].address}}
+              {{contacts[0].branches[i].address}}
             </p>
           </a>
-          <a class="col-sm-4" *ngIf="contact.branches[i+1]"  href="https://www.google.com/maps/?q={{contact.branches[i+1].branch.latitude}},{{contact.branches[i+1].branch.longitude}}" target="_blank">
+          <a class="col-sm-4" *ngIf="contacts[0].branches[i+1]"  href="https://www.google.com/maps/?q={{contacts[0].branches[i+1].branch.latitude}},{{contacts[0].branches[i+1].branch.longitude}}" target="_blank">
             <p class="main-header-font text-center-xs">
-              {{contact.branches[i+1].name}}
+              {{contacts[0].branches[i+1].name}}
             </p>
             <p class="main-content-font text-center-xs">
-              {{contact.branches[i+1].address}}
+              {{contacts[0].branches[i+1].address}}
             </p>
           </a>
-          <a class="col-sm-4" *ngIf="contact.branches[i+2]"  href="https://www.google.com/maps/?q={{contact.branches[i+2].branch.latitude}},{{contact.branches[i+2].branch.longitude}}" target="_blank">
+          <a class="col-sm-4" *ngIf="contacts[0].branches[i+2]"  href="https://www.google.com/maps/?q={{contacts[0].branches[i+2].branch.latitude}},{{contacts[0].branches[i+2].branch.longitude}}" target="_blank">
             <p class="main-header-font text-center-xs">
-              {{contact.branches[i+2].name}}
+              {{contacts[0].branches[i+2].name}}
             </p>
             <p class="main-content-font text-center-xs">
-              {{contact.branches[i+2].address}}
+              {{contacts[0].branches[i+2].address}}
             </p>
           </a>
         </div>
       </ng-template>
-      <div class="social-media">
-        <a *ngIf="contacts[0].contactInfo.twitter" href="{{ contacts[0].contactInfo.twitter }}"  target="_blank" class="a-btn a-block bloc-mob-center-text text-center main-content-font"><i class="icon fa fa-twitter"></i></a>
-        <a *ngIf="contacts[0].contactInfo.facebook" href="{{ contacts[0].contactInfo.facebook }}" target="_blank" class="a-btn a-block bloc-mob-center-text text-center main-content-font"><i class="icon fa fa-facebook"></i></a>
-        <a *ngIf="contacts[0].contactInfo.instagram" href="{{ contacts[0].contactInfo.instagram }}" target="_blank" class="a-btn a-block bloc-mob-center-text text-center main-content-font"><i class="icon fa fa-instagram"></i></a>
-        <a *ngIf="contacts[0].contactInfo.pinterest" href="{{ contacts[0].contactInfo.pinterest }}" target="_blank" class="a-btn a-block bloc-mob-center-text text-center main-content-font"><i class="icon fa fa-pinterest-p"></i></a>
-        <a *ngIf="contacts[0].contactInfo.linkedin" href="{{ contacts[0].contactInfo.linkedin }}" target="_blank" class="a-btn a-block bloc-mob-center-text text-center main-content-font"><i class="icon fa fa-linkedin"></i></a>
-      </div>
+      <!--<div class="social-media">-->
+        <!--<a *ngIf="contacts[0].contactInfo.twitter" href="{{ contacts[0].contactInfo.twitter }}"  target="_blank" class="a-btn a-block bloc-mob-center-text text-center main-content-font"><i class="icon fa fa-twitter"></i></a>-->
+        <!--<a *ngIf="contacts[0].contactInfo.facebook" href="{{ contacts[0].contactInfo.facebook }}" target="_blank" class="a-btn a-block bloc-mob-center-text text-center main-content-font"><i class="icon fa fa-facebook"></i></a>-->
+        <!--<a *ngIf="contacts[0].contactInfo.instagram" href="{{ contacts[0].contactInfo.instagram }}" target="_blank" class="a-btn a-block bloc-mob-center-text text-center main-content-font"><i class="icon fa fa-instagram"></i></a>-->
+        <!--<a *ngIf="contacts[0].contactInfo.pinterest" href="{{ contacts[0].contactInfo.pinterest }}" target="_blank" class="a-btn a-block bloc-mob-center-text text-center main-content-font"><i class="icon fa fa-pinterest-p"></i></a>-->
+        <!--<a *ngIf="contacts[0].contactInfo.linkedin" href="{{ contacts[0].contactInfo.linkedin }}" target="_blank" class="a-btn a-block bloc-mob-center-text text-center main-content-font"><i class="icon fa fa-linkedin"></i></a>-->
+      <!--</div>-->
     </div>
 <!-- </section> -->
 </div>
