@@ -33,7 +33,12 @@
                     toastr.success('Register Successful ', 'Congratulations ! ', {closeButton: true});
 
             }).catch(function onError(err) {
-                if (err.data.error){
+                console.log(err)
+                if (err.status === 409){
+                    toastr.error('Sorry this email is already registered', 'Error', {
+                        closeButton: true
+                    });
+                }else{
                     toastr.error(err.data.error, 'Error', {
                         closeButton: true
                     });
