@@ -52,30 +52,30 @@
       </h3>
       <ng-template  *ngFor="let branch of contact.branches;let i = index" [ngIf]="i % 3 == 0">
         <div class="row voffset row-space-top spacing-top">
-          <div class="col-sm-4" *ngIf="contact.branches[i]">
+          <a class="col-sm-4" *ngIf="contact.branches[i]"  href="https://www.google.com/maps/?q={{contact.branches[i].branch.latitude}},{{contact.branches[i].branch.longitude}}" target="_blank">
             <p class="main-header-font text-center-xs">
               {{ contact.branches[i].name}}
             </p>
             <p class="main-content-font text-center-xs">
               {{contact.branches[i].address}}
             </p>
-          </div>
-          <div class="col-sm-4" *ngIf="contact.branches[i+1]">
+          </a>
+          <a class="col-sm-4" *ngIf="contact.branches[i+1]"  href="https://www.google.com/maps/?q={{contact.branches[i+1].branch.latitude}},{{contact.branches[i+1].branch.longitude}}" target="_blank">
             <p class="main-header-font text-center-xs">
               {{contact.branches[i+1].name}}
             </p>
             <p class="main-content-font text-center-xs">
               {{contact.branches[i+1].address}}
             </p>
-          </div>
-          <div class="col-sm-4" *ngIf="contact.branches[i+2]">
+          </a>
+          <a class="col-sm-4" *ngIf="contact.branches[i+2]"  href="https://www.google.com/maps/?q={{contact.branches[i+2].branch.latitude}},{{contact.branches[i+2].branch.longitude}}" target="_blank">
             <p class="main-header-font text-center-xs">
               {{contact.branches[i+2].name}}
             </p>
             <p class="main-content-font text-center-xs">
               {{contact.branches[i+2].address}}
             </p>
-          </div>
+          </a>
         </div>
       </ng-template>
 

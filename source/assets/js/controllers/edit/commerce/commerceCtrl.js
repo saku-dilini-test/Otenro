@@ -1528,8 +1528,9 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {
                         toastr.success('Contact Us successfully updated. ', 'Awesome ', {closeButton: true});
-                        if(type == 'finish'){
-
+                        if(type == 'next'){
+                            $scope.selectedTab = 4;
+                        }else if(type == 'finish'){
                             $mdDialog.hide();
                         }
                     }).error(function(data, status, headers, config) {
