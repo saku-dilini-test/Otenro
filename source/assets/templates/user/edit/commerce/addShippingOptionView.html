@@ -146,8 +146,8 @@
                                             Only Positive numbers and Maximum two decimal places only
                                         </span>
                                     </td>
-                                    <td>
-                                        <div class='delete-icon' ng-show="$index == 0 || $index ==(weightRate.weightRanges.length-1)">
+                                    <td ng-if = "$index != 0">
+                                        <div class='delete-icon'  ng-show="$index == 0 || $index ==(weightRate.weightRanges.length-1)">
                                             <img ng-click='deleteWeight($index)' name="deleteWeight_{{$index}}" src='../../../images/delete-icon.png'>
                                         </div>
                                     </td>
