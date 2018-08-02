@@ -35,7 +35,8 @@
             <div class="spacing-1">
               <p  [innerHTML]="desPart1" style="font-weight: initial;">
                </p>
-               <a class=" text-left" *ngIf="!readMore" (click)="readMoreFunct()"><strong>Read More</strong></a>
+              <a class="text-left" *ngIf="readMore" (click)="readMoreFunct()"><strong>Read More</strong></a>
+              <a class="text-left" *ngIf="readMore == false" (click)="readLessFunct()"><strong>Read Less</strong></a>
 
             </div>
             <p>

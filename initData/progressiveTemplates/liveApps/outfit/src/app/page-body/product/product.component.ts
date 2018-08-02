@@ -48,7 +48,7 @@ export class ProductComponent implements OnInit {
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
     bannerImageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=banner';
-    readMore = false;
+    readMore: boolean;
     desPart1; desPart2; desPart1_demo;
     name1; name2; name3; name4;
     todayDate;
@@ -89,20 +89,26 @@ export class ProductComponent implements OnInit {
             this.desPart2 = this.Data.detailedDesc.slice(400, this.Data.detailedDesc.length);
             this.desPart1 = this.Data.detailedDesc.slice(0, 400) + "...";
             this.desPart1_demo = this.Data.detailedDesc.slice(0, 400);
+            this.readMore = true;
 
         } else {
             this.desPart1 = this.Data.detailedDesc;
-            this.readMore = true;
         }
     }
 
     currency: string;
     tests;
 
-    readMoreFunct() {
+    readLessFunct() {
+      this.desPart2 = this.Data.detailedDesc.slice(400, this.Data.detailedDesc.length);
+      this.desPart1 = this.Data.detailedDesc.slice(0, 400) + "...";
+      this.desPart1_demo = this.Data.detailedDesc.slice(0, 400);
+      this.readMore = true;
+    }
 
+    readMoreFunct() {
         this.desPart1 = this.desPart1_demo.concat(this.desPart2);
-        this.readMore = true;
+        this.readMore = false;
     }
 
     ngOnInit() {
@@ -163,9 +169,11 @@ export class ProductComponent implements OnInit {
           gallery_autoplay:true,
           theme_hide_panel_under_width: null
         });
-        $('#gallery').on({ 'touchstart' : function(){
-            api.stop();
-        } });
+        $('#gallery').on({
+            'touchstart' : function(){
+                api.stop();
+            }
+        });
     }
 
 

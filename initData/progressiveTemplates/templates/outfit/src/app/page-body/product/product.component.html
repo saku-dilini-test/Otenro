@@ -46,8 +46,8 @@
         </p>
         <p class="content-product  main-content-font no-margin" id="details" [innerHTML]="desPart1" style="font-weight: initial;">
         </p>
-       <a class="text-left product-detail padding-bottom" *ngIf="!readMore" (click)="readMoreFunct()" style="font-size: 12px;">Read More...</a>
-
+       <a class="text-left product-detail padding-bottom" *ngIf="readMore" (click)="readMoreFunct()" style="font-size: 12px;">Read More</a>
+        <a class="text-left product-detail padding-bottom" *ngIf="readMore == false" (click)="readLessFunct()" style="font-size: 12px;><strong>Read Less</strong></a>
 
         <div class="blocs-custom-html spacing-bottom">
 

@@ -34,8 +34,8 @@
             <div class="spacing-1">
               <p  [innerHTML]="desPart1" style="font-weight: initial;">
                </p>
-               <a class=" text-left" *ngIf="!readMore" (click)="readMoreFunct()"><strong>Read More</strong></a>
-
+               <a class=" text-left" *ngIf="readMore" (click)="readMoreFunct()"><strong>Read More</strong></a>
+                <a class="text-left" *ngIf="readMore == false" (click)="readLessFunct()"><strong>Read Less</strong></a>
             </div>
             <p>
               <strong style="color:rgb(153, 15, 15)" *ngIf=" Data.variants.length >= 1 && selectedVariant.quantity == 0 && lockBuyButton">Availability: Out of stock</strong>
