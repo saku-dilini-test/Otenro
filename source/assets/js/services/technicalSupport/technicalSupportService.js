@@ -326,7 +326,40 @@
             },
             getFailedTransactionReportDataForDateRange: function (dates) {
                 return $http.post(SERVER_URL + 'appMakerReports/getFailedTransactionReportDataForDateRange', dates);
-            }
+            },
+            getPaymentStatusOfUser: function (data) {
+                return $http.post(SERVER_URL + 'appMakerReports/getPaymentStatusOfUser', data);
+            },
+
+            getRevenueAndTrafficSummaryForDateRange :function (data) {
+                return $http.post(SERVER_URL + 'appMakerReports/getRevenueAndTrafficSummaryForDateRange', data);
+            },
+
+            getRevenueAndTrafficSummaryForYearly :function (data) {
+                return $http.post(SERVER_URL + 'appMakerReports/getRevenueAndTrafficSummaryForYearly', data);
+            },
+
+            getRevenueAndTrafficSummaryForMonthly :function (data) {
+                return $http.post(SERVER_URL + 'appMakerReports/getRevenueAndTrafficSummaryForMonthly', data);
+            },
+            getAllOperators : function(){
+                return $http.get(SERVER_URL + 'appMakerReports/getAllOperators');
+            },
+
+            getApplicationBaseDailySummary :function (data) {
+                return $http.post(SERVER_URL + 'appMakerReports/appBaseReport/getApplicationBaseDailySummary', data);
+            },
+
+            getApplicationBaseMonthlySummary :function (data) {
+                return $http.post(SERVER_URL + 'appMakerReports/appBaseReport/getApplicationBaseMonthlySummary', data);
+            },
+            getApplicationBaseYearlySummary :function (data) {
+                return $http.post(SERVER_URL + 'appMakerReports/appBaseReport/getApplicationBaseYearlySummary', data);
+            },
+            getAllApps :function () {
+                return $http.post(SERVER_URL + 'appMakerReports/appBaseReport/allApps', {});
+            },
+
 
 
         };

@@ -273,38 +273,105 @@
                         <md-tab>
                             <md-tab-label>Revenue And Traffic Report</md-tab-label>
                             <md-tab-body>
-                                 Revenue And Traffic 
-                               
-                                
-                                <!-- <div class="reports-container">
+                                <div class="reports-container">
 
-                                <div class="reports-type-container"> -->
-                                <!--<div class="technical-support">-->
-                                <!-- <h6>Select report type</h6>
-                                <select>
-                                </select> -->
-                                <!--</div>-->
-                                <!-- </div>
+                                    <div class="reports-type-container">
+                                        <div layout="column" layout-wrap>
+                                            <h6 flex="100">Select report type</h6>
+                                            <select placeholder="Select Report Type"  aria-label="Country Name"
+                                                    ng-model="revenueAndTrafficReport.report"
+                                                    ng-change="reconciliationReportsGet(revenueAndTrafficReport.report)" required >
+                                                <option ng-value="oneReport.name" ng-repeat="oneReport in reports">{{oneReport.name}}</option>
+                                            </select>
 
-                                <div class="reports-period-container">
 
-                                <div class="period-container">
-                                <h6>Select period</h6>
-                                <input type="date" placeholder="START DATE">
-                                <input type="date" placeholder="END DATE">
+                                            <h6 flex="100">Select operator</h6>
+                                            <select placeholder="Select Report Type"  aria-label="Country Name"
+                                                    ng-model="revenueAndTrafficReport.operator" required >
+                                                <option ng-value="operator.operator" ng-repeat="operator in operators">{{operator.operator}}</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="reports-period-container">
+
+                                        <div class="reports-container">
+                                            <h6>Select period</h6>
+
+                                            <form name="revenueAndTrafficReportForm">
+                                                <div ng-if="revenueAndTrafficReport.report == 'Date Range'">
+                                                    <input type="date"  ng-model="revenueAndTrafficReport.sdate" placeholder="START DATE" onkeydown="return false" required>
+                                                    <input type="date" ng-model="revenueAndTrafficReport.edate" placeholder="END DATE" onkeydown="return false" required>
+                                                    <Button type="button" class="me-default-button" ng-click="revenueAndTrafficReportData(revenueAndTrafficReport)">Search</Button>
+                                                </div>
+                                                <div ng-if="revenueAndTrafficReport.report == 'Monthly'" >
+                                                    <select ng-model="revenueAndTrafficReport.fromMonth" required>
+                                                        <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
+                                                    </select>
+                                                    <select ng-model="revenueAndTrafficReport.toMonth" required>
+                                                        <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
+                                                    </select>
+                                                    <select ng-model="revenueAndTrafficReport.year" required>
+                                                        <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                    </select>
+                                                    <Button type="button" class="me-default-button" ng-click="revenueAndTrafficReportData(revenueAndTrafficReport)">Search</Button>
+                                                </div>
+                                                <div ng-if="revenueAndTrafficReport.report == 'Yearly'">
+                                                    <select placeholder="From Year" ng-model="revenueAndTrafficReport.fromYear" required>
+                                                        <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                    </select>
+                                                    <select placeholder="To Year" ng-model="revenueAndTrafficReport.toYear" required>
+                                                        <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                    </select>
+                                                    <Button type="button" class="me-default-button" ng-click="revenueAndTrafficReportData(revenueAndTrafficReport)">Search</Button>
+                                                </div>
+
+                                                <!--<Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>-->
+                                            </form>
+                                        </div>
+
+
+
+                                    </div>
                                 </div>
 
-                                <div class="operator-container">
-                                <h6>Select operator</h6>
-                                <select>
-                                </select>
-                                </div>
 
-                                </div>
 
-                                </div> -->
+                                <form class="allItems" novalidate>
+                                    <a ng-if="(revenueAndTrafficReportResponseData.length > 0)" href="" ng-click='downloadCsv
+                                    (revenueAndTrafficReportResponseData,{ filename: "revenueAndTrafficReportData.csv",reportType:"revenueAndTrafficReportData",
+                                    reportRange:revenueAndTrafficReport.report})'>
+                                        <button style="float: right" type= "button" >CSV</button></a>
+                                    <table class="table">
+                                        <thead class="obl-dashboard-apps">
+                                        <tr>
+                                            <th ng-if="revenueAndTrafficReport.report == 'Date Range'">Date</th>
+                                            <th ng-if="revenueAndTrafficReport.report == 'Monthly'">Month</th>
+                                            <th ng-if="revenueAndTrafficReport.report == 'Yearly'">Year</th>
+                                            <th>Operator</th>
+                                            <th>AppMaker Revenue</th>
+                                            <th>AppMaker Traffic</th>
+                                            <th>Total Revenue</th>
+                                            <th>Total Traffic</th>
+                                        </tr>
+                                        </thead>
 
-                               
+                                        <tbody>
+                                        <tr  ng-repeat="revenueAndTraffic in revenueAndTrafficReportResponseData">
+                                            <td ng-if="revenueAndTrafficReport.report == 'Date Range'">{{revenueAndTraffic.date}}</td>
+                                            <td ng-if="revenueAndTrafficReport.report == 'Monthly'">{{revenueAndTraffic.month}}</td>
+                                            <td ng-if="revenueAndTrafficReport.report == 'Yearly'">{{revenueAndTraffic.year}}</td>
+                                            <td>{{revenueAndTraffic.operator}}</td>
+                                            <td>{{revenueAndTraffic.revenue}}</td>
+                                            <td>{{revenueAndTraffic.viewCount}}</td>
+                                            <td>{{revenueAndTraffic.revenue}}</td>
+                                            <td>{{revenueAndTraffic.viewCount}}</td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
                             </md-tab-body>
                         </md-tab>
 
@@ -312,7 +379,119 @@
                         <md-tab>
                             <md-tab-label>Application Base Report</md-tab-label>
                             <md-tab-body>
-                                Application Base Report
+                                <div class="reports-container">
+
+                                    <div class="reports-type-container">
+                                        <div layout="column" layout-wrap>
+                                            <h6 flex="100">Select report type</h6>
+                                            <select placeholder="Select Report Type"  aria-label="Country Name"
+                                                    ng-model="applicationBaseReport.report"
+                                                    ng-change="reconciliationReportsGet(applicationBaseReport.report)" required >
+                                                <option ng-value="oneReport.name" ng-repeat="oneReport in reports">{{oneReport.name}}</option>
+                                            </select>
+
+
+                                            <h6 flex="100">Select Application</h6>
+                                            <select placeholder="Select Report Type"  aria-label="Country Name"
+                                                    ng-model="applicationBaseReport.appName" required >
+                                                <option ng-value="app.appName" ng-repeat="app in apps">{{app.appName}}</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="reports-period-container">
+
+                                        <div class="reports-container">
+                                            <h6>Select period</h6>
+
+                                            <form name="applicationBaseReportReportForm">
+                                                <div ng-if="applicationBaseReport.report == 'Date Range'">
+                                                    <input type="date"  ng-model="applicationBaseReport.sdate" placeholder="START DATE" onkeydown="return false" required>
+                                                    <input type="date" ng-model="applicationBaseReport.edate" placeholder="END DATE" onkeydown="return false" required>
+                                                    <Button type="button" class="me-default-button" ng-click="applicationBaseReportData(applicationBaseReport)">Search</Button>
+                                                </div>
+                                                <div ng-if="applicationBaseReport.report == 'Monthly'" >
+                                                    <select ng-model="applicationBaseReport.fromMonth" required>
+                                                        <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
+                                                    </select>
+                                                    <select ng-model="applicationBaseReport.toMonth" required>
+                                                        <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
+                                                    </select>
+                                                    <select ng-model="applicationBaseReport.year" required>
+                                                        <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                    </select>
+                                                    <Button type="button" class="me-default-button" ng-click="applicationBaseReportData(applicationBaseReport)">Search</Button>
+                                                </div>
+                                                <div ng-if="applicationBaseReport.report == 'Yearly'">
+                                                    <select placeholder="From Year" ng-model="applicationBaseReport.fromYear" required>
+                                                        <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                    </select>
+                                                    <select placeholder="To Year" ng-model="applicationBaseReport.toYear" required>
+                                                        <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                    </select>
+                                                    <Button type="button" class="me-default-button" ng-click="applicationBaseReportData(applicationBaseReport)">Search</Button>
+                                                </div>
+
+                                                <!--<Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>-->
+                                            </form>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+
+
+                                <form class="allItems" novalidate>
+                                    <a ng-if="(applicationBaseReportResponseData.length > 0)" href="" ng-click='downloadCsv
+                                    (applicationBaseReportResponseData,{ filename: "applicationBaseReport.csv",reportType:"applicationBaseReport",
+                                    reportRange:applicationBaseReport.report})'>
+                                        <button style="float: right" type= "button" >CSV</button></a>
+                                    <table class="table">
+                                        <thead class="obl-dashboard-apps">
+                                        <tr>
+
+                                            <th>Application</th>
+                                            <th>Type</th>
+                                            <th>CaaS Taxable</th>
+                                            <th ng-if="applicationBaseReport.report == 'Date Range'">Date</th>
+                                            <th ng-if="applicationBaseReport.report == 'Monthly'">Month</th>
+                                            <th ng-if="applicationBaseReport.report == 'Yearly'">Year</th>
+                                            <th>Operator</th>
+                                            <th>Platform Earning</th>
+                                            <th>SP Earning</th>
+                                            <th>Application Total Revenue</th>
+                                            <th>App. Tot. Traffic</th>
+                                            <th>New Registrations Count</th>
+                                            <th>New Dereg Count</th>
+                                            <th>Total Subscribers</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                        <tr  ng-repeat="applicationBase in applicationBaseReportResponseData">
+                                            <td>{{applicationBase.appName}}</td>
+                                            <td>{{applicationBase.type}}</td>
+                                            <td>false</td>
+                                            <td ng-if="applicationBaseReport.report == 'Date Range'">{{applicationBase.date}}</td>
+                                            <td ng-if="applicationBaseReport.report == 'Monthly'">{{applicationBase.month}}</td>
+                                            <td ng-if="applicationBaseReport.report == 'Yearly'">{{applicationBase.year}}</td>
+                                            <td>{{applicationBase.operator}}</td>
+                                            <td>{{applicationBase.platformEarning | number}}</td>
+                                            <td>{{applicationBase.spEarning | number}}</td>
+                                            <td>{{applicationBase.appTotRevenue}}</td>
+                                            <td>{{applicationBase.appTrafficCount}}</td>
+                                            <td>{{applicationBase.subscriptionCount}}</td>
+                                            <td>{{applicationBase.unSubscriptionCount}}</td>
+                                            <td>{{applicationBase.totSubs}}</td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
                             </md-tab-body>
                         </md-tab> 
 
@@ -391,7 +570,61 @@
                         <md-tab>
                             <md-tab-label>Customer Care Report</md-tab-label>
                             <md-tab-body>
-                                Customer Care Report
+                                <div class="reports-container">
+
+                                    <div class="reports-period-container">
+
+                                        <div class="reports-container">
+                                            <form name="customerCareReportForm">
+
+                                                <div>
+                                                    <h6 flex="100">Msisdn</h6>
+                                                    <fieldset ng-style="myObj">
+                                                        <input type="text" ng-model="customerCareReport.msisdn">
+                                                    </fieldset>
+                                                </div>
+                                                <h6>Select period</h6>
+                                                <div>
+                                                    <input type="date"  ng-model="customerCareReport.fromDate" placeholder="START DATE" onkeydown="return false" >
+                                                    <input type="date" ng-model="customerCareReport.toDate" placeholder="END DATE" onkeydown="return false" >
+                                                    <Button type="button" class="me-default-button" ng-click="getCustomerCareReportData(customerCareReport)">Search</Button>
+                                                </div>
+                                                <!--<Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>-->
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <form class="allItems" novalidate>
+                                    <a ng-if="(customerCareReportData.length > 0)" href="" ng-click='downloadCsv
+                                    (customerCareReportData,{ filename: "customerCareReport.csv",reportType:"customerCareReport",reportRange:"Date Range"})'>
+                                        <button style="float: right" type= "button" >CSV</button></a>
+                                    <table class="table">
+                                        <thead class="obl-dashboard-apps">
+                                        <tr>
+                                            <th>MSISDN</th>
+                                            <th>App Name</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Charged Amount</th>
+
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <tr  ng-repeat="customerCareReport in customerCareReportData">
+                                            <td>{{customerCareReport.msisdn}}</td>
+                                            <td>{{customerCareReport.appName}}</td>
+                                            <td>{{customerCareReport.dateTime}}</td>
+                                            <td>{{customerCareReport.status}}</td>
+                                            <td>Rs : {{customerCareReport.amount}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
                             </md-tab-body>
                         </md-tab>
                         <md-tab>
@@ -403,7 +636,8 @@
                                         <div layout="column" layout-wrap>
                                              <h6 flex="100">Select report type</h6>
 
-                                             <select placeholder="Select Report Type"  aria-label="Country Name"  ng-model="reconciliationReports.report" ng-change="reconciliationReportsGet(reconciliationReports.report)" required >
+                                             <select placeholder="Select Report Type"  aria-label="Country Name"  ng-model="reconciliationReports.report"
+                                                     ng-change="reconciliationReportsGet(reconciliationReports.report)" required >
                                                  <option ng-value="oneReport.name" ng-repeat="oneReport in reports">{{oneReport.name}}</option>
                                              </select>
 

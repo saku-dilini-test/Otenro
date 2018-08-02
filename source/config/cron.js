@@ -17,9 +17,9 @@ module.exports.cron = {
                 var failedTransactionReportController = require('../api/controllers/appMakerReports/FailedTransactionReportController.js');
 
 
-                //revenueAndTrafficReportController.insertRevenueAndTrafficDailySummary();
+                revenueAndTrafficReportController.insertRevenueAndTrafficDailySummary();
                 reconciliationReportController.insertReconciliationDailySummary();
-               // applicationBaseReportController.insertApplicationBaseDailySummary();
+                applicationBaseReportController.insertApplicationBaseDailySummary();
                 failedTransactionReportController.insertFiledTransactionDailySummary();
             }
         }

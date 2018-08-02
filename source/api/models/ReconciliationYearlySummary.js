@@ -8,7 +8,7 @@ module.exports = {
             type: 'String'
         },
         revenue:{
-            type: 'Integer'
+            type: 'float'
         },
         userId:{
             type:'String'
