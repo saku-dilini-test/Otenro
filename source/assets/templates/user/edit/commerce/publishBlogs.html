@@ -38,10 +38,9 @@
 
                 <!--<div class="md-dialog-main">-->
                     <div class="file-upload-wrapper clearfix">
-                        <div class="cropArea">
+                        <s class="cropArea">
                             <img-crop image="myImage" area-type="rectangle" aspect-ratio="thirdNaviAspectRatio" result-image="picFile" result-image-size="iSizeThird">
-                            </img-crop>
-                        </div>
+ssssss                        </s>
 
                         <div class="inputField btn-material img-up">
                             <span >{{buttonName}}</span>
@@ -91,7 +90,7 @@
         </form>
         <div class="md-dialog-buttons">
             <div class="inner-section">
-                <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                <md-button class="me-default-button" ng-click="goPreview('cancel')">Cancel</md-button>
                 <md-button class="me-default-button" ng-disabled="blogForm.$invalid" ng-click="publishBlog(mainImg,blog)">Publish</md-button>
             </div>
         </div>

@@ -159,11 +159,15 @@
 
                 };
 
+                $scope.goPreview = function() {
+                    commerceService.showPreviewBlogDialog('previewBlog');
+                };
                 $scope.answer = function() {
                     $mdDialog.hide();
                 };
 
-                $scope.hide = function() {
+
+                 $scope.hide = function() {
                     $mdDialog.hide();
                 };
                 $scope.cancel = function() {
