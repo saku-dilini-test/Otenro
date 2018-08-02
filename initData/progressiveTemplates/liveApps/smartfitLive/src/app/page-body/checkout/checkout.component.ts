@@ -816,10 +816,10 @@ export class CheckoutComponent implements OnInit {
 
     }
 
-    this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails)
+    this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails,{ responseType: 'json' })
       .subscribe((orderRes: any) => {
 
-        this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart)
+        this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart,{ responseType: 'text' })
           .subscribe((res) => {
             this.dataService.cart.cartItems = [];
             this.dataService.cart.cartSize = 0;
@@ -837,16 +837,22 @@ export class CheckoutComponent implements OnInit {
             }else{
               this.localStorageService.remove("cartUnknownUser");
             }
+
+            let city = this.orderDetails.deliveryCity ? this.orderDetails.deliveryCity : "";
+            let streetNo = this.orderDetails.deliveryNo ? this.orderDetails.deliveryNo : "";
+            let streetName = this.orderDetails.deliveryStreet ? this.orderDetails.deliveryStreet : "";
+
+
             window.location.href=(SERVER_URL + '/mobile/getPayHereForm/?name=' +
-            this.orderDetails.customerName + "&amount=" +
-            this.orderDetails.amount + "&currency=" +
-            this.currency.symbol + "&email=" +
-            this.orderDetails.email + "&telNumber=" +
-            this.orderDetails.telNumber + "&item=" +
-            this.orderDetails.item[0].name + "&address=" +
-            this.orderDetails.deliveryNo + " " + this.orderDetails.deliveryStreet + "&city=" +
-            this.orderDetails.deliveryCity + "&appId=" + orderRes.orderData.appId +
-            "&orderId=" + orderRes.orderData.orderId + "&payHereMerchantId=" + this.payHereMID);
+              this.orderDetails.customerName + "&amount=" +
+              this.orderDetails.amount + "&currency=" +
+              this.currency.symbol + "&email=" +
+              this.orderDetails.email + "&telNumber=" +
+              this.orderDetails.telNumber + "&item=" +
+              this.orderDetails.item[0].name + "&address=" +
+              streetNo + " " + streetName  + "&city=" +
+              city + "&appId=" + orderRes.appId +
+              "&orderId=" + orderRes.id + "&payHereMerchantId=" + this.payHereMID);
           },
           (err) => {
             console.log(err);

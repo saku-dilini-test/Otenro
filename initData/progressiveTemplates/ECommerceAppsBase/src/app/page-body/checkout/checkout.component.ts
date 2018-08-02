@@ -502,7 +502,7 @@ export class CheckoutComponent implements OnInit {
       this.spinner.hide();
     }
     // this.dataService.finalDetails = shippingDetails;
-    this.chk(shippingDetails);
+    this.chk(shippingDetails,"deliver");
 
     // setTimeout(()=>{ this.pay("001"); }, 500);
 
@@ -525,12 +525,12 @@ export class CheckoutComponent implements OnInit {
       deliverDetails: { name: details.name, email: details.email, number: details.phone },
 
     }
-    this.chk(this.pickupData);
+    this.chk(this.pickupData,"pickup");
     // setTimeout(() => {  }, 500);
   };
 
   //------------------------------checkout---------------------------------------
-  chk(final) {
+  chk(final,type) {
 
     this.finalDetails = final;
     this.chkShippingCost = parseFloat(this.finalDetails.shippingCost);
@@ -538,7 +538,9 @@ export class CheckoutComponent implements OnInit {
     this.overWeight = this.finalDetails.overWeight;
 
 
-    if (typeof this.chkShippingCost == 'undefined') {
+    if (type == "pickup") {
+      this.hideShipping = true;
+    }else{
       this.hideShipping = false;
     }
 
@@ -1305,10 +1307,10 @@ export class CheckoutComponent implements OnInit {
       }
     }
 
-    this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails)
+    this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails,{ responseType: 'json' })
       .subscribe((orderRes: any) => {
 
-        this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart)
+        this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
           .subscribe((res) => {
             this.dataService.cart.cartItems = [];
             this.dataService.cart.cartSize = 0;
@@ -1325,6 +1327,10 @@ export class CheckoutComponent implements OnInit {
               }
             }
 
+            let city = this.orderDetails.deliveryCity ? this.orderDetails.deliveryCity : "";
+            let streetNo = this.orderDetails.deliveryNo ? this.orderDetails.deliveryNo : "";
+            let streetName = this.orderDetails.deliveryStreet ? this.orderDetails.deliveryStreet : "";
+
             window.location.href=(SERVER_URL + '/mobile/getPayHereForm/?name=' +
               this.orderDetails.customerName + "&amount=" +
               this.orderDetails.amount + "&currency=" +
@@ -1332,9 +1338,9 @@ export class CheckoutComponent implements OnInit {
               this.orderDetails.email + "&telNumber=" +
               this.orderDetails.telNumber + "&item=" +
               this.orderDetails.item[0].name + "&address=" +
-              this.orderDetails.deliveryNo + " " + this.orderDetails.deliveryStreet + "&city=" +
-              this.orderDetails.deliveryCity + "&appId=" + orderRes.orderData.appId +
-              "&orderId=" + orderRes.orderData.orderId + "&payHereMerchantId=" + this.payHereMID);
+              streetNo + " " + streetName  + "&city=" +
+              city + "&appId=" + orderRes.appId +
+              "&orderId=" + orderRes.id + "&payHereMerchantId=" + this.payHereMID);
 
           },
           (err) => {

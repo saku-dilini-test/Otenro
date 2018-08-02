@@ -65,8 +65,8 @@
 
 
         $scope.countrySearch= function (country) {
-            alert($scope.countryName);
             $scope.countryName = country;
+            console.log(country);
         };
 
 

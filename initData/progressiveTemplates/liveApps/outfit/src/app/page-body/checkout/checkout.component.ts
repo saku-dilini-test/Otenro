@@ -1320,14 +1320,14 @@ export class CheckoutComponent implements OnInit {
       }
     }
 
-    this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails)
+    this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails,{ responseType: 'json' })
       .subscribe((orderRes: any) => {
 
         console.log("done save pending order");
         console.log("orderRes :");
         console.log(orderRes);
 
-        this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart)
+        this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart,{ responseType: 'text' })
           .subscribe((res) => {
             this.dataService.cart.cartItems = [];
             this.dataService.cart.cartSize = 0;
@@ -1346,16 +1346,20 @@ export class CheckoutComponent implements OnInit {
               this.localStorageService.remove("cartUnknownUser");
             }
 
-            showHelp(SERVER_URL + '/mobile/getPayHereForm/?name=' +
+            let city = this.orderDetails.deliveryCity ? this.orderDetails.deliveryCity : "";
+            let streetNo = this.orderDetails.deliveryNo ? this.orderDetails.deliveryNo : "";
+            let streetName = this.orderDetails.deliveryStreet ? this.orderDetails.deliveryStreet : "";
+
+            window.location.href=(SERVER_URL + '/mobile/getPayHereForm/?name=' +
               this.orderDetails.customerName + "&amount=" +
               this.orderDetails.amount + "&currency=" +
               this.currency.symbol + "&email=" +
               this.orderDetails.email + "&telNumber=" +
               this.orderDetails.telNumber + "&item=" +
               this.orderDetails.item[0].name + "&address=" +
-              this.orderDetails.deliveryNo + " " + this.orderDetails.deliveryStreet + "&city=" +
-              this.orderDetails.deliveryCity + "&appId=" + orderRes.orderData.appId +
-              "&orderId=" + orderRes.orderData.orderId + "&payHereMerchantId=1211173");
+              streetNo + " " + streetName  + "&city=" +
+              city + "&appId=" + orderRes.appId +
+              "&orderId=" + orderRes.id + "&payHereMerchantId=" + this.payHereMID);
 
           },
           (err) => {
@@ -1370,69 +1374,6 @@ export class CheckoutComponent implements OnInit {
       });
 
 
-    var inAppBrowserRef;
-
-    function showHelp(url) {
-
-      var target = "_blank";
-
-      var options = "location=yes,hidden=yes";
-
-      inAppBrowserRef = window.open(url, target, options);
-
-      inAppBrowserRef.addEventListener('loadstart', loadStartCallBack);
-
-      inAppBrowserRef.addEventListener('loadstop', loadStopCallBack);
-
-      inAppBrowserRef.addEventListener('loaderror', loadErrorCallBack);
-
-    }
-
-    function loadStartCallBack() {
-
-      $('#status-message').text("loading please wait ...");
-
-    }
-
-    function loadStopCallBack() {
-
-      if (inAppBrowserRef != undefined) {
-
-        inAppBrowserRef.insertCSS({ code: "body{font-size: 25px;" });
-
-        $('#status-message').text("");
-
-        inAppBrowserRef.show();
-      }
-
-    }
-
-    function loadErrorCallBack(params) {
-
-      $('#status-message').text("");
-
-      var scriptErrorMesssage =
-        "alert('Sorry we cannot open that page. Message from the server is : "
-        + params.message + "');"
-
-      inAppBrowserRef.executeScript({ code: scriptErrorMesssage }, executeScriptCallBack);
-
-      inAppBrowserRef.close();
-
-      inAppBrowserRef = undefined;
-
-    }
-
-    function executeScriptCallBack(params) {
-
-      if (params[0] == null) {
-
-        $('#status-message').text(
-          "Sorry we couldn't open that page. Message from the server is : '"
-          + params.message + "'");
-      }
-
-    }
   }
 
 }

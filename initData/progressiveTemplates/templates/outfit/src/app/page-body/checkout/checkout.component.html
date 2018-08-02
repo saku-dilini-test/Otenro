@@ -307,7 +307,7 @@
                     </tr>
                   </tbody>
                   <tfoot>
-                    <tr *ngIf='hideShipping'>
+                    <tr *ngIf='!hideShipping'>
                       <th style="text-align: left">Shipping</th>
                       <td></td>
                       <td style="text-align: right">{{sign}}{{chkShippingCost}}</td>
