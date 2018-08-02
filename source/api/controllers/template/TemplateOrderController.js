@@ -26,13 +26,15 @@ module.exports = {
                     orderId:order.id
                 };
                 sails.log.info(searchApp);
-                res.send({orderData:searchApp});
+                res.send(order);
             });
         }
         else{
             ShippingDetails.find({id:data.pickupId,appId:data.appId}).exec(function(err,pickUp){
                 if(err) res.send(err);
                 data.pickUp = pickUp[0];
+                data.deliveryCountry = pickUp[0].country;
+                data.shippingOpt = pickUp[0].shippingOption;
                 data.option = 'pickUp';
                 ApplicationOrder.create(data).exec(function (err, order) {
                     if (err) res.send(err);
@@ -40,7 +42,7 @@ module.exports = {
                         id: order.appId
                     };
                     sails.log.info(searchApp);
-                    res.send('ok');
+                    res.send(order);
                 });
             });
         }
@@ -80,6 +82,8 @@ module.exports = {
            ShippingDetails.find({id:data.pickupId,appId:data.appId}).exec(function(err,pickUp){
             if(err) res.send(err);
             data.pickUp = pickUp[0];
+            data.deliveryCountry = pickUp[0].country;
+            data.shippingOpt = pickUp[0].shippingOption;
             data.option = 'pickUp';
             ApplicationOrder.create(data).exec(function (err, order) {
                 if (err) res.send(err);

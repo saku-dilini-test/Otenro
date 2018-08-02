@@ -254,50 +254,60 @@ module.exports = {
 
             //tax
             if (type=='tax'){
+                var data
 
-                reportData.push(" , "+"Country"+","+ "Customer" +"," +
-                    "Order ID" + "," +  "Date" + ","+ "Amount"+ ","+"Tax"+'\r\n');
-                Order.forEach(function(order) {
-                    var data = order.deliveryCountry+","+order.customerName +
-                        ","+ order.id + ","+ order.updatedAt+","+order.amount+","+order.tax+'\r\n';
-                    reportData.push(data);
-                });
+                    reportData.push(" , "+"Country"+","+ "Customer" +"," +
+                        "Order ID" + "," +  "Date" + ","+ "Amount"+ ","+"Tax"+'\r\n');
+                    Order.forEach(function(order) {
+                            data = order.deliveryCountry+","+order.customerName +
+                                ","+ order.id + ","+ order.updatedAt+","+order.amount+","+order.tax+'\r\n';
+                            reportData.push(data);
+
+                    });
+
 
             }else if (type=='shipping'){
 
+                var data;
                 //shipping
 
-                reportData.push(" , "+"Country"+","+ "Customer" +"," + "Order ID" + "," +
-                    "Date" + ","+ "Amount"+"," +"Shipping Type" +","+ "Shipping Cost" +'\r\n');
-                Order.forEach(function(order) {
+                    reportData.push(" , "+"Country"+","+ "Customer" +"," + "Order ID" + "," +
+                        "Date" + ","+ "Amount"+"," +"Shipping Type" +","+ "Shipping Cost" +'\r\n');
+                    Order.forEach(function(order) {
+                        if(order.shippingOpt != "Pick up"){
 
-                            var data = order.deliveryCountry+","+order.customerName + ","+
-                                order.id + ","+ order.updatedAt+","+order.amount+","+
-                                order.shippingOpt+","+order.shippingCost+'\r\n';
-                            reportData.push(data);
-                });
+                            data = order.deliveryCountry+","+order.customerName + ","+
+                                    order.id + ","+ order.updatedAt+","+order.amount+","+
+                                    order.shippingOpt+","+order.shippingCost+'\r\n';
+                                reportData.push(data);
+                        }
+                    });
+
 
             }else if (type=='sales'){
 
                 //sales
 
-                reportData.push(" , "+"Country"+","+ "Customer" +"," + "Product" + "," +
-                    "Date" + ","+ "Amount"+","+ "SKU"+"," +"variant"  +'\r\n');
-                Order.forEach(function(order) {
-                    order.item.forEach(function (item) {
-                        if(selectedProductData.indexOf(item.name) > -1){
-                            var itemTotal = item.qty * item.price;
-                            item.variant.forEach(function (variant) {
-                                var data = order.deliveryCountry+","+order.customerName + ","+
-                                    item.name + ","+ order.updatedAt+","+itemTotal+","+item.sku+"," +
-                                    ""+variant.name+"-"+variant.vType+'\r\n';
-                                reportData.push(data);
-                            })
-                        }
-                    })
-                });
+                    reportData.push(" , "+"Country"+","+ "Customer" +"," + "Product" + "," +
+                        "Date" + ","+ "Amount"+","+ "SKU"+"," +"variant"  +'\r\n');
+                    Order.forEach(function(order) {
+                        order.item.forEach(function (item) {
+                                if(selectedProductData.indexOf(item.name) > -1){
+                                    var itemTotal = item.qty * item.price;
+                                    item.variant.forEach(function (variant) {
+                                        var data = order.deliveryCountry+","+order.customerName + ","+
+                                            item.name + ","+ order.updatedAt+","+itemTotal+","+item.sku+"," +
+                                            ""+variant.name+"-"+variant.vType+'\r\n';
+                                        reportData.push(data);
+                                    })
+                                }
 
-            }
+                        });
+                    });
+
+                }
+
+
 
             var file = config.ME_SERVER +type+"-"+dateFormat(req.body.fromDate, "yyyy-mm-dd")+"-"+dateFormat(req.body.toDate, "yyyy-mm-dd")+'.csv';
 
