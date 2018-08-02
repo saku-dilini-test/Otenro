@@ -1,17 +1,20 @@
 <div class="bloc bgc-white l-bloc none">
-  <div class="col-sm-9">
+  <div class="col-sm-12">
     <div class="row" *ngFor = "let blog of blogData">
-      <div class="col-sm-3">
-
-        <img src="{{imageUrl}}/{{blog.imageUrl}}" width="100%">
+      <div class="col-sm-4">
+        <div class="blog-list-img-container">
+          <img src="{{imageUrl}}/{{blog.imageUrl}}" width="100%">
+        </div>
       </div>
-      <div class="col-sm-9">
-        <h3 class="header main-header-font">
+      <div class="col-sm-8">
+        <h3 class="header main-header-font blog-list-header-format">
             {{blog.title}}
         </h3>
 <hr>
-        <p class="mg-lg blog-content-text" [innerHTML]="blog.shortDesc">
-        </p>
+        <div class="blog-ist-content-container">
+            <p class=" blog-content-text">{{blog.shortDesc}}</p>            
+        </div>
+        <!-- <p class="mg-lg blog-content-text" [innerHTML]="blog.shortDesc"></p> -->
         <a class="btn btn-d main-button btn-block btn-lg" (click)="navigate(blog.id)">More Info</a>
       </div>
     </div>

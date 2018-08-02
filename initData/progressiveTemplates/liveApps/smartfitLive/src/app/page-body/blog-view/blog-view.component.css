@@ -1,3 +1,4 @@
 /deep/ .blog img{
   width:100%;
+  object-fit: contain;
 }

@@ -34,6 +34,10 @@
 }
 
 .mg-lg {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
     margin-top: 10px;
     margin-bottom: 20px;
     height: 160px;
@@ -64,3 +68,35 @@ hr {
     margin: 1em 0;
     padding: 0;
 }
+
+/* added by .sanira */
+.blog-size{
+    height: 160px;
+}
+.blog-list-img-container{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    height:200px;
+}
+.blog-list-img-container img{
+    object-fit: contain;
+}
+.blog-list-header-format{
+    border:none;
+}
+.blog-ist-content-container{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding:0;
+    height: 75px;
+    overflow: hidden;
+}
+/* --------------------- */
