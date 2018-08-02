@@ -209,7 +209,7 @@
                                             <th>Shipping {{ shppingList[0].currency }}</th>
                                         </tr>
 
-                                        <tr ng-repeat="shipping in shppingList | filter : {'country' :countryName}">
+                                        <tr ng-repeat="shipping in shppingList | filter : countryName">
                                             <td>{{ shipping._id.country }}</td>
                                             <td>{{ shipping._id.shippingOpt }}</td>
                                             <td>{{ shipping.totalShippingCost }}</td>
