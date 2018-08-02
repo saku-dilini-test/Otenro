@@ -71,14 +71,13 @@ module.exports = {
         var mainCatCtrl = this;
         var appId = req.param('appId');
         var searchApp = {
-            appId: appId,
-            sort: 'name ASC'
+            appId: appId
         };
-        MainCategory.find(searchApp).sort({ updatedAt: -1 }).exec(function(err, list) {
+        MainCategory.find(searchApp).sort({ updatedAt: 'DESC' }).exec(function(err, list) {
             if (err) throw err;
 
             if(list){
-                ThirdNavigation.find(searchApp, function(err, products) {
+                ThirdNavigation.find(searchApp).sort({ updatedAt:'DESC' }).exec(function(err, products) {
                     if (err) return done(err);
 
                     if(products){
