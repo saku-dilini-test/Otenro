@@ -20,7 +20,7 @@
       <div class="container" *ngIf="orderHistory && orderHistory.length == 0">
         <h1 class="main-header-font">You don't have any order history!</h1>
       </div>
-      <div class="container"  *ngFor="let order of orderHistory">
+      <div class="container order-history-li"  *ngFor="let order of orderHistory">
             <h5 class="col-md-12 main-content-font">ORDER ID : {{order.id}}</h5>
             <h5 class="col-md-12 main-content-font">ORDER DATE : {{order.createdAt | date: 'dd/MM/yyyy'}}</h5>
             <div *ngIf="order.note">
