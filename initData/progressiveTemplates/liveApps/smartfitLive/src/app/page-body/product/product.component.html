@@ -87,10 +87,10 @@
             <div>
               <div class="text-left product-details-price main-content-font" >
                 <p *ngIf="discountAvailable == false && availableFirstVariPromo == false"><strong>{{currency}}</strong> {{selectedVariant.price| number: '.2'}}</p>
-                <h5 *ngIf="discountAvailable == false && availableFirstVariPromo == true">Regular price - <strong style="text-decoration: line-through">{{currency}}{{oldPrice| number: '.2'}}</strong></h5>
+                <h5 *ngIf="discountAvailable == false && availableFirstVariPromo == true">Regular price - <strong style="text-decoration: line-through">{{currency}} {{oldPrice| number: '.2'}}</strong></h5>
                 <h4 *ngIf="discountAvailable == false && availableFirstVariPromo == true">Cash price - <strong>{{currency}}</strong> {{newPrice| number: '.2'}}</h4>
 
-                <h5 *ngIf="discountAvailable == true">Regular price - <strong style="text-decoration: line-through">{{currency}}{{oldPrice| number: '.2'}}</strong></h5>
+                <h5 *ngIf="discountAvailable == true">Regular price - <strong style="text-decoration: line-through">{{currency}} {{oldPrice| number: '.2'}}</strong></h5>
                 <h4 *ngIf="discountAvailable == true">Cash price - <strong>{{currency}}</strong> {{newPrice| number: '.2'}}</h4>
               </div>
               <p class="text-left product-details-price main-content-font" *ngIf="!selectedVariant.price">
