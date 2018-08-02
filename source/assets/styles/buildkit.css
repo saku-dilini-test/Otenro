@@ -2965,3 +2965,7 @@ table.md-calendar-day-header{
 .margin{
     margin: 16px !important;
 }
+/* added by .sanira */
+.width-100{
+    width: 100%;
+}
