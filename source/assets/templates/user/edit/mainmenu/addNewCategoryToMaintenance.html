@@ -1,7 +1,10 @@
 <md-dialog aria-label="Edit Child Menu">
     <md-dialog-content>
-        <div class="md-dialog-header">
+        <div  ng-if="initialData.menu == undefiend || initialData.parentId != undefiend" class="md-dialog-header">
             <h1>Add Category</h1>
+        </div>
+        <div  ng-if="initialData.menu != undefiend" class="md-dialog-header">
+            <h1>Edit Category</h1>
         </div>
         <form name="catForm" novalidate>
             <div class="md-dialog-main">
