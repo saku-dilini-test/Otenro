@@ -641,7 +641,8 @@ module.exports = {
             thisCtrl = this;
 
 
-        var zipFileSources = 'progPointerApp.zip';
+        var pointerAppDirName = 'progPointerApp';
+        var zipFileSources = pointerAppDirName + '.zip';
         var srcDirPath =  sails.config.appPath + '/api/src/';
         var ionicAppSourceDir = sails.config.appPath + '/api/src/progPointerApp';
 
@@ -692,25 +693,59 @@ module.exports = {
                                     return;
                                 }
 
-                                sails.log.debug("Source files copied in " + Math.floor((new Date().getTime() - startTime) / 1000) + " seconds");
+                                sails.log.debug("Source zip file copied ");
                                 sails.log.debug("Started to Extract the files...");
 
-                                var zip = new AdmZip(copyDirPath + zipFileSources);
-                                zip.extractAllTo(copyDirPath, true);//This is a synchronous function
+                                shell.cd(copyDirPath);
+                                shell.exec('unzip ' + zipFileSources + ' -d ./', {async: true}, function (codeunzip, stdoutunzip, stderrunzip) {
+                                    if (codeunzip == 0) {
+                                        sails.log.debug("Unzipped " + zipFileSources);
 
+                                        //Move all the files in the progPointerApp(Which unzipped using above shell command) to ./
+                                        shell.exec('mv ' + pointerAppDirName + '/* ./', {async: true}, function (codemv, stdoutmv, stderrmv) {
+                                            if (codemv == 0) {
+                                                sails.log.debug("Files moved from " + pointerAppDirName + " to ./");
 
-                                sails.log.debug("ionic files are ready in " + copyDirPath + " in " + Math.floor((new Date().getTime() - startTime) / 1000) + " seconds");
+                                                //Delete the directory progPointerApp in ./ which we don't need any more
+                                                shell.exec('rm -rf ' + pointerAppDirName, {async: true}, function (coderm, stdoutrm, stderrrm) {
+                                                    if (codemv == 0) {
+                                                        sails.log.debug("Directory removed  " + pointerAppDirName + " from ./");
+                                                        sails.log.debug("ionic files are ready in " + copyDirPath + " in " + Math.floor((new Date().getTime() - startTime) / 1000) + " seconds");
 
-                                var searchApp = {
-                                    id: appId
-                                };
+                                                        var searchApp = {
+                                                            id: appId
+                                                        };
 
-                                Application.findOne(searchApp).exec(function (err, app) {
-                                    if (err) {
-                                        thisCtrl.logApkGenerationError('Error while searching the appId:' + appId + ' in Application. Error: ' + err, userId, appId);
-                                        return;
+                                                        Application.findOne(searchApp).exec(function (err, app) {
+                                                            if (err) {
+                                                                thisCtrl.logApkGenerationError('Error while searching the appId:' + appId + ' in Application. Error: ' + err, userId, appId);
+                                                                return;
+                                                            }
+                                                            replaceAppNameNIcon(app.appName, appIconFileRES, appSplashFileRES);
+                                                        });
+                                                    }else{
+                                                        thisCtrl.printShellError('Error while Executing: rm -rf ' + pointerAppDirName,coderm, stdoutrm, stderrrm, userId, appId);
+                                                        if (stderr){
+                                                            shell.exit(1);
+                                                            return;
+                                                        }
+                                                    }
+                                                });
+                                            }else{
+                                                thisCtrl.printShellError('Error while Executing: mv ' + zipFileSources + '/* ./',codemv, stdoutmv, stderrmv, userId, appId);
+                                                if (stderr){
+                                                    shell.exit(1);
+                                                    return;
+                                                }
+                                            }
+                                        });
+                                    }else{
+                                        thisCtrl.printShellError('Error while Executing: unzip ' + zipFileSources + ' -d ./',codeunzip, stdoutunzip, stderrunzip, userId, appId);
+                                        if (stderr){
+                                            shell.exit(1);
+                                            return;
+                                        }
                                     }
-                                    replaceAppNameNIcon(app.appName, appIconFileRES, appSplashFileRES);
                                 });
                             });
                         }
