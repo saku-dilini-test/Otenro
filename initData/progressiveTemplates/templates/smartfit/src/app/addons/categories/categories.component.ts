@@ -82,6 +82,9 @@ export class CategoriesComponent implements OnInit {
     });
     // $('.right.carousel-control').trigger('click');
   }
+  ngOnDestroy() {
+    $('.carousel').carousel('pause');
+  }
 
   @Input('categories') categories:CategoriesModel;
 
