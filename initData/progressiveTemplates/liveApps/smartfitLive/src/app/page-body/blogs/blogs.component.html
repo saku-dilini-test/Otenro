@@ -2,20 +2,26 @@
   <div class="col-sm-9">
     <div class="row" *ngFor = "let blog of blogData">
       <div class="col-sm-3">
-
         <img src="{{imageUrl}}/{{blog.imageUrl}}" width="100%">
       </div>
       <div class="col-sm-9">
         <h3 class="header main-header-font">
             {{blog.title}}
         </h3>
-<hr>
-        <p class="mg-lg blog-content-text" [innerHTML]="blog.shortDesc">
+        <p class="main-content-font" [innerHTML]="blog.shortDesc">
         </p>
         <a class="btn btn-d main-button btn-block btn-lg" (click)="navigate(blog.id)">More Info</a>
       </div>
     </div>
   </div>
   <div class="col-sm-3">
-    </div>
+    <form class="form-blog">
+      <p class="header"  >
+        LATEST POSTS
+      </p>
+      <p class="links" *ngFor = "let blog of blogData" (click)="navigate(blog.id)">
+        <a>{{blog.title}}</a>
+      </p>
+    </form>
+  </div>
 </div>

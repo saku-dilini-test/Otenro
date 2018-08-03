@@ -1,14 +1,12 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("BlogCtrl", [
-        '$scope', '$mdDialog', 'toastr', 'commerceService','carouselService', 'currencyService', 'publishService', '$rootScope',
-        'SERVER_URL', '$auth', 'ME_APP_SERVER', '$interval', '$q','aboutUsService','mySharedService','initialData','comingSoonService',
-        '$filter','$templateCache','$log',
+        '$scope', '$mdDialog', 'toastr', 'commerceService', '$rootScope',
+        'SERVER_URL', '$auth', 'ME_APP_SERVER','mySharedService','initialData','mainMenuService',
         BlogCtrl]);
 
-    function BlogCtrl($scope, $mdDialog, toastr, commerceService,carouselService, currencyService, publishService, $rootScope,
-             SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService,initialData,comingSoonService, $filter
-            ,$templateCache,sendDate,$log) {
+    function BlogCtrl($scope, $mdDialog, toastr, commerceService, $rootScope,
+             SERVER_URL, $auth, ME_APP_SERVER, mySharedService,initialData,mainMenuService) {
 
 
                 $scope.appId = $rootScope.appId;
@@ -238,36 +236,36 @@
                                 toastr.error('Blogs publishing failed', 'Warning', {
                                     closeButton: true
                                 });
-                            })
+                            });
                     }
 
-                }
+                };
 
-//        $scope.setAspectRatio = function () {
-//            mainMenuService.getApplicationData($rootScope.appId)
-//                .success(function (data) {
-//                    if (data.templateId){
-//                        mainMenuService.getTemplateData(data.templateId)
-//                            .success(function (templateData) {
-//                                if(templateData.thirdNaviAspectRatio){
-//                                    $scope.thirdNaviAspectRatio = parseFloat(templateData.thirdNaviAspectRatio);
-//                                }
-//                                if(templateData.iSizeThird){
-//                                    $scope.iSizeThird={w:templateData.iSizeThird.w,h:templateData.iSizeThird.h};
-//                                }
-//                            }).error(function (err) {
-//                            toastr.error(err.message, 'Warning', {
-//                                closeButton: true
-//                            });
-//                        });
-//                    }
-//                }).error(function (err) {
-//                toastr.error(err.message, 'Warning', {
-//                    closeButton: true
-//                });
-//            });
-//        };
-//        $scope.setAspectRatio();
+               $scope.setAspectRatio = function () {
+                   mainMenuService.getApplicationData($rootScope.appId)
+                       .success(function (data) {
+                           if (data.templateId){
+                               mainMenuService.getTemplateData(data.templateId)
+                                   .success(function (templateData) {
+                                       if(templateData.thirdNaviAspectRatio){
+                                           $scope.thirdNaviAspectRatio = parseFloat(templateData.thirdNaviAspectRatio);
+                                       }
+                                       if(templateData.iSizeThird){
+                                           $scope.iSizeThird={w:templateData.iSizeThird.w,h:templateData.iSizeThird.h};
+                                       }
+                                   }).error(function (err) {
+                                   toastr.error(err.message, 'Warning', {
+                                       closeButton: true
+                                   });
+                               });
+                           }
+                       }).error(function (err) {
+                       toastr.error(err.message, 'Warning', {
+                           closeButton: true
+                       });
+                   });
+               };
+               $scope.setAspectRatio();
 
 
     }
