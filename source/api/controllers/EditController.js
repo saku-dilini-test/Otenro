@@ -725,7 +725,7 @@ module.exports = {
                                                         });
                                                     }else{
                                                         thisCtrl.printShellError('Error while Executing: rm -rf ' + pointerAppDirName,coderm, stdoutrm, stderrrm, userId, appId);
-                                                        if (stderr){
+                                                        if (stderrrm){
                                                             shell.exit(1);
                                                             return;
                                                         }
@@ -733,7 +733,7 @@ module.exports = {
                                                 });
                                             }else{
                                                 thisCtrl.printShellError('Error while Executing: mv ' + zipFileSources + '/* ./',codemv, stdoutmv, stderrmv, userId, appId);
-                                                if (stderr){
+                                                if (stderrmv){
                                                     shell.exit(1);
                                                     return;
                                                 }
@@ -741,7 +741,7 @@ module.exports = {
                                         });
                                     }else{
                                         thisCtrl.printShellError('Error while Executing: unzip ' + zipFileSources + ' -d ./',codeunzip, stdoutunzip, stderrunzip, userId, appId);
-                                        if (stderr){
+                                        if (stderrunzip){
                                             shell.exit(1);
                                             return;
                                         }
@@ -894,7 +894,7 @@ module.exports = {
                                         });
                                     } else {
                                         thisCtrl.printShellError('Error while Executing: jarsigner process',code4, stdout4, stderr4, userId, appId);
-                                        if (stderr){
+                                        if (stderr4){
                                             // shell.exit(1);
                                             return;
                                         }
@@ -902,7 +902,7 @@ module.exports = {
                                 });
                             } else {
                                 thisCtrl.printShellError('Error while Executing: ionic cordova build android  --release',code3, stdout3, stderr3, userId, appId);
-                                if (stderr){
+                                if (stderr3){
                                     // shell.exit(1);
                                     return;
                                 }
