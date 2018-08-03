@@ -38,8 +38,11 @@ export class FooterComponent{
 
   navigate(route: string, name: string) {
     this.title = name;
-
-    this.router.navigate([route]);
+    if(name == "Contact Us"){
+      this.router.navigate([route]);
+    }else{
+      this.router.navigate([route,name]);
+    }
   }
 
   getTwitterUrl(): string{

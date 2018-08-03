@@ -103,9 +103,9 @@
                     <input class="form-control" type="text" #city='ngModel' id="city"  pattern="^([a-zA-Z]+\s)*[a-zA-Z]+$" name="city" placeholder="Your City" ngModel required>
                     <div [hidden]="city.valid || city.pristine" class="alert alert-danger">
                       <div [hidden]="!city.hasError('required')">City is required</div>
-                    </div>
-                    <div [hidden]="!city.hasError('pattern')">
-                      City must only include Alphabetic character & no unnecessary spaces.
+                      <div [hidden]="!city.hasError('pattern')">
+                        City must only include Alphabetic character & no unnecessary spaces.
+                      </div>
                     </div>
                   </div>
                 </div>  

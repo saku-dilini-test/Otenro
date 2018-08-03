@@ -187,7 +187,7 @@
                         return;
                     }
                     if(!blog.shortDesc){
-                        toastr.error('Please enter an blog title ', 'Warning', {
+                        toastr.error('Please enter an short description ', 'Warning', {
                             closeButton: true
                         });
                         return;

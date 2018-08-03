@@ -82,11 +82,13 @@
             $scope.disableSave = true;
 
             if($scope.tmpImage[0] == null){
+                $scope.disableSave = false;
                 toastr.error('Please upload an image', 'Warning', {closeButton: true});
                 return;
             }
             // If menu undefined || menu.name undefined or empty, pop up error message
             if((typeof menu == 'undefined') || (typeof menu.name == 'undefined') || menu.name == ''){
+                $scope.disableSave = false
                 toastr.error('Please enter a name ', 'Warning', {closeButton: true});
                 return;
             }
