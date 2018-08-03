@@ -66,8 +66,8 @@ module.exports = {
     IDEABIZ_AUTH_CONSUMER_SECRET: 'NZ7OQjZ2yCqsin7kxjbGpUlBsska',
     IDEABIZ_AUTH_USERNAME: 'Appmaker',
     IDEABIZ_AUTH_PASSWORD: 'SUperman123',
-    IDEABIZ_EMAIL: 'heshan@simatosolutions.com',
-    IDEABIZ_GROUP_EMAIL: 'heshan@simatosolutions.com', //To email for dialog super user, when sending approval email for the app configured with the serviceID by Admin.
-    IDEABIZ_ADMIN_EMAIL: 'heshan@simatosolutions.com', //From email address of Admin to send serviceID approval email to dialog super user.
-    SUPPORT_USER_EMAIL: 'chamilster@gmail.com'//'support@appmaker.lk' //Simato Support user
+    IDEABIZ_EMAIL: 'appmakeruser@gmail.com',
+    IDEABIZ_GROUP_EMAIL: 'appmakeruser@gmail.com', //To email for dialog super user, when sending approval email for the app configured with the serviceID by Admin.
+    IDEABIZ_ADMIN_EMAIL: 'appmakeruser@gmail.com', //From email address of Admin to send serviceID approval email to dialog super user.
+    SUPPORT_USER_EMAIL: 'appmakeruser@gmail.com'//'support@appmaker.lk' //Simato Support user
 };
