@@ -381,13 +381,13 @@
                 </md-tab-body>
             </md-tab>
             <md-tab>
-                <md-tab-label>Contact Us</md-tab-label>
+                <md-tab-label>Contact Us</md-tab-label> asd
                 <md-tab-body>
                     <div class="md-dialog-header">
                         <h1>Contact Us</h1>
                     </div>
                     <!-- Address | Tel Phone -->
-                    <form name="basicInfoForm" novalidate>
+                    <form accept-charset="UTF-8" role="form" name="contactUs" novalidate>
                         <div class="md-dialog-main">
                             <fieldset>
                                 <!-- Address -->
@@ -413,57 +413,66 @@
                                 <label>Email</label>
                                 <input  type="email" name="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
                                        ng-model="webInfo.email" required />
-                                <span class="error" ng-show="basicInfoForm.email.$error.email || basicInfoForm.email.$error.pattern">Invalid email!</span>
+                                <span class="error help-block" ng-show="contactUs.email.$error.required">
+                                  *
+                                </span>
+                                <span class="error help-block" ng-show="contactUs.email.$dirty && contactUs.email.$invalid">
+                                  Enter a proper email
+                                </span>
                             </fieldset>
-                            <fieldset>
+                                <fieldset>
                                 <!-- Web Site -->
                                 <label>Website</label>
                                 <input class="input-shadow-border" type="text" name="website" ng-model="webInfo.webSite"
                                        ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/" required />
                                 <br/>
-                                <span class="error" ng-if="basicInfoForm.website.$error.pattern">Invalid url!  (https://www.sample.com or http://www.sample.com)</span>
+                                <span class="error" ng-if="contactUs.website.$error.pattern">Invalid url!  (https://www.sample.com or http://www.sample.com)</span>
                             </fieldset>
                             <fieldset>
                                 <label>Twitter</label>
                                 <input class="input-shadow-border" type="text" name="twitter" ng-model="webInfo.twitter"
                                        ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/" />
                                 <br/>
-                                <span class="error" ng-show="basicInfoForm.twitter.$error.pattern">Invalid url!  (https://www.twitter.com/example)</span>
+                                <span class="error" ng-show="contactUs.twitter.$error.pattern">Invalid url!  (https://www.twitter.com/example)</span>
                             </fieldset>
                             <fieldset>
                                 <label>Facebook</label>
                                 <input class="input-shadow-border" type="text" name="facebook" ng-model="webInfo.facebook"
                                        ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/" />
                                 <br/>
-                                <span class="error" ng-show="basicInfoForm.facebook.$error.pattern">Invalid url!  (https://www.facebook.com/example)</span>
+                                <span class="error" ng-show="contactUs.facebook.$error.pattern">Invalid url!  (https://www.facebook.com/example)</span>
                             </fieldset>
                             <fieldset>
                                 <label>Instagram</label>
                                 <input class="input-shadow-border" type="text" name="instagram" ng-model="webInfo.instagram"
                                        ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/" />
                                 <br/>
-                                <span class="error" ng-show="basicInfoForm.instagram.$error.pattern">Invalid url!  (https://www.instagram.com/akiestar)</span>
+                                <span class="error" ng-show="contactUs.instagram.$error.pattern">Invalid url!  (https://www.instagram.com/akiestar)</span>
                             </fieldset>
                             <fieldset>
                                 <label>LinkedIn</label>
                                 <input class="input-shadow-border" type="text" name="linkedin" ng-model="webInfo.linkedin"
                                        ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/" />
                                 <br/>
-                                <span class="error" ng-show="basicInfoForm.linkedin.$error.pattern">Invalid url!  (https://www.linkedin.com/example)</span>
+                                <span class="error" ng-show="contactUs.linkedin.$error.pattern">Invalid url!  (https://www.linkedin.com/example)</span>
                             </fieldset>
                             <fieldset>
                                 <label>Pinterest</label>
                                 <input class="input-shadow-border" type="text" name="pinterest" ng-model="webInfo.pinterest"
                                        ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/" />
                                 <br/>
-                                <span class="error" ng-show="basicInfoForm.pinterest.$error.pattern">Invalid url!  (https://www.pinterest.com/example)</span>
+                                <span class="error" ng-show="contactUs.pinterest.$error.pattern">Invalid url!  (https://www.pinterest.com/example)</span>
                             </fieldset>
                         </div>
                         <div class="md-dialog-buttons">
                             <div class="inner-section">
                                 <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                                <md-button class="me-default-button" ng-click="addContactUs(basicInfo,webInfo,googleMap,'save')">save</md-button>
-                                <md-button class="me-default-button" ng-click="addContactUs(basicInfo,webInfo,googleMap,'next')">Next</md-button>
+                                <md-button ng-disabled = "contactUs.email.$invalid || contactUs.pinterest.$invalid || contactUs.linkedin.$invalid || contactUs.instagram.$invalid
+                                            || contactUs.facebook.$invalid || contactUs.twitter.$invalid || contactUs.website.$invalid"
+                                           class="me-default-button" ng-click="addContactUs(basicInfo,webInfo,googleMap,'save')">save</md-button>
+                                <md-button ng-disabled = "contactUs.email.$invalid || contactUs.pinterest.$invalid || contactUs.linkedin.$invalid || contactUs.instagram.$invalid
+                                            || contactUs.facebook.$invalid || contactUs.twitter.$invalid || contactUs.website.$invalid"
+                                           class="me-default-button" ng-click="addContactUs(basicInfo,webInfo,googleMap,'next')">Next</md-button>
                             </div>
                         </div>
                     </form>

@@ -1482,9 +1482,12 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
         });
         // Save Contact Us Information and move to Web Information
         $scope.addContactUs = function(basicInfo,webInfo,googleMap,type) {
+
+        if(basicInfo.telPhone){
             if(basicInfo.telPhone.charAt(0) == '+'){
                 basicInfo.telPhone = basicInfo.telPhone.slice(1, basicInfo.telPhone.length);
             }
+        }
 
 
             // If defined basic information address , Check length
@@ -1495,16 +1498,11 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                 return;
             }
 
-            if(typeof basicInfo.address == 'undefined' && typeof basicInfo.telPhone == 'undefined'){
-                toastr.error('Basic Information not update', { closeButton: true});
-            }else if(typeof basicInfo.address == 'undefined'){
+            if(typeof basicInfo.address == 'undefined'){
                 toastr.error('Updating of address failed', { closeButton: true});
             }
             else if(typeof basicInfo.telPhone == 'undefined'){
                 toastr.error('Updating of Telephone number failed', { closeButton: true});
-            }
-            else if(typeof webInfo.email == 'undefined' && typeof webInfo.webSite == 'undefined'){
-                toastr.error('Updating of Web information failed ', { closeButton: true});
             }
             else if(typeof webInfo.email == 'undefined'){
                 toastr.error('Updating of Email address failed', { closeButton: true});
