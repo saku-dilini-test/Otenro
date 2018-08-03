@@ -776,14 +776,18 @@ export class CheckoutComponent implements OnInit {
         if (res.status == 'ok') {
           this.orderProcess(note);
         } else if (res.data == "Null Response") {
-
+          this.ePay = false;
+          this.ePayFail = false;
+          this.ePayNull = true;
           this._success.subscribe((message) => this.nullMessage = message);
           debounceTime.call(this._success, 4000).subscribe(() => this.nullMessage = null);
           this._success.next("Please provide card details!");
           setTimeout(() => { }, 3100);
 
         } else if (res.data == "Failed Transaction") {
-
+          this.ePay = false;
+          this.ePayNull = false;
+          this.ePayFail = true;
           this._success.subscribe((message) => this.errorMessage = message);
           debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
           this._success.next("Invalid Card details!, Please check your data");
@@ -895,6 +899,10 @@ export class CheckoutComponent implements OnInit {
         this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
           .subscribe((res) => {
 
+            this.ePayFail = false;
+            this.ePayNull = false;
+            this.ePay = true;
+
             this.dataService.cart.cartItems = [];
             this.dataService.cart.cartSize = 0;
             this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
@@ -909,12 +917,12 @@ export class CheckoutComponent implements OnInit {
               }
             }
 
-            this._success.next('Your Order has been successfully processed');
-
-            this._success.subscribe((message) => this.successMessage = message);
-            debounceTime.call(this._success, 4000).subscribe(() => this.successMessage = null);
-            this._success.next("Thank You, Your order has been successfully processed");
-            setTimeout(() => { this.router.navigate(['home']); }, 3100)
+            window.setTimeout(() => {
+              $(".alert").fadeTo(500, 0).slideUp(500, ()=>{
+                  $(this).remove();
+                  this.router.navigate(['home']);
+              });
+          }, 4000);
 
           }, (err: HttpErrorResponse) => {
 

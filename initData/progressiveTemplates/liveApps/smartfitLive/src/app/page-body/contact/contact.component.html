@@ -51,23 +51,24 @@
         </div>
       </div>
 
+      <div class="row">
+        <div class="col-sm-12">
+          <agm-map [latitude]="lat" [longitude]="lng" [zoom]="8" >
+            <agm-marker *ngFor="let branch of googleMap" [latitude]="branch.branch.latitude" [longitude]="branch.branch.longitude">
+              <agm-info-window>
+                <h4><strong>{{branch.name}}</strong></h4>
+                <p>{{branch.address}}</p>
+                <a href="https://www.google.com/maps/?q={{branch.branch.latitude}},{{branch.branch.longitude}}" target="_blank">Show on google map</a>
+              </agm-info-window>
+            </agm-marker>
+          </agm-map>
+        </div>
+      </div>
+
       <div class="row voffset" style="margin-top: 0px;">
         <div class="col-sm-12">
           <app-contact-info [contacts]="contactInfo"></app-contact-info>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="8" >
-          <agm-marker *ngFor="let branch of googleMap" [latitude]="branch.branch.latitude" [longitude]="branch.branch.longitude">
-            <agm-info-window>
-              <h4><strong>{{branch.name}}</strong></h4>
-              <p>{{branch.address}}</p>
-              <a href="https://www.google.com/maps/?q={{branch.branch.latitude}},{{branch.branch.longitude}}" target="_blank">Show on google map</a>
-            </agm-info-window>
-          </agm-marker>
-        </agm-map>
       </div>
     </div>
 
