@@ -374,23 +374,27 @@
                             </p>
                           </div>
                         </div>
-                        <div class="row voffset">
+                        <div class="row voffset" *ngIf='chkPickupCost > 0 || !hideShipping'>
                           <div class="col-xs-6 col-sm-8">
-                            <p>
-                              <strong *ngIf='chkPickupCost > 0'>Pick up cost</strong>
-                              <strong  *ngIf='!hideShipping' >Shipping</strong>
-                              
+                            <p *ngIf='chkPickupCost > 0'>
+                              <strong >Pick up cost</strong>
+                            </p>
+                            <p *ngIf='!hideShipping'>
+                              <strong>Shipping</strong>
                             </p>
                           </div>
+
                           <div class="col-xs-3 col-sm-2">
                             <p class="text-right">
                               <br>
                             </p>
                           </div>
                           <div class="col-xs-3 col-sm-2">
-                            <p class="text-right">
-                              <strong  *ngIf='!hideShipping'>{{sign}} {{chkShippingCost| number: '.2'}}</strong>
-                              <strong   *ngIf='chkPickupCost > 0'> {{sign}} {{chkPickupCost| number: '.2'}}</strong>
+                            <p class="text-right" *ngIf='chkPickupCost > 0'>
+                              <strong> {{sign}} {{chkPickupCost| number: '.2'}}</strong>
+                            </p>
+                            <p class="text-right" *ngIf='!hideShipping'>
+                              <strong  >{{sign}} {{chkShippingCost| number: '.2'}}</strong>
                             </p>
                           </div>
                         </div>
