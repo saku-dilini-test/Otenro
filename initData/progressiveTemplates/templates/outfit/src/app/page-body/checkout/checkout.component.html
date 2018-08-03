@@ -300,8 +300,8 @@
                   <tbody class="main-content-font">
                     <tr *ngFor="let itm of cartItems">
                       <td style="text-align: left"> {{itm.name}}&nbsp;</td>
-                      <td style="text-align: center"> {{itm.qty}}&nbsp;</td>
-                      <td style="text-align: right">
+                      <td style="text-align: right; padding-left:0;"> {{itm.qty}}&nbsp;</td>
+                      <td style="text-align: right; padding-left:0;">
                         <span>{{sign}}{{itemPriceCal(itm.total,itm.qty)}}</span>
                       </td>
                     </tr>
