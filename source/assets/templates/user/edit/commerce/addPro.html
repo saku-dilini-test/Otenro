@@ -383,7 +383,6 @@
                                 </div>
                                 <br>
 
-
                                 <div class="inputField btn-material img-up">
                                     <span >{{bannerButtonName}}</span>
                                     <div class="img-up1" ng-if="!picFile">
@@ -479,7 +478,12 @@
                                             <md-select class="img-sku-w" ng-disabled="!tmpImage[0].img|| (originalSku.length == selectedSku.length && (tmpImage[0].sku.length == 0 || !tmpImage[0].sku))" ng-change = "onChange(tmpImage[0].sku, 0)" ng-model="tmpImage[0].sku" placeholder="Select sku" multiple="">
                                                 <md-option ng-value="variants" ng-repeat="variants in getSku(0)">{{ variants }}</md-option>
                                             </md-select>
+                                            <div class="padding-vertical">
+                                                <span ng-if = "tmpImage[0].videoUrl">{{tmpImage[0].videoUrl}}</span>
+                                                <span ng-if = "!tmpImage[0].videoUrl">No video</span>
+                                            </div>
                                         </md-input-container>
+
                                     </div>
                                     <div class="old-image">
                                         <input type="button" ng-click="deleteImg(1)" value='delete'
@@ -493,6 +497,10 @@
                                             <md-select class="img-sku-w" ng-disabled="!tmpImage[1].img || (originalSku.length == selectedSku.length && (tmpImage[1].sku.length == 0 || !tmpImage[1].sku))" ng-change = "onChange(tmpImage[1].sku, 1)" ng-model="tmpImage[1].sku" placeholder="Select sku" multiple="">
                                                 <md-option  ng-value="variants" ng-repeat="variants in getSku(1)">{{ variants }}</md-option>
                                             </md-select>
+                                            <div class="padding-vertical">
+                                                <span ng-if = "tmpImage[1].videoUrl">{{tmpImage[1].videoUrl}}</span>
+                                                <span ng-if = "!tmpImage[1].videoUrl">No video</span>
+                                            </div>
                                         </md-input-container>
                                     </div>
                                     <div class="old-image">
@@ -507,6 +515,10 @@
                                             <md-select class="img-sku-w" ng-disabled="!tmpImage[2].img || (originalSku.length == selectedSku.length && (tmpImage[2].sku.length == 0 || !tmpImage[2].sku))" ng-change = "onChange(tmpImage[2].sku, 2)" ng-model="tmpImage[2].sku" placeholder="Select sku" multiple="">
                                                 <md-option  ng-value="variants" ng-repeat="variants in getSku(2)">{{ variants }}</md-option>
                                             </md-select>
+                                            <div class="padding-vertical">
+                                                <span ng-if = "tmpImage[2].videoUrl">{{tmpImage[2].videoUrl}}</span>
+                                                <span ng-if = "!tmpImage[2].videoUrl">No video</span>
+                                            </div>
                                         </md-input-container>
                                     </div>
                                     <div class="old-image">
@@ -521,6 +533,10 @@
                                             <md-select class="img-sku-w" ng-disabled="!tmpImage[3].img || (originalSku.length == selectedSku.length && (tmpImage[3].sku.length == 0 || !tmpImage[3].sku))" ng-change = "onChange(tmpImage[3].sku, 3)" ng-model="tmpImage[3].sku" placeholder="Select sku" multiple="">
                                                 <md-option  ng-value="variants" ng-repeat="variants in getSku(3)">{{ variants }}</md-option>
                                             </md-select>
+                                            <div class="padding-vertical">
+                                                <span ng-if = "tmpImage[3].videoUrl">{{tmpImage[3].videoUrl}}</span>
+                                                <span ng-if = "!tmpImage[3].videoUrl">No video</span>
+                                            </div>
                                         </md-input-container>
                                     </div>
                                     <div class="old-image">
@@ -535,6 +551,10 @@
                                             <md-select class="img-sku-w" ng-disabled="!tmpImage[4].img || (originalSku.length == selectedSku.length  && (tmpImage[4].sku.length == 0 || !tmpImage[4].sku))" ng-change = "onChange(tmpImage[4].sku, 4)" ng-model="tmpImage[4].sku" placeholder="Select sku" multiple="">
                                                 <md-option  ng-value="variants" ng-repeat="variants in getSku(4)">{{ variants }}</md-option>
                                             </md-select>
+                                            <div class="padding-vertical">
+                                                <span ng-if = "tmpImage[4].videoUrl">{{tmpImage[4].videoUrl}}</span>
+                                                <span ng-if = "!tmpImage[4].videoUrl">No video</span>
+                                            </div>
                                         </md-input-container>
                                     </div>
                                     <div class="old-image">
@@ -549,6 +569,10 @@
                                             <md-select class="img-sku-w" ng-disabled="!tmpImage[5].img || (originalSku.length == selectedSku.length && (tmpImage[5].sku.length == 0 || !tmpImage[5].sku))" ng-change = "onChange(tmpImage[5].sku, 5)" ng-model="tmpImage[5].sku" placeholder="Select sku" multiple="">
                                                 <md-option  ng-value="variants" ng-repeat="variants in getSku(5)">{{ variants }}</md-option>
                                             </md-select>
+                                            <div class="padding-vertical">
+                                                <span ng-if = "tmpImage[5].videoUrl">{{tmpImage[5].videoUrl}}</span>
+                                                <span ng-if = "!tmpImage[5].videoUrl">No video</span>
+                                            </div>
                                         </md-input-container>
                                     </div>
                                     <div class="old-image">
@@ -563,6 +587,10 @@
                                             <md-select class="img-sku-w" ng-disabled="!tmpImage[6].img || (originalSku.length == selectedSku.length && (tmpImage[6].sku.length == 0 || !tmpImage[6].sku))" ng-change = "onChange(tmpImage[6].sku, 6)" ng-model="tmpImage[6].sku" placeholder="Select sku" multiple="">
                                                 <md-option  ng-value="variants" ng-repeat="variants in getSku(6)">{{ variants }}</md-option>
                                             </md-select>
+                                            <div class="padding-vertical">
+                                                <span ng-if = "tmpImage[6].videoUrl">{{tmpImage[6].videoUrl}}</span>
+                                                <span ng-if = "!tmpImage[6].videoUrl">No video</span>
+                                            </div>
                                         </md-input-container>
                                     </div>
                                     <div class="old-image">
@@ -577,6 +605,10 @@
                                             <md-select class="img-sku-w" ng-disabled="!tmpImage[7].img || (originalSku.length == selectedSku.length && (tmpImage[7].sku.length == 0  || !tmpImage[7].sku))" ng-change = "onChange(tmpImage[7].sku, 7)" ng-model="tmpImage[7].sku" placeholder="Select sku" multiple="">
                                                 <md-option  ng-value="variants" ng-repeat="variants in getSku(7)">{{ variants }}</md-option>
                                             </md-select>
+                                            <div class="padding-vertical">
+                                                <span ng-if = "tmpImage[7].videoUrl">{{tmpImage[7].videoUrl}}</span>
+                                                <span ng-if = "!tmpImage[7].videoUrl">No video</span>
+                                            </div>
                                         </md-input-container>
                                     </div>
 

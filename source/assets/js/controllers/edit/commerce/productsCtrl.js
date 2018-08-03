@@ -612,7 +612,7 @@
 
         $scope.defImg = function(img,id){
             $scope.defaultImage = img;
-            $scope.product.videoUrl = id;
+//            $scope.product.videoUrl = id;
         }
         
         $scope.setImage = function (img) {
