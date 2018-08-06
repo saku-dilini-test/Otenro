@@ -41,17 +41,17 @@
         <form class="allItems" novalidate>
             <table class="table">
                 <thead class="obl-dashboard-apps">
-                <th width="10%" align="center">App ID</th>
-                <th width="10%">App Name</th>
-                <th width="10%">Email</th>
-                <th width="12%">App Description</th>
-                <th width="6%" ng-if="user.userRole[0] != 'ADMIN'">Billing</th>
-                <th width="6%" ng-if="user.userRole[0] == 'ADMIN'">apk</th>
-                <th width="10%">App Status</th>
+                <th>App ID</th>
+                <th>App Name</th>
+                <th>Email</th>
+                <th>App Description</th>
+                <th ng-if="user.userRole[0] != 'ADMIN'">Billing</th>
+                <th ng-if="user.userRole[0] == 'ADMIN'">apk</th>
+                <th>App Status</th>
                 <!--<th width="20%">Action</th>-->
-                <th width="6%" ng-if="user.userRole[0] != 'ADMIN'">Comments</th>
-                <th width="15%" ng-if="user.userRole[0] == 'ADMIN'">Service ID</th>
-                <th width="6%" ng-if="user.userRole[0] == 'ADMIN'"></th>
+                <th ng-if="user.userRole[0] != 'ADMIN'">Comments</th>
+                <th ng-if="user.userRole[0] == 'ADMIN'">Service ID</th>
+                <th ng-if="user.userRole[0] == 'ADMIN'"></th>
                 </thead>
 
                 <tbody>
@@ -75,25 +75,24 @@
                     <td ng-if="user.userRole[0] != 'ADMIN'">
                         <button class="btn-material"  ng-click="approvedOperatorsView(app,userList,getDes(app.id,'manage'))">Manage</button>
                     </td>
-                    <td align="center"  ng-if="user.userRole[0] == 'ADMIN'">
-                        <md-button class="me-default-button" ng-click = "buildAPK(app)" ng-hide = "app.apkStatus=='PENDING'">
+                    <td align="left" style="padding:2px 0" ng-if="user.userRole[0] == 'ADMIN'">
+                        <md-button class="me-default-button" style="padding:0; margin:0; margin-left:-12px" ng-click = "buildAPK(app)" ng-hide = "app.apkStatus=='PENDING'">
                             Build
                         </md-button>
                         <span ng-show = "app.apkStatus=='PENDING'">Building...</span>
                     </td>
                     <td>{{app.publishedStatus}}</td>
-                <td align="center" ng-if="user.userRole[0] != 'ADMIN'">
+                <td align="left" ng-if="user.userRole[0] != 'ADMIN'">
                     <u><md-icon ng-click="commentView(app.appName,app.id,getDes(app.id,'comment'),app.createdAt)" md-svg-icon="images/create-icon.svg"></md-icon></u>
                 </td>
-                    <td align="center" class="row"  ng-if="user.userRole[0] == 'ADMIN'">
+                    <td align="left" style="padding:2px 8px" class="row"  ng-if="user.userRole[0] == 'ADMIN'">
                                 <md-input-container style = "margin-top:0px; margin-bottom:0px;">
                                     <input type="text" name="serviceId" ng-model="app.serviceId" value="{{serviceId}}" />
                                 </md-input-container>
-
                     </td>
-                    <td align="center"  ng-if="user.userRole[0] == 'ADMIN'">
+                    <td align="left" style="padding:2px 0" ng-if="user.userRole[0] == 'ADMIN'">
                             <!--<md-button class="me-default-button" ng-click = "saveServiceId(app)" ng-hide = "!app.enableSave">-->
-                            <md-button class="me-default-button" ng-click = "saveServiceId(app)" ng-hide = "false">
+                            <md-button class="me-default-button"  style="padding:0; margin:0;" ng-click = "saveServiceId(app)" ng-hide = "false">
                                 Save & Submit
                             </md-button>
                     </td>
