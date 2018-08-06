@@ -95,7 +95,7 @@ export class CheckoutComponent implements OnInit {
   public orderDetails;
   public orderd = false;
   private years = [];
-  private months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+  private months = [];
   private emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   noteDes; showUser;
   private oldUser;
@@ -118,6 +118,19 @@ export class CheckoutComponent implements OnInit {
 
     this.title.changeTitle("Checkout");
 
+    let d = new Date();
+    let n = d.getMonth();
+    let s;
+    console.log(n + 1);
+    for(let i = n+1;i <= 12; i++){
+      if(i< 10){
+        s = '0' + i.toString();
+      }else{
+        s = i.toString();
+      }
+    this.months.push(s);
+    }
+    console.log(this.months);
     if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
       this.oldUser = true;
       this.showUser = true;
