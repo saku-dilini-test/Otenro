@@ -43,6 +43,8 @@ export class ProductComponent implements OnInit {
     oldPrice; newPrice;
     promoData = [];
     todayDate;
+    api;
+    private imageArray = [];
     imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
 
@@ -138,8 +140,7 @@ export class ProductComponent implements OnInit {
     }
 
     ngAfterViewInit() {
-        var api;
-        api = $("#gallery").unitegallery({
+        this.api = $("#gallery").unitegallery({
             theme_enable_text_panel: false,
             gallery_background_color: "rgba(0,0,0,0)",
             slider_scale_mode: "fit",
@@ -150,7 +151,7 @@ export class ProductComponent implements OnInit {
         });
         $('#gallery').on({
             'touchstart': function () {
-                api.stop();
+                this.api.stop();
             }
         });
     }
@@ -330,6 +331,14 @@ export class ProductComponent implements OnInit {
                 if (e !== BreakException) throw e;
             }
 
+            if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
+                this.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
+                this.api.stop();
+            }else{
+                this.api.selectItem(this.Data.defaultImage);
+                this.api.stop();
+            }
+
             this.lockBuyButton = true;
 
         } else {
@@ -414,6 +423,14 @@ export class ProductComponent implements OnInit {
                 if (e !== BreakException) throw e;
             }
 
+            if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
+                this.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
+                this.api.stop();
+            }else{
+                this.api.selectItem(this.Data.defaultImage);
+                this.api.stop();
+            }
+
             this.lockBuyButton = true;
 
         } else {
@@ -492,6 +509,14 @@ export class ProductComponent implements OnInit {
                 if (e !== BreakException) throw e;
             }
 
+            if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
+                this.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
+                this.api.stop();
+            }else{
+                this.api.selectItem(this.Data.defaultImage);
+                this.api.stop();
+            }
+
             this.lockBuyButton = true;
 
         } else {
@@ -560,6 +585,14 @@ export class ProductComponent implements OnInit {
 
             } catch (e) {
                 if (e !== BreakException) throw e;
+            }
+
+            if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
+                this.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
+                this.api.stop();
+            }else{
+                this.api.selectItem(this.Data.defaultImage);
+                this.api.stop();
             }
 
             this.lockBuyButton = true;

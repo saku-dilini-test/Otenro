@@ -96,7 +96,7 @@ export class CheckoutComponent implements OnInit {
   public orderDetails;
   public orderd = false;
   private years = [];
-  private months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+  private months = [];
   private emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   noteDes; showUser;
   private oldUser;
@@ -104,6 +104,9 @@ export class CheckoutComponent implements OnInit {
   private payHereMID;
   private isCountryChanged = false;
   private selectedCountry;
+  ePay = false;
+  ePayFail = false;
+  ePayNull = false;
 
   constructor(fb: FormBuilder, private ordersService: OrdersService,
     private shippingService: ShippingService,
@@ -114,6 +117,18 @@ export class CheckoutComponent implements OnInit {
     private spinner: Ng4LoadingSpinnerService) {
 
     this.title.changeTitle("Checkout");
+    let d = new Date();
+    let n = d.getMonth();
+    let s;
+
+    for(let i = n+1;i <= 12; i++){
+      if(i< 10){
+        s = '0' + i.toString();
+      }else{
+        s = i.toString();
+      }
+    this.months.push(s);
+    }
 
     if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
       this.oldUser = true;
@@ -758,10 +773,16 @@ export class CheckoutComponent implements OnInit {
         if (res.status == 'succeeded') {
           this.orderProcess(note);
         } else {
-          this._success.subscribe((message) => this.errorMessage = message);
-          debounceTime.call(this._success, 5000).subscribe(() => this.errorMessage = null);
-          this._success.next("Failed to make payment!,\n Please check your data");
-          setTimeout(() => { }, 3100);
+          this.ePay = false;
+          this.ePayNull = false;
+          this.ePayFail = true;
+
+          window.setTimeout(() => {
+            $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
+                $(this).remove();
+                this.ePayFail = false;
+            });
+        }, 2000);
         }
       }, (err) => {
         alert('makeStripePayment failed');
@@ -786,17 +807,27 @@ export class CheckoutComponent implements OnInit {
           this.orderProcess(note);
         } else if (res.data == "Null Response") {
 
-          this._success.subscribe((message) => this.nullMessage = message);
-          debounceTime.call(this._success, 4000).subscribe(() => this.nullMessage = null);
-          this._success.next("Please provide card details!");
-          setTimeout(() => { }, 3100);
+          this.ePay = false;
+          this.ePayFail = false;
+          this.ePayNull = true;
+          window.setTimeout(() => {
+            $(".alert-warning").fadeTo(500, 0).slideUp(500, ()=>{
+                $(this).remove();
+            });
+        }, 2000);
 
         } else if (res.data == "Failed Transaction") {
 
-          this._success.subscribe((message) => this.errorMessage = message);
-          debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
-          this._success.next("Invalid Card details!, Please check your data");
-          setTimeout(() => { }, 3100);
+          this.ePay = false;
+          this.ePayNull = false;
+          this.ePayFail = true;
+
+          window.setTimeout(() => {
+            $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
+                $(this).remove();
+                this.ePayFail = false;
+            });
+        }, 2000);
 
         }
 
@@ -920,12 +951,14 @@ export class CheckoutComponent implements OnInit {
               this.localStorageService.remove("cartUnknownUser");
             }
 
-            this._success.next('Your Order has been successfully processed');
 
-            this._success.subscribe((message) => this.successMessage = message);
-            debounceTime.call(this._success, 4000).subscribe(() => this.successMessage = null);
-            this._success.next("Thank You, Your order has been successfully processed");
-            setTimeout(() => { this.router.navigate(['home']); }, 3100)
+            window.setTimeout(() => {
+              $(".alert").fadeTo(500, 0).slideUp(500, ()=>{
+                  $(this).remove();
+                  this.ePay = false;
+                  this.router.navigate(['home']);
+              });
+          }, 2000);
 
           }, (err: HttpErrorResponse) => {
 
