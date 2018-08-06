@@ -102,7 +102,10 @@
             </div>
 
           </div>
-
+          <div *ngIf = "errBuy" class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{message}}
+        </div>
           <div class="blocs-custom-html spacing-bottom">
             <div style="display: block; background-color: rgb(10, 10, 20); height: 1px; width: 100%; margin: auto;"></div>
 
@@ -150,10 +153,13 @@
                 </div>
               </div>
             </div>
+
+    
+
             <div class="voffset padding-mobile" *ngIf="!(Data.variants.length >= 1 && selectedVariant.quantity == 0 && lockBuyButton)">
               <div class="col-xs-6">
                 <button (click)='addToCart("buyNowCart")' [disabled]="isBuyBtnDisable" class="btn btn-d btn-sq btn-lg main-button animDelay02 btn-block">BUY NOW</button>
-              </div>
+              </div> 
               <div class="col-xs-6">
                 <button (click)="addToCart('');test(this.selectedVariant.selection);" [disabled]="isBuyBtnDisable" class="btn btn-d btn-sq btn-lg main-button animDelay02  btn-block">ADD TO CART</button>
               </div>
