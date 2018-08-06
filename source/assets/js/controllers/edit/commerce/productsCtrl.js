@@ -120,6 +120,8 @@
             $scope.isNewProduct = initialData.isNewItem;
 
         }else if($scope.product.sku){
+
+        $scope.defaultImage = $scope.product.defaultImage;
             if($scope.liveApps == true){
                 if(!$scope.product.mainType){
                     $scope.product.mainType = "Main";
@@ -194,6 +196,7 @@
         }
 
         if(initialData.product.bannerImage){
+
             var tempImageUrl = tempImagePathBanner + $scope.product.bannerImage;
             $scope.bannerImage = tempImageUrl
             $scope.oldBannerImg = $scope.product.bannerImage;
