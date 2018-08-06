@@ -339,17 +339,23 @@
                         var linkElement = document.createElement('a');
                         try {
                             var blob = new Blob([data], {type: contentType});
-                            var url = window.URL.createObjectURL(blob);
+                            if (navigator.appVersion.toString().indexOf('.NET') > 0) { // for IE browser
+                                window.navigator.msSaveBlob(blob, filename);
+                            }
+                            else{
+                                var url = window.URL.createObjectURL(blob);
 
-                            linkElement.setAttribute('href', url);
-                            linkElement.setAttribute("download", filename);
+                                linkElement.setAttribute('href', url);
+                                linkElement.setAttribute("download", filename);
 
-                            var clickEvent = new MouseEvent("click", {
-                                "view": window,
-                                "bubbles": true,
-                                "cancelable": false
-                            });
-                            linkElement.dispatchEvent(clickEvent);
+                                var clickEvent = new MouseEvent("click", {
+                                    "view": window,
+                                    "bubbles": true,
+                                    "cancelable": false
+                                });
+                                linkElement.dispatchEvent(clickEvent);
+                            }
+
                         } catch (ex) {
                             console.log(ex);
                         }
