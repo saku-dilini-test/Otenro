@@ -247,7 +247,7 @@ module.exports = {
 
                                            "Please create and revert with the service ID for the below service created through <br> Appmaker. Details are as follows:" +
 
-                                            "<br><br><br>Service Name: " +  result[0].title +
+                                            "<br><br><br>App Name: " +  result[0].title +
                                             "<br>Company Name: " +  userData[0].firstName + " " + userData[0].lastName +
                                             "<br><br><table border='1px'>" +
                                             "<thead>" +
