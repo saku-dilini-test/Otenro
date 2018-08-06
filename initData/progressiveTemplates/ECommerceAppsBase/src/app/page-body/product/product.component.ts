@@ -37,6 +37,8 @@ export class ProductComponent implements OnInit {
     private parentobj = { cartItems: [], cartSize: 0, totalPrice: 0 };
     private lockBuyButton = false;
     private dialogVariants;
+    api;
+    private imageArray = [];
     private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
     bannerImageUrl = SERVER_URL + "/templates/viewWebImages?userId="
@@ -48,6 +50,10 @@ export class ProductComponent implements OnInit {
     constructor(private localStorageService: LocalStorageService, private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
 
         this.Data = this.dataService.data;
+
+        this.Data.tempImageArray.forEach( data => {
+            this.imageArray.push(data.img);
+        });
 
         this.init();
         this.isBuyBtnDisable = true;
@@ -101,8 +107,7 @@ export class ProductComponent implements OnInit {
 
     ngAfterViewInit() {
 
-      var api;
-      api = $("#gallery").unitegallery({
+      this.api = $("#gallery").unitegallery({
         theme_enable_text_panel: false,
         gallery_background_color: "rgba(0,0,0,0)",
         slider_scale_mode: "fit",
@@ -112,7 +117,7 @@ export class ProductComponent implements OnInit {
         theme_hide_panel_under_width: null
       });
       $('#gallery').on({ 'touchstart' : function(){
-        api.stop();
+        this.api.stop();
       } });
     }
 
@@ -208,6 +213,7 @@ export class ProductComponent implements OnInit {
 
         variant1 = variant1.replace(/\s/g, '');
 
+
         if (variant1) {
             if (variant1 == "Select"+this.name1) {
                 this.lockBuyButton = false;
@@ -226,6 +232,14 @@ export class ProductComponent implements OnInit {
 
 
                 }
+            }
+
+            if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
+                this.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
+                this.api.stop();
+            }else{
+                this.api.selectItem(this.Data.defaultImage);
+                this.api.stop();
             }
             this.lockBuyButton = true;
 
@@ -280,6 +294,13 @@ export class ProductComponent implements OnInit {
                     this.selectedVariant = this.foodInfo.variants[i];
                 }
             }
+            if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
+                this.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
+                this.api.stop();
+            }else{
+                this.api.selectItem(this.Data.defaultImage);
+                this.api.stop();
+            }
             this.lockBuyButton = true;
 
         } else {
@@ -330,6 +351,15 @@ export class ProductComponent implements OnInit {
                     this.selectedVariant = this.foodInfo.variants[i];
                 }
             }
+
+            if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
+                this.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
+                this.api.stop();
+            }else{
+                this.api.selectItem(this.Data.defaultImage);
+                this.api.stop();
+            }
+
             this.lockBuyButton = true;
 
         } else {
@@ -371,6 +401,15 @@ export class ProductComponent implements OnInit {
 
                 }
             }
+
+            if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
+                this.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
+                this.api.stop();
+            }else{
+                this.api.selectItem(this.Data.defaultImage);
+                this.api.stop();
+            }
+
             this.lockBuyButton = true;
         }
     };
