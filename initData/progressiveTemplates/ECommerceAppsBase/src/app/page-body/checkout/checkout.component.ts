@@ -104,6 +104,9 @@ export class CheckoutComponent implements OnInit {
   private isCountryChanged = false;
   private selectedCountry;
   private newUser;
+  ePay = false;
+  ePayFail = false;
+  ePayNull = false;
 
   constructor(fb: FormBuilder, private ordersService: OrdersService,
     private shippingService: ShippingService,
@@ -749,10 +752,21 @@ export class CheckoutComponent implements OnInit {
         if (res.status == 'succeeded') {
           this.orderProcess(note);
         } else {
-          this._success.subscribe((message) => this.errorMessage = message);
-          debounceTime.call(this._success, 5000).subscribe(() => this.errorMessage = null);
-          this._success.next("Failed to make payment!,\n Please check your data");
-          setTimeout(() => { }, 3100);
+          this.ePay = false;
+          this.ePayNull = false;
+          this.ePayFail = true;
+
+          window.setTimeout(() => {
+            $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
+                $(this).remove();
+                this.ePayFail = false;
+            });
+        }, 2000);
+
+          // this._success.subscribe((message) => this.errorMessage = message);
+          // debounceTime.call(this._success, 5000).subscribe(() => this.errorMessage = null);
+          // this._success.next("Failed to make payment!,\n Please check your data");
+          // setTimeout(() => { }, 3100);
         }
       }, (err) => {
         alert('makeStripePayment failed');
@@ -779,19 +793,32 @@ export class CheckoutComponent implements OnInit {
           this.ePay = false;
           this.ePayFail = false;
           this.ePayNull = true;
-          this._success.subscribe((message) => this.nullMessage = message);
-          debounceTime.call(this._success, 4000).subscribe(() => this.nullMessage = null);
-          this._success.next("Please provide card details!");
-          setTimeout(() => { }, 3100);
+          window.setTimeout(() => {
+            $(".alert-warning").fadeTo(500, 0).slideUp(500, ()=>{
+                $(this).remove();
+            });
+        }, 2000);
+          // this._success.subscribe((message) => this.nullMessage = message);
+          // debounceTime.call(this._success, 4000).subscribe(() => this.nullMessage = null);
+          // this._success.next("Please provide card details!");
+          // setTimeout(() => { }, 3100);
 
         } else if (res.data == "Failed Transaction") {
           this.ePay = false;
           this.ePayNull = false;
           this.ePayFail = true;
-          this._success.subscribe((message) => this.errorMessage = message);
-          debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
-          this._success.next("Invalid Card details!, Please check your data");
-          setTimeout(() => { }, 3100);
+
+          window.setTimeout(() => {
+            $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
+                $(this).remove();
+                this.ePayFail = false;
+            });
+        }, 2000);
+
+          // this._success.subscribe((message) => this.errorMessage = message);
+          // debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+          // this._success.next("Invalid Card details!, Please check your data");
+          // setTimeout(() => { }, 3100);
 
         }
 
@@ -920,9 +947,10 @@ export class CheckoutComponent implements OnInit {
             window.setTimeout(() => {
               $(".alert").fadeTo(500, 0).slideUp(500, ()=>{
                   $(this).remove();
+                  this.ePay = false;
                   this.router.navigate(['home']);
               });
-          }, 4000);
+          }, 2000);
 
           }, (err: HttpErrorResponse) => {
 
