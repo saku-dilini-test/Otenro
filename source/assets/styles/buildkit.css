@@ -3055,6 +3055,9 @@ table.md-calendar-day-header{
     float: right;
     width: 40%
 }
-
+/* added by .sanira */
+.edit-display-prop::before {
+    display: inline;
+}
 /*reports*/
 

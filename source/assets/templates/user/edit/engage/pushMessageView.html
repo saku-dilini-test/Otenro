@@ -16,22 +16,26 @@
                 <li class="pull-right">
                     <table>
                         <tr>
+                            <td style="vertical-align:bottom">
+                                <input class="edit-display-prop custom-file-input pull-left" style="width:100%; display:inherit !important; font-size:9pt;" ng-model="data.file" type = "file" accept=".csv" file-model = "myFile"/>
+                            </td>
                             <td>
-                                <input class="custom-file-input  pull-left" ng-model="data.file" type = "file" accept=".csv" file-model = "myFile"/>
+                                <!--<input class="custom-file-input  pull-left" ng-model="data.file" type = "file" accept=".csv" file-model = "myFile"/>-->
                                 <button class="btn-material pull-right"  ng-click = "uploadFile()">UPLOAD CSV FILE</button>
                             </td>
                         </tr>
                         <tr>
-                            <fieldset>
-                                <md-radio-group ng-model='scheduleType' layout="row">
-                                    <md-radio-button value="A">All Users</md-radio-button>
-                                    <md-radio-button value="I">Inactive Users </md-radio-button>
-                                </md-radio-group>
-                            </fieldset>
+                            <!--<fieldset>-->
+                                <!--<md-radio-group ng-model='scheduleType' layout="row">-->
+                                    <!--<md-radio-button value="A">All Users</md-radio-button>-->
+                                    <!--<md-radio-button value="I">Inactive Users </md-radio-button>-->
+                                <!--</md-radio-group>-->
+                            <!--</fieldset>-->
                         </tr>
                         <tr>
+                            <td></td>
                             <td>
-                                <a class="no-padding" href=""  ng-click = "downLoadSampleFile()">Download csv template</a>
+                                <a style="padding:0 5% !important;" href=""  ng-click = "downLoadSampleFile()">Download csv template</a>
                             </td>
                         </tr>
                     </table>
