@@ -111,7 +111,7 @@ chosen link or button. -->
             <input class="input-shadow-border" style="width:50px" name="countryCode" type="text" ng-model="user.countryCode" readonly>
           </div>
           <div class="col-sm-6">
-            <input class="input-shadow-border" ng-disabled = "!user.country" name="mobile" type="text" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,6}$/im"
+            <input class="input-shadow-border" ng-disabled = "!user.country" name="mobile" type="text" ng-pattern="/^[\+]?[(]?[1-9]{3}[)]?[-\s\.]?[1-9]{3}[-\s\.]?[1-9]{3,6}$/im"
                    style="float:left;margin-left:-20px" ng-model="user.mobile" ng-enter ="authSignUp(user);" maxlength="{{phoneNoLength}}" required/>
             <span class="error help-block" ng-show="register.mobile.$error.required">
           *
@@ -121,8 +121,8 @@ chosen link or button. -->
 
         <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
 
-        <span class="error help-block" ng-show="register.mobile.$dirty && register.mobile.$invalid">
-          Enter a valid mobile number
+        <span class="error help-block" ng-show="user.country == 'Sri Lanka' && register.mobile.$dirty && register.mobile.$invalid">
+          Enter a valid mobile number eg:777123456
         </span>
       </fieldset>
       <div class="row password-area-row">
