@@ -190,11 +190,11 @@
                                     <td align="center" ng-disabled = "!operator.isEnabled"  ng-class="{'disabled-class': !operator.isEnabled}">{{operatorDes(operator.operator)}}</td>
                                     <td align="center">
                                         <md-input-container style="margin-bottom:0px;margin-top:0px;">
-                                            <input type="text" maxlength="8" style="width:100%;text-align: center;" name="txtAccountNumber" numbers-only ng-model="operator.amount" value="{{amount}}" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_CONFIG' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED'" required/>
+                                            <input type="text" maxlength="8" style="width:100%;text-align: center;" name="txtAccountNumber" numbers-only ng-model="operator.amount" value="{{amount}}" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_CONFIG' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED' || operator.status == 'TERMINATED'" required/>
                                         </md-input-container>
                                     </td>
                                     <td align="center">
-                                        <select ng-model= "operator.interval" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_CONFIG' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED'">
+                                        <select ng-model= "operator.interval" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_CONFIG' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED' || operator.status == 'TERMINATED'">
                                             <option ng-repeat="sts in Renewals" >{{sts}}</option>
                                         </select>
                                     </td>
