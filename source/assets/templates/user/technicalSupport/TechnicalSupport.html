@@ -18,11 +18,6 @@
     </div>
 </div>
 
-<fieldset ng-style="myObj" ng-if="showSearchField">
-    <input type="text" ng-model="searchPublishApps" name="search">
-    <input type="submit" value="search" class="me-search-button">
-</fieldset>
-
 <div class="obl-dashboard-wrapper">
     <!--<div class="obl-dashboard-apps">
      All Applications
@@ -31,6 +26,10 @@
 
 
     <div class="md-dialog-main clearfix">
+        <fieldset ng-style="myObj">
+            <input type="text" ng-model="searchData.$" name="search">
+            <input type="submit" class="me-search-button">
+        </fieldset>
 
         <md-tabs md-center-tabs="false" md-selected="selectedIndex" md-no-ink="true" md-autoselect="false"
                  md-dynamic-height="true">
@@ -55,7 +54,7 @@
                 </thead>
 
                 <tbody>
-                <tr ng-repeat="app in appList | filter:searchPublishApps">
+                <tr ng-repeat="app in appList | filter : searchData">
                     <td ng-click="showAppView(app.id,app.userId)"  style="color:blue;">
                     <!--<a href="{{serverURL}}templates/viewWebTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">-->
                         <u>{{app.uniqueAppId}}</u>

@@ -516,7 +516,7 @@
                             var obj = {
                                 fullDes:$scope.publishAppData[i].fullDescription,
                                 keyword:$scope.publishAppData[i].keyword,
-                                price:$scope.publishAppData[i].price
+                                price:$scope.publishAppData[i].operators
                             }
 
                             return obj;
