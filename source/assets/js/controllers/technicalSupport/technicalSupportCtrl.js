@@ -258,6 +258,16 @@
                                             }
                                         });
                                     });
+
+                                    if($scope.user){
+                                        if($scope.user.userRole != "ADMIN"){
+                                          technicalSupportService.getComments().success(function(data){
+                                                console.log(data);
+                                                    $scope.commentsList = data;
+                                          });
+                                        }
+                                    }
+
                                 }).error(function(err){
 
                                 });
@@ -477,9 +487,8 @@
            }
 
           $scope.commentView = function(appName,appId,comment,createdData){
-                var data = {appName:appName , appId:appId ,comment:comment,date:createdData,commentList:$scope.commentsList}
-                technicalSupportService.showAppcommentView(data);
-
+                var parseData = {appName:appName , appId:appId ,comment:comment,date:createdData,commentList:$scope.commentsList}
+                technicalSupportService.showAppcommentView(parseData);
           }
 
         $scope.saveServiceId = function(data){
@@ -497,14 +506,6 @@
             });
         }
 
-        if($scope.user){
-            if($scope.user.userRole != "ADMIN"){
-              technicalSupportService.getComments().success(function(data){
-                    console.log(data);
-                        $scope.commentsList = data;
-              });
-            }
-        }
 
           $scope.getDes = function(id,des){
           var arr = [];

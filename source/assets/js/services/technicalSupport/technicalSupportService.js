@@ -273,13 +273,15 @@
                     templateUrl: 'user/technicalSupport/AppComment.html',
                     bindToController: true,
                     clickOutsideToClose: false,
-                    controller: ['$scope', 'initialData','$mdDialog','toastr', function($scope, initialData,$mdDialog,toastr) {
+                    controller: ['$scope', 'initialData','$mdDialog','toastr','technicalSupportService','$window', function($scope, initialData,$mdDialog,toastr,technicalSupportService,$window) {
 
                                     $scope.name = initialData.appName;
                                     $scope.comment = initialData.comment;
                                     var dates = new Date(initialData.date);
                                     $scope.date = dates.toDateString();
-                                    $scope.commentList = initialData.commentList;
+                                    var commentList = initialData.commentList;
+                                    $scope.commentList = $filter('filter')(commentList,{ "appId": initialData.appId });
+
                                     console.log($scope.commentList);
                                     $scope.save = function(){
                                         var data = { id:initialData.appId,comment:$scope.comment }
@@ -291,6 +293,7 @@
                                                 .success(function (data, status) {
                                                     console.log(data);
                                                     $mdDialog.hide();
+                                                    $window.location.reload();
                                                 })
                                                 .error(function (data, status) {
                                                     toastr.error('Error saving Operators', 'Warning', {closeButton: true});
