@@ -9,7 +9,7 @@
             data-type="youtube"
             src="{{imageUrl}}/{{item.img}}"
             [attr.data-image]="imageUrl/item.img"
-            [attr.data-videoid]="item.videoUrl">
+            [attr.data-videoid]="checkUrl(item.videoUrl)">
     </ng-template>
   </div>
 
