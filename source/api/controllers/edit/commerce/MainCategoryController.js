@@ -277,9 +277,16 @@ module.exports = {
                 });
             }
 
-            ThirdNavigation.destroy({id:{'$in':productArray}}).exec(function (err) {
+            ThirdNavigation.destroy({id:{'$in':productArray}}).exec(function (err,result) {
                 if (err) res.send(err);
-                res.send('ok');
+                if(result.length > 0){
+                    result.forEach(function(ele){
+                        Sku.destroy({productId: ele.id}).exec(function(err,result){
+                            if (err) res.send(err);
+                        });
+                    });
+                    res.send('ok');
+                }
             });
         });
     },
