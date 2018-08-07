@@ -38,7 +38,7 @@
         <br>
         <fieldset>
             <label class="font-size-12">App Name</label>
-            <input class="input-shadow-border" name="appName" type="text" ng-model="appName"
+            <input class="input-shadow-border" maxlength="25" name="appName" type="text" ng-model="appName"
                    ng-enter="answer('useful',appId,tempUrl,tempName,tempCategory)" ng-maxlength="25" required/>
         </fieldset>
                 <span ng-show="livePreview.appName.$error.maxlength">App Name could contain 25 Characters</span>
