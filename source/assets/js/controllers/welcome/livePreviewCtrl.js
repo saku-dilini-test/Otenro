@@ -164,8 +164,9 @@
 
             }
 
-        if($scope.appName== null){
-            toastr.error('Please enter a name for the application', 'Warning', {
+        if($scope.appName){
+         if($scope.appName.length > 25){
+            toastr.error('Please enter a 25 or less character name for the application', 'Warning', {
                   closeButton: true
             });
         }
@@ -325,6 +326,11 @@
 
                 }
                 }
+                }else{
+                             toastr.error('Please enter a name for the application', 'Warning', {
+                                   closeButton: true
+                             });
+                         }
                 $scope.profileView = function () {
                     return userProfileService.showUserProfileDialog();
                 }
