@@ -9,12 +9,16 @@ var fs = require('fs-extra'),
     config = require('../services/config'),
     xml2js = require('xml2js'),
     zipFolder = require('zip-folder'),
+    AdmZip = require('adm-zip'),
     emailService = require('../services/emailService');
 const nodemailer = require('nodemailer');
 
 gracefulFs.gracefulify(fs);
 var rimraf = require('rimraf');
 var shell = require('shelljs');
+var tempPath = '/tmp/';
+
+var startTime = new Date().getTime();
 
 var transporter = nodemailer.createTransport({
     host: 'appmaker.lk',
@@ -623,7 +627,7 @@ module.exports = {
             appId = req.param('appId'),
             isFromTechnicalSupportScreen = req.param('fromscreen')=='ts',
             copyDirPath = config.ME_SERVER + userId + '/buildProg/' + appId + '/',
-            moveConfigFile = copyDirPath + 'config.xml',
+            configFile = copyDirPath + 'config.xml',
             homets_File = copyDirPath + 'src/pages/home/home.ts',
             appIconFileRES = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/publish/0.png',
             appSplashFileRES = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/publish/6.png',
@@ -635,6 +639,12 @@ module.exports = {
             srcPath = sails.config.appPath + '/api/src/progPointerApp/',
             isNew = req.param('isNew'),
             thisCtrl = this;
+
+
+        var pointerAppDirName = 'progPointerApp';
+        var zipFileSources = pointerAppDirName + '.zip';
+        var srcDirPath =  sails.config.appPath + '/api/src/';
+        var ionicAppSourceDir = sails.config.appPath + '/api/src/progPointerApp';
 
         //Defining Shell command var's
         var releasePath = copyDirPath + 'platforms/android/app/build/outputs/apk/release/';
@@ -658,76 +668,95 @@ module.exports = {
             }
         });
 
-        fs.readFile(moveConfigFile, 'utf-8',
-            function(err, data) {
+        sails.log.debug("Copying sources zip from " + srcDirPath + zipFileSources + " to " + copyDirPath);
 
-                if(!data || err ){
-                    fs.copy(srcPath, copyDirPath, function (err) {
-                        if(err){
-                            thisCtrl.logApkGenerationError('Error while copying source to user dir. Error: ' + err,userId,appId);
-                            return;
-                        }
-                        //Success
-                        var searchApp = {
-                            id: appId
-                        };
-                        Application.findOne(searchApp).exec(function (err, app) {
-                            if(err){
-                                thisCtrl.logApkGenerationError('Error while searching the appId:' + appId + ' in Application. Error: ' + err,userId,appId);
+        startTime = new Date().getTime();
+
+        // zipFolder(ionicAppSourceDir, srcDirPath + zipFileSources, function (err) {
+        //     if (err) {
+        //         sails.log.debug('While zipping the source dir in <' + srcDirPath + zipFileSources + '>', err);
+        //         thisCtrl.logApkGenerationError('While zipping the source dir in <' + srcDirPath + zipFileSources + '> Error: ' + err,userId,appId);
+        //         return;
+        //     } else {
+        //         sails.log.debug("Zip file with sources are ready in the path <" + srcDirPath + zipFileSources + ">");
+
+                    fs.stat(srcDirPath + zipFileSources, function (err, fileStat) {
+                        if (err) {
+                            if (err.code == 'ENOENT') {
+                                thisCtrl.logApkGenerationError('File:' + zipFileSources + " does not exists, Please zip the sources in the dir(progPointerApp): " + ionicAppSourceDir + ' Error: ' + err, userId, appId);
                                 return;
                             }
-                            replaceAppNameNIcon(app.appName, appIconFileRES, appSplashFileRES);
-                        });
-                    });
-
-                }else{
-                    var parser = new xml2js.Parser(),
-                    xmlBuilder = new xml2js.Builder();
-                    parser.parseString(data, function (err, result) {
-
-                        var preVersion=result.widget['$'].version;
-                        var version=increaseVersion(preVersion);
-                        result.widget['$'].version=version;
-
-                        var xml = xmlBuilder.buildObject(result);
-
-                        fs.writeFile(moveConfigFile, xml,'utf-8', function(err) {
-                            if(err){
-                                thisCtrl.logApkGenerationError('Error while writing to the config file. Error: ' + err,userId,appId);
-                                return;
-                            }
-                        });
-
-                        var searchApp = {
-                            id: appId
-                        };
-                        Application.findOne(searchApp).exec(function (err, app) {
-                            if(err){
-                                thisCtrl.logApkGenerationError('Error while searching the appId:' + appId + ' in Application just before create a new build version. Error: ' + err,userId,appId);
-                                return;
-                            }
-                            BuildVersion.create({
-                                appId: appId,
-                                previousVersion: preVersion,
-                                version : version
-                            }).exec(function(err,build){
-                                if(err){
-                                    thisCtrl.logApkGenerationError('Error while create the build version. Error: ' + err,userId,appId);
+                        } else {
+                            fs.copy(srcDirPath + zipFileSources, copyDirPath + zipFileSources, function (err) {
+                                if (err) {
+                                    thisCtrl.logApkGenerationError('Error while copying zip file from ' + srcDirPath + zipFileSources + ' to ' + copyDirPath + ' for the appId:' + appId + ' in Application. Error: ' + err, userId, appId);
                                     return;
                                 }
-                                if(build) {
-                                    buildApkFile(copyDirPath,app.appName);
-                                }
+
+                                sails.log.debug("Source zip file copied ");
+                                sails.log.debug("Started to Extract the files...");
+
+                                shell.cd(copyDirPath);
+                                shell.exec('unzip ' + zipFileSources + ' -d ./', {async: true}, function (codeunzip, stdoutunzip, stderrunzip) {
+                                    if (codeunzip == 0) {
+                                        sails.log.debug("Unzipped " + zipFileSources);
+
+                                        //Move all the files in the progPointerApp(Which unzipped using above shell command) to ./
+                                        shell.exec('mv ' + pointerAppDirName + '/* ./', {async: true}, function (codemv, stdoutmv, stderrmv) {
+                                            if (codemv == 0) {
+                                                sails.log.debug("Files moved from " + pointerAppDirName + " to ./");
+
+                                                //Delete the directory progPointerApp in ./ which we don't need any more
+                                                shell.exec('rm -rf ' + pointerAppDirName, {async: true}, function (coderm, stdoutrm, stderrrm) {
+                                                    if (codemv == 0) {
+                                                        sails.log.debug("Directory removed  " + pointerAppDirName + " from ./");
+                                                        sails.log.debug("ionic files are ready in " + copyDirPath + " in " + Math.floor((new Date().getTime() - startTime) / 1000) + " seconds");
+
+                                                        var searchApp = {
+                                                            id: appId
+                                                        };
+
+                                                        Application.findOne(searchApp).exec(function (err, app) {
+                                                            if (err) {
+                                                                thisCtrl.logApkGenerationError('Error while searching the appId:' + appId + ' in Application. Error: ' + err, userId, appId);
+                                                                return;
+                                                            }
+                                                            replaceAppNameNIcon(app.appName, appIconFileRES, appSplashFileRES);
+                                                        });
+                                                    }else{
+                                                        thisCtrl.printShellError('Error while Executing: rm -rf ' + pointerAppDirName,coderm, stdoutrm, stderrrm, userId, appId);
+                                                        if (stderrrm){
+                                                            shell.exit(1);
+                                                            return;
+                                                        }
+                                                    }
+                                                });
+                                            }else{
+                                                thisCtrl.printShellError('Error while Executing: mv ' + zipFileSources + '/* ./',codemv, stdoutmv, stderrmv, userId, appId);
+                                                if (stderrmv){
+                                                    shell.exit(1);
+                                                    return;
+                                                }
+                                            }
+                                        });
+                                    }else{
+                                        thisCtrl.printShellError('Error while Executing: unzip ' + zipFileSources + ' -d ./',codeunzip, stdoutunzip, stderrunzip, userId, appId);
+                                        if (stderrunzip){
+                                            shell.exit(1);
+                                            return;
+                                        }
+                                    }
+                                });
                             });
-                        });
+                        }
                     });
-                }
-            });
+        //     }
+        // });
 
             function replaceAppNameNIcon(appName, icon, splash) {
                 var parser = new xml2js.Parser(),
                     xmlBuilder = new xml2js.Builder();
-                fs.readFile(moveConfigFile, 'utf-8',
+                fs.readFile(configFile, 'utf-8',
                     function(err, data) {
                         if(err){
                             thisCtrl.logApkGenerationError('Error while reading the config file in replaceAppNameNIcon. Error: ' + err,userId,appId);
@@ -737,9 +766,13 @@ module.exports = {
                         parser.parseString(data, function (err, result) {
                             result.widget.name = appName;
                             result.widget['$'].id='io.ionic.prog'+appId;
+                            var preVersion=result.widget['$'].version;
+                            var version=increaseVersion(preVersion);
+                            result.widget['$'].version=version;
+
                             var xml = xmlBuilder.buildObject(result);
 
-                            fs.writeFile(moveConfigFile, xml,'utf-8', function(err) {
+                            fs.writeFile(configFile, xml,'utf-8', function(err) {
 
                                 if(err){
                                     thisCtrl.logApkGenerationError('Error while writing to the config file in replaceAppNameNIcon. Error: ' + err,userId,appId);
@@ -821,12 +854,12 @@ module.exports = {
                 shell.cd(appPath);
 
                 sails.log.debug('Start to generate resources...');
-                shell.exec('ionic cordova resources android --force', {async: true}, function (code, stdout, stderr) {
+                shell.exec('ionic cordova resources android --force  --quiet --no-interactive', {async: true}, function (code, stdout, stderr) {
                     sails.log.debug('Completed generating resources');
                     if(code == 0) {
                         sails.log.debug('Start the Android release build');
-                        shell.exec('ionic cordova build android  --release', {async: true}, function (code3, stdout3, stderr3) {
-                            sails.log.debug('Completed the Android release build')
+                        shell.exec('ionic cordova build android  --release  --quiet --no-interactive', {async: true}, function (code3, stdout3, stderr3) {
+                            sails.log.debug('Completed the Android release build');
                             if (code3 == 0) {
                                 sails.log.debug('Running jarsigner');
 
@@ -857,11 +890,11 @@ module.exports = {
                                                 }
                                             }
                                             //Start Zipalign process
-                                            thisCtrl.doZipalign(appPath,userId,appId,apkName,unsignedApkName);
+                                            thisCtrl.doZipalign(appPath,userId,appId,apkName,unsignedApkName,releasePath);
                                         });
                                     } else {
                                         thisCtrl.printShellError('Error while Executing: jarsigner process',code4, stdout4, stderr4, userId, appId);
-                                        if (stderr){
+                                        if (stderr4){
                                             // shell.exit(1);
                                             return;
                                         }
@@ -869,7 +902,7 @@ module.exports = {
                                 });
                             } else {
                                 thisCtrl.printShellError('Error while Executing: ionic cordova build android  --release',code3, stdout3, stderr3, userId, appId);
-                                if (stderr){
+                                if (stderr3){
                                     // shell.exit(1);
                                     return;
                                 }
@@ -891,13 +924,13 @@ module.exports = {
         }
     },
 
-    doZipalign: function(appPath,userId,appId,apkName,unsignedApkName){
+    doZipalign: function(appPath,userId,appId,apkName,unsignedApkName,releasePath){
         var thisCtrl = this;
         sails.log.debug('Start zipalign process');
         shell.exec(config.ANDROID_APK_BUILD_ZIPALIGN_PATH + ' -v 4 ' + unsignedApkName + ' ' + apkName, {async: true}, function (code5, stdout5, stderr5) {
             sails.log.debug('Completed zipalign process');
             if (code5 == 0) {
-                thisCtrl.updateApkStatus(appPath,userId,appId);
+                thisCtrl.updateApkStatus(appPath,userId,appId,releasePath,apkName);
             } else {
                 thisCtrl.printShellError('Error while Executing: jarsigner process',code5, stdout5, stderr5, userId, appId);
                 if (stderr5){
@@ -908,8 +941,10 @@ module.exports = {
         });
     },
 
-    updateApkStatus: function(appPath,userId,appId){
+    updateApkStatus: function(appPath,userId,appId,releasePath,apkName){
         sails.log.debug("Exec updateApkStatus, Update Application appId:" + appId);
+        var thisCtrl = this;
+
         var searchAppData = {
             id: appId
         }
@@ -918,17 +953,40 @@ module.exports = {
 
         Application.update(searchAppData, {apkStatus: config.APK_BUILD_STATUS.SUCCESS.code, apkStatusUpdatedAt: time}).exec(function (err, apps) {
             if (err){
-                sails.log.error("Error while updating the Application for the appId:" + appId + " Error: " + err);
-                // shell.exit(1);
+                thisCtrl.logApkGenerationError("Error while updating the Application for the appId:" + appId + " Error: " + err,userId,appId);
+                return;
             }
             else {
                 var app = apps[0];
-                sails.log.debug("Update Application status as SUCCESS for the appId: " + appId);
-                emailService.send(config.SUPPORT_USER_EMAIL,
-                    config.SUPPORT_USER_EMAIL,
-                    'APK build success for the app unique ID: ' + app.uniqueAppId + " for the app Name:" + app.appName,
-                    '<strong>App Unique ID:</strong> ' + app.uniqueAppId + '<br><strong>UserId:</strong> ' + userId + "<br><strong>appId:</strong> " + appId + '<br><strong>Date:</strong> ' + time,
-                    function(err,info){});
+
+                shell.cp(releasePath + apkName, tempPath);//Copy the apk to the tempPath before remove everything in the appPath.
+                shell.rm('-rf', appPath + '*');//Will delete whole non hidden stuffs in the appPath.
+                shell.rm('-rf', appPath + '.*');//Will delete whole hidden stuffs in the appPath.
+                shell.mv('-n', tempPath + apkName, appPath);//Will move back the apk from the tempPath to appPath since we need this file should be available to be download by the app creator.
+                sails.log.debug('All the files removed in ' + appPath + ' except ' + apkName);
+
+                var timeTaken = Math.floor((new Date().getTime() - startTime) / 1000);
+                sails.log.debug('---------------------------------');
+                sails.log.debug("apk build success for the app: " + app.appName + " in " + timeTaken + " seconds");
+                sails.log.debug('---------------------------------');
+
+                User.findOne({id: userId}).exec(function (err, user) {
+                    if (err){
+                        sails.log.error("Error searching for the User id:" + userId + " Error: " + err);
+                    }
+
+                    var subject = 'APK build success. Creator: ' + user.firstName + ' ' + user.lastName + " for the app Name:" + app.appName;
+
+                    var htmlBody = '<strong>App Name:</strong> ' + app.appName +
+                        '<br><strong>App Unique ID:</strong> ' + app.uniqueAppId +
+                        '<br><strong>UserId:</strong> ' + userId +
+                        '<br><strong>App Creator info:</strong> ' + user.firstName + ' ' + user.lastName + ' Email:' + user.email + ' mobile: ' + user.mobile +
+                        "<br><strong>appId:</strong> " + appId +
+                        '<br><strong>Date:</strong> ' + time +
+                        '<br><strong>Time Taken(seconds):</strong> ' + timeTaken;
+
+                    emailService.send(config.SUPPORT_USER_EMAIL,config.SUPPORT_USER_EMAIL,subject,htmlBody,function(err,info){});
+                });
             }
         });
     },
@@ -966,7 +1024,7 @@ module.exports = {
     logApkGenerationError: function(message,userid,appid){
         if(message){
             sails.log.debug("**************Start - Error Generating APK(logApkGenerationError)*************");
-            sails.log.debug("message");
+            sails.log.debug(message + ' userId:' + userid + ' appId:' + appid);
             sails.log.debug("**************End - Error Generating APK(logApkGenerationError)*************");
 
             this.sendErrorLog(appid,message);
@@ -979,16 +1037,29 @@ module.exports = {
         //Update the status as ERROR
         Application.update({id: appid}, {apkStatus: config.APK_BUILD_STATUS.ERROR.code, apkStatusUpdatedAt: errorTime}).exec(function (err, apps) {
             if (err){
-                sails.log.error("Error while updating the Application Status as ERROR for the appId:" + app.id + " Error: " + err);
+                sails.log.error("Error while updating the Application Status as ERROR for the appId:" + appid + " Error: " + err);
             }
             else {
                 var app = apps[0];
                 sails.log.debug("Update Application status as ERROR for appName: " + app.uniqueAppId );
-                emailService.send(config.SUPPORT_USER_EMAIL,
-                    config.SUPPORT_USER_EMAIL,
-                    'Error when building apk for the app unique ID: ' + app.uniqueAppId + " app Name: " + app.appName,
-                    '<strong>Error log [' + errorTime + ']:</strong><br>' + body,
-                    function(err,info){});
+
+                User.findOne({id: app.userId}).exec(function (err, user) {
+                    if (err){
+                        sails.log.error("Error searching for the User id:" + userId + " Error: " + err);
+                    }
+
+                    var subject = 'APK build failed. Creator: ' + user.firstName + ' ' + user.lastName + " for the app Name:" + app.appName;
+
+                    var htmlBody = '<strong>App Name:</strong> ' + app.appName +
+                        '<br><strong>App Unique ID:</strong> ' + app.uniqueAppId +
+                        '<br><strong>UserId:</strong> ' + app.userId +
+                        '<br><strong>App Creator info:</strong> ' + user.firstName + ' ' + user.lastName + ' <strong>Email:</strong>' + user.email + ' <strong>mobile:</strong> ' + user.mobile +
+                        "<br><strong>appId:</strong> " + appid +
+                        '<br><strong>Date:</strong> ' +  new Date().toLocaleString() +
+                        '<br><strong>Error log [' + errorTime + ']:</strong><br>' + body;
+
+                    emailService.send(config.SUPPORT_USER_EMAIL,config.SUPPORT_USER_EMAIL,subject,htmlBody,function(err,info){});
+                });
             }
         });
     }
