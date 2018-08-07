@@ -371,7 +371,7 @@
          */
         $scope.addProduct = function () {
             var State = true;
-            return commerceService.showAddProductsDialog('products',State);
+            return commerceService.showAddProductsDialog('products');
         }
     }
     })();
