@@ -39,10 +39,10 @@ module.exports = {
                 Application.findOne({id:subscriptionPaymentData.appId}).
                 exec(function(error, applicationData) {
 
-                    console.log(JSON.stringify(applicationData));
+                    //console.log(JSON.stringify(applicationData));
 
                    var data = {msisdn:subscriptionPaymentData.msisdn,
-                       appName:applicationData.appName,dateTime:subscriptionPaymentData.createdAt,
+                       appName:applicationData.appName,dateTime:subscriptionPaymentData.date,
                        status:1,amount:subscriptionPaymentData.amount};
 
                     responseArray.push(data);

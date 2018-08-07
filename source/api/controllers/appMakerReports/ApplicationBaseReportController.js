@@ -116,7 +116,7 @@ module.exports = {
 
                                                                  appBaseintance.getShareSplit(operators.operator,function(shareSplit, err){
 
-                                                                       var data = {  appName:applicationData.appName,type:"ideaPro",
+                                                                       var data = {  appName:applicationData.appName,type:"appMaker",
                                                                             caaTaxable:true,date:dateFormat(date,"yyyy-mm-dd"),
                                                                             operator:operators.operator.toLowerCase(),
                                                                             platformEarning:subscriptionPaymentData[0] ? subscriptionPaymentData[0].amount:0,
@@ -245,12 +245,13 @@ module.exports = {
             query = { month: {'>=': monthFrom, '<=': monthTo}}
 
         }else{
-            {query = {month: {'>=': monthFrom, '<=': monthTo}, appName: appName}}
+            query = {month: {'>=': monthFrom, '<=': monthTo}, appName: appName}
+        }
 
 
             ApplicationBaseMonthlySummary.find(query,
                 {
-                    groupBy: ['appName', 'operator', 'date', 'type', 'caaTaxable'],
+                    groupBy: ['appName', 'operator','year', 'month', 'type', 'caaTaxable'],
                     sum: ['platformEarning', 'spEarning', 'appTotRevenue',
                         'appTrafficCount', 'subscriptionCount', 'unSubscriptionCount', 'totSubs']
                 }).exec(function (error, applicationBaseMonthlySummaryData) {
@@ -259,11 +260,12 @@ module.exports = {
 
             })
 
-        }
     },
 
 
+
     getApplicationBaseYearlySummary: function (req,res){
+
 
         var reqData = req.body;
 
@@ -271,28 +273,64 @@ module.exports = {
         var yearTo = reqData.yearTo;
         var appName = reqData.appName;
 
+
         var query="";
 
         if (appName=="all") {
 
             query = { year: {'>=': yearFrom, '<=': yearTo}}
 
-        }else{
-            {query = {year: {'>=': yearFrom, '<=': yearTo}, appName: appName}}
-
+        }else {
+            query = {year: {'>=': yearFrom, '<=': yearTo}, appName: appName}
+        }
+            console.log("query " + query);
 
             ApplicationBaseYearlySummary.find(query,
                 {
-                    groupBy: ['appName', 'operator', 'date', 'type', 'caaTaxable'],
+                    groupBy: ['appName', 'operator', 'year', 'type', 'caaTaxable'],
                     sum: ['platformEarning', 'spEarning', 'appTotRevenue',
                         'appTrafficCount', 'subscriptionCount', 'unSubscriptionCount', 'totSubs']
                 }).exec(function (error, applicationBaseDailySummaryData) {
 
+                if (error) console.log(error);
+                console.log("applicationBaseDailySummaryData " + applicationBaseDailySummaryData);
                 res.send(applicationBaseDailySummaryData);
 
             })
 
-        }
+
+    },
+
+    getAllOperators : function (req,res) {
+
+          Operator.find().exec(function(err, operator_data){
+              res.send(operator_data);
+
+          });
+     },
+
+    allApps: function (req, res) {
+
+        var appData = [];
+        var count = 0;
+
+        PublishDetails.find().exec(function(err, publishDetailsData) {
+
+            if (err) return done(err);
+
+                publishDetailsData.forEach(function (publishDetails) {
+
+                    Application.find({id:publishDetails.appId}).exec(function(err, application){
+                        count++;
+                        appData.push(application);
+
+                        if (count==publishDetailsData.length){
+                            res.send(appData);
+                        }
+
+                    });
+                });
+        });
     },
 
 

@@ -60,11 +60,8 @@
                     locals : {initialData : {comments:comments,operator:operator,operatorList:operatorList}},
                     controller: ['$scope', 'initialData','$mdDialog','toastr','$filter', function($scope, initialData,$mdDialog,toastr,$filter) {
 
-                                    console.log(initialData);
                                     $scope.commentsAll = initialData.comments;
-                                    console.log($scope.commentsAll);
                                     $scope.operators = initialData.operatorList;
-                                    console.log($scope.operators);
 
                                     $scope.myFilter = function (comment) {
                                         return comment.operator == initialData.operator || comment.operator == null;
@@ -75,14 +72,13 @@
                                     }
 
                                     $scope.operatorDes = function(comOp){
-                                    console.log(comOp);
                                         if(comOp){
                                             var arr = $filter('filter')($scope.operators,{ "code": comOp });
                                                 if(arr){
                                                     return arr[0].desc;
                                                 }
                                         }else{
-                                            return "Super Admin"
+                                            return "Admin"
                                         }
                                     }
 

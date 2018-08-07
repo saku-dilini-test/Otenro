@@ -12,6 +12,7 @@ var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
 var dateFormat = require('dateformat');
 var path = require('path').resolve(sails.config.appPath);
+var utilsService = require('../../services/utilsService');
 
 module.exports = {
 
@@ -472,6 +473,32 @@ module.exports = {
                     if(err) return console.error(err);
                     res.send("success");
                 });
+
+                try {
+                    AppUser.findOne().where({deviceUUID:uuid}).exec(function (err, appUser) {
+                        if (err) return done(err);
+                        if(appUser){
+
+                            utilsService.getOperator(appUser.msisdn, function (operator,err) {
+                                if(err){
+                                    console.log(err);
+                                }
+                                console.log(appUser.msisdn);
+                                AppVisitDataLog.create({appId:appUser.appId,msisdn:appUser.msisdn,
+                                    viewDate:dateFormat(new Date(), "yyyy-mm-dd"),operator: operator}).exec(function(err,appVisiting) {
+                                    if(err) {
+                                        console.log(err);
+                                    }else {
+                                        console.log(appVisiting);
+
+                                    }
+                                });
+                            });
+                        }
+                    });
+                }catch(e){
+                    sails.log.error(err) ;
+                }
             }else{
 
                 if(err) return console.error(err);
@@ -483,6 +510,33 @@ module.exports = {
                         }
                 });
 
+                try {
+                    AppUser.findOne().where({deviceUUID:uuid}).exec(function (err, appUser) {
+                        if (err) return done(err);
+                        if(appUser){
+
+                            utilsService.getOperator(appUser.msisdn, function (operator,err) {
+                                if(err){
+                                    console.log(err);
+                                }
+                                console.log(appUser.msisdn);
+                                AppVisitDataLog.create({appId:appUser.appId,msisdn:appUser.msisdn,
+                                    viewDate:dateFormat(new Date(), "yyyy-mm-dd"),operator: operator}).exec(function(err,appVisiting) {
+                                    if(err) {
+                                        console.log(err);
+                                    }else {
+                                        console.log(appVisiting);
+
+                                    }
+
+                                });
+                            });
+                        }
+
+                    });
+                }catch(e){
+                    sails.log.error(err) ;
+                }
             }
         });
 

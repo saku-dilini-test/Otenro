@@ -91,14 +91,13 @@ module.exports = {
             query = {date:{'>=':dateFormat(dateFrom, "yyyy-mm-dd"),'<=':dateFormat(dateTo, "yyyy-mm-dd")}}
 
         }else {
+
             query = {date:{'>=':dateFormat(dateFrom, "yyyy-mm-dd"),'<=':dateFormat(dateTo, "yyyy-mm-dd")},operator:operator}
         }
 
-
-
-        RevenueAndTrafficDailySummary.find(query).exec(function(err, app){
+        RevenueAndTrafficDailySummary.find(query).exec(function(err, revenueAndTrafficDailySummary){
             if (err) return done(err);
-            res.send(app);
+            res.send(revenueAndTrafficDailySummary);
         });
 
     },
