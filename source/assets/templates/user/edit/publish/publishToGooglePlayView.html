@@ -108,11 +108,13 @@
                             </fieldset>
                             <fieldset class="col-3">
                                 <label>category</label>
-                                <select class="input-shadow-border form-control"
-                                        ng-model="playStoreData.primaryCat"
-                                        ng-options="catList.category as catList.category for catList in primaryCatList"
-                                        required>
-                                </select>
+                                <div class="select-container">
+                                    <select class="input-shadow-border form-control"
+                                            ng-model="playStoreData.primaryCat"
+                                            ng-options="catList.category as catList.category for catList in primaryCatList"
+                                            required>
+                                    </select>
+                                </div>
                             </fieldset>
 
                         </div>
@@ -194,9 +196,11 @@
                                         </md-input-container>
                                     </td>
                                     <td align="center">
-                                        <select ng-model= "operator.interval" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_CONFIG' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED' || operator.status == 'TERMINATED'">
-                                            <option ng-repeat="sts in Renewals" >{{sts}}</option>
-                                        </select>
+                                        <div class="select-container">
+                                            <select class="op-config-select" ng-model= "operator.interval" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_CONFIG' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED' || operator.status == 'TERMINATED'">
+                                                <option ng-repeat="sts in Renewals" >{{sts}}</option>
+                                            </select>
+                                        </div>
                                     </td>
                                     <td align="center">
                                         <md-checkbox ng-click="toggle(operator,operator.isEnabled, $index)" ng-model = "operator.isEnabled" ng-disabled = "operator.status == 'APPROVED' || operator.status == 'SUBMITTED_FOR_CONFIG' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'SUSPENDED' || operator.status == 'TERMINATED'">
