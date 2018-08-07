@@ -9,3 +9,34 @@
 }
 
 
+
+.text-left{
+	text-align: left !important
+}
+
+.cus-padding{
+	padding: 40px 0 80px;
+}
+
+div.c-pad{
+	padding: 5px 0;
+}
+
+.padding-vertical{
+	padding:5px 0;
+}
+
+.footer-mobile{
+	position: fixed;
+	bottom: 0;
+	height: 60px;
+	width: 100%;
+	box-shadow: 0px -2px 20px 2px rgba(0, 0, 0, 0.12);
+	z-index:100;
+	padding-top: 8px;
+}
+
+.footer-mobile .row{
+	display: flex;
+    justify-content: space-between;
+}

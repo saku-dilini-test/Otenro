@@ -29,7 +29,7 @@ module.exports = {
     publishBlog : function(req,res){
 
         var blog = req.body;
-        var fileDir = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId+ '/src/assets/images/blogs/';
+        var fileDir = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId+ '/assets/images/blogs/';
         console.log(fileDir);
         if(blog.isNewBlog == 'true'){
             req.file('file').upload({
@@ -87,7 +87,7 @@ module.exports = {
              id : req.body.id
         }
 
-        var filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + appId+ '/src/assets/images/blogs/'+ imageUrl;
+        var filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + appId+ '/assets/images/blogs/'+ imageUrl;
 
         Blogs.destroy(deleteQuery).exec(function (err) {
             if (err) return res.send(err);

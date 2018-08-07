@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-
+import { RouterModule, Routes } from '@angular/router';
 import { PageBodyRoutingModule } from './page-body-routing.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { PageBodyComponent } from './page-body.component';
@@ -21,6 +21,8 @@ import { RegisterComponent } from './register/register.component';
 import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.component';
 import { AppUserComponent } from './app-user/app-user.component';
 import { SearchPipe } from '../pipes/search.pipe';
+import { BlogsComponent } from './blogs/blogs.component';
+import { BlogViewComponent } from './blog-view/blog-view.component';
 
 
 @NgModule({
@@ -32,13 +34,30 @@ import { SearchPipe } from '../pipes/search.pipe';
     OwlModule,
     AgmCoreModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
 
   ],
    exports:[
     PageBodyComponent
   ],
-  declarations: [HomepageComponent, PageBodyComponent, AboutusComponent, PoliciesComponent, TermsComponent, ContactComponent, ShopComponent, ProductComponent, CartComponent,
-    CheckoutComponent, RegisterComponent,PaypalPaymentComponent, AppUserComponent, SearchPipe]
+  declarations: [
+    HomepageComponent, 
+    PageBodyComponent, 
+    AboutusComponent, 
+    PoliciesComponent,
+    TermsComponent, 
+    ContactComponent, 
+    ShopComponent, 
+    ProductComponent, 
+    CartComponent,
+    CheckoutComponent,
+    RegisterComponent,
+    PaypalPaymentComponent,
+    AppUserComponent,
+    SearchPipe,
+    BlogsComponent,
+    BlogViewComponent,
+  ]
 })
-export class PageBodyModule { }
+export class PageBodyModule {}

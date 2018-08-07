@@ -1,59 +1,60 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import * as data from '../../madeEasy.json';
-import { SERVER_URL } from '../../constantsService';
-import { PagebodyServiceModule } from '../../page-body/page-body.service'
-import { ProductsService } from '../../services/products/products.service';
+import { Router} from '@angular/router';
+import * as data from '../../../assets/madeEasy.json';
+import { SERVER_URL } from '../../../assets/constantsService';
+import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { CurrencyService } from '../../services/currency/currency.service';
+declare var $:any;
 
 @Component({
   selector: 'app-categories',
-  templateUrl: './app/addons/categories/categories.component.html',
-  styleUrls: ['./app/addons/categories/categories.component.css'],
+  templateUrl: './categories.component.html',
+  styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent implements OnInit {
-  private prevCategories:any = [];
-  private prevProducts:any = [];
   private imageUrl: any;
   private imageUrl1: any;
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
   private catName: any;
-  private products: any;
-  constructor(private router: Router, private dataService: PagebodyServiceModule,private productService: ProductsService) {
+  private currentViewName: string;
+  private currency: string;
+
+  @Input('categories') categories: CategoriesModel;
+  @Input('products') products: any;
+
+  constructor(private router: Router, private dataService: PagebodyServiceModule,private currencyService: CurrencyService) {
+    this.currentViewName = 'Home';
+
   }
 
   ngOnInit() {
+
     this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
-      this.imageUrl1 = SERVER_URL + "/templates/viewWebImages?userId="
+    this.imageUrl1 = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=thirdNavi";
+
+
+    this.currencyService.getCurrencies().subscribe(data => {
+      this.currency = data.sign;
+    }, error => {
+      console.log('Error retrieving currency');
+    });
+
   }
 
-  @Input('categories') categories:CategoriesModel;
-
-
-  goToNextSubCategory(nextNode, currentNode, nextProducts){
-    console.log(currentNode)
-    if(nextNode.length != 0 || nextProducts.length != 0){
-      this.prevCategories.push(currentNode);
-      this.categories = nextNode;
-
-      this.prevProducts.push(currentNode.products);
-      this.products = nextProducts;
-      window.scrollTo(0, 0);
-
-    }
+  ngAfterContentChecked() {
+    $('.carousel').carousel('cycle');
+    $('.carousel').carousel({
+      interval: 3000
+    });
+    // $('.right.carousel-control').trigger('click');
+  }
+  ngOnDestroy() {
+    $('.carousel').carousel('pause');
   }
 
-  goToPreviousCategory(){
-    this.categories = this.prevCategories[this.prevCategories.length-1];
-    this.prevCategories.splice(this.prevCategories.length-1);
-
-    this.products = this.prevProducts[this.prevProducts.length-1];;
-    this.prevProducts.splice(this.prevProducts.length-1);
-    window.scrollTo(0, 0);
-  }
 
   checkSoldOut(product) {
 
@@ -77,6 +78,7 @@ export class CategoriesComponent implements OnInit {
     return isSoldOut;
   }
 
+
   getWidth(index, length) {
     let styles = {
       'width': '100%'
@@ -89,34 +91,38 @@ export class CategoriesComponent implements OnInit {
 
 
   owlOptions = {
-    loop:false,
-    margin:15,
-    responsiveClass:true,
-    responsive:{
-      0:{
-        items:2
+    loop: false,
+    margin: 15,
+    stagePadding: 50,
+    nav: true,
+    dots: true,
+    responsiveClass: true,
+    responsive: {
+      0: {
+        items: 1
       },
-      600:{
-        items:4
+      600: {
+        items: 2
       },
-      1000:{
-        items:5
+      1000: {
+        items: 3
       }
     }
   }
 
   navigateProd(val: String, item: any, catName: String) {
+    if(!this.checkSoldOut(item)){
       this.catName = catName;
       this.dataService.data = item;
+      localStorage.setItem(this.appId + ":dataServiceData", JSON.stringify(this.dataService.data));
       this.router.navigate([val, this.catName]);
-
-
+    }
   }
 
 }
 
-export class CategoriesModel{
-	id:number;
-	title:string;
-	nodes:any[];
+export class CategoriesModel {
+  id: number;
+  title: string;
+  nodes: any[];
 }

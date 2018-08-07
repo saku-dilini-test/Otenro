@@ -1,52 +1,69 @@
-<div class="container">
+<!-- Main container -->
+<div class="page-container bloc bloc-xl">
 
-  <div class="bloc bgc-white l-bloc" id="bloc-0">
-    <div class=" bloc-sm">
-    </div>
-  </div>
-
-  <div  *ngFor="let order of orderHistory">
-    <div class="row cart">
-      <h5 class="col-md-12 main-content-font">ORDER DATE: {{order.createdAt | date: 'dd/MM/yyyy'}}</h5>
-      <div class="col-md-8 col-sm-8 col-xs-12">
-        <div class="row order" *ngFor="let item of order.item">
-          <div class="col-md-2 col-sm-3 col-xs-4 no-m-padding">
-            <img *ngIf = "item.imgURL" src="{{imageURL}}/{{item.imgURL}}">
-            <img *ngIf = "!item.imgURL" src="{{imageURL}}/{{item.imgDefault}}">
-          </div>
-          <div class="col-md-10 col-sm-9 col-xs-8">
-            <div class="row">
-              <div class="col-md-4 col-sm-12">
-                <label class="no-m-margin main-header-font">{{item.name}}</label>
-                <span class="main-content-font">ITEM PRICE:<br> {{sign}} {{item.price}}</span>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="variants text-center no-m-margin main-content-font">
-                  <span  *ngFor="let v of item.variant">{{v.name}} : {{v.vType}}<br></span>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6 main-content-font">
-                <span class="no-m-margin" id="qty">Quantity: {{item.qty}}</span>
-              </div>
-            </div>
+    <!-- bloc-19 -->
+    <div class="bloc bgc-white l-bloc  hidden-xs" id="bloc-19">
+      <div class="container bloc-md">
+        <div class="row content-row">
+          <div class="col-sm-12">
+            <h1 class="header text-center main-header-font">
+              Order history
+            </h1>
           </div>
         </div>
       </div>
-      <div *ngIf="order.note">
-        <p>*note : {{order.note}}</p>
+    </div>
+    <!-- bloc-19 END -->
+
+    <!-- bloc-20 -->
+    <div class="bloc bgc-white l-bloc main-content-font" id="bloc-20">
+      <div class="container" *ngIf="orderHistory && orderHistory.length == 0">
+        <h1 class="main-header-font text-center">You don't have any order history!</h1>
       </div>
-      <div class="col-md-4 col-sm-4 col-sm-offset-0 col-xs-offset-4 col-xs-8">
-          <div class="total-price text-center main-content-font">
-            <span>ORDER TOTAL:</span>{{sign}} {{order.amount}}
-          </div>
+      <div class="container"  *ngFor="let order of orderHistory">
+            <h5 class="col-md-12 main-content-font">ORDER ID : {{order.id}}</h5>
+            <h5 class="col-md-12 main-content-font">ORDER DATE : {{order.createdAt | date: 'dd/MM/yyyy'}}</h5>
+            <div *ngIf="order.note">
+              <h5 class="col-md-12 main-content-font"><strong>*Note</strong> : {{order.note}}</h5>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="row content-cards" *ngFor="let item of order.item">
+                      <div class="col-sm-6">
+                        <img *ngIf="item.imgURL" src="{{imageURL}}/{{item.imgURL}}" class="center-block img-responsive lazyload">
+                        <img *ngIf="!item.imgURL" src="{{imageURL}}/{{item.imgDefault}}" class="center-block img-responsive lazyload">
+                      </div>
+                      <div class="col-sm-6">
+                        <p class="product-name padding-top main-header-font">
+                          {{item.name}}
+                        </p>
+                        <p class="spacing-2">
+                          <span *ngFor="let v of item.variant"><strong>{{v.name}}</strong> - {{v.vType}}<br><br></span>
+                          <strong>PRICE</strong> -  {{sign}} {{item.price}}<br><br>
+                          <strong>QTY</strong> -  {{item.qty}}<br><br>
+                           <a  (click) = "buyAgain(item)"  class="btn btn-d btn-lg button main-button"><span class="ion ion-plus-round icon-spacer"></span>Buy Again</a>
+                        </p>
+                      </div>
+                      <hr class="col-sm-12">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                  <div class="row content-cards">
+                        <div class="col-sm-12">
+                          <p class="product-name  padding-top text-right text-left-xs">
+                            TOTAL PRICE
+                          </p>
+                          <p class="spacing-2 text-right text-left-xs">
+                            <strong>{{sign}} {{order.amount}}</strong>
+                          </p>
+                        </div>
+                  </div>
+              </div>
+            </div>
+
+
       </div>
     </div>
-  </div>
-
-
-  <div class="bloc bgc-white l-bloc" id="bloc-0">
-    <div class=" bloc-sm">
-    </div>
-  </div>
-
+    <!-- bloc-20 END -->
 </div>
+

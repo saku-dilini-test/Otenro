@@ -1,117 +1,146 @@
-<div class="page-container">
+<header id="mobile">
+	<div class="bloc hidden-sm hidden-lg hidden-md l-bloc main-navigation" id="bloc-0">
+		<div class="container block-sm">
+			<div class="row">
+				<div class="col-sm-12">
+						<nav class="navbar nav-invert row mini-nav">
+							        <div class="navbar-header">
 
-  <!-- bloc-1 -->
+							          <button  aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle" (click)="openNav()">
+							            <i class="ion ion-android-menu"></i>
+							          </button>
+										<button *ngIf="title != 'Home'" aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle main-navigation" (click)="goBack()">
+											<i class="ion-android-arrow-back"></i>
+										</button>
+							          <div class="mobile-title visible-xs mobileTitle" >{{title}}</div>
+							          <div class="mobile-cart visible-xs" ><i class="feather-icon icon-bag icon-sm "  (click)="navigate('cart','Shopping Cart');manualToggle()"></i> <span class="badge main-navigation"  (click)="navigate('cart','Shopping Cart');manualToggle()">{{cartNo}}</span></div>
+							        </div>
+						</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+<header>
+	<div class="bloc hidden-xs d-bloc main-navigation" id="bloc-0">
+		<div class="container bloc-sm">
+			<nav class="navbar row">
+				<div class="navbar-header">
+					<a  (click)="navigate('','Home')"><img src="{{imageUrl}}/logo.png&dummy={{dummy}}" alt="logo" width="150" /></a>
+				</div>
+					<ul class="site-navigation nav navbar-nav">
+						<!--<li>-->
+							<!--<a (click)="navigate('','Home')">Home</a>-->
+						<!--</li>-->
+						<!-- <li>
+							<a  (click)="navigate('aboutus','About Us')">About-us</a>
+						</li> -->
+            <li>
+              <a (click)="navigate('shop','Search')">Products</a>
+            </li>
+						<li>
+							<a  (click)="navigate('contact', 'Contact Us')">Contact us</a>
+						</li>
+						<li>
+							<a (click)="navigate('warranty', 'Warranty')">Warranty</a>
+						</li>
+						<li *ngIf = "enableBlog" >
+							<a (click)="navigate('blogs', 'blogs')">Blog</a>
+						</li>
+						<li>
+							<a (click)="navigate('newarivals', 'New Arivals')">New Arrivals</a>
+						</li>
+						<li>
+							<a (click)="navigate('complaints', 'Complaints')">Service Request</a>
+						</li>
+						<!--<li>-->
+				            <!--<div class="dropdown">-->
+				              <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Terms &amp; Conditions<span class="caret"></span></a>-->
+				              <!--<ul class="dropdown-menu  main-navigation"  role="menu">-->
+                          <!--<li>-->
+                            <!--<a (click)="navigate('policies', 'Policies')">Privacy Policy</a>-->
+                          <!--</li>-->
+                          <!--<li>-->
+                            <!--<a (click)="navigate('warranty-conditions', 'Warranty Conditions')">Warranty Conditions</a>-->
+                          <!--</li>-->
+                          <!--<li>-->
+                            <!--<a (click)="navigate('delivery-policy', 'Delivery Policy')">Delivery Policy</a>-->
+                          <!--</li>-->
+                          <!--<li>-->
+                            <!--<a (click)="navigate('return-policy', 'Return Policy')">Return Policy</a>-->
+                          <!--</li>-->
+				              <!--</ul>-->
+				            <!--</div>-->
+				    <!--</li>-->
+						<li>
+				            <div class="dropdown">
+				              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="ion ion-person icon-sm"></span>
+				              <span class="caret"></span></a>
+				              <ul class="dropdown-menu  main-navigation"  role="menu">
+				                <li *ngIf="loginStatus">
+				                  <a   (click)="logout()">Log Out</a>
+				                </li>
+				                <li *ngIf="!loginStatus">
+				                  <a  (click)="navigate('login/home')">Login</a>
+				                </li>
+                        <li *ngIf="!loginStatus">
+                          <a  (click)="goToRegister()">Registration</a>
+                        </li>
+				                <li  *ngIf="loginStatus">
+									<a (click)="navigate('order-history','Order History')">Order History</a>
+								</li>
+								<li  *ngIf="loginStatus">
+									<a (click)="navigate('appUser','My Account')">My Account</a>
+								</li>
+				              </ul>
+				            </div>
+				        </li>
+						<li>
+							<a (click)="navigate('shop','Search')"><span class="ion ion-search icon-sm"></span></a>
+						</li>
+						<li>
+							<a (click)="navigate('cart','Shopping Cart')"><span class="ion ion-android-cart icon-sm"></span> {{cartNo}}</a>
+						</li>
+					</ul>
+			</nav>
+		</div>
+	</div>
+</header>
 
-  <div class="bloc bgc-white l-bloc main-navigation" id="bloc-1">
-    <div class="container">
-      <nav class="navbar">
-        <div class="navbar-header">
-          <button aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-2">
-            <i class="fa fa-bars"></i>
-          </button>
-          <div class="mobile-title visible-xs mobileTitle" >{{title}}</div>
-          <div class="mobile-cart visible-xs" ><i class="fa fa-shopping-cart"  (click)="navigate('cart','Shopping Cart');manualToggle()"></i> <span class="badge main-button"  (click)="navigate('cart','Shopping Cart');manualToggle()">{{cartNo}}</span></div>
-        </div>
-        <div class="navbar-1">
-          <ul class="site-navigation nav navbar-nav">
-            <li>
-              <a class="navbar-brand"  (click)="navigate('')"><img width="100%" src="assets/images/logo.png?dummy={{dummy}}"></a>
-            </li>
-            <li>
-              <a class="nav-link" (click)="navigate('')">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="nav-link" (click)="navigate('aboutus')">About Us</a>
-                </li>
-                 <li>
-                  <a class="nav-link" (click)="navigate('policies')">Policies</a>
-                </li>
-                <li>
-                  <a class="nav-link" (click)="navigate('terms')">Terms & Conditions</a>
-                </li>
+
+            <!-- Mobile Navigation -->
+  <div id="mySidenav" class="sidenav  main-navigation">
+    <div  class="closebtn" (click)="closeNav()">&times;</div>
+		<a (click)="navigate('','Home');closeNav()">Home</a>
+    <a (click)="navigate('shop','Search')">Products</a>
+		<!-- <a (click)="navigate('aboutus','About Us');closeNav()">About-us</a> -->
+		<a (click)="navigate('contact', 'Contact Us');closeNav()">Contact us</a>
+		<a (click)="navigate('warranty', 'Warranty');closeNav()">Warranty</a>
+		<a *ngIf = "enableBlog" (click)="navigate('blogs', 'blogs');closeNav()">Blog</a>
+		<a (click)="navigate('newarivals', 'New Arivals');closeNav()">New Arrivals</a>
+		<a (click)="navigate('complaints', 'Complaints');closeNav()">Service Request</a>
+		<a>
+            <div class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Terms &amp; Conditions<span class="caret"></span></a>
+              <ul class="dropdown-menu  main-navigation w-100"  role="menu">
+				<li>
+					<a (click)="navigate('policies', 'Policies');closeNav()">Privacy Policy</a>
+				</li>
+				<li>
+					<a (click)="navigate('warranty-conditions', 'Warranty Conditions');closeNav()">Warranty Conditions</a>
+				</li>
+				<li>
+					<a (click)="navigate('delivery-policy', 'Delivery Policy');closeNav()">Delivery Policy</a>
+				</li>
+				<li>
+					<a (click)="navigate('return-policy', 'Return Policy');closeNav()">Return Policy</a>
+				</li>
               </ul>
-            </li>
-            <li class="dropdown" *ngIf="loginStatus">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li *ngIf="loginStatus">
-                  <a class="nav-link" (click)="navigate('appUser')">My Account</a>
-                </li>
-                 <li *ngIf="loginStatus">
-                  <a class="nav-link" (click)="navigate('order-history')">Order History</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a class="nav-link" (click)="navigate('contact')">Contact Us</a>
-            </li>
-
-
-            <li>
-              <a class="nav-link" (click)="navigate('cart')"><i class="fa fa-shopping-cart" title="Shopping Cart"></i></a>{{cartNo}}
-            </li>
-            <li *ngIf="loginStatus">
-              <a class="nav-link" (click)="logout()"><i class="fa fa-sign-out" title="Sign out"></i></a>
-            </li>
-            <li *ngIf="!loginStatus">
-              <a class="nav-link" (click)="navigate('login/home')"><i title="Sign in" class="fa fa-sign-in"></i></a>
-            </li>
-          </ul>
-        </div>
-        <div class="collapse navbar-collapse navbar-2">
-          <ul class="site-navigation nav navbar-nav">
-            <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('','Home')">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('aboutus','About Us')">About Us</a>
-            </li>
-            <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('contact', 'Contact Us')">Contact Us</a>
-            </li>
-            <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('policies', 'Policies')">Policies</a>
-            </li>
-            <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('terms', 'Terms & Conditions')">Terms & Conditions</a>
-            </li>
-            <li *ngIf="loginStatus">
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('order-history','Order History')">Order History</a>
-            </li>
-            <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('cart', 'Shopping Cart')">Cart</a>
-            </li>
-            <li *ngIf="loginStatus">
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('appUser','My Account')">My Account</a>
-            </li>
-            <li *ngIf="loginStatus">
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="logout()">Log Out</a>
-            </li>
-            <li *ngIf="!loginStatus">
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('login/home')">Sign In</a>
-            </li>
-            <li class="logo">
-              <a class="navbar-brand"  (click)="navigate('')"><img width="100%" src="assets/images/logo.png?dummy={{dummy}}"></a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
+            </div>
+        </a>
+		<a (click)="logout();closeNav()" *ngIf="loginStatus">Log Out</a>
+        <a (click)="navigate('login/home');closeNav()"  *ngIf="!loginStatus">Sign In</a>
+        <a (click)="navigate('order-history','Order History');closeNav()" *ngIf="loginStatus">Order History</a>
+		<a (click)="navigate('appUser','My Account');closeNav()" *ngIf="loginStatus">My Account</a>
+	<div class="navbar-brand text-center"   (click)="navigate('','Home');closeNav()"><img src="{{imageUrl}}/logo.png&dummy={{dummy}}" width="150"></div>
   </div>
-  <!-- bloc-1 END -->
-
-  <!-- ScrollToTop Button -->
-  <a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1')">
-    <span class="fa fa-chevron-up"></span>
-  </a>
-  <!-- ScrollToTop Button END-->
-
-</div>
-<!-- bloc-2 END -->

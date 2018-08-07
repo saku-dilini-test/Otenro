@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SERVER_URL } from '../../constantsService';
-import * as data from '../../madeEasy.json';
+import { SERVER_URL } from '../../../assets/constantsService';
+import * as data from '../../../assets/madeEasy.json';
 import { Router } from '@angular/router';
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { CurrencyService } from '../../services/currency/currency.service';
@@ -9,24 +9,25 @@ import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'app-shop',
-  templateUrl: './app/page-body/shop/shop.component.html',
-  styleUrls: ['./app/page-body/shop/shop.component.css'],
+  templateUrl: './shop.component.html',
+  styleUrls: ['./shop.component.css'],
 })
 
 export class ShopComponent implements OnInit {
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
   private currency;
-  private results: {};
+  results: {};
   private catId: any;
   private catName: any;
+  searchTerm:any;
 
   constructor(private currencyService: CurrencyService, private productService: ProductsService,
     private dataService: PagebodyServiceModule, private router: Router,
     private title: TitleService) {
-      
+
      this.title.changeTitle("Search");
-      
+
   }
 
   private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
@@ -48,7 +49,7 @@ export class ShopComponent implements OnInit {
     error => {
       console.log('Error shop service all');
     });
-   
+
   }
 
 
@@ -57,6 +58,7 @@ export class ShopComponent implements OnInit {
   navigateProd(val: String, item: any, catName: String) {
     this.catName = catName;
     this.dataService.data = item;
+    localStorage.setItem(this.appId+":dataServiceData",JSON.stringify(this.dataService.data))
     this.router.navigate([val, this.catName]);
   }
 

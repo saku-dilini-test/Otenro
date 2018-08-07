@@ -1,26 +1,30 @@
-<!-- bloc-10 -->
-<div class="bloc bgc-white l-bloc" id="bloc-10">
-  <div class="container bloc-sm">
-    <div class="row">
-      <div class="col-sm-12">
-        <img  data-src="{{aboutUsUrl}}/ABOUTUS.png" class="img-responsive lazyload visible-lg-block visible-md-block" />
-        <!-- <h1 class="text-center margin-top padding-vertical main-header-font" [innerHTML]="header"></h1> -->
-        <h3 class="padding-vertical main-header-font" [innerHTML]="header"> </h3>
-        <p class="main-content-font" [innerHTML]="content"> </p>
 
-        <div class="container">
-          <h3 class="main-header-font">Open hours</h3>
-          <p class="main-content-font">Weekdays : {{openWeekdays}}</p>
-          <p class="main-content-font">Saturday : {{openSaturday}}</p>
-          <p class="main-content-font">Sunday : {{openSunday}}</p>
-        </div>
+<!-- bloc-8 -->
+<div class="bloc b-parallax bgc-white l-bloc" id="bloc-8">
+	<div class="container bloc-lg">
+		<div class="row padding-horizontal">
+			<div class="col-sm-12">
+				<p class="text-center header main-header-font hidden-xs">
+					ABOUT US
+				</p>
+				<div class="row">
+           			<img  data-src="{{aboutUsUrl}}/ABOUTUS.png" class="img-responsive lazyload" />
 
-      </div>
-    </div>
-  </div>
+					<div class="col-sm-12 padding-top">
+						<p class="text-center" [innerHTML]="content">
+						</p>
+					</div>
+				</div>
+				<h3 class="main-header-font">Open hours</h3>
+	              <p class="main-content-font">Weekdays : {{openWeekdays}}</p>
+	              <p class="main-content-font">Saturday : {{openSaturday}}</p>
+	              <p class="main-content-font">Sunday : {{openSunday}}</p>
+			</div>
+		</div>
+	</div>
 </div>
-<!-- bloc-10 END -->
+<!-- bloc-8 END -->
 
-
-
-<hr class="featurette-divider">
+<!-- ScrollToTop Button -->
+<a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1')"><span class="fa fa-chevron-up"></span></a>
+<!-- ScrollToTop Button END-->

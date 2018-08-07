@@ -102,13 +102,7 @@ module.exports = {
         var appId = req.body.data.appId;
         var dePath;
 
-        if(req.body.isNew == true || req.body.isNew == 'true'){
-          dePath = config.APP_FILE_SERVER + req.body.data.userId + '/progressiveTemplates/' + appId + '/src/assets/images/email/';
-
-        }else{
-          dePath = config.APP_FILE_SERVER + req.body.data.userId + '/templates/' + appId + '/img/email/';
-
-        }
+        dePath = config.APP_FILE_SERVER + req.body.data.userId + '/progressiveTemplates/' + appId + '/assets/images/email/';
 
             if(req.body.oldImage){
                 fs.unlink(dePath + req.body.oldImage, function (err) {
@@ -250,11 +244,11 @@ module.exports = {
             var  headerImagePath;
 
             if(type == "Order confirm"){
-                headerImagePath = config.APP_FILE_SERVER + userId + "/progressiveTemplates/"+appId+'/src/assets/images/email/'+userEmail.orderConfirmedEmailImage;
+                headerImagePath = config.APP_FILE_SERVER + userId + "/progressiveTemplates/"+appId+'/assets/images/email/'+userEmail.orderConfirmedEmailImage;
             }else if(type == "Order Fulfilled"){
-                headerImagePath = config.APP_FILE_SERVER + userId + "/progressiveTemplates/"+appId+'/src/assets/images/email/'+userEmail.orderFulfilledEmailImage;
+                headerImagePath = config.APP_FILE_SERVER + userId + "/progressiveTemplates/"+appId+'/assets/images/email/'+userEmail.orderFulfilledEmailImage;
             }else if(type == "Order Refund"){
-                headerImagePath = config.APP_FILE_SERVER + userId + "/progressiveTemplates/"+appId+'/src/assets/images/email/'+userEmail.orderRefundedEmailImage;
+                headerImagePath = config.APP_FILE_SERVER + userId + "/progressiveTemplates/"+appId+'/assets/images/email/'+userEmail.orderRefundedEmailImage;
             }
 
             var mBody = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'+

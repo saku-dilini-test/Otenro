@@ -1,8 +1,8 @@
 import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
-import { SERVER_URL } from '../../constantsService';
-import * as data from '../../madeEasy.json';
+import { SERVER_URL } from '../../../assets/constantsService';
+import * as data from '../../../assets/madeEasy.json';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Subject } from 'rxjs/Subject';
@@ -13,13 +13,13 @@ import { OrdersService } from '../../services/orders/orders.service';
 import { TitleService } from '../../services/title.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-
+declare let $:any;
 declare let paypal: any;
 
 @Component({
   selector: 'app-checkout',
-  templateUrl: './app/page-body/checkout/checkout.component.html',
-  styleUrls: ['./app/page-body/checkout/checkout.component.css']
+  templateUrl: './checkout.component.html',
+  styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
 
@@ -61,7 +61,7 @@ export class CheckoutComponent implements OnInit {
   public totalPrice;
   public cart;
   public chkShippingCost;
-  countries;
+  countries = [];
   public chkCountry;
   isApplyShippingCharge;
   chkHide; chkTax;
@@ -98,7 +98,7 @@ export class CheckoutComponent implements OnInit {
   private months = [];
   private emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   noteDes; showUser;
-  private oldUser;
+  oldUser;
   private loggedUserData;
   private payHereMID;
   private isCountryChanged = false;
@@ -955,7 +955,10 @@ export class CheckoutComponent implements OnInit {
               if (this.localStorageService.get("cart" + appUser.registeredUser)) {
                 this.localStorageService.remove("cart" + appUser.registeredUser);
               }
+            }else{
+              this.localStorageService.remove("cartUnknownUser");
             }
+
 
             window.setTimeout(() => {
               $(".alert").fadeTo(500, 0).slideUp(500, ()=>{
@@ -1106,6 +1109,8 @@ export class CheckoutComponent implements OnInit {
               if (this.localStorageService.get("cart" + appUser.registeredUser)) {
                 this.localStorageService.remove("cart" + appUser.registeredUser);
               }
+            }else{
+              this.localStorageService.remove("cartUnknownUser");
             }
 
             this._success.next('Your Order has been successfully processed');
@@ -1374,11 +1379,14 @@ export class CheckoutComponent implements OnInit {
               if (this.localStorageService.get("cart" + appUser.registeredUser)) {
                 this.localStorageService.remove("cart" + appUser.registeredUser);
               }
+            }else{
+              this.localStorageService.remove("cartUnknownUser");
             }
 
             let city = this.orderDetails.deliveryCity ? this.orderDetails.deliveryCity : "";
             let streetNo = this.orderDetails.deliveryNo ? this.orderDetails.deliveryNo : "";
             let streetName = this.orderDetails.deliveryStreet ? this.orderDetails.deliveryStreet : "";
+
 
             window.location.href=(SERVER_URL + '/mobile/getPayHereForm/?name=' +
               this.orderDetails.customerName + "&amount=" +
@@ -1390,7 +1398,6 @@ export class CheckoutComponent implements OnInit {
               streetNo + " " + streetName  + "&city=" +
               city + "&appId=" + orderRes.appId +
               "&orderId=" + orderRes.id + "&payHereMerchantId=" + this.payHereMID);
-
           },
           (err) => {
             console.log(err);

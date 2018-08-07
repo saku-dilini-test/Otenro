@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { SERVER_URL } from '../../constantsService';
-import * as data from '../../madeEasy.json';
+import { SERVER_URL } from '../../../assets/constantsService';
+import * as data from '../../../assets/madeEasy.json';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { FormGroup, Validators, FormControl, FormArray, NgForm, FormBuilder } from '@angular/forms';
 import { TitleService } from '../../services/title.service';
@@ -11,8 +11,8 @@ import { CurrencyService } from '../../services/currency/currency.service';
 
 @Component({
   selector: 'app-user',
-  templateUrl: './app/page-body/app-user/app-user.component.html',
-  styleUrls: ['./app/page-body/app-user/app-user.component.css']
+  templateUrl: './app-user.component.html',
+  styleUrls: ['./app-user.component.css']
 })
 export class AppUserComponent implements OnInit {
 
@@ -23,12 +23,12 @@ export class AppUserComponent implements OnInit {
 
   private selectedCountry;
   private country = [];
-  private countries;
-  private passwordEditable;
+  countries = [];
+  passwordEditable;
   private userData;
-  private isEmailDuplicate:boolean =false;
+  isEmailDuplicate:boolean =false;
   private isInvalidPassword:boolean =false;
-  private isSuccessDetails:boolean =false;
+  isSuccessDetails:boolean =false;
   private isSuccessPassword:boolean =false;
 
   constructor(fb: FormBuilder, private localStorageService: LocalStorageService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,

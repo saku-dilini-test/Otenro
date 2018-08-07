@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
-import { SERVER_URL } from '../../../app/constantsService';
-import * as data from '../../madeEasy.json';
+import { SERVER_URL } from '../../../assets/constantsService';
+import * as data from '../../../assets/madeEasy.json';
 import 'rxjs/add/operator/map';
 
 
@@ -16,6 +16,10 @@ export class CountryDataService {
 
     getCountryData() {
         return this.http.get(SERVER_URL + "/edit/getAllCountry")
+            .map(res => res.text() ? res.json() : res);
+    }
+    getProvinces(){
+        return this.http.get(SERVER_URL + "/get/provinces")
             .map(res => res.text() ? res.json() : res);
     }
 }

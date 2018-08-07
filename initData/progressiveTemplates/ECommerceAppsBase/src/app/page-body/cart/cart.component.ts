@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
-import { SERVER_URL } from '../../constantsService';
-import * as data from '../../madeEasy.json';
+import { SERVER_URL } from '../../../assets/constantsService';
+import * as data from '../../../assets/madeEasy.json';
 import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { TaxService } from '../../services/tax/tax.service';
@@ -13,8 +13,8 @@ import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-cart',
-  templateUrl: './app/page-body/cart/cart.component.html',
-  styleUrls: ['./app/page-body/cart/cart.component.css']
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
 
@@ -26,7 +26,7 @@ export class CartComponent implements OnInit {
   hide: any;
   tax: any;
   user;enableDelivery=false;enablePickup=false;
-
+  cartItems;
   private _success = new Subject<string>();
 
   staticAlertClosed = false;
@@ -36,7 +36,6 @@ export class CartComponent implements OnInit {
     private http: HttpClient, private router: Router, private dataService: PagebodyServiceModule, private title: TitleService) {
     this.title.changeTitle("Shopping Cart");
   }
-  cartItems = this.dataService.cart.cartItems;
 
   currency: string;
 
@@ -47,7 +46,9 @@ export class CartComponent implements OnInit {
   @Output()
 
   ngOnInit() {
+
     this.user = (this.localStorageService.get('appLocalStorageUser' + this.appId));
+    this.cartItems = this.dataService.cart.cartItems;
 
     this.taxService.getTaxInfo().subscribe(data => {
       if (data == '') {
@@ -134,6 +135,8 @@ export class CartComponent implements OnInit {
     this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
     if(this.user){
       this.localStorageService.set("cart" + this.user.registeredUser, (this.dataService.cart));
+    }else{
+      this.localStorageService.set("cartUnknownUser", (this.dataService.cart));
     }
 
   };

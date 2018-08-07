@@ -1,90 +1,55 @@
 <section *ngFor="let contact of contacts">
-
-    <h3 class="padding-vertical main-header-font">
-      Contact Info:
-    </h3>
-    <!--<p class="main-content-font" *ngIf="description">{{description}}</p>-->
-    <div>
-      <div class="row" *ngIf="contact.contactInfo.address">
-        <div class="col-md-3">
-          <div>
-            <i class="main-content-font fa fa-map-marker"></i> <span class="main-content-font">Address:</span></div>
-        </div>
-        <div class="col-md-9">
-          <div class="main-content-font">{{contact.contactInfo.address}}</div>
-        </div>
-      </div>
-      <div class="row" *ngIf="contact.contactInfo.telPhone">
-        <div class="col-md-3">
-          <div>
-            <i class="main-content-font fa fa-phone"></i>  <span class="main-content-font">Phone:</span></div>
-        </div>
-        <div class="col-md-9">
-          <div class="main-content-font">{{contact.contactInfo.telPhone}}</div>
-        </div>
-      </div>
-      <div class="row" *ngIf="contact.contactInfo.email">
-        <div class="col-md-3">
-          <div>
-            <i class="main-content-font fa fa-envelope"></i>  <span class="main-content-font">Email:</span></div>
-        </div>
-        <div class="col-md-9">
-          <div>
-            <a class="main-content-font" href="mailto:{{contact.contactInfo.email}}">{{contact.contactInfo.email}}</a>
-          </div>
-        </div>
-      </div>
-      <div class="row" *ngIf="contact.contactInfo.webSite">
-        <div class="col-md-3">
-          <div>
-            <i class="main-content-font  fa fa-file-text-o"></i>  <span class="main-content-font">WebSite:</span></div>
-        </div>
-        <div class="col-md-9">
-          <div>
-            <a class="main-content-font" target="_blank" href="{{contact.contactInfo.webSite}}">{{contact.contactInfo.webSite}}</a>
-          </div>
-        </div>
+      <div class="col-sm-12">
+        <p class="header text-center  main-header-font">
+          Softlogic Max Branches
+        </p>
       </div>
 
+          <!--</div>-->
+            <ng-template  *ngFor="let branch of contact.branches;let i = index" [ngIf]="i % 3 == 0">
+              <div class="row voffset row-space-top spacing-top">
+                <a class="col-sm-4" *ngIf="contact.branches[i]"  href="https://www.google.com/maps/?q={{contact.branches[i].branch.latitude}},{{contact.branches[i].branch.longitude}}" target="_blank">
+                  <p class="main-header-font text-center-xs">
+                    {{ contact.branches[i].name}}
+                  </p>
+                  <p class="main-content-font text-center-xs">
+                    {{contact.branches[i].address}}
+                  </p>
+                </a>
+                <a class="col-sm-4" *ngIf="contact.branches[i+1]"  href="https://www.google.com/maps/?q={{contact.branches[i+1].branch.latitude}},{{contact.branches[i+1].branch.longitude}}" target="_blank">
+                  <p class="main-header-font text-center-xs">
+                    {{contact.branches[i+1].name}}
+                  </p>
+                  <p class="main-content-font text-center-xs">
+                    {{contact.branches[i+1].address}}
+                  </p>
+                </a>
+                <a class="col-sm-4" *ngIf="contact.branches[i+2]"  href="https://www.google.com/maps/?q={{contact.branches[i+2].branch.latitude}},{{contact.branches[i+2].branch.longitude}}" target="_blank">
+                  <p class="main-header-font text-center-xs">
+                    {{contact.branches[i+2].name}}
+                  </p>
+                  <p class="main-content-font text-center-xs">
+                    {{contact.branches[i+2].address}}
+                  </p>
+                </a>
+              </div>
+            </ng-template>
 
-      <h3 class="padding-vertical main-header-font">
-        Branches
-      </h3>
-      <ng-template  *ngFor="let branch of contact.branches;let i = index" [ngIf]="i % 3 == 0">
-        <div class="row voffset row-space-top spacing-top">
-          <div class="col-sm-4" *ngIf="contact.branches[i]">
-            <p class="main-header-font text-center-xs">
-              {{ contact.branches[i].name}}
-            </p>
-            <p class="main-content-font text-center-xs">
-              {{contact.branches[i].address}}
-            </p>
-          </div>
-          <div class="col-sm-4" *ngIf="contact.branches[i+1]">
-            <p class="main-header-font text-center-xs">
-              {{contact.branches[i+1].name}}
-            </p>
-            <p class="main-content-font text-center-xs">
-              {{contact.branches[i+1].address}}
-            </p>
-          </div>
-          <div class="col-sm-4" *ngIf="contact.branches[i+2]">
-            <p class="main-header-font text-center-xs">
-              {{contact.branches[i+2].name}}
-            </p>
-            <p class="main-content-font text-center-xs">
-              {{contact.branches[i+2].address}}
-            </p>
+
+
+
+
+
+        <div class="divider-h">
+          <span class="divider"></span>
+        </div>
+        <div class="row text-center">
+          <div class="col-sm-12">
+            <a *ngIf="contact.contactInfo.facebook" href="{{ contact.contactInfo.facebook }}" target="_blank" ><span class="ion ion-social-facebook icon-md icon-spacing-right"></span></a>
+            <a *ngIf="contact.contactInfo.linkedin" href="{{ contact.contactInfo.linkedin }}" target="_blank" ><span class="ion ion-social-linkedin icon-md icon-spacing-right"></span></a>
+            <a *ngIf="contact.contactInfo.twitter" href="{{ contact.contactInfo.twitter }}" target="_blank" ><span class="ion ion-social-twitter icon-md icon-spacing-right"></span></a>
+            <a *ngIf="contact.contactInfo.instagram" href="{{ contact.contactInfo.instagram }}" target="_blank" ><span class="ion ion-social-instagram icon-md icon-spacing-right"></span></a>
+            <a *ngIf="contact.contactInfo.pinterest" href="{{ contact.contactInfo.pinterest }}" target="_blank" ><span class="ion ion-social-pinterest icon-md icon-spacing-right"></span></a>
           </div>
         </div>
-      </ng-template>
-
-      <!--<div class="social-media">-->
-        <!--<a *ngIf="contact.twitter" href="{{ contact.twitter }}"  target="_blank" class="a-btn a-block bloc-mob-center-text text-center main-content-font"><i class="icon fa fa-twitter"></i></a>-->
-        <!--<a *ngIf="contact.facebook" href="{{ contact.facebook }}" target="_blank" class="a-btn a-block bloc-mob-center-text text-center main-content-font"><i class="icon fa fa-facebook"></i></a>-->
-        <!--<a *ngIf="contact.instagram" href="{{ contact.instagram }}" target="_blank" class="a-btn a-block bloc-mob-center-text text-center main-content-font"><i class="icon fa fa-instagram"></i></a>-->
-        <!--<a *ngIf="contact.pinterest" href="{{ contact.pinterest }}" target="_blank" class="a-btn a-block bloc-mob-center-text text-center main-content-font"><i class="icon fa fa-pinterest-p"></i></a>-->
-        <!--<a *ngIf="contact.linkedin" href="{{ contact.linkedin }}" target="_blank" class="a-btn a-block bloc-mob-center-text text-center main-content-font"><i class="icon fa fa-linkedin"></i></a>-->
-      <!--</div>-->
-    </div>
 </section>

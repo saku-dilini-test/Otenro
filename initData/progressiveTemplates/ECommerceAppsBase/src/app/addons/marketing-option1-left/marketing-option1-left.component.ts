@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-marketing-option1-left',
-  templateUrl: './app/addons/marketing-option1-left/marketing-option1-left.component.html',
-  styleUrls: ['./app/addons/marketing-option1-left/marketing-option1-left.component.css']
+  templateUrl: './marketing-option1-left.component.html',
+  styleUrls: ['./marketing-option1-left.component.css']
 })
 export class MarketingOption1LeftComponent {
 

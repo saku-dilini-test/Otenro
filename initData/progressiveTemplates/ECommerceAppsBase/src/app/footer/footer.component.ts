@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import * as data from '../madeEasy.json';
+import * as data from '../../assets/madeEasy.json';
 import { AppDataService } from '../services/appdata-info/appdata-info.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
   selector: 'app-footer',
-  templateUrl: './app/footer/footer.component.html',
-  styleUrls: ['./app/footer/footer.component.css']
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.css']
 })
 export class FooterComponent{
 
@@ -15,6 +15,7 @@ export class FooterComponent{
   private userId = (<any>data).userId;
   public loginStatus;
   webInfo: any;
+  title:any;
 
   constructor(private router: Router, private appDataService: AppDataService, private localStorageService: LocalStorageService) {
     this.appDataService.getContactUs().subscribe((data: any) => {
@@ -35,8 +36,13 @@ export class FooterComponent{
     }
   }
 
-  navigate(val: string) {
-    this.router.navigate([val])
+  navigate(route: string, name: string) {
+    this.title = name;
+    if(name == "Contact Us"){
+      this.router.navigate([route]);
+    }else{
+      this.router.navigate([route,name]);
+    }
   }
 
   getTwitterUrl(): string{

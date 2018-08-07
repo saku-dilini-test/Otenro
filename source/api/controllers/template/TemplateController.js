@@ -176,7 +176,7 @@ module.exports = {
         Application.findOne(searchApp).exec(function(err, app) {
             if (err) return done(err);
              var currency = app.appSettings.appCurrency;
-             res.send(currency)
+             res.send(currency);
         });
 
     },
@@ -363,7 +363,7 @@ module.exports = {
         res.sendfile(config.APP_FILE_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
     },
     viewWebImages : function(req,res){
-        res.sendfile(config.APP_FILE_SERVER + req.param('userId') + '/progressiveTemplates/' + req.param('appId') + '/src/assets/images/'+ req.param('images'));
+        res.sendfile(config.APP_FILE_SERVER + req.param('userId') + '/progressiveTemplates/' + req.param('appId') + '/assets/images/'+ req.param('images'));
     },
 
     /**
@@ -375,7 +375,7 @@ module.exports = {
         res.redirect(config.ME_SERVER_URL + req.param('userId') + '/templates/' + req.param('appId'));
     },
     viewProgUrl : function(req,res){
-        res.redirect(config.ME_SERVER_URL + req.param('userId') + '/progressiveTemplates/' + req.param('appId')+'/src/');
+        res.redirect(config.ME_SERVER_URL + req.param('userId') + '/progressiveTemplates/' + req.param('appId')+'/');
     },
 
     /**

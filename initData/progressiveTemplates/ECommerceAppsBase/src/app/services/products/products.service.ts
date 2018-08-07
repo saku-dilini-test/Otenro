@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import { Observable } from "rxjs/Rx";
-import { SERVER_URL } from '../../constantsService';
-import * as data from '../../madeEasy.json';
+import { SERVER_URL } from '../../../assets/constantsService';
+import * as data from '../../../assets/madeEasy.json';
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 
 @Injectable()
@@ -26,6 +26,18 @@ export class ProductsService {
 
   getCategoryData(id:any){
     return this.http.get(SERVER_URL+'/templates/getCategoryByProdId?id='+id)
+      .map(res => res.text() ? res.json() : null);
+  }
+  getBlogs() {
+    return this.http.get(SERVER_URL+'/templates/getBlogData?appId=' + this.appId)
+                    .map(res => res.text() ? res.json() : null);
+  }
+  getBlogsById(id) {
+    return this.http.get(SERVER_URL+'/templates/getBlogDataById?id=' + id)
+                    .map(res => res.text() ? res.json() : null);
+  }
+  getSalesAndPromoData(id:any){
+    return this.http.get(SERVER_URL+'/edit/getListOfSalesAndPromotions?appId='+id)
       .map(res => res.text() ? res.json() : null);
   }
 }

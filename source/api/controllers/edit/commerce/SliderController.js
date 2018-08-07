@@ -40,8 +40,8 @@ module.exports = {
         var data = tmpImage[0].replace(/^data:image\/\w+;base64,/, "");
         var buf = new Buffer(data, 'base64');
 
-        var filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/slider/' + req.body.imageUrl;
-        var desPath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/slider/';
+        var filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/slider/' + req.body.imageUrl;
+        var desPath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/slider/';
 
 
 
@@ -50,7 +50,7 @@ module.exports = {
             });
 
              fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
-                appId + '/src/assets/images/slider/' + imgeFileName, buf, function (err) {
+                appId + '/assets/images/slider/' + imgeFileName, buf, function (err) {
                 if (err) {
                     return res.send(err);
                 }
@@ -81,9 +81,9 @@ module.exports = {
 
         var dePath;
 
-        dePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + appId + '/src/assets/images/slider/';
+        dePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + appId + 'assets/images/slider/';
         fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
-                        appId + '/src/assets/images/slider/' + imgeFileName, buf, function (err) {
+                        appId + '/assets/images/slider/' + imgeFileName, buf, function (err) {
                         if (err) {
                             return res.send(err);
                         }
@@ -128,7 +128,7 @@ module.exports = {
     deleteSlider: function (req, res){
     console.log(req.userId);
     console.log(req.body);
-        var sliderPath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + "/src/assets/images/slider/" + req.body.imageUrl;
+        var sliderPath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + "/assets/images/slider/" + req.body.imageUrl;
       Slider.destroy({_id : req.body.id}).exec(function (err,slider) {
             if (err) return callback("Error while deleting " + err.message);
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SERVER_URL } from '../../constantsService';
-import * as data from '../../madeEasy.json';
+import { SERVER_URL } from '../../../assets/constantsService';
+import * as data from '../../../assets/madeEasy.json';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { CurrencyService } from '../../services/currency/currency.service';
 import { TitleService } from '../../services/title.service';
@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-history',
-  templateUrl: './app/page-body/order-history/order-history.component.html',
-  styleUrls: ['./app/page-body/order-history/order-history.component.css']
+  templateUrl: './order-history.component.html',
+  styleUrls: ['./order-history.component.css']
 })
 export class OrderHistoryComponent implements OnInit {
 

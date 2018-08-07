@@ -114,7 +114,6 @@ module.exports.routes = {
     'POST /edit/addStyleFontSize': 'edit/style/StyleController.addStyleFontSize',
     'POST /edit/addWebStyleFontSize': 'edit/style/webStyleController.addWebStyleFontSize',
 
-    'POST /edit/addJsChange': 'edit/style/webStyleController.addJsChange',
 
     'POST /edit/addStyleFontWeight': 'edit/style/StyleController.addStyleFontWeight',
     'POST /edit/addWebStyleFontWeight': 'edit/style/webStyleController.addWebStyleFontWeight',

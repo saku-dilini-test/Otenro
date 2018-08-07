@@ -1,9 +1,0 @@
-{
-  "name": "Food Demo App",
-  "appId": "5742f7ad0aeaaff9079de87f",
-  "userId": "57397486a765a9573dabd76f",
-  "serviceApi": {
-    "host": "http://localhost",
-    "port": 1337
-  }
-}

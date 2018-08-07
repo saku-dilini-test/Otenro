@@ -19,10 +19,21 @@
         <div class="collapse navbar-collapse navbar-1 hidden-xs">
           <ul class="site-navigation nav navbar-nav">
             <li>
-              <a (click)="navigate('')">Home
+              <a (click)="navigate('','')">Home
 
               </a>
             </li>
+              <li>
+                  <div class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories
+                          <span class="caret"></span></a>
+                      <ul class="dropdown-menu  main-navigation"  role="menu">
+                          <li *ngFor="let mainCat of categories">
+                              <a class="nav-link"  [routerLink]="['']" [queryParams]="{ id:mainCat.id}">{{mainCat.name}}</a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
              <li>
               <a (click)="navigate('contact', 'Contact Us')">Contact Us
               </a>
@@ -64,9 +75,9 @@
                 </ul>
               </div>
             </li>
-              <li>
-                  <a (click)="navigate('shop','Search')"><span class="fa fa-search icon-sm"></span></a>
-              </li>
+            <li>
+              <a (click)="navigate('shop','Search')"><span class="ion ion-search icon-sm"></span></a>
+            </li>
             <li>
               <a (click)="navigate('cart', 'Shopping Cart')">
                 <span class="fa fa-cart-arrow-down icon-sm"></span>
@@ -128,9 +139,6 @@
                   <a data-toggle="collapse" data-target=".navbar-2" class="text-center" (click)="navigate('','Home')">
                     <img src="{{imageUrl}}/logo.png&dummy={{dummy}}">
                   </a>
-                </li>
-                <li>
-                  <a target="_blank" href="https://www.otenro.com">built by www.otenro.com</a>
                 </li>
             </ul>
         </div>

@@ -1,6 +1,6 @@
 import { Component, AfterViewChecked } from '@angular/core';
-import { SERVER_URL } from '../../constantsService';
-import * as data from '../../madeEasy.json';
+import { SERVER_URL } from '../../../assets/constantsService';
+import * as data from '../../../assets/madeEasy.json';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
@@ -12,8 +12,8 @@ declare let paypal: any;
 
 @Component({
   selector: 'app-paypal-payment',
-  templateUrl: './app/page-body/paypal-payment/paypal-payment.component.html',
-  styleUrls: ['./app/page-body/paypal-payment/paypal-payment.component.css']
+  templateUrl: './paypal-payment.component.html',
+  styleUrls: ['./paypal-payment.component.css']
 })
 export class PaypalPaymentComponent implements AfterViewChecked {
 
@@ -96,6 +96,15 @@ export class PaypalPaymentComponent implements AfterViewChecked {
                 this.dataService.cart.totalQuantity = 0;
                 this.dataService.payPalDetails = {};
 
+                let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+
+                if (appUser) {
+                  if (this.localStorageService.get("cart" + appUser.registeredUser)) {
+                    this.localStorageService.remove("cart" + appUser.registeredUser);
+                  }
+                }else{
+                  this.localStorageService.remove("cartUnknownUser");
+                }
                 //Pushing into order purchase history
                 // if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
                 //   this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));

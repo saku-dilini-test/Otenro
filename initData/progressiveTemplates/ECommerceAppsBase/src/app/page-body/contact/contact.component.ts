@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
-import * as data from '../../madeEasy.json';
+import * as data from '../../../assets/madeEasy.json';
 import { HttpClient } from '@angular/common/http';
 import { AppDataService } from '../../services/appdata-info/appdata-info.service';
 import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'app-contact',
-  templateUrl: './app/page-body/contact/contact.component.html',
-  styleUrls: ['./app/page-body/contact/contact.component.css']
+  templateUrl: './contact.component.html',
+  styleUrls: ['./contact.component.css']
 })
 export class ContactComponent {
 
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
-  private googleMap;
+  googleMap;
   lat; lng;
   finish: boolean;
   CONTACNTINFO = [];

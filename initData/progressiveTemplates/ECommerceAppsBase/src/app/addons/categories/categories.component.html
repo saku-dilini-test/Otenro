@@ -1,63 +1,146 @@
-<button class="btn main-button margin-vertical" (click)="goToPreviousCategory()" *ngIf="prevCategories.length != 0">Back to previous category</button>
-<div class="bloc bgc-white l-bloc">
-	<owl-carousel *ngIf=products [options]="owlOptions" [carouselClasses]="['owl-carousel', 'owl-theme']">
-		<div *ngFor="let prod of products; let i = index">
-			<section>
-				<div>
-					<a>
-						<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}" width="150px" />
-					</a>
-					<div class="hover-des">
-						<h4 class="padding-left main-header-font">{{prod.name}}</h4>
 
-						<div class="name-price main-content-font padding-left">
-							$ {{prod.variants[0].price}}
-							<a *ngIf="!checkSoldOut(products[i])"
-							 class="btn main-button btn-sm" (click)="navigateProd('product',prod, prod.name )">buy</a>
-							<!-- <div *ngIf="products[i].variants.length == 1 && products[i].variants[0].quantity == 0 || products[i].variants.length == 2 && (products[i].variants[0].quantity == 0 && products[i].variants[1].quantity == 0) || products[i].variants.length == 3 && (products[i].variants[0].quantity == 0 && products[i].variants[1].quantity == 0 && products[i].variants[2].quantity == 0) || products[i].variants.length == 4 && (products[i].variants[0].quantity == 0 && products[i].variants[1].quantity == 0 && products[i].variants[2].quantity == 0  && products[i].variants[3].quantity == 0)" -->
-								<div *ngIf="checkSoldOut(products[i])" class="text-center button-margin">
-                   <h4 href="#" class="text-warning">Sold Out!</h4>
-                </div>
+
+<!-- <div class="bloc bgc-white l-bloc" *ngIf="prevCategories && prevCategories.length != 0">
+	<div class="container padding-vertical">
+		<ol class="breadcrumb" *ngIf="prevCategories">
+			<li  *ngFor="let prev of prevCategories;let i = index;">
+				<a (click)="goToPreviousCategory(i,prev.catName)">
+					<span *ngIf="!prev.catName">Home</span>
+					<span *ngIf="prev.catName">{{prev.catName}}</span>
+				</a>
+			</li>
+			<li class="active">{{currentViewName}}</li>
+		</ol>
+	</div>
+</div> -->
+
+<!-- bloc-4 -->
+<div class="bloc hidden-xs bloc-lg l-bloc" id="bloc-4" *ngIf="products && products[0] && products[0].length != 0">
+	<div class="container" *ngFor="let node of products;">
+		<div class="row content-row">
+			<div class="col-sm-12">
+				<h2 class="header text-center  main-header-font">
+					Products
+				</h2>
+			</div>
+		</div>
+		<div class="row voffset" *ngIf="categories.length != 0">
+			<owl-carousel [options]="owlOptions" [carouselClasses]="['owl-carousel', 'owl-theme', 'voffset']">
+				<div class="content-cards"  *ngFor="let prod of node;">
+					<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}"  class="img-responsive lazyload" />
+					<p class="text-center product-name">
+						{{prod.name}}
+					</p>
+					<p class="text-center product-content">
+						Price - {{currency}} {{prod.variants[0].price| number: '.2'}}
+					</p>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="text-center"  *ngIf="!checkSoldOut(prod)">
+								<a (click)="navigateProd('product',prod, prod.name )" class="btn btn-d btn-lg main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span>Details</a>
+							</div>
+							<div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
+								<h4 href="#" class="text-warning">Sold Out!</h4>
+							</div>
 						</div>
 					</div>
 				</div>
-			</section>
+			</owl-carousel>
 		</div>
-	</owl-carousel>
-</div>
-
-<div class="bloc bgc-white l-bloc">
-	<ng-template *ngFor="let node of categories;let i = index" [ngIf]="i % 4 === 0">
-
-		<div class="row category margin-top">
-			<div class="col-xs-6 col-sm-3" *ngIf="categories[i]" [ngStyle]="getWidth(i,categories.length)">
-				<a (click)="goToNextSubCategory(categories[i].childNodes, categories, categories[i].products)">
-					<div class="main-header-font">{{categories[i].name}}</div>
-					<img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{categories[i].imageUrl}}" alt="product" class="img-responsive animated puffIn animDelay02 lazyload"
-					 width="100%" height="100%">
-				</a>
-			</div>
-			<div class="col-xs-6 col-sm-3" *ngIf="categories[i+1]">
-				<a (click)="goToNextSubCategory(categories[i+1].childNodes, categories, categories[i+1].products)">
-					<div class="main-header-font">{{categories[i+1].name}}</div>
-					<img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{categories[i+1].imageUrl}}" alt="product" class="img-responsive animated puffIn animDelay04 lazyload"
-					 width="100%" height="100%">
-				</a>
-			</div>
-			<div class="col-xs-6 col-sm-3" *ngIf="categories[i+2]" [ngStyle]="getWidth(i+2,categories.length)">
-				<a (click)="goToNextSubCategory(categories[i+2].childNodes, categories, categories[i+2].products)">
-					<div class="main-header-font">{{categories[i+2].name}}</div>
-					<img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{categories[i+2].imageUrl}}" alt="product" class="img-responsive animated puffIn animDelay06 lazyload"
-					 width="100%" height="100%">
-				</a>
-			</div>
-			<div class="col-xs-6 col-sm-3" *ngIf="categories[i+3]">
-				<a (click)="goToNextSubCategory(categories[i+3].childNodes, categories, categories[i+3].products)">
-					<div class="main-header-font">{{categories[i+3].name}}</div>
-					<img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{categories[i+3].imageUrl}}" alt="product" class="img-responsive animated puffIn animDelay08 lazyload"
-					 width="100%" height="100%">
-				</a>
+		<div class="row" *ngIf="categories.length == 0">
+			<div class="col-sm-4" *ngFor="let prod of node;">
+				<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
+				<p class="text-center product-name">
+					{{prod.name}}
+				</p>
+				<p class="text-center product-content">
+					Price - {{currency}} {{prod.variants[0].price| number: '.2'}}
+				</p>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="text-center" *ngIf="!checkSoldOut(prod)">
+							<a (click)="navigateProd('product',prod, prod.name )" class="btn btn-d btn-lg main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span>Details</a>
+						</div>
+						<div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
+							<h4 href="#" class="text-warning">Sold Out!</h4>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</ng-template>
+	</div>
 </div>
+<!-- bloc-4 END -->
+
+<!-- bloc-5 -->
+<div class="bloc hidden-sm hidden-lg hidden-md l-bloc" id="bloc-5"  *ngIf="products && this.products[0] && products[0].length != 0">
+	<div class="container bloc-sm"  *ngFor="let node of products;">
+		<div class="row content-row voffset">
+			<div class="col-sm-4" *ngFor="let prod of node;">
+				<div class="content-cards">
+					<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
+					<p class="text-center product-name main-header-font">
+						{{prod.name}}
+					</p>
+					<p class="text-center product-content main-content-font">
+						Price - {{currency}} {{prod.variants[0].price| number: '.2'}}
+					</p>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="text-center" *ngIf="!checkSoldOut(prod)">
+								<a  (click)="navigateProd('product',prod, prod.name )" class="btn btn-d btn-lg main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span>Details</a>
+							</div>
+							<div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
+								<h4 href="#" class="text-warning">Sold Out!</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bloc-5 END -->
+
+<!-- bloc-6 -->
+<div class="bloc bgc-white full-width-bloc l-bloc" id="bloc-6">
+	<div class="container">
+		<ng-template *ngFor="let node of categories | slice:1;let i = index;" [ngIf]="i % 2 === 0">
+			<div class="row row-no-gutters">
+
+				<a [routerLink]="['']" [queryParams]="{ id:categories[i].id}" class="col-xs-6"  *ngIf="categories[i]">
+					<div class="text-center">
+						<a class="btn btn-d btn-lg button-category orbitrack" [ngStyle]="{'background-image': 'url(' + imageUrl+'/'+categories[i].imageUrl + ')'}">
+							<!-- {{categories[i].name}} -->
+						</a>
+					</div>
+				</a>
+				<a [routerLink]="['']" [queryParams]="{ id:categories[i+1].id}" class="col-xs-6" *ngIf="categories[i+1]">
+					<div class="text-center">
+						<a class="btn btn-d btn-lg button-category orbitrack" [ngStyle]="{'background-image': 'url(' + imageUrl+'/'+categories[i+1].imageUrl + ')'}">
+							<!-- {{categories[i+1].name}} -->
+						</a>
+					</div>
+				</a>
+				<!-- <div *ngIf="categories && categories.length % 2 == 0" class="col-xs-6" (click)="goToNextSubCategory(categories[ categories.length-1].childNodes, categories, categories[ categories.length-1].products, categories[ categories.length-1].name)" >
+					<div class="text-center">
+						<a class="btn btn-d btn-lg button-category orbitrack" [ngStyle]="{'background-image': 'url(' + imageUrl+'/'+categories[ categories.length-1].imageUrl + ')'}">
+							{{categories[ categories.length-1].name}}
+						</a>
+					</div>
+				</div> -->
+			</div>
+		</ng-template>
+			<a [routerLink]="['']" [queryParams]="{ id:categories[categories.length-1].id}" class="row row-no-gutters"  *ngIf="categories && categories['length'] % 2 == 1">
+				<div class="col-xs-12">
+					<div class="text-center">
+						<a class="btn btn-d btn-lg button-category-single-button treadmills" [ngStyle]="{'background-image': 'url(' + imageUrl+'/'+categories[ categories.length-1].imageUrl + ')'}">
+							<!-- {{categories[ categories.length-1].name}} -->
+						</a>
+					</div>
+				</div>
+			</a>
+	</div>
+</div>
+<!-- bloc-6 END -->
+

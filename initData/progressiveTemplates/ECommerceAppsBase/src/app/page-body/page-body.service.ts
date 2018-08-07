@@ -23,7 +23,10 @@ export class PagebodyServiceModule {
   sign;
   searchArray = [];
   appUserId;
-
+  currentCategoryImage;
+  categories;
+  products;
+  promoData = [];
   constructor() {
 
     this.parentobj.cartSize = this.cart.cartSize;

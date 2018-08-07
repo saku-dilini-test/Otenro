@@ -1,0 +1,9 @@
+{
+  "name": "Outfit.lk",
+  "appId": "5b31ebd8708a7f7b088c1abf",
+  "userId": "5b17b815071168630caa53ac",
+  "serviceApi": {
+    "host": "https://dashboard.otenro.com",
+    "port": 1338
+  }
+}

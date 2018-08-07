@@ -39,12 +39,12 @@
 
               <div class="radio">
                 <label>
-                  <input type="radio" name="radioNew" value="newUser" id="showNewUser" (ngModelChange)="check('newUser')" [(ngModel)]="newUser"
-                    [checked]="!showUser" />Enter a new address
+                  <input type="radio" name="radioNew" value="newUser" id="showNewUser" (change)="check('newUser')"
+                    [checked]="!oldUser" />Enter a new address
                 </label>
               </div>
 
-              <form [formGroup]="complexForm" *ngIf="newUser" (ngSubmit)="submitForm(complexForm.value)" id="form_28872" novalidate class="spacing-form animated fadeInUp animDelay04">
+              <form [formGroup]="complexForm" *ngIf="!oldUser" (ngSubmit)="submitForm(complexForm.value)" id="form_28872" novalidate class="spacing-form animated fadeInUp animDelay04">
                   <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -198,7 +198,7 @@
                   </div>
               </form>
               <form class="row" [formGroup]="shippingForm">
-                <div class="margin-bottom padding-bottom  col-md-12" *ngIf="newUser && complexForm.valid || oldUser">
+                <div class="margin-bottom padding-bottom  col-md-12" *ngIf="!oldUser && complexForm.valid || oldUser">
                     <h3 class="main-header-font">Shipping Options</h3>
                     <div class="radio main-content-font" *ngFor="let ship of shippingData, let idx = index">
                       <label>
@@ -307,7 +307,7 @@
                     </tr>
                   </tbody>
                   <tfoot>
-                    <tr *ngIf='!hideShipping'>
+                    <tr *ngIf='hideShipping'>
                       <th style="text-align: left">Shipping</th>
                       <td></td>
                       <td style="text-align: right">{{sign}}{{chkShippingCost}}</td>
@@ -507,24 +507,18 @@
                           <p *ngIf="showSpinner">Processing...</p>
 
                           <!-- <button *ngIf="paymentType == 'authorizeNet'" type="submit" (click)='authorizeCreditCardMethod(card)' class="btn btn-primary btn-lg">MAKE PAYMENT</button> -->
-                          <div *ngIf = "ePay" class="alert alert-success" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <strong>Success!</strong> Your Order has been successfully processed!
-                          </div>
-                          <div *ngIf = "ePayFail" class="alert alert-danger" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            Invalid Card details!, Please check your data!
-                          </div>
-                          <div *ngIf = "ePayNull" class="alert alert-warning" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            Please provide card details!
-                          </div>
-                          <!-- <div class="col-sm-12" style="margin: 10px 0">
-                            <ngb-alert *ngIf="ePayFail" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
-                          </div>
-                          <div class="col-sm-12" style="margin: 10px 0">
-                            <ngb-alert *ngIf="ePayNull" type="info" (close)="nullMessage = null">{{ nullMessage }}</ngb-alert>
-                          </div> -->
+                            <div *ngIf = "ePay" class="alert alert-success" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <strong>Success!</strong> Your Order has been successfully processed!
+                            </div>
+                            <div *ngIf = "ePayFail" class="alert alert-danger" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                Invalid Card details!, Please check your data!
+                            </div>
+                            <div *ngIf = "ePayNull" class="alert alert-warning" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                Please provide card details!
+                            </div>
                         </div>
                     </form>
               </div>

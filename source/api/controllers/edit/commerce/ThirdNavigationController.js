@@ -63,7 +63,7 @@ module.exports = {
         }
 
        var fs2 = require('fs');
-       var dir = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + '/src/assets/images/banner';
+       var dir = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + '/assets/images/banner';
 
        if (!fs2.existsSync(dir)){
            fs2.mkdirSync(dir);
@@ -79,7 +79,7 @@ module.exports = {
                 // product images copy to app file server
                 if(isNew == 'true' || isNew == true){
                     fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
-                        req.body.product.appId + '/src/assets/images/thirdNavi/' + imgeFileName, buf, function (err) {
+                        req.body.product.appId + '/assets/images/thirdNavi/' + imgeFileName, buf, function (err) {
                         if (err) {
                             return res.send(err);
                         }
@@ -126,16 +126,16 @@ module.exports = {
            var buf = new Buffer(data, 'base64');
            const rimraf = require('rimraf');
 
-            if(fs2.existsSync(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + '/src/assets/images/banner/' + req.body.oldBannerImg    )){
-                fs.unlink(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + '/src/assets/images/banner/' + req.body.oldBannerImg, function(err) {
+            if(fs2.existsSync(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + '/assets/images/banner/' + req.body.oldBannerImg    )){
+                fs.unlink(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + '/assets/images/banner/' + req.body.oldBannerImg, function(err) {
                   if (err) throw err;
-                  console.log(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + '/src/assets/images/banner/' + req.body.oldBannerImg + "deleted");
+                  console.log(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + 'assets/images/banner/' + req.body.oldBannerImg + "deleted");
                 });
             }
 
            // product images copy to app file server
                fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
-                   req.body.product.appId + '/src/assets/images/banner/' + imgeFileName, buf, function (err) {
+                   req.body.product.appId + '/assets/images/banner/' + imgeFileName, buf, function (err) {
                    if (err) {
                        console.log(err);
                    }
@@ -260,7 +260,7 @@ module.exports = {
         var query = {'id':item.id};
         var skuQuery = {productId:item.id};
         var thirdNaviPath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/';
-        var thirdNaviPath2 = '/src/assets/images/thirdNavi/';
+        var thirdNaviPath2 = '/assets/images/thirdNavi/';
 
 
         //Variant of a Product
@@ -418,7 +418,7 @@ module.exports = {
     checkUniqueSku: function(req,res){
     console.log(req.body);
         var searchApp={
-            appId: req.body.appId
+            userId: req.body.userId
         }
         Sku.find(searchApp, function(err, app){
             if (err) return done(err);

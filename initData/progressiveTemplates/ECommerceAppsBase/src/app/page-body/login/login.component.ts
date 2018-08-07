@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SERVER_URL } from '../../constantsService';
-import * as data from '../../madeEasy.json';
+import { SERVER_URL } from '../../../assets/constantsService';
+import * as data from '../../../assets/madeEasy.json';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { HttpClient } from '@angular/common/http';
@@ -9,15 +9,16 @@ import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './app/page-body/login/login.component.html',
-  styleUrls: ['./app/page-body/login/login.component.css']
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
   private params = [];
-  private loginclicked;
+  loginclicked;
+  loading:any;
 
   name; pass; gate: boolean; navigate;
   ifInvalidUserPassword:boolean;
@@ -67,6 +68,10 @@ export class LoginComponent implements OnInit {
           "registeredUser": res.user.sub
         };
         this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
+        if(this.localStorageService.get("cartUnknownUser")){
+          this.localStorageService.set("cart"+requestParams.registeredUser,this.localStorageService.get("cartUnknownUser"));
+          this.localStorageService.remove("cartUnknownUser");
+        }
         this.dataService.appUserId = requestParams.registeredUser;
         this.dataService.isUserLoggedIn.check = true;
         this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;

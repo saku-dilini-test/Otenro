@@ -479,7 +479,7 @@ module.exports = {
         var data = logoImg;
         var backgroundExist;
         if(req.body.tempNew === 'true' || req.body.tempNew  === true){
-             backgroundExist = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/'+ 'logo.png';
+             backgroundExist = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/images/'+ 'logo.png';
         }else{
              backgroundExist = config.APP_FILE_SERVER + userId + '/templates/' + appId + '/img/'+ 'logo.png';
         }
@@ -490,7 +490,7 @@ module.exports = {
         var buf = new Buffer(data, 'base64');
         // product images copy to app file server
         if(req.body.tempNew === 'true' || req.body.tempNew  === true){
-            fs.writeFile(config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/'+ 'logo.png', buf, function(err) {
+            fs.writeFile(config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/images/'+ 'logo.png', buf, function(err) {
                 if(err) {
                     res.send(err);
                 }

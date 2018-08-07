@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { SERVER_URL } from '../../constantsService';
-import * as data from '../../madeEasy.json';
+import { SERVER_URL } from '../../../assets/constantsService';
+import * as data from '../../../assets/madeEasy.json';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { FormGroup, FormControl, FormArray, NgForm } from '@angular/forms';
 import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './app/page-body/register/register.component.html',
-  styleUrls: ['./app/page-body/register/register.component.css']
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
   // data = {};
@@ -30,10 +30,10 @@ export class RegisterComponent implements OnInit {
   private streetName;
   private city;
   private zip;
-  private selectedCountry = null;
+  selectedCountry = null;
   private phone;
   private myForm: FormGroup;
-  private isEmailDuplicate;
+  isEmailDuplicate;
 
   constructor(private localStorageService: LocalStorageService, private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
               private title: TitleService) {
@@ -120,10 +120,14 @@ export class RegisterComponent implements OnInit {
                     "registeredUser": res.user.sub
                 };
 
-                this.localStorageService.set('appLocalStorageUser'+this.appId,(requestParams));
-                this.dataService.appUserId = requestParams.registeredUser;
-                this.dataService.isUserLoggedIn.check = true;
-                this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
+        this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
+        if(this.localStorageService.get("cartUnknownUser")){
+          this.localStorageService.set("cart"+requestParams.registeredUser,this.localStorageService.get("cartUnknownUser"));
+          this.localStorageService.remove("cartUnknownUser");
+        }
+        this.dataService.appUserId = requestParams.registeredUser;
+        this.dataService.isUserLoggedIn.check = true;
+        this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
 
                 if(this.navigate == 'home'){
                     this.route.navigate(['home']);
@@ -140,6 +144,11 @@ export class RegisterComponent implements OnInit {
                 this.isEmailDuplicate = true;
               }
             });
+  }
+
+  //Show login page
+  singIn() {
+    this.route.navigate(['login', this.navigate]);
   }
 
 }

@@ -1,16 +1,16 @@
 import { Component, Input } from '@angular/core';
-import * as data from '../../madeEasy.json';
+import * as data from '../../../assets/madeEasy.json';
 @Component({
 	selector: 'app-contact-info',
-	templateUrl: './app/addons/contact-info/contact-info.component.html',
-	styleUrls: ['./app/addons/contact-info/contact-info.component.css']
+	templateUrl: './contact-info.component.html',
+	styleUrls: ['./contact-info.component.css']
 })
 export class ContactInfoComponent {
 
-	private appId = (<any>data).appId;
-	private userId = (<any>data).userId;
-	 @Input('contacts') contacts:any;
+  private appId = (<any>data).appId;
+  private userId = (<any>data).userId;
+  @Input('contacts') contacts: any;
 
-	constructor() {
+  constructor() {
   }
 }

@@ -1,19 +1,77 @@
-<!-- this creates a google map on the page with the given lat/lng from -->
-<!-- the component as the initial center of the map: -->
+<!-- bloc-23 -->
+<div class="bloc bgc-snow l-bloc" id="bloc-23">
+  <div class="container bloc-md padding-top-0">
 
-<div class="container">
-  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="8" >
-    <agm-marker *ngFor="let branch of googleMap" [latitude]="branch.branch.latitude" [longitude]="branch.branch.longitude">
-      <agm-info-window>
-        <h4><strong>{{branch.name}}</strong></h4>
-        <p>{{branch.address}}</p>
-        <a href="https://www.google.com/maps/?q={{branch.branch.latitude}},{{branch.branch.longitude}}" target="_blank">Show on google map</a>
-      </agm-info-window>
-    </agm-marker>
-  </agm-map>
-	<div class="row">
-		<div class="col-md-6">
-			<app-contact-info [contacts]="contactInfo"></app-contact-info>
-		</div>
-	</div>
+    <div class="row content-row  hidden-xs">
+      <div class="col-sm-12">
+        <h2 class="header text-center  main-header-font">
+          Contact us
+        </h2>
+      </div>
+
+      <div class="col-sm-12 text-center" >
+        <p style="margin-bottom: -1px;margin-top: 1%;">Authorized Agent</p>
+        <img src="assets/images/Softlogic.png" style="width:20%;">
+      </div>
+    </div>
+
+
+
+    <div class="row voffset">
+      <div class="col-sm-12">
+        <p class="text-center contact-text">
+          Sales Hotline
+          <br>
+          <a class="ion ion-ios-telephone" href="tel:0115705705"> 0115 705 705</a>
+        </p>
+        <p class="text-center contact-text">
+          Service Hotline
+          <br>
+          <a class="ion ion-ios-telephone" href="tel:0772208080"> 0772 208 080</a>
+        </p>
+      </div>
+
+      <div class="col-sm-12">
+        <p class="text-center contact-text" style="margin-top: 1%;">
+          “SMARTFIT” DRTV PRODUCTS (PVT)LTD.
+        </p>
+        <div *ngFor="let contact of contactInfo">
+          <p class="text-center contact-text">
+            {{contact.contactInfo.address}}
+          </p>
+          <p class="text-center contact-text">
+            <!-- {{contact.telPhone}} -->
+            {{contact.contactInfo.email}}
+            <br>
+          </p>
+          <p class="text-center">
+            <a href="{{contact.contactInfo.webSite}}" target="_blank">{{contact.contactInfo.webSite}}</a>
+            <br>
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <agm-map [latitude]="lat" [longitude]="lng" [zoom]="8" >
+            <agm-marker *ngFor="let branch of googleMap" [latitude]="branch.branch.latitude" [longitude]="branch.branch.longitude">
+              <agm-info-window>
+                <h4><strong>{{branch.name}}</strong></h4>
+                <p>{{branch.address}}</p>
+                <a href="https://www.google.com/maps/?q={{branch.branch.latitude}},{{branch.branch.longitude}}" target="_blank">Show on google map</a>
+              </agm-info-window>
+            </agm-marker>
+          </agm-map>
+        </div>
+      </div>
+
+      <div class="row voffset" style="margin-top: 0px;">
+        <div class="col-sm-12">
+          <app-contact-info [contacts]="contactInfo"></app-contact-info>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
+<!-- bloc-23 END -->

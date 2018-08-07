@@ -2,25 +2,27 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { SERVER_URL } from '../../constantsService';
-import * as data from '../../madeEasy.json';
+import { SERVER_URL } from '../../../assets/constantsService';
+import * as data from '../../../assets/madeEasy.json';
 import * as _ from 'lodash';
 import { CurrencyService } from '../../services/currency/currency.service';
 import { TitleService } from '../../services/title.service';
 import * as Player from '@vimeo/player';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { ProductsService } from '../../services/products/products.service';
+declare var $: any;
 
 @Component({
     selector: 'app-product',
-    templateUrl: './app/page-body/product/product.component.html',
-    styleUrls: ['./app/page-body/product/product.component.css'],
+    templateUrl: './product.component.html',
+    styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
 
     private catName;
     private foodInfo;
     private images;
-    private selectedVariant: any;
+    selectedVariant: any;
     private selectedVariant1;
     private selectedVariant2;
     private selectedVariant3;
@@ -28,34 +30,63 @@ export class ProductComponent implements OnInit {
     private sign;
     private appId = (<any>data).appId;
     private userId = (<any>data).userId;
-    private selection = [];
+    selection = [];
     private selection1 = [];
     private selection2 = [];
     private selection3 = [];
-    private Data;
-    private isBuyBtnDisable: boolean;
+    Data;
+    isBuyBtnDisable: boolean;
     private parentobj = { cartItems: [], cartSize: 0, totalPrice: 0 };
-    private lockBuyButton = false;
-    private dialogVariants;
-    api;
-    private imageArray = [];
-    private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
+    lockBuyButton = false;
+    dialogVariants;
+    discountAvailable = false;
+    oldPrice; newPrice;
+    promoData = [];
+    todayDate;
+    imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
+
     bannerImageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=banner';
     readMore: boolean;
     desPart1; desPart2; desPart1_demo;
     name1; name2; name3; name4;
+    ifNotSelectedVariantOrQuantity: boolean;
+    availableFirstVariPromo = false;
+    private player: Player;
+    constructor(private localStorageService: LocalStorageService, private CurrencyService: CurrencyService,
+        private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute,
+        private route: Router, private title: TitleService, private productsService: ProductsService) {
 
-    constructor(private localStorageService: LocalStorageService, private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
+        this.Data = JSON.parse(localStorage.getItem(this.appId + ":dataServiceData"));
 
-        this.Data = this.dataService.data;
 
-        this.Data.tempImageArray.forEach( data => {
-            this.imageArray.push(data.img);
+        this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
+
+            data.forEach(element => {
+                element.selectedProduct.forEach(variants => {
+
+                    variants.fromDate = element.dateFrom;
+                    variants.toDate = element.dateTo;
+
+                    if (element.discountType == 'discountValue') {
+                        variants.discountType = element.discountType;
+                        variants.discount = element.discount
+                    } else {
+                        variants.discountType = element.discountType;
+                        variants.discount = element.discountPercent
+                    }
+
+                    this.promoData.push(variants);
+                });
+            });
+
+            this.dataService.promoData = this.promoData;
+            console.log(this.dataService.promoData);
+            this.init();
         });
 
-        this.init();
+
         this.isBuyBtnDisable = true;
         this.title.changeTitle('Details');
         if (this.Data.detailedDesc.length > 400) {
@@ -82,6 +113,7 @@ export class ProductComponent implements OnInit {
     readMoreFunct() {
         this.desPart1 = this.desPart1_demo.concat(this.desPart2);
         this.readMore = false;
+
     }
 
     ngOnInit() {
@@ -106,23 +138,30 @@ export class ProductComponent implements OnInit {
     }
 
     ngAfterViewInit() {
-
-      this.api = $("#gallery").unitegallery({
-        theme_enable_text_panel: false,
-        gallery_background_color: "rgba(0,0,0,0)",
-        slider_scale_mode: "fit",
-        slider_textpanel_bg_color:"#000000",
-        slider_textpanel_bg_opacity: 0,
-        gallery_autoplay:true,
-        theme_hide_panel_under_width: null
-      });
-      $('#gallery').on({ 'touchstart' : function(){
-        this.api.stop();
-      } });
+        var api;
+        api = $("#gallery").unitegallery({
+            theme_enable_text_panel: false,
+            gallery_background_color: "rgba(0,0,0,0)",
+            slider_scale_mode: "fit",
+            slider_textpanel_bg_color: "#000000",
+            slider_textpanel_bg_opacity: 0,
+            gallery_autoplay: true,
+            theme_hide_panel_under_width: null
+        });
+        $('#gallery').on({
+            'touchstart': function () {
+                api.stop();
+            }
+        });
     }
 
 
     init() {
+
+        var d = new Date();
+        var str = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
+        this.todayDate = new Date(str);
+        // this.promoData = this.dataService.promoData;
 
 
         if (this.Data.selection.length == 1) {
@@ -155,18 +194,46 @@ export class ProductComponent implements OnInit {
                 this.selection1 = [];
                 this.selection2 = [];
                 this.selection3 = [];
-                if(this.Data.selection.length == 2){
-                    this.selection1.push({ 'vType': 'Select '+this.name2 });
-                }else if(this.Data.selection.length == 3){
-                    this.selection1.push({ 'vType': 'Select '+this.name2 });
-                    this.selection2.push({ 'vType': 'Select '+this.name3 });
-                }else if(this.Data.selection.length == 4){
-                    this.selection1.push({ 'vType': 'Select '+this.name2 });
-                    this.selection2.push({ 'vType': 'Select '+this.name3 });
-                    this.selection3.push({ 'vType': 'Select '+this.name4 });
+                if (this.Data.selection.length == 2) {
+                    this.selection1.push({ 'vType': 'Select ' + this.name2 });
+                } else if (this.Data.selection.length == 3) {
+                    this.selection1.push({ 'vType': 'Select ' + this.name2 });
+                    this.selection2.push({ 'vType': 'Select ' + this.name3 });
+                } else if (this.Data.selection.length == 4) {
+                    this.selection1.push({ 'vType': 'Select ' + this.name2 });
+                    this.selection2.push({ 'vType': 'Select ' + this.name3 });
+                    this.selection3.push({ 'vType': 'Select ' + this.name4 });
                 }
-                this.selection.push({ 'vType': 'Select '+this.name1 });                for (var i = 0; i < this.foodInfo.variants.length; i++) {
+                this.selection.push({ 'vType': 'Select ' + this.name1 });
+                for (var i = 0; i < this.foodInfo.variants.length; i++) {
                     this.selection.push({ 'vType': this.foodInfo.variants[i].selection[0].vType });
+                }
+
+                var percentagePrice;
+
+                if (this.dataService.promoData.length > 0) {
+                    if (this.foodInfo.selection.length == 1) {
+                        if (this.foodInfo.variants.length == 1) {
+                            for (let i = 0; i < this.dataService.promoData.length; i++) {
+                                if (this.dataService.promoData[i].sku == this.foodInfo.variants[0].sku) {
+                                    this.availableFirstVariPromo = true;
+                                    if (new Date(this.dataService.promoData[i].toDate) >= this.todayDate) {
+                                        if (this.dataService.promoData[i].discountType == "discountValue") {
+                                            this.oldPrice = this.selectedVariant.price;
+                                            this.newPrice = this.selectedVariant.price - this.dataService.promoData[i].discount;
+                                        } else {
+                                            this.oldPrice = this.selectedVariant.price;
+                                            percentagePrice = this.selectedVariant.price * (this.dataService.promoData[i].discount / 100);
+                                            this.newPrice = this.selectedVariant.price - percentagePrice;
+                                        }
+                                    }
+                                    break;
+                                }
+
+                            };
+                        }
+
+                    }
                 }
 
                 this.selection = _.uniqBy(this.selection, 'vType');
@@ -196,51 +263,73 @@ export class ProductComponent implements OnInit {
     }
 
     changeVariant(variant1) {
+        this.lockBuyButton = false;
+        this.discountAvailable = false;
         this.selection1 = [];
         this.selection2 = [];
         this.selection3 = [];
 
-        if(this.Data.selection.length == 2){
-            this.selection1.push({ 'vType': 'Select '+this.name2 });
-        }else if(this.Data.selection.length == 3){
-            this.selection1.push({ 'vType': 'Select '+this.name2 });
-            this.selection2.push({ 'vType': 'Select '+this.name3 });
-        }else if(this.Data.selection.length == 4){
-            this.selection1.push({ 'vType': 'Select '+this.name2 });
-            this.selection2.push({ 'vType': 'Select '+this.name3 });
-            this.selection3.push({ 'vType': 'Select '+this.name4 });
+        if (this.Data.selection.length == 2) {
+            this.selection1.push({ 'vType': 'Select ' + this.name2 });
+        } else if (this.Data.selection.length == 3) {
+            this.selection1.push({ 'vType': 'Select ' + this.name2 });
+            this.selection2.push({ 'vType': 'Select ' + this.name3 });
+        } else if (this.Data.selection.length == 4) {
+            this.selection1.push({ 'vType': 'Select ' + this.name2 });
+            this.selection2.push({ 'vType': 'Select ' + this.name3 });
+            this.selection3.push({ 'vType': 'Select ' + this.name4 });
         }
 
         variant1 = variant1.replace(/\s/g, '');
 
-
         if (variant1) {
-            if (variant1 == "Select"+this.name1) {
+            this.selectedVariant1 = variant1;
+            this.selectedVariant2 = null;
+            this.selectedVariant.buyQuantity = null;
+            if (variant1 == "Select" + this.name1 || this.selectedVariant.buyQuantity == null) {
                 this.lockBuyButton = false;
                 this.isBuyBtnDisable = true;
             }
-            this.selectedVariant1 = variant1;
-            this.selectedVariant2 = null;
-            this.selectedVariant.buyQuantity = '';
         }
 
-        if (this.foodInfo.selection.length == 1 && variant1 != 'Select'+this.name1.replace(/\s/g, '')) {
+        if (this.foodInfo.selection.length == 1 && variant1 != 'Select' + this.name1) {
 
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[0].vType.replace(/\s/g, '') == this.selectedVariant1) {
+                if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
                     this.selectedVariant = this.foodInfo.variants[i];
 
 
                 }
             }
 
-            if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
-                this.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
-                this.api.stop();
-            }else{
-                this.api.selectItem(this.Data.defaultImage);
-                this.api.stop();
+            var BreakException = {};
+            var percentagePrice;
+
+            try {
+
+                this.promoData.forEach(prod => {
+                    if (prod.sku == this.selectedVariant.sku) {
+
+                        if (new Date(prod.toDate) >= this.todayDate) {
+                            this.discountAvailable = true
+                            if (prod.discountType == "discountValue") {
+                                this.oldPrice = this.selectedVariant.price;
+                                this.newPrice = this.selectedVariant.price - prod.discount;
+                                throw BreakException;
+                            } else {
+                                this.oldPrice = this.selectedVariant.price;
+                                percentagePrice = this.selectedVariant.price * (prod.discount / 100);
+                                this.newPrice = this.selectedVariant.price - percentagePrice;
+                                throw BreakException;
+                            }
+                        }
+                    }
+                });
+
+            } catch (e) {
+                if (e !== BreakException) throw e;
             }
+
             this.lockBuyButton = true;
 
         } else {
@@ -251,7 +340,7 @@ export class ProductComponent implements OnInit {
             // }
 
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[0].vType.replace(/\s/g, '') == this.selectedVariant1) {
+                if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
 
                     this.selection1.push({ 'vType': this.foodInfo.variants[i].selection[1].vType });
                 }
@@ -262,45 +351,69 @@ export class ProductComponent implements OnInit {
     };
 
     changeVariant2(variant2) {
+        this.lockBuyButton = false;
+        this.discountAvailable = false;
         this.selection2 = [];
         this.selection3 = [];
-        if(this.Data.selection.length == 2){
+        if (this.Data.selection.length == 2) {
             // this.selection1.push({ 'vType': 'Select '+this.name2 });
-        }else if(this.Data.selection.length == 3){
+        } else if (this.Data.selection.length == 3) {
             // this.selection1.push({ 'vType': 'Select '+this.name2 });
-            this.selection2.push({ 'vType': 'Select '+this.name3 });
-        }else if(this.Data.selection.length == 4){
+            this.selection2.push({ 'vType': 'Select ' + this.name3 });
+        } else if (this.Data.selection.length == 4) {
             // this.selection1.push({ 'vType': 'Select '+this.name2 });
-            this.selection2.push({ 'vType': 'Select '+this.name3 });
-            this.selection3.push({ 'vType': 'Select '+this.name4 });
+            this.selection2.push({ 'vType': 'Select ' + this.name3 });
+            this.selection3.push({ 'vType': 'Select ' + this.name4 });
         }
         //for IE specific issue
         variant2 = variant2.replace(/\s/g, '');
 
         if (variant2) {
-            if (variant2 == "Select"+this.name2) {
+            this.selectedVariant2 = variant2;
+            this.selectedVariant.buyQuantity = null;
+            if (variant2 == "Select" + this.name2 || this.selectedVariant.buyQuantity == null) {
                 this.lockBuyButton = false;
                 this.isBuyBtnDisable = true;
 
             }
-            this.selectedVariant2 = variant2;
-            this.selectedVariant.buyQuantity = '';
         }
 
-        if (this.foodInfo.selection.length == 2 && variant2 != 'Select'+this.name2.replace(/\s/g, '')) {
+        if (this.foodInfo.selection.length == 2 && variant2 != 'Select' + this.name2) {
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[0].vType.replace(/\s/g, '') == this.selectedVariant1 &&
-                    this.foodInfo.variants[i].selection[1].vType.replace(/\s/g, '') == this.selectedVariant2) {
+                if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
+                    this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2) {
                     this.selectedVariant = this.foodInfo.variants[i];
                 }
             }
-            if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
-                this.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
-                this.api.stop();
-            }else{
-                this.api.selectItem(this.Data.defaultImage);
-                this.api.stop();
+
+            var BreakException = {};
+            var percentagePrice;
+
+            try {
+
+                this.promoData.forEach(prod => {
+                    if (prod.sku == this.selectedVariant.sku) {
+                        if (new Date(prod.toDate) >= this.todayDate) {
+
+                            this.discountAvailable = true
+                            if (prod.discountType == "discountValue") {
+                                this.oldPrice = this.selectedVariant.price;
+                                this.newPrice = this.selectedVariant.price - prod.discount;
+                                throw BreakException;
+                            } else {
+                                this.oldPrice = this.selectedVariant.price;
+                                percentagePrice = this.selectedVariant.price * (prod.discount / 100);
+                                this.newPrice = this.selectedVariant.price - percentagePrice;
+                                throw BreakException;
+                            }
+                        }
+                    }
+                });
+
+            } catch (e) {
+                if (e !== BreakException) throw e;
             }
+
             this.lockBuyButton = true;
 
         } else {
@@ -308,7 +421,7 @@ export class ProductComponent implements OnInit {
             //     this.selection2.push({ 'vType': 'Please Select' });
             // }
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[1].vType.replace(/\s/g, '') == variant2 && this.foodInfo.variants[i].selection[0].vType.replace(/\s/g, '') == this.selectedVariant1) {
+                if (this.foodInfo.variants[i].selection[1].vType == variant2 && this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
                     this.selection2.push({ 'vType': this.foodInfo.variants[i].selection[2].vType });
                 }
             }
@@ -319,45 +432,64 @@ export class ProductComponent implements OnInit {
     };
 
     changeVariant3(variant3) {
-
-        //for IE specific issue
+        this.lockBuyButton = false;
+        this.discountAvailable = false;
+        // for IE specific issue
         variant3 = variant3.replace(/\s/g, '');
         this.selection3 = [];
-        if(this.Data.selection.length == 2){
+        if (this.Data.selection.length == 2) {
             // this.selection1.push({ 'vType': 'Select '+this.name2 });
-        }else if(this.Data.selection.length == 3){
-            // this.selection1.push({ 'vType': 'Select '+this.name2 });
-            // this.selection2.push({ 'vType': 'Select '+this.name3 });
-        }else if(this.Data.selection.length == 4){
+        } else if (this.Data.selection.length == 3) {
             // this.selection1.push({ 'vType': 'Select '+this.name2 });
             // this.selection2.push({ 'vType': 'Select '+this.name3 });
-            this.selection3.push({ 'vType': 'Select '+this.name4 });
+        } else if (this.Data.selection.length == 4) {
+            // this.selection1.push({ 'vType': 'Select '+this.name2 });
+            // this.selection2.push({ 'vType': 'Select '+this.name3 });
+            this.selection3.push({ 'vType': 'Select ' + this.name4 });
         }
 
         if (variant3) {
-            if (variant3 == 'Select'+this.name3) {
+            this.selectedVariant3 = variant3;
+            this.selectedVariant.buyQuantity = null;
+            if (variant3 == 'Select' + this.name3 || this.selectedVariant.buyQuantity == null) {
                 this.lockBuyButton = false;
                 this.isBuyBtnDisable = true;
             }
-            this.selectedVariant3 = variant3;
-            this.selectedVariant.buyQuantity = '';
         }
 
-        if (this.foodInfo.selection.length == 3 && variant3 != 'Select'+this.name3.replace(/\s/g, '')) {
+        if (this.foodInfo.selection.length == 3 && variant3 != 'Select' + this.name3) {
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[0].vType.replace(/\s/g, '') == this.selectedVariant1 &&
-                    this.foodInfo.variants[i].selection[1].vType.replace(/\s/g, '') == this.selectedVariant2 &&
-                    this.foodInfo.variants[i].selection[2].vType.replace(/\s/g, '') == this.selectedVariant3) {
+                if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
+                    this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2 &&
+                    this.foodInfo.variants[i].selection[2].vType == this.selectedVariant3) {
                     this.selectedVariant = this.foodInfo.variants[i];
                 }
             }
+            var BreakException = {};
+            var percentagePrice;
 
-            if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
-                this.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
-                this.api.stop();
-            }else{
-                this.api.selectItem(this.Data.defaultImage);
-                this.api.stop();
+            try {
+
+                this.promoData.forEach(prod => {
+                    if (prod.sku == this.selectedVariant.sku) {
+                        if (new Date(prod.toDate) >= this.todayDate) {
+                            this.discountAvailable = true
+                            if (prod.discountType == "discountValue") {
+                                this.oldPrice = this.selectedVariant.price;
+                                this.newPrice = this.selectedVariant.price - prod.discount;
+                                throw BreakException;
+                            } else {
+                                this.oldPrice = this.selectedVariant.price;
+                                percentagePrice = this.selectedVariant.price * (prod.discount / 100);
+                                this.newPrice = this.selectedVariant.price - percentagePrice;
+                                throw BreakException;
+                            }
+                        }
+                    }
+                });
+
+            } catch (e) {
+                if (e !== BreakException) throw e;
             }
 
             this.lockBuyButton = true;
@@ -367,7 +499,7 @@ export class ProductComponent implements OnInit {
             //     this.selection3.push({ 'vType': 'Please Select' });
             // }
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[2].vType.replace(/\s/g, '') == variant3 && this.foodInfo.variants[i].selection[0].vType.replace(/\s/g, '') == this.selectedVariant1 && this.foodInfo.variants[i].selection[1].vType.replace(/\s/g, '') == this.selectedVariant2) {
+                if (this.foodInfo.variants[i].selection[2].vType == variant3 && this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 && this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2) {
                     this.selection3.push({ 'vType': this.foodInfo.variants[i].selection[3].vType });
                 }
             }
@@ -375,39 +507,59 @@ export class ProductComponent implements OnInit {
         }
     };
     changeVariant4(variant4) {
+        this.lockBuyButton = false;
+        this.discountAvailable = false;
         //for IE specific issue
         variant4 = variant4.replace(/\s/g, '');
 
         if (variant4) {
-            if (variant4 == 'Select'+this.name4) {
+            this.selectedVariant4 = variant4;
+            this.selectedVariant.buyQuantity = null;
+            if (variant4 == 'Select' + this.name4 || this.selectedVariant.buyQuantity == null) {
                 this.lockBuyButton = false;
                 this.isBuyBtnDisable = true;
 
             }
-            this.selectedVariant4 = variant4;
-            this.selectedVariant.buyQuantity = '';
-
         }
 
-        if (this.foodInfo.selection.length == 4 && variant4 != 'Select'+this.name4.replace(/\s/g, '')) {
+        if (this.foodInfo.selection.length == 4 && variant4 != 'Select' + this.name4) {
 
 
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[0].vType.replace(/\s/g, '') == this.selectedVariant1 &&
-                    this.foodInfo.variants[i].selection[1].vType.replace(/\s/g, '') == this.selectedVariant2 &&
-                    this.foodInfo.variants[i].selection[2].vType.replace(/\s/g, '') == this.selectedVariant3 &&
-                    this.foodInfo.variants[i].selection[3].vType.replace(/\s/g, '') == this.selectedVariant4) {
+                if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
+                    this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2 &&
+                    this.foodInfo.variants[i].selection[2].vType == this.selectedVariant3 &&
+                    this.foodInfo.variants[i].selection[3].vType == this.selectedVariant4) {
                     this.selectedVariant = this.foodInfo.variants[i];
 
                 }
             }
 
-            if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
-                this.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
-                this.api.stop();
-            }else{
-                this.api.selectItem(this.Data.defaultImage);
-                this.api.stop();
+            var BreakException = {};
+            var percentagePrice;
+
+            try {
+
+                this.promoData.forEach(prod => {
+                    if (prod.sku == this.selectedVariant.sku) {
+                        if (new Date(prod.toDate) >= this.todayDate) {
+                            this.discountAvailable = true
+                            if (prod.discountType == "discountValue") {
+                                this.oldPrice = this.selectedVariant.price;
+                                this.newPrice = this.selectedVariant.price - prod.discount;
+                                throw BreakException;
+                            } else {
+                                this.oldPrice = this.selectedVariant.price;
+                                percentagePrice = this.selectedVariant.price * (prod.discount / 100);
+                                this.newPrice = this.selectedVariant.price - percentagePrice;
+                                throw BreakException;
+                            }
+                        }
+                    }
+                });
+
+            } catch (e) {
+                if (e !== BreakException) throw e;
             }
 
             this.lockBuyButton = true;
@@ -437,7 +589,7 @@ export class ProductComponent implements OnInit {
         if (buyQty > 0) {
             // Get Selected-Variant-Qty value
             var selectVariantAvailableQty = this.selectedVariant.quantity;
-            //If quantity is unlimited enable buy button
+            // If quantity is unlimited enable buy button
             if (this.selectedVariant.unlimited == true) {
                 this.isBuyBtnDisable = false;
             }
@@ -449,9 +601,11 @@ export class ProductComponent implements OnInit {
             }
         }
     };
-    test(data) {
-        this.dialogVariants = data;
-        $('#myModal').modal('show')
+    open(data) {
+        if (!this.isBuyBtnDisable) {
+            this.dialogVariants = data;
+            $('#myModal').modal('show')
+        }
     }
     close() {
         $('#myModal').modal('hide')
@@ -469,7 +623,6 @@ export class ProductComponent implements OnInit {
     }
 
     addToCart(navi) {
-
         if (this.selectedVariant.buyQuantity == null) {
             console.log(' error please select buy quantity');
         } else {
@@ -498,14 +651,15 @@ export class ProductComponent implements OnInit {
                             qty: this.selectedVariant.buyQuantity,
                             sku: this.selectedVariant.sku,
                             totWeight: this.selectedVariant.weight * this.selectedVariant.buyQuantity,
-                            price: Math.round(this.selectedVariant.price * 100) / 100,
-                            total: Math.round(this.selectedVariant.price * 100) / 100,
+                            price: this.discountAvailable == true ? this.newPrice : Math.round(this.selectedVariant.price * 100) / 100,
+                            total: this.discountAvailable == true ? this.newPrice : Math.round(this.selectedVariant.price * 100) / 100,
                             imgURL: this.selectedVariant.imageUrl,
                             imgDefault: this.Data.tempImageArray[this.Data.defaultImage].img,
                             variant: this.selectedVariant.selection,
                             totalQty: this.selectedVariant.quantity,
                             unlimited: this.selectedVariant.unlimited,
-                            weight: this.selectedVariant.weight  //(new) added weight of each product
+                            weight: this.selectedVariant.weight,  //(new) added weight of each product
+                            type: this.Data.mainType
 
                         });
                         this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
@@ -521,6 +675,8 @@ export class ProductComponent implements OnInit {
                 }
                 if (this.dataService.appUserId) {
                     this.localStorageService.set("cart" + this.dataService.appUserId, (this.dataService.cart));
+                } else {
+                    this.localStorageService.set("cartUnknownUser", (this.dataService.cart));
                 }
             }
             else {
@@ -531,15 +687,15 @@ export class ProductComponent implements OnInit {
                     qty: this.selectedVariant.buyQuantity,
                     sku: this.selectedVariant.sku,
                     totWeight: this.selectedVariant.weight * this.selectedVariant.buyQuantity,
-                    price: Math.round(this.selectedVariant.price * 100) / 100,
-                    total: Math.round(this.selectedVariant.price * 100) / 100,
+                    price: this.discountAvailable == true ? this.newPrice : Math.round(this.selectedVariant.price * 100) / 100,
+                    total: this.discountAvailable == true ? this.newPrice : Math.round(this.selectedVariant.price * 100) / 100,
                     imgURL: this.selectedVariant.imageUrl,
                     imgDefault: this.Data.tempImageArray[this.Data.defaultImage].img,
                     variant: this.selectedVariant.selection,
                     totalQty: this.selectedVariant.quantity,
                     unlimited: this.selectedVariant.unlimited,
-                    weight: this.selectedVariant.weight //(new) added weight of each product
-
+                    weight: this.selectedVariant.weight, //(new) added weight of each product
+                    type: this.Data.mainType
                 });
                 this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
                 this.parentobj.cartSize = this.dataService.cart.cartSize;
@@ -548,6 +704,8 @@ export class ProductComponent implements OnInit {
 
                 if (this.dataService.appUserId) {
                     this.localStorageService.set("cart" + this.dataService.appUserId, (this.dataService.cart));
+                } else {
+                    this.localStorageService.set("cartUnknownUser", (this.dataService.cart));
                 }
                 if (navi == "buyNowCart") {
                     this.route.navigate(['cart']);

@@ -595,8 +595,8 @@ module.exports = {
             appId = req.param('appId'),
             copyDirPath = config.ME_SERVER + userId + '/buildProg/' + appId + '/',
             moveConfigFile = copyDirPath + 'config.xml',
-            appIconFileRES = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/publish/0.png',
-            appSplashFileRES = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/publish/6.png',
+            appIconFileRES = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/images/publish/0.png',
+            appSplashFileRES = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/images/publish/6.png',
             appIconFileDES = copyDirPath + 'resources' + '/' + 'icon.png',
             appSplashFileDES = copyDirPath + 'resources' + '/' + 'splash.png',
             replacePointerAppLink = config.ME_SERVER_URL+userId+'/progressiveTemplates/'+appId,
@@ -768,7 +768,7 @@ module.exports = {
 
                                                         var file = appPath + 'platforms/android/build/outputs/apk/' + appName.replace(/\s/g, '') + '.apk';
                                                         var resourcesPath = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' +
-                                                            appId + '/src/assets/images/publish/';
+                                                            appId + '/assets/images/publish/';
                                                         var publishPath = config.ME_SERVER + userId + '/buildProg/' + appId + '/publish';
                                                         var zipFile = config.ME_SERVER + userId + '/buildProg/' + appId + '/publish_' + appId + '.zip';
 

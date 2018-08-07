@@ -274,7 +274,7 @@ module.exports = {
                 userId = req.body.userId,
                 tempAppDirPath = config.ME_SERVER + userId + '/progressiveTemplates/',
                 appBasePath = config.PROGRESSIVE_TEMPLATES_PATH,
-                templatePath = config.PROGRESSIVE_TEMPLATES_PATH + '/templates/' + templateName,
+                templatePath = config.PROGRESSIVE_TEMPLATES_PATH  + templateName,
                 appName = req.body.appName,
                 serverTmp="http://localhost:port",
                 serverOrg=config.server.host,
@@ -369,10 +369,10 @@ module.exports = {
                           if (err) res.negotiate(err);
 
 
-                          fs.copy(appBasePath, tempAppDirPath + app.id, function(err) {
-                              if (err) res.send(err);
-
-                              console.log("coppied appsBase");
+                          // fs.copy(appBasePath, tempAppDirPath + app.id, function(err) {
+                          //     if (err) res.send(err);
+                          //
+                          //     console.log("coppied appsBase");
 
                               var madeEasyFileContent = {
                                   name : appName,
@@ -389,7 +389,7 @@ module.exports = {
                                   console.log("copyied the template");
                                   appCtrl.createProgWebAppCont(res,tempAppDirPath,app.id,madeEasyFileContent,serverTmp,serverOrg,userId,templatePath);
                               });
-                          });
+                          // });
                           /**
                            * Add Main Navigation
                            */
@@ -481,16 +481,39 @@ module.exports = {
             });
         },
     createProgWebAppCont :function(res,tempAppDirPath,appId,madeEasyFileContent,serverTmp,serverOrg,userId,templatePath){
-      var madeEasyFilePath = tempAppDirPath + appId +'/src/app/madeEasy.json';
+      var madeEasyFilePath = tempAppDirPath + appId +'/assets/madeEasy.json';
+      const testFolder = tempAppDirPath + appId;
+
+        fs.readdir(testFolder, (err, files) => {
+                files.forEach(file => {
+                    console.log(file);
+                    var matched = file.match(/main/g);
+                    if (matched == "main") {
+                        console.log("this worked");
+                        fs.readFile(tempAppDirPath + appId +'/'+file, 'utf-8',
+                            function(err, data) {
+                                if (err) return res.negotiate(err);
+                                data =  data.replace('http://localhost:port',serverOrg);
+                                data =  data.replace('unknownAppId',appId);
+                                data =  data.replace('unknownUserName',userId);
+                                data =  data.replace('unknownTemplateName',madeEasyFileContent.templateName);
+                                fs.writeFile(tempAppDirPath +appId+'/'+file, data,'utf-8',function(err) {
+                                    if (err) return res.negotiate(err);
+                                });
+                            });
+                    }
+                });
+        });
+
 
       fs.outputJson(madeEasyFilePath,madeEasyFileContent, function (err) {
           if(err) return console.error(err);
       });
 
-      fs.readFile(tempAppDirPath + appId +'/src/app/constantsService.ts', 'utf-8',
+      fs.readFile(tempAppDirPath + appId +'/assets/constantsService.ts', 'utf-8',
           function(err, data) {
               if (err) return res.negotiate(err);
-              fs.writeFile(tempAppDirPath +appId+'/src/app/constantsService.ts', data.replace(serverTmp,serverOrg),'utf-8',function(err) {
+              fs.writeFile(tempAppDirPath +appId+'/assets/constantsService.ts', data.replace(serverTmp,serverOrg),'utf-8',function(err) {
                   if (err) return res.negotiate(err);
               });
           });
@@ -500,12 +523,11 @@ module.exports = {
        * TODO : future development, Template dummy data move to another folder
        * **/
       var appFileServerPath  = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId +'/';
-      var tempDummyImagesPath = templatePath + '/src/assets/images/';
-      var tempDummyImagesDesPath = appFileServerPath +  '/src/assets/images/';
+      var tempDummyImagesPath = templatePath + '/assets/images/';
+      var tempDummyImagesDesPath = appFileServerPath +  '/assets/images/';
       /** Copy Template Dummy Images to APP File Server for given userID & appID **/
       fs.copy(tempDummyImagesPath,tempDummyImagesDesPath,function (err) {
               if (err) return res.negotiate(err);
-              sails.log('Third-navigation images copy to app-File-Server');
               res.send({
                   appId: appId,
                   message: "New Application has been created"
