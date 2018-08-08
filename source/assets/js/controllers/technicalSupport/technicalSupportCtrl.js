@@ -646,7 +646,7 @@
           var count = 0;
                 $scope.appList.forEach(function(ele){
                     if (ele.userId == id){
-                        if((ele.status == "APPROVED" || ele.status == "PENDING")){
+                        if((ele.publishedStatus == "Approved" || ele.publishedStatus == "Pending")){
                             count++;
                         }
                     }
