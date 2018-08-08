@@ -40,7 +40,7 @@
 
         <p class="color">
           <strong style="color:rgb(153, 15, 15)" *ngIf=" Data.variants.length >= 1 && selectedVariant.quantity == 0 && lockBuyButton">Availability: Out of stock</strong>
-          <strong *ngIf=" !(Data.variants.length >= 1 && selectedVariant.quantity == 0 && lockBuyButton)">Availability: In stock</strong>
+          <strong style="color: green" *ngIf=" !(Data.variants.length >= 1 && selectedVariant.quantity == 0 && lockBuyButton)">Availability: In stock</strong>
 
           <!-- <strong>Availability: In stock</strong> -->
           <br>
