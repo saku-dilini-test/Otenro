@@ -418,7 +418,7 @@ module.exports = {
     checkUniqueSku: function(req,res){
     console.log(req.body);
         var searchApp={
-            userId: req.body.userId
+            appId: req.body.appId
         }
         Sku.find(searchApp, function(err, app){
             if (err) return done(err);
