@@ -1,7 +1,7 @@
 app-page-body{
   min-height: calc(100vh - 139px);
   display: block;
-  padding-top: 133.25px;
+  padding-top: 112px;
 }
 app-header{
   position: fixed;

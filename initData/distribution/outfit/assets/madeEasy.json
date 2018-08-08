@@ -1,10 +1,10 @@
 {
-  "name": "Hellog",
-  "appId": "5b683fd7c5c075140e18e411",
-  "userId": "58905f44ebabf27c134706c3",
+  "name": "unknownName",
+  "appId": "unknownAppId",
+  "userId": "unknownUserName",
   "serviceApi": {
-    "host": "http://localhost:1337",
+    "host": "http://localhost:port",
     "port": 1337
   },
-  "templateName": "smartfit"
+  "templateName": "unknownTemplateName"
 }

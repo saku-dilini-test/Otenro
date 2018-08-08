@@ -8,41 +8,22 @@
           Contact us
         </h2>
       </div>
-
-      <div class="col-sm-12 text-center" >
-        <p style="margin-bottom: -1px;margin-top: 1%;">Authorized Agent</p>
-        <img src="assets/images/Softlogic.png" style="width:20%;">
-      </div>
     </div>
 
 
 
     <div class="row voffset">
-      <div class="col-sm-12">
-        <p class="text-center contact-text">
-          Sales Hotline
-          <br>
-          <a class="ion ion-ios-telephone" href="tel:0115705705"> 0115 705 705</a>
-        </p>
-        <p class="text-center contact-text">
-          Service Hotline
-          <br>
-          <a class="ion ion-ios-telephone" href="tel:0772208080"> 0772 208 080</a>
-        </p>
-      </div>
+
 
       <div class="col-sm-12">
-        <p class="text-center contact-text" style="margin-top: 1%;">
-          “SMARTFIT” DRTV PRODUCTS (PVT)LTD.
-        </p>
         <div *ngFor="let contact of contactInfo">
           <p class="text-center contact-text">
             {{contact.contactInfo.address}}
           </p>
           <p class="text-center contact-text">
-            <!-- {{contact.telPhone}} -->
+             {{contact.telPhone}} <br>
+
             {{contact.contactInfo.email}}
-            <br>
           </p>
           <p class="text-center">
             <a href="{{contact.contactInfo.webSite}}" target="_blank">{{contact.contactInfo.webSite}}</a>
