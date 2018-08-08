@@ -1,18 +1,18 @@
 <header>
-  <div class="bloc main-navigation d-bloc" id="bloc-0">
+  <div class="bloc main-navigation" id="bloc-0">
     <div class="container bloc-sm">
       <nav class="navbar row">
            <div class="navbar-header">
             <a class="navbar-brand hidden-xs">
               <span class="special-tag-for-editing-text-with-html"></span>
-              <img src="{{imageUrl}}/logo.png&dummy={{dummy}}" alt="logo" />
+              <img src="{{imageUrl}}/logo.png&dummy={{dummy}}" alt="logo" (click)="navigate('','')"/>
             </a>
-            <button aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle main-navigation" data-toggle="collapse" data-target=".navbar-2">
+            <a aria-label="menu" id="nav-toggle" class="pull-left ui-navbar-toggle navbar-toggle main-navigation" data-toggle="collapse" data-target=".navbar-2">
               <i class="fa fa-bars"></i>
-            </button>
-            <button *ngIf="title != 'Home'" aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle main-navigation" (click)="goBack()">
+            </a>
+            <a *ngIf="title != 'Home'" aria-label="menu" id="nav-toggle"  class="pull-left ui-navbar-toggle navbar-toggle main-navigation" (click)="goBack()">
               <i class="fa fa-arrow-left"></i>
-            </button>
+            </a>
             <div class="mobile-title visible-xs mobileTitle" >{{title}}</div>
             <div class="mobile-cart visible-xs" ><i class="fa fa-shopping-cart"  (click)="navigate('cart','Shopping Cart');manualToggle()"></i> <span class="badge main-navigation"  (click)="navigate('cart','Shopping Cart');manualToggle()">{{cartNo}}</span></div>
           </div>

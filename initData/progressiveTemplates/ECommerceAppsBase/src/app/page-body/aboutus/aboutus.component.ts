@@ -14,7 +14,7 @@ export class AboutusComponent implements OnInit {
 
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
-  private header;
+  header;
   content;
   private openHours: any;
   openWeekdays = "we are closed";

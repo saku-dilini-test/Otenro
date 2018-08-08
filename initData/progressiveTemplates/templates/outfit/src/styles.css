@@ -242,6 +242,7 @@ a:hover{text-decoration: none; cursor:pointer;}
 }
 .navbar-brand img{
 	max-height: 70px;
+	height:70px;
 	margin: 0 5px 0 0;
 	display:inline;
 }
@@ -1266,6 +1267,9 @@ button{
 	color: rgba(0,0,0,.6)!important;
 }
  }
+.padding-fit-top{
+	padding-top:88px !important;
+}
 @media (max-width: 767px){
 	.heading-spasing-mobile{
 		margin-top:-10px;
@@ -1429,6 +1433,9 @@ button{
 	    width: 0px;
 	    height:0;
 	}
+	.padding-fit-top{
+		padding-top: 65px !important;
+	}
 
 }
 
@@ -1467,9 +1474,7 @@ header{
 }
 
 
-.padding-fit-top{
-	padding-top:65px !important;
-}
+
 
 .owl-theme .owl-nav button{
 	border:0;

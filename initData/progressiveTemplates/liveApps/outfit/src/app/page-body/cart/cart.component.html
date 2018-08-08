@@ -65,7 +65,6 @@
         </div>
       </div>
       <h1 class="text-center  main-header-font" *ngIf="cartItems.length == 0">There are no products added to the cart</h1>
-
     </div>
   </div>
 </div>
@@ -74,95 +73,98 @@
 <!-- bloc-17 -->
 <div class="bloc bgc-white l-bloc hidden-xs" id="bloc-17">
   <div class="container bloc-md">
-  <div class="row voffset-md">
-      <div class="col-sm-12">
-        <h1 class="text-center  about-us main-header-font">
-          SHOPPING CART
-        </h1>
-      </div>
+    <div class="row voffset-md">
+        <div class="col-sm-12">
+          <h1 class="text-center  about-us main-header-font">
+            SHOPPING CART
+          </h1>
+        </div>
     </div>
     <div class="row">
       <div class="col-sm-12">
         <div class="row product-details" *ngFor="let item of cartItems ; let i = index">
-          <div class="col-sm-2">
-            <img *ngIf="item.imgURL" src="{{imageUrl}}/{{item.imgURL}}" class="img-thumb-small-cart center-block mg-sm img-responsive lazyload">
-            <img *ngIf="!item.imgURL" src="{{imageUrl}}/{{item.imgDefault}}" class="img-thumb-small-cart center-block mg-sm img-responsive lazyload">
-          </div>
-          <div class="col-sm-3">
-            <h4 class="mg-md header-text-h2 text-left main-header-font">
-              <strong>{{item.name}}</strong>
-            </h4>
-            <p class="sub-header-text-h2 text-justify main-content-fontn" *ngFor="let v of item.variant">
-              {{v.name}} : {{v.vType}}
-            </p>
-            
-            <form id="form_5427" novalidate>
-              <div class="form-group main-content-font">
-                <label class="sub-header-text-h2">
-                  QTY
-                </label>
-                <input class="form-control qty-input" name="qty" id="qty" type="number" min="1" oninput="validity.valid||(value='');"
-                  [(ngModel)]="item.qty" value="{{item.qty}}" (change)="buttonDisable(item.qty,item.totalQty ,cartItems.indexOf(item))"
-                  ngDefaultControl>
-              </div>
-            </form>
-             <!-- Product not available in store -->
-              <div class="col" *ngIf="cartItems[0].totalQty == 0">
-                <span style="color:rgb(180, 30, 30)">
-                  Product not available
-                </span>
-              </div>
-              <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
-              <div class="col" *ngIf="item.qty > cartItems[i].totalQty && cartItems[i].totalQty > 1">
-                <span style="color:rgb(180, 30, 30)">
-                  Enter a quantity of {{cartItems[i].totalQty}} or less.
-                </span>
-              </div>
-              <div class="col" *ngIf="item.qty > cartItems[i].totalQty && cartItems[i].totalQty == 1">
-                <span style="color:rgb(180, 30, 30)">
-                  Enter a quantity of {{cartItems[i].totalQty}}.
-                </span>
-              </div><br>
-              <p class="sub-header-text-h2 text-justify  main-content-font">
-                Total Price - {{currency}} {{itemPriceCal(item.total,item.qty)}}
-              </p>
-          </div>
-          <div class="col-sm-4">
-            <div class="text-center">
-              <a (click)="removeItem(i)" class="btn btn-d btn-lg button-mobile spacing-mobile-button button-top-spacing main-button">Remove</a>
+            <div class="col-sm-2">
+              <img *ngIf="item.imgURL" src="{{imageUrl}}/{{item.imgURL}}" class="img-thumb-small-cart center-block mg-sm img-responsive lazyload">
+              <img *ngIf="!item.imgURL" src="{{imageUrl}}/{{item.imgDefault}}" class="img-thumb-small-cart center-block mg-sm img-responsive lazyload">
             </div>
-          </div>
-          <div class="col-sm-3">
-            <h4 class="mg-md header-text-h2 text-right main-content-font">
-              <strong>price</strong>
-            </h4>
-            <p class="sub-header-text-h2  text-right main-content-font">
-              <strong>{{currency}} {{itemPriceCal(item.total,item.qty)}}</strong>
-            </p>
-          </div>
+            <div class="col-sm-3">
+              <h4 class="mg-md header-text-h2 text-left main-header-font">
+                <strong>{{item.name}}</strong>
+              </h4>
+              <p class="sub-header-text-h2 text-justify main-content-fontn" *ngFor="let v of item.variant">
+                {{v.name}} : {{v.vType}}
+              </p>
+
+              <form id="form_5427" novalidate>
+                <div class="form-group main-content-font">
+                  <label class="sub-header-text-h2">
+                    QTY
+                  </label>
+                  <input class="form-control qty-input" name="qty" id="qty" type="number" min="1" oninput="validity.valid||(value='');"
+                    [(ngModel)]="item.qty" value="{{item.qty}}" (change)="buttonDisable(item.qty,item.totalQty ,cartItems.indexOf(item))"
+                    ngDefaultControl>
+                </div>
+              </form>
+               <!-- Product not available in store -->
+                <div class="col" *ngIf="cartItems[0].totalQty == 0">
+                  <span style="color:rgb(180, 30, 30)">
+                    Product not available
+                  </span>
+                </div>
+                <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
+                <div class="col" *ngIf="item.qty > cartItems[i].totalQty && cartItems[i].totalQty > 1">
+                  <span style="color:rgb(180, 30, 30)">
+                    Enter a quantity of {{cartItems[i].totalQty}} or less.
+                  </span>
+                </div>
+                <div class="col" *ngIf="item.qty > cartItems[i].totalQty && cartItems[i].totalQty == 1">
+                  <span style="color:rgb(180, 30, 30)">
+                    Enter a quantity of {{cartItems[i].totalQty}}.
+                  </span>
+                </div>
+                <br>
+                <p class="sub-header-text-h2 text-justify  main-content-font">
+                  Total Price - {{currency}} {{itemPriceCal(item.total,item.qty)}}
+                </p>
+            </div>
+            <div class="col-sm-4">
+              <div class="text-center">
+                <a (click)="removeItem(i)" class="btn btn-d btn-lg button-mobile spacing-mobile-button button-top-spacing main-button">Remove</a>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <h4 class="mg-md header-text-h2 text-right main-content-font">
+                <strong>price</strong>
+              </h4>
+              <p class="sub-header-text-h2  text-right main-content-font">
+                <strong>{{currency}} {{itemPriceCal(item.total,item.qty)}}</strong>
+              </p>
+            </div>
         </div>
         
-    <div class="row row-no-gutters pricing-table lines">
-      <div class="col-xs-6">
-        <p class="product-text text-siize main-content-font">
-          <strong>Total amount</strong>
-        </p>
-      </div>
-      <div class="col-xs-6">
-        <p class="text-right product-text text-siize  main-content-font" *ngIf="cartItems.length > 0" [(ngModel)]="total" ngDefaultControl>
-          <strong>{{currency}} {{getTotal()}}</strong>
-        </p>
-        <p class="text-right product-text text-siize  main-content-font" *ngIf="cartItems.length == 0">There are no Products added to the cart</p>
+        <div class="row row-no-gutters pricing-table lines">
+          <div class="col-xs-6">
+            <p class="product-text text-siize main-content-font">
+              <strong>Total amount</strong>
+            </p>
+          </div>
+          <div class="col-xs-6">
+            <p class="text-right product-text text-siize  main-content-font" *ngIf="cartItems.length > 0" [(ngModel)]="total" ngDefaultControl>
+              <strong>{{currency}} {{getTotal()}}</strong>
+            </p>
+            <p class="text-right product-text text-siize  main-content-font" *ngIf="cartItems.length == 0">There are no Products added to the cart</p>
 
-        <a *ngIf="cartItems.length > 0  && enableDelivery" class="btn btn-d btn-lg pull-right button-spacing-top main-button" (click)="delivery(cartItems)">Delivery</a>
-        <a *ngIf="cartItems.length > 0  && enablePickup" class="btn btn-d btn-lg pull-right button-spacing-top main-button" (click)='pickupDetails(cartItems)'>Pickup</a>
+            <a *ngIf="cartItems.length > 0  && enableDelivery" class="btn btn-d btn-lg pull-right button-spacing-top main-button" (click)="delivery(cartItems)">Delivery</a>
+            <a *ngIf="cartItems.length > 0  && enablePickup" class="btn btn-d btn-lg pull-right button-spacing-top main-button" (click)='pickupDetails(cartItems)'>Pickup</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 <!-- bloc-17 END -->
-<div class="col-sm-12" style="margin: 10px 0">
-  <ngb-alert *ngIf="successMessage" type="warning" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+<div class="col-sm-12" style="margin: 10px 0" *ngIf="successMessage">
+  <ngb-alert  type="warning" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
 </div>
 
 

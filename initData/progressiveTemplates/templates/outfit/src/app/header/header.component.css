@@ -1,0 +1,40 @@
+.mobile-title{
+  margin-top: 9px;
+  margin-right: 0;
+  padding: 5px 0px;
+  width: 100%;
+  text-align: center;
+  margin-left: 0;
+  position: absolute;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+.mobile-cart{
+  margin-top: 8px;
+  margin-right: 0;
+  padding: 5px 20px;
+  width: 100%;
+  text-align: right;
+  margin-left: 0;
+  position: absolute;
+  font-size: 20px;
+}
+.ui-navbar-toggle{
+  z-index: 1;
+  font-size: 18px;
+}
+.navbar-2 ul, .navbar-2 li{
+  border: 0;
+}
+
+.logo a{
+  width: 100%;
+}
+.logo img{
+  margin: auto;
+}
+
+ul li a i{
+  font-size: 18px;
+}
