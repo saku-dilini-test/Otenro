@@ -21,10 +21,33 @@ export class ShopComponent implements OnInit {
   private catId: any;
   private catName: any;
   searchTerm:any;
-
+  todayDate;
+  promoData = [];
   constructor(private currencyService: CurrencyService, private productService: ProductsService,
     private dataService: PagebodyServiceModule, private router: Router,
-    private title: TitleService) {
+    private title: TitleService, private productsService:ProductsService) {
+
+      this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
+
+        data.forEach(element => {
+          element.selectedProduct.forEach(variants => {
+  
+            variants.fromDate = element.dateFrom;
+            variants.toDate = element.dateTo;
+  
+            if (element.discountType == 'discountValue') {
+              variants.discountType = element.discountType;
+              variants.discount = element.discount
+            } else {
+              variants.discountType = element.discountType;
+              variants.discount = element.discountPercent
+            }
+  
+            this.promoData.push(variants);
+          });
+        });
+        console.log(this.promoData);
+      });
 
      this.title.changeTitle("Search");
 
@@ -35,6 +58,10 @@ export class ShopComponent implements OnInit {
 
 
   ngOnInit() {
+
+    var d = new Date();
+    var str = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
+    this.todayDate = new Date(str);
 
     this.currencyService.getCurrencies().subscribe(data => {
       this.currency = data.sign;
@@ -84,6 +111,38 @@ export class ShopComponent implements OnInit {
       }
     }
     return isSoldOut;
+  }
+
+  checkForPromo(product) {
+    var availableFirstVariPromo = false;
+    if (product.variants.length > 0 && this.promoData) {
+      for (let i = 0; i < this.promoData.length; i++) {
+        if (this.promoData[i].sku == product.variants[0].sku) {
+          if (new Date(this.promoData[i].toDate) >= this.todayDate) {
+            availableFirstVariPromo = true;
+          }
+          break;
+        }
+
+      };
+
+    }
+    return availableFirstVariPromo;
+  }
+
+  getDiscountPrice(sku,price){
+    var newPrice,percentagePrice;
+    var test = this.promoData.filter((data)=> data.sku == sku);
+    if(test[0].discountType == "discountValue"){
+      newPrice = price - test[0].discount;
+      return newPrice;
+    }else{
+      percentagePrice = price * (test[0].discount / 100)
+      newPrice = price - percentagePrice;
+      return newPrice;
+    }
+
+    return newPrice;
   }
 
 }

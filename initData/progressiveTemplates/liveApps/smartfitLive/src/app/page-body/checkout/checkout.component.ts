@@ -16,6 +16,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { CountryDataService } from '../../services/country-data/country-data.service'
 
 declare let paypal: any;
+declare var $: any;
 
 @Component({
   selector: 'app-checkout',
@@ -116,7 +117,7 @@ export class CheckoutComponent implements OnInit {
   ePay = false;
   ePayFail = false;
   ePayNull = false;
-
+  
   constructor(fb: FormBuilder, private ordersService: OrdersService,
     private shippingService: ShippingService,
     private currencyService: CurrencyService,
