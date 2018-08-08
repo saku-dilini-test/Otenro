@@ -17,10 +17,10 @@ Starting development,
 4. Now you can start app by "ng serve" and start developing. 
 
 Pushing changes,
-
-1. Remember the files that you changed and replace them with the relevant template files.
-2. Always check if there are .ts file in relevant template and if not do the change in ECommerceAppsBase. (Always ask for help if you have any confusions).
-3. Also run ng build --prod and if it compiled without errors copy the all files inside the (dist/angular5/files) folder and past them into Otenro/initData/distribution/relevant_template. (Before pasting remove the files inside the relevent_template not asset folder)
-4. git add files inside the distribution folder, Commit all the changes and push.
+1. First of all copy the constantService.ts and madeEasy.json inside the BackupFiles folder and replace with your development folder relevant files.
+2. Remember the files that you changed and replace them with the relevant template files.
+3. Always check if there are .ts file in relevant template and if not do the change in ECommerceAppsBase. (Always ask for help if you have any confusions).
+4. Also run ng build --prod and if it compiled without errors copy the all files inside the (dist/angular5/files) folder and past them into Otenro/initData/distribution/relevant_template. (Before pasting remove the files inside the relevent_template not asset folder)
+5. git add files inside the distribution folder, Commit all the changes and push.
 
 <div><h3><center>Thank you! If there are any confusion do not hesitate to ask.</center></h3></div>
