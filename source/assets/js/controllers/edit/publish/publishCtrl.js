@@ -61,11 +61,19 @@
         $scope.maxDesc = 80;
         $scope.maxKeywords = 80;
 
-        $scope.validateSize = function(image,width,height){
-            if(image.width != width && image.height != height){
-                toastr.error('Image should be in recommended size', 'Warning', {
-                      closeButton: true
-                });
+        $scope.validateSize = function(image,width,height,idx){
+            if(image){
+                if(image.type != "image/png"){
+                $scope.splash[idx] = null;
+                    toastr.error('Please upload PNG format image', 'Warning', {
+                          closeButton: true
+                    });
+                }else if(image.width != width && image.height != height){
+                $scope.splash[idx] = null;
+                    toastr.error('Image should be in recommended size', 'Warning', {
+                          closeButton: true
+                    });
+                }
             }
         };
 
