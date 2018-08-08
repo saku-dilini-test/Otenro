@@ -1,9 +1,10 @@
 {
-  "name": "Outfit.lk",
-  "appId": "5b31ebd8708a7f7b088c1abf",
-  "userId": "5b17b815071168630caa53ac",
+  "name": "Hellog",
+  "appId": "5b683fd7c5c075140e18e411",
+  "userId": "58905f44ebabf27c134706c3",
   "serviceApi": {
-    "host": "https://dashboard.otenro.com",
-    "port": 1338
-  }
+    "host": "http://localhost:1337",
+    "port": 1337
+  },
+  "templateName": "smartfit"
 }

@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
   public title: string;
   public loginStatus;
   dummy: any;
-  private categories: any
+  categories: any
   private catName: any;
   imageUrl: any;
   user; localCart; blogData;userUkn;

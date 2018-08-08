@@ -3,7 +3,7 @@
   <div class="bloc  l-blocbottom-mobie-menu" id="bloc-37">
     <div class="container">
       <div class="row row-no-gutters">
-        <div class="col-xs-3" (click)="navigate('')">
+        <div class="col-xs-3" (click)="navigate('','Home')">
           <div class="text-center">
             <span class="fa fa-home icon-sm"></span>
           </div>
@@ -11,7 +11,7 @@
             Home
           </h6>
         </div>
-        <div class="col-xs-3" (click)="navigate('appUser')" *ngIf="loginStatus">
+        <div class="col-xs-3" (click)="navigate('appUser','Edit Profile')" *ngIf="loginStatus">
           <div class="text-center">
             <span class="fa fa-user icon-sm"></span>
           </div>
@@ -19,7 +19,7 @@
             Profile
           </h6>
         </div>
-        <div class="col-xs-3" (click)="navigate('shop')">
+        <div class="col-xs-3" (click)="navigate('shop','Search')">
           <div class="text-center">
             <span class="fa fa-search icon-sm"></span>
           </div>
@@ -27,7 +27,7 @@
             Search<br>
           </h6>
         </div>
-        <div class="col-xs-3" (click)="navigate('contact')">
+        <div class="col-xs-3" (click)="navigate('contact','Contact Us')">
           <div class="text-center">
             <span class="fa fa-phone icon-sm"></span>
           </div>
@@ -46,8 +46,8 @@
   <div class="bloc main-footer-back d-bloc " id="bloc-38">
     <div class="container bloc-sm cus-padding">
       <div class="row">
-        <div class="col-xs-4">
-          <img  src="{{imageUrl}}/logo.png&dummy={{dummy}}" alt="logo" (click)="navigate('')"/>
+        <div class="col-xs-4 navbar-brand">
+          <img  src="{{imageUrl}}/logo.png&dummy={{dummy}}" alt="logo" (click)="navigate('','Home')"/>
         </div>
         <div class="col-xs-4 text-left">
           <h4 class="main-footer-header">QUICK LINKS</h4>
