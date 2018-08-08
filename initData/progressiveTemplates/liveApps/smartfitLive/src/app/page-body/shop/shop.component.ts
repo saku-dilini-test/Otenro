@@ -133,7 +133,7 @@ export class ShopComponent implements OnInit {
   getDiscountPrice(sku,price){
     var newPrice,percentagePrice;
     var test = this.promoData.filter((data)=> data.sku == sku);
-    if(test[0] == "discountValue"){
+    if(test[0].discountType == "discountValue"){
       newPrice = price - test[0].discount;
       return newPrice;
     }else{
