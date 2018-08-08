@@ -217,8 +217,8 @@ export class ProductComponent implements OnInit {
                         if (this.foodInfo.variants.length == 1) {
                             for (let i = 0; i < this.dataService.promoData.length; i++) {
                                 if (this.dataService.promoData[i].sku == this.foodInfo.variants[0].sku) {
-                                    this.availableFirstVariPromo = true;
                                     if (new Date(this.dataService.promoData[i].toDate) >= this.todayDate) {
+                                        this.availableFirstVariPromo = true;
                                         if (this.dataService.promoData[i].discountType == "discountValue") {
                                             this.oldPrice = this.selectedVariant.price;
                                             this.newPrice = this.selectedVariant.price - this.dataService.promoData[i].discount;
