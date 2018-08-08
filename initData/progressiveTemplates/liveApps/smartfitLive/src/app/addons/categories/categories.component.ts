@@ -1,10 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import * as data from '../../madeEasy.json';
 import { SERVER_URL } from '../../constantsService';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { CurrencyService } from '../../services/currency/currency.service';
-declare var $:any;
+import { ProductsService } from '../../services/products/products.service';
+
+declare var $: any;
 
 @Component({
   selector: 'app-categories',
@@ -19,16 +21,43 @@ export class CategoriesComponent implements OnInit {
   private catName: any;
   private currentViewName: string;
   private currency: string;
+  promoData = []; todayDate;
 
   @Input('categories') categories: CategoriesModel;
   @Input('products') products: any;
 
-  constructor(private router: Router, private dataService: PagebodyServiceModule,private currencyService: CurrencyService) {
+  constructor(private router: Router, private dataService: PagebodyServiceModule,
+    private currencyService: CurrencyService, private productsService: ProductsService) {
     this.currentViewName = 'Home';
 
+    this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
+
+      data.forEach(element => {
+        element.selectedProduct.forEach(variants => {
+
+          variants.fromDate = element.dateFrom;
+          variants.toDate = element.dateTo;
+
+          if (element.discountType == 'discountValue') {
+            variants.discountType = element.discountType;
+            variants.discount = element.discount
+          } else {
+            variants.discountType = element.discountType;
+            variants.discount = element.discountPercent
+          }
+
+          this.promoData.push(variants);
+        });
+      });
+      console.log(this.promoData);
+    });
   }
 
   ngOnInit() {
+
+    var d = new Date();
+    var str = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
+    this.todayDate = new Date(str);
 
     this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
@@ -78,6 +107,47 @@ export class CategoriesComponent implements OnInit {
     return isSoldOut;
   }
 
+  checkForPromo(product) {
+    var availableFirstVariPromo = false;
+    // console.log(product);
+    if (product.variants.length > 0 && this.promoData) {
+      for (let i = 0; i < this.promoData.length; i++) {
+        if (this.promoData[i].sku == product.variants[0].sku) {
+          if (new Date(this.promoData[i].toDate) >= this.todayDate) {
+            availableFirstVariPromo = true;
+            // if (this.promoData[i].discountType == "discountValue") {
+            //     this.oldPrice = product.variants[0].price;
+            //     this.newPrice = product.variants[0].price - this.promoData[i].discount;
+            // } else {
+            //     this.oldPrice = product.variants[0].price;
+            //     percentagePrice = product.variants[0].price * (this.promoData[i].discount / 100);
+            //     this.newPrice = product.variants[0].price - percentagePrice;
+            // }
+          }
+          break;
+        }
+
+      };
+
+    }
+    return availableFirstVariPromo;
+  }
+
+  getDiscountPrice(sku,price){
+    var newPrice,percentagePrice;
+    var test = this.promoData.filter((data)=> data.sku == sku);
+    console.log(test);
+    if(test[0] == "discountValue"){
+      newPrice = price - test[0].discount;
+      return newPrice;
+    }else{
+      percentagePrice = price * (test[0].discount / 100)
+      newPrice = price - percentagePrice;
+      return newPrice;
+    }
+
+    return newPrice;
+  }
 
   getWidth(index, length) {
     let styles = {
@@ -111,7 +181,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   navigateProd(val: String, item: any, catName: String) {
-    if(!this.checkSoldOut(item)){
+    if (!this.checkSoldOut(item)) {
       this.catName = catName;
       this.dataService.data = item;
       localStorage.setItem(this.appId + ":dataServiceData", JSON.stringify(this.dataService.data));
