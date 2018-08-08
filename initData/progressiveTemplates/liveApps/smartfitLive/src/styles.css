@@ -1098,4 +1098,18 @@ button{
 	margin-bottom: 0;
 }
 
-body, html { overflow-x:hidden; }
+body, html { 
+	overflow-x:hidden;
+ }
+
+.productPromo{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 50px;
+}
+
+.productPromo h5, .productPromo h6{
+	margin-top:0px;
+	margin-bottom:5px
+}
