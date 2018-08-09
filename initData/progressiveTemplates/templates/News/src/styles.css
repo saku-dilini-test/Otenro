@@ -1065,7 +1065,7 @@ body::-webkit-scrollbar-thumb {
   overflow-x: hidden;
 }
 .made-easy-background-image{
-  background: url("assets/images/background.png");
+  background: null;
   background-repeat: repeat;
   background-size: cover;
 }
