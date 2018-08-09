@@ -1093,11 +1093,15 @@ body::-webkit-scrollbar-thumb {
   box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.5);
 }
 .main-footer-back{
-  background-color: #000 !important;
+  background-color: #fff !important;
 }
 .main-footer-header{
-  color:#fff;
+  color:#000;
 }
 .main-footer-font{
-  color:rgb(207, 189, 172);
+  color:#000;
+}
+
+.main-footer-header:hover{
+  color:#ccc;
 }
