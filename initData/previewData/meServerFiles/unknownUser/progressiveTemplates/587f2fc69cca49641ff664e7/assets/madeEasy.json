@@ -1,0 +1,10 @@
+{
+  "name": "outfit",
+  "appId": "587f2fc69cca49641ff664e7",
+  "userId": "unknownUser",
+  "serviceApi": {
+    "host": "serverUrl",
+    "port": 1337
+  },
+  "templateName": "outfit"
+}

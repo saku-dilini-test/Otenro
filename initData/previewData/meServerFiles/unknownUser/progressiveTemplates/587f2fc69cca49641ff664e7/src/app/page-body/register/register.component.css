@@ -1,9 +1,0 @@
-.register{
-  max-width: 800px;
-  margin: 5% auto 0% auto;
-}
-@media (max-width: 480px){
-  .h-40-s{
-    height: 40px;
-  }
-}

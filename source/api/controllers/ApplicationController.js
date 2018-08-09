@@ -276,7 +276,7 @@ module.exports = {
                 appBasePath = config.PROGRESSIVE_TEMPLATES_PATH,
                 templatePath = config.PROGRESSIVE_TEMPLATES_PATH  + templateName,
                 appName = req.body.appName,
-                serverTmp="http://localhost:port",
+                serverTmp="serverUrl",
                 serverOrg=config.server.host,
                 isAppNameAvailable=false;
 
@@ -486,10 +486,8 @@ module.exports = {
 
         fs.readdir(testFolder, (err, files) => {
                 files.forEach(file => {
-                    console.log(file);
                     var matched = file.match(/main/g);
                     if (matched == "main") {
-                        console.log("this worked");
                         fs.readFile(tempAppDirPath + appId +'/'+file, 'utf-8',
                             function(err, data) {
                                 if (err) return res.negotiate(err);

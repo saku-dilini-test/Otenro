@@ -98,18 +98,30 @@ cd meServerFiles/unknownUser/templates/
 
 cd ../
 pwd
+echo 'starting progressive apps'
+echo $serverUrl
 cd progressiveTemplates/
    for d in ./*;do
-       cd $d/src/app/
-       ls
+       cd $d/assets/
        sed -i "s@serverUrl@$serverUrl@" constantsService.ts
-       cd -
+       APPID=`grep -m 1 "\"appId\"" madeEasy.json | sed -r 's/^ *//;s/.*: *"//;s/",?//'`
+       USERID=`grep -m 1 "\"userId\"" madeEasy.json | sed -r 's/^ *//;s/.*: *"//;s/",?//'`
+       TEMPNAME=`grep -m 1 "\"templateName\"" madeEasy.json | sed -r 's/^ *//;s/.*: *"//;s/",?//'`
+       echo $APPID
+       echo $USERID
+       echo $TEMPNAME
+       cd ../
+       pwd
+       sed -i "s@serverUrl@$serverUrl@" main.*.js
+       sed -i "s@unknownAppId@$APPID@" main.*.js
+       sed -i "s@unknownUserName@$USERID@" main.*.js
+       sed -i "s@unknownTemplateName@$TEMPNAME@" main.*.js
+       cd ../
     done
-
 cd ../../../
 cp -r ./appFileServerFiles/unknownUser $APPFILESERVER
 cp -r ./meServerFiles/unknownUser $MESERVER
-cp -r ./meServerFiles/node_modules $NODE
+
 
 
 
