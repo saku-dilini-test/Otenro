@@ -1,0 +1,4 @@
+app-page-body{
+  min-height: calc(100vh - 382px);
+  display: block;
+}
