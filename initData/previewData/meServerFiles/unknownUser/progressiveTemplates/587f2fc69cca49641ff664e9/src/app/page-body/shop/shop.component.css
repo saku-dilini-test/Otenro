@@ -1,0 +1,43 @@
+.flex-row{
+  display: flex;
+  border: 0;
+  padding: 8px 8px 0 8px;
+}
+
+.flex-row img{
+  margin: 16px;
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 50%;
+  color: #a5a5a5;
+  min-width: 55px;
+}
+
+.flex-row p{
+  font-size: 13px;
+  height: 34px;
+  overflow: hidden;
+  color: #a5a5a5;
+}
+
+.flex-row div{
+  margin:16px 0;
+}
+
+.flex-row h5{
+  font-size: 16px;
+}
+.container{
+  height: 100vh;
+  background: #fff;
+  border-top:1px solid #ccc;
+}
+
+.flex-row:last-child {
+  padding-bottom: 60px;
+}
+.flex-row:first-child{
+  padding-top: 69px;
+}
+
