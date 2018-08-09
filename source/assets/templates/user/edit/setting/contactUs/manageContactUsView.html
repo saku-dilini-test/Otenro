@@ -34,7 +34,17 @@
                             <fieldset>
                                 <!-- Telephone -->
                                 <label>Telephone</label>
-                                <input class="input-shadow-border" type="text" name="telPhone" ng-model="basicInfo.telPhone" ng-pattern="/[0-9]+/" ui-mask="(999) 999-9999"  required />
+                                <!--<input class="input-shadow-border" type="text" name="telPhone" ng-model="basicInfo.telPhone" ng-pattern="/[0-9]+/" ui-mask="(999) 999-9999"  required />-->
+                                <input class="input-shadow-border" numbers-only type="text" name="telPhone" ng-model="basicInfo.telPhone" ng-pattern="/[0-9]+/" maxlength="{{phoneLength}}"  required />
+                                <div ng-hide="basicInfo.telPhone.length > phoneLength">
+                                    <span class="information">Digits left: {{phoneLength - basicInfo.telPhone.length}}</span>
+                                </div>
+                                <div  ng-show="basicInfo.telPhone.length > phoneLength">
+                                    <span>Digits left: </span>
+                                    <span class="information" >
+                                        {{phoneLength - basicInfo.telPhone.length}}
+                                    </span>
+                                </div>
                             </fieldset>
                             <fieldset>
                                 <!-- Email -->
