@@ -7,6 +7,8 @@ import * as data from '../../madeEasy.json';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { FormGroup, FormControl, FormArray, NgForm } from '@angular/forms';
 import { TitleService } from '../../services/title.service';
+import { Subject } from 'rxjs/Subject';
+import { debounceTime } from 'rxjs/operator/debounceTime';
 
 @Component({
   selector: 'app-register',
@@ -34,15 +36,17 @@ export class RegisterComponent implements OnInit {
   private phone;
   private myForm: FormGroup;
   isEmailDuplicate;
+  errorMessage: string;
+  private _success = new Subject<string>();
 
-  constructor(private localStorageService: LocalStorageService, private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
-              private title: TitleService) {
+  constructor(private localStorageService: LocalStorageService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
+    private title: TitleService) {
     this.title.changeTitle("Register");
 
   }
 
-  changeCountry(data){
-      this.selectedCountry = data;
+  changeCountry(data) {
+    this.selectedCountry = data;
   }
 
   ngOnInit() {
@@ -51,7 +55,7 @@ export class RegisterComponent implements OnInit {
       this.navigate = params['type'];
     });
 
-      this.http.get(SERVER_URL+"/edit/getAllCountry")
+    this.http.get(SERVER_URL + "/edit/getAllCountry")
       .subscribe((res) => {
         var data = JSON.stringify(res);
 
@@ -65,33 +69,42 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  modelChanged(e){
+  modelChanged(e) {
     this.isEmailDuplicate = false;
-    if(e == this.email){
+    if (e == this.email) {
       this.isEmailDuplicate = true;
     }
   }
 
 
-  signUp=function(myForm) {
+  signUp = function (myForm) {
 
-    this.fname = myForm.fname;
-    this.lname = myForm.lname;
-    this.email = myForm.email;
-    this.password = myForm.password;
-    let passwordCon = myForm.passwordCon;
-    this.city = myForm.city;
-    this.phone = myForm.phone;
-    this.streetName = myForm.streetName;
-    this.streetNumber = myForm.streetNumber;
-    this.zip = myForm.zip;
+    if (this.selectedCountry == null || this.selectedCountry == 'select a country') {
+
+      this._success.subscribe((message) => this.errorMessage = message);
+      debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+      this._success.next("Please select a country!");
+      setTimeout(() => { }, 3100);
+
+    } else {
+
+      this.fname = myForm.fname;
+      this.lname = myForm.lname;
+      this.email = myForm.email;
+      this.password = myForm.password;
+      let passwordCon = myForm.passwordCon;
+      this.city = myForm.city;
+      this.phone = myForm.phone;
+      this.streetName = myForm.streetName;
+      this.streetNumber = myForm.streetNumber;
+      this.zip = myForm.zip;
 
 
-    var data = {
+      var data = {
         firstName: this.fname,
         lastName: this.lname,
-        email : this.email,
-        password : this.password,
+        email: this.email,
+        password: this.password,
         streetNumber: this.streetNumber,
         streetName: this.streetName,
         city: this.city,
@@ -99,47 +112,48 @@ export class RegisterComponent implements OnInit {
         country: this.selectedCountry,
         phone: this.phone,
         appId: this.appId
-    };
+      };
 
-    this.http.post(SERVER_URL+"/templatesAuth/register",data)
-        .subscribe((res) =>{
+      this.http.post(SERVER_URL + "/templatesAuth/register", data)
+        .subscribe((res) => {
 
-                var requestParams = {
-                    "token": res.token,
-                    "email": data.email,
-                    "name": data.firstName,
-                    "lname": data.lastName,
-                    "phone": data.phone,
-                    "streetNumber": data.streetNumber,
-                    "streetName": data.streetName,
-                    "country": data.country,
-                    "city": data.city,
-                    "zip": data.zip,
-                    "type": 'internal',
-                    "appId":data.appId,
-                    "registeredUser": res.user.sub
-                };
+          var requestParams = {
+            "token": res.token,
+            "email": data.email,
+            "name": data.firstName,
+            "lname": data.lastName,
+            "phone": data.phone,
+            "streetNumber": data.streetNumber,
+            "streetName": data.streetName,
+            "country": data.country,
+            "city": data.city,
+            "zip": data.zip,
+            "type": 'internal',
+            "appId": data.appId,
+            "registeredUser": res.user.sub
+          };
 
-                this.localStorageService.set('appLocalStorageUser'+this.appId,(requestParams));
-                this.dataService.appUserId = requestParams.registeredUser;
-                this.dataService.isUserLoggedIn.check = true;
-                this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
+          this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
+          this.dataService.appUserId = requestParams.registeredUser;
+          this.dataService.isUserLoggedIn.check = true;
+          this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
 
-                if(this.navigate == 'home'){
-                    this.route.navigate(['home']);
-                }else if(this.navigate == 'cart'){
-                  this.route.navigate(['cart']);
-                }else if(this.navigate == 'delivery'){
-                  this.route.navigate(['checkout','delivery']);
-                }else{
-                  this.route.navigate(['checkout','pickup']);
-                }
-            },err =>{
+          if (this.navigate == 'home') {
+            this.route.navigate(['home']);
+          } else if (this.navigate == 'cart') {
+            this.route.navigate(['cart']);
+          } else if (this.navigate == 'delivery') {
+            this.route.navigate(['checkout', 'delivery']);
+          } else {
+            this.route.navigate(['checkout', 'pickup']);
+          }
+        }, err => {
 
-              if(err.status == 409){
-                this.isEmailDuplicate = true;
-              }
-            });
+          if (err.status == 409) {
+            this.isEmailDuplicate = true;
+          }
+        });
+    }
   }
 
 }
