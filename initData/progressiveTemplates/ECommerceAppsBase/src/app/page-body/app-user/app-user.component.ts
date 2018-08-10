@@ -47,7 +47,7 @@ export class AppUserComponent implements OnInit {
       'streetNo': new FormControl(this.userData.streetNumber, Validators.compose([Validators.required])),
       'streetName': new FormControl(this.userData.streetName, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/)])),
       'city': new FormControl(this.userData.city, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)])),
-      'zip': new FormControl(this.userData.zip, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9\-]+\s)*[a-zA-Z0-9\-]+$/)])),
+      'zip': new FormControl(this.userData.zip, Validators.compose([Validators.pattern(/^([a-zA-Z0-9\-]+\s)*[a-zA-Z0-9\-]+$/)])),
       'password': new FormControl('',Validators.compose([Validators.required])),
       'passwordNew': new FormControl('',Validators.compose([Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)])),
       'passwordConfirm': new FormControl('',Validators.compose([Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)])),

@@ -98,7 +98,7 @@
                 You must include Street Name.
               </div>
               <div *ngIf="!userEditForm.controls['streetName'].valid" class="alert alert-danger">
-                Invalid Street name, no special Characters & unnecessary spaces.              </div>
+                Invalid Street name, no special Characters & unnecessary spaces. </div>
             </div>
 
             <div class="form-group">
@@ -111,19 +111,19 @@
                 You must include a City.
               </div>
               <div *ngIf="!userEditForm.controls['city'].valid" class="alert alert-danger">
-                City must only include Alphabetic character & no unnecessary spaces.              </div>
+                City must only include Alphabetic character & no unnecessary spaces. </div>
             </div>
 
             <div class="form-group">
               <label for="username" class="sub-header-text-h2">
                 Postal Code/ZIP
               </label>
-              <input class="form-control" type="text" placeholder="A-123" [formControl]="userEditForm.controls['zip']">
+              <input class="form-control" type="text" placeholder="A-123 (optional)" [formControl]="userEditForm.controls['zip']">
 
-              <div *ngIf="userEditForm.controls['zip'].hasError('required')
+              <!-- <div *ngIf="userEditForm.controls['zip'].hasError('required')
               && userEditForm.controls['zip'].touched" class="alert alert-danger">
                 You must include zip code.
-              </div>
+              </div> -->
               <div *ngIf="!userEditForm.controls['zip'].valid" class="alert alert-danger">
                 Invalid ZIP code (A-123)
               </div>
@@ -139,20 +139,19 @@
                 </option>
               </select>
             </div>
+            <div *ngIf="isSuccessDetails" class="alert alert-success animated fadeIn">
+              Successfully Changed!
+            </div>
             <div class="col-sm-12">
-              <div *ngIf="isSuccessDetails" class="alert alert-success animated fadeIn">
-                Successfully Changed!
-              </div>
               <button [disabled]="userEditForm.controls['fName'].invalid ||
-                                      userEditForm.controls['lName'].invalid ||
-                                      userEditForm.controls['emailRe'].invalid ||
-                                      userEditForm.controls['phone'].invalid ||
-                                      userEditForm.controls['streetNo'].invalid ||
-                                      userEditForm.controls['streetName'].invalid ||
-                                      userEditForm.controls['city'].invalid ||
-                                      userEditForm.controls['zip'].invalid ||
-                                      userEditForm.controls['country'].invalid" (click)="editUserDetails(userEditForm.value)"
-                class="btn btn-d main-button">Change Details</button>
+              userEditForm.controls['lName'].invalid ||
+              userEditForm.controls['emailRe'].invalid ||
+              userEditForm.controls['phone'].invalid ||
+              userEditForm.controls['streetNo'].invalid ||
+              userEditForm.controls['streetName'].invalid ||
+              userEditForm.controls['zip'].invalid ||
+              userEditForm.controls['city'].invalid ||
+              userEditForm.controls['country'].invalid" (click)="editUserDetails(userEditForm.value)" class="btn btn-d main-button">Change Details</button>
             </div>
 
             <div class="padding-bottom">
@@ -196,7 +195,8 @@
                   </label>
                   <input class="form-control" width="50%" type="password" [formControl]="userEditForm.controls['passwordConfirm']">
                   <div *ngIf="userEditForm.controls['passwordConfirm'].hasError('required')
-                  && userEditForm.controls['passwordConfirm'].touched && userEditForm.controls['passwordConfirm'].dirty" class="alert alert-danger">
+                  && userEditForm.controls['passwordConfirm'].touched && userEditForm.controls['passwordConfirm'].dirty"
+                    class="alert alert-danger">
                     You must include the password.
                   </div>
                   <div *ngIf=" userEditForm.controls['passwordConfirm'].touched && userEditForm.controls['passwordConfirm'].dirty && !userEditForm.controls['passwordConfirm'].valid"

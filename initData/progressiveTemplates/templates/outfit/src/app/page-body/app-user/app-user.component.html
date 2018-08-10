@@ -118,12 +118,12 @@
               <label for="username" class="sub-header-text-h2">
                 Postal Code/ZIP
               </label>
-              <input class="form-control" type="text" placeholder="A-123" [formControl]="userEditForm.controls['zip']">
+              <input class="form-control" type="text" placeholder="A-123 (optional)" [formControl]="userEditForm.controls['zip']">
 
-              <div *ngIf="userEditForm.controls['zip'].hasError('required')
+              <!-- <div *ngIf="userEditForm.controls['zip'].hasError('required')
               && userEditForm.controls['zip'].touched" class="alert alert-danger">
                 You must include zip code.
-              </div>
+              </div> -->
               <div *ngIf="!userEditForm.controls['zip'].valid" class="alert alert-danger">
                 Invalid ZIP code (A-123)
               </div>
