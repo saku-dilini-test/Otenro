@@ -6,7 +6,7 @@
   text-align: center;
   margin-left: 0;
   position: absolute;
-  font-size: 20px;
+  font-size: 16px; /* edited by .sanira */
   font-weight: bold;
   text-transform: capitalize;
 }
@@ -18,7 +18,7 @@
   text-align: right;
   margin-left: 0;
   position: absolute;
-  font-size: 20px;
+  font-size: 16px;
 }
 .ui-navbar-toggle{
   z-index: 1;

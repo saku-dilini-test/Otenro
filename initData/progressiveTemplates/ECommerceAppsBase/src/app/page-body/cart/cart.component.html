@@ -22,7 +22,7 @@
         <div class= "col-sm-12 main-content-font">
           <div>
 
-            <h1 class="main-header-font text-center bloc-md" *ngIf="cartItems.length == 0">There are no products added to the cart</h1>
+            <h4 class="main-header-font text-center bloc-md" *ngIf="cartItems.length == 0">There are no products added to the cart</h4>
             <div class="row content-cards" *ngFor="let item of cartItems ; let i = index">
               <div class="col-sm-3">
                   <img *ngIf="item.imgURL" src="{{imageUrl}}/{{item.imgURL}}" class="center-block img-responsive lazyload" >

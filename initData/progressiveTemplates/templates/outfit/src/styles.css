@@ -1485,3 +1485,7 @@ header{
 }
 
 body, html { overflow-x:hidden; }
+
+.font-16{
+	font-size:16px;
+}

@@ -66,9 +66,9 @@
 				<h3 class="mg-md bloc-mob-center-text text-left main-footer-header">
 					Company
 				</h3>
-				<a (click)="navigate('terms','Terms')"	class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Terms and Conditionss</a>
-				<a (click)="navigate('policies','Policies')" class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Privacy Policy</a>
-				<a (click)="navigate('return-policy', 'Policies')" class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Return Policy</a>
+				<a  [routerLink]="['/terms']"	class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Terms and Conditions</a>
+				<a [routerLink]="['/policies']"	  class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Privacy Policy</a>
+				<a  [routerLink]="['/policies']" class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Return Policy</a>
 			</div>
 		</div>
 	</div>

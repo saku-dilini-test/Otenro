@@ -64,7 +64,7 @@
           </div>
         </div>
       </div>
-      <h1 class="text-center  main-header-font" *ngIf="cartItems.length == 0">There are no products added to the cart</h1>
+      <h4 class="text-center  main-header-font" *ngIf="cartItems.length == 0">There are no products added to the cart</h4>
     </div>
   </div>
 </div>
@@ -152,7 +152,7 @@
             <p class="text-right product-text text-siize  main-content-font" *ngIf="cartItems.length > 0" [(ngModel)]="total" ngDefaultControl>
               <strong>{{currency}} {{getTotal()}}</strong>
             </p>
-            <p class="text-right product-text text-siize  main-content-font" *ngIf="cartItems.length == 0">There are no Products added to the cart</p>
+            <h4 class="text-right product-text text-siize  main-content-font" *ngIf="cartItems.length == 0">There are no Products added to the cart</h4>
 
             <a *ngIf="cartItems.length > 0  && enableDelivery" class="btn btn-d btn-lg pull-right button-spacing-top main-button" (click)="delivery(cartItems)">Delivery</a>
             <a *ngIf="cartItems.length > 0  && enablePickup" class="btn btn-d btn-lg pull-right button-spacing-top main-button" (click)='pickupDetails(cartItems)'>Pickup</a>
