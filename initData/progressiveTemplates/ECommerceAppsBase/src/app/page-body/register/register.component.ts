@@ -76,6 +76,14 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+
+  }
 
   signUp = function (myForm) {
 
@@ -86,77 +94,77 @@ export class RegisterComponent implements OnInit {
       this._success.next("Please select a country!");
       setTimeout(() => { }, 3100);
 
-    } else {
+    }else {
 
-    this.fname = myForm.fname;
-    this.lname = myForm.lname;
-    this.email = myForm.email;
-    this.password = myForm.password;
-    let passwordCon = myForm.passwordCon;
-    this.city = myForm.city;
-    this.phone = myForm.phone;
-    this.streetName = myForm.streetName;
-    this.streetNumber = myForm.streetNumber;
-    this.zip = myForm.zip;
+      this.fname = myForm.fname;
+      this.lname = myForm.lname;
+      this.email = myForm.email;
+      this.password = myForm.password;
+      let passwordCon = myForm.passwordCon;
+      this.city = myForm.city;
+      this.phone = myForm.phone;
+      this.streetName = myForm.streetName;
+      this.streetNumber = myForm.streetNumber;
+      this.zip = myForm.zip;
 
 
-    var data = {
-      firstName: this.fname,
-      lastName: this.lname,
-      email: this.email,
-      password: this.password,
-      streetNumber: this.streetNumber,
-      streetName: this.streetName,
-      city: this.city,
-      zip: this.zip,
-      country: this.selectedCountry,
-      phone: this.phone,
-      appId: this.appId
-    };
+      var data = {
+        firstName: this.fname,
+        lastName: this.lname,
+        email: this.email,
+        password: this.password,
+        streetNumber: this.streetNumber,
+        streetName: this.streetName,
+        city: this.city,
+        zip: this.zip,
+        country: this.selectedCountry,
+        phone: this.phone,
+        appId: this.appId
+      };
 
-    this.http.post(SERVER_URL + "/templatesAuth/register", data)
-      .subscribe((res) => {
+      this.http.post(SERVER_URL + "/templatesAuth/register", data)
+        .subscribe((res) => {
 
-        var requestParams = {
-          "token": res.token,
-          "email": data.email,
-          "name": data.firstName,
-          "lname": data.lastName,
-          "phone": data.phone,
-          "streetNumber": data.streetNumber,
-          "streetName": data.streetName,
-          "country": data.country,
-          "city": data.city,
-          "zip": data.zip,
-          "type": 'internal',
-          "appId": data.appId,
-          "registeredUser": res.user.sub
-        };
+          var requestParams = {
+            "token": res.token,
+            "email": data.email,
+            "name": data.firstName,
+            "lname": data.lastName,
+            "phone": data.phone,
+            "streetNumber": data.streetNumber,
+            "streetName": data.streetName,
+            "country": data.country,
+            "city": data.city,
+            "zip": data.zip,
+            "type": 'internal',
+            "appId": data.appId,
+            "registeredUser": res.user.sub
+          };
 
-        this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
-        if (this.localStorageService.get("cartUnknownUser")) {
-          this.localStorageService.set("cart" + requestParams.registeredUser, this.localStorageService.get("cartUnknownUser"));
-          this.localStorageService.remove("cartUnknownUser");
-        }
-        this.dataService.appUserId = requestParams.registeredUser;
-        this.dataService.isUserLoggedIn.check = true;
-        this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
+          this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
+          if (this.localStorageService.get("cartUnknownUser")) {
+            this.localStorageService.set("cart" + requestParams.registeredUser, this.localStorageService.get("cartUnknownUser"));
+            this.localStorageService.remove("cartUnknownUser");
+          }
+          this.dataService.appUserId = requestParams.registeredUser;
+          this.dataService.isUserLoggedIn.check = true;
+          this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
 
-        if (this.navigate == 'home') {
-          this.route.navigate(['home']);
-        } else if (this.navigate == 'cart') {
-          this.route.navigate(['cart']);
-        } else if (this.navigate == 'delivery') {
-          this.route.navigate(['checkout', 'delivery']);
-        } else {
-          this.route.navigate(['checkout', 'pickup']);
-        }
-      }, err => {
+          if (this.navigate == 'home') {
+            this.route.navigate(['home']);
+          } else if (this.navigate == 'cart') {
+            this.route.navigate(['cart']);
+          } else if (this.navigate == 'delivery') {
+            this.route.navigate(['checkout', 'delivery']);
+          } else {
+            this.route.navigate(['checkout', 'pickup']);
+          }
+        }, err => {
 
-        if (err.status == 409) {
-          this.isEmailDuplicate = true;
-        }
-      });
+          if (err.status == 409) {
+            this.isEmailDuplicate = true;
+          }
+        });
     }
   }
 

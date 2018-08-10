@@ -134,11 +134,11 @@
               <label class="sub-header-text-h2">
                 phone
               </label>
-              <input class="form-control" maxlength="16" #phone='ngModel' type="tel" id="phone" name="phone" pattern="^[+]\d{11,15}$" name="phone"
-                placeholder="+94712345678" ngModel required>
-              <div [hidden]="phone.valid || phone.pristine" class="alert alert-danger">
-                <div [hidden]="!phone.hasError('required')">Phone Number is required</div>
-                <div [hidden]="!phone.hasError('pattern')">Invalid Phone number (+94123456789)</div>
+              <input (keypress)="numberOnly($event)" class="form-control" maxlength="16" #phone='ngModel' type="tel" id="phone" name="phone" name="phone"
+                placeholder="0712345678" ngModel required>
+              <div [hidden]="phone.valid || phone.pristine">
+                <div class="alert alert-danger" [hidden]="!phone.hasError('required')">Phone Number is required</div>
+                <!-- <div [hidden]="!phone.hasError('pattern')">Invalid Phone number (+94123456789)</div> -->
               </div>
             </div>
 
@@ -157,7 +157,7 @@
               <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
             </div>
             <button class="btn btn-d btn-lg main-button" [disabled]="!fname.valid || !lname.valid || !contactEmail.valid || !password.valid || !passwordCon.valid 
-            || !streetNumber.valid || !streetName.valid || !city.valid || !phone.valid || !zip.valid"
+            || !streetNumber.valid || !streetName.valid || !city.valid || !phone.valid || !zip.valid || (password.value != passwordCon.value)"
             type="submit">Create account</button>
           </form>
         </div>
