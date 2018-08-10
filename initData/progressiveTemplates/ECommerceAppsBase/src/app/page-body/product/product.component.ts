@@ -43,6 +43,8 @@ export class ProductComponent implements OnInit {
     oldPrice; newPrice;
     promoData = [];
     todayDate;
+    errBuy = false;
+    message;
     imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
 
@@ -601,12 +603,51 @@ export class ProductComponent implements OnInit {
             }
         }
     };
+
     open(data) {
-        if (!this.isBuyBtnDisable) {
+        console.log(this.lockBuyButton);
+        if (!this.lockBuyButton) {
+
+            this.errBuy = true;
+            if (this.Data.selection.length == 1) {
+                this.message = "Please select the " + this.name1 + " and the Quantity";
+            }else if (this.Data.selection.length == 2) {
+                this.message = "Please select the " + this.name1 + ", " + this.name2 + " and the Quantity";
+            } else if (this.Data.selection.length == 3) {
+                this.message = "Please select the " + this.name1 + ", " + this.name2 + ", " + this.name3 + " and the Quantity";
+            } else if (this.Data.selection.length == 4) {
+                this.message = "Please select the " + this.name1 + ", " + this.name2 + ", " + this.name3 + ", " + this.name4 + " and the Quantity";
+            }
+            window.setTimeout(() => {
+                $(".alert-warning").fadeTo(500, 0).slideUp(500, ()=>{
+                    $(this).remove();
+                    this.errBuy = false;
+                });
+            }, 2000);
+            return;
+        }else if(this.selectedVariant.buyQuantity == null){
+
+            this.errBuy = true;
+            this.message = "Please select a buyQuantity";
+            window.setTimeout(() => {
+                $(".alert-warning").fadeTo(500, 0).slideUp(500, ()=>{
+                    $(this).remove();
+                    this.errBuy = false;
+                });
+            }, 2000);
+            return;
+        } else {
             this.dialogVariants = data;
-            $('#myModal').modal('show')
+            $('#myModal').modal('show');
         }
+
     }
+    // open(data) {
+    //     if (!this.isBuyBtnDisable) {
+    //         this.dialogVariants = data;
+    //         $('#myModal').modal('show')
+    //     }
+    // }
     close() {
         $('#myModal').modal('hide')
     }
@@ -623,9 +664,40 @@ export class ProductComponent implements OnInit {
     }
 
     addToCart(navi) {
-        if (this.selectedVariant.buyQuantity == null) {
-            console.log(' error please select buy quantity');
+
+        if (!this.lockBuyButton) {
+
+            this.errBuy = true;
+            if (this.Data.selection.length == 1) {
+                this.message = "Please select the " + this.name1 + " and the Quantity";
+            }else if (this.Data.selection.length == 2) {
+                this.message = "Please select the " + this.name1 + ", " + this.name2 + " and the Quantity";
+            } else if (this.Data.selection.length == 3) {
+                this.message = "Please select the " + this.name1 + ", " + this.name2 + ", " + this.name3 + " and the Quantity";
+            } else if (this.Data.selection.length == 4) {
+                this.message = "Please select the " + this.name1 + ", " + this.name2 + ", " + this.name3 + ", " + this.name4 + " and the Quantity";
+            }
+            window.setTimeout(() => {
+                $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
+                    $(this).remove();
+                    this.errBuy = false;
+                });
+            }, 2000);
+            return;
+        }else if(this.selectedVariant.buyQuantity == null){
+
+            this.errBuy = true;
+            this.message = "Please select a buyQuantity";
+            window.setTimeout(() => {
+                $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
+                    $(this).remove();
+                    this.errBuy = false;
+                });
+            }, 2000);
+            return;
         } else {
+
+            this.errBuy = false;
             if (this.dataService.cart.cartItems.length != 0) {
                 var i = 0;
                 while (i < this.dataService.cart.cartItems.length) {
