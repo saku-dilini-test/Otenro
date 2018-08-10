@@ -124,8 +124,8 @@
                             </div>
                               <div *ngIf="!complexForm.controls['city'].valid && complexForm.controls['city'].touched && complexForm.controls['city'].dirty"
                                 class="alert alert-danger">
-                                City must only include Alphabetic character & no unnecessary spaces.                      
-                            </div>
+                                City must only include Alphabetic character & no unnecessary spaces.
+                              </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -198,7 +198,7 @@
                   </div>
               </form>
               <form class="row" [formGroup]="shippingForm">
-                <div class="margin-bottom padding-bottom  col-md-12" *ngIf="!oldUser && complexForm.valid || oldUser">
+                <div class="margin-bottom col-md-12" *ngIf="!oldUser && complexForm.valid || oldUser">
                     <h3 class="main-header-font">Shipping Options</h3>
                     <div class="radio main-content-font" *ngFor="let ship of shippingData, let idx = index">
                       <label>
@@ -286,7 +286,6 @@
           <div class="col-sm-3" *ngIf='isSelected && complexForm.valid && sign && totalPrice || isSelected && pickupForm.valid && sign && totalPrice'>
           </div>
           <div class="col-sm-9" *ngIf='isSelected && complexForm.valid && sign && totalPrice || isSelected && pickupForm.valid && sign && totalPrice'>
-              <hr class="featurette-divider">
               <div class="padding-vertical">
                 <h3 class="main-header-font">Your order</h3>
                 <table class="table table-responsive">
@@ -353,7 +352,7 @@
               <h4 class="main-content-font" *ngIf="overWeight">Over weight. Cannot ship</h4>
               <h4 class="main-content-font" *ngIf="underWeight">Under weight. Cannot ship</h4>
 
-              <div class="custom-controls-stacked main-content-font padding-vertical" *ngIf="isSelected && !(overWeight || underWeight) && complexForm.valid || isSelected && !(overWeight || underWeight) && pickupForm.valid">
+              <div class="custom-controls-stacked main-content-font" *ngIf="isSelected && !(overWeight || underWeight) && complexForm.valid || isSelected && !(overWeight || underWeight) && pickupForm.valid">
                     <h4 class="main-header-font">Select Payment Type</h4>
                     <div *ngIf="deliveryShow" class="mt-3">
 
