@@ -66,7 +66,7 @@
                                             '<h1>Thank you </h1>'+
                                         '</div>'+
                                         '<br>'+
-                                        '<div class="md-dialog-header">'+
+                                        '<div class="dialog-padding-set">'+
                                              '<lable>Thank you we will get back to you soon...</lable>'+
                                         '</div>'+
                                         '<br>'+
