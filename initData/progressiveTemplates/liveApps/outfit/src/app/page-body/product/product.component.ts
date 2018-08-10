@@ -31,6 +31,8 @@ export class ProductComponent implements OnInit {
     private sign;
     private appId = (<any>data).appId;
     private userId = (<any>data).userId;
+    private templateName = (<any>data).templateName;
+
     selection = [];
     selection1 = [];
     selection2 = [];
@@ -56,6 +58,7 @@ export class ProductComponent implements OnInit {
     todayDate;
     errBuy = false;
     message;
+    zoomRatio;
     constructor(private localStorageService: LocalStorageService, private CurrencyService: CurrencyService,
         private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute,
         private route: Router, private title: TitleService, private productsService: ProductsService) {
@@ -63,6 +66,11 @@ export class ProductComponent implements OnInit {
         this.Data = JSON.parse(localStorage.getItem(this.appId + ":dataServiceData"));
 
 
+        if(this.templateName == "smartfit"){
+            this.zoomRatio = 3.5;
+        }else{
+            this.zoomRatio = 2;
+        }
         this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
 
             data.forEach(element => {
@@ -169,7 +177,8 @@ export class ProductComponent implements OnInit {
           slider_textpanel_bg_color:"#000000",
           slider_textpanel_bg_opacity: 0,
           gallery_autoplay:true,
-          theme_hide_panel_under_width: null
+          theme_hide_panel_under_width: null,
+          slider_zoom_max_ratio: this.zoomRatio
         });
         $('#gallery').on({
             'touchstart' : function(){
