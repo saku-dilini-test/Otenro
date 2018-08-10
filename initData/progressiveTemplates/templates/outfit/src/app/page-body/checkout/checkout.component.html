@@ -350,11 +350,11 @@
               </div>
 
 
-              <h1 class="main-content-font" *ngIf="overWeight">Over weight. Cannot ship</h1>
-              <h1 class="main-content-font" *ngIf="underWeight">Under weight. Cannot ship</h1>
+              <h4 class="main-content-font" *ngIf="overWeight">Over weight. Cannot ship</h4>
+              <h4 class="main-content-font" *ngIf="underWeight">Under weight. Cannot ship</h4>
 
               <div class="custom-controls-stacked main-content-font padding-vertical" *ngIf="isSelected && !(overWeight || underWeight) && complexForm.valid || isSelected && !(overWeight || underWeight) && pickupForm.valid">
-                    <h3 class="main-header-font">Select Payment Type</h3>
+                    <h4 class="main-header-font">Select Payment Type</h4>
                     <div *ngIf="deliveryShow" class="mt-3">
 
                       <div class="radio">
