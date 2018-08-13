@@ -49,7 +49,7 @@ export class FooterComponent {
     }
   }
 
-  navigate(val: string) {
+  navigate(val: string,data) {
     this.router.navigate([val])
   }
 

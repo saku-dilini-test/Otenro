@@ -135,10 +135,10 @@
                           </label>
                           <input class="form-control" type="text" placeholder="A-123" [formControl]="complexForm.controls['zip']">
 
-                          <div *ngIf="complexForm.controls['zip'].hasError('required')
+                          <!-- <div *ngIf="complexForm.controls['zip'].hasError('required')
                         && complexForm.controls['zip'].touched && complexForm.controls['zip'].dirty" class="alert alert-danger">
                             You must include zip code.
-                          </div>
+                          </div> -->
                           <div *ngIf="!complexForm.controls['zip'].valid && complexForm.controls['zip'].touched && complexForm.controls['zip'].dirty"
                             class="alert alert-danger">
                             Invalid ZIP code (A-123)
@@ -189,10 +189,10 @@
                       && complexForm.controls['phone'].touched && complexForm.controls['phone'].dirty" class="alert alert-danger">
                           You must include a Phone Number.
                         </div>
-                        <div *ngIf="!complexForm.controls['phone'].valid && complexForm.controls['phone'].touched && complexForm.controls['phone'].dirty"
+                        <!-- <div *ngIf="!complexForm.controls['phone'].valid && complexForm.controls['phone'].touched && complexForm.controls['phone'].dirty"
                             class="alert alert-danger">
                             Enter a valid Phone Number (ex: +94123456789)
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -261,9 +261,9 @@
                         && pickupForm.controls['phone'].touched" class="alert alert-danger">
                           You must include a Phone Number.
                         </div>
-                        <div *ngIf="!pickupForm.controls['phone'].valid" class="alert alert-danger">
+                        <!-- <div *ngIf="!pickupForm.controls['phone'].valid" class="alert alert-danger">
                           Enter a valid Phone Number (ex: +94123456789)
-                        </div>
+                        </div> -->
                       </div>
                     </div>
 
@@ -306,7 +306,7 @@
                     </tr>
                   </tbody>
                   <tfoot>
-                    <tr *ngIf='hideShipping'>
+                    <tr *ngIf='!hideShipping'>
                       <th style="text-align: left">Shipping</th>
                       <td></td>
                       <td style="text-align: right">{{sign}}{{chkShippingCost}}</td>

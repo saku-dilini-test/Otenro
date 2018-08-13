@@ -168,11 +168,11 @@ export class CheckoutComponent implements OnInit {
       'fName': new FormControl(this.dataService.userData.name, Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
       'lName': new FormControl(this.dataService.userData.lname, Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
       'email': new FormControl(this.dataService.userData.email, Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
-      'phone': new FormControl(this.dataService.userData.phone, Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/)])),
+      'phone': new FormControl(this.dataService.userData.phone, Validators.compose([Validators.required])),
       'streetNo': new FormControl(this.dataService.userData.streetNumber, Validators.compose([Validators.required])),
       'streetName': new FormControl(this.dataService.userData.streetName, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/)])),
       'city': new FormControl(this.dataService.userData.city, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)])),
-      'zip': new FormControl(this.dataService.userData.zip, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9\-]+\s)*[a-zA-Z0-9\-]+$/)])),
+      'zip': new FormControl(this.dataService.userData.zip, Validators.compose([Validators.pattern(/^([a-zA-Z0-9\-]+\s)*[a-zA-Z0-9\-]+$/)])),
       'country': new FormControl(this.dataService.userData.country)
 
     });
