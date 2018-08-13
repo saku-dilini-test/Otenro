@@ -118,32 +118,33 @@ module.exports = {
             }
        }
 
+       if(bannerImage){
+           if (!bannerImage.match("http")){
 
-       if (!bannerImage.match("http")){
+               var imgeFileName = randomstring.generate()+".png";
+               var data = bannerImage.replace(/^data:image\/\w+;base64,/, "");
+               var buf = new Buffer(data, 'base64');
+               const rimraf = require('rimraf');
 
-           var imgeFileName = randomstring.generate()+".png";
-           var data = bannerImage.replace(/^data:image\/\w+;base64,/, "");
-           var buf = new Buffer(data, 'base64');
-           const rimraf = require('rimraf');
+                if(fs2.existsSync(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + '/assets/images/banner/' + req.body.oldBannerImg    )){
+                    fs.unlink(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + '/assets/images/banner/' + req.body.oldBannerImg, function(err) {
+                      if (err) throw err;
+                      console.log(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + 'assets/images/banner/' + req.body.oldBannerImg + "deleted");
+                    });
+                }
 
-            if(fs2.existsSync(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + '/assets/images/banner/' + req.body.oldBannerImg    )){
-                fs.unlink(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + '/assets/images/banner/' + req.body.oldBannerImg, function(err) {
-                  if (err) throw err;
-                  console.log(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.product.appId + 'assets/images/banner/' + req.body.oldBannerImg + "deleted");
-                });
-            }
+               // product images copy to app file server
+                   fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
+                       req.body.product.appId + '/assets/images/banner/' + imgeFileName, buf, function (err) {
+                       if (err) {
+                           console.log(err);
+                       }
+                   });
 
-           // product images copy to app file server
-               fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
-                   req.body.product.appId + '/assets/images/banner/' + imgeFileName, buf, function (err) {
-                   if (err) {
-                       console.log(err);
-                   }
-               });
-
-//           product.tempImageArray.push({img:imgeFileName,videoUrl:videoUrl,sku:sku});
-           product.bannerImage = imgeFileName;
-           finelImages = null;
+    //           product.tempImageArray.push({img:imgeFileName,videoUrl:videoUrl,sku:sku});
+               product.bannerImage = imgeFileName;
+               finelImages = null;
+           }
        }
 
 
