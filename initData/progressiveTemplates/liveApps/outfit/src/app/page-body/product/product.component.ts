@@ -291,6 +291,7 @@ export class ProductComponent implements OnInit {
 
     changeVariant(variant1) {
         this.lockBuyButton = false;
+        this.errBuy = false;
         this.discountAvailable = false;
         this.selection1 = [];
         this.selection2 = [];
@@ -665,31 +666,32 @@ export class ProductComponent implements OnInit {
 
             this.errBuy = true;
             if (this.Data.selection.length == 1) {
-                this.message = "Please select the " + this.name1 + " and the Quantity";
+                this.message = "Oops.. some details are missing..";
             }else if (this.Data.selection.length == 2) {
-                this.message = "Please select the " + this.name1 + ", " + this.name2 + " and the Quantity";
+                this.message = "Oops.. some details are missing..";
             } else if (this.Data.selection.length == 3) {
-                this.message = "Please select the " + this.name1 + ", " + this.name2 + ", " + this.name3 + " and the Quantity";
+                this.message = "Oops.. some details are missing..";
             } else if (this.Data.selection.length == 4) {
-                this.message = "Please select the " + this.name1 + ", " + this.name2 + ", " + this.name3 + ", " + this.name4 + " and the Quantity";
+                this.message = "Oops.. some details are missing..";
             }
-            window.setTimeout(() => {
-                $(".alert-warning").fadeTo(500, 0).slideUp(500, ()=>{
-                    $(this).remove();
-                    this.errBuy = false;
-                });
-            }, 2000);
+            // window.setTimeout(() => {
+            //     $(".alert-warning").fadeTo(500, 0).slideUp(500, ()=>{
+            //         $(this).remove();
+            //         this.errBuy = false;
+            //     });
+            // }, 10000);
             return;
         }else if(this.selectedVariant.buyQuantity == null){
 
             this.errBuy = true;
             this.message = "Please select a buyQuantity"; 
-            window.setTimeout(() => {
-                $(".alert-warning").fadeTo(500, 0).slideUp(500, ()=>{
-                    $(this).remove();
-                    this.errBuy = false;
-                });
-            }, 2000);
+            // window.setTimeout(() => {
+            //     $(".alert-warning").fadeTo(500, 0).slideUp(500, ()=>{
+            //         $(this).remove();
+            //         this.errBuy = false;
+            //     });
+            // }, 10000);
+
             return;
         } else {
             this.dialogVariants = data;
@@ -716,34 +718,33 @@ export class ProductComponent implements OnInit {
     addToCart(navi) {
 
         if (!this.lockBuyButton) {
-
             this.errBuy = true;
             if (this.Data.selection.length == 1) {
-                this.message = "Please select the " + this.name1 + " and the Quantity";
+                this.message = "Oops.. some details are missing..";
             }else if (this.Data.selection.length == 2) {
-                this.message = "Please select the " + this.name1 + ", " + this.name2 + " and the Quantity";
+                this.message = "Oops.. some details are missing..";
             } else if (this.Data.selection.length == 3) {
-                this.message = "Please select the " + this.name1 + ", " + this.name2 + ", " + this.name3 + " and the Quantity";
+                this.message = "Oops.. some details are missing..";
             } else if (this.Data.selection.length == 4) {
-                this.message = "Please select the " + this.name1 + ", " + this.name2 + ", " + this.name3 + ", " + this.name4 + " and the Quantity";
+                this.message = "Oops.. some details are missing..";
             }
-            window.setTimeout(() => {
-                $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
-                    $(this).remove();
-                    this.errBuy = false;
-                });
-            }, 2000);
+            // window.setTimeout(() => {
+            //     $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
+            //         $(this).remove();
+            //         this.errBuy = false;
+            //     });
+            // }, 2000);
             return;
         }else if(this.selectedVariant.buyQuantity == null){
 
             this.errBuy = true;
             this.message = "Please select a buyQuantity"; 
-            window.setTimeout(() => {
-                $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
-                    $(this).remove();
-                    this.errBuy = false;
-                });
-            }, 2000);
+            // window.setTimeout(() => {
+            //     $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
+            //         $(this).remove();
+            //         this.errBuy = false;
+            //     });
+            // }, 10000);
             return;
         } else {
 
