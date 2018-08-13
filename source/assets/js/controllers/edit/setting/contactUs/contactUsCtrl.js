@@ -153,15 +153,15 @@
              // }
 
              // Validate, Privacy Policy maximum characters length
-             var privacyPolicy = storeSettings.privacyPolicy;
-             if((typeof privacyPolicy != 'undefined') &&
-                 (privacyPolicy.length > $scope.maxPrivacyPolicy)){
-                 toastr.error('Privacy Policy, maximum characters length is exceed. ' +
-                     'Maximum characters length is : '+$scope.maxPrivacyPolicy, 'Warning',
-                     {closeButton: true}
-                 );
-                 return;
-             }
+             // var privacyPolicy = storeSettings.privacyPolicy;
+             // if((typeof privacyPolicy != 'undefined') &&
+             //     (privacyPolicy.length > $scope.maxPrivacyPolicy)){
+             //     toastr.error('Privacy Policy, maximum characters length is exceed. ' +
+             //         'Maximum characters length is : '+$scope.maxPrivacyPolicy, 'Warning',
+             //         {closeButton: true}
+             //     );
+             //     return;
+             // }
              else {
                  storeSettings.userId = $scope.userId;
                  storeSettings.appId = $rootScope.appId;

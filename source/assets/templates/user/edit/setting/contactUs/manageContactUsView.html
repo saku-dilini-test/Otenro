@@ -157,14 +157,14 @@
                             <fieldset>
                                 <label>privacy policy</label>
                                 <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
-                                <textarea maxlength="200" class="input-shadow-border" name="privacyPolicy" rows="2"  ng-model="storeSettings.privacyPolicy"></textarea>
-                                <br />
-                                <div ng-hide="storeSettings.privacyPolicy.length > maxPrivacyPolicy">
-                                    <span class="information">Characters left: {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}}</span>
-                                </div>
-                                <div  ng-show="storeSettings.privacyPolicy.length > maxPrivacyPolicy">
-                                    <span>Characters left: </span> <span class="information"> {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}} </span>
-                                </div>
+                                <textarea  class="input-shadow-border" name="privacyPolicy" rows="2"  ng-model="storeSettings.privacyPolicy"></textarea>
+                                <!--<br />-->
+                                <!--<div ng-hide="storeSettings.privacyPolicy.length > maxPrivacyPolicy">-->
+                                    <!--<span class="information">Characters left: {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}}</span>-->
+                                <!--</div>-->
+                                <!--<div  ng-show="storeSettings.privacyPolicy.length > maxPrivacyPolicy">-->
+                                    <!--<span>Characters left: </span> <span class="information"> {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}} </span>-->
+                                <!--</div>-->
                             </fieldset>
                         </form>
                     </div>
