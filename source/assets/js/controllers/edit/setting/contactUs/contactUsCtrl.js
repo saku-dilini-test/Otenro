@@ -190,15 +190,15 @@
                 return;
             }
             // Validate, About Us Content maximum characters length
-            var content = storeSettings.content;
-            if((typeof content != 'undefined') &&
-                (content.length > $scope.maxAboutUsContent)){
-                toastr.error('About Us Content, maximum characters length is exceed. ' +
-                    'Maximum characters length is : '+$scope.maxAboutUsContent, 'Warning',
-                    {closeButton: true}
-                );
-                return;
-            }
+           // var content = storeSettings.content;
+            // if((typeof content != 'undefined') &&
+            //     (content.length > $scope.maxAboutUsContent)){
+            //     toastr.error('About Us Content, maximum characters length is exceed. ' +
+            //         'Maximum characters length is : '+$scope.maxAboutUsContent, 'Warning',
+            //         {closeButton: true}
+            //     );
+            //     return;
+            // }
 
             if (storeSettings!=null){
                 if (!storeSettings.header  || !storeSettings.content) {
