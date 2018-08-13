@@ -45,6 +45,7 @@ module.exports = {
         }
         req.body.env = authKeyWeb;
         var updateData = req.body;
+        updateData.env = authKeyWeb;
         console.log("updateData : " + JSON.stringify(updateData));
         if(typeof req.body.id != 'undefined'){
             IPGDetails.update(searchQuery,updateData,function(err,ipg) {
@@ -61,18 +62,18 @@ module.exports = {
 
                     }
 
-                    fs.readFile(appJsFilePath, 'utf-8',
-                        function (err, data) {
-                            if (err) return res.negotiate(err);
-
-                                              
-                             data = data.replace(authKey, ipg[0].paypalKey);
-                             data = data.replace("paypalEnv",payPalEnv);
-
-                            fs.writeFile(appJsFilePath, data , 'utf-8', function (err) {
-                                if (err) return res.negotiate(err);
-                            });
-                        });
+//                    fs.readFile(appJsFilePath, 'utf-8',
+//                        function (err, data) {
+//                            if (err) return res.negotiate(err);
+//
+//
+//                             data = data.replace(authKey, ipg[0].paypalKey);
+//                             data = data.replace("paypalEnv",payPalEnv);
+//
+//                            fs.writeFile(appJsFilePath, data , 'utf-8', function (err) {
+//                                if (err) return res.negotiate(err);
+//                            });
+//                        });
                 }
                 return res.send(200, {message: 'Payment Settings Successfully Updated'});
             });
@@ -88,18 +89,20 @@ module.exports = {
                     }else{
                         appJsFilePath = tempAppDirPath + filePathMobile;
 
-                    }                    fs.readFile(appJsFilePath, 'utf-8',
-                        function (err, data) {
-                            if (err) return res.negotiate(err);
+                    }
 
-                            
-                            data = data.replace(authKey, ipg.paypalKey);
-                            data = data.replace("paypalEnv",payPalEnv);
-
-                            fs.writeFile(appJsFilePath, data , 'utf-8', function (err) {
-                                if (err) return res.negotiate(err);
-                            });
-                        });
+//                    fs.readFile(appJsFilePath, 'utf-8',
+//                        function (err, data) {
+//                            if (err) return res.negotiate(err);
+//
+//
+//                            data = data.replace(authKey, ipg.paypalKey);
+//                            data = data.replace("paypalEnv",payPalEnv);
+//
+//                            fs.writeFile(appJsFilePath, data , 'utf-8', function (err) {
+//                                if (err) return res.negotiate(err);
+//                            });
+//                        });
                 }
                 return res.send(200, {message: 'IPG Details successfully created'});
             });
