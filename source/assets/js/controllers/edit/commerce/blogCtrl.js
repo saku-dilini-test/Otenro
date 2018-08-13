@@ -15,8 +15,8 @@
                 $scope.isNewBlog = false;
                 $scope.pageSize = 5;
 
-                $scope.maxBlogTitle = 20;
-                $scope.maxBlogDesc = 200;
+                $scope.maxBlogTitle = 100;
+                $scope.maxBlogDesc = 2000;
                 $scope.myImage='';
                 $scope.myCroppedImage='';
 
