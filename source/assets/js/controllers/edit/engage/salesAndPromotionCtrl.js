@@ -38,6 +38,10 @@
 
         }
 
+        $scope.navigatePromoType = function(tab){
+            $scope.selectedTab = tab;
+        }
+
         if (typeof $scope.categories === 'undefined') {
             commerceService.getCategoryList()
                 .success(function (result) {
@@ -107,7 +111,7 @@
                                     if(item){
 
                                     if(item.salesAndPromotionType == "singleProduct"){
-                                        $scope.selectedTab = 5;
+                                        $scope.selectedTab = 4;
                                     }
 
                                  $scope.item.selectedProduct.forEach(function(ele){
