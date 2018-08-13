@@ -49,7 +49,7 @@
                             <fieldset>
                                 <!-- Email -->
                                 <label>Email</label>
-                                <input type="email" name="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                <input type="email" name="email" ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/"
                                        ng-model="webInfo.email" required />
                                 <span class="error" ng-show="basicInfoForm.email.$error.email || basicInfoForm.email.$error.pattern">Invalid email!</span>
                             </fieldset>
