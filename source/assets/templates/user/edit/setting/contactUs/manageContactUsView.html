@@ -145,14 +145,14 @@
                             <fieldset>
                                 <label>terms and conditions</label>
                                 <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
-                                <textarea maxlength="200" class="input-shadow-border" name="termsAndCondition" rows="2" ng-model="storeSettings.termsAndCondition"></textarea>
-                                <br />
-                                <div ng-hide="storeSettings.termsAndCondition.length > maxTermsAndCondition">
-                                    <span class="information">Characters left: {{maxTermsAndCondition - storeSettings.termsAndCondition.length}}</span>
-                                </div>
-                                <div  ng-show="storeSettings.termsAndCondition.length > maxTermsAndCondition">
-                                    <span>Characters left: </span> <span class="information"> {{maxTermsAndCondition - storeSettings.termsAndCondition.length}} </span>
-                                </div>
+                                <textarea  class="input-shadow-border" name="termsAndCondition" rows="2" ng-model="storeSettings.termsAndCondition"></textarea>
+                                <!--<br />-->
+                                <!--<div ng-hide="storeSettings.termsAndCondition.length > maxTermsAndCondition">-->
+                                    <!--<span class="information">Characters left: {{maxTermsAndCondition - storeSettings.termsAndCondition.length}}</span>-->
+                                <!--</div>-->
+                                <!--<div  ng-show="storeSettings.termsAndCondition.length > maxTermsAndCondition">-->
+                                    <!--<span>Characters left: </span> <span class="information"> {{maxTermsAndCondition - storeSettings.termsAndCondition.length}} </span>-->
+                                <!--</div>-->
                             </fieldset>
                             <fieldset>
                                 <label>privacy policy</label>
