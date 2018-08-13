@@ -93,6 +93,9 @@
                                 $scope.isPinReqSuccess = false;
                                 goog_report_conversion(O_SERVER_URL + "#templates");
                                 $state.go('user.templates');
+                                toastr.success('Register Successful', 'Congratulations !',{
+                                    closeButton:true
+                                });
                             } else {
                                 toastr.error('You entered a wrong pin!', 'Error', {
                                     closeButton: true
