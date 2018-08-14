@@ -148,7 +148,7 @@
                                                        ng-model="tmpImage[4].videoUrl" width="10px" ng-keyup="change()" required/>
                                                 <span class="error"><p style="color:red;" id="err_videoUrl5"></p></span>
                                             </td>
-                                            <s></s><td>
+                                            <td>
                                                 <div class="old-image">
                                                     <input type="button" ng-click="deleteImg(5)" value='delete' class="image-delete-button" />
                                                     <img ng-click="setImage()" ng-if="tmpImage[5].img == null" src="../../../images/small-placeholder.png" width="80" height="80"
@@ -172,16 +172,15 @@
 
                 <fieldset style="clear:both">
                     <label>Add Page Details</label>
-                    <div class="custom-trix">
+                    <!--<div class="custom-trix">-->
                         <!--<trix-editor class="textEditor input-shadow-border"-->
                         <!--name="editorText"-->
                         <!--ng-maxlength="1000"-->
                         <!--angular-trix ng-model="article.desc"-->
                         <!--required></trix-editor>-->
-                        <text-angular name="editorText" ng-model="article.desc" required></text-angular>
-
-                    </div>
-
+                        <!--<text-angular name="editorText" ng-model="article.desc" required></text-angular>-->
+                    <!--</div>-->
+                    <ng-quill-editor name="editorText" ng-model="article.desc"></ng-quill-editor>
                 </fieldset>
                 <fieldset style="margin-bottom:0px;">
                     <span ng-show="articleForm.editorText.$error.maxlength">Too lengthy</span>
