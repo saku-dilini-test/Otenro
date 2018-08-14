@@ -424,21 +424,24 @@
                         console.log(data);
                             $scope.playStoreData.operators = data.details.operators;
 
-
                                 splash.forEach(function(splash,idx){
                                     if (JSON.stringify(splash).match("blobUrl")){
                                         publishService.uploadPublishFiles(splash,idx,$rootScope.tempNew)
                                             .success(function (data, status, headers, config) {
 
+                                            if( idx == 6 && data.idx == "6"){
+                                                $scope.activeTabIndex = 1;
+                                            }
                                             }).error(function (data, status, headers, config) {
 
                                         });
                                     }
-
                                 });
 
                                 $scope.successPublish = true;
-                                $scope.activeTabIndex = 1;
+                                if($scope.existingData.length > 0){
+                                    $scope.activeTabIndex = 1;
+                                }
 
                             toastr.success('General information has been added successfully', 'Saved', {
                                 closeButton: true
