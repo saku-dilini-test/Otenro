@@ -122,13 +122,13 @@ export class CheckoutComponent implements OnInit {
     let n = d.getMonth();
     let s;
     console.log(n + 1);
-    for(let i = n+1;i <= 12; i++){
-      if(i< 10){
+    for (let i = n + 1; i <= 12; i++) {
+      if (i < 10) {
         s = '0' + i.toString();
-      }else{
+      } else {
         s = i.toString();
       }
-    this.months.push(s);
+      this.months.push(s);
     }
     console.log(this.months);
     if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
@@ -298,6 +298,18 @@ export class CheckoutComponent implements OnInit {
 
   }
 
+  getCvcLength(n) {
+    console.log(n);
+    let length;
+    if (n) {
+      if (n.length == 15 && n.charAt(0) == 3 && (n.charAt(1) == 4 || n.charAt(1) == 7)) {
+        length = 4
+      } else {
+        length = 3
+      }
+    }
+    return length;
+  }
   check(user, newUserCountry) {
     if (user == 'oldUser') {
       this.oldUser = true;

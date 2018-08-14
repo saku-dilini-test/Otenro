@@ -471,9 +471,9 @@
                             <div [hidden]="!number.hasError('minlength')">Credit card must be 15-19 digits</div>
                           </div>
                         </label>
-                        <label class="form-group col-sm-6">
+                        <label *ngIf = "paymentType == 'authorizeNet'" class="form-group col-sm-6">
                           <label class="input-label">Card CVC</label>
-                          <input class="form-control" placeholder="Card CVC*" type="text" name='cvc' minlength="3" maxlength="4" pattern="[0-9]+" #cvc='ngModel'
+                          <input class="form-control" [disabled] = "!number.valid" placeholder="Card CVC*" type="text" name='cvc' minlength="3" maxlength="{{getCvcLength(number.value)}}" pattern="[0-9]+" #cvc='ngModel'
                             cc-type="cardNumber.$ccType" ngModel required>
                           <div [hidden]="cvc.valid || cvc.pristine" class="alert alert-danger">
                             <div [hidden]="!cvc.hasError('required')">Security code required</div>
@@ -481,7 +481,16 @@
                             <div [hidden]="!cvc.hasError('minlength')">Security code must be 3-4 digits</div>
                           </div>
                         </label>
-
+                        <label *ngIf = "paymentType == 'creditcard'" class="form-group col-sm-6">
+                          <label class="input-label">Card CVC</label>
+                          <input class="form-control" [disabled] = "!number.valid" placeholder="Card CVC*" type="text" name='cvc' minlength="3" maxlength="4" pattern="[0-9]+" #cvc='ngModel'
+                            cc-type="cardNumber.$ccType" ngModel required>
+                          <div [hidden]="cvc.valid || cvc.pristine" class="alert alert-danger">
+                            <div [hidden]="!cvc.hasError('required')">Security code required</div>
+                            <div [hidden]="!cvc.hasError('pattern')">Security code must contain only numbers</div>
+                            <div [hidden]="!cvc.hasError('minlength')">Security code must be 3-4 digits</div>
+                          </div>
+                        </label>
                         <div class="form-group col-sm-6">
                           <label>Expiration Date:</label>
                           <div class="row form-group col-sm-12">
