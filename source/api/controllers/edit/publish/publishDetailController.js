@@ -327,7 +327,8 @@ module.exports = {
                      if (err) return res.send(err);
                      else {
                          return res.json({
-                             message: true
+                             message: true,
+                             idx:req.body.imgId
                          });
                      }
                  });

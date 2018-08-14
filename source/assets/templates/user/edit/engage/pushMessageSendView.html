@@ -49,7 +49,7 @@
                 <label>Schedule Message</label>
             </fieldset>
             <div class="clearfix">
-                <adm-dtp ng-model='pushMessage.date' on-datechange="dateChanged(date)" options='{multiple:false,default: today}'></adm-dtp>
+                <adm-dtp ng-model='pushMessage.date' on-datechange="dateChanged(date)" options='{multiple:false,default: today,format: "DD/MM/YY hh:mm"}'></adm-dtp>
                <!-- <input type="date" ng-model='pushMessage.date'>-->
             </div>
         </div>

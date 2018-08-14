@@ -279,17 +279,32 @@ module.exports = {
                             errorsInCsv = "Invalid date format in row "  + rowNumber + " ,  correct date/time format is " + CSV_DATE_TIME_FORMAT;
                         }
 
-                        if (jsonObj.message.length == 0){
+                        if (jsonObj.message && jsonObj.message.length == 0){
                             sails.log.debug("Message is empty in row " + rowNumber);
                             errorsInCsv = "Message is empty in row " + rowNumber;
                         }
 
-                        if (jsonObj.sendto.length == 0){
+                        if(!jsonObj.sendto){
+                           sails.log.debug("Invalid csv sendTo heading is missing");
+                           errorsInCsv = "Invalid csv sendTo heading is missing";
+                        }
+
+                        if(!jsonObj.dateTime){
+                           sails.log.debug("Invalid csv dateTime heading is missing");
+                           errorsInCsv = "Invalid csv dateTime heading is missing";
+                        }
+
+                        if(!jsonObj.message){
+                           sails.log.debug("Invalid csv message heading is missing");
+                           errorsInCsv = "Invalid csv message heading is missing";
+                        }
+
+                        if (jsonObj.sendto && jsonObj.sendto.length == 0){
                             sails.log.debug("sendto is empty in row " + rowNumber);
                             errorsInCsv = "sendto is empty in row " + rowNumber;
                         }
 
-                        if (!(jsonObj.sendto.toLowerCase() == CSV_SEND_TO_ALL || jsonObj.sendto.toLowerCase() == CSV_SEND_TO_INACTIVE)){
+                        if (jsonObj.sendto && !(jsonObj.sendto.toLowerCase() == CSV_SEND_TO_ALL || jsonObj.sendto.toLowerCase() == CSV_SEND_TO_INACTIVE)){
                             sails.log.debug("Value of sendto must be " + CSV_SEND_TO_ALL + "/" + CSV_SEND_TO_INACTIVE +  " in row " + rowNumber);
                             errorsInCsv = "Value of sendto must be " + CSV_SEND_TO_ALL + "/" + CSV_SEND_TO_INACTIVE +  " in row " + rowNumber;
                         }
@@ -384,7 +399,7 @@ module.exports = {
         var thisCtrl = this;
         var type = 'A';
 
-        if(jsonObj.sendto.toLowerCase() == CSV_SEND_TO_INACTIVE){
+        if(jsonObj.sendto && jsonObj.sendto.toLowerCase() == CSV_SEND_TO_INACTIVE){
             type = 'I';
         }
 
