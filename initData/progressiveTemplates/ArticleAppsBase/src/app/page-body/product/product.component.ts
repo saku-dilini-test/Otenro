@@ -25,6 +25,7 @@ export class ProductComponent implements OnInit {
     private lockBuyButton = false;
     private dialogVariants;
     private player: any;
+    private results: any; 
     private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
 
