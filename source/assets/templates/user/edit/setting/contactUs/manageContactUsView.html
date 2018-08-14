@@ -34,12 +34,22 @@
                             <fieldset>
                                 <!-- Telephone -->
                                 <label>Telephone</label>
-                                <input class="input-shadow-border" type="number" name="telPhone" ng-model="basicInfo.telPhone" ng-pattern="/[0-9]+/"  required />
+                                <!--<input class="input-shadow-border" type="text" name="telPhone" ng-model="basicInfo.telPhone" ng-pattern="/[0-9]+/" ui-mask="(999) 999-9999"  required />-->
+                                <input class="input-shadow-border" numbers-only type="text" name="telPhone" ng-model="basicInfo.telPhone" ng-pattern="/[0-9]+/" maxlength="{{phoneLength}}"  required />
+                                <div ng-hide="basicInfo.telPhone.length > phoneLength">
+                                    <span class="information">Digits left: {{phoneLength - basicInfo.telPhone.length}}</span>
+                                </div>
+                                <div  ng-show="basicInfo.telPhone.length > phoneLength">
+                                    <span>Digits left: </span>
+                                    <span class="information" >
+                                        {{phoneLength - basicInfo.telPhone.length}}
+                                    </span>
+                                </div>
                             </fieldset>
                             <fieldset>
                                 <!-- Email -->
                                 <label>Email</label>
-                                <input type="email" name="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                <input type="email" name="email" ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/"
                                        ng-model="webInfo.email" required />
                                 <span class="error" ng-show="basicInfoForm.email.$error.email || basicInfoForm.email.$error.pattern">Invalid email!</span>
                             </fieldset>
@@ -135,26 +145,26 @@
                             <fieldset>
                                 <label>terms and conditions</label>
                                 <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
-                                <textarea maxlength="200" class="input-shadow-border" name="termsAndCondition" rows="2" ng-model="storeSettings.termsAndCondition"></textarea>
-                                <br />
-                                <div ng-hide="storeSettings.termsAndCondition.length > maxTermsAndCondition">
-                                    <span class="information">Characters left: {{maxTermsAndCondition - storeSettings.termsAndCondition.length}}</span>
-                                </div>
-                                <div  ng-show="storeSettings.termsAndCondition.length > maxTermsAndCondition">
-                                    <span>Characters left: </span> <span class="information"> {{maxTermsAndCondition - storeSettings.termsAndCondition.length}} </span>
-                                </div>
+                                <textarea  class="input-shadow-border" name="termsAndCondition" rows="2" ng-model="storeSettings.termsAndCondition"></textarea>
+                                <!--<br />-->
+                                <!--<div ng-hide="storeSettings.termsAndCondition.length > maxTermsAndCondition">-->
+                                    <!--<span class="information">Characters left: {{maxTermsAndCondition - storeSettings.termsAndCondition.length}}</span>-->
+                                <!--</div>-->
+                                <!--<div  ng-show="storeSettings.termsAndCondition.length > maxTermsAndCondition">-->
+                                    <!--<span>Characters left: </span> <span class="information"> {{maxTermsAndCondition - storeSettings.termsAndCondition.length}} </span>-->
+                                <!--</div>-->
                             </fieldset>
                             <fieldset>
                                 <label>privacy policy</label>
                                 <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
-                                <textarea maxlength="200" class="input-shadow-border" name="privacyPolicy" rows="2"  ng-model="storeSettings.privacyPolicy"></textarea>
-                                <br />
-                                <div ng-hide="storeSettings.privacyPolicy.length > maxPrivacyPolicy">
-                                    <span class="information">Characters left: {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}}</span>
-                                </div>
-                                <div  ng-show="storeSettings.privacyPolicy.length > maxPrivacyPolicy">
-                                    <span>Characters left: </span> <span class="information"> {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}} </span>
-                                </div>
+                                <textarea  class="input-shadow-border" name="privacyPolicy" rows="2"  ng-model="storeSettings.privacyPolicy"></textarea>
+                                <!--<br />-->
+                                <!--<div ng-hide="storeSettings.privacyPolicy.length > maxPrivacyPolicy">-->
+                                    <!--<span class="information">Characters left: {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}}</span>-->
+                                <!--</div>-->
+                                <!--<div  ng-show="storeSettings.privacyPolicy.length > maxPrivacyPolicy">-->
+                                    <!--<span>Characters left: </span> <span class="information"> {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}} </span>-->
+                                <!--</div>-->
                             </fieldset>
                         </form>
                     </div>
@@ -193,15 +203,15 @@
                             <fieldset>
                                 <label>Content</label>
                                 <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
-                                <textarea maxlength="200" class="input-shadow-border" rows="4" name="content" ng-model="storeSettings.content"></textarea>
-                                <br />
-                                <div ng-hide="storeSettings.content.length > maxAboutUsContent">
-                                    <span class="information">Characters left: {{maxAboutUsContent - storeSettings.content.length}}</span>
-                                </div>
-                                <div  ng-show="storeSettings.content.length > maxAboutUsContent">
-                                    <span>Characters left: </span>
-                                    <span class="information"> {{maxAboutUsContent - storeSettings.content.length}} </span>
-                                </div>
+                                <textarea  class="input-shadow-border" rows="4" name="content" ng-model="storeSettings.content"></textarea>
+                                <!--<br />-->
+                                <!--<div ng-hide="storeSettings.content.length > maxAboutUsContent">-->
+                                    <!--<span class="information">Characters left: {{maxAboutUsContent - storeSettings.content.length}}</span>-->
+                                <!--</div>-->
+                                <!--<div  ng-show="storeSettings.content.length > maxAboutUsContent">-->
+                                    <!--<span>Characters left: </span>-->
+                                    <!--<span class="information"> {{maxAboutUsContent - storeSettings.content.length}} </span>-->
+                                <!--</div>-->
                             </fieldset>
                         </form>
                     </div>

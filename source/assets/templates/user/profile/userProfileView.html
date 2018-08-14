@@ -155,7 +155,13 @@
                                        type="text"
                                        name="fname"
                                        ng-model="userEdit.firstName"
+                                       ng-pattern="/^[-a-zA-Z\s]+$/"
                                        required />
+                                <span class="error help-block" ng-show="editProfile.fname.$error.required">*</span>
+                                <span class="error help-block" ng-show="editProfile.fname.$dirty && editProfile.fname.$invalid">
+                                 Enter a proper name
+                                 </span>
+
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Last name</label>
@@ -164,7 +170,12 @@
                                        type="text"
                                        name="lname"
                                        ng-model="userEdit.lastName"
+                                       ng-pattern="/^[-a-zA-Z]+$/"
                                        required />
+                                <span class="error help-block" ng-show="editProfile.lname.$error.required">*</span>
+                                <span class="error help-block" ng-show="editProfile.lname.$dirty && editProfile.lname.$invalid">
+                                Enter a proper name
+                                </span>
                             </fieldset>
                         </div>
                         <fieldset>

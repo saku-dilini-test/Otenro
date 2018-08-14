@@ -9,6 +9,7 @@
                             ME_APP_SERVER,mySharedService,SERVER_URL) {
 
         // --/-- Characters length config
+        $scope.phoneLength = 15;
         $scope.maxBasicInfoAddress = 50;
         $scope.maxReturnPolicy = 200;
         $scope.maxTermsAndCondition = 200;
@@ -125,7 +126,7 @@
 
         $scope.savePolicies = function (storeSettings,tab) {
 
-             // Validate, Return Policy maximum characters length
+           //  Validate, Return Policy maximum characters length
              var returnPolicy = storeSettings.returnPolicy;
              if((typeof returnPolicy != 'undefined') &&
                  (returnPolicy.length > $scope.maxReturnPolicy)){
@@ -142,25 +143,25 @@
                 toastr.error('Please fill Terms and Conditions','Error', { closeButton: true});
                 return;
             }
-             if((typeof termsAndCondition != 'undefined') &&
-                 (termsAndCondition.length > $scope.maxTermsAndCondition)){
-                 toastr.error('Terms And Condition, maximum characters length is exceed. ' +
-                     'Maximum characters length is : '+$scope.maxTermsAndCondition, 'Warning',
-                     {closeButton: true}
-                 );
-                 return;
-             }
+             // if((typeof termsAndCondition != 'undefined') &&
+             //     (termsAndCondition.length > $scope.maxTermsAndCondition)){
+             //     toastr.error('Terms And Condition, maximum characters length is exceed. ' +
+             //         'Maximum characters length is : '+$scope.maxTermsAndCondition, 'Warning',
+             //         {closeButton: true}
+             //     );
+             //     return;
+             // }
 
              // Validate, Privacy Policy maximum characters length
-             var privacyPolicy = storeSettings.privacyPolicy;
-             if((typeof privacyPolicy != 'undefined') &&
-                 (privacyPolicy.length > $scope.maxPrivacyPolicy)){
-                 toastr.error('Privacy Policy, maximum characters length is exceed. ' +
-                     'Maximum characters length is : '+$scope.maxPrivacyPolicy, 'Warning',
-                     {closeButton: true}
-                 );
-                 return;
-             }
+             // var privacyPolicy = storeSettings.privacyPolicy;
+             // if((typeof privacyPolicy != 'undefined') &&
+             //     (privacyPolicy.length > $scope.maxPrivacyPolicy)){
+             //     toastr.error('Privacy Policy, maximum characters length is exceed. ' +
+             //         'Maximum characters length is : '+$scope.maxPrivacyPolicy, 'Warning',
+             //         {closeButton: true}
+             //     );
+             //     return;
+             // }
              else {
                  storeSettings.userId = $scope.userId;
                  storeSettings.appId = $rootScope.appId;
@@ -189,15 +190,15 @@
                 return;
             }
             // Validate, About Us Content maximum characters length
-            var content = storeSettings.content;
-            if((typeof content != 'undefined') &&
-                (content.length > $scope.maxAboutUsContent)){
-                toastr.error('About Us Content, maximum characters length is exceed. ' +
-                    'Maximum characters length is : '+$scope.maxAboutUsContent, 'Warning',
-                    {closeButton: true}
-                );
-                return;
-            }
+           // var content = storeSettings.content;
+            // if((typeof content != 'undefined') &&
+            //     (content.length > $scope.maxAboutUsContent)){
+            //     toastr.error('About Us Content, maximum characters length is exceed. ' +
+            //         'Maximum characters length is : '+$scope.maxAboutUsContent, 'Warning',
+            //         {closeButton: true}
+            //     );
+            //     return;
+            // }
 
             if (storeSettings!=null){
                 if (!storeSettings.header  || !storeSettings.content) {

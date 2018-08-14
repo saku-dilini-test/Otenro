@@ -66,19 +66,25 @@ chosen link or button. -->
       <fieldset>
         <label>First Name</label>
         <!--<img src="../../../images/question-mark.svg" width=" 12" height="12" />-->
-        <input class="input-shadow-border" type="text" name="fname" ng-model="user.fname" ng-enter ="authSignUp(user);"
+        <input class="input-shadow-border" type="text" name="fname" ng-model="user.fname" ng-pattern="/^[-a-zA-Z\s]+$/"  ng-enter ="authSignUp(user);"
                required/>
         <span class="error help-block" ng-show="register.fname.$error.required">
           *
+        </span>
+        <span class="error help-block" ng-show="register.fname.$dirty && register.fname.$invalid">
+          Enter a proper name
         </span>
       </fieldset>
       <fieldset>
         <label>Last Name</label>
         <!--<img src="../../../images/question-mark.svg" width=" 12" height="12" />-->
-        <input class="input-shadow-border" type="text" name="lname" ng-model="user.lname" ng-enter ="authSignUp(user);"
+        <input class="input-shadow-border" type="text" name="lname" ng-model="user.lname" ng-pattern="/^[-a-zA-Z]+$/" ng-enter ="authSignUp(user);"
                required/>
         <span class="error help-block" ng-show="register.lname.$error.required">
           *
+        </span>
+        <span class="error help-block" ng-show="register.lname.$dirty && register.lname.$invalid">
+          Enter a proper name
         </span>
       </fieldset>
       <fieldset>
