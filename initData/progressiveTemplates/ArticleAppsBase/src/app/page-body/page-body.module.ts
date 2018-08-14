@@ -13,6 +13,7 @@ import { ContactComponent } from './contact/contact.component';
 import { AgmCoreModule } from '@agm/core';
 import { ShopComponent } from './shop/shop.component';
 import { ProductComponent } from './product/product.component';
+import { SafeHtmlPipe } from '../pipes/safeHtml.pipe';
 
 
 @NgModule({
@@ -24,11 +25,19 @@ import { ProductComponent } from './product/product.component';
     AgmCoreModule,
     FormsModule,
     ReactiveFormsModule
-
   ],
    exports:[
     PageBodyComponent
   ],
-  declarations: [HomepageComponent, PageBodyComponent, AboutusComponent, PoliciesComponent, ContactComponent, ShopComponent, ProductComponent]
+  declarations: [
+    HomepageComponent, 
+    PageBodyComponent, 
+    AboutusComponent, 
+    PoliciesComponent, 
+    ContactComponent, 
+    ShopComponent, 
+    ProductComponent, 
+    SafeHtmlPipe
+  ]
 })
 export class PageBodyModule { }
