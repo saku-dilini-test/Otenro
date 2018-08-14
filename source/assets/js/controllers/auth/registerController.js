@@ -50,37 +50,62 @@
                     // user.adagent = $stateParams.data.addname;
                     // user.affid = $stateParams.data.affid;
                 }
+                if(
+                    user.accountNumber	    &&
+                    user.bankCode 		    &&
+                    user.beneficiaryName	&&
+                    user.branchCode		    &&
+                    user.branchName		    &&
+                    user.country		    &&
+                    user.countryCode	    &&
+                    user.email		        &&
+                    user.fname		        &&
+                    user.lname		        &&
+                    user.mobile		        &&
+                    user.password		    &&
+                    (user.terms == true)     &&
+                    user.password_confirm   ||
+                    user.swiftCode
+                    )
+                {
+                    Auth.register(user).success(function (data) {
 
-                Auth.register(user).success(function (data) {
+                        if($stateParams.data && $stateParams.data.addname) {
+                            //Auth.sendAgentInfo($stateParams.data);
+                        }
+                        if ($scope.user.email== 'support@otenro.com'){
+                            $state.go('user.technicalSupporter');
+                        }else {
+                            if (data.message === 'success') {
+                                // commerceService.sendRegisterVerificationLinkEmail(user);
+                                toastr.success('Check your mobile and enter verification pin', 'Message', {
+                                    closeButton: true
+                                });
+                                $scope.isPinReqSuccess = true;
+                                $scope.user.id = data.id;
+                            } else {
+                                toastr.error('Error occurred while registering user!', 'Error', {
+                                    closeButton: true
+                                });
+                            }
+                        }
 
-                    if($stateParams.data && $stateParams.data.addname) {
-                        //Auth.sendAgentInfo($stateParams.data);
-                    }
-                    if ($scope.user.email== 'support@otenro.com'){
-                        $state.go('user.technicalSupporter');
-                    }else {
-                        if (data.message === 'success') {
-                            // commerceService.sendRegisterVerificationLinkEmail(user);
-                            toastr.success('Check your mobile and enter verification pin', 'Message', {
-                                closeButton: true
-                            });
-                            $scope.isPinReqSuccess = true;
-                            $scope.user.id = data.id;
-                        } else {
-                            toastr.error('Error occurred while registering user!', 'Error', {
+                    }).catch(function onError(err) {
+                        if (err.data.error){
+                            toastr.error(err.data.error, 'Error', {
                                 closeButton: true
                             });
                         }
-                    }
 
-                }).catch(function onError(err) {
-                    if (err.data.error){
-                        toastr.error(err.data.error, 'Error', {
-                            closeButton: true
-                        });
-                    }
+                    });
 
-                });
+                }
+                else{
+                    toastr.error('Please fill all the required fields!', 'Error: Data Missing',{
+                        closeButton: true
+                    });
+                }
+
             } else {
                 if ($scope.verificationPin) {
                     var user = {
