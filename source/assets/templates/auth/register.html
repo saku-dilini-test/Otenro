@@ -90,7 +90,7 @@ chosen link or button. -->
       <fieldset>
         <label> Email </label>
         <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
-        <input class="input-shadow-border" name="email" type="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+        <input class="input-shadow-border" name="email" type="email" ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/"
                style="float:left;" ng-model="user.email" ng-enter ="authSignUp(user);" required/>
         <span class="error help-block" ng-show="register.email.$error.required">
           *
