@@ -19,7 +19,7 @@
         </div>
         <div class="row hidden-xs">
           <div class="col-sm-4" *ngFor="let prod of results | filter:searchTerm; let i = index">
-            <img src="{{imageUrl}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
+            <img src="{{imageUrl}}/{{prod.tempImageArray[prod.defaultImage].img}}" (click)="navigateProd('product',prod, prod.name )" class="img-responsive lazyload" />
             <p class="text-center product-name">
               {{prod.name}}
             </p>
@@ -42,7 +42,7 @@
           <a class="list-group-item" *ngFor="let prod of results | filter:searchTerm">
             <div class="row">
               <div class="col-xs-4">
-               <img src="{{imageUrl}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
+               <img src="{{imageUrl}}/{{prod.tempImageArray[prod.defaultImage].img}}" (click)="navigateProd('product',prod, prod.name )" class="img-responsive lazyload" />
               </div>
               <div class="col-xs-8">
                 <span class="main-content-font"><strong>{{prod.name}}</strong></span>
