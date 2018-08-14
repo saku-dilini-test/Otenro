@@ -116,6 +116,7 @@
 
         if(initialData.isNewItem)
         {
+
             console.log(initialData.isNewItem)
             $scope.isNewProduct = initialData.isNewItem;
 
@@ -266,7 +267,9 @@
                                 closeButton: true
                             });
                         }else {
-                            disableTabs(current, true, true, false, true ,true);
+                            if($scope.isNewProduct != false){
+                                disableTabs(current, true, true, false, true ,true);
+                            }
                         }
                     }
                 }, function(reason) {
@@ -282,7 +285,11 @@
                         closeButton: true
                     });
                 }else {
-                    disableTabs(current, true, true, false, true,true);
+                    if($scope.isNewProduct != false){
+                        disableTabs(current, true, true, false, true,true);
+                    }else{
+                        $scope.selectedTab = 2;
+                    }
                 }
             }
 
@@ -414,7 +421,11 @@
                     });
                 }else{
                      $scope.selection = $scope.product.selection;
-                     disableTabs(current,false,false,false,false,false);
+                     if($scope.isNewProduct != false){
+                         disableTabs(current,false,false,false,false,false);
+                     }else{
+                        $scope.selectedTab = 3;
+                     }
                 }
         };
 
