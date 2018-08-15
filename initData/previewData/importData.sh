@@ -3,9 +3,9 @@ echo  'start....'
 
 #leave and comment other env
 #local
-MESERVER='/Library/WebServer/Documents/meServer/temp/';
-NODE='/Library/WebServer/Documents/meServer/';
-APPFILESERVER='/Users/chamilthushantha/Desktop/appFileServer/';
+MESERVER='c:/xampp/htdocs/meServer/temp/';
+NODE='c:/xampp/htdocs/meServer/node_modules/';
+APPFILESERVER='c:/xampp/htdocs/meServer/temp/';
 
 #stag
 #MESERVER='/home/admin/web/testcdn.otenro.com/public_html/temp/';
@@ -24,8 +24,8 @@ DB=''
 
 if [ $ENV == 'dev' ]
 then
-	DB='appmaker'
-	serverUrl='http://192.168.8.101:1337'
+	DB='appBuilder'
+	serverUrl='http://localhost:1337'
 elif [ $ENV == 'stag' ]
 then
 	DB='otenroTest'
@@ -89,10 +89,22 @@ echo $NODE
 pwd
 cd meServerFiles/unknownUser/progressiveTemplates/
    for d in ./*;do
-       cd $d/src/app/
-       ls
-       sed -i "s@serverUrl@$serverUrl@" constantsService.ts
-       cd -
+        cd $d/assets/
+        ls
+        sed -i "s@serverUrl@$serverUrl@" constantsService.ts
+        APPID=`grep -m 1 "\"appId\"" madeEasy.json | sed -r 's/^ *//;s/.*: *"//;s/",?//'`
+        USERID=`grep -m 1 "\"userId\"" madeEasy.json | sed -r 's/^ *//;s/.*: *"//;s/",?//'`
+        TEMPNAME=`grep -m 1 "\"templateName\"" madeEasy.json | sed -r 's/^ *//;s/.*: *"//;s/",?//'`
+        echo $APPID
+        echo $USERID
+        echo $TEMPNAME
+        cd ../
+        pwd
+        sed -i "s@serverUrl@$serverUrl@" main.*.js
+        sed -i "s@unknownAppId@$APPID@" main.*.js
+        sed -i "s@unknownUserName@$USERID@" main.*.js
+        sed -i "s@unknownTemplateName@$TEMPNAME@" main.*.js
+        cd -
     done
 
 cd ../../../

@@ -19,23 +19,23 @@
         <div class="navbar-1">
           <ul class="site-navigation nav navbar-nav">
             <li>
-              <a class="navbar-brand" (click)="navigate('')">
+              <a class="navbar-brand" (click)="navigate('','Home')">
                 <img width="100%" src="assets/images/logo.png">
               </a>
             </li>
             <li>
-              <a class="nav-link" (click)="navigate('')">Your Horoscope
+              <a class="nav-link" (click)="navigate('','Home')">Your Horoscope
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li>
-              <a class="nav-link" (click)="navigate('aboutus')">About Us</a>
+              <a class="nav-link" (click)="navigate('aboutus','About us')">About Us</a>
             </li>
             <li>
-              <a class="nav-link" (click)="navigate('contact')">Contact Us</a>
+              <a class="nav-link" (click)="navigate('contact','Contact us')">Contact Us</a>
             </li>
             <li>
-              <a class="nav-link" (click)="navigate('policies')">Policies</a>
+              <a class="nav-link" (click)="navigate('policies','Policies')">Policies</a>
             </li>
 
           </ul>
@@ -53,7 +53,7 @@
     <a *ngIf="subscriptionStatus" data-toggle="modal" (click) = "openMyAccountModel()">My Account</a>
     <a (click)="navigate('contact','Contact us')">Contact Us</a>
     <a (click)="navigate('policies','Privacy Policy')">Privacy Policy</a>
-    <div class="navbar-brand text-center" (click)="navigate('')">
+    <div class="navbar-brand text-center" (click)="navigate('','Home')">
       <img src="assets/images/logo.png">
     </div>
   </div>

@@ -2,29 +2,29 @@ import { Component,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppDataService } from '../services/appdata-info/appdata-info.service';
 import { SubscribedDataService } from '../services/subscribed-data/subscribed-data.service'
-import * as data from './../madeEasy.json';
+import * as data from '../../assets/madeEasy.json';
 import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
 import { PagebodyServiceModule } from '../page-body/page-body.service'
 import {SMSService} from "../services/cordova-plugin-services/sms.service";
-
+declare let $:any;
 var footerCmp;
 
 @Component({
   selector: 'app-footer',
-  templateUrl: './app/footer/footer.component.html',
-  styleUrls: ['./app/footer/footer.component.css']
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.css']
 })
 
 export class FooterComponent implements OnInit{
 
-  private subscriptionStatus;
-  private appId = <any>(data).appId;
-  private userId = <any>(data).userId;
+  subscriptionStatus;
+  private appId = (<any>data).appId;
+  private userId = (<any>data).userId;
   private alive = true;
-  private isSubscribing = false;
-  private isUnsubscribing = false;
+  isSubscribing = false;
+  isUnsubscribing = false;
   private isFromCMSAppView: boolean = false;
 
   constructor(private subscription:SubscribedDataService,

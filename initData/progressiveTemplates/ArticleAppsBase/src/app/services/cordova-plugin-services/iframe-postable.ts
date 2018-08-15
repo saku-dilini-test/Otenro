@@ -26,10 +26,10 @@ export class IframePostable{
       var successFunc = encodeURI(msgSentSuccess.toString());
 
       var frame = document.getElementById('appframe');
-      frame.contentWindow.postMessage(successFunc, '*');
+      (<HTMLIFrameElement> frame).contentWindow.postMessage(successFunc, '*');
     };
 
-    return success;
+    return success; 
   }
 
   getErrorFunctionToBePost(){
@@ -49,7 +49,7 @@ export class IframePostable{
       var errorFunc = encodeURI(msgSentError.toString());
 
       var frame = document.getElementById('appframe');
-      frame.contentWindow.postMessage(errorFunc, '*');
+      (<HTMLIFrameElement> frame).contentWindow.postMessage(errorFunc, '*');
     };
 
     return error;

@@ -1,0 +1,10 @@
+{
+  "name": "unknownName",
+  "appId": "unknownAppId",
+  "userId": "unknownUserName",
+  "serviceApi": {
+    "host": "serverUrl",
+    "port": 1337
+  },
+  "templateName": "unknownTemplateName"
+}

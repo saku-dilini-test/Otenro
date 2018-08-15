@@ -31,13 +31,13 @@ module.exports = {
   HOST_URL : 'http://localhost:1337',
   // ME SERVER Config
   ME_SERVER_URL : 'http://localhost:80/meServer/temp/',
-  ME_SERVER : '/var/www/html/meServer/temp/',
+  ME_SERVER : 'c:/xampp/htdocs/meServer/temp/',
   ME_SERVER_PORT : 80,
   // APP FILE SERVER Config
-  APP_FILE_SERVER : '/home/dilakshan/Desktop/appFileServer/',
+  APP_FILE_SERVER : 'c:/xampp/htdocs/meServer/temp/',
   CLIENT_SECRET : '44f4f3be572ec33711a40a5b8b4',
-  TEMPLATES_PATH : '/home/dilakshan/Desktop/Otenro/initData/templates/',
-  PROGRESSIVE_TEMPLATES_PATH : '/home/dilakshan/Desktop/Otenro/initData/progressiveTemplates/',
+  TEMPLATES_PATH : 'd:/OfficeWork/Otenro/Otenro/initData/templates/',
+  PROGRESSIVE_TEMPLATES_PATH : 'd:/OfficeWork/Otenro/Otenro/initData/distribution/',
   REDIRECT_URL : 'http://localhost:1337',
   ANDROID_APK_BUILD_ZIPALIGN_PATH: '/Users/chamilthushantha/Library/Android/sdk/build-tools/27.0.3/zipalign',//Use to do the zipalign when building android apk.
   ANDROID_VERSION : 25,

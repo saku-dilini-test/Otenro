@@ -1,9 +1,0 @@
-{
-  "name": "quantum",
-  "appId": "5a58a554ba0891be79a4eabd",
-  "userId": "5a4f03289aa69b7036fe712a",
-  "serviceApi": {
-    "host": "http://localhost",
-    "port": 1337
-  }
-}

@@ -322,7 +322,7 @@ module.exports = {
         var mainCssFile;
         var image;
         if(req.body.tempNew === 'true' || req.body.tempNew  === true) {
-            mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
+            mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/main.css';
             image = "url(assets/images/background.png)";
         }else {
             mainCssFile = config.ME_SERVER + userId + '/templates/' + appId + '/css/main.css';
@@ -400,7 +400,7 @@ module.exports = {
         var data = backImg;
         var backgroundExist;
         if(req.body.tempNew === 'true' || req.body.tempNew  === true){
-            backgroundExist = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/'+ 'background.png';
+            backgroundExist = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/images/'+ 'background.png';
         }else{
             backgroundExist = config.APP_FILE_SERVER + userId + '/templates/' + appId + '/img/'+ 'background.png';
         }
@@ -412,7 +412,7 @@ module.exports = {
         // product images copy to app file server
 
         if(req.body.tempNew === 'true' || req.body.tempNew  === true){
-            fs.writeFile(config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/'+ 'background.png', buf, function(err) {
+            fs.writeFile(config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/images/'+ 'background.png', buf, function(err) {
                 if(err) {
                     res.send(err);
                 }
@@ -501,7 +501,7 @@ module.exports = {
         var data = logoImg;
         var backgroundExist;
         if(req.body.tempNew === 'true' || req.body.tempNew  === true){
-             backgroundExist = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/'+ 'logo.png';
+             backgroundExist = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/images/'+ 'logo.png';
         }else{
              backgroundExist = config.APP_FILE_SERVER + userId + '/templates/' + appId + '/img/'+ 'logo.png';
         }
@@ -512,7 +512,7 @@ module.exports = {
         var buf = new Buffer(data, 'base64');
         // product images copy to app file server
         if(req.body.tempNew === 'true' || req.body.tempNew  === true){
-            fs.writeFile(config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/'+ 'logo.png', buf, function(err) {
+            fs.writeFile(config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/images/'+ 'logo.png', buf, function(err) {
                 if(err) {
                     res.send(err);
                 }

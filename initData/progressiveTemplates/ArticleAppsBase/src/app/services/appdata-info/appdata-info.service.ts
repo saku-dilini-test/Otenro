@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
-import { SERVER_URL } from '../../constantsService';
-import * as data from '../../madeEasy.json';
+import { SERVER_URL } from '../../../assets/constantsService';
+import * as data from '../../../assets/madeEasy.json';
 import 'rxjs/add/operator/map';
 import {Observable} from "rxjs/Rx";
 
