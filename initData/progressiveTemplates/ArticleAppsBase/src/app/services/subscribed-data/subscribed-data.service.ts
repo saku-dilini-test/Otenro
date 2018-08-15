@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import { Observable } from "rxjs/Rx";
-import { SERVER_URL } from '../../constantsService';
+import { SERVER_URL } from '../../../assets/constantsService';
 
 @Injectable()
 export class SubscribedDataService {

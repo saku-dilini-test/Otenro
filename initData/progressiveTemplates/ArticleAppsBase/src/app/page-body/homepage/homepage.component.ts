@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SERVER_URL } from '../../constantsService';
-import * as data from '../../madeEasy.json';
+import { SERVER_URL } from '../../../assets/constantsService';
+import * as data from '../../../assets/madeEasy.json';
 import { CategoriesService } from '../../services/categories/categories.service'
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { TitleService } from '../../services/title.service';
@@ -14,13 +14,13 @@ import {CordovaPluginDeviceService} from "../../services/cordova-plugin-services
 import {SMSService} from "../../services/cordova-plugin-services/sms.service";
 import { AppDataService } from "../../services/appdata-info/appdata-info.service";
 import {ProductsService} from "../../services/products/products.service";
-
+declare let $:any;
 var homePageCmp;
 
 @Component({
   selector: 'app-homepage',
-  templateUrl: './app/page-body/homepage/homepage.component.html',
-  styleUrls: ['./app/page-body/homepage/homepage.component.css'],
+  templateUrl: './homepage.component.html',
+  styleUrls: ['./homepage.component.css'],
 
 })
 export class HomepageComponent implements OnInit {
@@ -28,15 +28,14 @@ export class HomepageComponent implements OnInit {
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
   private imageUrl: any;
-  private results: {};
+  results: {};
   private uuid;
   private subscriptionStatus;
   private localStorageUUIDString = "UUID";
   private appPublishDetails;
   private alive = true;
-  private isSubscribing = false;
+  isSubscribing = false;
   private isFromCMSAppView: boolean = false;
-
   constructor(private route: Router,
               private dataService: PagebodyServiceModule,
               private router: Router,
@@ -49,7 +48,7 @@ export class HomepageComponent implements OnInit {
               private productService: ProductsService,
               private appDataService: AppDataService) {
 
-    this.title.changeTitle(data.name);
+    this.title.changeTitle((<any>data).name);
     homePageCmp = this;
   }
 
@@ -125,12 +124,12 @@ export class HomepageComponent implements OnInit {
   }
 
   // Routing Method
-  navigateShop(val: string, id, name) {
+  navigateShop(val: string, id, name,image) {
     this.isSubscribing = false;
 
     if (this.isFromCMSAppView) {
       this.dataService.catId = id;
-      this.router.navigate(['/' + val, id, name]);
+      this.router.navigate(['/' + val, id, name,image]);
     } else {
       let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn") }
       this.subscription.getSubscribedData(data).subscribe(data => {
@@ -142,10 +141,11 @@ export class HomepageComponent implements OnInit {
         } else {
           this.subscriptionStatus = data.isSubscribed;
           if (this.subscriptionStatus) {
+            this.isSubscribing = false;
             localStorage.setItem(this.appId + "msisdn", data.msisdn);
 
             this.dataService.catId = id;
-            this.router.navigate(['/' + val, id, name]);
+            this.router.navigate(['/' + val, id, name,image]);
           } else {
             this.dataService.subUserArticleData.id = id;
             this.dataService.subUserArticleData.name = name;
@@ -250,6 +250,7 @@ export class HomepageComponent implements OnInit {
         this.subscription.getSubscribedData(data).subscribe(data => {
           console.log(data);
           this.subscriptionStatus = data.isSubscribed;
+          this.dataService.subscriptionStatus = data.isSubscribed;
           if (this.subscriptionStatus == true) {
             this.isSubscribing = false;
             localStorage.setItem(this.appId + "msisdn", data.msisdn)

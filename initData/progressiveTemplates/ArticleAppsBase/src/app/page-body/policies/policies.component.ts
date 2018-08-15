@@ -2,18 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { AppDataService } from '../../services/appdata-info/appdata-info.service';
 import { TitleService } from '../../services/title.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { SERVER_URL } from 'app/constantsService';
+import { SERVER_URL } from '../../../assets/constantsService';
 
 @Component({
   selector: 'app-policies',
-  templateUrl: './app/page-body/policies/policies.component.html',
-  styleUrls: ['./app/page-body/policies/policies.component.css']
+  templateUrl: './policies.component.html',
+  styleUrls: ['./policies.component.css']
 })
 export class PoliciesComponent implements OnInit {
 
-  private privacyPolicy;
+  privacyPolicy;
   private returnPolicy;
-  private terms; defaultTerms;
+  terms;
+  defaultTerms;
   constructor(private http: HttpClient, private appdataService: AppDataService, private title: TitleService) {
     this.title.changeTitle("Policies");
   }

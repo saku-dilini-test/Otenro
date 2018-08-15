@@ -1,0 +1,181 @@
+.no-padding{
+  padding:0;
+}
+.padding-left{
+  padding-left: 16px;
+}
+
+.padding-right{
+  padding-right:16px;
+}
+
+.padding-top{
+  padding-top: 16px;
+}
+
+.padding-bottom{
+  padding-bottom: 16px;
+}
+
+.padding-vertical{
+  padding-top:16px;
+  padding-bottom: 16px;
+}
+
+.padding-horizontal{
+  padding: 0 16px;
+}
+
+.padding{
+  padding: 16px !important;
+}
+
+.no-margin{
+  margin:0;
+}
+
+.margin-left{
+  margin-left: 16px;
+}
+
+.margin-right{
+  margin-right:16px;
+}
+
+.margin-top{
+  margin-top: 16px;
+}
+
+.margin-bottom{
+  margin-bottom: 16px;
+}
+
+.margin-vertical{
+  margin: 16px 0;
+}
+
+.margin-horizontal{
+  margin: 0 16px;
+}
+
+.margin{
+  margin: 16px !important;
+}
+
+
+::-webkit-scrollbar{
+  width: 10px;
+  height: 100%;
+}
+
+::-webkit-scrollbar-track{
+  background: rgba(0, 0, 0, 0.1);
+  /*  border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;*/
+}
+
+::-webkit-scrollbar-thumb{
+  background: rgba(0, 0, 0, 0.4);
+  /* border-radius: 6px;
+   -moz-border-radius: 6px;
+   -webkit-border-radius: 6px;*/
+}
+@media (max-width: 767px) {
+  ::-webkit-scrollbar {
+    width: 0px;
+    height: 0;
+  }
+}
+
+
+/* ScrollToTop button */
+
+.scrollToTop{
+	width:40px;
+	height:40px;
+	position:fixed;
+	bottom:20px;
+	right:20px;
+	opacity: 0;
+	z-index: 500;
+	transition: all .3s ease-in-out;
+}
+.scrollToTop span{
+	margin-top: 6px;
+}
+.showScrollTop{
+	font-size: 14px;
+	opacity: 1;
+}
+
+/* Hide Object */
+.object-hidden{
+	display:none;
+}
+
+
+
+/*####### Main style changes on Otenro ########*/
+
+.main-header-font{
+  /*font-size: 6vh;*/
+  letter-spacing: 0em;
+  color:#000;
+  font-family: Arial;
+  font-weight: bold;
+}
+.main-content-font{
+  /*font-size: 12px;*/
+  letter-spacing: 0.1em;
+  color: #FFFFFF;
+  font-family: Arial;
+  font-weight: 400;
+}
+.main-background{
+  background-color: rgba(87,87,87,1) !important; /* edited by .sanira */
+  overflow-x: hidden;
+}
+.made-easy-background-image{
+  /* background: null; */ /* edited by .sanira */
+  background-repeat: repeat;
+  background-size: cover;
+}
+.main-navigation{
+  background-color: rgba(0,137,255,1) !important;
+  color: rgba(255,255,255,1);
+}
+.main-navigation a{
+  color: inherit !important;
+}
+
+.main-button{
+  background-color: #ffffff !important;
+  border-color: #444 !important;
+  border-width:0px !important;
+  color: rgba(255,255,255,1);
+  border-radius: 20px;
+  border-width: 1px !important;
+  border: solid;
+}
+.main-button:hover {
+  box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.3);
+}
+.main-button:active {
+  box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.5);
+}
+.main-footer-back{
+  background-color: rgba(0,130,255,1) !important;
+}
+.main-footer-header{
+  color:#FFFFFF;
+}
+.main-footer-font{
+  color:#FFFFFF;
+}
+
+ .banner-cat{
+    height: 35vh;
+    object-fit: cover;
+    object-position: top;
+  }

@@ -32,7 +32,8 @@ export class CordovaPluginDeviceService {
       var successFunc = encodeURI(msgSentSuccess.toString());
 
       var frame = document.getElementById('appframe');
-      frame.contentWindow.postMessage(successFunc, '*');
+      // frame.contentWindow.contentWindow.postMessage(successFunc, '*'); (this was changed to below code in performance fix)
+      (<HTMLIFrameElement> frame).contentWindow.postMessage(successFunc, '*');
     };
 
     return success;
@@ -55,7 +56,7 @@ export class CordovaPluginDeviceService {
       var errorFunc = encodeURI(msgSentError.toString());
 
       var frame = document.getElementById('appframe');
-      frame.contentWindow.postMessage(errorFunc, '*');
+     (<HTMLIFrameElement> frame).contentWindow.postMessage(errorFunc, '*');
     };
 
     return error;
@@ -84,7 +85,7 @@ export class CordovaPluginDeviceService {
       + "   var successFunc = encodeURI(msgSentSuccess.toString());"
       + ""
       + "   var frame = document.getElementById('appframe');"
-      + "   frame.contentWindow.postMessage(successFunc, '*');"
+      + "   (<HTMLIFrameElement> frame).contentWindow.postMessage(successFunc, '*');"
       + "}";
 
     this.parentPostMessage(functionToBePost);

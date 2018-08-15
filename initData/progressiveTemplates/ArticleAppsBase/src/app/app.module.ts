@@ -10,7 +10,6 @@ import { FooterComponent } from './footer/footer.component';
 import { AddonsModule } from './addons/addons.module';
 import { PageBodyModule } from './page-body/page-body.module';
 import { RouterModule, Routes } from '@angular/router';
-import { RegisterComponent } from './page-body/register/register.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 // https://ng-bootstrap.github.io/#/getting-started
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';

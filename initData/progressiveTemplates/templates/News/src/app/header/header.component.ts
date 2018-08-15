@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PagebodyServiceModule } from '../page-body/page-body.service';
-import * as data from './../madeEasy.json';
+import * as data from '../../assets/madeEasy.json';
 import { TitleService } from "../services/title.service";
 import { SMSService } from "../services/cordova-plugin-services/sms.service";
 import { CordovaPluginDeviceService } from "../services/cordova-plugin-services/cordova-plugin-device.service";
@@ -12,13 +12,13 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
-
+declare let $:any;
 var headerCmp;
 
 @Component({
   selector: 'app-header',
-  templateUrl: './app/header/header.component.html',
-  styleUrls: ['./app/header/header.component.css'],
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css'],
 })
 
 export class HeaderComponent implements OnInit {
@@ -27,13 +27,13 @@ export class HeaderComponent implements OnInit {
   private cartNo: number;
   public title: string;
   public hideBackOnHome: boolean;
-  private subscriptionStatus;
+  subscriptionStatus;
   private appPublishDetails;
   private alive = true;
-  private isSubscribing = false;
-  private isUnsubscribing = false;
+  isSubscribing = false;
+  isUnsubscribing = false;
   private isFromCMSAppView: boolean = false;
-  private appStatus;
+  displayMessage;
 
   constructor(private subscription: SubscribedDataService,
     private router: Router,
@@ -49,7 +49,7 @@ export class HeaderComponent implements OnInit {
 
     router.events.subscribe((val) => {
       // see also
-      if (val.url == '/') {
+      if (val['url'] == '/') {
         this.hideBackOnHome = false;
       } else {
         this.hideBackOnHome = true;
@@ -62,9 +62,6 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.checkAppStatus();
-
     this.isFromCMSAppView = localStorage.getItem(this.appId + "_isFromCMSAppView") == '1';
 
     $('#registerModel').on('hide.bs.modal', () => {
@@ -114,19 +111,11 @@ export class HeaderComponent implements OnInit {
 
   ngDoCheck() {
     this.subscriptionStatus = this.dataService.subscriptionStatus;
-  }
-
-  checkAppStatus() {
-
-    this.subscription.getAppStatus({ appId: this.appId }).subscribe(data => {
-      this.appStatus = data.isActive;
-      this.dataService.appStatus = this.appStatus;
-    });
-
+    this.displayMessage = this.dataService.displayMessage;
   }
 
   navigate(route: string, name: string) {
-    this.title = data.name;
+    this.title = name;
     this.router.navigate([route]);
     document.getElementById("mySidenav").style.height = "0";
   }
@@ -158,10 +147,10 @@ export class HeaderComponent implements OnInit {
   }
 
   openRegisterModel() {
-    this.subscription.getAppStatus({ appId: this.appId }).subscribe(data => {
-      this.appStatus = data.isActive;
-      this.dataService.appStatus = this.appStatus;
-      if (this.appStatus == false || this.appStatus == "false") {
+    let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn") }
+    this.subscription.getSubscribedData(data).subscribe(data => {
+      if(data.isError){
+        this.dataService.displayMessage = data.displayMessage;
         $(() => {
           $('#appStatusModel').modal('show');
         });
@@ -171,14 +160,13 @@ export class HeaderComponent implements OnInit {
         });
       }
     });
-
   }
 
   openMyAccountModel(){
-    this.subscription.getAppStatus({ appId: this.appId }).subscribe(data => {
-      this.appStatus = data.isActive;
-      this.dataService.appStatus = this.appStatus;
-      if (this.appStatus == false || this.appStatus == "false") {
+    let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn") }
+    this.subscription.getSubscribedData(data).subscribe(data => {
+      if(data.isError){
+        this.dataService.displayMessage = data.displayMessage;
         $(() => {
           $('#appStatusModel').modal('show');
         });
@@ -195,7 +183,7 @@ export class HeaderComponent implements OnInit {
       this.alive = true;
 
       //Send Registration SMS
-      this.sms.sendRegistrationSMS(this.smsSuccessRegistrationCallback, this.smsErrorRegistrationCallback);
+      headerCmp.sms.sendRegistrationSMS(headerCmp.smsSuccessRegistrationCallback, headerCmp.smsErrorRegistrationCallback);
 
       var uuid = localStorage.getItem("UUID");
 
@@ -237,7 +225,7 @@ export class HeaderComponent implements OnInit {
       this.alive = true;
 
       //Send Un-Registration SMS
-      this.sms.sendUnRegistrationSMS(this.smsSuccessUnRegistrationCallback, this.smsErrorUnRegistrationCallback);
+      headerCmp.sms.sendUnRegistrationSMS(headerCmp.smsSuccessUnRegistrationCallback, headerCmp.smsErrorUnRegistrationCallback);
 
       var uuid = localStorage.getItem("UUID");
 

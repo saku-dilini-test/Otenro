@@ -1,73 +1,44 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-  <!-- <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4></script> -->
-
   <meta charset="utf-8">
   <title>News</title>
   <base href="./">
 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/animate.min.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/feather.min.css">
+  </head>
+<body  class="main-background made-easy-background-image">
+  <app-root></app-root>
+  <script src="./assets/js/jquery-2.1.0.min.js"></script>
+  <script src="./assets/js/bootstrap.min.js"></script>
+  <script src="./assets/js/blocs.min.js"></script>
+  <script src="./assets/js/jquery.touchSwipe.min.js" defer></script>
+   <script src="./assets/js/lazysizes.min.js" defer></script>
+  <script type='text/javascript' src='./assets/js/unitegallery.min.js'></script>
+  <link rel='stylesheet' href='./assets/css/unite-gallery.css' type='text/css' />
+  <script type='text/javascript' src='./assets/js/ug-theme-default.js'></script>
+  <link rel='stylesheet'      href='./assets/css/ug-theme-default.css' type='text/css' />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" type="image/png" href="favicon.png">
-    <!-- app manifest -->
-  <link rel="manifest" href="../src/manifest.json">
-  <!--bootstrap -->
-  <link rel="stylesheet" href="../src/assets/css/bootstrap.min.css" />
-  <!--custom style sheet -->
-  <link rel="stylesheet" href="../src/styles.css" />
-  <link rel="stylesheet" type="text/css" href="../src/assets/css/animate.min.css">
-    <!-- font awesome  -->
+  <script>
+    var dummy = new Date().getTime();
+    function addCss(fileName) {
 
-  <link rel="stylesheet" type="text/css" href="../src/assets/css/font-awesome.min.css">
+      var head = document.head;
+      var link = document.createElement("link");
 
-	<link rel="stylesheet" type="text/css" href="../src/assets/css/feather.min.css">
+      link.type = "text/css";
+      link.rel = "stylesheet";
+      link.href = fileName;
 
-  <link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,800,300&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-
-  <!-- Add to home screen for Safari on iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Hello Mobile">
-  <link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
-  <meta name="msapplication-TileImage" content="assets/icons/icon-144x144.png">
-  <meta name="msapplication-TileColor" content="#e0e0e0">
-
-	<script src="../src/assets/js/jquery-2.1.0.min.js"></script>
-	<script src="../src/assets/js/bootstrap.min.js"></script>
-	<script src="../src/assets/js/blocs.min.js"></script>
-	<script src="../src/assets/js/jquery.touchSwipe.min.js" defer></script>
-	<script src="../src/assets/js/lazysizes.min.js" defer></script>
-
-  <!-- Polyfills -->
-  <!-- <script src="https://unpkg.com/core-js/client/shim.min.js"></script>
-  <script src="https://unpkg.com/zone.js@0.8.4?main=browser"></script>
-  <script src="https://unpkg.com/systemjs@0.19.39/dist/system.src.js"></script>
-  -->
-  <script src="../src/assets/js/shim.min.js"></script>
-  <script src="../src/assets/js/zone.js"></script>
-  <script src="../src/assets/js/system.src.js"></script>
-  <script type='text/javascript' src='../src/assets/js/unitegallery.min.js'></script>
-  <link rel='stylesheet' href='../src/assets/css/unite-gallery.css' type='text/css' />
-  <script type='text/javascript' src='../src/assets/js/ug-theme-default.js'></script>
-  <link rel='stylesheet'      href='../src/assets/css/ug-theme-default.css' type='text/css' />
-  <script src="systemjs.config.js"></script>
-
-</head>
-
-  <body class="main-background made-easy-background-image">
-    <app-root>
-      <div class="progress">
-        <svg class="progress-circle indefinite" width="100" height="100">
-          <g transform="rotate(-90,50,50)">
-            <circle class="bg" r="40" cx="50" cy="50" fill="none"></circle>
-            <circle class="progress" r="40" cx="50" cy="50" fill="none"></circle>
-          </g>
-        </svg>
-      </div>
-    </app-root>
-  </body>
-
+      head.appendChild(link);
+    }
+    var x = './assets/main.css?dummy='+dummy;
+    addCss(x);
+  </script>
+</body>
 </html>

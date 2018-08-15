@@ -14,218 +14,6 @@ var sizeOf = require('image-size'),
 
 module.exports = {
 
-    addStyles : function(req,res){
-
-        var userId = req.userId;
-        var appId = req.body.appId;
-        var main = config.ME_SERVER + userId + '/templates/' + appId + '/css/main.css';
-
-        var header = req.body.header;
-        var color = req.body.color;
-        var font = req.body.font;
-        var fontSize = req.body.fontSize;
-        var backImg = req.body.headerImg;
-        var data = header;
-        var bdata = backImg;
-
-        var headerImage = config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'headerTemp.jpg';
-        var headerExist = config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'header.jpg';
-        var backgroundImage = config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'backgroundTemp.jpg';
-        var background = config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'background.jpg';
-
-        var headerDimensions = sizeOf(headerExist);
-        var backgroundDimensions = sizeOf(background);
-
-        var query = { appId: req.body.appId };
-        Application.update(query,
-            { $set:
-            {
-                'appSettings.header' : header,
-                'appSettings.color' : color,
-                'appSettings.font' : font,
-                'appSettings.fontSize' : fontSize,
-                'appSettings.backImg' : backImg
-            }
-            });
-        /**
-         *  Decode Image
-         * @param dataString
-         * @returns {*}
-         */
-        function decodeBase64Image(dataString) {
-            var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
-                response = {};
-
-            if (matches.length !== 3) {
-                return new Error('Invalid input string');
-            }
-
-            response.type = matches[1];
-            response.data = new Buffer(matches[2], 'base64');
-            return response;
-        }
-
-        try{
-            mkpath(config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'header.jpg', 0777, function (err) {
-            })
-        }
-        catch(e){
-            if(e.code != 'EEXIT') throw e;
-        }
-
-        /**
-         * read header image and create temporary image with new image then resize new header image and overwrite it
-         */
-        if(typeof data != "undefined"){
-            var headerimageBuffer = decodeBase64Image(data);
-            fs.readFile(headerExist, function (err, data) {
-                if(err){
-                    return console.dir(err);
-                }
-                sails.log.info("Header file read");
-                fs.writeFile(headerImage, headerimageBuffer.data, function (err) {
-                    if(err){
-                        //this will log specific error to file
-                        return console.dir(err);
-                    }
-                    sails.log.info("Header image write");
-                    im.resize({
-                        srcPath:headerImage,
-                        dstPath: headerExist,
-                        width: headerDimensions.width,
-                        height: headerDimensions.height
-
-                    }, function(err, stdout, stderr){
-                        if (err) throw err;
-                        sails.log.info('resized image to fit within ' + headerDimensions.width + ' and ' + headerDimensions.height);
-                    });
-                    sails.log.info("success");
-                });
-            });
-        }
-        /**
-         * read background image and create temporary image with new image then resize new header image and overwrite it
-         */
-        if(typeof bdata != "undefined"){
-
-            var backgroundimageBuffer = decodeBase64Image(bdata);
-
-            fs.readFile(background, function (err, data){
-                if(err){
-                    return console.dir(err);
-                }
-                fs.writeFile(backgroundImage, backgroundimageBuffer.data, function (err) {
-                    if(err){
-                        return console.dir(err);
-                    }
-                    im.resize({
-                        srcPath:backgroundImage,
-                        dstPath: background,
-                        width: backgroundDimensions.width,
-                        height: backgroundDimensions.height
-                    }, function(err, stdout, stderr){
-                        if (err) throw err;
-                        sails.log.info('resized image to fit within ' + backgroundDimensions.width + ' and ' + backgroundDimensions.height);
-                    });
-
-                    sails.log.info("success");
-                });
-            });
-        }
-        /**
-         * update css file with new changes
-         */
-        function updateFile(filename, replacements) {
-            return new Promise(function(resolve) {
-                fs.readFile(filename, 'utf-8', function(err, data) {
-                    var regex, replaceStr;
-                    if (err) {
-                        throw (err);
-                    } else {
-                        for (var i = 0; i < replacements.length; i++) {
-                            regex = new RegExp("(\\" + replacements[i].rule + "\\s*{[^}]*" + replacements[i].target + "\\s*:\\s*)([^\\n;}]+)([\\s*;}])");
-                            replaceStr = "$1" + replacements[i].replacer + "$3";
-                            data = data.replace(regex, replaceStr);
-                        }
-                    }
-                    fs.writeFile(filename, data, 'utf-8', function(err) {
-                        if (err) {
-                            throw (err);
-                        } else {
-                            resolve();
-                        }
-                    });
-                });
-            })
-        }
-        if (font == "Arial" && fontSize == 11) {
-            updateFile(main, [{
-                rule: ".made-easy-themeColor",
-                target: "color",
-                replacer: color
-            }], function(err) {
-                sails.log.info((err));
-            });
-        } else if (color == "#FFFFFF" && font == "Arial") {
-            updateFile(main, [{
-                rule: ".made-easy-themeFontSize",
-                target: "font-size",
-                replacer: fontSize + "em"
-            }], function(err) {
-                sails.log.info((err));
-            });
-        } else if (color == "#FFFFFF" && fontSize == 11) {
-            updateFile(main, [{
-                rule: ".made-easy-themeFont",
-                target: "font-family",
-                replacer: font
-            }], function(err) {
-                sails.log.info((err));
-            });
-        } else if (font == "Arial") {
-            updateFile(main, [{
-                rule: ".made-easy-themeColor",
-                target: "color",
-                replacer: color
-            }, {
-                rule: ".made-easy-themeFontSize",
-                target: "font-size",
-                replacer: fontSize + "em"
-            }], function(err) {
-                sails.log.info((err));
-            });
-        } else if (fontSize == 11) {
-            updateFile(main, [{
-                rule: ".made-easy-themeColor",
-                target: "color",
-                replacer: color
-            }, {
-                rule: ".made-easy-themeFont",
-                target: "font-family",
-                replacer: font
-            }], function(err) {
-                sails.log.info((err));
-            });
-        } else {
-            updateFile(main, [{
-                rule: ".made-easy-themeColor",
-                target: "color",
-                replacer: color
-            }, {
-                rule: ".made-easy-themeFont",
-                target: "font-family",
-                replacer: font
-            }, {
-                rule: ".made-easy-themeFontSize",
-                target: "font-size",
-                replacer: fontSize + "em"
-            }], function(err) {
-                sails.log.info((err));
-            });
-
-        }
-    },
-
     /**
      *  Return appSetting given appId
      */
@@ -240,76 +28,6 @@ module.exports = {
         });
     },
 
-    /**
-     * Update header image given appId
-     */
-
-    addHeaderImage : function(req,res){
-        var userId = req.userId;
-        var appId = req.body.appId;
-        var headerImg = req.body.headerImg;
-        var data = headerImg;
-        var headerImage = config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'headerTemp.jpg';
-        var headerExist = config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'header.jpg';
-        var headerDimensions = sizeOf(headerExist);
-
-        /**
-         *  Decode Image
-         * @param dataString
-         * @returns {*}
-         */
-        function decodeBase64Image(dataString) {
-            var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
-                response = {};
-
-            if (matches.length !== 3) {
-                return new Error('Invalid input string');
-            }
-
-            response.type = matches[1];
-            response.data = new Buffer(matches[2], 'base64');
-            return response;
-        }
-        try{
-            mkpath(config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'header.jpg', 0777, function (err) {
-            })
-        }
-        catch(e){
-            if(e.code != 'EEXIT') throw e;
-        }
-
-        /**
-         * read header image and create temporary image with new image then resize new header image and overwrite it
-         */
-        if(typeof data != "undefined"){
-            var headerimageBuffer = decodeBase64Image(data);
-            fs.readFile(headerExist, function (err, data) {
-                if(err){
-                    return console.dir(err);
-                }
-                sails.log.info("Header file read");
-                fs.writeFile(headerImage, headerimageBuffer.data, function (err) {
-                    if(err){
-                        //this will log specific error to file
-                        return console.dir(err);
-                    }
-                    sails.log.info("Header image write");
-                    sails.log.info(headerDimensions.height);
-                    im.resize({
-                        srcPath:headerImage,
-                        dstPath: headerExist,
-                        width: headerDimensions.width,
-                        height: headerDimensions.height
-
-                    }, function(err, stdout, stderr){
-                        if (err) throw err;
-                        sails.log.info('resized image to fit within ' + headerDimensions.width + ' and ' + headerDimensions.height);
-                    });
-                    sails.log.info("success");
-                });
-            });
-        }
-    },
 
     /**
      * Apply background image for given appId
@@ -319,7 +37,7 @@ module.exports = {
     applyBackgroundImage : function(req,res){
         var userId = req.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/main.css';
         var isApplyBGImage = req.body.isApplyBGImage;
         var findQuery = { id : appId };
 
@@ -391,14 +109,14 @@ module.exports = {
         var appId = req.body.appId;
         var backImg = req.body.backgroundImg;
         var data = backImg;
-        var backgroundExist = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/'+ 'background.png';
+        var backgroundExist = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/images/'+ 'background.png';
         var backgroundDimensions = sizeOf(backgroundExist);
 
 
         var data = backImg.replace(/^data:image\/\w+;base64,/, "");
         var buf = new Buffer(data, 'base64');
         // product images copy to app file server
-        fs.writeFile(config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/'+ 'background.png', buf, function(err) {
+        fs.writeFile(config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/images/'+ 'background.png', buf, function(err) {
             if(err) {
                 if (err) res.send(err);
             }
@@ -407,133 +125,8 @@ module.exports = {
 
 
 
-        /*/!**
-         *  Decode Image
-         * @param dataString
-         * @returns {*}
-         *!/
-        function decodeBase64Image(dataString) {
-            var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
-                response = {};
-
-            if (matches.length !== 3) {
-                return new Error('Invalid input string');
-            }
-
-            response.type = matches[1];
-            response.data = new Buffer(matches[2], 'base64');
-            return response;
-        }
-        try{
-            mkpath(config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'background.jpg', 0777, function (err) {
-            })
-        }
-        catch(e){
-            if(e.code != 'EEXIT') throw e;
-        }
-
-        /!**
-         * read background image and create temporary image with new image then resize new header image and overwrite it
-         *!/
-        if(typeof data != "undefined"){
-
-            var backgroundimageBuffer = decodeBase64Image(data);
-            var type = backgroundimageBuffer.type.replace('image/','');
-
-            var backgroundImage = config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'backgroundTemp.'+ type;
-            fs.readFile(backgroundExist, function (err, data){
-                if(err){
-                    return console.dir(err);
-                }
-                fs.writeFile(backgroundImage, backgroundimageBuffer.data, function (err) {
-                    if(err){
-                        return console.dir(err);
-                    }
-
-                   /!* lwip.open(backgroundImage, function(err, image) {*!/
-                        if (err)  return res.send(500, err);
-
-                        fs.unlink(backgroundExist, function (err) {
-                            if (err)  return res.send(500, err);
-                        });
-                        image.resize(backgroundDimensions.width,backgroundDimensions.height, function(err, rzdImg) {
-                            rzdImg.writeFile(backgroundExist, function(err) {
-                                if (err)  return res.send(500, err);
-
-                                fs.unlink(backgroundImage, function (err) {
-                                    if (err)  return res.send(500, err);
-                                    res.send('ok');
-                                });
-                            });
-                        });
-                   /!* });*!/
-                });
-            });
-        }*/
     },
-    ///**
-    // * Update Background Color given appId
-    // */
-    //
-   // addBackgroundColor : function(req,res){
-    //    var userId = req.userId;
-    //    var appId = req.body.appId;
-    //    var mainCssFile = config.ME_SERVER + userId + '/templates/' + appId + '/css/main.css';
-    //    var backgroundColor = req.body.backgroundColor;
-    //
-    //    var data = {
-    //        appSettings:{
-    //            color: backgroundColor
-    //        }
-    //    };
-    //    var query = {id:appId};
-    //    Application.update(query,data).exec(function(err, appProduct) {
-    //        if (err) res.send(err);
-    //    });
-    //
-    //    /**
-    //     * update css file with new changes
-    //     */
-    //    function updateFile(filename, replacements) {
-    //        return new Promise(function(resolve) {
-    //            fs.readFile(filename, 'utf-8', function(err, data) {
-    //                var regex, replaceStr;
-    //                if (err) {
-    //                    throw (err);
-    //                } else {
-    //                    for (var i = 0; i < replacements.length; i++) {
-    //                        regex = new RegExp("(\\" + replacements[i].rule + "\\s*{[^}]*" + replacements[i].target + "\\s*:\\s*)([^\\n;}]+)([\\s*;}])");
-    //                        replaceStr = "$1" + replacements[i].replacer + "$3";
-    //                        data = data.replace(regex, replaceStr);
-    //                    }
-    //                }
-    //                fs.writeFile(filename, data, 'utf-8', function(err) {
-    //                    if (err) {
-    //                        throw (err);
-    //                    } else {
-    //                        resolve();
-    //                    }
-    //                });
-    //            });
-    //        })
-    //    }
-    //
-    //    if (backgroundColor == '#FFFFFF') {
-    //        updateFile(mainCssFile, [{
-    //
-    //        }], function (err) {
-    //            sails.log.info((err));
-    //        });
-    //    }else{
-    //        updateFile(mainCssFile, [{
-    //            rule: ".made-easy-themeColor",
-    //            target: "color",
-    //            replacer: backgroundColor
-    //        }], function (err) {
-    //            sails.log.info((err));
-    //        });
-    //    }
-   // },
+
     /**
      * Update Background Color , Navigation Bar , Footer and Button given appId with common function
      * also Update Header , Content & Footer Color given appId also integrated
@@ -541,12 +134,11 @@ module.exports = {
     addWebStyleColor : function(req,res){
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/main.css';
         var styleColor = req.body.styleColor;
         var type = req.body.type;
         var colorTypeCss = '';
 
-        console.log("type  : " + type);
          var query = { id : appId };
 
          Application.findOne(query).exec(function(err, app) {
@@ -609,7 +201,7 @@ module.exports = {
                     updateFile(mainCssFile, [{
                         rule: colorTypeCss,
                         target: "color",
-                        replacer: styleColor
+                        replacer: styleColor+ " "+"!important"
                     }], function (err) {
                         sails.log.info((err));
                     });
@@ -674,60 +266,6 @@ module.exports = {
 
     },
 
-    addJsChange : function(req,res){
-        var userId = req.body.userId;
-        var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/app/header/header.component.ts';
-       // var mainCssFile = "/home/dilakshan/Desktop/regex.ts";
-        var data = req.body.jsdata;
-
-        console.log("req.data :  " + JSON.stringify(data))
-
-        updateFile(mainCssFile, [{
-            attribute: 'title',
-            rule: 'string',
-            replacer: "'" + data + "'"
-        }], function (err) {
-            sails.log.info((err));
-        });
-
-        setTimeout(function() {
-            // console.log("res.send(\"success\");");
-            res.send("success");
-        }, 100);
-
-
-        /**
-         * update css file with new changes
-         *
-         */
-        function updateFile(filename, replacements) {
-            return new Promise(function(resolve) {
-                fs.readFile(filename, 'utf-8', function(err, data) {
-                    var regex, replaceStr;
-                    if (err) {
-                        throw (err);
-                    } else {
-                        regex = new RegExp("(" + replacements[0].attribute + "\\s*:]*" + replacements[0].rule + "\\s*=\\s*)([^\\n;}]+)([\\s*;}])");
-                            replaceStr = "$1" + replacements[0].replacer + "$3";
-                            data = data.replace(regex, replaceStr);
-
-                    }
-                    fs.writeFile(filename, data, 'utf-8', function(err) {
-
-                        if (err) {
-                            throw (err);
-                        } else {
-                            resolve();
-                        }
-                    });
-                });
-            })
-        }
-
-    },
-
-
 
 
     /**
@@ -736,7 +274,7 @@ module.exports = {
     addWebStyleFontFamily : function(req,res){
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/main.css';
         var styleFontFamily = req.body.styleFontFamily;
         var type = req.body.type;
         var fontFamilyCss = '';
@@ -826,7 +364,7 @@ module.exports = {
     addWebStyleFontSize : function(req,res){
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/main.css';
         var styleFontSize = req.body.styleFontSize;
         var type = req.body.type;
         var data = {};
@@ -928,7 +466,7 @@ module.exports = {
     addWebStyleFontWeight : function(req,res){
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/main.css';
         var styleFontWeight = req.body.styleFontWeight;
         var type = req.body.type;
         var fontWeightCss = '';
@@ -1015,7 +553,7 @@ module.exports = {
     addWebStyleButtonBorderWidth : function(req,res){
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/main.css';
         var buttonBorderWidth = req.body.styleButtonBorderWidth;
         var buttonBorderWidthCss = '.main-button';
 
@@ -1077,7 +615,7 @@ module.exports = {
         sails.log.info(req.body);
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/main.css';
         var buttonBorderRadius = req.body.styleButtonBorderRadius;
         var buttonBorderRadiusCss = '.main-button';
 
