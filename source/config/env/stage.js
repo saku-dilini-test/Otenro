@@ -36,7 +36,7 @@ module.exports = {
     APP_FILE_SERVER: '/var/www/html/meServer/temp/',
     CLIENT_SECRET: '44f4f3be572ec33711a40a5b8b4',
     TEMPLATES_PATH: '/home/Otenro/initData/templates/',
-    PROGRESSIVE_TEMPLATES_PATH: '/home/Otenro/initData/progressiveTemplates/',
+    PROGRESSIVE_TEMPLATES_PATH: '/home/Otenro/initData/distribution/',
     REDIRECT_URL: 'http://173.82.153.215:1338',
     ANDROID_APK_BUILD_ZIPALIGN_PATH: '/opt/android-sdk/build-tools/26.0.2/zipalign',//Use to do the zipalign when building android apk.
     ANDROID_VERSION : 26,

@@ -52,7 +52,7 @@ module.exports = {
     APP_FILE_SERVER: '/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/',
     CLIENT_SECRET: 'pro44f4f3be572ec33711a40a5b8b4789',
     TEMPLATES_PATH: '/home/projects/appmaker/Otenro/initData/templates/',
-    PROGRESSIVE_TEMPLATES_PATH: '/home/projects/appmaker/Otenro/initData/progressiveTemplates/',
+    PROGRESSIVE_TEMPLATES_PATH: '/home/projects/appmaker/Otenro/initData/distribution/',
     REDIRECT_URL: 'https://developer.appmaker.lk',
     ANDROID_APK_BUILD_ZIPALIGN_PATH: '/opt/android-sdk/build-tools/26.0.2/zipalign',//Use to do the zipalign when building android apk.
     ANDROID_VERSION : 26,

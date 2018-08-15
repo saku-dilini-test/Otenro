@@ -13,9 +13,9 @@ APPFILESERVER='c:/xampp/htdocs/meServer/temp/';
 #APPFILESERVER='/home/otenro/OtenroTest/appFileServer/';
 
 #prod
-MESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/';
-NODE='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/node_modules/';
-APPFILESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/';
+#MESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/';
+#NODE='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/node_modules/';
+#APPFILESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/';
 
 ENV='dev'   #this is for development
 #ENV='pro'  #this is for production
@@ -24,7 +24,7 @@ DB=''
 
 if [ $ENV == 'dev' ]
 then
-	DB='appBuilder'
+	DB='appmaker'
 	serverUrl='http://localhost:1337'
 elif [ $ENV == 'stag' ]
 then
@@ -92,6 +92,7 @@ cd meServerFiles/unknownUser/progressiveTemplates/
         cd $d/assets/
         ls
         sed -i "s@serverUrl@$serverUrl@" constantsService.ts
+        NAME=`grep -m 1 "\"name\"" madeEasy.json | sed -r 's/^ *//;s/.*: *"//;s/",?//'`
         APPID=`grep -m 1 "\"appId\"" madeEasy.json | sed -r 's/^ *//;s/.*: *"//;s/",?//'`
         USERID=`grep -m 1 "\"userId\"" madeEasy.json | sed -r 's/^ *//;s/.*: *"//;s/",?//'`
         TEMPNAME=`grep -m 1 "\"templateName\"" madeEasy.json | sed -r 's/^ *//;s/.*: *"//;s/",?//'`
@@ -101,10 +102,11 @@ cd meServerFiles/unknownUser/progressiveTemplates/
         cd ../
         pwd
         sed -i "s@serverUrl@$serverUrl@" main.*.js
+        sed -i "s@unknownAppId@$NAME@" main.*.js
         sed -i "s@unknownAppId@$APPID@" main.*.js
         sed -i "s@unknownUserName@$USERID@" main.*.js
         sed -i "s@unknownTemplateName@$TEMPNAME@" main.*.js
-        cd -
+        cd ../
     done
 
 cd ../../../
