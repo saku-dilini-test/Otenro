@@ -95,10 +95,7 @@
 
             // If defined basic information address , Check length
 
-            if(typeof webInfo.email == 'undefined'){
-                toastr.error('Please add Email Address', { closeButton: true});
-            }
-            else{
+            if(typeof webInfo.email != 'undefined'){
                 var basicInfoResponse = {
                     'appId': $rootScope.appId,
                     'address': !(basicInfo.address) ? null: basicInfo.address,
