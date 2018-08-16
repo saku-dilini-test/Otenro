@@ -1,6 +1,6 @@
 {
-  "name": "News",
-  "appId": "587f2fc69cca49641ff664ec",
+  "name": "News Sample",
+    "appId": "587f2fc69cca49641ff664ec",
   "userId": "unknownUser",
   "serviceApi": {
     "host": "http://localhost:1337",

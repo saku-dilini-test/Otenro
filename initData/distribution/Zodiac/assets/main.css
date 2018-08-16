@@ -134,11 +134,11 @@
   font-weight: 400;
 }
 .main-background{
-  background-color: #e6e8ea !important;
+  background-color: #ffffff !important;
   overflow-x: hidden;
 }
 .made-easy-background-image{
-  background: url("./images/background.png");
+  background: null;
   background-repeat: repeat;
   background-size: cover;
 }

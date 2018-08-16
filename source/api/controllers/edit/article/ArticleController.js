@@ -125,8 +125,8 @@ module.exports = {
 					return res.send(err);
 				}
 
-				var filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/secondNavi/';
-				var filePathArticle = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/thirdNavi/';
+				var filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/secondNavi/';
+				var filePathArticle = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/thirdNavi/';
 
 				result.forEach(function (result) {
 					fs.unlink(filePath + result.imageUrl, function (err) {
@@ -192,8 +192,8 @@ module.exports = {
 		var fileDir;
 
 		if (isNew == 'true' || isNew == true) {
-			filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/secondNavi/' + req.body.imageUrl;
-			fileDir = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/secondNavi/';
+			filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/secondNavi/' + req.body.imageUrl;
+			fileDir = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/secondNavi/';
 		} else {
 			filePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId + '/img/category/' + req.body.imageUrl;
 			fileDir = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId + '/img/category/';
@@ -244,7 +244,7 @@ module.exports = {
 		//        console.log("**************");
 		var fileDir;
 		if (isNew == true || isNew == 'true') {
-			fileDir = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/thirdNavi/';
+			fileDir = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/thirdNavi/';
 		} else {
 			fileDir = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId + '/img/article/';
 		}
@@ -272,9 +272,9 @@ module.exports = {
 					// product images copy to app file server
 					if (isNew == 'true' || isNew == true) {
 						console.log(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
-							req.body.appId + '/src/assets/images/thirdNavi/' + imgeFileName);
+							req.body.appId + '/assets/images/thirdNavi/' + imgeFileName);
 						fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
-							req.body.appId + '/src/assets/images/thirdNavi/' + imgeFileName, buf, function (err) {
+							req.body.appId + '/assets/images/thirdNavi/' + imgeFileName, buf, function (err) {
 								if (err) {
 									return res.send(err);
 								}
@@ -457,7 +457,7 @@ module.exports = {
 		var filePath;
 
 		if (isNew == true || isNew == 'true') {
-			filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/thirdNavi/' + imageUrl;;
+			filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/thirdNavi/' + imageUrl;;
 		} else {
 			filePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId + '/img/article/' + imageUrl;
 		}
