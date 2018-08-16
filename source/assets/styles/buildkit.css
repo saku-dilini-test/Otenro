@@ -2972,3 +2972,12 @@ table.md-calendar-day-header{
 .dialog-padding-set{
     padding: 20px 40px 10px;
 }
+
+[ng-quill-editor] { display: block; }
+
+.ql-editor {
+    height: 250px !important;
+}
+.float-left{
+    float: left;
+}

@@ -51,7 +51,8 @@ angular.module('app', [
   'ngImgCrop',
   'ngAnimate',
   'chart.js',
-  'uiCropper'
+  'uiCropper',
+  'ngQuill'
 
 
 ]).run(function($rootScope, $state, $auth,Auth,Permission,$log) {
