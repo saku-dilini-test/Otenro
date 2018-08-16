@@ -385,7 +385,30 @@ module.exports = {
                                         'registeredDate':dateFormat(new Date(), "yyyy-mm-dd"),
                                         'subscriptionStatus':config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code
                                     };
-                                    actionStateChangeInstance.sendForCharging(msisdn,serviceID,publishDetailsData,user.appID);
+
+                                    if(user.subscriptionStatus==config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code){
+                                        sails.log.debug('msisdn: ' + msisdn + ' already Subscribed');
+                                    }else if(user.subscriptionStatus==config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code){
+                                        var paymentQuery = {
+                                            appId: appID,
+                                            msisdn: msisdn,
+                                            date: dateFormat(new Date(), "yyyy-mm-dd")
+                                        };
+
+                                        SubscriptionPayment.findOne(paymentQuery).exec(function (err, payment) {
+                                            if (err){
+                                                sails.log.error("Error when searching SubscriptionPayment: " + JSON.stringify(paymentQuery));
+                                                return res.serverError(err);
+                                            }
+
+                                            if(payment){
+                                                sails.log.debug('There is a payment record for today for msisdn: ' + msisdn + ' as payment status: ' + payment.status);
+                                            }else{
+                                                sails.log.debug('No payment record for today therefore will charge for the msisdn: ' + msisdn);
+                                                actionStateChangeInstance.sendForCharging(msisdn,serviceID,publishDetailsData,user.appID);
+                                            }
+                                        });
+                                    }
                                 }else{
                                     var setFields = {
                                         'status': config.APP_USER_STATUS.INACTIVE,
