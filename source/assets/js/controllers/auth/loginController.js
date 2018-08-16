@@ -127,7 +127,15 @@
         }
     };
     $scope.cancel = function () {
-      $state.go('anon.welcome');
+        if($scope.isPinReqSuccess == true){
+            $state.go($state.current, {}, {reload: true});
+        }
+        else{
+            if($auth.getToken()=='undefined') {
+                $auth.removeToken();
+            }
+            $state.go('anon.welcome');
+        }
     };
 
       $scope.register = function() {
