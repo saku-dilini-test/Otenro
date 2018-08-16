@@ -3,7 +3,7 @@
   "appId": "unknownAppId",
   "userId": "unknownUserName",
   "serviceApi": {
-    "host": "http://localhost:port",
+    "host": "serverUrl",
     "port": 1337
   },
   "templateName": "unknownTemplateName"

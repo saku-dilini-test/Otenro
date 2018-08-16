@@ -24,7 +24,7 @@ DB=''
 
 if [ $ENV == 'dev' ]
 then
-	DB='appBuilder'
+	DB='appmaker'
 	serverUrl='http://localhost:1337'
 elif [ $ENV == 'stag' ]
 then
@@ -113,6 +113,7 @@ cd progressiveTemplates/
        cd ../
        pwd
        sed -i "s@serverUrl@$serverUrl@" main.*.js
+       sed -i "s@unknownName@$NAME@" main.*.js
        sed -i "s@unknownAppId@$APPID@" main.*.js
        sed -i "s@unknownUserName@$USERID@" main.*.js
        sed -i "s@unknownTemplateName@$TEMPNAME@" main.*.js

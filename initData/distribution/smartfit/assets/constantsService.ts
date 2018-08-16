@@ -1,2 +1,2 @@
-export var SERVER_URL = 'http://localhost:port';
+export var SERVER_URL = 'serverUrl';
  
