@@ -10,40 +10,6 @@
   -webkit-border-radius: 10px;
   background-color:lavender;
 }
-.progress {
-  margin: 0;
-  background: url(assets/images/test.png);
-  background-size: 100%;
-  position: relative;
-  height: 100vh;
-  display: block;
-  width: 100vw;
-  overflow: hidden;
-}
-
-.progress-circle{
-  position: relative;
-  top: calc(50% - 50px);
-  left: calc(50vw - 50px);
-}
-
-.progress-circle.indefinite .progress {
-  stroke: #00b8ff;
-  stroke-width: 2;
-  stroke-dashoffset: 0;
-  stroke-dasharray: 63 188;
-  animation: progress-indef 2s linear infinite;
-}
-
-.progress-circle.indefinite .bg {
-  stroke: #eee;
-  stroke-width: 2;
-}
-
-@keyframes progress-indef {
-  0% { stroke-dashoffset: 251; }
-  100% { stroke-dashoffset: 0; }
-}
 
 /*-----------------------------------------------------------------------------------
 	    index
