@@ -23,6 +23,7 @@ import { AppUserComponent } from './app-user/app-user.component';
 import { SearchPipe } from '../pipes/search.pipe';
 import { BlogsComponent } from './blogs/blogs.component';
 import { BlogViewComponent } from './blog-view/blog-view.component';
+import { SafeHtmlPipe } from '../pipes/safeHtml.pipe';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { BlogViewComponent } from './blog-view/blog-view.component';
     SearchPipe,
     BlogsComponent,
     BlogViewComponent,
+    SafeHtmlPipe
   ]
 })
 export class PageBodyModule {}
