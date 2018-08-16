@@ -38,6 +38,9 @@
               <a (click)="navigate('contact', 'Contact Us')">Contact Us
               </a>
             </li>
+              <li *ngIf = "enableBlog" >
+                  <a (click)="navigate('blogs', 'blogs')">Blog</a>
+              </li>
              <li>
               <div class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About
@@ -97,6 +100,9 @@
                <li>
                 <a  data-toggle="collapse" data-target=".navbar-2"  (click)="navigate('contact', 'Contact Us')">Contact Us
                 </a>
+              </li>
+              <li>
+                  <a  data-toggle="collapse" data-target=".navbar-2" *ngIf = "enableBlog" (click)="navigate('blogs', 'blogs')">Blog</a>
               </li>
                <li>
                 <div class="dropdown">
