@@ -3,9 +3,9 @@ echo  'start....'
 
 #leave and comment other env
 #local
-MESERVER='c:/xampp/htdocs/meServer/temp/';
-NODE='c:/xampp/htdocs/meServer/node_modules/';
-APPFILESERVER='c:/xampp/htdocs/meServer/temp/';
+#MESERVER='c:/xampp/htdocs/meServer/temp/';
+#NODE='c:/xampp/htdocs/meServer/node_modules/';
+#APPFILESERVER='c:/xampp/htdocs/meServer/temp/';
 
 #stag
 #MESERVER='/home/admin/web/testcdn.otenro.com/public_html/temp/';
@@ -13,12 +13,12 @@ APPFILESERVER='c:/xampp/htdocs/meServer/temp/';
 #APPFILESERVER='/home/otenro/OtenroTest/appFileServer/';
 
 #prod
-#MESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/';
-#NODE='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/node_modules/';
-#APPFILESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/';
+MESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/';
+NODE='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/node_modules/';
+APPFILESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/';
 
-ENV='dev'   #this is for development
-#ENV='pro'  #this is for production
+#ENV='dev'   #this is for development
+ENV='pro'  #this is for production
 #ENV='stag'  #this is for staging
 DB=''
 
