@@ -12,8 +12,10 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
+import { SERVER_URL } from '../../assets/constantsService';
 declare let $:any;
 var headerCmp;
+
 
 @Component({
   selector: 'app-header',
@@ -34,6 +36,7 @@ export class HeaderComponent implements OnInit {
   isUnsubscribing = false;
   private isFromCMSAppView: boolean = false;
   displayMessage;
+  logoUrl;
 
   constructor(private subscription: SubscribedDataService,
     private router: Router,
@@ -62,6 +65,9 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.logoUrl = SERVER_URL + "/templates/viewWebImages?userId="
+          + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images='
+
     this.isFromCMSAppView = localStorage.getItem(this.appId + "_isFromCMSAppView") == '1';
 
     $('#registerModel').on('hide.bs.modal', () => {

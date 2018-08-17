@@ -149,11 +149,15 @@
             };
 
             $scope.tmpImage[0] = $scope.path+data.userId+"/templates/"+data.id+"/img/background.jpg";
-            if($rootScope.tempNew === 'true' || $rootScope.tempNew === true){
-                $scope.tmpLogo[0] = $scope.path+data.userId+"/progressiveTemplates/"+data.id+"/src/assets/images/logo.png";
-            }else {
-                $scope.tmpLogo[0] = $scope.path+data.userId+"/templates/"+data.id+"/img/logo.png";
-            }
+            // if($rootScope.tempNew === 'true' || $rootScope.tempNew === true){
+            //     $scope.tmpLogo[0] = $scope.path+data.userId+"/progressiveTemplates/"+data.id+"/assets/images/logo.png";
+            // }else {
+            //     $scope.tmpLogo[0] = $scope.path+data.userId+"/templates/"+data.id+"/img/logo.png";
+            // }
+            $scope.tmpLogo[0] = SERVER_URL +"templates/viewWebImages?" +
+                "userId="+ $auth.getPayload().id +
+                "&appId="+$rootScope.appId+"&"+new Date().getTime()+
+                "&images=/logo.png";
         }).error(function (err) {
             toastr.error(err.error, 'Error', {
                 closeButton: true
