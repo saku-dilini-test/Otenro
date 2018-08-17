@@ -41,7 +41,7 @@
             <table class="table">
                 <thead class="obl-dashboard-apps">
                 <th>App ID</th>
-                <th>App Name</th>
+                <th data-ng-click="sortType = appName; sortReverse = !sortReverse;">App Name</th>
                 <th>Email</th>
                 <th>App Description</th>
                 <th ng-if="user.userRole[0] != 'ADMIN'">Billing</th>
@@ -54,7 +54,7 @@
                 </thead>
 
                 <tbody>
-                <tr ng-repeat="app in appList | filter : searchData">
+                <tr ng-repeat="app in appList | filter : searchData | orderBy:sortType:sortReverse">
                     <td ng-click="showAppView(app.id,app.userId)"  style="color:blue;">
                     <!--<a href="{{serverURL}}templates/viewWebTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">-->
                         <u>{{app.uniqueAppId}}</u>
