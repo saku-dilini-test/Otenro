@@ -26,14 +26,14 @@
 
 
     <div class="md-dialog-main clearfix">
-        <fieldset ng-style="myObj">
+        <fieldset ng-if="user.userRole!='APP_CREATOR'"  ng-style="myObj">
             <input type="text" ng-model="searchData.$" name="search">
             <input type="submit" class="me-search-button">
         </fieldset>
 
         <md-tabs md-center-tabs="false" md-selected="selectedIndex" md-no-ink="true" md-autoselect="false"
                  md-dynamic-height="true">
-            <md-tab ng-click="showHideSearchField('app_details')">
+            <md-tab ng-if="showAppDetails"ng-click="showHideSearchField('app_details')">
                 <md-tab-label>App Details</md-tab-label>
                 <md-tab-body>
 
@@ -164,7 +164,7 @@
                         <!--<div><a href="#/viewAdNetworks/"></a></div>-->
                     <!--</form> </md-tab-body>-->
             <!--</md-tab>-->
-            <md-tab ng-disabled="enableTab" ng-click="showHideSearchField('register_users')">
+            <md-tab ng-if="showRegisterdusers" ng-disabled="enableTab" ng-click="showHideSearchField('register_users')">
 
                 <md-tab-label>Registered users </md-tab-label>
                 <md-tab-body>
@@ -235,7 +235,7 @@
 
 
 
-                        <md-tab>
+                        <md-tab ng-if="showPayment">
                             <md-tab-label>Payments</md-tab-label>
                             <md-tab-body>
                                    
@@ -268,7 +268,7 @@
                                 </form>
                         </md-tab-body>
                             </md-tab> 
-                        <md-tab>
+                        <md-tab ng-if="showRevenueAndTrafficReport">
                             <md-tab-label>Revenue And Traffic Report</md-tab-label>
                             <md-tab-body>
                                 <div class="reports-container">
@@ -288,6 +288,15 @@
                                                     ng-model="revenueAndTrafficReport.operator" required >
                                                 <option ng-value="operator.operator" ng-repeat="operator in operators">{{operator.operator}}</option>
                                             </select>
+                                            <div ng-if="user.userRole=='APP_CREATOR'">
+                                                <h6 flex="100">Select Application</h6>
+                                                <select placeholder="Select Report Type"  aria-label="Country Name"
+                                                        ng-model="revenueAndTrafficReport.appName" required >
+                                                    <option ng-value="app.id" ng-repeat="app in apps">{{app.appName}}</option>
+                                                </select>
+
+                                            </div>
+
 
                                         </div>
                                     </div>
@@ -347,7 +356,8 @@
                                             <th ng-if="revenueAndTrafficReport.report == 'Date Range'">Date</th>
                                             <th ng-if="revenueAndTrafficReport.report == 'Monthly'">Month</th>
                                             <th ng-if="revenueAndTrafficReport.report == 'Yearly'">Year</th>
-                                            <th>Operator</th>
+                                            <th >Operator</th>
+                                            <th ng-if="user.userRole=='APP_CREATOR'">Application</th>
                                             <th>AppMaker Revenue</th>
                                             <th>AppMaker Traffic</th>
                                             <th>Total Revenue</th>
@@ -361,6 +371,7 @@
                                             <td ng-if="revenueAndTrafficReport.report == 'Monthly'">{{revenueAndTraffic.month}}</td>
                                             <td ng-if="revenueAndTrafficReport.report == 'Yearly'">{{revenueAndTraffic.year}}</td>
                                             <td>{{revenueAndTraffic.operator}}</td>
+                                            <td ng-if="user.userRole=='APP_CREATOR'">{{revenueAndTraffic.appId}}</td>
                                             <td>{{revenueAndTraffic.revenue}}</td>
                                             <td>{{revenueAndTraffic.viewCount}}</td>
                                             <td>{{revenueAndTraffic.revenue}}</td>
@@ -374,7 +385,7 @@
                         </md-tab>
 
 
-                        <md-tab>
+                        <md-tab ng-if="showapplicationBaseReport" >
                             <md-tab-label>Application Base Report</md-tab-label>
                             <md-tab-body>
                                 <div class="reports-container">
@@ -393,6 +404,12 @@
                                             <select placeholder="Select Report Type"  aria-label="Country Name"
                                                     ng-model="applicationBaseReport.appName" required >
                                                 <option ng-value="app.appName" ng-repeat="app in apps">{{app.appName}}</option>
+                                            </select>
+
+                                            <h6 flex="100">Select operator</h6>
+                                            <select placeholder="Select operator"  aria-label="Country Name"
+                                                    ng-model="applicationBaseReport.operator" required >
+                                                <option ng-value="operator.operator" ng-repeat="operator in operators">{{operator.operator}}</option>
                                             </select>
 
                                         </div>
@@ -493,7 +510,7 @@
                             </md-tab-body>
                         </md-tab> 
 
-                        <md-tab>
+                        <md-tab ng-if="failedTanscationReport">
                             <md-tab-label>Failed Transaction Report</md-tab-label>
                             <md-tab-body>
                                 <div class="reports-container">
@@ -508,7 +525,15 @@
                                                 <option ng-value="oneReport.name"
                                                         ng-repeat="oneReport in reports">{{oneReport.name}}</option>
                                             </select>
+
+                                            <h6 flex="100">Select operator</h6>
+                                            <select placeholder="Select operator"  aria-label="Country Name"
+                                                    ng-model="failedTransactionReport.operator" required >
+                                                <option ng-value="operator.operator" ng-repeat="operator in operators">{{operator.operator}}</option>
+                                            </select>
                                         </div>
+
+
 
                                     </div>
 
@@ -543,7 +568,7 @@
                                         <thead class="obl-dashboard-apps">
                                         <tr>
                                             <th>Date</th>
-                                            <th>Service Provider</th>
+                                            <th>Operator</th>
                                             <th>Application Name</th>
                                             <th>Error Code</th>
                                             <th>Total</th>
@@ -565,7 +590,7 @@
                             </md-tab-body>
                         </md-tab>
 
-                        <md-tab>
+                        <md-tab ng-if="showCustomerCareReport">
                             <md-tab-label>Customer Care Report</md-tab-label>
                             <md-tab-body>
                                 <div class="reports-container">
@@ -625,7 +650,7 @@
                                 </form>
                             </md-tab-body>
                         </md-tab>
-                        <md-tab>
+                        <md-tab ng-if="showReconciliationReports">
                             <md-tab-label>Reconciliation Report</md-tab-label>
                             <md-tab-body>
                                 <div class="reports-container">
@@ -638,6 +663,12 @@
                                                      ng-change="reconciliationReportsGet(reconciliationReports.report)" required >
                                                  <option ng-value="oneReport.name" ng-repeat="oneReport in reports">{{oneReport.name}}</option>
                                              </select>
+
+                                            <h6 flex="100">Select operator</h6>
+                                            <select placeholder="Select operator"  aria-label="Country Name"
+                                                    ng-model="reconciliationReports.operator" required >
+                                                <option ng-value="operator.operator" ng-repeat="operator in operators">{{operator.operator}}</option>
+                                            </select>
 
                                         </div>
 
@@ -700,6 +731,7 @@
                                                 <th ng-if="reconciliationReports.report == 'Monthly'">Month</th>
                                                 <th ng-if="reconciliationReports.report == 'Yearly'">Year</th>
                                                 <th>Service Provider</th>
+                                                <th>Operator</th>
                                                 <th>App ID</th>
                                                 <th>Name</th>
                                                 <th>Bank Code</th>
@@ -717,6 +749,7 @@
                                                 <td ng-if="reconciliationReports.report == 'Monthly'">{{reconciliation.month}}</td>
                                                 <td ng-if="reconciliationReports.report == 'Yearly'">{{reconciliation.year}}</td>
                                                 <td>{{reconciliation.userId}}</td>
+                                                <td>{{reconciliation.operator}}</td>
                                                 <td>{{reconciliation.appId}}</td>
                                                 <td>{{reconciliation.name}}</td>
                                                 <td>{{reconciliation.bankCode}}</td>

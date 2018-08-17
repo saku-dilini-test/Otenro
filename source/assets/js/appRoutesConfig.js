@@ -181,6 +181,18 @@ angular.module('app')
               },
               templateUrl : 'user/technicalSupport/ViewPublishDetails.html'
 
+          }).state('user.reports',{
+              url :'/reports/:appCreatorId',
+              controller : 'technicalSupportCtrl',
+              data : {
+                  permissions: {
+                      only: ['Support'],
+                      redirectTo: 'anon.login'
+                  },
+                  appCreatorId:null
+              },
+              templateUrl : 'user/technicalSupport/TechnicalSupport.html'
+
           }).state('user.viewAdNetworks',{
               url :'/viewAdNetworks/:adname',
               controller : 'technicalSupportCtrl',

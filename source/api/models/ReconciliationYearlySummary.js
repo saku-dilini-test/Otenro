@@ -30,7 +30,9 @@ module.exports = {
         },
         year:{
            type: 'Integer'
-
+        },
+        operator:{
+            type:'String'
         }
 
     }

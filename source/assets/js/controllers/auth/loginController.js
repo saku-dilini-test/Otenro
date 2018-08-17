@@ -52,7 +52,8 @@
                     toastr.success('Login Successful ', 'Message', {
                       closeButton: true
                     });
-                    if (response.user.userRoles== 'SUPER_ADMIN' || response.user.userRoles== 'OPERATOR' || response.user.userRoles == 'ADMIN'){
+                    if (response.user.userRoles== 'SUPER_ADMIN' || response.user.userRoles== 'OPERATOR'
+                        || response.user.userRoles == 'ADMIN'){
                          $state.go('user.technicalSupporter');
                     }else {
                          $state.go('user.dashboard');

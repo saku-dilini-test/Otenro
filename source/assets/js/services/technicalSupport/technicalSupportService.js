@@ -17,7 +17,6 @@
             },
 
             getUserApps : function (data) {
-
                 return $http.post(SERVER_URL + 'edit/getUserApps',data);
             },
 
@@ -362,6 +361,11 @@
             getAllApps :function () {
                 return $http.post(SERVER_URL + 'appMakerReports/appBaseReport/allApps', {});
             },
+            getOperator:function(data){
+
+                return $http.post(SERVER_URL + 'appMakerReports/getOperator', data);
+
+            }
 
 
 
