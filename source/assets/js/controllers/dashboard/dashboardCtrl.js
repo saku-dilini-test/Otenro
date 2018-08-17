@@ -23,6 +23,12 @@
             });
         });
 
+        $scope.getImageUrl = function (userId, appId) {
+            return SERVER_URL + "templates/viewWebImages?userId="+ userId + "&appId=" + appId + "&" + new Date().getTime() + "&images=publish/6.png";
+
+        }
+
+
         $scope.myFilter = function (app) {
             return app.isActive == true || app.isActive == "true" || app.isActive == undefined;
         };

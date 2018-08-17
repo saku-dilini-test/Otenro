@@ -313,7 +313,7 @@ module.exports = {
     uploadPublishFiles :function (req,res) {
         var imagePath;
         if(req.body.isNew == true || req.body.isNew == 'true'){
-            imagePath = config.APP_FILE_SERVER+req.userId + '/progressiveTemplates/' + req.body.appId +'/src/assets/images/publish/';
+            imagePath = config.APP_FILE_SERVER+req.userId + '/progressiveTemplates/' + req.body.appId +'/assets/images/publish/';
         } else{
             imagePath = config.APP_FILE_SERVER+req.userId + '/templates/' + req.body.appId +'/img/publish/';
         }
