@@ -315,8 +315,14 @@
                                     </md-button>
                                 </div>
 
-                                <div class="custom-trix">
-                                    <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="orderConfirmedEmail.orderConfirmedEmail.header" required></text-angular>
+                                <div class="input-shadow-border float-left width-100">
+                                    <ng-quill-editor
+                                            name="editorText"
+                                            ng-model="orderConfirmedEmail.orderConfirmedEmail.header"
+                                            required
+                                    >
+                                    </ng-quill-editor>
+                                    <!--<text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="orderConfirmedEmail.orderConfirmedEmail.header" required></text-angular>-->
                                     <!--<trix-editorsada style="width:75%" angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.header" required></trix-editor>-->
                                 </div>
                                 <p>
@@ -447,55 +453,76 @@
                     <div class="md-dialog-main">
 
                         <div class="row">
-                            <div class="col-lg-7 col-md-7">
+                            <div class="col-lg-8 col-md-8">
                                 <label>Insert Header Image</label><br>
                                 <div class="file-upload-wrapper clearfix">
                                     <div class="cropArea">
-                                        <ui-cropper image="myImageHeaderFulfill" area-type="rectangle" aspect-ratio="aspectRatio" result-image="fulfillPic" result-image-size="{w:1000,h:200}"   result-image-format="image/jpeg" result-image-quality="0.5">
+                                        <ui-cropper image="myImageHeaderFulfill" area-type="rectangle"
+                                                    aspect-ratio="aspectRatio" result-image="fulfillPic"
+                                                    result-image-size="{w:1000,h:200}" result-image-format="image/jpeg"
+                                                    result-image-quality="0.5">
                                         </ui-cropper>
                                     </div>
 
                                     <div class="inputField btn-material img-up">
-                                        <span >{{buttonNameFulfill}}</span>
+                                        <span>{{buttonNameFulfill}}</span>
                                         <div class="img-up1" ng-if="fulfillPicImageSelected">
-                                            <input type="file" value="file"  ng-click = "cropImageFulfill($event,'2');" id="fileInput2" >
+                                            <input type="file" value="file" ng-click="cropImageFulfill($event,'2');"
+                                                   id="fileInput2">
                                         </div>
-                                        <div  ng-if="!fulfillPicImageSelected" class="img-up1" ng-click="addImageFulfill(fulfillPic,'fulfillEmail')"></div>
+                                        <div ng-if="!fulfillPicImageSelected" class="img-up1"
+                                             ng-click="addImageFulfill(fulfillPic,'fulfillEmail')"></div>
 
                                     </div>
-                                    <md-button class="md-icon-button" aria-label="Delete" ng-click="picFileHeader2 = null">
+                                    <md-button class="md-icon-button" aria-label="Delete"
+                                               ng-click="picFileHeader2 = null">
                                         <md-icon md-svg-icon="images/delete-icon.svg"></md-icon>
                                     </md-button>
                                 </div>
-                                <label>Header</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <div class="custom-trix">
-                                    <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="orderFulfilledEmail.orderFulfilledEmail.header" required></text-angular>
+                                <!--<label>Header</label>-->
+                                <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
+                                <div class="input-shadow-border float-left width-100">
+                                    <ng-quill-editor
+                                            name="editorText"
+                                            ng-model="orderFulfilledEmail.orderFulfilledEmail.header"
+                                            required
+                                    >
+                                    </ng-quill-editor>
+                                    <!--<text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="orderFulfilledEmail.orderFulfilledEmail.header" required></text-angular>-->
                                     <!--<trix-editorsada style="width:75%" angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.header" required></trix-editor>-->
                                 </div>
                                 <p>
                                     <br>
                                     <label>Select below to add to the email</label>
-                                    <md-checkbox aria-label="Delivery and shhipping Details" ng-model="orderFulfilledEmail.orderFulfilledEmail.delivery">
+                                    <br>
+                                    <md-checkbox aria-label="Delivery and shhipping Details"
+                                                 ng-model="orderFulfilledEmail.orderFulfilledEmail.delivery">
                                         Delivery and shhipping Details
                                     </md-checkbox>
                                     <br>
 
-                                    <md-checkbox aria-label="Order" ng-model="orderFulfilledEmail.orderFulfilledEmail.order">
+                                    <md-checkbox aria-label="Order"
+                                                 ng-model="orderFulfilledEmail.orderFulfilledEmail.order">
                                         Order
                                     </md-checkbox>
                                     <br>
 
-                                    <md-checkbox aria-label="Store details" ng-model="orderFulfilledEmail.orderFulfilledEmail.storeDetails" >
+                                    <md-checkbox aria-label="Store details"
+                                                 ng-model="orderFulfilledEmail.orderFulfilledEmail.storeDetails">
                                         Store details
                                     </md-checkbox>
                                 </p>
                             </div>
-                            <div class="col-lg-5 col-md-5" style="zoom:0.7; background: #ebebeb;">
-                                <img ng-if="picFileHeader2 == null" ng-src="images/1000x200.png"  width="100%" height="80px" style="display: block;margin: 16px auto 0 auto;"/><br>
-                                <img ng-if="picFileHeader2 != null" ngf-src="picFileHeader2[0]" width="100%"   height="100px" style="display:block; margin: 16px auto 0 auto;"> <br>
+                            <div class="col-lg-4 col-md-4" style="zoom:0.7; background: #ebebeb;">
+                                <img ng-if="picFileHeader2 == null" ng-src="images/1000x200.png" width="100%"
+                                     height="80px" style="display: block;margin: 16px auto 0 auto;"/><br>
+                                <img ng-if="picFileHeader2 != null" ngf-src="picFileHeader2[0]" width="100%"
+                                     height="100px" style="display:block; margin: 16px auto 0 auto;"> <br>
                                 <p>
-                                    <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="orderFulfilledEmail.orderFulfilledEmail.header" disabled></text-angular>
+                                    <text-angular style="height: 150px" rows="4" rows="1"
+                                                  class="email-template input-shadow-border"
+                                                  ng-model="orderFulfilledEmail.orderFulfilledEmail.header"
+                                                  disabled></text-angular>
                                 </p>
                                 <p>
                                     <div class="row" ng-if="orderFulfilledEmail.orderFulfilledEmail.delivery">
@@ -618,10 +645,16 @@
                                         <md-icon md-svg-icon="images/delete-icon.svg"></md-icon>
                                     </md-button>
                                 </div>
-                                <label>Header</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <div class="custom-trix">
-                                    <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="orderRefundEmail.orderRefundEmail.header" required></text-angular>
+                                <!--<label>Header</label>-->
+                                <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
+                                <div class="input-shadow-border float-left width-100">
+                                    <ng-quill-editor
+                                            name="editorText"
+                                            ng-model="orderRefundEmail.orderRefundEmail.header"
+                                            required
+                                    >
+                                    </ng-quill-editor>
+                                    <!--<text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="orderRefundEmail.orderRefundEmail.header" required></text-angular>-->
                                     <!--<trix-editorsada style="width:75%" angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.header" required></trix-editor>-->
                                 </div>
                                 <p>
