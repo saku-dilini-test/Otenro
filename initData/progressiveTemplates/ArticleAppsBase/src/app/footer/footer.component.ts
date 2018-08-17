@@ -78,6 +78,8 @@ export class FooterComponent implements OnInit{
     //Send Un-Registration SMS
     footerCmp.sms.sendUnRegistrationSMS(footerCmp.smsSuccessUnRegistrationCallback, footerCmp.smsErrorUnRegistrationCallback);
 
+    this.timeoutUnubscriptionPopup();
+
     var uuid = localStorage.getItem("UUID");
 
     let data = {appId:this.appId,uuId:uuid}
@@ -87,13 +89,14 @@ export class FooterComponent implements OnInit{
       .takeWhile(() => this.alive) // only fires when component is alive
       .subscribe(() => {
         this.subscription.getSubscribedData(data).subscribe(data =>{
-          console.log(data);
           this.subscriptionStatus = data.isSubscribed;
           this.dataService.subscriptionStatus = data.isSubscribed;
-          if(this.subscriptionStatus == false){
+          if(this.subscriptionStatus){
             this.isUnsubscribing = false;
             localStorage.removeItem(this.appId+"msisdn")
              this.alive = false;
+             console.log("Footercomponenet: navigate to Home page");
+             this.router.navigate(['']);
               //close the model
               $( () => {
                 $('#myAccountModelfooter').modal('toggle');
@@ -112,5 +115,16 @@ export class FooterComponent implements OnInit{
 
   smsErrorUnRegistrationCallback(error: any) {
     console.log("smsErrorUnRegistrationCallback in Footer Component: " + error);
+  }
+
+  timeoutUnubscriptionPopup(){
+    setTimeout(() => {
+      this.alive = false;
+      this.dataService.displayMessage = 'Un-registration failed, Please try again.';
+      $(() => {
+        $('#myAccountModelfooter').modal('toggle');
+        $('#appStatusModel').modal('show');
+      });
+    }, 30000);
   }
 }

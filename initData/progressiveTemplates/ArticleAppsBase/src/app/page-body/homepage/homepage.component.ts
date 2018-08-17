@@ -60,8 +60,6 @@ export class HomepageComponent implements OnInit {
     this.isFromCMSAppView = localStorage.getItem(this.appId + "_isFromCMSAppView") == '1';
 
     $('#registerModelhome').on('hide.bs.modal', () => {
-      console.log('close');
-
       this.alive = false;
       this.isSubscribing = false;
     });
@@ -160,11 +158,7 @@ export class HomepageComponent implements OnInit {
 
   pushSuccessCallback(token: any) {
     console.log("Push Token: " + token);
-
     var data = 'deviceId=' + token + '&uuid=' + homePageCmp.uuid;
-
-    console.log(">>>>>>>>>" + data + "<<<<<<<<<<<");
-
     try {
           homePageCmp.categoryService.sendDeviceToken(data).subscribe(data => {
             console.log("Device token persisted successfully");
@@ -192,6 +186,12 @@ export class HomepageComponent implements OnInit {
     console.log("inside onNotificationOpenSuccessCallback notification: " + JSON.stringify(notification));
     if(notification.tap && notification.categoryId && notification.articleId && localStorage.getItem(homePageCmp.appId + "msisdn")) {
       homePageCmp.loadArticle(notification.categoryId, notification.articleId);
+    }else if(!notification.tap && notification.body){
+      homePageCmp.dataService.pushMessage = notification.body;
+      $(() => {
+        $('#appStatusModel').modal('hide');
+        $('#appPushNotificationModel').modal('show');
+      });
     }
   }
 
@@ -236,32 +236,34 @@ export class HomepageComponent implements OnInit {
 
     //Send Registration SMS
     homePageCmp.sms.sendRegistrationSMS(homePageCmp.smsSuccessRegistrationCallback, homePageCmp.smsErrorRegistrationCallback);
-
     var uuid = localStorage.getItem("UUID");
-
     let data = {appId:this.appId,uuId: uuid}
-    console.log(this.subscriptionStatus);
     this.alive = true;
     this.isSubscribing = true;
+    this.timeoutSubscriptionPopup();
 
     IntervalObservable.create(5000)
       .takeWhile(() => this.alive) // only fires when component is alive
       .subscribe(() => {
         this.subscription.getSubscribedData(data).subscribe(data => {
-          console.log(data);
           this.subscriptionStatus = data.isSubscribed;
           this.dataService.subscriptionStatus = data.isSubscribed;
-          if (this.subscriptionStatus == true) {
+          if(data.isError){
+            this.dataService.displayMessage = data.displayMessage;
+            $(() => {
+              $('#registerModelhome').modal('hide');
+              $('#appStatusModel').modal('show');
+            });
+          }else if (this.subscriptionStatus) {
             this.isSubscribing = false;
             localStorage.setItem(this.appId + "msisdn", data.msisdn)
             this.alive = false;
-            //close the model
+            this.dataService.catId = this.dataService.subUserArticleData.id;
+            this.router.navigate(['/shop', this.dataService.subUserArticleData.id, this.dataService.subUserArticleData.name]);
+
             $(() => {
               $('#registerModelhome').modal('hide');
-              this.router.navigate(['/' + "shop", this.dataService.subUserArticleData.id, this.subscriptionStatus.name]);
             });
-            //close the nav bar
-            //  document.getElementById("mySidenav").style.width = "0";
           }
         });
       });
@@ -273,5 +275,20 @@ export class HomepageComponent implements OnInit {
 
   smsErrorRegistrationCallback(error: any) {
     console.log("smsErrorRegistrationCallback in homepage Component: " + error);
+    this.dataService.displayMessage = 'Unknown error in Registration';
+    $(() => {
+      $('#appStatusModel').modal('show');
+    });
+  }
+
+  timeoutSubscriptionPopup(){
+    setTimeout(() => {
+      this.alive = false;
+      this.dataService.displayMessage = 'Registration failed, Please try again.';
+      $(() => {
+        $('#registerModelhome').modal('hide');
+        $('#appStatusModel').modal('show');
+      });
+    }, 30000);
   }
 }

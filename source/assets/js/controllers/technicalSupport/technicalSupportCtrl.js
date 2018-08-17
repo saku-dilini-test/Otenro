@@ -32,6 +32,9 @@
             $scope.customerCareReport = {};
             $scope.revenueAndTrafficReportResponseData =null;
             $scope.applicationBaseReportResponseData =null;
+            $scope.sortReverse = true;
+            $scope.sortType = "appName"
+
 
 
 

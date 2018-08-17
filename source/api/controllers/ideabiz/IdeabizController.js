@@ -15,6 +15,7 @@ module.exports = {
         var appId = req.param("appId");
         var response = {
             'isSubscribed': false, //This will use to check whether the user actually subscribed to the service
+            'isUnubscribed': false, //This will use to check whether the user actually un-subscribed to the service
             'msisdn': '',
             'isError': true, //This might tru when delete the app by app creator ot for the other issues.If this is tru then will need to set and show the displayMessage to the end user.
             'displayMessage': '', //Will show to the end user.
@@ -74,7 +75,6 @@ module.exports = {
                                                 var paymentQuery = {
                                                     appId: appId,
                                                     msisdn: appUser.msisdn,
-                                                    status: 1,
                                                     date: dateFormat(new Date(), "yyyy-mm-dd")
                                                 };
 
@@ -86,15 +86,26 @@ module.exports = {
                                                     }
 
                                                     if(payment){
-                                                        response.isSubscribed = true;
-                                                        response.msisdn = appUser.msisdn;
-                                                        response.isError = false;
+                                                        if(payment.status === 1) {
+                                                            response.isSubscribed = true;
+                                                            response.msisdn = appUser.msisdn;
+                                                            response.isError = false;
+                                                        }else{
+                                                            sails.log.debug('No Sufficient balance in the account for msisdn: ' + appUser.msisdn);
+                                                            response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                                                        }
                                                     }else{
                                                         sails.log.error("Payment details could not find for the paymentQuery: " + JSON.stringify(paymentQuery));
                                                         response.isError = false;
                                                     }
                                                     return res.ok(response);
                                                 });
+                                            }else{
+                                                sails.log.debug('Unsubscribed from the service msisdn: ' + appUser.msisdn);
+                                                response.isUnubscribed = true;
+                                                response.isError = false;
+                                                response.displayMessage = config.END_USER_MESSAGES.USER_UNSUBSCRIBED;
+                                                return res.ok(response);
                                             }
                                         }else{
                                             sails.log.debug('App is not Approved for the operator: ' + operatorObj.operator + ' msisdn: ' + appUser.msisdn + ' status: ' + operatorObj.status);
