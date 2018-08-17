@@ -85,7 +85,7 @@ export class CordovaPluginDeviceService {
       + "   var successFunc = encodeURI(msgSentSuccess.toString());"
       + ""
       + "   var frame = document.getElementById('appframe');"
-      + "   (<HTMLIFrameElement> frame).contentWindow.postMessage(successFunc, '*');"
+      + "   frame.contentWindow.postMessage(successFunc, '*');"
       + "}";
 
     this.parentPostMessage(functionToBePost);
