@@ -315,11 +315,15 @@ module.exports = {
         var count = 0;
 
         PublishDetails.find().exec(function(err, publishDetailsData) {
-
-            if (err) return done(err);
-
-                publishDetailsData.forEach(function (publishDetails) {
-
+            if (err) {
+                sails.log.error('error publishDetailsData ');
+                return res.serverError(err);
+            }
+            if(publishDetailsData.length==0){
+                sails.log.debug('no publishDetailsData');
+                return res.send([]);
+            }
+            publishDetailsData.forEach(function (publishDetails) {
                     Application.find({id:publishDetails.appId}).exec(function(err, application){
                         count++;
                         appData.push(application);
@@ -329,7 +333,7 @@ module.exports = {
                         }
 
                     });
-                });
+            });
         });
     },
 
