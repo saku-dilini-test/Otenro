@@ -45,7 +45,7 @@
 
 
             $scope.reports = [
-                {name:"Date Range"},
+                {name:"Daily"},
                 {name:"Monthly"} ,
                 {name:"Yearly"}
             ];
@@ -773,7 +773,7 @@
         $scope.getReconciliation = function(data){
                 $scope.reconciliationResponseData = [];
 
-                if(data.report == "Date Range"){
+                if(data.report == "Daily"){
 
 
                    var sdate = $filter('date')(data.sdate, "yyyy-MM-dd");
@@ -869,7 +869,7 @@
             $scope.applicationBaseReportResponseData = [];
 
 
-            if(data.report == "Date Range"){
+            if(data.report == "Daily"){
 
 
                 var sdate = $filter('date')(data.sdate, "yyyy-MM-dd");
@@ -981,7 +981,7 @@
 
         $scope.revenueAndTrafficReportData = function(data){
             $scope.revenueAndTrafficReportResponseData = [];
-            if(data.report == "Date Range"){
+            if(data.report == "Daily"){
 
 
                 var sdate = $filter('date')(data.sdate, "yyyy-MM-dd");
@@ -1098,7 +1098,7 @@
         $scope.getFailedTransactionData = function(data){
             $scope.responseData = [];
 
-            if(data.report == "Date Range"){
+            if(data.report == "Daily"){
 
 
                 var fromDate = $filter('date')(data.fromDate, "yyyy-MM-dd");
@@ -1196,7 +1196,7 @@
             var range = "";
             var rangeValue="";
 
-            if (args.reportRange=="Date Range"){
+            if (args.reportRange=="Daily"){
                 range = "Date";
             }else if (args.reportRange=="Monthly"){
                 range = "Month";
@@ -1212,7 +1212,7 @@
 
                 reportDataArray.forEach(function(obj){
 
-                    if (args.reportRange=="Date Range"){
+                    if (args.reportRange=="Daily"){
                         rangeValue = obj.date;
                     }else if (args.reportRange=="Monthly"){
                         rangeValue = obj.month;
@@ -1259,7 +1259,7 @@
                 reportDataArray.forEach(function(obj){
 
 
-                    if (args.reportRange=="Date Range"){
+                    if (args.reportRange=="Daily"){
                         rangeValue = obj.date;
                     }else if (args.reportRange=="Monthly"){
                         rangeValue = obj.month;
@@ -1282,7 +1282,7 @@
                 reportDataArray.forEach(function(obj){
 
 
-                    if (args.reportRange=="Date Range"){
+                    if (args.reportRange=="Daily"){
                         rangeValue = obj.date;
                     }else if (args.reportRange=="Monthly"){
                         rangeValue = obj.month;

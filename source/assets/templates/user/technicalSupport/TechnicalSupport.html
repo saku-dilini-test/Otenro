@@ -307,7 +307,7 @@
                                             <h6>Select period</h6>
 
                                             <form name="revenueAndTrafficReportForm">
-                                                <div ng-if="revenueAndTrafficReport.report == 'Date Range'">
+                                                <div ng-if="revenueAndTrafficReport.report == 'Daily'">
                                                     <input type="date"  ng-model="revenueAndTrafficReport.sdate" placeholder="START DATE" onkeydown="return false" required>
                                                     <input type="date" ng-model="revenueAndTrafficReport.edate" placeholder="END DATE" onkeydown="return false" required>
                                                     <Button type="button" class="me-default-button" ng-click="revenueAndTrafficReportData(revenueAndTrafficReport)">Search</Button>
@@ -353,7 +353,7 @@
                                     <table class="table">
                                         <thead class="obl-dashboard-apps">
                                         <tr>
-                                            <th ng-if="revenueAndTrafficReport.report == 'Date Range'">Date</th>
+                                            <th ng-if="revenueAndTrafficReport.report == 'Daily'">Date</th>
                                             <th ng-if="revenueAndTrafficReport.report == 'Monthly'">Month</th>
                                             <th ng-if="revenueAndTrafficReport.report == 'Yearly'">Year</th>
                                             <th >Operator</th>
@@ -367,7 +367,7 @@
 
                                         <tbody>
                                         <tr  ng-repeat="revenueAndTraffic in revenueAndTrafficReportResponseData">
-                                            <td ng-if="revenueAndTrafficReport.report == 'Date Range'">{{revenueAndTraffic.date}}</td>
+                                            <td ng-if="revenueAndTrafficReport.report == 'Daily'">{{revenueAndTraffic.date}}</td>
                                             <td ng-if="revenueAndTrafficReport.report == 'Monthly'">{{revenueAndTraffic.month}}</td>
                                             <td ng-if="revenueAndTrafficReport.report == 'Yearly'">{{revenueAndTraffic.year}}</td>
                                             <td>{{revenueAndTraffic.operator}}</td>
@@ -421,7 +421,7 @@
                                             <h6>Select period</h6>
 
                                             <form name="applicationBaseReportReportForm">
-                                                <div ng-if="applicationBaseReport.report == 'Date Range'">
+                                                <div ng-if="applicationBaseReport.report == 'Daily'">
                                                     <input type="date"  ng-model="applicationBaseReport.sdate" placeholder="START DATE" onkeydown="return false" required>
                                                     <input type="date" ng-model="applicationBaseReport.edate" placeholder="END DATE" onkeydown="return false" required>
                                                     <Button type="button" class="me-default-button" ng-click="applicationBaseReportData(applicationBaseReport)">Search</Button>
@@ -471,7 +471,7 @@
                                             <th>Application</th>
                                             <th>Type</th>
                                             <th>CaaS Taxable</th>
-                                            <th ng-if="applicationBaseReport.report == 'Date Range'">Date</th>
+                                            <th ng-if="applicationBaseReport.report == 'Daily'">Date</th>
                                             <th ng-if="applicationBaseReport.report == 'Monthly'">Month</th>
                                             <th ng-if="applicationBaseReport.report == 'Yearly'">Year</th>
                                             <th>Operator</th>
@@ -491,7 +491,7 @@
                                             <td>{{applicationBase.appName}}</td>
                                             <td>{{applicationBase.type}}</td>
                                             <td>false</td>
-                                            <td ng-if="applicationBaseReport.report == 'Date Range'">{{applicationBase.date}}</td>
+                                            <td ng-if="applicationBaseReport.report == 'Daily'">{{applicationBase.date}}</td>
                                             <td ng-if="applicationBaseReport.report == 'Monthly'">{{applicationBase.month}}</td>
                                             <td ng-if="applicationBaseReport.report == 'Yearly'">{{applicationBase.year}}</td>
                                             <td>{{applicationBase.operator}}</td>
@@ -543,7 +543,7 @@
                                             <h6>Select period</h6>
 
                                             <form name="reconciliationForm">
-                                                <div ng-if="failedTransactionReport.report == 'Date Range'">
+                                                <div ng-if="failedTransactionReport.report == 'Daily'">
                                                     <input type="date"  ng-model="failedTransactionReport.fromDate" placeholder="START DATE" onkeydown="return false" required>
                                                     <input type="date" ng-model="failedTransactionReport.toDate" placeholder="END DATE" onkeydown="return false" required>
                                                     <Button type="button" class="me-default-button" ng-click="getFailedTransactionData(failedTransactionReport)">Search</Button>
@@ -623,7 +623,7 @@
 
                                 <form class="allItems" novalidate>
                                     <a ng-if="(customerCareReportData.length > 0)" href="" ng-click='downloadCsv
-                                    (customerCareReportData,{ filename: "customerCareReport.csv",reportType:"customerCareReport",reportRange:"Date Range"})'>
+                                    (customerCareReportData,{ filename: "customerCareReport.csv",reportType:"customerCareReport",reportRange:"Daily"})'>
                                         <button style="float: right" type= "button" >CSV</button></a>
                                     <table class="table">
                                         <thead class="obl-dashboard-apps">
@@ -680,7 +680,7 @@
                                         <h6>Select period</h6>
 
                                         <form name="reconciliationForm">
-                                            <div ng-if="reconciliationReports.report == 'Date Range'">
+                                            <div ng-if="reconciliationReports.report == 'Daily'">
                                                 <input type="date"  ng-model="reconciliationReports.sdate" placeholder="START DATE" onkeydown="return false" required>
                                                 <input type="date" ng-model="reconciliationReports.edate" placeholder="END DATE" onkeydown="return false" required>
                                                 <Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>
@@ -727,7 +727,7 @@
                                     <table class="table">
                                         <thead class="obl-dashboard-apps">
                                         <tr>
-                                                <th ng-if="reconciliationReports.report == 'Date Range'">Date</th>
+                                                <th ng-if="reconciliationReports.report == 'Daily'">Date</th>
                                                 <th ng-if="reconciliationReports.report == 'Monthly'">Month</th>
                                                 <th ng-if="reconciliationReports.report == 'Yearly'">Year</th>
                                                 <th>Service Provider</th>
@@ -745,7 +745,7 @@
 
                                         <tbody>
                                             <tr  ng-repeat="reconciliation in reconciliationResponseData">
-                                                <td ng-if="reconciliationReports.report == 'Date Range'">{{reconciliation.date}}</td>
+                                                <td ng-if="reconciliationReports.report == 'Daily'">{{reconciliation.date}}</td>
                                                 <td ng-if="reconciliationReports.report == 'Monthly'">{{reconciliation.month}}</td>
                                                 <td ng-if="reconciliationReports.report == 'Yearly'">{{reconciliation.year}}</td>
                                                 <td>{{reconciliation.userId}}</td>
