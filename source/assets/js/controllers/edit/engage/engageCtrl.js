@@ -280,7 +280,13 @@
 
                     var sdDate = new Date(message.date);
 
-                    if (sdDate < now){
+                    if ((sdDate.getUTCFullYear() <= now.getUTCFullYear()) &&
+                        (sdDate.getMonth()+1  <= now.getMonth()+1) &&
+                        (sdDate.getUTCDate()  <= now.getUTCDate()) &&
+                        (sdDate.getTime()  < now.getTime())
+                    )
+
+                    {
 
                         toastr.error('Invalid date selection', 'Warning', {
                             closeButton: true
