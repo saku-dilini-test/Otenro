@@ -132,48 +132,65 @@ module.exports = {
                         });
 
                     }else {
-
-
                         PushMessage.create(req.body).exec(function(err,data){
                             if(err) return res.send(err);
 
-                                var shedDate = new Date(data.date);
-                                var date = new Date(shedDate.getUTCFullYear(), shedDate.getMonth(), shedDate.getDate(),
-                                    shedDate.getHours(), shedDate.getMinutes(),0).toLocaleString();
+                            if (!moment(data.date, CSV_DATE_TIME_FORMAT, true).isValid()) {
+                                console.log("Invalid date %s, correct format is %s",data.date,CSV_DATE_TIME_FORMAT);
+                                return res.badRequest();
+                            }
 
-                                console.log("date " + date);
+                             var date = moment(data.date,CSV_DATE_TIME_FORMAT).toDate();
 
                                 schedule.scheduleJob(date, function(){
-
                                     PushMessage.find({id:data.id}).exec(function(err, pushMessage) {
                                         if (err) return res.send(err);
                                         if(pushMessage[0]){
-                                        console.log("date--->>>" + pushMessage[0].date);
-                                        var Ndate = new Date(pushMessage[0].date);
-                                        var newDate = new Date(Ndate.getUTCFullYear(), Ndate.getMonth(), Ndate.getDate(),
-                                            Ndate.getHours(), Ndate.getMinutes(),0).toLocaleString();
+                                            var pushDate = pushMessage[0].date;
+                                            if (!moment(pushDate, CSV_DATE_TIME_FORMAT, true).isValid()) {
+                                                sails.log.error("Invalid date %s, correct format is %s",pushDate,CSV_DATE_TIME_FORMAT);
+                                                return;
+                                            }
+                                            var Ndate = moment(data.date,CSV_DATE_TIME_FORMAT).toDate();
+                                            if(Ndate.toString()==date.toString()){
+                                                // Find device by appID
+                                                DeviceId.find({appId:data.appId}).exec(function(err,deviceArray) {
+                                                    if (err) {
+                                                        sails.log.error("Could not find the DeviceId record for appId: ",data.appId);
+                                                        return;
+                                                    }
 
-                                        if(newDate.toString()==date.toString()){
+                                                    if(deviceArray.length==0){
+                                                        sails.log.error('No devices found for appId: ',data.appId);
+                                                        return;
+                                                    }
 
-                                            console.log("newDate.toString()==date.toString()");
+                                                    var message = data.message;
+                                                    var article = (data.article)? { 'articleId': data.article.id , 'categoryId': data.article.categoryId , 'title' : data.article.title } : null;
+                                                    for(var i=0; i<deviceArray.length; i++) {
+                                                        sails.log.debug("Push message: %s sending for the devices: %s ",data.message, deviceArray[i].deviceId);
+                                                        var id = {
+                                                            id:data.id,
+                                                            appId:data.appId
+                                                        }
+                                                        var emptyDate = {
+                                                            date : ""
+                                                        }
+                                                        PushMessage.update(id,emptyDate).exec(function(err,updateDate){
+                                                            if(err) return res.send(err);
+                                                            return;
+                                                        });
+                                                        thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,message);
+                                                    }
 
-                                            // Find device by appID
-                                            DeviceId.find({appId:data.appId}).exec(function(err,deviceArray) {
-                                                if (err) {
+                                                });
 
-                                                    console.log("Error on find DeviceId");
-                                                }
-                                                var message = data.message;
-                                                var article = (data.article)? { 'articleId': data.article.id , 'categoryId': data.article.categoryId , 'title' : data.article.title } : null;
-                                                for(var i=0; i<deviceArray.length; i++) {
 
-                                                    sails.log.info(" deviceArray " + deviceArray[i].deviceId);
-                                                    thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,message);
-                                                }
-                                            });
-                                            console.log('The world is going to end today.');
+                                            }else{
+                                                sails.log.error('The date scheduled: %s is not the same in database: %s',date.toString(),Ndate.toString());
+                                            }
                                         }
-                                    }
+
                                     });
                                     console.log('The world is going to end today.');
                                 });
