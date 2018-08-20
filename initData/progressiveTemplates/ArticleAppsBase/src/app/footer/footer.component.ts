@@ -125,6 +125,6 @@ export class FooterComponent implements OnInit{
         $('#myAccountModelfooter').modal('toggle');
         $('#appStatusModel').modal('show');
       });
-    }, 30000);
+    }, 60000);
   }
 }

@@ -289,6 +289,6 @@ export class HomepageComponent implements OnInit {
         $('#registerModelhome').modal('hide');
         $('#appStatusModel').modal('show');
       });
-    }, 30000);
+    }, 60000);
   }
 }

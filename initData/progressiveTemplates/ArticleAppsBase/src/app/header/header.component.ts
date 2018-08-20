@@ -29,6 +29,8 @@ export class HeaderComponent implements OnInit {
   public title: string;
   public hideBackOnHome: boolean;
   subscriptionStatus;
+  pushMessage;
+  logoUrl;
   private appPublishDetails;
   private alive = true;
   isSubscribing = false;
@@ -293,7 +295,7 @@ export class HeaderComponent implements OnInit {
         $('#registerModelhome').modal('hide');
         $('#appStatusModel').modal('show');
       });
-    }, 30000);
+    }, 60000);
   }
 
   timeoutUnubscriptionPopup(){
@@ -304,6 +306,6 @@ export class HeaderComponent implements OnInit {
         $('#myAccountModel').modal('toggle');
         $('#appStatusModel').modal('show');
       });
-    }, 30000);
+    }, 60000);
   }
 }
