@@ -105,6 +105,9 @@ export class ProductComponent implements OnInit {
         } else {
             this.desPart1 = this.Data.detailedDesc;
         }
+
+        window.scrollTo(0, 0);
+
     }
 
     currency: string;
