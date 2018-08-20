@@ -207,15 +207,27 @@ module.exports = {
         var dateFrom = reqData.dateFrom;
         var dateTo = reqData.dateTo;
         var appName = reqData.appName;
+        var operator = reqData.operator.toLowerCase();
+
+        console.log("operator " + operator);
 
         var query="";
 
-        if (appName=="all"){
+        if (appName=="all"&&operator=="all"){
 
             query = {date:{'>=':dateFormat(dateFrom, "yyyy-mm-dd"),'<=':dateFormat(dateTo, "yyyy-mm-dd")}}
 
-        }else {
+        }else if (appName=="all"&&operator!=="all"){
+
+            query = {date:{'>=':dateFormat(dateFrom, "yyyy-mm-dd"),'<=':dateFormat(dateTo, "yyyy-mm-dd")},operator:operator}
+
+        }else if (appName!=="all"&&operator=="all"){
+
             query = {date:{'>=':dateFormat(dateFrom, "yyyy-mm-dd"),'<=':dateFormat(dateTo, "yyyy-mm-dd")},appName:appName}
+
+        }else {
+
+            query = {date:{'>=':dateFormat(dateFrom, "yyyy-mm-dd"),'<=':dateFormat(dateTo, "yyyy-mm-dd")},appName:appName,operator:operator}
         }
 
 
@@ -237,16 +249,27 @@ module.exports = {
         var monthFrom = reqData.monthFrom;
         var monthTo = reqData.monthTo;
         var appName = reqData.appName;
+        var operator = reqData.operator.toLowerCase();
 
         var query="";
 
-        if (appName=="all") {
+        if (appName=="all"&&operator=="all"){
 
-            query = { month: {'>=': monthFrom, '<=': monthTo}}
+            query = {month:{'>=': monthFrom, '<=': monthTo}}
 
-        }else{
-            query = {month: {'>=': monthFrom, '<=': monthTo}, appName: appName}
+        }else if (appName=="all"&&operator!=="all"){
+
+            query = {month:{'>=': monthFrom, '<=': monthTo},operator:operator}
+
+        }else if (appName!=="all"&&operator=="all"){
+
+            query = {month:{'>=': monthFrom, '<=': monthTo},appName:appName}
+
+        }else {
+
+            query = {month:{'>=': monthFrom, '<=': monthTo},appName:appName,operator:operator}
         }
+
 
 
             ApplicationBaseMonthlySummary.find(query,
@@ -272,17 +295,28 @@ module.exports = {
         var yearFrom = reqData.yearFrom;
         var yearTo = reqData.yearTo;
         var appName = reqData.appName;
+        var operator = reqData.operator.toLowerCase();
 
 
         var query="";
 
-        if (appName=="all") {
+        if (appName=="all"&&operator=="all"){
 
-            query = { year: {'>=': yearFrom, '<=': yearTo}}
+            query = {year:{'>=': yearFrom, '<=': yearTo}}
+
+        }else if (appName=="all"&&operator!=="all"){
+
+            query = {year:{'>=': yearFrom, '<=': yearTo},operator:operator}
+
+        }else if (appName!=="all"&&operator=="all"){
+
+            query = {year:{'>=': yearFrom, '<=': yearTo},appName:appName}
 
         }else {
-            query = {year: {'>=': yearFrom, '<=': yearTo}, appName: appName}
+
+            query = {year:{'>=': yearFrom, '<=': yearTo},appName:appName,operator:operator}
         }
+
             console.log("query " + query);
 
             ApplicationBaseYearlySummary.find(query,

@@ -15,6 +15,9 @@ module.exports = {
         },
         viewCount:{
             type:'Integer'
+        },
+        appId:{
+            type:'string'
         }
 
     }

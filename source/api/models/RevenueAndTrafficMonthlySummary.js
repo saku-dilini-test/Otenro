@@ -18,6 +18,9 @@ module.exports = {
         },
         year:{
             type: 'Integer'
+        },
+        appId:{
+            type: 'String'
         }
 
     }

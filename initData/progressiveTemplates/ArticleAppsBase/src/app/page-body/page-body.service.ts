@@ -5,6 +5,7 @@ export class PagebodyServiceModule {
 
   data: object;
   displayMessage: string;
+  pushMessage: string;
   userData: any;
   subscriptionStatus: any;
   appStatus: any;

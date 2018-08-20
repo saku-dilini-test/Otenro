@@ -32,7 +32,7 @@ module.exports.cron = {
             if(sails){
                 var today = new Date();
                 var yesterday = new Date();
-                yesterday.setDate(today.getDate() - 1);
+                   yesterday.setDate(today.getDate() - 1);
 
                 if (today.getMonth() !== yesterday.getMonth()) {
 
@@ -43,7 +43,7 @@ module.exports.cron = {
                     revenueAndTrafficReportController.insertRevenueAndTrafficMonthlySummary(yesterday.getFullYear(),yesterday.getMonth());
                     reconciliationReportController.insertReconciliationMonthlySummary(yesterday.getFullYear(),yesterday.getMonth());
                     applicationBaseReportController.insertApplicationBaseMonthlySummary(yesterday.getFullYear(),yesterday.getMonth());
-               }
+                }
 
             }
         }
@@ -57,6 +57,8 @@ module.exports.cron = {
                 var today = new Date();
                 var yesterday = new Date();
                 yesterday.setDate(today.getDate() - 1);
+
+                console.log("yesterday " +yesterday.getFullYear() + "yesterday month " +yesterday.getMonth() );
 
                 if (today.getFullYear() !== yesterday.getFullYear()) {
 

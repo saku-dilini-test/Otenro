@@ -34,7 +34,8 @@
                           <div  ng-if="!item.isMobile">
 
                             <div class="me-app-box-view">
-                                <img class="me-app-icon" height="340" width="189" ng-src="{{path}}{{item.userId}}/progressiveTemplates/{{item.id}}/assets/images/test.png"></div>
+                                <!--<img ng-if="" class="me-app-icon" height="340" width="189" ng-src="{{path}}{{item.userId}}/progressiveTemplates/{{item.id}}/assets/images/test.png"></div>-->
+                                <img class="me-app-icon" height="340" width="189" ng-src="{{getImageUrl(item.userId,item.id)}}" on-error-src="{{path}}{{item.userId}}/progressiveTemplates/{{item.id}}/assets/images/test.png"></div>
                           </div>
                             <div class="me-app-details">
 

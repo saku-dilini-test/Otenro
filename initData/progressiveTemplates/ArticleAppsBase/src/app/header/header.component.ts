@@ -16,7 +16,6 @@ import { SERVER_URL } from '../../assets/constantsService';
 declare let $:any;
 var headerCmp;
 
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -36,7 +35,6 @@ export class HeaderComponent implements OnInit {
   isUnsubscribing = false;
   private isFromCMSAppView: boolean = false;
   displayMessage;
-  logoUrl;
 
   constructor(private subscription: SubscribedDataService,
     private router: Router,
@@ -72,13 +70,11 @@ export class HeaderComponent implements OnInit {
 
     $('#registerModel').on('hide.bs.modal', () => {
       this.alive = false;
-      console.log("model close " + this.alive);
       this.isSubscribing = false;
     });
 
     $('#myAccountModel').on('hide.bs.modal', () => {
       this.alive = false;
-      console.log("model close " + this.alive);
       this.isUnsubscribing = false;
     });
 
@@ -88,14 +84,12 @@ export class HeaderComponent implements OnInit {
     var msisdn = localStorage.getItem(this.appId + "msisdn");
     let data = { appId: this.appId, msisdn: msisdn }
     this.subscription.getSubscribedData(data).subscribe(data => {
-      console.log(data);
       this.subscriptionStatus = data.isSubscribed;
       this.dataService.subscriptionStatus = data.isSubscribed;
     });
 
 
     this.appDataService.getPublishDetails().subscribe(data => {
-      console.log(data);
       this.appPublishDetails = data;
       //Set the keyword and port to localstorage
       localStorage.setItem(this.sms.LOCALSTORAGE_KEYWORD_STRING,data.keyword);
@@ -118,6 +112,7 @@ export class HeaderComponent implements OnInit {
   ngDoCheck() {
     this.subscriptionStatus = this.dataService.subscriptionStatus;
     this.displayMessage = this.dataService.displayMessage;
+    this.pushMessage = this.dataService.pushMessage;
   }
 
   navigate(route: string, name: string) {
@@ -200,6 +195,8 @@ export class HeaderComponent implements OnInit {
 
   getSubscription(data) {
 
+    this.timeoutSubscriptionPopup();
+
     this.isSubscribing = true;
 
     //This will periodically check whether the User had subscribed to the Service successfully
@@ -207,10 +204,17 @@ export class HeaderComponent implements OnInit {
       .takeWhile(() => this.alive) // only fires when component is alive
       .subscribe(() => {
         this.subscription.getSubscribedData(data).subscribe(data => {
-          console.log(data);
           this.subscriptionStatus = data.isSubscribed;
           this.dataService.subscriptionStatus = data.isSubscribed;
-          if (this.subscriptionStatus == true) {
+
+          if(data.isError){
+            this.dataService.displayMessage = data.displayMessage;
+            $(() => {
+              $('#registerModel').modal('toggle');
+              $('#appStatusModel').modal('show');
+            });
+            document.getElementById("mySidenav").style.width = "0";
+          }else if (this.subscriptionStatus) {
             this.isSubscribing = false;
             localStorage.setItem(this.appId + "msisdn", data.msisdn)
             this.alive = false;
@@ -230,6 +234,8 @@ export class HeaderComponent implements OnInit {
     if (!this.isFromCMSAppView) {
       this.alive = true;
 
+      this.timeoutUnubscriptionPopup();
+
       //Send Un-Registration SMS
       headerCmp.sms.sendUnRegistrationSMS(headerCmp.smsSuccessUnRegistrationCallback, headerCmp.smsErrorUnRegistrationCallback);
 
@@ -242,13 +248,14 @@ export class HeaderComponent implements OnInit {
         .takeWhile(() => this.alive) // only fires when component is alive
         .subscribe(() => {
           this.subscription.getSubscribedData(data).subscribe(data => {
-            console.log(data);
             this.subscriptionStatus = data.isSubscribed;
             this.dataService.subscriptionStatus = data.isSubscribed;
+
             if (this.subscriptionStatus == false) {
               this.isUnsubscribing = false;
               localStorage.removeItem(this.appId + "msisdn")
               this.alive = false;
+              this.router.navigate(['']);
               //close the model
               $(() => {
                 $('#myAccountModel').modal('toggle');
@@ -276,5 +283,27 @@ export class HeaderComponent implements OnInit {
 
   smsErrorUnRegistrationCallback(error: any) {
     console.log("smsErrorUnRegistrationCallback in Header Component: " + error);
+  }
+
+  timeoutSubscriptionPopup(){
+    setTimeout(() => {
+      this.alive = false;
+      this.dataService.displayMessage = 'Registration failed, Please try again.';
+      $(() => {
+        $('#registerModelhome').modal('hide');
+        $('#appStatusModel').modal('show');
+      });
+    }, 30000);
+  }
+
+  timeoutUnubscriptionPopup(){
+    setTimeout(() => {
+      this.alive = false;
+      this.dataService.displayMessage = 'Un-registration failed, Please try again.';
+      $(() => {
+        $('#myAccountModel').modal('toggle');
+        $('#appStatusModel').modal('show');
+      });
+    }, 30000);
   }
 }

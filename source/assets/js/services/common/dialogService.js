@@ -5,13 +5,15 @@
     angular.module('appEdit').service('dialogService', ['stylesService', 'contactUsService',
         'commerceService','articleService','mainMenuService', 'currencyService',
         'publishService', 'engageService', 'logoAndTittleService','aboutUsService',
-        'policiesService','comingSoonService', 'templateService','salesAndPromotionService','getAssistanceService','carouselService',dialogService]);
+        'policiesService','comingSoonService', 'templateService','salesAndPromotionService','getAssistanceService'
+        ,'carouselService','$rootScope','SERVER_URL',dialogService]);
 
 
     function dialogService(stylesService, contactUsService,
                            commerceService, articleService ,mainMenuService,
                            currencyService, publishService, engageService,
-                           logoAndTittleService,aboutUsService,policiesService,comingSoonService,templateService,salesAndPromotionService,getAssistanceService,carouselService) {
+                           logoAndTittleService,aboutUsService,policiesService,comingSoonService,templateService,
+                           salesAndPromotionService,getAssistanceService,carouselService,$rootScope,SERVER_URL) {
 
         return {
             showDialog: function(clickTitle) {
@@ -129,9 +131,14 @@
                     return getAssistanceService.showGetAssistanceDialog();
                 if('articleAnalytics' == clickTitle)
                     return articleService.showArticleAnalyticsDialog();
+                if('articleAnalytics' == clickTitle)
+                    return articleService.showArticleAnalyticsDialog();
+                if('reports' == clickTitle){
+                        var win = window.open(SERVER_URL+'/#/reports/'+$rootScope.userId, '_blank');
+                        win.focus();
 
 
-
+                }
             }
         }
     }

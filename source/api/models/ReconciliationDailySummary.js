@@ -30,6 +30,9 @@ module.exports = {
         },
         bankAccountNumber:{
             type:'String'
+        },
+        operator:{
+            type:'String'
         }
 
     }

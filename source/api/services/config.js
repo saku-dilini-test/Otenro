@@ -204,7 +204,9 @@ module.exports = {
         'APP_SUBMITTED_FOR_APPROVAL': 'The service is currently not available on the network.',
         'APP_SUBMITTED_FOR_CONFIGURATION': 'The service is currently not available on the network.',
         'APP_NOT_SUBMITTED': 'The service is currently not available on the network.',
-        'APP_DELETED': 'The service is no longer available.'
+        'APP_DELETED': 'The service is no longer available.',
+        'USER_UNSUBSCRIBED': 'You got unsubscribed from this service',
+        'INSUFFICIENT_BALANCE': 'You have no sufficient balance.Please recharge and try again.'
     }
 
 };

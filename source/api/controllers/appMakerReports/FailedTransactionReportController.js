@@ -86,8 +86,19 @@ module.exports = {
 
         var dateFrom = reqData.dateFrom;
         var dateTo = reqData.dateTo;
+        var operator= reqData.operator;
 
-            var query = {date:{'>=':dateFormat(dateFrom, "yyyy-mm-dd"),'<=':dateFormat(dateTo, "yyyy-mm-dd")}}
+        var query = "";
+
+           if (operator=="all"){
+
+               query = {date:{'>=':dateFormat(dateFrom, "yyyy-mm-dd"),'<=':dateFormat(dateTo, "yyyy-mm-dd")}}
+
+           }else {
+               query = {date:{'>=':dateFormat(dateFrom, "yyyy-mm-dd"),'<=':dateFormat(dateTo, "yyyy-mm-dd")},operator:operator}
+           }
+
+
 
         FailedTransactionLogDailySummary.find(query).
         exec(function(error, failedTransactionLogDailySummary) {
