@@ -68,7 +68,7 @@
 <div class="bgc-white l-bloc " id="bloc-5">
 	<div class="container bloc-lg">
 		<div *ngFor="let node of categories;">
-			<div class="row">
+			<div class="row" *ngIf="node.products.length != 0">
 				<div class="col-sm-12 text-center">
 					<h1 class="text-center about-us  voffset cursor-p">
 						<a [routerLink]="['']" [queryParams]="{ id:node.id}" class=" main-header-font" >{{node.name}}</a><br>
