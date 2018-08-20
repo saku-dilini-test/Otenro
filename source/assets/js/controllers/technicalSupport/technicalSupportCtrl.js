@@ -787,6 +787,10 @@
                             technicalSupportService.getReconciliationDataForDateRange(dates)
                                 .success(function (response) {
                                     $scope.reconciliationResponseData = response;
+                                    if ($scope.reconciliationResponseData.length<=0){
+                                        toastr.error('No data available',
+                                            'Warning', {closeButton: true});
+                                    }
 
                                 }).error(function (response) {
                                 toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
@@ -816,6 +820,10 @@
                         technicalSupportService.getReconciliationDataForMonthly(dates)
                             .success(function(response){
                                 $scope.reconciliationResponseData = response;
+                                if ($scope.reconciliationResponseData.length<=0){
+                                    toastr.error('No data available',
+                                        'Warning', {closeButton: true});
+                                }
                             })
                             .error(function(){
                                 toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
@@ -841,6 +849,10 @@
                             technicalSupportService.getReconciliationDataForYearly(dates)
                                 .success(function (response) {
                                     $scope.reconciliationResponseData = response;
+                                    if ($scope.reconciliationResponseData.length<=0){
+                                        toastr.error('No data available',
+                                            'Warning', {closeButton: true});
+                                    }
                                 })
                                 .error(function (response) {
                                     toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
@@ -886,6 +898,10 @@
                             technicalSupportService.getApplicationBaseDailySummary(reqData)
                                 .success(function (response) {
                                     $scope.applicationBaseReportResponseData = response;
+                                    if ($scope.applicationBaseReportResponseData.length<=0){
+                                        toastr.error('No data available',
+                                            'Warning', {closeButton: true});
+                                    }
 
                                 }).error(function (response) {
 
@@ -924,6 +940,10 @@
                                 technicalSupportService.getApplicationBaseMonthlySummary(reqData)
                                     .success(function (response) {
                                         $scope.applicationBaseReportResponseData = response;
+                                        if ($scope.applicationBaseReportResponseData.length<=0){
+                                            toastr.error('No data available',
+                                                'Warning', {closeButton: true});
+                                        }
                                     })
                                     .error(function () {
                                         toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
@@ -958,6 +978,10 @@
                             technicalSupportService. getApplicationBaseYearlySummary(reqData)
                                 .success(function(response){
                                     $scope.applicationBaseReportResponseData = response;
+                                    if ($scope.applicationBaseReportResponseData.length<=0){
+                                        toastr.error('No data available',
+                                            'Warning', {closeButton: true});
+                                    }
                                 })
                                 .error(function(response){
                                     toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
@@ -1004,6 +1028,10 @@
                         technicalSupportService.getRevenueAndTrafficSummaryForDateRange(reqData)
                             .success(function (response) {
                                 $scope.revenueAndTrafficReportResponseData = response;
+                                if ($scope.revenueAndTrafficReportResponseData.length<=0){
+                                    toastr.error('No data available',
+                                        'Warning', {closeButton: true});
+                                }
 
                             }).error(function (response) {
                             toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
@@ -1045,6 +1073,10 @@
                             technicalSupportService.getRevenueAndTrafficSummaryForMonthly(reqData)
                                 .success(function (response) {
                                     $scope.revenueAndTrafficReportResponseData = response;
+                                    if ($scope.revenueAndTrafficReportResponseData.length<=0){
+                                        toastr.error('No data available',
+                                            'Warning', {closeButton: true});
+                                    }
                                 })
                                 .error(function () {
                                     toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
@@ -1079,6 +1111,10 @@
                         technicalSupportService. getRevenueAndTrafficSummaryForYearly(reqData)
                             .success(function(response){
                                 $scope.revenueAndTrafficReportResponseData = response;
+                                if ($scope.revenueAndTrafficReportResponseData.length<=0){
+                                    toastr.error('No data available',
+                                        'Warning', {closeButton: true});
+                                }
                             })
                             .error(function(response){
                                 toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
@@ -1113,6 +1149,10 @@
                         technicalSupportService.getFailedTransactionReportDataForDateRange(dates)
                             .success(function (response) {
                                 $scope.responseData = response;
+                                if ($scope.responseData.length<=0){
+                                    toastr.error('No data available',
+                                        'Warning', {closeButton: true});
+                                }
 
                             }).error(function (response) {
                             toastr.error('FailedTransaction Reports Loading Error', 'Warning', {closeButton: true});
@@ -1151,6 +1191,11 @@
                                             technicalSupportService.getPaymentStatusOfUser(data)
                                                 .success(function (response) {
                                                     $scope.customerCareReportData = response;
+                                                    if ($scope.customerCareReportData.length<=0){
+                                                        toastr.error('No data available',
+                                                            'Warning', {closeButton: true});
+                                                    }
+
 
                                                 }).error(function (response) {
                                                 toastr.error('FailedTransaction Reports Loading Error', 'Warning', {closeButton: true});
@@ -1167,6 +1212,10 @@
                                         technicalSupportService.getPaymentStatusOfUser(data)
                                             .success(function (response) {
                                                 $scope.customerCareReportData = response;
+                                                if ($scope.customerCareReportData.length<=0){
+                                                    toastr.error('No data available',
+                                                        'Warning', {closeButton: true});
+                                                }
 
                                             }).error(function (response) {
                                             toastr.error('FailedTransaction Reports Loading Error', 'Warning', {closeButton: true});
