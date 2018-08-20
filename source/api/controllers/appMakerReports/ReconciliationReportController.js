@@ -59,7 +59,9 @@ module.exports = {
 
         PublishDetails.find().exec(function(err, publishDetailsData){
 
-            if (err) return done(err);
+            if (err) {
+                console.log(err);
+            }
 
             publishDetailsData.forEach(function(publishDetails) {
 
@@ -87,6 +89,7 @@ module.exports = {
                                            revenue:subscriptionPayment.amount/100*shareSplit ,userId:userData.id,
                                            name:userData.firstName+ " "+ userData.lastName ,bankCode:userData.bankCode,
                                            branchCode:userData.branchCode,branchName:userData.branchName,
+                                           uniqueAppId:applicationData.uniqueAppId,
                                            bankAccountNumber:userData.accountNumber,operator:subscriptionPayment.operator};
 
                                        ReconciliationDailySummary.create(data).exec(function (err, result) {
@@ -152,6 +155,7 @@ module.exports = {
                                 revenue:dailySummaryResultData.revenue ,userId:applicationData.userId,
                                 name:userData.firstName+ " "+ userData.lastName ,bankCode:userData.bankCode,
                                 branchCode:userData.branchCode,branchName:userData.branchName,
+                                uniqueAppId:applicationData.uniqueAppId,
                                 bankAccountNumber:userData.accountNumber,operator:dailySummaryResultData._id.operator};
 
 
@@ -172,7 +176,9 @@ module.exports = {
 
         ReconciliationMonthlySummary.native(function (err, collection) {
 
-            if (err) return res.serverError(err);
+            if (err) {
+                console.log(err)
+            }
 
             collection.aggregate([
                 {
@@ -210,6 +216,7 @@ module.exports = {
                                 revenue:monthlySummaryDataResultData.revenue ,userId:applicationData.userId,
                                 name:userData.firstName+ " "+ userData.lastName ,bankCode:userData.bankCode,
                                 branchCode:userData.branchCode,branchName:userData.branchName,
+                                uniqueAppId:applicationData.uniqueAppId,
                                 bankAccountNumber:userData.accountNumber,operator:monthlySummaryDataResultData._id.operator};
 
 
@@ -247,7 +254,9 @@ module.exports = {
 
 
         ReconciliationDailySummary.find(query).exec(function(err, app){
-            if (err) return done(err);
+            if (err){
+                console.log(err);
+            }
             res.send(app);
         });
 
@@ -275,7 +284,9 @@ module.exports = {
 
 
         ReconciliationMonthlySummary.find(query).exec(function(err, data){
-            if (err) return done(err);
+            if (err){
+                console.log(err);
+            }
             res.send(data);
         });
 
@@ -301,7 +312,9 @@ module.exports = {
         }
 
         ReconciliationYearlySummary.find(query).exec(function(err, data){
-            if (err) return done(err);
+            if (err) {
+                console.log(err);
+            }
             res.send(data);
         });
 

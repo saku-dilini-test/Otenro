@@ -1206,7 +1206,7 @@
 
             if (args.reportType=="RECONCILIATION"){
 
-                dataArray.push(range +","+"Service Provider" +"," + "App Id"+ "," +"Name" + ","
+                dataArray.push(range  +"," + "App Id"+ "," +"Name" + ","
                     + "Bank Code" + "," +"Branch Code" + ","+"Branch Name" + ","+"Bank A/C No" +
                     ","+"Service Provide Earnings" +'\r\n');
 
@@ -1220,7 +1220,7 @@
                         rangeValue = obj.year;
                     }
 
-                    var str = rangeValue +","+obj.userId + "," + obj.appId +"," + obj.name + + obj.bankCode +"," + obj.branchCode +","
+                    var str = rangeValue + "," + obj.uniqueAppId +"," + obj.name + + obj.bankCode +"," + obj.branchCode +","
                         + obj.branchName +"," + obj.bankAccountNumber+"," + obj.revenue + '\r\n';
 
                     dataArray.push(str);

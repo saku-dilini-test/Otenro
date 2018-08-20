@@ -37,6 +37,9 @@ module.exports = {
         },
         operator:{
             type:'String'
+        },
+        uniqueAppId:{
+            type:'String'
         }
 
     }

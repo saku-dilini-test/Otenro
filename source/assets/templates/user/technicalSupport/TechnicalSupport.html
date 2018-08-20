@@ -730,7 +730,7 @@
                                                 <th ng-if="reconciliationReports.report == 'Daily'">Date</th>
                                                 <th ng-if="reconciliationReports.report == 'Monthly'">Month</th>
                                                 <th ng-if="reconciliationReports.report == 'Yearly'">Year</th>
-                                                <th>Service Provider</th>
+                                                <!--<th>Service Provider</th>-->
                                                 <th>Operator</th>
                                                 <th>App ID</th>
                                                 <th>Name</th>
@@ -748,9 +748,9 @@
                                                 <td ng-if="reconciliationReports.report == 'Daily'">{{reconciliation.date}}</td>
                                                 <td ng-if="reconciliationReports.report == 'Monthly'">{{reconciliation.month}}</td>
                                                 <td ng-if="reconciliationReports.report == 'Yearly'">{{reconciliation.year}}</td>
-                                                <td>{{reconciliation.userId}}</td>
+                                                <!--<td>{{reconciliation.userId}}</td>-->
                                                 <td>{{reconciliation.operator}}</td>
-                                                <td>{{reconciliation.appId}}</td>
+                                                <td>{{reconciliation.uniqueAppId}}</td>
                                                 <td>{{reconciliation.name}}</td>
                                                 <td>{{reconciliation.bankCode}}</td>
                                                 <td>{{reconciliation.branchCode}}</td>
