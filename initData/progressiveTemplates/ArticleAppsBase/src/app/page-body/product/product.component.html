@@ -7,8 +7,8 @@
 
       <img  *ngIf="item.videoUrl != null" alt="{{item.name}}"
             data-type="youtube"
-            src="{{imageUrl}}/{{item.img}}"
-            [attr.data-image]="imageUrl/item.img"
+            [src]="item.img ? imageUrl+'/'+item.img : ''"
+            [attr.data-image]="item.img ? imageUrl+'/'+item.img : ''"
             [attr.data-videoid]="checkUrl(item.videoUrl)">
     </ng-template>
   </div>
