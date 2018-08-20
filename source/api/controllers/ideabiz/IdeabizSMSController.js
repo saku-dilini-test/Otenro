@@ -5,6 +5,7 @@
  */
 var adminAPI = require('./IdeabizAdminapiController');
 var config = require('../../services/config');
+var dateFormat = require('dateformat');
 
 module.exports = {
     /**
@@ -103,6 +104,8 @@ module.exports = {
                                 sails.log.debug("In Un-Registration: User exists for the msisdn: " + msisdn + " and for the appID: " + appID);
 
                                 setFields.status = config.APP_USER_STATUS.INACTIVE;
+                                setFields.unsubscribeDate = dateFormat(new Date(), "yyyy-mm-dd");
+                                setFields.subscriptionStatus = config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code;
                             }
 
                             AppUser.update(queryUser, setFields).exec(function (err, users) {
