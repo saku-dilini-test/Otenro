@@ -285,7 +285,7 @@ module.exports = {
 
                                      mailOptions = {
                                         from: userData[0].email, // sender address
-                                        to: config.IDEABIZ_EMAIL, // list of receivers
+                                        to: config.IDEABIZ_GROUP_EMAIL, // list of receivers
                                         subject: 'App Publish', // Subject line
                                         html:emailBody
 
