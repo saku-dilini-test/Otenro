@@ -30,6 +30,7 @@ export class ProductComponent implements OnInit {
     private sign;
     private appId = (<any>data).appId;
     private userId = (<any>data).userId;
+    private templateName = (<any>data).templateName;
     selection = [];
     private selection1 = [];
     private selection2 = [];
@@ -56,6 +57,7 @@ export class ProductComponent implements OnInit {
     ifNotSelectedVariantOrQuantity: boolean;
     availableFirstVariPromo = false;
     private player: Player;
+    zoomRatio;
     constructor(private localStorageService: LocalStorageService, private CurrencyService: CurrencyService,
         private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute,
         private route: Router, private title: TitleService, private productsService: ProductsService) {
@@ -63,6 +65,11 @@ export class ProductComponent implements OnInit {
         this.Data = JSON.parse(localStorage.getItem(this.appId + ":dataServiceData"));
 
 
+        if(this.templateName == "smartfit"){
+            this.zoomRatio = 1.5;
+        }else{
+            this.zoomRatio = 1;
+        }
         this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
 
             data.forEach(element => {
@@ -143,13 +150,14 @@ export class ProductComponent implements OnInit {
 
     ngAfterViewInit() {
         this.api = $("#gallery").unitegallery({
-            theme_enable_text_panel: false,
-            gallery_background_color: "rgba(0,0,0,0)",
-            slider_scale_mode: "fit",
-            slider_textpanel_bg_color: "#000000",
-            slider_textpanel_bg_opacity: 0,
-            gallery_autoplay: true,
-            theme_hide_panel_under_width: null
+          theme_enable_text_panel: false,
+          gallery_background_color: "rgba(0,0,0,0)",
+          slider_scale_mode: "fit",
+          slider_textpanel_bg_color: "#000000",
+          slider_textpanel_bg_opacity: 0,
+          gallery_autoplay: true,
+          theme_hide_panel_under_width: null,
+          slider_zoom_max_ratio: this.zoomRatio
         });
         $('#gallery').on({
             'touchstart': function () {

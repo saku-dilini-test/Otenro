@@ -65,9 +65,9 @@ export class ProductComponent implements OnInit {
         this.Data = JSON.parse(localStorage.getItem(this.appId + ":dataServiceData"));
 
         if(this.templateName == "smartfit"){
-            this.zoomRatio = 3.5;
+            this.zoomRatio = 1.5;
         }else{
-            this.zoomRatio = 2;
+            this.zoomRatio = 1;
         }
         this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
 
