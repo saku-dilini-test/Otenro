@@ -65,9 +65,6 @@
                 $scope.tmpImage[0] = img;
                 $scope.mainImg = img;
                 $scope.myImage = null;
-                toastr.success('Image has been uploaded successfully', 'message', {
-                    closeButton: true
-                });
             }
 
             $scope.imageSelected = true;
@@ -122,7 +119,7 @@
                         }
                     }
                 }).error(function(err) {
-                    toastr.error(err.message, 'Warning', {
+                    toastr.error(err, 'Warning', {
                         closeButton: true
                     });
                 });
@@ -151,6 +148,9 @@
                     categoryMaintenanceService.showCategoryMaintenanceDialog();
 
                 }).error(function(err) {
+                    toastr.error(err, 'Warning', {
+                        closeButton: true
+                    });
                 })
             }
             //updating both category and image
@@ -180,7 +180,9 @@
                     categoryMaintenanceService.showCategoryMaintenanceDialog();
 
                 }).error(function(err) {
-
+                    toastr.error(err, 'Warning', {
+                        closeButton: true
+                    });
                 })
             }
         };

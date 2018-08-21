@@ -12,57 +12,63 @@ module.exports = {
         var dePath;
 
         dePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/secondNavi/';
+        console.log("wtf",req.body.name)
+        MainCategory.find({ appId: req.body.appId ,name: req.body.name}).exec(function(err,nameExists) {
+            if (err) res.send(err);
+            if (nameExists.length == 0) {
+                req.file('file').upload({
+                    dirname: require('path').resolve(dePath)
+                }, function (err, uploadedFiles) {
+                    if (err) res.send(500, err);
+                    var newFileName = Date.now() + '.png';
+                    fs.rename(uploadedFiles[0].fd, dePath + newFileName, function (err) {
+                        if (err) res.send(err);
+                    });
 
 
-        req.file('file').upload({
-            dirname: require('path').resolve(dePath)
-        },function (err, uploadedFiles) {
-            if (err) res.send(500, err);
-            var newFileName=Date.now()+'.png';
-            fs.rename(uploadedFiles[0].fd, dePath+newFileName, function (err) {
-                if (err) res.send(err);
-            });
-
-
-            if(req.body.parentId){
-                var secondSubNavi =req.body;
-                secondSubNavi.imageUrl = newFileName;
-                secondSubNavi.nodes = [];
-                MainCategory.create(secondSubNavi).exec(function(err, newMenu) {
-                    if (err) res.send(err);
-
-                    if(newMenu){
-                        MainCategory.find({ id: req.body.parentId}).exec(function(err,parent) {
+                    if (req.body.parentId) {
+                        var secondSubNavi = req.body;
+                        secondSubNavi.imageUrl = newFileName;
+                        secondSubNavi.nodes = [];
+                        MainCategory.create(secondSubNavi).exec(function (err, newMenu) {
                             if (err) res.send(err);
-                            if(parent){
-                                var newParent = {};
-                                newParent.nodes = [];
-                                console.log(parent)
-                                if(parent[0].nodes){
-                                    newParent.nodes = parent[0].nodes;
-                                }
-                                newParent.nodes.push(newMenu.id);
-                                MainCategory.update({id :req.body.parentId},newParent).exec(function(err) {
-                                    if (err) {
-                                        res.send(err);
-                                    }else{
-                                        res.send('ok');
+
+                            if (newMenu) {
+                                MainCategory.find({id: req.body.parentId}).exec(function (err, parent) {
+                                    if (err) res.send(err);
+                                    if (parent) {
+                                        var newParent = {};
+                                        newParent.nodes = [];
+                                        console.log(parent)
+                                        if (parent[0].nodes) {
+                                            newParent.nodes = parent[0].nodes;
+                                        }
+                                        newParent.nodes.push(newMenu.id);
+                                        MainCategory.update({id: req.body.parentId}, newParent).exec(function (err) {
+                                            if (err) {
+                                                res.send(err);
+                                            } else {
+                                                res.send('ok');
+                                            }
+                                        });
                                     }
+
                                 });
                             }
+                        });
 
+                    } else {
+                        var secondNavi = req.body;
+                        secondNavi.imageUrl = newFileName;
+                        secondNavi.nodes = [];
+                        MainCategory.create(secondNavi).exec(function (err, newMenu) {
+                            if (err) res.send(err);
+                            res.json(newMenu);
                         });
                     }
                 });
-
             }else{
-                var secondNavi =req.body;
-                secondNavi.imageUrl = newFileName;
-                secondNavi.nodes = [];
-                MainCategory.create(secondNavi).exec(function(err, newMenu) {
-                    if (err) res.send(err);
-                    res.json(newMenu);
-                });
+                res.status(409).send("Category name already exists");
             }
         });
     },
