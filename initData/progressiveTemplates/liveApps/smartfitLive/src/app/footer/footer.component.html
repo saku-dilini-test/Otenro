@@ -48,8 +48,8 @@
 					About
 				</h3>
 				<a  (click)="navigate('', 'Home')"  class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Home</a>
-				<a  *ngIf="!loginStatus" (click)="navigate('login','home')"  class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Login</a>
-				<a  *ngIf="!loginStatus" (click)="navigate('register', 'Register')"  class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Register</a>
+				<a  *ngIf="!loginStatus" routerLink="/login/foot" routerLinkActive="active" class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Login</a>
+				<a  *ngIf="!loginStatus" routerLink="/register/foot" routerLinkActive="active"   class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Register</a>
 				<a  (click)="navigate('contact', 'Contact Us')" class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Contact us</a>
 			</div>
 			<div class="col-sm-4" *ngIf="isShowFollowUs()">
@@ -67,11 +67,10 @@
 					Company
 				</h3>
 				<!--<a (click)="navigate('terms','Terms')"	class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Terms and Conditionss</a>-->
-        <a (click)="navigate('policies','Policies')" class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Privacy Policy</a>
-        <a (click)="navigate('warranty-conditions', 'Warranty Conditions')" class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Warranty Conditions</a>
-        <a (click)="navigate('delivery-policy', 'Delivery Policy')" class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Delivery Policy</a>
-        <a (click)="navigate('return-policy', 'Return Policy')" class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Return Policy</a>
-
+		        <a (click)="navigate('policies','Policies')" class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Privacy Policy</a>
+		        <a (click)="navigate('warranty-conditions', 'Warranty Conditions')" class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Warranty Conditions</a>
+		        <a (click)="navigate('delivery-policy', 'Delivery Policy')" class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Delivery Policy</a>
+		        <a (click)="navigate('return-policy', 'Return Policy')" class="a-btn a-block bloc-mob-center-text pull-left-block main-footer-font">Return Policy</a>
 			</div>
 		</div>
 	</div>
