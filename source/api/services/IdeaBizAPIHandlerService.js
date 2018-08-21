@@ -76,6 +76,9 @@ module.exports = {
     },
 
     requestCallbackContinue: function(err, response, body, callback) {
+        sails.log.debug('In requestCallbackContinue=>');
+        sails.log.debug('err:',err);
+        sails.log.debug('response:',response);
         if (err) {
             sails.log.error('Error while requesting the IdeaBiz api: ' + this.requestObj.url  + " err: " + err);
             return callback(null,err);
