@@ -1157,7 +1157,8 @@
         }
 
         $scope.newcategory = function(){
-            mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2,$scope.product)
+            categoryMaintenanceService.showAddOrEditCategoryDialog();
+//            mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2,$scope.product)
         }
 
         $scope.goToEditProductWindow = function(item){
