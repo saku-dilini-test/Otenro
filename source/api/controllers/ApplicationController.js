@@ -491,7 +491,8 @@ module.exports = {
                         fs.readFile(tempAppDirPath + appId +'/'+file, 'utf-8',
                             function(err, data) {
                                 if (err) return res.negotiate(err);
-                                data =  data.replace('http://localhost:port',serverOrg);
+                                data =  data.replace('serverUrl',serverOrg);
+                                data =  data.replace('unknownName',madeEasyFileContent.name);
                                 data =  data.replace('unknownAppId',appId);
                                 data =  data.replace('unknownUserName',userId);
                                 data =  data.replace('unknownTemplateName',madeEasyFileContent.templateName);

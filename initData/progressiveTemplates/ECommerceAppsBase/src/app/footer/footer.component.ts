@@ -20,7 +20,7 @@ export class FooterComponent {
   title: any;
   imageUrl;
   dummy: any;
-  ipgInfo;
+  ipgInfo: any = null;
 
   constructor(private router: Router, private appDataService: AppDataService,
     private localStorageService: LocalStorageService, private ordersService: OrdersService) {
@@ -101,5 +101,21 @@ export class FooterComponent {
 
   isShowFollowUs(): boolean {
     return this.isTwitterUrlExists() || this.isFacebookUrlExists() || this.isInstagramUrlExists() || this.isPinterestUrlExists() || this.isLinkedInUrlExists();
+  }
+
+  /**
+   * added by .sanira
+   * this method will check whether the app creator was enabled any payment method or not
+   */
+  isIpgInfoExists(): boolean {
+    return (
+      this.ipgInfo &&
+      (this.ipgInfo.paypalEnable ||
+        this.ipgInfo.cashOnDeliveryEnable ||
+        this.ipgInfo.cashOnPickupEnable ||
+        this.ipgInfo.payHereEnable ||
+        this.ipgInfo.authorizeNetEnable ||
+        this.ipgInfo.stripeEnable ) > 0
+    );
   }
 }

@@ -79,10 +79,19 @@
 
             <fieldset style="clear:both">
                 <label>Description</label>
-                <div >
-                    <text-angular  rows="4"  name="editorText" ng-maxlength="1000000000000" class="input-shadow-border" ng-model="blog.desc" required></text-angular>
+                <!--<div >-->
+                    <!--<text-angular  -->
+                            <!--rows="4"  -->
+                            <!--name="editorText" -->
+                            <!--ng-maxlength="1000000000000" -->
+                            <!--class="input-shadow-border" -->
+                            <!--ng-model="blog.desc" required>-->
+                    <!--</text-angular>-->
+                <!--</div>-->
+                <!--<text-angular name="editorText" ng-model="article.desc" required></text-angular>-->
+                <div class="input-shadow-border">
+                    <ng-quill-editor name="editorText" ng-model="blog.desc" required></ng-quill-editor>
                 </div>
-
             </fieldset>
             <fieldset style="margin-bottom:0px;">
             <span ng-show="blogForm.editorText.$error.maxlength">Too lengthy</span></td>

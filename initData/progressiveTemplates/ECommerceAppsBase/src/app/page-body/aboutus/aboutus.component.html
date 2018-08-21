@@ -11,7 +11,7 @@
            			<img  data-src="{{aboutUsUrl}}/ABOUTUS.png" class="img-responsive lazyload" />
 
 					<div class="col-sm-12 padding-top">
-						<p class="text-center" [innerHTML]="content">
+						<p class="text-center" [innerHTML]="content | safeHtml">
 						</p>
 					</div>
 				</div>

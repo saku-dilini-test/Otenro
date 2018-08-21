@@ -2143,6 +2143,16 @@ trix-toolbar .button_group input[type=button]{
     font-weight:inherit;
 }
 
+.custom-grid  .ui-grid-canvas{
+    overflow: overlay;
+    height: inherit !important;
+    padding-bottom: 10px;
+}
+.custom-grid .ui-grid-viewport{
+    overflow: hidden !important;
+}
+
+
 li#menuitem-8 {
     font-weight: 800;
     background: darkgray;
@@ -2971,4 +2981,13 @@ table.md-calendar-day-header{
 }
 .dialog-padding-set{
     padding: 20px 40px 10px;
+}
+
+[ng-quill-editor] { display: block; }
+
+.ql-editor {
+    height: 250px !important;
+}
+.float-left{
+    float: left;
 }

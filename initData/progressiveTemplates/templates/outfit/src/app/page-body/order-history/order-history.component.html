@@ -3,7 +3,7 @@
 
     <!-- bloc-19 -->
     <div class="bloc bgc-white l-bloc  hidden-xs" id="bloc-19">
-      <div class="container bloc-md">
+      <div class="container">
         <div class="row content-row">
           <div class="col-sm-12">
             <h1 class="header text-center main-header-font">
@@ -20,7 +20,7 @@
       <div class="container" *ngIf="orderHistory && orderHistory.length == 0">
         <h1 class="main-header-font">You don't have any order history!</h1>
       </div>
-      <div class="container"  *ngFor="let order of orderHistory">
+      <div class="container order-history-li"  *ngFor="let order of orderHistory">
             <h5 class="col-md-12 main-content-font">ORDER ID : {{order.id}}</h5>
             <h5 class="col-md-12 main-content-font">ORDER DATE : {{order.createdAt | date: 'dd/MM/yyyy'}}</h5>
             <div *ngIf="order.note">
@@ -44,7 +44,7 @@
                            <a  (click)="buyAgain(item)" class="btn btn-d btn-lg button main-button"><span class="ion ion-plus-round icon-spacer"></span>Buy Again</a>
                         </p>
                       </div>
-                      <hr class="col-sm-12">
+                      <hr class="line">
                 </div>
               </div>
               <div class="col-sm-6">

@@ -10,7 +10,7 @@
             TERMS AND CONDITIONS
           </h2>
           <div class="row">
-            <div class="col-sm-12 main-content-font" [innerHTML]="terms">
+            <div class="col-sm-12 main-content-font" [innerHTML]="terms | safeHtml">
             </div>
           </div>
         </div>
