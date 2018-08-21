@@ -187,56 +187,55 @@ export class HeaderComponent implements OnInit {
 
       //Send Registration SMS
       headerCmp.sms.sendRegistrationSMS(headerCmp.smsSuccessRegistrationCallback, headerCmp.smsErrorRegistrationCallback);
-
       var uuid = localStorage.getItem("UUID");
-
       let data = { appId: this.appId, uuId: uuid };
-      this.getSubscription(data);
-    }
-  }
+      this.dataService.numberOfTries = 1;
+      this.isSubscribing = true;
 
-  getSubscription(data) {
-
-    this.timeoutSubscriptionPopup();
-
-    this.isSubscribing = true;
-
-    //This will periodically check whether the User had subscribed to the Service successfully
-    IntervalObservable.create(5000)
-      .takeWhile(() => this.alive) // only fires when component is alive
-      .subscribe(() => {
-        this.subscription.getSubscribedData(data).subscribe(data => {
-          this.subscriptionStatus = data.isSubscribed;
-          this.dataService.subscriptionStatus = data.isSubscribed;
-
-          if(data.isError){
-            this.dataService.displayMessage = data.displayMessage;
-            $(() => {
-              $('#registerModel').modal('toggle');
-              $('#appStatusModel').modal('show');
-            });
-            document.getElementById("mySidenav").style.width = "0";
-          }else if (this.subscriptionStatus) {
-            this.isSubscribing = false;
-            localStorage.setItem(this.appId + "msisdn", data.msisdn)
+      //This will periodically check whether the User had subscribed to the Service successfully
+      IntervalObservable.create(5000)
+        .takeWhile(() => this.alive) // only fires when component is alive
+        .subscribe(() => {
+          if(this.dataService.numberOfTries==this.dataService.defaultNumberOfTries) {
             this.alive = false;
-            //close the model
-            $(() => {
-              $('#registerModel').modal('toggle');
-            });
-            //close the nav bar
-            document.getElementById("mySidenav").style.width = "0";
+            this.timeoutSubscriptionPopup();
+            return;
           }
-        });
-      });
+          this.dataService.numberOfTries++;
 
+          this.subscription.getSubscribedData(data).subscribe(data => {
+            this.subscriptionStatus = data.isSubscribed;
+            this.dataService.subscriptionStatus = data.isSubscribed;
+
+            if(data.isError){
+              this.alive = false;
+              this.dataService.displayMessage = data.displayMessage;
+              $(() => {
+                $('#registerModel').modal('toggle');
+                $('#appStatusModel').modal('show');
+              });
+              document.getElementById("mySidenav").style.width = "0";
+            }else if (this.subscriptionStatus) {
+              this.isSubscribing = false;
+              localStorage.setItem(this.appId + "msisdn", data.msisdn)
+              this.alive = false;
+              //close the model
+              $(() => {
+                $('#registerModel').modal('toggle');
+              });
+              //close the nav bar
+              document.getElementById("mySidenav").style.width = "0";
+            }
+          });
+        });
+    }
   }
 
   onUnsubscribe() {
     if (!this.isFromCMSAppView) {
       this.alive = true;
 
-      this.timeoutUnubscriptionPopup();
+      this.dataService.numberOfTries = 1;
 
       //Send Un-Registration SMS
       headerCmp.sms.sendUnRegistrationSMS(headerCmp.smsSuccessUnRegistrationCallback, headerCmp.smsErrorUnRegistrationCallback);
@@ -249,20 +248,25 @@ export class HeaderComponent implements OnInit {
       IntervalObservable.create(5000)
         .takeWhile(() => this.alive) // only fires when component is alive
         .subscribe(() => {
+          if(this.dataService.numberOfTries==this.dataService.defaultNumberOfTries) {
+            this.alive = false;
+            this.timeoutUnubscriptionPopup();
+            return;
+          }
+          this.dataService.numberOfTries++;
+
           this.subscription.getSubscribedData(data).subscribe(data => {
             this.subscriptionStatus = data.isSubscribed;
             this.dataService.subscriptionStatus = data.isSubscribed;
 
-            if (this.subscriptionStatus == false) {
+            if (!this.subscriptionStatus) {
               this.isUnsubscribing = false;
               localStorage.removeItem(this.appId + "msisdn")
               this.alive = false;
               this.router.navigate(['']);
-              //close the model
               $(() => {
-                $('#myAccountModel').modal('toggle');
+                this.unSubscribedSuccessPopup();
               });
-              //close the nav bar
               document.getElementById("mySidenav").style.width = "0";
             }
           });
@@ -272,7 +276,6 @@ export class HeaderComponent implements OnInit {
 
   smsSuccessRegistrationCallback(results: any) {
     console.log("smsSuccessRegistrationCallback in Header Component: " + results);
-    $('#myAccountModel').modal('hide');
   }
 
   smsErrorRegistrationCallback(error: any) {
@@ -288,24 +291,26 @@ export class HeaderComponent implements OnInit {
   }
 
   timeoutSubscriptionPopup(){
-    setTimeout(() => {
-      this.alive = false;
-      this.dataService.displayMessage = 'Registration failed, Please try again.';
-      $(() => {
-        $('#registerModelhome').modal('hide');
-        $('#appStatusModel').modal('show');
-      });
-    }, 60000);
+    this.dataService.displayMessage = 'Registration failed, Please try again.';
+    $(() => {
+      $('#registerModelhome').modal('hide');
+      $('#appStatusModel').modal('show');
+    });
   }
 
   timeoutUnubscriptionPopup(){
-    setTimeout(() => {
-      this.alive = false;
-      this.dataService.displayMessage = 'Un-registration failed, Please try again.';
-      $(() => {
-        $('#myAccountModel').modal('toggle');
-        $('#appStatusModel').modal('show');
-      });
-    }, 60000);
+    this.dataService.displayMessage = 'Un-registration failed, Please try again.';
+    $(() => {
+      $('#myAccountModel').modal('toggle');
+      $('#appStatusModel').modal('show');
+    });
+  }
+
+  unSubscribedSuccessPopup(){
+    this.dataService.displayMessage = 'You got unsubscribed from the service';
+    $(() => {
+      $('#myAccountModel').modal('toggle');
+      $('#appStatusModel').modal('show');
+    });
   }
 }

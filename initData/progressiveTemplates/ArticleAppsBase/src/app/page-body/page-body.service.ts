@@ -27,7 +27,9 @@ export class PagebodyServiceModule {
   sign;
   searchArray = [];
   uuid;
-  subUserArticleData = {id:null,name:null}
+  subUserArticleData = {id:null,name:null,image:null};
+  defaultNumberOfTries = 12;
+  numberOfTries;
   constructor() {
 
     this.parentobj.cartSize = this.cart.cartSize;
