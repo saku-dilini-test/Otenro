@@ -120,7 +120,7 @@ export class PaypalPaymentComponent implements AfterViewChecked {
                 this._success.next('Your Order has been successfully processed');
 
                 this._success.subscribe((message) => this.successMessage = message);
-                debounceTime.call(this._success, 3000).subscribe(() => this.successMessage = null);
+                debounceTime.call(this._success, 3500).subscribe(() => this.successMessage = null);
                 this._success.next("Thank You, Your order has been successfully processed");
                 setTimeout(() => { this.router.navigate(['home']); }, 3100)
 
@@ -146,6 +146,9 @@ export class PaypalPaymentComponent implements AfterViewChecked {
 
         window.alert('Transaction Failed!');
       });        // show success page
+    },
+    onError: function (err) {
+      console.log(err);
     }
   };
 
