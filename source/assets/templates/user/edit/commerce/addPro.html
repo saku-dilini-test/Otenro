@@ -472,152 +472,25 @@
                            <div class="uploaded-old-images">
                                 <p>Uploaded Product Images</p>
                                 <div class="old-images clearfix">
-                                    <div class="old-image">
-                                        <input type="button" ng-click="deleteImg(0)" value='delete'
-                                               class="image-delete-button"/>
-                                        <img ng-click="setImage()" ng-if="tmpImage[0].img == null"
-                                             src="../../../images/small-placeholder.png" width="119px" height="119px"/>
-                                        <img id="1" ng-class="{special: defaultImage == 0}" ng-click="defImg(0,tmpImage[0].videoUrl)" ng-if="tmpImage[0].img !== null" ngf-src="tmpImage[0].img"
-                                             width="119px" height="119px"/>
-                                        <br>
+                                    <div class="old-image" ng-repeat="n in [].constructor(8) track by $index">
+                                       <div ng-class="{special: defaultImage ==  $index}">
+                                            <input type="button" ng-click="deleteImg( $index)" value='delete'
+                                                   class="image-delete-button"/>
+                                            <img ng-click="setImage()" ng-if="tmpImage[ $index].img == null"
+                                                 src="../../../images/small-placeholder.png" height="100%"/>
+                                            <img id="1"  ng-click="defImg($index,tmpImage[$index].videoUrl)" ng-if="tmpImage[$index].img !== null" ngf-src="tmpImage[$index].img"
+                                                 height="100%"/>
+                                       </div>
                                         <md-input-container>
-                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[0].img|| (originalSku.length == selectedSku.length && (tmpImage[0].sku.length == 0 || !tmpImage[0].sku))" ng-change = "onChange(tmpImage[0].sku, 0)" ng-model="tmpImage[0].sku" placeholder="Select sku" multiple="">
+                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[$index].img|| (originalSku.length == selectedSku.length && (tmpImage[$index].sku.length == $index || !tmpImage[$index].sku))" ng-change = "onChange(tmpImage[$index].sku, $index)" ng-model="tmpImage[$index].sku" placeholder="Select sku" multiple="">
                                                 <md-option ng-value="variants" ng-repeat="variants in getSku(0)">{{ variants }}</md-option>
                                             </md-select>
                                             <div class="padding-vertical">
-                                                <span ng-if = "tmpImage[0].videoUrl">{{checkUrl(tmpImage[0].videoUrl)}}</span>
-                                                <span ng-if = "!tmpImage[0].videoUrl">No video</span>
-                                            </div>
-                                        </md-input-container>
-
-                                    </div>
-                                    <div class="old-image">
-                                        <input type="button" ng-click="deleteImg(1)" value='delete'
-                                               class="image-delete-button"/>
-                                        <img ng-click="setImage()" ng-if="tmpImage[1].img == null"
-                                             src="../../../images/small-placeholder.png" width="119px" height="119px"/>
-                                        <img  id="2" ng-class="{special: defaultImage == 1}"  ng-click="defImg(1,tmpImage[1].videoUrl)" ng-if="tmpImage[1].img !== null" ngf-src="tmpImage[1].img"
-                                              width="119px" height="119px"/>
-                                        <br>
-                                        <md-input-container>
-                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[1].img || (originalSku.length == selectedSku.length && (tmpImage[1].sku.length == 0 || !tmpImage[1].sku))" ng-change = "onChange(tmpImage[1].sku, 1)" ng-model="tmpImage[1].sku" placeholder="Select sku" multiple="">
-                                                <md-option  ng-value="variants" ng-repeat="variants in getSku(1)">{{ variants }}</md-option>
-                                            </md-select>
-                                            <div class="padding-vertical">
-                                                <span ng-if = "tmpImage[1].videoUrl">{{checkUrl(tmpImage[1].videoUrl)}}</span>
-                                                <span ng-if = "!tmpImage[1].videoUrl">No video</span>
+                                                <span ng-if = "tmpImage[$index].videoUrl">{{checkUrl(tmpImage[$index].videoUrl)}}</span>
+                                                <span ng-if = "!tmpImage[$index].videoUrl">No video</span>
                                             </div>
                                         </md-input-container>
                                     </div>
-                                    <div class="old-image">
-                                        <input type="button" ng-click="deleteImg(2)" value='delete'
-                                               class="image-delete-button"/>
-                                        <img ng-click="setImage()" ng-if="tmpImage[2].img == null"
-                                             src="../../../images/small-placeholder.png" width="119px" height="119px"/>
-                                        <img id="3" ng-class="{special: defaultImage == 2}"  ng-click="defImg(2,tmpImage[2].videoUrl)" ng-if="tmpImage[2].img !== null" ngf-src="tmpImage[2].img"
-                                             width="119px" height="119px"/>
-                                        <br>
-                                        <md-input-container>
-                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[2].img || (originalSku.length == selectedSku.length && (tmpImage[2].sku.length == 0 || !tmpImage[2].sku))" ng-change = "onChange(tmpImage[2].sku, 2)" ng-model="tmpImage[2].sku" placeholder="Select sku" multiple="">
-                                                <md-option  ng-value="variants" ng-repeat="variants in getSku(2)">{{ variants }}</md-option>
-                                            </md-select>
-                                            <div class="padding-vertical">
-                                                <span ng-if = "tmpImage[2].videoUrl">{{checkUrl(tmpImage[2].videoUrl)}}</span>
-                                                <span ng-if = "!tmpImage[2].videoUrl">No video</span>
-                                            </div>
-                                        </md-input-container>
-                                    </div>
-                                    <div class="old-image">
-                                        <input type="button" ng-click="deleteImg(3)" value='delete'
-                                               class="image-delete-button"/>
-                                        <img ng-click="setImage()" ng-if="tmpImage[3].img == null"
-                                             src="../../../images/small-placeholder.png" width="119px" height="119px"/>
-                                        <img id="4" ng-class="{special: defaultImage == 3}"  ng-click="defImg(3,tmpImage[3].videoUrl)" ng-if="tmpImage[3].img !== null" ngf-src="tmpImage[3].img"
-                                             width="119px" height="119px"/>
-                                        <br>
-                                        <md-input-container>
-                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[3].img || (originalSku.length == selectedSku.length && (tmpImage[3].sku.length == 0 || !tmpImage[3].sku))" ng-change = "onChange(tmpImage[3].sku, 3)" ng-model="tmpImage[3].sku" placeholder="Select sku" multiple="">
-                                                <md-option  ng-value="variants" ng-repeat="variants in getSku(3)">{{ variants }}</md-option>
-                                            </md-select>
-                                            <div class="padding-vertical">
-                                                <span ng-if = "tmpImage[3].videoUrl">{{checkUrl(tmpImage[3].videoUrl)}}</span>
-                                                <span ng-if = "!tmpImage[3].videoUrl">No video</span>
-                                            </div>
-                                        </md-input-container>
-                                    </div>
-                                    <div class="old-image">
-                                        <input type="button" ng-click="deleteImg(4)" value='delete'
-                                               class="image-delete-button"/>
-                                        <img ng-click="setImage()" ng-if="tmpImage[4].img == null"
-                                             src="../../../images/small-placeholder.png" width="119px" height="119px"/>
-                                        <img id="5" ng-class="{special: defaultImage == 4}"  ng-click="defImg(4,tmpImage[4].videoUrl)" ng-if="tmpImage[4].img !== null" ngf-src="tmpImage[4].img"
-                                             width="119px" height="119px"/>
-                                        <br>
-                                        <md-input-container>
-                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[4].img || (originalSku.length == selectedSku.length  && (tmpImage[4].sku.length == 0 || !tmpImage[4].sku))" ng-change = "onChange(tmpImage[4].sku, 4)" ng-model="tmpImage[4].sku" placeholder="Select sku" multiple="">
-                                                <md-option  ng-value="variants" ng-repeat="variants in getSku(4)">{{ variants }}</md-option>
-                                            </md-select>
-                                            <div class="padding-vertical">
-                                                <span ng-if = "tmpImage[4].videoUrl">{{checkUrl(tmpImage[4].videoUrl)}}</span>
-                                                <span ng-if = "!tmpImage[4].videoUrl">No video</span>
-                                            </div>
-                                        </md-input-container>
-                                    </div>
-                                    <div class="old-image">
-                                        <input type="button" ng-click="deleteImg(5)" value='delete'
-                                               class="image-delete-button"/>
-                                        <img ng-click="setImage()" ng-if="tmpImage[5].img == null"
-                                             src="../../../images/small-placeholder.png" width="119px" height="119px"/>
-                                        <img id="6" ng-class="{special: defaultImage == 5}"  ng-click="defImg(5,tmpImage[5].videoUrl)" ng-if="tmpImage[5].img !== null" ngf-src="tmpImage[5].img"
-                                             width="119px" height="119px"/>
-                                        <br>
-                                        <md-input-container>
-                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[5].img || (originalSku.length == selectedSku.length && (tmpImage[5].sku.length == 0 || !tmpImage[5].sku))" ng-change = "onChange(tmpImage[5].sku, 5)" ng-model="tmpImage[5].sku" placeholder="Select sku" multiple="">
-                                                <md-option  ng-value="variants" ng-repeat="variants in getSku(5)">{{ variants }}</md-option>
-                                            </md-select>
-                                            <div class="padding-vertical">
-                                                <span ng-if = "tmpImage[5].videoUrl">{{checkUrl(tmpImage[5].videoUrl)}}</span>
-                                                <span ng-if = "!tmpImage[5].videoUrl">No video</span>
-                                            </div>
-                                        </md-input-container>
-                                    </div>
-                                    <div class="old-image">
-                                        <input type="button" ng-click="deleteImg(6)" value='delete'
-                                               class="image-delete-button"/>
-                                        <img ng-click="setImage()" ng-if="tmpImage[6].img == null"
-                                             src="../../../images/small-placeholder.png" width="119px" height="119px"/>
-                                        <img id="7" ng-class="{special: defaultImage == 6}"  ng-click="defImg(6,tmpImage[6].videoUrl)" ng-if="tmpImage[6].img !== null" ngf-src="tmpImage[6].img"
-                                             width="119px" height="119px"/>
-                                        <br>
-                                        <md-input-container>
-                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[6].img || (originalSku.length == selectedSku.length && (tmpImage[6].sku.length == 0 || !tmpImage[6].sku))" ng-change = "onChange(tmpImage[6].sku, 6)" ng-model="tmpImage[6].sku" placeholder="Select sku" multiple="">
-                                                <md-option  ng-value="variants" ng-repeat="variants in getSku(6)">{{ variants }}</md-option>
-                                            </md-select>
-                                            <div class="padding-vertical">
-                                                <span ng-if = "tmpImage[6].videoUrl">{{checkUrl(tmpImage[6].videoUrl)}}</span>
-                                                <span ng-if = "!tmpImage[6].videoUrl">No video</span>
-                                            </div>
-                                        </md-input-container>
-                                    </div>
-                                    <div class="old-image">
-                                        <input type="button" ng-click="deleteImg(7)" value='delete'
-                                               class="image-delete-button"/>
-                                        <img ng-click="setImage()" ng-if="tmpImage[7].img == null"
-                                             src="../../../images/small-placeholder.png" width="119px" height="119px"/>
-                                        <img id="8" ng-class="{special: defaultImage == 7}"  ng-click="defImg(7,tmpImage[7].videoUrl)" ng-if="tmpImage[7].img !== null" ngf-src="tmpImage[7].img"
-                                             width="119px" height="119px"/>
-                                        <br>
-                                        <md-input-container>
-                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[7].img || (originalSku.length == selectedSku.length && (tmpImage[7].sku.length == 0  || !tmpImage[7].sku))" ng-change = "onChange(tmpImage[7].sku, 7)" ng-model="tmpImage[7].sku" placeholder="Select sku" multiple="">
-                                                <md-option  ng-value="variants" ng-repeat="variants in getSku(7)">{{ variants }}</md-option>
-                                            </md-select>
-                                            <div class="padding-vertical">
-                                                <span ng-if = "tmpImage[7].videoUrl">{{checkUrl(tmpImage[7].videoUrl)}}</span>
-                                                <span ng-if = "!tmpImage[7].videoUrl">No video</span>
-                                            </div>
-                                        </md-input-container>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>

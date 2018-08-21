@@ -1379,13 +1379,16 @@ background-color: #f4f5f4;
 }
 
 
-.uploaded-old-images .old-images .old-image img{
+.uploaded-old-images .old-images .old-image div:first-child{
     cursor: pointer;
     border: none;
     box-shadow: 0 0 2px 1px #CCC;
     -moz-box-shadow: 0 0 2px 1px #CCC;
     -webkit-box-shadow: 0 0 2px 1px #CCC;
     border-radius: 4px;
+    width: 119px;
+    height: 119px;
+    text-align: center;
 }
 
 .uploaded-old-images .old-images .old-image .image-delete-button{
