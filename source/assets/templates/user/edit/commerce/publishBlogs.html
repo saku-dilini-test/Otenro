@@ -64,12 +64,14 @@
                             <p>Uploaded Blog Image</p>
                             <div class="old-images clearfix">
                                 <div class="old-image">
-                                    <input type="button" ng-click="deleteImg(0)" value='delete'
-                                           class="image-delete-button"/>
-                                    <img ng-click="setImage()" ng-if="tmpImage[0] == null"
-                                         src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                    <img ng-click="setImage(0)" ng-if="tmpImage[0] !== null" ngf-src="tmpImage[0]"
-                                         width="80" height="80" required/>
+                                    <div>
+                                        <input type="button" ng-click="deleteImg(0)" value='delete'
+                                               class="image-delete-button"/>
+                                        <img ng-click="setImage()" ng-if="tmpImage[0] == null"
+                                             src="../../../images/small-placeholder.png" height="100%"/>
+                                        <img ng-click="setImage(0)" ng-if="tmpImage[0] !== null" ngf-src="tmpImage[0]"
+                                             height="100%" required/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
