@@ -72,17 +72,7 @@ export class CategoriesComponent implements OnInit {
 
   }
 
-  ngAfterContentChecked() {
-    $('.carousel').carousel('cycle');
-    $('.carousel').carousel({
-      interval: 3000
-    });
-    // $('.right.carousel-control').trigger('click');
-  }
-  ngOnDestroy() {
-    $('.carousel').carousel('pause');
-  }
-
+ 
 
   checkSoldOut(product) {
 

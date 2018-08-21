@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
-import { CategoriesService } from '../../services/categories/categories.service'
-import { PagebodyServiceModule } from '../../page-body/page-body.service'
+import { CategoriesService } from '../../services/categories/categories.service';
+import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { TitleService } from '../../services/title.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { AppDataService } from '../../services/appdata-info/appdata-info.service';
 import { SliderService } from '../../services/slider/slider.service';
+declare var $: any;
 
 @Component({
   selector: 'app-homepage',
@@ -89,6 +90,11 @@ export class HomepageComponent implements OnInit {
 
 
   ngOnInit() {
+
+    setTimeout(function() {
+        $('.carousel').carousel('cycle');
+     
+    }, 3000);
 
     let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
 

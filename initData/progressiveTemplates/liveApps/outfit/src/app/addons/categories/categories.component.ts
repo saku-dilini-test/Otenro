@@ -4,7 +4,7 @@ import * as data from '../../madeEasy.json';
 import { SERVER_URL } from '../../constantsService';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { CurrencyService } from '../../services/currency/currency.service';
-declare var $:any;
+
 
 @Component({
   selector: 'app-categories',
@@ -43,18 +43,6 @@ export class CategoriesComponent implements OnInit {
     });
 
   }
-
-  ngAfterContentChecked() {
-    $('.carousel').carousel('cycle');
-    $('.carousel').carousel({
-      interval: 3000
-    });
-    // $('.right.carousel-control').trigger('click');
-  }
-  ngOnDestroy() {
-    $('.carousel').carousel('pause');
-  }
-
 
   checkSoldOut(product) {
 

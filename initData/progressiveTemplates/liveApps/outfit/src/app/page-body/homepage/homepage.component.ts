@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
-import { CategoriesService } from '../../services/categories/categories.service'
-import { PagebodyServiceModule } from '../../page-body/page-body.service'
+import { CategoriesService } from '../../services/categories/categories.service';
+import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { TitleService } from '../../services/title.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { SliderService } from '../../services/slider/slider.service';
+declare var $: any;
 
 @Component({
   selector: 'app-homepage',
@@ -77,6 +78,21 @@ export class HomepageComponent implements OnInit {
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
   }
 
+   ngOnInit() {
+   setTimeout(function() {
+        $('.carousel').carousel('cycle');
+     
+    }, 3000);
+
+      // let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+      //
+      // if (appUser) {
+      //   if (this.localStorageService.get("cart" + appUser.registeredUser)) {
+      //     this.dataService.cart = this.localStorageService.get("cart" + appUser.registeredUser);
+      //   }
+      // }
+
+    }
   navigateSliderProd(val, item) {
     if (item.optionals.length == 2 && item.optionals[0]) {
       this.catName = item.optionals[0].name;
@@ -86,16 +102,4 @@ export class HomepageComponent implements OnInit {
     }
   }
 
-
-  ngOnInit() {
-
-    // let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
-    //
-    // if (appUser) {
-    //   if (this.localStorageService.get("cart" + appUser.registeredUser)) {
-    //     this.dataService.cart = this.localStorageService.get("cart" + appUser.registeredUser);
-    //   }
-    // }
-
-  }
 }
