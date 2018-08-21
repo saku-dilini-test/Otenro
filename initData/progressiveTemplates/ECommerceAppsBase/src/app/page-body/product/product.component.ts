@@ -123,6 +123,18 @@ export class ProductComponent implements OnInit {
         this.readMore = false;
 
     }
+    checkUrl(url) {
+
+        let id,URL;
+        let res = url.slice(8);
+        let res2 = res.split(/\/|&|=/);
+        if (res2.length > 2) {
+            id = res2[2];
+        }else{
+            id = res2[1];
+        }
+        return id;
+    }
 
     ngOnInit() {
 

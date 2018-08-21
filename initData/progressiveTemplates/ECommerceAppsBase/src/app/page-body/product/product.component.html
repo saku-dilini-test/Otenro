@@ -17,10 +17,10 @@
                          [attr.data-image]="imageUrl/item.img">
 
                       <img  *ngIf="item.videoUrl != null" alt="{{item.name}}"
-                         data-type="vimeo"
+                         data-type="youtube"
                          src="{{imageUrl}}/{{item.img}}"
                          [attr.data-image]="imageUrl/item.img"
-                         [attr.data-videoid]="item.videoUrl">
+                         [attr.data-videoid]="checkUrl(item.videoUrl)">
                     </ng-template>
 
               </div>

@@ -295,6 +295,18 @@
 
         };
 
+    $scope.checkUrl = function(url) {
+
+       var id,URL;
+       var res = url.slice(8);
+       var res2 = res.split(/\/|&|=/);
+       if (res2.length > 2) {
+           id = res2[2];
+       }else{
+           id = res2[1];
+       }
+       return id;
+   }
 
         /**
          * Product variants tab, add variant of a product.
