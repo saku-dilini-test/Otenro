@@ -6,7 +6,6 @@ import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { CurrencyService } from '../../services/currency/currency.service';
 import { ProductsService } from '../../services/products/products.service';
 
-declare var $: any;
 
 @Component({
   selector: 'app-categories',
