@@ -49,7 +49,6 @@ export class CategoriesComponent implements OnInit {
           this.promoData.push(variants);
         });
       });
-      console.log(this.promoData);
     });
   }
 
@@ -145,8 +144,6 @@ export class CategoriesComponent implements OnInit {
       newPrice = price - percentagePrice;
       return newPrice;
     }
-
-    return newPrice;
   }
 
   getWidth(index, length) {

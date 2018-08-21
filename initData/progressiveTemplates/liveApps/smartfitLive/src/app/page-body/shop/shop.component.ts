@@ -141,8 +141,6 @@ export class ShopComponent implements OnInit {
       newPrice = price - percentagePrice;
       return newPrice;
     }
-
-    return newPrice;
   }
 
 }
