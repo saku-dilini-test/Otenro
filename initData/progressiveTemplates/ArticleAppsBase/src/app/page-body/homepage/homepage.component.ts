@@ -147,6 +147,7 @@ export class HomepageComponent implements OnInit {
           } else {
             this.dataService.subUserArticleData.id = id;
             this.dataService.subUserArticleData.name = name;
+            this.dataService.subUserArticleData.image = image;
             this.isSubscribing = false;
             $('#registerModelhome').modal('show')
           }
@@ -240,26 +241,39 @@ export class HomepageComponent implements OnInit {
     let data = {appId:this.appId,uuId: uuid}
     this.alive = true;
     this.isSubscribing = true;
-    this.timeoutSubscriptionPopup();
+    this.dataService.numberOfTries = 1;
 
     IntervalObservable.create(5000)
       .takeWhile(() => this.alive) // only fires when component is alive
       .subscribe(() => {
+        console.log('# of tries: ' + this.dataService.numberOfTries);
+        if(this.dataService.numberOfTries==this.dataService.defaultNumberOfTries) {
+          this.alive = false;
+          this.timeoutSubscriptionPopup();
+          return;
+        }
+        console.log('Try Sub: ' + this.dataService.numberOfTries);
+        this.dataService.numberOfTries++;
+
         this.subscription.getSubscribedData(data).subscribe(data => {
           this.subscriptionStatus = data.isSubscribed;
           this.dataService.subscriptionStatus = data.isSubscribed;
-          if(data.isError){
+          if (data.isError) {
+            this.alive = false;
             this.dataService.displayMessage = data.displayMessage;
             $(() => {
               $('#registerModelhome').modal('hide');
               $('#appStatusModel').modal('show');
             });
-          }else if (this.subscriptionStatus) {
+          } else if (this.subscriptionStatus) {
             this.isSubscribing = false;
             localStorage.setItem(this.appId + "msisdn", data.msisdn)
             this.alive = false;
             this.dataService.catId = this.dataService.subUserArticleData.id;
-            this.router.navigate(['/shop', this.dataService.subUserArticleData.id, this.dataService.subUserArticleData.name]);
+            this.router.navigate(['/shop',
+                                  this.dataService.subUserArticleData.id,
+                                  this.dataService.subUserArticleData.name,
+                                  this.dataService.subUserArticleData.image]);
 
             $(() => {
               $('#registerModelhome').modal('hide');
@@ -282,13 +296,10 @@ export class HomepageComponent implements OnInit {
   }
 
   timeoutSubscriptionPopup(){
-    setTimeout(() => {
-      this.alive = false;
-      this.dataService.displayMessage = 'Registration failed, Please try again.';
-      $(() => {
-        $('#registerModelhome').modal('hide');
-        $('#appStatusModel').modal('show');
-      });
-    }, 30000);
+    this.dataService.displayMessage = 'Registration failed, Please try again.';
+    $(() => {
+      $('#registerModelhome').modal('hide');
+      $('#appStatusModel').modal('show');
+    });
   }
 }

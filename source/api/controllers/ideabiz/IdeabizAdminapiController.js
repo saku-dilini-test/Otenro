@@ -341,6 +341,12 @@ module.exports = {
 
         try {
             if(reqBody.status==config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code||reqBody.status==config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code ) {
+
+                if(!serviceID){
+                    sails.log.error('The serviceID sent through the response is not valid: ', serviceID);
+                    return res.badRequest("IThe serviceID sent through the response is not valid: " + serviceID);
+                }
+
                 var queryApp = { 'serviceID': serviceID };
 
                 try {

@@ -78,7 +78,7 @@ export class FooterComponent implements OnInit{
     //Send Un-Registration SMS
     footerCmp.sms.sendUnRegistrationSMS(footerCmp.smsSuccessUnRegistrationCallback, footerCmp.smsErrorUnRegistrationCallback);
 
-    this.timeoutUnubscriptionPopup();
+    this.dataService.numberOfTries = 1;
 
     var uuid = localStorage.getItem("UUID");
 
@@ -88,20 +88,24 @@ export class FooterComponent implements OnInit{
     IntervalObservable.create(5000)
       .takeWhile(() => this.alive) // only fires when component is alive
       .subscribe(() => {
+        if(this.dataService.numberOfTries==this.dataService.defaultNumberOfTries) {
+          this.alive = false;
+          this.timeoutUnubscriptionPopup();
+          return;
+        }
+        this.dataService.numberOfTries++;
+
         this.subscription.getSubscribedData(data).subscribe(data =>{
           this.subscriptionStatus = data.isSubscribed;
           this.dataService.subscriptionStatus = data.isSubscribed;
-          if(this.subscriptionStatus){
+          if(!this.subscriptionStatus){
             this.isUnsubscribing = false;
             localStorage.removeItem(this.appId+"msisdn")
              this.alive = false;
-             console.log("Footercomponenet: navigate to Home page");
              this.router.navigate(['']);
-              //close the model
               $( () => {
-                $('#myAccountModelfooter').modal('toggle');
+                this.unSubscribedSuccessPopup();
              });
-             //close the nav bar
              document.getElementById("mySidenav").style.width = "0";
           }
         });
@@ -118,13 +122,18 @@ export class FooterComponent implements OnInit{
   }
 
   timeoutUnubscriptionPopup(){
-    setTimeout(() => {
-      this.alive = false;
-      this.dataService.displayMessage = 'Un-registration failed, Please try again.';
-      $(() => {
-        $('#myAccountModelfooter').modal('toggle');
-        $('#appStatusModel').modal('show');
-      });
-    }, 30000);
+    this.dataService.displayMessage = 'Un-registration failed, Please try again.';
+    $(() => {
+      $('#myAccountModelfooter').modal('toggle');
+      $('#appStatusModel').modal('show');
+    });
+  }
+
+  unSubscribedSuccessPopup(){
+    this.dataService.displayMessage = 'You got unsubscribed from the service';
+    $(() => {
+      $('#myAccountModelfooter').modal('toggle');
+      $('#appStatusModel').modal('show');
+    });
   }
 }
