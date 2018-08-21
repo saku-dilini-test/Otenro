@@ -1,5 +1,7 @@
 <h1 *ngIf="loading">Loading...</h1>
-<div id="paypal-button"></div>
+<div *ngIf="!successMessage" id="paypal-button"></div>
+<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+
 <!-- <div id="paypal"></div>
 
     <script>
