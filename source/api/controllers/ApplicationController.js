@@ -43,7 +43,6 @@ module.exports = {
             isAppNameAvailable=false;
 
         var appQuery = { 
-            "userId":userId, 
             "appName":req.body.appName
          }
           
@@ -294,7 +293,6 @@ module.exports = {
             var appCtrl = this;
 
             var appQuery = { 
-                    "userId":userId, 
                     "appName":req.body.appName
                  }
         Application.find(searchByTempIdQuery)
