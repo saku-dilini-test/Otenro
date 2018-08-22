@@ -111,7 +111,6 @@ module.exports = {
 	 */
 	deleteCategory: function (req, res) {
 
-		console.log("deleted");
 		var id = req.body.id;
 		var deleteQuery = {
 			id: id
@@ -237,11 +236,6 @@ module.exports = {
 		var delImages = req.body.deleteImages;
 
 		var article = req.body;
-		//        console.log("**************");
-		//        console.log(tmpImage);
-		//        console.log(article);
-		//        console.log(req.body.isNewArticle);
-		//        console.log("**************");
 		var fileDir;
 		if (isNew == true || isNew == 'true') {
 			fileDir = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/thirdNavi/';
@@ -249,7 +243,6 @@ module.exports = {
 			fileDir = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId + '/img/article/';
 		}
 
-		//        console.log(article.tempImageArray);
 		if (typeof article.tempImageArray == 'undefined') {
 			article.tempImageArray = [];
 		}
@@ -266,13 +259,10 @@ module.exports = {
 			if (tmpImage[i].img) {
 				if (!tmpImage[i].img.match("http")) {
 					var imgeFileName = randomstring.generate() + ".png";
-					console.log("imgeFileName :  " + imgeFileName);
 					var data = tmpImage[i].img.replace(/^data:image\/\w+;base64,/, "");
 					var buf = new Buffer(data, 'base64');
 					// product images copy to app file server
 					if (isNew == 'true' || isNew == true) {
-						console.log(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
-							req.body.appId + '/assets/images/thirdNavi/' + imgeFileName);
 						fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
 							req.body.appId + '/assets/images/thirdNavi/' + imgeFileName, buf, function (err) {
 								if (err) {
@@ -280,7 +270,6 @@ module.exports = {
 								}
 							});
 					} else {
-						console.log("inside template ")
 						fs.writeFile(config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId + '/img/article/' + imgeFileName, buf, function (err) {
 							if (err) {
 								return res.send(err);
@@ -292,17 +281,13 @@ module.exports = {
 					if (tmpImage[i].videoUrl) {
                         try{
                             (article.tempImageArray[i].videoUrl)
-                            console.log("inside video If 1");
                             article.tempImageArray[i].img = imgeFileName;
                         }catch(e){
-                            console.log("e");
-                            console.log("inside video If 2");
                             article.tempImageArray.push({ img: imgeFileName, videoUrl: tmpImage[i].videoUrl, url: tmpImage[i].url });
                         }
 
 
 				    } else if (tmpImage.length >= 1 && i == 0) {
-						console.log("inside video 0 index If");
 						if(article.tempImageArray.length >= 1){
                                 article.tempImageArray[0].img = imgeFileName;
                             }else{
@@ -311,7 +296,6 @@ module.exports = {
 
 				    //if only add video.
 					} else {
-						console.log("inside video else");
 						article.tempImageArray.push({ img: imgeFileName, videoUrl: null, url: null });
 					}
 					article.imageUrl = imgeFileName;
@@ -354,7 +338,7 @@ module.exports = {
 			'id': req.body.id
 		}
 
-		if (req.body.isNewArticle == true || req.body.isNewArticle == 'true') {
+		if (!req.body.id) {
 			Article.create(article).exec(function (err, result) {
 				if (err) res.send(err);
 				res.send({ categoryId: article.categoryId });
