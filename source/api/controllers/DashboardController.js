@@ -52,7 +52,7 @@ module.exports = {
 
                     fs.stat(splashImageAbsolutePath, function (err, fileStat) {
                         if (err) {
-                            if (err.code != 'ENOENT') {
+                            if (err.code == 'ENOENT') {
                                 // sails.log.debug('File does not exists in the path:' , splashImageAbsolutePath);
                             }else{
                                 sails.log.error('Error in allAppsForDashboard: ', err);
