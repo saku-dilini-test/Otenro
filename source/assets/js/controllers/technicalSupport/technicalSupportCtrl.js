@@ -176,6 +176,33 @@
 
             }
 
+            $scope.operatorArrSort = function(operators){
+                var returnArray = [];
+                var idx;
+                var firstIdxValue;
+                $scope.sortOp = $filter('orderBy')(operators, 'operator');
+                if($scope.sortOp){
+                    for(var i = 0;i < $scope.sortOp.length; i++){
+                        if($scope.sortOp[0].operator == "all"){
+                            returnArray = $scope.sortOp;
+                            break;
+                        }else if ($scope.sortOp[0] != "all"){
+                            firstIdxValue = $scope.sortOp[0];
+                            if($scope.sortOp[i].operator == "all"){
+
+                                idx = i;
+                                $scope.sortOp[0] = $scope.sortOp[i];
+                                $scope.sortOp[i] = firstIdxValue;
+                                returnArray = $scope.sortOp;
+                                break;
+                            };
+                        }
+                    }
+                }
+                return returnArray;
+            }
+
+
             if($stateParams.adname){
                 var addname = $stateParams.adname;
 
