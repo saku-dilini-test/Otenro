@@ -119,6 +119,11 @@ export class FooterComponent implements OnInit{
 
   smsErrorUnRegistrationCallback(error: any) {
     console.log("smsErrorUnRegistrationCallback in Footer Component: " + error);
+    footerCmp.dataService.displayMessage = 'Sorry we could not register you for the service. Please ensure that you have enough credit and try again.';
+    $(() => {
+      $('#myAccountModelfooter').modal('hide');
+      $('#appStatusModel').modal('show');
+    });
   }
 
   timeoutUnubscriptionPopup(){
