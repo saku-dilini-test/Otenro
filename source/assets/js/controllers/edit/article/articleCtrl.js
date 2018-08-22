@@ -16,6 +16,7 @@
         $scope.appId = $rootScope.appId;
         $scope.tmpImage = [];
         $scope.data;
+        $scope.dialogTitle = 'Edit Page';
         $scope.tempImageDel = [];
         $scope.deleteImages = [];
         $scope.mainImg = null;
@@ -163,6 +164,7 @@
         if (initialData == 'publishArticle') {
             $scope.isNewArticle = true;
             $scope.dummyCat = [];
+            $scope.dialogTitle = 'Create Page';
 
             $scope.seletedCategoryId = null;
             $scope.articleCat = {
@@ -553,7 +555,7 @@
             $mdDialog.hide();
         };
 
-        $scope.showPublishArticleDialog = function () {
+        $scope.showPublishArticleDialog = function (){
             $mdDialog.hide();
             return articleService.showPublishArticleDialog('publishArticle');
         };
