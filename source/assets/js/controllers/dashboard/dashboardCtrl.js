@@ -14,7 +14,7 @@
 
     function DashboardCtrl($scope, dashboardService,toastr,$state,$auth,ME_APP_SERVER,mySharedService,$rootScope,
             SERVER_URL) {
-        dashboardService.getAllApps().success(function (data) {
+        dashboardService.getAllAppsForDashboard().success(function (data) {
             $rootScope.widgets = data;
             $scope.path = ME_APP_SERVER+"temp/";
         }).error(function (err) {
@@ -22,12 +22,6 @@
                 closeButton: true
             });
         });
-
-        $scope.getImageUrl = function (userId, appId) {
-            return SERVER_URL + "templates/viewWebImages?userId="+ userId + "&appId=" + appId + "&" + new Date().getTime() + "&images=publish/6.png";
-
-        }
-
 
         $scope.myFilter = function (app) {
             return app.isActive == true || app.isActive == "true" || app.isActive == undefined;

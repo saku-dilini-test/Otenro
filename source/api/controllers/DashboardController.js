@@ -7,6 +7,9 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
+var config = require('../services/config');
+var fs = require('fs-extra');
+
 module.exports = {
 
     allApps: function (req, res) {
@@ -18,6 +21,58 @@ module.exports = {
         Application.find(searchApp, function (err, apps) {
             if (err) return done(err);
             res.send(apps);
+        });
+    },
+    /**
+     * This method returns all the Apps as the method allApps, but with additional details attached such as images etc for dashboard.
+     * This will be little slower than the above allApps method since we are checking whether the files are exists etc...
+     * Therefore recomands to use the allApps method if you just want the app details without more info.
+     * @param req
+     * @param res
+     */
+    allAppsForDashboard: function (req, res) {
+
+        var userId = req.userId;
+        var searchApp = {
+            userId: userId
+        };
+
+        Application.find(searchApp, function (err, apps) {
+            if (err) return res.serverError(err);
+
+            var newApps = [];
+
+            if(apps.length>0) {
+                apps.forEach(function(app){
+                    var splashImageAbsolutePath = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + app.id + '/assets/images/publish/6.png';
+                    var splashImageUrl = config.server.host + "/templates/viewWebImages?userId="+ userId + "&appId=" + app.id + "&" + new Date().getTime() + "&images=publish/6.png";
+                    var defaultImageUrl = config.ME_SERVER_URL + userId + '/progressiveTemplates/' + app.id + '/assets/images/test.png';
+
+                    app.splashScreenPath = defaultImageUrl;
+
+                    fs.stat(splashImageAbsolutePath, function (err, fileStat) {
+                        if (err) {
+                            if (err.code != 'ENOENT') {
+                                // sails.log.debug('File does not exists in the path:' , splashImageAbsolutePath);
+                            }else{
+                                sails.log.error('Error in allAppsForDashboard: ', err);
+                            }
+                        } else {
+                            //Adding Splash screen if uploaded already
+                            app.splashScreenPath = splashImageUrl;
+                        }
+                        newApps.push(app);
+
+                        //Only sent the response just after adding all the image paths
+                        if(newApps.length===apps.length){
+                            return res.send(newApps);
+                        }
+                    });
+                });
+            }else{
+                sails.log.debug('No Apps found for the userId:', userId);
+                res.send(apps);
+            }
         });
     },
     getAllCategory: function (req, res) {
