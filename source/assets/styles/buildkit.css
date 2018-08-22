@@ -3086,6 +3086,9 @@ table.md-calendar-day-header{
     border: 1px solid #ccc;
     border-radius: 3px;
 }
+.btn-margin{
+    margin: 10px 0 0 20px !important;
+}
 [ng-quill-editor] { display: block; }
 
 /*reports*/
