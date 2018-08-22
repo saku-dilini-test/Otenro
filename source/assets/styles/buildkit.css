@@ -1390,6 +1390,10 @@ background-color: #f4f5f4;
     height: 119px;
     text-align: center;
 }
+.uploaded-old-images .old-images .old-image img{
+    max-height: 119px;
+    max-width: 119px;
+}
 
 .uploaded-old-images .old-images .old-image .image-delete-button{
     position: absolute;
@@ -2877,7 +2881,7 @@ table.md-calendar-day-header{
 
 
 .special{
-    border: 3px solid #31bd00 !important;
+    box-shadow: 0px 0px 1px 2px #31bd00 !important;
 }
 .engage-user tr:hover{
     background: rgba(121, 121, 121, 0.1)
