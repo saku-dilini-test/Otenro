@@ -286,7 +286,7 @@
                                             <h6 flex="100">Select operator</h6>
                                             <select placeholder="Select Report Type"  aria-label="Country Name"
                                                     ng-model="revenueAndTrafficReport.operator" required >
-                                                <option ng-value="operator.operator" ng-repeat="operator in operators">{{operator.operator}}</option>
+                                                <option ng-value="operator.operator" ng-repeat="operator in operators | orderBy: 'operator'">{{operator.operator | titleCase}}</option>
                                             </select>
                                             <div ng-if="user.userRole=='APP_CREATOR'">
                                                 <h6 flex="100">Select Application</h6>
