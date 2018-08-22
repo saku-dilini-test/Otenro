@@ -31,7 +31,7 @@
 						{{prod.name}}
 					</h2>
 					<h2 class="mg-md sub-header-text-h2 text-center main-content-font">
-						<strong>{{currency}}</strong> {{prod.variants[0].price}}
+						<strong>{{currency}} {{prod.variants[0].price}}</strong>
 					</h2>
 					<div class="text-center">
 						<a class="btn btn-d btn-lg main-button" *ngIf="!checkSoldOut(prod)"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
@@ -51,7 +51,7 @@
 						{{prod.name}}
 					</h2>
 					<h2 class="mg-md sub-header-text-h2 text-center main-content-font">
-						<strong>{{currency}}</strong> {{prod.variants[0].price}}
+						<strong>{{currency}} {{prod.variants[0].price}}</strong>
 					</h2>
 					<div class="text-center">
 						<a class="btn btn-d btn-lg main-button" *ngIf="!checkSoldOut(prod)"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
@@ -88,7 +88,7 @@
 								{{prod.name}}
 							</h2>
 							<h2 class="mg-md sub-header-text-h2 text-center main-content-font">
-								<strong>{{currency}}</strong> {{prod.variants[0].price}}
+								<strong>{{currency}} {{prod.variants[0].price}}</strong>
 							</h2>
 							<div class="text-center">
 								<a class="btn btn-d btn-lg main-button" *ngIf="!checkSoldOut(prod)"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>

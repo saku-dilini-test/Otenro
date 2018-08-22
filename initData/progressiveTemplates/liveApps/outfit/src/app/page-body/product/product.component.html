@@ -22,20 +22,20 @@
         </h3>
         <div class="text-left main-content-font">
           <p *ngIf="discountAvailable == false && availableFirstVariPromo == false">
-            <strong>{{currency}}</strong> {{selectedVariant.price| number: '.2'}}</p>
+            <strong>{{currency}} {{selectedVariant.price| number: '.2'}} </strong></p>
           <h5 *ngIf="discountAvailable == false && availableFirstVariPromo == true">
             <strong style="text-decoration: line-through">{{currency}}{{oldPrice| number: '.2'}}</strong>
           </h5>
           <h4 *ngIf="discountAvailable == false && availableFirstVariPromo == true">
-            <strong>{{currency}}</strong> {{newPrice| number: '.2'}}</h4>
+            <strong>{{currency}} {{newPrice| number: '.2'}}</strong></h4>
 
           <p style="text-decoration: line-through" *ngIf="discountAvailable == true">
-            <strong>{{currency}}</strong> {{oldPrice| number: '.2'}}</p>
+            <strong>{{currency}} {{oldPrice| number: '.2'}}</strong></p>
           <p *ngIf="discountAvailable == true">
-            <strong>{{currency}}</strong> {{newPrice| number: '.2'}}</p>
+            <strong>{{currency}} {{newPrice| number: '.2'}}</strong></p>
         </div>
         <p class="text-left main-content-font" *ngIf="!selectedVariant.price">
-          <strong>{{currency}}</strong> {{Data.variants[0].price}}
+          <strong>{{currency}} {{Data.variants[0].price}}</strong>
         </p>
 
         <p class="color">

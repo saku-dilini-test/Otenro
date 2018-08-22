@@ -24,12 +24,12 @@
               {{prod.name}}
             </p>
             <p class="text-center product-content">
-              Price - {{currency}} {{prod.variants[0].price| number: '.2'}}
+              <strong>{{currency}} {{prod.variants[0].price| number: '.2'}}</strong>
             </p>
             <div class="row">
               <div class="col-sm-12">
                 <div class="text-center" *ngIf="!checkSoldOut(prod)">
-                  <a (click)="navigateProd('product',prod, prod.name )" class="btn btn-d btn-lg main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span>Details</a>
+                  <a (click)="navigateProd('product',prod, prod.name )" class="btn btn-d btn-lg main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span> Details</a>
                 </div>
                 <div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
                   <h4 href="#" class="text-warning">Sold Out!</h4>
@@ -46,9 +46,9 @@
               </div>
               <div class="col-xs-8">
                 <span class="main-content-font"><strong>{{prod.name}}</strong></span>
-                <div class="main-content-font price-margin"> Price - {{currency}} {{prod.variants[0].price| number: '.2'}}</div>
+                <div class="main-content-font price-margin"> {{currency}} {{prod.variants[0].price| number: '.2'}}</div>
                 <div class="text-center" *ngIf="!checkSoldOut(prod)">
-                  <a (click)="navigateProd('product',prod, prod.name )" class="btn btn-d main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span>Details</a>
+                  <a (click)="navigateProd('product',prod, prod.name )" class="btn btn-d main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span> Details</a>
                 </div>
                 <div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
                   <h4 href="#" class="text-warning">Sold Out!</h4>
