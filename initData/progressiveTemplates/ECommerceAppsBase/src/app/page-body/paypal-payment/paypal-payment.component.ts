@@ -7,7 +7,7 @@ import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { debounceTime } from 'rxjs/operator/debounceTime';
-
+declare let $:any;
 declare let paypal: any;
 
 @Component({
@@ -28,6 +28,9 @@ export class PaypalPaymentComponent implements AfterViewChecked {
   private productionKey = this.dataService.paypalKey;
   private _success = new Subject<string>();
   successMessage: string;
+  desired;
+  errPaypal = false;
+  showPaypal = true;
 
   constructor(private localStorageService: LocalStorageService, private http: HttpClient, private route: ActivatedRoute, private router: Router, private dataService: PagebodyServiceModule) {
     this.localData = (this.localStorageService.get('appLocalStorageUser' + this.appId));
@@ -81,7 +84,7 @@ export class PaypalPaymentComponent implements AfterViewChecked {
     },
     onAuthorize: (data, actions) => {
       return actions.payment.execute().then(() => {
-
+        this.showPaypal = false;
         this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.dataService.payPalDetails, { responseType: 'text' })
           .subscribe((res) => {
             console.log("inside web save");
@@ -147,8 +150,26 @@ export class PaypalPaymentComponent implements AfterViewChecked {
         window.alert('Transaction Failed!');
       });        // show success page
     },
-    onError: function (err) {
-      console.log(err);
+    onError: (err) => {
+      this.errPaypal = true;
+      this.showPaypal = false;
+      let error = err;
+      console.log(typeof(error));
+      console.log(String(error));
+      var e = String(error);
+      console.log(typeof(e));
+      console.log(String(error).trim());
+      var result = e.match(/\"message(.*)\"/);
+      this.desired = result[1].replace(/[^\w\s]/gi, '')
+      window.setTimeout(() => {
+        $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
+            $(this).remove();
+            this.showPaypal = true;
+            this.loadPaypalScript();
+            this.errPaypal = false;
+        });
+    }, 2000);
+      // alert(error);
     }
   };
 

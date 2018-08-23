@@ -1,7 +1,11 @@
 <h1 *ngIf="loading">Loading...</h1>
 <div *ngIf="!successMessage" id="paypal-button"></div>
 <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-
+<br>
+<div *ngIf = "errPaypal && desired" class="alert alert-danger" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    {{desired}}
+</div>
 <!-- <div id="paypal"></div>
 
     <script>
