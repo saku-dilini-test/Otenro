@@ -131,10 +131,10 @@
                             <img src="{{imageUrl}}/{{selectedVariant.imageUrl || Data.tempImageArray[0].img}}" width="80%">
                           </div>
                           <div class="col-xs-7">
-                            <h3 class="main-content-font">{{Data.name}}</h3>
-                            <h4 class="main-content-font" *ngFor="let v of dialogVariants">{{v.name}}:{{v.vType}}</h4>
-                            <h4 *ngIf = "discountAvailable == false" class="main-content-font"> {{currency}} {{selectedVariant.price | number: '.2'}}</h4>
-                            <h4 *ngIf = "discountAvailable == true" class="main-content-font"> {{currency}} {{newPrice | number: '.2'}}</h4>
+                            <h4 class="main-content-font"><b>{{Data.name}}</b></h4>
+                            <p class="main-content-font" *ngFor="let v of dialogVariants">{{v.name}}:{{v.vType}}</p>
+                            <p *ngIf = "discountAvailable == false" class="main-content-font"> {{currency}} {{selectedVariant.price | number: '.2'}}</p>
+                            <p *ngIf = "discountAvailable == true" class="main-content-font"> {{currency}} {{newPrice | number: '.2'}}</p>
                           </div>
                         </div>
                         <div class="modal-footer">
