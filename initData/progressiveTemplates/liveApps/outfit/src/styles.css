@@ -1182,7 +1182,7 @@ button{
 	   height: 320px;
     }
     .bloc-xl {
-	    padding: 60px 50px 170px;
+	    padding: 60px 0 170px;
 	}
 	.bloc-xl-mobile{
 		padding-bottom: 170px;

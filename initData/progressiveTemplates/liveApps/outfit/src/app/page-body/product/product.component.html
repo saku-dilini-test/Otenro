@@ -35,7 +35,7 @@
             <strong>{{currency}} {{newPrice| number: '.2'}}</strong></p>
         </div>
         <p class="text-left main-content-font" *ngIf="!selectedVariant.price">
-          <strong>{{currency}} {{Data.variants[0].price}}</strong>
+          <strong>{{currency}} {{Data.variants[0].price| number: '.2'}}</strong>
         </p>
 
         <p class="color">
@@ -138,7 +138,7 @@
                       </h4>
                       <p class="main-content-font" *ngFor="let v of dialogVariants">{{v.name}}:{{v.vType}}</p>
                       <h4 class="main-content-font">
-                        <strong> {{currency}} {{selectedVariant.price}}</strong>
+                        <strong> {{currency}} {{selectedVariant.price| number: '.2'}}</strong>
                       </h4>
                     </div>
                   </div>
