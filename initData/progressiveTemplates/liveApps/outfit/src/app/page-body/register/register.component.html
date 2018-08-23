@@ -18,7 +18,7 @@
                 ngModel required>
               <div [hidden]="fname.valid || fname.pristine" class="alert alert-danger">
                 <div [hidden]="!fname.hasError('required')">First Name is required</div>
-                <div [hidden]="!fname.hasError('pattern')">Last Name must only include Alphabetic character and no spaces.</div>
+                <div [hidden]="!fname.hasError('pattern')">First Name must only include Alphabetic character and no spaces.</div>
               </div> 
             </div>
             <div class="form-group">
