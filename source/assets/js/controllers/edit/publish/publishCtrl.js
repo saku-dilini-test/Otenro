@@ -335,6 +335,7 @@
 
                 if(ele.isEnabled == true){
                     if(ele.status == "NOT_SUBMITTED" || ele.status == "REJECTED"){
+
                         if(!ele.amount && !ele.interval){
                             showSavedMsg = false;
                             toastr.error('Please enter the amount and renewal for ' + ele.operator, 'Warning', {
@@ -345,14 +346,41 @@
                             toastr.error('Please enter the amount for ' + ele.operator, 'Warning', {
                                   closeButton: true
                             });
-                        }else if(!ele.interval){
+                        }else if(!ele.interval) {
                             showSavedMsg = false;
-                            toastr.error('Please select the renewal for ' + ele.operator , 'Warning', {
-                                  closeButton: true
+                            toastr.error('Please select the renewal for ' + ele.operator, 'Warning', {
+                                closeButton: true
                             });
-                        }else{
+
+                        }
+                        else if(ele.interval == "Daily") {
+                                if (ele.priceRange.daily.min > ele.amount || ele.priceRange.daily.max < ele.amount) {
+                                    showSavedMsg = false;
+                                    toastr.error('Please enter a price between ' + ele.priceRange.daily.min + ' and ' + ele.priceRange.daily.max + ' for ' + ele.operator, 'Warning', {
+                                        closeButton: true
+                                    });
+                                }
+                                else{
+                                    ele.status = "SUBMITTED_FOR_CONFIG";
+                                    isRequestUpdate = true;
+                                }
+                        }
+                        else if(ele.interval == "Monthly"){
+                                if(ele.priceRange.monthly.min > ele.amount || ele.priceRange.monthly.max < ele.amount ){
+                                    showSavedMsg = false;
+                                    toastr.error('Please enter a price between ' + ele.priceRange.monthly.min +' and ' + ele.priceRange.monthly.max + ' for ' + ele.operator, 'Warning',{
+                                        closeButton: true
+                                    });
+                                }
+                                else{
+                                    ele.status = "SUBMITTED_FOR_CONFIG";
+                                    isRequestUpdate = true;
+                                }
+                        }
+                        else{
                             ele.status = "SUBMITTED_FOR_CONFIG";
                             isRequestUpdate = true;
+                            console.log("one");
                         }
                     }
                 }else{
@@ -367,7 +395,6 @@
             if(isRequestUpdate){
                 showSavedMsg = false;
                 publishService.updateOperators(data).success(function(res){
-                    console.log(res);
                     toastr.success('Operators information has been added successfully', 'Saved', {
                         closeButton: true
                     });

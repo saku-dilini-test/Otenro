@@ -73,25 +73,65 @@ module.exports = {
             'code': 'MOBITEL',
             'desc': 'Mobitel',
             'shareSplit': '60',
-            'email': 'supportTest@mobitel.com'
+            'email': 'supportTest@mobitel.com',
+            'priceRange': {
+                'daily': {
+                    'min': 1,
+                    'max': 10
+                },
+                'monthly': {
+                    'min': 1,
+                    'max': 1000
+                }
+            }
         },
         'Dialog': {
             'code': 'DIALOG',
             'desc': 'Dialog',
             'shareSplit': '60',
-            'email': 'supportTest@dialog.com'
+            'email': 'supportTest@dialog.com',
+            'priceRange': {
+                'daily': {
+                    'min': 1,
+                    'max': 10
+                },
+                'monthly': {
+                    'min': 1,
+                    'max': 1000
+                }
+            }
         },
         'Hutch': {
             'code': 'HUTCH',
             'desc': 'Hutch',
             'shareSplit': '60',
-            'email': 'supportTest@hutch.com'
+            'email': 'supportTest@hutch.com',
+            'priceRange': {
+                'daily': {
+                    'min': 1,
+                    'max': 10
+                },
+                'monthly': {
+                    'min': 1,
+                    'max': 1000
+                }
+            }
         },
         'Airtel': {
             'code': 'AIRTEL',
             'desc': 'Airtel',
             'shareSplit': '60',
-            'email': 'supportTest@airtel.com'
+            'email': 'supportTest@airtel.com',
+            'priceRange': {
+                'daily': {
+                    'min': 1,
+                    'max': 10
+                },
+                'monthly': {
+                    'min': 1,
+                    'max': 1000
+                }
+            }
         }
 
     },
