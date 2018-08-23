@@ -54,9 +54,10 @@
         </p>
         <p class="content-product  main-content-font no-margin" id="details" [innerHTML]="desPart1" style="font-weight: initial;">
         </p>
-        <a class="text-left product-detail padding-bottom" *ngIf="readMore" (click)="readMoreFunct()" style="font-size: 12px;">Read More</a>
-        <a class="text-left  product-detail padding-bottom" *ngIf="readMore == false" (click)="readLessFunct()" style="font-size: 12px;"><strong>Read Less</strong></a>
-
+        <p>
+          <a class="text-left product-detail padding-bottom" *ngIf="readMore" (click)="readMoreFunct()" style="font-size: 12px;">Read More</a>
+          <a class="text-left  product-detail padding-bottom" *ngIf="readMore == false" (click)="readLessFunct()" style="font-size: 12px;"><strong>Read Less</strong></a>
+        </p>
         <div class="blocs-custom-html spacing-bottom">
 
           <div style="display: block; background-color: rgb(10, 10, 20); height: 1px; width: 100%; margin: auto;"></div>
@@ -133,13 +134,13 @@
                       <img src="{{imageUrl}}/{{selectedVariant.imageUrl || Data.tempImageArray[0].img}}" width="100%">
                     </div>
                     <div class="col-xs-6">
-                      <h4 class="main-header-font padding-vertical">
+                      <h4 class="main-header-font padding-vertical horizontal-0">
                         <strong> {{Data.name}}</strong>
                       </h4>
                       <p class="main-content-font" *ngFor="let v of dialogVariants">{{v.name}}:{{v.vType}}</p>
-                      <h4 class="main-content-font">
+                      <p class="main-content-font">
                         <strong> {{currency}} {{selectedVariant.price| number: '.2'}}</strong>
-                      </h4>
+                      </p>
                     </div>
                   </div>
                   <div class="modal-footer">
