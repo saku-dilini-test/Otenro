@@ -85,7 +85,7 @@
             }
             // If menu undefined || menu.name undefined or empty, pop up error message
             if((typeof menu == 'undefined') || (typeof menu.name == 'undefined') || menu.name == ''){
-                $scope.disableSave = false
+                $scope.disableSave = false;
                 toastr.error('Please enter a name ', 'Warning', {closeButton: true});
                 return;
             }
@@ -119,6 +119,7 @@
                         }
                     }
                 }).error(function(err) {
+                    $scope.disableSave = false;
                     toastr.error(err, 'Warning', {
                         closeButton: true
                     });
@@ -148,6 +149,7 @@
                     categoryMaintenanceService.showCategoryMaintenanceDialog();
 
                 }).error(function(err) {
+                    $scope.disableSave = false;
                     toastr.error(err, 'Warning', {
                         closeButton: true
                     });
@@ -180,10 +182,11 @@
                     categoryMaintenanceService.showCategoryMaintenanceDialog();
 
                 }).error(function(err) {
+                    $scope.disableSave = false;
                     toastr.error(err, 'Warning', {
                         closeButton: true
                     });
-                })
+                });
             }
         };
 

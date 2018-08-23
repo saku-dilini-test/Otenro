@@ -237,7 +237,7 @@ module.exports = {
     },
     deleteNodes : function(req,res) {
         var mainCatCtrl = this;
-        // console.log(req.body.data);
+        console.log(req.body.data);
 
         var categoryArray = [];
         var productArray = [];
@@ -248,12 +248,14 @@ module.exports = {
             if (err) res.send(err);
 
             // If parentId is not undefined of deleted category
-            if (typeof deletedNode[0].parentId !== 'undefined') {
+            if (deletedNode[0].parentId) {
                 //Find parent category of deleted category
                 MainCategory.findOne({ id: deletedNode[0].parentId }).exec(function (err, category) {
                     if (err) {
                         sails.log.error('Error in getting parent category of sub category! , error : ' + err);
+                        res.send(err);
                     }
+                    console.log(category)
                     if (category) {
                         //Id of the deleted category
                         var deletedNodeId = req.body.data.id;
@@ -270,9 +272,10 @@ module.exports = {
                         category.save(function (err) {
                             if (err) {
                                 sails.log.error('Error occurred while saving category after splice node, error : ' + err);
-
+                                res.send(err);
                             }
                         });
+                        console.log('done');
 
                     }
                 });
@@ -287,9 +290,12 @@ module.exports = {
                         });
                     });
                     res.send('ok');
+                }else{
+                    res.send('ok, but no products added');
                 }
             });
         });
+
     },
 
     getToDeleteCategoryArray: function(node,categoryArray,productArray) {
@@ -301,8 +307,8 @@ module.exports = {
             }
         }
         if(node.childNodes && node.childNodes.length !== 0){
-                for(var i=0; i< node.childNodes.length; i++){
-                    categoryArray.push(mainCatCtrl.getToDeleteCategoryArray(node.childNodes[i],categoryArray,productArray));
+                for(var j=0; j< node.childNodes.length; j++){
+                    categoryArray.push(mainCatCtrl.getToDeleteCategoryArray(node.childNodes[j],categoryArray,productArray));
                 }
         }
         return node.id;
