@@ -15,7 +15,7 @@
 
             <fieldset>
                 <label>Title</label>
-                <input class="input-shadow-border" type="text" name="title" ng-pattern="/^[a-zA-Z0-9_ ]*$/"
+                <input class="input-shadow-border" type="text" name="title"
                        ng-model="blog.title" max-length="maxBlogTitle" required />
                 <br />
                 <span ng-show="blogForm.title.$error.pattern" class="error">No symbols</span>

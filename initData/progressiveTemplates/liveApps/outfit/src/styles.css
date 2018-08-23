@@ -1189,14 +1189,6 @@ button{
 	}
 }
 
-@media (max-width: 400px)
-{    
-    .bloc{
-        padding-left: 10px; 
-        padding-right: 10px;
-    }
-}
-
 @media (max-width: 991px){
 	.kids-fashion{
 	/* background-image:url("img/baby_kids_clothing_onepieces.jpg"); */
@@ -1426,7 +1418,7 @@ button{
 		font-size:10px;
 	}
 	.bloc-lg{
-		padding: 0px 20px 170px 20px;
+		padding: 0px 10px 170px 10px;
 	}
 
 	::-webkit-scrollbar{
