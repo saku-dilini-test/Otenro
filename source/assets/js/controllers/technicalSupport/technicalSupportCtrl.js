@@ -369,6 +369,7 @@
                 technicalSupportService.buildApk(app.id,app.userId)
                     .success(function (result) {
                         console.log('Start to build the apk');
+                        $scope.appList = [];
                         getAllAppDataList();
                         toastr.success(result, 'Info', {
                             closeButton: true
