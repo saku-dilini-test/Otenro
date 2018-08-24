@@ -289,8 +289,9 @@ export class HomepageComponent implements OnInit {
 
   smsErrorRegistrationCallback(error: any) {
     console.log("smsErrorRegistrationCallback in homepage Component: " + error);
-    this.dataService.displayMessage = 'Unknown error in Registration';
+    homePageCmp.dataService.displayMessage = 'Sorry we could not register you for the service. Please ensure that you have enough credit and try again.';
     $(() => {
+      $('#registerModelhome').modal('hide');
       $('#appStatusModel').modal('show');
     });
   }

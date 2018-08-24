@@ -969,3 +969,12 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background: #666;
 }
+
+/* added by .sanira */
+p img{
+  width:100%;
+  margin-bottom: 5%;
+}
+.desc p:last-child{
+  margin-bottom: 15%;
+}

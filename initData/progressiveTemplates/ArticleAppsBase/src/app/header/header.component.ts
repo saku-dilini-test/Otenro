@@ -280,6 +280,11 @@ export class HeaderComponent implements OnInit {
 
   smsErrorRegistrationCallback(error: any) {
     console.log("smsErrorRegistrationCallback in Header Component: " + error);
+    headerCmp.dataService.displayMessage = 'Sorry we could not register you for the service. Please ensure that you have enough credit and try again.';
+    $(() => {
+      $('#registerModel').modal('hide');
+      $('#appStatusModel').modal('show');
+    });
   }
 
   smsSuccessUnRegistrationCallback(results: any) {
@@ -288,12 +293,17 @@ export class HeaderComponent implements OnInit {
 
   smsErrorUnRegistrationCallback(error: any) {
     console.log("smsErrorUnRegistrationCallback in Header Component: " + error);
+    headerCmp.dataService.displayMessage = 'Sorry we could not register you for the service. Please ensure that you have enough credit and try again.';
+    $(() => {
+      $('#myAccountModel').modal('toggle');
+      $('#appStatusModel').modal('show');
+    });
   }
 
   timeoutSubscriptionPopup(){
     this.dataService.displayMessage = 'Registration failed, Please try again.';
     $(() => {
-      $('#registerModelhome').modal('hide');
+      $('#registerModel').modal('hide');
       $('#appStatusModel').modal('show');
     });
   }
