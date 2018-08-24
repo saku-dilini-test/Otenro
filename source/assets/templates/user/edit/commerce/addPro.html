@@ -185,7 +185,7 @@
                                             <input ng-blur="checkValidity(data.sku, $index)"  maxlength="10"
                                                    required
                                                    aria-label="SKU"
-                                                   ng-disabled="(initSku($index)&&!isNewProduct) || (initSku($index) && isNewProduct === undefined)"
+                                                   ng-disabled="initSku($index)&&!isNewProduct"
                                                    class="product-sku"
                                                    name="sku_{{$index}}"
                                                    ng-model="data.sku"

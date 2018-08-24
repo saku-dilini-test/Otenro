@@ -139,7 +139,10 @@
         });
 
         $scope.initSku = function(index){
-            if(index < $scope.initSkuLength || index == 0){
+        console.log(index);
+        console.log($scope.product.variants.length);
+        console.log($scope.initSkuLength);
+            if(index < $scope.initSkuLength || index == 0 || index < $scope.product.variants.length -1){
                 return true;
             }
             else{
@@ -334,7 +337,7 @@
             }
             else{
                 $scope.selection1 = product.selection;
-                $scope.selection2 =[];
+                $scope.selection2 = [];
                 for(var i=0;i<$scope.selection1.length;i++){
                     $scope.selection2.push({
                         name:$scope.selection1[i].name,
@@ -894,6 +897,7 @@
         *
         */
         $scope.checkValidity = function(sku, position){
+        console.log(sku);
 
             return $q(function(resolve, reject) {
                     $scope.exist = false;
@@ -904,7 +908,8 @@
                     }
                     commerceService.checkUniqueSku(skuData)
                     .success(function(result){
-                        if(result == 'true'){
+                    console.log(result);
+                        if(result == 'true' || result == true){
                              $scope.exist = true;
                              $scope.position = position;
                              if(position) {
@@ -918,7 +923,7 @@
                         }else if($scope.product.variants){
                             var count = 0;
                             for(var i=0; i<$scope.product.variants.length; i++){
-                                if($scope.product.variants[i].sku.toUpperCase() == sku.toUpperCase()){
+                                if($scope.product.variants[i].sku && sku && $scope.product.variants[i].sku.toUpperCase() == sku.toUpperCase()){
                                     count = count +1;
                                     if(count == 2) {
                                         $scope.exist = true;
