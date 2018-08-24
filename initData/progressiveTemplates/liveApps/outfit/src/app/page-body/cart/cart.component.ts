@@ -160,7 +160,7 @@ export class CartComponent implements OnInit {
     let proceed = true;
 
       for (let i = 0; i < deliverItems.length; i++) {
-        if (deliverItems[i].qty > deliverItems[i].totalQty && !deliverItems[i].unlimited) {
+        if (deliverItems[i].qty > deliverItems[i].totalQty && !deliverItems[i].unlimited || !deliverItems[i].qty) {
           proceed = false;
         }
       }
