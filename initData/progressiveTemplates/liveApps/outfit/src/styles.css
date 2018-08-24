@@ -1064,7 +1064,7 @@ button{
     }
     h1,h2,h3,h4,h5,h6,p,#disqus_thread{
         padding-left:10px!important; 
-        padding-right:10px!important; 
+        padding-right:10px!important;
     }
     .b-parallax{
         background-attachment:scroll;
@@ -1427,6 +1427,10 @@ button{
 	}
 	.padding-fit-top{
 		padding-top:60px !important;
+	}
+
+	h1{
+		font-size: 20px;
 	}
 
 }
