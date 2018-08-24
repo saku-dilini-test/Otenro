@@ -21,7 +21,7 @@
       </a>
     </div>
   </div>
-  <img class="banner-cat" *ngIf="prevCategories" src="{{imageUrl}}/{{currentCategoryImage}}" width="100%" />
+  <img  *ngIf="prevCategories" src="{{imageUrl}}/{{currentCategoryImage}}" width="100%" />
 
   <app-categories [categories]="categories" [products]="products"></app-categories>
 </div>

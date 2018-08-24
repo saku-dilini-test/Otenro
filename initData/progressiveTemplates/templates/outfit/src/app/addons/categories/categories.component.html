@@ -31,7 +31,7 @@
 						{{prod.name}}
 					</h2>
 					<h2 class="mg-md sub-header-text-h2 text-center main-content-font">
-						<strong>{{currency}}</strong> {{prod.variants[0].price}}
+						<strong>{{currency}} {{prod.variants[0].price| number: '.2'}}</strong>
 					</h2>
 					<div class="text-center">
 						<a class="btn btn-d btn-lg main-button" *ngIf="!checkSoldOut(prod)"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
@@ -51,7 +51,7 @@
 						{{prod.name}}
 					</h2>
 					<h2 class="mg-md sub-header-text-h2 text-center main-content-font">
-						<strong>{{currency}}</strong> {{prod.variants[0].price}}
+						<strong>{{currency}} {{prod.variants[0].price| number: '.2'}}</strong>
 					</h2>
 					<div class="text-center">
 						<a class="btn btn-d btn-lg main-button" *ngIf="!checkSoldOut(prod)"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
@@ -68,13 +68,13 @@
 <div class="bgc-white l-bloc " id="bloc-5">
 	<div class="container bloc-lg">
 		<div *ngFor="let node of categories;">
-			<div class="row" *ngIf="node.products.length != 0">
+			<div class="row">
 				<div class="col-sm-12 text-center">
 					<h1 class="text-center about-us  voffset cursor-p">
 						<a [routerLink]="['']" [queryParams]="{ id:node.id}" class=" main-header-font" >{{node.name}}</a><br>
 					</h1>
 					<a [routerLink]="['']" [queryParams]="{ id:node.id}" >
-						<img class="cursor-p"  *ngIf="node.products.length == 0" src="{{imageUrl}}/{{node.imageUrl}}" width="70%" />
+						<img class="cursor-p"  *ngIf="node.products.length == 0" src="{{imageUrl}}/{{node.imageUrl}}" width="100%" />
 					</a>
 
 				</div>
@@ -88,7 +88,7 @@
 								{{prod.name}}
 							</h2>
 							<h2 class="mg-md sub-header-text-h2 text-center main-content-font">
-								<strong>{{currency}}</strong> {{prod.variants[0].price}}
+								<strong>{{currency}} {{prod.variants[0].price | number: '.2'}}</strong>
 							</h2>
 							<div class="text-center">
 								<a class="btn btn-d btn-lg main-button" *ngIf="!checkSoldOut(prod)"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>

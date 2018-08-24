@@ -2,9 +2,9 @@
 
   <div class="container  bloc-xl">
     <div *ngIf="Data.bannerImage">
-      <img class="banner-cat" src="{{bannerImageUrl}}/{{Data.bannerImage}}" width="100%" />
+      <img src="{{bannerImageUrl}}/{{Data.bannerImage}}" width="100%" />
     </div>
-    <div class="row bgc-white" id="product">
+    <div class="row padding-top" id="product">
       <div class="col-sm-6">
         <div id="gallery" style="display:none;">
           <ng-template *ngFor="let item of Data.tempImageArray" [ngIf]="item">
@@ -22,20 +22,20 @@
         </h3>
         <div class="text-left main-content-font">
           <p *ngIf="discountAvailable == false && availableFirstVariPromo == false">
-            <strong>{{currency}}</strong> {{selectedVariant.price| number: '.2'}}</p>
+            <strong>{{currency}} {{selectedVariant.price| number: '.2'}} </strong></p>
           <h5 *ngIf="discountAvailable == false && availableFirstVariPromo == true">
             <strong style="text-decoration: line-through">{{currency}}{{oldPrice| number: '.2'}}</strong>
           </h5>
           <h4 *ngIf="discountAvailable == false && availableFirstVariPromo == true">
-            <strong>{{currency}}</strong> {{newPrice| number: '.2'}}</h4>
+            <strong>{{currency}} {{newPrice| number: '.2'}}</strong></h4>
 
           <p style="text-decoration: line-through" *ngIf="discountAvailable == true">
-            <strong>{{currency}}</strong> {{oldPrice| number: '.2'}}</p>
+            <strong>{{currency}} {{oldPrice| number: '.2'}}</strong></p>
           <p *ngIf="discountAvailable == true">
-            <strong>{{currency}}</strong> {{newPrice| number: '.2'}}</p>
+            <strong>{{currency}} {{newPrice| number: '.2'}}</strong></p>
         </div>
         <p class="text-left main-content-font" *ngIf="!selectedVariant.price">
-          <strong>{{currency}}</strong> {{Data.variants[0].price}}
+          <strong>{{currency}} {{Data.variants[0].price| number: '.2'}}</strong>
         </p>
 
         <p class="color">
@@ -138,7 +138,7 @@
                       </h4>
                       <p class="main-content-font" *ngFor="let v of dialogVariants">{{v.name}}:{{v.vType}}</p>
                       <p class="main-content-font">
-                        <strong> {{currency}} {{selectedVariant.price}}</strong>
+                        <strong> {{currency}} {{selectedVariant.price| number: '.2'}}</strong>
                       </p>
                     </div>
                   </div>

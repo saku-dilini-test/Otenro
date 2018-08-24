@@ -685,7 +685,6 @@
         $scope.bannerButtonName = "Select Image";
 
         $scope.cropImage = function () {
-            $scope.setAspectRatio();
             $scope.myImage = null;
             var handleFileSelect=function(evt) {
 
@@ -706,7 +705,6 @@
         };
 
         $scope.cropBannerImage = function () {
-            $scope.setAspectRatio();
             $scope.myBannerImage = null;
             var handleFileSelect=function(evt) {
 
@@ -1395,9 +1393,11 @@
                             .success(function (templateData) {
                                 if(templateData.thirdNaviAspectRatio){
                                     $scope.thirdNaviAspectRatio = parseFloat(templateData.thirdNaviAspectRatio);
+                                    $scope.aspectRatioBanner = parseFloat(templateData.secondNaviAspectRatio);
                                 }
                                 if(templateData.iSizeThird){
                                     $scope.iSizeThird={w:templateData.iSizeThird.w,h:templateData.iSizeThird.h};
+                                    $scope.sizeBanner={w:templateData.iSizeSecond.w,h:templateData.iSizeSecond.h};
                                 }
                             }).error(function (err) {
                             toastr.error(err.message, 'Warning', {
@@ -1412,32 +1412,7 @@
             });
         };
 
-        $scope.getAspectRatio = function () {
-            carouselService.getApplicationData($rootScope.appId)
-                .success(function (data) {
-                    if (data.templateId){
-                        carouselService.getTemplateData(data.templateId)
-                            .success(function (templateData) {
-
-                                if(templateData.sliderSize){
-                                    $scope.aspectRatioBanner = parseFloat(templateData.sliderSize.aspectRatio);
-                                }
-                                if(templateData.iSizeThird){
-                                    $scope.sizeBanner={w:templateData.sliderSize.w,h:templateData.sliderSize.h};
-                                }
-                            }).error(function (err) {
-                            toastr.error(err.message, 'Warning', {
-                                closeButton: true
-                            });
-                        });
-                    }
-                }).error(function (err) {
-                toastr.error(err.message, 'Warning', {
-                    closeButton: true
-                });
-            });
-        };
-        $scope.getAspectRatio();
+        $scope.setAspectRatio();
 
 
 
