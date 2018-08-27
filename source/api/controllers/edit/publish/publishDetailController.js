@@ -534,7 +534,7 @@ module.exports = {
         var path = require('path');
         var mime = require('mime');
 
-        var apk = config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/' + req.param("appName") + ".apk";
+        var apk = config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/' + req.param("appName").replace(/\s/g, '') + ".apk";
 
         console.log("inside apk send: " + apk);
 
