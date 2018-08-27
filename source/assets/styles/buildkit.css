@@ -3093,6 +3093,12 @@ table.md-calendar-day-header{
 .me-search-input::-ms-clear {
     display: none;
 }
+.width-100{
+    width: 35%;
+}
+.padding-horizontal-16-10{
+    padding: 0 16px 0 10px;
+}
 [ng-quill-editor] { display: block; }
 
 /*reports*/
