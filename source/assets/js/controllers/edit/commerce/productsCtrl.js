@@ -140,12 +140,9 @@
 
         $scope.initSku = function(index){
             if(!$scope.product.variants[index].isNewSku){
-                console.log('true')
                 return true;
             }
             else{
-                console.log('false')
-
                 return false;
             }
         }
