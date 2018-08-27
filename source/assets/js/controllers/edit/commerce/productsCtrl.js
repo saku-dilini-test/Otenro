@@ -139,13 +139,13 @@
         });
 
         $scope.initSku = function(index){
-        console.log(index);
-        console.log($scope.product.variants.length);
-        console.log($scope.initSkuLength);
-            if(index < $scope.initSkuLength || index == 0 || index < $scope.product.variants.length -1){
+            if(!$scope.product.variants[index].isNewSku){
+                console.log('true')
                 return true;
             }
             else{
+                console.log('false')
+
                 return false;
             }
         }
@@ -349,7 +349,8 @@
                     name: product.name,
                     price: null,
                     quantity: null,
-                    selection:$scope.selection2
+                    selection:$scope.selection2,
+                    isNewSku: true
                 };
 
                if($scope.product.variants.length >= 2){
@@ -560,6 +561,7 @@
                   $scope.product.selection = $scope.selection;
                   $scope.product.published = 'NO';
                   $scope.product.selectedSku = $scope.selectedSku;
+                  $scope.product.variants.forEach(function(v){delete v.isNewSku});
                   commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product,'isNew': $rootScope.tempNew, 'defImg': $scope.defaultImage,bannerImage: $scope.bannerImage,oldBannerImg: $scope.oldBannerImg}).success(function (result) {
                       toastr.success('Product added successfully', 'Awsome!', {
                           closeButton: true
@@ -609,6 +611,8 @@
                   $scope.product.selection = $scope.selection;
                   $scope.product.published = 'YES';
                   $scope.product.selectedSku = $scope.selectedSku;
+
+                  $scope.product.variants.forEach(function(v){delete v.isNewSku});
                   commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product, 'isNew': $rootScope.tempNew, 'defImg': $scope.defaultImage,bannerImage:$scope.bannerImage,oldBannerImg: $scope.oldBannerImg}).success(function (result) {
                       toastr.success('Products updated successfully', 'Awesome!', {
                           closeButton: true
