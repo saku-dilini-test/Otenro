@@ -126,7 +126,9 @@ module.exports = {
     },
 
     addNewCategory : function (req,res) {
-            var isNew = req.body.isNew;
+        var isNew = req.body.isNew;
+        var tmpImage  = req.body.file[0];
+        var randomstring = require("randomstring");
         var searchApp = {
             appId: req.body.appId,
             name: req.body.name
@@ -142,30 +144,35 @@ module.exports = {
         ArticleCategory.find(searchApp, function (err, found) {
             if (err) return res.send(err);
 
-            if(found.length != 0){
-                return res.send(409, {message:'Category name already exists!'});
-            }else{
-                req.file('file').upload({
-                    dirname: require('path').resolve(dePath)
-                },function (err, uploadedFiles) {
-                    if (err) return res.send(500, err);
+            if(found.length != 0) {
+                return res.send(409, {message: 'Category name already exists!'});
 
-                    var newFileName=Date.now()+'.png';
-                    fs.rename(uploadedFiles[0].fd, dePath+'/'+newFileName, function (err) {
-                        if (err) return res.send(err);
-                    });
+            }else {
+                    if (!tmpImage.match("http")) {
+                        var imgeFileName = randomstring.generate() + ".png";
+                        var data = tmpImage.replace(/^data:image\/\w+;base64,/, "");
+                        var buf = new Buffer(data, 'base64');
 
-                    var articleCategoryattribute =req.body;
-                    articleCategoryattribute.imageUrl = newFileName;
-                    ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
-                        if (err){
-                            res.send(err)
-                        }else{
-                            res.json(articleCategory);
-                        }
+                        // product images copy to app file server
+                        fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
+                                req.body.appId + '/assets/images/thirdNavi/' + imgeFileName, buf, function (err) {
+                                if (err) {
+                                    return res.send(err);
+                                }
+                        });
 
-                    });
-                });
+                        var articleCategoryattribute = {name:req.body.name,imageUrl:imgeFileName,isNew:req.body.isNew,enteredBy : "demo",appId:req.body.appId}
+                        ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
+                                    if (err){
+                                        res.send(err);
+                                    }else{
+                                        res.json(articleCategory);
+                                    }
+
+                                });
+
+
+                    }
 
             }
         })

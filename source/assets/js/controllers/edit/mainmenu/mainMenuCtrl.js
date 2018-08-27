@@ -554,7 +554,7 @@
             // }
             else{
             if($scope.initialData.menu == 'addNewMenuCategory') {
-                mainMenuService.addNewCategory(file, $rootScope.appId, menu.name,$rootScope.tempNew)
+                mainMenuService.addNewCategory({"file":$scope.tmpImage,"appId":$rootScope.appId,"name": menu.name,"isNew":$rootScope.tempNew})
                     .success(function (data) {
                         var urlPath;
                         if($rootScope.tempNew == 'true' || $rootScope.tempNew == true){
