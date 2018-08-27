@@ -123,7 +123,7 @@
                                     closeButton: true
                                 });
                             })
-
+                        document.getElementById('searchBar').style.display = 'none';
                         $scope.showRevenueAndTrafficReport=true;
                         $scope.showapplicationBaseReport=true;
                         $scope.showPayment=false;
@@ -333,6 +333,7 @@
                                                     }
                                                 }
                                                 app.serviceId = detail.serviceID;
+                                                app.keyword = detail.keyword;
                                                     console.log(app);
                                                 $scope.appList.push(app);
                                             }
