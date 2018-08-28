@@ -161,7 +161,7 @@ module.exports = {
                                 }
                         });
 
-                        var articleCategoryattribute = {name:req.body.name,imageUrl:imgeFileName,isNew:req.body.isNew,enteredBy : "demo",appId:req.body.appId}
+                        var articleCategoryattribute = {name:req.body.name,imageUrl:imgeFileName,isNew:req.body.isNew,appId:req.body.appId}
                         ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
                                     if (err){
                                         res.send(err);
