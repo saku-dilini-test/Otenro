@@ -3090,6 +3090,21 @@ table.md-calendar-day-header{
     margin: 10px 0 0 20px !important;
 }
 [ng-quill-editor] { display: block; }
+.glyphicon-move {
+  cursor: move;
+  cursor: -webkit-grabbing;
+}
 
+.ghost {
+  opacity: .5;
+  background: #C8EBFB;
+}
+
+.use-hover .list-group-item:hover {
+  background-color: #f00;
+}
+.sortable{
+    cursor: pointer;
+}
 /*reports*/
 

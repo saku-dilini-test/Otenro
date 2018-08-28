@@ -453,6 +453,21 @@ module.exports = {
 				res.send(200, { message: 'Deleted Article' });
 			});
 		});
+	},
+
+	updateCategoryOrder: function(req, res){
+	    var categories = req.body;
+
+	    categories.forEach(function(ele){
+	        ArticleCategory.update({id: ele.id},ele).exec(function(err, result){
+                if (err) res.send(err);
+
+
+	        });
+	    });
+                res.send("success")
+
+	    console.log(categories);
 	}
 };
 

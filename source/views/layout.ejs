@@ -58,6 +58,7 @@
    <link rel="stylesheet" href="/vendor/angular-ui-grid/ui-grid.css">
    <link rel="stylesheet" href="/vendor/angular-ui-grid/ui-grid.min.css">
    <link rel="stylesheet" href="/vendor/angular-ui-tree/angular-ui-tree.css">
+   <link rel="stylesheet" href="/vendor/font-awesome/font-awesome.css">
    <link rel="stylesheet" href="/vendor/ng-dialog/ngDialog-theme-default.css">
    <link rel="stylesheet" href="/vendor/ng-dialog/ngDialog.css">
    <link rel="stylesheet" href="/vendor/ng-img-crop-full-extended/ng-img-crop.css">
@@ -131,8 +132,6 @@
     <script src="/vendor/angular-bind-html-compile/angular-bind-html-compile.js"></script>
     <script src="/vendor/angular-bootstrap-colorpicker/bootstrap-colorpicker-module.js"></script>
     <script src="/vendor/angular-bootstrap-grid-tree/tree-grid-directive.js"></script>
-    <script src="/vendor/angular-chart.js"></script>
-    <script src="/vendor/angular-chart.js/angular-chart.js"></script>
     <script src="/vendor/angular-color-picker/angularjs-color-picker.js"></script>
     <script src="/vendor/angular-cookies/angular-cookies.js"></script>
     <script src="/vendor/angular-credit-cards/angular-credit-cards.js"></script>
@@ -143,6 +142,7 @@
     <script src="/vendor/angular-loading-bar/loading-bar.js"></script>
     <script src="/vendor/angular-material/angular-material.js"></script>
     <script src="/vendor/angular-messages/angular-messages.js"></script>
+    <script src="/vendor/angular-mocks/angular-mocks.js"></script>
     <script src="/vendor/angular-permission/angular-permission.js"></script>
     <script src="/vendor/angular-resource/angular-resource.js"></script>
     <script src="/vendor/angular-route/angular-route.js"></script>
@@ -154,9 +154,8 @@
     <script src="/vendor/angular-ui-mask/mask.js"></script>
     <script src="/vendor/angular-ui-router/angular-ui-router.js"></script>
     <script src="/vendor/angular-ui-tree/angular-ui-tree.js"></script>
+    <script src="/vendor/angularjs-dropdown-multiselect/angularjs-dropdown-multiselect.js"></script>
     <script src="/vendor/angularUtils-pagination/dirPagination.js"></script>
-    <script src="/vendor/chart.js"></script>
-    <script src="/vendor/chart.js/Chart.js"></script>
     <script src="/vendor/hammerjs/hammer.js"></script>
     <script src="/vendor/javascript-detect-element-resize/detect-element-resize.js"></script>
     <script src="/vendor/ng-csv/ng-csv.min.js"></script>
@@ -175,6 +174,7 @@
     <script src="/vendor/rangy/rangy-serializer.js"></script>
     <script src="/vendor/rangy/rangy-textrange.js"></script>
     <script src="/vendor/satellizer/satellizer.js"></script>
+    <script src="/vendor/Sortable/Sortable.js"></script>
     <script src="/vendor/textAngular/textAngular-sanitize.js"></script>
     <script src="/vendor/textAngular/textAngular.js"></script>
     <script src="/vendor/textAngular/textAngularSetup.js"></script>
@@ -185,6 +185,9 @@
     <script src="/js/dependencies/aChart.js"></script>
     <script src="/js/dependencies/angular-chart.js"></script>
     <script src="/js/dependencies/angular-google-maps.min.js"></script>
+    <script src="/js/dependencies/quill/ng-quill.min.js"></script>
+    <script src="/js/dependencies/quill/quill.min.js"></script>
+    <script src="/js/dependencies/Sortable.js"></script>
     <script src="/js/dependencies/ui-bootstrap-tpls-0.11.0.js"></script>
     <script src="/js/app.js"></script>
     <script src="/env/development.js"></script>
@@ -212,6 +215,7 @@
     <script src="/js/controllers/dashboard/ext-modules/oblFrameWork/oblFrameworkCtrl.js"></script>
     <script src="/js/controllers/dashboard/ext-modules/oblMenu/oblMenuCtrl.js"></script>
     <script src="/js/controllers/edit/analytics/AnalyticsController.js"></script>
+    <script src="/js/controllers/edit/analytics/ArticaleAnalyticsController.js"></script>
     <script src="/js/controllers/edit/appEditAreaCtrl.js"></script>
     <script src="/js/controllers/edit/article/articleCtrl.js"></script>
     <script src="/js/controllers/edit/carousel/carouselController.js"></script>
@@ -240,6 +244,7 @@
     <script src="/js/controllers/edit/styles/StylesCtrl.js"></script>
     <script src="/js/controllers/edit/styles/webStylesCtrl.js"></script>
     <script src="/js/controllers/get-assistance/get-assistance.js"></script>
+    <script src="/js/controllers/technicalSupport/appViewCtrl.js"></script>
     <script src="/js/controllers/technicalSupport/technicalSupportCtrl.js"></script>
     <script src="/js/controllers/treeSource/controllers/handleCtrl.js"></script>
     <script src="/js/controllers/treeSource/controllers/nodeCtrl.js"></script>
@@ -254,6 +259,7 @@
     <script src="/js/directives/common/device/tablet/meTabletDrt.js"></script>
     <script src="/js/directives/compareTo.module.js"></script>
     <script src="/js/directives/dashboard/meDashboardDir.js"></script>
+    <script src="/js/directives/dashboard/onErrorSrc.js"></script>
     <script src="/js/directives/dashboard/widgets/appBoxDir.js"></script>
     <script src="/js/directives/edit/appEditorDir.js"></script>
     <script src="/js/directives/edit/commerce/commerceDir.js"></script>
@@ -277,6 +283,7 @@
     <script src="/js/services/auth/auth.js"></script>
     <script src="/js/services/auth/currentUser.js"></script>
     <script src="/js/services/auth/localStorage.js"></script>
+    <script src="/js/services/auth/registerService.js"></script>
     <script src="/js/services/common/dialogService.js"></script>
     <script src="/js/services/common/oblMenuService.js"></script>
     <script src="/js/services/dashboard/dashboardService.js"></script>
@@ -312,6 +319,10 @@
     <!--SCRIPTS END-->
 
     <!-- scripts for quill text editor -->
+         <!-- Sortable.js -->
+         <script src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
+         <!-- ng-sortable.js -->
+         <script src="http://rubaxa.github.io/Sortable/ng-sortable.js"></script>
     <script type="text/javascript" src="/js/dependencies/quill/quill.min.js"></script>
     <script type="text/javascript" src="/js/dependencies/quill/ng-quill.min.js"></script>
 
