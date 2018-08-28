@@ -136,7 +136,6 @@
                             .success(function (technicalData) {
                                 $scope.apps = [];
                                 $scope.apps.push({appName:"all"});
-                                    console.log($scope.apps);
                                 var count = 0;
                                 technicalData.forEach(function (app) {
                                     $scope.apps.push(app[count]);
@@ -205,7 +204,6 @@
 
             $scope.applicationArrSort = function(applications){
 
-                console.log(applications);
                 var returnArray = [];
                 var idx;
                 var firstIdxValue;
@@ -353,7 +351,7 @@
                                                 if($scope.user){
                                                     if($scope.user.userRole == "ADMIN"){
                                                         var checkStatus = $filter('filter')(detail.operators,{status:"SUBMITTED_FOR_CONFIG"});
-                                                        console.log(checkStatus.length)
+
                                                         if(checkStatus.length == 0){
                                                             app.enableSave = false
                                                         }else{
@@ -363,7 +361,6 @@
                                                 }
                                                 app.serviceId = detail.serviceID;
                                                 app.keyword = detail.keyword;
-                                                    console.log(app);
                                                 $scope.appList.push(app);
                                             }
                                         });
@@ -372,7 +369,6 @@
                                     if($scope.user){
                                         if($scope.user.userRole != "ADMIN"){
                                           technicalSupportService.getComments().success(function(data){
-                                                console.log(data);
                                                     $scope.commentsList = data;
                                           });
                                         }
@@ -561,7 +557,6 @@
                 appName:appName,
                 appView: appView
                }
-                console.log(data);
                 technicalSupportService.sendApkEmail(data).success(function(data){
                     console.log("success");
                 }).error(function(){
@@ -583,15 +578,12 @@
             });*/
 
            $scope.appDescriptionView = function(appName, appData,appId,userId){
-                console.log(appName);
-                console.log(appData);
                 var data = { appName:appName,appData:appData,id:appId,userId:userId}
                 technicalSupportService.showPublishArticleDescription(data);
 
            }
 
           $scope.approvedOperatorsView = function(app,userList,operators){
-                console.log(operators);
                 var data = {app: app, userList: userList, operators:operators}
                 technicalSupportService.showApprovedOperators(data);
 
@@ -717,7 +709,6 @@
                     appView:appView,
                     operators:operators
                 }
-                console.log(data);
 
                 technicalSupportService.setAppststus(data).success(function(res){
                     $window.location.reload();
