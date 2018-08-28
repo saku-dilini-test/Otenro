@@ -1,5 +1,13 @@
 .desc{
-  padding-bottom: 60px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
 }
 .carousel-control{
   height: 86%;
@@ -18,4 +26,7 @@
 
 /deep/ .ug-theme-panel .ug-strip-panel{
          background-color: rgba(0, 0, 0, 0) !important;
+       }
+/deep/ .ug-videoplayer .ug-videoplayer-button-close{
+         background-image: none !important;
        }

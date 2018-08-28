@@ -7,7 +7,6 @@ import { PoliciesComponent } from './policies/policies.component';
 import { ContactComponent } from './contact/contact.component';
 import { ShopComponent } from './shop/shop.component';
 import { ProductComponent } from './product/product.component';
-import { AppUserComponent } from './app-user/app-user.component';
 
 const routes: Routes = [
  { path: '',
@@ -30,7 +29,7 @@ const routes: Routes = [
     data:{title:'Contact Page'}
   },
   {
-    path: 'shop/:id/:name',
+    path: 'shop/:id/:name/:image',
     component: ShopComponent,
     data:{title:'Shop Page'}
   },

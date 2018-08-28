@@ -10,6 +10,9 @@
             getAllApps:function(){
                 return $http.post(SERVER_URL+ 'app/dashboard/allApps');
             },
+            getAllAppsForDashboard:function(){
+                return $http.post(SERVER_URL+ 'app/dashboard/allAppsForDashboard');
+            },
             getTemplatesData:function(appParams){
                 return $http.post(SERVER_URL + 'api/dashboard/getTemplatesData', appParams);
             },

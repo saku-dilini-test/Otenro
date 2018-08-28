@@ -1,3 +1,9 @@
+<style>
+  .ng-scope{
+    height: 100%;
+  }
+</style>
+
 <div class="me-guest">
   <!--Google Analytics-->
   <script>
@@ -60,7 +66,7 @@
         <!--<div>By signing in you agree to our  <a class="me-guest-reset-link" target="_blank" href="https://www.otenro.com/terms.pdf">Terms & Conditions</a></div>-->
       <!--</fieldset>-->
       <fieldset class="reset-margin text-right">
-        <input type="button" class="me-default-button" ng-model="cancel" ng-click="cancel()" name="cancel" value="Cancel" />
+        <button type="button" class="me-default-button"  ng-click="cancel()">Cancel</button>
         <button ng-disabled="register.$invalid" type="submit" class="me-default-button">
           <!--{{"login.button.title" | translate}}-->
           login

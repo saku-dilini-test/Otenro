@@ -3,9 +3,9 @@ echo  'start....'
 
 #leave and comment other env
 #local
-MESERVER='C:/xampp/htdocs/meServer/temp/';
-NODE='C:/xampp/htdocs/meServer/node_modules';
-APPFILESERVER='C:/Users/Simato/Desktop/work/appFileServer/';
+#MESERVER='c:/xampp/htdocs/meServer/temp/';
+#NODE='c:/xampp/htdocs/meServer/node_modules/';
+#APPFILESERVER='c:/xampp/htdocs/meServer/temp/';
 
 #stag
 #MESERVER='/home/admin/web/testcdn.otenro.com/public_html/temp/';
@@ -13,18 +13,18 @@ APPFILESERVER='C:/Users/Simato/Desktop/work/appFileServer/';
 #APPFILESERVER='/home/otenro/OtenroTest/appFileServer/';
 
 #prod
-# MESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/';
-# NODE='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/node_modules/';
-# APPFILESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/';
+MESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/';
+NODE='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/node_modules/';
+APPFILESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/';
 
-ENV='dev'   #this is for development
-#ENV='pro'  #this is for production
+#ENV='dev'   #this is for development
+ENV='pro'  #this is for production
 #ENV='stag'  #this is for staging
 DB=''
 
 if [ $ENV == 'dev' ]
 then
-	DB='appBuilder'
+	DB='appmaker'
 	serverUrl='http://localhost:1337'
 elif [ $ENV == 'stag' ]
 then
@@ -89,10 +89,24 @@ echo $NODE
 pwd
 cd meServerFiles/unknownUser/progressiveTemplates/
    for d in ./*;do
-       cd $d/src/app/
-       ls
-       sed -i "s@serverUrl@$serverUrl@" constantsService.ts
-       cd -
+        cd $d/assets/
+        ls
+        sed -i "s@serverUrl@$serverUrl@" constantsService.ts
+        NAME=`grep -m 1 "\"name\"" madeEasy.json | sed -r 's/^ *//;s/.*: *"//;s/",?//'`
+        APPID=`grep -m 1 "\"appId\"" madeEasy.json | sed -r 's/^ *//;s/.*: *"//;s/",?//'`
+        USERID=`grep -m 1 "\"userId\"" madeEasy.json | sed -r 's/^ *//;s/.*: *"//;s/",?//'`
+        TEMPNAME=`grep -m 1 "\"templateName\"" madeEasy.json | sed -r 's/^ *//;s/.*: *"//;s/",?//'`
+        echo $APPID
+        echo $USERID
+        echo $TEMPNAME
+        cd ../
+        pwd
+        sed -i "s@serverUrl@$serverUrl@" main.*.js
+        sed -i "s@unknownName@$NAME@" main.*.js
+        sed -i "s@unknownAppId@$APPID@" main.*.js
+        sed -i "s@unknownUserName@$USERID@" main.*.js
+        sed -i "s@unknownTemplateName@$TEMPNAME@" main.*.js
+        cd ../
     done
 
 cd ../../../

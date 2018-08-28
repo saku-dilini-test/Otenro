@@ -52,7 +52,8 @@
                     toastr.success('Login Successful ', 'Message', {
                       closeButton: true
                     });
-                    if (response.user.userRoles== 'SUPER_ADMIN' || response.user.userRoles== 'OPERATOR' || response.user.userRoles == 'ADMIN'){
+                    if (response.user.userRoles== 'SUPER_ADMIN' || response.user.userRoles== 'OPERATOR'
+                        || response.user.userRoles == 'ADMIN'){
                          $state.go('user.technicalSupporter');
                     }else {
                          $state.go('user.dashboard');
@@ -127,7 +128,15 @@
         }
     };
     $scope.cancel = function () {
-      $state.go('anon.welcome');
+        if($scope.isPinReqSuccess == true){
+            $state.go($state.current, {}, {reload: true});
+        }
+        else{
+            if($auth.getToken()=='undefined') {
+                $auth.removeToken();
+            }
+            $state.go('anon.welcome');
+        }
     };
 
       $scope.register = function() {
@@ -139,7 +148,7 @@
       };
 
     $scope.isValidationOk = function () {
-      if ($scope.email !== undefined && $scope.password !== undefined) {
+      if ($scope.email !== undefined && $scope.password !== undefined && !$scope.mobile) {
           $scope.user = {
               email: $scope.email,
               password: $scope.password,

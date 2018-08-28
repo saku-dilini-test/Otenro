@@ -15,7 +15,6 @@ import { ShopComponent } from './shop/shop.component';
 import { ProductComponent } from './product/product.component';
 import { SafeHtmlPipe } from '../pipes/safeHtml.pipe';
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -25,18 +24,19 @@ import { SafeHtmlPipe } from '../pipes/safeHtml.pipe';
     AgmCoreModule,
     FormsModule,
     ReactiveFormsModule
+
   ],
    exports:[
     PageBodyComponent
   ],
   declarations: [
-    HomepageComponent, 
-    PageBodyComponent, 
-    AboutusComponent, 
-    PoliciesComponent, 
-    ContactComponent, 
-    ShopComponent, 
-    ProductComponent, 
+    HomepageComponent,
+    PageBodyComponent,
+    AboutusComponent,
+    PoliciesComponent,
+    ContactComponent,
+    ShopComponent,
+    ProductComponent,
     SafeHtmlPipe
   ]
 })

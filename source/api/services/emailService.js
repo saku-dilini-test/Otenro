@@ -947,7 +947,7 @@ module.exports = {
         var status = data.operator.status;
         var subject,emailBody,operator;
         var toEmail = data.email;
-        var fromEmail = config.IDEABIZ_EMAIL;
+        var fromEmail = config.IDEABIZ_GROUP_EMAIL;
         var op = this.getIdeabizUserNetwrokClientsAsArray();
 
          op.forEach(function(ele){

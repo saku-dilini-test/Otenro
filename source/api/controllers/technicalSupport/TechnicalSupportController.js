@@ -568,41 +568,53 @@ module.exports = {
                     }
 
                 });
-                    PublishDetails.update(Query,{serviceID:req.body.serviceId, operators:operators}).exec(function(err, data){
-                        if(err){ res.send(err);}
-                        else{
 
-                            var emailBody = "<html>" + req.body.appName + " is pending approval.<br><br>" +
+                //Check the serviceId already exists in the other apps
+                var findServiceIdQuery = {
+                    appId: {
+                        '!': [req.body.id]
+                    },
+                    serviceID: req.body.serviceId
+                }
 
-                                           req.body.appName +  " with App ID " + req.body.id + " has been configured, and is pending approval.<br><br>" +
-                                           "The Appmaker Team" +
-                                            "</html>";
+                PublishDetails.find(findServiceIdQuery).exec(function(err, apps){
+                    if(err){ res.send(err);}
 
+                    if(apps && apps.length>0){
+                        return res.status(409).send({ isError: true, message: 'Service ID ' + req.body.serviceId + ' already exists' });
+                    }else{
+                        PublishDetails.update(Query,{serviceID:req.body.serviceId, operators:operators}).exec(function(err, data){
+                            if(err){ res.send(err);}
+                            else{
+                                var emailBody = "<html>" + req.body.appName + " is pending approval.<br><br>" +
+                                    req.body.appName +  " with App ID " + req.body.id + " has been configured, and is pending approval.<br><br>" +
+                                    "The Appmaker Team" +
+                                    "</html>";
 
-                                             mailOptions = {
-                                                from: fromEmail, // sender address
-                                                to: toEmail, // list of receivers
-                                                subject: 'Pending Approval', // Subject line
-                                                html:emailBody
+                                mailOptions = {
+                                    from: fromEmail, // sender address
+                                    to: toEmail, // list of receivers
+                                    subject: 'Pending Approval', // Subject line
+                                    html:emailBody
+                                };
 
+                                // send mail with defined transport object
+                                transporter.sendMail(mailOptions, (error, info) => {
+                                    if (error) {
+                                        //return console.log(error);
+                                        console.log(error);
+                                        return  res.send(500,error);
 
-                                             };
-
-                                        // send mail with defined transport object
-                                        transporter.sendMail(mailOptions, (error, info) => {
-                                            if (error) {
-                                                //return console.log(error);
-                                                console.log(error);
-                                                return  res.send(500,error);
-
-                                            }
-                                            console.log('Message sent: %s', info.messageId);
-                                                                return res.send("ok");
-                                        });
+                                    }
+                                    console.log('Message sent: %s', info.messageId);
+                                return res.send("ok");
+                            });
 
                                 res.send("serviceId added");
-                        }
-                    });
+                            }
+                        });
+                    }
+                });
             }
         });
     },

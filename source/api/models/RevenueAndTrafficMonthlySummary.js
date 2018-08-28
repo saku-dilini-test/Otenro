@@ -11,13 +11,16 @@ module.exports = {
             type: 'String'
         },
         revenue:{
-            type: 'Integer'
+            type: 'float'
         },
         viewCount:{
             type:'Integer'
         },
         year:{
             type: 'Integer'
+        },
+        appId:{
+            type: 'String'
         }
 
     }

@@ -2,16 +2,17 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { SERVER_URL } from '../../constantsService';
-import * as data from '../../madeEasy.json';
+import { SERVER_URL } from '../../../assets/constantsService';
+import * as data from '../../../assets/madeEasy.json';
 import * as _ from 'lodash';
 import { TitleService } from '../../services/title.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ProductsService } from '../../services/products/products.service';
+declare let $:any;
 @Component({
     selector: 'app-product',
-    templateUrl: './app/page-body/product/product.component.html',
-    styleUrls: ['./app/page-body/product/product.component.css'],
+    templateUrl: './product.component.html',
+    styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
 
@@ -19,7 +20,7 @@ export class ProductComponent implements OnInit {
     private foodInfo;
     private appId = (<any>data).appId;
     private userId = (<any>data).userId;
-    private Data;
+    Data;
     private isBuyBtnDisable: boolean;
     private parentobj = { cartItems: [], cartSize: 0, totalPrice: 0 };
     private lockBuyButton = false;
@@ -28,7 +29,7 @@ export class ProductComponent implements OnInit {
     private results: any; 
     private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
-
+    results:any;
     constructor(private productService: ProductsService, private sanitizer: DomSanitizer, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
 
         this.Data = this.dataService.data;
@@ -62,6 +63,19 @@ export class ProductComponent implements OnInit {
             }
         });
 
+    }
+
+    checkUrl(url) {
+
+        let id,URL;
+        let res = url.slice(8);
+        let res2 = res.split(/\/|&|=/);
+        if (res2.length > 2) {
+            id = res2[2];
+        }else{
+            id = res2[1];
+        }
+        return id;
     }
 
 

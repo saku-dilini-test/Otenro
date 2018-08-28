@@ -155,7 +155,13 @@
                                        type="text"
                                        name="fname"
                                        ng-model="userEdit.firstName"
+                                       ng-pattern="/^[-a-zA-Z\s]+$/"
                                        required />
+                                <span class="error help-block" ng-show="editProfile.fname.$error.required">*</span>
+                                <span class="error help-block" ng-show="editProfile.fname.$dirty && editProfile.fname.$invalid">
+                                 Enter a proper name
+                                 </span>
+
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Last name</label>
@@ -164,7 +170,12 @@
                                        type="text"
                                        name="lname"
                                        ng-model="userEdit.lastName"
+                                       ng-pattern="/^[-a-zA-Z]+$/"
                                        required />
+                                <span class="error help-block" ng-show="editProfile.lname.$error.required">*</span>
+                                <span class="error help-block" ng-show="editProfile.lname.$dirty && editProfile.lname.$invalid">
+                                Enter a proper name
+                                </span>
                             </fieldset>
                         </div>
                         <fieldset>
@@ -277,8 +288,8 @@
                             <fieldset ng-show="isPinReqSuccess">
                                 <label>Verification Pin </label>
                                 <input class="input-shadow-border" ng-enter ="updateUserProfileWithMobile(userEdit)" name="mobileVerificationPin" type="text" ng-model="mobileVerificationPin">
-                                <div style="float: right">
-                                    <input style="background: #0099FF; text-align: center; color: white; margin-top: 10px" class="input-shadow-border"  ng-click="updateUserProfileWithMobile(userEdit)" name="continue" value="continue" />
+                                <div class="text-right">
+                                    <input class="btn-margin input-shadow-border me-default-button" ng-click="updateUserProfileWithMobile(userEdit)" name="continue" value="continue" />
                                 </div>
                             </fieldset>
                         <fieldset class="text-right">

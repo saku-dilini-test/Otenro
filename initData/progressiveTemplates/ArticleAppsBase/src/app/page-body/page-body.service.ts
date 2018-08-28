@@ -4,6 +4,8 @@ import { Injectable, OnInit } from '@angular/core';
 export class PagebodyServiceModule {
 
   data: object;
+  displayMessage: string;
+  pushMessage: string;
   userData: any;
   subscriptionStatus: any;
   appStatus: any;
@@ -25,7 +27,9 @@ export class PagebodyServiceModule {
   sign;
   searchArray = [];
   uuid;
-  subUserArticleData = {id:null,name:null}
+  subUserArticleData = {id:null,name:null,image:null};
+  defaultNumberOfTries = 12;
+  numberOfTries;
   constructor() {
 
     this.parentobj.cartSize = this.cart.cartSize;

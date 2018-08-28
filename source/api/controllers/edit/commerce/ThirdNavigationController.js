@@ -73,9 +73,9 @@ module.exports = {
                 // product images copy to app file server
                 if(isNew == 'true' || isNew == true){
                     console.log(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
-                        req.body.product.appId + '/src/assets/images/thirdNavi/' + imgeFileName);
+                        req.body.product.appId + '/assets/images/thirdNavi/' + imgeFileName);
                     fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
-                        req.body.product.appId + '/src/assets/images/thirdNavi/' + imgeFileName, buf, function (err) {
+                        req.body.product.appId + '/assets/images/thirdNavi/' + imgeFileName, buf, function (err) {
                         if (err) {
                             return res.send(err);
                         }
@@ -193,7 +193,7 @@ module.exports = {
         var query = {'id':item.id};
         var skuQuery = {productId:item.id};
         var thirdNaviPath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/';
-        var thirdNaviPath2 = '/src/assets/images/thirdNavi/';
+        var thirdNaviPath2 = '/assets/images/thirdNavi/';
         console.log(req.userId);
 
         //Variant of a Product

@@ -11,7 +11,7 @@ module.exports = {
             type: 'String'
         },
         revenue:{
-            type: 'Integer'
+            type: 'float'
         },
         userId:{
             type:'String'
@@ -29,6 +29,12 @@ module.exports = {
             type:'String'
         },
         bankAccountNumber:{
+            type:'String'
+        },
+        operator:{
+            type:'String'
+        },
+        uniqueAppId:{
             type:'String'
         }
 

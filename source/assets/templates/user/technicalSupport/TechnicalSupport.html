@@ -18,11 +18,6 @@
     </div>
 </div>
 
-<fieldset ng-style="myObj" ng-if="showSearchField">
-    <input type="text" ng-model="searchPublishApps" name="search">
-    <input type="submit" value="search" class="me-search-button">
-</fieldset>
-
 <div class="obl-dashboard-wrapper">
     <!--<div class="obl-dashboard-apps">
      All Applications
@@ -31,10 +26,13 @@
 
 
     <div class="md-dialog-main clearfix">
-
+        <fieldset ng-style="myObj" id = "searchBar">
+            <input type="text" placeholder="Search by app: keyword,status,name & ID  " ng-model="searchPublishApps" name="search">
+            <input type="submit" class="me-search-button">
+        </fieldset>
         <md-tabs md-center-tabs="false" md-selected="selectedIndex" md-no-ink="true" md-autoselect="false"
                  md-dynamic-height="true">
-            <md-tab ng-click="showHideSearchField('app_details')">
+            <md-tab ng-if="showAppDetails"ng-click="showHideSearchField('app_details')">
                 <md-tab-label>App Details</md-tab-label>
                 <md-tab-body>
 
@@ -42,7 +40,7 @@
             <table class="table">
                 <thead class="obl-dashboard-apps">
                 <th>App ID</th>
-                <th>App Name</th>
+                <th data-ng-click="sortType = appName; sortReverse = !sortReverse;">App Name</th>
                 <th>Email</th>
                 <th>App Description</th>
                 <th ng-if="user.userRole[0] != 'ADMIN'">Billing</th>
@@ -55,7 +53,7 @@
                 </thead>
 
                 <tbody>
-                <tr ng-repeat="app in appList | filter:searchPublishApps">
+                <tr ng-repeat="app in appList | filter : searchPublishApps | orderBy:sortType:sortReverse">
                     <td ng-click="showAppView(app.id,app.userId)"  style="color:blue;">
                     <!--<a href="{{serverURL}}templates/viewWebTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">-->
                         <u>{{app.uniqueAppId}}</u>
@@ -76,10 +74,10 @@
                         <button class="btn-material"  ng-click="approvedOperatorsView(app,userList,getDes(app.id,'manage'))">Manage</button>
                     </td>
                     <td align="left" style="padding:2px 0" ng-if="user.userRole[0] == 'ADMIN'">
-                        <md-button class="me-default-button" style="padding:0; margin:0; margin-left:-12px" ng-click = "buildAPK(app)" ng-hide = "app.apkStatus=='PENDING'">
+                        <md-button style="padding:0; margin:0; margin-left:-12px" class="me-default-button" ng-click = "buildAPK(app)">
                             Build
                         </md-button>
-                        <span ng-show = "app.apkStatus=='PENDING'">Building...</span>
+                        <!--<span ng-show = "app.apkStatus=='PENDING'">Building...</span>-->
                     </td>
                     <td>{{app.publishedStatus}}</td>
                 <td align="left" ng-if="user.userRole[0] != 'ADMIN'">
@@ -165,7 +163,7 @@
                         <!--<div><a href="#/viewAdNetworks/"></a></div>-->
                     <!--</form> </md-tab-body>-->
             <!--</md-tab>-->
-            <md-tab ng-disabled="enableTab" ng-click="showHideSearchField('register_users')">
+            <md-tab ng-if="showRegisterdusers" ng-disabled="enableTab" ng-click="showHideSearchField('register_users')">
 
                 <md-tab-label>Registered users </md-tab-label>
                 <md-tab-body>
@@ -236,7 +234,7 @@
 
 
 
-                        <md-tab>
+                        <md-tab ng-if="showPayment">
                             <md-tab-label>Payments</md-tab-label>
                             <md-tab-body>
                                    
@@ -269,80 +267,407 @@
                                 </form>
                         </md-tab-body>
                             </md-tab> 
-                        <md-tab>
+                        <md-tab ng-if="showRevenueAndTrafficReport">
                             <md-tab-label>Revenue And Traffic Report</md-tab-label>
                             <md-tab-body>
-                                 Revenue And Traffic 
-                               
-                                
-                                <!-- <div class="reports-container">
+                                <div class="reports-container">
 
-                                <div class="reports-type-container"> -->
-                                <!--<div class="technical-support">-->
-                                <!-- <h6>Select report type</h6>
-                                <select>
-                                </select> -->
-                                <!--</div>-->
-                                <!-- </div>
+                                    <div class="reports-type-container">
+                                        <div layout="column" layout-wrap>
+                                            <h6 flex="100">Select report type</h6>
+                                            <select placeholder="Select Report Type"  aria-label="Country Name"
+                                                    ng-model="revenueAndTrafficReport.report"
+                                                    ng-change="reconciliationReportsGet(revenueAndTrafficReport.report)" required >
+                                                <option ng-value="oneReport.name" ng-repeat="oneReport in reports">{{oneReport.name}}</option>
+                                            </select>
 
-                                <div class="reports-period-container">
 
-                                <div class="period-container">
-                                <h6>Select period</h6>
-                                <input type="date" placeholder="START DATE">
-                                <input type="date" placeholder="END DATE">
+                                            <h6 flex="100">Select operator</h6>
+                                            <select placeholder="Select Report Type"  aria-label="Country Name"
+                                                    ng-model="revenueAndTrafficReport.operator" required >
+                                                <option ng-value="operator.operator" ng-repeat="operator in operatorArrSort(operators)">{{operator.operator | titleCase}}</option>
+                                            </select>
+                                            <div ng-if="user.userRole=='APP_CREATOR'">
+                                                <h6 flex="100">Select Application</h6>
+                                                <select placeholder="Select Report Type"  aria-label="Country Name"
+                                                        ng-model="revenueAndTrafficReport.appName" required >
+                                                    <option ng-value="app.id" ng-repeat="app in apps track by $index">{{app.appName}}</option>
+                                                </select>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="reports-period-container">
+
+                                        <div class="reports-container">
+                                            <h6>Select period</h6>
+
+                                            <form name="revenueAndTrafficReportForm">
+                                                <div ng-if="revenueAndTrafficReport.report == 'Daily'">
+                                                    <input type="date"  ng-model="revenueAndTrafficReport.sdate" placeholder="START DATE" onkeydown="return false" required>
+                                                    <input type="date" ng-model="revenueAndTrafficReport.edate" placeholder="END DATE" onkeydown="return false" required>
+                                                    <Button type="button" class="me-default-button" ng-click="revenueAndTrafficReportData(revenueAndTrafficReport)">Search</Button>
+                                                </div>
+                                                <div ng-if="revenueAndTrafficReport.report == 'Monthly'" >
+                                                    <select ng-model="revenueAndTrafficReport.fromMonth" required>
+                                                        <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
+                                                    </select>
+                                                    <select ng-model="revenueAndTrafficReport.toMonth" required>
+                                                        <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
+                                                    </select>
+                                                    <select ng-model="revenueAndTrafficReport.year" required>
+                                                        <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                    </select>
+                                                    <Button type="button" class="me-default-button" ng-click="revenueAndTrafficReportData(revenueAndTrafficReport)">Search</Button>
+                                                </div>
+                                                <div ng-if="revenueAndTrafficReport.report == 'Yearly'">
+                                                    <select placeholder="From Year" ng-model="revenueAndTrafficReport.fromYear" required>
+                                                        <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                    </select>
+                                                    <select placeholder="To Year" ng-model="revenueAndTrafficReport.toYear" required>
+                                                        <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                    </select>
+                                                    <Button type="button" class="me-default-button" ng-click="revenueAndTrafficReportData(revenueAndTrafficReport)">Search</Button>
+                                                </div>
+
+                                                <!--<Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>-->
+                                            </form>
+                                        </div>
+
+
+
+                                    </div>
                                 </div>
 
-                                <div class="operator-container">
-                                <h6>Select operator</h6>
-                                <select>
-                                </select>
-                                </div>
 
-                                </div>
 
-                                </div> -->
+                                <form class="allItems" novalidate>
+                                    <a ng-if="(revenueAndTrafficReportResponseData.length > 0)" href="" ng-click='downloadCsv
+                                    (revenueAndTrafficReportResponseData,{ filename: "revenueAndTrafficReportData.csv",reportType:"revenueAndTrafficReportData",
+                                    reportRange:revenueAndTrafficReport.report})'>
+                                        <button style="float: right" type= "button" >CSV</button></a>
+                                    <table class="table">
+                                        <thead class="obl-dashboard-apps">
+                                        <tr>
+                                            <th ng-if="revenueAndTrafficReport.report == 'Daily'">Date</th>
+                                            <th ng-if="revenueAndTrafficReport.report == 'Monthly'">Month</th>
+                                            <th ng-if="revenueAndTrafficReport.report == 'Yearly'">Year</th>
+                                            <th >Operator</th>
+                                            <th ng-if="user.userRole=='APP_CREATOR'">Application</th>
+                                            <th>AppMaker Revenue</th>
+                                            <th>AppMaker Traffic</th>
+                                            <th>Total Revenue</th>
+                                            <th>Total Traffic</th>
+                                        </tr>
+                                        </thead>
 
-                               
+                                        <tbody>
+                                        <tr  ng-repeat="revenueAndTraffic in revenueAndTrafficReportResponseData">
+                                            <td ng-if="revenueAndTrafficReport.report == 'Daily'">{{revenueAndTraffic.date}}</td>
+                                            <td ng-if="revenueAndTrafficReport.report == 'Monthly'">{{revenueAndTraffic.month}}</td>
+                                            <td ng-if="revenueAndTrafficReport.report == 'Yearly'">{{revenueAndTraffic.year}}</td>
+                                            <td>{{revenueAndTraffic.operator}}</td>
+                                            <td ng-if="user.userRole=='APP_CREATOR'">{{revenueAndTraffic.appId}}</td>
+                                            <td>{{revenueAndTraffic.revenue}}</td>
+                                            <td>{{revenueAndTraffic.viewCount}}</td>
+                                            <td>{{revenueAndTraffic.revenue}}</td>
+                                            <td>{{revenueAndTraffic.viewCount}}</td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
                             </md-tab-body>
                         </md-tab>
 
 
-                        <md-tab>
+                        <md-tab ng-if="showapplicationBaseReport" >
                             <md-tab-label>Application Base Report</md-tab-label>
                             <md-tab-body>
-                                Application Base Report
+                                <div class="reports-container">
+
+                                    <div class="reports-type-container">
+                                        <div layout="column" layout-wrap>
+                                            <h6 flex="100">Select report type</h6>
+                                            <select placeholder="Select Report Type"  aria-label="Country Name"
+                                                    ng-model="applicationBaseReport.report"
+                                                    ng-change="reconciliationReportsGet(applicationBaseReport.report)" required >
+                                                <option ng-value="oneReport.name" ng-repeat="oneReport in reports">{{oneReport.name}}</option>
+                                            </select>
+
+
+                                            <h6 flex="100">Select Application</h6>
+                                            <select placeholder="Select Report Type"  aria-label="Country Name"
+                                                    ng-model="applicationBaseReport.appName" required >
+                                                <option ng-value="app.appName" ng-repeat="app in apps track by $index">{{app.appName}}</option>
+                                            </select>
+
+                                            <h6 flex="100">Select operator</h6>
+                                            <select placeholder="Select operator"  aria-label="Country Name"
+                                                    ng-model="applicationBaseReport.operator" required >
+                                                <option ng-value="operator.operator" ng-repeat="operator in operators">{{operator.operator}}</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="reports-period-container">
+
+                                        <div class="reports-container">
+                                            <h6>Select period</h6>
+
+                                            <form name="applicationBaseReportReportForm">
+                                                <div ng-if="applicationBaseReport.report == 'Daily'">
+                                                    <input type="date"  ng-model="applicationBaseReport.sdate" placeholder="START DATE" onkeydown="return false" required>
+                                                    <input type="date" ng-model="applicationBaseReport.edate" placeholder="END DATE" onkeydown="return false" required>
+                                                    <Button type="button" class="me-default-button" ng-click="applicationBaseReportData(applicationBaseReport)">Search</Button>
+                                                </div>
+                                                <div ng-if="applicationBaseReport.report == 'Monthly'" >
+                                                    <select ng-model="applicationBaseReport.fromMonth" required>
+                                                        <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
+                                                    </select>
+                                                    <select ng-model="applicationBaseReport.toMonth" required>
+                                                        <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
+                                                    </select>
+                                                    <select ng-model="applicationBaseReport.year" required>
+                                                        <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                    </select>
+                                                    <Button type="button" class="me-default-button" ng-click="applicationBaseReportData(applicationBaseReport)">Search</Button>
+                                                </div>
+                                                <div ng-if="applicationBaseReport.report == 'Yearly'">
+                                                    <select placeholder="From Year" ng-model="applicationBaseReport.fromYear" required>
+                                                        <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                    </select>
+                                                    <select placeholder="To Year" ng-model="applicationBaseReport.toYear" required>
+                                                        <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                    </select>
+                                                    <Button type="button" class="me-default-button" ng-click="applicationBaseReportData(applicationBaseReport)">Search</Button>
+                                                </div>
+
+                                                <!--<Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>-->
+                                            </form>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+
+
+                                <form class="allItems" novalidate>
+                                    <a ng-if="(applicationBaseReportResponseData.length > 0)" href="" ng-click='downloadCsv
+                                    (applicationBaseReportResponseData,{ filename: "applicationBaseReport.csv",reportType:"applicationBaseReport",
+                                    reportRange:applicationBaseReport.report})'>
+                                        <button style="float: right" type= "button" >CSV</button></a>
+                                    <table class="table">
+                                        <thead class="obl-dashboard-apps">
+                                        <tr>
+
+                                            <th>Application</th>
+                                            <th>Type</th>
+                                            <th>CaaS Taxable</th>
+                                            <th ng-if="applicationBaseReport.report == 'Daily'">Date</th>
+                                            <th ng-if="applicationBaseReport.report == 'Monthly'">Month</th>
+                                            <th ng-if="applicationBaseReport.report == 'Yearly'">Year</th>
+                                            <th>Operator</th>
+                                            <th>Platform Earning</th>
+                                            <th>SP Earning</th>
+                                            <th>Application Total Revenue</th>
+                                            <th>App. Tot. Traffic</th>
+                                            <th>New Registrations Count</th>
+                                            <th>New Dereg Count</th>
+                                            <th>Total Subscribers</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                        <tr  ng-repeat="applicationBase in applicationBaseReportResponseData">
+                                            <td>{{applicationBase.appName}}</td>
+                                            <td>{{applicationBase.type}}</td>
+                                            <td>false</td>
+                                            <td ng-if="applicationBaseReport.report == 'Daily'">{{applicationBase.date}}</td>
+                                            <td ng-if="applicationBaseReport.report == 'Monthly'">{{applicationBase.month}}</td>
+                                            <td ng-if="applicationBaseReport.report == 'Yearly'">{{applicationBase.year}}</td>
+                                            <td>{{applicationBase.operator}}</td>
+                                            <td>{{applicationBase.platformEarning | number}}</td>
+                                            <td>{{applicationBase.spEarning | number}}</td>
+                                            <td>{{applicationBase.appTotRevenue}}</td>
+                                            <td>{{applicationBase.appTrafficCount}}</td>
+                                            <td>{{applicationBase.subscriptionCount}}</td>
+                                            <td>{{applicationBase.unSubscriptionCount}}</td>
+                                            <td>{{applicationBase.totSubs}}</td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
                             </md-tab-body>
                         </md-tab> 
 
-                        <md-tab>
+                        <md-tab ng-if="failedTanscationReport">
                             <md-tab-label>Failed Transaction Report</md-tab-label>
                             <md-tab-body>
-                                Failed Transaction Report
+                                <div class="reports-container">
+
+                                    <div class="reports-type-container">
+
+                                        <div layout="column" layout-wrap>
+                                            <h6 flex="100">Select report type</h6>
+                                            <select placeholder="Select Report Type"
+                                                    ng-model="failedTransactionReport.report"
+                                                    ng-change="reconciliationReportsGet(failedTransactionReport.report)" required >
+                                                <option ng-value="oneReport.name"
+                                                        ng-repeat="oneReport in reports">{{oneReport.name}}</option>
+                                            </select>
+
+                                            <h6 flex="100">Select operator</h6>
+                                            <select placeholder="Select operator"  aria-label="Country Name"
+                                                    ng-model="failedTransactionReport.operator" required >
+                                                <option ng-value="operator.operator" ng-repeat="operator in operators">{{operator.operator}}</option>
+                                            </select>
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <div class="reports-period-container">
+
+                                        <div class="reports-container">
+                                            <h6>Select period</h6>
+
+                                            <form name="reconciliationForm">
+                                                <div ng-if="failedTransactionReport.report == 'Daily'">
+                                                    <input type="date"  ng-model="failedTransactionReport.fromDate" placeholder="START DATE" onkeydown="return false" required>
+                                                    <input type="date" ng-model="failedTransactionReport.toDate" placeholder="END DATE" onkeydown="return false" required>
+                                                    <Button type="button" class="me-default-button" ng-click="getFailedTransactionData(failedTransactionReport)">Search</Button>
+                                                </div>
+                                                <!--<Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>-->
+                                            </form>
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+
+
+                                <form class="allItems" novalidate>
+                                    <a ng-if="(responseData.length > 0)" href="" ng-click='downloadCsv
+                                    (responseData,{ filename: "failedTransaction.csv",reportType:"failedTransaction",reportRange:failedTransactionReport.report})'>
+                                        <button style="float: right" type= "button" >CSV</button></a>
+                                    <table class="table">
+                                        <thead class="obl-dashboard-apps">
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Operator</th>
+                                            <th>Application Name</th>
+                                            <th>Error Code</th>
+                                            <th>Total</th>
+
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <tr  ng-repeat="failedTransaction in responseData">
+                                            <td>{{failedTransaction.date}}</td>
+                                            <td>{{failedTransaction.operator}}</td>
+                                            <td>{{failedTransaction.appName}}</td>
+                                            <td>{{failedTransaction.statusCode}}</td>
+                                            <td>{{failedTransaction.count}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
                             </md-tab-body>
                         </md-tab>
 
-                        <md-tab>
+                        <md-tab ng-if="showCustomerCareReport">
                             <md-tab-label>Customer Care Report</md-tab-label>
                             <md-tab-body>
-                                Customer Care Report
+                                <div class="reports-container">
+
+                                    <div class="reports-period-container">
+
+                                        <div class="reports-container">
+                                            <form name="customerCareReportForm">
+
+                                                <div>
+                                                    <h6 flex="100">Msisdn</h6>
+                                                    <fieldset ng-style="myObj">
+                                                        <input type="text" ng-model="customerCareReport.msisdn">
+                                                    </fieldset>
+                                                </div>
+                                                <h6>Select period</h6>
+                                                <div>
+                                                    <input type="date"  ng-model="customerCareReport.fromDate" placeholder="START DATE" onkeydown="return false" >
+                                                    <input type="date" ng-model="customerCareReport.toDate" placeholder="END DATE" onkeydown="return false" >
+                                                    <Button type="button" class="me-default-button" ng-click="getCustomerCareReportData(customerCareReport)">Search</Button>
+                                                </div>
+                                                <!--<Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>-->
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <form class="allItems" novalidate>
+                                    <a ng-if="(customerCareReportData.length > 0)" href="" ng-click='downloadCsv
+                                    (customerCareReportData,{ filename: "customerCareReport.csv",reportType:"customerCareReport",reportRange:"Daily"})'>
+                                        <button style="float: right" type= "button" >CSV</button></a>
+                                    <table class="table">
+                                        <thead class="obl-dashboard-apps">
+                                        <tr>
+                                            <th>MSISDN</th>
+                                            <th>App Name</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Charged Amount</th>
+
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <tr  ng-repeat="customerCareReport in customerCareReportData">
+                                            <td>{{customerCareReport.msisdn}}</td>
+                                            <td>{{customerCareReport.appName}}</td>
+                                            <td>{{customerCareReport.dateTime}}</td>
+                                            <td>{{customerCareReport.status}}</td>
+                                            <td>Rs : {{customerCareReport.amount}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
                             </md-tab-body>
                         </md-tab>
-
-                         <md-tab>
+                        <md-tab ng-if="showReconciliationReports">
                             <md-tab-label>Reconciliation Report</md-tab-label>
                             <md-tab-body>
-                                Reconciliation Report
-
                                 <div class="reports-container">
 
                                     <div class="reports-type-container">
                                         <div layout="column" layout-wrap>
                                              <h6 flex="100">Select report type</h6>
 
-                                             <select placeholder="Select Report Type"  aria-label="Country Name"  ng-model="reconciliationReports.report" ng-change="reconciliationReportsGet(reconciliationReports.report)" required >
+                                             <select placeholder="Select Report Type"  aria-label="Country Name"  ng-model="reconciliationReports.report"
+                                                     ng-change="reconciliationReportsGet(reconciliationReports.report)" required >
                                                  <option ng-value="oneReport.name" ng-repeat="oneReport in reports">{{oneReport.name}}</option>
                                              </select>
+
+                                            <h6 flex="100">Select operator</h6>
+                                            <select placeholder="Select operator"  aria-label="Country Name"
+                                                    ng-model="reconciliationReports.operator" required >
+                                                <option ng-value="operator.operator" ng-repeat="operator in operators">{{operator.operator}}</option>
+                                            </select>
 
                                         </div>
 
@@ -354,7 +679,7 @@
                                         <h6>Select period</h6>
 
                                         <form name="reconciliationForm">
-                                            <div ng-if="reconciliationReports.report == 'Date Range'">
+                                            <div ng-if="reconciliationReports.report == 'Daily'">
                                                 <input type="date"  ng-model="reconciliationReports.sdate" placeholder="START DATE" onkeydown="return false" required>
                                                 <input type="date" ng-model="reconciliationReports.edate" placeholder="END DATE" onkeydown="return false" required>
                                                 <Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>
@@ -394,11 +719,18 @@
 
 
                                 <form class="allItems" novalidate>
-                                    <a ng-if="(reconciliations.length > 0)" href="" ng-click='csvReconciliations(reconciliations,{ filename: "RECONCILIATION-REPORT.csv"})'><button style="float: right" type= "button" >CSV</button></a>
+                                    <a ng-if="(reconciliationResponseData.length > 0)" href="" ng-click='downloadCsv
+                                    (reconciliationResponseData,{ filename: "RECONCILIATION-REPORT.csv",reportType:"RECONCILIATION",
+                                    reportRange:reconciliationReports.report})'>
+                                        <button style="float: right" type= "button" >CSV</button></a>
                                     <table class="table">
                                         <thead class="obl-dashboard-apps">
                                         <tr>
-                                                <th>Service Provider</th>
+                                                <th ng-if="reconciliationReports.report == 'Daily'">Date</th>
+                                                <th ng-if="reconciliationReports.report == 'Monthly'">Month</th>
+                                                <th ng-if="reconciliationReports.report == 'Yearly'">Year</th>
+                                                <!--<th>Service Provider</th>-->
+                                                <th>Operator</th>
                                                 <th>App ID</th>
                                                 <th>Name</th>
                                                 <th>Bank Code</th>
@@ -411,22 +743,23 @@
                                         </thead>
 
                                         <tbody>
-                                            <tr  ng-repeat="reconciliation in reconciliations">
-                                                <td>{{reconciliation.userId}}</td>
-                                                <td>{{reconciliation.appId}}</td>
+                                            <tr  ng-repeat="reconciliation in reconciliationResponseData">
+                                                <td ng-if="reconciliationReports.report == 'Daily'">{{reconciliation.date}}</td>
+                                                <td ng-if="reconciliationReports.report == 'Monthly'">{{reconciliation.month}}</td>
+                                                <td ng-if="reconciliationReports.report == 'Yearly'">{{reconciliation.year}}</td>
+                                                <!--<td>{{reconciliation.userId}}</td>-->
+                                                <td>{{reconciliation.operator}}</td>
+                                                <td>{{reconciliation.uniqueAppId}}</td>
                                                 <td>{{reconciliation.name}}</td>
                                                 <td>{{reconciliation.bankCode}}</td>
                                                 <td>{{reconciliation.branchCode}}</td>
                                                 <td>{{reconciliation.branchName}}</td>
                                                 <td>{{reconciliation.bankAccountNumber}}</td>
-                                                <td>{{reconciliation.revenue}}</td>
+                                                <td>Rs :{{reconciliation.revenue}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </form>
-
-
-
                             </md-tab-body>
                         </md-tab>
 

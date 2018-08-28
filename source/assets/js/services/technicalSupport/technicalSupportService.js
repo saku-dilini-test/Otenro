@@ -17,7 +17,6 @@
             },
 
             getUserApps : function (data) {
-
                 return $http.post(SERVER_URL + 'edit/getUserApps',data);
             },
 
@@ -273,13 +272,15 @@
                     templateUrl: 'user/technicalSupport/AppComment.html',
                     bindToController: true,
                     clickOutsideToClose: false,
-                    controller: ['$scope', 'initialData','$mdDialog','toastr', function($scope, initialData,$mdDialog,toastr) {
+                    controller: ['$scope', 'initialData','$mdDialog','toastr','technicalSupportService','$window', function($scope, initialData,$mdDialog,toastr,technicalSupportService,$window) {
 
                                     $scope.name = initialData.appName;
                                     $scope.comment = initialData.comment;
                                     var dates = new Date(initialData.date);
                                     $scope.date = dates.toDateString();
-                                    $scope.commentList = initialData.commentList;
+                                    var commentList = initialData.commentList;
+                                    $scope.commentList = $filter('filter')(commentList,{ "appId": initialData.appId });
+
                                     console.log($scope.commentList);
                                     $scope.save = function(){
                                         var data = { id:initialData.appId,comment:$scope.comment }
@@ -291,6 +292,7 @@
                                                 .success(function (data, status) {
                                                     console.log(data);
                                                     $mdDialog.hide();
+                                                    $window.location.reload();
                                                 })
                                                 .error(function (data, status) {
                                                     toastr.error('Error saving Operators', 'Warning', {closeButton: true});
@@ -323,7 +325,48 @@
 
             getReconciliationDataForDateRange: function (dates) {
                 return $http.post(SERVER_URL + 'appMakerReports/getReconciliationDataForDateRange', dates);
+            },
+            getFailedTransactionReportDataForDateRange: function (dates) {
+                return $http.post(SERVER_URL + 'appMakerReports/getFailedTransactionReportDataForDateRange', dates);
+            },
+            getPaymentStatusOfUser: function (data) {
+                return $http.post(SERVER_URL + 'appMakerReports/getPaymentStatusOfUser', data);
+            },
+
+            getRevenueAndTrafficSummaryForDateRange :function (data) {
+                return $http.post(SERVER_URL + 'appMakerReports/getRevenueAndTrafficSummaryForDateRange', data);
+            },
+
+            getRevenueAndTrafficSummaryForYearly :function (data) {
+                return $http.post(SERVER_URL + 'appMakerReports/getRevenueAndTrafficSummaryForYearly', data);
+            },
+
+            getRevenueAndTrafficSummaryForMonthly :function (data) {
+                return $http.post(SERVER_URL + 'appMakerReports/getRevenueAndTrafficSummaryForMonthly', data);
+            },
+            getAllOperators : function(){
+                return $http.get(SERVER_URL + 'appMakerReports/getAllOperators');
+            },
+
+            getApplicationBaseDailySummary :function (data) {
+                return $http.post(SERVER_URL + 'appMakerReports/appBaseReport/getApplicationBaseDailySummary', data);
+            },
+
+            getApplicationBaseMonthlySummary :function (data) {
+                return $http.post(SERVER_URL + 'appMakerReports/appBaseReport/getApplicationBaseMonthlySummary', data);
+            },
+            getApplicationBaseYearlySummary :function (data) {
+                return $http.post(SERVER_URL + 'appMakerReports/appBaseReport/getApplicationBaseYearlySummary', data);
+            },
+            getAllApps :function () {
+                return $http.post(SERVER_URL + 'appMakerReports/appBaseReport/allApps', {});
+            },
+            getOperator:function(data){
+
+                return $http.post(SERVER_URL + 'appMakerReports/getOperator', data);
+
             }
+
 
 
         };

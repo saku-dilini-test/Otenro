@@ -4,8 +4,8 @@ import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'app-contact',
-  templateUrl: './app/page-body/contact/contact.component.html',
-  styleUrls: ['./app/page-body/contact/contact.component.css']
+  templateUrl: './contact.component.html',
+  styleUrls: ['./contact.component.css']
 })
 export class ContactComponent {
 

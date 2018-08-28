@@ -2,35 +2,36 @@ import { Component,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppDataService } from '../services/appdata-info/appdata-info.service';
 import { SubscribedDataService } from '../services/subscribed-data/subscribed-data.service'
-import * as data from './../madeEasy.json';
+import * as data from '../../assets/madeEasy.json';
 import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
 import { PagebodyServiceModule } from '../page-body/page-body.service'
 import {SMSService} from "../services/cordova-plugin-services/sms.service";
+declare let $:any;
+var footerCmp;
 
 @Component({
   selector: 'app-footer',
-  templateUrl: './app/footer/footer.component.html',
-  styleUrls: ['./app/footer/footer.component.css']
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.css']
 })
 
 export class FooterComponent implements OnInit{
 
-  private subscriptionStatus;
-  private appId = <any>(data).appId;
-  private userId = <any>(data).userId;
+  subscriptionStatus;
+  private appId = (<any>data).appId;
+  private userId = (<any>data).userId;
   private alive = true;
-  private isSubscribing = false;
-  private isUnsubscribing = false;
+  isSubscribing = false;
+  isUnsubscribing = false;
   private isFromCMSAppView: boolean = false;
-  private appStatus;
 
   constructor(private subscription:SubscribedDataService,
               private router: Router,
               private sms: SMSService,
               private dataService:PagebodyServiceModule) {
-
+    footerCmp = this;
   }
 
   ngOnInit(){
@@ -50,21 +51,19 @@ export class FooterComponent implements OnInit{
   }
 
   openFooterMyAccount(){
-
-    this.subscription.getAppStatus({ appId: this.appId }).subscribe(data => {
-      this.appStatus = data.isActive;
-      this.dataService.appStatus = this.appStatus;
-      if (this.appStatus == false || this.appStatus == "false") {
+    let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn") };
+    this.subscription.getSubscribedData(data).subscribe(data => {
+      if(data.isError){
+        this.dataService.displayMessage = data.displayMessage;
         $(() => {
           $('#appStatusModel').modal('show');
         });
       } else {
-        $( () => {
+        $(() => {
           $('#myAccountModelfooter').modal('show');
-       });
+        });
       }
     });
-
   }
 
   navigate(val: string) {
@@ -77,7 +76,10 @@ export class FooterComponent implements OnInit{
     this.alive = true;
 
     //Send Un-Registration SMS
-    this.sms.sendUnRegistrationSMS(this.smsSuccessUnRegistrationCallback, this.smsErrorUnRegistrationCallback);
+    footerCmp.sms.sendUnRegistrationSMS(footerCmp.smsSuccessUnRegistrationCallback, footerCmp.smsErrorUnRegistrationCallback);
+
+    this.dataService.numberOfTries = 1;
+
     var uuid = localStorage.getItem("UUID");
 
     let data = {appId:this.appId,uuId:uuid}
@@ -86,19 +88,24 @@ export class FooterComponent implements OnInit{
     IntervalObservable.create(5000)
       .takeWhile(() => this.alive) // only fires when component is alive
       .subscribe(() => {
+        if(this.dataService.numberOfTries==this.dataService.defaultNumberOfTries) {
+          this.alive = false;
+          this.timeoutUnubscriptionPopup();
+          return;
+        }
+        this.dataService.numberOfTries++;
+
         this.subscription.getSubscribedData(data).subscribe(data =>{
-          console.log(data);
           this.subscriptionStatus = data.isSubscribed;
           this.dataService.subscriptionStatus = data.isSubscribed;
-          if(this.subscriptionStatus == false){
+          if(!this.subscriptionStatus){
             this.isUnsubscribing = false;
             localStorage.removeItem(this.appId+"msisdn")
              this.alive = false;
-              //close the model
+             this.router.navigate(['']);
               $( () => {
-                $('#myAccountModelfooter').modal('toggle');
+                this.unSubscribedSuccessPopup();
              });
-             //close the nav bar
              document.getElementById("mySidenav").style.width = "0";
           }
         });
@@ -112,5 +119,26 @@ export class FooterComponent implements OnInit{
 
   smsErrorUnRegistrationCallback(error: any) {
     console.log("smsErrorUnRegistrationCallback in Footer Component: " + error);
+    footerCmp.dataService.displayMessage = 'Sorry we could not register you for the service. Please ensure that you have enough credit and try again.';
+    $(() => {
+      $('#myAccountModelfooter').modal('hide');
+      $('#appStatusModel').modal('show');
+    });
+  }
+
+  timeoutUnubscriptionPopup(){
+    this.dataService.displayMessage = 'Un-registration failed, Please try again.';
+    $(() => {
+      $('#myAccountModelfooter').modal('toggle');
+      $('#appStatusModel').modal('show');
+    });
+  }
+
+  unSubscribedSuccessPopup(){
+    this.dataService.displayMessage = 'You got unsubscribed from the service';
+    $(() => {
+      $('#myAccountModelfooter').modal('toggle');
+      $('#appStatusModel').modal('show');
+    });
   }
 }

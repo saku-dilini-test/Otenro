@@ -51,7 +51,8 @@ angular.module('app', [
   'ngImgCrop',
   'ngAnimate',
   'chart.js',
-  'uiCropper'
+  'uiCropper',
+  'ngQuill'
 
 
 ]).run(function($rootScope, $state, $auth,Auth,Permission,$log) {
@@ -76,7 +77,8 @@ angular.module('app', [
   });
   Permission.defineRole('Support', function (stateParams) {
     // If the returned value is *truthy* then the user has the role, otherwise they don't
-    if ($auth.getPayload().userRoles[0] == 'SUPER_ADMIN' || $auth.getPayload().userRoles[0] == 'OPERATOR' || $auth.getPayload().userRoles[0] == 'ADMIN') {
+    if ($auth.getPayload().userRoles[0] == 'SUPER_ADMIN' || $auth.getPayload().userRoles[0] == 'OPERATOR'
+        || $auth.getPayload().userRoles[0] == 'ADMIN' || $auth.getPayload().userRoles[0] == 'APP_CREATOR' ) {
       return true; // Is anonymous
     }
     return false;

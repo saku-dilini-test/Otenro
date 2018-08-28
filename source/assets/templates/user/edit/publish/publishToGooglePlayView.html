@@ -50,7 +50,7 @@
                                     <span class="overlay01">
                                         <span class="caption01">
                                            <input type="button" class="me-default-button" ngf-select name="splash1"
-                                                 ng-model="splash[0]" ngf-accept="image/*" ngf-change="validateSize(splash[0],'512','512')"
+                                                 ng-model="splash[0]" ngf-accept="image/*" ngf-change="validateSize(splash[0],'512','512',0)"
                                                  value="Add Image" ngf-validate="{width: {min: 512, max:512}, height: {min: 512, max: 512}}"/>
 
                                         </span>
@@ -66,7 +66,7 @@
                                     <span class="overlay01">
                                         <span class="caption01">
                                            <input type="button" class="me-default-button" ngf-select
-                                                  ng-model="splash[1]" ngf-accept="image/*" ngf-change="validateSize(splash[1],'1024','500')"
+                                                  ng-model="splash[1]" ngf-accept="image/*" ngf-change="validateSize(splash[1],'1024','500',1)"
                                                   value="Add Image" ngf-validate="{width: {min: 1024, max:1024}, height: {min: 500, max: 500}}" />
                                         </span>
                                     </span>
@@ -82,7 +82,7 @@
                                     <span class="overlay01">
                                         <span class="caption01">
                                            <input type="button" class="me-default-button" ngf-select
-                                                  ng-model="splash[6]" ngf-accept="image/*" ngf-change="validateSize(splash[6],'2732','2732')"
+                                                  ng-model="splash[6]" ngf-accept="image/*" ngf-change="validateSize(splash[6],'2732','2732',6)"
                                                   value="Add Image" ngf-validate="{width: {min: 2732, max:2732}, height: {min: 2732, max: 2732}}" />
                                         </span>
                                     </span>
@@ -100,13 +100,11 @@
                         <div class="clearfix">
                             <fieldset class="col-3">
                                 <label>language</label>
-                                <div class="select-container">
                                     <select class="input-shadow-border form-control"
                                             ng-model="playStoreData.language"
                                             ng-options="languages.language as languages.language for languages in languageList"
                                             required>
                                     </select>
-                                </div>
                             </fieldset>
                             <fieldset class="col-3">
                                 <label>category</label>
@@ -194,12 +192,12 @@
                                     <td align="center" ng-disabled = "!operator.isEnabled"  ng-class="{'disabled-class': !operator.isEnabled}">{{operatorDes(operator.operator)}}</td>
                                     <td align="center">
                                         <md-input-container style="margin-bottom:0px;margin-top:0px;">
-                                            <input type="text" maxlength="8" style="width:100%;text-align: center;" name="txtAccountNumber" numbers-only ng-model="operator.amount" value="{{amount}}" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_CONFIG' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED'" required/>
+                                            <input type="text" maxlength="8" style="width:100%;text-align: center;" name="txtAccountNumber" numbers-only ng-model="operator.amount" value="{{amount}}" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_CONFIG' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED' || operator.status == 'TERMINATED'" required/>
                                         </md-input-container>
                                     </td>
                                     <td align="center">
                                         <div class="select-container">
-                                            <select class="op-config-select" ng-model= "operator.interval" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_CONFIG' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED'">
+                                            <select class="op-config-select" ng-model= "operator.interval" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_CONFIG' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED' || operator.status == 'TERMINATED'">
                                                 <option ng-repeat="sts in Renewals" >{{sts}}</option>
                                             </select>
                                         </div>

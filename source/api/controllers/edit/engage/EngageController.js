@@ -11,6 +11,9 @@ var PushUrl = config.PUSH_API_URL;
 var Authorization = config.AUTHORIZATION;
 var schedule = require('node-schedule');
 
+var CSV_DATE_TIME_FORMAT = "DD/MM/YY HH:mm";
+var CSV_SEND_TO_ALL = "all";
+var CSV_SEND_TO_INACTIVE = "inactive";
 
 module.exports = {
 
@@ -60,7 +63,7 @@ module.exports = {
                             }
                         }
                         PushMessage.create(req.body).exec(function(err,data){
-                            if(err) return done(err);
+                            if(err) return res.send(err);
                             res.send(data);
                         });
                     });
@@ -78,7 +81,7 @@ module.exports = {
                     if(result[0]){
 
                         PushMessage.update(criteria,req.body).exec(function(err,data){
-                            if(err) return done(err);
+                            if(err) return res.send(err);
                             console.log("date 1 " + data[0].date);
                             var shedDate = new Date(data[0].date);
                             var date = new Date(shedDate.getUTCFullYear(), shedDate.getMonth(), shedDate.getDate(),
@@ -88,7 +91,7 @@ module.exports = {
 
 
                                 PushMessage.find({id:data[0].id}).exec(function(err, pushMessage) {
-                                    if (err) return done(err);
+                                    if (err) return res.send(err);
 
                                     if (pushMessage[0]) {
 
@@ -108,7 +111,7 @@ module.exports = {
                                                 console.log("Error on find DeviceId");
                                             }
                                             var message = data[0].message;
-                                            var article = (data[0].article)? { 'articleId': data[0].article.id } : null;
+                                            var article = (data[0].article)? { 'articleId': data[0].article.id , 'categoryId': data[0].article.categoryId , 'title' : data[0].article.title } : null;
                                             for (var i = 0; i < deviceArray.length; i++) {
 
                                                 sails.log.info(" deviceArray " + deviceArray[i].deviceId);
@@ -129,48 +132,65 @@ module.exports = {
                         });
 
                     }else {
-
-
                         PushMessage.create(req.body).exec(function(err,data){
-                            if(err) return done(err);
+                            if(err) return res.send(err);
 
-                                var shedDate = new Date(data.date);
-                                var date = new Date(shedDate.getUTCFullYear(), shedDate.getMonth(), shedDate.getDate(),
-                                    shedDate.getHours(), shedDate.getMinutes(),0).toLocaleString();
+                            if (!moment(data.date, CSV_DATE_TIME_FORMAT, true).isValid()) {
+                                console.log("Invalid date %s, correct format is %s",data.date,CSV_DATE_TIME_FORMAT);
+                                return res.badRequest();
+                            }
 
-                                console.log("date " + date);
+                             var date = moment(data.date,CSV_DATE_TIME_FORMAT).toDate();
 
                                 schedule.scheduleJob(date, function(){
-
                                     PushMessage.find({id:data.id}).exec(function(err, pushMessage) {
-                                        if (err) return done(err);
+                                        if (err) return res.send(err);
                                         if(pushMessage[0]){
-                                        console.log("date--->>>" + pushMessage[0].date);
-                                        var Ndate = new Date(pushMessage[0].date);
-                                        var newDate = new Date(Ndate.getUTCFullYear(), Ndate.getMonth(), Ndate.getDate(),
-                                            Ndate.getHours(), Ndate.getMinutes(),0).toLocaleString();
+                                            var pushDate = pushMessage[0].date;
+                                            if (!moment(pushDate, CSV_DATE_TIME_FORMAT, true).isValid()) {
+                                                sails.log.error("Invalid date %s, correct format is %s",pushDate,CSV_DATE_TIME_FORMAT);
+                                                return;
+                                            }
+                                            var Ndate = moment(data.date,CSV_DATE_TIME_FORMAT).toDate();
+                                            if(Ndate.toString()==date.toString()){
+                                                // Find device by appID
+                                                DeviceId.find({appId:data.appId}).exec(function(err,deviceArray) {
+                                                    if (err) {
+                                                        sails.log.error("Could not find the DeviceId record for appId: ",data.appId);
+                                                        return;
+                                                    }
 
-                                        if(newDate.toString()==date.toString()){
+                                                    if(deviceArray.length==0){
+                                                        sails.log.error('No devices found for appId: ',data.appId);
+                                                        return;
+                                                    }
 
-                                            console.log("newDate.toString()==date.toString()");
+                                                    var message = data.message;
+                                                    var article = (data.article)? { 'articleId': data.article.id , 'categoryId': data.article.categoryId , 'title' : data.article.title } : null;
+                                                    for(var i=0; i<deviceArray.length; i++) {
+                                                        sails.log.debug("Push message: %s sending for the devices: %s ",data.message, deviceArray[i].deviceId);
+                                                        var id = {
+                                                            id:data.id,
+                                                            appId:data.appId
+                                                        }
+                                                        var emptyDate = {
+                                                            date : ""
+                                                        }
+                                                        PushMessage.update(id,emptyDate).exec(function(err,updateDate){
+                                                            if(err) return res.send(err);
+                                                            return;
+                                                        });
+                                                        thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,message);
+                                                    }
 
-                                            // Find device by appID
-                                            DeviceId.find({appId:data.appId}).exec(function(err,deviceArray) {
-                                                if (err) {
+                                                });
 
-                                                    console.log("Error on find DeviceId");
-                                                }
-                                                var message = data.message;
-                                                var article = (data.article)? { 'articleId': data.article.id } : null;
-                                                for(var i=0; i<deviceArray.length; i++) {
 
-                                                    sails.log.info(" deviceArray " + deviceArray[i].deviceId);
-                                                    thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,message);
-                                                }
-                                            });
-                                            console.log('The world is going to end today.');
+                                            }else{
+                                                sails.log.error('The date scheduled: %s is not the same in database: %s',date.toString(),Ndate.toString());
+                                            }
                                         }
-                                    }
+
                                     });
                                     console.log('The world is going to end today.');
                                 });
@@ -191,7 +211,7 @@ module.exports = {
 
         Article.find(searchQuery).exec(function(err,data){
             if(err) return res.send(err);
-            console.log(data);
+            // console.log(data);
             return res.send(data);
         });
 
@@ -220,7 +240,7 @@ module.exports = {
             sort: 'createdAt DESC'
         };
         PushMessage.find(searchApp).exec(function(err, app) {
-            if (err) return done(err);
+            if (err) return res.send(err);
             res.send(app);
         });
 
@@ -234,7 +254,7 @@ module.exports = {
             registeredUser: registeredUser
         }
         ApplicationOrder.find(searchApp).exec(function (err, app) {
-            if (err) return done(err);
+            if (err) return res.send(err);
             res.send(app);
         })
     }
@@ -270,20 +290,40 @@ module.exports = {
                     const csv=require('csvtojson');
                     csv().fromFile(csvFilePath).on('json',(jsonObj)=>{
 
-                    // console.log("row: " + rowNumber + " date: " + jsonObj.dateTime + " msg: " + jsonObj.message);
-
                     if(errorsInCsv == null){
-
-//                        var date = engageCtrl.formatDate(new Date(jsonObj.dateTime));
-
-                        if (!moment(jsonObj.dateTime, "YYYY/MM/DD HH:mm", true).isValid()){
-                            sails.log.debug("Invalid date format in row "  + rowNumber + ".Correct datetime Format is DD/MM/YYYY HH:mm");
-                            errorsInCsv = "Invalid date format in row "  + rowNumber + ".Correct datetime Format is DD/MM/YYYY HH:mm";
+                        if (!moment(jsonObj.dateTime, CSV_DATE_TIME_FORMAT, true).isValid()){
+                            sails.log.debug("Invalid date format in row "  + rowNumber + " , correct date/time format is " + CSV_DATE_TIME_FORMAT);
+                            errorsInCsv = "Invalid date format in row "  + rowNumber + " ,  correct date/time format is " + CSV_DATE_TIME_FORMAT;
                         }
 
-                        if (jsonObj.message.length == 0){
-                            sails.log.debug("Message is empty in row: " + rowNumber);
-                            errorsInCsv = "Message is empty in row: " + rowNumber;
+                        if (jsonObj.message && jsonObj.message.length == 0){
+                            sails.log.debug("Message is empty in row " + rowNumber);
+                            errorsInCsv = "Message is empty in row " + rowNumber;
+                        }
+
+                        if(!jsonObj.sendto){
+                           sails.log.debug("Invalid csv sendTo heading is missing");
+                           errorsInCsv = "Invalid csv sendTo heading is missing";
+                        }
+
+                        if(!jsonObj.dateTime){
+                           sails.log.debug("Invalid csv dateTime heading is missing");
+                           errorsInCsv = "Invalid csv dateTime heading is missing";
+                        }
+
+                        if(!jsonObj.message){
+                           sails.log.debug("Invalid csv message heading is missing");
+                           errorsInCsv = "Invalid csv message heading is missing";
+                        }
+
+                        if (jsonObj.sendto && jsonObj.sendto.length == 0){
+                            sails.log.debug("sendto is empty in row " + rowNumber);
+                            errorsInCsv = "sendto is empty in row " + rowNumber;
+                        }
+
+                        if (jsonObj.sendto && !(jsonObj.sendto.toLowerCase() == CSV_SEND_TO_ALL || jsonObj.sendto.toLowerCase() == CSV_SEND_TO_INACTIVE)){
+                            sails.log.debug("Value of sendto must be " + CSV_SEND_TO_ALL + "/" + CSV_SEND_TO_INACTIVE +  " in row " + rowNumber);
+                            errorsInCsv = "Value of sendto must be " + CSV_SEND_TO_ALL + "/" + CSV_SEND_TO_INACTIVE +  " in row " + rowNumber;
                         }
                         csvRows.push(jsonObj);
                     }
@@ -313,7 +353,7 @@ module.exports = {
                         }
 
                         PushMessage.find(searchApp).exec(function(err, app) {
-                        if (err) return done(err);
+                        if (err) return res.send(err);
 
                         sails.log.debug("Success upload");
                         res.send(app);
@@ -374,7 +414,11 @@ module.exports = {
 
     persistCSVPushMessages : function(req,res,jsonObj){
         var thisCtrl = this;
-        var type = req.body.type;
+        var type = 'A';
+
+        if(jsonObj.sendto && jsonObj.sendto.toLowerCase() == CSV_SEND_TO_INACTIVE){
+            type = 'I';
+        }
 
         var date_diff_indays = function(date1, date2) {
             console.log("date1 " + date1);
@@ -383,11 +427,8 @@ module.exports = {
             var dt2 = new Date(date2);
             return Math.floor((Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) - Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) ) /(1000 * 60 * 60 * 24));
         };
-        // console.log(moment(jsonObj.dateTime, "YYYY/MM/DD HH:mm", true).isValid());
 
-        var date = this.formatDate(new Date(jsonObj.dateTime));
-
-        if (moment(date, "DD/MM/YYYY HH:mm", true).isValid()&&jsonObj.message.length > 0){
+        if (moment(jsonObj.dateTime, CSV_DATE_TIME_FORMAT, true).isValid()&&jsonObj.message.length > 0){
 
             console.log(jsonObj.dateTime + "" + jsonObj.message);
             var data = {date:jsonObj.dateTime,message:jsonObj.message,appId:req.body.appId,userId:req.userId,type:type};
@@ -403,7 +444,7 @@ module.exports = {
                 schedule.scheduleJob(date, function(){
 
                     PushMessage.find({id:data.id}).exec(function(err, pushMessage) {
-                        if (err) return done(err);
+                        if (err) return res.send(err);
                         if(pushMessage[0]){
                             console.log("date--->>>" + pushMessage[0].date);
                             var Ndate = new Date(pushMessage[0].date);
@@ -455,8 +496,7 @@ module.exports = {
                 var mime = require('mime');
                 var fs = require('fs');
 
-                var file = config.ME_SERVER +"sample.csv";
-
+                var file = sails.config.appPath+'/api/services/push_sample.csv';
                 var filename = path.basename(file);
                 var mimetype = mime.lookup(file);
                 res.setHeader('x-filename', filename);
@@ -502,7 +542,7 @@ module.exports = {
         console.log("scheduling started ..............");
 
         PushMessage.find().exec(function(err, pushMessage) {
-            if (err) return done(err);
+            if (err) return res.send(err);
 
             pushMessage.forEach(function(data) {
 

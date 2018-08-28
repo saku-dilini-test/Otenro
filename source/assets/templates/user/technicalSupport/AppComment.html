@@ -58,7 +58,7 @@
             <br>
             <div class = "md-dialog-main clearfix">
                 <div class="comment-view">
-                    <div ng-repeat = "comments in commentList" >
+                    <div ng-repeat = "comments in commentList | orderBy:'-updatedAt'" >
                         <div style="margin-top:4%">
                             <label style="margin-left:1%;">Date: </label>{{comments.createdAt | date:'MM/dd/yyyy'}}
                         </div>

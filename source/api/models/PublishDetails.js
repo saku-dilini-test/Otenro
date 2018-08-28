@@ -141,6 +141,10 @@ module.exports = {
         publishStatus:{
             type: 'string'
         },
+        cashTaxable :{
+            type: 'boolean',
+            defaultsTo : false
+        },
 
         toJSON: function() {
           var obj = this.toObject();

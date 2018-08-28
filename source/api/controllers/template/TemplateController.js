@@ -12,6 +12,7 @@ var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
 var dateFormat = require('dateformat');
 var path = require('path').resolve(sails.config.appPath);
+var utilsService = require('../../services/utilsService');
 
 module.exports = {
 
@@ -278,7 +279,7 @@ module.exports = {
         appId: appId
     };
         ArticleCategory.find().where(searchApp).exec(function (err, result) {
-            if (err) return done(err);
+            if (err) return res.send(err);
             res.json(result);
     });
 },
@@ -369,7 +370,7 @@ module.exports = {
         res.sendfile(config.APP_FILE_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
     },
     viewWebImages : function(req,res){
-        res.sendfile(config.APP_FILE_SERVER + req.param('userId') + '/progressiveTemplates/' + req.param('appId') + '/src/assets/images/'+ req.param('images'));
+        res.sendfile(config.APP_FILE_SERVER + req.param('userId') + '/progressiveTemplates/' + req.param('appId') + '/assets/images/'+ req.param('images'));
     },
 
     /**
@@ -381,7 +382,7 @@ module.exports = {
         res.redirect(config.ME_SERVER_URL + req.param('userId') + '/templates/' + req.param('appId'));
     },
     viewProgUrl : function(req,res){
-        var url = config.ME_SERVER_URL + req.param('userId') + '/progressiveTemplates/' + req.param('appId')+'/src/';
+        var url = config.ME_SERVER_URL + req.param('userId') + '/progressiveTemplates/' + req.param('appId')+'/';
         if(req.param('isFromCMSAppView'))
         {
             url += "?isFromCMSAppView=1";//This is to ditect that the app is loading using the iFrame window in cms.
@@ -472,6 +473,32 @@ module.exports = {
                     if(err) return console.error(err);
                     res.send("success");
                 });
+
+                try {
+                    AppUser.findOne().where({deviceUUID:uuid}).exec(function (err, appUser) {
+                        if (err) return done(err);
+                        if(appUser){
+
+                            utilsService.getOperator(appUser.msisdn, function (operator,err) {
+                                if(err){
+                                    console.log(err);
+                                }
+                                console.log(appUser.msisdn);
+                                AppVisitDataLog.create({appId:appUser.appId,msisdn:appUser.msisdn,
+                                    viewDate:dateFormat(new Date(), "yyyy-mm-dd"),operator: operator}).exec(function(err,appVisiting) {
+                                    if(err) {
+                                        console.log(err);
+                                    }else {
+                                        console.log(appVisiting);
+
+                                    }
+                                });
+                            });
+                        }
+                    });
+                }catch(e){
+                    sails.log.error(err) ;
+                }
             }else{
 
                 if(err) return console.error(err);
@@ -483,6 +510,33 @@ module.exports = {
                         }
                 });
 
+                try {
+                    AppUser.findOne().where({deviceUUID:uuid}).exec(function (err, appUser) {
+                        if (err) return done(err);
+                        if(appUser){
+
+                            utilsService.getOperator(appUser.msisdn, function (operator,err) {
+                                if(err){
+                                    console.log(err);
+                                }
+                                console.log(appUser.msisdn);
+                                AppVisitDataLog.create({appId:appUser.appId,msisdn:appUser.msisdn,
+                                    viewDate:dateFormat(new Date(), "yyyy-mm-dd"),operator: operator}).exec(function(err,appVisiting) {
+                                    if(err) {
+                                        console.log(err);
+                                    }else {
+                                        console.log(appVisiting);
+
+                                    }
+
+                                });
+                            });
+                        }
+
+                    });
+                }catch(e){
+                    sails.log.error(err) ;
+                }
             }
         });
 

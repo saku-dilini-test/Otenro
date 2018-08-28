@@ -11,20 +11,73 @@
 (function() {
     'use strict';
     angular.module('app')
+        .filter('titleCase', function() {
+                             return function(input) {
+                               input = input || '';
+                               return input.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+                             };
+                           })
         .controller('technicalSupportCtrl',
-            ['$scope','$mdDialog','$auth','toastr','$state','$stateParams','SERVER_URL','ME_SERVER','$filter','$window','userProfileResource','technicalSupportService',
+            ['$scope','$mdDialog','$auth','toastr','$state','$stateParams','SERVER_URL','ME_SERVER','$filter',
+                '$window','userProfileResource','technicalSupportService',
                 technicalSupportCtrl
             ]);
 
 
-    function technicalSupportCtrl($scope,$mdDialog,$auth,toastr,$state,$stateParams,SERVER_URL,ME_SERVER,$filter,$window,userProfileResource,technicalSupportService) {
+    function technicalSupportCtrl($scope,$mdDialog,$auth,toastr,$state,$stateParams,SERVER_URL,ME_SERVER,$filter,
+                                  $window,userProfileResource,technicalSupportService) {
 
             $scope.splash = [];
             $scope.publishSplash = [];
             $scope.appList = [];
             $scope.deviceView ="mobile";
             $scope.showSearchField = true;
-            $scope.reconciliations = null;
+            $scope.responseData = null;
+            $scope.reconciliationResponseData =null;
+            $scope.customerCareReportData =null;
+            $scope.customerCareReport = {};
+            $scope.revenueAndTrafficReportResponseData =null;
+            $scope.applicationBaseReportResponseData =null;
+            $scope.showRegisterdusers = false;
+            $scope.showAppDetails = false;
+            $scope.showPayment=true;
+            $scope.showRevenueAndTrafficReport=false;
+            $scope.showapplicationBaseReport=false;
+            $scope.failedTanscationReport =false;
+            $scope.showCustomerCareReport=false;
+            $scope.showReconciliationReports=false;
+            $scope.sortReverse = true;
+            $scope.sortType = "appName"
+
+
+            $scope.reports = [
+                {name:"Daily"},
+                {name:"Monthly"} ,
+                {name:"Yearly"}
+            ];
+            $scope.currentYear = new Date().getFullYear();
+            // $scope.current =   $scope.currentYear -1;
+            $scope.months  = [
+                {month:1},
+                {month:2},
+                {month:3},
+                {month:4},
+                {month:5},
+                {month:6},
+                {month:7},
+                {month:8},
+                {month:9},
+                {month:10},
+                {month:11},
+                {month:12}
+            ];
+            $scope.years  = [
+                {year:$scope.currentYear},
+                {year:$scope.currentYear-1},
+                {year:$scope.currentYear-2},
+                {year:$scope.currentYear-3}
+            ];
+
             var tempImagePath;
 
 //            console.log(initialData);
@@ -34,11 +87,71 @@
                 $scope.userId = $stateParams.userId;
                 $scope.appId = $stateParams.appId;
 
-                //Get User Details
-                var profParams = { userId: $stateParams.userId }
+                var profParams = {};
+
+                if ($stateParams.appCreatorId){
+                    $scope.userId = $stateParams.appCreatorId;
+                    profParams = { userId: $scope.userId}
+
+                }else {
+                     profParams = { userId: $stateParams.userId }
+                }
                 userProfileResource.getUserProfile(profParams).success(function (data) {
+
                     $scope.user = data;
-                    console.log($scope.user);
+                    technicalSupportService.getAllOperators()
+                        .success(function (opratoreData) {
+                           if ($scope.user.userRole=="OPERATOR"){
+                               $scope.operators = [{"operator":$scope.user.operator}];
+                           }else {
+                               opratoreData.push({"operator":"all"});
+                               $scope.operators = opratoreData;
+                           }
+
+                        }).error(function (error) {
+                        toastr.error('operators Loading Error', 'Warning', {closeButton: true});
+                    });
+
+                    if ($scope.user.userRole=="APP_CREATOR"){
+
+                            var param ={userId :$scope.userId};
+                            technicalSupportService.getUserApps(param)
+                                .success(function (result) {
+                                    $scope.apps = result;
+                                }).error(function (error) {
+                                toastr.error('Loading Error', 'Warning', {
+                                    closeButton: true
+                                });
+                            })
+                        document.getElementById('searchBar').style.display = 'none';
+                        $scope.showRevenueAndTrafficReport=true;
+                        $scope.showapplicationBaseReport=true;
+                        $scope.showPayment=false;
+
+                    }else {
+                        $scope.showRegisterdusers = true;
+                        $scope.showAppDetails = true;
+                        getAllAppDataList();
+                        technicalSupportService.getAllApps()
+                            .success(function (technicalData) {
+                                $scope.apps = [];
+                                $scope.apps.push({appName:"all"});
+                                var count = 0;
+                                technicalData.forEach(function (app) {
+                                    $scope.apps.push(app[count]);
+                                })
+                            }).error(function (error) {
+                            toastr.error('Apps Loading Error', 'Warning', {closeButton: true});
+                        });
+
+                        $scope.showRevenueAndTrafficReport=true;
+                        $scope.showapplicationBaseReport=true;
+                        $scope.failedTanscationReport =true;
+                        $scope.showCustomerCareReport=true;
+                        $scope.showReconciliationReports=true;
+                    }
+
+
                 }).error(function (err) {
                     console.err(err);
                 });
@@ -58,7 +171,37 @@
                 }
 
 
+
+
+
             }
+
+            $scope.operatorArrSort = function(operators){
+                var returnArray = [];
+                var idx;
+                var firstIdxValue;
+                $scope.sortOp = $filter('orderBy')(operators, 'operator');
+                if($scope.sortOp){
+                    for(var i = 0;i < $scope.sortOp.length; i++){
+                        if($scope.sortOp[0].operator == "all"){
+                            returnArray = $scope.sortOp;
+                            break;
+                        }else if ($scope.sortOp[0] != "all"){
+                            firstIdxValue = $scope.sortOp[0];
+                            if($scope.sortOp[i].operator == "all"){
+
+                                idx = i;
+                                $scope.sortOp[0] = $scope.sortOp[i];
+                                $scope.sortOp[i] = firstIdxValue;
+                                returnArray = $scope.sortOp;
+                                break;
+                            };
+                        }
+                    }
+                }
+                return returnArray;
+            }
+
 
             if($stateParams.adname){
                 var addname = $stateParams.adname;
@@ -190,11 +333,22 @@
                                                     }
                                                 }
                                                 app.serviceId = detail.serviceID;
+                                                app.keyword = detail.keyword;
                                                     console.log(app);
                                                 $scope.appList.push(app);
                                             }
                                         });
                                     });
+
+                                    if($scope.user){
+                                        if($scope.user.userRole != "ADMIN"){
+                                          technicalSupportService.getComments().success(function(data){
+                                                console.log(data);
+                                                    $scope.commentsList = data;
+                                          });
+                                        }
+                                    }
+
                                 }).error(function(err){
 
                                 });
@@ -216,6 +370,7 @@
                 technicalSupportService.buildApk(app.id,app.userId)
                     .success(function (result) {
                         console.log('Start to build the apk');
+                        $scope.appList = [];
                         getAllAppDataList();
                         toastr.success(result, 'Info', {
                             closeButton: true
@@ -236,7 +391,7 @@
             }
 
 
-            getAllAppDataList();
+
 
 
       /**
@@ -387,7 +542,7 @@
 
            }
 
-            technicalSupportService.getOperators()
+            /*technicalSupportService.getOperators()
                 .success(function(result){
 
                     $scope.operators = result;
@@ -396,7 +551,7 @@
                     toastr.error('Loading operators Error', 'Warning', {
                     closeButton: true
                 });
-            });
+            });*/
 
            $scope.appDescriptionView = function(appName, appData,appId,userId){
                 console.log(appName);
@@ -414,9 +569,8 @@
            }
 
           $scope.commentView = function(appName,appId,comment,createdData){
-                var data = {appName:appName , appId:appId ,comment:comment,date:createdData,commentList:$scope.commentsList}
-                technicalSupportService.showAppcommentView(data);
-
+                var parseData = {appName:appName , appId:appId ,comment:comment,date:createdData,commentList:$scope.commentsList}
+                technicalSupportService.showAppcommentView(parseData);
           }
 
         $scope.saveServiceId = function(data){
@@ -425,18 +579,15 @@
 //                toastr.error('Service ID added Successfully', 'Success', {closeButton: true});
                 $window.location.reload();
             }).error(function(error){
-                toastr.error('Error adding Service ID', 'Warning', {closeButton: true});
+
+                if(error.isError){
+                    toastr.error( error.message , 'Error', {closeButton: true});
+                }else{
+                    toastr.error('Error adding Service ID' , 'Warning', {closeButton: true});
+                }
             });
         }
 
-        if($scope.user){
-            if($scope.user.userRole != "ADMIN"){
-              technicalSupportService.getComments().success(function(data){
-                    console.log(data);
-                        $scope.commentsList = data;
-              });
-            }
-        }
 
           $scope.getDes = function(id,des){
           var arr = [];
@@ -448,7 +599,7 @@
                             var obj = {
                                 fullDes:$scope.publishAppData[i].fullDescription,
                                 keyword:$scope.publishAppData[i].keyword,
-                                price:$scope.publishAppData[i].price
+                                price:$scope.publishAppData[i].operators
                             }
 
                             return obj;
@@ -577,7 +728,7 @@
           var count = 0;
                 $scope.appList.forEach(function(ele){
                     if (ele.userId == id){
-                        if((ele.status == "APPROVED" || ele.status == "PENDING")){
+                        if((ele.publishedStatus == "Approved" || ele.publishedStatus == "Pending")){
                             count++;
                         }
                     }
@@ -639,141 +790,605 @@
              **/
 
 
-            var reconciliationReports;
-            $scope.reports = [
-                    {name:"Date Range"},
-                    {name:"Monthly"} ,
-                    {name:"Yearly"}
-            ];
-            $scope.currentYear = new Date().getFullYear();
-            $scope.current =   $scope.currentYear -1;
-            $scope.months  = [
-                    {month:1},
-                    {month:2},
-                    {month:3},
-                    {month:4},
-                    {month:5},
-                    {month:6},
-                    {month:7},
-                    {month:8},
-                    {month:9},
-                    {month:10},
-                    {month:11},
-                    {month:12}
-            ];
-            $scope.years  = [
-                {year:$scope.currentYear},
-                {year:$scope.currentYear-1},
-                {year:$scope.currentYear-2},
-                {year:$scope.currentYear-3}
-            ];
-
-            $scope.master = {};
-
-            $scope.reconciliationReportsGet = function(){
-                $scope.reconciliations = [];
-            }
-            $scope.getReconciliation = function(Date){
-                $scope.reconciliations = [];
-
-                var dates;
-                if(Date.report == "Date Range"){
 
 
-                   var sdate = $filter('date')(Date.sdate, "yyyy-MM-dd");
-                   var edate = $filter('date')(Date.edate, "yyyy-MM-dd");
+
+        $scope.master = {};
+
+        $scope.reconciliationReportsGet = function(){
+
+            $scope.responseData = [];
+            $scope.reconciliationResponseData =[];
+            $scope.customerCareReportData = [];
+            $scope.revenueAndTrafficReportResponseData = [];
+            $scope.applicationBaseReportResponseData =[];
+        };
+
+
+        $scope.getReconciliation = function(data){
+                $scope.reconciliationResponseData = [];
+
+                if(data.report == "Daily"){
+
+
+                   var sdate = $filter('date')(data.sdate, "yyyy-MM-dd");
+                   var edate = $filter('date')(data.edate, "yyyy-MM-dd");
 
                     if(edate >= sdate) {
+                        if (data.operator){
 
-                        var dates = {dateFrom: sdate, dateTo: edate};
+                            var dates = {dateFrom: sdate, dateTo: edate,operator:data.operator};
 
-                        technicalSupportService.getReconciliationDataForDateRange(dates)
-                            .success(function (response) {
-                                $scope.reconciliations = response;
+                            technicalSupportService.getReconciliationDataForDateRange(dates)
+                                .success(function (response) {
+                                    $scope.reconciliationResponseData = response;
+                                    if ($scope.reconciliationResponseData.length<=0){
+                                        toastr.error('No data available',
+                                            'Warning', {closeButton: true});
+                                    }
 
-                            }).error(function (response) {
-                            toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
-                        });
+                                }).error(function (response) {
+                                toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
+                            });
+                        }else {
+                            toastr.error('Please select operator ', 'Warning', {closeButton: true});
 
+                        }
                     }
                     else{
                         toastr.error('From Date should less than To Date', 'Warning', {closeButton: true});
                     }
                 }
 
-                else if(Date.report == "Monthly"){
+                else if(data.report == "Monthly"){
+
+                        var fromMonth = data.fromMonth;
+                        var toMonth = data.toMonth;
+                        var year = data.year;
 
 
-                    if(toMonth>fromMonth){
+                    if(toMonth>=fromMonth){
+                        if (data.operator){
 
-                        var  fromMonth = Date.fromMonth;
-                        var toMonth = Date.toMonth;
-                        var year = Date.year;
+                        dates = {monthFrom:fromMonth, monthTo:toMonth, year:year,operator:data.operator}
 
-                        dates = {monthFrom:fromMonth, monthTo:toMonth, year:year}
                         technicalSupportService.getReconciliationDataForMonthly(dates)
                             .success(function(response){
-                                $scope.reconciliations = response;
+                                $scope.reconciliationResponseData = response;
+                                if ($scope.reconciliationResponseData.length<=0){
+                                    toastr.error('No data available',
+                                        'Warning', {closeButton: true});
+                                }
                             })
                             .error(function(){
                                 toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
 
                             });
+                        }else {
+                            toastr.error('Please select operator ', 'Warning', {closeButton: true});
 
+                        }
                     }
                     else{
-                        toastr.error('From Month should less than To Month', 'Warning', {closeButton: true});
+                        toastr.error('Invalid month range', 'Warning', {closeButton: true});
                     }
-
                 }
-
                 else{
 
-                    var fromYear = Date.fromYear;
-                    var toYear   = Date.toYear;
+                    var fromYear = data.fromYear;
+                    var toYear   = data.toYear;
 
-                    if(toYear>=fromYear){
-                        dates = {yearFrom:fromYear, yearTo:toYear};
-                        technicalSupportService. getReconciliationDataForYearly(dates)
+                    if(toYear>=fromYear) {
+                        if (data.operator) {
+                            dates = {yearFrom: fromYear, yearTo: toYear,operator:data.operator};
+                            technicalSupportService.getReconciliationDataForYearly(dates)
+                                .success(function (response) {
+                                    $scope.reconciliationResponseData = response;
+                                    if ($scope.reconciliationResponseData.length<=0){
+                                        toastr.error('No data available',
+                                            'Warning', {closeButton: true});
+                                    }
+                                })
+                                .error(function (response) {
+                                    toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
+                                });
+
+                        } else {
+                            toastr.error('Please select operator ', 'Warning', {closeButton: true});
+
+                        }
+                    }else{
+
+                        toastr.error('Invalid year range', 'Warning' , {closeButton: true});
+                    }
+                }
+            }
+
+
+
+
+
+
+
+
+        $scope.applicationBaseReportData = function(data){
+
+            $scope.applicationBaseReportResponseData = [];
+
+
+            if(data.report == "Daily"){
+
+
+                var sdate = $filter('date')(data.sdate, "yyyy-MM-dd");
+                var edate = $filter('date')(data.edate, "yyyy-MM-dd");
+
+                if(edate >= sdate) {
+
+                    if (data.appName){
+
+                        if (data.operator){
+
+                            var reqData = {dateFrom: sdate, dateTo: edate,appName:data.appName,operator:data.operator};
+
+                            technicalSupportService.getApplicationBaseDailySummary(reqData)
+                                .success(function (response) {
+                                    $scope.applicationBaseReportResponseData = response;
+                                    if ($scope.applicationBaseReportResponseData.length<=0){
+                                        toastr.error('No data available',
+                                            'Warning', {closeButton: true});
+                                    }
+
+                                }).error(function (response) {
+
+                                toastr.error('applicationBase Report Loading Error', 'Warning', {closeButton: true});
+                            });
+
+                        }else {
+                            toastr.error('Please select operator ', 'Warning', {closeButton: true});
+
+                        }
+
+                    }else {
+                        toastr.error('Please select application name', 'Warning', {closeButton: true});
+                    }
+                }
+                else{
+                    toastr.error('Invalid date range', 'Warning', {closeButton: true});
+                }
+            }
+
+            else if(data.report == "Monthly"){
+
+                var fromMonth = data.fromMonth;
+                var toMonth = data.toMonth;
+                var year = data.year;
+
+
+                if(toMonth>=fromMonth){
+
+                    if (year){
+                        if (data.appName) {
+                            if (data.operator){
+
+                                var reqData = {monthFrom: fromMonth, monthTo: toMonth, year: year, appName: data.appName,operator:data.operator}
+
+                                technicalSupportService.getApplicationBaseMonthlySummary(reqData)
+                                    .success(function (response) {
+                                        $scope.applicationBaseReportResponseData = response;
+                                        if ($scope.applicationBaseReportResponseData.length<=0){
+                                            toastr.error('No data available',
+                                                'Warning', {closeButton: true});
+                                        }
+                                    })
+                                    .error(function () {
+                                        toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
+                                    });
+                            }else {
+                                toastr.error('Please select operator ', 'Warning', {closeButton: true});
+
+                            }
+                        }else{
+                            toastr.error('Please select application name', 'Warning', {closeButton: true});
+                        }
+                    }else {
+                        toastr.error('Please select year', 'Warning', {closeButton: true});
+                    }
+                }
+                else{
+                    toastr.error('Invalid month range', 'Warning', {closeButton: true});
+                }
+            }
+            else{
+                var fromYear = data.fromYear;
+                var toYear   = data.toYear;
+
+
+                if(toYear>=fromYear){
+
+                    if (data.appName){
+
+                        if (data.operator){
+
+                            var reqData = {yearFrom:fromYear, yearTo:toYear,appName:data.appName,operator:data.operator};
+                            technicalSupportService. getApplicationBaseYearlySummary(reqData)
+                                .success(function(response){
+                                    $scope.applicationBaseReportResponseData = response;
+                                    if ($scope.applicationBaseReportResponseData.length<=0){
+                                        toastr.error('No data available',
+                                            'Warning', {closeButton: true});
+                                    }
+                                })
+                                .error(function(response){
+                                    toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
+                                });
+                        }else {
+                            toastr.error('Please select operator ', 'Warning', {closeButton: true});
+
+                        }
+                    }else {
+                            toastr.error('Please select application name ', 'Warning' , {closeButton: true});
+                    }
+                } else{
+                    toastr.error('Invalid year range', 'Warning' , {closeButton: true});
+                }
+            }
+        }
+
+
+
+
+
+        $scope.revenueAndTrafficReportData = function(data){
+            $scope.revenueAndTrafficReportResponseData = [];
+            if(data.report == "Daily"){
+
+
+                var sdate = $filter('date')(data.sdate, "yyyy-MM-dd");
+                var edate = $filter('date')(data.edate, "yyyy-MM-dd");
+                var reqData ="";
+
+                if(edate >= sdate) {
+                    if (data.operator){
+                        if ($scope.user.userRole=="APP_CREATOR"){
+                            if (data.appName){
+                                reqData = {dateFrom: sdate, dateTo: edate,operator:data.operator,appId:data.appName};
+                            }else {
+                                toastr.error('Please select Application name', 'Warning', {closeButton: true});
+                                return;
+                            }
+                        }else {
+                            reqData = {dateFrom: sdate, dateTo: edate,operator:data.operator};
+
+                        }
+                        technicalSupportService.getRevenueAndTrafficSummaryForDateRange(reqData)
+                            .success(function (response) {
+                                $scope.revenueAndTrafficReportResponseData = response;
+                                if ($scope.revenueAndTrafficReportResponseData.length<=0){
+                                    toastr.error('No data available',
+                                        'Warning', {closeButton: true});
+                                }
+
+                            }).error(function (response) {
+                            toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
+                        });
+                    }else {
+                        toastr.error('Please select operator type', 'Warning', {closeButton: true});
+                    }
+                }
+                else{
+                    toastr.error('From Date should less than To Date', 'Warning', {closeButton: true});
+                }
+            }
+
+            else if(data.report == "Monthly"){
+
+                var fromMonth = data.fromMonth;
+                var toMonth = data.toMonth;
+                var year = data.year;
+                var reqData ="";
+;
+
+                if(toMonth>=fromMonth){
+
+                    if (year){
+                        if (data.operator) {
+
+                            if ($scope.user.userRole=="APP_CREATOR"){
+                                if (data.appName){
+                                  reqData = {monthFrom: fromMonth, monthTo: toMonth, year: year, operator: data.operator,appId:data.appName}
+                                }else {
+                                    toastr.error('Please select Application name', 'Warning', {closeButton: true});
+                                    return;
+                                }
+                            }else {
+                                 reqData = {monthFrom: fromMonth, monthTo: toMonth, year: year, operator: data.operator}
+                            }
+
+
+                            technicalSupportService.getRevenueAndTrafficSummaryForMonthly(reqData)
+                                .success(function (response) {
+                                    $scope.revenueAndTrafficReportResponseData = response;
+                                    if ($scope.revenueAndTrafficReportResponseData.length<=0){
+                                        toastr.error('No data available',
+                                            'Warning', {closeButton: true});
+                                    }
+                                })
+                                .error(function () {
+                                    toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
+                                });
+                        }else{
+                            toastr.error('Please select operator', 'Warning', {closeButton: true});
+                        }
+                    }else {
+                        toastr.error('Please select year', 'Warning', {closeButton: true});
+                    }
+                }
+                else{
+                    toastr.error('Invalid month range', 'Warning', {closeButton: true});
+                }
+            }
+            else{
+                var fromYear = data.fromYear;
+                var toYear   = data.toYear;
+
+                if(toYear>=fromYear){
+                    if (data.operator){
+                        if ($scope.user.userRole=="APP_CREATOR"){
+                            if (data.appName){
+                                var reqData = {yearFrom:fromYear, yearTo:toYear,operator:data.operator,appId:appId};
+                            }else {
+                                toastr.error('Please select Application name', 'Warning', {closeButton: true});
+                                return;
+                            }
+                        }else {
+                            var reqData = {yearFrom:fromYear, yearTo:toYear,operator:data.operator};
+                        }
+                        technicalSupportService. getRevenueAndTrafficSummaryForYearly(reqData)
                             .success(function(response){
-                                $scope.reconciliations = response;
+                                $scope.revenueAndTrafficReportResponseData = response;
+                                if ($scope.revenueAndTrafficReportResponseData.length<=0){
+                                    toastr.error('No data available',
+                                        'Warning', {closeButton: true});
+                                }
                             })
                             .error(function(response){
                                 toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
                             });
 
+                    }else {
+                        toastr.error('Please select operator ', 'Warning' , {closeButton: true});
                     }
-                    else{
-
-                        toastr.error('From Year Should less then To Year', 'Warning' , {closeButton: true});
-                    }
-
-
+                } else{
+                    toastr.error('Invalid year range', 'Warning' , {closeButton: true});
                 }
+            }
+        }
 
 
+
+        $scope.getFailedTransactionData = function(data){
+            $scope.responseData = [];
+
+            if(data.report == "Daily"){
+
+
+                var fromDate = $filter('date')(data.fromDate, "yyyy-MM-dd");
+                var toDate = $filter('date')(data.toDate, "yyyy-MM-dd");
+
+                if(toDate >= fromDate) {
+
+                    if (data.operator){
+
+                        var dates = {dateFrom: fromDate, dateTo: toDate,operator: data.operator};
+
+                        technicalSupportService.getFailedTransactionReportDataForDateRange(dates)
+                            .success(function (response) {
+                                $scope.responseData = response;
+                                if ($scope.responseData.length<=0){
+                                    toastr.error('No data available',
+                                        'Warning', {closeButton: true});
+                                }
+
+                            }).error(function (response) {
+                            toastr.error('FailedTransaction Reports Loading Error', 'Warning', {closeButton: true});
+                        });
+                    }else {
+                        toastr.error('Please select operator ', 'Warning' , {closeButton: true});
+                    }
+                }
+                else{
+                    toastr.error('Invalid date range', 'Warning', {closeButton: true});
+                }
+            }
+        }
+
+        $scope.getCustomerCareReportData = function(pramData){
+            $scope.customerCareReportData = [];
+
+
+                var fromDate = $filter('date')(pramData.fromDate, "yyyy-MM-dd");
+                var toDate = $filter('date')(pramData.toDate, "yyyy-MM-dd");
+
+                if (toDate >= fromDate) {
+
+                    var mobile = pramData.msisdn;
+                    var pattern = /^\d{11}$/;
+                    if (pattern.test(mobile)) {
+
+                        technicalSupportService.getOperator({msisdn:mobile})
+                            .success(function (response) {
+                                    if ($scope.user.userRole=="OPERATOR"){
+
+                                        if (response.operator==$scope.user.operator){
+
+                                            var data = {dateFrom: fromDate, dateTo: toDate, msisdn: pramData.msisdn};
+
+                                            technicalSupportService.getPaymentStatusOfUser(data)
+                                                .success(function (response) {
+                                                    $scope.customerCareReportData = response;
+                                                    if ($scope.customerCareReportData.length<=0){
+                                                        toastr.error('No data available',
+                                                            'Warning', {closeButton: true});
+                                                    }
+
+
+                                                }).error(function (response) {
+                                                toastr.error('FailedTransaction Reports Loading Error', 'Warning', {closeButton: true});
+                                            });
+
+                                        }else {
+
+                                            toastr.error('You are not allowed for this operation', 'Warning', {closeButton: true});
+                                        }
+
+                                    }else {
+                                        var data = {dateFrom: fromDate, dateTo: toDate, msisdn: pramData.msisdn};
+
+                                        technicalSupportService.getPaymentStatusOfUser(data)
+                                            .success(function (response) {
+                                                $scope.customerCareReportData = response;
+                                                if ($scope.customerCareReportData.length<=0){
+                                                    toastr.error('No data available',
+                                                        'Warning', {closeButton: true});
+                                                }
+
+                                            }).error(function (response) {
+                                            toastr.error('FailedTransaction Reports Loading Error', 'Warning', {closeButton: true});
+                                        });
+
+                                    }
+
+
+                            }).error(function (response) {
+                            toastr.error('FailedTransaction Reports Loading Error', 'Warning', {closeButton: true});
+                        });
+                    }else {
+                        toastr.error('Invalid mobile number', 'Warning', {closeButton: true});
+                    }
+                }
+                else {
+                    toastr.error('Invalid date range', 'Warning', {closeButton: true});
+                }
+        }
+
+
+
+        $scope.downloadCsv = function(reportData,args){
+
+            var dataArray = [];
+            var reportDataArray = reportData;
+            var range = "";
+            var rangeValue="";
+
+            if (args.reportRange=="Daily"){
+                range = "Date";
+            }else if (args.reportRange=="Monthly"){
+                range = "Month";
+            }else {
+                range = "Year"
             }
 
-        $scope.csvReconciliations = function(reconciliationsData,args){
+            if (args.reportType=="RECONCILIATION"){
 
-            var reconciliationsArray = [];
-            var array = reconciliationsData
-            console.log(array);
+                dataArray.push(range  +"," + "App Id"+ "," +"Name" + ","
+                    + "Bank Code" + "," +"Branch Code" + ","+"Branch Name" + ","+"Bank A/C No" +
+                    ","+"Service Provide Earnings" +'\r\n');
 
-            reconciliationsArray.push("Service Provider" +"," + "App Id"+ "," +"Name" + "," + "Bank Code" + "," +"Branch Code" + ","+"Branch Name" + ","+"Bank A/C No" + ","+"Service Provide Earnings" +'\r\n');
-            array.forEach(function(obj){
+                reportDataArray.forEach(function(obj){
 
-            var str = obj.userId + "," + obj.appId +"," + obj.name + + obj.bankCode +"," + obj.branchCode +"," + obj.branchName +"," + obj.bankAccountNumber+"," + obj.revenue + '\r\n';
+                    if (args.reportRange=="Daily"){
+                        rangeValue = obj.date;
+                    }else if (args.reportRange=="Monthly"){
+                        rangeValue = obj.month;
+                    }else {
+                        rangeValue = obj.year;
+                    }
 
-            reconciliationsArray.push(str);
+                    var str = rangeValue + "," + obj.uniqueAppId +"," + obj.name + + obj.bankCode +"," + obj.branchCode +","
+                        + obj.branchName +"," + obj.bankAccountNumber+"," + obj.revenue + '\r\n';
+
+                    dataArray.push(str);
+                });
+
+            }else if (args.reportType=="failedTransaction"){
+
+                dataArray.push(range +"," + "Service Provider"+ "," +"Application Name" + ","
+                    + "Error Code" + "," +"Total"+'\r\n');
 
 
-            });
+                reportDataArray.forEach(function(obj){
+
+                    var str = obj.date + "," + obj.operator +"," + obj.appName + "," + obj.statusCode +"," + obj.count +'\r\n';
+
+                    dataArray.push(str);
+                });
+            }else if (args.reportType=="customerCareReport"){
+
+                dataArray.push("MSISDN"+ "," +"Application Name" + ","
+                    + "Date" + "," +"Status"+','+'Charged Amount'+'\r\n');
+
+
+                reportDataArray.forEach(function(obj){
+
+                    var str = obj.msisdn + "," + obj.appName +"," + obj.dateTime + "," + obj.status +"," + obj.amount +'\r\n';
+
+                    dataArray.push(str);
+                });
+            }else if (args.reportType=="revenueAndTrafficReportData"){
+
+                dataArray.push(range + "," +"Operator" + ","
+                    + "AppMaker Revenue" + "," +"AppMaker Traffic"+','+'Total Revenue'+","+'Total Revenue'+'\r\n');
+
+
+                reportDataArray.forEach(function(obj){
+
+
+                    if (args.reportRange=="Daily"){
+                        rangeValue = obj.date;
+                    }else if (args.reportRange=="Monthly"){
+                        rangeValue = obj.month;
+                    }else {
+                        rangeValue = obj.year;
+                    }
+
+                    var str = rangeValue + "," + obj.operator +"," + obj.revenue + "," + obj.viewCount +"," + obj.revenue +"," + obj.viewCount+'\r\n';
+
+                    dataArray.push(str);
+                });
+            }else if (args.reportType=="applicationBaseReport"){
+
+                dataArray.push("Application" + "," +"Type" + ","
+                    + "CaaS Taxable" + "," +range+','+'Operator'+","+'Platform Earning'+","+'SP Earning'+","
+                    +'Application Total Revenue'+","+'App. Tot. Traffic'+","+'New Registrations Count'+","
+                    +'New De-Reg Count'+","+'Total Subscribers'+'\r\n');
+
+
+                reportDataArray.forEach(function(obj){
+
+
+                    if (args.reportRange=="Daily"){
+                        rangeValue = obj.date;
+                    }else if (args.reportRange=="Monthly"){
+                        rangeValue = obj.month;
+                    }else {
+                        rangeValue = obj.year;
+                    }
+
+                    var str = obj.appName + "," + obj.type +"," + false + "," + rangeValue +"," + obj.operator
+                        +"," + obj.platformEarning+"," + obj.spEarning+","
+                        + obj.appTotRevenue+"," + obj.appTrafficCount+"," + obj.subscriptionCount+","
+                        + obj.unSubscriptionCount+"," + obj.totSubs+'\r\n';
+
+
+                    dataArray.push(str);
+                });
+            }
+
 
             var csv = "";
 
-            for( i=0 ; i<reconciliationsArray.length; i++ ){
-                        csv += reconciliationsArray[i];
+            for( i=0 ; i<dataArray.length; i++ ){
+                        csv += dataArray[i];
                 }
             var data, filename, csvButton;
             if (csv == null) return;
@@ -790,10 +1405,6 @@
             csvButton.click();
 
         }
-
-
-
-
 
     }
 

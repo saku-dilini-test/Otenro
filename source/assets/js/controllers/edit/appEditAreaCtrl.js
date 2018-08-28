@@ -56,25 +56,12 @@
 
 
 
-        if(templateCheck == true || templateCheck == 'true'){
-
             $scope.urlPath1 = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
                 + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
 
             $scope.appTemplateUrl = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
                 + "&appId=" + $rootScope.appId + "&isFromCMSAppView=1" + "&" + new Date().toISOString() + "/";
 
-        }else{
-
-            console.log('inside mobile urls');
-//            $scope.urlPath1 = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-//                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
-
-
-            $scope.appTemplateUrl = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
-                + "&appId=" + $rootScope.appId + "&isFromCMSAppView=1" + "&" + new Date().toISOString() + "/";
-
-        }
 
         // $http.get(urlPath)
         //     .success(function(){

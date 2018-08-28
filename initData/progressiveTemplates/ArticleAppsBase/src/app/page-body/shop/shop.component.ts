@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SERVER_URL } from '../../constantsService';
-import * as data from '../../madeEasy.json';
+import { SERVER_URL } from '../../../assets/constantsService';
+import * as data from '../../../assets/madeEasy.json';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { ProductsService } from '../../services/products/products.service';
@@ -8,18 +8,18 @@ import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'app-shop',
-  templateUrl: './app/page-body/shop/shop.component.html',
-  styleUrls: ['./app/page-body/shop/shop.component.css'],
+  templateUrl: './shop.component.html',
+  styleUrls: ['./shop.component.css'],
 })
 
 export class ShopComponent implements OnInit {
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
-  private results: {};
+  results: {};
   private catId: any;
   private catName: any;
-  private catImage: any;
-  private description:string=[];
+  catImage: any;
+  private description:string[] = [];
 
   constructor( private productService: ProductsService, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
                private title: TitleService) {
@@ -36,8 +36,11 @@ export class ShopComponent implements OnInit {
 
   }
 
-  private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
+  imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
     + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
+
+  imageUrl1 = SERVER_URL + "/templates/viewWebImages?userId="
+      + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
 
 
   ngOnInit() {

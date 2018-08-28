@@ -73,25 +73,65 @@ module.exports = {
             'code': 'MOBITEL',
             'desc': 'Mobitel',
             'shareSplit': '60',
-            'email': 'supportTest@mobitel.com'
+            'email': 'supportTest@mobitel.com',
+            'priceRange': {
+                'daily': {
+                    'min': 1,
+                    'max': 10
+                },
+                'monthly': {
+                    'min': 1,
+                    'max': 1000
+                }
+            }
         },
         'Dialog': {
             'code': 'DIALOG',
             'desc': 'Dialog',
             'shareSplit': '60',
-            'email': 'supportTest@dialog.com'
+            'email': 'supportTest@dialog.com',
+            'priceRange': {
+                'daily': {
+                    'min': 1,
+                    'max': 10
+                },
+                'monthly': {
+                    'min': 1,
+                    'max': 1000
+                }
+            }
         },
         'Hutch': {
             'code': 'HUTCH',
             'desc': 'Hutch',
             'shareSplit': '60',
-            'email': 'supportTest@hutch.com'
+            'email': 'supportTest@hutch.com',
+            'priceRange': {
+                'daily': {
+                    'min': 1,
+                    'max': 10
+                },
+                'monthly': {
+                    'min': 1,
+                    'max': 1000
+                }
+            }
         },
         'Airtel': {
             'code': 'AIRTEL',
             'desc': 'Airtel',
             'shareSplit': '60',
-            'email': 'supportTest@airtel.com'
+            'email': 'supportTest@airtel.com',
+            'priceRange': {
+                'daily': {
+                    'min': 1,
+                    'max': 10
+                },
+                'monthly': {
+                    'min': 1,
+                    'max': 1000
+                }
+            }
         }
 
     },
@@ -192,6 +232,21 @@ module.exports = {
             'code': 'ERROR',
             'desc': 'Error'
         }
+    },
+
+    //END_USER_MESSAGES are the messages which we will show to the end user(in the mobile app itself)
+    END_USER_MESSAGES: {
+        'SERVER_ERROR': 'Could not provide the service, please contact support.',
+        'OPERATOR_NOT_FOUND': 'Service not available for your network operator.',
+        'APP_TERMINATED': 'The service is no longer available on the network.',
+        'APP_SUSPENDED': 'The service is temporarily unavailable on the network.',
+        'APP_REJECTED': 'The service is currently not available on the network. ',
+        'APP_SUBMITTED_FOR_APPROVAL': 'The service is currently not available on the network.',
+        'APP_SUBMITTED_FOR_CONFIGURATION': 'The service is currently not available on the network.',
+        'APP_NOT_SUBMITTED': 'The service is currently not available on the network.',
+        'APP_DELETED': 'The service is no longer available.',
+        'USER_UNSUBSCRIBED': 'You got unsubscribed from this service',
+        'INSUFFICIENT_BALANCE': 'You have no sufficient balance.Please recharge and try again.'
     }
 
 };

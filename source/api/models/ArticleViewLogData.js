@@ -7,7 +7,7 @@ module.exports = {
             type: 'string'
         },
         msisdn: {
-            type: 'integer'
+            type: 'String'
         },
         appId:{
             type: 'string'

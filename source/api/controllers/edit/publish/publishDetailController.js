@@ -63,7 +63,13 @@ module.exports = {
 
                                 for (var key in operators) {
                                     if (operators.hasOwnProperty(key)) {
-                                        details.operators.push({operator:operators[key].code,amount:"",interval:"",isEnabled:false, status:"NOT_SUBMITTED"})
+                                        details.operators.push({
+                                            operator:operators[key].code,
+                                            amount:"",
+                                            interval:"",
+                                            isEnabled:false,
+                                            status:"NOT_SUBMITTED"
+                                        });
                                     }
                                 }
 
@@ -78,6 +84,17 @@ module.exports = {
                                                     ApplicationContactUs.update({appId:appData[0].id},{email:details.email}).exec(function(err,contact){
                                                         if (err) res.send(err);
 
+                                                        for(var keyOne in operators){
+                                                            if (operators.hasOwnProperty(keyOne)) {
+                                                                appDetails.operators.forEach(function (playApps) {
+                                                                    if (!playApps.priceRange) {
+                                                                        playApps.priceRange = operators[keyOne].priceRange;
+                                                                    } else {
+                                                                        return;
+                                                                    }
+                                                                });
+                                                            }
+                                                        };
                                                         res.send({
                                                                details: appDetails,
                                                                message: "New Publish Details has been created"
@@ -98,8 +115,6 @@ module.exports = {
                 });
             }else{
 
-            console.log("inside update");
-
                 PublishDetails.find({keyword:details.keyword}).exec(function(err,data){
                         if (err) res.send(err);
                         else{
@@ -109,14 +124,27 @@ module.exports = {
                                         if (err) res.send(err);
                                         else {
                                             if (playApp.length==0) {
-
-
+                                                sails.log.debug('no playApps');
+                                                return res.send([]);
                                             }else{
 
                                                     Application.findOne(searchAppData).exec(function(err,app) {
                                                         if (err) res.send(err);
                                                         else {
                                                             ApplicationContactUs.update({appId:app.id},{email:details.email}).exec(function(err,contact){
+
+                                                                var operators = config.IDEABIZ_USER_NETWORK_CLIENTS;
+                                                                for(var keyOne in operators){
+                                                                    if (operators.hasOwnProperty(keyOne)) {
+                                                                        playApp[0].operators.forEach(function (playApps) {
+                                                                            if (!playApps.priceRange) {
+                                                                                playApps.priceRange = operators[keyOne].priceRange;
+                                                                            } else {
+                                                                                return;
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                };
                                                                 if (err){ res.send(err);}
 
                                                                 else{
@@ -138,6 +166,7 @@ module.exports = {
                             }
                         }else{
                             PublishDetails.update(searchApp,details).exec(function(err,app) {
+
                                      if (err) res.send(err);
                                      else {
                                                  Application.findOne({id:app[0].appId}).exec(function(err,searchApp) {
@@ -147,6 +176,18 @@ module.exports = {
                                                              if (err){ res.send(err);}
 
                                                              else{
+                                                                 var operators = config.IDEABIZ_USER_NETWORK_CLIENTS;
+                                                                 for(var keyOne in operators){
+                                                                     if (operators.hasOwnProperty(keyOne)) {
+                                                                         app[0].operators.forEach(function (playApps) {
+                                                                             if (!playApps.priceRange) {
+                                                                                 playApps.priceRange = operators[keyOne].priceRange;
+                                                                             } else {
+                                                                                 return;
+                                                                             }
+                                                                         });
+                                                                     }
+                                                                 };
                                                                  res.send({
                                                                             details: app[0],
                                                                             message: "New Publish Details has been created"
@@ -204,15 +245,17 @@ module.exports = {
     },
 
     updateOperators: function (req,res){
-        console.log(req.body);
+        req.body.operators.forEach(function(operators){
+            delete operators.priceRange;
+        });
         var body = req.body;
         var operatorObject = config.IDEABIZ_USER_NETWORK_CLIENTS;
         var allowedOperators = [];
         var configOperators = this.getIdeabizUserNetwrokClientsAsArray();
 
-
         console.log(configOperators);
         req.body.operators.forEach(function(ele){
+
             if(ele.isEnabled == true || ele.isEnabled == 'true'){
                 configOperators.forEach(function(op){
                     if(op.code == ele.operator){
@@ -231,11 +274,11 @@ module.exports = {
             Application.findOne({id:result[0].appId}).exec(function(err,appData){
                 if (err) res.send(err);
 
-                if(!appData.apkStatus){
-                    sails.log.debug("apk generation started for the appId:" + body.appId);
-                    req.body.userId = appData.userId;
-                    editController.buildSourceProg(req,res);
-                }
+                // if(!appData.apkStatus){
+                //     sails.log.debug("apk generation started for the appId:" + body.appId);
+                //     req.body.userId = appData.userId;
+                //     editController.buildSourceProg(req,res);
+                // }
 
                 console.log(appData);
                     User.find({id:appData.userId}).exec(function(err,userData){
@@ -285,7 +328,7 @@ module.exports = {
 
                                      mailOptions = {
                                         from: userData[0].email, // sender address
-                                        to: config.IDEABIZ_EMAIL, // list of receivers
+                                        to: config.IDEABIZ_GROUP_EMAIL, // list of receivers
                                         subject: 'App Publish', // Subject line
                                         html:emailBody
 
@@ -295,13 +338,9 @@ module.exports = {
                                         // send mail with defined transport object
                                         transporter.sendMail(mailOptions, (error, info) => {
                                             if (error) {
-                                                //return console.log(error);
                                                 console.log(error);
-                                                return  res.send(500,error);
-
                                             }
-                                            console.log('Message sent: %s', info.messageId);
-                                                                return res.send("ok");
+                                            console.log('Message sent: %s', userData[0].email);
                                         });
                         res.send("ok");
 
@@ -317,7 +356,7 @@ module.exports = {
     uploadPublishFiles :function (req,res) {
         var imagePath;
         if(req.body.isNew == true || req.body.isNew == 'true'){
-            imagePath = config.APP_FILE_SERVER+req.userId + '/progressiveTemplates/' + req.body.appId +'/src/assets/images/publish/';
+            imagePath = config.APP_FILE_SERVER+req.userId + '/progressiveTemplates/' + req.body.appId +'/assets/images/publish/';
         } else{
             imagePath = config.APP_FILE_SERVER+req.userId + '/templates/' + req.body.appId +'/img/publish/';
         }
@@ -331,7 +370,8 @@ module.exports = {
                      if (err) return res.send(err);
                      else {
                          return res.json({
-                             message: true
+                             message: true,
+                             idx:req.body.imgId
                          });
                      }
                  });
@@ -494,14 +534,7 @@ module.exports = {
         var path = require('path');
         var mime = require('mime');
 
-        var apk = config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/platforms/android/app/build/outputs/apk/release/' + req.param("appName") + ".apk";
-
-        var androidVersion = config.ANDROID_VERSION;
-        sails.log.debug("in getApkPath config.ANDROID_VERSION: " + androidVersion);
-
-        if(androidVersion<26){
-            apk = config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/platforms/android/build/outputs/apk/' + req.param("appName") + ".apk";
-        }
+        var apk = config.ME_SERVER + req.param("userId") + '/buildProg/' + req.param("appId") + '/' + req.param("appName").replace(/\s/g, '') + ".apk";
 
         console.log("inside apk send: " + apk);
 

@@ -19,23 +19,23 @@
         <div class="navbar-1">
           <ul class="site-navigation nav navbar-nav">
             <li>
-              <a class="navbar-brand" (click)="navigate('')">
-                <img width="100%" src="assets/images/logo.png">
+              <a class="navbar-brand" (click)="navigate('','Home')">
+                <img width="100%" src="{{logoUrl}}/logo.png">
               </a>
             </li>
             <li>
-              <a class="nav-link" (click)="navigate('')">Your Horoscope
+              <a class="nav-link" (click)="navigate('','Home')">Your Horoscope
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li>
-              <a class="nav-link" (click)="navigate('aboutus')">About Us</a>
+              <a class="nav-link" (click)="navigate('aboutus','About us')">About Us</a>
             </li>
             <li>
-              <a class="nav-link" (click)="navigate('contact')">Contact Us</a>
+              <a class="nav-link" (click)="navigate('contact','Contact us')">Contact Us</a>
             </li>
             <li>
-              <a class="nav-link" (click)="navigate('policies')">Policies</a>
+              <a class="nav-link" (click)="navigate('policies','Policies')">Policies</a>
             </li>
 
           </ul>
@@ -53,8 +53,8 @@
     <a *ngIf="subscriptionStatus" data-toggle="modal" (click) = "openMyAccountModel()">My Account</a>
     <a (click)="navigate('contact','Contact us')">Contact Us</a>
     <a (click)="navigate('policies','Privacy Policy')">Privacy Policy</a>
-    <div class="navbar-brand text-center" (click)="navigate('')">
-      <img src="assets/images/logo.png">
+    <div class="navbar-brand text-center" (click)="navigate('','Home')">
+      <img src="{{logoUrl}}/logo.png">
     </div>
   </div>
 
@@ -157,10 +157,24 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body text-center">
-        <h3 class="padding-bottom">Sorry!</h3>
-        <p>The App is no longer available</p>
+        <h3>{{displayMessage}}</h3>
         <br>
-        <button type="button" class="btn sub-button-cancel btn-block" data-dismiss="modal" (click)= "close()">Cancel</button>
+        <button type="button" class="btn sub-button-cancel btn-block" data-dismiss="modal" (click)= "close()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- App push notifications Model -->
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="appPushNotificationModel" tabindex="-1" role="dialog" aria-labelledby="appStatusModelLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <strong>Notification</strong>
+        <br>
+        <p>{{pushMessage}}</p>
+        <br>
+        <button type="button" class="btn sub-button-cancel btn-block" data-dismiss="modal" (click)= "close()">Ok</button>
       </div>
     </div>
   </div>

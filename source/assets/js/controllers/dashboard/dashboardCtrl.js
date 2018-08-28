@@ -14,7 +14,7 @@
 
     function DashboardCtrl($scope, dashboardService,toastr,$state,$auth,ME_APP_SERVER,mySharedService,$rootScope,
             SERVER_URL) {
-        dashboardService.getAllApps().success(function (data) {
+        dashboardService.getAllAppsForDashboard().success(function (data) {
             $rootScope.widgets = data;
             $scope.path = ME_APP_SERVER+"temp/";
         }).error(function (err) {

@@ -16,6 +16,7 @@
         $scope.appId = $rootScope.appId;
         $scope.tmpImage = [];
         $scope.data;
+        $scope.dialogTitle = 'Create Page';
         $scope.tempImageDel = [];
         $scope.deleteImages = [];
         $scope.mainImg = null;
@@ -25,7 +26,6 @@
         $scope.cancelButton_chk = initialData;
         $scope.pageSize = 5;
         $log.debug("catName " + $scope.catName);
-        console.log($scope.cancelButton_chk);
         // Characters length config (Article)
         // $scope.maxArticleTitle = 40;
         $scope.maxArticleDesc = 200;
@@ -58,14 +58,12 @@
         };
 
         $scope.chng = function(asd,index){
-            console.log(asd,index);
             if(asd == false && !$scope.tmpImage[index].img){
                 $scope.tmpImage.splice(index, 1);
                 if ($scope.article.tempImageArray && $scope.article.tempImageArray.length > 0){
                    $scope.article.tempImageArray.splice(index, 1);
                }
             }else if(asd == false && $scope.tmpImage[index].img){
-            console.log("else if");
                 $scope.tmpImage[index].videoUrl = null;
                 $scope.tmpImage[index].url = null
             }
@@ -75,35 +73,27 @@
         $scope.addImage = function (img) {
             $scope.addNew = true
             if ($scope.tmpImage.length < 6  && angular.element('#fileInput').val() != '' || $scope.tmpImage[0].img == null) {
-                console.log($scope.tmpImage.length);
                 for(var i =0;i<$scope.tmpImage.length;i++){
 
                     if($scope.tmpImage[0].img == null){
-                        console.log('inside if 0 index');
                         $scope.tmpImage[0].img = img
                         $scope.addNew = false;
                         break
                     }else if($scope.tmpImage.length >= 1 && $scope.tmpImage[0].img == null){
-                        console.log('inside if 1');
                         $scope.tmpImage[0].img = img
                         $scope.addNew = false;
                         break
                     }
                     if($scope.tmpImage[i].url && !$scope.tmpImage[i].img){
-                    console.log('inside if 2');
-                    console.log(i);
-                    console.log($scope.tmpImage[i]);
                         $scope.tmpImage[i].img = img
                         $scope.addNew = false;
                         break;
                     }
                     else{
-                    console.log('inside else ' + $scope.tmpImage.length);
                         $scope.addNew = true;
                     }
                 }
                 if($scope.addNew == true){
-                console.log('inside else function');
                     if($scope.tmpImage.length <= 6){
                         $scope.tmpImage.push({'img': img});
                     }
@@ -133,14 +123,11 @@
 
        $scope.deleteImg = function (index) {
            $scope.defaultImage = null;
-           console.log($scope.tempImageDel[index]);
            var image = $scope.tempImageDel[index];
            $scope.deleteImages.push({'img':image});
 
            if(index == 0){
-           console.log("deleted 0th index");
                 $scope.tmpImage[0].img = null;
-                console.log($scope.tmpImage[0].img);
 //                $scope.article.tempImageArray[0].img = null;
            }else{
                $scope.tmpImage.splice(index, 1);
@@ -159,7 +146,6 @@
                     closeButton: true
                 });
             });
-        console.log(initialData);
         if (initialData == 'publishArticle') {
             $scope.isNewArticle = true;
             $scope.dummyCat = [];
@@ -187,7 +173,9 @@
                 })
 
 
-        } else if (initialData == 'previewArticles') {
+        } else if (initialData == 'previewArticles')  {
+                    $scope.dialogTitle = 'Edit Page';
+
             articleService.getArticleList($scope.appId)
                 .success(function (responseData) {
 
@@ -213,21 +201,29 @@
                     });
                 })
         } else {
+                        $scope.dialogTitle = 'Edit Page';
 
         $scope.article = initialData;
 
 //            $scope.serverImg = initialData.imageUrl;
 //            $scope.mainImg = initialData.imageUrl;
 //            $scope.picFile = ME_APP_SERVER + 'temp/' + $auth.getPayload().id + '/templates/' + $rootScope.appId + '/img/article/' + initialData.imageUrl;
+            if(initialData.tmpImage){
+                $scope.tmpImage = initialData.tmpImage;
+            }else if (initialData.tempImageArray) {
+                var patt = new RegExp("base64");
 
-            if (initialData.tempImageArray) {
                 for (var i = 0; i < initialData.tempImageArray.length; i++) {
 
                     var tempImageUrl;
-
+                    var res = patt.test(initialData.tempImageArray[i].img);
                     if(initialData.tempImageArray[i].img){
-                        tempImageUrl = SERVER_URL + "templates/viewWebImages?userId=" + $auth.getPayload().id
-                                      + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "&images=thirdNavi/" + initialData.tempImageArray[i].img;
+                        if(res){
+                            tempImageUrl = initialData.tempImageArray[i].img;
+                        }else{
+                            tempImageUrl = SERVER_URL + "templates/viewWebImages?userId=" + $auth.getPayload().id
+                                          + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "&images=thirdNavi/" + initialData.tempImageArray[i].img;
+                        }
                     }else{
                         tempImageUrl = null;
                     }
@@ -281,7 +277,9 @@
 
         $scope.changeArticleCat = function (catId) {
             if (catId.id == 1) {
-                mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory',3,'fromPublishArticle');
+                $scope.article.tmpImage = $scope.tmpImage;
+            var data = { article : $scope.article, from : "fromPublishArticle" }
+                mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory',3,data);
             }
             $scope.seletedCategoryId = catId.id;
         }

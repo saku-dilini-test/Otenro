@@ -341,6 +341,12 @@ module.exports = {
 
         try {
             if(reqBody.status==config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code||reqBody.status==config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code ) {
+
+                if(!serviceID){
+                    sails.log.error('The serviceID sent through the response is not valid: ', serviceID);
+                    return res.badRequest("IThe serviceID sent through the response is not valid: " + serviceID);
+                }
+
                 var queryApp = { 'serviceID': serviceID };
 
                 try {
@@ -385,7 +391,30 @@ module.exports = {
                                         'registeredDate':dateFormat(new Date(), "yyyy-mm-dd"),
                                         'subscriptionStatus':config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code
                                     };
-                                    actionStateChangeInstance.sendForCharging(msisdn,serviceID,publishDetailsData);
+
+                                    if(user.subscriptionStatus==config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code){
+                                        sails.log.debug('msisdn: ' + msisdn + ' already Subscribed');
+                                    }else if(user.subscriptionStatus==config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code){
+                                        var paymentQuery = {
+                                            appId: appID,
+                                            msisdn: msisdn,
+                                            date: dateFormat(new Date(), "yyyy-mm-dd")
+                                        };
+
+                                        SubscriptionPayment.findOne(paymentQuery).exec(function (err, payment) {
+                                            if (err){
+                                                sails.log.error("Error when searching SubscriptionPayment: " + JSON.stringify(paymentQuery));
+                                                return res.serverError(err);
+                                            }
+
+                                            if(payment){
+                                                sails.log.debug('There is a payment record for today for msisdn: ' + msisdn + ' as payment status: ' + payment.status);
+                                            }else{
+                                                sails.log.debug('No payment record for today therefore will charge for the msisdn: ' + msisdn);
+                                                actionStateChangeInstance.sendForCharging(msisdn,serviceID,publishDetailsData,user.appID);
+                                            }
+                                        });
+                                    }
                                 }else{
                                     var setFields = {
                                         'status': config.APP_USER_STATUS.INACTIVE,
@@ -426,7 +455,7 @@ module.exports = {
                                     }
 
                                     sails.log.debug("New user created for the msisdn: " + msisdn + " serviceID=" + publishDetailsData.serviceID);
-                                    actionStateChangeInstance.sendForCharging(msisdn,serviceID,publishDetailsData);
+                                    actionStateChangeInstance.sendForCharging(msisdn,serviceID,publishDetailsData,appID);
                                     return res.created(user);
                                 });
                             }
@@ -467,9 +496,9 @@ module.exports = {
         }
     },
 
-    sendForCharging:function(msisdn,serviceID,publishDetailsData){
+    sendForCharging:function(msisdn,serviceID,publishDetailsData,appID){
 
-        var actionStateChangeInstance =this;
+       var sendForChargingIntance = this;
 
         IdeaBizPINVerificationAPIService.getBalance(msisdn,function(response,err){
             if(err){
@@ -498,7 +527,7 @@ module.exports = {
                 sails.log.debug("responseBody.accountInfo.balance " + responseBody.accountInfo.balance);
 
 
-                actionStateChangeInstance.getChargeAmount(publishDetailsData,msisdn,function(data, err){
+                sendForChargingIntance.getChargeAmount(publishDetailsData,msisdn,function(data, err){
                     if(err){
                         sails.log.debug("getChargeAmount failed for the mobile: "+ err);
                         return false;
@@ -543,15 +572,39 @@ module.exports = {
                                         return true;
                                     });
 
+                                }else {
+                                    sails.log.debug("Error while requesting the charge, err:  " + responseBody.message);
+
+
+                                    sendForChargingIntance.getOperator(msisdn,function(operator, err){
+
+                                        if (err) {
+                                            sails.log.error("Operator find Error");
+                                            return callback(null, err);
+                                        }else {
+
+                                            var data= {appId:publishDetailsData.appId,date:dateFormat(new Date(), "yyyy-mm-dd"),
+                                                statusCode:response.statusCode,operator:operator};
+
+                                            FailedTransactionLog.create(data).exec(function (err, result) {
+
+                                                if (err) {
+                                                    sails.log.error("FailedTransactionLog Create Error");
+                                                    return false;
+                                                }
+                                                return true;
+                                            });
+                                        }
+
+                                    });
+
                                 }
                             });
-
-
                     }else {
 
                         console.log(responseBody);
                         var data = {appId:publishDetailsData.appId,msisdn:msisdn,
-                            amount:0.0,operator:data.operator,status:0 ,data:dateFormat(new Date(), "yyyy-mm-dd")}
+                            amount:0.0,operator:data.operator,status:0 ,date:dateFormat(new Date(), "yyyy-mm-dd")}
 
                         SubscriptionPayment.create(data).exec(function (err, result) {
 
@@ -563,22 +616,43 @@ module.exports = {
                         });
                     }
                 })
+            }else {
 
+                sails.log.debug("Error while requesting the balance check, err:  " + responseBody.message);
+
+                sendForChargingIntance.getOperator(msisdn,function(operator, err){
+
+                    if (err) {
+                        sails.log.error("Operator find Error");
+                        return callback(null, err);
+                    }else {
+
+                        var data= {appId:publishDetailsData.appId,date:dateFormat(new Date(), "yyyy-mm-dd"),
+                            statusCode:response.statusCode,operator:operator};
+
+                        FailedTransactionLog.create(data).exec(function (err, result) {
+
+                            if (err) {
+                                sails.log.error("FailedTransactionLog Create Error");
+                                return false;
+                            }
+                            return true;
+                        });
+
+                    }
+                });
             }
         });
-
     },
 
 
 
     getOperator:function(msisdn,callback){
-          console.log("msisdn.substring(0, 4) " + msisdn.substring(0, 4));
         Operator.findOne({operator_code:parseInt(msisdn.substring(0, 4))}).exec(function (err, data) {
             if (err) {
                 sails.log.error("Operator find Error");
                 return callback(null,err);
             }else {
-                   console.log("operatorData '''''''''''''''''' " + data.operator);
                 return callback( data.operator,err);
             }
 
@@ -593,7 +667,6 @@ module.exports = {
 
             actionStateChangeInstance.getOperator(msisdn,function(operator, err){
 
-                console.log("data ----------- " + operator);
                 if (err) {
                     sails.log.error("Operator find Error");
                     return callback(null,err);

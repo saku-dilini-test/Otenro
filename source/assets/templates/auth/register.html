@@ -66,25 +66,31 @@ chosen link or button. -->
       <fieldset>
         <label>First Name</label>
         <!--<img src="../../../images/question-mark.svg" width=" 12" height="12" />-->
-        <input class="input-shadow-border" type="text" name="fname" ng-model="user.fname" ng-enter ="authSignUp(user);"
+        <input class="input-shadow-border" type="text" name="fname" ng-model="user.fname" ng-pattern="/^[-a-zA-Z\s]+$/"  ng-enter ="authSignUp(user);"
                required/>
         <span class="error help-block" ng-show="register.fname.$error.required">
           *
+        </span>
+        <span class="error help-block" ng-show="register.fname.$dirty && register.fname.$invalid">
+          Enter a proper name
         </span>
       </fieldset>
       <fieldset>
         <label>Last Name</label>
         <!--<img src="../../../images/question-mark.svg" width=" 12" height="12" />-->
-        <input class="input-shadow-border" type="text" name="lname" ng-model="user.lname" ng-enter ="authSignUp(user);"
+        <input class="input-shadow-border" type="text" name="lname" ng-model="user.lname" ng-pattern="/^[-a-zA-Z]+$/" ng-enter ="authSignUp(user);"
                required/>
         <span class="error help-block" ng-show="register.lname.$error.required">
           *
+        </span>
+        <span class="error help-block" ng-show="register.lname.$dirty && register.lname.$invalid">
+          Enter a proper name
         </span>
       </fieldset>
       <fieldset>
         <label> Email </label>
         <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
-        <input class="input-shadow-border" name="email" type="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+        <input class="input-shadow-border" name="email" type="email" ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/"
                style="float:left;" ng-model="user.email" ng-enter ="authSignUp(user);" required/>
         <span class="error help-block" ng-show="register.email.$error.required">
           *
@@ -111,7 +117,7 @@ chosen link or button. -->
             <input class="input-shadow-border" style="width:50px" name="countryCode" type="text" ng-model="user.countryCode" readonly>
           </div>
           <div class="col-sm-6">
-            <input class="input-shadow-border" ng-disabled = "!user.country" name="mobile" type="text" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,6}$/im"
+            <input class="input-shadow-border" ng-disabled = "!user.country" name="mobile" type="text" ng-pattern="/^[1-9][0-9]*$/"
                    style="float:left;margin-left:-20px" ng-model="user.mobile" ng-enter ="authSignUp(user);" maxlength="{{phoneNoLength}}" required/>
             <span class="error help-block" ng-show="register.mobile.$error.required">
           *
@@ -121,8 +127,8 @@ chosen link or button. -->
 
         <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
 
-        <span class="error help-block" ng-show="register.mobile.$dirty && register.mobile.$invalid">
-          Enter a valid mobile number
+        <span class="error help-block" ng-show="user.country == 'Sri Lanka' && register.mobile.$dirty && register.mobile.$invalid">
+          Enter a valid mobile number eg:777123456
         </span>
       </fieldset>
       <div class="row password-area-row">
@@ -235,7 +241,7 @@ chosen link or button. -->
       <!--</fieldset>-->
 
       <fieldset>
-        <md-checkbox ng-model="terms" aria-label="Terms & Conditions" required>
+        <md-checkbox ng-model="user.terms" aria-label="Terms & Conditions" required>
           I agree to Appmaker <a target="_blank" href="https://developer.appmaker.lk/appmakerterms.pdf" style="font-size: 12px;">Terms & Conditions</a>
         </md-checkbox>
       </fieldset>
@@ -257,7 +263,7 @@ chosen link or button. -->
       <!--</fieldset>-->
 
       <fieldset class="set-register">
-        <input type="button" class="me-default-button" ng-model="cancel" ng-click="cancel()" name="cancel" value="Cancel" />
+        <input type="button" class="width-100 padding-horizontal-16-10 me-default-button" ng-model="cancel" ng-click="cancel()" name="cancel" value="Cancel" />
         <button ng-disabled="register.$invalid"   ng-click="authSignUp(user);"  type="button" class="me-default-button">
           Register
         </button>

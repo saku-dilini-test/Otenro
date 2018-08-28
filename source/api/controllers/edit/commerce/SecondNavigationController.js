@@ -129,9 +129,9 @@ module.exports = {
 
     if(isNew == 'true' || isNew == true){
 
-        var filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/secondNavi/'+ req.body.imageUrl;
+        var filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/secondNavi/'+ req.body.imageUrl;
 
-        var desPath  = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId+ '/src/assets/images/secondNavi/';
+        var desPath  = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId+ '/assets/images/secondNavi/';
 
 
                         fs.unlink(filePath, function (err) {

@@ -1,0 +1,9 @@
+{
+  "name": "Recipe Sample",
+  "appId": "587f2fc69cca49641ff664e8",
+  "userId": "unknownUser",
+  "serviceApi": {
+    "host": "http://localhost:1337",
+    "port": 1337
+  }
+}

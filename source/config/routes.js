@@ -68,6 +68,7 @@ module.exports.routes = {
      * */
 
     'POST /app/dashboard/allApps': 'DashboardController.allApps',
+    'POST /app/dashboard/allAppsForDashboard': 'DashboardController.allAppsForDashboard',
     'POST /api/dashboard/getAllCategory': 'DashboardController.getAllCategory',
     'POST /api/dashboard/getSelectedCategory': 'DashboardController.getSelectedCategory',
     'POST /api/dashboard/getSelectedCategoryDashboard': 'DashboardController.getSelectedCategoryDashboard',
@@ -502,7 +503,10 @@ module.exports.routes = {
     /**
      * CustomerCareReportController (ideaDroid)
      */
+
     'POST /appMakerReports/getPaymentStatusOfUser': 'appMakerReports/CustomerCareReportController.getPaymentStatusOfUser',
+    'POST /appMakerReports/getOperator': 'appMakerReports/CustomerCareReportController.getOperator',
+
 
 
 
@@ -510,11 +514,15 @@ module.exports.routes = {
     /**
      * Routes related with ApplicationBaseReportController
      **/
+    'POST /appMakerReports/appBaseReport/getApplicationBaseDailySummary': 'appMakerReports/ApplicationBaseReportController.getApplicationBaseDailySummary',
+    'POST /appMakerReports/appBaseReport/getApplicationBaseMonthlySummary': 'appMakerReports/ApplicationBaseReportController.getApplicationBaseMonthlySummary',
+    'POST /appMakerReports/appBaseReport/getApplicationBaseYearlySummary': 'appMakerReports/ApplicationBaseReportController.getApplicationBaseYearlySummary',
+    'POST /appMakerReports/appBaseReport/allApps': 'appMakerReports/ApplicationBaseReportController.allApps',
 
-    'GET /appMakerReports/appBaseReport/getAppCreators': 'appMakerReports/ApplicationBaseReportController.getAppCreators',
-    'GET /appMakerReports/appBaseReport/getApplications': 'appMakerReports/ApplicationBaseReportController.getApplications',
 
+    'POST /appMakerReports/getFailedTransactionReportDataForDateRange': 'appMakerReports/FailedTransactionReportController.getFailedTransactionReportDataForDateRange',
 
+    'GET /appMakerReports/getAllOperators': 'appMakerReports/ApplicationBaseReportController.getAllOperators',
 
 
     /**
@@ -522,5 +530,7 @@ module.exports.routes = {
      **/
 
     'GET /appMakerReports/getSubscriptionPayments': 'appMakerReports/ApplicationBaseReportController.getSubscriptionPayments',
+    'GET /appMakerReports/appBaseReport/insertFiledTransactionDailySummary': 'appMakerReports/FailedTransactionReportController.insertFiledTransactionDailySummary',
+
 
 };
