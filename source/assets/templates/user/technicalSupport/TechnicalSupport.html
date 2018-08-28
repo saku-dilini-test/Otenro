@@ -291,7 +291,7 @@
                                                 <h6 flex="100">Select Application</h6>
                                                 <select placeholder="Select Report Type"  aria-label="Country Name"
                                                         ng-model="revenueAndTrafficReport.appName" required >
-                                                    <option ng-value="app.id" ng-repeat="app in apps track by $index">{{app.appName}}</option>
+                                                    <option ng-value="app.id" ng-repeat="app in applicationArrSort(apps) track by $index">{{app.appName}}</option>
                                                 </select>
 
                                             </div>
@@ -402,13 +402,13 @@
                                             <h6 flex="100">Select Application</h6>
                                             <select placeholder="Select Report Type"  aria-label="Country Name"
                                                     ng-model="applicationBaseReport.appName" required >
-                                                <option ng-value="app.appName" ng-repeat="app in apps track by $index">{{app.appName}}</option>
+                                                <option ng-value="app.appName" ng-repeat="app in applicationArrSort(apps) track by $index">{{app.appName}}</option>
                                             </select>
 
                                             <h6 flex="100">Select operator</h6>
                                             <select placeholder="Select operator"  aria-label="Country Name"
                                                     ng-model="applicationBaseReport.operator" required >
-                                                <option ng-value="operator.operator" ng-repeat="operator in operators">{{operator.operator}}</option>
+                                                <option ng-value="operator.operator" ng-repeat="operator in operatorArrSort(operators)">{{operator.operator}}</option>
                                             </select>
 
                                         </div>
@@ -528,7 +528,7 @@
                                             <h6 flex="100">Select operator</h6>
                                             <select placeholder="Select operator"  aria-label="Country Name"
                                                     ng-model="failedTransactionReport.operator" required >
-                                                <option ng-value="operator.operator" ng-repeat="operator in operators">{{operator.operator}}</option>
+                                                <option ng-value="operator.operator" ng-repeat="operator in operatorArrSort(operators)">{{operator.operator}}</option>
                                             </select>
                                         </div>
 
@@ -666,7 +666,7 @@
                                             <h6 flex="100">Select operator</h6>
                                             <select placeholder="Select operator"  aria-label="Country Name"
                                                     ng-model="reconciliationReports.operator" required >
-                                                <option ng-value="operator.operator" ng-repeat="operator in operators">{{operator.operator}}</option>
+                                                <option ng-value="operator.operator" ng-repeat="operator in operatorArrSort(operators)">{{operator.operator}}</option>
                                             </select>
 
                                         </div>
