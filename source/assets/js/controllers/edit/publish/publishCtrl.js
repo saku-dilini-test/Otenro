@@ -253,6 +253,10 @@
                                     $scope.splash.push(tempImageUrl);
                                 }
 
+
+                            var notSubmittedOperators = $filter('filter')($scope.existingData[0].operators, {'status': 'NOT_SUBMITTED'});
+                            var isAppSubmitted = notSubmittedOperators.length != $scope.existingData[0].operators.length;
+
                            /* $scope.thumbPic = $scope.existingData[0].file;*/
                             $scope.playStoreData = {
                                 language : $scope.existingData[0].language,
@@ -266,7 +270,8 @@
 //                                serviceID: $scope.existingData[0].serviceID,
                                 port: $scope.existingData[0].port,
                                 price: $scope.existingData[0].price,
-                                operators: $scope.existingData[0].operators
+                                operators: $scope.existingData[0].operators,
+                                isAppSubmitted: isAppSubmitted
                             /*  keywords: $scope.existingData[0].keywords,*/
                             };
                      }
