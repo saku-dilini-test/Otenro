@@ -3099,6 +3099,15 @@ table.md-calendar-day-header{
 .padding-horizontal-16-10{
     padding: 0 16px 0 10px;
 }
+[size='10%']{
+    width: 10%;
+}
+[size='15%']{
+    width: 15%;
+}
+[size='50%']{
+    width: 50%;
+}
 [ng-quill-editor] { display: block; }
 
 /*reports*/
