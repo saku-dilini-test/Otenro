@@ -150,3 +150,7 @@
     opacity: 0.95;
   }
 }
+/* added by .sanira */
+.flex-justify-start{
+  justify-content: flex-start;
+}

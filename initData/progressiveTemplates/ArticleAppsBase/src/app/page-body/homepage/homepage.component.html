@@ -4,7 +4,7 @@
     <div class="container bloc-sm">
 
       <ng-template *ngFor="let category of results;let i = index" [ngIf]="i % 3 === 0">
-        <div class="flex-row">
+        <div class="flex-justify-start flex-row">
           <div class="flex-col" (click)="navigateShop('shop',results[i].id,results[i].name,results[i].imageUrl)" *ngIf="results[i]">
             <img src="{{imageUrl}}/{{results[i].imageUrl}}" >
             <div class="main-header-font">{{results[i].name}}</div>
