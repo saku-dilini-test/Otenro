@@ -136,6 +136,7 @@
                             .success(function (technicalData) {
                                 $scope.apps = [];
                                 $scope.apps.push({appName:"all"});
+                                    console.log($scope.apps);
                                 var count = 0;
                                 technicalData.forEach(function (app) {
                                     $scope.apps.push(app[count]);
@@ -189,6 +190,34 @@
                         }else if ($scope.sortOp[0] != "all"){
                             firstIdxValue = $scope.sortOp[0];
                             if($scope.sortOp[i].operator == "all"){
+
+                                idx = i;
+                                $scope.sortOp[0] = $scope.sortOp[i];
+                                $scope.sortOp[i] = firstIdxValue;
+                                returnArray = $scope.sortOp;
+                                break;
+                            };
+                        }
+                    }
+                }
+                return returnArray;
+            }
+
+            $scope.applicationArrSort = function(applications){
+
+                console.log(applications);
+                var returnArray = [];
+                var idx;
+                var firstIdxValue;
+                $scope.sortOp = $filter('orderBy')(applications, 'appName');
+                if($scope.sortOp){
+                    for(var i = 0;i < $scope.sortOp.length; i++){
+                        if($scope.sortOp[0].appName == "all"){
+                            returnArray = $scope.sortOp;
+                            break;
+                        }else if ($scope.sortOp[0] != "all"){
+                            firstIdxValue = $scope.sortOp[0];
+                            if($scope.sortOp[i].appName == "all"){
 
                                 idx = i;
                                 $scope.sortOp[0] = $scope.sortOp[i];
