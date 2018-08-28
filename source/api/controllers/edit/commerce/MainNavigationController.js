@@ -155,7 +155,7 @@ module.exports = {
 
                         // product images copy to app file server
                         fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
-                                req.body.appId + '/assets/images/thirdNavi/' + imgeFileName, buf, function (err) {
+                                req.body.appId + '/assets/images/secondNavi/' + imgeFileName, buf, function (err) {
                                 if (err) {
                                     return res.send(err);
                                 }
