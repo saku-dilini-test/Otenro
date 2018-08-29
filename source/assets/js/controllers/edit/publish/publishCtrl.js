@@ -481,7 +481,7 @@
 //                            $mdDialog.hide();
                         }).error(function(data, status, headers, config) {
                         if(status == "409"){
-                            toastr.error('Unable to save keyword already exists.', 'Warning', {
+                            toastr.error('This keyword is already in use.', 'Warning', {
                                 closeButton: true
                             });
                         }else{
