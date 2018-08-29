@@ -54,7 +54,6 @@ module.exports = {
 
     //These info will retain in the sails global session
     setTokenInfo: function(body){
-        sails.log.debug("Token Info, expiresIn: " + body.expires_in + " accessToken: " + body.access_token + " refreshToken: " + body.refresh_token);
         expiresIn = body.expires_in;
         accessToken = body.access_token;
         refreshToken = body.refresh_token;
