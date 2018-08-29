@@ -66,13 +66,13 @@ module.exports = {
                         '<tr>'+
                          '<td class="hero-subheader__content" style="font-size: 16px; line-height: 20px; color: #969696; padding: 0 60px 50px 0;" align="left">'+
                                  '<p>Hi '+ data.fName + " " + data.lName + ' Welcome Aboard!</p>'+
-                                 '<p>Thank you for registering for Appmaker, the platform that enables you to create mobile </p>'+
+                                 '<p>Thank you for registering for Ideadroid, the platform that enables you to create mobile </p>'+
                                  '<p>applications without any coding. The service is currently in beta, and some features of the</p>'+
-                                 '<p>platform are currently not enabled. </p><br>'+
+                                 '<p>platform are currently not enabled. </p><br><br>'+
                                  '<p>As the service is in beta you may encounter bugs or errors. Please report these to</p>'+
-                                 '<p>support@appmaker.lk so that we can ensure they are addressed at launch.</p><br>'+
+                                 '<p>support@appmaker.lk so that we can ensure they are addressed at launch.</p><br><br>'+
                                  '<p>Good luck on your app creation journey!</p>'+
-                                 '<p>The Appmaker Team*</p>'+
+                                 '<p>The Ideamart Team*</p>'+
                          '</td>'+
                         '</tr>'+
                     '</table>'+
@@ -965,17 +965,16 @@ module.exports = {
 
                                emailBody = "<html><br>Hi " +  data.fName + " " + data.lName + ",<br><br>"+
 
-                                           "Good news! <B>" + data.appName + "</B> App has been approved by <B>" + operator + "</B> for launch! Users can access the web app<br> using the following URL: <a href=" + data.appView + "> App view</a><br><br>" +
+                                           "Good news! <B>" + data.appName + "</B> App has been approved by <B>" + operator + "</B> for launch!<br>" +
 
-                                           "You can download the apk file of the application from " + "<a href=" + apkFile + "> download APK </a><br><br>" +
+                                           "Users can access the web app using the following URL: <a href=" + data.appView + "> App view</a><br><br>" +
 
-                                           "<br>If you need any technical support in uploading the app to an app store, please contact<br> us at support@appmaker.lk. To upload the app on Google Play Store you can follow the<br> instructions we have given on publishing page " + "<a href='http://developer.appmaker.lk'>developer.appmaker.lk</a>" +
+                                           "You can download the apk file of the application from " + "<a href=" + apkFile + "> download APK </a><br><br><br>" +
 
-                                           "<br><br>For any assistance required in marketing the application please contact<br> marketing@appmaker.lk<br><br>" +
-
+                                           "If you need any technical support in uploading the app to an app store, please <br> contact the Ideamart team.<br><br><br>" +
                                            "Regards,<br><br>"+
 
-                                           "Appmaker Team</html>";
+                                           "Ideamart Team</html>";
 
                                 subject = data.appName + " has been approved";
 
@@ -983,13 +982,13 @@ module.exports = {
 
                                 emailBody = "<html><br>Hi " +  data.fName + " " + data.lName + ",<br><br>"+
 
-                                           "This email is to inform you that <B>" + data.appName + "</B> has been suspended by <B>" + operator + "</B>." +
+                                           "This email is to inform you that <B>" + data.appName + "</B> has been suspended by <B>" + operator + "</B>.<br><br>" +
 
-                                           "<br><br>You can re-submit the app for approval after addressing the concerns<br>" +
+                                           "You can re-submit the app for approval after addressing the concerns<br>" +
 
                                            "Regards,<br>"+
 
-                                           "Appmaker Team</html>";
+                                           "Ideamart Team</html>";
 
                                 subject = data.appName + " has been suspended";
 
@@ -997,13 +996,13 @@ module.exports = {
 
                                 emailBody = "<html><br>Hi " +  data.fName + " " + data.lName + ",<br><br>"+
 
-                                           "This email is to inform you that <B>" + data.appName + "</B> has been rejected by <B>" + operator + "</B>." +
+                                           "This email is to inform you that <B>" + data.appName + "</B> has been rejected by <B>" + operator + "</B>. <br><br>" +
 
-                                           "<br><br>You can re-submit the app for approval after addressing the concerns<br>" +
+                                           "You can re-submit the app for approval after addressing the concerns<br>" +
 
                                            "Regards,<br>"+
 
-                                           "Appmaker Team</html>";
+                                           "Ideamart Team</html>";
 
                                 subject = data.appName + " has been rejected";
 
@@ -1011,13 +1010,11 @@ module.exports = {
 
                                            emailBody = "<html><br>Hi " +  data.fName + " " + data.lName + ",<br><br>"+
 
-                                                  "This email is to inform you that <B>" + data.appName + "</B> has been terminated by <B>" + operator + "</B>." +
-
-                                                  "<br><br>You can re-submit the app for approval after addressing the concerns<br>" +
+                                                  "This email is to inform you that <B>" + data.appName + "</B> has been terminated by <B>" + operator + "</B>. <br><br>" +
 
                                                   "Regards,<br>"+
 
-                                                  "Appmaker Team</html>";
+                                                  "Ideamart Team</html>";
 
                                 subject = data.appName + " has been terminated";
 
