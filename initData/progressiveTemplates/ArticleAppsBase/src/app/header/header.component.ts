@@ -121,6 +121,8 @@ export class HeaderComponent implements OnInit {
     this.title = name;
     this.router.navigate([route]);
     document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("header").style.height = "initial";
+
   }
 
   goBack() {
@@ -138,10 +140,12 @@ export class HeaderComponent implements OnInit {
 
   openNav() {
     document.getElementById("mySidenav").style.width = "100%";
+    document.getElementById("header").style.height = "100%";
   }
 
   closeNav() {
     document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("header").style.height = "initial";
   }
 
   close() {
@@ -215,6 +219,8 @@ export class HeaderComponent implements OnInit {
                 $('#appStatusModel').modal('show');
               });
               document.getElementById("mySidenav").style.width = "0";
+              document.getElementById("header").style.height = "initial";
+
             }else if (this.subscriptionStatus) {
               this.isSubscribing = false;
               localStorage.setItem(this.appId + "msisdn", data.msisdn)
@@ -225,6 +231,8 @@ export class HeaderComponent implements OnInit {
               });
               //close the nav bar
               document.getElementById("mySidenav").style.width = "0";
+              document.getElementById("header").style.height = "initial";
+
             }
           });
         });
@@ -268,6 +276,8 @@ export class HeaderComponent implements OnInit {
                 this.unSubscribedSuccessPopup();
               });
               document.getElementById("mySidenav").style.width = "0";
+              document.getElementById("header").style.height = "initial";
+
             }
           });
         });
@@ -280,7 +290,7 @@ export class HeaderComponent implements OnInit {
 
   smsErrorRegistrationCallback(error: any) {
     console.log("smsErrorRegistrationCallback in Header Component: " + error);
-    headerCmp.dataService.displayMessage = 'Sorry we could not register you for the service. Please ensure that you have enough credit and try again.';
+    headerCmp.dataService.displayMessage = 'Sorry, you do not have enough credit to subscribe to the service';
     $(() => {
       $('#registerModel').modal('hide');
       $('#appStatusModel').modal('show');
@@ -293,7 +303,7 @@ export class HeaderComponent implements OnInit {
 
   smsErrorUnRegistrationCallback(error: any) {
     console.log("smsErrorUnRegistrationCallback in Header Component: " + error);
-    headerCmp.dataService.displayMessage = 'Sorry we could not register you for the service. Please ensure that you have enough credit and try again.';
+    headerCmp.dataService.displayMessage = 'Sorry, you do not have enough credit to send the sms to unsubscribe from the service';
     $(() => {
       $('#myAccountModel').modal('toggle');
       $('#appStatusModel').modal('show');
@@ -301,7 +311,7 @@ export class HeaderComponent implements OnInit {
   }
 
   timeoutSubscriptionPopup(){
-    this.dataService.displayMessage = 'Registration failed, Please try again.';
+    this.dataService.displayMessage = 'The subscription process timed out. We are unable to subscribe you to the service at this time.';
     $(() => {
       $('#registerModel').modal('hide');
       $('#appStatusModel').modal('show');
@@ -309,7 +319,7 @@ export class HeaderComponent implements OnInit {
   }
 
   timeoutUnubscriptionPopup(){
-    this.dataService.displayMessage = 'Un-registration failed, Please try again.';
+    this.dataService.displayMessage = 'The unsubscription process timed out, Please try again.';
     $(() => {
       $('#myAccountModel').modal('toggle');
       $('#appStatusModel').modal('show');

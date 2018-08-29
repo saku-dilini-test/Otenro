@@ -289,7 +289,7 @@ export class HomepageComponent implements OnInit {
 
   smsErrorRegistrationCallback(error: any) {
     console.log("smsErrorRegistrationCallback in homepage Component: " + error);
-    homePageCmp.dataService.displayMessage = 'Sorry we could not register you for the service. Please ensure that you have enough credit and try again.';
+    homePageCmp.dataService.displayMessage = 'Sorry, you do not have enough credit to subscribe to the service';
     $(() => {
       $('#registerModelhome').modal('hide');
       $('#appStatusModel').modal('show');
@@ -297,7 +297,7 @@ export class HomepageComponent implements OnInit {
   }
 
   timeoutSubscriptionPopup(){
-    this.dataService.displayMessage = 'Registration failed, Please try again.';
+    this.dataService.displayMessage = 'The subscription process timed out. We are unable to subscribe you to the service at this time.';
     $(() => {
       $('#registerModelhome').modal('hide');
       $('#appStatusModel').modal('show');
