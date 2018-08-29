@@ -74,10 +74,10 @@ module.exports = {
 
                                         var data = {
                                             "operator": operatorData.operator,
-                                            "revenue": subscriptionPaymentData[0]?subscriptionPaymentData[0].amount:0,
+                                            "revenue": subscriptionPaymentData[0] ? subscriptionPaymentData[0].amount : 0,
                                             "viewCount": appVisitDataLog[0] ? appVisitDataLog[0].count : 0,
                                             "date": dateFormat(date, "yyyy-mm-dd"),
-                                            "appId":publishDetailsData.appId
+                                            "appId": publishDetailsData.appId
                                         };
 
                                         console.log(data);
@@ -110,30 +110,32 @@ module.exports = {
         console.log("appId " + appId);
 
 
+        var query, groupBy = "";
 
-        var query,groupBy = "";
-
-        groupBy= {
-            groupBy: ['operator','date'],
-            sum: ['revenue','viewCount']
+        groupBy = {
+            groupBy: ['operator', 'date'],
+            sum: ['revenue', 'viewCount']
         }
 
         if (operator == "all") {
 
-            if (appId){
-                query = {date: {'>=': dateFormat(dateFrom, "yyyy-mm-dd"), '<=': dateFormat(dateTo, "yyyy-mm-dd")},appId:appId}
+            if (appId) {
+                query = {
+                    date: {'>=': dateFormat(dateFrom, "yyyy-mm-dd"), '<=': dateFormat(dateTo, "yyyy-mm-dd")},
+                    appId: appId
+                }
 
-            }else {
+            } else {
                 query = {date: {'>=': dateFormat(dateFrom, "yyyy-mm-dd"), '<=': dateFormat(dateTo, "yyyy-mm-dd")}}
             }
         } else {
 
-            if (appId){
+            if (appId) {
                 query = {
                     date: {'>=': dateFormat(dateFrom, "yyyy-mm-dd"), '<=': dateFormat(dateTo, "yyyy-mm-dd")},
-                    operator: operator,appId:appId
+                    operator: operator, appId: appId
                 }
-            }else {
+            } else {
 
                 query = {
                     date: {'>=': dateFormat(dateFrom, "yyyy-mm-dd"), '<=': dateFormat(dateTo, "yyyy-mm-dd")},
@@ -143,7 +145,7 @@ module.exports = {
 
         }
 
-        RevenueAndTrafficDailySummary.find(query,groupBy).exec(function (err, revenueAndTrafficDailySummary) {
+        RevenueAndTrafficDailySummary.find(query, groupBy).exec(function (err, revenueAndTrafficDailySummary) {
             if (err) return res.serverError();
             res.send(revenueAndTrafficDailySummary);
         });
@@ -158,34 +160,34 @@ module.exports = {
         var monthFrom = reqData.monthFrom;
         var monthTo = reqData.monthTo;
         var operator = reqData.operator;
-        var query,groupBy = "";
+        var query, groupBy = "";
 
         var appId = reqData.appId;
 
-        groupBy= {
-            groupBy: ['operator','month','year'],
-            sum: ['revenue','viewCount']
+        groupBy = {
+            groupBy: ['operator', 'month', 'year'],
+            sum: ['revenue', 'viewCount']
         }
 
         var query = "";
 
         if (operator == "all") {
 
-             if (appId){
-                 query = {month: {'>=': monthFrom, '<=': monthTo}, year: year,appId:appId}
-             }else {
-                 query = {month: {'>=': monthFrom, '<=': monthTo}, year: year}
-             }
+            if (appId) {
+                query = {month: {'>=': monthFrom, '<=': monthTo}, year: year, appId: appId}
+            } else {
+                query = {month: {'>=': monthFrom, '<=': monthTo}, year: year}
+            }
         } else {
-            if (appId){
-                query = {month: {'>=': monthFrom, '<=': monthTo}, year: year, operator: operator,appId:appId}
-            }else {
+            if (appId) {
+                query = {month: {'>=': monthFrom, '<=': monthTo}, year: year, operator: operator, appId: appId}
+            } else {
                 query = {month: {'>=': monthFrom, '<=': monthTo}, year: year, operator: operator}
             }
         }
 
 
-        RevenueAndTrafficMonthlySummary.find(query,groupBy).exec(function (err, data) {
+        RevenueAndTrafficMonthlySummary.find(query, groupBy).exec(function (err, data) {
             if (err) return done(err);
             res.send(data);
         });
@@ -201,30 +203,30 @@ module.exports = {
         var operator = reqData.operator;
         var appId = reqData.appId;
 
-        var query,groupBy = "";
+        var query, groupBy = "";
 
-        groupBy= {
-            groupBy: ['operator','year'],
-            sum: ['revenue','viewCount']
+        groupBy = {
+            groupBy: ['operator', 'year'],
+            sum: ['revenue', 'viewCount']
         }
 
         if (operator == "all") {
-            if (appId){
-                query = {year: {'>=': yearFrom, '<=': yearTo},appId:appId}
-            }else {
+            if (appId) {
+                query = {year: {'>=': yearFrom, '<=': yearTo}, appId: appId}
+            } else {
                 query = {year: {'>=': yearFrom, '<=': yearTo}}
             }
         } else {
-            if (appId){
-                query = {year: {'>=': yearFrom, '<=': yearTo}, operator: operator,appId:appId}
-            }else {
+            if (appId) {
+                query = {year: {'>=': yearFrom, '<=': yearTo}, operator: operator, appId: appId}
+            } else {
                 query = {year: {'>=': yearFrom, '<=': yearTo}, operator: operator}
             }
 
         }
 
 
-        RevenueAndTrafficYearlySummary.find(query,groupBy).exec(function (err, data) {
+        RevenueAndTrafficYearlySummary.find(query, groupBy).exec(function (err, data) {
             if (err) return done(err);
             res.send(data);
         });
@@ -232,105 +234,120 @@ module.exports = {
     },
 
 
-    insertRevenueAndTrafficMonthlySummary: function (year, month) {
+    insertRevenueAndTrafficMonthlySummary: function () {
 
-                console.log("year " + year + " " + "month " + month);
+        var date = new Date();
+        date.setDate(date.getDate() - 1);
 
-                RevenueAndTrafficDailySummary.native(function (err, collection) {
+        RevenueAndTrafficMonthlySummary.destroy({
+            month: date.getMonth() + 1,
+            year: date.getFullYear()
+        }).exec(function (err) {
+            if (err) return console.log("Error while deleting RevenueAndTrafficMonthlySummary " + err);
 
+            RevenueAndTrafficDailySummary.native(function (err, collection) {
+
+                if (err) {
+                    return console.log("RevenueAndTrafficDailySummary find error " + error);
+                }
+
+                collection.aggregate([
+                    {
+                        "$match": {
+                            "date": {
+                                $gte: dateFormat(getFirstDayOfMonth(date.getFullYear(), date.getMonth()), "yyyy-mm-dd"),
+                                $lte: dateFormat(getLastDayOfMonth(date.getFullYear(), date.getMonth()), "yyyy-mm-dd")
+                            }
+                        }
+                    },
+                    {
+                        "$group": {
+                            "_id": {"operator": "$operator", "appId": "$appId"},
+                            "viewCount": {"$sum": "$viewCount"},
+                            "revenue": {"$sum": "$revenue"}
+                        }
+                    }
+                ]).toArray(function (err, dailySummaryData) {
                     if (err) {
-                        console.log("SubscriptionPayment find error " + error);
+                        return console.log(err);
                     }
 
-                    collection.aggregate([
-                        {
-                            "$match": {
-                                "date": {
-                                    $gte: dateFormat(getFirstDayOfMonth(year, month), "yyyy-mm-dd"),
-                                    $lte: dateFormat(getLastDayOfMonth(year, month), "yyyy-mm-dd")
-                                }
-                            }
-                        },
-                        {
-                            "$group": {
-                                "_id": {"operator": "$operator", "appId": "$appId"},
-                                "viewCount": {"$sum": "$viewCount"},
-                                "revenue": {"$sum": "$revenue"}
-                            }
-                        }
-                    ]).toArray(function (err, dailySummaryData) {
-                        if (err) {
-                            console.log(err);
-                        }
+                    dailySummaryData.forEach(function (dailySummary) {
 
-                        dailySummaryData.forEach(function (dailySummary) {
+                        var data = {
+                            "appId": dailySummary._id.appId,
+                            "operator": dailySummary._id.operator,
+                            "revenue": dailySummary.revenue,
+                            "viewCount": dailySummary.viewCount,
+                            "month": date.getMonth() + 1,
+                            "year": date.getFullYear()
+                        };
 
-                            var data = {
-                                "appId":dailySummary._id.appId,
-                                "operator": dailySummary._id.operator,
-                                "revenue": dailySummary.revenue,
-                                "viewCount": dailySummary.viewCount ,
-                                "month": month,
-                                "year": year
-                            };
-
-                            RevenueAndTrafficMonthlySummary.create(data).exec(function (err, result) {
-                                if (err) console.log(err);
-                                console.log(result);
-                            });
+                        RevenueAndTrafficMonthlySummary.create(data).exec(function (err, result) {
+                            if (err) return console.log(err);
+                            console.log(result);
                         });
-
                     });
 
                 });
+
+            });
+        });
 
     },
 
 
-    insertRevenueAndTrafficYearSummary: function (year) {
+    insertRevenueAndTrafficYearSummary: function () {
 
-        RevenueAndTrafficMonthlySummary.native(function (err, collection) {
+        var date = new Date();
+        date.setDate(date.getDate() - 1);
 
-            if (err) {
-                console.log("SubscriptionPayment find error " + error);
-            }
+        RevenueAndTrafficYearlySummary.destroy({year: date.getFullYear()}).exec(function (err) {
+            if (err) return console.log("Error while deleting RevenueAndTrafficYearlySummary " + err);
 
-            collection.aggregate([
-                {
-                    "$match": {
-                        "year": year
-                    }
-                },
-                {
-                    "$group": {
-                        "_id": {"operator": "$operator", "appId": "$appId"},
-                        "viewCount": {"$sum": "$viewCount"},
-                        "revenue": {"$sum": "$revenue"}
-                    }
-                }
-            ]).toArray(function (err, monthlySummaryData) {
+            RevenueAndTrafficMonthlySummary.native(function (err, collection) {
+
                 if (err) {
-                    console.log(err);
+                    return console.log("SubscriptionPayment find error " + error);
                 }
 
-                monthlySummaryData.forEach(function (monthlySummary) {
+                collection.aggregate([
+                    {
+                        "$match": {
+                            "year": date.getFullYear()
+                        }
+                    },
+                    {
+                        "$group": {
+                            "_id": {"operator": "$operator", "appId": "$appId"},
+                            "viewCount": {"$sum": "$viewCount"},
+                            "revenue": {"$sum": "$revenue"}
+                        }
+                    }
+                ]).toArray(function (err, monthlySummaryData) {
+                    if (err) {
+                        return console.log(err);
+                    }
 
-                    var data = {
-                        "appId":monthlySummary._id.appId,
-                        "operator": monthlySummary._id.operator,
-                        "revenue": monthlySummary.revenue,
-                        "viewCount": monthlySummary.viewCount ,
-                        "year": year
-                    };
+                    monthlySummaryData.forEach(function (monthlySummary) {
 
-                    RevenueAndTrafficYearlySummary.create(data).exec(function (err, result) {
-                        if (err) console.log(err);
-                        console.log(result);
+                        var data = {
+                            "appId": monthlySummary._id.appId,
+                            "operator": monthlySummary._id.operator,
+                            "revenue": monthlySummary.revenue,
+                            "viewCount": monthlySummary.viewCount,
+                            "year": date.getFullYear()
+                        };
+
+                        RevenueAndTrafficYearlySummary.create(data).exec(function (err, result) {
+                            if (err) return console.log(err);
+                            console.log(result);
+                        });
                     });
+
                 });
 
             });
-
         });
     }
 };

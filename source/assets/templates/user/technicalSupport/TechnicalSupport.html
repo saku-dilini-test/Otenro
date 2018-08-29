@@ -7,7 +7,7 @@
     <div class="obl-dashboard-wrapper" ng-controller="HeaderController" ng-show="auth.isAuthenticated()">
         <div class="obl-dashboard-header clearfix">
             <h2 ng-hide="welcome"> </h2>
-            <p  ng-hide="welcome"> Welcome to the technical support area</p>
+            <p ng-if="showWelComeMessage" ng-hide="welcome"> Welcome to the technical support area</p>
             <div class="obl-dashboard-settings">
                 <button class="user-settings-button" ng-click="profileView()" type="button">
                     <img src="images/user-icon.svg" alt="User Logo" />
