@@ -16,7 +16,7 @@
                     <div class="md-dialog-header">
                         <h1 >Hello {{userEdit.firstName}}</h1>
                         <ul class="md-dialog-header-nav clearfix">
-                            <li ng-if="userEdit.userRole === 'APP_CREATOR'">
+                            <li ng-if="userEdit.userRole[0]==='APP_CREATOR'">
                                 <a ng-click="redirectToDashboard()" class="return-to-app">my apps</a>
                             </li>
                             <li>
