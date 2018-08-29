@@ -3114,6 +3114,9 @@ table.md-calendar-day-header{
   cursor: -webkit-grabbing;
 }
 
+.ADMdtp-container .ADMdtp-calendar-container .daysNames > span, .ADMdtp-container .ADMdtp-calendar-container .days > span{
+    width: 14.2% !important;
+}
 .ghost {
   opacity: .5;
   background: #C8EBFB;
