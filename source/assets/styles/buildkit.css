@@ -3099,14 +3099,11 @@ table.md-calendar-day-header{
 .padding-horizontal-16-10{
     padding: 0 16px 0 10px;
 }
-[size='10%']{
-    width: 10%;
+[size='12%']{
+    width: 12%;
 }
-[size='15%']{
-    width: 15%;
-}
-[size='50%']{
-    width: 50%;
+[size='48%']{
+    width: 48%;
 }
 .height-100vh{
     height:100vh;
