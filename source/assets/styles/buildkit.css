@@ -3108,6 +3108,10 @@ table.md-calendar-day-header{
 [size='50%']{
     width: 50%;
 }
+.height-100vh{
+    height:100vh;
+}
+
 [ng-quill-editor] { display: block; }
 .glyphicon-move {
   cursor: move;
