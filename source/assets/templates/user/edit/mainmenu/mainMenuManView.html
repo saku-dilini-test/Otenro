@@ -13,19 +13,21 @@
                 </ul>
             </div>
             <div class="md-dialog-main">
-                <table class="me-simple-table">
+                <table class="me-simple-table" >
                     <thead>
                         <tr>
                             <th width="50%">Name</th>
-                            <th width="25%">Edit</th>
-                            <th width="25%">
+                            <th width="20%">Move up/Down</th>
+                            <th width="20%">Edit</th>
+                            <th width="20%">
                                 <md-checkbox aria-label="Checkbox Delete" ng-checked="isChecked()" ng-click="toggleAll()"> Delete </md-checkbox>                                 
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
-                    <tr ng-repeat="item in menuItems">
-                        <td>{{item.name}}</td>
+                    <tbody ng-sortable = "filesSortConfig" >
+                    <tr id ="listArr" ng-repeat="item in menuItems | orderBy: 'orderNo'">
+                        <td class="sortable" >{{item.name}}</td>
+                        <td><span> ^ </span> <span> | </span></td>
                         <td><img width="15%" src="../../../images/edit-icon.svg" ng-click="goToEditMenuItemView(item)"></td>
                        <td>
                             <md-checkbox aria-label="{{item.id}}" ng-checked="exists(item.id, selected)" ng-click="toggleDelete(item.id, selected)"></md-checkbox>
@@ -74,6 +76,7 @@
                     <md-button class="me-default-button" ng-click="deleteCategories(selected)">Delete</md-button>
                     <!--<md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>-->
                     <md-button class="me-default-button" ng-click="hide()">Close</md-button>
+                    <!--<md-button class="me-default-button" ng-click="">Save</md-button>-->
                 </div>
             </div>
         </form>

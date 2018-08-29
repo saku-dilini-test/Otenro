@@ -52,8 +52,8 @@ angular.module('app', [
   'ngAnimate',
   'chart.js',
   'uiCropper',
-  'ngQuill'
-
+  'ngQuill',
+  'ng-sortable'
 
 ]).run(function($rootScope, $state, $auth,Auth,Permission,$log) {
 

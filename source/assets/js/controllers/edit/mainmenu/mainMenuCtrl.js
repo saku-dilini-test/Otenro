@@ -10,8 +10,32 @@
         $scope.tmpImage = [];
         $scope.mainImg = null;
         $scope.topLevel  = '';
+        $scope.newSortArr;
+
         $scope.tempplayer = "";
 
+$scope.filesSortConfig = {
+        animation: 150,
+        ghostClass: 'ghost',
+        onAdd: function (evt) {
+            console.log(evt);
+        },
+        onUpdate: function (evt) {
+            evt.model.orderNo = evt.newIndex;
+            evt.models[evt.oldIndex].orderNo = evt.oldIndex;
+            console.log(evt);
+            console.log(evt.models);
+            $scope.saveCategoryOrder(evt.models);
+        }
+    };
+
+        $scope.saveCategoryOrder = function(arr){
+            mainMenuService.updateCategoryOrder(arr).success(function(data){
+                console.log(data);
+            }).error(function(err) {
+                console.log("error update cat")
+            });
+        };
 
         // ----- Config -----
         $scope.initialData = initialData;
@@ -48,6 +72,31 @@
             angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
         }
 
+
+        $scope.moveUp = function(arr, old_index) {
+            console.log(arr);
+            console.log(old_index);
+            var orderNoStable;
+            var orderNo;
+
+            for(var i = 0;i < arr.length; i++){
+                if( i == old_index){
+                    orderNoStable = arr[old_index].orderNo;
+                    console.log(orderNo);
+                    arr[old_index].orderNo = arr[old_index -1].orderNo;
+                    console.log(old_index -1);
+                    arr[old_index -1].orderNo = orderNo;
+                    break;
+                }
+            }
+
+            console.log(arr);
+        };
+
+
+        $scope.moveDown = function(index){
+            console.log(index);
+        }
 
         $scope.addImage = function(img){
                     if(angular.element('#fileInput').val() == ''){

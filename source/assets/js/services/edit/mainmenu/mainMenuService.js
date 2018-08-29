@@ -167,6 +167,9 @@
             updateSecondNavi : function(data) {
                 return $http.post(SERVER_URL+ 'edit/updateSecondNavi',data);
             },
+            updateCategoryOrder : function(data) {
+                return $http.post(SERVER_URL+ 'edit/updateCategoryOrder',data);
+            },
             /**
              * Get Application data from server
              * @param {String} appId
