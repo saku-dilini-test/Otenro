@@ -1404,26 +1404,19 @@
                 });
             }
 
-
-            var csv = "";
-
-            for( i=0 ; i<dataArray.length; i++ ){
-                        csv += dataArray[i];
-                }
-            var data, filename, csvButton;
-            if (csv == null) return;
-
-            filename = args.filename || 'export.csv';
-
-            if (!csv.match(/^data:text\/csv/i)) {
-                csv = 'data:text/csv;charset=utf-8,' + csv;
+            var blob = new Blob(dataArray);
+            if (window.navigator.msSaveOrOpenBlob){
+                window.navigator.msSaveBlob(blob, "download.csv");
             }
-            data = encodeURI(csv);
-            csvButton = document.createElement('a');
-            csvButton.setAttribute('href', data);
-          //  csvButton.setAttribute('download', filename);
-            csvButton.click();
-
+            else
+            {
+                var a = window.document.createElement("a");
+                a.href = window.URL.createObjectURL(blob, {type: "text/plain"});
+                a.download = "download.csv";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
         }
 
     }
