@@ -44,16 +44,6 @@ module.exports = {
             appId: req.body.appId
         };
 
-        if(data.telPhone){
-            for (var i = 0; i < data.telPhone.length; i++) {
-                if (data.telPhone.charAt(i) === '+') {
-                    isPlusMarkExists = true;
-                }
-            }
-            if (!isPlusMarkExists) {
-                data.telPhone = "+" + data.telPhone;
-            }
-        }
         ApplicationContactUs.update(searchApp, data).exec(function (err, app) {
             if(err) return err;
 
