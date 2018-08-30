@@ -135,12 +135,12 @@
                                 <label>Keyword</label>
                                 <input class="input-shadow-border"
                                        type="text"
-                                       ng-pattern="/^[0-9A-z]*$/"
-                                       name="keyword" maxlength="{{keywordLength}}"  ng-model="playStoreData.keyword" required/>
+                                       ng-pattern="/^[a-zA-Z]*$/"
+                                       name="keyword" maxlength="{{keywordLength}}"  ng-model="playStoreData.keyword" required ng-disabled="playStoreData.isAppSubmitted"/>
                                     <br>
                                 <span class="information">Characters left: {{keywordLength - playStoreData.keyword.length}} </span>
                                 <span class="error help-block" ng-show="generalForm.keyword.$dirty && generalForm.keyword.$invalid">
-                                        Enter a proper keyword
+                                        Only letters are allowed
                                 </span>
                                 </fieldset>
                         </div>
@@ -148,7 +148,7 @@
                             <fieldset class="col-3">
                                 <label>Select Port</label>
 
-                                <md-select class="" placeholder="Select Port" ng-model="playStoreData.port" required>
+                                <md-select class="" placeholder="Select Port" ng-model="playStoreData.port" required ng-disabled="playStoreData.isAppSubmitted">
                                     <md-option ng-value="port" ng-repeat="port in Ports ">{{port}}
                                     </md-option>
                                 </md-select>

@@ -47,37 +47,139 @@ module.exports = {
         var approot = path.resolve();
         var imgPath = approot + '/assets/images/emailtemplates/';
 
-        var emailBody = '<html><body style="padding: 0; margin: 0;" bgcolor="#eeeeee">' +
-                         '<span style="color:transparent !important; overflow:hidden !important; display:none !important; line-height:0px !important; height:0 !important; opacity:0 !important; visibility:hidden !important; width:0 !important; mso-hide:all;">This is your preheader text for this email (Read more about email preheaders here - https://goo.gl/e60hyK)</span>' +
-                         			'<table class="container" border="0" cellpadding="0" cellspacing="0" width="700" bgcolor="#ffffff" style="width: 700px;">' +
-                         					'<table class="container header" border="0" cellpadding="0" cellspacing="0" width="620" style="width: 620px;">' +
-                         						'<tr>' +
-                         							'<td style="padding: 30px 0 30px 0; border-bottom: solid 1px #eeeeee;" align="left">' +
-                         								'<a href="#" style="font-size: 30px; text-decoration: none; color: #000000;"><img src="cid:appmakerLogo" width="120px"></a>'+
-                         							'</td>'+
-                         						'</tr>'+
-                         					'</table>'+
-                         				'</table>'+
-                    '<table class="container hero-subheader" border="0" cellpadding="0" cellspacing="0">'+
-                        '<tr>'+
-                            '<td class="hero-subheader__title" style="font-size: 43px; font-weight: bold; padding: 40px 0 15px 0;" align="left">Welcome to AppMaker!</td>'+
-                        '</tr>'+
+        var emailBody = '<!DOCTYPE>' +
+                        '<html>' +
+                           '<head>' +
+                              '<title>Ideadroid - Responsive Email Template</title>' +
+                            '<style type="text/css">' +
+                               '/* ----- Custom Font Import ----- */' +
+                               '/* ----- Text Styles ----- */' +
+                               'table{' +
+                                  'font-family: "Lato", Arial, sans-serif;' +
+                                  '-webkit-font-smoothing: antialiased;' +
+                                  '-moz-font-smoothing: antialiased;' +
+                                  'font-smoothing: antialiased;' +
+                               '}' +
+                               '@media only screen and (max-width: 700px){' +
+                                  '/* ----- Base styles ----- */' +
+                                  '.full-width-container{padding: 0 !important;}' +
+                                  '.container{width: 100% !important;}' +
+                                  '/* ----- Header ----- */' +
+                                  '.header td{padding: 30px 15px 30px 15px !important;}' +
+                                  '/* ----- Projects list ----- */' +
+                                  '.projects-list{display: block !important;}' +
+                                  '.projects-list tr{display: block !important;}' +
+                                  '.projects-list td{display: block !important;}' +
+                                  '.projects-list tbody{display: block !important;}' +
+                                  '.projects-list img{margin: 0 auto 25px auto;}' +
+                                  '/* ----- Half block ----- */' +
+                                  '.half-block{display: block !important;}' +
+                                  '.half-block tr{display: block !important;}' +
+                                  '.half-block td{display: block !important;}' +
+                                  '.half-block__image{width: 100% !important;background-size: cover;}' +
+                                  '.half-block__content{' +
+                                   'width: 100% !important;box-sizing: border-box;padding: 25px 15px 25px 15px !important;}' +
+                                  '/* ----- Hero subheader ----- */' +
+                                  '.hero-subheader__title{' +
+                                  '  padding: 80px 15px 15px 15px !important;font-size: 35px !important;}' +
+                                  '.hero-subheader__content{padding: 0 15px 90px 15px !important;}' +
+                                  '/* ----- Title block ----- */' +
+                                  '.title-block{padding: 0 15px 0 15px;}' +
+                                  '/* ----- Paragraph block ----- */' +
+                                  '.paragraph-block__content{padding: 25px 15px 18px 15px !important;}' +
 
-                        '<tr>'+
-                         '<td class="hero-subheader__content" style="font-size: 16px; line-height: 20px; color: #969696; padding: 0 60px 50px 0;" align="left">'+
-                                 '<p>Hi '+ data.fName + " " + data.lName + ' Welcome Aboard!</p>'+
-                                 '<p>Thank you for registering for Appmaker, the platform that enables you to create mobile </p>'+
-                                 '<p>applications without any coding. The service is currently in beta, and some features of the</p>'+
-                                 '<p>platform are currently not enabled. </p><br>'+
-                                 '<p>As the service is in beta you may encounter bugs or errors. Please report these to</p>'+
-                                 '<p>support@appmaker.lk so that we can ensure they are addressed at launch.</p><br>'+
-                                 '<p>Good luck on your app creation journey!</p>'+
-                                 '<p>The Appmaker Team*</p>'+
-                         '</td>'+
-                        '</tr>'+
-                    '</table>'+
-                         '</body>'+
-                         '</html>';
+                                  '.info-bullets tr{display: block !important;}' +
+                                  '.info-bullets td{display: block !important;}' +
+                                  '.info-bullets tbody{display: block;}' +
+                                  '.info-bullets__icon{text-align: center;padding: 0 0 15px 0 !important;}' +
+                                  '.info-bullets__content{text-align: center;}' +
+                                  '.info-bullets__block{padding: 25px !important;}' +
+                                  '/* ----- CTA block ----- */' +
+                                  '.cta-block__title{padding: 35px 15px 0 15px !important;}' +
+                                  '.cta-block__content{padding: 20px 15px 27px 15px !important;}' +
+                                  '.cta-block__button{padding: 0 15px 0 15px !important;}' +
+                               '}' +
+                            '</style>' +
+                           '</head>' +
+                           '<body style="padding: 0; margin: 0;" bgcolor="#eeeeee">' +
+                           '  <span style="color:transparent !important; overflow:hidden !important; display:none !important; line-height:0px !important; height:0 !important; opacity:0 !important; visibility:hidden !important; width:0 !important; mso-hide:all;">This is your preheader text for this email (Read more about email preheaders here - https://goo.gl/e60hyK)</span>' +
+                           '  <!-- / Full width container -->' +
+                           '  <table class="full-width-container" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" bgcolor="#eeeeee" style="width: 100%; height: 100%; padding: 30px 0 30px 0;">' +
+                           '     <tr>' +
+                           '        <td align="center" valign="top">' +
+                           '           <!-- / 700px container -->' +
+                           '           <table class="container" border="0" cellpadding="0" cellspacing="0" width="700" bgcolor="#ffffff" style="width: 700px;">' +
+                           '              <tr>' +
+                           '                 <td align="center" valign="top">' +
+                           '                    <!-- / Header -->' +
+                           '                    <table class="container header" border="0" cellpadding="0" cellspacing="0" width="620" style="width: 620px;">' +
+                           '                       <tr>' +
+                           '                          <td style="padding: 30px 0 30px 0; border-bottom: solid 1px #eeeeee;" align="left">' +
+                           '                             <a href="#" style="font-size: 30px; text-decoration: none; color: #000000;"><img src="cid:ideadroid" width="120px"></a>' +
+                           '                          </td>' +
+                           '                       </tr>' +
+                           '                    </table>' +
+                           '                    <!-- /// Header -->' +
+                           '                    <!-- / Hero subheader -->' +
+                           '                    <table class="container hero-subheader" border="0" cellpadding="0" cellspacing="0" width="620" style="width: 620px;">' +
+                           '                       <tr>' +
+                           '                          <td class="hero-subheader__title" style="font-size: 43px; font-weight: bold; padding: 40px 0 15px 0;" align="left">Welcome Aboard!</td>' +
+                           '                       </tr>' +
+                           '                       <tr>' +
+                             '                               <td class="hero-subheader__content" style="font-size: 16px; line-height: 27px; color: #969696; padding: 0 0 50px 0;" align="justify">' +
+                                                              '<p>Hi '+ data.fName + " " + data.lName + ' Welcome Aboard!</p>'+
+                              '                                      <p>Thank you for registering for Ideadroid, the platform that enables you to create mobile applications without any coding. The service is currently in beta, and some features of the platform are currently not enabled.</p>' +
+                               '                                     <p>As the service is in beta you may encounter bugs or errors. Please report these to support@appmaker.lk so that we can ensure they are addressed at launch.</p>' +
+                                '                                    <p>Good luck on your app creation journey!</p>' +
+                                 '                                   <p style="padding: 15px 0 0 0; font-weight:700; ">The Ideamart Team<br/>' +
+                                  '                                      </p>' +
+                                   '                     </td>' +
+                                 '                 </tr>' +
+                                 '              </table>' +
+                                 '              <!-- /// Hero subheader -->' +
+                                 '              <!-- / CTA Block -->' +
+                                 '                          </tr>' +
+                                 '                       </table>' +
+                                 '                    </td>' +
+                                 '                 </tr>' +
+                                 '              </table>' +
+                                 '              <!-- /// CTA Block -->' +
+                                     '                   <!-- / Footer -->' +
+                                 '              <table class="container" border="0" cellpadding="0" cellspacing="0" width="100%" align="center">' +
+                                 '<tr>' +
+                                 '<td align="center">' +
+                                 '<table class="container" border="0" cellpadding="0" cellspacing="0" width="620" align="center" style="border-top: 1px solid #eeeeee; width: 620px;">' +
+                                 '<tr>' +
+                                 '<td style="text-align: center; padding: 10px 0 10px 0;">' +
+                                 '<a href="#" style="font-size: 28px; text-decoration: none; color: #d5d5d5;">ideamart.io</a>' +
+                                 '</td>' +
+                                 '</tr>' +
+                                 '<tr>' +
+                                 '<td align="middle">' +
+                                 '<table width="60" height="2" border="0" cellpadding="0" cellspacing="0" style="width: 60px; height: 2px;">' +
+                                 '<tr>' +
+                                 '<td align="middle" width="60" height="2" style="background-color: #eeeeee; width: 60px; height: 2px; font-size: 1px;"><img src="cid:img16"></td>' +
+                                 '</tr>' +
+                                 '</table>' +
+                                 '</td>' +
+                                 '</tr>' +
+                                 '<tr>' +
+                                 '<td style="color: #d5d5d5; text-align: center; font-size: 15px; padding: 10px 0 60px 0; line-height: 22px;">Copyright &copy; 2018 <a href="https://ideamart.io/" target="_blank" style="text-decoration: none; border-bottom: 1px solid #d5d5d5; color: #d5d5d5;">ideamart.io</a>. <br />All rights reserved.</td>' +
+                                 '</tr>' +
+                                 '</table>' +
+                                 '</td>' +
+                                 '</tr>' +
+                                 '</table>' +
+                                 '<!-- /// Footer -->' +
+                                 '</td>' +
+                                 '</tr>' +
+                                 '</table>' +
+                                 '</td>' +
+                                 '</tr>' +
+                              '</table>' +
+                           '</body>' +
+                        '</html>';
+
 
 
         var mailOptions = {
@@ -87,9 +189,14 @@ module.exports = {
             html: emailBody,
             attachments: [
                 {
-                    filename: 'appmaker.png',
-                    path: imgPath + 'appmaker.png',
-                    cid: 'appmakerLogo'
+                    filename: 'ideadroid.png',
+                    path: imgPath + 'ideadroid.png',
+                    cid: 'ideadroid'
+                },
+                {
+                    filename: 'img16.jpg',
+                    path: imgPath + 'img16.jpg',
+                    cid: 'img16'
                 }
             ]
         };
@@ -965,17 +1072,16 @@ module.exports = {
 
                                emailBody = "<html><br>Hi " +  data.fName + " " + data.lName + ",<br><br>"+
 
-                                           "Good news! <B>" + data.appName + "</B> App has been approved by <B>" + operator + "</B> for launch! Users can access the web app<br> using the following URL: <a href=" + data.appView + "> App view</a><br><br>" +
+                                           "Good news! <B>" + data.appName + "</B> App has been approved by <B>" + operator + "</B> for launch!<br>" +
 
-                                           "You can download the apk file of the application from " + "<a href=" + apkFile + "> download APK </a><br><br>" +
+                                           "Users can access the web app using the following URL: <a href=" + data.appView + "> App view</a><br><br>" +
 
-                                           "<br>If you need any technical support in uploading the app to an app store, please contact<br> us at support@appmaker.lk. To upload the app on Google Play Store you can follow the<br> instructions we have given on publishing page " + "<a href='http://developer.appmaker.lk'>developer.appmaker.lk</a>" +
+                                           "You can download the apk file of the application from " + "<a href=" + apkFile + "> download APK </a><br><br><br>" +
 
-                                           "<br><br>For any assistance required in marketing the application please contact<br> marketing@appmaker.lk<br><br>" +
-
+                                           "If you need any technical support in uploading the app to an app store, please <br> contact the Ideamart team.<br><br><br>" +
                                            "Regards,<br><br>"+
 
-                                           "Appmaker Team</html>";
+                                           "Ideamart Team</html>";
 
                                 subject = data.appName + " has been approved";
 
@@ -983,13 +1089,13 @@ module.exports = {
 
                                 emailBody = "<html><br>Hi " +  data.fName + " " + data.lName + ",<br><br>"+
 
-                                           "This email is to inform you that <B>" + data.appName + "</B> has been suspended by <B>" + operator + "</B>." +
+                                           "This email is to inform you that <B>" + data.appName + "</B> has been suspended by <B>" + operator + "</B>.<br><br>" +
 
-                                           "<br><br>You can re-submit the app for approval after addressing the concerns<br>" +
+                                           "You can re-submit the app for approval after addressing the concerns<br>" +
 
                                            "Regards,<br>"+
 
-                                           "Appmaker Team</html>";
+                                           "Ideamart Team</html>";
 
                                 subject = data.appName + " has been suspended";
 
@@ -997,13 +1103,13 @@ module.exports = {
 
                                 emailBody = "<html><br>Hi " +  data.fName + " " + data.lName + ",<br><br>"+
 
-                                           "This email is to inform you that <B>" + data.appName + "</B> has been rejected by <B>" + operator + "</B>." +
+                                           "This email is to inform you that <B>" + data.appName + "</B> has been rejected by <B>" + operator + "</B>. <br><br>" +
 
-                                           "<br><br>You can re-submit the app for approval after addressing the concerns<br>" +
+                                           "You can re-submit the app for approval after addressing the concerns<br>" +
 
                                            "Regards,<br>"+
 
-                                           "Appmaker Team</html>";
+                                           "Ideamart Team</html>";
 
                                 subject = data.appName + " has been rejected";
 
@@ -1011,13 +1117,11 @@ module.exports = {
 
                                            emailBody = "<html><br>Hi " +  data.fName + " " + data.lName + ",<br><br>"+
 
-                                                  "This email is to inform you that <B>" + data.appName + "</B> has been terminated by <B>" + operator + "</B>." +
-
-                                                  "<br><br>You can re-submit the app for approval after addressing the concerns<br>" +
+                                                  "This email is to inform you that <B>" + data.appName + "</B> has been terminated by <B>" + operator + "</B>. <br><br>" +
 
                                                   "Regards,<br>"+
 
-                                                  "Appmaker Team</html>";
+                                                  "Ideamart Team</html>";
 
                                 subject = data.appName + " has been terminated";
 

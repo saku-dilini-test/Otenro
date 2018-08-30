@@ -11,15 +11,15 @@ module.exports.cron = {
         schedule: '00 01 01 * * *',
         onTick: function () {
             if(sails){
+
                 var revenueAndTrafficReportController = require('../api/controllers/appMakerReports/RevenueAndTrafficReportController.js');
                 var reconciliationReportController = require('../api/controllers/appMakerReports/ReconciliationReportController.js');
                 var applicationBaseReportController = require('../api/controllers/appMakerReports/ApplicationBaseReportController.js');
                 var failedTransactionReportController = require('../api/controllers/appMakerReports/FailedTransactionReportController.js');
 
-
+                applicationBaseReportController.insertApplicationBaseDailySummary();
                 revenueAndTrafficReportController.insertRevenueAndTrafficDailySummary();
                 reconciliationReportController.insertReconciliationDailySummary();
-                applicationBaseReportController.insertApplicationBaseDailySummary();
                 failedTransactionReportController.insertFiledTransactionDailySummary();
             }
         }
@@ -27,23 +27,18 @@ module.exports.cron = {
 
     MonthlySummaryJob: {
 
-        schedule: '00 10 01 * * *',
+        schedule: '00 05 01 * * *',
         onTick: function () {
             if(sails){
-                var today = new Date();
-                var yesterday = new Date();
-                   yesterday.setDate(today.getDate() - 1);
-
-                if (today.getMonth() !== yesterday.getMonth()) {
 
                     var revenueAndTrafficReportController = require('../api/controllers/appMakerReports/RevenueAndTrafficReportController.js');
                     var reconciliationReportController = require('../api/controllers/appMakerReports/ReconciliationReportController.js');
                     var applicationBaseReportController = require('../api/controllers/appMakerReports/ApplicationBaseReportController.js');
 
-                    revenueAndTrafficReportController.insertRevenueAndTrafficMonthlySummary(yesterday.getFullYear(),yesterday.getMonth());
-                    reconciliationReportController.insertReconciliationMonthlySummary(yesterday.getFullYear(),yesterday.getMonth());
-                    applicationBaseReportController.insertApplicationBaseMonthlySummary(yesterday.getFullYear(),yesterday.getMonth());
-                }
+                    revenueAndTrafficReportController.insertRevenueAndTrafficMonthlySummary();
+                    reconciliationReportController.insertReconciliationMonthlySummary();
+                    applicationBaseReportController.insertApplicationBaseMonthlySummary();
+
 
             }
         }
@@ -51,25 +46,17 @@ module.exports.cron = {
 
     YearSummaryJob:{
 
-        schedule: '00 15 01 * * *',
+        schedule: '00 10 01 * * *',
         onTick: function () {
             if(sails){
-                var today = new Date();
-                var yesterday = new Date();
-                yesterday.setDate(today.getDate() - 1);
-
-                console.log("yesterday " +yesterday.getFullYear() + "yesterday month " +yesterday.getMonth() );
-
-                if (today.getFullYear() !== yesterday.getFullYear()) {
 
                     var revenueAndTrafficReportController = require('../api/controllers/appMakerReports/RevenueAndTrafficReportController.js');
                     var reconciliationReportController = require('../api/controllers/appMakerReports/ReconciliationReportController.js');
                     var applicationBaseReportController = require('../api/controllers/appMakerReports/ApplicationBaseReportController.js');
 
-                    revenueAndTrafficReportController.insertRevenueAndTrafficYearSummary(yesterday.getFullYear());
-                    reconciliationReportController.insertReconciliationYearlySummary(yesterday.getFullYear());
-                    applicationBaseReportController.insertApplicationBaseYearlySummary(yesterday.getFullYear())
-                }
+                     revenueAndTrafficReportController.insertRevenueAndTrafficYearSummary();
+                     reconciliationReportController.insertReconciliationYearlySummary();
+                     applicationBaseReportController.insertApplicationBaseYearlySummary();
 
             }
         }
