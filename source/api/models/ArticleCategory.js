@@ -21,6 +21,9 @@ module.exports = {
 
      type : 'ObjectId'
 
+    },
+    orderNo : {
+        type : 'integer'
     }
   }
 };

@@ -2,10 +2,10 @@
     'use strict';
     angular.module("appEdit").controller("MainMenuCtrl", ['oblMenuService','$scope', '$mdDialog', '$rootScope',
         'mainMenuService','$http','commerceService','toastr','mySharedService','SERVER_URL','ME_APP_SERVER','$auth'
-        ,'dashboardService','articleService','initialData','$log', MainMenuCtrl]);
+        ,'dashboardService','articleService','initialData','$log','$filter', MainMenuCtrl]);
 
     function MainMenuCtrl(oblMenuService,$scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr,
-                          mySharedService,SERVER_URL,ME_APP_SERVER,$auth,dashboardService,articleService,initialData,$log) {
+                          mySharedService,SERVER_URL,ME_APP_SERVER,$auth,dashboardService,articleService,initialData,$log,$filter) {
 
         $scope.tmpImage = [];
         $scope.mainImg = null;
@@ -18,14 +18,21 @@ $scope.filesSortConfig = {
         animation: 150,
         ghostClass: 'ghost',
         onAdd: function (evt) {
-            console.log(evt);
         },
         onUpdate: function (evt) {
-            evt.model.orderNo = evt.newIndex;
-            evt.models[evt.oldIndex].orderNo = evt.oldIndex;
             console.log(evt);
             console.log(evt.models);
-            $scope.saveCategoryOrder(evt.models);
+            var myarr = $filter('orderBy')(evt.models, 'orderNo');
+            console.log(myarr);
+            var newArray = [];
+            myarr.forEach(function(ele,idx){
+                ele.orderNo = idx;
+                newArray.push(ele);
+            });
+            newArray[evt.oldIndex].orderNo = evt.newIndex;
+            newArray[evt.newIndex].orderNo = evt.oldIndex;
+
+            $scope.saveCategoryOrder(newArray);
         }
     };
 
@@ -74,28 +81,42 @@ $scope.filesSortConfig = {
 
 
         $scope.moveUp = function(arr, old_index) {
-            console.log(arr);
-            console.log(old_index);
-            var orderNoStable;
-            var orderNo;
 
-            for(var i = 0;i < arr.length; i++){
-                if( i == old_index){
-                    orderNoStable = arr[old_index].orderNo;
-                    console.log(orderNo);
-                    arr[old_index].orderNo = arr[old_index -1].orderNo;
-                    console.log(old_index -1);
-                    arr[old_index -1].orderNo = orderNo;
-                    break;
+            arr = $filter('orderBy')(arr, 'orderNo');
+
+
+                if(old_index != 0){
+
+                    var orderNoStable;
+                    var orderNo;
+
+                    orderNo = arr[old_index].orderNo;
+                    orderNoStable = arr[old_index - 1].orderNo;
+                    arr[old_index - 1].orderNo = orderNo;
+                    arr[old_index].orderNo = orderNoStable;
+
+                    $scope.saveCategoryOrder(arr);
                 }
-            }
 
-            console.log(arr);
         };
 
 
-        $scope.moveDown = function(index){
-            console.log(index);
+        $scope.moveDown = function(arr, old_index){
+            arr = $filter('orderBy')(arr, 'orderNo');
+
+
+                if(old_index != arr.length - 1){
+
+                    var orderNoStable;
+                    var orderNo;
+
+                    orderNo = arr[old_index].orderNo;
+                    orderNoStable = arr[old_index + 1].orderNo;
+                    arr[old_index + 1].orderNo = orderNo;
+                    arr[old_index].orderNo = orderNoStable;
+
+                    $scope.saveCategoryOrder(arr);
+                }
         }
 
         $scope.addImage = function(img){
