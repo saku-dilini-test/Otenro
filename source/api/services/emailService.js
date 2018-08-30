@@ -44,8 +44,7 @@ module.exports = {
 
     sendRegisterConfirmation: function(data, callback){
 
-        var approot = path.resolve();
-        var imgPath = approot + '/assets/images/emailtemplates/';
+        var imgPath = sails.config.appPath + '/assets/images/emailtemplates/';
 
         var emailBody = '<!DOCTYPE>' +
                         '<html>' +
