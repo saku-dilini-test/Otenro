@@ -142,10 +142,12 @@
                                     <!--<span>Characters left: </span> <span class="information"> {{maxReturnPolicy - storeSettings.returnPolicy.length}} </span>-->
                                 <!--</div>-->
                             <!--</fieldset>-->
-                            <fieldset>
+                            <fieldset class="no-margin">
                                 <label>terms and conditions</label>
+                                <md-input-container class="md-block no-margin">
+                                    <textarea  class="input-shadow-border" name="termsAndCondition" rows="4" ng-model="storeSettings.termsAndCondition"></textarea>
+                                </md-input-container>
                                 <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
-                                <textarea  class="input-shadow-border" name="termsAndCondition" rows="2" ng-model="storeSettings.termsAndCondition"></textarea>
                                 <!--<br />-->
                                 <!--<div ng-hide="storeSettings.termsAndCondition.length > maxTermsAndCondition">-->
                                     <!--<span class="information">Characters left: {{maxTermsAndCondition - storeSettings.termsAndCondition.length}}</span>-->
@@ -154,10 +156,12 @@
                                     <!--<span>Characters left: </span> <span class="information"> {{maxTermsAndCondition - storeSettings.termsAndCondition.length}} </span>-->
                                 <!--</div>-->
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="no-margin">
                                 <label>privacy policy</label>
                                 <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
-                                <textarea  class="input-shadow-border" name="privacyPolicy" rows="2"  ng-model="storeSettings.privacyPolicy"></textarea>
+                                <md-input-container class="md-block no-margin">
+                                     <textarea  class="input-shadow-border" name="privacyPolicy" rows="4"  ng-model="storeSettings.privacyPolicy"></textarea>
+                                </md-input-container>
                                 <!--<br />-->
                                 <!--<div ng-hide="storeSettings.privacyPolicy.length > maxPrivacyPolicy">-->
                                     <!--<span class="information">Characters left: {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}}</span>-->
@@ -200,10 +204,12 @@
                                     <span class="information"> {{maxAboutUsHeader - storeSettings.header.length}} </span>
                                 </div>
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="no-margin">
                                 <label>Content</label>
                                 <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
-                                <textarea  class="input-shadow-border" rows="4" name="content" ng-model="storeSettings.content"></textarea>
+                                <md-input-container class="md-block no-margin">
+                                    <textarea  class="input-shadow-border" rows="4" name="content" ng-model="storeSettings.content"></textarea>
+                                </md-input-container>
                                 <!--<br />-->
                                 <!--<div ng-hide="storeSettings.content.length > maxAboutUsContent">-->
                                     <!--<span class="information">Characters left: {{maxAboutUsContent - storeSettings.content.length}}</span>-->
