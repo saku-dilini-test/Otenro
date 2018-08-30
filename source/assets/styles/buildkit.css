@@ -3109,6 +3109,21 @@ table.md-calendar-day-header{
     width: 50%;
 }
 [ng-quill-editor] { display: block; }
+.glyphicon-move {
+  cursor: move;
+  cursor: -webkit-grabbing;
+}
 
+.ghost {
+  opacity: .5;
+  background: #C8EBFB;
+}
+
+.use-hover .list-group-item:hover {
+  background-color: #f00;
+}
+.sortable{
+    cursor: pointer;
+}
 /*reports*/
 

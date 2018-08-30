@@ -47,6 +47,8 @@
             $scope.showCustomerCareReport=false;
             $scope.showReconciliationReports=false;
             $scope.sortReverse = true;
+            $scope.showWelComeMessage = true;
+
             $scope.sortType = "appName"
 
 
@@ -127,6 +129,7 @@
                         $scope.showRevenueAndTrafficReport=true;
                         $scope.showapplicationBaseReport=true;
                         $scope.showPayment=false;
+                        $scope.showWelComeMessage = false;
 
                     }else {
                         $scope.showRegisterdusers = true;
@@ -177,26 +180,32 @@
             }
 
             $scope.operatorArrSort = function(operators){
+
                 var returnArray = [];
                 var idx;
                 var firstIdxValue;
                 $scope.sortOp = $filter('orderBy')(operators, 'operator');
-                if($scope.sortOp){
-                    for(var i = 0;i < $scope.sortOp.length; i++){
-                        if($scope.sortOp[0].operator == "all"){
-                            returnArray = $scope.sortOp;
-                            break;
-                        }else if ($scope.sortOp[0] != "all"){
-                            firstIdxValue = $scope.sortOp[0];
-                            if($scope.sortOp[i].operator == "all"){
 
-                                idx = i;
-                                $scope.sortOp[0] = $scope.sortOp[i];
-                                $scope.sortOp[i] = firstIdxValue;
+                if($scope.sortOp){
+                    if($scope.sortOp.length > 1){
+                        for(var i = 0;i < $scope.sortOp.length; i++){
+                            if($scope.sortOp[0].operator == "all"){
                                 returnArray = $scope.sortOp;
                                 break;
-                            };
+                            }else if ($scope.sortOp[0] != "all"){
+                                firstIdxValue = $scope.sortOp[0];
+                                if($scope.sortOp[i].operator == "all"){
+
+                                    idx = i;
+                                    $scope.sortOp[0] = $scope.sortOp[i];
+                                    $scope.sortOp[i] = firstIdxValue;
+                                    returnArray = $scope.sortOp;
+                                    break;
+                                };
+                            }
                         }
+                    }else{
+                        returnArray = $scope.sortOp;
                     }
                 }
                 return returnArray;
@@ -834,6 +843,8 @@
                    var sdate = $filter('date')(data.sdate, "yyyy-MM-dd");
                    var edate = $filter('date')(data.edate, "yyyy-MM-dd");
 
+
+
                     if(edate >= sdate) {
                         if (data.operator){
 
@@ -843,7 +854,7 @@
                                 .success(function (response) {
                                     $scope.reconciliationResponseData = response;
                                     if ($scope.reconciliationResponseData.length<=0){
-                                        toastr.error('No data available',
+                                        toastr.error('There is no data to show',
                                             'Warning', {closeButton: true});
                                     }
 
@@ -862,10 +873,9 @@
 
                 else if(data.report == "Monthly"){
 
-                        var fromMonth = data.fromMonth;
-                        var toMonth = data.toMonth;
+                        var fromMonth = parseInt(data.fromMonth);
+                        var toMonth = parseInt(data.toMonth);
                         var year = data.year;
-
 
                     if(toMonth>=fromMonth){
                         if (data.operator){
@@ -876,7 +886,7 @@
                             .success(function(response){
                                 $scope.reconciliationResponseData = response;
                                 if ($scope.reconciliationResponseData.length<=0){
-                                    toastr.error('No data available',
+                                    toastr.error('There is no data to show',
                                         'Warning', {closeButton: true});
                                 }
                             })
@@ -905,7 +915,7 @@
                                 .success(function (response) {
                                     $scope.reconciliationResponseData = response;
                                     if ($scope.reconciliationResponseData.length<=0){
-                                        toastr.error('No data available',
+                                        toastr.error('There is no data to show',
                                             'Warning', {closeButton: true});
                                     }
                                 })
@@ -942,6 +952,8 @@
                 var sdate = $filter('date')(data.sdate, "yyyy-MM-dd");
                 var edate = $filter('date')(data.edate, "yyyy-MM-dd");
 
+
+
                 if(edate >= sdate) {
 
                     if (data.appName){
@@ -954,7 +966,7 @@
                                 .success(function (response) {
                                     $scope.applicationBaseReportResponseData = response;
                                     if ($scope.applicationBaseReportResponseData.length<=0){
-                                        toastr.error('No data available',
+                                        toastr.error('There is no data to show',
                                             'Warning', {closeButton: true});
                                     }
 
@@ -979,8 +991,8 @@
 
             else if(data.report == "Monthly"){
 
-                var fromMonth = data.fromMonth;
-                var toMonth = data.toMonth;
+                var fromMonth = parseInt(data.fromMonth);
+                var toMonth = parseInt(data.toMonth);
                 var year = data.year;
 
 
@@ -996,7 +1008,7 @@
                                     .success(function (response) {
                                         $scope.applicationBaseReportResponseData = response;
                                         if ($scope.applicationBaseReportResponseData.length<=0){
-                                            toastr.error('No data available',
+                                            toastr.error('There is no data to show',
                                                 'Warning', {closeButton: true});
                                         }
                                     })
@@ -1034,7 +1046,7 @@
                                 .success(function(response){
                                     $scope.applicationBaseReportResponseData = response;
                                     if ($scope.applicationBaseReportResponseData.length<=0){
-                                        toastr.error('No data available',
+                                        toastr.error('There is no data to show',
                                             'Warning', {closeButton: true});
                                     }
                                 })
@@ -1084,7 +1096,7 @@
                             .success(function (response) {
                                 $scope.revenueAndTrafficReportResponseData = response;
                                 if ($scope.revenueAndTrafficReportResponseData.length<=0){
-                                    toastr.error('No data available',
+                                    toastr.error('There is no data to show',
                                         'Warning', {closeButton: true});
                                 }
 
@@ -1102,8 +1114,8 @@
 
             else if(data.report == "Monthly"){
 
-                var fromMonth = data.fromMonth;
-                var toMonth = data.toMonth;
+                var fromMonth = parseInt(data.fromMonth);
+                var toMonth = parseInt(data.toMonth);
                 var year = data.year;
                 var reqData ="";
 ;
@@ -1129,7 +1141,7 @@
                                 .success(function (response) {
                                     $scope.revenueAndTrafficReportResponseData = response;
                                     if ($scope.revenueAndTrafficReportResponseData.length<=0){
-                                        toastr.error('No data available',
+                                        toastr.error('There is no data to show',
                                             'Warning', {closeButton: true});
                                     }
                                 })
@@ -1167,7 +1179,7 @@
                             .success(function(response){
                                 $scope.revenueAndTrafficReportResponseData = response;
                                 if ($scope.revenueAndTrafficReportResponseData.length<=0){
-                                    toastr.error('No data available',
+                                    toastr.error('There is no data to show',
                                         'Warning', {closeButton: true});
                                 }
                             })
@@ -1205,7 +1217,7 @@
                             .success(function (response) {
                                 $scope.responseData = response;
                                 if ($scope.responseData.length<=0){
-                                    toastr.error('No data available',
+                                    toastr.error('There is no data to show',
                                         'Warning', {closeButton: true});
                                 }
 
@@ -1247,7 +1259,7 @@
                                                 .success(function (response) {
                                                     $scope.customerCareReportData = response;
                                                     if ($scope.customerCareReportData.length<=0){
-                                                        toastr.error('No data available',
+                                                        toastr.error('There is no data to show',
                                                             'Warning', {closeButton: true});
                                                     }
 
@@ -1258,7 +1270,7 @@
 
                                         }else {
 
-                                            toastr.error('You are not allowed for this operation', 'Warning', {closeButton: true});
+                                            toastr.error('You are not authorized to access user details of other operators', 'Warning', {closeButton: true});
                                         }
 
                                     }else {
@@ -1268,7 +1280,7 @@
                                             .success(function (response) {
                                                 $scope.customerCareReportData = response;
                                                 if ($scope.customerCareReportData.length<=0){
-                                                    toastr.error('No data available',
+                                                    toastr.error('There is no data to show',
                                                         'Warning', {closeButton: true});
                                                 }
 
@@ -1404,26 +1416,19 @@
                 });
             }
 
-
-            var csv = "";
-
-            for( i=0 ; i<dataArray.length; i++ ){
-                        csv += dataArray[i];
-                }
-            var data, filename, csvButton;
-            if (csv == null) return;
-
-            filename = args.filename || 'export.csv';
-
-            if (!csv.match(/^data:text\/csv/i)) {
-                csv = 'data:text/csv;charset=utf-8,' + csv;
+            var blob = new Blob(dataArray);
+            if (window.navigator.msSaveOrOpenBlob){
+                window.navigator.msSaveBlob(blob, "download.csv");
             }
-            data = encodeURI(csv);
-            csvButton = document.createElement('a');
-            csvButton.setAttribute('href', data);
-          //  csvButton.setAttribute('download', filename);
-            csvButton.click();
-
+            else
+            {
+                var a = window.document.createElement("a");
+                a.href = window.URL.createObjectURL(blob, {type: "text/plain"});
+                a.download = "download.csv";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
         }
 
     }

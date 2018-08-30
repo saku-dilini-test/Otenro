@@ -134,6 +134,7 @@ module.exports = {
             name: req.body.name
         };
         var dePath;
+        var orderNo;
 
         if(isNew == 'true' || isNew == true){
             dePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/secondNavi/';
@@ -161,15 +162,40 @@ module.exports = {
                                 }
                         });
 
-                        var articleCategoryattribute = {name:req.body.name,imageUrl:imgeFileName,isNew:req.body.isNew,appId:req.body.appId}
-                        ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
-                                    if (err){
-                                        res.send(err);
-                                    }else{
-                                        res.json(articleCategory);
-                                    }
+                        ArticleCategory.find({appId: req.body.appId}).exec(function(err, categories){
+                            if(err) res.send(err);
 
+                            if(categories.length == 0){
+                                orderNo = 0
+                                  var articleCategoryattribute = {name:req.body.name,imageUrl:imgeFileName,isNew:req.body.isNew,appId:req.body.appId,orderNo:orderNo}
+                                    ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
+                                        if (err){
+                                            res.send(err);
+                                        }else{
+                                            res.json(articleCategory);
+                                        }
+                                    });
+
+                            }else{
+                                ArticleCategory.find({appId: req.body.appId}).max('orderNo').exec(function(err, categories){
+
+                                    orderNo = categories[0].orderNo + 1;
+
+                                    var articleCategoryattribute = {name:req.body.name,imageUrl:imgeFileName,isNew:req.body.isNew,appId:req.body.appId,orderNo:orderNo}
+                                    ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
+                                        if (err){
+                                            res.send(err);
+                                        }else{
+                                            res.json(articleCategory);
+                                        }
+
+                                    });
                                 });
+
+                            }
+
+                        });
+
 
 
                     }

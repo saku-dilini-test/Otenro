@@ -2,16 +2,47 @@
     'use strict';
     angular.module("appEdit").controller("MainMenuCtrl", ['oblMenuService','$scope', '$mdDialog', '$rootScope',
         'mainMenuService','$http','commerceService','toastr','mySharedService','SERVER_URL','ME_APP_SERVER','$auth'
-        ,'dashboardService','articleService','initialData','$log', MainMenuCtrl]);
+        ,'dashboardService','articleService','initialData','$log','$filter', MainMenuCtrl]);
 
     function MainMenuCtrl(oblMenuService,$scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr,
-                          mySharedService,SERVER_URL,ME_APP_SERVER,$auth,dashboardService,articleService,initialData,$log) {
+                          mySharedService,SERVER_URL,ME_APP_SERVER,$auth,dashboardService,articleService,initialData,$log,$filter) {
 
         $scope.tmpImage = [];
         $scope.mainImg = null;
         $scope.topLevel  = '';
+        $scope.newSortArr;
+
         $scope.tempplayer = "";
 
+$scope.filesSortConfig = {
+        animation: 150,
+        ghostClass: 'ghost',
+        onAdd: function (evt) {
+        },
+        onUpdate: function (evt) {
+            console.log(evt);
+            console.log(evt.models);
+            var myarr = $filter('orderBy')(evt.models, 'orderNo');
+            console.log(myarr);
+            var newArray = [];
+            myarr.forEach(function(ele,idx){
+                ele.orderNo = idx;
+                newArray.push(ele);
+            });
+            newArray[evt.oldIndex].orderNo = evt.newIndex;
+            newArray[evt.newIndex].orderNo = evt.oldIndex;
+
+            $scope.saveCategoryOrder(newArray);
+        }
+    };
+
+        $scope.saveCategoryOrder = function(arr){
+            mainMenuService.updateCategoryOrder(arr).success(function(data){
+                console.log(data);
+            }).error(function(err) {
+                console.log("error update cat")
+            });
+        };
 
         // ----- Config -----
         $scope.initialData = initialData;
@@ -48,6 +79,45 @@
             angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
         }
 
+
+        $scope.moveUp = function(arr, old_index) {
+
+            arr = $filter('orderBy')(arr, 'orderNo');
+
+
+                if(old_index != 0){
+
+                    var orderNoStable;
+                    var orderNo;
+
+                    orderNo = arr[old_index].orderNo;
+                    orderNoStable = arr[old_index - 1].orderNo;
+                    arr[old_index - 1].orderNo = orderNo;
+                    arr[old_index].orderNo = orderNoStable;
+
+                    $scope.saveCategoryOrder(arr);
+                }
+
+        };
+
+
+        $scope.moveDown = function(arr, old_index){
+            arr = $filter('orderBy')(arr, 'orderNo');
+
+
+                if(old_index != arr.length - 1){
+
+                    var orderNoStable;
+                    var orderNo;
+
+                    orderNo = arr[old_index].orderNo;
+                    orderNoStable = arr[old_index + 1].orderNo;
+                    arr[old_index + 1].orderNo = orderNo;
+                    arr[old_index].orderNo = orderNoStable;
+
+                    $scope.saveCategoryOrder(arr);
+                }
+        }
 
         $scope.addImage = function(img){
                     if(angular.element('#fileInput').val() == ''){

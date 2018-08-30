@@ -155,7 +155,7 @@
                                        type="text"
                                        name="fname"
                                        ng-model="userEdit.firstName"
-                                       ng-pattern="/^[-a-zA-Z\s]+$/"
+                                       ng-pattern="/^[[a-zA-Z -]+$/"
                                        required />
                                 <span class="error help-block" ng-show="editProfile.fname.$error.required">*</span>
                                 <span class="error help-block" ng-show="editProfile.fname.$dirty && editProfile.fname.$invalid">
@@ -170,8 +170,8 @@
                                        type="text"
                                        name="lname"
                                        ng-model="userEdit.lastName"
-                                       ng-pattern="/^[-a-zA-Z]+$/"
-                                       required />
+                                       ng-pattern="/^[a-zA-Z-]+$/"
+                                       required disallow-spaces/>
                                 <span class="error help-block" ng-show="editProfile.lname.$error.required">*</span>
                                 <span class="error help-block" ng-show="editProfile.lname.$dirty && editProfile.lname.$invalid">
                                 Enter a proper name
@@ -295,7 +295,7 @@
                         <fieldset class="text-right">
                             <md-button class="me-default-button" ng-click="backToView(0,'userEdit')">Cancel</md-button>
 
-                            <md-button class="me-default-button" ng-disabled="editProfile.password.$error.compareTo"
+                            <md-button class="me-default-button" ng-disabled="editProfile.password.$error.compareTo || editProfile.fname.$invalid || editProfile.lname.$invalid"
                                        ng-click="editUserProfile(userEdit,selected);">Save
                             </md-button>
                         </fieldset>
