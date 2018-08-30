@@ -21,7 +21,7 @@ module.exports = {
     PUSH_API_URL : 'https://fcm.googleapis.com/fcm/send',
     AUTHORIZATION : 'key=AAAAJ4YjgQI:APA91bH-TmfU_nC3oKelw9ramCmDN5Mx1MllS3NeMvfJxcHvh-rIvPxqBlC782UU9DO8jrU9qV5hzzPDN1isyCVzhmLyhS7hZQZg_ZQHtoDFZHxMQI3GSp1PqeeVdbn4QccdcQh35uk9',
 
-    KEYWORD_LENGTH: sails.config.KEYWORD_LENGTH,
+    KEYWORD_LENGTH: 11,
 
     //IdeaBiz
     IDEABIZ_AUTH_CONSUMER_KEY: sails.config.IDEABIZ_AUTH_CONSUMER_KEY,
@@ -73,25 +73,65 @@ module.exports = {
             'code': 'MOBITEL',
             'desc': 'Mobitel',
             'shareSplit': '60',
-            'email': 'supportTest@mobitel.com'
+            'email': 'supportTest@mobitel.com',
+            'priceRange': {
+                'daily': {
+                    'min': 1,
+                    'max': 10
+                },
+                'monthly': {
+                    'min': 1,
+                    'max': 1000
+                }
+            }
         },
         'Dialog': {
             'code': 'DIALOG',
             'desc': 'Dialog',
             'shareSplit': '60',
-            'email': 'supportTest@dialog.com'
+            'email': 'supportTest@dialog.com',
+            'priceRange': {
+                'daily': {
+                    'min': 1,
+                    'max': 10
+                },
+                'monthly': {
+                    'min': 1,
+                    'max': 1000
+                }
+            }
         },
         'Hutch': {
             'code': 'HUTCH',
             'desc': 'Hutch',
             'shareSplit': '60',
-            'email': 'supportTest@hutch.com'
+            'email': 'supportTest@hutch.com',
+            'priceRange': {
+                'daily': {
+                    'min': 1,
+                    'max': 10
+                },
+                'monthly': {
+                    'min': 1,
+                    'max': 1000
+                }
+            }
         },
         'Airtel': {
             'code': 'AIRTEL',
             'desc': 'Airtel',
             'shareSplit': '60',
-            'email': 'supportTest@airtel.com'
+            'email': 'supportTest@airtel.com',
+            'priceRange': {
+                'daily': {
+                    'min': 1,
+                    'max': 10
+                },
+                'monthly': {
+                    'min': 1,
+                    'max': 1000
+                }
+            }
         }
 
     },

@@ -95,11 +95,11 @@
                                         <select ng-model="headerFontFamilyProp.value" ng-options="v for v in headerFontFamilyProp.values" ng-change="styleFontFamilyChange(headerFontFamilyProp.value,'headerFont')">
                                         </select>
                                     </div>
-                                    <div class="other-setting">
-                                        <h2>Header Font Size</h2>
-                                        <select ng-model="headerFontSizeProp.value" ng-options="v for v in headerFontSizeProp.values" ng-change="styleFontSizeChange(headerFontSizeProp.value,'headerFont')">
-                                        </select>
-                                    </div>
+                                    <!--<div class="other-setting">-->
+                                        <!--<h2>Header Font Size</h2>-->
+                                        <!--<select ng-model="headerFontSizeProp.value" ng-options="v for v in headerFontSizeProp.values" ng-change="styleFontSizeChange(headerFontSizeProp.value,'headerFont')">-->
+                                        <!--</select>-->
+                                    <!--</div>-->
                                     <div class="other-setting">
                                         <h2>Header Font Weight</h2>
                                         <select ng-model="headerFontWeightProp.value" ng-options="v for v in headerFontWeightProp.values" ng-change="styleFontWeightChange(headerFontWeightProp.value,'headerFont')">
@@ -122,11 +122,11 @@
                                         <select ng-model="contentFontFamilyProp.value" ng-options="v for v in contentFontFamilyProp.values" ng-change="styleFontFamilyChange(contentFontFamilyProp.value,'contentFont')">
                                         </select>
                                     </div>
-                                    <div class="other-setting">
-                                        <h2>Content Font Size</h2>
-                                        <select ng-model="contentFontSizeProp.value" ng-options="v for v in contentFontSizeProp.values" ng-change="styleFontSizeChange(contentFontSizeProp.value,'contentFont')">
-                                        </select>
-                                    </div>
+                                    <!--<div class="other-setting">-->
+                                        <!--<h2>Content Font Size</h2>-->
+                                        <!--<select ng-model="contentFontSizeProp.value" ng-options="v for v in contentFontSizeProp.values" ng-change="styleFontSizeChange(contentFontSizeProp.value,'contentFont')">-->
+                                        <!--</select>-->
+                                    <!--</div>-->
                                     <div class="other-setting">
                                         <h2>Content Font Weight</h2>
                                         <select ng-model="contentFontWeightProp.value" ng-options="v for v in contentFontWeightProp.values" ng-change="styleFontWeightChange(contentFontWeightProp.value,'contentFont')">
@@ -166,62 +166,62 @@
                                         </button>
                                         <input colorpicker="rgba" ng-model="footerHeaderFontColor" type="text">
                                     </div>
-                                    <div class="color-setting">
-                                        <div class="color-section">Footer content Color</div>
-                                        <button class="color-picker-button pull-left"
-                                                colorpicker="rgba"
-                                                colorpicker-parent="true"
-                                                ng-model="footerFontColor"  type="text"
-                                                style="background-color: {{footerFontColor}}; color: {{footerFontColor}};" >
-                                        </button>
-                                        <input colorpicker="rgba" ng-model="footerFontColor" type="text">
-                                    </div>
+                                    <!--<div class="color-setting">-->
+                                        <!--<div class="color-section">Footer content Color</div>-->
+                                        <!--<button class="color-picker-button pull-left"-->
+                                                <!--colorpicker="rgba"-->
+                                                <!--colorpicker-parent="true"-->
+                                                <!--ng-model="footerFontColor"  type="text"-->
+                                                <!--style="background-color: {{footerFontColor}}; color: {{footerFontColor}};" >-->
+                                        <!--</button>-->
+                                        <!--<input colorpicker="rgba" ng-model="footerFontColor" type="text">-->
+                                    <!--</div>-->
                                 </div>
 
 
-                                <h1 ng-if="isApplyStyle.button">Button</h1>
-                                <div ng-if="isApplyStyle.button">
-                                    <div class="color-setting clearfix">
-                                        <div class="color-section">Button Color</div>
-                                        <button class="color-picker-button pull-left"
-                                                colorpicker="rgba"
-                                                colorpicker-parent="true"
-                                                ng-model="buttonColor"  type="text"
-                                                style="background-color: {{buttonColor}}; color: {{buttonColor}};" >
-                                        </button>
-                                        <input colorpicker="rgba" ng-model="buttonColor" type="text">
-                                    </div>
-                                    <div class="color-setting clearfix">
-                                        <div class="color-section">Button Font Color</div>
-                                        <button class="color-picker-button pull-left"
-                                                colorpicker="rgba"
-                                                colorpicker-parent="true"
-                                                ng-model="buttonFontColor"  type="text"
-                                                style="background-color: {{buttonFontColor}}; color: {{buttonFontColor}};" >
-                                        </button>
-                                        <input colorpicker="rgba" ng-model="buttonFontColor" type="text">
-                                    </div>
-                                    <div class="color-setting clearfix">
-                                        <div class="color-section">Button Border Color</div>
-                                        <button class="color-picker-button pull-left"
-                                                colorpicker="rgba"
-                                                colorpicker-parent="true"
-                                                ng-model="buttonBorderColor"  type="text"
-                                                style="background-color: {{buttonBorderColor}}; color: {{buttonBorderColor}};" >
-                                        </button>
-                                        <input colorpicker="rgba" ng-model="buttonBorderColor" type="text">
-                                    </div>
-                                    <div class="other-setting">
-                                        <h2>Border size</h2>
-                                        <select ng-model="buttonBorderWidthProp.value" ng-options="v for v in buttonBorderWidthProp.values" ng-change="styleButtonBorderWidthChange(buttonBorderWidthProp.value)">
-                                        </select>
-                                    </div>
-                                    <div class="other-setting">
-                                        <h2>Border Radius</h2>
-                                        <select ng-model="buttonBorderRadiusProp.value" ng-options="v for v in buttonBorderRadiusProp.values" ng-change="styleButtonBorderRadiusChange(buttonBorderRadiusProp.value)">
-                                        </select>
-                                    </div>
-                                </div>
+                                <!--<h1 ng-if="isApplyStyle.button">Button</h1>-->
+                                <!--<div ng-if="isApplyStyle.button">-->
+                                    <!--<div class="color-setting clearfix">-->
+                                        <!--<div class="color-section">Button Color</div>-->
+                                        <!--<button class="color-picker-button pull-left"-->
+                                                <!--colorpicker="rgba"-->
+                                                <!--colorpicker-parent="true"-->
+                                                <!--ng-model="buttonColor"  type="text"-->
+                                                <!--style="background-color: {{buttonColor}}; color: {{buttonColor}};" >-->
+                                        <!--</button>-->
+                                        <!--<input colorpicker="rgba" ng-model="buttonColor" type="text">-->
+                                    <!--</div>-->
+                                    <!--<div class="color-setting clearfix">-->
+                                        <!--<div class="color-section">Button Font Color</div>-->
+                                        <!--<button class="color-picker-button pull-left"-->
+                                                <!--colorpicker="rgba"-->
+                                                <!--colorpicker-parent="true"-->
+                                                <!--ng-model="buttonFontColor"  type="text"-->
+                                                <!--style="background-color: {{buttonFontColor}}; color: {{buttonFontColor}};" >-->
+                                        <!--</button>-->
+                                        <!--<input colorpicker="rgba" ng-model="buttonFontColor" type="text">-->
+                                    <!--</div>-->
+                                    <!--<div class="color-setting clearfix">-->
+                                        <!--<div class="color-section">Button Border Color</div>-->
+                                        <!--<button class="color-picker-button pull-left"-->
+                                                <!--colorpicker="rgba"-->
+                                                <!--colorpicker-parent="true"-->
+                                                <!--ng-model="buttonBorderColor"  type="text"-->
+                                                <!--style="background-color: {{buttonBorderColor}}; color: {{buttonBorderColor}};" >-->
+                                        <!--</button>-->
+                                        <!--<input colorpicker="rgba" ng-model="buttonBorderColor" type="text">-->
+                                    <!--</div>-->
+                                    <!--<div class="other-setting">-->
+                                        <!--<h2>Border size</h2>-->
+                                        <!--<select ng-model="buttonBorderWidthProp.value" ng-options="v for v in buttonBorderWidthProp.values" ng-change="styleButtonBorderWidthChange(buttonBorderWidthProp.value)">-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                    <!--<div class="other-setting">-->
+                                        <!--<h2>Border Radius</h2>-->
+                                        <!--<select ng-model="buttonBorderRadiusProp.value" ng-options="v for v in buttonBorderRadiusProp.values" ng-change="styleButtonBorderRadiusChange(buttonBorderRadiusProp.value)">-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                <!--</div>-->
                             </div>
                         </div>
                         

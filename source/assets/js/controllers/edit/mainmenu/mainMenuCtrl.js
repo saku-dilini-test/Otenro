@@ -103,7 +103,7 @@
                 });
         }   // Menu-Navigation or Menu-Category (Article Category) -> Add / Update
         else if($scope.initialData){
-            if(initialData.from.from == 'fromPublishArticle' || initialData.menu == 'addNewMenuCategory'){
+            if(initialData.from && initialData.from.from == 'fromPublishArticle' || initialData.menu == 'addNewMenuCategory'){
                 $scope.heading = "Add Category";
 
             }else{
@@ -554,7 +554,7 @@
             // }
             else{
             if($scope.initialData.menu == 'addNewMenuCategory') {
-                mainMenuService.addNewCategory(file, $rootScope.appId, menu.name,$rootScope.tempNew)
+                mainMenuService.addNewCategory({"file":$scope.tmpImage,"appId":$rootScope.appId,"name": menu.name,"isNew":$rootScope.tempNew})
                     .success(function (data) {
                         var urlPath;
                         if($rootScope.tempNew == 'true' || $rootScope.tempNew == true){
@@ -575,7 +575,7 @@
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
                         toastr.success("New category has been added successfully", 'Message', {closeButton: true});
                         $mdDialog.hide();
-                         if(initialData.from.from == 'fromPublishArticle'){
+                         if(initialData.from && initialData.from.from == 'fromPublishArticle'){
                                        articleService.showPublishArticleDialog(initialData.from.article);
                                    }else {
                                        mainMenuService.showMainMenuDialog();
@@ -833,7 +833,7 @@
 
         $scope.cancelCategory = function() {
             $mdDialog.hide();
-            if(initialData.from.from == 'fromPublishArticle'){
+            if(initialData.from && initialData.from.from == 'fromPublishArticle'){
                 articleService.showPublishArticleDialog(initialData.from.article);
             }else {
                 mainMenuService.showMainMenuDialog();

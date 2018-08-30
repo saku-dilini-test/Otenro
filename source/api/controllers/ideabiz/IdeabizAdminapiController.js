@@ -702,14 +702,14 @@ module.exports = {
             if(device) {
                 Application.findOne({id: user.appId}).exec(function (err, app) {
 
-                    var message = {
+                    var messageObj = {
                         "to": device.deviceId,
                         "notification": {
                             "body": message
                         }
                     };
 
-                    pushService.sendPushNotification(message);
+                    pushService.sendPushNotification(messageObj);
                 });
             }else{
                 sails.log.debug("No devices found to send the push notification for the msisdn:" + user.msisdn + " appID:" + user.appId + " ");

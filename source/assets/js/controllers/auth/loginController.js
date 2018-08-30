@@ -148,7 +148,7 @@
       };
 
     $scope.isValidationOk = function () {
-      if ($scope.email !== undefined && $scope.password !== undefined) {
+      if ($scope.email !== undefined && $scope.password !== undefined && !$scope.mobile) {
           $scope.user = {
               email: $scope.email,
               password: $scope.password,

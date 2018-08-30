@@ -148,7 +148,6 @@ module.exports = {
                               return res.serverError({ error: 'error' });
                           }
 
-                          sails.log.debug("Response after requesting the pin: " + JSON.stringify(response));
 
                           if(!(response && response.body)){
                               sails.log.debug("Response received in pin request seems not valid response: " + JSON.stringify(response));
@@ -243,7 +242,6 @@ module.exports = {
                             return res.serverError({ error: 'error' });
                         }
 
-                        sails.log.debug("Response after submitting the pin for the pin: " + pin + " ref: " + ideaBizPinServerRef);
 
                         if(!(response && response.body)){
                             sails.log.debug("Error received in pin request for the pin: " + pin + " ref: " + ideaBizPinServerRef);
@@ -277,7 +275,6 @@ module.exports = {
             paramseperator = "&"
         }
         var url = req.body.returnUrl + paramseperator +req.body.clickidparam + "=" +  req.body.clickid;
-        sails.log(url);
         // var url = "http://www.securebill.mobi/bg.php?clickID="+req.body.clickid+"&idcallback=bda90516cfadcac19221685973261a75";
         //
         request.get({
@@ -527,7 +524,6 @@ module.exports = {
                                 return res.serverError({ error: 'error' });
                             }
 
-                            sails.log.debug("Response after submitting the pin for the pin: " + pin + " ref: " + ideaBizPinServerRef);
 
                             if(!(response && response.body)){
                                 sails.log.debug("Error received in pin request for the pin: " + pin + " ref: " + ideaBizPinServerRef);

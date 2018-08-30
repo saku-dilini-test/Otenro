@@ -16,7 +16,7 @@
         $scope.appId = $rootScope.appId;
         $scope.tmpImage = [];
         $scope.data;
-        $scope.dialogTitle = 'Edit Page';
+        $scope.dialogTitle = 'Create Page';
         $scope.tempImageDel = [];
         $scope.deleteImages = [];
         $scope.mainImg = null;
@@ -149,7 +149,6 @@
         if (initialData == 'publishArticle') {
             $scope.isNewArticle = true;
             $scope.dummyCat = [];
-            $scope.dialogTitle = 'Create Page';
 
             $scope.seletedCategoryId = null;
             $scope.articleCat = {
@@ -175,6 +174,8 @@
 
 
         } else if (initialData == 'previewArticles')  {
+                    $scope.dialogTitle = 'Edit Page';
+
             articleService.getArticleList($scope.appId)
                 .success(function (responseData) {
 
@@ -200,6 +201,7 @@
                     });
                 })
         } else {
+                        $scope.dialogTitle = 'Edit Page';
 
         $scope.article = initialData;
 

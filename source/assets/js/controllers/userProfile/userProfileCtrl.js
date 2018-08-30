@@ -10,7 +10,17 @@
     'use strict';
     var mobileVerificationPin;
     angular.module('app')
-        .controller('userProfileCtrl',
+    .directive('disallowSpaces', function() {
+      return {
+        restrict: 'A',
+
+        link: function($scope, $element) {
+          $element.bind('input', function() {
+            $(this).val($(this).val().replace(/ /g, ''));
+          });
+        }
+      };
+    }).controller('userProfileCtrl',
       ['$scope', 'userProfileResource', 'CurrentUser', 'userProfileService','Auth','$auth','$state','$mdDialog','toastr','$log',
             userProfileCtrl
         ]);
