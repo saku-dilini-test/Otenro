@@ -3110,9 +3110,24 @@ table.md-calendar-day-header{
 }
 
 [ng-quill-editor] { display: block; }
+.glyphicon-move {
+  cursor: move;
+  cursor: -webkit-grabbing;
+}
 
 .ADMdtp-container .ADMdtp-calendar-container .daysNames > span, .ADMdtp-container .ADMdtp-calendar-container .days > span{
     width: 14.2% !important;
+}
+.ghost {
+  opacity: .5;
+  background: #C8EBFB;
+}
+
+.use-hover .list-group-item:hover {
+  background-color: #f00;
+}
+.sortable{
+    cursor: pointer;
 }
 /*reports*/
 
