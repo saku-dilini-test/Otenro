@@ -19,10 +19,10 @@
     <div class="row hidden-xs">
       <div class="col-sm-4" *ngFor="let prod of results | filter:searchTerm; let i = index">
         <img src="{{imageUrl}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
-        <p class="text-center product-name">
+        <p class="main-content-font text-center product-name">
           {{prod.name}}
         </p>
-        <p class="text-center product-content">
+        <p class="main-content-font text-center product-content">
           Price - {{currency}} {{prod.variants[0].price| number: '.2'}}
         </p>
         <div class="row">

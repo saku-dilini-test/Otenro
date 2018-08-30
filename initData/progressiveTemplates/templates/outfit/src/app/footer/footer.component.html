@@ -1,10 +1,10 @@
-<footer class="footer-mobile bgc-white  hidden-sm hidden-lg hidden-md"
+<footer class="main-footer-back footer-mobile bgc-white  hidden-sm hidden-lg hidden-md"
         [ngClass]="isIpgInfoExists() ? 'height-160': 'height-60'">
   <!-- Footer mobile payment methods view - bloc-36 -->
   <div class="block" id="bloc-36" *ngIf="isIpgInfoExists()">
     <div class="content-container">
       <div class="content-box height-30per">
-        <p class="margin-vert-1">Accepted Payment Types</p>
+        <p class="margin-vert-1 main-footer-header">Accepted Payment Types</p>
       </div>
       <div class="content-box padding-hor-10 height-70per">
         <img *ngIf="ipgInfo && ipgInfo.paypalEnable" src="assets/images/Paypal.png" width="35px" height="25px" class="set-img-margin">
@@ -43,7 +43,7 @@
   <!-- Footer - bloc-36 END -->
 
   <!-- Footer - bloc-37 -->
-  <div class="bloc  padding-top shadow-effect position-fix height-60" id="bloc-37">
+  <div class="bloc main-footer-font  padding-top shadow-effect position-fix height-60" id="bloc-37">
     <div class="container">
       <div class="row row-no-gutters">
         <div class="col-xs-3" (click)="navigate('','Home')">

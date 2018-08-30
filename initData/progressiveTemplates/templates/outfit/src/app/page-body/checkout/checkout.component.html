@@ -4,15 +4,15 @@
       <div class="container bloc-xl">
         <div class="row bgc-white">
           <div class="col-sm-3">
-            <a class="a-btn a-block links link-spacing-top color animated fadeInUp hidden-xs">BILLING ADDRESS</a>
-            <a class="a-btn a-block links color animated fadeInUp animDelay02 hidden-xs">REVIEW AND PAYMENT</a>
+            <a class="a-btn a-block links link-spacing-top main-content-font animated fadeInUp hidden-xs">BILLING ADDRESS</a>
+            <a class="a-btn a-block links  main-content-font animated fadeInUp animDelay02 hidden-xs">REVIEW AND PAYMENT</a>
           </div>
           <div class="col-sm-9" *ngIf='formType == "delivery"'>
               <h2 class="mg-md header-text-h1 spacing-top-text main-header-font">
                 SHIPPING ADDRESS
               </h2>
 
-              <div class="row">
+              <div class="row main-content-font">
                 <div class="col-sm-6" *ngIf="showUser">
                   <div class="radio">
                     <label>
@@ -37,14 +37,14 @@
                 </div>
               </div>
 
-              <div class="radio">
+              <div class="radio main-content-font">
                 <label>
                   <input type="radio" name="radioNew" value="newUser" id="showNewUser" (change)="check('newUser')"
                     [checked]="!oldUser" />Enter a new address
                 </label>
               </div>
 
-              <form [formGroup]="complexForm" *ngIf="!oldUser" (ngSubmit)="submitForm(complexForm.value)" id="form_28872" novalidate class="spacing-form animated fadeInUp animDelay04">
+              <form [formGroup]="complexForm" *ngIf="!oldUser" (ngSubmit)="submitForm(complexForm.value)" id="form_28872" novalidate class="spacing-form animated fadeInUp animDelay04 main-content-font">
                   <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -285,7 +285,7 @@
 
           <div class="col-sm-3" *ngIf='isSelected && complexForm.valid && sign && totalPrice || isSelected && pickupForm.valid && sign && totalPrice'>
           </div>
-          <div class="col-sm-9" *ngIf='isSelected && complexForm.valid && sign && totalPrice || isSelected && pickupForm.valid && sign && totalPrice'>
+          <div class="col-sm-9 main-content-font" *ngIf='isSelected && complexForm.valid && sign && totalPrice || isSelected && pickupForm.valid && sign && totalPrice'>
               <div class="padding-vertical">
                 <h3 class="main-header-font">Your order</h3>
                 <table class="table table-responsive">

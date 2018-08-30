@@ -10,7 +10,7 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <input class="form-control input-lg" type="text" placeholder="Search by name..." [(ngModel)]="searchTerm">
+        <input class="main-content-font form-control input-lg" type="text" placeholder="Search by name..." [(ngModel)]="searchTerm">
       </div>
     </div>
     <div class="divider-h">
@@ -19,16 +19,16 @@
     <div class="row hidden-xs">
       <div class="col-sm-4" *ngFor="let prod of results | filter:searchTerm; let i = index">
         <img src="{{imageUrl}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
-        <p class="text-center product-name">
+        <p class="text-center product-name main-content-font">
           {{prod.name}}
         </p>
-        <p class="text-center product-content">
+        <p class="text-center product-content main-content-font">
           Price - {{currency}} {{prod.variants[0].price| number: '.2'}}
         </p>
         <div class="row">
           <div class="col-sm-12">
             <div class="text-center" *ngIf="!checkSoldOut(prod)">
-              <a (click)="navigateProd('product',prod, prod.name )" class="btn btn-d btn-lg main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span>Details</a>
+              <a (click)="navigateProd('product',prod, prod.name )" class="btn btn-d btn-lg main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span> Details</a>
             </div>
             <div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
               <h4 href="#" class="text-warning">Sold Out!</h4>
@@ -47,7 +47,7 @@
             <span class="main-content-font"><strong>{{prod.name}}</strong></span>
             <div class="main-content-font price-margin"> Price - {{currency}} {{prod.variants[0].price| number: '.2'}}</div>
             <div class="text-center" *ngIf="!checkSoldOut(prod)">
-              <a (click)="navigateProd('product',prod, prod.name )" class="btn btn-d main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span>Details</a>
+              <a (click)="navigateProd('product',prod, prod.name )" class="btn btn-d main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span> Details</a>
             </div>
             <div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
               <h4 href="#" class="text-warning">Sold Out!</h4>

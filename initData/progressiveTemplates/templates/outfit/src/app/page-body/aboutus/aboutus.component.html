@@ -3,7 +3,7 @@
   <div class="container bloc-xl">
     <div class="row row-about-main">
       <div class="col-sm-12">
-        <h1 class="mg-md text-center about-us" [innerHTML]="header"> </h1>
+        <h1 *ngIf="header" class="mg-md text-center about-us main-header-font" [innerHTML]="header"> </h1>
         <div class="row row-about">
           <div class="col-sm-6">
             <img src="{{aboutUsUrl}}/ABOUTUS.png"  class="img-responsive lazyload">
@@ -17,7 +17,7 @@
             </div>
           </div>
         </div>
-        <p class="content-about text-justify main-content-font" [innerHTML]="content | safeHtml"> </p>
+        <p *ngIf="content" class="content-about text-justify main-content-font" [innerHTML]="content | safeHtml"> </p>
       </div>
     </div>
   </div>

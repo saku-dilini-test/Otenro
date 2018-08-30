@@ -18,7 +18,7 @@
 	<div class="container" *ngFor="let node of products;">
 		<div class="row voffset animated fadeInUp">
 			<div class="col-sm-12">
-				<h1 class="mg-md text-center about-us ">
+				<h1 class="mg-md text-center about-us main-header-font">
 					<span class="main-header-font" >PRODUCTS</span><br>
 				</h1>
 			</div>
@@ -70,7 +70,7 @@
 		<div *ngFor="let node of categories;">
 			<div class="row">
 				<div class="col-sm-12 text-center">
-					<h1 class="text-center about-us  voffset cursor-p">
+					<h1 class="text-center about-us  main-header-font  voffset cursor-p">
 						<a [routerLink]="['']" [queryParams]="{ id:node.id}" class=" main-header-font" >{{node.name}}</a><br>
 					</h1>
 					<a [routerLink]="['']" [queryParams]="{ id:node.id}" >
