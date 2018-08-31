@@ -3109,6 +3109,12 @@ table.md-calendar-day-header{
 [size='50%']{
     width: 50%;
 }
+.ql-snow .ql-tooltip{
+    top: auto !important;
+    bottom: 15px !important;
+    left: auto !important;
+    right: 0 !important;
+}
 [ng-quill-editor] { display: block; }
 
 /*reports*/
