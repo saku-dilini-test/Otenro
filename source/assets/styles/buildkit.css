@@ -3116,6 +3116,10 @@ table.md-calendar-day-header{
     height:100vh;
 }
 
+.margin-left-0{
+    margin-left: 0 !important;
+}
+
 [ng-quill-editor] { display: block; }
 
 .ADMdtp-container .ADMdtp-calendar-container .daysNames > span, .ADMdtp-container .ADMdtp-calendar-container .days > span{
