@@ -478,7 +478,7 @@
                  return $mdDialog.show({
                      controller: 'BlogCtrl',
                      templateUrl: 'user/edit/commerce/previewBlogs.html',
-                     clickOutsideToClose: true,
+                     clickOutsideToClose: false,
                      locals : {
                          initialData : data
                      }
@@ -488,7 +488,7 @@
                 return $mdDialog.show({
                     controller: 'BlogCtrl',
                     templateUrl: 'user/edit/commerce/publishBlogs.html',
-                    clickOutsideToClose: true,
+                    clickOutsideToClose: false,
                     locals : {
                         initialData : data
                     }
