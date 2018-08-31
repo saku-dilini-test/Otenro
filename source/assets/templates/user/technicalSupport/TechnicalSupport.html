@@ -312,15 +312,31 @@
                                                     <Button type="button" class="me-default-button" ng-click="revenueAndTrafficReportData(revenueAndTrafficReport)">Search</Button>
                                                 </div>
                                                 <div ng-if="revenueAndTrafficReport.report == 'Monthly'" >
-                                                    <select ng-model="revenueAndTrafficReport.fromMonth" required>
-                                                        <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
-                                                    </select>
-                                                    <select ng-model="revenueAndTrafficReport.toMonth" required>
-                                                        <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
-                                                    </select>
-                                                    <select ng-model="revenueAndTrafficReport.year" required>
-                                                        <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
-                                                    </select>
+
+                                                        <label>From</label>
+                                                        <br>
+                                                                <select ng-model="revenueAndTrafficReport.fromYear" required>
+                                                                    <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                                </select>
+
+                                                                <select ng-model="revenueAndTrafficReport.fromMonth" required>
+                                                                    <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
+                                                                </select>
+                                                                <br>
+                                                                <br>
+
+                                                        <label>To</label>
+                                                        <br>
+                                                                <select ng-model="revenueAndTrafficReport.toYear" required>
+                                                                    <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                                </select>
+
+                                                                <select ng-model="revenueAndTrafficReport.toMonth" required>
+                                                                    <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
+                                                                </select>
+
+                                                    <br>
+                                                    <br>
                                                     <Button type="button" class="me-default-button" ng-click="revenueAndTrafficReportData(revenueAndTrafficReport)">Search</Button>
                                                 </div>
                                                 <div ng-if="revenueAndTrafficReport.report == 'Yearly'">
@@ -426,16 +442,31 @@
                                                     <Button type="button" class="me-default-button" ng-click="applicationBaseReportData(applicationBaseReport)">Search</Button>
                                                 </div>
                                                 <div ng-if="applicationBaseReport.report == 'Monthly'" >
+                                                    <label>From</label>
+                                                    <br>
+                                                    <select ng-model="applicationBaseReport.fromYear" required>
+                                                        <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                    </select>
+
                                                     <select ng-model="applicationBaseReport.fromMonth" required>
                                                         <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
                                                     </select>
+                                                    <br>
+                                                    <br>
+
+                                                    <label>To</label>
+                                                    <br>
+                                                    <select ng-model="applicationBaseReport.toYear" required>
+                                                        <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                    </select>
+
                                                     <select ng-model="applicationBaseReport.toMonth" required>
                                                         <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
                                                     </select>
-                                                    <select ng-model="applicationBaseReport.year" required>
-                                                        <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
-                                                    </select>
+                                                    <br>
+                                                    <br>
                                                     <Button type="button" class="me-default-button" ng-click="applicationBaseReportData(applicationBaseReport)">Search</Button>
+
                                                 </div>
                                                 <div ng-if="applicationBaseReport.report == 'Yearly'">
                                                     <select placeholder="From Year" ng-model="applicationBaseReport.fromYear" required>
@@ -685,15 +716,30 @@
                                                 <Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>
                                             </div>
                                             <div ng-if="reconciliationReports.report == 'Monthly'" >
+                                                <label>From</label>
+                                                <br>
+                                                <select ng-model="reconciliationReports.fromYear" required>
+                                                    <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                </select>
+
                                                 <select ng-model="reconciliationReports.fromMonth" required>
                                                     <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
                                                 </select>
+                                                <br>
+                                                <br>
+
+                                                <label>To</label>
+                                                <br>
+                                                <select ng-model="reconciliationReports.toYear" required>
+                                                    <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
+                                                </select>
+
                                                 <select ng-model="reconciliationReports.toMonth" required>
                                                     <option  ng-repeat="oneMonth in months">{{oneMonth.month}}</option>
                                                 </select>
-                                                <select ng-model="reconciliationReports.year" required>
-                                                    <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
-                                                </select>
+
+                                                <br>
+                                                <br>
                                                 <Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>
                                             </div>
                                             <div ng-if="reconciliationReports.report == 'Yearly'">
