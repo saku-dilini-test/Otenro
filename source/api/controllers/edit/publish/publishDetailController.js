@@ -487,7 +487,25 @@ module.exports = {
         };
         PublishDetails.find(searchApp, function(err, app) {
             if (err) return done(err);
-            res.send(app)
+            if(app.length == 0){
+                sails.log.debug('No apps to load');
+                res.send([]);
+            }
+            else{
+                var operators = config.IDEABIZ_USER_NETWORK_CLIENTS;
+                for(var keyOne in operators){
+                    if (operators.hasOwnProperty(keyOne)) {
+                        app[0].operators.forEach(function (playApps) {
+                            if (!playApps.priceRange) {
+                                playApps.priceRange = operators[keyOne].priceRange;
+                            } else {
+                                return;
+                            }
+                        });
+                    }
+                };
+              res.send(app);
+            }
         });
     },
 

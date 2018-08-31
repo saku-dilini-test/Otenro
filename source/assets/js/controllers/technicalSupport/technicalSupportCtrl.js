@@ -1242,7 +1242,7 @@
                             .success(function (response) {
                                     if ($scope.user.userRole=="OPERATOR"){
 
-                                        if (response.operator==$scope.user.operator){
+                                        if (response.operator.toLowerCase()==$scope.user.operator.toLowerCase()){
 
                                             var data = {dateFrom: fromDate, dateTo: toDate, msisdn: pramData.msisdn};
 

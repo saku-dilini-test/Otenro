@@ -3099,16 +3099,41 @@ table.md-calendar-day-header{
 .padding-horizontal-16-10{
     padding: 0 16px 0 10px;
 }
-[size='10%']{
-    width: 10%;
+[size='12%']{
+    width: 12%;
 }
-[size='15%']{
-    width: 15%;
+[size='48%']{
+    width: 48%;
 }
-[size='50%']{
-    width: 50%;
+.ql-snow .ql-tooltip{
+    top: auto !important;
+    bottom: 15px !important;
+    left: auto !important;
+    right: 0 !important;
 }
+.height-100vh{
+    height:100vh;
+}
+
+.margin-left-0{
+    margin-left: 0 !important;
+}
+
 [ng-quill-editor] { display: block; }
 
+.ADMdtp-container .ADMdtp-calendar-container .daysNames > span, .ADMdtp-container .ADMdtp-calendar-container .days > span{
+    width: 14.2% !important;
+}
+.ghost {
+  opacity: .5;
+  background: #C8EBFB;
+}
+
+.use-hover .list-group-item:hover {
+  background-color: #f00;
+}
+.sortable{
+    cursor: pointer;
+}
 /*reports*/
 
