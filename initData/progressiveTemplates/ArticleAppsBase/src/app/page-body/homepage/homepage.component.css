@@ -1,6 +1,6 @@
 .flex-row{
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin: 20px 0;
 }
 
