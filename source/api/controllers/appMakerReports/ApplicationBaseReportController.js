@@ -326,6 +326,8 @@ module.exports = {
 
         var reqData = req.body;
 
+        var yearFrom = reqData.yearFrom;
+        var yearTo = reqData.yearTo;
         var monthFrom = reqData.monthFrom;
         var monthTo = reqData.monthTo;
         var appName = reqData.appName;
@@ -335,19 +337,19 @@ module.exports = {
 
         if (appName == "all" && operator == "all") {
 
-            query = {month: {'>=': monthFrom, '<=': monthTo}}
+            query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}}
 
         } else if (appName == "all" && operator !== "all") {
 
-            query = {month: {'>=': monthFrom, '<=': monthTo}, operator: operator}
+            query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}, operator: operator}
 
         } else if (appName !== "all" && operator == "all") {
 
-            query = {month: {'>=': monthFrom, '<=': monthTo}, appName: appName}
+            query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}, appName: appName}
 
         } else {
 
-            query = {month: {'>=': monthFrom, '<=': monthTo}, appName: appName, operator: operator}
+            query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}, appName: appName, operator: operator}
         }
 
 

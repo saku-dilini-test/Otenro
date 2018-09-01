@@ -369,8 +369,8 @@
                                         <thead class="obl-dashboard-apps">
                                         <tr>
                                             <th ng-if="revenueAndTrafficReport.report == 'Daily'">Date</th>
+                                            <th ng-if="revenueAndTrafficReport.report == 'Yearly' || revenueAndTrafficReport.report == 'Monthly'">Year</th>
                                             <th ng-if="revenueAndTrafficReport.report == 'Monthly'">Month</th>
-                                            <th ng-if="revenueAndTrafficReport.report == 'Yearly'">Year</th>
                                             <th >Operator</th>
                                             <th ng-if="user.userRole=='APP_CREATOR'">Application</th>
                                             <th>AppMaker Revenue</th>
@@ -381,10 +381,10 @@
                                         </thead>
 
                                         <tbody>
-                                        <tr  ng-repeat="revenueAndTraffic in revenueAndTrafficReportResponseData">
+                                        <tr  ng-repeat="revenueAndTraffic in revenueAndTrafficReportResponseData | orderBy:['date','year','month']">
                                             <td ng-if="revenueAndTrafficReport.report == 'Daily'">{{revenueAndTraffic.date}}</td>
+                                            <td ng-if="revenueAndTrafficReport.report == 'Yearly' || revenueAndTrafficReport.report == 'Monthly'">{{revenueAndTraffic.year}}</td>
                                             <td ng-if="revenueAndTrafficReport.report == 'Monthly'">{{revenueAndTraffic.month}}</td>
-                                            <td ng-if="revenueAndTrafficReport.report == 'Yearly'">{{revenueAndTraffic.year}}</td>
                                             <td>{{revenueAndTraffic.operator}}</td>
                                             <td ng-if="user.userRole=='APP_CREATOR'">{{revenueAndTraffic.appId}}</td>
                                             <td>{{revenueAndTraffic.revenue}}</td>
@@ -502,8 +502,8 @@
                                             <th>Type</th>
                                             <th>CaaS Taxable</th>
                                             <th ng-if="applicationBaseReport.report == 'Daily'">Date</th>
+                                            <th ng-if="applicationBaseReport.report == 'Yearly' || applicationBaseReport.report == 'Monthly'">Year</th>
                                             <th ng-if="applicationBaseReport.report == 'Monthly'">Month</th>
-                                            <th ng-if="applicationBaseReport.report == 'Yearly'">Year</th>
                                             <th>Operator</th>
                                             <th>Platform Earning</th>
                                             <th>SP Earning</th>
@@ -517,13 +517,13 @@
 
                                         <tbody>
 
-                                        <tr  ng-repeat="applicationBase in applicationBaseReportResponseData">
+                                        <tr  ng-repeat="applicationBase in applicationBaseReportResponseData | orderBy:['date','year','month','appName']">
                                             <td>{{applicationBase.appName}}</td>
                                             <td>{{applicationBase.type}}</td>
                                             <td>false</td>
                                             <td ng-if="applicationBaseReport.report == 'Daily'">{{applicationBase.date}}</td>
+                                            <td ng-if="applicationBaseReport.report == 'Yearly' || applicationBaseReport.report == 'Monthly'">{{applicationBase.year}}</td>
                                             <td ng-if="applicationBaseReport.report == 'Monthly'">{{applicationBase.month}}</td>
-                                            <td ng-if="applicationBaseReport.report == 'Yearly'">{{applicationBase.year}}</td>
                                             <td>{{applicationBase.operator}}</td>
                                             <td>{{applicationBase.platformEarning | number}}</td>
                                             <td>{{applicationBase.spEarning | number}}</td>
@@ -773,8 +773,8 @@
                                         <thead class="obl-dashboard-apps">
                                         <tr>
                                                 <th ng-if="reconciliationReports.report == 'Daily'">Date</th>
+                                                <th ng-if="reconciliationReports.report == 'Yearly' || reconciliationReports.report == 'Monthly'">Year</th>
                                                 <th ng-if="reconciliationReports.report == 'Monthly'">Month</th>
-                                                <th ng-if="reconciliationReports.report == 'Yearly'">Year</th>
                                                 <!--<th>Service Provider</th>-->
                                                 <th>Operator</th>
                                                 <th>App ID</th>
@@ -789,10 +789,10 @@
                                         </thead>
 
                                         <tbody>
-                                            <tr  ng-repeat="reconciliation in reconciliationResponseData">
+                                            <tr  ng-repeat="reconciliation in reconciliationResponseData | orderBy:['year','month']">
                                                 <td ng-if="reconciliationReports.report == 'Daily'">{{reconciliation.date}}</td>
+                                                <td ng-if="reconciliationReports.report == 'Yearly' || reconciliationReports.report == 'Monthly'">{{reconciliation.year}}</td>
                                                 <td ng-if="reconciliationReports.report == 'Monthly'">{{reconciliation.month}}</td>
-                                                <td ng-if="reconciliationReports.report == 'Yearly'">{{reconciliation.year}}</td>
                                                 <!--<td>{{reconciliation.userId}}</td>-->
                                                 <td>{{reconciliation.operator}}</td>
                                                 <td>{{reconciliation.uniqueAppId}}</td>

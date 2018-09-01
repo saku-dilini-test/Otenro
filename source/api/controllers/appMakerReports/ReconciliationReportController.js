@@ -332,7 +332,8 @@ module.exports = {
 
         var reqData = req.body;
 
-        var year = reqData.year;
+        var yearFrom = reqData.yearFrom;
+        var yearTo = reqData.yearTo;
         var monthFrom = reqData.monthFrom;
         var monthTo = reqData.monthTo;
         var operator = reqData.operator;
@@ -340,11 +341,11 @@ module.exports = {
         var query = "";
 
         if (operator == "all") {
-            query = {month: {'>=': monthFrom, '<=': monthTo}, year: year}
+            query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}}
 
         } else {
 
-            query = {month: {'>=': monthFrom, '<=': monthTo}, year: year, operator: operator}
+            query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}, operator: operator}
         }
 
 
