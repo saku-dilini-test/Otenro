@@ -3142,5 +3142,11 @@ table.md-calendar-day-header{
 .sortable{
     cursor: pointer;
 }
-/*reports*/
 
+.publish-article-publish-date-time .ADMdtp-calendar-container{
+    bottom: auto !important;
+}
+
+.publish-article-expiry-date .ADMdtp-calendar-container{
+    bottom: auto !important;
+}
