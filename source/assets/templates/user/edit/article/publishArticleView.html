@@ -15,9 +15,15 @@
 
                 <fieldset>
                     <label>page Category</label>
-                    <select class="input-shadow-border" ng-model="dummyCat.id" ng-options="v.name for v in dummyCat" ng-change="changeArticleCat(dummyCat.id)"
-                            required>
-                    </select>
+                    <br>
+                    <div class="select-container-long select-container width-100">
+                        <select class="input-shadow-border"
+                                ng-model="dummyCat.id"
+                                ng-options="v.name for v in dummyCat"
+                                ng-change="changeArticleCat(dummyCat.id)"
+                                required>
+                        </select>
+                    </div>
                 </fieldset>
                 <fieldset>
                     <label>Title</label>
