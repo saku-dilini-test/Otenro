@@ -3154,3 +3154,6 @@ table.md-calendar-day-header{
 .publish-article-expiry-date .ADMdtp-calendar-container{
     bottom: auto !important;
 }
+.border-1px{
+    border: solid 1px #aaa;
+}
