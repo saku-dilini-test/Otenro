@@ -42,16 +42,14 @@
 
                 <fieldset>
                     <label>publish date and time</label>
-                    <div class="clearfix">
+                    <div class="clearfix publish-article-publish-date-time">
                         <adm-dtp ng-disabled="true" ng-model='article.publishDate' options='{multiple:false, calType: "gregorian", default: today, freezeInput:true}' ></adm-dtp>
-                        <!-- <input type="date" ng-model='pushMessage.date'>-->
                     </div>
                 </fieldset>
                 <fieldset>
                     <label>Expiry date and time</label>
-                    <div class="clearfix">
+                    <div class="clearfix publish-article-expiry-date">
                         <adm-dtp ng-disabled="true" ng-model='article.expiryDate' options='{multiple:false, calType: "gregorian", default: today,  freezeInput:true}' ></adm-dtp>
-                        <!-- <input type="date" ng-model='pushMessage.date'>-->
                     </div>
                 </fieldset>
 
