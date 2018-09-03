@@ -118,7 +118,11 @@ export class HeaderComponent implements OnInit {
   }
 
   navigate(route: string, name: string) {
-    this.title = name;
+    if (name === '') {
+      this.title = (<any>data).name;
+    } else {
+      this.title = name;
+    }
     this.router.navigate([route]);
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("header").style.height = "initial";

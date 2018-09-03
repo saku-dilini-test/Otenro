@@ -19,12 +19,12 @@
         <div class="navbar-1">
           <ul class="site-navigation nav navbar-nav">
             <li>
-              <a class="navbar-brand" (click)="navigate('','Home')">
+              <a class="navbar-brand" (click)="navigate('','')">
                 <img width="100%" src="{{logoUrl}}/logo.png">
               </a>
             </li>
             <li>
-              <a class="nav-link" (click)="navigate('','Home')">Your Horoscope
+              <a class="nav-link" (click)="navigate('','')">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -48,12 +48,12 @@
   <!-- Mobile Navigation -->
   <div id="mySidenav" class="sidenav  main-navigation">
     <div class="closebtn" (click)="closeNav()">&times;</div>
-    <a (click)="navigate('','Your Horoscope')">Home</a>
+    <a (click)="navigate('','')">Home</a>
     <a *ngIf="!subscriptionStatus" data-toggle="modal" (click) = "openRegisterModel()">Register</a>
     <a *ngIf="subscriptionStatus" data-toggle="modal" (click) = "openMyAccountModel()">My Account</a>
     <a (click)="navigate('contact','Contact us')">Contact Us</a>
     <a (click)="navigate('policies','Privacy Policy')">Privacy Policy</a>
-    <div class="navbar-brand text-center" (click)="navigate('','Home')">
+    <div class="navbar-brand text-center" (click)="navigate('','')">
       <img src="{{logoUrl}}/logo.png">
     </div>
   </div>
