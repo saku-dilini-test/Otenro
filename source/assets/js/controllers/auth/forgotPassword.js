@@ -12,7 +12,7 @@
             }
             //send email address to send verification email to the user's email address
             commerceService.sendVerificationLinkEmail(data).success(function (data) {
-                toastr.info(data.msg, {closeButton: true});
+                toastr.success(data.msg, {closeButton: true});
                 //To check email page
                //$state.go('anon.checkEmail');
             }).error(function(err) {
