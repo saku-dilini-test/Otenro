@@ -3081,6 +3081,9 @@ table.md-calendar-day-header{
 .select-container > select::-ms-expand {
     display: none;
 }
+.select-container-long:after{
+    left: 97% !important;
+}
 .op-config-select{
     margin: 0 5px;
     border: 1px solid #ccc;
@@ -3093,7 +3096,7 @@ table.md-calendar-day-header{
 .me-search-input::-ms-clear {
     display: none;
 }
-.width-100{
+.width-35{
     width: 35%;
 }
 .padding-horizontal-16-10{
@@ -3119,6 +3122,10 @@ table.md-calendar-day-header{
     margin-left: 0 !important;
 }
 
+.width-100{
+    width: 100% !important;
+}
+
 [ng-quill-editor] { display: block; }
 .glyphicon-move {
   cursor: move;
@@ -3139,5 +3146,11 @@ table.md-calendar-day-header{
 .sortable{
     cursor: pointer;
 }
-/*reports*/
 
+.publish-article-publish-date-time .ADMdtp-calendar-container{
+    bottom: auto !important;
+}
+
+.publish-article-expiry-date .ADMdtp-calendar-container{
+    bottom: auto !important;
+}

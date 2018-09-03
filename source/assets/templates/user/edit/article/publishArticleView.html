@@ -15,9 +15,15 @@
 
                 <fieldset>
                     <label>page Category</label>
-                    <select class="input-shadow-border" ng-model="dummyCat.id" ng-options="v.name for v in dummyCat" ng-change="changeArticleCat(dummyCat.id)"
-                            required>
-                    </select>
+                    <br>
+                    <div class="select-container-long select-container width-100">
+                        <select class="input-shadow-border"
+                                ng-model="dummyCat.id"
+                                ng-options="v.name for v in dummyCat"
+                                ng-change="changeArticleCat(dummyCat.id)"
+                                required>
+                        </select>
+                    </div>
                 </fieldset>
                 <fieldset>
                     <label>Title</label>
@@ -36,16 +42,14 @@
 
                 <fieldset>
                     <label>publish date and time</label>
-                    <div class="clearfix">
+                    <div class="clearfix publish-article-publish-date-time">
                         <adm-dtp ng-disabled="true" ng-model='article.publishDate' options='{multiple:false, calType: "gregorian", default: today, freezeInput:true}' ></adm-dtp>
-                        <!-- <input type="date" ng-model='pushMessage.date'>-->
                     </div>
                 </fieldset>
                 <fieldset>
                     <label>Expiry date and time</label>
-                    <div class="clearfix">
+                    <div class="clearfix publish-article-expiry-date">
                         <adm-dtp ng-disabled="true" ng-model='article.expiryDate' options='{multiple:false, calType: "gregorian", default: today,  freezeInput:true}' ></adm-dtp>
-                        <!-- <input type="date" ng-model='pushMessage.date'>-->
                     </div>
                 </fieldset>
 
