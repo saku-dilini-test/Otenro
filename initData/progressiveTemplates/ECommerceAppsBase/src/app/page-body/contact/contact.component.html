@@ -32,7 +32,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row" *ngIf="showmap">
         <div class="col-sm-12">
           <agm-map [latitude]="lat" [longitude]="lng" [zoom]="8" >
             <agm-marker *ngFor="let branch of googleMap" [latitude]="branch.branch.latitude" [longitude]="branch.branch.longitude">

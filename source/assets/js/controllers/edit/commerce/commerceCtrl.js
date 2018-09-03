@@ -1517,6 +1517,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                     'telPhone': basicInfo.telPhone,
                     'email': webInfo.email,
                     'webSite': webInfo.webSite,
+                    'showmap': webInfo.showmap,
                     'twitter': webInfo.twitter,
                     'facebook': webInfo.facebook,
                     'instagram': webInfo.instagram,

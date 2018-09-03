@@ -17,14 +17,17 @@ export class ContactComponent {
   lat; lng;
   finish: boolean;
   CONTACNTINFO = [];
+  showmap:boolean;
   constructor(private http: HttpClient, private appdataService: AppDataService, private title: TitleService) {
 
     this.appdataService.getContactUs().subscribe(data => {
 
       if(data.contactInfo){
         this.CONTACNTINFO.push(data);
+        if(data.contactInfo.showmap){
+          this.showmap = data.contactInfo.showmap;
+        }
       }
-
       this.googleMap = data.branches;
       if(data.branches && data.branches.length !== 0){
         this.lat = data.branches[0].branch.latitude;

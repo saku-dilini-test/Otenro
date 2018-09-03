@@ -1,4 +1,4 @@
-<section *ngFor="let contact of contacts">
+<div class="col-sm-12" *ngFor="let contact of contacts">
 
     <h3 class="padding-vertical main-header-font">
       Contact Info:
@@ -47,10 +47,11 @@
       </div>
 
 
-      <h3 class="padding-vertical main-header-font">
-        Branches
-      </h3>
+
       <ng-template  *ngFor="let branch of contact.branches;let i = index" [ngIf]="i % 3 == 0">
+        <h3 class="padding-vertical main-header-font">
+          Branches
+        </h3>
         <div class="row voffset row-space-top spacing-top">
           <a class="col-sm-4" *ngIf="contact.branches[i]"  href="https://www.google.com/maps/?q={{contact.branches[i].branch.latitude}},{{contact.branches[i].branch.longitude}}" target="_blank">
             <p class="main-header-font text-center-xs">
@@ -87,4 +88,4 @@
         <a *ngIf="contact.contactInfo.linkedin" href="{{ contact.contactInfo.linkedin }}" target="_blank" class="margin-horizontal bloc-mob-center-text text-center main-content-font"><i class="icon fa fa-linkedin"></i></a>
       </div>
     </div>
-</section>
+</div>
