@@ -214,24 +214,15 @@
             $scope.applicationArrSort = function(applications){
 
                 var returnArray = [];
-                var idx;
-                var firstIdxValue;
-                $scope.sortOp = $filter('orderBy')(applications, 'appName');
-                if($scope.sortOp){
-                    for(var i = 0;i < $scope.sortOp.length; i++){
-                        if($scope.sortOp[0].appName == "all"){
-                            returnArray = $scope.sortOp;
+                $scope.sortApps = $filter('orderBy')(applications, 'appName');
+                if($scope.sortApps){
+                    for(var i = 0;i < $scope.sortApps.length; i++){
+                        if($scope.sortApps[i].appName == "all"){
+                            returnArray = $scope.sortApps;
                             break;
-                        }else if ($scope.sortOp[0] != "all"){
-                            firstIdxValue = $scope.sortOp[0];
-                            if($scope.sortOp[i].appName == "all"){
-
-                                idx = i;
-                                $scope.sortOp[0] = $scope.sortOp[i];
-                                $scope.sortOp[i] = firstIdxValue;
-                                returnArray = $scope.sortOp;
-                                break;
-                            };
+                        }else if ($scope.sortApps[i] != "all"){
+                            returnArray = $scope.sortApps;
+                            break;
                         }
                     }
                 }
@@ -872,35 +863,37 @@
                 }
 
                 else if(data.report == "Monthly"){
+                    var fromMonth = parseInt(data.fromMonth);
+                    var toMonth = parseInt(data.toMonth);
+                    var fromYear = data.fromYear;
+                    var toYear = data.toYear;
 
-                        var fromMonth = parseInt(data.fromMonth);
-                        var toMonth = parseInt(data.toMonth);
-                        var year = data.year;
+                    if(toYear>=fromYear){
+                        if(toMonth>=fromMonth){
+                            if (data.operator){
+                                dates = {monthFrom:fromMonth, yearFrom: fromYear, monthTo:toMonth, yearTo: toYear,operator:data.operator}
 
-                    if(toMonth>=fromMonth){
-                        if (data.operator){
+                                technicalSupportService.getReconciliationDataForMonthly(dates)
+                                .success(function(response){
+                                    $scope.reconciliationResponseData = response;
+                                    if ($scope.reconciliationResponseData.length<=0){
+                                        toastr.error('There is no data to show',
+                                            'Warning', {closeButton: true});
+                                    }
+                                })
+                                .error(function(){
+                                    toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
 
-                        dates = {monthFrom:fromMonth, monthTo:toMonth, year:year,operator:data.operator}
+                                });
+                            }else {
+                                toastr.error('Please select operator ', 'Warning', {closeButton: true});
 
-                        technicalSupportService.getReconciliationDataForMonthly(dates)
-                            .success(function(response){
-                                $scope.reconciliationResponseData = response;
-                                if ($scope.reconciliationResponseData.length<=0){
-                                    toastr.error('There is no data to show',
-                                        'Warning', {closeButton: true});
-                                }
-                            })
-                            .error(function(){
-                                toastr.error('Reconciliations Reports Loading Error', 'Warning', {closeButton: true});
-
-                            });
-                        }else {
-                            toastr.error('Please select operator ', 'Warning', {closeButton: true});
-
+                            }
+                        }else{
+                            toastr.error('Invalid month range', 'Warning', {closeButton: true});
                         }
-                    }
-                    else{
-                        toastr.error('Invalid month range', 'Warning', {closeButton: true});
+                    } else{
+                        toastr.error('Invalid year range', 'Warning' , {closeButton: true});
                     }
                 }
                 else{
@@ -993,16 +986,15 @@
 
                 var fromMonth = parseInt(data.fromMonth);
                 var toMonth = parseInt(data.toMonth);
-                var year = data.year;
+                var fromYear = data.fromYear;
+                var toYear = data.toYear;
 
-
-                if(toMonth>=fromMonth){
-
-                    if (year){
+                if(toYear>=fromYear){
+                    if(toMonth>=fromMonth){
                         if (data.appName) {
                             if (data.operator){
 
-                                var reqData = {monthFrom: fromMonth, monthTo: toMonth, year: year, appName: data.appName,operator:data.operator}
+                                var reqData = {monthFrom: fromMonth, yearFrom: fromYear, monthTo: toMonth, yearTo: toYear, appName: data.appName,operator:data.operator}
 
                                 technicalSupportService.getApplicationBaseMonthlySummary(reqData)
                                     .success(function (response) {
@@ -1017,17 +1009,15 @@
                                     });
                             }else {
                                 toastr.error('Please select operator ', 'Warning', {closeButton: true});
-
                             }
                         }else{
                             toastr.error('Please select application name', 'Warning', {closeButton: true});
                         }
-                    }else {
-                        toastr.error('Please select year', 'Warning', {closeButton: true});
+                    }else{
+                        toastr.error('Invalid month range', 'Warning', {closeButton: true});
                     }
-                }
-                else{
-                    toastr.error('Invalid month range', 'Warning', {closeButton: true});
+                } else{
+                    toastr.error('Invalid year range', 'Warning' , {closeButton: true});
                 }
             }
             else{
@@ -1116,24 +1106,23 @@
 
                 var fromMonth = parseInt(data.fromMonth);
                 var toMonth = parseInt(data.toMonth);
-                var year = data.year;
+                var fromYear = data.fromYear;
+                var toYear = data.toYear;
                 var reqData ="";
-;
 
-                if(toMonth>=fromMonth){
-
-                    if (year){
+                if(toYear>=fromYear){
+                    if(toMonth>=fromMonth){
                         if (data.operator) {
 
                             if ($scope.user.userRole=="APP_CREATOR"){
                                 if (data.appName){
-                                  reqData = {monthFrom: fromMonth, monthTo: toMonth, year: year, operator: data.operator,appId:data.appName}
+                                  reqData = {monthFrom: fromMonth, yearFrom: fromYear, monthTo: toMonth, yearTo: toYear, operator: data.operator,appId:data.appName}
                                 }else {
                                     toastr.error('Please select Application name', 'Warning', {closeButton: true});
                                     return;
                                 }
                             }else {
-                                 reqData = {monthFrom: fromMonth, monthTo: toMonth, year: year, operator: data.operator}
+                                 reqData = {monthFrom: fromMonth, yearFrom: fromYear, monthTo: toMonth, yearTo: toYear, operator: data.operator}
                             }
 
 
@@ -1151,12 +1140,11 @@
                         }else{
                             toastr.error('Please select operator', 'Warning', {closeButton: true});
                         }
-                    }else {
-                        toastr.error('Please select year', 'Warning', {closeButton: true});
+                    }else{
+                        toastr.error('Invalid month range', 'Warning', {closeButton: true});
                     }
-                }
-                else{
-                    toastr.error('Invalid month range', 'Warning', {closeButton: true});
+                } else{
+                    toastr.error('Invalid year range', 'Warning' , {closeButton: true});
                 }
             }
             else{
@@ -1251,7 +1239,7 @@
                             .success(function (response) {
                                     if ($scope.user.userRole=="OPERATOR"){
 
-                                        if (response.operator==$scope.user.operator){
+                                        if (response.operator.toLowerCase()==$scope.user.operator.toLowerCase()){
 
                                             var data = {dateFrom: fromDate, dateTo: toDate, msisdn: pramData.msisdn};
 

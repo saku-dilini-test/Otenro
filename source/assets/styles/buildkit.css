@@ -1269,7 +1269,7 @@ md-dialog{
 }
 
 .md-dialog-main{
-    max-height: 60vh;
+    max-height: 70vh;
     overflow-x: hidden;
     overflow-y: auto;
     padding: 25px 40px 0;
@@ -2958,7 +2958,7 @@ table.md-calendar-day-header{
     visibility: hidden;
 }
 .custom-file-input::before {
-    content: 'Select files';
+    content: 'Select files' !important;
     display: inline-block;
     background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
     border: 1px solid #999;
@@ -2971,6 +2971,7 @@ table.md-calendar-day-header{
     text-shadow: 1px 1px #fff;
     font-weight: 700;
     font-size: 10pt;
+    position:relative;
 }
 .custom-file-input:hover::before {
     border-color: black;
@@ -3018,7 +3019,6 @@ table.md-calendar-day-header{
 }
 .reports-type-container select{
     font-size: 10px;
-    height: 25px;
     padding-left: 0;
     width: 25%;
 }
@@ -3105,8 +3105,18 @@ table.md-calendar-day-header{
 [size='48%']{
     width: 48%;
 }
+.ql-snow .ql-tooltip{
+    top: auto !important;
+    bottom: 15px !important;
+    left: auto !important;
+    right: 0 !important;
+}
 .height-100vh{
     height:100vh;
+}
+
+.margin-left-0{
+    margin-left: 0 !important;
 }
 
 [ng-quill-editor] { display: block; }
