@@ -36,7 +36,7 @@
           “SMARTFIT” DRTV PRODUCTS (PVT)LTD.
         </p>
         <div *ngFor="let contact of contactInfo">
-          <p class="text-center contact-text">
+          <p class="text-center contact-text" *ngIf="contact.contactInfo.address">
             {{contact.contactInfo.address}}
           </p>
           <p class="text-center contact-text">

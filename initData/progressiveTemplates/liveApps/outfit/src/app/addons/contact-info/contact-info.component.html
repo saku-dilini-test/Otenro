@@ -10,8 +10,8 @@
           <div>
             <i class="fa fa-map-marker"></i> <span class="main-content-font">Address:</span></div>
         </div>
-        <div class="col-md-9 col-xs-7">
-          <div>{{contact.contactInfo.contactInfoaddress}}</div>
+        <div class="col-md-9 col-xs-7" *ngIf="contact.contactInfo.address">
+          <div>{{contact.contactInfo.address}}</div>
         </div>
       </div>
       <div class="row main-content-font" *ngIf="contact.contactInfo.telPhone">
