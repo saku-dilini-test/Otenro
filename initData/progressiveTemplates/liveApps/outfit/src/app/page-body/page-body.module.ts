@@ -37,8 +37,9 @@ import { SearchPipe } from '../pipes/search.pipe';
    exports:[
     PageBodyComponent
   ],
-  declarations: [HomepageComponent, 
-    PageBodyComponent,
+  declarations: [
+     HomepageComponent,
+     PageBodyComponent,
      AboutusComponent, 
      PoliciesComponent,
      TermsComponent, 

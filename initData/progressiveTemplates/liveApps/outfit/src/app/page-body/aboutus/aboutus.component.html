@@ -3,7 +3,7 @@
   <div class="container bloc-xl">
     <div class="row row-about-main">
       <div class="col-sm-12">
-        <h1 class="hidden-xs padding-top mg-md text-center about-us" [innerHTML]="header"> </h1>
+        <h1 *ngIf="header" class="mg-md text-center about-us main-header-font" [innerHTML]="header"> </h1>
         <div class="row row-about">
           <div class="col-sm-6">
             <img src="{{aboutUsUrl}}/ABOUTUS.png"  class="img-responsive lazyload">
@@ -11,15 +11,17 @@
           <div class="col-sm-6">
             <div class="contebt-about-medium text-justify">
               <h3 class="main-header-font">Open hours</h3>
-              <div class="main-content-font">Weekdays : {{openWeekdays}}</div>
-              <div class="main-content-font">Saturday : {{openSaturday}}</div>
-              <div class="main-content-font">Sunday : {{openSunday}}</div>
+              <p class="main-content-font">Weekdays : {{openWeekdays}}</p>
+              <p class="main-content-font">Saturday : {{openSaturday}}</p>
+              <p class="main-content-font">Sunday : {{openSunday}}</p>
             </div>
           </div>
         </div>
-        <p class="content-about text-justify main-content-font" [innerHTML]="content"> </p>
+        <p *ngIf="content" class="content-about text-justify main-content-font" [innerHTML]="content"> </p>
       </div>
     </div>
+    <app-accepted-payment-type></app-accepted-payment-type>
+
   </div>
 </div>
 <!-- bloc-24 END -->

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarouselComponent } from './carousel/carousel.component';
+import { AcceptedPaymentTypeComponent } from './accepted-payment-types/accepted-payment-type.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { MarketingOption1LeftComponent } from './marketing-option1-left/marketing-option1-left.component';
 import { MarketingOption1RightComponent } from './marketing-option1-right/marketing-option1-right.component';
@@ -20,9 +21,9 @@ import { OwlModule } from 'angular-owl-carousel';
     OwlModule,
     RouterModule
   ],
-   exports:[
+   exports: [
     CarouselComponent,
-
+    AcceptedPaymentTypeComponent,
     MarketingOption1LeftComponent,
     MarketingOption1RightComponent,
     NewsletterComponent,
@@ -36,6 +37,7 @@ import { OwlModule } from 'angular-owl-carousel';
     NewsletterComponent,
     FeedbackComponent,
     ContactInfoComponent,
-    CategoriesComponent]
+    CategoriesComponent,
+    AcceptedPaymentTypeComponent]
 })
 export class AddonsModule { }
