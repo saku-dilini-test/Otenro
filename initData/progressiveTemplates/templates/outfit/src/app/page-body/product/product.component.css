@@ -1,4 +1,6 @@
-
+/deep/ .product-des p{
+    margin: 0;
+}
 .name-sale{
     position: absolute;
     top: 5px;
