@@ -8,10 +8,11 @@
           TERMS &amp; Conditions
         </h1>
         
-        <p class=" content-about text-justify main-content-font"   [innerHTML]="terms"> </p>
-      
+        <p *ngIf="terms"  class=" content-about text-justify main-content-font"   [innerHTML]="terms"> </p>
+
       </div>
     </div>
+    <app-accepted-payment-type></app-accepted-payment-type>
   </div>
 </div>
 <!-- bloc-26 END -->

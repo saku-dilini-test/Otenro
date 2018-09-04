@@ -5,6 +5,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { MarketingOption1LeftComponent } from './marketing-option1-left/marketing-option1-left.component';
 import { MarketingOption1RightComponent } from './marketing-option1-right/marketing-option1-right.component';
 import { Routes, RouterModule } from '@angular/router';
+import { AcceptedPaymentTypeComponent } from './accepted-payment-types/accepted-payment-type.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NewsletterComponent } from './newsletter/newsletter.component';
@@ -22,7 +23,7 @@ import { OwlModule } from 'angular-owl-carousel';
   ],
    exports:[
     CarouselComponent,
-
+    AcceptedPaymentTypeComponent,
     MarketingOption1LeftComponent,
     MarketingOption1RightComponent,
     NewsletterComponent,
@@ -36,6 +37,8 @@ import { OwlModule } from 'angular-owl-carousel';
     NewsletterComponent,
     FeedbackComponent,
     ContactInfoComponent,
-    CategoriesComponent]
+    CategoriesComponent,
+    AcceptedPaymentTypeComponent
+  ]
 })
 export class AddonsModule { }

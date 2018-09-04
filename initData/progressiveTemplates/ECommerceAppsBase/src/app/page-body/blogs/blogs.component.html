@@ -1,6 +1,6 @@
 <div class="row bloc">
   <div class="col-sm-9 col-xs-12">
-    <div class="row" *ngFor = "let blog of blogData">
+    <div class="row mg-sm" *ngFor = "let blog of blogData">
       <div class="col-sm-3">
         <img src="{{imageUrl}}/{{blog.imageUrl}}" width="100%">
       </div>
@@ -10,7 +10,7 @@
         </h3>
         <p class="main-content-font" [innerHTML]="blog.shortDesc">
         </p>
-        <a class="btn btn-d main-button btn-block btn-lg" (click)="navigate(blog.id)">More Info</a>
+        <a class="btn btn-d main-button btn-lg" (click)="navigate(blog.id)">More Info</a>
       </div>
     </div>
   </div>
@@ -24,4 +24,5 @@
       </p>
     </form>
   </div>
+  <app-accepted-payment-type></app-accepted-payment-type>
 </div>

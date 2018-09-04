@@ -33,6 +33,13 @@
                       Enter a quantity of {{cartItems[i].totalQty}} or less.
                     </span>
                   </div>
+
+                  <div class="col" *ngIf="!item.qty || item.qty == null">
+                    <span style="color:rgb(180, 30, 30)">
+                      Please enter the quantity.
+                    </span>
+                  </div>
+
                   <div class="col" *ngIf="item.qty > cartItems[i].totalQty && cartItems[i].totalQty == 1">
                     <span style="color:rgb(180, 30, 30)">
                       Enter a quantity of {{cartItems[i].totalQty}}.
@@ -66,6 +73,8 @@
       </div>
       <h4 class="text-center  main-header-font" *ngIf="cartItems.length == 0">There are no products added to the cart</h4>
     </div>
+    <app-accepted-payment-type></app-accepted-payment-type>
+
   </div>
 </div>
 <!-- bloc-18 END -->
@@ -115,6 +124,11 @@
                 <div class="col" *ngIf="item.qty > cartItems[i].totalQty && cartItems[i].totalQty > 1">
                   <span style="color:rgb(180, 30, 30)">
                     Enter a quantity of {{cartItems[i].totalQty}} or less.
+                  </span>
+                </div>
+                <div class="col" *ngIf="!item.qty || item.qty == null">
+                  <span style="color:rgb(180, 30, 30)">
+                    Please enter the quantity.
                   </span>
                 </div>
                 <div class="col" *ngIf="item.qty > cartItems[i].totalQty && cartItems[i].totalQty == 1">

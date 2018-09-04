@@ -1,49 +1,8 @@
-<footer class="main-footer-back footer-mobile bgc-white  hidden-sm hidden-lg hidden-md"
-        [ngClass]="isIpgInfoExists() ? 'height-160': 'height-60'">
-  <!-- Footer mobile payment methods view - bloc-36 -->
-  <div class="block" id="bloc-36" *ngIf="isIpgInfoExists()">
-    <div class="content-container">
-      <div class="content-box height-30per">
-        <p class="margin-vert-1 main-footer-header">Accepted Payment Types</p>
-      </div>
-      <div class="content-box padding-hor-10 height-70per">
-        <img *ngIf="ipgInfo && ipgInfo.paypalEnable" src="assets/images/Paypal.png" width="35px" height="25px" class="set-img-margin">
-        <img *ngIf="ipgInfo && ipgInfo.paypalEnable" src="assets/images/Visa.png" width="35px" height="25px" class="set-img-margin">
-        <img *ngIf="ipgInfo && ipgInfo.paypalEnable" src="assets/images/Master.png" width="35px" height="25px" class="set-img-margin">
-        <img *ngIf="ipgInfo && ipgInfo.paypalEnable" src="./assets/images/Amex.png" width="35px" height="25px" class="set-img-margin">
+<footer class="main-footer-back footer-mobile  hidden-sm hidden-lg hidden-md">
 
-        <img *ngIf="ipgInfo && ipgInfo.cashOnDeliveryEnable" src="assets/images/Cash-on-Delivery.png" width="35px" height="25px" class="set-img-margin">
-        <img *ngIf="ipgInfo && ipgInfo.cashOnPickupEnable" src="assets/images/Cash-on-pickup.png" width="35px" height="25px" class="set-img-margin">
-
-        <img *ngIf="ipgInfo && ipgInfo.payHereEnable" src="assets/images/PayApp.png" width="35px" height="25px" class="set-img-margin">
-        <img *ngIf="ipgInfo && ipgInfo.payHereEnable" src="assets/images/mCash.png" width="35px" height="25px" class="set-img-margin">
-        <img *ngIf="ipgInfo && ipgInfo.payHereEnable" src="assets/images/ezCash.png" width="35px" height="25px" class="set-img-margin">
-        <img *ngIf="ipgInfo && ipgInfo.payHereEnable" src="assets/images/Vishwa.png" width="35px" height="25px" class="set-img-margin">
-        <img *ngIf="ipgInfo && ipgInfo.payHereEnable && !ipgInfo.authorizeNetEnable && !ipgInfo.stripeEnable  && !ipgInfo.paypalEnable"
-          src="assets/images/Visa.png" width="35px" height="25px" class="set-img-margin">
-        <img *ngIf="ipgInfo && ipgInfo.payHereEnable && !ipgInfo.authorizeNetEnable && !ipgInfo.stripeEnable  && !ipgInfo.paypalEnable"
-          src="assets/images/Master.png" width="35px" height="25px" class="set-img-margin">
-        <img *ngIf="ipgInfo && ipgInfo.payHereEnable && !ipgInfo.authorizeNetEnable && !ipgInfo.stripeEnable  && !ipgInfo.paypalEnable"
-          src="assets/images/Amex.png" width="35px" height="25px" class="set-img-margin">
-
-        <img *ngIf="ipgInfo && (ipgInfo.authorizeNetEnable && !ipgInfo.stripeEnable  && !ipgInfo.paypalEnable)" src="assets/images/Visa.png"
-          width="35px" height="25px" class="set-img-margin">
-        <img *ngIf="ipgInfo && (ipgInfo.authorizeNetEnable && !ipgInfo.stripeEnable  && !ipgInfo.paypalEnable)" src="assets/images/Master.png"
-          width="35px" height="25px" class="set-img-margin">
-
-        <img *ngIf="ipgInfo && (ipgInfo.stripeEnable && !ipgInfo.authorizeNetEnable  && !ipgInfo.paypalEnable)" src="assets/images/Visa.png"
-          width="35px" height="25px" class="set-img-margin">
-        <img *ngIf="ipgInfo && (ipgInfo.stripeEnable && !ipgInfo.authorizeNetEnable  && !ipgInfo.paypalEnable)" src="assets/images/Master.png"
-          width="35px" height="25px" class="set-img-margin">
-        <img *ngIf="ipgInfo && (ipgInfo.stripeEnable && !ipgInfo.authorizeNetEnable  && !ipgInfo.paypalEnable)" src="assets/images/Amex.png"
-          width="35px" height="25px" class="set-img-margin">
-      </div>
-    </div>
-  </div>
-  <!-- Footer - bloc-36 END -->
 
   <!-- Footer - bloc-37 -->
-  <div class="bloc main-footer-font  padding-top shadow-effect position-fix height-60" id="bloc-37">
+  <div class="bloc main-footer-back main-footer-font  padding-top shadow-effect position-fix height-60" id="bloc-37">
     <div class="container">
       <div class="row row-no-gutters">
         <div class="col-xs-3" (click)="navigate('','Home')">
@@ -95,24 +54,24 @@
         <div class="col-xs-4 text-left">
           <h4 class="main-footer-header">QUICK LINKS</h4>
           <div class="c-pad">
-            <a class="main-footer-font" [routerLink]="['aboutus']">ABOUT US</a>
+            <a class="main-footer-font" [routerLink]="['aboutus']">About Us</a>
           </div>
           <div class="c-pad">
-            <a class="main-footer-font" [routerLink]="['policies']">POLICIES</a>
+            <a class="main-footer-font" [routerLink]="['policies']">Policies</a>
           </div>
           <div class="c-pad">
-              <a class="main-footer-font" [routerLink]="['terms']">TERMS & CONDITIONS</a>
+            <a class="main-footer-font" [routerLink]="['terms']">Terms & Conditions</a>
           </div>
         </div>
         <div class="col-xs-4 text-left">
           <h4 class="main-footer-header">CUSTOMER CARE HOTLINE</h4>
-          <div *ngIf="webInfo.telPhone" class="c-pad main-footer-font">Phone: {{webInfo.telPhone}}</div>
-          <div *ngIf="webInfo.email" class="c-pad main-footer-font">Email: {{webInfo.email}}</div>
-          <a *ngIf="isFacebookUrlExists()"  href="{{ getFacebookUrl() }}" target="_blank"><span class="fa fa-facebook icons icon-sm mobile-icons main-footer-font"></span></a>
-          <a  *ngIf="isTwitterUrlExists()" href="{{ getTwitterUrl() }}" target="_blank"><span class="fa fa-twitter icons icon-sm mobile-icons main-footer-font"></span></a>
-          <a  *ngIf="isInstagramUrlExists()" href="{{ getInstagramrUrl() }}" target="_blank"><span class="fa fa-instagram icons icon-sm mobile-icons main-footer-font"></span></a>
-          <a  *ngIf="isPinterestUrlExists()"  href="{{ getPinterestrUrl() }}" target="_blank"><span class="fa fa-pinterest-p icons icon-sm mobile-icons main-footer-font"></span></a>
-          <a *ngIf="isLinkedInUrlExists()" href="{{ getLinkedInUrl() }}" target="_blank"><span class="fa fa-linkedin icons icon-sm mobile-icons main-footer-font"></span></a>
+          <div *ngIf="webInfo?.telPhone" class="c-pad main-footer-font">Phone: {{webInfo?.telPhone}}</div>
+          <div *ngIf="webInfo?.email" class="c-pad main-footer-font">Email: {{webInfo?.email}}</div>
+          <a *ngIf="isFacebookUrlExists()"  href="{{ getFacebookUrl() }}" ><span class="fa fa-facebook icons icon-sm mobile-icons main-footer-font"></span></a>
+          <a  *ngIf="isTwitterUrlExists()" href="{{ getTwitterUrl() }}"><span class="fa fa-twitter icons icon-sm mobile-icons main-footer-font"></span></a>
+          <a  *ngIf="isInstagramUrlExists()" href="{{ getInstagramrUrl() }}"><span class="fa fa-instagram icons icon-sm mobile-icons main-footer-font"></span></a>
+          <a  *ngIf="isPinterestUrlExists()"  href="{{ getPinterestrUrl() }}"><span class="fa fa-pinterest-p icons icon-sm mobile-icons main-footer-font"></span></a>
+          <a *ngIf="isLinkedInUrlExists()" href="{{ getLinkedInUrl() }}"><span class="fa fa-linkedin icons icon-sm mobile-icons main-footer-font"></span></a>
         </div>
       </div>
     </div>
@@ -129,28 +88,28 @@
       <div style="margin-top:0.4%" class="main-footer-font col-sm-2">OUTFIT.LK 2018</div>
       <div style="margin-top:0.4%; text-align:right" class="main-footer-font col-sm-6">ACCEPTED PAYMENT TYPES</div>
       <div  style="text-align:left;" class="col-sm-4">
-          <img *ngIf = "ipgInfo && ipgInfo.paypalEnable" src="assets/images/Paypal.png" width="35px" height="25px">
-          <img *ngIf = "ipgInfo && ipgInfo.paypalEnable" src="assets/images/Visa.png" width="35px" height="25px">
-          <img *ngIf = "ipgInfo && ipgInfo.paypalEnable" src="assets/images/Master.png" width="35px" height="25px">
-          <img *ngIf = "ipgInfo && ipgInfo.paypalEnable" src="assets/images/Amex.png" width="35px" height="25px">
+        <img *ngIf = "ipgInfo && ipgInfo.paypalEnable" src="assets/images/Paypal.png" width="35px" height="25px">
+        <img *ngIf = "ipgInfo && ipgInfo.paypalEnable" src="assets/images/Visa.png" width="35px" height="25px">
+        <img *ngIf = "ipgInfo && ipgInfo.paypalEnable" src="assets/images/Master.png" width="35px" height="25px">
+        <img *ngIf = "ipgInfo && ipgInfo.paypalEnable" src="assets/images/Amex.png" width="35px" height="25px">
 
-          <img *ngIf = "ipgInfo && ipgInfo.cashOnDeliveryEnable" src="assets/images/Cash-on-Delivery.png" width="35px" height="25px">
-          <img *ngIf = "ipgInfo && ipgInfo.cashOnPickupEnable" src="assets/images/Cash-on-pickup.png" width="35px" height="25px">
+        <img *ngIf = "ipgInfo && ipgInfo.cashOnDeliveryEnable" src="assets/images/Cash-on-Delivery.png" width="35px" height="25px">
+        <img *ngIf = "ipgInfo && ipgInfo.cashOnPickupEnable" src="assets/images/Cash-on-pickup.png" width="35px" height="25px">
 
-          <img *ngIf = "ipgInfo && ipgInfo.payHereEnable" src="assets/images/PayApp.png" width="35px" height="25px">
-          <img *ngIf = "ipgInfo && ipgInfo.payHereEnable" src="assets/images/mCash.png" width="35px" height="25px">
-          <img *ngIf = "ipgInfo && ipgInfo.payHereEnable" src="assets/images/ezCash.png" width="35px" height="25px">
-          <img *ngIf = "ipgInfo && ipgInfo.payHereEnable" src="assets/images/Vishwa.png" width="35px" height="25px">
-          <img *ngIf = "ipgInfo && ipgInfo.payHereEnable && !ipgInfo.authorizeNetEnable && !ipgInfo.stripeEnable  && !ipgInfo.paypalEnable" src=".assets/images/Visa.png" width="35px" height="25px">
-          <img *ngIf = "ipgInfo && ipgInfo.payHereEnable && !ipgInfo.authorizeNetEnable && !ipgInfo.stripeEnable  && !ipgInfo.paypalEnable" src=".assets/images/Master.png" width="35px" height="25px">
-          <img *ngIf = "ipgInfo && ipgInfo.payHereEnable && !ipgInfo.authorizeNetEnable && !ipgInfo.stripeEnable  && !ipgInfo.paypalEnable" src="assets/images/Amex.png" width="35px" height="25px">
+        <img *ngIf = "ipgInfo && ipgInfo.payHereEnable" src="assets/images/PayApp.png" width="35px" height="25px">
+        <img *ngIf = "ipgInfo && ipgInfo.payHereEnable" src="assets/images/mCash.png" width="35px" height="25px">
+        <img *ngIf = "ipgInfo && ipgInfo.payHereEnable" src="assets/images/ezCash.png" width="35px" height="25px">
+        <img *ngIf = "ipgInfo && ipgInfo.payHereEnable" src="assets/images/Vishwa.png" width="35px" height="25px">
+        <img *ngIf = "ipgInfo && ipgInfo.payHereEnable && !ipgInfo.authorizeNetEnable && !ipgInfo.stripeEnable  && !ipgInfo.paypalEnable" src=".assets/images/Visa.png" width="35px" height="25px">
+        <img *ngIf = "ipgInfo && ipgInfo.payHereEnable && !ipgInfo.authorizeNetEnable && !ipgInfo.stripeEnable  && !ipgInfo.paypalEnable" src=".assets/images/Master.png" width="35px" height="25px">
+        <img *ngIf = "ipgInfo && ipgInfo.payHereEnable && !ipgInfo.authorizeNetEnable && !ipgInfo.stripeEnable  && !ipgInfo.paypalEnable" src="assets/images/Amex.png" width="35px" height="25px">
 
-          <img *ngIf = "ipgInfo && (ipgInfo.authorizeNetEnable && !ipgInfo.stripeEnable  && !ipgInfo.paypalEnable)" src="assets/images/Visa.png" width="35px" height="25px">
-          <img *ngIf = "ipgInfo && (ipgInfo.authorizeNetEnable && !ipgInfo.stripeEnable  && !ipgInfo.paypalEnable)" src="assets/images/Master.png" width="35px" height="25px">
+        <img *ngIf = "ipgInfo && (ipgInfo.authorizeNetEnable && !ipgInfo.stripeEnable  && !ipgInfo.paypalEnable)" src="assets/images/Visa.png" width="35px" height="25px">
+        <img *ngIf = "ipgInfo && (ipgInfo.authorizeNetEnable && !ipgInfo.stripeEnable  && !ipgInfo.paypalEnable)" src="assets/images/Master.png" width="35px" height="25px">
 
-          <img *ngIf = "ipgInfo && (ipgInfo.stripeEnable && !ipgInfo.authorizeNetEnable  && !ipgInfo.paypalEnable)" src="assets/images/Visa.png" width="35px" height="25px">
-          <img *ngIf = "ipgInfo && (ipgInfo.stripeEnable && !ipgInfo.authorizeNetEnable  && !ipgInfo.paypalEnable)" src="assets/images/Master.png" width="35px" height="25px">
-          <img *ngIf = "ipgInfo && (ipgInfo.stripeEnable && !ipgInfo.authorizeNetEnable  && !ipgInfo.paypalEnable)" src="assets/images/Amex.png" width="35px" height="25px">
+        <img *ngIf = "ipgInfo && (ipgInfo.stripeEnable && !ipgInfo.authorizeNetEnable  && !ipgInfo.paypalEnable)" src="assets/images/Visa.png" width="35px" height="25px">
+        <img *ngIf = "ipgInfo && (ipgInfo.stripeEnable && !ipgInfo.authorizeNetEnable  && !ipgInfo.paypalEnable)" src="assets/images/Master.png" width="35px" height="25px">
+        <img *ngIf = "ipgInfo && (ipgInfo.stripeEnable && !ipgInfo.authorizeNetEnable  && !ipgInfo.paypalEnable)" src="assets/images/Amex.png" width="35px" height="25px">
 
       </div>
     </div>

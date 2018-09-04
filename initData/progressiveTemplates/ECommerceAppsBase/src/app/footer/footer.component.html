@@ -2,23 +2,23 @@
 <div class="bloc main-footer-back hidden-lg hidden-md hidden-sm l-bloc" id="bloc-27">
 	<div class="container bloc-sm">
 		<div class="row row-no-gutters flex-center">
-			<div class="col-xs-3" (click)="navigate('', 'Home')" >
+			<a class="col-xs-3"  routerLink="home" routerLinkActive="active"  >
 				<div class="text-center">
 					<span class="feather-icon icon-air-play icon-sm main-footer-font"></span>
 				</div>
 				<p class="text-center-xs mobile-footer-label main-footer-font">
 					Home
 				</p>
-			</div>
-			<div class="col-xs-3" *ngIf="loginStatus" (click)="navigate('appUser','My Account')">
+			</a>
+			<a class="col-xs-3" *ngIf="loginStatus"   routerLink="/appUser" routerLinkActive="active">
 				<div class="text-center">
 					<span class="feather-icon icon-head icon-sm main-footer-font"></span>
 				</div>
 				<p class="text-center-xs mobile-footer-label main-footer-font"  >
 					User
 				</p>
-			</div>
-			<div class="col-xs-3"  (click)="navigate('shop', 'Search')">
+			</a>
+			<div class="col-xs-3"  routerLink="/shop" routerLinkActive="active">
 				<div class="text-center">
 					<span class="feather-icon icon-search icon-sm main-footer-font"></span>
 				</div>
@@ -26,7 +26,7 @@
 					Search
 				</p>
 			</div>
-			<div class="col-xs-3"  (click)="navigate('contact', 'Contact Us')">
+			<div class="col-xs-3"  routerLink="/contact" routerLinkActive="active">
 				<div class="text-center">
 					<span class="feather-icon icon-speech-bubble icon-sm main-footer-font"></span>
 				</div>
