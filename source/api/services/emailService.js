@@ -600,10 +600,6 @@ module.exports = {
 
         UserEmail.findOne(searchApp).exec(function (err, userEmail) {
 
-
-            //console.log(config.APP_FILE_SERVER + data.userId + "/templates/"+data.appId+'/img/email/'+userEmail.orderConfirmedEmailImage);
-
-
             if( typeof userEmail==='undefined'){
                 console.log("Please Update Email Setting ");
 
@@ -616,7 +612,7 @@ module.exports = {
 //                        var imagePath =  serverOrg +"/templates/viewWebImages?userId="+ data.userId
 
                         if(data.paymentStatus == 'Pending'){
-                            headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderConfirmedEmailImage;
+                            headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/assets/images/email/'+userEmail.orderConfirmedEmailImage;
                             headerFileName = userEmail.orderConfirmedEmailImage;
                             subject = 'You have orderd';
                             if(userEmail.orderConfirmedEmail.order){
@@ -624,7 +620,7 @@ module.exports = {
                             }
                         }
                         if(data.paymentStatus == 'Successful'){
-                            headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderFulfilledEmailImage;
+                            headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/assets/images/email/'+userEmail.orderFulfilledEmailImage;
                             headerFileName = userEmail.orderFulfilledEmailImage;
                             subject = 'Order fulfilled';
                             if(userEmail.orderFulfilledEmail.order){
@@ -632,7 +628,7 @@ module.exports = {
                             }
                         }
                         if(data.paymentStatus == 'Refunded'){
-                            headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderRefundedEmailImage;
+                            headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/assets/images/email/'+userEmail.orderRefundedEmailImage;
                             headerFileName = userEmail.orderRefundedEmailImage;
                             subject = 'Order Refunded';
                             if(userEmail.orderRefundEmail.order){
@@ -641,7 +637,7 @@ module.exports = {
                         }
 
 
-                        var  testPath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/thirdNavi/';
+                        var  testPath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/assets/images/thirdNavi/';
 
                         var test = [];
                         test.push({
@@ -667,23 +663,6 @@ module.exports = {
                                 })
                         }
 
-//                        console.log("--------------------");
-//                        console.log("test=>" + JSON.stringify(test, null, 2));
-//                        console.log("-----------------------");
-
-//                        var serverOrg=config.server.host+':'+config.server.port;
-//                        var emailHeaderImage;
-//
-//                        var imagePath
-//                        if(data.isNew == true || data.isNew == 'true'){
-//
-//                            imagePath =  serverOrg +"/templates/viewWebImages?userId="+ data.userId
-//                                                    +"&appId="+data.appId+"&"+new Date().getTime()+"&images=thirdNavi/";
-//
-//                        }else{
-//                            imagePath =  serverOrg +"/templates/viewImages?userId="+ data.userId
-//                                            +"&appId="+data.appId+"&"+new Date().getTime()+"&img=thirdNavi/";
-//                        }
 
                 console.log("typeof userEmail.orderConfirmedEmailImage "  + typeof userEmail.orderConfirmedEmailImage);
                 if(typeof userEmail.orderConfirmedEmailImage !=='undefined'){
@@ -849,17 +828,6 @@ module.exports = {
 
                 let  mailOptions;
 
-//                if (err){
-//                       console.log('*****************');
-//                       console.log(err);
-//                    mailOptions = {
-//                        from: 'onbitlabs@gmail.com', // sender address
-//                        to: 'onbitlabs@gmail.com', // list of receivers
-//                        subject: 'You have ordered', // Subject line
-//                        html: mBody
-//                    };
-//
-//                }else {
                    console.log('------------------');
 
                     // setup email data with unicode symbols
@@ -884,12 +852,6 @@ module.exports = {
                         };
 
                     }
-
-
-//                }
-//console.log("mailOptions");
-//console.log("-----------------");
-//console.log(mailOptions);
 
                 // send mail with defined transport object
                 transporter.sendMail(mailOptions, (error, info) => {
