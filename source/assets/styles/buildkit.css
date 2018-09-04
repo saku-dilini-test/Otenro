@@ -3157,3 +3157,6 @@ table.md-calendar-day-header{
 .border-1px{
     border: solid 1px #aaa;
 }
+.margin-bottom-20{
+    margin-bottom: 20px !important;
+}
