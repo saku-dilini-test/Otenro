@@ -11,6 +11,11 @@
     outline: none;
 }
 
+html{
+    background-color: #F2F2F2;
+    font-family: 'Open Sans', sans-serif;
+    color: #666;
+}
 body{
     background-color: #F2F2F2;
     font-family: 'Open Sans', sans-serif;

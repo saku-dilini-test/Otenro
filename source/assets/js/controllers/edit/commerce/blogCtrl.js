@@ -247,11 +247,11 @@
                            if (data.templateId){
                                mainMenuService.getTemplateData(data.templateId)
                                    .success(function (templateData) {
-                                       if(templateData.thirdNaviAspectRatio){
-                                           $scope.thirdNaviAspectRatio = parseFloat(templateData.thirdNaviAspectRatio);
+                                       if(templateData.secondNaviAspectRatio){
+                                           $scope.secondNaviAspectRatio = parseFloat(templateData.secondNaviAspectRatio);
                                        }
-                                       if(templateData.iSizeThird){
-                                           $scope.iSizeThird={w:templateData.iSizeThird.w,h:templateData.iSizeThird.h};
+                                       if(templateData.iSizeSecond){
+                                           $scope.iSizeSecond={w:templateData.iSizeSecond.w,h:templateData.iSizeSecond.h};
                                        }
                                    }).error(function (err) {
                                    toastr.error(err.message, 'Warning', {

@@ -6,7 +6,6 @@
 body{
 	margin:0;
 	padding:0;
-    background:#FFF;
     overflow-x:hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -643,10 +642,10 @@ button{
 	min-width:100%;
 	max-width:100%;
 	max-height:100%;
-	padding-top:20%;
+	padding-top:14%;
+	margin:0;
 	padding-bottom:14%;
 	font-size:3.1vw;
-	font-weight:bold;
 	letter-spacing:5px;
 	text-transform:uppercase;
 }
@@ -659,7 +658,7 @@ button{
 .orbitrack{
 	background-position:center center;
 	background-repeat:no-repeat;
-	background-size:100% auto;
+	background-size:100% 100%;
 	color: #fff;
 
 }
@@ -677,7 +676,7 @@ button{
 	padding-top:10%;
 	padding-bottom:10%;
 	font-size:3.1vw;
-	font-weight:bold;
+	margin: 0;
 	text-transform:uppercase;
 	letter-spacing:5px;
 }
@@ -1098,7 +1097,7 @@ button{
 	margin-bottom: 0;
 }
 
-body, html { 
+body, html {
 	overflow-x:hidden;
  }
 

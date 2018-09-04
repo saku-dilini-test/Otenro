@@ -64,3 +64,34 @@ hr {
     margin: 1em 0;
     padding: 0;
 }
+
+img{
+  width: 200px;
+  height: 200px;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+@media (max-width: 1285px){
+  img{
+    width: 150px;
+    height:150px;
+  }
+}
+@media (max-width: 960px){
+  .bloc{
+    padding:16px;
+  }
+  img{
+    width: 125px;
+    height:125px;
+  }
+}
+
+@media (max-width: 767px){
+
+  img{
+    width: 100%;
+    object-fit: unset;
+    height: 100%;
+  }
+}

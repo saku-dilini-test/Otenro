@@ -1,5 +1,5 @@
-<div class="bloc bgc-white l-bloc none">
-  <div class="col-sm-9">
+<div class="row bloc">
+  <div class="col-sm-9 col-xs-12">
     <div class="row" *ngFor = "let blog of blogData">
       <div class="col-sm-3">
         <img src="{{imageUrl}}/{{blog.imageUrl}}" width="100%">
@@ -14,7 +14,7 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-3">
+  <div class="col-sm-3 hidden-xs">
     <form class="form-blog">
       <p class="header"  >
         LATEST POSTS

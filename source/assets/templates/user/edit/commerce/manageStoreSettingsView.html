@@ -512,7 +512,11 @@
                     <!-- Address | Tel Phone -->
                     <form name="basicInfoForm" novalidate>
                         <div class="md-dialog-main">
-
+                            <md-checkbox aria-label="Show Map"  ng-model="webInfo.showmap">
+                            Show the map on the app
+                            </md-checkbox>
+                            <br>
+                            <br>
                             <fieldset>
                                 <button class="btn-material" ng-click="addNewMapLocation()">
                                     Add new location
@@ -535,9 +539,7 @@
                                 </tbody>
                             </table>
                             <!--<div class="google-map-wrapper">-->
-                            <!--<md-checkbox aria-label="Show Map">-->
-                            <!--Show the map on the app-->
-                            <!--</md-checkbox>-->
+
                             <!--<div class="google-map-container">-->
                             <!--<ui-gmap-google-map  center="map.center" zoom="map.zoom" draggable="true" events="map.events">-->
                             <!--<ui-gmap-marker ng-repeat="mp in map.markers" coords="mp.coords" icon="mp.icon" idkey="mp.id"></ui-gmap-marker>-->

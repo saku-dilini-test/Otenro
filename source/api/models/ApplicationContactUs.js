@@ -23,6 +23,9 @@ module.exports = {
         webSite: {
             type: 'string'
         },
+        showmap: {
+            type: 'boolean'
+        },
         twitter: {
             type: 'string'
         },

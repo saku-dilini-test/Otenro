@@ -139,10 +139,7 @@
         });
 
         $scope.initSku = function(index){
-        console.log(index);
-        console.log($scope.product.variants.length);
-        console.log($scope.initSkuLength);
-            if(index < $scope.initSkuLength || index == 0 || index < $scope.product.variants.length -1){
+            if(!$scope.product.variants[index].isNewSku){
                 return true;
             }
             else{
@@ -349,7 +346,8 @@
                     name: product.name,
                     price: null,
                     quantity: null,
-                    selection:$scope.selection2
+                    selection:$scope.selection2,
+                    isNewSku: true
                 };
 
                if($scope.product.variants.length >= 2){
@@ -560,6 +558,7 @@
                   $scope.product.selection = $scope.selection;
                   $scope.product.published = 'NO';
                   $scope.product.selectedSku = $scope.selectedSku;
+                  $scope.product.variants.forEach(function(v){delete v.isNewSku});
                   commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product,'isNew': $rootScope.tempNew, 'defImg': $scope.defaultImage,bannerImage: $scope.bannerImage,oldBannerImg: $scope.oldBannerImg}).success(function (result) {
                       toastr.success('Product added successfully', 'Awsome!', {
                           closeButton: true
@@ -609,6 +608,8 @@
                   $scope.product.selection = $scope.selection;
                   $scope.product.published = 'YES';
                   $scope.product.selectedSku = $scope.selectedSku;
+
+                  $scope.product.variants.forEach(function(v){delete v.isNewSku});
                   commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product, 'isNew': $rootScope.tempNew, 'defImg': $scope.defaultImage,bannerImage:$scope.bannerImage,oldBannerImg: $scope.oldBannerImg}).success(function (result) {
                       toastr.success('Products updated successfully', 'Awesome!', {
                           closeButton: true
@@ -685,7 +686,6 @@
         $scope.bannerButtonName = "Select Image";
 
         $scope.cropImage = function () {
-            $scope.setAspectRatio();
             $scope.myImage = null;
             var handleFileSelect=function(evt) {
 
@@ -706,7 +706,6 @@
         };
 
         $scope.cropBannerImage = function () {
-            $scope.setAspectRatio();
             $scope.myBannerImage = null;
             var handleFileSelect=function(evt) {
 
@@ -1395,9 +1394,11 @@
                             .success(function (templateData) {
                                 if(templateData.thirdNaviAspectRatio){
                                     $scope.thirdNaviAspectRatio = parseFloat(templateData.thirdNaviAspectRatio);
+                                    $scope.aspectRatioBanner = parseFloat(templateData.secondNaviAspectRatio);
                                 }
                                 if(templateData.iSizeThird){
                                     $scope.iSizeThird={w:templateData.iSizeThird.w,h:templateData.iSizeThird.h};
+                                    $scope.sizeBanner={w:templateData.iSizeSecond.w,h:templateData.iSizeSecond.h};
                                 }
                             }).error(function (err) {
                             toastr.error(err.message, 'Warning', {
@@ -1412,32 +1413,7 @@
             });
         };
 
-        $scope.getAspectRatio = function () {
-            carouselService.getApplicationData($rootScope.appId)
-                .success(function (data) {
-                    if (data.templateId){
-                        carouselService.getTemplateData(data.templateId)
-                            .success(function (templateData) {
-
-                                if(templateData.sliderSize){
-                                    $scope.aspectRatioBanner = parseFloat(templateData.sliderSize.aspectRatio);
-                                }
-                                if(templateData.iSizeThird){
-                                    $scope.sizeBanner={w:templateData.sliderSize.w,h:templateData.sliderSize.h};
-                                }
-                            }).error(function (err) {
-                            toastr.error(err.message, 'Warning', {
-                                closeButton: true
-                            });
-                        });
-                    }
-                }).error(function (err) {
-                toastr.error(err.message, 'Warning', {
-                    closeButton: true
-                });
-            });
-        };
-        $scope.getAspectRatio();
+        $scope.setAspectRatio();
 
 
 

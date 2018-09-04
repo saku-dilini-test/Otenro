@@ -1,4 +1,4 @@
-<footer class="footer-mobile bgc-white  hidden-sm hidden-lg hidden-md"
+<footer class="footer-mobile  main-footer-back hidden-sm hidden-lg hidden-md"
         [ngClass]="isIpgInfoExists() ? 'height-160': 'height-60'">
   <!-- Footer mobile payment methods view - bloc-36 -->
   <div class="block" id="bloc-36" *ngIf="isIpgInfoExists()">
@@ -90,24 +90,24 @@
     <div class="container bloc-sm cus-padding">
       <div class="row">
         <div class="col-xs-4 navbar-brand">
-          <img  src="{{imageUrl}}/logo.png&dummy={{dummy}}" alt="logo" (click)="navigate('','Home')"/>
+          <img  src="{{imageUrl}}/footerLogo.png&dummy={{dummy}}" alt="footerLogo" (click)="navigate('','Home')"/>
         </div>
         <div class="col-xs-4 text-left">
           <h4 class="main-footer-header">QUICK LINKS</h4>
           <div class="c-pad">
-            <a class="main-footer-font" [routerLink]="['aboutus']">ABOUT US</a>
+            <a class="main-footer-font" [routerLink]="['aboutus']">About Us</a>
           </div>
           <div class="c-pad">
-            <a class="main-footer-font" [routerLink]="['policies']">POLICIES</a>
+            <a class="main-footer-font" [routerLink]="['policies']">Policies</a>
           </div>
           <div class="c-pad">
-              <a class="main-footer-font" [routerLink]="['terms']">TERMS & CONDITIONS</a>
+              <a class="main-footer-font" [routerLink]="['terms']">Terms & Conditions</a>
           </div>
         </div>
         <div class="col-xs-4 text-left">
           <h4 class="main-footer-header">CUSTOMER CARE HOTLINE</h4>
-          <div class="c-pad main-footer-font">Phone: 0772 369 268</div>
-          <div class="c-pad main-footer-font">Email: infor@outfit.lk</div>
+          <div *ngIf="webInfo?.telPhone" class="c-pad main-footer-font">Phone: {{webInfo?.telPhone}}</div>
+          <div *ngIf="webInfo?.email" class="c-pad main-footer-font">Email: {{webInfo?.email}}</div>
           <a *ngIf="isFacebookUrlExists()"  href="{{ getFacebookUrl() }}" ><span class="fa fa-facebook icons icon-sm mobile-icons main-footer-font"></span></a>
           <a  *ngIf="isTwitterUrlExists()" href="{{ getTwitterUrl() }}"><span class="fa fa-twitter icons icon-sm mobile-icons main-footer-font"></span></a>
           <a  *ngIf="isInstagramUrlExists()" href="{{ getInstagramrUrl() }}"><span class="fa fa-instagram icons icon-sm mobile-icons main-footer-font"></span></a>

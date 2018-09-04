@@ -28,10 +28,10 @@
 			<owl-carousel [options]="owlOptions" [carouselClasses]="['owl-carousel', 'owl-theme', 'voffset']">
 				<div class="content-cards"  *ngFor="let prod of node;">
 					<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}"  class="img-responsive lazyload" />
-					<p class="text-center product-name">
+					<p class="main-content-font text-center product-name">
 						{{prod.name}}
 					</p>
-					<p class="text-center product-content">
+					<p class="main-content-font text-center product-content">
 						Price - {{currency}} {{prod.variants[0].price| number: '.2'}}
 					</p>
 					<div class="row">
@@ -50,7 +50,7 @@
 		<div class="row" *ngIf="categories.length == 0">
 			<div class="col-sm-4" *ngFor="let prod of node;">
 				<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
-				<p class="text-center product-name">
+				<p class="text-center product-name main-content-font">
 					{{prod.name}}
 				</p>
 				<p class="text-center product-content">
@@ -79,7 +79,7 @@
 			<div class="col-sm-4" *ngFor="let prod of node;">
 				<div class="content-cards">
 					<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
-					<p class="text-center product-name main-header-font">
+					<p class="text-center product-name main-content-font">
 						{{prod.name}}
 					</p>
 					<p class="text-center product-content main-content-font">

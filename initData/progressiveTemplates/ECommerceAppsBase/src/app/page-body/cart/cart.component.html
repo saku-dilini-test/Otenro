@@ -50,7 +50,7 @@
                   </div>
                   <div class="col-sm-6">
 
-                      <input class="form-control" name="qty" id="qty" type="number" min="1" oninput="validity.valid||(value='');" [(ngModel)]="item.qty" value="{{item.qty}}" (change)="buttonDisable(item.qty,item.totalQty ,cartItems.indexOf(item))"
+                      <input class="main-content-font form-control" name="qty" id="qty" type="number" min="1" oninput="validity.valid||(value='');" [(ngModel)]="item.qty" value="{{item.qty}}" (change)="buttonDisable(item.qty,item.totalQty ,cartItems.indexOf(item))"
                     ngDefaultControl>
 
                      <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->

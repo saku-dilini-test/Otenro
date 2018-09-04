@@ -1,23 +1,23 @@
 <!-- bloc-18 -->
 <div class="bloc bgc-white none b-parallax tc-outer-space hidden-sm hidden-lg hidden-md" id="bloc-18">
   <div class="container bloc-xl ">
-    <div class="row bgc-white">
-      <div class="col-sm-12 no-padding" *ngIf="cartItems.length != 0">
+    <div class="row bgc-white row-spacing-mobile">
+      <div  *ngIf="cartItems.length != 0">
             <div class="row row-no-gutters"  *ngFor="let item of cartItems ; let i = index">
-              <div class="col-xs-4">
+              <div class="col-xs-6">
                  <img *ngIf="item.imgURL" src="{{imageUrl}}/{{item.imgURL}}" class="img-responsive img-thumb-small-cart center-block lazyload">
                 <img *ngIf="!item.imgURL" src="{{imageUrl}}/{{item.imgDefault}}" class="img-responsive img-thumb-small-cart center-block lazyload">
               </div>
-              <div class="col-xs-8">
-                <h4 class="mg-md header-text-h2 text-left  main-header-font">
+              <div class="col-xs-6">
+                <p class="mg-md text-siize  text-left  main-header-font">
                   <strong>{{item.name}}</strong>
-                </h4>
+                </p>
                 <p class="sub-header-text-h2 text-justify main-content-font"  *ngFor="let v of item.variant">
                   {{v.name}} : {{v.vType}}
                 </p>
                 
                 <p class="sub-header-text-h2 text-justify main-content-font">
-                  QTY - <input class="form-control qty-input" name="qty" id="qty" type="number" min="1" oninput="validity.valid||(value='');"
+                  QTY : <input class="form-control qty-input" name="qty" id="qty" type="number" min="1" oninput="validity.valid||(value='');"
                   [(ngModel)]="item.qty" value="{{item.qty}}" (change)="buttonDisable(item.qty,item.totalQty ,cartItems.indexOf(item))"
                   ngDefaultControl>
                 </p>
@@ -39,21 +39,21 @@
                     </span>
                   </div><br>
                   <p class="sub-header-text-h2 text-justify  main-content-font">
-                    Total Price - {{currency}} {{itemPriceCal(item.total,item.qty) | number: '.2'}}
+                    {{currency}} {{itemPriceCal(item.total,item.qty) | number: '.2'}}
                   </p>
                 <a (click)="removeItem(i)" class="btn btn-d btn-lg pull-left button-mobile spacing-mobile-button main-button">Remove</a>
               </div>
             </div>
       </div>
-      <div class="col-sm-7" *ngIf="cartItems.length != 0">
+      <div class="padding-top" *ngIf="cartItems.length != 0">
         <div class="row row-no-gutters pricing-table lines">
-          <div class="col-xs-7">
-            <div class="product-text text-siize main-content-font">
+          <div class="col-xs-5">
+            <div class="text-siize main-content-font">
               Total amount
             </div>
           </div>
-          <div class="col-xs-5">
-              <p class="text-right product-text text-siize  main-content-font" *ngIf="cartItems.length > 0" [(ngModel)]="total" ngDefaultControl>
+          <div class="col-xs-7">
+              <p class="text-right text-siize  main-content-font" *ngIf="cartItems.length > 0" [(ngModel)]="total" ngDefaultControl>
                 {{currency}} {{getTotal() | number: '.2'}}
               </p>
 
@@ -88,10 +88,10 @@
               <img *ngIf="!item.imgURL" src="{{imageUrl}}/{{item.imgDefault}}" class="img-thumb-small-cart center-block mg-sm img-responsive lazyload">
             </div>
             <div class="col-sm-3">
-              <h4 class="mg-md header-text-h2 text-left main-header-font">
+              <h4 class="mg-md  text-left main-header-font">
                 <strong>{{item.name}}</strong>
               </h4>
-              <p class="sub-header-text-h2 text-justify main-content-fontn" *ngFor="let v of item.variant">
+              <p class="sub-header-text-h2 text-justify main-content-font" *ngFor="let v of item.variant">
                 {{v.name}} : {{v.vType}}
               </p>
 
@@ -124,7 +124,7 @@
                 </div>
                 <br>
                 <p class="sub-header-text-h2 text-justify  main-content-font">
-                  Total Price - {{currency}} {{itemPriceCal(item.total,item.qty)}}
+                   {{currency}} {{itemPriceCal(item.total,item.qty) | number: '.2'}}
                 </p>
             </div>
             <div class="col-sm-4">
@@ -137,7 +137,7 @@
                 <strong>price</strong>
               </h4>
               <p class="sub-header-text-h2  text-right main-content-font">
-                <strong>{{currency}} {{itemPriceCal(item.total,item.qty)}}</strong>
+                <strong>{{currency}} {{itemPriceCal(item.total,item.qty) | number: '.2'}}</strong>
               </p>
             </div>
         </div>

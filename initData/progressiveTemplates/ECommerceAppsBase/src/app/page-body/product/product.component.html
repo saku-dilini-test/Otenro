@@ -4,7 +4,7 @@
     <div class="bloc bgc-white l-bloc" id="bloc-9">
 
         <div *ngIf = "Data.bannerImage">
-            <img class="banner-cat" src="{{bannerImageUrl}}/{{Data.bannerImage}}" width="100%" />
+            <img  src="{{bannerImageUrl}}/{{Data.bannerImage}}" width="100%" />
         </div>
       <div class="container bloc-lg  padding-top-0">
         <div class="row content-row">
@@ -32,8 +32,8 @@
                     {{Data.name}}<br>
               </p>
             </div>
-            <div class="spacing-1">
-              <p  [innerHTML]="desPart1 | safeHtml" style="font-weight: initial;">
+            <div class="spacing-1 main-content-font">
+              <p  [innerHTML]="desPart1 | safeHtml">
                </p>
               <a class="text-left" *ngIf="readMore" (click)="readMoreFunct()"><strong>Read More</strong></a>
               <a class="text-left" *ngIf="readMore == false" (click)="readLessFunct()"><strong>Read Less</strong></a>
@@ -48,27 +48,27 @@
               <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                      <select class="form-control" (change)="changeVariant($event.target.value)">
+                      <select class="main-content-font form-control" (change)="changeVariant($event.target.value)">
                         <option  *ngFor="let v1 of selection; let i = index" [ngValue]="v1.vType"> {{v1.vType}} </option>
                       </select>
                     </div>
                 </div>
                 <div class="col-sm-6"  *ngIf="Data.selection[1]">
                     <div class="form-group">
-                     <select class="form-control" (change)="changeVariant2($event.target.value)">
+                     <select class="main-content-font form-control" (change)="changeVariant2($event.target.value)">
                         <option  *ngFor="let v2 of selection1; let i = index" [ngValue]="v2.vType"> {{v2.vType}} </option>
                       </select>
                     </div>
                 </div>
                 <div class="col-sm-6" *ngIf="Data.selection[2]">
                   <div class="form-group">
-                     <select class="form-control" (change)="changeVariant3($event.target.value)">
+                     <select class="main-content-font form-control" (change)="changeVariant3($event.target.value)">
                         <option  *ngFor="let v3 of selection2; let i = index" [ngValue]="v3.vType"> {{v3.vType}} </option>
                       </select>
                   </div>
                 </div>
                 <div class="col-sm-6" *ngIf="Data.selection[3]">
-                    <div class="form-group">
+                    <div class="main-content-font form-group">
                       <select class="form-control" (change)="changeVariant4($event.target.value)">
                         <option  *ngFor="let v4 of selection3; let i = index" [ngValue]="v4.vType"> {{v4.vType}} </option>
                       </select>
@@ -78,7 +78,7 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <input class="form-control" type="number" min="1" oninput="validity.valid||(value='');" name="qty" placeholder="QTY"
+                    <input class="main-content-font form-control" type="number" min="1" oninput="validity.valid||(value='');" name="qty" placeholder="QTY"
                   id="qty" value="selectedVariant.buyQuantity" [disabled]="Data.variants.length >= 1 && selectedVariant.quantity == 0 || lockBuyButton == false"
                   [(ngModel)]="selectedVariant.buyQuantity" (ngModelChange)="changeBuyQuantity(selectedVariant.buyQuantity)" />
                   </div>
@@ -101,9 +101,7 @@
               <p class="text-left product-details-price main-content-font" *ngIf="!selectedVariant.price">
                 <strong>{{currency}}</strong> {{Data.variants[0].price| number: '.2'}}
               </p>
-              <p class="text-left  text-danger">
-                <strong>0% installment schemes available on credit cards</strong>
-              </p>
+
               <div>
                 <div class="row">
                  <div class="col-xs-12 text-center text-warning" *ngIf="selectedVariant.buyQuantity > selectedVariant.quantity">
@@ -171,8 +169,7 @@
                       </button>
                     </div>
                   </div>
-                  <br>
-                  <div style="margin-left: 4%;margin-top: 8%;"> Also available at <a href = "https://www.mysoftlogic.lk" target="_blank" rel="noopener noreferrer" >www.mysoftlogic.lk</a></div>
+
                 </div>
               </div>
             </div>

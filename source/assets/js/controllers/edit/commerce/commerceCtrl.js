@@ -1491,17 +1491,18 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
 
 
             // If defined basic information address , Check length
-            if((typeof basicInfo.address != 'undefined') && (basicInfo.address.length > $scope.maxBasicInfoAddress)){
-                toastr.error('Address should be less than '+$scope.maxBasicInfoAddress+' letters.',
-                    'Warning',{closeButton: true}
-                );
-                return;
-            }
+            // if((typeof basicInfo.address != 'undefined') && (basicInfo.address.length > $scope.maxBasicInfoAddress)){
+            //     toastr.error('Address should be less than '+$scope.maxBasicInfoAddress+' letters.',
+            //         'Warning',{closeButton: true}
+            //     );
+            //     return;
+            // }
 
             if(typeof basicInfo.address == 'undefined'){
-                toastr.error('Updating of address failed', { closeButton: true});
+                // toastr.error('Updating of address failed', { closeButton: true});
+                basicInfo.address = null;
             }
-            else if(typeof basicInfo.telPhone == 'undefined'){
+            if(typeof basicInfo.telPhone == 'undefined'){
                 toastr.error('Updating of Telephone number failed', { closeButton: true});
             }
             else if(typeof webInfo.email == 'undefined'){
@@ -1517,6 +1518,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                     'telPhone': basicInfo.telPhone,
                     'email': webInfo.email,
                     'webSite': webInfo.webSite,
+                    'showmap': webInfo.showmap,
                     'twitter': webInfo.twitter,
                     'facebook': webInfo.facebook,
                     'instagram': webInfo.instagram,

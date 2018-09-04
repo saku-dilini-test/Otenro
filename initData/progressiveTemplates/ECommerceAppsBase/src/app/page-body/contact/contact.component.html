@@ -17,7 +17,7 @@
 
       <div class="col-sm-12">
         <div *ngFor="let contact of contactInfo">
-          <p class="text-center contact-text">
+          <p class="text-center contact-text" *ngIf="contact.contactInfo.address">
             {{contact.contactInfo.address}}
           </p>
           <p class="text-center contact-text">
@@ -32,7 +32,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row" *ngIf="showmap">
         <div class="col-sm-12">
           <agm-map [latitude]="lat" [longitude]="lng" [zoom]="8" >
             <agm-marker *ngFor="let branch of googleMap" [latitude]="branch.branch.latitude" [longitude]="branch.branch.longitude">

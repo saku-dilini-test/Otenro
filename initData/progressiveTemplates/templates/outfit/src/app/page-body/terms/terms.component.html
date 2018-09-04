@@ -4,11 +4,11 @@
   <div class="container bloc-xl">
     <div class="row row-about-main">
       <div class="col-sm-12">
-        <!-- <h1 class="mg-md text-center about-us">
+        <h1 class="hidden-xs mg-md text-center about-us main-header-font">
           TERMS &amp; Conditions
-        </h1> -->
+        </h1>
         
-        <p class=" content-about text-justify main-content-font"   [innerHTML]="terms | safeHtml"> </p>
+        <p *ngIf="terms" class=" content-about text-justify main-content-font"   [innerHTML]="terms | safeHtml"> </p>
       
       </div>
     </div>
