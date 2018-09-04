@@ -73,6 +73,11 @@
       </div>
       <h1 class="text-center  main-header-font" *ngIf="cartItems.length == 0">There are no products added to the cart</h1>
     </div>
+    <!-- bloc-17 END -->
+  <div class="col-sm-12" style="margin: 10px 0" *ngIf="successMessage">
+    <ngb-alert  type="warning" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+  </div>
+
     <app-accepted-payment-type></app-accepted-payment-type>
 
   </div>
@@ -174,11 +179,12 @@
         </div>
       </div>
     </div>
+    <!-- bloc-17 END -->
+    <div class="col-sm-12" style="margin: 10px 0" *ngIf="successMessage">
+      <ngb-alert  type="warning" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+    </div>
+
   </div>
-</div>
-<!-- bloc-17 END -->
-<div class="col-sm-12" style="margin: 10px 0" *ngIf="successMessage">
-  <ngb-alert  type="warning" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
 </div>
 
 
