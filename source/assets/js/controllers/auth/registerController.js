@@ -24,7 +24,7 @@
         $scope.getCountryCode = function(country){
 
             if(country != "Sri Lanka"){
-                $scope.phoneNoLength = 10;
+                $scope.phoneNoLength = 11;
             }else{
                 $scope.phoneNoLength = 9;
                 $scope.user.mobile = null;

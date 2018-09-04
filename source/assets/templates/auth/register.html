@@ -116,9 +116,16 @@ chosen link or button. -->
           <div class="col-sm-2">
             <input class="input-shadow-border" style="width:50px" name="countryCode" type="text" ng-model="user.countryCode" readonly>
           </div>
-          <div class="col-sm-6">
+          <div ng-if="user.country == 'Sri Lanka'"  class="col-sm-6">
             <input class="input-shadow-border" ng-disabled = "!user.country" name="mobile" type="text" ng-pattern="/^[1-9][0-9]*$/"
                    style="float:left;margin-left:-20px" ng-model="user.mobile" ng-enter ="authSignUp(user);" maxlength="{{phoneNoLength}}" required/>
+            <span class="error help-block" ng-show="register.mobile.$error.required">
+          *
+        </span>
+          </div>
+          <div ng-if="user.country != 'Sri Lanka'" class="col-sm-6">
+            <input class="input-shadow-border" ng-disabled = "!user.country" name="mobile" type="text" ng-pattern="/^[0-9]*$/"
+                   style="float:left;margin-left:-20px" ng-model="user.mobile" ng-enter ="authSignUp(user);" maxlength="{{phoneNoLength}}" minlength="10" required/>
             <span class="error help-block" ng-show="register.mobile.$error.required">
           *
         </span>
@@ -130,6 +137,12 @@ chosen link or button. -->
         <span class="error help-block" ng-show="user.country == 'Sri Lanka' && register.mobile.$dirty && register.mobile.$invalid">
           Enter a valid mobile number eg:777123456
         </span>
+        <span class="error help-block" ng-show="user.country != 'Sri Lanka' && register.mobile.$dirty && register.mobile.$invalid">
+          Enter a valid mobile number, minimum 10 digits and only numbers allowed.
+        </span>
+        <!--<span class="error help-block" ng-show="user.country != 'Sri Lanka' && register.mobile.$dirty && register.mobile.$error.minlength">-->
+          <!--Enter a valid mobile number eg:777123456-->
+        <!--</span>-->
       </fieldset>
       <div class="row password-area-row">
         <fieldset class="password-area">
