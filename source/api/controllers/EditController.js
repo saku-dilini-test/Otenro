@@ -65,6 +65,12 @@ module.exports = {
         Application.update(searchApp,{isActive: false}).exec(function (err, app) {
             if (err) return res.negotiate(err);
             else {
+
+                var appPath = config.ME_SERVER + app[0].userId + "/progressiveTemplates/" + appId ;
+                console.log(appPath);
+                rimraf(appPath, function () { console.log('deleted ' + appId); });
+
+
                 console.log(app);
                 PublishDetails.findOne({appId: app[0].id}).exec(function (err, publishApp){
                     if(err) return res.negotiate(err);
