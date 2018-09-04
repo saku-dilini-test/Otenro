@@ -444,8 +444,7 @@
 
         $scope.addBanner = function (){
 
-
-            disableTabs(4,false,false,false,false,false);
+            disableTabs(4,true,false,false,false,false);
         };
 
         if (typeof $scope.categories === 'undefined') {
@@ -1142,12 +1141,12 @@
 
             if(initialData.addVariant)
             {
-                disableTabs(2, false, false, false, false,true);
+                disableTabs(2, true, false, false, false,true);
             }else if(initialData.product.id == undefined){
                 disableTabs(0, true, true, true, true,true);
             }
             else {
-                disableTabs(1, false, false, false, false, false);
+                disableTabs(1, true, false, false, false, false);
             }
         }
 
