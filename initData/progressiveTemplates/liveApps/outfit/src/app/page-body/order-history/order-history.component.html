@@ -2,7 +2,7 @@
 <div class="page-container bloc bloc-xl">
 
     <!-- bloc-20 -->
-    <div class="bloc bgc-white l-bloc main-content-font" id="bloc-20">
+    <div class="l-bloc main-content-font" id="bloc-20">
       <div class="container" *ngIf="orderHistory && orderHistory.length == 0">
         <h1 class="main-header-font">You don't have any order history!</h1>
       </div>
@@ -23,13 +23,13 @@
                         <img *ngIf="!item.imgURL" src="{{imageURL}}/{{item.imgDefault}}" class="center-block img-responsive lazyload">
                       </div>
                       <div class="col-sm-6">
-                        <p class="product-name padding-top main-header-font">
+                        <p class="product-name padding-top  main-content-font">
                           {{item.name}}
                         </p>
-                        <p class="spacing-2">
-                          <span *ngFor="let v of item.variant"><strong>{{v.name}}</strong> - {{v.vType}}<br><br></span>
-                          <strong>PRICE</strong> -  {{sign}} {{item.price| number: '.2'}}<br><br>
-                          <strong>QTY</strong> -  {{item.qty}}<br><br>
+                        <p class="spacing-2 main-content-font">
+                          <span *ngFor="let v of item.variant">{{v.name}} - {{v.vType}}<br><br></span>
+                          Price -  {{sign}} {{item.price| number: '.2'}}<br><br>
+                          Qty -  {{item.qty}}<br><br>
                            <a  (click)="buyAgain(item)" class="btn btn-d btn-lg button main-button"><span class="ion ion-plus-round icon-spacer"></span>Buy Again</a>
                         </p>
                       </div>
