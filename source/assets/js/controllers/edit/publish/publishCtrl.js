@@ -481,7 +481,7 @@
 //                            $mdDialog.hide();
                         }).error(function(data, status, headers, config) {
                         if(status == "409"){
-                            toastr.error('This keyword is already in use.', 'Warning', {
+                            toastr.error('This keyword is already in use.Please enter a unique keyword', 'Warning', {
                                 closeButton: true
                             });
                         }else{
