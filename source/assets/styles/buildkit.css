@@ -2155,14 +2155,14 @@ trix-toolbar .button_group input[type=button]{
     font-weight:inherit;
 }
 
-.custom-grid  .ui-grid-canvas{
-    overflow: overlay;
-    height: inherit !important;
-    padding-bottom: 10px;
-}
-.custom-grid .ui-grid-viewport{
-    overflow: hidden !important;
-}
+/*.custom-grid  .ui-grid-canvas{*/
+    /*overflow: overlay;*/
+    /*height: inherit !important;*/
+    /*padding-bottom: 10px;*/
+/*}*/
+/*.custom-grid .ui-grid-viewport{*/
+    /*overflow: hidden !important;*/
+/*}*/
 
 
 li#menuitem-8 {
@@ -2694,6 +2694,7 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 
 .orders-dialog .md-dialog-main {
     overflow-y: hidden;
+    max-height: initial;
 }
 .expand {
     transition: all linear 0.5s;
