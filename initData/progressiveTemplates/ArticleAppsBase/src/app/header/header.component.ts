@@ -51,12 +51,11 @@ export class HeaderComponent implements OnInit {
     this.title = 'Your Horoscope';
 
     router.events.subscribe((val) => {
-      // see also
-      if (val['url'] == '/') {
+      console.log(val['url']);
+      if (val['url'] == '/'  || val['url'] === '/?isFromCMSAppView=1' ) {
         this.hideBackOnHome = false;
       } else {
         this.hideBackOnHome = true;
-
       }
     });
 
