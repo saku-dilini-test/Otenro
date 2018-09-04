@@ -28,6 +28,12 @@ schema: true,
                 article:{
                   type: 'json'
                 },
-
+                status:{
+                    type: 'string'
+                },
+                isScheduled:{
+                    type: 'boolean',
+                    defaultsTo: false
+                }
         }
 }

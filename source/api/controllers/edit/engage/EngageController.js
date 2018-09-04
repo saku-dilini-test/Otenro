@@ -12,6 +12,7 @@ var Authorization = config.AUTHORIZATION;
 var schedule = require('node-schedule');
 
 var CSV_DATE_TIME_FORMAT = "DD/MM/YY HH:mm";
+var DATE_TIME_FORMAT = "DD/MM/YY";
 var CSV_SEND_TO_ALL = "all";
 var CSV_SEND_TO_INACTIVE = "inactive";
 
@@ -25,181 +26,145 @@ module.exports = {
      * @param res
      */
     sendPushMessage: function(req, res){
-            var thisCtrl = this;
-            var findDevicedQuery = {
-                appId : req.body.appId
-            };
+        var thisCtrl = this;
+        var findDevicedQuery = {
+            appId : req.body.appId
+        };
 
-            var date_diff_indays = function(date1, date2) {
-                console.log("date1 " + date1);
-                console.log("date2" + date2);
-                var dt1 = new Date(date1);
-                var dt2 = new Date(date2);
-                return Math.floor((Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) - Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) ) /(1000 * 60 * 60 * 24));
-            };
+        var date_diff_indays = function(date1, date2) {
+            console.log("date1 " + date1);
+            console.log("date2" + date2);
+            var dt1 = new Date(date1);
+            var dt2 = new Date(date2);
+            return Math.floor((Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) - Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) ) /(1000 * 60 * 60 * 24));
+        };
 
 
-                    var Message = req.body.message;
+        var Message = req.body.message;
 
-                    // Find device by appID
-                    DeviceId.find(findDevicedQuery).exec(function(err,deviceArray){
-                        if (err) return res.send(err);
-                        var message = req.body.message;
-                        for(var i=0; i<deviceArray.length; i++){
+        // Find device by appID
+        DeviceId.find(findDevicedQuery).exec(function(err,deviceArray){
+            if (err) return res.send(err);
+            var message = req.body.message;
+            for(var i=0; i<deviceArray.length; i++){
 
-                            // push API request
-                            if (req.body.type=="I"){
+                // push API request
+                if (req.body.type=="I"){
 
-                                var count = date_diff_indays(dateFormat(new Date(),"m/d/yy"),dateFormat(deviceArray[i].lastAccessTime,"m/d/yy"));
-                                console.log("count " + count);
+                    var count = date_diff_indays(dateFormat(new Date(),"m/d/yy"),dateFormat(deviceArray[i].lastAccessTime,"m/d/yy"));
+                    console.log("count " + count);
 
-                                if(count>7){
-                                    sails.log.info("my deviceArray " + deviceArray[i].deviceId);
-                                    thisCtrl.sendPushNotification(deviceArray[i].deviceId,null,req.body.message);
-                                }
-                            }else {
-                                sails.log.info("my deviceArray " + deviceArray[i].deviceId);
-                                thisCtrl.sendPushNotification(deviceArray[i].deviceId,null,req.body.message);
-                            }
-                        }
-                        PushMessage.create(req.body).exec(function(err,data){
-                            if(err) return res.send(err);
-                            res.send(data);
-                        });
-                    });
+                    if(count>7){
+                        sails.log.info("my deviceArray " + deviceArray[i].deviceId);
+                        thisCtrl.sendPushNotification(deviceArray[i].deviceId,null,req.body.message,null);
+                    }
+                }else {
+                    sails.log.info("my deviceArray " + deviceArray[i].deviceId);
+                    thisCtrl.sendPushNotification(deviceArray[i].deviceId,null,req.body.message,null);
+                }
+            }
 
+            var pushMessage = req.body;
+            pushMessage.status = config.PUSH_MESSAGE_STATUS.SENT.code;
+
+            PushMessage.create(pushMessage).exec(function(err,data){
+                if(err) return res.send(err);
+                res.send(data);
+            });
+        });
     },
 
-
-
     saveSchedulePushMassage : function (req,res) {
-                var thisCtrl = this;
-                var criteria = {id:req.body.id,appId:req.body.appId};
-                // Create push collection
-                PushMessage.find(criteria).exec(function(err, result) {
-                    if (err) return res.send(err);
-                    if(result[0]){
-
-                        PushMessage.update(criteria,req.body).exec(function(err,data){
-                            if(err) return res.send(err);
-                            console.log("date 1 " + data[0].date);
-                            var shedDate = new Date(data[0].date);
-                            var date = new Date(shedDate.getUTCFullYear(), shedDate.getMonth(), shedDate.getDate(),
-                                shedDate.getHours(), shedDate.getMinutes(),0).toLocaleString();
-                                console.log("date " + date);
-                            schedule.scheduleJob(date, function(){
+        console.log("saveSchedulePushMassage");
+        var thisCtrl = this;
+        var criteria = {id:req.body.id,appId:req.body.appId};
+        // Create push collection
+        PushMessage.find(criteria).exec(function(err, result) {
+            if (err) return res.send(err);
 
 
-                                PushMessage.find({id:data[0].id}).exec(function(err, pushMessage) {
-                                    if (err) return res.send(err);
+            if(result[0]){
+                console.log('Push message update');
+                PushMessage.update(criteria,req.body).exec(function(err,data){
+                    if(err) return res.send(err);
+                    thisCtrl.scheduleJobForPushMessages(res,data[0].date,data[0]);
+                    return res.send(data);
+                });
 
-                                    if (pushMessage[0]) {
+            }else {
+                console.log('Push Message create');
+                var pushMessage = req.body;
+                pushMessage.status = config.PUSH_MESSAGE_STATUS.PENDING.code;
+                pushMessage.isScheduled = true;
+                PushMessage.create(pushMessage).exec(function(err,data){
+                    if(err) return res.send(err);
+                    thisCtrl.scheduleJobForPushMessages(res,data.date,data);
+                    return res.send(data);
+                });
+            }
+        });
+    },
 
-                                    console.log("date--->>>" + pushMessage[0].date);
-                                    var Ndate = new Date(pushMessage[0].date);
-                                    var newDate = new Date(Ndate.getUTCFullYear(), Ndate.getMonth(), Ndate.getDate(),
-                                        Ndate.getHours(), Ndate.getMinutes(), 0).toLocaleString();
+    scheduleJobForPushMessages : function(res,dateString,data){
+        var thisCtrl = this;
 
-                                    if (newDate.toString() == date.toString()) {
+        sails.log.debug('in scheduleJobForPushMessages');
+        if (!moment(dateString, CSV_DATE_TIME_FORMAT, true).isValid()) {
+            console.log("Invalid date %s, correct format is %s",data.date,CSV_DATE_TIME_FORMAT);
+            return res.badRequest();
+        }
 
-                                        console.log("newDate.toString()==date.toString()");
+        var date = moment(dateString,CSV_DATE_TIME_FORMAT).toDate();
+        console.log("scheduleJobForPushMessages->date " + date);
 
-                                        // Find device by appID
-                                        DeviceId.find({appId: data[0].appId}).exec(function (err, deviceArray) {
-                                            if (err) {
+        schedule.scheduleJob(date, function(){
+            PushMessage.find({id: data.id}).exec(function(err, pushMessage) {
+                if (err) {
+                    sails.log.error("scheduleJobForPushMessages=> Error in PushMessage.find for id %s",pushId);
+                    return;
+                }
 
-                                                console.log("Error on find DeviceId");
-                                            }
-                                            var message = data[0].message;
-                                            var article = (data[0].article)? { 'articleId': data[0].article.id , 'categoryId': data[0].article.categoryId , 'title' : data[0].article.title } : null;
-                                            for (var i = 0; i < deviceArray.length; i++) {
+                if(pushMessage[0]){
+                    var pushDateStr = pushMessage[0].date;
+                    if (!moment(pushDateStr, CSV_DATE_TIME_FORMAT, true).isValid()) {
+                        sails.log.error("Invalid date %s, correct format is %s",pushDateStr,CSV_DATE_TIME_FORMAT);
+                        return;
+                    }
 
-                                                sails.log.info(" deviceArray " + deviceArray[i].deviceId);
-
-                                                thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,message);
-                                            }
-                                        });
-                                        console.log('The world is going to end today.');
-                                    }
-                                }
-                                });
-
-
-                            });
-
-
-                            return res.send(data);
-                        });
-
-                    }else {
-                        PushMessage.create(req.body).exec(function(err,data){
-                            if(err) return res.send(err);
-
-                            if (!moment(data.date, CSV_DATE_TIME_FORMAT, true).isValid()) {
-                                console.log("Invalid date %s, correct format is %s",data.date,CSV_DATE_TIME_FORMAT);
-                                return res.badRequest();
+                    var pushDate = moment(pushDateStr,CSV_DATE_TIME_FORMAT).toDate();
+                    if(pushDate.toString()==date.toString()){
+                        // Find device by appID
+                        DeviceId.find({appId:data.appId}).exec(function(err,deviceArray) {
+                            if (err) {
+                                sails.log.error("Failed to send the message id %s since there is an error when searching for DeviceID for appId: %s Error: %s ",data.id,data.appId,err);
+                                return;
                             }
 
-                             var date = moment(data.date,CSV_DATE_TIME_FORMAT).toDate();
+                            if(deviceArray.length==0){
+                                sails.log.error('Failed to send the message id %s since No devices found for appId: %s ',data.id,data.appId);
+                                return;
+                            }
 
-                                schedule.scheduleJob(date, function(){
-                                    PushMessage.find({id:data.id}).exec(function(err, pushMessage) {
-                                        if (err) return res.send(err);
-                                        if(pushMessage[0]){
-                                            var pushDate = pushMessage[0].date;
-                                            if (!moment(pushDate, CSV_DATE_TIME_FORMAT, true).isValid()) {
-                                                sails.log.error("Invalid date %s, correct format is %s",pushDate,CSV_DATE_TIME_FORMAT);
-                                                return;
-                                            }
-                                            var Ndate = moment(data.date,CSV_DATE_TIME_FORMAT).toDate();
-                                            if(Ndate.toString()==date.toString()){
-                                                // Find device by appID
-                                                DeviceId.find({appId:data.appId}).exec(function(err,deviceArray) {
-                                                    if (err) {
-                                                        sails.log.error("Could not find the DeviceId record for appId: ",data.appId);
-                                                        return;
-                                                    }
+                            var message = data.message;
+                            var article = (data.article)? { 'articleId': data.article.id , 'categoryId': data.article.categoryId , 'title' : data.article.title } : null;
+                            for(var i=0; i<deviceArray.length; i++) {
+                                sails.log.debug("Push message: %s sending for the devices: %s ",data.message, deviceArray[i].deviceId);
+                                var id = {
+                                    id:data.id,
+                                    appId:data.appId
+                                }
+                                thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,message,data.id);
+                            }
 
-                                                    if(deviceArray.length==0){
-                                                        sails.log.error('No devices found for appId: ',data.appId);
-                                                        return;
-                                                    }
-
-                                                    var message = data.message;
-                                                    var article = (data.article)? { 'articleId': data.article.id , 'categoryId': data.article.categoryId , 'title' : data.article.title } : null;
-                                                    for(var i=0; i<deviceArray.length; i++) {
-                                                        sails.log.debug("Push message: %s sending for the devices: %s ",data.message, deviceArray[i].deviceId);
-                                                        var id = {
-                                                            id:data.id,
-                                                            appId:data.appId
-                                                        }
-                                                        var emptyDate = {
-                                                            date : ""
-                                                        }
-                                                        PushMessage.update(id,emptyDate).exec(function(err,updateDate){
-                                                            if(err) return res.send(err);
-                                                            return;
-                                                        });
-                                                        thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,message);
-                                                    }
-
-                                                });
-
-
-                                            }else{
-                                                sails.log.error('The date scheduled: %s is not the same in database: %s',date.toString(),Ndate.toString());
-                                            }
-                                        }
-
-                                    });
-                                    console.log('The world is going to end today.');
-                                });
-
-                            return res.send(data);
                         });
+
+
+                    }else{
+                        sails.log.error('Failed to send the message id %s since the date scheduled: %s is not the same in database: %s',data.id,date.toString(),pushDate.toString());
                     }
-                });
-        
+                }
+            });
+        });
     },
 
     getAllArticles : function(req,res){
@@ -239,9 +204,18 @@ module.exports = {
             userId:userId,
             sort: 'createdAt DESC'
         };
-        PushMessage.find(searchApp).exec(function(err, app) {
+        PushMessage.find(searchApp).exec(function(err, apps) {
             if (err) return res.send(err);
-            res.send(app);
+
+            var all = [];
+            if(apps && apps.length>0) {
+                apps.forEach(function (app) {
+                    var date = new Date(app.createdAt);
+                    app.createdAtFormatted = moment(date).format(DATE_TIME_FORMAT);
+                    all.push(app);
+                });
+            }
+            res.send(all);
         });
 
     },
@@ -413,6 +387,7 @@ module.exports = {
     },
 
     persistCSVPushMessages : function(req,res,jsonObj){
+        console.log("persistCSVPushMessages");
         var thisCtrl = this;
         var type = 'A';
 
@@ -431,30 +406,43 @@ module.exports = {
         if (moment(jsonObj.dateTime, CSV_DATE_TIME_FORMAT, true).isValid()&&jsonObj.message.length > 0){
 
             console.log(jsonObj.dateTime + "" + jsonObj.message);
-            var data = {date:jsonObj.dateTime,message:jsonObj.message,appId:req.body.appId,userId:req.userId,type:type};
+            var data = {
+                         date:jsonObj.dateTime,
+                         message:jsonObj.message,
+                         appId:req.body.appId,
+                         userId:req.userId,
+                         type:type,
+                         status:config.PUSH_MESSAGE_STATUS.PENDING.code,
+                         isScheduled: true
+                        };
 
             PushMessage.create(data).exec(function(err,data){
                 if(err) return res.send((500,{message:"Invalid csv file. Please use sample csv template"}));
-                var shedDate = new Date(data.date);
-                var date = new Date(shedDate.getUTCFullYear(), shedDate.getMonth(), shedDate.getDate(),
-                    shedDate.getHours(), shedDate.getMinutes(),0).toLocaleString();
 
-                console.log("date " + date);
+                var pushDateStr = data.date;
+
+                if (!moment(pushDateStr, CSV_DATE_TIME_FORMAT, true).isValid()) {
+                    sails.log.error("Invalid date %s, correct format is %s",pushDateStr,CSV_DATE_TIME_FORMAT);
+                    return;
+                }
+
+                var date = moment(pushDateStr,CSV_DATE_TIME_FORMAT).toDate();
+
+                console.log("persistCSVPushMessages->date " + date);
 
                 schedule.scheduleJob(date, function(){
-
                     PushMessage.find({id:data.id}).exec(function(err, pushMessage) {
                         if (err) return res.send(err);
                         if(pushMessage[0]){
-                            console.log("date--->>>" + pushMessage[0].date);
-                            var Ndate = new Date(pushMessage[0].date);
-                            var newDate = new Date(Ndate.getUTCFullYear(), Ndate.getMonth(), Ndate.getDate(),
-                                Ndate.getHours(), Ndate.getMinutes(),0).toLocaleString();
+                            var pushDateStr = pushMessage[0].date;
+                            if (!moment(pushDateStr, CSV_DATE_TIME_FORMAT, true).isValid()) {
+                                sails.log.error("Invalid date %s, correct format is %s",pushDateStr,CSV_DATE_TIME_FORMAT);
+                                return;
+                            }
 
-                            if(newDate.toString()==date.toString()){
+                            var pushDate = moment(pushDateStr,CSV_DATE_TIME_FORMAT).toDate();
 
-                                console.log("newDate.toString()==date.toString()");
-
+                            if(pushDate.toString()==date.toString()){
                                 // Find device by appID
                                 DeviceId.find({appId:data.appId}).exec(function(err,deviceArray) {
                                     if (err) {
@@ -470,10 +458,10 @@ module.exports = {
                                         if (type === "I"){
                                             var count = date_diff_indays(dateFormat(new Date(),"m/d/yy"),dateFormat(deviceArray[i].lastAccessTime,"m/d/yy"));
                                             if (count > 7) {
-                                                thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,message);
+                                                thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,message,data.id);
                                             }
                                         } else {
-                                            thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,message);
+                                            thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,message,data.id);
                                         }
                                     }
                                 });
@@ -522,7 +510,16 @@ module.exports = {
 
     },
 
-    sendPushNotification: function(deviceId,data,message){
+    sendPushNotification: function(deviceId,data,message,pushId){
+        console.log("sendPushNotification message: %s pushId: %s ",message,pushId);
+        if(pushId) {
+            PushMessage.update(pushId, {status: config.PUSH_MESSAGE_STATUS.SENT.code}).exec(function (err, updateDate) {
+                if (err) {
+                    sails.log.error('Error in sendPushNotification: ', err);
+                }
+            });
+        }
+
         var msg = {
             "to": deviceId,
             "notification" : {
@@ -553,7 +550,7 @@ module.exports = {
                     var date = new Date(shedDate.getUTCFullYear(), shedDate.getMonth(), shedDate.getDate(),
                         shedDate.getHours(), shedDate.getMinutes(),0).toLocaleString();
 
-                    console.log("date " + date);
+                    console.log("startSchedulingJob->scheduleJob->date " + date);
 
                      schedule.scheduleJob(date, function(){
 
@@ -571,7 +568,7 @@ module.exports = {
 
                                  sails.log.info(" deviceArray " + deviceArray[i].deviceId);
 
-                                 thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,data.message);
+                                 thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,data.message,data.id);
                              }
                          });
                         console.log('The world is going to end today.');

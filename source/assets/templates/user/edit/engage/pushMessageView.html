@@ -55,9 +55,9 @@
                 <tbody>
                 <tr ng-repeat="data in pushedMessages">
                     <!--<td class="checkbox-row"><input type="checkbox" /></td>-->
-                    <td size="12%" ng-model="data.createdDate">{{data.createdDate}}</td>
+                    <td size="12%" ng-model="data.createdDate">{{data.createdAtFormatted}}</td>
                     <td size="48%" ng-model="data.message">{{data.message}}</td>
-                    <td size="10%" ng-model="data.status" ng-class="{'status-sent': data.status == 'sent', 'status-pending': data.status == 'pending'}">{{data.status}}</td>
+                    <td size="10%" ng-model="data.status" ng-class="{'status-sent': data.status == 'SENT', 'status-pending': data.status == 'PENDING'}">{{data.status}}</td>
                     <td size="15%" ng-model="data.date">{{data.date}}</td>
                     <td size="15%" ng-model="data.id"><a href=""   ng-click = "edit(data)">Edit</a>/<a href=""
                                                          ng-click = "delete(data)">Delete</a></td>

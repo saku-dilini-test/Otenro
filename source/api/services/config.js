@@ -247,6 +247,34 @@ module.exports = {
         'APP_DELETED': 'The service is no longer available.',
         'USER_UNSUBSCRIBED': 'You got unsubscribed from this service',
         'INSUFFICIENT_BALANCE': 'You have no sufficient balance.Please recharge and try again.'
+    },
+
+    //These renewal intervals are defined in a json call port.json, but we defined it in here since we need to use this in the code
+    RENEWAL_INTERVALS: {
+        'DAILY': {
+            'code': 'Daily',
+            'desc': 'Daily'
+        },
+        'MONTHLY': {
+            'code': 'Monthly',
+            'desc': 'Monthly'
+        }
+    },
+
+    //Push Message Sending status PushMessage.status
+    PUSH_MESSAGE_STATUS: {
+        'PENDING': {
+            'code': 'PENDING',
+            'desc': 'Pending'
+        },
+        'SENT': {
+            'code': 'SENT',
+            'desc': 'Sent'
+        },
+        'ERROR': {
+            'code': 'ERROR',
+            'desc': 'Error'
+        }
     }
 
 };
