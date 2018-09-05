@@ -113,6 +113,19 @@ export class ProductComponent implements OnInit {
     currency: string;
     tests;
 
+    checkUrl(url) {
+
+        let id,URL;
+        let res = url.slice(8);
+        let res2 = res.split(/\/|&|=/);
+        if (res2.length > 2) {
+            id = res2[2];
+        }else{
+            id = res2[1];
+        }
+        return id;
+    }
+
     readLessFunct() {
       this.desPart2 = this.Data.detailedDesc.slice(400, this.Data.detailedDesc.length);
       this.desPart1 = this.Data.detailedDesc.slice(0, 400) + "...";
