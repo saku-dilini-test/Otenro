@@ -3108,40 +3108,22 @@ table.md-calendar-day-header{
 [size='48%']{
     width: 48%;
 }
-.ql-snow .ql-tooltip{
-    top: auto !important;
-    bottom: 15px !important;
-    left: auto !important;
-    right: 0 !important;
-}
 .height-100vh{
     height:100vh;
 }
-
 .margin-left-0{
     margin-left: 0 !important;
 }
-
 .width-100{
     width: 100% !important;
 }
-
-[ng-quill-editor] { display: block; }
-.glyphicon-move {
-  cursor: move;
-  cursor: -webkit-grabbing;
-}
-
-.ADMdtp-container .ADMdtp-calendar-container .daysNames > span, .ADMdtp-container .ADMdtp-calendar-container .days > span{
-    width: 14.2% !important;
-}
 .ghost {
-  opacity: .5;
-  background: #C8EBFB;
+    opacity: .5;
+    background: #C8EBFB;
 }
 
 .use-hover .list-group-item:hover {
-  background-color: #f00;
+    background-color: #f00;
 }
 .sortable{
     cursor: pointer;
@@ -3160,3 +3142,26 @@ table.md-calendar-day-header{
 .margin-bottom-20{
     margin-bottom: 20px !important;
 }
+.glyphicon-move {
+    cursor: move;
+    cursor: -webkit-grabbing;
+}
+
+/* quill editor over-ride classes and styles */
+.ql-editor {
+    height: 250px !important;
+}
+.ql-snow .ql-tooltip{
+    top: auto !important;
+    bottom: 15px !important;
+    left: auto !important;
+    right: 0 !important;
+}
+[ng-quill-editor] { display: block; }
+/* .End of quill editor over-ride classes and styles */
+
+/* ADM date picker over-ride classes and styles */
+.ADMdtp-container .ADMdtp-calendar-container .daysNames > span, .ADMdtp-container .ADMdtp-calendar-container .days > span{
+    width: 14.2% !important;
+}
+/* .End of ADM date picker over-ride classes and styles */
