@@ -724,10 +724,10 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                                     $scope.selectedTab = current;
                                 }).error(function (data, status, headers, config) {
-                                toastr.error('Unable to Add', 'Warning', {
-                                    closeButton: true
+                                    toastr.error('Unable to Add', 'Warning', {
+                                        closeButton: true
+                                    });
                                 });
-                            })        
 
                         }).error(function(err) {
                             toastr.error(err.message, 'Warning', {
@@ -758,10 +758,10 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                                 mySharedService.prepForBroadcast($scope.appTemplateUrl);
                                 $scope.selectedTab = current;
                             }).error(function (data, status, headers, config) {
-                            toastr.error('Unable to Add', 'Warning', {
-                                closeButton: true
+                                toastr.error('Unable to Add', 'Warning', {
+                                    closeButton: true
+                                });
                             });
-                        })   
                     }
                 } else {
 
