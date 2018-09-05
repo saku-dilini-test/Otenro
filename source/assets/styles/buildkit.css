@@ -2418,6 +2418,7 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 
 .custom-add-products .me-hours-table{
    width:1500px;
+    min-width: 1500px;
    /*display: -moz-box;*/
 }
 
