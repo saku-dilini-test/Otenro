@@ -103,8 +103,8 @@ module.exports = {
         var data = tmpImage[0].replace(/^data:image\/\w+;base64,/, "");
         var buf = new Buffer(data, 'base64');
 
-        var dePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/';
-        var filePath = config.APP_FILE_SERVER + req.body.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/ABOUTUS.png';
+        var dePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/';
+        var filePath = config.APP_FILE_SERVER + req.body.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/ABOUTUS.png';
 
 
                      fs.writeFile(filePath, buf, function (err) {
@@ -118,7 +118,7 @@ module.exports = {
         deleteAboutUsImage: function (req, res){
         console.log(req.userId);
         console.log(req.body);
-            var ImagePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + "/src/assets/images/ABOUTUS.png";
+            var ImagePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + "/assets/images/ABOUTUS.png";
 
                 fs.unlink(ImagePath, function (err) {
                     if (err){
