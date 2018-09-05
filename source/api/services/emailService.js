@@ -12,35 +12,31 @@ const nodemailer = require('nodemailer');
 //var transporter = null;
 
 
-nodemailer.createTestAccount((err, account) => {
-
-    // create reusable transporter object using the default SMTP transport
-     transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false, // true for 465, false for other ports
-        auth: {
-            user: 'communications@otenro.com', // generated ethereal user
-            pass: 'R&3%ee=r1'  // generated ethereal password
-        }
-    });
-
-
-
-});
-//var transporter = nodemailer.createTransport({
-//    name: 'appmaker',
-//    host: 'appmaker.lk',
-//    port: 465,
-//    secure: true, // true for 465, false for other ports
-//    auth: {
-//        user: 'support@appmaker.lk', // generated ethereal user
-//        pass: 'Jza12BTL36' // generated ethereal password
-//    },
-//    tls:{
-//        rejectUnauthorized: false
-//    }
+//nodemailer.createTestAccount((err, account) => {
+//    // create reusable transporter object using the default SMTP transport
+//     transporter = nodemailer.createTransport({
+//        host: 'smtp.gmail.com',
+//        port: 587,
+//        secure: false, // true for 465, false for other ports
+//        auth: {
+//            user: 'communications@otenro.com', // generated ethereal user
+//            pass: 'R&3%ee=r1'  // generated ethereal password
+//        }
+//    });
 //});
+
+var transporter = nodemailer.createTransport({
+    host: 'appmaker.lk',
+    port: 465,
+    secure: true, // true for 465, false for other ports
+    auth: {
+        user: 'support@appmaker.lk', // generated ethereal user
+        pass: 'Jza12BTL36' // generated ethereal password
+    },
+    tls:{
+        rejectUnauthorized: false
+    }
+});
 
 
 
@@ -938,17 +934,18 @@ module.exports = {
                     if(test && test.length > 0){
 
                         mailOptions = {
-                            from: userEmail.replyToEmail,
+                            from: userEmail.fromEmail,
                             to: data.email, // list of receivers
                             subject: subject, // Subject line
                             html: mBody ,
                             attachments : test
 
                         };
+
                     }else{
                         mailOptions = {
 
-                            from: userEmail.replyToEmail,
+                            from: userEmail.fromEmail,
                             to: data.email, // list of receivers
                             subject: subject, // Subject line
                             html: mBody
