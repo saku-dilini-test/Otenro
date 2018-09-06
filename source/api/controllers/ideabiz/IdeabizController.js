@@ -2,6 +2,7 @@ var config = require('../../services/config');
 var utilsService = require('../../services/utilsService');
 var dateFormat = require('dateformat');
 var SIMPLE_DATE_FORMAT = 'yyyy-mm-dd';
+var IdeabizAdminapiController = require('../../controllers/ideabiz/IdeabizAdminapiController');
 
 /**
  * IdeabizController
@@ -99,9 +100,23 @@ module.exports = {
                                                                 response.msisdn = renewalAppUser.msisdn;
                                                                 response.isError = false;
                                                             }else{
-                                                                //TODO Send charging request
-                                                                sails.log.error('msisdn: %s will not allows to access the contents today %s since the nextPaymentDate %s is not valid.' ,renewalAppUser.msisdn,today,nextPaymentDate);
-                                                                response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+
+                                                                sails.log.error('msisdn: %s will not allows to access the' +
+                                                                    ' contents today %s since the nextPaymentDate %s is not valid.' ,renewalAppUser.msisdn,today,nextPaymentDate);
+
+                                                                IdeabizAdminapiController.chargeUserAPiCall(msisdn,appId,function(paymentData, err){
+
+                                                                    if (err) {
+                                                                        sails.log.debug('No Sufficient balance in the account for msisdn: ' + msisdn);
+                                                                        response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                                                                        return res.ok(response);
+
+                                                                    }else if (paymentData.payment=="ok"){
+                                                                        response.isSubscribed = true;
+                                                                        response.msisdn = msisdn;
+                                                                        response.isError = false;
+                                                                    }
+                                                                });
                                                             }
                                                             return res.ok(response);
                                                         }else{
@@ -155,7 +170,7 @@ module.exports = {
     checkPayments: function(req,res,appId,msisdn,response,interval){
         var paymentQuery = {
             appId: appId,
-            msisdn: appUser.msisdn,
+            msisdn: msisdn,
             date: dateFormat(new Date(), SIMPLE_DATE_FORMAT)
         };
 
@@ -169,18 +184,48 @@ module.exports = {
             if(payment){
                 if(payment.status === 1) {
                     response.isSubscribed = true;
-                    response.msisdn = appUser.msisdn;
+                    response.msisdn = msisdn;
                     response.isError = false;
+                    return res.ok(response);
                 }else{
-                    //TODO Send charging request, note:Has to think what will happen when it interval is Monthly or Daily
-                    sails.log.debug('No Sufficient balance in the account for msisdn: ' + appUser.msisdn);
-                    response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                    IdeabizAdminapiController.chargeUserAPiCall(msisdn,appId,function(paymentData, err){
+
+                        if (err) {
+                            sails.log.debug('No Sufficient balance in the account for msisdn: ' + msisdn);
+                            response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                            return res.ok(response);
+
+                        }else if (paymentData.payment=="ok"){
+                            response.isSubscribed = true;
+                            response.msisdn = msisdn;
+                            response.isError = false;
+                            return res.ok(response);
+                        }
+                    });
+
                 }
             }else{
-                sails.log.error("Payment details could not find for the paymentQuery: " + JSON.stringify(paymentQuery));
-                response.isError = false;
-            } return res.ok(response);
 
+                IdeabizAdminapiController.chargeUserAPiCall(msisdn,appId,function(paymentData, err){
+
+                    if (err) {
+                        sails.log.debug('No Sufficient balance in the account for msisdn: ' + msisdn);
+                        response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                        response.isError = false;
+
+                        return res.ok(response);
+
+
+                    }else if (paymentData.payment=="ok"){
+                        response.isSubscribed = true;
+                        response.msisdn = msisdn;
+                        response.isError = false;
+
+                        return res.ok(response);
+                    }
+                });
+            }
+          /*return res.ok(response);*/
         });
     }
 };

@@ -411,7 +411,13 @@ module.exports = {
                                                 sails.log.debug('There is a payment record for today for msisdn: ' + msisdn + ' as payment status: ' + payment.status);
                                             }else{
                                                 sails.log.debug('No payment record for today therefore will charge for the msisdn: ' + msisdn);
-                                                actionStateChangeInstance.sendForCharging(msisdn,serviceID,publishDetailsData,user.appID);
+                                                actionStateChangeInstance.sendForCharging(msisdn,serviceID,publishDetailsData,user.appID,function(data,err){
+                                                    if(err){
+                                                        console.log(err);
+                                                    }else {
+                                                        console.log(data);
+                                                    }
+                                                });
                                             }
                                         });
                                     }
@@ -453,9 +459,14 @@ module.exports = {
                                     if (err) {
                                         return res.serverError(err);
                                     }
-
                                     sails.log.debug("New user created for the msisdn: " + msisdn + " serviceID=" + publishDetailsData.serviceID);
-                                    actionStateChangeInstance.sendForCharging(msisdn,serviceID,publishDetailsData,appID);
+                                    actionStateChangeInstance.sendForCharging(msisdn,serviceID,publishDetailsData,appID,function(data,err){
+                                        if(err){
+                                            console.log(err);
+                                        }else {
+                                            console.log(data);
+                                        }
+                                    });
                                     return res.created(user);
                                 });
                             }
@@ -496,21 +507,51 @@ module.exports = {
         }
     },
 
-    sendForCharging:function(msisdn,serviceID,publishDetailsData,appID){
+    chargeUserAPiCall :function (msisdn,appId,callback) {
+
+        var queryApp = {appId:appId};
+        var chargeUserAPiCallInstance =this;
+
+        PublishDetails.findOne(queryApp).exec(function(err,publishDetailsData) {
+            if (err) {
+                sails.log.error("Error when searching publishDetails Data: "  + " error: " + err);
+                return callback(null,err);
+            }else {
+                chargeUserAPiCallInstance.sendForCharging(msisdn,publishDetailsData.serviceID, publishDetailsData,appId,function(data,err){
+                    if (err&&data==null){
+                          console.log("1");
+                        return callback(null, "error");
+
+                    } else if (data){
+                        console.log("2");
+                       return callback({payment:data.payment}, null);
+                    }
+                });
+
+            }
+        })
+    },
+
+
+   /* testSendCharge:function (msisdn,serviceID,publishDetailsData,appID,callback) {
+
+        return callback({payment:"ok"}, null);
+
+    },*/
+
+
+    sendForCharging:function(msisdn,serviceID,publishDetailsData,appID,callback){
 
        var sendForChargingIntance = this;
 
         IdeaBizPINVerificationAPIService.getBalance(msisdn,function(response,err){
             if(err){
                 sails.log.debug("getBalance failed for the mobile: " + msisdn + " err:" + JSON.stringify(err));
-                return false ;
+                return callback(null, "error");
             }
-
-           // sails.log.debug("Response after requesting getBalance: " + JSON.stringify(response));
-
             if(!(response && response.body)){
                 sails.log.debug("Response received in getBalance request seems not valid response: " + JSON.stringify(response));
-                return false;
+                return callback(null, "error");
             }
 
             var responseBody = JSON.parse(response.body);
@@ -520,17 +561,17 @@ module.exports = {
 
             if(responseBody && responseBody.statusCode === "ERROR"){
                 sails.log.debug("Error while requesting the getBalance, err:  " + responseBody.message);
-                return false;
+                return callback(null, "error");
 
             }else if (responseBody && response.statusCode === 200){
 
                 sails.log.debug("responseBody.accountInfo.balance " + responseBody.accountInfo.balance);
 
-
+               /* return callback(null, "error");*/
                 sendForChargingIntance.getChargeAmount(publishDetailsData,msisdn,function(data, err){
                     if(err){
                         sails.log.debug("getChargeAmount failed for the mobile: "+ err);
-                        return false;
+                        return callback(null, "error");
                     }
                     if (responseBody.accountInfo.balance > data.amount){
 
@@ -538,14 +579,14 @@ module.exports = {
                             msisdn,serviceID,data.amount,function(response,err){
                                 if(err){
                                     sails.log.debug("charge failed for the mobile: " + msisdn + " err:" + JSON.stringify(err));
-                                    return false;
+                                    return callback(null, "error");
                                 }
 
                                 sails.log.debug("Response after requesting charge: " + JSON.stringify(response));
 
                                 if(!(response && response.body)){
                                     sails.log.debug("Response received in charge request seems not valid response: " + JSON.stringify(response));
-                                    return false;
+                                    return callback(null, "error");
                                 }
 
                                 var responseBody = JSON.parse(response.body);
@@ -553,7 +594,7 @@ module.exports = {
                                 if(responseBody && responseBody.statusCode === "ERROR"){
 
                                     sails.log.debug("Error while requesting the charge, err:  " + responseBody.message);
-                                    return false;
+                                    return callback(null, "error");
 
                                 }else if (responseBody && (response.statusCode === 200 || response.statusCode === 201)){
 
@@ -567,9 +608,9 @@ module.exports = {
 
                                         if (err) {
                                             sails.log.error("SubscriptionPayment Create Error");
-                                            return false;
+                                            return callback(null, "error");
                                         }
-                                        return true;
+                                        return callback({payment:"ok"}, null);
                                     });
 
                                 }else {
@@ -580,7 +621,7 @@ module.exports = {
 
                                         if (err) {
                                             sails.log.error("Operator find Error");
-                                            return callback(null, err);
+                                            return callback(null, "error");
                                         }else {
 
                                             var data= {appId:publishDetailsData.appId,date:dateFormat(new Date(), "yyyy-mm-dd"),
@@ -590,9 +631,9 @@ module.exports = {
 
                                                 if (err) {
                                                     sails.log.error("FailedTransactionLog Create Error");
-                                                    return false;
+                                                    return callback(null, "error");
                                                 }
-                                                return true;
+                                                return callback(null, "error");
                                             });
                                         }
 
@@ -610,23 +651,19 @@ module.exports = {
 
                             if (err) {
                                 sails.log.error("SubscriptionPayment Create Error");
-                                return false;
+                                return callback(null, "error");
                             }
-                            return true;
+                            return callback(null, "error");
                         });
                     }
                 })
             }else {
-
                 sails.log.debug("Error while requesting the balance check, err:  " + responseBody.message);
-
                 sendForChargingIntance.getOperator(msisdn,function(operator, err){
-
                     if (err) {
                         sails.log.error("Operator find Error");
-                        return callback(null, err);
+                        return callback(null, "error");
                     }else {
-
                         var data= {appId:publishDetailsData.appId,date:dateFormat(new Date(), "yyyy-mm-dd"),
                             statusCode:response.statusCode,operator:operator};
 
@@ -634,9 +671,9 @@ module.exports = {
 
                             if (err) {
                                 sails.log.error("FailedTransactionLog Create Error");
-                                return false;
+                                return callback(null, "error");
                             }
-                            return true;
+                            return callback(null, "error");
                         });
 
                     }
