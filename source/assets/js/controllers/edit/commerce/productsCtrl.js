@@ -2,10 +2,10 @@
     'use strict';
     angular.module("appEdit").controller("ProductCtrl", [
         '$scope', '$mdDialog', 'toastr', 'commerceService','productService','inventoryService', '$rootScope', '$auth', 'SERVER_URL','initialData',
-        'mainMenuService','$log','$q','categoryMaintenanceService','$filter','mySharedService','carouselService', ProductCtrl]);
+        'mainMenuService','$log','$q','categoryMaintenanceService','$filter','mySharedService','carouselService','$timeout', ProductCtrl]);
 
     function ProductCtrl($scope, $mdDialog, toastr, commerceService, productService,inventoryService, $rootScope,  $auth, SERVER_URL,initialData,
-    mainMenuService,$log,$q,categoryMaintenanceService,$filter,mySharedService,carouselService) {
+    mainMenuService,$log,$q,categoryMaintenanceService,$filter,mySharedService,carouselService, $timeout) {
         var size, weight;
         var variants;
         $scope.defaultImage;
@@ -1415,6 +1415,33 @@
         $scope.setAspectRatio();
 
 
+        /**
+         * options if pasting text form another source
+         **/
+        var originatorEv;
+        $scope.pastingContent = '';
+        $scope.oldTextContent = '';
+        $scope.openMenu = function($mdMenu, ev) {
+            originatorEv = ev;
+            $mdMenu.open(ev);
+        };
+        $scope.pastedText = function (oldTextContent, event) {
+            $scope.pastingContent = event.originalEvent.clipboardData.getData('text');
+            $scope.oldTextContent = oldTextContent;
+            $timeout(function(){
+                var ele=document.getElementById('luis');
+                angular.element(ele).triggerHandler('click');
+            },0);
+        };
+
+        $scope.stripHtml = function () {
+            if($scope.oldTextContent){
+                $scope.product.detailedDesc = $scope.oldTextContent +$scope.pastingContent ;
+            }else{
+                $scope.product.detailedDesc =  $scope.pastingContent;
+            }
+
+        }
 
     }
 })();

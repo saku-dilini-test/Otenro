@@ -59,14 +59,42 @@
                                         </div>
                                     </md-input-container>
 
+
+
                                     <md-input-container class="md-block">
                                         <label class="padding-bottom">Description</label>
                                         <br>
                                         <div>
+                                            <!--custom pasting options menu-->
+                                            <!--<md-menu>-->
+                                                <!--<md-button id="luis" aria-label="Open menu with custom trigger" class="md-icon-button" ng-mouseenter="$mdMenu.open()">-->
+                                                    <!--<span md-menu-origin>custom</span>-->
+                                                <!--</md-button>-->
+                                                <!--<md-menu-content width="4" ng-mouseleave="$mdMenu.close()">-->
+                                                    <!--<md-menu-item ng-repeat="item in [1, 2, 3]">-->
+                                                        <!--<md-button>-->
+                                                            <!--Option {{item}}-->
+                                                        <!--</md-button>-->
+                                                    <!--</md-menu-item>-->
+                                                <!--</md-menu-content>-->
+                                            <!--</md-menu>-->
+                                            <md-menu class="paste-options">
+                                                <!-- Trigger element is a md-button with an icon -->
+                                                <md-button  id="luis" ng-click="$mdOpenMenu($event)" class="paste-button md-icon-button" aria-label="Open sample menu">
+                                                    &nbsp;
+                                                </md-button>
+                                                <md-menu-content>
+                                                    <md-menu-item><md-button ng-click="stripHtml()">Keep text only</md-button></md-menu-item>
+                                                    <md-menu-item><md-button>Keep source formating</md-button></md-menu-item>
+                                                </md-menu-content>
+                                            </md-menu>
+
                                             <ng-quill-editor
                                                     name="editorText"
                                                     ng-model="product.detailedDesc"
+                                                    ng-paste="pastedText(product.detailedDesc, $event)"
                                                     required>
+
                                             </ng-quill-editor>
                                             <!--<text-angular  rows="4" class="input-shadow-border" ng-model="product.detailedDesc" required></text-angular>-->
                                         </div>
