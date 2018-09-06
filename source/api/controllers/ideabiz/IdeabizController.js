@@ -115,10 +115,11 @@ module.exports = {
                                                                         response.isSubscribed = true;
                                                                         response.msisdn = msisdn;
                                                                         response.isError = false;
+                                                                        return res.ok(response);
                                                                     }
                                                                 });
                                                             }
-                                                            return res.ok(response);
+
                                                         }else{
                                                             sails.log.error("renewalAppUser details could not find for the paymentQuery: " + JSON.stringify(renewalQuery));
                                                             thisCtrl.checkPayments(req,res,appId,msisdn,response,config.RENEWAL_INTERVALS.MONTHLY.code);
