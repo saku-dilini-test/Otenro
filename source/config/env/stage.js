@@ -28,7 +28,7 @@ module.exports = {
     // HOST URL
     HOST_URL: 'http://appmaker.ddns.net',
     // ME SERVER Config
-    ME_SERVER_URL: 'http://192.168.8.115:80/developer/meServer/temp/',
+    ME_SERVER_URL: 'http://cdnappmaker.ddns.net/developer/meServer/temp/',
     ME_SERVER: '/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/',
     ME_SERVER_PORT: 80,
     // APP FILE SERVER Config
