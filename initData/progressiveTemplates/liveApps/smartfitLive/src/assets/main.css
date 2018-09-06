@@ -1,90 +1,27 @@
-.progress {
-  position: relative;
-  height: 4px;
-  display: block;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.29);
-  border-radius: 2px;
-  background-clip: padding-box;
-  margin: 0.5rem 0 1rem 0;
-  overflow: hidden;
+/* quill.core.css overrides classes */
+.ql-size-small {
+  font-size: 0.75em;
 }
-
-.progress .indeterminate {
-  background-color: rgba(0, 0, 0, 0.76);
+.ql-size-large {
+  font-size: 1.5em;
 }
-
-.progress .indeterminate:before {
-  content: '';
-  position: absolute;
-  background-color: inherit;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  will-change: left, right;
-  -webkit-animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
-  animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+.ql-size-huge {
+  font-size: 2.5em;
 }
-
-.progress .indeterminate:after {
-  content: '';
-  position: absolute;
-  background-color: inherit;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  will-change: left, right;
-  -webkit-animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-  animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-  -webkit-animation-delay: 1.15s;
-  animation-delay: 1.15s;
+.ql-direction-rtl {
+  direction: rtl;
+  text-align: inherit;
 }
-
-@-webkit-keyframes indeterminate {
-  0% {
-    left: -35%;
-    right: 100%; }
-  60% {
-    left: 100%;
-    right: -90%; }
-  100% {
-    left: 100%;
-    right: -90%; }
+.ql-align-center {
+  text-align: center;
 }
-@keyframes indeterminate {
-  0% {
-    left: -35%;
-    right: 100%; }
-  60% {
-    left: 100%;
-    right: -90%; }
-  100% {
-    left: 100%;
-    right: -90%; }
+.ql-align-justify {
+  text-align: justify;
 }
-@-webkit-keyframes indeterminate-short {
-  0% {
-    left: -200%;
-    right: 100%; }
-  60% {
-    left: 107%;
-    right: -8%; }
-  100% {
-    left: 107%;
-    right: -8%; }
+.ql-align-right {
+  text-align: right;
 }
-@keyframes indeterminate-short {
-  0% {
-    left: -200%;
-    right: 100%; }
-  60% {
-    left: 107%;
-    right: -8%; }
-  100% {
-    left: 107%;
-    right: -8%; }
-}
-
+/* end of quill.core.css overrides classes */
 
 .no-padding{
   padding:0;
