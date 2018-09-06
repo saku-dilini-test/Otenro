@@ -244,7 +244,7 @@
                     message.userId = $auth.getPayload().id;
                     engageService.sendPushMessage(message)
                         .success(function(data){
-                            toastr.success('Successfully Saved ', 'Saved', {
+                            toastr.success('The message has been successfully sent.', 'Message Sent', {
                                 closeButton: true
                             });
                             return engageService.showPushMessageDialog();
