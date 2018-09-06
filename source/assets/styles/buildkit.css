@@ -3004,12 +3004,14 @@ table.md-calendar-day-header{
 }
 .float-left{
     float: left;
+    position: relative;
 }
 
 .md-menu.paste-options {
     position: absolute;
     top: 87px;
     z-index: 10;
+    height:0;
 }
 .md-menu.paste-options .paste-button{
     visibility: hidden;

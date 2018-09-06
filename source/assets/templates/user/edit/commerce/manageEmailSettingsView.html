@@ -177,10 +177,21 @@
                                     </md-button>
                                 </div>
 
-                                <div class="input-shadow-border float-left width-100">
+                                <div class="float-left width-100">
+                                    <md-menu class="paste-options">
+                                        <!-- Trigger element is a md-button with an icon -->
+                                        <md-button  id="addOrderConfirmationEmail" ng-click="$mdOpenMenu($event)" class="paste-button md-icon-button" aria-label="Open sample menu">
+                                            &nbsp;
+                                        </md-button>
+                                        <md-menu-content>
+                                            <md-menu-item><md-button ng-click="stripHtml()">Keep text only</md-button></md-menu-item>
+                                            <md-menu-item><md-button>Keep source formating</md-button></md-menu-item>
+                                        </md-menu-content>
+                                    </md-menu>
                                     <ng-quill-editor
                                             name="editorText"
                                             ng-model="orderConfirmedEmail.orderConfirmedEmail.header"
+                                            ng-paste="pastedText(orderConfirmedEmail.orderConfirmedEmail.header, $event,'addOrderConfirmationEmail')"
                                             required
                                     >
                                     </ng-quill-editor>
@@ -343,10 +354,21 @@
                                 </div>
                                 <!--<label>Header</label>-->
                                 <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
-                                <div class="input-shadow-border float-left width-100">
+                                <div class=" float-left width-100">
+                                    <md-menu class="paste-options">
+                                        <!-- Trigger element is a md-button with an icon -->
+                                        <md-button  id="addFulfillEmail" ng-click="$mdOpenMenu($event)" class="paste-button md-icon-button" aria-label="Open sample menu">
+                                            &nbsp;
+                                        </md-button>
+                                        <md-menu-content>
+                                            <md-menu-item><md-button ng-click="stripHtml()">Keep text only</md-button></md-menu-item>
+                                            <md-menu-item><md-button>Keep source formating</md-button></md-menu-item>
+                                        </md-menu-content>
+                                    </md-menu>
                                     <ng-quill-editor
                                             name="editorText"
                                             ng-model="orderFulfilledEmail.orderFulfilledEmail.header"
+                                            ng-paste="pastedText(orderFulfilledEmail.orderFulfilledEmail.header, $event,'addFulfillEmail')"
                                             required
                                     >
                                     </ng-quill-editor>
@@ -509,10 +531,21 @@
                                 </div>
                                 <!--<label>Header</label>-->
                                 <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
-                                <div class="input-shadow-border float-left width-100">
+                                <div class="float-left width-100">
+                                    <md-menu class="paste-options">
+                                        <!-- Trigger element is a md-button with an icon -->
+                                        <md-button  id="addRefundEmail" ng-click="$mdOpenMenu($event)" class="paste-button md-icon-button" aria-label="Open sample menu">
+                                            &nbsp;
+                                        </md-button>
+                                        <md-menu-content>
+                                            <md-menu-item><md-button ng-click="stripHtml()">Keep text only</md-button></md-menu-item>
+                                            <md-menu-item><md-button>Keep source formating</md-button></md-menu-item>
+                                        </md-menu-content>
+                                    </md-menu>
                                     <ng-quill-editor
                                             name="editorText"
                                             ng-model="orderRefundEmail.orderRefundEmail.header"
+                                            ng-paste="pastedText(orderRefundEmail.orderRefundEmail.header, $event,'addRefundEmail')"
                                             required
                                     >
                                     </ng-quill-editor>

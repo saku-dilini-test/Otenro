@@ -2,11 +2,11 @@
     'use strict';
     angular.module("appEdit").controller("BlogCtrl", [
         '$scope', '$mdDialog', 'toastr', 'commerceService', '$rootScope',
-        'SERVER_URL', '$auth', 'ME_APP_SERVER','mySharedService','initialData','mainMenuService',
+        'SERVER_URL', '$auth', 'ME_APP_SERVER','mySharedService','initialData','mainMenuService','$timeout',
         BlogCtrl]);
 
     function BlogCtrl($scope, $mdDialog, toastr, commerceService, $rootScope,
-             SERVER_URL, $auth, ME_APP_SERVER, mySharedService,initialData,mainMenuService) {
+             SERVER_URL, $auth, ME_APP_SERVER, mySharedService,initialData,mainMenuService,$timeout) {
 
 
                 $scope.appId = $rootScope.appId;
@@ -267,6 +267,28 @@
                };
                $scope.setAspectRatio();
 
+        /**
+         * options if pasting text form another source
+         **/
+        var originatorEv;
+        $scope.pastingContent = '';
+        $scope.oldTextContent = '';
 
+        $scope.pastedText = function (oldTextContent, event) {
+            $scope.pastingContent = event.originalEvent.clipboardData.getData('text');
+            $scope.oldTextContent = oldTextContent;
+            $timeout(function(){
+                var ele=document.getElementById('addBlog');
+                angular.element(ele).triggerHandler('click');
+            },0);
+        };
+
+        $scope.stripHtml = function () {
+            if($scope.oldTextContent){
+                $scope.blog.desc = $scope.oldTextContent +$scope.pastingContent ;
+            }else{
+                $scope.blog.desc =  $scope.pastingContent;
+            }
+        };
     }
 })();

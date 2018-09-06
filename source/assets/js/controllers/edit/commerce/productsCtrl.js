@@ -1421,15 +1421,12 @@
         var originatorEv;
         $scope.pastingContent = '';
         $scope.oldTextContent = '';
-        $scope.openMenu = function($mdMenu, ev) {
-            originatorEv = ev;
-            $mdMenu.open(ev);
-        };
+
         $scope.pastedText = function (oldTextContent, event) {
             $scope.pastingContent = event.originalEvent.clipboardData.getData('text');
             $scope.oldTextContent = oldTextContent;
             $timeout(function(){
-                var ele=document.getElementById('luis');
+                var ele=document.getElementById('addDescription');
                 angular.element(ele).triggerHandler('click');
             },0);
         };
@@ -1440,8 +1437,7 @@
             }else{
                 $scope.product.detailedDesc =  $scope.pastingContent;
             }
-
-        }
+        };
 
     }
 })();

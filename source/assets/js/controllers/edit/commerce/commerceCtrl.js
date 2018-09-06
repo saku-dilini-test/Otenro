@@ -3,12 +3,12 @@
     angular.module("appEdit").controller("CommerceCtrl", [
         '$scope', '$mdDialog', 'toastr', 'commerceService','carouselService', 'currencyService', 'publishService', '$rootScope',
         'SERVER_URL', '$auth', 'ME_APP_SERVER', '$interval', '$q','aboutUsService','mySharedService','comingSoonService',
-        '$filter','contactUsService','uiGmapGoogleMapApi','uiGridConstants','$templateCache','uiGridExporterConstants','uiGridExporterService','$log','selectedTab',
+        '$filter','contactUsService','uiGmapGoogleMapApi','uiGridConstants','$templateCache','uiGridExporterConstants','uiGridExporterService','$log','selectedTab','$timeout',
         CommerceCtrl]);
 
     function CommerceCtrl($scope, $mdDialog, toastr, commerceService,carouselService, currencyService, publishService, $rootScope,
              SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService,comingSoonService, $filter,
-             contactUsService,uiGmapGoogleMapApi,uiGridConstants,$templateCache,uiGridExporterConstants,uiGridExporterService,$log,selectedTab) {
+             contactUsService,uiGmapGoogleMapApi,uiGridConstants,$templateCache,uiGridExporterConstants,uiGridExporterService,$log,selectedTab,$timeout) {
         $scope.isNew = $rootScope.tempNew;
         $scope.picFileHeader = [];
         $scope.picFileHeader2 = [];
@@ -1591,6 +1591,78 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                 '</md-content>' +
                 '</md-dialog>'
             })
+        };
+
+
+        /**
+         * options if pasting text form another source
+         **/
+        var originatorEv;
+        $scope.pastingContent = '';
+        $scope.oldTextContent = '';
+        $scope.whichEditor = '';
+
+        $scope.pastedText = function (oldTextContent, event, whichEditor) {
+            $scope.pastingContent = event.originalEvent.clipboardData.getData('text');
+            $scope.oldTextContent = oldTextContent;
+            $scope.whichEditor = whichEditor;
+            $timeout(function(){
+                var ele;
+                if(whichEditor == 'returnpolicy'){
+                    ele=document.getElementById('addReturnPolicy');
+
+                }else if(whichEditor == 'termsconditions'){
+                    ele=document.getElementById('addTermsConditions');
+
+                }else if(whichEditor == 'privacypolicy'){
+                    ele=document.getElementById('addPrivacyPolicy');
+                }else if(whichEditor == 'addFulfillEmail'){
+                    ele=document.getElementById('addFulfillEmail');
+                }else if(whichEditor == 'addOrderConfirmationEmail'){
+                    ele=document.getElementById('addOrderConfirmationEmail');
+                }else if(whichEditor == 'addRefundEmail'){
+                    ele=document.getElementById('addRefundEmail');
+                }else{
+                    ele=document.getElementById('addAboutUs');
+                }
+                angular.element(ele).triggerHandler('click');
+            },0);
+        };
+
+        $scope.stripHtml = function () {
+            if($scope.oldTextContent){
+                if($scope.whichEditor == 'returnpolicy'){
+                    $scope.storeSettings.returnPolicy = $scope.oldTextContent +$scope.pastingContent;
+                }else if($scope.whichEditor == 'termsconditions'){
+                    $scope.storeSettings.termsAndCondition = $scope.oldTextContent +$scope.pastingContent;
+                }else if($scope.whichEditor == 'privacypolicy'){
+                    $scope.storeSettings.privacyPolicy = $scope.oldTextContent +$scope.pastingContent;
+                }else if($scope.whichEditor == 'addFulfillEmail'){
+                    $scope.orderFulfilledEmail.orderFulfilledEmail.header = $scope.oldTextContent +$scope.pastingContent;
+                }else if($scope.whichEditor == 'addOrderConfirmationEmail'){
+                    $scope.orderConfirmedEmail.orderConfirmedEmail.header = $scope.oldTextContent +$scope.pastingContent;
+                }else if($scope.whichEditor == 'addRefundEmail'){
+                    $scope.orderRefundEmail.orderRefundEmail.header = $scope.oldTextContent +$scope.pastingContent;
+                }else{
+                    $scope.storeSettings.content = $scope.oldTextContent +$scope.pastingContent;
+                }
+            }else{
+                if($scope.whichEditor == 'returnpolicy'){
+                    $scope.storeSettings.returnPolicy =  $scope.pastingContent;
+                }else if($scope.whichEditor == 'termsconditions'){
+                    $scope.storeSettings.termsAndCondition =  $scope.pastingContent;
+                }else if($scope.whichEditor == 'privacypolicy'){
+                    $scope.storeSettings.privacyPolicy =  $scope.pastingContent;
+                }else if($scope.whichEditor == 'addFulfillEmail'){
+                    $scope.orderFulfilledEmail.orderFulfilledEmail.header =  $scope.pastingContent;
+                }else if($scope.whichEditor == 'addOrderConfirmationEmail'){
+                    $scope.orderConfirmedEmail.orderConfirmedEmail.header =  $scope.pastingContent;
+                }else if($scope.whichEditor == 'addRefundEmail'){
+                    $scope.orderRefundEmail.orderRefundEmail.header =  $scope.pastingContent;
+                }else{
+                    $scope.storeSettings.content =  $scope.pastingContent;
+                }
+            }
         };
 
     }

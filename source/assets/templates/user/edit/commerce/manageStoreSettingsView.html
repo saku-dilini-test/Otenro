@@ -244,10 +244,22 @@
                             <fieldset>
                                 <label>return policy</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <div class="input-shadow-border">
+                                <div >
+
+                                    <md-menu class="paste-options">
+                                        <!-- Trigger element is a md-button with an icon -->
+                                        <md-button  id="addReturnPolicy" ng-click="$mdOpenMenu($event)" class="paste-button md-icon-button" aria-label="Open sample menu">
+                                            &nbsp;
+                                        </md-button>
+                                        <md-menu-content>
+                                            <md-menu-item><md-button ng-click="stripHtml()">Keep text only</md-button></md-menu-item>
+                                            <md-menu-item><md-button>Keep source formating</md-button></md-menu-item>
+                                        </md-menu-content>
+                                    </md-menu>
                                     <ng-quill-editor
                                             name="editorText"
                                             ng-model="storeSettings.returnPolicy"
+                                            ng-paste="pastedText(storeSettings.returnPolicy, $event, 'returnpolicy')"
                                             required
                                     >
                                     </ng-quill-editor>
@@ -265,10 +277,21 @@
                             <fieldset>
                                 <label>terms and conditions</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <div class="input-shadow-border">
+                                <div>
+                                    <md-menu class="paste-options">
+                                        <!-- Trigger element is a md-button with an icon -->
+                                        <md-button  id="addTermsConditions" ng-click="$mdOpenMenu($event)" class="paste-button md-icon-button" aria-label="Open sample menu">
+                                            &nbsp;
+                                        </md-button>
+                                        <md-menu-content>
+                                            <md-menu-item><md-button ng-click="stripHtml()">Keep text only</md-button></md-menu-item>
+                                            <md-menu-item><md-button>Keep source formating</md-button></md-menu-item>
+                                        </md-menu-content>
+                                    </md-menu>
                                     <ng-quill-editor
                                             name="editorText"
                                             ng-model="storeSettings.termsAndCondition"
+                                            ng-paste="pastedText(storeSettings.termsAndCondition, $event, 'termsconditions')"
                                             required
                                     >
                                     </ng-quill-editor>
@@ -286,10 +309,21 @@
                             <fieldset>
                                 <label>privacy policy</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <div class="input-shadow-border">
+                                <div>
+                                    <md-menu class="paste-options">
+                                        <!-- Trigger element is a md-button with an icon -->
+                                        <md-button  id="addPrivacyPolicy" ng-click="$mdOpenMenu($event)" class="paste-button md-icon-button" aria-label="Open sample menu">
+                                            &nbsp;
+                                        </md-button>
+                                        <md-menu-content>
+                                            <md-menu-item><md-button ng-click="stripHtml()">Keep text only</md-button></md-menu-item>
+                                            <md-menu-item><md-button>Keep source formating</md-button></md-menu-item>
+                                        </md-menu-content>
+                                    </md-menu>
                                     <ng-quill-editor
                                             name="editorText"
                                             ng-model="storeSettings.privacyPolicy"
+                                            ng-paste="pastedText(storeSettings.privacyPolicy, $event, 'privacypolicy')"
                                             required
                                     >
                                     </ng-quill-editor>
@@ -381,10 +415,21 @@
                             <label>Content</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
                             <!--<trix-editor angular-trix rows="4" ng-model="storeSettings.content"></trix-editor>-->
-                            <div class="input-shadow-border">
+                            <div>
+                                <md-menu class="paste-options">
+                                    <!-- Trigger element is a md-button with an icon -->
+                                    <md-button  id="addAboutUs" ng-click="$mdOpenMenu($event)" class="paste-button md-icon-button" aria-label="Open sample menu">
+                                        &nbsp;
+                                    </md-button>
+                                    <md-menu-content>
+                                        <md-menu-item><md-button ng-click="stripHtml()">Keep text only</md-button></md-menu-item>
+                                        <md-menu-item><md-button>Keep source formating</md-button></md-menu-item>
+                                    </md-menu-content>
+                                </md-menu>
                                 <ng-quill-editor
                                         name="editorText"
                                         ng-model="storeSettings.content"
+                                        ng-paste="pastedText(storeSettings.content, $event,'aboutus')"
                                         required
                                 >
                                 </ng-quill-editor>

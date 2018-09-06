@@ -80,18 +80,18 @@
 
             <fieldset style="clear:both">
                 <label>Description</label>
-                <!--<div >-->
-                    <!--<text-angular  -->
-                            <!--rows="4"  -->
-                            <!--name="editorText" -->
-                            <!--ng-maxlength="1000000000000" -->
-                            <!--class="input-shadow-border" -->
-                            <!--ng-model="blog.desc" required>-->
-                    <!--</text-angular>-->
-                <!--</div>-->
-                <!--<text-angular name="editorText" ng-model="article.desc" required></text-angular>-->
-                <div class="input-shadow-border">
-                    <ng-quill-editor name="editorText" ng-model="blog.desc" required></ng-quill-editor>
+                <div>
+                    <md-menu class="paste-options">
+                        <!-- Trigger element is a md-button with an icon -->
+                        <md-button  id="addBlog" ng-click="$mdOpenMenu($event)" class="paste-button md-icon-button" aria-label="Open sample menu">
+                            &nbsp;
+                        </md-button>
+                        <md-menu-content>
+                            <md-menu-item><md-button ng-click="stripHtml()">Keep text only</md-button></md-menu-item>
+                            <md-menu-item><md-button>Keep source formating</md-button></md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                    <ng-quill-editor name="editorText" ng-model="blog.desc" ng-paste="pastedText(blog.desc, $event)" required></ng-quill-editor>
                 </div>
             </fieldset>
             <fieldset style="margin-bottom:0px;">
