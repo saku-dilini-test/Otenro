@@ -8,9 +8,9 @@ echo  'start....'
 #APPFILESERVER='c:/xampp/htdocs/meServer/temp/';
 
 #stag
-#MESERVER='/home/admin/web/testcdn.otenro.com/public_html/temp/';
-#NODE='/home/admin/web/testcdn.otenro.com/public_html/node_modules/';
-#APPFILESERVER='/home/otenro/OtenroTest/appFileServer/';
+#MESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/';
+#NODE='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/node_modules/';
+#APPFILESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/';
 
 #prod
 MESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/';
@@ -28,8 +28,8 @@ then
 	serverUrl='http://localhost:1337'
 elif [ $ENV == 'stag' ]
 then
-	DB='otenroTest'
-	serverUrl='https://testdashboard.otenro.com:1448'
+	DB='appmaker'
+	serverUrl='http://appmaker.ddns.net'
 else
 	DB='appmaker'
 	serverUrl='https://developer.appmaker.lk'
