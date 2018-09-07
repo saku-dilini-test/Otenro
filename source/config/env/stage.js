@@ -28,11 +28,11 @@ module.exports = {
     // HOST URL
     HOST_URL: 'http://appmaker.ddns.net',
     // ME SERVER Config
-    ME_SERVER_URL: 'http://cdnappmaker.ddns.net/developer/meServer/temp/',
-    ME_SERVER: '/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/',
+    ME_SERVER_URL: 'http://appmaker.ddns.net:8082/developer/meServer/temp/',
+    ME_SERVER: '/var/www/html/developer/meServer/temp/',
     ME_SERVER_PORT: 80,
     // APP FILE SERVER Config
-    APP_FILE_SERVER: '/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/',
+    APP_FILE_SERVER: '/var/www/html/developer/appFileServer/',
     CLIENT_SECRET: 'pro44f4f3be572ec33711a40a5b8b4789',
     TEMPLATES_PATH: '/home/projects/appmaker/Otenro/initData/templates/',
     PROGRESSIVE_TEMPLATES_PATH: '/home/projects/appmaker/Otenro/initData/distribution/',
