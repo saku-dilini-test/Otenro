@@ -60,18 +60,18 @@
             $scope.currentYear = new Date().getFullYear();
             // $scope.current =   $scope.currentYear -1;
             $scope.months  = [
-                {month:1},
-                {month:2},
-                {month:3},
-                {month:4},
-                {month:5},
-                {month:6},
-                {month:7},
-                {month:8},
-                {month:9},
-                {month:10},
-                {month:11},
-                {month:12}
+                {month:"January"},
+                {month:"February"},
+                {month:"March"},
+                {month:"April"},
+                {month:"May"},
+                {month:"June"},
+                {month:"July"},
+                {month:"August"},
+                {month:"September"},
+                {month:"October"},
+                {month:"November"},
+                {month:"December"}
             ];
             $scope.years  = [
                 {year:$scope.currentYear},
