@@ -16,38 +16,47 @@
             <p>@Ideadroid</p>
           </a>
         </ion-item>
-        <ion-item menu-close ng-click="clearAllData()">
-          <a class="item-content">
-            <i class="icon ion-android-checkmark-circle"></i> Clear all app data
-          </a>
-        </ion-item>
-        <ion-item menu-close ui-sref="app.dash">
-          <i class="icon ion-android-checkmark-circle"></i> My Apps
-        </ion-item>
-        <ion-item menu-close ng-click="openInstructions()">
-          <a class="item-content">
-            <i class="icon ion-ios-paper-outline"></i> Instructions
-          </a>
-        </ion-item>
-        <ion-item menu-close ng-click="openTerms()">
-          <a class="item-content">
-            <i class="icon ion-ios-cog-outline"></i> Term of services
-          </a>
-        </ion-item>
-
-        <ion-item menu-close class="logout"  ng-click="logout()">
-          <a class="item-content">
-             <i class="icon ion-log-out"></i> Logout
-          </a>
-        </ion-item>
+        <div class="menu-items-container">
+          <div class="menu-item">
+            <ion-item menu-close ng-click="clearAllData()">
+              <a>
+                <i class="icon ion-android-checkmark-circle"></i> Clear all app data
+              </a>
+            </ion-item>
+          </div>
+          <div class="menu-item">
+            <ion-item menu-close ui-sref="app.dash">
+                <i class="icon ion-android-checkmark-circle"></i> My Apps
+            </ion-item>
+          </div>
+          <div class="menu-item">
+            <ion-item menu-close ng-click="openInstructions()">
+              <a>
+                <i class="icon ion-ios-paper-outline"></i> Instructions
+              </a>
+            </ion-item>
+          </div>
+          <div class="menu-item">
+            <ion-item menu-close ng-click="openTerms()">
+              <a>
+                <i class="icon ion-ios-cog-outline"></i> Term of services
+              </a>
+            </ion-item>
+          </div>
+          <div class="menu-item">
+            <ion-item menu-close class="logout"  ng-click="logout()">
+              <a>
+                <i class="icon ion-log-out"></i> Logout
+              </a>
+            </ion-item>
+          </div>
+        </div>
       </ion-list>
 
-      <div style="text-align: center;" class="com-link">
-        <span>
-        <a href="#" class="link" onclick="window.open('http://simatosolutions.com/', '_system', 'location=yes'); return false;"> 
-          Built by Simato Solutions</a>
-        </span>
+      <div class="com-link footer-link">
+        <a href="#">Built by Simato Solutions</a>
       </div>
+
     </ion-content>
   </ion-side-menu>
 </ion-side-menus>
