@@ -1,10 +1,4 @@
 <section *ngFor="let contact of contacts">
-      <div class="col-sm-12">
-        <p class="header text-center  main-header-font">
-          Softlogic Max Branches
-        </p>
-      </div>
-
           <!--</div>-->
             <ng-template  *ngFor="let branch of contact.branches;let i = index" [ngIf]="i % 3 == 0">
               <div class="row voffset row-space-top spacing-top">
