@@ -552,8 +552,7 @@
                                             <select placeholder="Select Report Type"
                                                     ng-model="failedTransactionReport.report"
                                                     ng-change="reconciliationReportsGet(failedTransactionReport.report)" required >
-                                                <option ng-value="oneReport.name"
-                                                        ng-repeat="oneReport in reports">{{oneReport.name}}</option>
+                                                <option ng-value="Daily">Daily</option>
                                             </select>
 
                                             <h6 flex="100">Select operator</h6>
