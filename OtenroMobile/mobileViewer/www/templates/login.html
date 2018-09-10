@@ -2,21 +2,48 @@
   <ion-content >
        <div class="card">
              <div class="logo-section text-center">
-                  <img src="img/made-easy-logo.svg" alt="logo" width="150" />
-                  <h4 style="color:#b4b4b4">Log into your Appmaker account to testing your Appmaker Apps </h4>
+                  <img src="img/made-easy-logo.png" alt="logo" width="150" />
+                  <h4 style="color:#b4b4b4">Login to your account to test your ideadroid apps </h4>
 
                   <form name="loginForm">
-                        <div class="list">
-                          <label class="item item-input item-floating-label">
-                            <span class="input-label">Email</span>
-                            <input type="text" name="username" placeholder="Email" ng-model="data.username" required>
-                          </label>
-                          <label class="item item-input item-floating-label">
-                            <span class="input-label">Password</span>
-                            <input type="password" name="password" placeholder="Password" ng-model="data.password" required>
-                          </label>
+                        <div id="login-input-container" class="list">
+
+                          <div class="list list-inset">
+                            <label class="input-label">Email</label>
+                            <label  id="email" class="item item-input">
+                                <input type="text" ng-model="data.username">
+                            </label>
+                          </div>
+
+                          <div class="list list-inset">
+                            <label class="input-label">Password</label>
+                            <label  id="password" class="item item-input">
+                                <input type="password" ng-model="data.password">
+                            </label>
+                          </div>
+
+                          <label style="color: grey;"> -or-</label>
+
+                          <div class="list list-inset">
+                              <label class="input-label">Mobile Number</label>
+                              <label  id="mobile" class="item item-input">
+                                  <input type="text" ng-model="data.mobile">
+                              </label>
+                            </div>
+
+                            <div class="list list-inset" ng-show='isPinReqSuccess'>
+                              <label class="input-label">Login Pin</label>
+                              <label  id="pin" class="item item-input">
+                                  <input type="text" ng-model="data.pin">
+                              </label>
+                            </div>
+
+                            <label style="color: blue;"> Forgot Password?</label>
+
                           <div class="col text-center">
-                            <button class="button button-positive button-full" ng-disabled="loginForm.$invalid" ng-click="login(data)">Login</button>
+                            <button class="button button-positive button-full" style="border-radius: 6px;" 
+                            ng-disabled="loginForm.$invalid" 
+                            ng-click="login(data)">Login</button>
                           </div>
                         </div>
                   </form>

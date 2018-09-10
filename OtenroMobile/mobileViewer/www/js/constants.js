@@ -11,6 +11,11 @@ angular.module('starter')
     public: 'public_role'
   })
 
+  .constant('LOGIN_TYPES', {
+    EMAIL: 'email',
+    MOBILE: 'mobile'
+  })
+
   // local development
     .constant('SERVER_URL', 'http://localhost:1337/');
   // Stage testing

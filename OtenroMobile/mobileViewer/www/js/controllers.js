@@ -1,5 +1,6 @@
 angular.module('starter.controllers', [])
 
+
   /** --/-- App Ctrl ------------------- **/
   .controller('AppCtrl', function($scope, AuthService, $state) {
 
@@ -14,9 +15,18 @@ angular.module('starter.controllers', [])
   })
 
   /** --/-- Login Ctrl ------------------- **/
-  .controller('LoginCtrl', function($scope, $state, $ionicPopup, AuthService) {
+  .controller('LoginCtrl', function($scope, $state, $ionicPopup, AuthService, LOGIN_TYPES) {
 
 $scope.status = "";
+$scope.user = null;
+$scope.loginType = null;
+$scope.isPinReqSuccess = false;
+$scope.data = {
+  username : '',
+  password: '',
+  mobile: '',
+  pin: ''
+};
 
     // Check user already login
     // If login true, move to dashboard
@@ -27,19 +37,108 @@ $scope.status = "";
     // Login Function
     $scope.login = function(data) {
 
-      // Call Auth Service
-      AuthService.login(data.username, data.password)
-        .then(function(authenticated) {
-          // If success move to dashboard
-          $state.go('app.dash', {}, {reload: true});
-        }, function(err) {
-          // Login failed give alert
-          $ionicPopup.alert({
-            title: 'Login failed!',
-            template: 'Please check your credentials!'
+      if ($scope.isValidationOk(data)) {
+
+        if ($scope.loginType === LOGIN_TYPES.EMAIL) {
+
+          // Call Auth Service
+          AuthService.login($scope.user)
+          .then(function(authenticated) {
+            //Clear input fields
+            $scope.data.username = '';
+            $scope.data.password = '';
+            // If success move to dashboard
+            $state.go('app.dash', {}, {reload: true});
+          }, function(err) {
+            // Login failed give alert
+            $ionicPopup.alert({
+              title: 'Login failed!',
+              template: 'Please check your credentials!'
+            });
           });
-        });
+        }
+
+        if ($scope.loginType === LOGIN_TYPES.MOBILE) {
+
+          if (!data.pin) {
+            // Call Auth Service
+            AuthService.login($scope.user)
+            .then(function(authenticated) {
+              $scope.isPinReqSuccess = true;
+            }, function(err) {
+              // Login failed give alert
+              $ionicPopup.alert({
+                title: 'Failed!',
+                template: 'Mobile number is not registered!'
+              });
+            });
+          }
+
+          if (data.pin) {
+            $scope.user = { mobile: data.mobile, pin: data.pin };
+
+            AuthService.mobileLogin($scope.user)
+            .then(function(authenticated) {
+              // Clear input fields
+              $scope.data.mobile = '';
+              $scope.data.pin = '';
+              // Goto dashbord
+              $state.go('app.dash', {}, {reload: true});
+            }, function(err) {
+              $ionicPopup.alert({
+                title: 'Failed!',
+                template: 'You entered a wrong pin!'
+              });
+            });
+          }
+
+        }
+      }
     };
+
+    // Check for validations
+    $scope.isValidationOk = function(data) {
+
+      if (data.username && data.password && !data.mobile) {
+
+        $scope.user = {
+          email: data.username,
+          password: data.password,
+          method: LOGIN_TYPES.EMAIL
+        };
+        $scope.loginType = LOGIN_TYPES.EMAIL;
+        return true;
+      }
+      else if (data.mobile && !$scope.isPinReqSuccess) {
+
+        $scope.user = {
+          mobile: data.mobile,
+          method: LOGIN_TYPES.MOBILE
+        };
+        $scope.loginType = LOGIN_TYPES.MOBILE;
+        return true;
+      }
+      else if (data.mobile && !data.pin && $scope.isPinReqSuccess ) {
+
+        $ionicPopup.alert({
+          title: 'Failed!',
+          template: 'Please enter login pin!'
+        });
+        return false;
+      }
+      else if (data.mobile && data.pin && $scope.isPinReqSuccess) {
+
+        return true;
+      }
+      else {
+
+        $ionicPopup.alert({
+          title: 'Failed!',
+          template: 'Please enter Email/Password or Mobile number'
+        });
+        return false;
+      }
+    }
   })
 
   /** --/-- Dash-board Ctrl ------------------- **/

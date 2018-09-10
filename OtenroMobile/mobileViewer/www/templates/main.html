@@ -1,31 +1,10 @@
-<!--<ion-view class="made-easy-background-color">-->
-  <!--<ion-tabs class="tabs-icon-top tabs-balanced">-->
-
-    <!--<ion-tab title="My Apps" icon="ion-home" ui-sref="main.dash">-->
-      <!--<ion-nav-view name="dash-tab"></ion-nav-view>-->
-    <!--</ion-tab>-->
-
-    <!--<ion-tab title="Settings" icon="ion-settings" ui-sref="main.userInfo">-->
-      <!--<ion-nav-view name="user-tab"></ion-nav-view>-->
-    <!--</ion-tab>-->
-
-  <!--</ion-tabs>-->
-<!--</ion-view>-->
 <ion-side-menus  class="navigation-drawer" enable-menu-with-back-views="true">
-
   <ion-side-menu-content drag-content="false">
 
     <ion-nav-bar class="made-easy-navigationBarColor"  align-title="center">
-
-      <!--<ion-nav-back-button class="button button-icon button-clear ion-ios-arrow-back"></ion-nav-back-button>-->
-
-      <!--<ion-nav-buttons side="left" >-->
-        <!--<button class="button button-icon button-clear ion-navicon" menu-toggle="left" ></button>-->
-      <!--</ion-nav-buttons>-->
-
     </ion-nav-bar>
 
-    <ion-nav-view name="menuContent" align="left"></ion-nav-view>
+  <ion-nav-view name="menuContent" align="left"></ion-nav-view>
   </ion-side-menu-content>
 
   <ion-side-menu side="left" class="made-easy-navigationBarColor">
@@ -34,7 +13,7 @@
         <ion-item   class="settings" ng-click="logout()">
           <a class="item-content">
             <h1>Settings</h1>
-            <p>@Appmaker</p>
+            <p>@Ideadroid</p>
           </a>
         </ion-item>
         <ion-item menu-close ng-click="clearAllData()">
@@ -55,15 +34,20 @@
             <i class="icon ion-ios-cog-outline"></i> Term of services
           </a>
         </ion-item>
-        <!--<ion-item menu-close ui-sref="app.dash">-->
-          <!--<i class="icon ion-ios-person-outline"></i> Privacy Policy-->
-        <!--</ion-item>-->
+
         <ion-item menu-close class="logout"  ng-click="logout()">
           <a class="item-content">
              <i class="icon ion-log-out"></i> Logout
           </a>
         </ion-item>
       </ion-list>
+
+      <div style="text-align: center;" class="com-link">
+        <span>
+        <a href="#" class="link" onclick="window.open('http://simatosolutions.com/', '_system', 'location=yes'); return false;"> 
+          Built by Simato Solutions</a>
+        </span>
+      </div>
     </ion-content>
   </ion-side-menu>
 </ion-side-menus>

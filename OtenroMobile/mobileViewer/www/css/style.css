@@ -150,6 +150,11 @@ body{
   top: calc(22vh);
 }
 
+.com-link {
+    position: relative;
+    top: calc(24vh); 
+}
+
 .settings {
   border-bottom: 1px solid #fff !important;
 }
@@ -170,4 +175,37 @@ body{
 
 .logo-section{
   height:70vh;
+}
+
+/*----- Login.html CSS  ------*/
+
+#email{
+    border: 1px solid #CCCCCC;
+    border-radius: 6px;
+}
+
+#password{
+    border: 1px solid #CCCCCC;
+    border-radius: 6px;
+}
+
+#mobile{
+    border: 1px solid #CCCCCC;
+    border-radius: 6px;
+}
+
+#pin{
+    border: 1px solid #CCCCCC;
+    border-radius: 6px;
+}
+
+#login-input-container input{
+    height: 20px;
+}
+
+.input-label {
+    color: grey;
+    width: 100%;
+    text-align: start;
+    padding: 5px 10px;
 }
