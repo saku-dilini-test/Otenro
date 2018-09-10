@@ -275,6 +275,7 @@ module.exports = {
             'code': 'ERROR',
             'desc': 'Error'
         }
-    }
+    },
+    IDEABIZ_ADMIN_MO_CALLBACK_FORWARD_URLS : sails.config.IDEABIZ_ADMIN_MO_CALLBACK_FORWARD_URLS
 
 };

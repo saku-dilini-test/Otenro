@@ -1,7 +1,9 @@
 var config = require('../../services/config');
+var utilsService = require('../../services/utilsService');
 var pushService = require('../../services/pushNotificationsService');
 var dateFormat = require('dateformat');
 var IdeaBizPINVerificationAPIService = require('../../services/IdeaBizPINVerificationAPIService');
+var request = require('request');
 
 
 /**
@@ -21,6 +23,9 @@ module.exports = {
         var body = req.body;
 
         sails.log.debug("Request received to IdeabizAdminapiController.takeaction with req.body: " + JSON.stringify(body));
+
+        //Request forwarding to specified URLs
+        utilsService.forwardRequests(req,res,'/adminapi/index','POST');
 
         //Log the API call
         this.logApiCall(body);

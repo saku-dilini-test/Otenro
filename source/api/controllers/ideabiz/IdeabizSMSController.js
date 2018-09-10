@@ -4,6 +4,7 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 var adminAPI = require('./IdeabizAdminapiController');
+var utilsService = require('../../services/utilsService');
 var config = require('../../services/config');
 var dateFormat = require('dateformat');
 
@@ -20,6 +21,9 @@ module.exports = {
         var reqBody = req.body;
 
         sails.log.debug("Request received to onReceivingSMS message body: " + JSON.stringify(reqBody));
+
+        //Request forwarding to specified URLs
+        utilsService.forwardRequests(req,res,'/sms/report','POST');
 
         try {
             var inboundSMSMessage = reqBody.inboundSMSMessageNotification.inboundSMSMessage;
