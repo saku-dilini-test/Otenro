@@ -124,7 +124,6 @@ export class HomepageComponent implements OnInit {
   // Routing Method
   navigateShop(val: string, id, name,image) {
     this.isSubscribing = false;
-
     if (this.isFromCMSAppView) {
       this.dataService.catId = id;
       this.router.navigate(['/' + val, id, name,image]);
