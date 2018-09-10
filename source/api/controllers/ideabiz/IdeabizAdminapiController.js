@@ -519,11 +519,9 @@ module.exports = {
             }else {
                 chargeUserAPiCallInstance.sendForCharging(msisdn,publishDetailsData.serviceID, publishDetailsData,appId,function(data,err){
                     if (err&&data==null){
-                          console.log("1");
                         return callback(null, "error");
 
                     } else if (data){
-                        console.log("2");
                        return callback({payment:data.payment}, null);
                     }
                 });
@@ -599,20 +597,47 @@ module.exports = {
                                 }else if (responseBody && (response.statusCode === 200 || response.statusCode === 201)){
 
                                    // console.log(responseBody);
-                                    var saveData = {appId:publishDetailsData.appId,msisdn:msisdn,amount:data.amount,
-                                        operator:data.operator,status:1,date:dateFormat(new Date(), "yyyy-mm-dd")};
+                                    var paymentQuery = {
+                                        appId: publishDetailsData.appId,
+                                        msisdn: msisdn,
+                                        date: dateFormat(new Date(),  "yyyy-mm-dd")
+                                    };
 
-                                    console.log("saveData " + JSON.stringify(saveData));
+                                    SubscriptionPayment.findOne(paymentQuery).exec(function (err, payment) {
 
-                                    SubscriptionPayment.create(saveData).exec(function (err, result) {
-
-                                        if (err) {
-                                            sails.log.error("SubscriptionPayment Create Error");
-                                            return callback(null, "error");
+                                        if (err){
+                                            sails.log.error("Error when searching for a payment for the details: " + JSON.stringify(paymentQuery));
                                         }
-                                        return callback({payment:"ok"}, null);
-                                    });
 
+                                        if(payment){
+
+                                            SubscriptionPayment.update(paymentQuery, {status:1,amount:1.0}).exec(function (err, result) {
+                                                if (err) {
+                                                    sails.log.error("Payment updated Error");
+                                                    return callback(null, "error");
+
+                                                }else {
+                                                    sails.log.debug("Payment updated success");
+                                                    return callback({payment:"ok"}, null);
+                                                }
+                                            });
+
+                                        }else {
+                                            var saveData = {appId:publishDetailsData.appId,msisdn:msisdn,amount:data.amount,
+                                                operator:data.operator,status:1,date:dateFormat(new Date(), "yyyy-mm-dd")};
+
+                                            SubscriptionPayment.create(saveData).exec(function (err, result) {
+
+                                                if (err) {
+                                                    sails.log.error("SubscriptionPayment Create Error");
+                                                    return callback(null, "error");
+                                                }
+                                                return callback({payment:"ok"}, null);
+                                            });
+
+                                        }
+
+                                    });
                                 }else {
                                     sails.log.debug("Error while requesting the charge, err:  " + responseBody.message);
 
