@@ -247,6 +247,8 @@ module.exports = {
         'APP_DELETED': 'The service is no longer available.',
         'USER_UNSUBSCRIBED': 'You got unsubscribed from this service',
         'INSUFFICIENT_BALANCE': 'You have no sufficient balance.Please recharge and try again.'
-    }
+    },
+
+    IDEABIZ_ADMIN_MO_CALLBACK_FORWARD_URLS : sails.config.IDEABIZ_ADMIN_MO_CALLBACK_FORWARD_URLS
 
 };

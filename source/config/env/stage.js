@@ -44,7 +44,7 @@ module.exports = {
     /**
      * change isBeta to 0 after beta period
      **/
-    isBeta: 1,
+    isBeta: 0,
     //IdeaBiz
     IDEABIZ_AUTH_CONSUMER_KEY: 'fmqgPhGyJ6KFvsLe6cpgxPzlXcca',
     IDEABIZ_AUTH_CONSUMER_SECRET: 'NZ7OQjZ2yCqsin7kxjbGpUlBsska',
@@ -53,5 +53,9 @@ module.exports = {
     IDEABIZ_EMAIL: 'heshan@simatosolutions.com',
     IDEABIZ_GROUP_EMAIL: 'heshan@simatosolutions.com', //To email for dialog super user, when sending approval email for the app configured with the serviceID by Admin.
     IDEABIZ_ADMIN_EMAIL: 'heshan@simatosolutions.com', //From email address of Admin to send serviceID approval email to dialog super user.
-    SUPPORT_USER_EMAIL: 'chamilster@gmail.com'//'support@appmaker.lk' //Simato Support user
+    SUPPORT_USER_EMAIL: 'chamilster@gmail.com',//'support@appmaker.lk' //Simato Support user
+    /**
+     * The ADMIN api and MO callbacks will call these
+     */
+    IDEABIZ_ADMIN_MO_CALLBACK_FORWARD_URLS : []
 };

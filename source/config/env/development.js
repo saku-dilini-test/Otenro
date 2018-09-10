@@ -53,5 +53,9 @@ module.exports = {
   IDEABIZ_EMAIL: 'support@appmaker.lk',
   IDEABIZ_GROUP_EMAIL: 'support@appmaker.lk', //To email for dialog super user, when sending approval email for the app configured with the serviceID by Admin.
   IDEABIZ_ADMIN_EMAIL: 'communications@otenro.com', //From email address of Admin to send serviceID approval email to dialog super user.
-  SUPPORT_USER_EMAIL: 'chamilster@gmail.com'//'support@appmaker.lk' //Simato Support user
+  SUPPORT_USER_EMAIL: 'chamilster@gmail.com',//'support@appmaker.lk' //Simato Support user
+    /**
+     * The ADMIN api and MO callbacks will call these
+     */
+    IDEABIZ_ADMIN_MO_CALLBACK_FORWARD_URLS : []
 };
