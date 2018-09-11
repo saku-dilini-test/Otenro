@@ -123,8 +123,11 @@ module.exports = {
                 query = {
                     date: {'>=': dateFormat(dateFrom, "yyyy-mm-dd"), '<=': dateFormat(dateTo, "yyyy-mm-dd")},
                     appId: appId
-                }
+                };
 
+                if(appId==='All'){
+                    query.appId = { '$in': reqData.allAppIds};
+                }
             } else {
                 query = {date: {'>=': dateFormat(dateFrom, "yyyy-mm-dd"), '<=': dateFormat(dateTo, "yyyy-mm-dd")}}
             }
@@ -134,6 +137,10 @@ module.exports = {
                 query = {
                     date: {'>=': dateFormat(dateFrom, "yyyy-mm-dd"), '<=': dateFormat(dateTo, "yyyy-mm-dd")},
                     operator: operator, appId: appId
+                };
+
+                if(appId==='All'){
+                    query.appId = { '$in': reqData.allAppIds};
                 }
             } else {
 
@@ -175,13 +182,21 @@ module.exports = {
         if (operator == "all") {
 
             if (appId) {
-                query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}, appId: appId}
+                query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}, appId: appId};
+
+                if(appId==='All'){
+                    query.appId = { '$in': reqData.allAppIds};
+                }
             } else {
                 query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}}
             }
         } else {
             if (appId) {
-                query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}, operator: operator, appId: appId}
+                query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}, operator: operator, appId: appId};
+
+                if(appId==='All'){
+                    query.appId = { '$in': reqData.allAppIds};
+                }
             } else {
                 query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}, operator: operator}
             }
@@ -213,13 +228,21 @@ module.exports = {
 
         if (operator == "all") {
             if (appId) {
-                query = {year: {'>=': yearFrom, '<=': yearTo}, appId: appId}
+                query = {year: {'>=': yearFrom, '<=': yearTo}, appId: appId};
+
+                if(appId==='All'){
+                    query.appId = { '$in': reqData.allAppIds};
+                }
             } else {
                 query = {year: {'>=': yearFrom, '<=': yearTo}}
             }
         } else {
             if (appId) {
-                query = {year: {'>=': yearFrom, '<=': yearTo}, operator: operator, appId: appId}
+                query = {year: {'>=': yearFrom, '<=': yearTo}, operator: operator, appId: appId};
+
+                if(appId==='All'){
+                    query.appId = { '$in': reqData.allAppIds};
+                }
             } else {
                 query = {year: {'>=': yearFrom, '<=': yearTo}, operator: operator}
             }

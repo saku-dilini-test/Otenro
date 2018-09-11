@@ -58,7 +58,6 @@ module.exports = {
         }
         Application.find(userApps).exec(function (err, appsData) {
             if (err) res.send(err);
-            console.log(JSON.stringify(appsData));
             res.json(appsData);
 
         });

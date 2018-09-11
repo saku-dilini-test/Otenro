@@ -277,8 +277,6 @@ module.exports = {
         var appName = reqData.appName;
         var operator = reqData.operator.toLowerCase();
 
-        console.log("operator " + operator);
-
         var query = "";
 
         if (appName == "all" && operator == "all") {
@@ -308,6 +306,9 @@ module.exports = {
             }
         }
 
+        if (appName == "All"){
+            query.appName = { '$in': reqData.appNamesArray};
+        }
 
         ApplicationBaseDailySummary.find(query,
             {
@@ -335,15 +336,15 @@ module.exports = {
 
         var query = "";
 
-        if (appName == "all" && operator == "all") {
+        if (appName == "All" && operator == "all") {
 
             query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}}
 
-        } else if (appName == "all" && operator !== "all") {
+        } else if (appName == "All" && operator !== "all") {
 
             query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}, operator: operator}
 
-        } else if (appName !== "all" && operator == "all") {
+        } else if (appName !== "All" && operator == "all") {
 
             query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}, appName: appName}
 
@@ -352,6 +353,9 @@ module.exports = {
             query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}, appName: appName, operator: operator}
         }
 
+        if (appName == "All"){
+            query.appName = { '$in': reqData.appNamesArray};
+        }
 
         ApplicationBaseMonthlySummary.find(query,
             {
@@ -397,7 +401,9 @@ module.exports = {
             query = {year: {'>=': yearFrom, '<=': yearTo}, appName: appName, operator: operator}
         }
 
-        console.log("query " + query);
+        if (appName == "All"){
+            query.appName = { '$in': reqData.appNamesArray};
+        }
 
         ApplicationBaseYearlySummary.find(query,
             {

@@ -48,6 +48,8 @@
             $scope.showReconciliationReports=false;
             $scope.sortReverse = true;
             $scope.showWelComeMessage = true;
+            $scope.appIdsArray = [];
+            $scope.appNamesArray = [];
 
             $scope.sortType = "appName"
 
@@ -58,21 +60,22 @@
                 {name:"Yearly"}
             ];
             $scope.currentYear = new Date().getFullYear();
-            // $scope.current =   $scope.currentYear -1;
+
             $scope.months  = [
-                {month:"January"},
-                {month:"February"},
-                {month:"March"},
-                {month:"April"},
-                {month:"May"},
-                {month:"June"},
-                {month:"July"},
-                {month:"August"},
-                {month:"September"},
-                {month:"October"},
-                {month:"November"},
-                {month:"December"}
+                {month:1,desc:"January"},
+                {month:2,desc:"February"},
+                {month:3,desc:"March"},
+                {month:4,desc:"April"},
+                {month:5,desc:"May"},
+                {month:6,desc:"June"},
+                {month:7,desc:"July"},
+                {month:8,desc:"August"},
+                {month:9,desc:"September"},
+                {month:10,desc:"October"},
+                {month:11,desc:"November"},
+                {month:12,desc:"December"}
             ];
+
             $scope.years  = [
                 {year:$scope.currentYear},
                 {year:$scope.currentYear-1},
@@ -119,7 +122,10 @@
                             var param ={userId :$scope.userId};
                             technicalSupportService.getUserApps(param)
                                 .success(function (result) {
+                                    $scope.appIdsArray = $scope.getAppIdsArray(result);
+                                    $scope.appNamesArray = $scope.getAppNamesArray(result);
                                     $scope.apps = result;
+                                    $scope.apps.push({appName:"All"});
                                 }).error(function (error) {
                                 toastr.error('Loading Error', 'Warning', {
                                     closeButton: true
@@ -172,11 +178,22 @@
                         toastr.error('Push Config Details Loading Error', 'Warning', {closeButton: true});
                     });
                 }
+            }
 
+            $scope.getAppIdsArray = function(apps){
+                var arr = [];
+                apps.forEach(function(app){
+                    arr.push(app.id);
+                });
+                return arr;
+            }
 
-
-
-
+            $scope.getAppNamesArray = function(apps){
+                var arr = [];
+                apps.forEach(function(app){
+                    arr.push(app.appName);
+                });
+                return arr;
             }
 
             $scope.operatorArrSort = function(operators){
@@ -955,6 +972,10 @@
 
                             var reqData = {dateFrom: sdate, dateTo: edate,appName:data.appName,operator:data.operator};
 
+                            if(data.appName==='All'){
+                                reqData.appNamesArray = $scope.appNamesArray;
+                            }
+
                             technicalSupportService.getApplicationBaseDailySummary(reqData)
                                 .success(function (response) {
                                     $scope.applicationBaseReportResponseData = response;
@@ -996,6 +1017,10 @@
 
                                 var reqData = {monthFrom: fromMonth, yearFrom: fromYear, monthTo: toMonth, yearTo: toYear, appName: data.appName,operator:data.operator}
 
+                                if(data.appName==='All'){
+                                    reqData.appNamesArray = $scope.appNamesArray;
+                                }
+
                                 technicalSupportService.getApplicationBaseMonthlySummary(reqData)
                                     .success(function (response) {
                                         $scope.applicationBaseReportResponseData = response;
@@ -1032,6 +1057,11 @@
                         if (data.operator){
 
                             var reqData = {yearFrom:fromYear, yearTo:toYear,appName:data.appName,operator:data.operator};
+
+                            if(data.appName==='All'){
+                                reqData.appNamesArray = $scope.appNamesArray;
+                            }
+
                             technicalSupportService. getApplicationBaseYearlySummary(reqData)
                                 .success(function(response){
                                     $scope.applicationBaseReportResponseData = response;
@@ -1074,6 +1104,10 @@
                         if ($scope.user.userRole=="APP_CREATOR"){
                             if (data.appName){
                                 reqData = {dateFrom: sdate, dateTo: edate,operator:data.operator,appId:data.appName};
+
+                                if(data.appName==='All'){
+                                    reqData.allAppIds = $scope.appIdsArray;
+                                }
                             }else {
                                 toastr.error('Please select Application name', 'Warning', {closeButton: true});
                                 return;
@@ -1117,6 +1151,10 @@
                             if ($scope.user.userRole=="APP_CREATOR"){
                                 if (data.appName){
                                   reqData = {monthFrom: fromMonth, yearFrom: fromYear, monthTo: toMonth, yearTo: toYear, operator: data.operator,appId:data.appName}
+
+                                  if(data.appName==='All'){
+                                    reqData.allAppIds = $scope.appIdsArray;
+                                  }
                                 }else {
                                     toastr.error('Please select Application name', 'Warning', {closeButton: true});
                                     return;
@@ -1155,7 +1193,11 @@
                     if (data.operator){
                         if ($scope.user.userRole=="APP_CREATOR"){
                             if (data.appName){
-                                var reqData = {yearFrom:fromYear, yearTo:toYear,operator:data.operator,appId:appId};
+                                var reqData = {yearFrom:fromYear, yearTo:toYear,operator:data.operator,appId:data.appName};
+
+                                if(data.appName==='All'){
+                                    reqData.allAppIds = $scope.appIdsArray;
+                                }
                             }else {
                                 toastr.error('Please select Application name', 'Warning', {closeButton: true});
                                 return;
