@@ -5,106 +5,217 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 var sentMails = require('../../services/emailService');
+const digitSize = 6;
 module.exports = {
 
 
     savePendingOrder : function (req,res) {
-
-
+        var thisOrderCtrl = this;
         var data = req.body;
         data['paymentStatus'] = 'Pending';
         data['fulfillmentStatus'] = 'Pending';
+        data.orderId = thisOrderCtrl.getOrderId();
+        ApplicationOrder.findOne({orderId:data.orderId}).exec(function(error, order) {
 
-        sails.log.info(data);
-        if(data.pickupId == null){
-            ApplicationOrder.create(data).exec(function (err, order) {
-                sails.log.info(order);
+            if (error) {
+                sails.log.error('order details fetching error');
+                return res.send(500);
+            }
+            if (order) {
+                data.orderId = thisOrderCtrl.getOrderId();
+                if (data.pickupId == null) {
+                    ApplicationOrder.create(data).exec(function (err, order) {
+                        if (err) res.send(err);
+                        var searchApp = {
+                            appId: order.appId,
+                            orderId: order.id
+                        };
+                        sails.log.info(searchApp);
+                        res.send(order);
+                    });
+                }
+                else {
+                    ShippingDetails.find({id: data.pickupId, appId: data.appId}).exec(function (err, pickUp) {
+                        if (err) res.send(err);
+                        data.pickUp = pickUp[0];
+                        data.deliveryCountry = pickUp[0].country;
+                        data.shippingOpt = pickUp[0].shippingOption;
+                        data.option = 'pickUp';
+                        ApplicationOrder.create(data).exec(function (err, order) {
+                            if (err) res.send(err);
+                            var searchApp = {
+                                id: order.appId
+                            };
+                            sails.log.info(searchApp);
+                            res.send(order);
+                        });
+                    });
+                }
+            }
+            else {
+                if (data.pickupId == null) {
+                    ApplicationOrder.create(data).exec(function (err, order) {
+                        if (err) res.send(err);
+                        var searchApp = {
+                            appId: order.appId,
+                            orderId: order.id
+                        };
+                        sails.log.info(searchApp);
+                        res.send(order);
+                    });
+                }
+                else {
+                    ShippingDetails.find({id: data.pickupId, appId: data.appId}).exec(function (err, pickUp) {
+                        if (err) res.send(err);
+                        data.pickUp = pickUp[0];
+                        data.deliveryCountry = pickUp[0].country;
+                        data.shippingOpt = pickUp[0].shippingOption;
+                        data.option = 'pickUp';
+                        ApplicationOrder.create(data).exec(function (err, order) {
+                            if (err) res.send(err);
+                            var searchApp = {
+                                id: order.appId
+                            };
+                            sails.log.info(searchApp);
+                            res.send(order);
+                        });
+                    });
+                }
+            }
 
-                if (err) res.send(err);
-                var searchApp = {
-                    appId: order.appId,
-                    orderId:order.id
-                };
-                sails.log.info(searchApp);
-                res.send(order);
-            });
-        }
-        else{
-            ShippingDetails.find({id:data.pickupId,appId:data.appId}).exec(function(err,pickUp){
-                if(err) res.send(err);
-                data.pickUp = pickUp[0];
-                data.deliveryCountry = pickUp[0].country;
-                data.shippingOpt = pickUp[0].shippingOption;
-                data.option = 'pickUp';
-                ApplicationOrder.create(data).exec(function (err, order) {
-                    if (err) res.send(err);
-                    var searchApp = {
-                        id: order.appId
-                    };
-                    sails.log.info(searchApp);
-                    res.send(order);
-                });
-            });
-        }
+        });
     },
 
     saveOrder : function(req,res) {
-
+        var thisOrderCtrl = this;
         var data = req.body;
         data['paymentStatus'] = 'Pending';
         data['fulfillmentStatus'] = 'Pending';
-
-        console.log(JSON.stringify(data));
-        if(data.pickupId == null){
-            ApplicationOrder.create(data).exec(function (err, order) {
-                sails.log.info(order);
-
-                if (err) res.send(err);
-                var searchApp = {
-                    id: order.appId
-                };
-                sails.log.info(searchApp);
-                Application.findOne(searchApp).exec(function (err, app) {
-                    order['userId'] = app.userId;
-                    order.isNew = req.body.isNew;
-                sentMails.sendOrderEmail(order,function (err,msg) {
-                    sails.log.info(err);
-                    if (err) {
-                        return  res.send(500);
-                    }
-                });
-                });
-
-                res.send('ok');
-            });
-        }
-        else{
-           ShippingDetails.find({id:data.pickupId,appId:data.appId}).exec(function(err,pickUp){
-            if(err) res.send(err);
-            data.pickUp = pickUp[0];
-            data.deliveryCountry = pickUp[0].country;
-            data.shippingOpt = pickUp[0].shippingOption;
-            data.option = 'pickUp';
-            ApplicationOrder.create(data).exec(function (err, order) {
-                if (err) res.send(err);
-                var searchApp = {
-                    id: order.appId
-                };
-                sails.log.info(searchApp);
-                Application.findOne(searchApp).exec(function (err, app) {
-                    order['userId'] = app.userId;
-                    order.isNew = req.body.isNew;
-                    sentMails.sendOrderEmail(order,function (err,msg) {
-                        sails.log.info(err);
-                        if (err) {
-                            return  res.send(500);
+        data.orderId = thisOrderCtrl.getOrderId();
+                    ApplicationOrder.findOne({orderId:data.orderId}).exec(function(error, order){
+                        if(error) {
+                            sails.log.error('order details fetching error');
+                            return res.send(500);
                         }
-                    });
-                });
-                res.send('ok');
-            });
-           });
+                        if(order) {
+                            data.orderId = thisOrderCtrl.getOrderId();
+                            if (data.pickupId == null) {
+                                ApplicationOrder.create(data).exec(function (err, order) {
+                                    if (err) res.send(err);
+                                    var searchApp = {
+                                        id: order.appId
+                                    };
+                                    sails.log.info(searchApp);
+                                    Application.findOne(searchApp).exec(function (err, app) {
+                                        order['userId'] = app.userId;
+                                        order.isNew = req.body.isNew;
+                                        sentMails.sendOrderEmail(order, function (err, msg) {
+                                            sails.log.info(err);
+                                            if (err) {
+                                                return res.send(500);
+                                            }
+                                        });
+                                    });
+                                   return res.send('ok');
+                                });
+                            }
+                            else {
+                                ShippingDetails.find({
+                                    id: data.pickupId,
+                                    appId: data.appId
+                                }).exec(function (err, pickUp) {
+                                    if (err) res.send(err);
+                                    data.pickUp = pickUp[0];
+                                    data.deliveryCountry = pickUp[0].country;
+                                    data.shippingOpt = pickUp[0].shippingOption;
+                                    data.option = 'pickUp';
+                                    ApplicationOrder.create(data).exec(function (err, order) {
+                                        if (err) res.send(err);
+                                        var searchApp = {
+                                            id: order.appId
+                                        };
+                                        sails.log.info(searchApp);
+                                        Application.findOne(searchApp).exec(function (err, app) {
+                                            order['userId'] = app.userId;
+                                            order.isNew = req.body.isNew;
+                                            sentMails.sendOrderEmail(order, function (err, msg) {
+                                                sails.log.info(err);
+                                                if (err) {
+                                                    return res.send(500);
+                                                }
+                                            });
+                                        });
+                                        return  res.send('ok');
+                                    });
+                                });
+                            }
+                        }
+                        else {
+                            if (data.pickupId == null) {
+
+                                ApplicationOrder.create(data).exec(function (err, order) {
+                                    if (err) res.send(err);
+                                    var searchApp = {
+                                        id: order.appId
+                                    };
+                                    sails.log.info(searchApp);
+                                    Application.findOne(searchApp).exec(function (err, app) {
+                                        order['userId'] = app.userId;
+                                        order.isNew = req.body.isNew;
+                                        sentMails.sendOrderEmail(order, function (err, msg) {
+                                            sails.log.info(err);
+                                            if (err) {
+                                                return res.send(500);
+                                            }
+                                        });
+                                    });
+
+                                    res.send('ok');
+                                });
+                            }
+                            else {
+                                ShippingDetails.find({
+                                    id: data.pickupId,
+                                    appId: data.appId
+                                }).exec(function (err, pickUp) {
+                                    if (err) res.send(err);
+                                    data.pickUp = pickUp[0];
+                                    data.deliveryCountry = pickUp[0].country;
+                                    data.shippingOpt = pickUp[0].shippingOption;
+                                    data.option = 'pickUp';
+                                    ApplicationOrder.create(data).exec(function (err, order) {
+                                        if (err) res.send(err);
+                                        var searchApp = {
+                                            id: order.appId
+                                        };
+                                        sails.log.info(searchApp);
+                                        Application.findOne(searchApp).exec(function (err, app) {
+                                            order['userId'] = app.userId;
+                                            order.isNew = req.body.isNew;
+                                            sentMails.sendOrderEmail(order, function (err, msg) {
+                                                sails.log.info(err);
+                                                if (err) {
+                                                    return res.send(500);
+                                                }
+                                            });
+                                        });
+                                        res.send('ok');
+                                    });
+                                });
+                            }
+                        }
+
+                        });
+                    },
+    getOrderId: function(){
+        return this.zeroPadding(Math.floor(Math.random() * 1000000));
+    },
+    zeroPadding: function(random) {
+        var orderId = random + "";
+        while(orderId.length < digitSize){
+            orderId = "0" + orderId;
         }
+        return orderId;
     },
     updateInventory : function(req,res){
     /*Manually updating the relevant quantity in the ThirdNavigation*/

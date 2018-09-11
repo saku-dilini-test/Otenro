@@ -19,7 +19,9 @@ module.exports = {
             type: 'string'
         },
         orderId  : {
-            type: 'string'
+            type: 'string',
+            unique: true,
+            required: true,
         },
         customerName : {
             type : 'string'
