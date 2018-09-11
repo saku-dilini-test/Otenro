@@ -842,7 +842,7 @@ button{
         padding-right: 0;
     }
     .bloc-xxl,.bloc-xl,.bloc-lg{
-        padding: 40px 10px !important;
+        padding: 0 10px !important;
     }
     .bloc-sm,.bloc-md{
         padding-left: 0;
