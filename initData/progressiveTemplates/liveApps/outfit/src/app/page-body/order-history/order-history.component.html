@@ -10,7 +10,7 @@
             Order history
         </h1>
         <div class="container order"  *ngFor="let order of orderHistory">
-            <h5 class="col-md-12 main-content-font">ORDER ID : {{order.id}}</h5>
+            <h5 class="col-md-12 main-content-font">ORDER ID : {{order.orderId}}</h5>
             <h5 class="col-md-12 main-content-font">ORDER DATE : {{order.createdAt | date: 'dd/MM/yyyy'}}</h5>
             <div *ngIf="order.note">
               <h5 class="col-md-12 main-content-font"><strong>*Note</strong> : {{order.note}}</h5>
