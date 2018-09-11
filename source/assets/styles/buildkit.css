@@ -3020,4 +3020,10 @@ table.md-calendar-day-header{
     color: #000 !important;
     text-transform: none !important;
 }
+.ql-snow .ql-tooltip{
+    top: -10px !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: 0 !important;
+}
 /* .End of .quill text editor override classes and syles */
