@@ -53,25 +53,36 @@ angular.module('starter.services', [])
 
     }
 
-    var login = function(name, pw) {
-      // userData only testing
-      //var userData = {
-      //  email: 'amila@gmail.com',
-      //  password: 'admin'
-      //};
-      var userData = {
-        email: name,
-        password: pw,
-        method: 'email'
-      };
+    var login = function(credentials) {
+      // var userData = {
+      //   email: name,
+      //   password: pw,
+      //   method: 'email'
+      // };
 
       return $q(function(resolve, reject) {
         // Make a request and receive your auth token from your server
-          $http.post(SERVER_URL+'auth/authenticate',userData).success(function (data) {
-            storeUserCredentials(JSON.stringify(data.user),data.token);
+          $http.post(SERVER_URL+'auth/authenticate',credentials).success(function (data) {
+            if (data.user) {
+              storeUserCredentials(JSON.stringify(data.user),data.token);
+            }
             resolve('Admin Login success.');
           }).error(function (err) {
+            console.log('Error data => ' + err)
             reject('Login Failed.');
+          });
+      });
+    };
+
+    var  mobileLogin = function (credentials) {
+
+      return $q(function(resolve, reject) {
+          $http.post(SERVER_URL + 'auth/verifyMobilePin',credentials)
+          .success(function (data) {
+            storeUserCredentials(JSON.stringify(data.user),data.token);
+            resolve(data);
+          }).error(function (err) {
+            reject(err);
           });
       });
     };
@@ -91,6 +102,7 @@ angular.module('starter.services', [])
 
     return {
       login: login,
+      mobileLogin: mobileLogin,
       logout: logout,
       isAuthorized: isAuthorized,
       isAuthenticated: function() {return isAuthenticated;},

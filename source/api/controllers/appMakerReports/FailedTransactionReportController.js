@@ -56,22 +56,22 @@ module.exports = {
                                 Application.findOne({id:failedTransaction._id.appId}).
                                 exec(function(error, applicationData) {
 
-                                    var data = {date:dateFormat(date, "yyyy-mm-dd"),
-                                        operator:failedTransaction._id.oprator,
-                                        statusCode:failedTransaction._id.statusCode,
-                                         appName:applicationData.appName,count:failedTransaction.count};
+                                    if (applicationData){
+
+                                        var data = {date:dateFormat(date, "yyyy-mm-dd"),
+                                            operator:failedTransaction._id.oprator,
+                                            statusCode:failedTransaction._id.statusCode,
+                                            appName:applicationData.appName,count:failedTransaction.count};
 
 
-                                    FailedTransactionLogDailySummary.create(data).exec(function (err, result) {
+                                        FailedTransactionLogDailySummary.create(data).exec(function (err, result) {
 
-                                        if (err) console.log(err);
-                                        console.log(result);
+                                            if (err) console.log(err);
+                                            console.log(result);
 
-                                    });
-
+                                        });
+                                    }
                                 });
-
-
                             });
                         });
                     });
@@ -102,6 +102,9 @@ module.exports = {
 
         FailedTransactionLogDailySummary.find(query).
         exec(function(error, failedTransactionLogDailySummary) {
+            if (error){
+                if (error) return res.send(error);
+            }
 
             res.send(failedTransactionLogDailySummary);
 

@@ -20,16 +20,7 @@
                             <fieldset>
                                 <!-- Address -->
                                 <label>Address</label>
-                                <input class="input-shadow-border" maxlength="50" type="text" name="address" ng-model="basicInfo.address" required />
-                                <div ng-hide="basicInfo.address.length > maxBasicInfoAddress">
-                                    <span class="information">Characters left: {{maxBasicInfoAddress - basicInfo.address.length}}</span>
-                                </div>
-                                <div  ng-show="basicInfo.address.length > maxBasicInfoAddress">
-                                    <span>Characters left: </span>
-                                    <span class="information" >
-                                        {{maxBasicInfoAddress - basicInfo.address.length}}
-                                    </span>
-                                </div>
+                                <input class="input-shadow-border"  type="text" name="address" ng-model="basicInfo.address" required />
                             </fieldset>
                             <fieldset>
                                 <!-- Telephone -->

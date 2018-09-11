@@ -36,9 +36,7 @@
     background:transparent;
     border: 0;
     color:inherit;
-    padding:6px;
 }
-
 
 .navigation-drawer .menu-left{
     -webkit-transition: -webkit-transform 200ms ease;
@@ -53,12 +51,12 @@
     transform: translate3d(0%, 0px, 0px);
 
 background: rgba(255,113,205,0.6);
-background: -moz-linear-gradient(left, rgba(255,113,205,0.6) 0%, rgba(159,34,134,0.94) 84%, rgba(159,34,134,1) 100%);
-background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,113,205,0.6)), color-stop(84%, rgba(159,34,134,0.94)), color-stop(100%, rgba(159,34,134,1)));
-background: -webkit-linear-gradient(left, rgba(255,113,205,0.6) 0%, rgba(159,34,134,0.94) 84%, rgba(159,34,134,1) 100%);
-background: -o-linear-gradient(left, rgba(255,113,205,0.6) 0%, rgba(159,34,134,0.94) 84%, rgba(159,34,134,1) 100%);
-background: -ms-linear-gradient(left, rgba(255,113,205,0.6) 0%, rgba(159,34,134,0.94) 84%, rgba(159,34,134,1) 100%);
-background: linear-gradient(to right, rgba(255,113,205,0.6) 0%, rgba(159,34,134,0.94) 84%, rgba(159,34,134,1) 100%);
+background: -moz-linear-gradient(left, rgba(255,113,205,1) 0%, rgba(159,34,134,0.9) 84%, rgba(159,34,134,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,113,205,1)), color-stop(84%, rgba(159,34,134,0.9)), color-stop(100%, rgba(159,34,134,1)));
+background: -webkit-linear-gradient(left, rgba(255,113,205,1) 0%, rgba(159,34,134,0.9) 84%, rgba(159,34,134,1) 100%);
+background: -o-linear-gradient(left, rgba(255,113,205,1) 0%, rgba(159,34,134,0.9) 84%, rgba(159,34,134,1) 100%);
+background: -ms-linear-gradient(left, rgba(255,113,205,1) 0%, rgba(159,34,134,0.9) 84%, rgba(159,34,134,1) 100%);
+background: linear-gradient(to right, rgba(255,113,205,1) 0%, rgba(159,34,134,0.9) 84%, rgba(159,34,134,1) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff71cd', endColorstr='#9f2286', GradientType=1 );
 
 
@@ -144,17 +142,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff71cd', end
 body{
     font-family: "Open Sans",sans-serif;
 }
-
-.logout{
-  position: relative;
-  top: calc(22vh);
-}
-
 .settings {
   border-bottom: 1px solid #fff !important;
 }
 .settings h1, .settings p{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
   color: #fff !important;
+
 }
 
 .card{
@@ -171,3 +166,151 @@ body{
 .logo-section{
   height:70vh;
 }
+
+/* added by .sanira */
+
+/*----- Login.html CSS  ------*/
+#login-input-container input, textarea{
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #DDDDDD;
+  width: 100%;
+  border-radius: 5px;
+}
+#login-input-container input:focus, textarea:focus{
+  box-shadow: 0 0 6px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 5px;
+  margin: 5px 1px 3px 0px;
+  border: 0.5px solid rgba(81, 203, 238, 1);
+}
+.field{
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+.board-container{
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 85vh;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+.board{
+  display: flex;
+  margin: 0;
+  padding: 15px;
+  width: 94%;
+  min-width: 94%;
+  max-width: 94%;
+  height: 100%;
+  min-height: 100%;
+  max-height: 100%;
+  flex-direction: column;
+  flex-wrap: wrap;
+  position: relative;
+  overflow-y: auto;
+  border-radius: 5px;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.link-container{
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 15px;
+  margin: 20px 0 15px 0;
+  box-sizing: border-box;
+}
+.link-container a{
+  text-decoration: none;
+}
+.login-desc{
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  letter-spacing: 1px;
+  font-size: 15px;
+}
+.input-label {
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  letter-spacing: 1px;
+  font-size: 15px;
+  text-align: left;
+  padding-left: 15px;
+  width: 100%;
+}
+.footer-link{
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  padding: 3%;
+  position: fixed;
+  bottom: 0;
+}
+.footer-link a{
+  text-decoration: none;
+  color: #fff;
+}
+.footer-link a:hover{
+  text-decoration: underline;
+}
+.footer-link a:visited{
+  text-decoration: none;
+  color: #fff;
+}
+/*----- End of Login.html CSS  ------*/
+
+/* side menu Styles */
+.menu-items-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-left: 15%;
+}
+.menu-item{
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+}
+.menu-item:last-child{
+  margin-top: 40px;
+}
+.menu-item ion-item{
+  padding: 15px 0 0 10px;
+}
+.menu-item ion-item .item-content{
+  width: 100%;
+  overflow: auto;
+  margin: 0 !important;
+  padding: 0;
+}
+.menu-item ion-item a{
+  text-decoration: none;
+  color: #fff !important;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  margin: 0 !important;
+  font-size: 13px;
+}
+.com-link {
+  position: relative !important;
+  top: 15%;
+  font-weight: 300;
+}
+/* End of side menu Styles */

@@ -1,3 +1,5 @@
+var config = require('./config');
+var request = require('request');
 
 module.exports = {
     /**
@@ -70,5 +72,34 @@ module.exports = {
                 message = config.END_USER_MESSAGES.APP_NOT_SUBMITTED;
         }
         return message;
+    },
+
+    /**
+     * This will use to do some Testing only, Prod envirenment should not call this
+     * Mostly this is use to forward the Admin API and SMS mo Callbacks to different servers
+     * @param method
+     */
+    forwardRequests: function(req,res,api,method){
+        if(config.IDEABIZ_ADMIN_MO_CALLBACK_FORWARD_URLS.length>0){
+            sails.log.debug('Request forward to urls: ', config.IDEABIZ_ADMIN_MO_CALLBACK_FORWARD_URLS);
+
+            config.IDEABIZ_ADMIN_MO_CALLBACK_FORWARD_URLS.forEach(function(url){
+                var requestObj = {
+                    'url': url + api,
+                    'method': method,
+                    'body': JSON.stringify(req.body)
+                };
+                console.log("Request Obj:", JSON.stringify(requestObj));
+                request(requestObj, function(err, response, body) {
+                    if(err) {
+                        sails.log.error('Will not receive a Success response if the response not handled properly.');
+                        return;
+                    }
+                    sails.log.debug('Received a Success response.');
+                    return;
+                });
+            });
+        }
     }
+
 };

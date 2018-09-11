@@ -28,11 +28,11 @@ module.exports = {
     // HOST URL
     HOST_URL: 'http://appmaker.ddns.net',
     // ME SERVER Config
-    ME_SERVER_URL: 'http://192.168.8.115:80/developer/meServer/temp/',
-    ME_SERVER: '/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/',
+    ME_SERVER_URL: 'http://appmaker.ddns.net:8082/developer/meServer/temp/',
+    ME_SERVER: '/var/www/html/developer/meServer/temp/',
     ME_SERVER_PORT: 80,
     // APP FILE SERVER Config
-    APP_FILE_SERVER: '/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/',
+    APP_FILE_SERVER: '/var/www/html/developer/appFileServer/',
     CLIENT_SECRET: 'pro44f4f3be572ec33711a40a5b8b4789',
     TEMPLATES_PATH: '/home/projects/appmaker/Otenro/initData/templates/',
     PROGRESSIVE_TEMPLATES_PATH: '/home/projects/appmaker/Otenro/initData/distribution/',
@@ -52,5 +52,9 @@ module.exports = {
     IDEABIZ_EMAIL: 'appmakeruser@gmail.com',
     IDEABIZ_GROUP_EMAIL: 'appmakeruser@gmail.com', //To email for dialog super user, when sending approval email for the app configured with the serviceID by Admin.
     IDEABIZ_ADMIN_EMAIL: 'appmakeruser@gmail.com', //From email address of Admin to send serviceID approval email to dialog super user.
-    SUPPORT_USER_EMAIL: 'appmakeruser@gmail.com'//'support@appmaker.lk' //Simato Support user
+    SUPPORT_USER_EMAIL: 'appmakeruser@gmail.com',//'support@appmaker.lk' //Simato Support user
+    /**
+     * The ADMIN api and MO callbacks will call these
+     */
+    IDEABIZ_ADMIN_MO_CALLBACK_FORWARD_URLS : []
 };

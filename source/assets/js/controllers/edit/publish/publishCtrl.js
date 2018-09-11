@@ -336,65 +336,72 @@
         $scope.save = function(data){
             var isRequestUpdate = false;
             var showSavedMsg = true;
-            data.forEach(function(ele){
+            for(var i=0; i<data.length;i++){
 
-                if(ele.isEnabled == true){
-                    if(ele.status == "NOT_SUBMITTED" || ele.status == "REJECTED"){
-
-                        if(!ele.amount && !ele.interval){
+                if(data[i].isEnabled == true){
+                    if(data[i].status == "NOT_SUBMITTED" || data[i].status == "REJECTED"){
+                        if(!data[i].amount && !data[i].interval){
+                            isRequestUpdate = false;
                             showSavedMsg = false;
-                            toastr.error('Please enter the amount and renewal for ' + ele.operator, 'Warning', {
-                                  closeButton: true
-                            });
-                        }else if(!ele.amount){
-                            showSavedMsg = false;
-                            toastr.error('Please enter the amount for ' + ele.operator, 'Warning', {
-                                  closeButton: true
-                            });
-                        }else if(!ele.interval) {
-                            showSavedMsg = false;
-                            toastr.error('Please select the renewal for ' + ele.operator, 'Warning', {
+                            toastr.error('Please enter the amount and renewal for ' + data[i].operator, 'Warning', {
                                 closeButton: true
                             });
-
+                            break;
+                        }else if(!data[i].amount){
+                            isRequestUpdate = false;
+                            showSavedMsg = false;
+                            toastr.error('Please enter the amount for ' + data[i].operator, 'Warning', {
+                                closeButton: true
+                            });
+                            break;
+                        }else if(!data[i].interval) {
+                            isRequestUpdate = false;
+                            showSavedMsg = false;
+                            toastr.error('Please select the renewal for ' + data[i].operator, 'Warning', {
+                                closeButton: true
+                            });
+                            break;
                         }
-                        else if(ele.interval == "Daily") {
-                                if (ele.priceRange.daily.min > ele.amount || ele.priceRange.daily.max < ele.amount) {
-                                    showSavedMsg = false;
-                                    toastr.error('Please enter a price between ' + ele.priceRange.daily.min + ' and ' + ele.priceRange.daily.max + ' for ' + ele.operator, 'Warning', {
-                                        closeButton: true
-                                    });
-                                }
-                                else{
-                                    ele.status = "SUBMITTED_FOR_CONFIG";
-                                    isRequestUpdate = true;
-                                }
+                        else if(data[i].interval == "Daily") {
+                            if (data[i].priceRange.daily.min > data[i].amount || data[i].priceRange.daily.max < data[i].amount) {
+                                isRequestUpdate = false;
+                                showSavedMsg = false;
+                                toastr.error('Please enter a price between ' + data[i].priceRange.daily.min + ' and ' + data[i].priceRange.daily.max + ' for ' + data[i].operator, 'Warning', {
+                                    closeButton: true
+                                });
+                                break;
+                            }
+                            else{
+                                data[i].status = "SUBMITTED_FOR_CONFIG";
+                                isRequestUpdate = true;
+                            }
                         }
-                        else if(ele.interval == "Monthly"){
-                                if(ele.priceRange.monthly.min > ele.amount || ele.priceRange.monthly.max < ele.amount ){
-                                    showSavedMsg = false;
-                                    toastr.error('Please enter a price between ' + ele.priceRange.monthly.min +' and ' + ele.priceRange.monthly.max + ' for ' + ele.operator, 'Warning',{
-                                        closeButton: true
-                                    });
-                                }
-                                else{
-                                    ele.status = "SUBMITTED_FOR_CONFIG";
-                                    isRequestUpdate = true;
-                                }
+                        else if(data[i].interval == "Monthly"){
+                            if(data[i].priceRange.monthly.min > data[i].amount || data[i].priceRange.monthly.max < data[i].amount ){
+                                isRequestUpdate = false;
+                                showSavedMsg = false;
+                                toastr.error('Please enter a price between ' + data[i].priceRange.monthly.min +' and ' + data[i].priceRange.monthly.max + ' for ' + data[i].operator, 'Warning',{
+                                    closeButton: true
+                                });
+                                break;
+                            }
+                            else{
+                                data[i].status = "SUBMITTED_FOR_CONFIG";
+                                isRequestUpdate = true;
+                            }
                         }
                         else{
-                            ele.status = "SUBMITTED_FOR_CONFIG";
+                            data[i].status = "SUBMITTED_FOR_CONFIG";
                             isRequestUpdate = true;
-                            console.log("one");
                         }
                     }
                 }else{
-                    if(ele.status == "REJECTED"){
+                    if(data[i].status == "REJECTED"){
                         isRequestUpdate = true;
                     }
                 }
 
-            });
+            };
 
 
             if(isRequestUpdate){

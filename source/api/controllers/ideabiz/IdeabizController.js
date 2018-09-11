@@ -15,6 +15,7 @@ module.exports = {
         var msisdn = req.param("msisdn");
         var uuId = req.param("uuId");
         var appId = req.param("appId");
+
         var thisCtrl = this;
         var response = {
             'isSubscribed': false, //This will use to check whether the user actually subscribed to the service
@@ -23,7 +24,8 @@ module.exports = {
             'isError': true, //This might tru when delete the app by app creator ot for the other issues.If this is tru then will need to set and show the displayMessage to the end user.
             'displayMessage': '', //Will show to the end user.
             'errorMessage': '', //This is the actual error message to use in our debugging purposes, will not show to the end user.
-            'date': new Date().toLocaleString()
+            'date': new Date().toLocaleString(),
+            'isPaymentSuccess': false
         };
 
         Application.findOne({id:appId}).exec(function(err, app){
@@ -58,7 +60,7 @@ module.exports = {
                     if(appUser && appUser.msisdn){
                         utilsService.getOperator(appUser.msisdn, function (operatorFor_msisdn,err) {
                             if(err){
-                                sails.log.error('Error getting the operator for the msisdn: ' + msisdn + ' Error: ' + err);
+                                sails.log.error('Error getting the operator for the msisdn: ' + appUser.msisdn + ' Error: ' + err);
                                 response.displayMessage = config.END_USER_MESSAGES.SERVER_ERROR;
                                 return res.ok(response);
                             }
@@ -76,10 +78,10 @@ module.exports = {
                                         if(operatorObj.isEnabled && operatorObj.status==='APPROVED'){
                                             if(appUser.subscriptionStatus===config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code){
                                                 if(operatorObj.interval === config.RENEWAL_INTERVALS.DAILY.code){
-                                                    sails.log.debug('The msisdn:%s will have Daily renewal interval', msisdn);
-                                                    thisCtrl.checkPayments(req,res,appId,msisdn,response,config.RENEWAL_INTERVALS.DAILY.code);
+                                                    sails.log.debug('The msisdn:%s will have Daily renewal interval', appUser.msisdn);
+                                                    thisCtrl.checkPayments(req,res,appId,appUser.msisdn,response,config.RENEWAL_INTERVALS.DAILY.code);
                                                 } else if(operatorObj.interval === config.RENEWAL_INTERVALS.MONTHLY.code){
-                                                    sails.log.debug('The msisdn:%s will have Monthly renewal interval', msisdn);
+                                                    sails.log.debug('The msisdn:%s will have Monthly renewal interval', appUser.msisdn);
                                                     var renewalQuery = {
                                                         appId: appId,
                                                         msisdn: appUser.msisdn
@@ -104,7 +106,7 @@ module.exports = {
                                                                 sails.log.error('msisdn: %s will not allows to access the' +
                                                                     ' contents today %s since the nextPaymentDate %s is not valid.' ,renewalAppUser.msisdn,today,nextPaymentDate);
 
-                                                                IdeabizAdminapiController.chargeUserAPiCall(msisdn,appId,function(paymentData, err){
+                                                                IdeabizAdminapiController.chargeUserAPiCall(appUser.msisdn,appId,function(paymentData, err){
 
                                                                     if (err) {
                                                                         sails.log.debug('No Sufficient balance in the account for msisdn: ' + msisdn);
@@ -113,15 +115,17 @@ module.exports = {
 
                                                                     }else if (paymentData.payment=="ok"){
                                                                         response.isSubscribed = true;
-                                                                        response.msisdn = msisdn;
+                                                                        response.msisdn = appUser.msisdn;
                                                                         response.isError = false;
+                                                                        response.isPaymentSuccess =true;
+                                                                        return res.ok(response);
                                                                     }
                                                                 });
                                                             }
-                                                            return res.ok(response);
+
                                                         }else{
                                                             sails.log.error("renewalAppUser details could not find for the paymentQuery: " + JSON.stringify(renewalQuery));
-                                                            thisCtrl.checkPayments(req,res,appId,msisdn,response,config.RENEWAL_INTERVALS.MONTHLY.code);
+                                                            thisCtrl.checkPayments(req,res,appId,appUser.msisdn,response,config.RENEWAL_INTERVALS.MONTHLY.code);
                                                         }
                                                     });
                                                 } else {
@@ -175,6 +179,9 @@ module.exports = {
         };
 
         SubscriptionPayment.findOne(paymentQuery).exec(function (err, payment) {
+
+            console.log("payment " + JSON.stringify(payment));
+
             if (err){
                 sails.log.error("Error when searching for a payment for the details: " + JSON.stringify(paymentQuery));
                 response.displayMessage = config.END_USER_MESSAGES.SERVER_ERROR;
@@ -199,6 +206,7 @@ module.exports = {
                             response.isSubscribed = true;
                             response.msisdn = msisdn;
                             response.isError = false;
+                            response.isPaymentSuccess =true;
                             return res.ok(response);
                         }
                     });
@@ -220,6 +228,7 @@ module.exports = {
                         response.isSubscribed = true;
                         response.msisdn = msisdn;
                         response.isError = false;
+                        response.isPaymentSuccess =true;
 
                         return res.ok(response);
                     }

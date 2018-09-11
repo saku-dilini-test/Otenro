@@ -1,26 +1,52 @@
 <ion-view class="made-easy-background-color" view-title="Login" name="login-view" >
-  <ion-content >
-       <div class="card">
-             <div class="logo-section text-center">
-                  <img src="img/made-easy-logo.svg" alt="logo" width="150" />
-                  <h4 style="color:#b4b4b4">Log into your Appmaker account to testing your Appmaker Apps </h4>
+  <ion-content>
+       <div class="board-container">
+         <div class="board">
+           <div class="logo-section text-center">
+             <img src="img/icon.png" alt="logo" width="150" />
+             <h4 class="login-desc">Login to your account to test your ideadroid apps </h4>
 
-                  <form name="loginForm">
-                        <div class="list">
-                          <label class="item item-input item-floating-label">
-                            <span class="input-label">Email</span>
-                            <input type="text" name="username" placeholder="Email" ng-model="data.username" required>
-                          </label>
-                          <label class="item item-input item-floating-label">
-                            <span class="input-label">Password</span>
-                            <input type="password" name="password" placeholder="Password" ng-model="data.password" required>
-                          </label>
-                          <div class="col text-center">
-                            <button class="button button-positive button-full" ng-disabled="loginForm.$invalid" ng-click="login(data)">Login</button>
-                          </div>
-                        </div>
-                  </form>
-             </div>
+             <form name="loginForm">
+               <div id="login-input-container" class="list">
+
+                 <div class="field">
+                   <label for="email" class="input-label">Email</label>
+                   <input id="email" type="email" ng-model="data.username">
+                 </div>
+
+                 <div class="field">
+                   <label for="password" class="input-label">Password</label>
+                   <input id="password" type="password" ng-model="data.password">
+                 </div>
+
+                 <label style="color: grey;"> -or-</label>
+
+                 <div class="field">
+                   <label for="mobile" class="input-label">Mobile Number</label>
+                   <input id="mobile" type="text" ng-model="data.mobile">
+                 </div>
+
+                 <div class="field" ng-show='isPinReqSuccess'>
+                   <label for="pin" class="input-label">Login Pin</label>
+                   <input id="pin" type="text" ng-model="data.pin">
+                 </div>
+
+                 <div class="link-container">
+                   <a href="#">Forgot Password?</a>
+                 </div>
+
+                 <div class="col text-center">
+                   <button class="button button-positive button-full" style="border-radius: 6px;"
+                           ng-disabled="loginForm.$invalid"
+                           ng-click="login(data)">Login</button>
+                 </div>
+               </div>
+             </form>
+           </div>
+         </div>
        </div>
+        <div class="footer-link">
+          <a href="#">Built by Simato Solutions</a>
+        </div>
   </ion-content>
 </ion-view>
