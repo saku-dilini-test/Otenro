@@ -616,7 +616,7 @@ module.exports = {
 
                                         if(payment){
 
-                                            SubscriptionPayment.update(paymentQuery, {status:1,amount:1.0}).exec(function (err, result) {
+                                            SubscriptionPayment.update(paymentQuery, {status:1,amount:data.amount}).exec(function (err, result) {
                                                 if (err) {
                                                     sails.log.error("Payment updated Error");
                                                     return callback(null, "error");
@@ -645,8 +645,6 @@ module.exports = {
                                     });
                                 }else {
                                     sails.log.debug("Error while requesting the charge, err:  " + responseBody.message);
-
-
                                     sendForChargingIntance.getOperator(msisdn,function(operator, err){
 
                                         if (err) {
