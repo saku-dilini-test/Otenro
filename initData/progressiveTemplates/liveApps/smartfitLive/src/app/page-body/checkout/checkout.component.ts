@@ -33,7 +33,7 @@ export class CheckoutComponent implements OnInit {
   nullMessage: string;
   private showSpinner;
   private hideConfirm = false;
-
+  responce;
   complexForm: FormGroup;
   pickupForm: FormGroup;
   shippingForm: FormGroup;
@@ -606,6 +606,12 @@ export class CheckoutComponent implements OnInit {
 
     this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.orderDetails, { responseType: 'text' })
       .subscribe((res) => {
+        this.responce = JSON.parse(res).name;
+        console.log(this.responce);
+        if (JSON.parse(res).status == 404) {
+          this.showSpinner = false;
+          $('#myModal').modal('show')
+        } else {
         this.orderDetails.id = this.dataService.cart.cartItems[0].id;
         this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
           .subscribe((res) => {
@@ -647,6 +653,7 @@ export class CheckoutComponent implements OnInit {
             }
             console.log(err);
           });
+        }
       }, (err: HttpErrorResponse) => {
 
 

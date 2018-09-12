@@ -107,7 +107,7 @@ export class CheckoutComponent implements OnInit {
   ePay = false;
   ePayFail = false;
   ePayNull = false;
-
+  responce;
   constructor(fb: FormBuilder, private ordersService: OrdersService,
     private shippingService: ShippingService,
     private currencyService: CurrencyService,
@@ -931,6 +931,12 @@ export class CheckoutComponent implements OnInit {
 
     this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.orderDetails, { responseType: 'text' })
       .subscribe((res) => {
+        this.responce = JSON.parse(res).name;
+        console.log(this.responce);
+        if (JSON.parse(res).status == 404) {
+          this.showSpinner = false;
+          $('#myModal').modal('show')
+        } else {
         this.orderDetails.id = this.dataService.cart.cartItems[0].id;
         this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
           .subscribe((res) => {
@@ -972,6 +978,7 @@ export class CheckoutComponent implements OnInit {
             }
             console.log(err);
           });
+        }
       }, (err: HttpErrorResponse) => {
 
 
@@ -1083,6 +1090,12 @@ export class CheckoutComponent implements OnInit {
     // console.log(note);
     this.http.post(SERVER_URL + "/templatesOrder/saveOrder", (this.orderDetails), { responseType: 'text' })
       .subscribe((res) => {
+        this.responce = JSON.parse(res).name;
+        console.log(this.responce);
+        if (JSON.parse(res).status == 404) {
+          this.showSpinner = false;
+          $('#myModal').modal('show')
+        } else {
         this.orderDetails.id = this.dataService.cart.cartItems[0].id;
         this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
           .subscribe(res => {
@@ -1134,6 +1147,7 @@ export class CheckoutComponent implements OnInit {
             }
             console.log(err);
           });
+        }
       },
       (err: HttpErrorResponse) => {
 
