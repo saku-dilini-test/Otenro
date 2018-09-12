@@ -290,7 +290,7 @@ module.exports = {
 
                                            "Please create and revert with the service ID for the below service created through <br> Appmaker. Details are as follows:" +
 
-                                            "<br><br><br>App Name: " +  result[0].title +
+                                            "<br><br><br>Service Name: " +  result[0].title +
                                             "<br>Company Name: " +  userData[0].firstName + " " + userData[0].lastName +
                                             "<br><br><table border='1px'>" +
                                             "<thead>" +
@@ -314,11 +314,15 @@ module.exports = {
 
 
 
-                                     emailBody = emailBody + "<br><br>Charging Type: Subscription" +
-                                            "<br>Subscription Keyword: reg-" + result[0].keyword +
-                                            "<br>Un-subscription Keyword: Unreg-" + result[0].keyword +
-
-                                           "<br><br>Regards," +
+                                     emailBody = emailBody +
+                                            "<br>Subscription Keyword: START " + result[0].keyword +
+                                            "<br>Un-subscription Keyword: STOP " + result[0].keyword +
+                                            "<br>Subscription SMS: You have subscribed to the " + result[0].title + " service. Type STOP " + result[0].keyword  + " and send to 87757 to unsubscribe." +
+                                            "<br>Un-subscription SMS: You have been unsubscribed from the " + result[0].title + " service." +
+                                            "<br>SMS Mask : Ideadroid" +
+                                            "<br>Admin notify URL: https://developer.appmaker.lk/adminapi/index" +
+                                            "<br>SMS Notify URL: https://developer.appmaker.lk/sms/report" +
+                                            "<br><br>Regards," +
 
                                             "<br><br>Appmaker Support" +
 
