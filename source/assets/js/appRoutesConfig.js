@@ -193,6 +193,18 @@ angular.module('app')
               },
               templateUrl : 'user/technicalSupport/TechnicalSupport.html'
 
+          }).state('user.help',{
+              url :'/help',
+              controller : 'helpCtrl',
+              data : {
+                  permissions: {
+                      only: ['Support'],
+                      redirectTo: 'anon.login'
+                  },
+                  appCreatorId:null
+              },
+              templateUrl : 'user/help/helpPage.html'
+
           }).state('user.viewAdNetworks',{
               url :'/viewAdNetworks/:adname',
               controller : 'technicalSupportCtrl',
