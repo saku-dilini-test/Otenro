@@ -151,9 +151,9 @@ module.exports = {
             enteredBy:'demo'
         };
 
-        var secondNaviPath = config.APP_FILE_SERVER + userId + "/progressiveTemplates/" + appId + '/src/assets/images/secondNavi/';
-        var thirdNaviPath = config.APP_FILE_SERVER + userId + "/progressiveTemplates/" + appId + '/src/assets/images/thirdNavi/';
-        var sliderPath = config.APP_FILE_SERVER + userId + "/progressiveTemplates/" + appId + '/src/assets/images/slider/';
+        var secondNaviPath = config.APP_FILE_SERVER + userId + "/progressiveTemplates/" + appId + '/assets/images/secondNavi/';
+        var thirdNaviPath = config.APP_FILE_SERVER + userId + "/progressiveTemplates/" + appId + '/assets/images/thirdNavi/';
+        var sliderPath = config.APP_FILE_SERVER + userId + "/progressiveTemplates/" + appId + '/assets/images/slider/';
 
         console.log(searchApp);
 

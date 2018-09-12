@@ -508,6 +508,12 @@ module.exports.routes = {
     'POST /appMakerReports/getOperator': 'appMakerReports/CustomerCareReportController.getOperator',
 
 
+    /**
+     * Support user (ideaDroid)
+     */
+    'POST /appMakerSupport/updateAllApps': 'UpdateAllAppsController.updateAllApps',
+
+
 
 
 

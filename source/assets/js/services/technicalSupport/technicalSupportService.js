@@ -365,7 +365,13 @@
 
                 return $http.post(SERVER_URL + 'appMakerReports/getOperator', data);
 
+            },
+            updateAllApps:function(data){
+
+                return $http.post(SERVER_URL + 'appMakerSupport/updateAllApps',data);
+
             }
+
 
 
 

@@ -32,6 +32,12 @@
         </fieldset>
         <md-tabs md-center-tabs="false" md-selected="selectedIndex" md-no-ink="true" md-autoselect="false"
                  md-dynamic-height="true">
+            <md-tab ng-if="user.userRole == 'ADMIN'">
+                <md-tab-label>Update all apps</md-tab-label>
+                <md-tab-body>
+                    <button class="btn-material margin" ng-click="updateApps()">Update All Apps</button>
+                </md-tab-body>
+            </md-tab>
             <md-tab ng-if="showAppDetails"ng-click="showHideSearchField('app_details')">
                 <md-tab-label>App Details</md-tab-label>
                 <md-tab-body>

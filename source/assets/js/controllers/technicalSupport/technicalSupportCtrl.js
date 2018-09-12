@@ -1461,6 +1461,39 @@
             }
         }
 
+
+        $scope.updateApps = function () {
+            console.log("updateApps")
+            $scope.users = [];
+            $scope.apps = [];
+            //get all users
+
+            //get all apps
+            technicalSupportService.getAllAppData().
+                success(function (response) {
+                $scope.apps = response;
+                console.log($scope.apps)
+                var requiredData = {
+                    apps: $scope.apps,
+                }
+                //pass all the apps and
+                technicalSupportService.updateAllApps(requiredData).
+                success(function (response) {
+
+                    console.log("response",response)
+                }).error(function (err) {
+                    console.log(err)
+                    toastr.error('Failed to load all the users', 'Warning', {closeButton: true});
+                });
+            }).error(function (err) {
+                console.log(err)
+                toastr.error('Failed to load all the users', 'Warning', {closeButton: true});
+            });
+
+
+
+        }
+
     }
 
 })();

@@ -144,4 +144,8 @@ module.exports.policies = {
     'IdeabizAdminapiController':{
         '*': true
     },
+
+    'UpdateAllAppsController':{
+        '*': true
+    },
 };
