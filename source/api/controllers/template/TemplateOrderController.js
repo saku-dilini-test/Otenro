@@ -48,35 +48,81 @@ module.exports = {
         }
     },
 
-    saveOrder : function(req,res) {
+    excuteSave : function (data,res){
 
+    },
+
+    saveOrder : function(req,res) {
+        var execute = this;
         var data = req.body;
+        var save = true;
+        var name;
+        var count = 0;
+
         data['paymentStatus'] = 'Pending';
         data['fulfillmentStatus'] = 'Pending';
-
-        console.log(JSON.stringify(data));
         if(data.pickupId == null){
-            ApplicationOrder.create(data).exec(function (err, order) {
-                sails.log.info(order);
+            for(var i = 0;i < data.item.length;i++){
 
-                if (err) res.send(err);
-                var searchApp = {
-                    id: order.appId
-                };
-                sails.log.info(searchApp);
-                Application.findOne(searchApp).exec(function (err, app) {
-                    order['userId'] = app.userId;
-                    order.isNew = req.body.isNew;
-                sentMails.sendOrderEmail(order,function (err,msg) {
-                    sails.log.info(err);
-                    if (err) {
-                        return  res.send(500);
+                        var found = 0;
+                ThirdNavigation.find({id:data.item[i].id}).exec(function(err,prod){
+                    console.log(i);
+                    count ++;
+                    if(!prod[0]){
+                        save = false;
+                        name = data.item[count-1].name;
+                    }else{
+                    var newCount = 0;
+                        for(var j = 0; j < prod[0].variants.length; j++){
+                            newCount ++;
+                        console.log(prod[0].variants[j].sku);
+                        console.log(data.item[count-1].sku);
+                             if(prod[0].variants[j].sku == data.item[count-1].sku){
+                                 found ++;
+                                 if(prod[0].variants[j].quantity == 0 || prod[0].variants[j].quantity < data.item[count-1].qty){
+                                     save = false;
+                                     name = data.item[count-1].name;
+                                 }
+                             }
+
+                             if(newCount == prod[0].variants && found == 0){
+                                 save = false;
+                                 name = data.item[count-1].name;
+                             }
+
+                        };
+
+                    }
+                    if(count == data.item.length && save == true){
+                        ApplicationOrder.create(data).exec(function (err, order) {
+                            sails.log.info(order);
+
+                            if (err) res.send(err);
+                            var searchApp = {
+                                id: order.appId
+                            };
+                            sails.log.info(searchApp);
+                            Application.findOne(searchApp).exec(function (err, app) {
+                                order['userId'] = app.userId;
+                                order.isNew = data.isNew;
+                            sentMails.sendOrderEmail(order,function (err,msg) {
+                                sails.log.info(err);
+                                if (err) {
+                                    return  res.send(500);
+                                }
+                            });
+                            });
+
+                            return res.send({status:200});
+                        });
+                    }
+                     if(count == data.item.length && save == false){
+                        return res.send({status:404,name:name});
                     }
                 });
-                });
 
-                res.send('ok');
-            });
+            };
+
         }
         else{
            ShippingDetails.find({id:data.pickupId,appId:data.appId}).exec(function(err,pickUp){
@@ -85,24 +131,66 @@ module.exports = {
             data.deliveryCountry = pickUp[0].country;
             data.shippingOpt = pickUp[0].shippingOption;
             data.option = 'pickUp';
-            ApplicationOrder.create(data).exec(function (err, order) {
-                if (err) res.send(err);
-                var searchApp = {
-                    id: order.appId
-                };
-                sails.log.info(searchApp);
-                Application.findOne(searchApp).exec(function (err, app) {
-                    order['userId'] = app.userId;
-                    order.isNew = req.body.isNew;
-                    sentMails.sendOrderEmail(order,function (err,msg) {
-                        sails.log.info(err);
-                        if (err) {
-                            return  res.send(500);
-                        }
-                    });
+            for(var i = 0;i < data.item.length;i++){
+
+                        var found = 0;
+                ThirdNavigation.find({id:data.item[i].id}).exec(function(err,prod){
+                    console.log(i);
+                    count ++;
+                    if(!prod[0]){
+                        save = false;
+                        name = data.item[count-1].name;
+                    }else{
+                    var newCount = 0;
+                        for(var j = 0; j < prod[0].variants.length; j++){
+                            newCount ++;
+                        console.log(prod[0].variants[j].sku);
+                        console.log(data.item[count-1].sku);
+                             if(prod[0].variants[j].sku == data.item[count-1].sku){
+                                 found ++;
+                                 if(prod[0].variants[j].quantity == 0 || prod[0].variants[j].quantity < data.item[count-1].qty){
+                                     save = false;
+                                     name = data.item[count-1].name;
+                                 }
+                             }
+
+                             if(newCount == prod[0].variants && found == 0){
+                                 save = false;
+                                 name = data.item[count-1].name;
+                             }
+
+                        };
+
+                    }
+                    if(count == data.item.length && save == true){
+                        ApplicationOrder.create(data).exec(function (err, order) {
+                            sails.log.info(order);
+
+                            if (err) res.send(err);
+                            var searchApp = {
+                                id: order.appId
+                            };
+                            sails.log.info(searchApp);
+                            Application.findOne(searchApp).exec(function (err, app) {
+                                order['userId'] = app.userId;
+                                order.isNew = data.isNew;
+                            sentMails.sendOrderEmail(order,function (err,msg) {
+                                sails.log.info(err);
+                                if (err) {
+                                    return  res.send(500);
+                                }
+                            });
+                            });
+
+                            return res.send({status:200});
+                        });
+                    }
+                     if(count == data.item.length && save == false){
+                        return res.send({status:404,name:name});
+                    }
                 });
-                res.send('ok');
-            });
+
+            };
            });
         }
     },

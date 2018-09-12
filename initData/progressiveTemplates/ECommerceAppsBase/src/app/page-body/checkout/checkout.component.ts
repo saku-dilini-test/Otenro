@@ -13,7 +13,7 @@ import { OrdersService } from '../../services/orders/orders.service';
 import { TitleService } from '../../services/title.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-declare let $:any;
+declare let $: any;
 declare let paypal: any;
 
 @Component({
@@ -30,7 +30,7 @@ export class CheckoutComponent implements OnInit {
   errorMessage: string;
   nullMessage: string;
   private showSpinner;
-
+  responce;
   complexForm: FormGroup;
   pickupForm: FormGroup;
   shippingForm: FormGroup;
@@ -507,7 +507,7 @@ export class CheckoutComponent implements OnInit {
         }
         if (i != shippingDetails.weightRanges.length - 1) {
           if (weightRange.endWeight < totalWeight && shippingDetails.weightRanges[i + 1].startWeight > totalWeight) {
-            shippingCost = shippingDetails.weightRanges[i+1].cost;
+            shippingCost = shippingDetails.weightRanges[i + 1].cost;
           }
         }
       }
@@ -530,7 +530,7 @@ export class CheckoutComponent implements OnInit {
       this.spinner.hide();
     }
     // this.dataService.finalDetails = shippingDetails;
-    this.chk(shippingDetails,"deliver");
+    this.chk(shippingDetails, "deliver");
 
     // setTimeout(()=>{ this.pay("001"); }, 500);
 
@@ -553,12 +553,12 @@ export class CheckoutComponent implements OnInit {
       deliverDetails: { name: details.name, email: details.email, number: details.phone },
 
     }
-    this.chk(this.pickupData,"pickup");
+    this.chk(this.pickupData, "pickup");
     // setTimeout(() => {  }, 500);
   };
 
   //------------------------------checkout---------------------------------------
-  chk(final,type) {
+  chk(final, type) {
 
     this.finalDetails = final;
     this.chkShippingCost = parseFloat(this.finalDetails.shippingCost);
@@ -568,7 +568,7 @@ export class CheckoutComponent implements OnInit {
 
     if (type == "pickup") {
       this.hideShipping = true;
-    }else{
+    } else {
       this.hideShipping = false;
     }
 
@@ -782,11 +782,11 @@ export class CheckoutComponent implements OnInit {
           this.ePayFail = true;
 
           window.setTimeout(() => {
-            $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
-                $(this).remove();
-                this.ePayFail = false;
+            $(".alert-danger").fadeTo(500, 0).slideUp(500, () => {
+              $(this).remove();
+              this.ePayFail = false;
             });
-        }, 2000);
+          }, 2000);
 
           // this._success.subscribe((message) => this.errorMessage = message);
           // debounceTime.call(this._success, 5000).subscribe(() => this.errorMessage = null);
@@ -819,10 +819,10 @@ export class CheckoutComponent implements OnInit {
           this.ePayFail = false;
           this.ePayNull = true;
           window.setTimeout(() => {
-            $(".alert-warning").fadeTo(500, 0).slideUp(500, ()=>{
-                $(this).remove();
+            $(".alert-warning").fadeTo(500, 0).slideUp(500, () => {
+              $(this).remove();
             });
-        }, 2000);
+          }, 2000);
           // this._success.subscribe((message) => this.nullMessage = message);
           // debounceTime.call(this._success, 4000).subscribe(() => this.nullMessage = null);
           // this._success.next("Please provide card details!");
@@ -834,11 +834,11 @@ export class CheckoutComponent implements OnInit {
           this.ePayFail = true;
 
           window.setTimeout(() => {
-            $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
-                $(this).remove();
-                this.ePayFail = false;
+            $(".alert-danger").fadeTo(500, 0).slideUp(500, () => {
+              $(this).remove();
+              this.ePayFail = false;
             });
-        }, 2000);
+          }, 2000);
 
           // this._success.subscribe((message) => this.errorMessage = message);
           // debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
@@ -947,6 +947,12 @@ export class CheckoutComponent implements OnInit {
 
     this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.orderDetails, { responseType: 'text' })
       .subscribe((res) => {
+        this.responce = JSON.parse(res).name;
+        console.log(this.responce);
+        if (JSON.parse(res).status == 404) {
+          this.showSpinner = false;
+          $('#myModal').modal('show')
+        } else {
         this.orderDetails.id = this.dataService.cart.cartItems[0].id;
         this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
           .subscribe((res) => {
@@ -967,18 +973,18 @@ export class CheckoutComponent implements OnInit {
               if (this.localStorageService.get("cart" + appUser.registeredUser)) {
                 this.localStorageService.remove("cart" + appUser.registeredUser);
               }
-            }else{
+            } else {
               this.localStorageService.remove("cartUnknownUser");
             }
 
 
             window.setTimeout(() => {
-              $(".alert").fadeTo(500, 0).slideUp(500, ()=>{
-                  $(this).remove();
-                  this.ePay = false;
-                  this.router.navigate(['home']);
+              $(".alert").fadeTo(500, 0).slideUp(500, () => {
+                $(this).remove();
+                this.ePay = false;
+                this.router.navigate(['home']);
               });
-          }, 2000);
+            }, 2000);
 
           }, (err: HttpErrorResponse) => {
 
@@ -992,6 +998,7 @@ export class CheckoutComponent implements OnInit {
             }
             console.log(err);
           });
+        }
       }, (err: HttpErrorResponse) => {
 
 
@@ -1103,57 +1110,64 @@ export class CheckoutComponent implements OnInit {
     // console.log(note);
     this.http.post(SERVER_URL + "/templatesOrder/saveOrder", (this.orderDetails), { responseType: 'text' })
       .subscribe((res) => {
-        this.orderDetails.id = this.dataService.cart.cartItems[0].id;
-        this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
-          .subscribe(res => {
+        this.responce = JSON.parse(res).name;
+        console.log(this.responce);
+        if (JSON.parse(res).status == 404) {
+          this.showSpinner = false;
+          $('#myModal').modal('show')
+        } else {
+          this.orderDetails.id = this.dataService.cart.cartItems[0].id;
+          this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
+            .subscribe(res => {
 
-            this.showSpinner = false;
+              this.showSpinner = false;
 
-            this.dataService.cart.cartItems = [];
-            this.dataService.cart.cartSize = 0;
-            this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
-            this.dataService.cart.totalPrice = 0;
-            this.dataService.cart.totalQuantity = 0;
+              this.dataService.cart.cartItems = [];
+              this.dataService.cart.cartSize = 0;
+              this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
+              this.dataService.cart.totalPrice = 0;
+              this.dataService.cart.totalQuantity = 0;
 
-            let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+              let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
 
-            if (appUser) {
-              if (this.localStorageService.get("cart" + appUser.registeredUser)) {
-                this.localStorageService.remove("cart" + appUser.registeredUser);
+              if (appUser) {
+                if (this.localStorageService.get("cart" + appUser.registeredUser)) {
+                  this.localStorageService.remove("cart" + appUser.registeredUser);
+                }
+              } else {
+                this.localStorageService.remove("cartUnknownUser");
               }
-            }else{
-              this.localStorageService.remove("cartUnknownUser");
-            }
 
-            this._success.next('Your Order has been successfully processed');
+              this._success.next('Your Order has been successfully processed');
 
-            this._success.subscribe((message) => this.successMessage = message);
-            debounceTime.call(this._success, 3000).subscribe(() => this.successMessage = null);
-            this._success.next("Thank You, Your order has been successfully processed");
-            setTimeout(() => { this.router.navigate(['home']); }, 3100)
+              this._success.subscribe((message) => this.successMessage = message);
+              debounceTime.call(this._success, 3000).subscribe(() => this.successMessage = null);
+              this._success.next("Thank You, Your order has been successfully processed");
+              setTimeout(() => { this.router.navigate(['home']); }, 3100)
 
-          }, (err: HttpErrorResponse) => {
+            }, (err: HttpErrorResponse) => {
 
-            this.showSpinner = false;
+              this.showSpinner = false;
 
-            if (err.error instanceof Error) {
+              if (err.error instanceof Error) {
 
-              console.log("Error Updating Inventory!\n Please check your connection.");
+                console.log("Error Updating Inventory!\n Please check your connection.");
 
-              this._success.subscribe((message) => this.errorMessage = message);
-              debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
-              this._success.next("Error Updating Inventory!\n Please check your connection.");
-              setTimeout(() => { }, 3100);
+                this._success.subscribe((message) => this.errorMessage = message);
+                debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+                this._success.next("Error Updating Inventory!\n Please check your connection.");
+                setTimeout(() => { }, 3100);
 
-            } else {
-              console.log("Server-side error occured.");
-              this._success.subscribe((message) => this.errorMessage = message);
-              debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
-              this._success.next("Server-side error occured.");
-              setTimeout(() => { }, 3100);
-            }
-            console.log(err);
-          });
+              } else {
+                console.log("Server-side error occured.");
+                this._success.subscribe((message) => this.errorMessage = message);
+                debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+                this._success.next("Server-side error occured.");
+                setTimeout(() => { }, 3100);
+              }
+              console.log(err);
+            });
+        }
       },
       (err: HttpErrorResponse) => {
 
@@ -1373,9 +1387,14 @@ export class CheckoutComponent implements OnInit {
       }
     }
 
-    this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails,{ responseType: 'json' })
+    this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails, { responseType: 'json' })
       .subscribe((orderRes: any) => {
-        console.log(orderRes);
+        this.responce = JSON.parse(orderRes).name;
+        console.log(this.responce);
+        if (JSON.parse(orderRes).status == 404) {
+          this.showSpinner = false;
+          $('#myModal').modal('show')
+        } else {
         this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
           .subscribe((res) => {
             this.dataService.cart.cartItems = [];
@@ -1391,7 +1410,7 @@ export class CheckoutComponent implements OnInit {
               if (this.localStorageService.get("cart" + appUser.registeredUser)) {
                 this.localStorageService.remove("cart" + appUser.registeredUser);
               }
-            }else{
+            } else {
               this.localStorageService.remove("cartUnknownUser");
             }
 
@@ -1400,21 +1419,21 @@ export class CheckoutComponent implements OnInit {
             let streetName = this.orderDetails.deliveryStreet ? this.orderDetails.deliveryStreet : "";
 
 
-            window.location.href=(SERVER_URL + '/mobile/getPayHereForm/?name=' +
+            window.location.href = (SERVER_URL + '/mobile/getPayHereForm/?name=' +
               this.orderDetails.customerName + "&amount=" +
               this.orderDetails.amount + "&currency=" +
               this.currency.symbol + "&email=" +
               this.orderDetails.email + "&telNumber=" +
               this.orderDetails.telNumber + "&item=" +
               this.orderDetails.item[0].name + "&address=" +
-              streetNo + " " + streetName  + "&city=" +
+              streetNo + " " + streetName + "&city=" +
               city + "&appId=" + orderRes.appId +
               "&orderId=" + orderRes.id + "&payHereMerchantId=" + this.payHereMID);
           },
           (err) => {
             console.log(err);
           });
-
+        }
 
 
       },
