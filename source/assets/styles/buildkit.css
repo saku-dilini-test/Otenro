@@ -2996,12 +2996,6 @@ table.md-calendar-day-header{
 .dialog-padding-set{
     padding: 20px 40px 10px;
 }
-
-[ng-quill-editor] { display: block; }
-
-.ql-editor {
-    height: 250px !important;
-}
 .float-left{
     float: left;
     position: relative;
@@ -3016,3 +3010,20 @@ table.md-calendar-day-header{
 .md-menu.paste-options .paste-button{
     visibility: hidden;
 }
+/* quill text editor override classes and syles */
+[ng-quill-editor] { display: block; }
+
+.ql-editor {
+    height: 250px !important;
+}
+.ql-editor  h1,h2,h3,h4,h5,h6,p {
+    color: #000 !important;
+    text-transform: none !important;
+}
+.ql-snow .ql-tooltip{
+    top: -10px !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: 0 !important;
+}
+/* .End of .quill text editor override classes and syles */

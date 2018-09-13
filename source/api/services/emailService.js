@@ -9,6 +9,8 @@ var request = require('request'),
     config = require('../services/config');
 var path = require('path');
 const nodemailer = require('nodemailer');
+var inlineBase64 = require('nodemailer-plugin-inline-base64');
+
 //var transporter = null;
 
 
@@ -593,9 +595,6 @@ module.exports = {
 
 
 
-
-
-
     sendOrderEmail:function (data,res) {
         var attachment = false;
 //        console.log("-------------------------------");
@@ -617,6 +616,8 @@ module.exports = {
                         var headerImagePath;
                         var headerFileName;
                         var subject;
+                        var approot = path.resolve();
+                        var logoPath = approot + '/assets/images/otenro.png';
 
 //                        var imagePath =  serverOrg +"/templates/viewWebImages?userId="+ data.userId
 
@@ -647,6 +648,11 @@ module.exports = {
                                filename: headerFileName,
                                path: headerImagePath,
                                cid: 'header' // should be as unique as possible
+                              },
+                              {
+                               filename: "otenro.png",
+                               path: logoPath,
+                               cid: 'logo' // should be as unique as possible
                               });
 
                         for(var i =0;i<data.item.length;i++){
@@ -676,10 +682,41 @@ module.exports = {
                     '<meta name="viewport" content="width=device-width" />'+
                     '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'+
                     '<title>Billing e.g. invoices and receipts</title>'+
-                    ''+
-                    ''+
                     '<style type="text/css">'+
-                    'img {'+
+                    /*!
+                     * Quill Editor v1.3.6
+                     * https://quilljs.com/
+                     * Copyright (c) 2014, Jason Chen
+                     * Copyright (c) 2013, salesforce.com
+                     */
+                     '.ql-size-small {font-size: 0.75em;}' +
+                     '.ql-size-large {font-size: 1.5em;}' +
+                     '.ql-size-huge {font-size: 2.5em;}' +
+                     '.ql-align-center {text-align: center;}' +
+                     '.ql-align-justify {text-align: justify;}' +
+                     '.ql-align-right {text-align: right;}' +
+                     '.ql-video {display: block;max-width: 100%;}' +
+                     '.ql-video.ql-align-center {margin: 0 auto;}' +
+                     '.ql-video.ql-align-right {margin: 0 0 0 auto;}' +
+                     '.ql-bg-black {background-color: #000;}' +
+                     '.ql-bg-red {background-color: #e60000;}' +
+                     '.ql-bg-orange {background-color: #f90;}' +
+                     '.ql-bg-yellow {background-color: #ff0;}' +
+                     '.ql-bg-green {background-color: #008a00;}' +
+                     '.ql-bg-blue {background-color: #06c;}' +
+                     '.ql-bg-purple {background-color: #93f;}' +
+                     '.ql-color-white {color: #fff;}' +
+                     '.ql-color-red {color: #e60000;}' +
+                     '.ql-color-orange {color: #f90;}' +
+                     '.ql-color-yellow {color: #ff0;}' +
+                     '.ql-color-green {color: #008a00;}' +
+                     '.ql-color-blue {color: #06c;}' +
+                     '.ql-color-purple {color: #93f;}' +
+                     '.ql-font-serif {font-family: Georgia, Times New Roman, serif;}' +
+                     '.ql-font-monospace {font-family: Monaco, Courier New, monospace;}' +
+                     '.ql-container {box-sizing: border-box;font-family: Helvetica, Arial, sans-serif;font-size: 13px;height: 100%;margin: 0px;position: relative;}' +
+                     'h1, h2 {color: #747474;font-weight: 300;letter-spacing: 2px;padding-bottom: 8px;margin: 0;text-transform: uppercase;}' +
+                   'img {'+
                     'max-width: 100%;'+
                     '}'+
                     'body {'+
@@ -734,26 +771,24 @@ module.exports = {
                     '<table class="body-wrap" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></td>'+
                     '		<td class="container" width="600" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;" valign="top">'+
                     '			<div class="content" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;">'+
-                    '				<table class="main" width="100%" cellpadding="0" cellspacing="0" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px; background-color: #fff; margin: 0; border: 1px solid #e9e9e9;" bgcolor="#fff"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-wrap aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 20px;" align="center" valign="top">'+
+                    '				<table class="main" width="100%" cellpadding="0" cellspacing="0" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px; background-color: #fff; margin: 0; border: 1px solid #e9e9e9;" bgcolor="#fff"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-wrap aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 20px;" align="center" valign="top">'+
                     '							<table width="100%" cellpadding="0" cellspacing="0" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
                     '                              <tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
                     '                                  <td class="content-block" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">'+
                     '								<img src="cid:header"/></td>'+
-                    '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">';
+                    '								</tr><td';
                     if(data.paymentStatus == 'Pending' && userEmail.orderConfirmedEmail.header){
-                                        mBody += '<td '+ userEmail.orderConfirmedEmail.header +  ' </td>';
+                                        mBody += '<br>'+ userEmail.orderConfirmedEmail.header;
+
+                    }else if(data.paymentStatus == 'Successful' && userEmail.orderFulfilledEmail.header){
+                                        mBody += '<br>'+ userEmail.orderFulfilledEmail.header;
+
+                    }else if(data.paymentStatus == 'Refunded' && userEmail.orderRefundEmail.header){
+                                        mBody += '<br>' + userEmail.orderRefundEmail.header;
 
                     }
-                     if(data.paymentStatus == 'Successful' && userEmail.orderFulfilledEmail.header){
-                                        mBody += '<td '+ userEmail.orderFulfilledEmail.header +  ' </td>';
 
-                    }
-                    if(data.paymentStatus == 'Refunded' && userEmail.orderRefundEmail.header){
-                                        mBody += '<td '+ userEmail.orderRefundEmail.header +  ' </td>';
-
-                    }
-
-                    mBody +='								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
+                    mBody +='								</td><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
                     '										<table class="invoice" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; text-align: left; width: 80%; margin: 40px auto;"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">';
                 if(typeof data.deliveryCountry != 'undefined' && typeof data.pickUp == 'undefined' && userEmail.orderConfirmedEmail.delivery == true ) {
                     mBody += '  <td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top"><b>Delivered to</b><br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />' + data.deliveryNo + '<br>' + data.deliveryStreet + '<br>' + data.deliveryCity + ' <br>' + data.deliveryCountry;
@@ -779,9 +814,9 @@ module.exports = {
 
 
                         mBody += '<tr  style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" valign="top">'+
-                            '															<div style="display: inline-block;padding: 5px"><img src="cid:'+test[j+1].cid+'" width="60" height="60"></div><div style="display: inline-block;padding: 5px;">'+data.item[j].name+'<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />QTY: '+data.item[j].qty+' <br>Product Code: '+data.item[j].id+'	</td>'+
+                            '															<div style="display: inline-block;padding: 5px"><img src="cid:'+test[j+2].cid+'" width="60" height="60"></div><div style="display: inline-block;padding: 5px;">'+data.item[j].name+'<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />QTY: '+data.item[j].qty+' <br>Product Code: '+data.item[j].id+'	</td>'+
                             '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" align="right" valign="top">'+
-                            '															<br><div> '+data.currency + parseFloat(data.item[j].total).toFixed(2)+'</div></td></tr>';
+                            '															<br><div> '+ data.currency + '&nbsp;' + formatNumber(data.item[j].total)+'</div></td></tr>';
                     }
                     mBody += '														<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
                         '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 2px; border-top-color: #333; border-top-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top"></td>'+
@@ -791,25 +826,25 @@ module.exports = {
 
                         mBody += '															<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
                             '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">Delivery</td>'+
-                            '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">'+data.currency + parseFloat(data.shippingCost).toFixed(2)+'</td>'+
+                            '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">'+data.currency + '&nbsp;' + formatNumber(data.shippingCost) +'</td>'+
                             '														</tr>';
                     }
                     if(typeof data.tax != 'undefined') {
                         mBody += '															<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
                             '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">Tax</td>' +
-                            '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">' +data.currency + parseFloat(data.tax).toFixed(2) + '</td>' +
+                            '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">' +data.currency + '&nbsp;' + formatNumber(data.tax) + '</td>' +
                             '														</tr>';
                     }
                     mBody += '													<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
                         '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  border-bottom-color: #333; border-bottom-width: 2px; border-bottom-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">Total</td>'+
-                        '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-bottom-color: #333; border-bottom-width: 2px; border-bottom-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">'+data.currency +parseFloat(data.amount).toFixed(2)+'</td>'+
+                        '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-bottom-color: #333; border-bottom-width: 2px; border-bottom-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">'+data.currency + '&nbsp;' + formatNumber(data.amount) +'</td>'+
                         '														</tr>'+
                         ''+
                         '													</table></td>'+
                         '											</tr></table></td>'+
                         '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
                         '										'+
-                        '									<img src="https://s3-ap-southeast-1.amazonaws.com/mymagic-startupdb/uploads/Startup/original/ilogos.62522.png" alt="" class="CToWUd"  width="70" height="50" > <br>Powered by otenro.com</td>'+
+                        '									<img src="cid:logo" alt="" class="CToWUd"  width="70" height="50" > <br>Powered by <a target="_blank" href="https://www.otenro.com"> www.otenro.com </a></td>'+
                         '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
                         '								'+
                         '									</td>'+
@@ -827,9 +862,9 @@ module.exports = {
 
 
                         mBody += '<tr  style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" valign="top">'+
-                            '															<div style="display: inline-block;padding: 5px"><img src="cid:'+test[j+1].cid+'" width="60" height="60"></div><div style="display: inline-block;padding: 5px;">'+data.item[j].name+'<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />QTY: '+data.item[j].qty+' <br>Product Code: '+data.item[j].id+'	</td>'+
+                            '															<div style="display: inline-block;padding: 5px"><img src="cid:'+test[j+2].cid+'" width="60" height="60"></div><div style="display: inline-block;padding: 5px;">'+data.item[j].name+'<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />QTY: '+data.item[j].qty+' <br>Product Code: '+data.item[j].id+'	</td>'+
                             '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" align="right" valign="top">'+
-                            '															<br><div> '+data.currency + parseFloat(data.item[j].total).toFixed(2)+'</div></td></tr>';
+                            '															<br><div> '+data.currency + '&nbsp;' + formatNumber(data.item[j].total)+'</div></td></tr>';
                     }
                     mBody += '														<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
                         '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 2px; border-top-color: #333; border-top-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top"></td>'+
@@ -839,25 +874,25 @@ module.exports = {
 
                         mBody += '															<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
                             '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">Delivery</td>'+
-                            '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">'+data.currency + parseFloat(data.shippingCost).toFixed(2)+'</td>'+
+                            '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">'+data.currency + '&nbsp;' + formatNumber(data.shippingCost) +'</td>'+
                             '														</tr>';
                     }
                     if(typeof data.tax != 'undefined') {
                         mBody += '															<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
                             '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">Tax</td>' +
-                            '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">' +data.currency + parseFloat(data.tax).toFixed(2) + '</td>' +
+                            '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">' +data.currency + '&nbsp;' + formatNumber(data.tax) + '</td>' +
                             '														</tr>';
                     }
                     mBody += '													<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
                         '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  border-bottom-color: #333; border-bottom-width: 2px; border-bottom-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">Total</td>'+
-                        '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-bottom-color: #333; border-bottom-width: 2px; border-bottom-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">'+data.currency +parseFloat(data.amount).toFixed(2)+'</td>'+
+                        '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-bottom-color: #333; border-bottom-width: 2px; border-bottom-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">'+data.currency + '&nbsp;' +formatNumber(data.amount)+'</td>'+
                         '														</tr>'+
                         ''+
                         '													</table></td>'+
                         '											</tr></table></td>'+
                         '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
                         '										'+
-                        '									<img src="https://s3-ap-southeast-1.amazonaws.com/mymagic-startupdb/uploads/Startup/original/ilogos.62522.png" alt="" class="CToWUd"  width="70" height="50" > <br>Powered by otenro.com</td>'+
+                        '									<img src="cid:logo" alt="" class="CToWUd"  width="70" height="50" > <br>Powered by <a target="_blank" href="https://www.otenro.com"> www.otenro.com </a></td>'+
                         '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
                         '								'+
                         '									</td>'+
@@ -875,9 +910,9 @@ module.exports = {
 
 
                         mBody += '<tr  style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" valign="top">'+
-                            '															<div style="display: inline-block;padding: 5px"><img src="cid:'+test[j+1].cid+'" width="60" height="60"></div><div style="display: inline-block;padding: 5px;">'+data.item[j].name+'<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />QTY: '+data.item[j].qty+' <br>Product Code: '+data.item[j].id+'	</td>'+
+                            '															<div style="display: inline-block;padding: 5px"><img src="cid:'+test[j+2].cid+'" width="60" height="60"></div><div style="display: inline-block;padding: 5px;">'+data.item[j].name+'<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />QTY: '+data.item[j].qty+' <br>Product Code: '+data.item[j].id+'	</td>'+
                             '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" align="right" valign="top">'+
-                            '															<br><div> '+data.currency + parseFloat(data.item[j].total).toFixed(2)+'</div></td></tr>';
+                            '															<br><div> '+data.currency + '&nbsp;' + formatNumber(data.item[j].total)+'</div></td></tr>';
                     }
                     mBody += '														<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
                         '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 2px; border-top-color: #333; border-top-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top"></td>'+
@@ -887,32 +922,32 @@ module.exports = {
 
                         mBody += '															<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
                             '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">Delivery</td>'+
-                            '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">'+data.currency + parseFloat(data.shippingCost).toFixed(2)+'</td>'+
+                            '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">'+data.currency + '&nbsp;' + formatNumber(data.shippingCost) +'</td>'+
                             '														</tr>';
                     }
                     if(typeof data.tax != 'undefined') {
                         mBody += '															<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
                             '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">Tax</td>' +
-                            '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">' +data.currency + parseFloat(data.tax).toFixed(2) + '</td>' +
+                            '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">' +data.currency + '&nbsp;' + formatNumber(data.tax) + '</td>' +
                             '														</tr>';
                     }
                     mBody += '													<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
                         '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  border-bottom-color: #333; border-bottom-width: 2px; border-bottom-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">Total</td>'+
-                        '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-bottom-color: #333; border-bottom-width: 2px; border-bottom-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">'+data.currency +parseFloat(data.amount).toFixed(2)+'</td>'+
+                        '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-bottom-color: #333; border-bottom-width: 2px; border-bottom-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">'+data.currency + '&nbsp;' + formatNumber(data.amount)+'</td>'+
                         '														</tr>'+
                         ''+
                         '													</table></td>'+
                         '											</tr></table></td>'+
                         '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
                         '										'+
-                        '									<img src="https://s3-ap-southeast-1.amazonaws.com/mymagic-startupdb/uploads/Startup/original/ilogos.62522.png" alt="" class="CToWUd"  width="70" height="50" > <br>Powered by otenro.com</td>'+
+                        '									<img src="cid:logo" alt="" class="CToWUd"  width="70" height="50" > <br>Powered by <a target="_blank" href="https://www.otenro.com"> www.otenro.com </a></td>'+
                         '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
                         '								'+
                         '									</td>'+
                         '								</tr></table></td>';
                 }
                 mBody +='					</tr></table><div class="footer" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; clear: both; color: #999; margin: 0; padding: 20px;"> '+
-                    '					<table width="100%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="aligncenter content-block" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 12px; vertical-align: top; color: #999; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">Powered by otenro.com</td>'+
+                    '					<table width="100%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> ' +
                     '						</tr></table></div></div>'+
                     '		</td>'+
                     '		<td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></td>'+
@@ -953,7 +988,7 @@ module.exports = {
                         };
 
                     }
-
+                transporter.use('compile', inlineBase64());
                 // send mail with defined transport object
                 transporter.sendMail(mailOptions, (error, info) => {
                     if (error) {
@@ -974,5 +1009,21 @@ module.exports = {
 
 
     }
+
+
+
+
 };
 
+function formatNumber(number)
+{
+    number = number.toFixed(2) + '';
+    x = number.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2;
+}
