@@ -9,8 +9,4 @@
                 $location.hash(hash);
             };
         });
-
-    function hideMenu() {
-
-    }
 })();

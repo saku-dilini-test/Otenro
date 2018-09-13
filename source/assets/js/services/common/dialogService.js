@@ -66,7 +66,8 @@
                 if ('backup'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
                 if ('help'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
+                    window.open(SERVER_URL+'#/help');
+
 
 
                 if ('styles' == clickTitle)
