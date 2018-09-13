@@ -275,19 +275,9 @@
                 message.userId = $auth.getPayload().id;
 
                 var now = new Date();
-
                 if (message.date){
-
-                    var sdDate = new Date(message.date);
-
-                    if ((sdDate.getUTCFullYear() <= now.getUTCFullYear()) &&
-                        (sdDate.getMonth()+1  <= now.getMonth()+1) &&
-                        (sdDate.getUTCDate()  <= now.getUTCDate()) &&
-                        (sdDate.getTime()  < now.getTime())
-                    )
-
-                    {
-
+                    var sdDate = $scope.getScheduledDate(message.date);
+                    if (sdDate < now){
                         toastr.error('Invalid date selection', 'Warning', {
                             closeButton: true
                         });
@@ -313,6 +303,16 @@
                 });
             }
            }
+        };
+
+        //Method use to get a Date object for the format "DD/MM/YY hh:mm" (eg.12/09/18 00:00)
+        $scope.getScheduledDate = function(dateStr){
+            var d = dateStr.substring(0,2);
+            var m = parseInt(dateStr.substring(3,5))-1;
+            var y = '20' + dateStr.substring(6,8);
+            var h = dateStr.substring(9,11);
+            var min = dateStr.substring(12,14);
+            return new Date(y,m,d,h,min);
         };
 
         /**
