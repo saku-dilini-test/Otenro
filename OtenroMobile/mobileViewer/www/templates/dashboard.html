@@ -19,16 +19,9 @@
     <div class="list card" style="height:85%">
       <a class="item item-thumbnail-left" ng-repeat="oneApp in appList"
          ng-click="openApp('{{oneApp.userId}}','{{oneApp.id}}','{{oneApp.appName}}')">
-        <img  ng-src="https://dashboard.otenro.com/templates/viewImages?userId={{oneApp.userId}}&appId={{oneApp.id}}&{{date}}&img=publish/0.png"  err-src="img/default-app-icon.png" alt="published image">
+        <img  ng-src="https://developer.appmaker.lk/templates/viewImages?userId={{oneApp.userId}}&appId={{oneApp.id}}&{{date}}&img=publish/0.png"  err-src="img/default-app-icon.png" alt="published image">
         <h2>{{oneApp.appName}}</h2>
       </a>
-    </div>
-    
-    <div style="text-align: center; margin-top: 40px;">
-      <span>
-      <a href="#" class="link" onclick="window.open('http://simatosolutions.com/', '_system', 'location=yes'); return false;"> 
-        Built by Simato Solutions</a>
-      </span>
     </div>
   </ion-content>
 </ion-view>

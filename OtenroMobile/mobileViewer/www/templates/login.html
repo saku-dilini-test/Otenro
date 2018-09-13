@@ -1,52 +1,53 @@
-<ion-view class="made-easy-background-color" view-title="Login" name="login-view" >
+<ion-view class="made-easy-background-color" view-title="Login" name="login-view">
   <ion-content>
-       <div class="board-container">
-         <div class="board">
-           <div class="logo-section text-center">
-             <img src="img/icon.png" alt="logo" width="150" />
-             <h4 class="login-desc">Login to your account to test your ideadroid apps </h4>
-
-             <form name="loginForm">
-               <div id="login-input-container" class="list">
-
-                 <div class="field">
-                   <label for="email" class="input-label">Email</label>
-                   <input id="email" type="email" ng-model="data.username">
-                 </div>
-
-                 <div class="field">
-                   <label for="password" class="input-label">Password</label>
-                   <input id="password" type="password" ng-model="data.password">
-                 </div>
-
-                 <label style="color: grey;"> -or-</label>
-
-                 <div class="field">
-                   <label for="mobile" class="input-label">Mobile Number</label>
-                   <input id="mobile" type="text" ng-model="data.mobile">
-                 </div>
-
-                 <div class="field" ng-show='isPinReqSuccess'>
-                   <label for="pin" class="input-label">Login Pin</label>
-                   <input id="pin" type="text" ng-model="data.pin">
-                 </div>
-
-                 <div class="link-container">
-                   <a href="#">Forgot Password?</a>
-                 </div>
-
-                 <div class="col text-center">
-                   <button class="button button-positive button-full" style="border-radius: 6px;"
-                           ng-disabled="loginForm.$invalid"
-                           ng-click="login(data)">Login</button>
-                 </div>
-               </div>
-             </form>
-           </div>
-         </div>
-       </div>
+      <div class="board-container">
+          <div class="board">
+            <div class="logo-section text-center">
+              <img src="img/icon.png" alt="logo" width="150" />
+              <h4 class="login-desc">Login to your account to test your ideadroid apps </h4>
+    
+              <form name="loginForm">
+                <div id="login-input-container" class="list">
+    
+                  <div class="field">
+                    <label for="email" class="input-label">Email</label>
+                    <input id="email" type="email" ng-model="data.username">
+                  </div>
+    
+                  <div class="field">
+                    <label for="password" class="input-label">Password</label>
+                    <input id="password" type="password" ng-model="data.password">
+                  </div>
+    
+                  <label style="color: grey;"> -or-</label>
+    
+                  <div class="field">
+                    <label for="mobile" class="input-label">Mobile Number</label>
+                    <input id="mobile" type="text" ng-model="data.mobile">
+                  </div>
+    
+                  <div class="field" ng-show='isPinReqSuccess'>
+                    <label for="pin" class="input-label">Login Pin</label>
+                    <input id="pin" type="text" ng-model="data.pin">
+                  </div>
+    
+                  <div class="link-container">
+                    <a href="#">Forgot Password?</a>
+                  </div>
+    
+                  <div class="col text-center">
+                    <button class="button button-positive button-full" style="border-radius: 6px; background:#7986CB;" ng-click="login(data)">Login</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
         <div class="footer-link">
-          <a href="#">Built by Simato Solutions</a>
+          <span>
+            <a href="#" class="link" onclick="window.open('http://simatosolutions.com/', '_system', 'location=yes'); return false;">
+              Built by Simato Solutions</a>
+          </span>
         </div>
   </ion-content>
 </ion-view>

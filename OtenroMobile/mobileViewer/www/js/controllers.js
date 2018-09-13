@@ -82,6 +82,7 @@ $scope.data = {
               // Clear input fields
               $scope.data.mobile = '';
               $scope.data.pin = '';
+              $scope.isPinReqSuccess = false;
               // Goto dashbord
               $state.go('app.dash', {}, {reload: true});
             }, function(err) {
@@ -185,9 +186,9 @@ $scope.data = {
     $scope.openApp = function(userID,appId,appName){
       $ionicLoading.hide();
       // ME SERVER URL for GIVEN User ID & AppId
-        //var url = 'http://192.168.8.35/meServer/temp/'+userID+'/templates/'+appId+'/#/';
-        var url = 'http://cdn.otenro.com'+'/temp/'+userID+'/templates/'+appId+'/#/';
-      console.log(url);
+        // var url = 'http://192.168.8.98/meServer/temp/'+userID+'/templates/'+appId+'/#/';
+        var url = 'https://cdn.appmaker.lk/developer/meServer/temp/' + userID + '/progressiveTemplates/'+appId;
+      console.log('app url => ' + url);
 
       // Keep in mind that you must add your own images to native resource.
       // Images below are for sample only. They are not imported by this plugin.

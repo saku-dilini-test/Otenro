@@ -17,6 +17,8 @@ angular.module('starter')
   })
 
   // local development
-    .constant('SERVER_URL', 'http://localhost:1337/');
+    // .constant('SERVER_URL', 'http://localhost:1337/');
+    // .constant('SERVER_URL', 'http://192.168.8.98:1337/');
   // Stage testing
   // .constant('SERVER_URL', 'http://192.168.8.203:1340/');
+  .constant('SERVER_URL', 'https://developer.appmaker.lk/');
