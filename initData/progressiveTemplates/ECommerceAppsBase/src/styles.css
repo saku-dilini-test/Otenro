@@ -36,7 +36,7 @@ a:hover{text-decoration: none; cursor:pointer;}
 	padding:50px;
 }
 .bloc-sm{
-	padding:20px 50px;
+	padding:12px 50px;
 }
 
 /* = Full Width Blocs
@@ -946,6 +946,7 @@ button{
     text-transform:uppercase;
     line-height:14px;
     padding-top:5px;
+    margin-bottom: 0;
   }
   .orbitrack{
     font-size:3.1vw;
