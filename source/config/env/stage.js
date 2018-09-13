@@ -56,5 +56,5 @@ module.exports = {
     /**
      * The ADMIN api and MO callbacks will call these
      */
-    IDEABIZ_ADMIN_MO_CALLBACK_FORWARD_URLS : []
+    IDEABIZ_ADMIN_MO_CALLBACK_FORWARD_URLS : ['http://192.168.8.112']
 };
