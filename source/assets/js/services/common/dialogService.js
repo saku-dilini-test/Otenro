@@ -66,8 +66,7 @@
                 if ('backup'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
                 if ('help'==clickTitle)
-                    var tab = window.open(SERVER_URL+'#/help');
-                    tab.focus();
+                    return comingSoonService.showComingSoonDialog();
 
 
                 if ('styles' == clickTitle)
