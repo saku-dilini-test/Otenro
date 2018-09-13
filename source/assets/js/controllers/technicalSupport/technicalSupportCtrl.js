@@ -422,6 +422,24 @@
                     });
             }
 
+            technicalSupportService.getAppStatus().success(function(data){
+
+                console.log(data);
+                $scope.searchStatuses = [];
+                $scope.searchStatuses.push('All');
+                data.PUBLISH_STATUSES.forEach(function(ele){
+                    $scope.searchStatuses.push(ele.description);
+                });
+                $scope.searchStatuses  = $filter('orderBy')($scope.searchStatuses);
+
+            });
+
+            $scope.all = function(status){
+                if(status == "All"){
+                    $scope.searchPublishApps = {};
+                }
+            }
+
             $scope.checkStatus = function(appId){
 
             }

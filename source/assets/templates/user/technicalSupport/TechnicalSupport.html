@@ -27,8 +27,13 @@
 
     <div class="md-dialog-main clearfix">
         <fieldset ng-style="myObj" id = "searchBar">
-            <input type="text" placeholder="Search by app: keyword,status,name & ID  " ng-model="searchPublishApps" name="search">
+            <input type="text" placeholder="Search by app name" ng-model="searchPublishApps.appName" name="search">
             <input type="submit" class="me-search-button">
+        </fieldset>
+        <fieldset>
+            <md-select placeholder="Search by app status" ng-model="searchPublishApps.publishedStatus" ng-change="all(searchPublishApps.publishedStatus)" style="margin-left: 20px;width: 398px;">
+                <md-option ng-value="status" ng-repeat="status in searchStatuses">{{status}}</md-option>
+            </md-select>
         </fieldset>
         <md-tabs md-center-tabs="false" md-selected="selectedIndex" md-no-ink="true" md-autoselect="false"
                  md-dynamic-height="true">
