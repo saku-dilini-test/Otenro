@@ -17,6 +17,8 @@ declare let $:any;
 export class ProductComponent implements OnInit {
 
     private catName;
+    private catId;
+    private articleId;
     private foodInfo;
     private appId = (<any>data).appId;
     private userId = (<any>data).userId;
@@ -29,7 +31,8 @@ export class ProductComponent implements OnInit {
     private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
     results:any;
-    constructor(private productService: ProductsService, private sanitizer: DomSanitizer, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
+    constructor(private productService: ProductsService, private sanitizer: DomSanitizer, private dataService: PagebodyServiceModule,
+        private router: ActivatedRoute, private route: Router, private title: TitleService) {
 
         this.Data = this.dataService.data;
     }
@@ -45,12 +48,46 @@ export class ProductComponent implements OnInit {
       });
     }
 
+    loadArticle(catId,articleId){
+        if(catId && articleId) {
+          console.log("loadArticle for catId: " + catId + " articleId: " + articleId);
+
+          this.dataService.catId = catId;
+          this.productService.getProducts().subscribe(articles => {
+              console.log("<<<<<<<<Articles>>>>>>>>>");
+              console.log(articles);
+              var article = null;
+              for (let i = 0; i < articles.length; i++) {
+                console.log("articles[i].id=>" + articles[i].id)
+                if (articles[i].id === articleId) {
+                  article = articles[i];
+                }
+              }
+
+              if (article) {
+                this.dataService.data = article;
+                this.catName = article.title;
+                // this.route.navigate(['product', article.title]);
+              } else {
+                console.log("Article not found for the catId: " + catId + " articleId: " + articleId);
+              }
+            },
+            error => {
+              console.log('Error shop service');
+            });
+        }
+    }
 
 
     ngOnInit() {
 
         this.router.params.subscribe(params => {
-            this.catName = params['catName'];
+            if(this.catName != 'fromPushMessage'){
+                this.catName = params['catName'];
+            }
+            this.catId = params['catId'];
+            this.articleId = params['articleId'];
+            this.loadArticle(this.catId,this.articleId)
             if (this.catName) {
                 this.productService.createArticleViewDataInfo(this.catName).subscribe(data => {
                     // Read the result field from the JSON response.
