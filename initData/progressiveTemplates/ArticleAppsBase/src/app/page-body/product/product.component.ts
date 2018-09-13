@@ -67,6 +67,7 @@ export class ProductComponent implements OnInit {
               if (article) {
                 this.dataService.data = article;
                 this.catName = article.title;
+                this.Data = article;
                 // this.route.navigate(['product', article.title]);
               } else {
                 console.log("Article not found for the catId: " + catId + " articleId: " + articleId);
@@ -82,10 +83,11 @@ export class ProductComponent implements OnInit {
     ngOnInit() {
 
         this.router.params.subscribe(params => {
-            if(this.catName != 'fromPushMessage'){
-                this.catName = params['catName'];
+            if(params['catName'] != 'fromPushMessage'){
+              this.title.changeTitle(params['catName']);
+            }else{
+            //  write the code to fetch category name
             }
-            this.catId = params['catId'];
             this.articleId = params['articleId'];
             this.loadArticle(this.catId,this.articleId)
             if (this.catName) {
