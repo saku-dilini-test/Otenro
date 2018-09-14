@@ -122,6 +122,7 @@ module.exports = {
                                                                                 response.msisdn = appUser.msisdn;
                                                                                 response.isError = false;
                                                                                 response.isPaymentSuccess =true;
+                                                                                response.dispalyMessage = config.END_USER_MESSAGES.SUCCESSFULLY_RENEWED;
                                                                                 return res.ok(response);
                                                                             }
                                                                         });
@@ -212,6 +213,7 @@ module.exports = {
                             response.msisdn = msisdn;
                             response.isError = false;
                             response.isPaymentSuccess =true;
+                            response.dispalyMessage = config.END_USER_MESSAGES.SUCCESSFULLY_RENEWED;
                             return res.ok(response);
                         }
                     });
@@ -234,7 +236,7 @@ module.exports = {
                         response.msisdn = msisdn;
                         response.isError = false;
                         response.isPaymentSuccess =true;
-
+                        response.dispalyMessage = config.END_USER_MESSAGES.SUCCESSFULLY_RENEWED;
                         return res.ok(response);
                     }
                 });

@@ -246,7 +246,8 @@ module.exports = {
         'APP_NOT_SUBMITTED': 'The service is currently not available on the network.',
         'APP_DELETED': 'The service is no longer available.',
         'USER_UNSUBSCRIBED': 'You got unsubscribed from this service',
-        'INSUFFICIENT_BALANCE': 'You have no sufficient balance.Please recharge and try again.'
+        'INSUFFICIENT_BALANCE': 'You have no sufficient balance.Please recharge and try again.',
+        'SUCCESSFULLY_RENEWED': 'Successfully renewed your service.'
     },
 
     //These renewal intervals are defined in a json call port.json, but we defined it in here since we need to use this in the code

@@ -138,6 +138,13 @@ export class HomepageComponent implements OnInit {
         } else {
           this.subscriptionStatus = data.isSubscribed;
           if (this.subscriptionStatus) {
+
+              if (data.isPaymentSuccess){
+                this.dataService.displayMessage = "Successfully renewed your service";
+                $(() => {
+                  $('#appStatusModel').modal('show');
+                });
+              }
             this.isSubscribing = false;
             localStorage.setItem(this.appId + "msisdn", data.msisdn);
 
