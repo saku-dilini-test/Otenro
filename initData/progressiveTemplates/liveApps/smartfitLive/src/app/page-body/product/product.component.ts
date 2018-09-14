@@ -58,6 +58,8 @@ export class ProductComponent implements OnInit {
     availableFirstVariPromo = false;
     private player: Player;
     zoomRatio;
+    errBuy = false;
+    message;
     constructor(private localStorageService: LocalStorageService, private CurrencyService: CurrencyService,
         private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute,
         private route: Router, private title: TitleService, private productsService: ProductsService) {
@@ -125,6 +127,18 @@ export class ProductComponent implements OnInit {
         this.desPart1 = this.desPart1_demo.concat(this.desPart2);
         this.readMore = false;
 
+    }
+    checkUrl(url) {
+
+        let id,URL;
+        let res = url.slice(8);
+        let res2 = res.split(/\/|&|=/);
+        if (res2.length > 2) {
+            id = res2[2];
+        }else{
+            id = res2[1];
+        }
+        return id;
     }
 
     ngOnInit() {
@@ -644,11 +658,43 @@ export class ProductComponent implements OnInit {
             }
         }
     };
+
     open(data) {
-        if (!this.isBuyBtnDisable) {
+        if (!this.lockBuyButton) {
+
+            this.errBuy = true;
+            if (this.Data.selection.length == 1) {
+                this.message = "Please select the " + this.name1 + " and the Quantity";
+            }else if (this.Data.selection.length == 2) {
+                this.message = "Please select the " + this.name1 + ", " + this.name2 + " and the Quantity";
+            } else if (this.Data.selection.length == 3) {
+                this.message = "Please select the " + this.name1 + ", " + this.name2 + ", " + this.name3 + " and the Quantity";
+            } else if (this.Data.selection.length == 4) {
+                this.message = "Please select the " + this.name1 + ", " + this.name2 + ", " + this.name3 + ", " + this.name4 + " and the Quantity";
+            }
+            window.setTimeout(() => {
+                $(".alert-warning").fadeTo(500, 0).slideUp(500, ()=>{
+                    $(this).remove();
+                    this.errBuy = false;
+                });
+            }, 2000);
+            return;
+        }else if(this.selectedVariant.buyQuantity == null){
+
+            this.errBuy = true;
+            this.message = "Please select a buyQuantity";
+            window.setTimeout(() => {
+                $(".alert-warning").fadeTo(500, 0).slideUp(500, ()=>{
+                    $(this).remove();
+                    this.errBuy = false;
+                });
+            }, 2000);
+            return;
+        } else {
             this.dialogVariants = data;
-            $('#myModal').modal('show')
+            $('#myModal').modal('show');
         }
+
     }
     close() {
         $('#myModal').modal('hide')
@@ -666,9 +712,40 @@ export class ProductComponent implements OnInit {
     }
 
     addToCart(navi) {
-        if (this.selectedVariant.buyQuantity == null) {
-            console.log(' error please select buy quantity');
+
+        if (!this.lockBuyButton) {
+
+            this.errBuy = true;
+            if (this.Data.selection.length == 1) {
+                this.message = "Please select the " + this.name1 + " and the Quantity";
+            }else if (this.Data.selection.length == 2) {
+                this.message = "Please select the " + this.name1 + ", " + this.name2 + " and the Quantity";
+            } else if (this.Data.selection.length == 3) {
+                this.message = "Please select the " + this.name1 + ", " + this.name2 + ", " + this.name3 + " and the Quantity";
+            } else if (this.Data.selection.length == 4) {
+                this.message = "Please select the " + this.name1 + ", " + this.name2 + ", " + this.name3 + ", " + this.name4 + " and the Quantity";
+            }
+            window.setTimeout(() => {
+                $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
+                    $(this).remove();
+                    this.errBuy = false;
+                });
+            }, 2000);
+            return;
+        }else if(this.selectedVariant.buyQuantity == null){
+
+            this.errBuy = true;
+            this.message = "Please select a buyQuantity";
+            window.setTimeout(() => {
+                $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
+                    $(this).remove();
+                    this.errBuy = false;
+                });
+            }, 2000);
+            return;
         } else {
+
+            this.errBuy = false;
             if (this.dataService.cart.cartItems.length != 0) {
                 var i = 0;
                 while (i < this.dataService.cart.cartItems.length) {

@@ -17,10 +17,10 @@
                          [attr.data-image]="imageUrl/item.img">
 
                       <img  *ngIf="item.videoUrl != null" alt="{{item.name}}"
-                         data-type="vimeo"
+                         data-type="youtube"
                          src="{{imageUrl}}/{{item.img}}"
                          [attr.data-image]="imageUrl/item.img"
-                         [attr.data-videoid]="item.videoUrl">
+                         [attr.data-videoid]="checkUrl(item.videoUrl)">
                     </ng-template>
 
               </div>
@@ -85,6 +85,10 @@
                 </div>
               </div>
             </div>
+            <div *ngIf = "errBuy" class="alert alert-danger" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              {{message}}
+          </div>
             <div>
               <div class="text-left product-details-price main-content-font" >
                 <p *ngIf="discountAvailable == false && availableFirstVariPromo == false"><strong>{{currency}}</strong> {{selectedVariant.price| number: '.2'}}</p>
