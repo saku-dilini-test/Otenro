@@ -86,7 +86,6 @@ module.exports = {
                                                         appId: appId,
                                                         msisdn: appUser.msisdn
                                                     };
-
                                                     RenewalAppUser.findOne(renewalQuery).exec(function (err, renewalAppUser) {
                                                         if (err){
                                                             sails.log.error("Error when searching for a RenewalAppUser for the details: " + JSON.stringify(renewalQuery));
@@ -101,28 +100,34 @@ module.exports = {
                                                                 response.isSubscribed = true;
                                                                 response.msisdn = renewalAppUser.msisdn;
                                                                 response.isError = false;
+                                                                return res.ok(response);
                                                             }else{
-
                                                                 sails.log.error('msisdn: %s will not allows to access the' +
                                                                     ' contents today %s since the nextPaymentDate %s is not valid.' ,renewalAppUser.msisdn,today,nextPaymentDate);
 
                                                                 IdeabizAdminapiController.chargeUserAPiCall(appUser.msisdn,appId,function(paymentData, err){
-
                                                                     if (err) {
                                                                         sails.log.debug('No Sufficient balance in the account for msisdn: ' + msisdn);
                                                                         response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
                                                                         return res.ok(response);
-
                                                                     }else if (paymentData.payment=="ok"){
-                                                                        response.isSubscribed = true;
-                                                                        response.msisdn = appUser.msisdn;
-                                                                        response.isError = false;
-                                                                        response.isPaymentSuccess =true;
-                                                                        return res.ok(response);
+                                                                        IdeabizAdminapiController.updateRenewalAppUser(appId,appUser.msisdn,
+                                                                            operatorObj.interval,function(renewalAppUserData, err) {
+                                                                            if (err){
+                                                                                sails.log.debug('No Sufficient balance in the account for msisdn: ' + msisdn);
+                                                                                response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                                                                                return res.ok(response);
+                                                                            }else if (renewalAppUserData.updateRenewalAppUser=="ok") {
+                                                                                response.isSubscribed = true;
+                                                                                response.msisdn = appUser.msisdn;
+                                                                                response.isError = false;
+                                                                                response.isPaymentSuccess =true;
+                                                                                return res.ok(response);
+                                                                            }
+                                                                        });
                                                                     }
                                                                 });
                                                             }
-
                                                         }else{
                                                             sails.log.error("renewalAppUser details could not find for the paymentQuery: " + JSON.stringify(renewalQuery));
                                                             thisCtrl.checkPayments(req,res,appId,appUser.msisdn,response,config.RENEWAL_INTERVALS.MONTHLY.code);

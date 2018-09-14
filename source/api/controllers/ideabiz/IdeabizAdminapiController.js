@@ -536,13 +536,6 @@ module.exports = {
     },
 
 
-   /* testSendCharge:function (msisdn,serviceID,publishDetailsData,appID,callback) {
-
-        return callback({payment:"ok"}, null);
-
-    },*/
-
-
     sendForCharging:function(msisdn,serviceID,publishDetailsData,appID,callback){
 
        var sendForChargingIntance = this;
@@ -709,6 +702,45 @@ module.exports = {
             }
         });
     },
+
+
+    updateRenewalAppUser:function (appId,msisdn,intervel ,callback){
+
+        var renewalQuery = {
+            appId: appId,
+            msisdn: msisdn
+        };
+
+        RenewalAppUser.findOne(renewalQuery).exec(function (err, renewalAppUser) {
+            if (err) {
+                sails.log.error("Error when searching for a RenewalAppUser for the details: " + JSON.stringify(renewalQuery));
+                return callback(null, "error");
+            }
+            if (renewalAppUser) {
+                var nextPaymentDate = "";
+                var date = new Date();
+
+                if(intervel==config.RENEWAL_INTERVALS.MONTHLY.code){
+
+                    date.setDate(date.getDate() + 30);
+                    nextPaymentDate = dateFormat(date,"yyyy-mm-dd");
+                }
+                RenewalAppUser.update(renewalQuery, {nextPaymentDate:nextPaymentDate}).exec(function (err, result) {
+                    if (err) {
+                        sails.log.error("RenewalAppUser updated Error");
+                        return callback(null, "error");
+
+                    }else {
+                        return callback({updateRenewalAppUser:"ok"}, null);
+                    }
+                });
+            }else {
+                sails.log.error("RenewalAppUser not found: " + JSON.stringify(renewalQuery));
+                return callback(null, "error");
+            }
+        });
+    },
+
 
 
 
