@@ -603,7 +603,6 @@
 //                }
                 else {
 
-
                   $scope.product.selection = $scope.selection;
                   $scope.product.published = 'YES';
                   $scope.product.selectedSku = $scope.selectedSku;
@@ -768,7 +767,7 @@
         };
 
         $scope.deleteBanner = function(){
-            $scope.bannerImage = null;
+            $scope.bannerImage = '';
         }
 
         $scope.deleteImg = function (index) {

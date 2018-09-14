@@ -51,7 +51,7 @@ module.exports = {
 
         var defImg = req.body.defImg;
         var randomstring = require("randomstring");
-
+        console.log(req.body.bannerImage)
         var  finelImages = [];
         var  tmpImage = req.body.productImages;
         var  bannerImage = req.body.bannerImage;
@@ -145,6 +145,8 @@ module.exports = {
                product.bannerImage = imgeFileName;
                finelImages = null;
            }
+       }else{
+           product.bannerImage = req.body.bannerImage;
        }
 
 
@@ -172,6 +174,8 @@ module.exports = {
         var sku =[];
         if(typeof req.body.product.id != 'undefined'){
             delete product["id"];
+            console.log("consoel.log at 175 %_%")
+            console.log(product)
             ThirdNavigation.update(searchQuery,product,function(err,main) {
                 if (err) {
                     return res.send(err);
