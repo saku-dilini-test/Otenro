@@ -101,7 +101,8 @@ module.exports.policies = {
     getArticleCategoryByAppId : true,
     getArticleCategoryById : true,
     getCommentsDummy : true,
-    getSliderData : true
+    getSliderData : true,
+    checkProduct : true
 
   },
 

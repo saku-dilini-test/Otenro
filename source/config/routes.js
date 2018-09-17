@@ -323,6 +323,7 @@ module.exports.routes = {
     'POST /templates/postDeviceId': 'template/TemplateController.postDeviceId',
     'GET /templates/getOrdersOfUser': 'template/TemplateController.getOrdersOfUser',
     'GET /templates/getTemplateData' : 'template/TemplateController.getTemplateByPreviewId',
+    'GET /templates/checkProduct' : 'template/TemplateController.checkProduct',
 
     'POST /templates/updateUser' : 'template/TemplateAuthController.editAppUser',
     'POST /templates/updateUserPassword' : 'template/TemplateAuthController.editAppUserPassword',
@@ -360,7 +361,6 @@ module.exports.routes = {
     'POST /templatesOrder/saveOrder': 'template/TemplateOrderController.saveOrder',
     'POST /templatesOrder/getTaxInfoByCountry': 'template/TemplateOrderController.getTaxInfoByCountry',
     'GET /templates/getOrdersOfUser': 'template/TemplateController.getOrdersOfUser',
-
     /***
      * Template Inventory Controller
      */

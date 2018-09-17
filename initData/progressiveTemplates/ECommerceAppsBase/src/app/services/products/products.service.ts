@@ -40,4 +40,8 @@ export class ProductsService {
     return this.http.get(SERVER_URL+'/edit/getListOfSalesAndPromotions?appId='+id)
       .map(res => res.text() ? res.json() : null);
   }
+  checkProduct(id,sku,name,qty) {
+    return this.http.get(SERVER_URL + '/templates/checkProduct?id=' + id + '&sku=' + sku + '&name=' + name + '&qty=' + qty)
+      .map(res => res.text() ? res.json() : null);
+  }
 }

@@ -59,7 +59,7 @@ export class ProductComponent implements OnInit {
     private player: Player;
     zoomRatio;
     errBuy = false;
-    message;
+    message;responce;
     constructor(private localStorageService: LocalStorageService, private CurrencyService: CurrencyService,
         private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute,
         private route: Router, private title: TitleService, private productsService: ProductsService) {
@@ -93,7 +93,7 @@ export class ProductComponent implements OnInit {
             });
 
             this.dataService.promoData = this.promoData;
-            console.log(this.dataService.promoData);
+
             this.init();
         });
 
@@ -713,126 +713,134 @@ export class ProductComponent implements OnInit {
 
     addToCart(navi) {
 
-        if (!this.lockBuyButton) {
+        this.productsService.checkProduct(this.foodInfo.id, this.selectedVariant.sku, this.foodInfo.name, this.selectedVariant.quantity).subscribe(data => {
 
-            this.errBuy = true;
-            if (this.Data.selection.length == 1) {
-                this.message = "Please select the " + this.name1 + " and the Quantity";
-            }else if (this.Data.selection.length == 2) {
-                this.message = "Please select the " + this.name1 + ", " + this.name2 + " and the Quantity";
-            } else if (this.Data.selection.length == 3) {
-                this.message = "Please select the " + this.name1 + ", " + this.name2 + ", " + this.name3 + " and the Quantity";
-            } else if (this.Data.selection.length == 4) {
-                this.message = "Please select the " + this.name1 + ", " + this.name2 + ", " + this.name3 + ", " + this.name4 + " and the Quantity";
+            if (data.status == 200) {
+
+              if (!this.lockBuyButton) {
+
+                  this.errBuy = true;
+                  if (this.Data.selection.length == 1) {
+                      this.message = "Please select the " + this.name1 + " and the Quantity";
+                  }else if (this.Data.selection.length == 2) {
+                      this.message = "Please select the " + this.name1 + ", " + this.name2 + " and the Quantity";
+                  } else if (this.Data.selection.length == 3) {
+                      this.message = "Please select the " + this.name1 + ", " + this.name2 + ", " + this.name3 + " and the Quantity";
+                  } else if (this.Data.selection.length == 4) {
+                      this.message = "Please select the " + this.name1 + ", " + this.name2 + ", " + this.name3 + ", " + this.name4 + " and the Quantity";
+                  }
+                  window.setTimeout(() => {
+                      $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
+                          $(this).remove();
+                          this.errBuy = false;
+                      });
+                  }, 2000);
+                  return;
+              }else if(this.selectedVariant.buyQuantity == null){
+
+                  this.errBuy = true;
+                  this.message = "Please select a buyQuantity";
+                  window.setTimeout(() => {
+                      $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
+                          $(this).remove();
+                          this.errBuy = false;
+                      });
+                  }, 2000);
+                  return;
+              } else {
+
+                  this.errBuy = false;
+                  if (this.dataService.cart.cartItems.length != 0) {
+                      var i = 0;
+                      while (i < this.dataService.cart.cartItems.length) {
+                          if (this.foodInfo.id == this.dataService.cart.cartItems[i].id && this.selectedVariant.sku == this.dataService.cart.cartItems[i].sku) {
+                              this.dataService.position2 = false;
+                              //increasing weight when we add same product again.
+                              this.dataService.cart.cartItems[i].totWeight += this.selectedVariant.weight * this.selectedVariant.buyQuantity;
+                              this.dataService.cart.cartItems[i].qty += this.selectedVariant.buyQuantity;
+                              this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
+                              this.parentobj.cartSize = this.dataService.cart.cartSize;
+                              this.dataService.parseWeight = this.selectedVariant.weight;
+                              // $state.go('app.category');
+                              if (navi == "buyNowCart") {
+                                  this.route.navigate(['cart']);
+                              }
+                              break;
+                          }
+                          else if (i == (this.dataService.cart.cartItems.length - 1)) {
+                              this.dataService.position2 = true;
+                              this.dataService.cart.cartItems.push({
+                                  id: this.foodInfo.id,
+                                  name: this.foodInfo.name,
+                                  qty: this.selectedVariant.buyQuantity,
+                                  sku: this.selectedVariant.sku,
+                                  totWeight: this.selectedVariant.weight * this.selectedVariant.buyQuantity,
+                                  price: this.discountAvailable == true ? this.newPrice : Math.round(this.selectedVariant.price * 100) / 100,
+                                  total: this.discountAvailable == true ? this.newPrice : Math.round(this.selectedVariant.price * 100) / 100,
+                                  imgURL: this.selectedVariant.imageUrl,
+                                  imgDefault: this.Data.tempImageArray[this.Data.defaultImage].img,
+                                  variant: this.selectedVariant.selection,
+                                  totalQty: this.selectedVariant.quantity,
+                                  unlimited: this.selectedVariant.unlimited,
+                                  weight: this.selectedVariant.weight,  //(new) added weight of each product
+                                  type: this.Data.mainType
+
+                              });
+                              this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
+                              this.parentobj.cartSize = this.dataService.cart.cartSize;
+                              this.dataService.parseWeight = this.selectedVariant.weight;
+                              //  $state.go('app.category');
+                              if (navi == "buyNowCart") {
+                                  this.route.navigate(['cart']);
+                              }
+                              break;
+                          }
+                          i++;
+                      }
+                      if (this.dataService.appUserId) {
+                          this.localStorageService.set("cart" + this.dataService.appUserId, (this.dataService.cart));
+                      } else {
+                          this.localStorageService.set("cartUnknownUser", (this.dataService.cart));
+                      }
+                  }
+                  else {
+
+                      this.dataService.cart.cartItems.push({
+                          id: this.foodInfo.id,
+                          name: this.foodInfo.name,
+                          qty: this.selectedVariant.buyQuantity,
+                          sku: this.selectedVariant.sku,
+                          totWeight: this.selectedVariant.weight * this.selectedVariant.buyQuantity,
+                          price: this.discountAvailable == true ? this.newPrice : Math.round(this.selectedVariant.price * 100) / 100,
+                          total: this.discountAvailable == true ? this.newPrice : Math.round(this.selectedVariant.price * 100) / 100,
+                          imgURL: this.selectedVariant.imageUrl,
+                          imgDefault: this.Data.tempImageArray[this.Data.defaultImage].img,
+                          variant: this.selectedVariant.selection,
+                          totalQty: this.selectedVariant.quantity,
+                          unlimited: this.selectedVariant.unlimited,
+                          weight: this.selectedVariant.weight, //(new) added weight of each product
+                          type: this.Data.mainType
+                      });
+                      this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
+                      this.parentobj.cartSize = this.dataService.cart.cartSize;
+                      this.dataService.parseWeight = this.selectedVariant.weight;
+                      // $state.go('app.category');
+
+                      if (this.dataService.appUserId) {
+                          this.localStorageService.set("cart" + this.dataService.appUserId, (this.dataService.cart));
+                      } else {
+                          this.localStorageService.set("cartUnknownUser", (this.dataService.cart));
+                      }
+                      if (navi == "buyNowCart") {
+                          this.route.navigate(['cart']);
+                      }
+                  }
+              }
+           } else {
+                this.responce = data.name;
+                $('#unavailableProd').modal('show');
             }
-            window.setTimeout(() => {
-                $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
-                    $(this).remove();
-                    this.errBuy = false;
-                });
-            }, 2000);
-            return;
-        }else if(this.selectedVariant.buyQuantity == null){
-
-            this.errBuy = true;
-            this.message = "Please select a buyQuantity";
-            window.setTimeout(() => {
-                $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
-                    $(this).remove();
-                    this.errBuy = false;
-                });
-            }, 2000);
-            return;
-        } else {
-
-            this.errBuy = false;
-            if (this.dataService.cart.cartItems.length != 0) {
-                var i = 0;
-                while (i < this.dataService.cart.cartItems.length) {
-                    if (this.foodInfo.id == this.dataService.cart.cartItems[i].id && this.selectedVariant.sku == this.dataService.cart.cartItems[i].sku) {
-                        this.dataService.position2 = false;
-                        //increasing weight when we add same product again.
-                        this.dataService.cart.cartItems[i].totWeight += this.selectedVariant.weight * this.selectedVariant.buyQuantity;
-                        this.dataService.cart.cartItems[i].qty += this.selectedVariant.buyQuantity;
-                        this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
-                        this.parentobj.cartSize = this.dataService.cart.cartSize;
-                        this.dataService.parseWeight = this.selectedVariant.weight;
-                        // $state.go('app.category');
-                        if (navi == "buyNowCart") {
-                            this.route.navigate(['cart']);
-                        }
-                        break;
-                    }
-                    else if (i == (this.dataService.cart.cartItems.length - 1)) {
-                        this.dataService.position2 = true;
-                        this.dataService.cart.cartItems.push({
-                            id: this.foodInfo.id,
-                            name: this.foodInfo.name,
-                            qty: this.selectedVariant.buyQuantity,
-                            sku: this.selectedVariant.sku,
-                            totWeight: this.selectedVariant.weight * this.selectedVariant.buyQuantity,
-                            price: this.discountAvailable == true ? this.newPrice : Math.round(this.selectedVariant.price * 100) / 100,
-                            total: this.discountAvailable == true ? this.newPrice : Math.round(this.selectedVariant.price * 100) / 100,
-                            imgURL: this.selectedVariant.imageUrl,
-                            imgDefault: this.Data.tempImageArray[this.Data.defaultImage].img,
-                            variant: this.selectedVariant.selection,
-                            totalQty: this.selectedVariant.quantity,
-                            unlimited: this.selectedVariant.unlimited,
-                            weight: this.selectedVariant.weight,  //(new) added weight of each product
-                            type: this.Data.mainType
-
-                        });
-                        this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
-                        this.parentobj.cartSize = this.dataService.cart.cartSize;
-                        this.dataService.parseWeight = this.selectedVariant.weight;
-                        //  $state.go('app.category');
-                        if (navi == "buyNowCart") {
-                            this.route.navigate(['cart']);
-                        }
-                        break;
-                    }
-                    i++;
-                }
-                if (this.dataService.appUserId) {
-                    this.localStorageService.set("cart" + this.dataService.appUserId, (this.dataService.cart));
-                } else {
-                    this.localStorageService.set("cartUnknownUser", (this.dataService.cart));
-                }
-            }
-            else {
-
-                this.dataService.cart.cartItems.push({
-                    id: this.foodInfo.id,
-                    name: this.foodInfo.name,
-                    qty: this.selectedVariant.buyQuantity,
-                    sku: this.selectedVariant.sku,
-                    totWeight: this.selectedVariant.weight * this.selectedVariant.buyQuantity,
-                    price: this.discountAvailable == true ? this.newPrice : Math.round(this.selectedVariant.price * 100) / 100,
-                    total: this.discountAvailable == true ? this.newPrice : Math.round(this.selectedVariant.price * 100) / 100,
-                    imgURL: this.selectedVariant.imageUrl,
-                    imgDefault: this.Data.tempImageArray[this.Data.defaultImage].img,
-                    variant: this.selectedVariant.selection,
-                    totalQty: this.selectedVariant.quantity,
-                    unlimited: this.selectedVariant.unlimited,
-                    weight: this.selectedVariant.weight, //(new) added weight of each product
-                    type: this.Data.mainType
-                });
-                this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
-                this.parentobj.cartSize = this.dataService.cart.cartSize;
-                this.dataService.parseWeight = this.selectedVariant.weight;
-                // $state.go('app.category');
-
-                if (this.dataService.appUserId) {
-                    this.localStorageService.set("cart" + this.dataService.appUserId, (this.dataService.cart));
-                } else {
-                    this.localStorageService.set("cartUnknownUser", (this.dataService.cart));
-                }
-                if (navi == "buyNowCart") {
-                    this.route.navigate(['cart']);
-                }
-            }
-        }
-
+        });
     };
 }
 

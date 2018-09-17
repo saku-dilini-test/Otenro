@@ -218,6 +218,52 @@ module.exports = {
 
     },
 
+    checkProduct : function (req,res){
+
+        var id = req.param("id");
+        var sku = req.param("sku");
+        var name = req.param("name");
+        var qty = req.param("qty");
+        var save = true;
+
+            ThirdNavigation.find({id:id}).exec(function(err,prod){
+
+                if(!prod[0]){
+                    save = false;
+                    name = name;
+                }else{
+                var newCount = 0;
+                var found = 0;
+                    for(var j = 0; j < prod[0].variants.length; j++){
+                        newCount ++;
+                    console.log(prod[0].variants[j].sku);
+                    console.log(sku);
+                         if(prod[0].variants[j].sku == sku){
+                             found ++;
+                             if(prod[0].variants[j].quantity == 0 || prod[0].variants[j].quantity < qty){
+                                 save = false;
+                                 name = name;
+                             }
+                         }
+
+                         if(newCount == prod[0].variants.length && found == 0){
+                             save = false;
+                             name = name;
+                         }
+
+                    };
+
+                }
+                if(save == true){
+                        return res.send({status:200});
+                }
+
+                 if(save == false){
+                    return res.send({status:404,name:name});
+                }
+            });
+    },
+
     getBlogData : function(req,res){
         var appId = req.param('appId');
         var searchApp = {

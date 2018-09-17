@@ -48,10 +48,6 @@ module.exports = {
         }
     },
 
-    excuteSave : function (data,res){
-
-    },
-
     saveOrder : function(req,res) {
         var execute = this;
         var data = req.body;
@@ -85,7 +81,7 @@ module.exports = {
                                  }
                              }
 
-                             if(newCount == prod[0].variants && found == 0){
+                             if(newCount == prod[0].variants.length && found == 0){
                                  save = false;
                                  name = data.item[count-1].name;
                              }
@@ -154,7 +150,7 @@ module.exports = {
                                  }
                              }
 
-                             if(newCount == prod[0].variants && found == 0){
+                             if(newCount == prod[0].variants.length && found == 0){
                                  save = false;
                                  name = data.item[count-1].name;
                              }
