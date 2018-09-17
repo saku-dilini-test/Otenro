@@ -436,7 +436,8 @@
 
             $scope.all = function(status){
                 if(status == "All"){
-                    $scope.searchPublishApps = {};
+                    $scope.searchPublishApps = undefined;
+//                    $scope.searchPublishApps.publishedStatus = "All";
                 }
             }
 
