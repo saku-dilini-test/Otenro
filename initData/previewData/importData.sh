@@ -5,7 +5,7 @@ echo  'start....'
 #local
 #MESERVER='c:/xampp/htdocs/meServer/temp/';
 #NODE='c:/xampp/htdocs/meServer/node_modules/';
-#APPFILESERVER='c:/xampp/htdocs/meServer/temp/';
+#APPFILESERVER='c:/xampp/htdocs/meServer/temp/'#;
 
 #stag
 #MESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/';
@@ -17,14 +17,14 @@ MESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/';
 NODE='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/node_modules/';
 APPFILESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/';
 
-#ENV='dev'   #this is for development
-ENV='pro'  #this is for production
+ENV='dev'   #this is for development
+#ENV='pro'  #this is for production
 #ENV='stag'  #this is for staging
 DB=''
 
 if [ $ENV == 'dev' ]
 then
-	DB='appmaker'
+	DB='appBuilderID'
 	serverUrl='http://localhost:1337'
 elif [ $ENV == 'stag' ]
 then
@@ -58,6 +58,7 @@ mongoimport --db $DB --collection articlecategory --file dataFiles/articlecatego
 mongoimport --db $DB --collection secondnavigation --file dataFiles/secondnavigation.json
 mongoimport --db $DB --collection thirdnavigation --file dataFiles/thirdnavigation.json
 mongoimport --db $DB --collection slider --file dataFiles/slider.json
+mongoimport --db $DB --collection renewalintervals --file dataFiles/renewalintervals.json
 
 #for export data
 #mongoexport --db $DB --collection accounttype --out accounttype.json
@@ -82,7 +83,7 @@ mongoimport --db $DB --collection slider --file dataFiles/slider.json
 #mongoexport --db $DB --collection secondnavigation --out secondnavigation.json
 #mongoexport --db $DB --collection thirdnavigation --out thirdnavigation.json
 #mongoimport --db $DB --collection slider --out slider.json
-
+#mongoimport --db $DB --collection renewalintervals --out renewalintervals.json
 echo $MESERVER
 echo $NODE
 

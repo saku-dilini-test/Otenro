@@ -235,6 +235,9 @@
             getAllPorts:function(){
                 return $http.get(SERVER_URL + 'edit/getAllPorts');
             },
+            getRenewals:function(){
+                return $http.get(SERVER_URL + 'edit/getRenewals');
+            },
             getAllPrice:function(){
                 return $http.get(SERVER_URL + 'edit/getAllPrice');
             },

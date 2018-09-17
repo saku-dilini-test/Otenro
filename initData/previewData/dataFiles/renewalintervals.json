@@ -1,0 +1,2 @@
+{"_id":{"$oid":"589c475d3685292e226670ba"},"code":"DAILY","description":"Daily","noOfDays":"1","createdAt":{"$date":"2018-09-09T10:41:33.078Z"},"updatedAt":{"$date":"2018-09-09T10:41:33.078Z"}}
+{"_id":{"$oid":"589c475d3685292e226670be"},"code":"MONTHLY","description":"Monthly","noOfDays":"30","createdAt":{"$date":"2018-09-09T10:41:33.078Z"},"updatedAt":{"$date":"2018-09-09T10:41:33.078Z"}}

@@ -528,6 +528,15 @@ module.exports = {
        });
     },
 
+    getRenewals : function(req,res){
+    console.log("im in");
+        RenewalIntervals.find().exec(function(err, result){
+        console.log(err);
+        console.log(result);
+            res.send(result);
+        });
+    },
+
     getAllPrice : function(req,res){
        fs.readFile(sails.config.appPath+'/api/services/price.json', function(err, data) {
            if (err)  res.send(err);

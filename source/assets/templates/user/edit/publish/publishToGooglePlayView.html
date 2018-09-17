@@ -200,7 +200,7 @@
                                     <td align="center">
                                         <div class="select-container">
                                             <select class="op-config-select" ng-model= "operator.interval" ng-disabled = "!operator.isEnabled || operator.status == 'SUBMITTED_FOR_CONFIG' || operator.status == 'SUBMITTED_FOR_APPROVAL' || operator.status == 'APPROVED' || operator.status == 'SUSPENDED' || operator.status == 'TERMINATED'">
-                                                <option ng-repeat="sts in Renewals" >{{sts}}</option>
+                                                <option ng-repeat="sts in Renewals" ng-value = "sts.code">{{sts.description}}</option>
                                             </select>
                                         </div>
                                     </td>

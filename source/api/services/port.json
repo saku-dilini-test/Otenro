@@ -1,9 +1,5 @@
 {
   "ports": [
     87757
-  ],
-  "renewalIntervals": [
-    "Daily",
-    "Monthly"
   ]
 }

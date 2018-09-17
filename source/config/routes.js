@@ -222,6 +222,7 @@ module.exports.routes = {
     'GET /edit/getAllPrimaryCategories': 'edit/publish/publishDetailController.getAllPrimaryCategories',
     'GET /edit/getAllSecondaryCategories': 'edit/publish/publishDetailController.getAllSecondaryCategories',
     'GET /edit/getAllPorts': 'edit/publish/publishDetailController.getAllPorts',
+    'GET /edit/getRenewals': 'edit/publish/publishDetailController.getRenewals',
     'GET /edit/getAllPrice': 'edit/publish/publishDetailController.getAllPrice',
     'GET /edit/getKeywordLength': 'edit/publish/publishDetailController.getKeywordLength',
     'GET /getApkPath' : 'edit/publish/publishDetailController.getApkPath',

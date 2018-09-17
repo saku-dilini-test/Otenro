@@ -134,7 +134,14 @@
        publishService.getAllPorts().
            success(function(data){
                $scope.Ports = data.ports;
-               $scope.Renewals = data.renewalIntervals;
+           }).error(function(err){
+               //alert("MainMenu Loading Error : " + err);
+       });
+
+       publishService.getRenewals().
+           success(function(data){
+           console.log(data);
+               $scope.Renewals = data;
            }).error(function(err){
                //alert("MainMenu Loading Error : " + err);
        });
@@ -334,6 +341,7 @@
         }
 
         $scope.save = function(data){
+
             var isRequestUpdate = false;
             var showSavedMsg = true;
             for(var i=0; i<data.length;i++){
