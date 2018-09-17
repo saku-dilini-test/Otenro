@@ -20,7 +20,7 @@ module.exports = {
     onReceivingSMS : function(req,res){
         var reqBody = req.body;
 
-        sails.log.debug("Request received to onReceivingSMS message body: " + JSON.stringify(reqBody));
+        sails.log.debug("IdeabizSMSController: Request received to onReceivingSMS message body: " + JSON.stringify(reqBody));
 
         //Request forwarding to specified URLs
         utilsService.forwardRequests(req,res,'/sms/report','POST');
@@ -42,7 +42,7 @@ module.exports = {
             message = message.toLowerCase();
 
             if(message.indexOf(unregStr)==-1 && message.indexOf(regStr)==-1){
-                sails.log.error("Message body does not contains '" + regStr + " or " + unregStr);
+                sails.log.error("IdeabizSMSController: Message body does not contains '" + regStr + " or " + unregStr);
                 return res.badRequest("SMS body does not contains required data");
             }
 
@@ -65,7 +65,7 @@ module.exports = {
             }
 
             if (!keyword || (keyword && keyword.length===0)) {
-                sails.log.error("SMS body does not contains keyword");
+                sails.log.error("IdeabizSMSController: SMS body does not contains keyword");
                 return res.badRequest("SMS body does not contains required data");
             }
 
@@ -74,12 +74,12 @@ module.exports = {
             try {
                 PublishDetails.findOne(queryApp).exec(function(err,app){
                     if(err){
-                        sails.log.error("Error when searching for a app using keyword: " + keyword + " error: " + err);
+                        sails.log.error("IdeabizSMSController: Error when searching for a app using keyword: " + keyword + " error: " + err);
                         return res.serverError(err);
                     }
 
                     if(!app){
-                        sails.log.error("No app in the system for the keyword: " + keyword);
+                        sails.log.error("IdeabizSMSController: No app in the system for the keyword: " + keyword);
                         return res.badRequest("No app in the system for the keyword: " + keyword);
                     }
 
@@ -95,17 +95,17 @@ module.exports = {
                             var setFields = {};
 
                             if(isRegistration) {
-                                sails.log.debug("In Registration: User exists for the msisdn: " + msisdn + " and for the appID: " + appID);
+                                sails.log.debug("IdeabizSMSController: In Registration: User exists for the msisdn: " + msisdn + " and for the appID: " + appID);
 
                                 setFields.status = config.APP_USER_STATUS.ACTIVE;
 
                                 if (!deviceUUID) {
-                                    sails.log.info("No deviceUUID returned from msisdn: " + msisdn);
+                                    sails.log.error("IdeabizSMSController: No deviceUUID returned from msisdn: " + msisdn);
                                 } else {
                                     setFields.deviceUUID = deviceUUID;
                                 }
                             }else{
-                                sails.log.debug("In Un-Registration: User exists for the msisdn: " + msisdn + " and for the appID: " + appID);
+                                sails.log.debug("IdeabizSMSController: In Un-Registration: User exists for the msisdn: " + msisdn + " and for the appID: " + appID);
 
                                 setFields.status = config.APP_USER_STATUS.INACTIVE;
                                 setFields.unsubscribeDate = dateFormat(new Date(), "yyyy-mm-dd");
@@ -114,21 +114,24 @@ module.exports = {
 
                             AppUser.update(queryUser, setFields).exec(function (err, users) {
                                 if (err) {
-                                    sails.log.error("Error when update the msisdn: " + msisdn + " error: " + err);
+                                    sails.log.error("IdeabizSMSController: Error when update the msisdn: " + msisdn + " error: " + err);
                                     return res.serverError("Error when update the msisdn: " + msisdn + " error: " + err);
                                 }
 
-                                if(user.deviceUUID) {
+                                if(isRegistration && users[0].deviceUUID) {
                                     // Send the notifications to the AppUser
-                                    var message = "Your subscription to " + app.appName + " has been success. Click to open " + app.appName;
-                                    adminAPI.notifyUsers(req, res, users, message);
+                                    var message = "Your subscription to " + app.title  + " has been success. Click to open " + app.title ;
+                                    sails.log.debug('IdeabizSMSController: Sent Push Notification message"%s" for msisdn: %s appId:%s AppUser ID:%s',message,msisdn,appID,users[0].id);
+                                    adminAPI.notifyUsers(req, res, users[0], message);
+                                }else{
+                                    sails.log.error('IdeabizSMSController: User does not have a UUID attached. msisdn: %s appId:%s AppUser ID:%s',msisdn,appID,users[0].id);
                                 }
 
                                 return res.ok("ok");
                             });
                         }else {
                             if(!isRegistration){
-                                sails.log.debug("In Un-Registration: User does not exists in the System for the msisdn: " + msisdn + " and for the appID: " + appID);
+                                sails.log.debug("IdeabizSMSController: In Un-Registration: User does not exists in the System for the msisdn: " + msisdn + " and for the appID: " + appID);
                                 return res.badRequest("In Un-Registration: User is not registered in the System for the msisdn: " + msisdn);
                             }
 
@@ -149,7 +152,7 @@ module.exports = {
                                     return res.serverError(err);
                                 }
 
-                                sails.log.debug("New user created for the msisdn: " + msisdn + " serviceID=" + app.serviceID);
+                                sails.log.debug("IdeabizSMSController: New user created for the msisdn: " + msisdn + " serviceID=" + app.serviceID);
                                 // thisController.subscribeUser(req,res,msisdn,app.serviceID);
 
                                 return res.created(user);
@@ -158,11 +161,11 @@ module.exports = {
                     });
                 });
             }catch(err){
-                sails.log.error("Exception in registerUser, error: " + err);
+                sails.log.error("IdeabizSMSController: Exception in registerUser, error: " + err);
                 res.serverError("Exception in registerUser, error: " + err);
             }
         }catch(err){
-            sails.log.error(err);
+            sails.log.error("IdeabizSMSController: " + err);
             res.serverError(err);
         }
     }

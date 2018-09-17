@@ -19,7 +19,7 @@ var name = "chamil";
 module.exports = {
 
     createNewtoken: function(callback){
-        sails.log.debug("Call createNewtoken");
+        sails.log.debug("IdeaBizAuthenticatorService: Call createNewtoken");
         var thisCtrl = this;
         var headers = this.getHeaders();
 
@@ -31,17 +31,15 @@ module.exports = {
             'headers': headers
         };
 
-        console.log("requestObj: " + JSON.stringify(requestObj,null,2));
-
         request(requestObj, function(err, response, body) {
             if (err) {
-                sails.log.error('Error while requesting the IdeaBiz token status: ' + err.status + " body: " + err.body);
+                sails.log.error('IdeaBizAuthenticatorService: Error while requesting the IdeaBiz token status: ' + err.status + " body: " + err.body);
                 callback(null,err);
                 return;
             }
 
             if (response.statusCode !== 200) {
-                sails.log.error('Unsuccessfull token response body: ' + body);
+                sails.log.error('IdeaBizAuthenticatorService: Unsuccessfull token response body: ' + body);
                 callback(null,{ 'err': 'Unsuccessfull token response body: ' + body });
                 return;
             }
@@ -63,7 +61,7 @@ module.exports = {
         sails.log.debug("Call renewToken");
 
         if(this.getAccessToken()===null){
-            sails.log.debug("Create new Token since there is no Access Token");
+            sails.log.debug("IdeaBizAuthenticatorService: Create new Token since there is no Access Token");
             this.createNewtoken(function(data,err){
                 callback(data,err);
             });
@@ -81,23 +79,23 @@ module.exports = {
             'headers': headers
         };
 
-        console.log("requestObj: " + JSON.stringify(requestObj,null,2));
+        sails.log.debug("IdeaBizAuthenticatorService: requestObj: " + JSON.stringify(requestObj,null,2));
 
         request(requestObj, function(err, response, body) {
             if (err) {
-                sails.log.error('Error while requesting the IdeaBiz token status: ' + err.status + " body: " + err.body);
+                sails.log.error('IdeaBizAuthenticatorService: Error while requesting the IdeaBiz token status: ' + err.status + " body: " + err.body);
                 callback(null,err);
                 return;
             }
 
             if (response.statusCode === 400 && body.indexOf('invalid_grant') > 0) {
-                sails.log.debug("Create new Token since there is a 400 status code and it is a invalid grant request");
+                sails.log.debug("IdeaBizAuthenticatorService: Create new Token since there is a 400 status code and it is a invalid grant request");
                 thisCtrl.createNewtoken(function(data,err){
                     callback(data,err);
                 });
                 return;
             }else if(response.statusCode !== 200){
-                sails.log.error('Unsuccessfull token response body: ' + body);
+                sails.log.error('IdeaBizAuthenticatorService: Unsuccessfull token response body: ' + body);
                 callback(null,{ 'err': 'Unsuccessfull token response body: ' + body });
                 return;
             }

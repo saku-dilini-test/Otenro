@@ -77,7 +77,7 @@ module.exports.routes = {
     'POST /app/viewTemplate': 'ApplicationController.viewTemplate',
     'POST /app/createProgWebApp': 'ApplicationController.createProgWebApp',
     'POST /app/templatePreview': 'ApplicationController.templatePreview',
-   
+
     'GET /api/getTemplateMetaData': 'DashboardController.getTemplateMetaData',
     'GET /app/getIconAllowance': 'ApplicationController.iconAllowance',
     'POST /app/createTempTemplates': 'ApplicationController.createTempTemplates',
@@ -277,7 +277,7 @@ module.exports.routes = {
     'POST /edit/updateTaxInfo': 'edit/commerce/TaxController.updateTaxInfo',
     'POST /edit/deleteTaxInfo': 'edit/commerce/TaxController.deleteTaxInfo',
     'GET /edit/getAllCountry': 'edit/commerce/TaxController.getAllCountry',
-    
+
     /**
      * EngageController
      */
@@ -344,6 +344,9 @@ module.exports.routes = {
     'GET /templates/getAppVisitDataInfo': 'template/AnalyticsController.getAppVisitDataInfo',
 
     'GET /templates/getSubscribedData' : 'ideabiz/IdeabizController.isSubscribed',
+    'GET /templates/printChargingMap' : 'ideabiz/IdeabizController.printCurrentChargingMap',
+    'POST /templates/resetChargingMap' : 'ideabiz/IdeabizController.resetChargingMap',
+    'POST /templates/removeFromChargingMap' : 'ideabiz/IdeabizController.removeFromChargingMap',
     'POST /templates/getAppStatus' : 'ideabiz/IdeabizController.getAppStatus',
 
     /**
@@ -396,7 +399,7 @@ module.exports.routes = {
     /***
      * Technical Support Controller
      *
-     **/  
+     **/
      'GET  /edit/getAllAppsData': 'technicalSupport/TechnicalSupportController.getAllAppsData',
      'POST  /edit/getPublishDetails': 'technicalSupport/TechnicalSupportController.getPublishDetails',
     'POST  /edit/getUserApps': 'technicalSupport/TechnicalSupportController.getUserApps',
@@ -437,7 +440,7 @@ module.exports.routes = {
     'POST /edit/paymentMethods': 'edit/commerce/BraintreeController.paymentMethods',
         /**
          * salesAndPromotionsController
-         */  
+         */
     'POST /edit/saveSalesAndPromotion': 'edit/salesAndPromotion/SalesAndPromotionController.saveSalesAndPromotion',
     'GET /edit/getListOfSalesAndPromotions': 'edit/salesAndPromotion/SalesAndPromotionController.getListOfSalesAndPromotions',
 

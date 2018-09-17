@@ -12,7 +12,7 @@ module.exports = {
         var thisCtrl = this;
 
         if(auth.getAccessToken()===null){
-            sails.log.debug("Access Token is null, hence renew the Token");
+            sails.log.debug("IdeaBizAPIHandlerService: Access Token is null, hence renew the Token");
             thisCtrl.renewTokenAndSendAPICall(url,method,dataBody,contentType,accept,callback);
         }else{
 
@@ -73,21 +73,19 @@ module.exports = {
     },
 
     requestCallbackContinue: function(err, response, body, callback) {
-        sails.log.debug('In requestCallbackContinue=>');
-        sails.log.debug('err:',err);
-//        sails.log.debug('response:',response);
+        sails.log.debug('IdeaBizAPIHandlerService: In requestCallbackContinue err:',err);
         if (err) {
-            sails.log.error('Error while requesting the IdeaBiz api: ' + this.requestObj.url  + " err: " + err);
+            sails.log.error('IdeaBizAPIHandlerService: Error while requesting the IdeaBiz api: ' + this.requestObj.url  + " err: " + err);
             return callback(null,err);
         }
 
         if (response.statusCode === 401 && (body.indexOf('Expired')>0 || body.indexOf('Access Token Inactive')>0)){
             if(!this.requestObj){
-                sails.log.error('requestObj is null which can not send the request requestObj: ' + JSON.stringify(this.requestObj,null,2));
+                sails.log.error('IdeaBizAPIHandlerService: requestObj is null which can not send the request requestObj: ' + JSON.stringify(this.requestObj,null,2));
                 return callback(null,{ message: 'Error' });
             }
 
-            sails.log.debug('Expired Token hence renew the Token');
+            sails.log.debug('IdeaBizAPIHandlerService: Expired Token hence renew the Token');
             this.renewTokenAndSendAPICall(this.requestObj.url,
                                               this.requestObj.method,
                                               this.requestObj.body,
@@ -98,7 +96,6 @@ module.exports = {
         }
 
         if (response.statusCode !== 200) {
-            sails.log.error('api response body is: ' + JSON.stringify(body));
             return callback(response,null);
         }
         callback(response,null);

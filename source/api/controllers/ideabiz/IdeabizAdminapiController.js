@@ -1,5 +1,6 @@
 var config = require('../../services/config');
 var utilsService = require('../../services/utilsService');
+var chargingAPICallLogService = require('../../services/IdeabizChargingAPICallLogService');
 var pushService = require('../../services/pushNotificationsService');
 var dateFormat = require('dateformat');
 var IdeaBizPINVerificationAPIService = require('../../services/IdeaBizPINVerificationAPIService');
@@ -22,7 +23,7 @@ module.exports = {
     takeAction: function(req,res){
         var body = req.body;
 
-        sails.log.debug("Request received to IdeabizAdminapiController.takeaction with req.body: " + JSON.stringify(body));
+        sails.log.debug("IdeabizAdminapiController: Request received to IdeabizAdminapiController.takeaction with req.body: " + JSON.stringify(body));
 
         //Request forwarding to specified URLs
         utilsService.forwardRequests(req,res,'/adminapi/index','POST');
@@ -33,23 +34,23 @@ module.exports = {
         if(body && body.action){
             switch (body.action){
                 case config.IDEABIZ_ADMIN_API_ACTIONS.STATE_CHANGE:
-                    sails.log.debug("in state change");
+                    sails.log.debug("IdeabizAdminapiController: in state change");
                     this.onActionStateChange(req,res);
                     break;
                 case config.IDEABIZ_ADMIN_API_ACTIONS.HISTORY:
-                    sails.log.debug("in history");
+                    sails.log.debug("IdeabizAdminapiController: in history");
                     this.onSearchHistory(req,res);
                     break;
                 case config.IDEABIZ_ADMIN_API_ACTIONS.STATE_CHECK:
-                    sails.log.debug("in state check");
+                    sails.log.debug("IdeabizAdminapiController: in state check");
                     this.onStateCheck(req,res);
                     break;
                 default:
-                    sails.log.error("Havent impliment the action: " + body.action);
+                    sails.log.error("IdeabizAdminapiController: Havent impliment the action: " + body.action);
                     return res.serverError("No Action implimented for: " + body.action);
             }
         }else{
-            sails.log.error("Body is empty or no action");
+            sails.log.error("IdeabizAdminapiController: Body is empty or no action");
             return res.badRequest('invalid request body');
         }
     },
@@ -82,22 +83,22 @@ module.exports = {
             }
         };
 
-        sails.log.info("Exec onSearchHistory");
+        sails.log.info("IdeabizAdminapiController: Exec onSearchHistory");
 
         if(!ideabizAppID){
-            sails.log.error("ideabizAppID not found");
+            sails.log.error("IdeabizAdminapiController: ideabizAppID not found");
             res.json(notFound);
             return;
         }
 
         if(!msisdn){
-            sails.log.error("msisdn not found");
+            sails.log.error("IdeabizAdminapiController: msisdn not found");
             res.json(notFound);
             return;
         }
 
         if(!serviceID){
-            sails.log.error("Service ID not found");
+            sails.log.error("IdeabizAdminapiController: Service ID not found");
             res.json(notFound);
             return;
         }
@@ -114,12 +115,12 @@ module.exports = {
 
         IdeabizUserHistory.findOne(queryWhere).exec(function(err,history){
             if(err){
-                sails.log.error("Error when searching for the history using serviceID: " + serviceID + " msisdn: " + msisdn + " error: " + err);
+                sails.log.error("IdeabizAdminapiController: Error when searching for the history using serviceID: " + serviceID + " msisdn: " + msisdn + " error: " + err);
                 return res.json(notFound);
             }
 
             if(!history){
-                sails.log.error("No history in the system for the serviceID: " + serviceID);
+                sails.log.error("IdeabizAdminapiController: No history in the system for the serviceID: " + serviceID);
                 return res.json(notFound);
             }
 
@@ -174,22 +175,22 @@ module.exports = {
             }
         };
 
-        sails.log.info("Exec onStateCheck");
+        sails.log.info("IdeabizAdminapiController: Exec onStateCheck");
 
         if(!ideabizAppID){
-            sails.log.error("ideabizAppID not found");
+            sails.log.error("IdeabizAdminapiController: ideabizAppID not found");
             res.json(notFound);
             return;
         }
 
         if(!msisdn){
-            sails.log.error("msisdn not found");
+            sails.log.error("IdeabizAdminapiController: msisdn not found");
             res.json(notFound);
             return;
         }
 
         if(!serviceID){
-            sails.log.error("Service ID not found");
+            sails.log.error("IdeabizAdminapiController: Service ID not found");
             res.json(notFound);
             return;
         }
@@ -202,13 +203,13 @@ module.exports = {
         //Get the current status of the User
         AppUser.findOne(searchAppUser).exec(function(err, appUser){
             if(err){
-                sails.log.error("There is an error when getting AppUser: " + err);
+                sails.log.error("IdeabizAdminapiController: There is an error when getting AppUser: " + err);
                 return res.json(notFound);
             }
 
             //If user not registered
             if(!appUser){
-                sails.log.error("No user registered for msisdn: " + msisdn + " for the serviceId: " + serviceID);
+                sails.log.error("IdeabizAdminapiController: No user registered for msisdn: " + msisdn + " for the serviceId: " + serviceID);
                 return res.json(notFound);
             }
 
@@ -232,12 +233,12 @@ module.exports = {
 
             IdeabizUserHistory.find(searchQuery).exec(function(err,history) {
                 if (err) {
-                    sails.log.error("Error when searching for the history using serviceID: " + serviceID + " msisdn: " + msisdn + " error: " + err);
+                    sails.log.error("IdeabizAdminapiController: Error when searching for the history using serviceID: " + serviceID + " msisdn: " + msisdn + " error: " + err);
                     return res.json(notFound);
                 }
 
                 if (!history) {
-                    sails.log.error("No history in the system for the serviceID: " + serviceID);
+                    sails.log.error("IdeabizAdminapiController: No history in the system for the serviceID: " + serviceID);
                     return res.json(notFound);
                 }
 
@@ -340,7 +341,7 @@ module.exports = {
         //Checking the incoming status is valid with our Statuses in config.IDEABIZ_SUBSCRIPTION_STATUS <- Should remove once we impliment the renewal api
 
         if(!actionStateChangeInstance.isStatusValid(subscriptionStatus)){
-            sails.log.error("Incoming status: " + subscriptionStatus + " is not matching any status in config.IDEABIZ_STATUS");
+            sails.log.error("IdeabizAdminapiController: Incoming status: " + subscriptionStatus + " is not matching any status in config.IDEABIZ_STATUS");
             return res.badRequest("Invalid status: " + subscriptionStatus);
         }
 
@@ -348,7 +349,7 @@ module.exports = {
             if(reqBody.status==config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code||reqBody.status==config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code ) {
 
                 if(!serviceID){
-                    sails.log.error('The serviceID sent through the response is not valid: ', serviceID);
+                    sails.log.error('IdeabizAdminapiController: The serviceID sent through the response is not valid: ', serviceID);
                     return res.badRequest("IThe serviceID sent through the response is not valid: " + serviceID);
                 }
 
@@ -357,12 +358,12 @@ module.exports = {
                 try {
                     PublishDetails.findOne(queryApp).exec(function(err,publishDetailsData){
                         if(err){
-                            sails.log.error("Error when searching for a app using serviceID: " + serviceID + " error: " + err);
+                            sails.log.error("IdeabizAdminapiController: Error when searching for a app using serviceID: " + serviceID + " error: " + err);
                             return res.serverError(err);
                         }
 
                         if(!publishDetailsData){
-                            sails.log.error("No app in the system for the serviceID: " + serviceID);
+                            sails.log.error("IdeabizAdminapiController: No app in the system for the serviceID: " + serviceID);
                             return res.badRequest("No app in the system for the serviceID: " + serviceID);
                         }
 
@@ -398,7 +399,7 @@ module.exports = {
                                     };
 
                                     if(user.subscriptionStatus==config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code){
-                                        sails.log.debug('msisdn: ' + msisdn + ' already Subscribed');
+                                        sails.log.debug('IdeabizAdminapiController: msisdn: ' + msisdn + ' already Subscribed');
                                     }else if(user.subscriptionStatus==config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code){
                                         var paymentQuery = {
                                             appId: appID,
@@ -408,19 +409,19 @@ module.exports = {
 
                                         SubscriptionPayment.findOne(paymentQuery).exec(function (err, payment) {
                                             if (err){
-                                                sails.log.error("Error when searching SubscriptionPayment: " + JSON.stringify(paymentQuery));
+                                                sails.log.error("IdeabizAdminapiController: Error when searching SubscriptionPayment: " + JSON.stringify(paymentQuery));
                                                 return res.serverError(err);
                                             }
 
                                             if(payment){
-                                                sails.log.debug('There is a payment record for today for msisdn: ' + msisdn + ' as payment status: ' + payment.status);
+                                                sails.log.debug('IdeabizAdminapiController: There is a payment record for today for msisdn: ' + msisdn + ' as payment status: ' + payment.status);
                                             }else{
-                                                sails.log.debug('No payment record for today therefore will charge for the msisdn: ' + msisdn);
+                                                sails.log.debug('IdeabizAdminapiController: No payment record for today therefore will charge for the msisdn: ' + msisdn);
                                                 actionStateChangeInstance.sendForCharging(msisdn,serviceID,publishDetailsData,user.appID,function(data,err){
                                                     if(err){
-                                                        console.log(err);
+                                                        sails.log.error('IdeabizAdminapiController: Issue when send for charging for msisdn: %s appId:%s err:%s',msisdn,user.appID,err);
                                                     }else {
-                                                        console.log(data);
+                                                        sails.log.debug('IdeabizAdminapiController: Charging success for msisdn: %s appId:%s',msisdn,user.appID);
                                                     }
                                                 });
                                             }
@@ -434,18 +435,21 @@ module.exports = {
                                     };
                                 }
 
-                                sails.log.debug("In Subscription: User exists for the msisdn: " + msisdn + " and for the appID: " + appID);
+                                sails.log.debug("IdeabizAdminapiController: In Subscription: User exists for the msisdn: " + msisdn + " and for the appID: " + appID);
 
                                 AppUser.update(queryUser, setFields).exec(function (err, users) {
                                     if (err) {
-                                        sails.log.error("Error when update the msisdn: " + msisdn + " error: " + err);
+                                        sails.log.error("IdeabizAdminapiController: Error when update the msisdn: " + msisdn + " error: " + err);
                                         return res.serverError("Error when update the msisdn: " + msisdn + " error: " + err);
                                     }
 
-                                    if(users.deviceUUID) {
+                                    if(user.deviceUUID) {
                                         // Send the notifications to the AppUser
-                                        var message = "Your subscription to " + app.appName + " has been success. Click to open " + app.appName;
-                                        actionStateChangeInstance.notifyUsers(req, res, users, message);
+                                        var message = "Your subscription to " + publishDetailsData.title + " has been success. Click to open " + publishDetailsData.title;
+                                        sails.log.debug('IdeabizAdminapiController: Sent Push Notification message"%s" for msisdn: %s appId:%s AppUser ID:%s',message,msisdn,appID,user.id);
+                                        actionStateChangeInstance.notifyUsers(req, res, user, message);
+                                    }else{
+                                        sails.log.error('IdeabizAdminapiController: User does not have a UUID attached. msisdn: %s appId:%s AppUser ID:%s',msisdn,appID,user.id);
                                     }
 
                                     return res.ok("User updated");
@@ -464,12 +468,12 @@ module.exports = {
                                     if (err) {
                                         return res.serverError(err);
                                     }
-                                    sails.log.debug("New user created for the msisdn: " + msisdn + " serviceID=" + publishDetailsData.serviceID);
+                                    sails.log.debug("IdeabizAdminapiController: New user created for the msisdn: " + msisdn + " serviceID=" + publishDetailsData.serviceID);
                                     actionStateChangeInstance.sendForCharging(msisdn,serviceID,publishDetailsData,appID,function(data,err){
                                         if(err){
-                                            console.log(err);
+                                            sails.log.error('IdeabizAdminapiController: (New user created) Issue when send for charging for msisdn: %s appId:%s err:%s',msisdn,appID,err);
                                         }else {
-                                            console.log(data);
+                                            sails.log.debug('IdeabizAdminapiController: (New user created) Charging success for msisdn: %s appId:%s',msisdn,appID);
                                         }
                                     });
                                     return res.created(user);
@@ -478,20 +482,20 @@ module.exports = {
                         });
                     });
                 }catch(err){
-                    sails.log.error("Exception in registerUser, error: " + err);
+                    sails.log.error("IdeabizAdminapiController: Exception in registerUser, error: " + err);
                     res.serverError("Exception in registerUser, error: " + err);
                 }
             }
 
         }catch(err){
 
-            sails.log.error("Exception in registerUser, error: " + err);
+            sails.log.error("IdeabizAdminapiController: Exception in registerUser, error: " + err);
             res.serverError("Exception in registerUser, error: " + err);
         }
     },
 
     logApiCall : function(log){
-        sails.log.info("Exec takeaction body: " + JSON.stringify(log));
+        sails.log.info("IdeabizAdminapiController: Exec takeaction body: " + JSON.stringify(log));
 
         // IdeabizUserHistory.create({ 'log': log }).exec(function(err,log){
         //     // sails.log.debug("log inserted");
@@ -519,9 +523,10 @@ module.exports = {
 
         PublishDetails.findOne(queryApp).exec(function(err,publishDetailsData) {
             if (err) {
-                sails.log.error("Error when searching publishDetails Data: "  + " error: " + err);
+                sails.log.error("IdeabizAdminapiController: Error when searching publishDetails Data: "  + " error: " + err);
                 return callback(null,err);
             }else {
+                sails.log.debug("IdeabizAdminapiController: Found publishDetails. Calling sendForCharging");
                 chargeUserAPiCallInstance.sendForCharging(msisdn,publishDetailsData.serviceID, publishDetailsData,appId,function(data,err){
                     if (err&&data==null){
                         return callback(null, "error");
@@ -537,51 +542,60 @@ module.exports = {
 
 
     sendForCharging:function(msisdn,serviceID,publishDetailsData,appID,callback){
+        //Record the Charging request
+        chargingAPICallLogService.addToChargingMap(appID,msisdn);
 
-       var sendForChargingIntance = this;
+        sails.log.debug("IdeabizAdminapiController: Sending for Charging msisdn: %s serviceID: %s appID: %s ",msisdn,serviceID,appID);
+        var sendForChargingIntance = this;
 
+        sails.log.debug("IdeabizAdminapiController: About to Call the getBalance msisdn: %s serviceID: %s appID: %s ",msisdn,serviceID,appID);
         IdeaBizPINVerificationAPIService.getBalance(msisdn,function(response,err){
             if(err){
-                sails.log.debug("getBalance failed for the mobile: " + msisdn + " err:" + JSON.stringify(err));
+                sails.log.debug("IdeabizAdminapiController: getBalance failed for the mobile: " + msisdn + " err:" + JSON.stringify(err));
+                chargingAPICallLogService.setInProgress(appID,msisdn,false);
                 return callback(null, "error");
             }
             if(!(response && response.body)){
-                sails.log.debug("Response received in getBalance request seems not valid response: " + JSON.stringify(response));
+                sails.log.debug("IdeabizAdminapiController: Response received in getBalance request seems not valid response: " + JSON.stringify(response));
+                chargingAPICallLogService.setInProgress(appID,msisdn,false);
                 return callback(null, "error");
             }
 
             var responseBody = JSON.parse(response.body);
 
-            sails.log.debug("statusCode "+response.statusCode);
-
-
             if(responseBody && responseBody.statusCode === "ERROR"){
-                sails.log.debug("Error while requesting the getBalance, err:  " + responseBody.message);
+                sails.log.debug("IdeabizAdminapiController: Error while requesting the getBalance, err:  " + responseBody.message);
+                chargingAPICallLogService.setInProgress(appID,msisdn,false);
                 return callback(null, "error");
 
             }else if (responseBody && response.statusCode === 200){
 
-                sails.log.debug("responseBody.accountInfo.balance " + responseBody.accountInfo.balance);
+                sails.log.debug("IdeabizAdminapiController: Balance check success for the msisdn: %s serviceID %s appID: %s ",msisdn,serviceID,appID);
+                sails.log.debug("IdeabizAdminapiController: responseBody.accountInfo.balance " + responseBody.accountInfo.balance);
 
                /* return callback(null, "error");*/
+                sails.log.debug("IdeabizAdminapiController: Call getChargeAmount msisdn: %s serviceID %s appID: %s ",msisdn,serviceID,appID);
                 sendForChargingIntance.getChargeAmount(publishDetailsData,msisdn,function(data, err){
                     if(err){
-                        sails.log.debug("getChargeAmount failed for the mobile: "+ err);
+                        sails.log.debug("IdeabizAdminapiController: getChargeAmount failed for the mobile: "+ err);
+                        chargingAPICallLogService.setInProgress(appID,msisdn,false);
                         return callback(null, "error");
                     }
                     if (responseBody.accountInfo.balance > data.amount){
-
+                        sails.log.debug("IdeabizAdminapiController: Call IdeaBizPINVerificationAPIService.chargeUser msisdn: %s serviceID %s appID: %s ",msisdn,serviceID,appID);
                         IdeaBizPINVerificationAPIService.chargeUser(
                             msisdn,serviceID,data.amount,function(response,err){
                                 if(err){
-                                    sails.log.debug("charge failed for the mobile: " + msisdn + " err:" + JSON.stringify(err));
+                                    sails.log.debug("IdeabizAdminapiController: charge failed for the mobile: " + msisdn + " err:" + JSON.stringify(err));
+                                    chargingAPICallLogService.setInProgress(appID,msisdn,false);
                                     return callback(null, "error");
                                 }
 
-                                sails.log.debug("Response after requesting charge: " + JSON.stringify(response));
+                                sails.log.debug("IdeabizAdminapiController: Response after requesting charge: msisdn: %s serviceID %s appID: %s Response: %s",msisdn,serviceID,appID,JSON.stringify(response));
 
                                 if(!(response && response.body)){
-                                    sails.log.debug("Response received in charge request seems not valid response: " + JSON.stringify(response));
+                                    sails.log.debug("IdeabizAdminapiController: Response received in charge request seems not valid response: " + JSON.stringify(response));
+                                    chargingAPICallLogService.setInProgress(appID,msisdn,false);
                                     return callback(null, "error");
                                 }
 
@@ -589,7 +603,8 @@ module.exports = {
 
                                 if(responseBody && responseBody.statusCode === "ERROR"){
 
-                                    sails.log.debug("Error while requesting the charge, err:  " + responseBody.message);
+                                    sails.log.debug("IdeabizAdminapiController: Error while requesting the charge, err:  " + responseBody.message);
+                                    chargingAPICallLogService.setInProgress(appID,msisdn,false);
                                     return callback(null, "error");
 
                                 }else if (responseBody && (response.statusCode === 200 || response.statusCode === 201)){
@@ -604,18 +619,19 @@ module.exports = {
                                     SubscriptionPayment.findOne(paymentQuery).exec(function (err, payment) {
 
                                         if (err){
-                                            sails.log.error("Error when searching for a payment for the details: " + JSON.stringify(paymentQuery));
+                                            sails.log.error("IdeabizAdminapiController: Error when searching for a payment for the details: " + JSON.stringify(paymentQuery));
                                         }
 
                                         if(payment){
-
-                                            SubscriptionPayment.update(paymentQuery, {status:1,amount:data.amount}).exec(function (err, result) {
+                                            SubscriptionPayment.update(paymentQuery, {status:1,amount:data.amount}).exec(function (err, updatedPayment) {
                                                 if (err) {
-                                                    sails.log.error("Payment updated Error");
+                                                    sails.log.error("IdeabizAdminapiController: Payment updated Error");
+                                                    chargingAPICallLogService.setInProgress(appID,msisdn,false);
                                                     return callback(null, "error");
 
                                                 }else {
-                                                    sails.log.debug("Payment updated success");
+                                                    sails.log.debug("IdeabizAdminapiController: Payment updated successfully for msisdn: %s serviceID: %s appID: %s Payment: %s",msisdn,serviceID,appID,JSON.stringify(updatedPayment));
+                                                    chargingAPICallLogService.setInProgress(appID,msisdn,false);
                                                     return callback({payment:"ok"}, null);
                                                 }
                                             });
@@ -624,12 +640,15 @@ module.exports = {
                                             var saveData = {appId:publishDetailsData.appId,msisdn:msisdn,amount:data.amount,
                                                 operator:data.operator,status:1,date:dateFormat(new Date(), "yyyy-mm-dd")};
 
-                                            SubscriptionPayment.create(saveData).exec(function (err, result) {
+                                            SubscriptionPayment.create(saveData).exec(function (err, newPayment) {
 
                                                 if (err) {
-                                                    sails.log.error("SubscriptionPayment Create Error");
+                                                    sails.log.error("IdeabizAdminapiController: SubscriptionPayment Create Error");
+                                                    chargingAPICallLogService.setInProgress(appID,msisdn,false);
                                                     return callback(null, "error");
                                                 }
+                                                sails.log.debug("IdeabizAdminapiController: Payment created successfully for msisdn: %s serviceID: %s appID: %s Payment:%s ",msisdn,serviceID,appID,JSON.stringify(newPayment));
+                                                chargingAPICallLogService.setInProgress(appID,msisdn,false);
                                                 return callback({payment:"ok"}, null);
                                             });
 
@@ -637,11 +656,12 @@ module.exports = {
 
                                     });
                                 }else {
-                                    sails.log.debug("Error while requesting the charge, err:  " + responseBody.message);
+                                    sails.log.debug("IdeabizAdminapiController: Error while requesting the charge, err: %s  for msisdn: %s serviceID: %s appID: %s ",responseBody.message,msisdn,serviceID,appID);
                                     sendForChargingIntance.getOperator(msisdn,function(operator, err){
 
                                         if (err) {
-                                            sails.log.error("Operator find Error");
+                                            sails.log.error("IdeabizAdminapiController: Operator find Error");
+                                            chargingAPICallLogService.setInProgress(appID,msisdn,false);
                                             return callback(null, "error");
                                         }else {
 
@@ -651,9 +671,11 @@ module.exports = {
                                             FailedTransactionLog.create(data).exec(function (err, result) {
 
                                                 if (err) {
-                                                    sails.log.error("FailedTransactionLog Create Error");
+                                                    sails.log.error("IdeabizAdminapiController: FailedTransactionLog Create Error");
+                                                    chargingAPICallLogService.setInProgress(appID,msisdn,false);
                                                     return callback(null, "error");
                                                 }
+                                                chargingAPICallLogService.setInProgress(appID,msisdn,false);
                                                 return callback(null, "error");
                                             });
                                         }
@@ -663,26 +685,29 @@ module.exports = {
                                 }
                             });
                     }else {
-
-                        console.log(responseBody);
+                        sails.log.debug("IdeabizAdminapiController: Account balance: %s is not enough to charge the service amount: %s for the  msisdn: %s serviceID %s appID: %s ",responseBody.accountInfo.balance,data.amount,msisdn,serviceID,appID);
                         var data = {appId:publishDetailsData.appId,msisdn:msisdn,
                             amount:0.0,operator:data.operator,status:0 ,date:dateFormat(new Date(), "yyyy-mm-dd")}
 
-                        SubscriptionPayment.create(data).exec(function (err, result) {
+                        SubscriptionPayment.create(data).exec(function (err, newPayment) {
 
                             if (err) {
-                                sails.log.error("SubscriptionPayment Create Error");
+                                sails.log.error("IdeabizAdminapiController: SubscriptionPayment Create Error");
+                                chargingAPICallLogService.setInProgress(appID,msisdn,false);
                                 return callback(null, "error");
                             }
+                            sails.log.debug("IdeabizAdminapiController: Payment created successfully with status 0 and for amnt 0.0 for msisdn: %s serviceID: %s appID: %s Payment:%s ",msisdn,serviceID,appID,JSON.stringify(newPayment));
+                            chargingAPICallLogService.setInProgress(appID,msisdn,false);
                             return callback(null, "error");
                         });
                     }
                 })
             }else {
-                sails.log.debug("Error while requesting the balance check, err:  " + responseBody.message);
+                sails.log.debug("IdeabizAdminapiController: Error while requesting the balance check, err:  " + responseBody.message);
                 sendForChargingIntance.getOperator(msisdn,function(operator, err){
                     if (err) {
-                        sails.log.error("Operator find Error");
+                        sails.log.error("IdeabizAdminapiController: Operator find Error");
+                        chargingAPICallLogService.setInProgress(appID,msisdn,false);
                         return callback(null, "error");
                     }else {
                         var data= {appId:publishDetailsData.appId,date:dateFormat(new Date(), "yyyy-mm-dd"),
@@ -691,9 +716,11 @@ module.exports = {
                         FailedTransactionLog.create(data).exec(function (err, result) {
 
                             if (err) {
-                                sails.log.error("FailedTransactionLog Create Error");
+                                sails.log.error("IdeabizAdminapiController: FailedTransactionLog Create Error");
+                                chargingAPICallLogService.setInProgress(appID,msisdn,false);
                                 return callback(null, "error");
                             }
+                            chargingAPICallLogService.setInProgress(appID,msisdn,false);
                             return callback(null, "error");
                         });
 
@@ -713,7 +740,7 @@ module.exports = {
 
         RenewalAppUser.findOne(renewalQuery).exec(function (err, renewalAppUser) {
             if (err) {
-                sails.log.error("Error when searching for a RenewalAppUser for the details: " + JSON.stringify(renewalQuery));
+                sails.log.error("IdeabizAdminapiController: Error when searching for a RenewalAppUser for the details: " + JSON.stringify(renewalQuery));
                 return callback(null, "error");
             }
             if (renewalAppUser) {
@@ -727,7 +754,7 @@ module.exports = {
                 }
                 RenewalAppUser.update(renewalQuery, {nextPaymentDate:nextPaymentDate}).exec(function (err, result) {
                     if (err) {
-                        sails.log.error("RenewalAppUser updated Error");
+                        sails.log.error("IdeabizAdminapiController: RenewalAppUser updated Error");
                         return callback(null, "error");
 
                     }else {
@@ -735,7 +762,7 @@ module.exports = {
                     }
                 });
             }else {
-                sails.log.error("RenewalAppUser not found: " + JSON.stringify(renewalQuery));
+                sails.log.error("IdeabizAdminapiController: RenewalAppUser not found: " + JSON.stringify(renewalQuery));
                 return callback(null, "error");
             }
         });
@@ -747,7 +774,7 @@ module.exports = {
     getOperator:function(msisdn,callback){
         Operator.findOne({operator_code:parseInt(msisdn.substring(0, 4))}).exec(function (err, data) {
             if (err) {
-                sails.log.error("Operator find Error");
+                sails.log.error("IdeabizAdminapiController: Operator find Error");
                 return callback(null,err);
             }else {
                 return callback( data.operator,err);
@@ -765,7 +792,7 @@ module.exports = {
             actionStateChangeInstance.getOperator(msisdn,function(operator, err){
 
                 if (err) {
-                    sails.log.error("Operator find Error");
+                    sails.log.error("IdeabizAdminapiController: Operator find Error");
                     return callback(null,err);
 
                 }else if (operatorData.operator.toLowerCase()==operator){
@@ -777,7 +804,7 @@ module.exports = {
     },
 
     getAppUserStatus: function(subscriptionStatus){
-        console.log("subscriptionStatus=" + subscriptionStatus);
+        sails.log.debug("IdeabizAdminapiController: subscriptionStatus=" + subscriptionStatus);
         if(this.isStatusValid(subscriptionStatus)){
             switch (subscriptionStatus){
                 case config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code:
@@ -794,22 +821,21 @@ module.exports = {
     },
 
     notifyUsers: function(req,res,user,message){
-        DeviceId.findOne({appId:user.appId,deviceUUID:user.deviceUUID}).exec(function (err, device) {
-            console.log(JSON.stringify(device));
-            if(device) {
-                Application.findOne({id: user.appId}).exec(function (err, app) {
-
-                    var messageObj = {
-                        "to": device.deviceId,
-                        "notification": {
-                            "body": message
-                        }
-                    };
-
-                    pushService.sendPushNotification(messageObj);
-                });
+        DeviceId.find({
+            where: {appId:user.appId,deviceUUID:user.deviceUUID},
+            sort: 'createdAt DESC'
+        }).exec(function (err, devices) {
+            if(devices && devices.length>0) {
+                console.log("devices=>", devices);
+                var messageObj = {
+                    "to": devices[0].deviceId,
+                    "notification": {
+                        "body": message
+                    }
+                };
+                pushService.sendPushNotification(messageObj);
             }else{
-                sails.log.debug("No devices found to send the push notification for the msisdn:" + user.msisdn + " appID:" + user.appId + " ");
+                sails.log.debug("IdeabizAdminapiController: No devices found to send the push notification for the msisdn:" + user.msisdn + " appID:" + user.appId + " ");
             }
         });
     }
