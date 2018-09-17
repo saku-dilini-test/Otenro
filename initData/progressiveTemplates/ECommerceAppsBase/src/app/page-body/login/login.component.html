@@ -56,6 +56,11 @@
 									<div class="col-sm-4">
 										<a  (click)='register()' class="btn btn-d btn-lg main-button btn-block">Register</a>
 									</div>
+									<div class="col-sm-4">
+										<div class="row padding" style="text-align: center;">
+											<span data-toggle="modal" data-target="#myModal">Forgot Password?</span>
+										</div>
+									</div>
 								</div>
 							</form>
 						</div>
@@ -67,3 +72,36 @@
 	</div>
 	<!-- bloc-17 END -->
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+
+	  <!-- Modal content-->
+	  <div class="modal-content" style="margin: 20vh 0;">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+		  <h4 class="modal-title">Enter Your Email</h4>
+		</div>
+		<div class="modal-body">
+		  <input class="form-control" #email='ngModel' type="email" name="email" id="email" placeholder="you@example.com"
+				  pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" ngModel required>
+		  <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+			<div [hidden]="!email.hasError('required')">email is required</div>
+			<div [hidden]="!email.hasError('pattern')">Invalid Email ID</div>
+		  </div>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-default" data-dismiss="modal" (click)="forgotPassword(email.value)">Send</button>
+		</div>
+	  </div>
+
+	</div>
+  </div>
+
+  <div class="col-sm-12" style="margin: 10px 0">
+	<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+  </div>
+  <div class="col-sm-12" style="margin: 10px 0">
+	<ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
+  </div>

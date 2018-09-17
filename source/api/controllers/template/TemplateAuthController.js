@@ -9,7 +9,10 @@ var JWT = require('machinepack-jwt'),
     GoogleAPIsOAuth2v2 = require('machinepack-googleapisoauth2v2'),
     Facebook = require('machinepack-facebook'),
     request = require('request'),
-    config = require('../../services/config');
+    config = require('../../services/config'),
+    emailService = require('../../services/emailService'),
+    Cryptr = require('cryptr'),
+    cryptr = new Cryptr('OtenroEncryptSecretKey');
 
 module.exports = {
 
@@ -428,6 +431,124 @@ module.exports = {
                 });
             });
 
+    },
+
+    /**
+     * Responsible for sending password reset email
+     * @param req - email,appId,url
+     * @param res - json
+     **/
+    sendPasswordResetEmail: function(req, res) {
+
+        'use strict';
+        var email = req.body.email;
+        var appId = req.body.appId;
+        var url = 'http://localhost:4200/#/passwordReset';
+        // AppUser find query
+        var criteria = { email: email, appId : appId };
+        // Encrypt the email
+        var encryptedEmail = cryptr.encrypt(email);
+
+        AppUser.findOne(criteria)
+            .exec(function (err, user) {
+
+                if (err) {
+
+                    return res.send({ message: 'error'});
+                }
+
+                else if (user) {
+
+                    var data = {
+                        email: email,
+                        title: 'Click the link below to set the password',
+                        link: url + '?email=' + encryptedEmail
+                    };
+
+                    // Send email with password reset link
+                    emailService.sendForgotPasswordEmail(data, function (callback) {
+
+                        if (callback.message === 'success') {
+
+                            return res.send({ message: 'success'});
+                        }
+
+                        if (callback.message === 'error') {
+
+                            return res.send({ message: 'error'});
+                        }
+
+                        if (callback.message === 'failed') {
+
+                            return res.send({ message: 'failed'});
+                        }
+                    });
+                } else {
+
+                    return res.send({ message: 'user not found' });
+                }
+            });
+    },
+
+    /**
+     * Responsible for resetting password
+     * @param req - encryptedEmail, appId, password
+     * @param res - json
+     **/
+    resetPassword: function(req, res) {
+
+        'use strict';
+        // Decrypt the email
+        var decryptedEmail = cryptr.decrypt(req.body.email);
+        // AppUser find and update query
+        var criteria = {
+                email: decryptedEmail,
+                appId : req.body.appId
+            };
+        var password = req.body.password;
+
+        AppUser.findOne(criteria).exec(function (err, user) {
+
+            if (err) {
+
+                return res.send({ message: 'error'});
+            }
+
+            if (!user) {
+
+                return res.send({ message: 'user not found' });
+            }
+
+            // Encrypt the password
+            Passwords.encryptPassword({
+                password: password,
+                difficulty: 10
+            }).exec({
+                error: function (err) {
+                    return res.send({ message: 'error'});
+                },
+                success: function(hash) {
+                    password = hash;
+                    // Update app user with new password
+                    AppUser.update(criteria, { password: password })
+                        .exec(function(err,user){
+
+                            if (err) {
+
+                                return res.send({ message: 'error'});
+                            }
+                            if (user.length > 0) {
+
+                                return res.send({ message: 'success'});
+                            }
+                            if (user.length === 0) {
+
+                                return res.send({ message: 'failed'});
+                            }
+                        });
+                }
+            });
+        });
     }
 };
 

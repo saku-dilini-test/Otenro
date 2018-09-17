@@ -1008,6 +1008,29 @@ module.exports = {
 
 
 
+    },
+
+    /**
+     * Responsible for password reset fo mobile app user
+     * @param data
+     * @param callback
+     **/
+    sendForgotPasswordEmail: function(data, callback) {
+        var emailDetails = {
+            text: data.title + '\n' + data.link,
+            from: 'communications@otenro.com',
+            to: data.email,
+            subject: 'Set New password'
+        };
+        server.send(emailDetails, function (err, message) {
+            if (err) {
+                return callback({ message: 'error' });
+            } else if (message) {
+                return callback({ message: 'success' });
+            } else {
+                return callback({ message: 'failed' });
+            }
+        });
     }
 
 

@@ -18,6 +18,7 @@ import { AppUserComponent } from './app-user/app-user.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BlogsComponent } from './blogs/blogs.component';
 import { BlogViewComponent } from './blog-view/blog-view.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
 
 const routes: Routes = [
  { path: '',
@@ -101,8 +102,12 @@ const routes: Routes = [
   },
   {
     path: 'paypal/rest/execute',
-  component: PaypalPaymentComponent
-},
+    component: PaypalPaymentComponent
+  },
+  {
+    path: 'passwordReset',
+    component: PasswordResetComponent
+  },
 // {
 //   path: 'paypal',
 // component: PaypalPaymentComponent

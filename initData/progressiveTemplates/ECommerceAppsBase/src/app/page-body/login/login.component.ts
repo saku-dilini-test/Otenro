@@ -6,6 +6,9 @@ import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { TitleService } from '../../services/title.service';
+import { debounceTime } from 'rxjs/operator/debounceTime';
+import { Subject } from 'rxjs/Subject';
+declare var $: any;
 
 @Component({
   selector: 'app-login',
@@ -14,14 +17,19 @@ import { TitleService } from '../../services/title.service';
 })
 export class LoginComponent implements OnInit {
 
+  private _success = new Subject<string>();
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
   private params = [];
+  successMessage; errorMessage;
   loginclicked;
   loading:any;
 
   name; pass; gate: boolean; navigate;
   ifInvalidUserPassword:boolean;
+
+  private static EMAIL_PATTERN = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
   constructor(private localStorageService: LocalStorageService, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private http: HttpClient,
               private title: TitleService) {
     this.title.changeTitle("Login");
@@ -98,4 +106,49 @@ export class LoginComponent implements OnInit {
     this.route.navigate(['register', this.navigate]);
   }
 
+  /**
+   * Send forgot password email
+   * @param fpEmail - password reset link sending email
+   **/
+  forgotPassword(fpEmail) {
+
+    if (this.isEmailValid(fpEmail)) {
+      let data = { email: fpEmail, appId: this.appId };
+
+      this.http.post(SERVER_URL + '/templatesAuth/forgotPassword', data)
+      .subscribe((res : any) => {
+          $('#email').val("");
+
+          // if email sent success
+          if (res.message == 'success') {
+
+            this._success.subscribe((message) => this.successMessage = message);
+            debounceTime.call(this._success, 4000).subscribe(() => this.successMessage = null);
+            this._success.next('Please check your email to get password reset link');
+            setTimeout(() => {}, 3100);
+          } else {
+
+            this._success.subscribe((message) => this.errorMessage = message);
+            debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+            this._success.next('Failed to send password reset link to your email');
+            setTimeout(() => {}, 3100);
+          }
+        });
+    } else {
+      $('#email').val("");
+    }
+  }
+
+  /**
+   * Check email is valid
+   * @param fpEmail - email that needs to validate
+   **/
+  isEmailValid (fpEmail) {
+
+    if (fpEmail.match(LoginComponent.EMAIL_PATTERN)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

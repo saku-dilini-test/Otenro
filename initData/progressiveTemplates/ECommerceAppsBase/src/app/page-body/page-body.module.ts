@@ -24,7 +24,7 @@ import { SearchPipe } from '../pipes/search.pipe';
 import { BlogsComponent } from './blogs/blogs.component';
 import { BlogViewComponent } from './blog-view/blog-view.component';
 import { SafeHtmlPipe } from '../pipes/safeHtml.pipe';
-
+import { PasswordResetComponent } from './password-reset/password-reset.component';
 
 @NgModule({
   imports: [
@@ -59,7 +59,8 @@ import { SafeHtmlPipe } from '../pipes/safeHtml.pipe';
     SearchPipe,
     BlogsComponent,
     BlogViewComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    PasswordResetComponent
   ]
 })
 export class PageBodyModule {}
