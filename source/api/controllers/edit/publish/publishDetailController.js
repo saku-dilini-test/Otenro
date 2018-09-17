@@ -288,7 +288,7 @@ module.exports = {
                             var email = req.body.email;
                             var emailBody = "<html><br>Hi,<br><br>" +
 
-                                           "Please create and revert with the service ID for the below service created through <br> Appmaker. Details are as follows:" +
+                                           "Please create and revert with the service ID for the below service created through <br> Ideadroid. Details are as follows:" +
 
                                             "<br><br><br>Service Name: " +  result[0].title +
                                             "<br>Company Name: " +  userData[0].firstName + " " + userData[0].lastName +
