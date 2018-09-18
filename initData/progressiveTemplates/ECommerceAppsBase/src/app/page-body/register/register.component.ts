@@ -39,6 +39,7 @@ export class RegisterComponent implements OnInit {
   errorMessage: string;
   successMessage: string;
   private _success = new Subject<string>();
+  fullUrl; domainUrl;
 
   constructor(private localStorageService: LocalStorageService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
     private title: TitleService) {
@@ -66,8 +67,7 @@ export class RegisterComponent implements OnInit {
 
 
       });
-
-
+      this.generateDomainUrl();
   }
 
   modelChanged(e) {
@@ -120,7 +120,8 @@ export class RegisterComponent implements OnInit {
         zip: this.zip,
         country: this.selectedCountry,
         phone: this.phone,
-        appId: this.appId
+        appId: this.appId,
+        url: this.domainUrl
       };
 
       this.http.post(SERVER_URL + "/templatesAuth/register", data)
@@ -149,6 +150,14 @@ export class RegisterComponent implements OnInit {
   //Show login page
   singIn() {
     this.route.navigate(['login', this.navigate]);
+  }
+
+  generateDomainUrl() {
+
+    this.fullUrl = window.location.toString();
+    let index = this.fullUrl.indexOf('#');
+    this.domainUrl = this.fullUrl.substring(0, index + 2);
+    this.localStorageService.set('domainUrl', this.domainUrl);
   }
 
 }

@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   loginclicked;
   loading:any;
 
-  name; pass; gate: boolean; navigate;
+  name; pass; domainUrl; gate: boolean; navigate;
   ifInvalidUserPassword:boolean;
 
   private static EMAIL_PATTERN = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.domainUrl = this.localStorageService.get('domainUrl');
     this.router.params.subscribe(params => {
       this.navigate = params['type'];
     });
@@ -123,7 +124,7 @@ export class LoginComponent implements OnInit {
   forgotPassword(fpEmail) {
 
     if (this.isEmailValid(fpEmail)) {
-      let data = { email: fpEmail, appId: this.appId };
+      let data = { email: fpEmail, appId: this.appId, url: this.domainUrl };
 
       this.http.post(SERVER_URL + '/templatesAuth/forgotPassword', data)
       .subscribe((res : any) => {

@@ -122,6 +122,10 @@ module.exports = {
 
     register: function(req, res) {
 
+        'use strict';
+
+        var domainUrl = req.body.url;
+
         AppUser.findOne({email: req.body.email,appId:req.body.appId}, function foundUser(err, user) {
 
             if (err) {
@@ -144,7 +148,7 @@ module.exports = {
 
                     // Encrypt the email
                     var encryptedEmail = cryptr.encrypt(user.email);
-                    var url = 'http://localhost:4200/#/login/home';
+                    var url = domainUrl + 'login/home';
                     var data = {
                         email: user.email,
                         title: 'Click the link below to Verify your email!',
@@ -465,7 +469,8 @@ module.exports = {
         'use strict';
         var email = req.body.email;
         var appId = req.body.appId;
-        var url = 'http://localhost:4200/#/passwordReset';
+        var domailUrl = req.body.url;
+        var url = domailUrl + 'passwordReset';
         // AppUser find query
         var criteria = { email: email, appId : appId };
         // Encrypt the email
