@@ -37,6 +37,7 @@ export class RegisterComponent implements OnInit {
   private myForm: FormGroup;
   isEmailDuplicate;
   errorMessage: string;
+  successMessage: string;
   private _success = new Subject<string>();
 
   constructor(private localStorageService: LocalStorageService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
@@ -125,39 +126,16 @@ export class RegisterComponent implements OnInit {
       this.http.post(SERVER_URL + "/templatesAuth/register", data)
         .subscribe((res) => {
 
-          var requestParams = {
-            "token": res.token,
-            "email": data.email,
-            "name": data.firstName,
-            "lname": data.lastName,
-            "phone": data.phone,
-            "streetNumber": data.streetNumber,
-            "streetName": data.streetName,
-            "country": data.country,
-            "city": data.city,
-            "zip": data.zip,
-            "type": 'internal',
-            "appId": data.appId,
-            "registeredUser": res.user.sub
-          };
+          if (res.message === 'success') {
 
-          this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
-          if (this.localStorageService.get("cartUnknownUser")) {
-            this.localStorageService.set("cart" + requestParams.registeredUser, this.localStorageService.get("cartUnknownUser"));
-            this.localStorageService.remove("cartUnknownUser");
-          }
-          this.dataService.appUserId = requestParams.registeredUser;
-          this.dataService.isUserLoggedIn.check = true;
-          this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
+            this._success.subscribe((message) => this.successMessage = message);
+            debounceTime.call(this._success, 4000)
+              .subscribe(() => this.successMessage = null);
+            this._success.next('Verify your email address to complete registration.');
+            setTimeout(() => {
 
-          if (this.navigate == 'home') {
-            this.route.navigate(['home']);
-          } else if (this.navigate == 'cart') {
-            this.route.navigate(['cart']);
-          } else if (this.navigate == 'delivery') {
-            this.route.navigate(['checkout', 'delivery']);
-          } else {
-            this.route.navigate(['checkout', 'pickup']);
+              this.route.navigate(['home']);
+            }, 3100);
           }
         }, err => {
 

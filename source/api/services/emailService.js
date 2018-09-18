@@ -1031,6 +1031,30 @@ module.exports = {
                 return callback({ message: 'failed' });
             }
         });
+    },
+
+    /**
+     * Responsible for sending app user email verification email
+     *
+     * @param data
+     * @param callback
+     **/
+    sendAppUserVerificationEmail: function (data, callback) {
+        var emailDetails = {
+            text: data.title + '\n\n' + data.link,
+            from: 'communications@otenro.com',
+            to: data.email,
+            subject: 'Verify Email Address'
+        };
+        server.send(emailDetails, function (err, message) {
+            if (err) {
+                return callback({message: 'error'});
+            } else if (message) {
+                return callback({message: 'success'});
+            } else {
+                return callback({message: 'failed'});
+            }
+        });
     }
 
 
