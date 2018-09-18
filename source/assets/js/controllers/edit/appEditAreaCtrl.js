@@ -63,20 +63,20 @@
         })
 
 
-
-        if(templateCheck == true || templateCheck == 'true'){
-
-            $scope.urlPath1 = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
+        // console.log(templateCheck)
+        // if(templateCheck == true || templateCheck == 'true'){
+        //
+        //     $scope.urlPath1 = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+        //         + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
 
             $scope.appTemplateUrl = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
                 + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
 
-        }else{
-            $scope.appTemplateUrl = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
-                + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
-
-        }
+        // }else{
+        //     $scope.appTemplateUrl = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+        //         + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
+        //
+        // }
 
         appEditResource.getSelectedApp({appId: $scope.appId})
             .success(function(data) {
