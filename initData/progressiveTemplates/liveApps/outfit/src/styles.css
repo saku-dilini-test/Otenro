@@ -1010,6 +1010,10 @@ button{
         padding-left: 0; 
         padding-right: 0;  
     }
+
+	.header-text-h2{
+		font-size:10px;
+	}
 }
 @media (max-width: 992px) and (min-width: 768px)
 {
@@ -1393,9 +1397,6 @@ button{
 		text-align:center;
 	}
 
-	.header-text-h2{
-		font-size:10px;
-	}
 	.bloc-lg{
 		padding: 0px 10px 80px 10px;
 	}

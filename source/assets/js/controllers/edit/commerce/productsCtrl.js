@@ -694,6 +694,19 @@
                     $scope.$apply(function($scope){
                         $scope.myImage=evt.target.result;
                         $scope.picFile =  $scope.myImage;
+                        var img = new Image();
+                        img.src = window.URL.createObjectURL( file );
+
+                        img.onload = function() {
+                            var width = img.naturalWidth,
+                                height = img.naturalHeight;
+                            window.URL.revokeObjectURL( img.src );
+                            if($scope.iSizeThird.w > width || $scope.iSizeThird.h > height){
+                                toastr.warning('The uploaded image does not meet minimum required resolution, which could lead to a distorted image', 'Warning', {
+                                    closeButton: true
+                                });
+                            }
+                        };
                     });
                 };
                 reader.readAsDataURL(file);
@@ -714,6 +727,19 @@
                     $scope.$apply(function($scope){
                         $scope.myBannerImage=evt.target.result;
                         $scope.picFileBanner =  $scope.myBannerImage;
+                        var img = new Image();
+                        img.src = window.URL.createObjectURL( file );
+
+                        img.onload = function() {
+                            var width = img.naturalWidth,
+                                height = img.naturalHeight;
+                            window.URL.revokeObjectURL( img.src );
+                            if($scope.sizeBanner.w > width || $scope.sizeBanner.h > height){
+                                toastr.warning('The uploaded image does not meet minimum required resolution, which could lead to a distorted image', 'Warning', {
+                                    closeButton: true
+                                });
+                            }
+                        };
                     });
                 };
                 reader.readAsDataURL(file);

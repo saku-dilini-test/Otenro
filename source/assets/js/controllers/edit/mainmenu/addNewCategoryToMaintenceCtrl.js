@@ -35,7 +35,7 @@
             $scope.picFile     = imageURL;
 
         }
-
+        window.URL = window.URL || window.webkitURL;
         // image crop function
         $scope.cropImage = function () {
             var handleFileSelect=function(evt) {
@@ -44,7 +44,22 @@
                 reader.onload = function (evt) {
                     $scope.$apply(function($scope){
                         $scope.myImage=evt.target.result;
-                        $scope.picFile =  $scope.myImage
+                        $scope.picFile =  $scope.myImage;
+                        var img = new Image();
+                        img.src = window.URL.createObjectURL( file );
+
+                        img.onload = function() {
+                            var width = img.naturalWidth,
+                                height = img.naturalHeight;
+                            window.URL.revokeObjectURL( img.src );
+                            if($scope.iSizeSecond.w > width || $scope.iSizeSecond.h > height){
+                                toastr.warning('The uploaded image does not meet minimum required resolution, which could lead to a distorted image', 'Warning', {
+                                    closeButton: true
+                                });
+                            }
+                        };
+
+
                     });
                 };
                 reader.readAsDataURL(file);
@@ -240,6 +255,16 @@
         $scope.deleteImg = function () {
             $scope.tmpImage[0] = null;
             $scope.picFile     = null;
+        };
+
+        //give a warn to image upload if size is less than expected
+        $scope.validateSize = function(image,width,height){
+            console.log(image,width,height)
+            if(image.width != width && image.height != height){
+                toastr.error('Image should be in recommended size', 'Warning', {
+                    closeButton: true
+                });
+            }
         };
 
     }

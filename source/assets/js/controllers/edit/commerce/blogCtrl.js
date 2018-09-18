@@ -63,7 +63,22 @@
                         reader.onload = function (evt) {
                             $scope.$apply(function($scope){
                                 $scope.myImage=evt.target.result;
-                                $scope.picFile =  $scope.myImage
+                                $scope.picFile =  $scope.myImage;
+
+                                var img = new Image();
+                                img.src = window.URL.createObjectURL( file );
+
+                                img.onload = function() {
+                                    var width = img.naturalWidth,
+                                        height = img.naturalHeight;
+                                    window.URL.revokeObjectURL( img.src );
+                                    if($scope.iSizeSecond.w > width || $scope.iSizeSecond.h > height){
+                                        toastr.warning('The uploaded image does not meet minimum required resolution, which could lead to a distorted image', 'Warning', {
+                                            closeButton: true
+                                        });
+                                    }
+                                };
+
                             });
                         };
                         reader.readAsDataURL(file);
