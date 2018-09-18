@@ -263,13 +263,17 @@ module.exports = {
                     const csvFilePath=dePath+"/"+newFileName;
                     const csv=require('csvtojson');
                     csv().fromFile(csvFilePath).on('json',(jsonObj)=>{
-
+                    var csvDate   = moment(jsonObj.dateTime, CSV_DATE_TIME_FORMAT).toDate();
+                    var currDate  = moment().seconds(0).millisecond(0).toDate();
                     if(errorsInCsv == null){
                         if (!moment(jsonObj.dateTime, CSV_DATE_TIME_FORMAT, true).isValid()){
                             sails.log.debug("Invalid date format in row "  + rowNumber + " , correct date/time format is " + CSV_DATE_TIME_FORMAT);
                             errorsInCsv = "Invalid date format in row "  + rowNumber + " ,  correct date/time format is " + CSV_DATE_TIME_FORMAT;
                         }
-
+                        if(csvDate <= currDate){
+                            sails.log.debug("Invalid date and time in row " + rowNumber + " , You can only schedule notifications for the future.");
+                            errorsInCsv = " You have entered a past date and time in row " + rowNumber + ". You can only schedule notifications for the future.";
+                        }
                         if (jsonObj.message && jsonObj.message.length == 0){
                             sails.log.debug("Message is empty in row " + rowNumber);
                             errorsInCsv = "Message is empty in row " + rowNumber;
