@@ -110,6 +110,8 @@ module.exports = {
     /*Manually updating the relevant quantity in the ThirdNavigation*/
         var obj = [];
         var data = req.body[0];
+        // Remaining quantity of the updating product
+        var pQuantity;
         ThirdNavigation.find({id: data.id}).exec(function(err, app){
             if(err) res.send(err);
             for(var i =0; i<app[0].variants.length; i++){
@@ -119,6 +121,40 @@ module.exports = {
                     }
                     else {
                         app[0].variants[i].quantity = app[0].variants[i].quantity - data.qty;
+                        pQuantity = app[0].variants[i].quantity;
+                        UserEmail.find({appId: app[0].appId}).exec(function (err, email) {
+                            if (err) {
+                                // TODO: handle user email find error
+                                sails.log.info(err);
+                            }
+                            if (email.length > 0) {
+                                // If remaining product Quantity is less than minimum stock level
+                                if (email[0].alertAt >= pQuantity) {
+                                    var emailData = {
+                                        fromEmail: email[0].fromEmail,
+                                        alertEmail: email[0].alertEmail,
+                                        pName: app[0].name,
+                                        pDescription: app[0].detailedDesc,
+                                        sku: data.sku,
+                                        price: data.price,
+                                        weight: data.weight
+                                    };
+                                    // Send the low stock notification email
+                                    sentMails.sendLowStockEmail(emailData, function (callback) {
+                                        if (callback.message === 'success') {
+                                            // TODO: handle success callback
+                                            sails.log.info(callback.message);
+                                        } else if (callback.message === 'error') {
+                                            // TODO: handle error callback
+                                            sails.log.info(callback.message);
+                                        } else if (callback.message === 'failed') {
+                                            // TODO: handle failed callback
+                                            sails.log.info(callback.message);
+                                        }
+                                    });
+                                }
+                            }
+                        });
                     }
                     ThirdNavigation.update({id:data.id},app[0]).exec(function(err,thirdNavi){
                         if(err) res.send(err);
