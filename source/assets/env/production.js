@@ -1,6 +1,6 @@
 /**
  * Created by praveen on 3/2/17.
  */
-O_SERVER_URL = 'https://developer.appmaker.lk/';
-O_MESERVER_URL = 'https://cdn.appmaker.lk/developer/meServer/';
-O_ME_SERVER = '/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/';
+O_SERVER_URL = 'https://ideadroid.ideamart.io/';
+O_MESERVER_URL = 'https://ideadroidcdn.ideamart.io/';
+O_ME_SERVER = '/home/admin/web/ideadroidcdn.ideamart.io/public_html/temp/';

@@ -43,17 +43,17 @@ module.exports = {
 
     /** ****** Custom Config ****** **/
     // HOST URL
-    HOST_URL: 'https://developer.appmaker.lk',
+    HOST_URL: 'https://ideadroid.ideamart.io',
     // ME SERVER Config
-    ME_SERVER_URL: 'https://cdn.appmaker.lk/developer/meServer/temp/',
-    ME_SERVER: '/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/',
+    ME_SERVER_URL: 'https://ideadroidcdn.ideamart.io/developer/meServer/temp/',
+    ME_SERVER: '/home/admin/web/ideadroidcdn.ideamart.io/public_html/developer/meServer/temp/',
     ME_SERVER_PORT: 80,
     // APP FILE SERVER Config
-    APP_FILE_SERVER: '/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/',
+    APP_FILE_SERVER: '/home/admin/web/ideadroidcdn.ideamart.io/public_html/developer/appFileServer/',
     CLIENT_SECRET: 'pro44f4f3be572ec33711a40a5b8b4789',
-    TEMPLATES_PATH: '/home/projects/appmaker/Otenro/initData/templates/',
-    PROGRESSIVE_TEMPLATES_PATH: '/home/projects/appmaker/Otenro/initData/distribution/',
-    REDIRECT_URL: 'https://developer.appmaker.lk',
+    TEMPLATES_PATH: '/home/projects/ideadroid/Otenro/initData/templates/',
+    PROGRESSIVE_TEMPLATES_PATH: '/home/projects/ideadroid/Otenro/initData/distribution/',
+    REDIRECT_URL: 'https://ideadroid.ideamart.io',
     ANDROID_APK_BUILD_ZIPALIGN_PATH: '/opt/android-sdk/build-tools/26.0.2/zipalign',//Use to do the zipalign when building android apk.
     ANDROID_VERSION : 26,
 
