@@ -272,7 +272,7 @@ module.exports = {
                         }
                         if(csvDate <= currDate){
                             sails.log.debug("Invalid date and time in row " + rowNumber + " , You can only schedule notifications for the future.");
-                            errorsInCsv = " You have entered a past date and time in row " + rowNumber + ". You can only schedule notifications for the future.";
+                            errorsInCsv = "You have entered a past date and time in row " + rowNumber + ". You can only schedule notifications for the future.";
                         }
                         if (jsonObj.message && jsonObj.message.length == 0){
                             sails.log.debug("Message is empty in row " + rowNumber);
