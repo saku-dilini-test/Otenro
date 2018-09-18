@@ -75,6 +75,13 @@ module.exports = {
     phone:{
         type: 'string'
     },
+    regToken:{
+        type: 'string'
+    },
+    isEmailVerified:{
+        type: 'boolean',
+        defaultsTo: false
+    },
     toJSON: function() {
       var obj = this.toObject();
       delete obj.password;

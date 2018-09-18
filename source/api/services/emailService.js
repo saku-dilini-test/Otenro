@@ -1008,6 +1008,79 @@ module.exports = {
 
 
 
+    },
+
+    /**
+     * Responsible for password reset fo mobile app user
+     * @param data
+     * @param callback
+     **/
+    sendForgotPasswordEmail: function(data, callback) {
+        var emailDetails = {
+            text: data.title + '\n' + data.link,
+            from: 'communications@otenro.com',
+            to: data.email,
+            subject: 'Set New password'
+        };
+        server.send(emailDetails, function (err, message) {
+            if (err) {
+                return callback({ message: 'error' });
+            } else if (message) {
+                return callback({ message: 'success' });
+            } else {
+                return callback({ message: 'failed' });
+            }
+        });
+    },
+
+    /**
+     * Responsible for sending app user email verification email
+     *
+     * @param data
+     * @param callback
+     **/
+    sendAppUserVerificationEmail: function (data, callback) {
+        var emailDetails = {
+            text: data.title + '\n\n' + data.link,
+            from: 'communications@otenro.com',
+            to: data.email,
+            subject: 'Verify Email Address'
+        };
+        server.send(emailDetails, function (err, message) {
+            if (err) {
+                return callback({message: 'error'});
+            } else if (message) {
+                return callback({message: 'success'});
+            } else {
+                return callback({message: 'failed'});
+            }
+        });
+    },
+
+    /**
+     * Responsible for sending email to alert email when inventory of a
+     * certain product  is less than minimum inventory quantity
+     *
+     * @param data - data to the email body
+     * @param callback
+     **/
+    sendLowStockEmail: function(data, callback) {
+        var emailDetails = {
+            subject: 'Product Low Stock Notification',
+            from: data.fromEmail,
+            to: data.alertEmail,
+            text: 'Inventory of Below product is less than minimum inventory level'
+            + '\n\n' + 'Product Name : ' + data.pName
+            + '\n' + 'Product Description : ' + data.pDescription
+            + '\n' + 'Product SKU : ' + data.sku
+            + '\n' + 'Product Price : ' + data.price
+            + '\n' + 'Product Weight : ' + data.weight
+        };
+        server.send(emailDetails, function (err, message) {
+            if (err) return callback({ message: 'error' });
+            else if (message) return callback({ message: 'success' });
+            else return callback({ message: 'failed' });
+        });
     }
 
 

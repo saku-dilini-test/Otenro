@@ -351,6 +351,9 @@ module.exports.routes = {
     'POST /templatesAuth/register': 'template/TemplateAuthController.register',
     'POST /templatesAuth/facebook': 'template/TemplateAuthController.facebookAuth',
     'POST /templatesAuth/google': 'template/TemplateAuthController.googleAuth',
+    'POST /templatesAuth/forgotPassword': 'template/TemplateAuthController.sendPasswordResetEmail',
+    'POST /templatesAuth/resetPassword': 'template/TemplateAuthController.resetPassword',
+    'POST /templatesAuth/verifyAppUserEmail': 'template/TemplateAuthController.verifyAppUserEmail',
 
 
 
