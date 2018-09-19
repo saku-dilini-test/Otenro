@@ -1,4 +1,6 @@
-
+/deep/ .text-editor img{
+  width:100%;
+}
 .name-sale{
     position: absolute;
     top: 5px;
