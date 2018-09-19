@@ -5,6 +5,7 @@
  */
 var fs = require('fs-extra'),
     config = require('../../../services/config');
+var NOT_FOUND = { status : 'NOT_FOUND' };    
 module.exports = {
 
     saveStoreSettings : function(req,res){
@@ -30,18 +31,42 @@ module.exports = {
                }
         });
     },
-    showStoreSettings: function(req,res){
-     var appId = req.param('appId');
-            var searchApp = {
-                appId: appId
-            };
-        ApplicationStoreSettings.find(searchApp, function(err, app) {
-            if (err) return done(err);
-            if(app.length == 0){
-                res.send([{currencySign : '$'}]);
-            }else{
-                res.send(app);
+    showStoreSettings: function (req, res) {
+
+        var appId = req.param('appId');
+        var searchApp = {
+            appId: appId
+        };
+        var appName;
+
+        Application.findOne({ id: appId }).exec(function (err, foundApp) {
+
+            if (err) {
+
+                sails.log.error('UserSettingsController => showStoreSettings => ' + err);
+                return done(err);
             }
+
+            if (!foundApp) {
+
+                return res.send(NOT_FOUND);
+            }
+
+            appName = foundApp.appName;
+
+            ApplicationStoreSettings.find(searchApp, function (err, app) {
+
+                if (err) return done(err);
+
+                if (app.length == 0) {
+
+                    res.send([{ currencySign: '$', appName: appName }]);
+                } else {
+
+                    app.appName = appName;
+                    res.send(app);
+                }
+            });
         });
     },
     getAllSiteType: function(req,res){
