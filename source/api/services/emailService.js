@@ -1046,8 +1046,8 @@ module.exports = {
         var imageArr = [];
 
         imageArr.push({
-                          filename: 'regHeader.jpg',
-                          path: logoPath+ "/appUserRegister/regHeader.jpg",
+                          filename: 'regHeader.png',
+                          path: logoPath+ "/appUserRegister/regHeader.png",
                           cid: 'regHeader'
                       });
 
