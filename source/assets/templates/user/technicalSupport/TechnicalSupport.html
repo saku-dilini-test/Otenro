@@ -37,12 +37,7 @@
         </fieldset>
         <md-tabs md-center-tabs="false" md-selected="selectedIndex" md-no-ink="true" md-autoselect="false"
                  md-dynamic-height="true">
-            <md-tab ng-if="user.userRole == 'ADMIN'">
-                <md-tab-label>Update all apps</md-tab-label>
-                <md-tab-body>
-                    <button class="btn-material margin" ng-click="updateApps()">Update All Apps</button>
-                </md-tab-body>
-            </md-tab>
+
             <md-tab ng-if="showAppDetails"ng-click="showHideSearchField('app_details')">
                 <md-tab-label>App Details</md-tab-label>
                 <md-tab-body>
@@ -318,8 +313,17 @@
 
                                             <form name="revenueAndTrafficReportForm">
                                                 <div ng-if="revenueAndTrafficReport.report == 'Daily'">
-                                                    <input type="date"  ng-model="revenueAndTrafficReport.sdate" placeholder="START DATE" onkeydown="return false" required>
-                                                    <input type="date" ng-model="revenueAndTrafficReport.edate" placeholder="END DATE" onkeydown="return false" required>
+                                                    <div class="row margin-bottom">
+                                                        <div class="col-xs-4">
+                                                            <adm-dtp ng-model='revenueAndTrafficReport.sdate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
+                                                        </div>
+                                                        <div class="col-xs-4">
+                                                            <adm-dtp ng-model='revenueAndTrafficReport.edate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--<input type="date"  ng-model="revenueAndTrafficReport.sdate" placeholder="START DATE" onkeydown="return false" required>-->
+                                                    <!--<input type="date" ng-model="revenueAndTrafficReport.edate" placeholder="END DATE" onkeydown="return false" required>-->
                                                     <Button type="button" class="me-default-button" ng-click="revenueAndTrafficReportData(revenueAndTrafficReport)">Search</Button>
                                                 </div>
                                                 <div ng-if="revenueAndTrafficReport.report == 'Monthly'" >
@@ -448,8 +452,16 @@
 
                                             <form name="applicationBaseReportReportForm">
                                                 <div ng-if="applicationBaseReport.report == 'Daily'">
-                                                    <input type="date"  ng-model="applicationBaseReport.sdate" placeholder="START DATE" onkeydown="return false" required>
-                                                    <input type="date" ng-model="applicationBaseReport.edate" placeholder="END DATE" onkeydown="return false" required>
+                                                    <div class="row margin-bottom">
+                                                        <div class="col-xs-4">
+                                                            <adm-dtp ng-model='applicationBaseReport.sdate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
+                                                        </div>
+                                                        <div class="col-xs-4">
+                                                            <adm-dtp ng-model='applicationBaseReport.edate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
+                                                        </div>
+                                                    </div>
+                                                    <!--<input type="date"  ng-model="applicationBaseReport.sdate" placeholder="START DATE" onkeydown="return false" required>-->
+                                                    <!--<input type="date" ng-model="applicationBaseReport.edate" placeholder="END DATE" onkeydown="return false" required>-->
                                                     <Button type="button" class="me-default-button" ng-click="applicationBaseReportData(applicationBaseReport)">Search</Button>
                                                 </div>
                                                 <div ng-if="applicationBaseReport.report == 'Monthly'" >
@@ -584,8 +596,16 @@
 
                                             <form name="reconciliationForm">
                                                 <div ng-if="failedTransactionReport.report == 'Daily'">
-                                                    <input type="date"  ng-model="failedTransactionReport.fromDate" placeholder="START DATE" onkeydown="return false" required>
-                                                    <input type="date" ng-model="failedTransactionReport.toDate" placeholder="END DATE" onkeydown="return false" required>
+                                                    <div class="row margin-bottom">
+                                                        <div class="col-xs-4">
+                                                            <adm-dtp ng-model='failedTransactionReport.fromDate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
+                                                        </div>
+                                                        <div class="col-xs-4">
+                                                            <adm-dtp ng-model='failedTransactionReport.toDate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
+                                                        </div>
+                                                    </div>
+                                                    <!--<input type="date"  ng-model="failedTransactionReport.fromDate" placeholder="START DATE" onkeydown="return false" required>-->
+                                                    <!--<input type="date" ng-model="failedTransactionReport.toDate" placeholder="END DATE" onkeydown="return false" required>-->
                                                     <Button type="button" class="me-default-button" ng-click="getFailedTransactionData(failedTransactionReport)">Search</Button>
                                                 </div>
                                                 <!--<Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>-->
@@ -648,8 +668,16 @@
                                                 </div>
                                                 <h6>Select period</h6>
                                                 <div>
-                                                    <input type="date"  ng-model="customerCareReport.fromDate" placeholder="START DATE" onkeydown="return false" >
-                                                    <input type="date" ng-model="customerCareReport.toDate" placeholder="END DATE" onkeydown="return false" >
+                                                    <div class="row margin-bottom">
+                                                        <div class="col-xs-4">
+                                                            <adm-dtp ng-model='customerCareReport.fromDate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
+                                                        </div>
+                                                        <div class="col-xs-4">
+                                                            <adm-dtp ng-model='customerCareReport.toDate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
+                                                        </div>
+                                                    </div>
+                                                    <!--<input type="date"  ng-model="customerCareReport.fromDate" placeholder="START DATE" onkeydown="return false" >-->
+                                                    <!--<input type="date" ng-model="customerCareReport.toDate" placeholder="END DATE" onkeydown="return false" >-->
                                                     <Button type="button" class="me-default-button" ng-click="getCustomerCareReportData(customerCareReport)">Search</Button>
                                                 </div>
                                                 <!--<Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>-->
@@ -721,8 +749,16 @@
 
                                         <form name="reconciliationForm">
                                             <div ng-if="reconciliationReports.report == 'Daily'">
-                                                <input type="date"  ng-model="reconciliationReports.sdate" placeholder="START DATE" onkeydown="return false" required>
-                                                <input type="date" ng-model="reconciliationReports.edate" placeholder="END DATE" onkeydown="return false" required>
+                                                <div class="row margin-bottom">
+                                                    <div class="col-xs-4">
+                                                        <adm-dtp ng-model='reconciliationReports.sdate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <adm-dtp ng-model='reconciliationReports.edate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
+                                                    </div>
+                                                </div>
+                                                <!--<input type="date"  ng-model="reconciliationReports.sdate" placeholder="START DATE" onkeydown="return false" required>-->
+                                                <!--<input type="date" ng-model="reconciliationReports.edate" placeholder="END DATE" onkeydown="return false" required>-->
                                                 <Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>
                                             </div>
                                             <div ng-if="reconciliationReports.report == 'Monthly'" >
@@ -821,6 +857,12 @@
 
                     </md-tabs>
 
+                </md-tab-body>
+            </md-tab>
+            <md-tab ng-if="user.userRole == 'ADMIN'">
+                <md-tab-label>Update all apps</md-tab-label>
+                <md-tab-body>
+                    <button class="btn-material margin" ng-click="updateApps()">Update All Apps</button>
                 </md-tab-body>
             </md-tab>
         </md-tabs>

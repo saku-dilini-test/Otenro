@@ -867,9 +867,11 @@
                 if(data.report == "Daily"){
 
 
-                   var sdate = $filter('date')(data.sdate, "yyyy-MM-dd");
-                   var edate = $filter('date')(data.edate, "yyyy-MM-dd");
+                   // var sdate = $filter('date')(data.sdate, "yyyy-MM-dd");
+                   // var edate = $filter('date')(data.edate, "yyyy-MM-dd");
 
+                    var sdate = data.sdate,
+                        edate = data.edate;
 
 
                     if(edate >= sdate) {
@@ -978,9 +980,10 @@
             if(data.report == "Daily"){
 
 
-                var sdate = $filter('date')(data.sdate, "yyyy-MM-dd");
-                var edate = $filter('date')(data.edate, "yyyy-MM-dd");
-
+                // var sdate = $filter('date')(data.sdate, "yyyy-MM-dd");
+                // var edate = $filter('date')(data.edate, "yyyy-MM-dd");
+                var sdate = data.sdate,
+                    edate = data.edate;
 
 
                 if(edate >= sdate) {
@@ -1110,12 +1113,15 @@
 
 
         $scope.revenueAndTrafficReportData = function(data){
+
             $scope.revenueAndTrafficReportResponseData = [];
             if(data.report == "Daily"){
 
+                var sdate = data.sdate,
+                    edate = data.edate;
+               // var sdate = $filter('date')(data.sdate, "yyyy-MM-dd"),
+               //  edate = $filter('date')(data.edate, "yyyy-MM-dd");
 
-                var sdate = $filter('date')(data.sdate, "yyyy-MM-dd");
-                var edate = $filter('date')(data.edate, "yyyy-MM-dd");
                 var reqData ="";
 
                 if(edate >= sdate) {
@@ -1253,8 +1259,11 @@
             if(data.report == "Daily"){
 
 
-                var fromDate = $filter('date')(data.fromDate, "yyyy-MM-dd");
-                var toDate = $filter('date')(data.toDate, "yyyy-MM-dd");
+                // var fromDate = $filter('date')(data.fromDate, "yyyy-MM-dd");
+                // var toDate = $filter('date')(data.toDate, "yyyy-MM-dd");
+
+                var fromDate = data.fromDate,
+                    toDate = data.toDate;
 
                 if(toDate >= fromDate) {
 
@@ -1287,8 +1296,11 @@
             $scope.customerCareReportData = [];
 
 
-                var fromDate = $filter('date')(pramData.fromDate, "yyyy-MM-dd");
-                var toDate = $filter('date')(pramData.toDate, "yyyy-MM-dd");
+                // var fromDate = $filter('date')(pramData.fromDate, "yyyy-MM-dd");
+                // var toDate = $filter('date')(pramData.toDate, "yyyy-MM-dd");
+
+                var fromDate = pramData.fromDate,
+                    toDate = pramData.toDate;
 
                 if (toDate >= fromDate) {
 

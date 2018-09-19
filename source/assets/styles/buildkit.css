@@ -3029,6 +3029,13 @@ table.md-calendar-day-header{
     width: 25%;
     margin-right: 10px;
 }
+.reports-period-container .ADMdtp-container .ADMdtp-calendar-container footer .timeSelectIcon{
+    display:none;
+}
+.reports-period-container .ADMdtp-container .ADMdtp-calendar-container{
+    top: 0 !important;
+    position: relative;
+}
 
 .period-container{
     float: left;
