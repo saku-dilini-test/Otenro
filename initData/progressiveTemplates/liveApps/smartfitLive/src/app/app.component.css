@@ -15,5 +15,12 @@ app-header{
 	  min-height: calc(100vh - 139px);
 	  display: block;
 	  padding-top: 50px;
+    padding-bottom: 89px;
 	}
+  app-footer{
+    position: fixed;
+    z-index: 9;
+    bottom: 0;
+    width: 100%;
+  }
 }
