@@ -8,27 +8,51 @@ var fs = require('fs-extra'),
 var NOT_FOUND = { status : 'NOT_FOUND' };    
 module.exports = {
 
-    saveStoreSettings : function(req,res){
+    saveStoreSettings: function (req, res) {
+
         var data = req.body;
-        var query = {appId:req.body.appId};
-        ApplicationStoreSettings.update(query,data).exec(function(err,user) {
-               if (err) res.send(err);
-               if (user.length == 0) {
-                   ApplicationStoreSettings.create(data).exec(function (err, app) {
-                       if (err) res.send(err);
+        var appId = req.body.appId;
+        var query = { appId: appId };
 
-                       res.send({
-                           app: app,
-                           message: "New Store Settings Record successfully Created"
+        Application.update({ id: appId }, { appName: data.appName }).exec(function (err, updatedApp) {
 
-                       });
-                   });
-               } else {
-                   res.send({
-                       app: user,
-                       message: "New Store Settings Record  Successfully updated"
-                   });
-               }
+            if (err) {
+
+                sails.log.error('UserSettingsController => saveStoreSettings => ' + err);
+                return res.serverError(err);
+            }
+            data.appName = updatedApp[0].appName;
+
+            ApplicationStoreSettings.update(query, data).exec(function (err, user) {
+
+                if (err) {
+
+                    sails.log.error('UserSettingsController => saveStoreSettings => ' + err);
+                    return res.serverError(err);
+                }
+                if (user.length == 0) {
+
+                    ApplicationStoreSettings.create(data).exec(function (err, app) {
+
+                        if (err) {
+
+                            sails.log.error('UserSettingsController => saveStoreSettings => ' + err);
+                            return res.serverError(err);
+                        }
+
+                        res.send({
+                            app: app,
+                            message: "New Store Settings Record successfully Created"
+                        });
+                    });
+                } else {
+
+                    res.send({
+                        app: user,
+                        message: "New Store Settings Record  Successfully updated"
+                    });
+                }
+            });
         });
     },
     showStoreSettings: function (req, res) {
