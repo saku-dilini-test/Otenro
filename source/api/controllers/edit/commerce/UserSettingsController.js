@@ -122,10 +122,10 @@ module.exports = {
 
                 fs.unlink(ImagePath, function (err) {
                     if (err){
-                        sails.config.logging.custom.error("Error deleting image UserID: " +req.userId );
+//                        sails.config.logging.custom.error("Error deleting image UserID: " +req.userId );
                         return console.error(err);
                     }
-                    sails.config.logging.custom.info("About us Image deleted Successfully! UserID: " + req.userId );
+//                    sails.config.logging.custom.info("About us Image deleted Successfully! UserID: " + req.userId );
                     res.send(200,{message:' About us Image deleted!'});
                 });
 

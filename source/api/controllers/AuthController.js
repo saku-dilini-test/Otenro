@@ -30,13 +30,13 @@ module.exports = {
         }).exec({
 
           error: function (err){
-            sails.config.logging.custom.error(err);
+//            sails.config.logging.custom.error(err);
             logger.error();
             return res.negotiate(err);
           },
 
           incorrect: function (){
-            sails.config.logging.custom.warn({message:'Invalid User credentials! emailId:' + req.body.email});
+//            sails.config.logging.custom.warn({message:'Invalid User credentials! emailId:' + req.body.email});
             return res.notFound();
           },
 
@@ -50,7 +50,7 @@ module.exports = {
 //              logger.info({
 //                      message: 'User Logged in!'
 //              });
-              sails.config.logging.custom.info({message:'User Logged in! emailId:' + req.body.email});
+//              sails.config.logging.custom.info({message:'User Logged in! emailId:' + req.body.email});
 
             createToken(user,res);
           }
@@ -137,13 +137,13 @@ module.exports = {
                                 console.log(msg);
                                 res.send(msg);
                           });
-                           sails.config.logging.custom.info({message:'User Registered Successfully! emailId:' + req.body.email});
+//                           sails.config.logging.custom.info({message:'User Registered Successfully! emailId:' + req.body.email});
                               createToken(user,res);
                           }
                       });
                   });
               }else {
-                  sails.config.logging.custom.warn({message:'Registration Error'});
+//                  sails.config.logging.custom.warn({message:'Registration Error'});
                   return res.status(409).json({error: 'Registration Error'})
               }
           });
@@ -254,7 +254,7 @@ module.exports = {
       // An unexpected error occurred.
       error: function (err){
         sails.log.info(err);
-        sails.config.logging.custom.error({message:'Google registration Error'});
+//        sails.config.logging.custom.error({message:'Google registration Error'});
       },
       // OK.
       success: function ( result){
@@ -293,14 +293,14 @@ module.exports = {
 
                   if (err) return res.negotiate(err);
                     newUser.isNew = true;
-                  sails.config.logging.custom.info({message:'Google Plus Registration successful! emailId:' + googleEmail});
+//                  sails.config.logging.custom.info({message:'Google Plus Registration successful! emailId:' + googleEmail});
                   createToken(newUser,res)
                 });
               } else {
                   foundUser.isNew = false;
                   User.update({email : foundUser.email},{lastLoginTime : new Date()}, function(err1){
                   });
-                sails.config.logging.custom.info({message:'Google Plus Login successful! emailId:' + googleEmail});
+//                sails.config.logging.custom.info({message:'Google Plus Login successful! emailId:' + googleEmail});
                 createToken(foundUser,res)
               }
             });

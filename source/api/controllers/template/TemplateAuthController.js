@@ -152,13 +152,14 @@ module.exports = {
                     var data = {
                         email: user.email,
                         title: 'Click the link below to Verify your email!',
-                        link: url+ '?emailID=' + encryptedEmail
+                        link: url+ '?emailID=' + encryptedEmail,
+                        appId : req.body.appId,
+                        userName : user.firstName + " " + user.lastName
                     };
 
                     emailService.sendAppUserVerificationEmail(data, function (callback) {
 
-                        if (callback.message === 'success') {
-
+                    });
                             AppUser.update({ id: user.id}, { regToken: encryptedEmail })
                                 .exec(function (err, updatedUser) {
 
@@ -175,16 +176,15 @@ module.exports = {
                                     return res.send({ message: 'failed' });
                                 }
                             });
-                        }
-                        else if (callback.message === 'error') {
-
-                            return res.send({ message: 'error' });
-                        }
-                        else if (callback.message === 'failed') {
-
-                            return res.send({ message: 'failed' });
-                        }
-                    });
+//                        }
+//                        else if (callback.message === 'error') {
+//
+//                            return res.send({ message: 'error' });
+//                        }
+//                        else if (callback.message === 'failed') {
+//
+//                            return res.send({ message: 'failed' });
+//                        }
                 }
             });
         });
