@@ -1,7 +1,9 @@
 .bloc {
     width: 100%;
 }
-
+/deep/ .text-editor img{
+           width:100%;
+       }
 .voffset {
     margin-top: 30px;
 }

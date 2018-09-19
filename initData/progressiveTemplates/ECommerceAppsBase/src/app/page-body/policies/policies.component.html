@@ -10,12 +10,12 @@
           </h2>
           <div class="row" >
             <div class="col-sm-12">
-              <p class="header-spacing-top text-center main-content-font" *ngIf="privacyPolicy"  [innerHTML]="privacyPolicy | safeHtml">
+              <p class="header-spacing-top text-center text-editor" *ngIf="privacyPolicy"  [innerHTML]="privacyPolicy | safeHtml">
               </p>
               <h2 class="text-center header main-header-font header-spacing-top" *ngIf="returnPolicy">
                 Return Policy
               </h2>
-              <p class="header-spacing-top text-center main-content-font" *ngIf="returnPolicy"  [innerHTML]="returnPolicy | safeHtml">
+              <p class="header-spacing-top text-center text-editor" *ngIf="returnPolicy"  [innerHTML]="returnPolicy | safeHtml">
               </p>
             </div>
           </div>

@@ -53,7 +53,10 @@
     width: 550px !important;
     height: 618px !important;
 }
-
+/deep/ .text-editor img{
+           width:100%;
+       }
+       
 @media (max-width: 768px){
     #gallery{
         width: 450px !important;

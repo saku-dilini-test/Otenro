@@ -1,7 +1,9 @@
 /deep/ .product-des p{
     margin: 0;
 }
-
+/deep/ .text-editor img{
+           width:100%;
+       }
 .name-sale{
     position: absolute;
     top: 5px;
