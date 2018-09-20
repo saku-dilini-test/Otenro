@@ -187,7 +187,8 @@ $scope.data = {
       $ionicLoading.hide();
       // ME SERVER URL for GIVEN User ID & AppId
         // var url = 'http://192.168.8.98/meServer/temp/'+userID+'/templates/'+appId+'/#/';
-        var url = 'https://cdn.appmaker.lk/developer/meServer/temp/' + userID + '/progressiveTemplates/'+appId;
+        // var url = 'https://cdn.appmaker.lk/developer/meServer/temp/' + userID + '/progressiveTemplates/'+appId;
+        var url = 'https://ideadroidcdn.ideamart.io/developer/meServer/temp/' + userID + '/progressiveTemplates/' + appId+ '/?isFromCMSAppView=1';
       console.log('app url => ' + url);
 
       // Keep in mind that you must add your own images to native resource.
@@ -200,11 +201,11 @@ $scope.data = {
           height: 44,
           color: '#f0f0f0ff'
         },
-        title: {
-          color: '#003264ff',
-          staticText : appName,
-          showPageTitle: true
-        },
+        // title: {
+        //   color: '#003264ff',
+        //   staticText : appName,
+        //   showPageTitle: true
+        // },
         backButton: {
           wwwImage: 'img/button_back.png',
           imagePressed: 'img/button_back.png',
@@ -285,7 +286,7 @@ $scope.data = {
 
     $scope.openTerms = function () {
       console.log("Opening Terms...");
-      var ref =  cordova.ThemeableBrowser.open('https://www.otenro.com/terms.pdf', '_system');
+      var ref =  cordova.ThemeableBrowser.open('https://ideadroid.ideamart.io/appmakerterms.pdf', '_system');
     }
 
 
