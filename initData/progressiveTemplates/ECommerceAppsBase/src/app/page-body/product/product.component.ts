@@ -95,7 +95,6 @@ export class ProductComponent implements OnInit {
 
 
         this.isBuyBtnDisable = true;
-        this.title.changeTitle('Details');
         if (this.Data.detailedDesc.length > 400) {
             this.desPart2 = this.Data.detailedDesc.slice(400, this.Data.detailedDesc.length);
             this.desPart1 = this.Data.detailedDesc.slice(0, 400) + "...";
@@ -105,6 +104,9 @@ export class ProductComponent implements OnInit {
         } else {
             this.desPart1 = this.Data.detailedDesc;
         }
+        window.scrollTo(0, 0);
+        this.title.changeTitle('Details');
+
     }
 
     currency: string;
@@ -205,7 +207,6 @@ export class ProductComponent implements OnInit {
 
         if (this.Data) {
             this.foodInfo = this.Data;
-            this.title.changeTitle(" ");
             this.images = this.Data.tempImageArray;
 
             if (this.Data.variants.length > 0) {
