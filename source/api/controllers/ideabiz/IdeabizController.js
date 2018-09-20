@@ -4,6 +4,9 @@ var dateFormat = require('dateformat');
 var SIMPLE_DATE_FORMAT = 'yyyy-mm-dd';
 var IdeabizAdminapiController = require('../../controllers/ideabiz/IdeabizAdminapiController');
 var chargingAPICallLogService = require('../../services/IdeabizChargingAPICallLogService');
+var moment = require('moment');
+
+var DATE_FORMAT = "YYYY-MM-DD";
 
 /**
  * IdeabizController
@@ -69,7 +72,7 @@ module.exports = {
                             if(operatorFor_msisdn){
                                 PublishDetails.findOne({ 'appId': appId }).exec(function(err,details) {
                                     if (err) {
-                                        sails.log.error("IdeabizController: Error when searching for a app using appId: " + appId + " error: " + err);
+                                        sails.log.error("IdeabizController: Error when searching for a app using appId: " + appId + " appUser.msisdn: " + appUser.msisdn + " error: " + err);
                                         response.displayMessage = config.END_USER_MESSAGES.SERVER_ERROR;
                                         return res.ok(response);
                                     }
@@ -78,76 +81,70 @@ module.exports = {
                                         var operatorObj = utilsService.getAppOperatorByOperatorFor_msisdn(details.operators,operatorFor_msisdn);
                                         if(operatorObj.isEnabled && operatorObj.status==='APPROVED'){
                                             if(appUser.subscriptionStatus===config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code){
-                                                if(operatorObj.interval === config.RENEWAL_INTERVALS.DAILY.code){
-                                                    sails.log.debug('IdeabizController: The msisdn:%s will have Daily renewal interval', appUser.msisdn);
-                                                    thisCtrl.checkPayments(req,res,appId,appUser.msisdn,response,config.RENEWAL_INTERVALS.DAILY.code);
-                                                } else if(operatorObj.interval === config.RENEWAL_INTERVALS.MONTHLY.code){
-                                                    sails.log.debug('IdeabizController: The msisdn:%s will have Monthly renewal interval', appUser.msisdn);
-                                                    var renewalQuery = {
-                                                        appId: appId,
-                                                        msisdn: appUser.msisdn
-                                                    };
+                                                RenewalIntervals.findOne({'code': operatorObj.interval }).exec(function (err, intervalObj) {
+                                                    if (err) {
+                                                        sails.log.error("IdeabizController: Error when searching for a RenewalIntervals for the code: " + operatorObj.interval + " appId:" + appId + " appUser.msisdn: " + appUser.msisdn + " error: " + err);
+                                                        response.displayMessage = config.END_USER_MESSAGES.SERVER_ERROR;
+                                                        return res.ok(response);
+                                                    }
 
-                                                    RenewalAppUser.findOne(renewalQuery).exec(function (err, renewalAppUser) {
-                                                        if (err){
-                                                            sails.log.error("IdeabizController: Error when searching for a RenewalAppUser for the details: " + JSON.stringify(renewalQuery));
-                                                            response.displayMessage = config.END_USER_MESSAGES.SERVER_ERROR;
-                                                            return res.ok(response);
-                                                        }
+                                                    if (intervalObj.noOfDays === 1) {
+                                                        sails.log.debug('IdeabizController: The msisdn:%s will have Daily renewal interval', appUser.msisdn);
+                                                        thisCtrl.checkPayments(req, res, appId, appUser.msisdn, response, intervalObj);
+                                                    } else {
+                                                        sails.log.debug('IdeabizController: Renewal interval: %s noOfDays: %s appId:%s msisdn:%s ',intervalObj.code,intervalObj.noOfDays,appId,appUser.msisdn);
+                                                        var renewalQuery = {
+                                                            appId: appId,
+                                                            msisdn: appUser.msisdn
+                                                        };
 
-                                                        if(renewalAppUser){
-                                                            var nextPaymentDate = dateFormat(renewalAppUser.nextPaymentDate, SIMPLE_DATE_FORMAT);
-                                                            var today = dateFormat(new Date(), SIMPLE_DATE_FORMAT);
-                                                            if(today<=nextPaymentDate) {
-                                                                response.isSubscribed = true;
-                                                                response.msisdn = renewalAppUser.msisdn;
-                                                                response.isError = false;
+                                                        RenewalAppUser.findOne(renewalQuery).exec(function (err, renewalAppUser) {
+                                                            if (err) {
+                                                                sails.log.error("IdeabizController: Error when searching for a RenewalAppUser for appId:%s msisdn:%s ",appId,appUser.msisdn);
+                                                                response.displayMessage = config.END_USER_MESSAGES.SERVER_ERROR;
                                                                 return res.ok(response);
-                                                            }else{
-
-                                                                sails.log.debug('IdeabizController: msisdn: %s will not allows to access the contents today %s since the nextPaymentDate %s is not valid.' ,renewalAppUser.msisdn,today,nextPaymentDate);
-
-                                                                IdeabizAdminapiController.chargeUserAPiCall(appUser.msisdn,appId,function(paymentData, err){
-                                                                    if (err) {
-                                                                        sails.log.error('IdeabizController: No Sufficient balance in the account for msisdn: ' + msisdn);
-                                                                        response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
-                                                                        return res.ok(response);
-                                                                    }else if (paymentData.payment=="ok"){
-                                                                        sails.log.debug('IdeabizController: Charging success, Updating renewal app user for msisdn: ' + msisdn);
-                                                                        IdeabizAdminapiController.updateRenewalAppUser(appId,appUser.msisdn,
-                                                                            operatorObj.interval,function(renewalAppUserData, err) {
-                                                                            if (err){
-                                                                                sails.log.error('IdeabizController: No Sufficient balance in the account for msisdn: ' + msisdn);
-                                                                                response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
-                                                                                return res.ok(response);
-                                                                            }else if (renewalAppUserData.updateRenewalAppUser=="ok") {
-                                                                                response.isSubscribed = true;
-                                                                                response.msisdn = appUser.msisdn;
-                                                                                response.isError = false;
-                                                                                response.isPaymentSuccess =true;
-                                                                                response.dispalyMessage = config.END_USER_MESSAGES.SUCCESSFULLY_RENEWED;
-                                                                                return res.ok(response);
-                                                                            }
-                                                                        });
-                                                                    }
-                                                                });
                                                             }
-                                                        }else{
-                                                            sails.log.debug("IdeabizController: renewalAppUser details could not find for the paymentQuery: " + JSON.stringify(renewalQuery));
-                                                            thisCtrl.checkPayments(req,res,appId,appUser.msisdn,response,config.RENEWAL_INTERVALS.MONTHLY.code);
-                                                        }
-                                                    });
-                                                } else {
-                                                    sails.log.error("IdeabizController: Haven't coded for the Renewal interval: " + operatorObj.interval + " appId: " + appId + " error: " + err);
-                                                    response.displayMessage = config.END_USER_MESSAGES.SERVER_ERROR;
-                                                    return res.ok(response);
-                                                }
+
+                                                            if (renewalAppUser) {
+                                                                var nextPaymentDate = dateFormat(renewalAppUser.nextPaymentDate, SIMPLE_DATE_FORMAT);
+                                                                var today = dateFormat(new Date(), SIMPLE_DATE_FORMAT);
+                                                                sails.log.debug('IdeabizController: renewalAppUser Exists for msisdn: %s today: %s nextPaymentDate: %s ', renewalAppUser.msisdn, today, nextPaymentDate);
+                                                                if (today < nextPaymentDate) {
+                                                                    return thisCtrl.sendSubscribedResponse(res,response,renewalAppUser.msisdn,appId);
+                                                                } else {
+
+                                                                    sails.log.debug('IdeabizController: msisdn: %s will not allows to access the contents today %s since the nextPaymentDate %s is not valid.', renewalAppUser.msisdn, today, nextPaymentDate);
+
+                                                                    IdeabizAdminapiController.chargeUserAPiCall(appUser.msisdn, appId, function (paymentData, err) {
+                                                                        if (err) {
+                                                                            sails.log.error('IdeabizController: No Sufficient balance in the account for appId:%s msisdn:%s ',appId,appUser.msisdn);
+                                                                            response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                                                                            return res.ok(response);
+                                                                        } else if (paymentData.payment == "ok") {
+                                                                            sails.log.debug('IdeabizController: Charging success, Updating renewal app user for appId:%s msisdn:%s ',appId,appUser.msisdn);
+                                                                            IdeabizAdminapiController.updateRenewalAppUser(appId, appUser.msisdn,
+                                                                                intervalObj, function (renewalAppUserData, err) {
+                                                                                    if (err) {
+                                                                                        sails.log.error('IdeabizController: No Sufficient balance in the account for appId:%s msisdn:%s ',appId,appUser.msisdn);
+                                                                                        response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                                                                                        return res.ok(response);
+                                                                                    } else if (renewalAppUserData.updateRenewalAppUser == "ok") {
+                                                                                        return thisCtrl.sendPaymentRenewedResponse(res,response,appUser.msisdn,appId);
+                                                                                    }
+                                                                                });
+                                                                        }
+                                                                    });
+                                                                }
+                                                            } else {
+                                                                sails.log.debug("IdeabizController: renewalAppUser details could not find for appId:%s msisdn:%s ",appId,appUser.msisdn);
+                                                                thisCtrl.checkPayments(req, res, appId, appUser.msisdn, response, intervalObj);
+                                                            }
+                                                        });
+                                                    }
+                                                });
                                             }else{
                                                 sails.log.debug('IdeabizController: Unsubscribed from the service msisdn: ' + appUser.msisdn);
-                                                response.isUnubscribed = true;
-                                                response.isError = false;
-                                                response.displayMessage = config.END_USER_MESSAGES.USER_UNSUBSCRIBED;
-                                                return res.ok(response);
+                                                thisCtrl.sendUnsubscribedResponse(res,response,appUser.msisdn,appId);
                                             }
                                         }else{
                                             sails.log.debug('IdeabizController: App is not Approved for the operator: ' + operatorObj.operator + ' msisdn: ' + appUser.msisdn + ' status: ' + operatorObj.status);
@@ -180,79 +177,214 @@ module.exports = {
         });
     },
 
-    checkPayments: function(req,res,appId,msisdn,response,interval){
-        var paymentQuery = {
-            appId: appId,
-            msisdn: msisdn,
-            date: dateFormat(new Date(), SIMPLE_DATE_FORMAT)
-        };
+    checkPayments: function(req,res,appId,msisdn,response,intervalObj){
+        var thisCtrl = this;
+        var paymentQuery;
 
-        sails.log.debug("IdeabizController: Call checkPayments for msisdn: %s appID: %s ",msisdn,appId);
+        sails.log.debug("IdeabizController: Call checkPayments for msisdn: %s appID: %s interval: %s noOfDays: %s",msisdn,appId,intervalObj.code,intervalObj.noOfDays);
 
-        SubscriptionPayment.findOne(paymentQuery).exec(function (err, payment) {
-            if (err){
-                sails.log.error("IdeabizController: Error when searching for a payment for the details: " + JSON.stringify(paymentQuery));
-                response.displayMessage = config.END_USER_MESSAGES.SERVER_ERROR;
-                return res.ok(response);
-            }
+        if(intervalObj.noOfDays===1){
+            paymentQuery = {
+                appId: appId,
+                msisdn: msisdn,
+                date: dateFormat(new Date(), SIMPLE_DATE_FORMAT)
+            };
 
-            if(payment){
-                sails.log.debug("IdeabizController: Payment found for msisdn: %s appID: %s Payment: %s",msisdn,appId,JSON.stringify(payment));
-                if(payment.status === 1) {
-                    if(chargingAPICallLogService.isAppIdMSISDNExistsInChargingMap(appId,msisdn)) {
-                        chargingAPICallLogService.removeFromChargingMap(appId, msisdn);
-                    }
-                    response.isSubscribed = true;
-                    response.msisdn = msisdn;
-                    response.isError = false;
+            sails.log.debug("IdeabizController: Call checkPayments(Daily) for msisdn: %s appID: %s paymentQuery:%s",msisdn,appId,JSON.stringify(paymentQuery));
+
+            SubscriptionPayment.findOne(paymentQuery).exec(function (err, payment) {
+                if (err){
+                    sails.log.error("IdeabizController: Error when searching for a payment for the details: " + JSON.stringify(paymentQuery));
+                    response.displayMessage = config.END_USER_MESSAGES.SERVER_ERROR;
                     return res.ok(response);
-                }else if(!chargingAPICallLogService.isAppIdMSISDNExistsInChargingMap(appId,msisdn)){
-                    sails.log.debug("IdeabizController: Payment status is 0 for msisdn: %s appID: %s, hence call charging api",msisdn,appId);
-                    IdeabizAdminapiController.chargeUserAPiCall(msisdn,appId,function(paymentData, err){
-                        sails.log.debug("IdeabizController: (When Payment status is 0) Immediate Charging cll initiated for msisdn: %s appID: %s ", msisdn, appId);
-                        chargingAPICallLogService.removeFromChargingMap(appId,msisdn);
-                        if (err) {
-                            sails.log.error("IdeabizController: (When Payment status is 0) No Sufficient balance in the account for msisdn: %s appID: %s",msisdn,appId);
-                            response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
-                            return res.ok(response);
-                        }else if (paymentData.payment=="ok"){
-                            sails.log.debug("IdeabizController: (When Payment status is 0) Charging success for msisdn: %s appID: %s, paymentData: %s",msisdn,appId,JSON.stringify(paymentData));
-                            response.isSubscribed = true;
-                            response.msisdn = msisdn;
-                            response.isError = false;
-                            response.isPaymentSuccess = true;
-                            response.dispalyMessage = config.END_USER_MESSAGES.SUCCESSFULLY_RENEWED;
-                            return res.ok(response);
-                        }
-                    });
-                }else{
-                    sails.log.error("IdeabizController: (When Payment status is 0) appId_msisdn exists in the map, hence no charging request made for msisdn: %s appID: %s",msisdn,appId);
                 }
-            }else{
-                sails.log.debug("IdeabizController: No Payment record found for paymentQuery: %s ",JSON.stringify(paymentQuery));
 
-                if(!chargingAPICallLogService.isAppIdMSISDNExistsInChargingMap(appId,msisdn)){
-                    sails.log.debug("IdeabizController: (No Payment record) Immediate Charging cll initiated for msisdn: %s appID: %s ", msisdn, appId);
-                    IdeabizAdminapiController.chargeUserAPiCall(msisdn, appId, function (paymentData, err) {
-                        chargingAPICallLogService.removeFromChargingMap(appId,msisdn);
-                        if (err) {
-                            sails.log.debug("IdeabizController: (No Payment record) Charging failed since no sufficient balance in the acc, just after complete the Charging call, for msisdn: %s appID: %s ", msisdn, appId);
+                if(payment){
+                    sails.log.debug("IdeabizController: Payment found for msisdn: %s appID: %s Payment: %s",msisdn,appId,JSON.stringify(payment));
+                    if(payment.status === 1) {
+                        if(chargingAPICallLogService.isAppIdMSISDNExistsInChargingMap(appId,msisdn)) {
+                            chargingAPICallLogService.removeFromChargingMap(appId, msisdn);
+                        }
+                        return thisCtrl.sendSubscribedResponse(res,response,msisdn,appId);
+                    }else if(!chargingAPICallLogService.isAppIdMSISDNExistsInChargingMap(appId,msisdn)){
+                        sails.log.debug("IdeabizController: Payment status is 0 for msisdn: %s appID: %s, hence call charging api",msisdn,appId);
+                        IdeabizAdminapiController.chargeUserAPiCall(msisdn,appId,function(paymentData, err){
+                            sails.log.debug("IdeabizController: (When Payment status is 0) Immediate Charging cll initiated for msisdn: %s appID: %s ", msisdn, appId);
+                            chargingAPICallLogService.removeFromChargingMap(appId,msisdn);
+                            if (err) {
+                                sails.log.error("IdeabizController: (When Payment status is 0) No Sufficient balance in the account for msisdn: %s appID: %s",msisdn,appId);
+                                response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                                return res.ok(response);
+                            }else if (paymentData.payment=="ok"){
+                                sails.log.debug("IdeabizController: (When Payment status is 0) Charging success for msisdn: %s appID: %s, paymentData: %s",msisdn,appId,JSON.stringify(paymentData));
+                                return thisCtrl.sendPaymentRenewedResponse(res,response,msisdn,appId);
+                            }
+                        });
+                    }else{
+                        sails.log.error("IdeabizController: (When Payment status is 0) appId_msisdn exists in the map, hence no charging request made for msisdn: %s appID: %s",msisdn,appId);
+                    }
+                }else{
+                    sails.log.debug("IdeabizController: No Payment record found for paymentQuery: %s ",JSON.stringify(paymentQuery));
+
+                    if(!chargingAPICallLogService.isAppIdMSISDNExistsInChargingMap(appId,msisdn)){
+                        sails.log.debug("IdeabizController: (No Payment record) Immediate Charging cll initiated for msisdn: %s appID: %s ", msisdn, appId);
+                        IdeabizAdminapiController.chargeUserAPiCall(msisdn, appId, function (paymentData, err) {
+                            chargingAPICallLogService.removeFromChargingMap(appId,msisdn);
+                            if (err) {
+                                sails.log.debug("IdeabizController: (No Payment record) Charging failed since no sufficient balance in the acc, just after complete the Charging call, for msisdn: %s appID: %s ", msisdn, appId);
+                                response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                                return res.ok(response);
+                            } else if (paymentData.payment == "ok") {
+                                sails.log.debug("IdeabizController: (No Payment record) Charging successfully Renewed just after complete the Charging call, for msisdn: %s appID: %s ", msisdn, appId);
+                                thisCtrl.sendSubscribedAndChargedResponse(res,response,msisdn,appId);
+                            }
+                        });
+                    }else{
+                        sails.log.error("IdeabizController: (No Payment record) appId_msisdn exists in the map, hence no charging request made for msisdn: %s appID: %s",msisdn,appId);
+                    }
+                }
+            });
+        }else{
+            paymentQuery = {
+                where: {
+                    appId: appId,
+                    msisdn: msisdn,
+                },
+                limit: 10,
+                sort: 'createdAt DESC'
+            };
+
+            sails.log.debug("IdeabizController: Call checkPayments(Monthly) for msisdn: %s appID: %s paymentQuery:%s",msisdn,appId,JSON.stringify(paymentQuery));
+
+            SubscriptionPayment.find(paymentQuery).exec(function (err, payments) {
+                if (err){
+                    sails.log.error("IdeabizController: Error when searching for a payment for the details: " + JSON.stringify(paymentQuery));
+                    response.displayMessage = config.END_USER_MESSAGES.SERVER_ERROR;
+                    return res.ok(response);
+                }
+
+                if(payments.length>0 && payments[0]){
+                    sails.log.debug("IdeabizController: Payment found for msisdn: %s appID: %s Payment: %s",msisdn,appId,JSON.stringify(payments[0]));
+
+                    var paymentDate = moment(payments[0].date,DATE_FORMAT);
+                    var today = moment().startOf('day');
+                    var nextRenewalDate = paymentDate.add(intervalObj.noOfDays, 'days');
+
+                    sails.log.debug("IdeabizController: Payment found for msisdn: %s appID: %s paymentDate: %s nextRenewalDate: %s today: %s",msisdn,appId,moment(payments[0].date,DATE_FORMAT),nextRenewalDate,today);
+
+                    if(today<nextRenewalDate) {
+                        if(payments[0].status === 1) {
+                            if (chargingAPICallLogService.isAppIdMSISDNExistsInChargingMap(appId, msisdn)) {
+                                chargingAPICallLogService.removeFromChargingMap(appId, msisdn);
+                            }
+                            return thisCtrl.sendSubscribedResponse(res,response,msisdn,appId);
+                        }else{
+                            sails.log.error("IdeabizController: Payment record exists but the Payment Status is 0, for msisdn: %s appID: %s",msisdn,appId);
                             response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
                             return res.ok(response);
-                        } else if (paymentData.payment == "ok") {
-                            sails.log.debug("IdeabizController: (No Payment record) Charging successfully Renewed just after complete the Charging call, for msisdn: %s appID: %s ", msisdn, appId);
-                            response.isSubscribed = true;
-                            response.msisdn = msisdn;
-                            response.isError = false;
-                            response.isPaymentSuccess = true;
-                            return res.ok(response);
                         }
-                    });
+                    }else if(!chargingAPICallLogService.isAppIdMSISDNExistsInChargingMap(appId,msisdn)){
+                        sails.log.debug("IdeabizController: Initiate the Charging for the next period  msisdn: %s appID: %s, hence call charging api",msisdn,appId);
+                        IdeabizAdminapiController.chargeUserAPiCall(msisdn,appId,function(paymentData, err){
+                            sails.log.debug("IdeabizController: Immediate Charging cll initiated for msisdn: %s appID: %s ", msisdn, appId);
+                            chargingAPICallLogService.removeFromChargingMap(appId,msisdn);
+                            if (err) {
+                                sails.log.error("IdeabizController: No Sufficient balance in the account for msisdn: %s appID: %s",msisdn,appId);
+                                response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                                return res.ok(response);
+                            }else if (paymentData.payment=="ok"){
+                                sails.log.debug("IdeabizController: Charging success for msisdn: %s appID: %s, paymentData: %s",msisdn,appId,JSON.stringify(paymentData));
+                                return thisCtrl.sendPaymentRenewedResponse(res,response,msisdn,appId);
+                            }
+                        });
+                    }else{
+                        sails.log.error("IdeabizController: (When Payment status is 0) appId_msisdn exists in the map, hence no charging request made for msisdn: %s appID: %s",msisdn,appId);
+                    }
                 }else{
-                    sails.log.error("IdeabizController: (No Payment record) appId_msisdn exists in the map, hence no charging request made for msisdn: %s appID: %s",msisdn,appId);
+                    sails.log.debug("IdeabizController: No Payment record found for paymentQuery: %s ",JSON.stringify(paymentQuery));
+
+                    if(!chargingAPICallLogService.isAppIdMSISDNExistsInChargingMap(appId,msisdn)){
+                        sails.log.debug("IdeabizController: (No Payment record) Immediate Charging cll initiated for msisdn: %s appID: %s ", msisdn, appId);
+                        IdeabizAdminapiController.chargeUserAPiCall(msisdn, appId, function (paymentData, err) {
+                            chargingAPICallLogService.removeFromChargingMap(appId,msisdn);
+                            if (err) {
+                                sails.log.debug("IdeabizController: (No Payment record) Charging failed since no sufficient balance in the acc, just after complete the Charging call, for msisdn: %s appID: %s ", msisdn, appId);
+                                response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                                return res.ok(response);
+                            } else if (paymentData.payment == "ok") {
+                                sails.log.debug("IdeabizController: (No Payment record) Charging successfully Renewed just after complete the Charging call, for msisdn: %s appID: %s ", msisdn, appId);
+                                thisCtrl.sendSubscribedAndChargedResponse(res,response,msisdn,appId);
+                            }
+                        });
+                    }else{
+                        sails.log.error("IdeabizController: (No Payment record) appId_msisdn exists in the map, hence no charging request made for msisdn: %s appID: %s",msisdn,appId);
+                    }
                 }
-            }
-        });
+            });
+        }
+    },
+
+    /**
+     * This will send a response object when the msisdn successfully subscribed to a service
+     * @param res
+     * @param response
+     * @param msisdn
+     * @param appId
+     */
+    sendSubscribedResponse: function(res,response,msisdn,appId){
+        sails.log.debug('<<<<<<<<<<<< SUBSCRIBED msisdn: %s appId: %s >>>>>>>>>>>>',msisdn,appId);
+        response.isSubscribed = true;
+        response.msisdn = msisdn;
+        response.isError = false;
+        return res.ok(response);
+    },
+
+    /**
+     * This will send a response object when subscribed by immediate charging
+     * @param res
+     * @param response
+     * @param msisdn
+     * @param appId
+     */
+    sendSubscribedAndChargedResponse: function(res,response,msisdn,appId){
+        sails.log.debug('<<<<<<<<<<<< SUBSCRIBED (By Immediate charging) msisdn: %s appId: %s >>>>>>>>>>>>',msisdn,appId);
+        response.isSubscribed = true;
+        response.msisdn = msisdn;
+        response.isError = false;
+        response.isPaymentSuccess = true;
+        return res.ok(response);
+    },
+
+    /**
+     * This will send a response object when payment re-newed
+     * @param res
+     * @param response
+     * @param msisdn
+     * @param appId
+     */
+    sendPaymentRenewedResponse: function(res,response,msisdn,appId){
+        sails.log.debug('<<<<<<<<<<<< SUBSCRIBED (Payment Renewed) msisdn: %s appId: %s >>>>>>>>>>>>',msisdn,appId);
+        response.isSubscribed = true;
+        response.msisdn = msisdn;
+        response.isError = false;
+        response.isPaymentSuccess = true;
+        response.dispalyMessage = config.END_USER_MESSAGES.SUCCESSFULLY_RENEWED;
+        return res.ok(response);
+    },
+
+    /**
+     * This will send a response object when Un-Subscribed from a service
+     * @param res
+     * @param response
+     * @param msisdn
+     * @param appId
+     */
+    sendUnsubscribedResponse: function(res,response,msisdn,appId){
+        sails.log.debug('<<<<<<<<<<<< UN-SUBSCRIBED msisdn: %s appId: %s >>>>>>>>>>>>',msisdn,appId);
+        response.isUnubscribed = true;
+        response.isError = false;
+        response.displayMessage = config.END_USER_MESSAGES.USER_UNSUBSCRIBED;
+        return res.ok(response);
     },
 
     /**

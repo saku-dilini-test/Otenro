@@ -18,10 +18,8 @@ module.exports = {
      * @param message
      */
     sendPushNotifications: function(messagesArray){
-        sails.log.debug("Call sendPushNotifications message length: " + messagesArray.length);
-
         messagesArray.forEach(function(message){
-            sails.log.debug("Call sendPushNotifications message: " + JSON.stringify(message,null,2));
+            sails.log.debug("pushNotificationsService: message: " + JSON.stringify(message));
             request.post(
                 PushUrl,{
                     json: message,
@@ -30,10 +28,10 @@ module.exports = {
                         'Content-Type' : 'application/json'
                     }} , function(error, response, body){
                     if (error) sails.log.info(error);
-                    if(response.statusCode === 200){
-                        sails.log("push message send success =>", response.statusCode);
+                    if(response && response.statusCode === 200){
+                        sails.log("pushNotificationsService: push message send success =>", response.statusCode);
                     }else{
-                        sails.log("push message send failed =>", response.statusCode);
+                        sails.log("pushNotificationsService: push message send failed =>", JSON.stringify(response,null,2));
                     }
             });
        });

@@ -157,7 +157,8 @@ export class HeaderComponent implements OnInit {
   }
 
   openRegisterModel() {
-    let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn") }
+    var uuid = localStorage.getItem("UUID");
+    let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn"),uuId: uuid }
     this.subscription.getSubscribedData(data).subscribe(data => {
       if(data.isError){
         this.dataService.displayMessage = data.displayMessage;
@@ -173,7 +174,8 @@ export class HeaderComponent implements OnInit {
   }
 
   openMyAccountModel(){
-    let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn") }
+    var uuid = localStorage.getItem("UUID");
+    let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn"),uuId: uuid }
     this.subscription.getSubscribedData(data).subscribe(data => {
       if(data.isError){
         this.dataService.displayMessage = data.displayMessage;
