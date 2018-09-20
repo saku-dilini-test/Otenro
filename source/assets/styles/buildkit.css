@@ -3175,3 +3175,13 @@ table.md-calendar-day-header{
     width: 14.2% !important;
 }
 /* .End of ADM date picker over-ride classes and styles */
+
+
+.md-menu.paste-options {
+    position: absolute;
+    top: 87px;
+    z-index: 10;
+}
+.md-menu.paste-options .paste-button{
+    visibility: hidden;
+} 	}

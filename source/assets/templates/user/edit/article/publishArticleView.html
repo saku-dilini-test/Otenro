@@ -176,15 +176,24 @@
 
                 <fieldset style="clear:both">
                     <label>Add Page Details</label>
-                    <!--<div class="custom-trix">-->
-                        <!--<trix-editor class="textEditor input-shadow-border"-->
-                        <!--name="editorText"-->
-                        <!--ng-maxlength="1000"-->
-                        <!--angular-trix ng-model="article.desc"-->
-                        <!--required></trix-editor>-->
-                        <!--<text-angular name="editorText" ng-model="article.desc" required></text-angular>-->
-                    <!--</div>-->
-                    <ng-quill-editor name="editorText" ng-model="article.desc"></ng-quill-editor>
+                    <br>
+                    <div>
+                        <md-menu class="paste-options">
+                            <!-- Trigger element is a md-button with an icon -->
+                            <md-button  id="pasteMenu" ng-click="$mdOpenMenu($event)" class="paste-button md-icon-button" aria-label="Open sample menu">
+                                &nbsp;
+                            </md-button>
+                            <md-menu-content>
+                                <md-menu-item><md-button ng-click="stripHtml()">Keep text only</md-button></md-menu-item>
+                                <md-menu-item><md-button>Keep source formating</md-button></md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                        <ng-quill-editor
+                                name="editorText"
+                                ng-model="article.desc"
+                                ng-paste="pastedText(article.desc, $event)">
+                        </ng-quill-editor>
+                    </div>
                 </fieldset>
                 <fieldset style="margin-bottom:0px;">
                     <span ng-show="articleForm.editorText.$error.maxlength">Too lengthy</span>

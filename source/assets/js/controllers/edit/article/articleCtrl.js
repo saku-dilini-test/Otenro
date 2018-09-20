@@ -9,9 +9,9 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("ArticleCtrl", [
-        '$scope', '$mdDialog', '$auth', '$rootScope', 'articleService', 'toastr', 'SERVER_URL', 'ME_APP_SERVER', 'mySharedService', 'initialData', '$log', 'mainMenuService', ArticleCtrl]);
+        '$scope', '$mdDialog', '$auth', '$rootScope', 'articleService', 'toastr', 'SERVER_URL', 'ME_APP_SERVER', 'mySharedService', 'initialData', '$log', 'mainMenuService', '$timeout', ArticleCtrl]);
 
-    function ArticleCtrl($scope, $mdDialog, $auth, $rootScope, articleService, toastr, SERVER_URL, ME_APP_SERVER, mySharedService, initialData, $log, mainMenuService) {
+    function ArticleCtrl($scope, $mdDialog, $auth, $rootScope, articleService, toastr, SERVER_URL, ME_APP_SERVER, mySharedService, initialData, $log, mainMenuService, $timeout) {
 
         $scope.appId = $rootScope.appId;
         $scope.tmpImage = [];
@@ -659,6 +659,32 @@
                 });
         };
         $scope.setAspectRatio();
+
+        /**
+         * options if pasting text form another source
+         **/
+        var originatorEv;
+        $scope.pastingContent = '';
+        $scope.oldTextContent = '';
+        $scope.openMenu = function($mdMenu, ev) {
+            originatorEv = ev;
+            $mdMenu.open(ev);
+        };
+        $scope.pastedText = function (oldTextContent, event) {
+            $scope.pastingContent = event.originalEvent.clipboardData.getData('text');
+            $scope.oldTextContent = oldTextContent;
+            $timeout(function(){
+                var ele=document.getElementById('pasteMenu');
+                angular.element(ele).triggerHandler('click');
+            },0);
+        };
+        $scope.stripHtml = function () {
+            if($scope.oldTextContent){
+                $scope.article.desc = $scope.oldTextContent +$scope.pastingContent ;
+            }else{
+                $scope.article.desc =  $scope.pastingContent;
+            }
+        }
 
     }
 })();
