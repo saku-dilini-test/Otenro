@@ -107,7 +107,7 @@ module.exports = {
             if(req.body.oldImage){
                 fs.unlink(dePath + req.body.oldImage, function (err) {
                     if (err) return console.error(err);
-                    sails.config.logging.custom.info("file deleted" + req.body.oldImage);
+//                    sails.config.logging.custom.info("file deleted" + req.body.oldImage);
 
                 });
             }
@@ -117,7 +117,7 @@ module.exports = {
             console.log(err);
                 return res.send(err);
             }
-            sails.config.logging.custom.info("file saved" + imgeFileName);
+//            sails.config.logging.custom.info("file saved" + imgeFileName);
                 console.log("dePath " + dePath);
 
                 //var appId = req.param('appId');

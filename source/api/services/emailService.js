@@ -1040,21 +1040,233 @@ module.exports = {
      * @param callback
      **/
     sendAppUserVerificationEmail: function (data, callback) {
-        var emailDetails = {
-            text: data.title + '\n\n' + data.link,
-            from: 'communications@otenro.com',
-            to: data.email,
-            subject: 'Verify Email Address'
-        };
-        server.send(emailDetails, function (err, message) {
-            if (err) {
-                return callback({message: 'error'});
-            } else if (message) {
-                return callback({message: 'success'});
-            } else {
-                return callback({message: 'failed'});
-            }
+
+        var appRoot = path.resolve();
+        var logoPath = appRoot + '/assets/images/';
+        var imageArr = [];
+
+        imageArr.push({
+                          filename: 'regHeader.png',
+                          path: logoPath+ "/appUserRegister/regHeader.png",
+                          cid: 'regHeader'
+                      });
+
+        imageArr.push({
+                          filename: "otenro.png",
+                          path: logoPath + "otenro.png",
+                          cid: 'logo'
+                      });
+
+        UserEmail.findOne({appId: data.appId}).exec(function (err, userEmail) {
+            if(err) res.send(err);
+            Application.find({id:data.appId}).exec(function(err, app){
+                if(err) res.send(err);
+                ApplicationContactUs.find({appId:data.appId}).exec(function(err,contact){
+
+                                    var mBody = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'+
+                                        '<html xmlns="http://www.w3.org/1999/xhtml" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
+                                        '<head>'+
+                                        '<meta name="viewport" content="width=device-width" />'+
+                                        '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'+
+                                        '<title>Billing e.g. invoices and receipts</title>'+
+                                        '<style type="text/css">'+
+                                        '.ql-align-center {text-align: center;text-decoration: underline}' +
+                                        '.line {margin-top: 3px}' +
+                                        'img {'+
+                                        'max-width: 100%;'+
+                                        '}'+
+                                        'body {'+
+                                        '-webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em;'+
+                                        '}'+
+                                        'body {'+
+                                        'background-color: #f6f6f6;'+
+                                        '}'+
+                                        '@media only screen and (max-width: 640px) {'+
+                                        '  body {'+
+                                        '    padding: 0 !important;'+
+                                        '  }'+
+                                        '  h1 {'+
+                                        '    font-weight: 800 !important; margin: 20px 0 5px !important;'+
+                                        '  }'+
+                                        '  h2 {'+
+                                        '    font-weight: 800 !important; margin: 20px 0 5px !important;'+
+                                        '  }'+
+                                        '  h3 {'+
+                                        '    font-weight: 800 !important; margin: 20px 0 5px !important;'+
+                                        '  }'+
+                                        '  h4 {'+
+                                        '    font-weight: 800 !important; margin: 20px 0 5px !important;'+
+                                        '  }'+
+                                        '  h1 {'+
+                                        '    font-size: 22px !important;'+
+                                        '  }'+
+                                        '  h2 {'+
+                                        '    font-size: 18px !important;'+
+                                        '  }'+
+                                        '  h3 {'+
+                                        '    font-size: 16px !important;'+
+                                        '  }'+
+                                        '  .container {'+
+                                        '    padding: 0 !important; width: 100% !important;'+
+                                        '  }'+
+                                        '  .content {'+
+                                        '    padding: 0 !important;'+
+                                        '  }'+
+                                        '  .content-wrap {'+
+                                        '    padding: 10px !important;'+
+                                        '  }'+
+                                        '  .invoice {'+
+                                        '    width: 100% !important;'+
+                                        '  }'+
+                                        '}'+
+                                        '</style>'+
+                                        '</head>'+
+                                        ''+
+                                        '<body itemscope itemtype="http://schema.org/EmailMessage" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6">'+
+                                        ''+
+                                        '<table class="body-wrap" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></td>'+
+                                        '		<td class="container" width="600" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;" valign="top">'+
+                                        '			<div class="content" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;">'+
+                                        '				<table class="main" width="100%" cellpadding="0" cellspacing="0" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px; background-color: #fff; margin: 0; border: 1px solid #e9e9e9;" bgcolor="#fff"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-wrap aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 20px;" align="center" valign="top">'+
+                                        '							<table width="100%" cellpadding="0" cellspacing="0" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
+                                        '                              <tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
+                                        '                                  <td class="content-block" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">'+
+                                        '								<img src="cid:regHeader"/></td>'+
+                                        '								</tr><td style="padding: 0 40px">'+
+                                        ' <h2 class = "ql-align-center">Successfully Registered</h2><br><br><br>'+
+                                        ' hi ' + data.userName + ',<br><br>' +
+                                        ' Thank you for registering with ' + app[0].appName + ',<br><br>' +
+                                        ' To complete the registration process click on the confirmation<br> link: <a target="_blank" href='+ data.link +'><u>click here</u></a>' +
+                                        ' <br><br>Thank you <br><br><br>';
+
+                                        if(contact[0]){
+                                            if(contact[0].address){
+                                                imageArr.push({
+                                                              filename: "location.png",
+                                                              path: logoPath + "appUserRegister/location.png",
+                                                              cid: 'address'
+                                                             });
+                                                mBody += '<img class="line" src="cid:address" width = "13px" height = "16px"> &nbsp;Address: ' + contact[0].address + "<br>";
+                                            }
+                                            if(contact[0].telPhone){
+                                                imageArr.push({
+                                                              filename: "phone.png",
+                                                              path: logoPath + "appUserRegister/phone.png",
+                                                              cid: 'phone'
+                                                             });
+                                                mBody += '<img class="line" src="cid:phone" width = "13px" height = "16px"> &nbsp;Phone: ' + contact[0].telPhone + "<br>";
+                                            }
+                                            if(contact[0].email){
+                                                imageArr.push({
+                                                              filename: "email.png",
+                                                              path: logoPath + "appUserRegister/email.png",
+                                                              cid: 'email'
+                                                             });
+                                                mBody += '<img class="line" src="cid:email" width = "13px" height = "16px"> &nbsp;Email: ' + contact[0].email + "<br>";
+                                            }
+                                            if(contact[0].webSite){
+                                                imageArr.push({
+                                                              filename: "web.png",
+                                                              path: logoPath + "appUserRegister/web.png",
+                                                              cid: 'web'
+                                                             });
+                                                mBody += '<img class="line" src="cid:web" width = "13px" height = "16px"> &nbsp;WebSite: ' + contact[0].webSite + "<br>";
+                                            }
+                                            if(contact[0].facebook){
+                                                imageArr.push({
+                                                              filename: "facebook.png",
+                                                              path: logoPath + "appUserRegister/facebook.png",
+                                                              cid: 'facebook'
+                                                             });
+                                                mBody += '<img class="line" src="cid:facebook" width = "13px" height = "16px"> &nbsp;' + contact[0].facebook + "<br>";
+                                            }
+                                            if(contact[0].instagram){
+                                                imageArr.push({
+                                                              filename: "insta.png",
+                                                              path: logoPath + "appUserRegister/insta.png",
+                                                              cid: 'insta'
+                                                             });
+                                                mBody += '<img class="line" src="cid:insta" width = "13px" height = "16px"> &nbsp;' + contact[0].instagram + "<br>";
+                                            }
+                                            if(contact[0].linkedin){
+                                                imageArr.push({
+                                                              filename: "linkedin.png",
+                                                              path: logoPath + "appUserRegister/linkedin.png",
+                                                              cid: 'linkedin'
+                                                             });
+                                                mBody += '<img class="line" src="cid:linkedin" width = "13px" height = "16px"> &nbsp;' + contact[0].linkedin + "<br>";
+                                            }
+                                            if(contact[0].pinterest){
+                                                imageArr.push({
+                                                              filename: "pinterest.png",
+                                                              path: logoPath + "appUserRegister/pinterest.png",
+                                                              cid: 'pinterest'
+                                                             });
+                                                mBody += '<img class="line" src="cid:pinterest" width = "13px" height = "16px"> &nbsp;' + contact[0].pinterest + "<br>";
+                                            }
+                                            if(contact[0].twitter){
+                                                imageArr.push({
+                                                              filename: "twitter.png",
+                                                              path: logoPath + "appUserRegister/twitter.png",
+                                                              cid: 'twitter'
+                                                             });
+                                                mBody += '<img class="line" src="cid:twitter" width = "13px" height = "16px"> &nbsp;' + contact[0].twitter + "<br>";
+                                            }
+                                        }
+
+
+                                    mBody +='	<br><br><br><br><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
+                                                                        '									<img src="cid:logo" alt="" class="CToWUd"  width="70" height="50" > <br>Powered by <a target="_blank" href="https://www.otenro.com"> www.otenro.com </a></td>'+
+                                                                        '								</tr>				</tr></table><div class="footer" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; clear: both; color: #999; margin: 0; padding: 20px;"> '+
+                                        '					<table width="100%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> ' +
+                                        '						</tr></table></div></div>'+
+                                        '		</td>'+
+                                        '		<td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></td>'+
+                                        '	</tr></table></body>'+
+                                        '</html>';
+
+
+                    var mailOptions;
+                    if(userEmail){
+
+                    mailOptions = {
+
+                                from: userEmail.fromEmail,
+                                to: data.email, // list of receivers
+                                subject: "Successfully Registered", // Subject line
+                                html: mBody,
+                                attachments: imageArr
+
+                            };
+
+                    }else{
+                            mailOptions = {
+
+                                from: "communications@otenro.com",
+                                to: data.email, // list of receivers
+                                subject: "Successfully Registered", // Subject line
+                                html: mBody,
+                                attachments: imageArr
+
+                            };
+
+                    }
+
+
+                    transporter.sendMail(mailOptions, (error, info) => {
+                            if (error) {
+                                console.log("email send failed \n id: " + data.email +"\n order: " + data.paymentStatus + "\n error: " + error);
+                                return  callback.send(500);
+                            }
+                            console.log('Message sent: %s', info.messageId);
+                            console.log(info);
+                        return callback.send('ok');
+                    });
+                });
+            });
+
         });
+
     },
 
     /**
