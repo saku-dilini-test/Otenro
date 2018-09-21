@@ -28,9 +28,9 @@ export class NewarivalsComponent {
       if(data[i].name == 'New Arrivals'){
         this.categories = data[i];
         break;
+      }else if(i == data.length-1) {
+        this.showComingSoon = true;
       }
-    }else if(i == data.length-1){
-      this.showComingSoon = true;
     }
   }, err => {
     console.error(err);
