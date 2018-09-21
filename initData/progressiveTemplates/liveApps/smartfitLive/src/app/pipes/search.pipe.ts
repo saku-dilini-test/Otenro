@@ -28,15 +28,17 @@ export class SearchPipe implements PipeTransform {
     const toCompare = term.toLowerCase();
 
     return items.filter(function (item: any) {
-      for (let property in item) {
-        if (item[property] === null || item[property] == undefined) {
-          continue;
-        }
-        if (item[property].toString().toLowerCase().includes(toCompare)) {
-          return true;
-        }
+
+      // for (let property in item) {
+
+      if (item.name === null || item.name == undefined) {
+        return false;
       }
-      return false;
+      if (item.name.toString().toLowerCase().includes(toCompare)) {
+        return true;
+      }
+      // }
+      // return false;
     });
   }
 }
