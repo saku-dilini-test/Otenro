@@ -17,7 +17,7 @@ export class DeliveryPolicyComponent implements OnInit {
   // privacyPolicy;
   // returnPolicy;
   constructor( private title: TitleService) {
-    this.title.changeTitle("Policies");
+    this.title.changeTitle("Delivery Policy");
   }
 
   ngOnInit() {
