@@ -77,7 +77,13 @@
             },
             aboutUsImageName:{
              type: 'string'
-            }
+            },
+            showOnWebsiteAbout:{
+             type: 'boolean'
+            },
+             showOnWebsitePolicies:{
+              type: 'boolean'
+             }
 
-            }
-     };
+    }
+};

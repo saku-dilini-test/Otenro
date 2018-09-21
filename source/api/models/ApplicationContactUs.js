@@ -86,6 +86,9 @@ module.exports = {
         updateAt: {
             type: 'date',
             default: Date.now
+        },
+        showOnWebsiteContact:{
+            type: 'boolean'
         }
     }
 };

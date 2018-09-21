@@ -32,13 +32,13 @@
 						<!--<li>-->
 							<!--<a (click)="navigate('','Home')">Home</a>-->
 						<!--</li>-->
-						<!-- <li>
+						<li  *ngIf="showOnWebsiteAbout">
 							<a  (click)="navigate('aboutus','About Us')">About-us</a>
-						</li> -->
+						</li>
             <li>
               <a (click)="navigate('shop','Search')">Products</a>
             </li>
-						<li>
+						<li  *ngIf="showOnWebsiteContact">
 							<a  (click)="navigate('contact', 'Contact Us')">Contact us</a>
 						</li>
 						<li>

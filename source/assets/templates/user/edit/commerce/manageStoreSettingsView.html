@@ -11,10 +11,11 @@
             <md-tab>
                 <md-tab-label>general</md-tab-label>
                 <md-tab-body>
-                    <div class="md-dialog-header">
-                        <h1>general</h1>
-                    </div>
+
                     <div class="md-dialog-main">
+                        <div class="md-dialog-header">
+                            <h1>general</h1>
+                        </div>
                         <form name="storeSettingsForm" class="clearfix" novalidate>
                             <fieldset>
                             <md-input-container class="md-block">
@@ -236,13 +237,13 @@
             <md-tab>
                 <md-tab-label>policies</md-tab-label>
                 <md-tab-body>
-                    <div class="md-dialog-header">
-                        <h1>policies</h1>
-                        <md-checkbox aria-label="Show Map"  ng-model="storeSettings.showOnWebsitePolicies">
-                            Show on the Website Menu Bar
-                        </md-checkbox>
-                    </div>
                     <div class="md-dialog-main">
+                        <div class="md-dialog-header">
+                            <h1>policies</h1>
+                            <md-checkbox aria-label="Show Map"  ng-model="storeSettings.showOnWebsitePolicies">
+                                Show on the Website Menu Bar
+                            </md-checkbox>
+                        </div>
                         <form name="policies" class="clearfix" novalidate>
                             <fieldset>
                                 <label>return policy</label>
@@ -356,13 +357,13 @@
             <md-tab>
                 <md-tab-label>About Us</md-tab-label>
                 <md-tab-body>
-                    <div class="md-dialog-header">
-                        <h1>About Us</h1>
-                    </div>
                     <div class="md-dialog-main">
+                        <div class="md-dialog-header">
+                            <h1>About Us</h1>
+                        </div>
                         <!--<input type="file" ngf-select="uploadPic(picFile)" ng-model="picFile" name="file" ngf-accept="'image/*'" required="">-->
                         <label>Select Image</label>
-                        <div layout-gt-xs="row" class="margin">
+                        <div layout-gt-xs="row">
                             <div class="file-upload-wrapper clearfix">
                                 <div class="cropArea">
                                     <ui-cropper image="myImage" area-type="rectangle" aspect-ratio="aspectRatio" result-image="picFile" result-image-size="size"   result-image-format="image/png/jpeg" result-image-quality="0.5">
@@ -461,15 +462,15 @@
             <md-tab>
                 <md-tab-label>Contact Us</md-tab-label> asd
                 <md-tab-body>
-                    <div class="md-dialog-header">
-                        <h1>Contact Us</h1>
-                        <md-checkbox aria-label="Show Map"  ng-model="basicInfo.showOnWebsiteContact">
-                            Show on the Website Menu Bar
-                        </md-checkbox>
-                    </div>
                     <!-- Address | Tel Phone -->
                     <form accept-charset="UTF-8" role="form" name="contactUs" novalidate>
                         <div class="md-dialog-main">
+                            <div class="md-dialog-header">
+                                <h1>Contact Us</h1>
+                                <md-checkbox aria-label="Show Map"  ng-model="basicInfo.showOnWebsiteContact">
+                                    Show on the Website Menu Bar
+                                </md-checkbox>
+                            </div>
                             <fieldset>
                                 <!-- Address -->
                                 <label>Address</label>

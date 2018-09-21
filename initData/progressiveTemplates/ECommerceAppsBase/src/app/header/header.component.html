@@ -32,18 +32,19 @@
 						<li>
 							<a (click)="navigate('','Home')">Home</a>
 						</li>
-						<!--<li>-->
-							<!--<a  (click)="navigate('aboutus','About Us')">About-us</a>-->
-						<!--</li>-->
+						<li *ngIf="showOnWebsiteAbout">
+							<a (click)="navigate('aboutus','About Us')">About-us</a>
+						</li>
 						<li>
 						  <a (click)="navigate('shop','Search')">Products</a>
 						</li>
-						<li>
+						<li *ngIf="showOnWebsiteContact">
 							<a  (click)="navigate('contact', 'Contact Us')">Contact us</a>
 						</li>
 						<li *ngIf = "enableBlog" >
 							<a (click)="navigate('blogs', 'blogs')">Blog</a>
 						</li>
+
 						<li>
 				            <div class="dropdown">
 				              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="ion ion-person icon-sm"></span>

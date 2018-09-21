@@ -9,6 +9,7 @@ import { CategoriesService } from '../services/categories/categories.service'
 import { SERVER_URL } from '../../assets/constantsService';
 import { Location } from '@angular/common';
 import { ProductsService } from '../services/products/products.service';
+import { AppDataService } from '../services/appdata-info/appdata-info.service';
 declare var $:any;
 
 @Component({
@@ -31,11 +32,13 @@ export class HeaderComponent implements OnInit {
   imageUrl: any;
   user; localCart; blogData;userUkn;
   enableBlog = false;
-
+  showOnWebsitePolicies:boolean;
+  showOnWebsiteAbout:boolean;
+  showOnWebsiteContact:boolean;
   constructor(private location: Location, private localStorageService: LocalStorageService,
     private categoryService: CategoriesService, private router: Router,
     private dataService: PagebodyServiceModule, private titleServ: TitleService,
-    private productsService: ProductsService) {
+    private productsService: ProductsService, private appdataService: AppDataService) {
 
     this.title = 'Home';
     this.dummy = new Date().getTime();
@@ -45,6 +48,29 @@ export class HeaderComponent implements OnInit {
     }, err => {
       console.log(err);
     });
+
+	this.appdataService.getAboutUs()
+      .subscribe((data: any) => {
+		  if(data.showOnWebsitePolicies){
+		    this.showOnWebsitePolicies = data.showOnWebsitePolicies;
+          }
+          if(data.showOnWebsiteAbout){
+            this.showOnWebsiteAbout = data.showOnWebsiteAbout;
+          }
+
+	  }, (err) => {
+        console.log(err);
+      });
+
+	this.appdataService.getContactUs().subscribe(data => {
+      if(data.contactInfo && data.contactInfo.showOnWebsiteContact){
+        this.showOnWebsiteContact = data.contactInfo.showOnWebsiteContact;
+      }
+    }), ((err) => {
+      alert('warning!' + " Unable to get contact us info\n Please check your connection.");
+    });
+
+
   }
 
   ngOnInit() {
