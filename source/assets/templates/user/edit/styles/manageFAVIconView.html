@@ -1,0 +1,34 @@
+<md-dialog style="width:325px;" aria-label="Background Image">
+
+    <!--Google Analytics-->
+    <script>
+        ga('set', 'page', 'select-background-image');
+        ga('send', 'pageview');
+    </script>
+
+    <md-dialog-content>
+
+                    <div class="md-dialog-header">
+                        <h1>UPLOAD FAV ICON</h1>
+                    </div>
+                    <div class="md-dialog-main">
+
+                        <fieldset class="col-md-3">
+                            <label class="reset-inline">Uploaded FAV Icon</label>
+                            <a class="feature01 logo-upload">
+                                <img ng-if="splash != null" ngf-src="splash"  style="width:120px; height:120px;" />
+                                <!--<img ng-show="splash[0] == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />-->
+                            </a>
+                            <input type="button" class="me-default-button" ngf-select name="splash1"
+                                   ng-model="splash" ngf-accept="image/*" ngf-change="validateIcon(splash,'512','512')" value="Add Image" />
+                            <!--ngf-validate="{width: {min: 512, max:512}, height: {min: 512, max: 512}}"-->
+                        </fieldset>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button" ng-click="hide()">Close</md-button>
+                            <!--<button class="me-default-button" ng-click="addBackgroundImage(picFile)">Submit</button>-->
+                        </div>
+                    </div>
+    </md-dialog-content>
+</md-dialog>
+

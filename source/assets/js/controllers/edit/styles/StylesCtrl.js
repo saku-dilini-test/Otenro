@@ -16,6 +16,36 @@
         $scope.tmpImage = [];
         $scope.tmpLogo= [];
         $scope.path = ME_APP_SERVER+"temp/";
+        $scope.splash;
+
+        $scope.imageUrlFAV = SERVER_URL + "templates/viewFAVIcon?userId=" + $auth.getPayload().id + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/favicon.ico";
+        $scope.splash = $scope.imageUrlFAV;
+
+        console.log($scope.imageUrlFAV);
+        $scope.validateIcon = function(splash,x,v){
+
+            console.log(splash);
+            console.log(JSON.stringify(splash));
+
+            if(splash && splash.type != "image/vnd.microsoft.icon"){
+                toastr.error('Please upload an Icon', 'Warning', {
+                      closeButton: true
+                });
+                    $scope.splash = null;
+            }else{
+
+                        stylesService.uploadFAVIcon(splash)
+                            .success(function (data, status, headers, config) {
+
+                            }).error(function (data, status, headers, config) {
+
+                        });
+
+            }
+
+
+
+        }
 
 
         $scope.cropImage = function () {
