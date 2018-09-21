@@ -51,7 +51,8 @@ export class FooterComponent implements OnInit{
   }
 
   openFooterMyAccount(){
-    let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn") };
+    var uuid = localStorage.getItem("UUID");
+    let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn"),uuId: uuid };
     this.subscription.getSubscribedData(data).subscribe(data => {
       if(data.isError){
         this.dataService.displayMessage = data.displayMessage;

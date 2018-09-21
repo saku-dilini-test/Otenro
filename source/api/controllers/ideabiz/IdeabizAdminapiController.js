@@ -431,7 +431,8 @@ module.exports = {
                                     var setFields = {
                                         'status': config.APP_USER_STATUS.INACTIVE,
                                         'unsubscribeDate':dateFormat(new Date(), "yyyy-mm-dd"),
-                                        'subscriptionStatus':config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code
+                                        'subscriptionStatus':config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code,
+                                        'deviceUUID': null
                                     };
                                 }
 
@@ -731,7 +732,7 @@ module.exports = {
     },
 
 
-    updateRenewalAppUser:function (appId,msisdn,intervel ,callback){
+    updateRenewalAppUser:function (appId,msisdn,intervalObj ,callback){
 
         var renewalQuery = {
             appId: appId,
@@ -747,9 +748,9 @@ module.exports = {
                 var nextPaymentDate = "";
                 var date = new Date();
 
-                if(intervel==config.RENEWAL_INTERVALS.MONTHLY.code){
+                if(intervalObj.noOfDays !== 1){
 
-                    date.setDate(date.getDate() + 30);
+                    date.setDate(date.getDate() + intervalObj.noOfDays);
                     nextPaymentDate = dateFormat(date,"yyyy-mm-dd");
                 }
                 RenewalAppUser.update(renewalQuery, {nextPaymentDate:nextPaymentDate}).exec(function (err, result) {
@@ -826,7 +827,6 @@ module.exports = {
             sort: 'createdAt DESC'
         }).exec(function (err, devices) {
             if(devices && devices.length>0) {
-                console.log("devices=>", devices);
                 var messageObj = {
                     "to": devices[0].deviceId,
                     "notification": {

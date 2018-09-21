@@ -93,6 +93,7 @@ module.exports = {
                         //Will update the user statuses while receiving a status change call
                         if (user) {
                             var setFields = {};
+                            var isDeviceChangedByUser = false;
 
                             if(isRegistration) {
                                 sails.log.debug("IdeabizSMSController: In Registration: User exists for the msisdn: " + msisdn + " and for the appID: " + appID);
@@ -103,6 +104,8 @@ module.exports = {
                                     sails.log.error("IdeabizSMSController: No deviceUUID returned from msisdn: " + msisdn);
                                 } else {
                                     setFields.deviceUUID = deviceUUID;
+
+                                    isDeviceChangedByUser = user.deviceUUID && user.deviceUUID !== deviceUUID;//Check whether the User has changed the Device
                                 }
                             }else{
                                 sails.log.debug("IdeabizSMSController: In Un-Registration: User exists for the msisdn: " + msisdn + " and for the appID: " + appID);
@@ -110,6 +113,7 @@ module.exports = {
                                 setFields.status = config.APP_USER_STATUS.INACTIVE;
                                 setFields.unsubscribeDate = dateFormat(new Date(), "yyyy-mm-dd");
                                 setFields.subscriptionStatus = config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code;
+                                setFields.deviceUUID = null;
                             }
 
                             AppUser.update(queryUser, setFields).exec(function (err, users) {
@@ -119,8 +123,13 @@ module.exports = {
                                 }
 
                                 if(isRegistration && users[0].deviceUUID) {
-                                    // Send the notifications to the AppUser
-                                    var message = "Your subscription to " + app.title  + " has been success. Click to open " + app.title ;
+                                    var message = "";
+                                    if(isDeviceChangedByUser){
+                                        message = "Successfully updated your device details." ;
+                                    }else{
+                                        message = "Your subscription to " + app.title  + " has been success." ;
+                                    }
+
                                     sails.log.debug('IdeabizSMSController: Sent Push Notification message"%s" for msisdn: %s appId:%s AppUser ID:%s',message,msisdn,appID,users[0].id);
                                     adminAPI.notifyUsers(req, res, users[0], message);
                                 }else{
