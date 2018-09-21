@@ -76,7 +76,15 @@ export class HomepageComponent implements OnInit {
           // console.log(result)
                     // console.log(this.dataService.categories)
                     this.currentCategoryImage = this.dataService.currentCategoryImage;
-                    this.categories = this.dataService.categories;
+                    for(let i=0;i<this.dataService.categories.length;i++){
+                      if(this.dataService.categories[i].name == 'New Arrivals'){
+                        this.dataService.categories.splice(i, 1);
+                        this.categories = this.dataService.categories;
+                        break;
+                      }else if(i == this.dataService.categories.length -1){
+                        this.categories = this.dataService.categories;
+                      }
+                    }
                     this.products = this.dataService.products;
               });
         });
@@ -93,7 +101,7 @@ export class HomepageComponent implements OnInit {
 
     setTimeout(function() {
         $('.carousel').carousel('cycle');
-     
+
     }, 3000);
 
     let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
