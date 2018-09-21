@@ -34,7 +34,7 @@ const routes: Routes = [
     data:{title:'Shop Page'}
   },
   {
-    path: 'product/:catName',
+    path: 'product/:catName/:catId/:articleId',
     component: ProductComponent,
     data:{title:'Product Page'}
   },

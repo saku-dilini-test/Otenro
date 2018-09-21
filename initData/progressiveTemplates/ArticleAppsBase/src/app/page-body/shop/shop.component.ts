@@ -80,9 +80,8 @@ export class ShopComponent implements OnInit {
   }
 
   navigateProd(val: String, item: any) {
-    this.catName = item.title;
     this.dataService.data = item;
-    this.route.navigate([val, this.catName]);
+    this.route.navigate([val, this.catName, item.categoryId, item.id]);
   }
 
 }

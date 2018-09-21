@@ -93,32 +93,7 @@ export class HomepageComponent implements OnInit {
   }
 
   loadArticle(catId,articleId){
-    if(catId && articleId) {
-      console.log("loadArticle for catId: " + catId + " articleId: " + articleId);
-
-      this.dataService.catId = catId;
-      this.productService.getProducts().subscribe(articles => {
-          console.log("<<<<<<<<Articles>>>>>>>>>");
-          console.log(articles);
-          var article = null;
-          for (let i = 0; i < articles.length; i++) {
-            console.log("articles[i].id=>" + articles[i].id)
-            if (articles[i].id === articleId) {
-              article = articles[i];
-            }
-          }
-
-          if (article) {
-            this.dataService.data = article;
-            this.route.navigate(['product', article.title]);
-          } else {
-            console.log("Article not found for the catId: " + catId + " articleId: " + articleId);
-          }
-        },
-        error => {
-          console.log('Error shop service');
-        });
-    }
+    this.route.navigate(['product', 'fromPushMessage', catId, articleId]);
   }
 
   // Routing Method
