@@ -70,21 +70,24 @@ export class HomepageComponent implements OnInit {
         this.prevCategories = false;
       }
         categoryService.getCategories().subscribe(data => {
+
           this.primaryCategories = data;
+
+          if(this.primaryCategories && this.primaryCategories.length != 0){
+            for(let i=0;i<this.primaryCategories.length;i++){
+              if(this.primaryCategories[i].name == 'New Arrivals'){
+                 this.primaryCategories.splice(i, 1);
+                break;
+              }else if(i == this.primaryCategories.length -1){
+                this.primaryCategories = data;
+              }
+            }
+          }
           // console.log(this.primaryCategories,params.id)
               categoryService.getNodeById(this.primaryCategories,params.id).subscribe((result)=>{
-          // console.log(result)
-                    // console.log(this.dataService.categories)
+
                     this.currentCategoryImage = this.dataService.currentCategoryImage;
-                    for(let i=0;i<this.dataService.categories.length;i++){
-                      if(this.dataService.categories[i].name == 'New Arrivals'){
-                        this.dataService.categories.splice(i, 1);
-                        this.categories = this.dataService.categories;
-                        break;
-                      }else if(i == this.dataService.categories.length -1){
-                        this.categories = this.dataService.categories;
-                      }
-                    }
+                    this.categories = this.dataService.categories;
                     this.products = this.dataService.products;
               });
         });

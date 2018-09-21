@@ -19,6 +19,7 @@ export class NewarivalsComponent {
   private imageUrl:any;
   private imageUrl1:any;
   private catName: any;
+  showComingSoon:boolean = false;
   constructor(private title: TitleService, private categoryService: CategoriesService,private dataService: PagebodyServiceModule, private router: Router) {
     this.title.changeTitle("New Arrivals");
 
@@ -28,6 +29,8 @@ export class NewarivalsComponent {
         this.categories = data[i];
         break;
       }
+    }else if(i == data.length-1){
+      this.showComingSoon = true;
     }
   }, err => {
     console.error(err);
