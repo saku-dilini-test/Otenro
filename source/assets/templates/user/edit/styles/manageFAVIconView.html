@@ -1,4 +1,4 @@
-<md-dialog style="width:325px;" aria-label="Background Image">
+<md-dialog style="width:350px;" aria-label="Background Image">
 
     <!--Google Analytics-->
     <script>
@@ -25,8 +25,8 @@
                         </fieldset>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
+                            <md-button ng-disabled = "!saveFAV" class="me-default-button" ng-click="saveFAVIcon()">Save</md-button>
                             <md-button class="me-default-button" ng-click="hide()">Close</md-button>
-                            <!--<button class="me-default-button" ng-click="addBackgroundImage(picFile)">Submit</button>-->
                         </div>
                     </div>
     </md-dialog-content>
