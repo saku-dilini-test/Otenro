@@ -18,7 +18,7 @@ module.exports = {
      ***************************************************************************/
 
     models: {
-        connection: 'productionMongodbServer'
+        connection: 'stagingMongodbServer'
     },
     port: 1339,
     log: {
