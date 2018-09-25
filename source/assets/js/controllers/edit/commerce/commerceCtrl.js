@@ -1524,6 +1524,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                     'instagram': webInfo.instagram,
                     'linkedin': webInfo.linkedin,
                     'pinterest': webInfo.pinterest,
+                    'showOnWebsiteContact' : basicInfo.showOnWebsiteContact || false
                 };
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {
