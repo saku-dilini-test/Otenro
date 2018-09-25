@@ -119,7 +119,7 @@ module.exports.routes = {
     'POST /edit/addStyleFontSize': 'edit/style/StyleController.addStyleFontSize',
     'POST /edit/addWebStyleFontSize': 'edit/style/webStyleController.addWebStyleFontSize',
 
-    'POST /edit/addJsChange': 'edit/style/webStyleController.addJsChange',
+    // 'POST /edit/addJsChange': 'edit/style/webStyleController.addJsChange',
 
     'POST /edit/addStyleFontWeight': 'edit/style/StyleController.addStyleFontWeight',
     'POST /edit/addWebStyleFontWeight': 'edit/style/webStyleController.addWebStyleFontWeight',
@@ -291,6 +291,7 @@ module.exports.routes = {
     'POST /edit/sendSampleFile' : 'edit/engage/EngageController.sendSampleFile',
     'POST /edit/deletePushMessage' : 'edit/engage/EngageController.deletePushMessage',
     'GET /edit/getAllArticles' : 'edit/engage/EngageController.getAllArticles',
+    'GET /edit/pushMessage/subscribe' : 'edit/engage/EngageController.subscribe',
 
     /**
      * GetAssistanceController
@@ -348,7 +349,7 @@ module.exports.routes = {
     'GET /templates/printChargingMap' : 'ideabiz/IdeabizController.printCurrentChargingMap',
     'POST /templates/resetChargingMap' : 'ideabiz/IdeabizController.resetChargingMap',
     'POST /templates/removeFromChargingMap' : 'ideabiz/IdeabizController.removeFromChargingMap',
-    'POST /templates/getAppStatus' : 'ideabiz/IdeabizController.getAppStatus',
+    // 'POST /templates/getAppStatus' : 'ideabiz/IdeabizController.getAppStatus',
 
     /**
     * Pay by authorizeNet in templates
@@ -484,7 +485,7 @@ module.exports.routes = {
      */
 
     'POST /adminapi/index': 'ideabiz/IdeabizAdminapiController.takeAction',
-    'POST /adminapi/push': 'ideabiz/IdeabizAdminapiController.sendPushMessage',
+    // 'POST /adminapi/push': 'ideabiz/IdeabizAdminapiController.sendPushMessage',
 
 
 

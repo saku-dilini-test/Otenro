@@ -30,13 +30,17 @@
             <hr />
 
             <fieldset>
-                <md-checkbox type="checkbox" ng-model="linkArticle" value="" ng-change="clearArticle(linkArticle)" >
+                <md-checkbox type="checkbox" ng-model="linkArticle" value="">
                     LINK AN ARTICLE
                 </md-checkbox>
             </fieldset>
 
-            <md-select class="" placeholder="Select Article" ng-model="pushMessage.article" ng-model-options="{trackBy: '$value.id'}" required>
-                <md-option ng-value="v" ng-repeat="v in linkedArticles ">{{v.title}}
+            <md-select class="" placeholder="Select Article" 
+                        ng-model="pushMessage.article" 
+                        ng-model-options="{trackBy: '$value.id'}" 
+                        ng-disabled="!linkArticle" 
+                        ng-style="{'cursor' : !linkArticle ? 'not-allowed': 'pionter'}">
+                <md-option ng-show="linkArticle" ng-value="v" ng-repeat="v in linkedArticles ">{{v.title}}
                 </md-option>
                 <!--// create new catergory-->
                 <!--<md-option ng-click="newcategory ()">Create New Category</md-option>-->
