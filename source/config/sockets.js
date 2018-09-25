@@ -16,17 +16,23 @@ module.exports.sockets = {
   //// (To control whether a socket is allowed to connect, check out `authorization` config.)
   //// Keep in mind that Sails' RESTful simulation for sockets
   //// mixes in socket.io events for your routes and blueprints automatically.
-  //onConnect: function(session, socket) {
-  //
-  //  // By default, do nothing.
-  //
-  //},
+  // onConnect: function(session, socket) {
+
+  //   console.log('Connected to socket');  
+  // },
+
+  beforeConnect: function(handshake, callback) {
+
+
+    sails.log.debug('connecting to socket.io ...');
+    return callback(null, true);
+  },
   //
   //// This custom onDisconnect function will be run each time a socket disconnects
-  //onDisconnect: function(session, socket) {
-  //
-  //  // By default: do nothing.
-  //},
+  // onDisconnect: function(session, socket) {
+
+  //   console.log('Connected from socket');
+  // },
   //
   //
   //

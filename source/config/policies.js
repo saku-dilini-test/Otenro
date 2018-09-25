@@ -127,7 +127,8 @@ module.exports.policies = {
     },
     'edit/engage/EngageController':{
         '*': ['jwtAuth'],
-        sendSampleFile:true
+        sendSampleFile:true,
+        subscribe: true
     },
 
 

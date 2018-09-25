@@ -21,6 +21,30 @@
             }
         }
 
+        io.socket.get('/edit/pushMessage/subscribe', (data) => {
+
+            console.log('Subscribe Data => ' + JSON.stringify(data, null, 2))
+        });
+
+        io.socket.on('pushmessage', (socketData) => {
+
+            if (socketData.verb === 'updated') {
+
+                let updatedMessage = $scope.pushedMessages.filter(message => {
+
+                    return message.id === socketData.data.id;
+                });
+
+                let updateMessageIndex = $scope.pushedMessages.indexOf(updatedMessage[0]);
+
+                if (updateMessageIndex > -1) {
+
+                    $scope.pushedMessages[updateMessageIndex].status = socketData.data.status;
+                    $scope.$apply();
+                }
+            }
+        });
+
         // //get all app registered user details
         //
         // var getAppUserData = function () {

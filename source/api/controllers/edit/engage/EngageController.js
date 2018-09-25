@@ -517,10 +517,12 @@ module.exports = {
     sendPushNotification: function(deviceId,data,message,pushId){
         console.log("sendPushNotification message: %s pushId: %s ",message,pushId);
         if(pushId) {
-            PushMessage.update(pushId, {status: config.PUSH_MESSAGE_STATUS.SENT.code}).exec(function (err, updateDate) {
+            PushMessage.update(pushId, {status: config.PUSH_MESSAGE_STATUS.SENT.code}).exec(function (err, updatedMessage) {
                 if (err) {
                     sails.log.error('Error in sendPushNotification: ', err);
                 }
+                //Notify connected socket clients about model update
+                PushMessage.publishUpdate(updatedMessage[0].id, updatedMessage[0]);
             });
         }
 
@@ -579,6 +581,30 @@ module.exports = {
                     });
                 }
             })
+        });
+    },
+
+    /**
+     * Responsible to subscribe real time model events of 
+     * PushMessage to connected socket client
+     * 
+     **/
+    subscribe: function (req, res) {
+
+        if (!req.isSocket) {
+
+            sails.log.debug('Not a socket request' + ' EngageController => subscribe');
+            return res.badRequest({ status: 'NOT_SOCKET_REQUEST' });
+        }
+        PushMessage.find().exec(function (err, pushMessages) {
+
+            if (err) {
+
+                return res.serverError({ status: 'SERVER_ERROR' });
+            }
+            PushMessage.subscribe(req, _.pluck(pushMessages, 'id'));
+
+            return res.ok({ status: 'SUBSCRIBED' });
         });
     }
 }
