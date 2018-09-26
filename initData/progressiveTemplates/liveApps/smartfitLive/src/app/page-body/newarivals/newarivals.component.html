@@ -19,9 +19,13 @@
 					<h3 class="mg-md product-name text-center main-content-font">
 						<strong>{{prod.name}}</strong>
 					</h3>
-					<h4 class="mg-md product-price-text text-center main-content-font">
-						Price - {{currency}} {{prod.variants[0].price}}
-					</h4>
+					<div *ngIf = "!checkForPromo(prod)" class="text-center product-content productPromo">
+						Price - {{currency}} {{prod.variants[0].price| number: '.2'}}
+					</div>
+					<div *ngIf = "checkForPromo(prod)" class="text-center product-content productPromo">
+						<h6 style ="margin-top:0px;margin-bottom:5px">Regular Price - <strong style="text-decoration: line-through">{{currency}} {{prod.variants[0].price| number: '.2'}}</strong></h6>
+						<h5 style ="margin-top:0px;margin-bottom:5px">Cash Price - <strong >{{currency}} {{getDiscountPrice(prod.variants[0].sku,prod.variants[0].price)| number: '.2'}}</strong></h5>
+					</div>
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="text-center" *ngIf="!checkSoldOut(prod)">
