@@ -67,6 +67,7 @@ export class ProductComponent implements OnInit {
               if (article) {
                 this.dataService.data = article;
                 this.catName = article.title;
+                this.title.changeTitle(this.catName);
                 this.Data = article;
                 // this.route.navigate(['product', article.title]);
               } else {
@@ -81,15 +82,19 @@ export class ProductComponent implements OnInit {
 
 
     ngOnInit() {
-
+        console.log("Product. ngOnInit",this.catId,this.articleId);
         this.router.params.subscribe(params => {
             if(params['catName'] != 'fromPushMessage'){
               this.title.changeTitle(params['catName']);
             }else{
             //  write the code to fetch category name
             }
+            console.log(this.catId,this.articleId);
+
             this.articleId = params['articleId'];
-            this.loadArticle(this.catId,this.articleId)
+            this.catId = params['catId'];
+
+            this.loadArticle(this.catId,this.articleId);
             if (this.catName) {
                 this.productService.createArticleViewDataInfo(this.catName).subscribe(data => {
                     // Read the result field from the JSON response.

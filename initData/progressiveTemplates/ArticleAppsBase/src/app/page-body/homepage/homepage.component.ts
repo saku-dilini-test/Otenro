@@ -174,6 +174,14 @@ export class HomepageComponent implements OnInit {
       $(() => {
         $('#appStatusModel').modal('hide');
         $('#appPushNotificationModel').modal('show');
+
+        if(notification.categoryId && notification.articleId) {
+          console.log("binded appPushNotificationModel");
+          $('#appPushNotificationModel').on('hidden.bs.modal', function () {
+            console.log("In Close appPushNotificationModel");
+            homePageCmp.loadArticle(notification.categoryId, notification.articleId);
+          });
+        }
       });
     }
   }
