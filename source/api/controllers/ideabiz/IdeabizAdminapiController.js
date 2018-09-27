@@ -687,19 +687,40 @@ module.exports = {
                             });
                     }else {
                         sails.log.debug("IdeabizAdminapiController: Account balance: %s is not enough to charge the service amount: %s for the  msisdn: %s serviceID %s appID: %s ",responseBody.accountInfo.balance,data.amount,msisdn,serviceID,appID);
-                        var data = {appId:publishDetailsData.appId,msisdn:msisdn,
+                        var newPaymentObj = {appId:publishDetailsData.appId,msisdn:msisdn,
                             amount:0.0,operator:data.operator,status:0 ,date:dateFormat(new Date(), "yyyy-mm-dd")}
 
-                        SubscriptionPayment.create(data).exec(function (err, newPayment) {
+                        var paymentQuery = {
+                            appId: publishDetailsData.appId,
+                            msisdn: msisdn,
+                            date: dateFormat(new Date(),  "yyyy-mm-dd")
+                        };
 
-                            if (err) {
-                                sails.log.error("IdeabizAdminapiController: SubscriptionPayment Create Error");
+                        SubscriptionPayment.findOrCreate(paymentQuery, newPaymentObj).exec(function(error, createdOrFoundPaymentRecords){
+                            if (error) {
+                                sails.log.error("IdeabizAdminapiController: SubscriptionPayment findOrCreate Create Error: ",error);
                                 chargingAPICallLogService.setInProgress(appID,msisdn,false);
                                 return callback(null, "error");
                             }
-                            sails.log.debug("IdeabizAdminapiController: Payment created successfully with status 0 and for amnt 0.0 for msisdn: %s serviceID: %s appID: %s Payment:%s ",msisdn,serviceID,appID,JSON.stringify(newPayment));
-                            chargingAPICallLogService.setInProgress(appID,msisdn,false);
-                            return callback(null, "error");
+
+                            if(createdOrFoundPaymentRecords && createdOrFoundPaymentRecords.status!==0){
+                                SubscriptionPayment.update(paymentQuery, {status:0,amount:0.0}).exec(function (err, updatedPayment) {
+                                    if (err) {
+                                        sails.log.error("IdeabizAdminapiController: SubscriptionPayment updated Error: ",err);
+                                        chargingAPICallLogService.setInProgress(appID,msisdn,false);
+                                        return callback(null, "error");
+
+                                    }
+
+                                    sails.log.debug("IdeabizAdminapiController: SubscriptionPayment updated successfully for the status=0 and the amount=0.0 for msisdn: %s serviceID: %s appID: %s Payment: %s",msisdn,serviceID,appID,JSON.stringify(updatedPayment));
+                                    chargingAPICallLogService.setInProgress(appID,msisdn,false);
+                                    return callback(null, "error");
+                                });
+                            }else{
+                                sails.log.debug("IdeabizAdminapiController: SubscriptionPayment created or did not update. But the status=0 and amount=0.0 for the payment record for msisdn: %s serviceID: %s appID: %s Payment: %s",msisdn,serviceID,appID,JSON.stringify(createdOrFoundPaymentRecords));
+                                chargingAPICallLogService.setInProgress(appID,msisdn,false);
+                                return callback(null, "error");
+                            }
                         });
                     }
                 })
