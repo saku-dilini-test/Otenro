@@ -75,10 +75,10 @@ module.exports.connections = {
   },
   productionMongodbServer: {
     adapter: 'sails-mongo',
-    host: 'localhost',
+    host: '13.229.197.90',
     port: 27017,
-    // user: 'username',
-    // password: 'password',
+    user: 'ideadroid',
+    password: 'SUperman123',
     database: 'ideadroid'
   },
 
