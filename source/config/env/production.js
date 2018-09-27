@@ -73,5 +73,5 @@ module.exports = {
     /**
      * The ADMIN api and MO callbacks will call these
      */
-    IDEABIZ_ADMIN_MO_CALLBACK_FORWARD_URLS : ['http://appmaker.ddns.net']
+    IDEABIZ_ADMIN_MO_CALLBACK_FORWARD_URLS : ['']
 };
