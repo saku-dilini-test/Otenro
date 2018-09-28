@@ -3,7 +3,7 @@
     <div class="container bloc-sm">
       <nav class="navbar row">
            <div class="navbar-header">
-            <a class="navbar-brand hidden-xs">
+            <a class="navbar-brand hidden-xs hidden-sm">
               <span class="special-tag-for-editing-text-with-html"></span>
               <img src="{{imageUrl}}/logo.png&dummy={{dummy}}" alt="logo" (click)="navigate('','Home')"/>
             </a>
@@ -13,10 +13,10 @@
             <button *ngIf="title != 'Home'" aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle main-navigation" (click)="goBack()">
               <i class="fa fa-arrow-left"></i>
             </button>
-            <div class="mobile-title visible-xs mobileTitle" >{{title}}</div>
-            <div class="mobile-cart visible-xs" ><i class="fa fa-shopping-cart"  (click)="navigate('cart','Shopping Cart');manualToggle()"></i> <span class="badge main-navigation"  (click)="navigate('cart','Shopping Cart');manualToggle()">{{cartNo}}</span></div>
+            <div class="mobile-title visible-xs  visible-sm mobileTitle" >{{title}}</div>
+            <div class="mobile-cart visible-xs visible-sm" ><i class="fa fa-shopping-cart"  (click)="navigate('cart','Shopping Cart');manualToggle()"></i> <span class="badge main-navigation"  (click)="navigate('cart','Shopping Cart');manualToggle()">{{cartNo}}</span></div>
           </div>
-        <div class="collapse navbar-collapse navbar-1 hidden-xs">
+        <div class="collapse navbar-collapse navbar-1 hidden-xs hidden-sm">
           <ul class="site-navigation nav navbar-nav">
             <li>
               <a (click)="navigate('','')">Home
@@ -88,7 +88,7 @@
         </div>
         <div class="collapse navbar-collapse navbar-2">
 
-          <ul class="site-navigation nav navbar-nav  hidden-lg hidden-md hidden-sm">
+          <ul class="site-navigation nav navbar-nav  hidden-lg hidden-md">
               <li>
                 <a  data-toggle="collapse" data-target=".navbar-2"  (click)="navigate('','Home')">Home
 
