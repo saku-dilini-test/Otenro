@@ -22,8 +22,8 @@ then
 elif [ $ENV == 'stag' ]
 then
     echo '++++++++++++++++Running importData.sh for Staging+++++++++++++++++++'
-    MESERVER='/home/admin/web/testcdn.otenro.com/public_html/temp/';
-    APPFILESERVER='/home/otenro/OtenroTest/appFileServer/';
+    MESERVER='/var/www/html/developer/meServer/temp/';
+    APPFILESERVER='/var/www/html/developer/appFileServer/';
 	DB='appmaker'
 	serverUrl='http://appmaker.ddns.net'
 else
