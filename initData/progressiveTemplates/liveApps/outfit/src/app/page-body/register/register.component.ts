@@ -38,6 +38,7 @@ export class RegisterComponent implements OnInit {
   isEmailDuplicate;
   errorMessage: string;
   private _success = new Subject<string>();
+  fullUrl; domainUrl;
 
   constructor(private localStorageService: LocalStorageService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
     private title: TitleService) {
@@ -66,7 +67,7 @@ export class RegisterComponent implements OnInit {
 
       });
 
-
+      this.generateDomainUrl();
   }
 
   modelChanged(e) {
@@ -119,42 +120,25 @@ export class RegisterComponent implements OnInit {
         zip: this.zip,
         country: this.selectedCountry,
         phone: this.phone,
-        appId: this.appId
+        appId: this.appId,
+        url: this.domainUrl
       };
-
+      console.log(data);
       this.http.post(SERVER_URL + "/templatesAuth/register", data)
         .subscribe((res) => {
+          console.log(res);
+          if (res.message === 'success') {
 
-          var requestParams = {
-            "token": res.token,
-            "email": data.email,
-            "name": data.firstName,
-            "lname": data.lastName,
-            "phone": data.phone,
-            "streetNumber": data.streetNumber,
-            "streetName": data.streetName,
-            "country": data.country,
-            "city": data.city,
-            "zip": data.zip,
-            "type": 'internal',
-            "appId": data.appId,
-            "registeredUser": res.user.sub
-          };
+            this._success.subscribe((message) => this.successMessage = message);
+            debounceTime.call(this._success, 4000)
+              .subscribe(() => this.successMessage = null);
+            this._success.next('Verify your email address to complete registration.');
+            setTimeout(() => {
 
-          this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
-          this.dataService.appUserId = requestParams.registeredUser;
-          this.dataService.isUserLoggedIn.check = true;
-          this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
-
-          if (this.navigate == 'home') {
-            this.route.navigate(['home']);
-          } else if (this.navigate == 'cart') {
-            this.route.navigate(['cart']);
-          } else if (this.navigate == 'delivery') {
-            this.route.navigate(['checkout', 'delivery']);
-          } else {
-            this.route.navigate(['checkout', 'pickup']);
+              this.route.navigate(['home']);
+            }, 3100);
           }
+
         }, err => {
 
           if (err.status == 409) {
@@ -162,6 +146,14 @@ export class RegisterComponent implements OnInit {
           }
         });
     }
+  }
+
+  generateDomainUrl() {
+
+    this.fullUrl = window.location.toString();
+    let index = this.fullUrl.indexOf('#');
+    this.domainUrl = this.fullUrl.substring(0, index + 2);
+    this.localStorageService.set('domainUrl', this.domainUrl);
   }
 
 }
