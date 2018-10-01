@@ -25,30 +25,35 @@
         console.log($scope.imageUrlFAV);
         $scope.validateIcon = function(splash,x,v){
 
-            console.log(splash);
-            console.log(JSON.stringify(splash));
-
-            if(splash && splash.type == "image/vnd.microsoft.icon" || splash.type == "image/x-icon"){
-                $scope.saveFAV = true;
-            }else{
-                toastr.error('Please upload an Icon', 'Warning', {
-                      closeButton: true
-                });
-                    $scope.splash = null;
-            }
-
+            $scope.saveFAV = true;
         }
 
         $scope.saveFAVIcon = function (){
+                console.log($scope.splash);
+                if($scope.splash && $scope.splash.type == "image/vnd.microsoft.icon" || $scope.splash.type == "image/x-icon"){
+                    $scope.saveFAV = false;
+                    stylesService.uploadFAVIcon($scope.splash)
+                        .success(function (data, status, headers, config) {
+                    toastr.success('FAV Icon uploaded Successfully!', 'Successful', {
+                          closeButton: true
+                    });
+                        }).error(function (data, status, headers, config) {
 
-                stylesService.uploadFAVIcon($scope.splash)
-                    .success(function (data, status, headers, config) {
-
-                    }).error(function (data, status, headers, config) {
-
-                });
+                    });
+                }else{
+                    toastr.error('Please upload an Icon', 'Warning', {
+                          closeButton: true
+                    });
+                        $scope.splash = null;
+                        $scope.saveFAV = false;
+                }
 
         }
+
+        $scope.deleteFAV = function (){
+            $scope.splash = null;
+        }
+
 
         $scope.cropImage = function () {
             var handleFileSelect=function(evt) {
