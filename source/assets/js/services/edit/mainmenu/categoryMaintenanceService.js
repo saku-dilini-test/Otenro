@@ -70,7 +70,24 @@
                 };
 
                 var blob = dataURItoBlob(file);
-                var UploadFile = new File([blob], 'imageFileName.png');
+                // var UploadFile = new File([blob], 'imageFileName.png');
+                var UploadFile;
+                if (!document.documentMode && !/Edge/.test(navigator.userAgent)) {
+                // THIS KNOWN EDGE BUG
+                    if (typeof File === "function") {
+                        UploadFile = new File([blob], 'imageFileName.png');
+                    }
+                }
+                // this workaround
+                if (typeof window.navigator.msSaveBlob !== "undefined") {
+                    blob = new Blob([blob], { type: "image/png" });
+                    blob.name = 'imageFileName.png';
+                    UploadFile = blob;
+                }
+
+
+
+
                 return Upload.upload({
                     url: SERVER_URL + 'edit/addNewCategoryToMaintenance',
                     fields: {

@@ -1218,6 +1218,9 @@ md-dialog{
 
 .md-dialog-header{
     background-color: #fff;
+    padding: 10px 20px 20px;
+}
+.md-dialog-main  .md-dialog-header{
     padding: 10px 0px 20px;
 }
 
