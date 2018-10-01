@@ -3,10 +3,10 @@
  */
 (function(){
     angular.module('appEdit').service('stylesService',[
-       '$mdDialog','$http','SERVER_URL',stylesService
+       '$mdDialog','$http','SERVER_URL','Upload','$rootScope',stylesService
     ]);
 
-    function stylesService($mdDialog,$http,SERVER_URL){
+    function stylesService($mdDialog,$http,SERVER_URL,Upload,$rootScope){
         return {
            showStyleDialog: function(){
                return $mdDialog.show({
@@ -44,6 +44,30 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
+            uploadFAVIcon: function(file){
+            console.log("im in");
+                return Upload.upload({
+                        url: SERVER_URL + 'edit/uploadFAVIcon',
+                        fields: {
+                            'appId':$rootScope.appId
+                        },
+                        file: file
+                    });
+            },
+            showStyleAddFAVIconDialog: function(){
+                return $mdDialog.show({
+                    controller: 'StylesCtrl',
+                    templateUrl: 'user/edit/styles/manageFAVIconView.html',
+                    clickOutsideToClose:true
+                }).then(function(answer) {
+
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
+
+
             addHeaderImage: function(Data){
                 return $http.post(SERVER_URL + 'edit/addStyleImage/addHeaderImage', Data);
             },

@@ -9,9 +9,9 @@ var sizeOf = require('image-size'),
     fs = require('fs-extra'),
     config = require('../../../services/config'),
     im = require('imagemagick'),
-    easyimg = require('easyimage')
+    easyimg = require('easyimage'),
     /*lwip = require('lwip');*/
-
+    path = require('path');
 module.exports = {
 
     addStyles : function(req,res){
@@ -238,6 +238,33 @@ module.exports = {
             if (err) return done(err);
             res.send(apps);
         });
+    },
+
+    /* image uploading with validation*/
+    uploadFAVIcon :function (req,res) {
+
+    var sourcePath = path.resolve();
+    console.log(sourcePath,req.body,req.file);
+    console.log(req.userId);
+
+        var imagePath = config.ME_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId +'/';
+
+         req.file('file').upload({
+            dirname: require('path').resolve(imagePath)
+         },function (err, uploadedFiles) {
+             if (err) return res.negotiate(err);
+             else {
+                 fs.rename(uploadedFiles[0].fd, imagePath + 'favicon.ico', function (err) {
+
+                     if (err) return res.send(err);
+                     else {
+                         return res.json({
+                             message: true
+                         });
+                     }
+                 });
+             }
+         });
     },
 
     /**
