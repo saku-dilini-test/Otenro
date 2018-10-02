@@ -24,13 +24,14 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
-            showPublishArticleDialog: function(data) {
+            showPublishArticleDialog: function(data,type) {
                 return $mdDialog.show({
                     controller: 'ArticleCtrl',
                     templateUrl: 'user/edit/article/publishArticleView.html',
                     clickOutsideToClose: false,
                     locals : {
-                        initialData : data
+                        initialData : data,
+                        type:type
                     }
                 });
             },
@@ -40,7 +41,8 @@
                     templateUrl: 'user/edit/article/previewArticles.html',
                     clickOutsideToClose: true,
                     locals : {
-                        initialData : data
+                        initialData : data,
+                        type:"showPreviewArticslesDilog"
                     }
                 });
             },
@@ -50,7 +52,8 @@
                     templateUrl: 'user/edit/article/viewCategories.html',
                     clickOutsideToClose: true,
                     locals : {
-                        initialData : data
+                        initialData : data,
+                        type:"showCategoriesDialog"
                     }
                 });
             },
@@ -60,7 +63,8 @@
                     templateUrl: 'user/edit/article/addCategories.html',
                     clickOutsideToClose: true,
                     locals : {
-                        initialData : data
+                        initialData : data,
+                        type:"addCategoryDialog"
                     }
                 });
             },
@@ -70,7 +74,8 @@
                     templateUrl: 'user/edit/article/editCategories.html',
                     clickOutsideToClose: true,
                     locals : {
-                        initialData : data
+                        initialData : data,
+                        type:"editCategoryDialog"
                     }
                 });
             },

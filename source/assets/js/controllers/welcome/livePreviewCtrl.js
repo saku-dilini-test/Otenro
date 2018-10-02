@@ -118,7 +118,7 @@
          *Live preview Area display
          */
         if ($scope.isNew == 'true' || $scope.isNew == true) {
-            $scope.appTemplateUrl = ME_APP_SERVER + 'temp' + '/' + $scope.userId + '/progressiveTemplates' + '/' + $scope.appId + '/';
+            $scope.appTemplateUrl = ME_APP_SERVER + 'temp' + '/' + $scope.userId + '/progressiveTemplates' + '/' + $scope.appId + '/?isFromCMSAppView=1';
             $scope.urlPath1 = ME_APP_SERVER + 'temp' + '/' + $scope.userId + '/progressiveTemplates' + '/' + $scope.appId + '/';
 
         }else{
