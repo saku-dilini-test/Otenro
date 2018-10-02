@@ -529,10 +529,11 @@ module.exports = {
     },
 
     getRenewals : function(req,res){
-    console.log("im in");
         RenewalIntervals.find().exec(function(err, result){
-        console.log(err);
-        console.log(result);
+            if(err){
+                sails.log.error("Error when getting the Renewals.Err: ", err);
+                return res.send([]);
+            }
             res.send(result);
         });
     },

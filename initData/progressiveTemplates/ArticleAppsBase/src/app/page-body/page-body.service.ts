@@ -26,6 +26,7 @@ export class PagebodyServiceModule {
   catId;
   sign;
   searchArray = [];
+  renewalIntervals = [];
   uuid;
   subUserArticleData = {id:null,name:null,image:null};
   defaultNumberOfTries = 12;

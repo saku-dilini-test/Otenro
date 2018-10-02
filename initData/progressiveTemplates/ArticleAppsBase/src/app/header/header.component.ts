@@ -35,6 +35,7 @@ export class HeaderComponent implements OnInit {
   private alive = true;
   isSubscribing = false;
   isUnsubscribing = false;
+  renewalIntervals = [];
   private isFromCMSAppView: boolean = false;
   displayMessage;
 
@@ -95,7 +96,11 @@ export class HeaderComponent implements OnInit {
       //Set the keyword and port to localstorage
       localStorage.setItem(this.sms.LOCALSTORAGE_KEYWORD_STRING,data.keyword);
       localStorage.setItem(this.sms.LOCALSTORAGE_PORT_STRING,data.port);
-    })
+    });
+
+    if(this.dataService.renewalIntervals.length>0) {
+      this.renewalIntervals = this.dataService.renewalIntervals;
+    }
 
     this.titleServ.currentTitle.subscribe(message => this.title = message);
 
@@ -337,5 +342,9 @@ export class HeaderComponent implements OnInit {
       $('#myAccountModel').modal('toggle');
       $('#appStatusModel').modal('show');
     });
+  }
+
+  getRenewalIntervalNumberOfDaysByIntervalCode(code: string){
+    return this.appDataService.getRenewalIntervalNumberOfDaysByIntervalCode(code);
   }
 }

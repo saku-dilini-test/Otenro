@@ -35,6 +35,7 @@ export class HomepageComponent implements OnInit {
   private appPublishDetails;
   private alive = true;
   isSubscribing = false;
+  renewalIntervals = [];
   private isFromCMSAppView: boolean = false;
   constructor(private route: Router,
               private dataService: PagebodyServiceModule,
@@ -55,6 +56,11 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     this.appDataService.getPublishDetails().subscribe(data => {
       this.appPublishDetails = data;
+    });
+
+    this.appDataService.getRenewalIntervals().subscribe(data => {
+      this.dataService.renewalIntervals = data;
+      this.renewalIntervals = this.dataService.renewalIntervals;
     });
 
     this.isFromCMSAppView = localStorage.getItem(this.appId + "_isFromCMSAppView") == '1';
@@ -292,5 +298,9 @@ export class HomepageComponent implements OnInit {
       $('#registerModelhome').modal('hide');
       $('#appStatusModel').modal('show');
     });
+  }
+
+  getRenewalIntervalNumberOfDaysByIntervalCode(code: string){
+    return this.appDataService.getRenewalIntervalNumberOfDaysByIntervalCode(code);
   }
 }
