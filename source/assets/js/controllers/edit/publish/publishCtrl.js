@@ -103,12 +103,6 @@
                 promotions: tab4
             };
         }
-        publishService.getAllLanguages().
-        success(function(data){
-            $scope.languageList = data;
-        }).error(function(err){
-            //alert("MainMenu Loading Error : " + err);
-        });
 
         publishService.getAllRatings().
         success(function(data){
@@ -116,13 +110,6 @@
         }).error(function(err){
             //alert("MainMenu Loading Error : " + err);
         });
-
-        publishService.getAllPrimaryCategories().
-           success(function(data){
-               $scope.primaryCatList = data;
-           }).error(function(err){
-               //alert("MainMenu Loading Error :          " + err);
-           });
 
         publishService.getAllSecondaryCategories().
            success(function(data){
@@ -287,15 +274,6 @@
                 });
         }
 
-        $scope.chkPlaystore = function(status){
-
-            if(status == false){
-                $scope.playStoreData.language = null;
-                $scope.playStoreData.primaryCat = null;
-
-            }
-        }
-
         $scope.toggle = function(operator,flag, index){
             console.log(operator);
             console.log(flag);
@@ -444,8 +422,7 @@
              $scope.count = 0;
 
             if(allowPlayStore == true &&(splash[0] == null || splash[1] == null|| splash[6] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
-                playStoreData.language == null ||
-                playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
+                playStoreData.fullDescription == null  ||
                 playStoreData.email==null || playStoreData.keyword==null || playStoreData.port==null)){
 
                         toastr.error('Please fill all fields  ', 'Warning', {
