@@ -555,8 +555,12 @@ module.exports = {
         var searchApp = {
             appId: appId
         };
+
         PublishDetails.findOne(searchApp, function(err, app) {
-            if (err) return done(err);
+            if (err) {
+                sails.log.error('Error when searching for PublishDetails for appId: %s Error: $s ', appId, err );
+                return res.serverError(err);
+            }
             res.send(app)
         });
     },
