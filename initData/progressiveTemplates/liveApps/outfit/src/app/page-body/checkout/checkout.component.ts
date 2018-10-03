@@ -13,6 +13,7 @@ import { OrdersService } from '../../services/orders/orders.service';
 import { TitleService } from '../../services/title.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import {DomSanitizer} from '@angular/platform-browser';
 declare var $:any;
 
 declare let paypal: any;
@@ -108,13 +109,21 @@ export class CheckoutComponent implements OnInit {
   ePayFail = false;
   ePayNull = false;
   responce;
-  constructor(fb: FormBuilder, private ordersService: OrdersService,
+  payHereUrl;
+  constructor(
+    fb: FormBuilder,
+    private ordersService: OrdersService,
     private shippingService: ShippingService,
     private currencyService: CurrencyService,
     private localStorageService: LocalStorageService,
-    private http: HttpClient, private route: ActivatedRoute,
-    private router: Router, private dataService: PagebodyServiceModule, private title: TitleService,
-    private spinner: Ng4LoadingSpinnerService) {
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private router: Router,
+    private dataService: PagebodyServiceModule,
+    private title: TitleService,
+    private spinner: Ng4LoadingSpinnerService,
+    private sanitizer: DomSanitizer
+  ) {
 
     this.title.changeTitle("Checkout");
     let d = new Date();
@@ -1370,10 +1379,6 @@ export class CheckoutComponent implements OnInit {
     this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails,{ responseType: 'json' })
       .subscribe((orderRes: any) => {
 
-        console.log("done save pending order");
-        console.log("orderRes :");
-        console.log(orderRes);
-
         this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart,{ responseType: 'text' })
           .subscribe((res) => {
             this.dataService.cart.cartItems = [];
@@ -1397,7 +1402,7 @@ export class CheckoutComponent implements OnInit {
             let streetNo = this.orderDetails.deliveryNo ? this.orderDetails.deliveryNo : "";
             let streetName = this.orderDetails.deliveryStreet ? this.orderDetails.deliveryStreet : "";
 
-            window.location.href=(SERVER_URL + '/mobile/getPayHereForm/?name=' +
+            this.payHereUrl = SERVER_URL + '/mobile/getPayHereForm/?name=' +
               this.orderDetails.customerName + "&amount=" +
               this.orderDetails.amount + "&currency=" +
               this.currency.symbol + "&email=" +
@@ -1406,7 +1411,9 @@ export class CheckoutComponent implements OnInit {
               this.orderDetails.item[0].name + "&address=" +
               streetNo + " " + streetName  + "&city=" +
               city + "&appId=" + orderRes.appId +
-              "&orderId=" + orderRes.id + "&payHereMerchantId=" + this.payHereMID);
+              "&orderId=" + orderRes.id + "&payHereMerchantId=" + this.payHereMID;
+
+            $('#payehreProcessModal').modal({backdrop: 'static', keyboard: false});
 
           },
           (err) => {
@@ -1421,6 +1428,14 @@ export class CheckoutComponent implements OnInit {
       });
 
 
+  }
+
+  safeGetPayHere() {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.payHereUrl);
+  }
+
+  closePayhereModal(){
+    $('#payehreProcessModal').modal('hide');
   }
 
 }

@@ -549,3 +549,14 @@
     </div>
   </div>
 </div>
+
+
+<!-- payhere modal -->
+<div class="modal fade" id="payehreProcessModal" tabindex="-1" role="dialog" aria-labelledby="payehreProcessModal">
+    <div class="modal-dialog  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="text-right padding"><span (click)="closePayhereModal()" class="modal-close padding">X</span></div>
+            <iframe [src]="safeGetPayHere()"></iframe>
+        </div>
+    </div>
+</div>
