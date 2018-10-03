@@ -348,7 +348,7 @@
                             });
                             break;
                         }
-                        else if(data[i].interval == "Daily") {
+                        else if(data[i].interval == "DAILY") {
                             if (data[i].priceRange.daily.min > data[i].amount || data[i].priceRange.daily.max < data[i].amount) {
                                 isRequestUpdate = false;
                                 showSavedMsg = false;
@@ -362,7 +362,7 @@
                                 isRequestUpdate = true;
                             }
                         }
-                        else if(data[i].interval == "Monthly"){
+                        else if(data[i].interval == "MONTHLY"){
                             if(data[i].priceRange.monthly.min > data[i].amount || data[i].priceRange.monthly.max < data[i].amount ){
                                 isRequestUpdate = false;
                                 showSavedMsg = false;

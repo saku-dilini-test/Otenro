@@ -68,23 +68,6 @@ module.exports = {
     },
     IDEABIZ_USER_ACTIONS:{'states':["APPROVED,REJECTED"]},
     IDEABIZ_USER_NETWORK_CLIENTS:{
-
-        'Mobitel': {
-            'code': 'MOBITEL',
-            'desc': 'Mobitel',
-            'shareSplit': '60',
-            'email': 'supportTest@mobitel.com',
-            'priceRange': {
-                'daily': {
-                    'min': 1,
-                    'max': 10
-                },
-                'monthly': {
-                    'min': 1,
-                    'max': 1000
-                }
-            }
-        },
         'Dialog': {
             'code': 'DIALOG',
             'desc': 'Dialog',
@@ -100,40 +83,7 @@ module.exports = {
                     'max': 1000
                 }
             }
-        },
-        'Hutch': {
-            'code': 'HUTCH',
-            'desc': 'Hutch',
-            'shareSplit': '60',
-            'email': 'supportTest@hutch.com',
-            'priceRange': {
-                'daily': {
-                    'min': 1,
-                    'max': 10
-                },
-                'monthly': {
-                    'min': 1,
-                    'max': 1000
-                }
-            }
-        },
-        'Airtel': {
-            'code': 'AIRTEL',
-            'desc': 'Airtel',
-            'shareSplit': '60',
-            'email': 'supportTest@airtel.com',
-            'priceRange': {
-                'daily': {
-                    'min': 1,
-                    'max': 10
-                },
-                'monthly': {
-                    'min': 1,
-                    'max': 1000
-                }
-            }
         }
-
     },
      IDEABIZ_ADMIN_APP_STATUS:{
 
