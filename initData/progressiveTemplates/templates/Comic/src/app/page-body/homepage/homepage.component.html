@@ -32,13 +32,10 @@
               <h3 class="padding-bottom">Subscribe</h3>
               <div *ngIf = "appPublishDetails">
                   <div  *ngFor = "let operators of appPublishDetails.operators">
-                      <div *ngIf = "operators.isEnabled == true || operators.isEnabled == 'true'">
-                        <div *ngIf = "operators.interval == 'Daily'">
-                            <p> {{operators.operator | titlecase}} Rs.{{operators.amount}}+tax per day</p>
-                        </div>
-                        <div *ngIf = "operators.interval == 'Monthly'">
-                            <p> {{operators.operator | titlecase}} Rs.{{operators.amount}}+tax per month</p>
-                        </div>
+                      <div *ngIf = "operators.isEnabled">
+                          <div>
+                              <p> {{operators.operator | titlecase}} Rs.{{operators.amount}}+tax per {{getRenewalIntervalNumberOfDaysByIntervalCode(operators.interval)}} day(s)</p>
+                          </div>
                       </div>
                   </div>
               </div>

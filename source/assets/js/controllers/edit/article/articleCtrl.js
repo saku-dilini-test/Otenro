@@ -9,9 +9,9 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("ArticleCtrl", [
-        '$scope', '$mdDialog', '$auth', '$rootScope', 'articleService', 'toastr', 'SERVER_URL', 'ME_APP_SERVER', 'mySharedService', 'initialData', '$log', 'mainMenuService', '$timeout', ArticleCtrl]);
+        '$scope', '$mdDialog', '$auth', '$rootScope', 'articleService', 'toastr', 'SERVER_URL', 'ME_APP_SERVER', 'mySharedService', 'initialData', '$log', 'mainMenuService', '$timeout','type', ArticleCtrl]);
 
-    function ArticleCtrl($scope, $mdDialog, $auth, $rootScope, articleService, toastr, SERVER_URL, ME_APP_SERVER, mySharedService, initialData, $log, mainMenuService, $timeout) {
+    function ArticleCtrl($scope, $mdDialog, $auth, $rootScope, articleService, toastr, SERVER_URL, ME_APP_SERVER, mySharedService, initialData, $log, mainMenuService, $timeout,type) {
 
         $scope.appId = $rootScope.appId;
         $scope.tmpImage = [];
@@ -20,7 +20,7 @@
         $scope.tempImageDel = [];
         $scope.deleteImages = [];
         $scope.mainImg = null;
-
+        $scope.callType= type;
         $scope.isNewArticle = false;
         $scope.edit_Category = initialData;
         $scope.cancelButton_chk = initialData;
@@ -547,13 +547,19 @@
              return articleService.showPreviewArticslesDilog('previewArticles');
         };
 
-        $scope.ok = function () {
+        $scope.ok = function (page) {
             $mdDialog.hide();
+
         };
+
+        $scope.cancelPublishArticle = function (cancelPublishArticle) {
+            $mdDialog.hide();
+            return articleService.showPreviewArticslesDilog('previewArticles');
+        }
 
         $scope.showPublishArticleDialog = function () {
             $mdDialog.hide();
-            return articleService.showPublishArticleDialog('publishArticle');
+            return articleService.showPublishArticleDialog('publishArticle',"subPopUp");
         };
 
         $scope.hide = function () {

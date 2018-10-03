@@ -68,7 +68,8 @@ module.exports.policies = {
   'edit/publish/publishDetailController':{
    '*': ['jwtAuth'],
     getPublishDetails: true,
-      getApkPath: true
+    getApkPath: true,
+    getRenewals: true
   },
 
   'edit/article/articleController':{
