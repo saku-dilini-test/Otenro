@@ -69,40 +69,43 @@ export class LoginComponent implements OnInit {
     this.ifInvalidUserPassword = false;
     this.http.post(SERVER_URL + "/templatesAuth/authenticateForApp", data)
       .subscribe((res) => {
-        console.log(res);
-        requestParams = {
-          "token": res.token,
-          "email": data.email,
-          "name": res.user.name,
-          "lname": res.user.lname,
-          "phone": res.user.phone,
-          "streetNumber": res.user.streetNumber,
-          "streetName": res.user.streetName,
-          "country": res.user.country,
-          "city": res.user.city,
-          "zip": res.user.zip,
-          "type": 'internal',
-          "appId": res.user.appId,
-          "registeredUser": res.user.sub
-        };
-        this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
-
-        if (this.localStorageService.get("cartUnknownUser")) {
-          this.localStorageService.set("cart" + requestParams.registeredUser, this.localStorageService.get("cartUnknownUser"));
-          this.localStorageService.remove("cartUnknownUser");
-        }
-        this.dataService.appUserId = requestParams.registeredUser;
-        this.dataService.isUserLoggedIn.check = true;
-        this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
-
-        if (this.navigate == 'home') {
-          this.route.navigate(['home']);
-        } else if (this.navigate == 'cart') {
-          this.route.navigate(['cart']);
-        } else if (this.navigate == 'delivery') {
-          this.route.navigate(['checkout', 'delivery']);
+        if (res.message === 'email not verified'){
+          console.log(res);
         } else {
-          this.route.navigate(['checkout', 'pickup']);
+          requestParams = {
+            "token": res.token,
+            "email": data.email,
+            "name": res.user.name,
+            "lname": res.user.lname,
+            "phone": res.user.phone,
+            "streetNumber": res.user.streetNumber,
+            "streetName": res.user.streetName,
+            "country": res.user.country,
+            "city": res.user.city,
+            "zip": res.user.zip,
+            "type": 'internal',
+            "appId": res.user.appId,
+            "registeredUser": res.user.sub
+          };
+          this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
+
+          if (this.localStorageService.get("cartUnknownUser")) {
+            this.localStorageService.set("cart" + requestParams.registeredUser, this.localStorageService.get("cartUnknownUser"));
+            this.localStorageService.remove("cartUnknownUser");
+          }
+          this.dataService.appUserId = requestParams.registeredUser;
+          this.dataService.isUserLoggedIn.check = true;
+          this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
+
+          if (this.navigate == 'home') {
+            this.route.navigate(['home']);
+          } else if (this.navigate == 'cart') {
+            this.route.navigate(['cart']);
+          } else if (this.navigate == 'delivery') {
+            this.route.navigate(['checkout', 'delivery']);
+          } else {
+            this.route.navigate(['checkout', 'pickup']);
+          }
         }
       },
       function (err) {
