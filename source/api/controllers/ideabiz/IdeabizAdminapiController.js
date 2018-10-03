@@ -658,11 +658,11 @@ module.exports = {
                                     });
                                 }else {
                                     sails.log.debug("IdeabizAdminapiController: Error while requesting the charge, err: %s  for msisdn: %s serviceID: %s appID: %s ",responseBody.message,msisdn,serviceID,appID);
+                                    chargingAPICallLogService.setInProgress(appID,msisdn,false);
                                     sendForChargingIntance.getOperator(msisdn,function(operator, err){
 
                                         if (err) {
                                             sails.log.error("IdeabizAdminapiController: Operator find Error");
-                                            chargingAPICallLogService.setInProgress(appID,msisdn,false);
                                             return callback(null, "error");
                                         }else {
 
@@ -673,10 +673,8 @@ module.exports = {
 
                                                 if (err) {
                                                     sails.log.error("IdeabizAdminapiController: FailedTransactionLog Create Error");
-                                                    chargingAPICallLogService.setInProgress(appID,msisdn,false);
                                                     return callback(null, "error");
                                                 }
-                                                chargingAPICallLogService.setInProgress(appID,msisdn,false);
                                                 return callback(null, "error");
                                             });
                                         }
