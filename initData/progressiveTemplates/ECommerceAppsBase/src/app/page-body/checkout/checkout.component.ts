@@ -1411,11 +1411,11 @@ export class CheckoutComponent implements OnInit {
 
     this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails, { responseType: 'json' })
       .subscribe((orderRes: any) => {
-        this.responce = JSON.parse(orderRes).name;
-        console.log(this.responce);
-        if (JSON.parse(orderRes).status == 404) {
+        this.responce = orderRes.name;
+
+        if (orderRes.status == 404) {
           this.showSpinner = false;
-          $('#myModal').modal('show')
+          $('#myModal').modal('show');
         } else {
           this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, {responseType: 'text'})
             .subscribe((res) => {
