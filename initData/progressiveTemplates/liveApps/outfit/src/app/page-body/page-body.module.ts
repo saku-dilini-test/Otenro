@@ -21,7 +21,7 @@ import { RegisterComponent } from './register/register.component';
 import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.component';
 import { AppUserComponent } from './app-user/app-user.component';
 import { SearchPipe } from '../pipes/search.pipe';
-
+import { SafeUrlPipe } from '../pipes/safeUrl.pipe';
 @NgModule({
   imports: [
     CommonModule,
@@ -38,20 +38,21 @@ import { SearchPipe } from '../pipes/search.pipe';
     PageBodyComponent
   ],
   declarations: [
-     HomepageComponent,
-     PageBodyComponent,
-     AboutusComponent, 
-     PoliciesComponent,
-     TermsComponent, 
-     ContactComponent, 
-     ShopComponent, 
-     ProductComponent, 
-     CartComponent, 
-     CheckoutComponent, 
-     RegisterComponent,
-     PaypalPaymentComponent, 
-     AppUserComponent, 
-     SearchPipe
+        HomepageComponent,
+        PageBodyComponent,
+        AboutusComponent,
+        PoliciesComponent,
+        TermsComponent,
+        ContactComponent,
+        ShopComponent,
+        ProductComponent,
+        CartComponent,
+        CheckoutComponent,
+        RegisterComponent,
+        PaypalPaymentComponent,
+        AppUserComponent,
+        SearchPipe,
+        SafeUrlPipe
     ]
 })
 export class PageBodyModule { }

@@ -13,9 +13,7 @@ import { OrdersService } from '../../services/orders/orders.service';
 import { TitleService } from '../../services/title.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import {DomSanitizer} from '@angular/platform-browser';
 declare var $:any;
-
 declare let paypal: any;
 
 @Component({
@@ -121,8 +119,7 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private dataService: PagebodyServiceModule,
     private title: TitleService,
-    private spinner: Ng4LoadingSpinnerService,
-    private sanitizer: DomSanitizer
+    private spinner: Ng4LoadingSpinnerService
   ) {
 
     this.title.changeTitle("Checkout");
@@ -1454,7 +1451,7 @@ export class CheckoutComponent implements OnInit {
                   city + "&appId=" + orderRes.appId +
                   "&orderId=" + orderRes.id + "&payHereMerchantId=" + this.payHereMID;
 
-                $('#payehreProcessModal').modal({backdrop: 'static', keyboard: false});
+              $('#payhereProcessModal').modal({backdrop: 'static', keyboard: false});
 
               },
               (err) => {
@@ -1468,13 +1465,5 @@ export class CheckoutComponent implements OnInit {
   }
 
 
-
-  safeGetPayHere() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.payHereUrl);
-  }
-
-  closePayhereModal(){
-    $('#payehreProcessModal').modal('hide');
-  }
 
 }

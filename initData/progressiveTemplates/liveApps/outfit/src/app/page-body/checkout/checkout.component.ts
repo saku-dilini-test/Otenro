@@ -13,9 +13,7 @@ import { OrdersService } from '../../services/orders/orders.service';
 import { TitleService } from '../../services/title.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import {DomSanitizer} from '@angular/platform-browser';
 declare var $:any;
-
 declare let paypal: any;
 
 @Component({
@@ -110,6 +108,7 @@ export class CheckoutComponent implements OnInit {
   ePayNull = false;
   responce;
   payHereUrl;
+
   constructor(
     fb: FormBuilder,
     private ordersService: OrdersService,
@@ -121,8 +120,7 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private dataService: PagebodyServiceModule,
     private title: TitleService,
-    private spinner: Ng4LoadingSpinnerService,
-    private sanitizer: DomSanitizer
+    private spinner: Ng4LoadingSpinnerService
   ) {
 
     this.title.changeTitle("Checkout");
@@ -145,7 +143,6 @@ export class CheckoutComponent implements OnInit {
       this.loggedUserData = this.localStorageService.get('appLocalStorageUser' + this.appId);
       this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
 
-      console.log(this.loggedUserData);
     } else {
       this.oldUser = false;
     }
@@ -282,9 +279,6 @@ export class CheckoutComponent implements OnInit {
 
     this.shippingData = [];
 
-    console.log("Country : ");
-    console.log(Country);
-    console.log("appId : " + appId);
 
     let param2 = {
       'appId': appId,
@@ -302,7 +296,6 @@ export class CheckoutComponent implements OnInit {
             this.shippingData.push(this.shippingDatas[i]);
           }
         }
-        console.log(this.shippingData);
       }, (err) => {
         this.spinner.hide();
         alert(
@@ -313,16 +306,13 @@ export class CheckoutComponent implements OnInit {
   }
 
   check(user, newUserCountry) {
-    console.log(user);
     if (user == 'oldUser') {
-      console.log('oldUser');
       this.oldUser = true;
       this.getShippingData(this.appId, this.dataService.userData.country);
       this.isSelected = false;
       this.shippingForm.controls['shippingOption'].reset();
     }
     if (user == 'newUser') {
-      console.log('new Users');
       this.oldUser = false;
       if (!newUserCountry) {
         this.getShippingData(this.appId, this.selectedCountry);
@@ -358,7 +348,6 @@ export class CheckoutComponent implements OnInit {
 
   login() {
     this.router.navigate(['login', this.formType]);
-    console.log(this.dataService.cart);
   }
 
   checkNote(note) {
@@ -367,7 +356,8 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  ngAfterContentChecked() {
+  ngAfterViewInit() {
+    console.log("ngAfterViewInit")
     if (this.formType == "pickup" && !this.pickupForm.valid) {
       this.isSelected = false;
     }
@@ -1108,10 +1098,9 @@ export class CheckoutComponent implements OnInit {
     this.http.post(SERVER_URL + "/templatesOrder/saveOrder", (this.orderDetails), { responseType: 'text' })
       .subscribe((res) => {
         this.responce = JSON.parse(res).name;
-        console.log(this.responce);
         if (JSON.parse(res).status == 404) {
           this.showSpinner = false;
-          $('#myModal').modal('show')
+          $('#myModal').modal('show');
         } else {
         this.orderDetails.id = this.dataService.cart.cartItems[0].id;
         this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
@@ -1417,7 +1406,7 @@ export class CheckoutComponent implements OnInit {
             let city = this.orderDetails.deliveryCity ? this.orderDetails.deliveryCity : "";
             let streetNo = this.orderDetails.deliveryNo ? this.orderDetails.deliveryNo : "";
             let streetName = this.orderDetails.deliveryStreet ? this.orderDetails.deliveryStreet : "";
-
+            //
             this.payHereUrl = SERVER_URL + '/mobile/getPayHereForm/?name=' +
               this.orderDetails.customerName + "&amount=" +
               this.orderDetails.amount + "&currency=" +
@@ -1429,29 +1418,18 @@ export class CheckoutComponent implements OnInit {
               city + "&appId=" + orderRes.appId +
               "&orderId=" + orderRes.id + "&payHereMerchantId=" + this.payHereMID;
 
-            $('#payehreProcessModal').modal({backdrop: 'static', keyboard: false});
+             $('#payhereProcessModal').modal({backdrop: 'static', keyboard: false});
 
-          },
+              },
           (err) => {
             console.log(err);
           });
-
-
-
       },
       (err) => {
         console.log(err);
       });
-
-
   }
 
-  safeGetPayHere() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.payHereUrl);
-  }
 
-  closePayhereModal(){
-    $('#payehreProcessModal').modal('hide');
-  }
 
 }
