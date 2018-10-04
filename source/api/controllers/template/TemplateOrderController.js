@@ -55,7 +55,13 @@ module.exports = {
         var name;
         var count = 0;
 
-        data['paymentStatus'] = 'Pending';
+        if(data.paymentType == 'Cash on delivery' || data.paymentType == 'Cash on pickup'){
+            data['paymentStatus'] = 'Successful';
+        }else{
+            data['paymentStatus'] = 'Pending';
+        }
+
+
         data['fulfillmentStatus'] = 'Pending';
         if(data.pickupId == null){
             for(var i = 0;i < data.item.length;i++){

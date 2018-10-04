@@ -57,6 +57,9 @@ module.exports = {
         deliveryZip : {
             type : 'string'
         },
+        paymentType : {
+            type : 'string'
+        },
         paymentStatus : {
             type : 'string'
         },
