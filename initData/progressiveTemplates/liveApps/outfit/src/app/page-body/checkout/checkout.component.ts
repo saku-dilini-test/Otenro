@@ -759,14 +759,14 @@ export class CheckoutComponent implements OnInit {
   submit(data, type, note) {
 
     if (type == 'creditcard') {
-      this.makeStripePaymentMethod(data, note);
+      this.makeStripePaymentMethod(data, note, type);
     } else {
-      this.authorizeCreditCardMethod(data, note);
+      this.authorizeCreditCardMethod(data, note, type);
     }
 
   }
 
-  makeStripePaymentMethod(cardInformation, note) {
+  makeStripePaymentMethod(cardInformation, note, type) {
 
     this.showSpinner = true;
 
@@ -780,7 +780,7 @@ export class CheckoutComponent implements OnInit {
         this.showSpinner = false;
 
         if (res.status == 'succeeded') {
-          this.orderProcess(note);
+          this.orderProcess(note, type);
         } else {
           this.ePay = false;
           this.ePayNull = false;
@@ -800,7 +800,7 @@ export class CheckoutComponent implements OnInit {
 
   };
 
-  authorizeCreditCardMethod(cardInformation, note) {
+  authorizeCreditCardMethod(cardInformation, note, type) {
 
     this.showSpinner = true;
 
@@ -813,7 +813,7 @@ export class CheckoutComponent implements OnInit {
         this.showSpinner = false;
 
         if (res.status == 'ok') {
-          this.orderProcess(note);
+          this.orderProcess(note, type);
         } else if (res.data == "Null Response") {
 
           this.ePay = false;
@@ -846,7 +846,7 @@ export class CheckoutComponent implements OnInit {
       })
   }
 
-  orderProcess(note) {
+  orderProcess(note, type) {
 
     if (note) {
       note = note.trim();
@@ -874,7 +874,8 @@ export class CheckoutComponent implements OnInit {
           'currency': this.dataService.currency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': type
         };
 
       } else {
@@ -898,7 +899,8 @@ export class CheckoutComponent implements OnInit {
           'currency': this.dataService.currency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': type
         };
       }
     } else {
@@ -916,7 +918,8 @@ export class CheckoutComponent implements OnInit {
           "email": this.payInfo.userEmail,
           "currency": this.dataService.paypalCurrency,
           "promotionCode": this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': type
         }
       } else {
         this.orderDetails = {
@@ -932,7 +935,8 @@ export class CheckoutComponent implements OnInit {
           "email": this.payInfo.item.deliverDetails.email,
           "currency": this.dataService.paypalCurrency,
           "promotionCode": this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': type
         }
       }
 
@@ -1031,7 +1035,8 @@ export class CheckoutComponent implements OnInit {
           'currency': this.dataService.currency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'Cash on delivery'
         };
 
       } else {
@@ -1055,7 +1060,8 @@ export class CheckoutComponent implements OnInit {
           'currency': this.dataService.currency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'Cash on delivery'
         };
       }
 
@@ -1076,7 +1082,8 @@ export class CheckoutComponent implements OnInit {
           "email": this.payInfo.userEmail,
           "currency": this.dataService.currency,
           "promotionCode": this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'Cash on pickup'
         }
       } else {
         this.orderDetails = {
@@ -1092,7 +1099,8 @@ export class CheckoutComponent implements OnInit {
           "email": this.payInfo.item.deliverDetails.email,
           "currency": this.dataService.currency,
           "promotionCode": this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'Cash on pickup'
         }
       }
     }
@@ -1213,7 +1221,8 @@ export class CheckoutComponent implements OnInit {
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'PayPal'
         };
 
       } else {
@@ -1238,7 +1247,8 @@ export class CheckoutComponent implements OnInit {
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'PayPal'
         };
       }
 
@@ -1257,7 +1267,8 @@ export class CheckoutComponent implements OnInit {
           "email": this.payInfo.userEmail,
           "currency": this.dataService.paypalCurrency,
           "promotionCode": this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'PayPal'
         }
       } else {
         this.orderDetails = {
@@ -1273,7 +1284,8 @@ export class CheckoutComponent implements OnInit {
           "email": this.payInfo.item.deliverDetails.email,
           "currency": this.dataService.paypalCurrency,
           "promotionCode": this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'PayPal'
         }
       }
     }
@@ -1311,7 +1323,8 @@ export class CheckoutComponent implements OnInit {
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'PayHere'
         };
 
       } else {
@@ -1336,7 +1349,8 @@ export class CheckoutComponent implements OnInit {
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'PayHere'
         };
       }
     }
@@ -1355,7 +1369,8 @@ export class CheckoutComponent implements OnInit {
           "email": this.payInfo.userEmail,
           "currency": this.dataService.paypalCurrency,
           "promotionCode": this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'PayHere'
         }
       } else {
         this.orderDetails = {
@@ -1371,7 +1386,8 @@ export class CheckoutComponent implements OnInit {
           "email": this.payInfo.item.deliverDetails.email,
           "currency": this.dataService.paypalCurrency,
           "promotionCode": this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'PayHere'
         }
       }
     }
