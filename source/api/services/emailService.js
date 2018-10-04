@@ -967,7 +967,7 @@ module.exports = {
                         mailOptions = {
                             from: userEmail.fromEmail,
                             to: data.email, // list of receivers
-                            cc: data.fromEmail,
+                            bcc: data.fromEmail,
                             subject: subject, // Subject line
                             html: mBody ,
                             attachments : test

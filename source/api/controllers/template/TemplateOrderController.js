@@ -15,36 +15,18 @@ module.exports = {
         data['paymentStatus'] = 'Pending';
         data['fulfillmentStatus'] = 'Pending';
 
+        console.log('#############');
+        console.log('###### => ' + JSON.stringify(data, null, 2));
+        console.log('#############');
+
         sails.log.info(data);
         if(data.pickupId == null){
             ApplicationOrder.create(data).exec(function (err, order) {
 
-                if (err) res.send(err);
-                var searchApp = { id: order.appId };
-
-                Application.findOne(searchApp).exec(function (err, app) {
-
-                    order['userId'] = app.userId;
-                    order.isNew = data.isNew;
-                    //Find user email settings
-                    UserEmail.findOne({ appId: order.appId }).exec(function(err, userEmail) {
-                
-                        if (err) {
-                            sails.log.error('Error occurred in finding User email Settings : TemplateOrderController.saveOrder , error : ' + err);
-                        }
-                
-                        if (userEmail) {
-                            order.fromEmail = userEmail.fromEmail;
-                        }
-                        sentMails.sendOrderEmail(order, function (err, msg) {
-                            sails.log.info(err);
-                            if (err) {
-                                return res.send(500);
-                            }
-                        });
-                    });
-                });
-                res.send(order);
+                if (err)
+                    return res.send(err);
+                else
+                    return res.send(order);
             });
         }
         else{

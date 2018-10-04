@@ -8,6 +8,7 @@
  */
 var config = require('../../services/config');
 var md5 = require('md5');
+var emailService = require('../../services/emailService');
 
 module.exports = {
 
@@ -113,6 +114,7 @@ module.exports = {
         var oderId = req.param("orderId");
         var appId = req.param("appId");
         var userId = req.param("userId");
+        var mobileCtrl = this;
 
         var searchOrder = {id:oderId};
 
@@ -122,8 +124,7 @@ module.exports = {
             var searchQry ={'id': appId}
             Application.find(searchQry, function(err, app){
 
-                var redirectUrl = sails.config.ME_SERVER_URL + app[0].userId + "/progressiveTemplates/" + appId + "/src"
-                console.log(redirectUrl);
+                var redirectUrl = sails.config.ME_SERVER_URL + app[0].userId + "/progressiveTemplates/" + appId + "/src";
 
                 var htmlForm = "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> " +
                     "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> " +
@@ -132,6 +133,8 @@ module.exports = {
                     "<h1 style=\"color:#00a700;text-align:center\">Thank you!</h1>" +
                     "<p style=\"text-align:center\">Your order is " + order[0].paymentStatus + " </p><br>" +
                     "<div style=\"text-align:center\"><a href= " + redirectUrl + " >Back to Home</a></div></body></html>";
+
+                mobileCtrl.sendOrderConfirmationEmail(app[0], order[0]);    
 
                 res.set('Content-Type', 'text/html');
                 res.send(new Buffer(htmlForm));
@@ -203,7 +206,28 @@ module.exports = {
         res.set('Content-Type', 'text/html');
         res.send(new Buffer(htmlForm));
 
+    },
+
+    sendOrderConfirmationEmail: function (app, order) {
+
+        order['userId'] = app.userId;
+        UserEmail.findOne({ appId: order.appId }).exec(function (err, userEmail) {
+
+            if (err) {
+                sails.log.error('Error occurred in finding User email Settings : TemplateOrderController.saveOrder , error : ' + err);
+            }
+
+            if (userEmail) {
+
+                order.fromEmail = userEmail.fromEmail;
+                order.userId = app.userId;
+                emailService.sendOrderEmail(order, function (err, msg) {
+
+                    if (err) {
+                        sails.log.error('Error occurred in finding User email Settings : TemplateOrderController.saveOrder , error : ' + err);
+                    }
+                });
+            }
+        });
     }
-
-
 };
