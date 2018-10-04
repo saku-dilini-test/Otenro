@@ -604,8 +604,6 @@ module.exports = {
                     appId: data.appId
                 };
 
-
-
         UserEmail.findOne(searchApp).exec(function (err, userEmail) {
 
             if( typeof userEmail==='undefined'){
@@ -960,8 +958,6 @@ module.exports = {
 
 
                 let  mailOptions;
-
-                   console.log('------------------');
                    console.log(userEmail.replyToEmail);
                    console.log(data.email);
 
@@ -971,6 +967,7 @@ module.exports = {
                         mailOptions = {
                             from: userEmail.fromEmail,
                             to: data.email, // list of receivers
+                            cc: data.fromEmail,
                             subject: subject, // Subject line
                             html: mBody ,
                             attachments : test

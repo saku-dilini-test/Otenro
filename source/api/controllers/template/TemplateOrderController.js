@@ -18,14 +18,32 @@ module.exports = {
         sails.log.info(data);
         if(data.pickupId == null){
             ApplicationOrder.create(data).exec(function (err, order) {
-                sails.log.info(order);
 
                 if (err) res.send(err);
-                var searchApp = {
-                    appId: order.appId,
-                    orderId:order.id
-                };
-                sails.log.info(searchApp);
+                var searchApp = { id: order.appId };
+
+                Application.findOne(searchApp).exec(function (err, app) {
+
+                    order['userId'] = app.userId;
+                    order.isNew = data.isNew;
+                    //Find user email settings
+                    UserEmail.findOne({ appId: order.appId }).exec(function(err, userEmail) {
+                
+                        if (err) {
+                            sails.log.error('Error occurred in finding User email Settings : TemplateOrderController.saveOrder , error : ' + err);
+                        }
+                
+                        if (userEmail) {
+                            order.fromEmail = userEmail.fromEmail;
+                        }
+                        sentMails.sendOrderEmail(order, function (err, msg) {
+                            sails.log.info(err);
+                            if (err) {
+                                return res.send(500);
+                            }
+                        });
+                    });
+                });
                 res.send(order);
             });
         }
@@ -37,11 +55,32 @@ module.exports = {
                 data.shippingOpt = pickUp[0].shippingOption;
                 data.option = 'pickUp';
                 ApplicationOrder.create(data).exec(function (err, order) {
+
                     if (err) res.send(err);
-                    var searchApp = {
-                        id: order.appId
-                    };
-                    sails.log.info(searchApp);
+                    var searchApp = { id: order.appId };
+    
+                    Application.findOne(searchApp).exec(function (err, app) {
+    
+                        order['userId'] = app.userId;
+                        order.isNew = data.isNew;
+                        //Find user email settings
+                        UserEmail.findOne({ appId: order.appId }).exec((err, userEmail) => {
+                    
+                            if (err) {
+                                sails.log.error('Error occurred in finding User email Settings : TemplateOrderController.saveOrder , error : ' + err);
+                            }
+                    
+                            if (userEmail) {
+                                order.fromEmail = userEmail.fromEmail;
+                            }
+                            sentMails.sendOrderEmail(order, function (err, msg) {
+                                sails.log.info(err);
+                                if (err) {
+                                    return res.send(500);
+                                }
+                            });
+                        });
+                    });
                     res.send(order);
                 });
             });
@@ -105,14 +144,26 @@ module.exports = {
                             };
                             sails.log.info(searchApp);
                             Application.findOne(searchApp).exec(function (err, app) {
+
                                 order['userId'] = app.userId;
                                 order.isNew = data.isNew;
-                            sentMails.sendOrderEmail(order,function (err,msg) {
-                                sails.log.info(err);
-                                if (err) {
-                                    return  res.send(500);
-                                }
-                            });
+                                //Find user email settings
+                                UserEmail.findOne({ appId: order.appId }).exec(function(err, userEmail) {
+
+                                    if (err) {
+                                        sails.log.error('Error occurred in finding User email Settings : TemplateOrderController.saveOrder , error : ' + err);
+                                    }
+
+                                    if (userEmail) {
+                                        order.fromEmail = userEmail.fromEmail;
+                                    }
+                                    sentMails.sendOrderEmail(order, function (err, msg) {
+                                        sails.log.info(err);
+                                        if (err) {
+                                            return res.send(500);
+                                        }
+                                    });
+                                });
                             });
 
                             return res.send({status:200});
@@ -176,12 +227,23 @@ module.exports = {
                             Application.findOne(searchApp).exec(function (err, app) {
                                 order['userId'] = app.userId;
                                 order.isNew = data.isNew;
-                            sentMails.sendOrderEmail(order,function (err,msg) {
-                                sails.log.info(err);
-                                if (err) {
-                                    return  res.send(500);
-                                }
-                            });
+                                //Find user email settings
+                                UserEmail.findOne({ appId: order.appId }).exec(function(err, userEmail) {
+
+                                    if (err) {
+                                        sails.log.error('Error occurred in finding User email Settings : TemplateOrderController.saveOrder , error : ' + err);
+                                    }
+
+                                    if (userEmail) {
+                                        order.fromEmail = userEmail.fromEmail;
+                                    }
+                                    sentMails.sendOrderEmail(order, function (err, msg) {
+                                        sails.log.info(err);
+                                        if (err) {
+                                            return res.send(500);
+                                        }
+                                    });
+                                });
                             });
 
                             return res.send({status:200});
