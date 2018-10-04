@@ -1,7 +1,7 @@
 <md-dialog aria-label="Menu Tree">
     <md-dialog-content>
         <form novalidate>
-            <div class="md-dialog-header">
+            <div class="md-dialog-header" style="padding: 10px;">
                 <h1>Categories</h1>
                 <ul class="md-dialog-header-nav clearfix">
                     <li>
@@ -13,14 +13,19 @@
                 </ul>
             </div>
             <div class="md-dialog-main">
-                <table class="me-simple-table">
+                <table ui-tree id="tree-root" class="me-simple-table">
                     <thead>
-                    <tr>
-                        <th width="100%">Name</th>
-                    </tr>
+                        <tr>
+                            <th width="30%">name</th>
+                            <th width="20%">move up/down</th>
+                            <th width="10%">featured</th>
+                            <th width="10%" style="text-align: center">edit</th>
+                            <th width="20%">sub-category</th>
+                            <th width="10%">delete</th>
+                        </tr>
                     </thead>
                 </table>
-                <div ui-tree id="tree-root" data-drag-enabled="false">
+                <div ui-tree="treeOptions" id="tree-root" data-drag-enabled="false">
                     <ol ui-tree-nodes ng-model="menuItems">
                         <li ng-repeat="node in menuItems"  ui-tree-node ng-include="'nodes_renderer.html'"></li>
                     </ol>
@@ -28,7 +33,7 @@
             </div>
 
             <!-- TODO : Later, ui-tree may be use -->
-            <script type="text/ng-template" id="nodes_renderer.html">
+            <!-- <script type="text/ng-template" id="nodes_renderer.html">
                 <div ui-tree-handle class="tree-node tree-node-content">
                     <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)">
                         <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
@@ -45,7 +50,43 @@
                     <li ng-repeat="node in node.childNodes" ui-tree-node ng-include="'nodes_renderer.html'">
                     </li>
                 </ol>
+            </script> -->
+            <script type="text/ng-template" id="nodes_renderer.html">
 
+                <div ui-tree-handle class="tree-node tree-node-content" style="background: none; border: none">
+                        {{node.name}}
+                        <a class="pull-right" style="margin-right: 3vw;" data-nodrag ng-click="deleteNodes(node)">
+                            <img height="20px" style="cursor: pointer;" src="../../../images/category-delete.svg">
+                        </a>
+
+                        <a class="pull-right" style="margin-right: 8vw;" data-nodrag ng-click="goToAddNewNode(node.id)">
+                            <img height="20px" style="cursor: pointer;" src="../../../images/sub-category.svg">
+                        </a>
+
+                        <a class="pull-right" style="margin-right: 8vw;" data-nodrag ng-click="goToEditMenuItemView(node)">
+                            <img height="20px" style="cursor: pointer;" src="../../../images/edit-icon.svg">
+                        </a>
+
+                        <input class="pull-right" 
+                            ng-model="node.isFeaturedCategory" 
+                            ng-change="onCheckboxChange(node)" 
+                            ng-if="node.isMainCategory" data-nodrag style="margin-right: 6vw; cursor: pointer;" type="checkbox">
+
+                        <a class="pull-right" ng-style="{ 'margin-right': node.isMainCategory ? '8vw' : '15.3vw'}" data-nodrag ng-click="moveDown($index, $last, node)">
+                            <img height="20px" style="cursor: s-resize;" src="../../../images/down-arrow.svg">
+                        </a>
+
+                        <a class="pull-right" data-nodrag ng-click="moveUp($index, $first, node)">
+                            <img height="20px" ng-if="!$first" style="margin-right:3%; cursor: n-resize;" src="../../../images/up-arrow.svg">
+                            <img height="20px" ng-if="$first" style="margin-right:3%; cursor: not-allowed;" src="../../../images/up-arrow.svg">
+                        </a>
+                  
+                </div>
+
+                <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+                    <li ng-repeat="node in node.childNodes" ui-tree-node ng-include="'nodes_renderer.html'">
+                    </li>
+                </ol>
             </script>
 
             <div class="md-dialog-buttons">

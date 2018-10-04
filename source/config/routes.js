@@ -144,6 +144,8 @@ module.exports.routes = {
     'POST /edit/updateSliderImage': 'edit/commerce/SliderController.updateSliderImage',
     'POST /edit/updateCategory': 'edit/commerce/MainCategoryController.updateCategory',
     'POST /edit/updateCategoryName': 'edit/commerce/MainCategoryController.updateCategoryName',
+    'POST /edit/commerce/updateCategoryOrder': 'edit/commerce/MainCategoryController.updateCategoryOrder',
+    'POST /edit/commerce/updateFeaturedCategory': 'edit/commerce/MainCategoryController.updateFeaturedCategory',
     //'POST /edit/updateProductImage': '',
     //'POST /edit/updateCategoryImage': '',
     //'POST /edit/addProducts': '

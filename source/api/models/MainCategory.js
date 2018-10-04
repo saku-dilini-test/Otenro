@@ -42,6 +42,17 @@ module.exports = {
         },
         nodes:{
             type:'json'
+        },
+        index: {
+            type: 'integer'
+        },
+        isMainCategory: {
+            type: 'boolean',
+            defaultsTo: false
+        },
+        isFeaturedCategory: {
+            type: 'boolean',
+            defaultsTo: false 
         }
     }
 };
