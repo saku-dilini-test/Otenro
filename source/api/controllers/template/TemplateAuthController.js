@@ -158,10 +158,8 @@ module.exports = {
                     };
 
                     emailService.sendAppUserVerificationEmail(data, function (callback) {
-
-                    });
-                            AppUser.update({ id: user.id}, { regToken: encryptedEmail })
-                                .exec(function (err, updatedUser) {
+                        AppUser.update({ id: user.id}, { regToken: encryptedEmail })
+                            .exec(function (err, updatedUser) {
 
                                 if (err) {
 
@@ -169,13 +167,15 @@ module.exports = {
                                 }
                                 else if (updatedUser.length === 1)  {
 
-                                    return res.send({ message: 'success' });
+                                    return res.send({ message: 'success', user:user });
                                 }
                                 else {
 
                                     return res.send({ message: 'failed' });
                                 }
                             });
+                    });
+
 //                        }
 //                        else if (callback.message === 'error') {
 //
