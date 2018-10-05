@@ -153,6 +153,7 @@ module.exports = {
         var notification   = req.body;
         var md5sig = notification.md5sig.toUpperCase();
         var paymentStatus;
+        var mobileCtrl = this;
 
         console.log("notification.merchant_id " + notification.merchant_id);
 
@@ -176,16 +177,17 @@ module.exports = {
                 break;
             case "-2":
                 paymentStatus = "failed";
-                break
+                break;
             case "-3":
                 paymentStatus = "chargedback";
-           ;
+                break;
         }
 
 
             ApplicationOrder.update(
                 {id:notification.order_id},{paymentStatus:paymentStatus}).exec(function(err,order){
                 if (err) return done(err);
+                mobileCtrl.updateInventory(paymentStatus, order[0]);
                 res.ok(order);
 
             })
@@ -229,5 +231,46 @@ module.exports = {
                 });
             }
         });
+    },
+
+    updateInventory: function (status, applicationOrder) {
+
+        if (status === "canceled" || status === "failed") {
+
+            applicationOrder.item.forEach(function (item) {
+
+                ThirdNavigation.findOne({ id: item.id }).exec(function (err, thirdNavigation) {
+
+                    if (err) {
+
+                        sails.log.error('Error occurred : MobileController.updateInventory , error : ' + err);
+                    }
+
+                    if (thirdNavigation) {
+
+                        for (var i = 0; i < thirdNavigation.variants.length; i++) {
+
+                            if (thirdNavigation.variants[i].sku === item.sku) {
+
+                                thirdNavigation.variants[i].quantity = thirdNavigation.variants[i].quantity + thirdNavigation.variants[i].orderedQuantity;
+                            }
+                        }
+
+                        ThirdNavigation.update({ id: item.id }, thirdNavigation).exec(function (err, updatedThirdNav) {
+
+                            if (err) {
+
+                                sails.log.error('Error occurred : MobileController.updateInventory , error : ' + err);
+                            }
+
+                            if (updatedThirdNav.length > 0) {
+
+                                sails.log.debug('Invetory Updated Successfully');
+                            }
+                        });
+                    }
+                });
+            });
+        }
     }
 };

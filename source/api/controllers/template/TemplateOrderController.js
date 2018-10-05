@@ -15,10 +15,6 @@ module.exports = {
         data['paymentStatus'] = 'Pending';
         data['fulfillmentStatus'] = 'Pending';
 
-        console.log('#############');
-        console.log('###### => ' + JSON.stringify(data, null, 2));
-        console.log('#############');
-
         sails.log.info(data);
         if(data.pickupId == null){
             ApplicationOrder.create(data).exec(function (err, order) {
@@ -255,6 +251,7 @@ module.exports = {
                     }
                     else {
                         app[0].variants[i].quantity = app[0].variants[i].quantity - data.qty;
+                        app[0].variants[i].orderedQuantity = data.qty;
                         pQuantity = app[0].variants[i].quantity;
                         UserEmail.find({appId: app[0].appId}).exec(function (err, email) {
                             if (err) {
