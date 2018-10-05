@@ -2,10 +2,10 @@
     'use strict';
     angular.module("appEdit").controller("MainMenuCtrl", ['oblMenuService','$scope', '$mdDialog', '$rootScope',
         'mainMenuService','$http','commerceService','toastr','mySharedService','SERVER_URL','ME_APP_SERVER','$auth'
-        ,'dashboardService','articleService','initialData','$log','$filter', MainMenuCtrl]);
+        ,'dashboardService','articleService','initialData','$log','$filter','imageEditorService', MainMenuCtrl]);
 
     function MainMenuCtrl(oblMenuService,$scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr,
-                          mySharedService,SERVER_URL,ME_APP_SERVER,$auth,dashboardService,articleService,initialData,$log,$filter) {
+                          mySharedService,SERVER_URL,ME_APP_SERVER,$auth,dashboardService,articleService,initialData,$log,$filter,imageEditorService) {
 
         $scope.tmpImage = [];
         $scope.mainImg = null;
@@ -61,6 +61,11 @@ $scope.filesSortConfig = {
         $scope.imageSelected = true;
         $scope.buttonName = "Browse Image";
 
+        // open image editor function (added by .sanira)
+        $scope.openDialog = function () {
+            imageEditorService.showImageEditorDialog();
+        };
+
         // image crop function
         $scope.cropImage = function () {
             var handleFileSelect=function(evt) {
@@ -77,7 +82,7 @@ $scope.filesSortConfig = {
                 $scope.buttonName = "Upload";
             };
             angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
-        }
+        };
 
 
         $scope.moveUp = function(arr, old_index) {

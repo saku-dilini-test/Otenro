@@ -68,6 +68,7 @@
    <link rel="stylesheet" href="/vendor/ngDialog/ngDialog-theme-default.css">
    <link rel="stylesheet" href="/vendor/ngDialog/ngDialog.css">
    <link rel="stylesheet" href="/vendor/textAngular/textAngular.css">
+   <link rel="stylesheet" href="/vendor/tui-color-picker/tui-color-picker.css">
    <link rel="stylesheet" href="/vendor/ui-cropper/ui-cropper.css">
    <link rel="stylesheet" href="/styles/ext-modules/oblFrameWork/oblFramework.css">
    <link rel="stylesheet" href="/styles/ext-modules/oblDashboard/oblDashboard.css">
@@ -93,7 +94,13 @@
 
     <!-- quill text editor styles -->
    <link rel="stylesheet" href="/js/dependencies/quill/quill.snow.css">
+    <!-- ./end quill text editor styles -->
+    
    <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4></script>
+
+    <!-- imageEditor styles -->
+    <link rel="stylesheet" href="/js/dependencies/tuiImageEditor/styles/tui-image-editor.css">
+    <!-- ./end imageEditor styles -->
  </head>
 
   <body>
@@ -158,6 +165,7 @@
     <script src="/vendor/angular-ui-router/angular-ui-router.js"></script>
     <script src="/vendor/angular-ui-tree/angular-ui-tree.js"></script>
     <script src="/vendor/angularUtils-pagination/dirPagination.js"></script>
+    <script src="/vendor/fabric/fabric.min.js"></script>
     <script src="/vendor/hammerjs/hammer.js"></script>
     <script src="/vendor/javascript-detect-element-resize/detect-element-resize.js"></script>
     <script src="/vendor/ng-csv/ng-csv.min.js"></script>
@@ -181,6 +189,8 @@
     <script src="/vendor/textAngular/textAngular.js"></script>
     <script src="/vendor/textAngular/textAngularSetup.js"></script>
     <script src="/vendor/tinycolor/tinycolor.js"></script>
+    <script src="/vendor/tui-code-snippet/tui-code-snippet.js"></script>
+    <script src="/vendor/tui-color-picker/tui-color-picker.js"></script>
     <script src="/vendor/tweenlite/TweenLite.min.js"></script>
     <script src="/vendor/ui-cropper/ui-cropper.js"></script>
     <script src="/js/dependencies/lodash.min.js"></script>
@@ -189,6 +199,9 @@
     <script src="/js/dependencies/angular-google-maps.min.js"></script>
     <script src="/js/dependencies/quill/ng-quill.min.js"></script>
     <script src="/js/dependencies/quill/quill.min.js"></script>
+    <script src="/js/dependencies/tuiImageEditor/js/themes/black-theme.js"></script>
+    <script src="/js/dependencies/tuiImageEditor/js/themes/white-theme.js"></script>
+    <script src="/js/dependencies/tuiImageEditor/js/tui-image-editor.js"></script>
     <script src="/js/dependencies/ui-bootstrap-tpls-0.11.0.js"></script>
     <script src="/js/app.js"></script>
     <script src="/env/development.js"></script>
@@ -232,6 +245,7 @@
     <script src="/js/controllers/edit/engage/engageCtrl.js"></script>
     <script src="/js/controllers/edit/engage/salesAndPromotionCtrl.js"></script>
     <script src="/js/controllers/edit/engage/userCtrl.js"></script>
+    <script src="/js/controllers/edit/imageEditor/imageEditroCtrl.js"></script>
     <script src="/js/controllers/edit/logoandtittle/logoAndTittleCtrl.js"></script>
     <script src="/js/controllers/edit/mainmenu/editChildCtrl.js"></script>
     <script src="/js/controllers/edit/mainmenu/editChildImageCtrl.js"></script>
@@ -299,6 +313,7 @@
     <script src="/js/services/edit/commerce/taxService.js"></script>
     <script src="/js/services/edit/design/templateService.js"></script>
     <script src="/js/services/edit/engage/engageService.js"></script>
+    <script src="/js/services/edit/imageEditor/imageEditorService.js"></script>
     <script src="/js/services/edit/logoandtittle/logoAndTittleService.js"></script>
     <script src="/js/services/edit/mainmenu/mainMenuService.js"></script>
     <script src="/js/services/edit/publish/publishService.js"></script>
@@ -325,8 +340,17 @@
          <script src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
          <!-- ng-sortable.js -->
          <script src="http://rubaxa.github.io/Sortable/ng-sortable.js"></script>
+
+    <!-- quill.js -->
     <script type="text/javascript" src="/js/dependencies/quill/quill.min.js"></script>
     <script type="text/javascript" src="/js/dependencies/quill/ng-quill.min.js"></script>
+    <!-- end quill.js -->
+
+    <!-- imageEditor scripts -->
+    <script type="text/javascript" src="/js/dependencies/tuiImageEditor/js/tui-image-editor.js"></script>
+    <script type="text/javascript" src="/js/dependencies/tuiImageEditor/js/themes/black-theme.js"></script>
+    <script type="text/javascript" src="/js/dependencies/tuiImageEditor/js/themes/white-theme.js"></script>
+    <!-- end imageEditor scripts -->
 
 
     <!--
