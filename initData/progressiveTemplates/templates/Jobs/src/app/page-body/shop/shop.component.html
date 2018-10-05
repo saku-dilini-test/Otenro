@@ -1,0 +1,21 @@
+
+<section class="margin-size clean-block clean-info dark">
+    <div class="page-container padding">
+        <div class="remove-margin row"*ngFor="let article of results">
+            <div class="col" >
+                <div class="card-size clean-card text-center">
+                    <img src="{{imageUrl}}/{{article.tempImageArray[0].img}}" class="card-img-top w-100 d-block" width="100%" />
+                    <div class="card-color card-body info">
+                        <div class="main-header-font">{{article.title}}</div>
+                        <div class="icons">
+                            <button class="btn-style btn btn-outline-primary btn-lg" type="button"  (click)="navigateProd('product',article)">View Job</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1')">
+        <span class="fa fa-chevron-up"></span>
+        </a>
+    </div>
+</section>
