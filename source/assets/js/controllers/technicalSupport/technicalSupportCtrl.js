@@ -180,6 +180,7 @@
                 }
             }
 
+
             $scope.getAppIdsArray = function(apps){
                 var arr = [];
                 apps.forEach(function(app){
@@ -1405,7 +1406,7 @@
 
             }else if (args.reportType=="failedTransaction"){
 
-                dataArray.push(range +"," + "Service Provider"+ "," +"Application Name" + ","
+                dataArray.push(range +"," + "Operator"+ "," +"Application Name" + ","
                     + "Error Code" + "," +"Total"+'\r\n');
 
 
