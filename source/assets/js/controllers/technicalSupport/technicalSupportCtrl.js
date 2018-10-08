@@ -1377,9 +1377,9 @@
             if (args.reportRange=="Daily"){
                 range = "Date";
             }else if (args.reportRange=="Monthly"){
-                range = "Month";
+                range = "Year , Month";
             }else {
-                range = "Year"
+                range = "Year";
             }
 
             if (args.reportType=="RECONCILIATION"){
@@ -1393,7 +1393,7 @@
                     if (args.reportRange=="Daily"){
                         rangeValue = obj.date;
                     }else if (args.reportRange=="Monthly"){
-                        rangeValue = obj.month;
+                        rangeValue =  obj.year +","+obj.month;
                     }else {
                         rangeValue = obj.year;
                     }
@@ -1431,7 +1431,7 @@
             }else if (args.reportType=="revenueAndTrafficReportData"){
 
                 dataArray.push(range + "," +"Operator" + ","
-                    + "AppMaker Revenue" + "," +"AppMaker Traffic"+','+'Total Revenue'+","+'Total Revenue'+'\r\n');
+                    + "Revenue" + "," +"Traffic"+','+'Total Revenue'+","+'Total Revenue'+'\r\n');
 
 
                 reportDataArray.forEach(function(obj){
@@ -1440,7 +1440,7 @@
                     if (args.reportRange=="Daily"){
                         rangeValue = obj.date;
                     }else if (args.reportRange=="Monthly"){
-                        rangeValue = obj.month;
+                        rangeValue = obj.year + "," +obj.month;
                     }else {
                         rangeValue = obj.year;
                     }
@@ -1463,7 +1463,7 @@
                     if (args.reportRange=="Daily"){
                         rangeValue = obj.date;
                     }else if (args.reportRange=="Monthly"){
-                        rangeValue = obj.month;
+                        rangeValue =  obj.year +","+obj.month;
                     }else {
                         rangeValue = obj.year;
                     }
