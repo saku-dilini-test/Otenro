@@ -1327,7 +1327,7 @@
 
 
                                                 }).error(function (response) {
-                                                toastr.error('FailedTransaction Reports Loading Error', 'Warning', {closeButton: true});
+                                                toastr.error('CustomerCare Report Loading Error', 'Warning', {closeButton: true});
                                             });
 
                                         }else {
@@ -1347,17 +1347,17 @@
                                                 }
 
                                             }).error(function (response) {
-                                            toastr.error('FailedTransaction Reports Loading Error', 'Warning', {closeButton: true});
+                                            toastr.error('Customer Care Report Loading Error', 'Warning', {closeButton: true});
                                         });
 
                                     }
 
 
                             }).error(function (response) {
-                            toastr.error('FailedTransaction Reports Loading Error', 'Warning', {closeButton: true});
+                            toastr.error('CustomerCare Report Loading Error', 'Warning', {closeButton: true});
                         });
                     }else {
-                        toastr.error('Invalid mobile number', 'Warning', {closeButton: true});
+                        toastr.error('Please make sure that you entered international dialing code', 'Warning', {closeButton: true});
                     }
                 }
                 else {
