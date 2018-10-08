@@ -286,34 +286,31 @@
 
             if (node.isFeaturedCategory && $scope.featuredCategoryArr.length < 4) {
 
-                let maxLength = 19;
-                let headerStr = '';
-                $scope.featuredCategoryArr.forEach(category => {
+                let body = { appId: $rootScope.appId, characterLength: node.name.length };
+                io.socket.post('/edit/commerce/checkAppHeaderEligibility', body, (res) => {
 
-                    headerStr = headerStr.concat(category.name);
+                    if (res.status === 'ELIGIBLE') {
+
+                        let socketBody = { id: node.id, isFeaturedCategory: node.isFeaturedCategory };
+                        io.socket.post('/edit/commerce/updateFeaturedCategory', socketBody, (res) => {
+
+                            if (res.status === 'SUCCESS') {
+
+                                $scope.featuredCategoryArr.push(node);
+                                toastr.success('Successfully added to featured categories!', 'Success!', { closeButton: true });
+                            }
+                            else
+                                toastr.error('Menu Loading Error', 'Warning', { closeButton: true });
+
+                        });
+                    }
+
+                    if (res.status === 'NOT_ELIGIBLE') {
+
+                        node.isFeaturedCategory = false;
+                        toastr.warning('Only ' + $scope.featuredCategoryArr.length + ' categories can be shown due to limited space!', 'Warning!', { closeButton: true });
+                    }
                 });
-                headerStr = headerStr.concat(node.name)
-                console.log('Character count => ' + headerStr.length);
-
-                if (maxLength >= headerStr.length) {
-
-                    let socketBody = { id: node.id , isFeaturedCategory: node.isFeaturedCategory };
-                    io.socket.post('/edit/commerce/updateFeaturedCategory', socketBody, (res) => {
-    
-                        if (res.status === 'SUCCESS') {
-    
-                            $scope.featuredCategoryArr.push(node);
-                            toastr.success('Successfully added to featured categories!', 'Success!', { closeButton: true });
-                        }
-                        else
-                            toastr.error('Menu Loading Error', 'Warning', { closeButton: true });
-    
-                    });
-                } else {
-
-                    node.isFeaturedCategory = false;
-                    toastr.warning('Only ' + $scope.featuredCategoryArr.length + ' categories can be shown due to limited space!', 'Warning!', { closeButton: true });
-                }
             }
 
             if (!node.isFeaturedCategory) {

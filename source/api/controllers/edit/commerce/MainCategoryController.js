@@ -413,6 +413,8 @@ module.exports = {
      **/
     updateFeaturedCategory: function (req, res) {
 
+        var mainCategoryController = this;
+
         if (!req.isSocket) {
 
             sails.log.debug('Not a socket request ' + ' MainCategoryController.updateFeaturedCategory');
@@ -423,14 +425,81 @@ module.exports = {
         var isFeaturedCategory = req.body.isFeaturedCategory;
 
         MainCategory.update({ id: id }, { isFeaturedCategory: isFeaturedCategory })
-            .exec(function (err) {
+            .exec(function (err, category) {
 
                 if (err) {
 
                     sails.log.error('In MainCategoryController.updateFeaturedCategory, error => ' + err);
                     return res.serverError({ status: 'SERVER_ERROR' });
                 }
-                return res.send({ status: 'SUCCESS' });
+
+                if (category.length > 0) {
+
+                    mainCategoryController.updateAppHeaderData(category[0]);
+                    return res.send({ status: 'SUCCESS' });
+                }
             });
+    },
+
+    checkAppHeaderEligibility: function (req, res) {
+
+        if (!req.isSocket) {
+
+            sails.log.debug('Not a socket request ' + ' MainCategoryController.updateFeaturedCategory');
+            return res.badRequest({ status: 'NOT_SOCKET_REQUEST' });
+        }
+
+        var appId = req.body.appId;
+        var characterLength = req.body.characterLength;
+
+        AppHeaderData.findOne({ appId: appId }).exec(function (err, appHeaderData) {
+
+            if (err) {
+
+                sails.log.error('In MainCategoryController.checkAppHeaderEligibility, error => ' + err);
+                return res.serverError({ status: 'SERVER_ERROR' });
+            }
+
+            if (appHeaderData) {
+
+                var remainingCharacterCount = appHeaderData.maxCategoryCharacterLength - appHeaderData.usedCategoryCharacterLength;
+
+                if (remainingCharacterCount >= characterLength) {
+
+                    return res.send({ status: 'ELIGIBLE' });
+                } else
+                    return res.send({ status: 'NOT_ELIGIBLE' });
+            }
+        });
+    },
+
+    updateAppHeaderData: function (category) {
+
+        AppHeaderData.findOne({ appId: category.appId }).exec(function (err, appHeaderData) {
+
+            if (err) {
+
+                sails.log.error('Error occurred in MainCategoryController.updateAppHeaderData , error ' + err);
+            }
+
+            if (appHeaderData) {
+
+                var charLength = category.name.length;
+                if (category.isFeaturedCategory) {
+
+                    appHeaderData.usedCategoryCharacterLength = appHeaderData.usedCategoryCharacterLength + charLength;
+                }
+                else
+                    appHeaderData.usedCategoryCharacterLength = appHeaderData.usedCategoryCharacterLength - charLength;
+
+                appHeaderData.save(function (err) {
+
+                    if (!err) {
+
+                        sails.log.debug('AppHeaderData is updated successfully.');
+                    }
+                });
+            }
+        });
     }
 };

@@ -14,5 +14,15 @@ module.exports = {
     TEMPLATES_PATH :sails.config.TEMPLATES_PATH,
     PROGRESSIVE_TEMPLATES_PATH :sails.config.PROGRESSIVE_TEMPLATES_PATH,
 
-    PUSH_API_URL : "https://api.ionic.io/push/notifications"
+    PUSH_API_URL : "https://api.ionic.io/push/notifications",
+
+    APP_HEADER_INITIAL_DATA : {
+        MAX_CHARACTER_COUNT : {
+            POWER_HOUSE : 52,
+            STYLE_TO_SHOP: 26
+        },
+        POLICIES_CHARACTER_COUNT: 8,
+        ABOUT_US_CHARACTER_COUNT: 8,
+        CONTACT_US_CHARACTER_COUNT: 10,
+    }
 };
