@@ -1250,14 +1250,15 @@ module.exports = {
                     }
 
 
-                    transporter.sendMail(mailOptions, (error, info) => {
+                    transporter.sendMail(mailOptions, function(error, info) {
+
                             if (error) {
                                 console.log("email send failed \n id: " + data.email +"\n order: " + data.paymentStatus + "\n error: " + error);
-                                return  callback.send(500);
+                                return  callback('error');
                             }
                             console.log('Message sent: %s', info.messageId);
                             console.log(info);
-                        return callback.send('ok');
+                        return callback('ok');
                     });
                 });
             });

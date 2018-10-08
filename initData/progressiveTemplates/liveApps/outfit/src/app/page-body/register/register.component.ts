@@ -37,6 +37,7 @@ export class RegisterComponent implements OnInit {
   private myForm: FormGroup;
   isEmailDuplicate;
   errorMessage: string;
+  successMessage: string;
   private _success = new Subject<string>();
   fullUrl; domainUrl;
 
