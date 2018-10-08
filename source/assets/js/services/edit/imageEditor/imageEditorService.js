@@ -6,21 +6,22 @@
 (function() {
     'use strict';
 
-    angular.module('appEdit').factory('imageEditorService', [
+    angular.module('appEdit').service('imageEditorService', [
         '$mdDialog',imageEditorService
     ]);
 
     function imageEditorService($mdDialog) {
         return {
 
-            showImageEditorDialog: function () {
+            showImageEditorDialog: function (_width,_height) {
                 return $mdDialog.show({
                     controller: 'imageEditorCtrl',
                     templateUrl: 'user/edit/imageEditor/imageEditor.html',
                     clickOutsideToClose: true,
-                    // locals: {
-                    //     initialData: null
-                    // }
+                    locals: {
+                        width: _width,
+                        height: _height
+                    }
                 });
             },
         };
