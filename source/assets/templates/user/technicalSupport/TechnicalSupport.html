@@ -583,7 +583,7 @@
                                             <h6 flex="100">Select operator</h6>
                                             <select placeholder="Select operator"  aria-label="Country Name"
                                                     ng-model="failedTransactionReport.operator" required >
-                                                <option ng-value="operator.operator" ng-repeat="operator in operatorArrSort(operators)">{{operator.operator}}</option>
+                                                <option ng-value="operator.operator" ng-repeat="operator in operatorArrSort(operators)">{{operator.operator | titleCase}}</option>
                                             </select>
                                         </div>
 
@@ -736,7 +736,7 @@
                                             <h6 flex="100">Select operator</h6>
                                             <select placeholder="Select operator"  aria-label="Country Name"
                                                     ng-model="reconciliationReports.operator" required >
-                                                <option ng-value="operator.operator" ng-repeat="operator in operatorArrSort(operators)">{{operator.operator}}</option>
+                                                <option ng-value="operator.operator" ng-repeat="operator in operatorArrSort(operators)">{{operator.operator | titleCase}}</option>
                                             </select>
 
                                         </div>
