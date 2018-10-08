@@ -55,8 +55,9 @@
     "tweenlite": "https://github.com/jjhan1986/TweenLite.git#4b5eb64916f24a2169032feda89ac306ae0cbdf5",
     "pdfmake": "^0.1.25",
     "ui-cropper": "^1.0.6",
-    "fabric.js": "fabric#^2.3.6",
-    "tui-image-editor": "^3.2.0"
+    "tui-code-snippet": "^1.4.0",
+    "tui-color-picker": "^2.2.0",
+    "fabric": "~1.6.7"
   },
   "name": "meV2",
   "version": "0.0.0",
