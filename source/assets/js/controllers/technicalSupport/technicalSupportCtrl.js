@@ -1398,7 +1398,7 @@
                         rangeValue = obj.year;
                     }
 
-                    var str = rangeValue + "," + obj.uniqueAppId +"," + obj.name + + obj.bankCode +"," + obj.branchCode +","
+                    var str = rangeValue + "," + obj.uniqueAppId +"," + obj.name + ","  + obj.bankCode +"," + obj.branchCode +","
                         + obj.branchName +"," + obj.bankAccountNumber+"," + obj.revenue + '\r\n';
 
                     dataArray.push(str);
