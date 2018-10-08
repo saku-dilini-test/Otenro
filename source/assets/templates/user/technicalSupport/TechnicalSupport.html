@@ -309,10 +309,9 @@
                                     <div class="reports-period-container">
 
                                         <div class="reports-container">
-                                            <h6>Select period</h6>
-
                                             <form name="revenueAndTrafficReportForm">
                                                 <div ng-if="revenueAndTrafficReport.report == 'Daily'">
+                                                    <h6>Select period</h6>
                                                     <div class="row margin-bottom">
                                                         <div class="col-xs-4">
                                                             <adm-dtp ng-model='revenueAndTrafficReport.sdate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
@@ -327,7 +326,7 @@
                                                     <Button type="button" class="me-default-button" ng-click="revenueAndTrafficReportData(revenueAndTrafficReport)">Search</Button>
                                                 </div>
                                                 <div ng-if="revenueAndTrafficReport.report == 'Monthly'" >
-
+                                                    <h6>Select period</h6>
                                                         <label>From</label>
                                                         <br>
                                                                 <select ng-model="revenueAndTrafficReport.fromYear" required>
@@ -355,6 +354,7 @@
                                                     <Button type="button" class="me-default-button" ng-click="revenueAndTrafficReportData(revenueAndTrafficReport)">Search</Button>
                                                 </div>
                                                 <div ng-if="revenueAndTrafficReport.report == 'Yearly'">
+                                                    <h6>Select period</h6>
                                                     <select placeholder="From Year" ng-model="revenueAndTrafficReport.fromYear" required>
                                                         <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
                                                     </select>
@@ -448,10 +448,10 @@
                                     <div class="reports-period-container">
 
                                         <div class="reports-container">
-                                            <h6>Select period</h6>
 
                                             <form name="applicationBaseReportReportForm">
                                                 <div ng-if="applicationBaseReport.report == 'Daily'">
+                                                    <h6>Select period</h6>
                                                     <div class="row margin-bottom">
                                                         <div class="col-xs-4">
                                                             <adm-dtp ng-model='applicationBaseReport.sdate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
@@ -465,6 +465,7 @@
                                                     <Button type="button" class="me-default-button" ng-click="applicationBaseReportData(applicationBaseReport)">Search</Button>
                                                 </div>
                                                 <div ng-if="applicationBaseReport.report == 'Monthly'" >
+                                                    <h6>Select period</h6>
                                                     <label>From</label>
                                                     <br>
                                                     <select ng-model="applicationBaseReport.fromYear" required>
@@ -492,6 +493,7 @@
 
                                                 </div>
                                                 <div ng-if="applicationBaseReport.report == 'Yearly'">
+                                                    <h6>Select period</h6>
                                                     <select placeholder="From Year" ng-model="applicationBaseReport.fromYear" required>
                                                         <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
                                                     </select>
@@ -592,10 +594,9 @@
                                     <div class="reports-period-container">
 
                                         <div class="reports-container">
-                                            <h6>Select period</h6>
-
                                             <form name="reconciliationForm">
                                                 <div ng-if="failedTransactionReport.report == 'Daily'">
+                                                    <h6>Select period</h6>
                                                     <div class="row margin-bottom">
                                                         <div class="col-xs-4">
                                                             <adm-dtp ng-model='failedTransactionReport.fromDate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
@@ -745,10 +746,9 @@
                                 <div class="reports-period-container">
 
                                 <div class="reports-container">
-                                        <h6>Select period</h6>
-
                                         <form name="reconciliationForm">
                                             <div ng-if="reconciliationReports.report == 'Daily'">
+                                                <h6>Select period</h6>
                                                 <div class="row margin-bottom">
                                                     <div class="col-xs-4">
                                                         <adm-dtp ng-model='reconciliationReports.sdate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
@@ -762,6 +762,7 @@
                                                 <Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>
                                             </div>
                                             <div ng-if="reconciliationReports.report == 'Monthly'" >
+                                                <h6>Select period</h6>
                                                 <label>From</label>
                                                 <br>
                                                 <select ng-model="reconciliationReports.fromYear" required>
@@ -789,6 +790,7 @@
                                                 <Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>
                                             </div>
                                             <div ng-if="reconciliationReports.report == 'Yearly'">
+                                                <h6>Select period</h6>
                                                 <select placeholder="From Year" ng-model="reconciliationReports.fromYear" required>
                                                     <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
                                                 </select>
