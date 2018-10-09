@@ -300,7 +300,7 @@
                                 toastr.success('Successfully added to featured categories!', 'Success!', { closeButton: true });
                             }
                             else
-                                toastr.error('Menu Loading Error', 'Warning', { closeButton: true });
+                                toastr.error('Error in adding to featured categories', 'Error!', { closeButton: true });
 
                         });
                     }

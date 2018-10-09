@@ -18,8 +18,8 @@ module.exports = {
 
     APP_HEADER_INITIAL_DATA : {
         MAX_CHARACTER_COUNT : {
-            POWER_HOUSE : 52,
-            STYLE_TO_SHOP: 26
+            POWER_HOUSE : 58,
+            STYLE_TO_SHOP: 68
         },
         POLICIES_CHARACTER_COUNT: 8,
         ABOUT_US_CHARACTER_COUNT: 8,

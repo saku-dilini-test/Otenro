@@ -49,13 +49,15 @@ module.exports = {
         ApplicationContactUs.update(searchApp, data).exec(function (err, app) {
             if(err) return err;
 
-            contactUsController.updateAppHeaderData(app[0].appId, app[0].showOnWebsiteContact);
+            if (app.length > 0) {
+                contactUsController.updateAppHeaderData(app[0].appId, app[0].showOnWebsiteContact);
+            }
 
             if (app.length == 0) {
                 ApplicationContactUs.create(data).exec(function (err, appContactUs) {
                     if (err) return res.send(err);
 
-                    contactUsController.updateAppHeaderData(appContactUs[0].appId, appContactUs[0].showOnWebsiteContact);
+                    contactUsController.updateAppHeaderData(appContactUs.appId, appContactUs.showOnWebsiteContact);
 
                     res.send({
                         appId: appContactUs.appId,

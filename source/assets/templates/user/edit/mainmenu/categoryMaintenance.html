@@ -54,31 +54,35 @@
             <script type="text/ng-template" id="nodes_renderer.html">
 
                 <div ui-tree-handle class="tree-node tree-node-content" style="background: none; border: none">
+                    <a>
+                        <img ng-if="!node.isMainCategory" style="margin-left:-15px;" height="10px" src="../../../images/subcategory-icon.svg">
+                    </a>
                         {{node.name}}
-                        <a class="pull-right" style="margin-right: 3vw;" data-nodrag ng-click="deleteNodes(node)">
-                            <img height="20px" style="cursor: pointer;" src="../../../images/category-delete.svg">
+                        <a class="pull-right" style="margin-right: 30px;" data-nodrag ng-click="deleteNodes(node)">
+                            <img height="20px" style="cursor: pointer;" src="../../../images/delete.svg">
                         </a>
 
-                        <a class="pull-right" style="margin-right: 8vw;" data-nodrag ng-click="goToAddNewNode(node.id)">
+                        <a class="pull-right" style="margin-right: 80px;" data-nodrag ng-click="goToAddNewNode(node.id)">
                             <img height="20px" style="cursor: pointer;" src="../../../images/sub-category.svg">
                         </a>
 
-                        <a class="pull-right" style="margin-right: 8vw;" data-nodrag ng-click="goToEditMenuItemView(node)">
-                            <img height="20px" style="cursor: pointer;" src="../../../images/edit-icon.svg">
+                        <a class="pull-right" style="margin-right: 65px;" data-nodrag ng-click="goToEditMenuItemView(node)">
+                            <img height="20px" style="cursor: pointer;" src="../../../images/category-edit.svg">
                         </a>
 
                         <input class="pull-right" 
                             ng-model="node.isFeaturedCategory" 
                             ng-change="onCheckboxChange(node)" 
-                            ng-if="node.isMainCategory" data-nodrag style="margin-right: 6vw; cursor: pointer;" type="checkbox">
+                            ng-if="node.isMainCategory" data-nodrag style="margin-right: 60px; cursor: pointer;" type="checkbox">
 
-                        <a class="pull-right" ng-style="{ 'margin-right': node.isMainCategory ? '8vw' : '15.3vw'}" data-nodrag ng-click="moveDown($index, $last, node)">
-                            <img height="20px" style="cursor: s-resize;" src="../../../images/down-arrow.svg">
+                        <a class="pull-right" ng-style="{ 'margin-right': node.isMainCategory ? '60px' : '130px'}" data-nodrag ng-click="moveDown($index, $last, node)">
+                            <img height="20px" ng-if="!$last" style="cursor: s-resize;" src="../../../images/down-arrow-active.svg">
+                            <img height="20px" ng-if="$last" style="cursor: not-allowed;" src="../../../images/down-arrow-disable.svg">
                         </a>
 
                         <a class="pull-right" data-nodrag ng-click="moveUp($index, $first, node)">
-                            <img height="20px" ng-if="!$first" style="margin-right:3%; cursor: n-resize;" src="../../../images/up-arrow.svg">
-                            <img height="20px" ng-if="$first" style="margin-right:3%; cursor: not-allowed;" src="../../../images/up-arrow.svg">
+                            <img height="20px" ng-if="!$first" style="cursor: n-resize;" src="../../../images/up-arrow-active.svg">
+                            <img height="20px" ng-if="$first" style="cursor: not-allowed;" src="../../../images/up-arrow-disable.svg">
                         </a>
                   
                 </div>

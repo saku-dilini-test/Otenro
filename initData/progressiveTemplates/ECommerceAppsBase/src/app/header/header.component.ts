@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
   public title: string;
   public loginStatus;
   dummy: any;
-  categories: any
+  categories: any;
   private catName: any;
   imageUrl: any;
   user; localCart; blogData;userUkn;
@@ -35,6 +35,9 @@ export class HeaderComponent implements OnInit {
   showOnWebsitePolicies:boolean;
   showOnWebsiteAbout:boolean;
   showOnWebsiteContact:boolean;
+  featuredCategories = [];
+  nonFeaturedCategories = [];
+
   constructor(private location: Location, private localStorageService: LocalStorageService,
     private categoryService: CategoriesService, private router: Router,
     private dataService: PagebodyServiceModule, private titleServ: TitleService,
@@ -45,6 +48,11 @@ export class HeaderComponent implements OnInit {
 
     this.categoryService.getCategories().subscribe(data => {
       this.categories = data;
+      this.categories.forEach(category => {
+
+        category.isFeaturedCategory ?
+          this.featuredCategories.push(category) : this.nonFeaturedCategories.push(category);
+      });
     }, err => {
       console.log(err);
     });
