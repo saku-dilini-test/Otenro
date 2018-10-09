@@ -3158,8 +3158,9 @@ table.md-calendar-day-header{
 .ql-editor {
     height: 250px !important;
 }
-.ql-editor  h1,h2,h3,h4,h5,h6 {
+.ql-editor  h1,h2,h3,h4,h5,h6,p {
     color: #000 !important;
+    text-transform: none !important;
 }
 .ql-snow .ql-tooltip{
     top: auto !important;
@@ -3184,4 +3185,4 @@ table.md-calendar-day-header{
 }
 .md-menu.paste-options .paste-button{
     visibility: hidden;
-} 	}
+}
