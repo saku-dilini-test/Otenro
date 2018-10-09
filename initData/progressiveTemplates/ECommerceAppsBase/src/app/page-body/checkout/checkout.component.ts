@@ -1440,7 +1440,11 @@ export class CheckoutComponent implements OnInit {
                 let streetNo = this.orderDetails.deliveryNo ? this.orderDetails.deliveryNo : "";
                 let streetName = this.orderDetails.deliveryStreet ? this.orderDetails.deliveryStreet : "";
 
-                this.payHereUrl = SERVER_URL + '/mobile/getPayHereForm/?name=' +
+
+                let realHostUrl = encodeURIComponent(window.location.protocol+"//"+window.location.host+"/#/");
+
+                this.http.get(
+                  SERVER_URL + '/mobile/getPayHereForm/?name=' +
                   this.orderDetails.customerName + "&amount=" +
                   this.orderDetails.amount + "&currency=" +
                   this.currency.symbol + "&email=" +
@@ -1449,9 +1453,15 @@ export class CheckoutComponent implements OnInit {
                   this.orderDetails.item[0].name + "&address=" +
                   streetNo + " " + streetName + "&city=" +
                   city + "&appId=" + orderRes.appId +
-                  "&orderId=" + orderRes.id + "&payHereMerchantId=" + this.payHereMID;
-
-              $('#payhereProcessModal').modal({backdrop: 'static', keyboard: false});
+                  "&orderId=" + orderRes.id + "&payHereMerchantId=" + this.payHereMID +
+                  "&realHostUrl=" + realHostUrl, {responseType: 'text'})
+                .subscribe((res) => {
+                  this.payHereUrl = res;
+                  $('#payhereProcessModal').modal({backdrop: 'static', keyboard: false});
+                 },
+                 (err) => {
+                    console.log(err);
+                 });
 
               },
               (err) => {

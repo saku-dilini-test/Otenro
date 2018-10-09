@@ -30,7 +30,7 @@ export class CheckoutComponent implements OnInit {
   errorMessage: string;
   nullMessage: string;
   private showSpinner;
-
+  responce;
   complexForm: FormGroup;
   pickupForm: FormGroup;
   shippingForm: FormGroup;
@@ -1381,49 +1381,65 @@ export class CheckoutComponent implements OnInit {
       }
     }
 
-    this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails,{ responseType: 'json' })
+    this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails, { responseType: 'json' })
       .subscribe((orderRes: any) => {
+        this.responce = orderRes.name;
 
-        this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart,{ responseType: 'text' })
-          .subscribe((res) => {
-            this.dataService.cart.cartItems = [];
-            this.dataService.cart.cartSize = 0;
-            this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
-            this.dataService.cart.totalPrice = 0;
-            this.dataService.cart.totalQuantity = 0;
+        if (orderRes.status == 404) {
+          this.showSpinner = false;
+          $('#myModal').modal('show');
+        } else {
+          this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, {responseType: 'text'})
+            .subscribe((res) => {
+                this.dataService.cart.cartItems = [];
+                this.dataService.cart.cartSize = 0;
+                this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
+                this.dataService.cart.totalPrice = 0;
+                this.dataService.cart.totalQuantity = 0;
 
-            //Pushing into order purchase history
-            let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+                //Pushing into order purchase history
+                let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
 
-            if (appUser) {
-              if (this.localStorageService.get("cart" + appUser.registeredUser)) {
-                this.localStorageService.remove("cart" + appUser.registeredUser);
-              }
-            }else{
-              this.localStorageService.remove("cartUnknownUser");
-            }
+                if (appUser) {
+                  if (this.localStorageService.get("cart" + appUser.registeredUser)) {
+                    this.localStorageService.remove("cart" + appUser.registeredUser);
+                  }
+                } else {
+                  this.localStorageService.remove("cartUnknownUser");
+                }
 
-            let city = this.orderDetails.deliveryCity ? this.orderDetails.deliveryCity : "";
-            let streetNo = this.orderDetails.deliveryNo ? this.orderDetails.deliveryNo : "";
-            let streetName = this.orderDetails.deliveryStreet ? this.orderDetails.deliveryStreet : "";
-            //
-            this.payHereUrl = SERVER_URL + '/mobile/getPayHereForm/?name=' +
-              this.orderDetails.customerName + "&amount=" +
-              this.orderDetails.amount + "&currency=" +
-              this.currency.symbol + "&email=" +
-              this.orderDetails.email + "&telNumber=" +
-              this.orderDetails.telNumber + "&item=" +
-              this.orderDetails.item[0].name + "&address=" +
-              streetNo + " " + streetName  + "&city=" +
-              city + "&appId=" + orderRes.appId +
-              "&orderId=" + orderRes.id + "&payHereMerchantId=" + this.payHereMID;
+                let city = this.orderDetails.deliveryCity ? this.orderDetails.deliveryCity : "";
+                let streetNo = this.orderDetails.deliveryNo ? this.orderDetails.deliveryNo : "";
+                let streetName = this.orderDetails.deliveryStreet ? this.orderDetails.deliveryStreet : "";
 
-             $('#payhereProcessModal').modal({backdrop: 'static', keyboard: false});
+
+                let realHostUrl = encodeURIComponent(window.location.protocol+"//"+window.location.host+"/#/");
+
+                this.http.get(
+                  SERVER_URL + '/mobile/getPayHereForm/?name=' +
+                  this.orderDetails.customerName + "&amount=" +
+                  this.orderDetails.amount + "&currency=" +
+                  this.currency.symbol + "&email=" +
+                  this.orderDetails.email + "&telNumber=" +
+                  this.orderDetails.telNumber + "&item=" +
+                  this.orderDetails.item[0].name + "&address=" +
+                  streetNo + " " + streetName + "&city=" +
+                  city + "&appId=" + orderRes.appId +
+                  "&orderId=" + orderRes.id + "&payHereMerchantId=" + this.payHereMID +
+                  "&realHostUrl=" + realHostUrl, {responseType: 'text'})
+                .subscribe((res) => {
+                  this.payHereUrl = res;
+                  $('#payhereProcessModal').modal({backdrop: 'static', keyboard: false});
+                 },
+                 (err) => {
+                    console.log(err);
+                 });
 
               },
-          (err) => {
-            console.log(err);
-          });
+              (err) => {
+                console.log(err);
+              });
+        }
       },
       (err) => {
         console.log(err);

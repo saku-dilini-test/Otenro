@@ -1,0 +1,16 @@
+h2{
+	font-size:55px;
+	color:red !important;
+}
+
+p{
+   font-size: 18px;
+}
+
+button{
+	font-size: 1.25rem
+}
+
+section{
+    margin-top: 15vh;
+}

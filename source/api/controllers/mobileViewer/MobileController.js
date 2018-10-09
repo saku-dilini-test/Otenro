@@ -55,53 +55,48 @@ module.exports = {
              //var currency = req.param("currency");
              var currency = "LKR";
              var sever = config.server.host;
-             console.log(sever);
+             console.log("realHost"+req.param("realHostUrl"));
              //var  sever = "http://76c8163f.ngrok.io";
+            var appRealHost = decodeURIComponent(req.param("realHostUrl"));
 
-        var htmlForm ="<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> " +
-                        "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> " +
-                        "<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags --> <title>Pay Here</title> " +
-                        "<!-- Latest compiled and minified CSS --> <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\" integrity=\"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u\" crossorigin=\"anonymous\"> " +
-                        "</head> <body> " +
-                        "<form class=\"container\" method=\"post\" "+
-                        "action=\"https://www.payhere.lk/pay/checkout\">  " +
-                        " <h3 style=\"color: #2957de;\">Item Details</h3>" +
+         var htmlForm =  " <h3 class=\"main-header-font\">Item Details</h3>" +
                         " <ul class=\"list-group\" style=\"margin-top: 15px\"> " +
-                        "<li class=\"list-group-item\"><input class=\"form-control\" type=\"text\" name=\"items\" value=\""+req.param("item")+"\" style=\"width:48%;display:inline;margin-right:5px\"><input readonly class=\"form-control\" style=\"width:50%;display:inline;\" type=\"text\" name=\"amount\" value=\""+req.param("amount")+"\"></li> " +
+                        "<li class=\"list-group-item\">" +
+                        "<input class=\"form-control\" type=\"text\" name=\"items\" value=\""+req.param("item")+"\"  [(ngModel)]=\"items\" style=\"width:48%;display:inline;margin-right:5px\">" +
+                        "<input readonly class=\"form-control\" style=\"width:50%;display:inline;\" type=\"text\" name=\"amount\" value=\""+req.param("amount")+"\" [(ngModel)]=\""+req.param("amount")+"\"></li> " +
                         "</ul> " +
-                        "<input type=\"hidden\" name=\"custom_1\" value=\""+req.param("appId")+"\">   " +
-                        "<input type=\"hidden\" name=\"merchant_id\" value=\""+req.param("payHereMerchantId")+"\">" +
-                        " <input type=\"hidden\" name=\"return_url\"  value=\""+sever+"/mobile/payHereSuccess?orderId="+req.param("orderId")+"&appId="+req.param("appId")+"\">" +
-                        " <input type=\"hidden\" name=\"cancel_url\" value=\""+sever+"/mobile/cancelUrl\">" +
-                        " <input type=\"hidden\" name=\"notify_url\" value=\""+sever+"/mobile/notifyUrl\">" +
-                        " <input type=\"hidden\" name=\"order_id\" value=\""+req.param("orderId")+"\">" +
-                        " <input type=\"hidden\" name=\"currency\" value=\""+currency+"\">" +
-                        " <h3 style=\"color: #2957de;\">Personal Details</h3>" +
+                        "<input type=\"hidden\" name=\"custom_1\" value=\""+req.param("appId")+"\" [(ngModel)]=\""+req.param("appId")+"\">   " +
+                        "<input type=\"hidden\" name=\"merchant_id\" value=\""+req.param("payHereMerchantId")+"\" [(ngModel)]=\""+req.param("payHereMerchantId")+"\">" +
+                        " <input type=\"hidden\" name=\"return_url\"  value=\""+appRealHost+"payhereSuccess?orderId="+req.param("orderId")+"&appId="+req.param("appId")+"\"   [(ngModel)]=\""+appRealHost+"payhereSuccess?orderId="+req.param("orderId")+"&appId="+req.param("appId")+"\">" +
+                        " <input type=\"hidden\" name=\"cancel_url\" value=\""+appRealHost+"payhereCancel?orderId="+req.param("orderId")+"\" [(ngModel)]=\""+appRealHost+"payhereCancel?orderId="+req.param("orderId")+"\">" +
+                        " <input type=\"hidden\" name=\"notify_url\" value=\""+sever+"/mobile/notifyUrl\" [(ngModel)]=\""+sever+"/mobile/notifyUrl\">" +
+                        " <input type=\"hidden\" name=\"order_id\" value=\""+req.param("orderId")+"\" [(ngModel)]=\""+req.param("orderId")+"\">" +
+                        " <input type=\"hidden\" name=\"currency\" value=\""+currency+"\" [(ngModel)]=\""+currency+"\">" +
+                        " <h3 class=\"main-header-font\">Personal Details</h3>" +
                         " <div class=\"form-group\"> " +
                         " <label for=\"firstName\">First Name</label> " +
-                        "<input type=\"text\" name=\"first_name\" class=\"form-control\"  value=\""+req.param("name")+"\"> " +
+                        "<input type=\"text\" name=\"first_name\" class=\"form-control\"  value=\""+req.param("name")+"\"  [(ngModel)]=\""+req.param("name")+"\"> " +
                         " </div> " +
                         "<div class=\"form-group\"> <label for=\"lastName\">Last Name</label>" +
-                        " <input type=\"text\" name=\"last_name\" class=\"form-control\" id=\"lastName\" placeholder=\"Last Name\"  value=\"-\"> " +
+                        " <input type=\"text\" name=\"last_name\" class=\"form-control\" id=\"lastName\" placeholder=\"Last Name\"  value=\"-\"  [(ngModel)]=\"-\"> " +
                         "</div> " +
                         "<div class=\"form-group\"> <label for=\"email\">Email</label>" +
-                        " <input type=\"text\" name=\"email\" class=\"form-control\"  value=\""+req.param("email")+"\"> " +
+                        " <input type=\"text\" name=\"email\" class=\"form-control\"  value=\""+req.param("email")+"\"  [(ngModel)]=\""+req.param("email")+"\"> " +
                         "</div> " +
                         "<div class=\"form-group\"> <label for=\"phone\">Phone</label> " +
-                        "<input  type=\"text\" name=\"phone\" value=\""+req.param("telNumber")+"\" class=\"form-control\" id=\"phone\" placeholder=\"Phone No.\" > " +
+                        "<input  type=\"text\" name=\"phone\" value=\""+req.param("telNumber")+"\" [(ngModel)]=\""+req.param("telNumber")+"\" class=\"form-control\" id=\"phone\" placeholder=\"Phone No.\" > " +
                         "</div>" +
-                        " <h3 style=\"color: #2957de;\">Address</h3>" +
+                        " <h3 class=\"main-header-font\">Address</h3>" +
                         " <div class=\"form-group\"> <label for=\"address\">Address</label> " +
-                        "<input type=\"text\" name=\"address\" value=\""+req.param("address")+"\" class=\"form-control\" id=\"address\" placeholder=\"Address\" > " +
+                        "<input type=\"text\" name=\"address\" value=\""+req.param("address")+"\" [(ngModel)]=\""+req.param("address")+"\" class=\"form-control\" id=\"address\" placeholder=\"Address\" > " +
                         "</div>" +
                         " <div class=\"form-group\"> <label for=\"city\">City</label> " +
-                        "<input type=\"text\" name=\"city\" value=\""+req.param("city")+"\" class=\"form-control\" id=\"city\" placeholder=\"City\" >" +
+                        "<input type=\"text\" name=\"city\" value=\""+req.param("city")+"\" [(ngModel)]=\""+req.param("city")+"\" class=\"form-control\" id=\"city\" placeholder=\"City\" >" +
                         " </div>" +
                         " <div class=\"form-group\"> <label for=\"country\">Country</label>" +
-                        " <input id=\"country\"  type=\"text\" name=\"country\" value=\"Sri Lanka\" class=\"form-control\" placeholder=\"Country\" >" +
+                        " <input id=\"country\"  type=\"text\" name=\"country\" value=\"Sri Lanka\" [(ngModel)]=\"Sri Lanka\" class=\"form-control\" placeholder=\"Country\" >" +
                         " </div>" +
-                        " <hr> <button type=\"submit\" value=\"Submit\" style=\"background: #ffa700; color: #fff; border: 0; margin: 15px 0;\" class=\"btn btn-default btn-block\">Next</button> " +
-                        "</form> </body> </html>";
+                        " <hr>";
         res.set('Content-Type', 'text/html');
         res.send(new Buffer(htmlForm));
     },
@@ -124,22 +119,12 @@ module.exports = {
             var searchQry ={'id': appId}
             Application.find(searchQry, function(err, app){
 
-                var redirectUrl = sails.config.ME_SERVER_URL + app[0].userId + "/progressiveTemplates/" + appId + "/src";
-
-                var htmlForm = "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> " +
-                    "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> " +
-                    "<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags --> <title>Pay Here</title> " +
-                    "</head> <body class=\"container\" style=\"height: 90vh; vertical-align: middle; display: table-cell;width:100vw\"> " +
-                    "<h1 style=\"color:#00a700;text-align:center\">Thank you!</h1>" +
-                    "<p style=\"text-align:center\">Your order is " + order[0].paymentStatus + " </p><br>" +
-                    "<div style=\"text-align:center\"><a href= " + redirectUrl + " >Back to Home</a></div></body></html>";
-
                 mobileCtrl.sendOrderConfirmationEmail(app[0], order[0]);    
 
-                res.set('Content-Type', 'text/html');
-                res.send(new Buffer(htmlForm));
+                // res.set('Content-Type', 'text/html');
+                res.send('ok');
 
-                });
+            });
 
         });
 

@@ -672,3 +672,16 @@
     </div>
   </div>
 </div>
+
+<!-- payhere modal -->
+<div class="modal fade" id="payhereProcessModal" tabindex="-1" role="dialog" aria-labelledby="payhereProcessModalLabel">
+    <div class="modal-dialog  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="text-right padding"><span class="modal-close padding"  data-dismiss="modal" aria-label="Close">X</span></div>
+              <form #payHereSubmitform class="padding main-content-font" method="post" action="https://www.payhere.lk/pay/checkout" >
+                <div [innerHTML] = "payHereUrl | safeHtml"></div>
+                <button type="submit" value="Submit"  class="btn btn-default main-button btn-lg btn-block" (click)="payHereSubmitform.submit()">Next</button>
+              </form>
+        </div>
+    </div>
+</div>

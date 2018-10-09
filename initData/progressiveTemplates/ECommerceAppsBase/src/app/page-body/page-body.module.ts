@@ -19,6 +19,8 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { RegisterComponent } from './register/register.component';
 import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.component';
+import { PayhereCancelComponent } from './payhere-cancel/payhere-cancel.component';
+import { PayhereSuccessComponent } from './payhere-success/payhere-success.component';
 import { AppUserComponent } from './app-user/app-user.component';
 import { SearchPipe } from '../pipes/search.pipe';
 import { BlogsComponent } from './blogs/blogs.component';
@@ -62,7 +64,9 @@ import { SafeUrlPipe } from '../pipes/safeUrl.pipe';
     BlogViewComponent,
     SafeHtmlPipe,
     PasswordResetComponent,
-    SafeUrlPipe
+    SafeUrlPipe,
+    PayhereCancelComponent,
+    PayhereSuccessComponent
   ]
 })
 export class PageBodyModule {}
