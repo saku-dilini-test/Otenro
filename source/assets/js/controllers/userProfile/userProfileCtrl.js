@@ -94,7 +94,7 @@
 
 
         $scope.editUserProfile = function(params){
-           if ($scope.isValidationOk(params.currentPassword, params.password)) {
+           if ($scope.isValidationOk(params.currentPassword, params.password) == true ) {
                if (!params.currentPassword || !params.password) {
                    params.method = 'WITHOUT_PASSWORD';
                } else {
@@ -129,11 +129,20 @@
                        $scope.isPinReqSuccess = true;
                    }
                });
-           } else {
-               toastr.error('You are not allowed to change password without entering current password!', 'Error', {
-                   closeButton: true
-               });
            }
+           else{
+                   if($scope.isValidationOk(params.currentPassword, params.password) == params.currentPassword) {
+                       toastr.error('Please enter a  new password!', 'Error',{
+                            closeButton: true
+                       });
+                   }
+                   else {
+                        toastr.error('You are not allowed to change password without entering current password!', 'Error', {
+                            closeButton: true
+                        });
+                   }
+           }
+
         };
         $scope.saveBillings = function(billingEdit){
             billingEdit.userId = $auth.getPayload().id;
@@ -190,11 +199,14 @@
                         });
                     }
                 });
-            } else {
+            }
+            else{
                 toastr.error('You are not allowed to change password without entering current password!', 'Error', {
                     closeButton: true
                 });
             }
+
+
         };
         /**
          * Check whether user try to update profile details with password without entering currentPassword
@@ -210,7 +222,11 @@
                 } else {
                     return true;
                 }
-            } else {
+            }
+            if (currentPassword) {
+                return currentPassword;
+            }
+            else{
                 return true;
             }
         };
