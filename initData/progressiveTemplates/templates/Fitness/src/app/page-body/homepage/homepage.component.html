@@ -1,0 +1,55 @@
+<div class="page-container padding">
+  <div class="bloc bgc-white l-bloc" id="bloc-2">
+    <div class="container bloc-sm">
+      <div class="row-size row" *ngFor="let category of results"  (click)="navigateShop('shop',category.id,category.name,category.imageUrl)">
+        <div class="col-size col-xs-12">
+            <img src="{{imageUrl}}/{{category.imageUrl}}" width="100%">
+             <div class="main-header-font name">{{category.name}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- My Account Model -->
+<div class="modal fade" id="registerModelhome" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div *ngIf="isSubscribing == false">
+                    <h3 class="padding-bottom">Subscribe</h3>
+                    <div *ngIf = "appPublishDetails">
+                        <div  *ngFor = "let operators of appPublishDetails.operators">
+                            <div *ngIf = "operators.isEnabled">
+                                <div>
+                                    <p> {{operators.operator | titlecase}} Rs.{{operators.amount}}+tax per {{getRenewalIntervalNumberOfDaysByIntervalCode(operators.interval)}} day(s)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>The subscription amount will be charged to your mobile phone account and your subscription will be renewed automatically.</p>
+                    <p>මෙම සේවාව සදහා දායක මුදල ඔබේ ජංගම දුරකතන ගිණුමෙන් අය කරනු ලැබේ. දායක මුදල් ස්වයංක්‍රීයව නැවත අලුත් කෙරෙනු ලැබේ.</p>
+                    <p>இந்த சேவை கட்டணம் உங்கள் தொலைபேசி கணக்கிலிருந்து அறவிடப்படும். உங்களது சேவையானது தானாகவே மீண்டும் மீள் செயட்படுத்தப்படும்.</p>
+                </div>
+                <div *ngIf="isSubscribing == true">
+                    <div class="wrapper">
+                        <div class="loader-box">
+                            <div class="loader">
+
+                            </div>
+                            <div class="loader-text">
+                                Subscribing...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button [disabled]="isSubscribing == true" type="button" class="btn sub-button-sub btn-block" (click)="onSubscribe()"> Subscibe Now</button>
+                <button (click)="onCancel()" type="button" class="btn sub-button-cancel btn-block" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
