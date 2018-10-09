@@ -184,7 +184,7 @@ module.exports = {
         var mailOptions = {
             from: "support@appmaker.lk",
             to: data.email,
-            subject: "Welcome to AppMaker ",
+            subject: "Welcome to Ideadroid",
             html: emailBody,
             attachments: [
                 {
