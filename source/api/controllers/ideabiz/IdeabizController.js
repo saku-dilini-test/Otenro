@@ -31,7 +31,8 @@ module.exports = {
             'displayMessage': '', //Will show to the end user.
             'errorMessage': '', //This is the actual error message to use in our debugging purposes, will not show to the end user.
             'date': new Date().toLocaleString(),
-            'isPaymentSuccess': false
+            'isPaymentSuccess': false,
+            'subscriptionStatus': null //Will tell thet the user SUBSCRIBED/UNSUBSCRIBED/null
         };
 
         Application.findOne({id:appId}).exec(function(err, app){
@@ -62,6 +63,8 @@ module.exports = {
 
                     //Check whether the service is available for the operator for the subscribed msisdn.
                     if(appUser && appUser.msisdn){
+                        response.subscriptionStatus = appUser.subscriptionStatus;
+
                         utilsService.getOperator(appUser.msisdn, function (operatorFor_msisdn,err) {
                             if(err){
                                 sails.log.error('IdeabizController: Error getting the operator for the msisdn: ' + appUser.msisdn + ' Error: ' + err);
@@ -419,5 +422,62 @@ module.exports = {
         var appId = req.param("appId");
         IdeabizChargingAPICallLogService.removeFromChargingMap(appId,msisdn);
         res.ok('Removed from Charging map');
+    },
+
+    /**
+     * This will give you the End User Subascription Status whether SUBSCRIBE/UNSUBSCRIBE/null(If msisdn does not registered yet)
+     * @param req
+     * @param res
+     */
+    getSubscriptionStatus: function(req,res){
+        var msisdn = req.param("msisdn");
+        var uuId = req.param("uuId");
+        var appId = req.param("appId");
+
+        sails.log.debug("IdeabizController: Get Subscription Status for the  appId: " + appId + ' UUID: ' + uuId + ' msisdn:' + msisdn);
+
+        var response = {
+            'subscriptionStatus': null //Will tell thet the user SUBSCRIBED/UNSUBSCRIBED/null
+        };
+
+        Application.findOne({id:appId}).exec(function(err, app){
+            if(err){
+                sails.log.error("IdeabizController: Error while getting the Application for the  appId: " + appId + ' error: ' + err);
+                return res.ok(response);
+            }
+
+            if(app && app.isActive){
+                console.log(uuId);
+                var query = {
+                    'appId': appId
+                };
+
+                if(uuId){
+                    query.deviceUUID = uuId;
+                }else{
+                    query.msisdn = msisdn;
+                }
+
+                AppUser.findOne(query).exec(function(err, appUser){
+                    if(err){
+                        sails.log.error("Error while checking App User Status, error: " + err);
+                        return res.ok(response);
+                    }
+
+                    //Check whether the service is available for the operator for the subscribed msisdn.
+                    if(appUser && appUser.msisdn){
+                        response.subscriptionStatus = appUser.subscriptionStatus;
+                    }else{
+                        sails.log.error('IdeabizController: AppUser or msisdn does not exists for the query:' + JSON.stringify(query));
+                    }
+                    return res.ok(response);
+                });
+            } else{
+                sails.log.error("IdeabizController: Application has been deleted for the appId: " + appId);
+                return res.ok(response);
+            }
+        });
     }
+
+
 };
