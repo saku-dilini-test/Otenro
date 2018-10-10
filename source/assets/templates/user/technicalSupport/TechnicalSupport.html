@@ -297,7 +297,7 @@
                                                 <h6 flex="100">Select Application</h6>
                                                 <select placeholder="Select Report Type"  aria-label="Country Name"
                                                         ng-model="revenueAndTrafficReport.appName" required >
-                                                    <option ng-value="app.id" ng-repeat="app in applicationArrSort(apps) track by $index">{{app.appName}}</option>
+                                                    <option ng-value="app.id" ng-repeat="app in apps ">{{app.appName | titleCase}}</option>
                                                 </select>
 
                                             </div>
@@ -433,7 +433,7 @@
                                             <h6 flex="100">Select Application</h6>
                                             <select placeholder="Select Report Type"  aria-label="Country Name"
                                                     ng-model="applicationBaseReport.appName" required >
-                                                <option ng-value="app.appName" ng-repeat="app in applicationArrSort(apps) track by $index">{{app.appName}}</option>
+                                                <option ng-value="app.appName" ng-repeat="app in apps">{{app.appName | titleCase}}</option>
                                             </select>
 
                                             <h6 flex="100">Select operator</h6>

@@ -122,10 +122,11 @@
                             var param ={userId :$scope.userId};
                             technicalSupportService.getUserApps(param)
                                 .success(function (result) {
+                                    $scope.apps =[];
                                     $scope.appIdsArray = $scope.getAppIdsArray(result);
                                     $scope.appNamesArray = $scope.getAppNamesArray(result);
                                     $scope.apps = result;
-                                    $scope.apps.push({appName:"All"});
+
                                 }).error(function (error) {
                                 toastr.error('Loading Error', 'Warning', {
                                     closeButton: true
@@ -145,9 +146,9 @@
                             .success(function (technicalData) {
                                 $scope.apps = [];
                                 $scope.apps.push({appName:"all"});
-                                var count = 0;
+                                //var count = 0;
                                 technicalData.forEach(function (app) {
-                                    $scope.apps.push(app[count]);
+                                    $scope.apps.push(app[0]);
                                 })
                             }).error(function (error) {
                             toastr.error('Apps Loading Error', 'Warning', {closeButton: true});
@@ -232,6 +233,7 @@
             $scope.applicationArrSort = function(applications){
 
                 var returnArray = [];
+
                 $scope.sortApps = $filter('orderBy')(applications, 'appName');
                 if($scope.sortApps){
                     for(var i = 0;i < $scope.sortApps.length; i++){
@@ -1303,18 +1305,41 @@
                 var fromDate = pramData.fromDate,
                     toDate = pramData.toDate;
 
-                if (toDate >= fromDate) {
+                if (fromDate&&toDate){
 
-                    var mobile = pramData.msisdn;
-                    var pattern = /^\d{11}$/;
-                    if (pattern.test(mobile)) {
+                    if (toDate >= fromDate) {
 
-                        technicalSupportService.getOperator({msisdn:mobile})
-                            .success(function (response) {
-                                    if ($scope.user.userRole=="OPERATOR"){
+                        var mobile = pramData.msisdn;
+                        var pattern = /^\d{11}$/;
+                        if (pattern.test(mobile)) {
+                            if (mobile.startsWith("94")){
+                                technicalSupportService.getOperator({msisdn:mobile})
+                                    .success(function (response) {
+                                        if ($scope.user.userRole=="OPERATOR"){
 
-                                        if (response.operator.toLowerCase()==$scope.user.operator.toLowerCase()){
+                                            if (response.operator.toLowerCase()==$scope.user.operator.toLowerCase()){
 
+                                                var data = {dateFrom: fromDate, dateTo: toDate, msisdn: pramData.msisdn};
+
+                                                technicalSupportService.getPaymentStatusOfUser(data)
+                                                    .success(function (response) {
+                                                        $scope.customerCareReportData = response;
+                                                        if ($scope.customerCareReportData.length<=0){
+                                                            toastr.error('There is no data to show',
+                                                                'Warning', {closeButton: true});
+                                                        }
+
+
+                                                    }).error(function (response) {
+                                                    toastr.error('CustomerCare Report Loading Error', 'Warning', {closeButton: true});
+                                                });
+
+                                            }else {
+
+                                                toastr.error('You are not authorized to access user details of other operators', 'Warning', {closeButton: true});
+                                            }
+
+                                        }else {
                                             var data = {dateFrom: fromDate, dateTo: toDate, msisdn: pramData.msisdn};
 
                                             technicalSupportService.getPaymentStatusOfUser(data)
@@ -1325,42 +1350,27 @@
                                                             'Warning', {closeButton: true});
                                                     }
 
-
                                                 }).error(function (response) {
-                                                toastr.error('CustomerCare Report Loading Error', 'Warning', {closeButton: true});
+                                                toastr.error('Customer Care Report Loading Error', 'Warning', {closeButton: true});
                                             });
-
-                                        }else {
-
-                                            toastr.error('You are not authorized to access user details of other operators', 'Warning', {closeButton: true});
                                         }
+                                    }).error(function (response) {
+                                    toastr.error('CustomerCare Report Loading Error', 'Warning', {closeButton: true});
+                                });
 
-                                    }else {
-                                        var data = {dateFrom: fromDate, dateTo: toDate, msisdn: pramData.msisdn};
+                            }else {
 
-                                        technicalSupportService.getPaymentStatusOfUser(data)
-                                            .success(function (response) {
-                                                $scope.customerCareReportData = response;
-                                                if ($scope.customerCareReportData.length<=0){
-                                                    toastr.error('There is no data to show',
-                                                        'Warning', {closeButton: true});
-                                                }
-
-                                            }).error(function (response) {
-                                            toastr.error('Customer Care Report Loading Error', 'Warning', {closeButton: true});
-                                        });
-
-                                    }
-
-
-                            }).error(function (response) {
-                            toastr.error('CustomerCare Report Loading Error', 'Warning', {closeButton: true});
-                        });
-                    }else {
-                        toastr.error('Please make sure that you entered international dialing code', 'Warning', {closeButton: true});
+                                toastr.error('Please make sure that you entered international dialing code', 'Warning', {closeButton: true});
+                            }
+                        }else {
+                            toastr.error('Invalid mobile number', 'Warning', {closeButton: true});
+                        }
                     }
-                }
-                else {
+                    else {
+                        toastr.error('Invalid date range', 'Warning', {closeButton: true});
+                    }
+
+                }else {
                     toastr.error('Invalid date range', 'Warning', {closeButton: true});
                 }
         }
@@ -1424,7 +1434,7 @@
 
                 reportDataArray.forEach(function(obj){
 
-                    var str = obj.msisdn + "," + obj.appName +"," + obj.dateTime + "," + obj.status +"," + obj.amount +'\r\n';
+                    var str = obj.msisdn + "," + obj.appName +"," + obj.dateTime + "," + obj.status +"," + "Rs: " +obj.amount +'\r\n';
 
                     dataArray.push(str);
                 });
