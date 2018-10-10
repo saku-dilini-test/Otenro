@@ -377,7 +377,7 @@ module.exports.routes = {
     'GET /mobile/allApps': 'mobileViewer/MobileController.allApps',
     'GET /mobile/meServerUrl': 'mobileViewer/MobileController.meServerUrl',
     'GET /mobile/fileServerUrl': 'mobileViewer/MobileController.fileServerUrl',
-    'GET /mobile/getPayHereForm': 'mobileViewer/MobileController.sendPayHereForm',
+    'POST /mobile/getPayHereForm': 'mobileViewer/MobileController.sendPayHereForm',
     'GET /mobile/payHereSuccess': 'mobileViewer/MobileController.payHereSuccess',
     'POST /mobile/notifyUrl': 'mobileViewer/MobileController.notifyUrl',
     'GET /mobile/cancelUrl': 'mobileViewer/MobileController.cancelUrl',

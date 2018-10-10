@@ -50,48 +50,64 @@ module.exports = {
             res.ok();
         });
     },
+    showTwoDecimals: function(num){
+       return parseFloat(Math.round(num * 100) / 100).toFixed(2);
+    },
     sendPayHereForm :function (req,res) {
-
              //var currency = req.param("currency");
              var currency = "LKR";
              var sever = config.server.host;
-             console.log("realHost"+req.param("realHostUrl"));
-             //var  sever = "http://76c8163f.ngrok.io";
-            var appRealHost = decodeURIComponent(req.param("realHostUrl"));
+            var appRealHost = decodeURIComponent(req.body.realHostUrl);
+
+        var items = req.body.item;
+
+        var itemsHtml = '';
+        for (var i=0; i < items.length; i++) {
+            var j= i+1;
+            itemsHtml +=  '<li class="list-group-item"><label>Item_'+j+'</label>' +
+                            '<input readonly class="form-control" type="text" name="item_name_'+j+'"  value="'+items[i].name+'"  [(ngModel)]="'+items[i].name+'" style="width:44%;display:inline;margin:0 5px">' +
+                            '<label>Amount_'+j+' (LKR)</label>' +
+                            '<input readonly class="form-control" style="width:31%;display:inline;margin:0 5px;" type="text" name="amount_'+j+'" value="'+this.showTwoDecimals(items[i].price)+'" [(ngModel)]="'+this.showTwoDecimals(items[i].price)+'"\>'+
+                            '<input readonly class="form-control" style="width:37%;display:inline;margin:0 5px;" type="hidden" name="quantity_'+j+'" value="'+items[i].qty+'" [(ngModel)]="'+items[i].qty+'"\>'+
+                            '<input readonly class="form-control" style="width:37%;display:inline;margin:0 5px;" type="hidden" name="item_number_'+j+'" value="'+items[i].id+'" [(ngModel)]="'+items[i].id+'"\>'+
+                          '</li><br>';
+        }
+
 
          var htmlForm =  " <h3 class=\"main-header-font\">Item Details</h3>" +
-                        " <ul class=\"list-group\" style=\"margin-top: 15px\"> " +
+                        " <ul class=\"list-group\" style=\"margin-top: 15px\"> " + itemsHtml+
                         "<li class=\"list-group-item\">" +
-                        "<input class=\"form-control\" type=\"text\" name=\"items\" value=\""+req.param("item")+"\"  [(ngModel)]=\"items\" style=\"width:48%;display:inline;margin-right:5px\">" +
-                        "<input readonly class=\"form-control\" style=\"width:50%;display:inline;\" type=\"text\" name=\"amount\" value=\""+req.param("amount")+"\" [(ngModel)]=\""+req.param("amount")+"\"></li> " +
+                        "<input class=\"form-control\" type=\"hidden\" name=\"items\" value=\""+"Order with tax"+"\"  [(ngModel)]=\""+items[0].name+"\" style=\"width:44%;display:inline;margin:0 5px\">" +
+                        "<label>Total Amount</label>" +
+                        "<input readonly class=\"form-control\" style=\"width:38%;display:inline;margin:0 5px;\" type=\"text\" name=\"amount\" value=\""+this.showTwoDecimals(req.body.amount)+"\" [(ngModel)]=\""+this.showTwoDecimals(req.body.amount)+"\"></li> " +
                         "</ul> " +
-                        "<input type=\"hidden\" name=\"custom_1\" value=\""+req.param("appId")+"\" [(ngModel)]=\""+req.param("appId")+"\">   " +
-                        "<input type=\"hidden\" name=\"merchant_id\" value=\""+req.param("payHereMerchantId")+"\" [(ngModel)]=\""+req.param("payHereMerchantId")+"\">" +
-                        " <input type=\"hidden\" name=\"return_url\"  value=\""+appRealHost+"payhereSuccess?orderId="+req.param("orderId")+"&appId="+req.param("appId")+"\"   [(ngModel)]=\""+appRealHost+"payhereSuccess?orderId="+req.param("orderId")+"&appId="+req.param("appId")+"\">" +
-                        " <input type=\"hidden\" name=\"cancel_url\" value=\""+appRealHost+"payhereCancel?orderId="+req.param("orderId")+"\" [(ngModel)]=\""+appRealHost+"payhereCancel?orderId="+req.param("orderId")+"\">" +
+                        "<input type=\"hidden\" name=\"custom_1\" value=\""+req.body.appId+"\" [(ngModel)]=\""+req.body.appId+"\">   " +
+                        "<input type=\"hidden\" name=\"merchant_id\" value=\""+req.body.payHereMerchantId+"\" [(ngModel)]=\""+req.body.payHereMerchantId+"\">" +
+                        " <input type=\"hidden\" name=\"return_url\"  value=\""+appRealHost+"payhereSuccess?orderId="+req.body.orderId+"&appId="+req.body.appId+"\"   [(ngModel)]=\""+appRealHost+"payhereSuccess?orderId="+req.body.orderId+"&appId="+req.body.appId+"\">" +
+                        " <input type=\"hidden\" name=\"cancel_url\" value=\""+appRealHost+"payhereCancel?orderId="+req.body.orderId+"\" [(ngModel)]=\""+appRealHost+"payhereCancel?orderId="+req.body.orderId+"\">" +
                         " <input type=\"hidden\" name=\"notify_url\" value=\""+sever+"/mobile/notifyUrl\" [(ngModel)]=\""+sever+"/mobile/notifyUrl\">" +
-                        " <input type=\"hidden\" name=\"order_id\" value=\""+req.param("orderId")+"\" [(ngModel)]=\""+req.param("orderId")+"\">" +
+                        " <input type=\"hidden\" name=\"order_id\" value=\""+req.body.orderId+"\" [(ngModel)]=\""+req.body.orderId+"\">" +
                         " <input type=\"hidden\" name=\"currency\" value=\""+currency+"\" [(ngModel)]=\""+currency+"\">" +
                         " <h3 class=\"main-header-font\">Personal Details</h3>" +
                         " <div class=\"form-group\"> " +
                         " <label for=\"firstName\">First Name</label> " +
-                        "<input type=\"text\" name=\"first_name\" class=\"form-control\"  value=\""+req.param("name")+"\"  [(ngModel)]=\""+req.param("name")+"\"> " +
+                        "<input type=\"text\" name=\"first_name\" class=\"form-control\"  value=\""+req.body.customerName+"\"  [(ngModel)]=\""+req.body.customerName+"\"> " +
                         " </div> " +
                         "<div class=\"form-group\"> <label for=\"lastName\">Last Name</label>" +
                         " <input type=\"text\" name=\"last_name\" class=\"form-control\" id=\"lastName\" placeholder=\"Last Name\"  value=\"-\"  [(ngModel)]=\"-\"> " +
                         "</div> " +
                         "<div class=\"form-group\"> <label for=\"email\">Email</label>" +
-                        " <input type=\"text\" name=\"email\" class=\"form-control\"  value=\""+req.param("email")+"\"  [(ngModel)]=\""+req.param("email")+"\"> " +
+                        " <input type=\"text\" name=\"email\" class=\"form-control\"  value=\""+req.body.email+"\"  [(ngModel)]=\""+req.body.email+"\"> " +
                         "</div> " +
                         "<div class=\"form-group\"> <label for=\"phone\">Phone</label> " +
-                        "<input  type=\"text\" name=\"phone\" value=\""+req.param("telNumber")+"\" [(ngModel)]=\""+req.param("telNumber")+"\" class=\"form-control\" id=\"phone\" placeholder=\"Phone No.\" > " +
+                        "<input  type=\"text\" name=\"phone\" value=\""+req.body.telNumber+"\" [(ngModel)]=\""+req.body.telNumber+"\" class=\"form-control\" id=\"phone\" placeholder=\"Phone No.\" > " +
                         "</div>" +
                         " <h3 class=\"main-header-font\">Address</h3>" +
                         " <div class=\"form-group\"> <label for=\"address\">Address</label> " +
-                        "<input type=\"text\" name=\"address\" value=\""+req.param("address")+"\" [(ngModel)]=\""+req.param("address")+"\" class=\"form-control\" id=\"address\" placeholder=\"Address\" > " +
+                        "<input type=\"text\" name=\"address\" value=\""+req.body.deliveryNo+" "+req.body.deliveryStreet+"\" [(ngModel)]=\""+req.body.deliveryNo+" "+req.body.deliveryStreet+"\" class=\"form-control\" id=\"address\" placeholder=\"Address\" > " +
                         "</div>" +
                         " <div class=\"form-group\"> <label for=\"city\">City</label> " +
-                        "<input type=\"text\" name=\"city\" value=\""+req.param("city")+"\" [(ngModel)]=\""+req.param("city")+"\" class=\"form-control\" id=\"city\" placeholder=\"City\" >" +
+                        "<input type=\"text\" name=\"city\" value=\""+req.body.deliveryCity+"\" [(ngModel)]=\""+req.body.deliveryCity+"\" class=\"form-control\" id=\"city\" placeholder=\"City\" >" +
                         " </div>" +
                         " <div class=\"form-group\"> <label for=\"country\">Country</label>" +
                         " <input id=\"country\"  type=\"text\" name=\"country\" value=\"Sri Lanka\" [(ngModel)]=\"Sri Lanka\" class=\"form-control\" placeholder=\"Country\" >" +
