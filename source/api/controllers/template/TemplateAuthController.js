@@ -31,7 +31,7 @@ module.exports = {
 
                 return res.notFound();
             }
-            if (user.isEmailVerified === true) {
+            if (user.isEmailVerified === true || user.isEmailVerified === false) {
 
                 Passwords.checkPassword({
                     passwordAttempt: req.body.password,
