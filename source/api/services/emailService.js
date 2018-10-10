@@ -724,7 +724,7 @@ module.exports = {
                                 }
                                 console.log('Message sent: %s', info.messageId);
 
-                                return res({msg:'Check your email for get the verification link'})
+                                return res({type:'Success',msg:'Check your email for get the verification link'})
 
                             });
 
@@ -733,7 +733,7 @@ module.exports = {
                 });
             }
             else{
-                return res({msg:'Email does not exist'})
+                return res({type:'Error',msg:'Email does not exist'})
             }
         });
     },
