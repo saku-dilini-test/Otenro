@@ -1397,6 +1397,8 @@ export class CheckoutComponent implements OnInit {
     this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails, { responseType: 'json' })
       .subscribe((orderRes: any) => {
         this.responce = orderRes.name;
+        this.orderDetails['orderId'] = orderRes.id;
+        this.orderDetails['appId'] = orderRes.appId;
 
         if (orderRes.status == 404) {
           this.showSpinner = false;

@@ -78,7 +78,7 @@ module.exports = {
                         " <ul class=\"list-group\" style=\"margin-top: 15px\"> " + itemsHtml+
                         "<li class=\"list-group-item\">" +
                         "<input class=\"form-control\" type=\"hidden\" name=\"items\" value=\""+"Order with tax"+"\"  [(ngModel)]=\""+items[0].name+"\" style=\"width:44%;display:inline;margin:0 5px\">" +
-                        "<label>Total Amount</label>" +
+                        "<label>Total Amount (LKR)</label>" +
                         "<input readonly class=\"form-control\" style=\"width:38%;display:inline;margin:0 5px;\" type=\"text\" name=\"amount\" value=\""+this.showTwoDecimals(req.body.amount)+"\" [(ngModel)]=\""+this.showTwoDecimals(req.body.amount)+"\"></li> " +
                         "</ul> " +
                         "<input type=\"hidden\" name=\"custom_1\" value=\""+req.body.appId+"\" [(ngModel)]=\""+req.body.appId+"\">   " +
@@ -168,19 +168,19 @@ module.exports = {
 
         switch (notification.status_code) {
             case "0":
-                paymentStatus = "pending";
+                paymentStatus = "Pending";
                 break;
             case "-1":
-                paymentStatus = "canceled";
+                paymentStatus = "Canceled";
                 break;
             case "2":
-                paymentStatus = "successful";
+                paymentStatus = "Successful";
                 break;
             case "-2":
-                paymentStatus = "failed";
+                paymentStatus = "Failed";
                 break;
             case "-3":
-                paymentStatus = "chargedback";
+                paymentStatus = "Chargedback";
                 break;
         }
 
@@ -224,10 +224,16 @@ module.exports = {
 
                 order.fromEmail = userEmail.fromEmail;
                 order.userId = app.userId;
+                // console.log("-----------------------------------------------------")
+                // console.log(order)
                 emailService.sendOrderEmail(order, function (err, msg) {
 
                     if (err) {
-                        sails.log.error('Error occurred in finding User email Settings : TemplateOrderController.saveOrder , error : ' + err);
+                        if(err == 'error processing order, no email sent'){
+                            sails.log.error('Error processing order, no email sent');
+                        }else{
+                            sails.log.error('Error occurred in finding User email Settings : TemplateOrderController.saveOrder , error : ' + err);
+                        }
                     }
                 });
             }
@@ -236,7 +242,7 @@ module.exports = {
 
     updateInventory: function (status, applicationOrder) {
 
-        if (status === "canceled" || status === "failed") {
+        if (status === "Canceled" || status === "Failed") {
 
             applicationOrder.item.forEach(function (item) {
 

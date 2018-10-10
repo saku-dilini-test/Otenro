@@ -108,6 +108,7 @@ export class CheckoutComponent implements OnInit {
   ePayFail = false;
   ePayNull = false;
   payHereUrl;
+
   constructor(
     fb: FormBuilder,
     private ordersService: OrdersService,
@@ -1312,7 +1313,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   payHere(note) {
-
+    let realHostUrl = encodeURIComponent(window.location.protocol+"//"+window.location.host+"/#/");
     if (note) {
       note = note.trim();
     }
@@ -1326,10 +1327,10 @@ export class CheckoutComponent implements OnInit {
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.user.name,
-          'deliverName': this.fname + " " + this.lname,
-          'deliveryNo': this.streetNumber,
-          'deliveryStreet': this.streetName,
-          'deliveryCity': this.city,
+          'deliverName': this.fname + ' ' + this.lname,
+          'deliveryNo': this.streetNumber ? this.streetNumber : '',
+          'deliveryStreet': this.streetName ? this.streetName : '',
+          'deliveryCity': this.city ? this.city : '',
           'deliveryCountry': this.country,
           'deliveryZip': this.zip,
           'telNumber': this.phone,
@@ -1341,21 +1342,23 @@ export class CheckoutComponent implements OnInit {
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
           'note': note,
-          'paymentType': 'PayHere'
+          'paymentType': 'PayHere',
+          'realHostUrl': realHostUrl,
+          'payHereMerchantId': this.payHereMID
         };
 
       } else {
         this.orderDetails = {
 
           'appId': this.appId,
-          'registeredUser': "Unknown User",
+          'registeredUser': 'Unknown User',
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.fname,
-          'deliverName': this.fname + " " + this.lname,
-          'deliveryNo': this.streetNumber,
-          'deliveryStreet': this.streetName,
-          'deliveryCity': this.city,
+          'deliverName': this.fname + ' ' + this.lname,
+          'deliveryNo': this.streetNumber ? this.streetNumber : '',
+          'deliveryStreet': this.streetName ? this.streetName : '',
+          'deliveryCity': this.city ? this.city : '',
           'deliveryCountry': this.country,
           'deliveryZip': this.zip,
           'telNumber': this.phone,
@@ -1367,51 +1370,65 @@ export class CheckoutComponent implements OnInit {
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
           'note': note,
-          'paymentType': 'PayHere'
+          'paymentType': 'PayHere',
+          'realHostUrl': realHostUrl,
+          'payHereMerchantId': this.payHereMID
         };
       }
     }
     else {
       if (this.user) {
         this.orderDetails = {
-          "appId": this.appId,
-          "registeredUser": this.user.registeredUser,
-          "item": this.payInfo.cart,
-          "amount": this.payInfo.amount,
-          "customerName": this.payInfo.item.deliverDetails.name,
-          "telNumber": this.payInfo.item.deliverDetails.number,
-          "tax": this.payInfo.taxTotal,
-          "pickupId": this.payInfo.item.pickupId,
-          "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.userEmail,
-          "currency": this.dataService.paypalCurrency,
-          "promotionCode": this.payInfo.promotionCode,
+          'appId': this.appId,
+          'registeredUser': this.user.registeredUser,
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.payInfo.item.deliverDetails.name,
+          'deliveryNo':  '',
+          'deliveryStreet': '',
+          'deliveryCity': '',
+          'telNumber': this.payInfo.item.deliverDetails.number,
+          'tax': this.payInfo.taxTotal,
+          'pickupId': this.payInfo.item.pickupId,
+          'pickupCost': this.chkPickupCost,
+          'email': this.payInfo.userEmail,
+          'currency': this.dataService.paypalCurrency,
+          'promotionCode': this.payInfo.promotionCode,
           'note': note,
-          'paymentType': 'PayHere'
-        }
+          'paymentType': 'PayHere',
+          'realHostUrl': realHostUrl,
+          'payHereMerchantId': this.payHereMID
+        };
       } else {
         this.orderDetails = {
-          "appId": this.appId,
-          "registeredUser": 'Unknown User',
-          "item": this.payInfo.cart,
-          "amount": this.payInfo.amount,
-          "customerName": this.payInfo.item.deliverDetails.name,
-          "telNumber": this.payInfo.item.deliverDetails.number,
-          "tax": this.payInfo.taxTotal,
-          "pickupId": this.payInfo.item.pickupId,
-          "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.item.deliverDetails.email,
-          "currency": this.dataService.paypalCurrency,
-          "promotionCode": this.payInfo.promotionCode,
+          'appId': this.appId,
+          'registeredUser': 'Unknown User',
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.payInfo.item.deliverDetails.name,
+          'deliveryNo':  '',
+          'deliveryStreet': '',
+          'deliveryCity': '',
+          'telNumber': this.payInfo.item.deliverDetails.number,
+          'tax': this.payInfo.taxTotal,
+          'pickupId': this.payInfo.item.pickupId,
+          'pickupCost': this.chkPickupCost,
+          'email': this.payInfo.item.deliverDetails.email,
+          'currency': this.dataService.paypalCurrency,
+          'promotionCode': this.payInfo.promotionCode,
           'note': note,
-          'paymentType': 'PayHere'
-        }
+          'paymentType': 'PayHere',
+          'realHostUrl': realHostUrl,
+          'payHereMerchantId': this.payHereMID
+        };
       }
     }
 
     this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails, { responseType: 'json' })
       .subscribe((orderRes: any) => {
         this.responce = orderRes.name;
+        this.orderDetails['orderId'] = orderRes.id;
+        this.orderDetails['appId'] = orderRes.appId;
 
         if (orderRes.status == 404) {
           this.showSpinner = false;
@@ -1436,25 +1453,8 @@ export class CheckoutComponent implements OnInit {
                   this.localStorageService.remove("cartUnknownUser");
                 }
 
-                let city = this.orderDetails.deliveryCity ? this.orderDetails.deliveryCity : "";
-                let streetNo = this.orderDetails.deliveryNo ? this.orderDetails.deliveryNo : "";
-                let streetName = this.orderDetails.deliveryStreet ? this.orderDetails.deliveryStreet : "";
-
-
-                let realHostUrl = encodeURIComponent(window.location.protocol+"//"+window.location.host+"/#/");
-
-                this.http.get(
-                  SERVER_URL + '/mobile/getPayHereForm/?name=' +
-                  this.orderDetails.customerName + "&amount=" +
-                  this.orderDetails.amount + "&currency=" +
-                  this.currency.symbol + "&email=" +
-                  this.orderDetails.email + "&telNumber=" +
-                  this.orderDetails.telNumber + "&item=" +
-                  this.orderDetails.item[0].name + "&address=" +
-                  streetNo + " " + streetName + "&city=" +
-                  city + "&appId=" + orderRes.appId +
-                  "&orderId=" + orderRes.id + "&payHereMerchantId=" + this.payHereMID +
-                  "&realHostUrl=" + realHostUrl, {responseType: 'text'})
+                this.http.post(
+                  SERVER_URL + '/mobile/getPayHereForm/', this.orderDetails, {responseType: 'text'})
                 .subscribe((res) => {
                   this.payHereUrl = res;
                   $('#payhereProcessModal').modal({backdrop: 'static', keyboard: false});
