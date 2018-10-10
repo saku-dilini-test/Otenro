@@ -712,12 +712,12 @@ module.exports = {
     },
 
     getDefaultTerms : function(req,res){
-
-        fs.readFile(path + '/assets/templates/user/edit/commerce/defaultTerms/defaultTerms.html', 'utf8', (err, data) => {
-          if (err) throw err;
-                  res.send(data);
-        });
-
+        //
+        // fs.readFile(path + '/assets/templates/user/edit/commerce/defaultTerms/defaultTerms.html', 'utf8', (err, data) => {
+        //   if (err) throw err;
+        //           res.send(data);
+        // });
+       res.send(null);
     }
 
 
