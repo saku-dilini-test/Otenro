@@ -3,8 +3,8 @@ import { TitleService } from '../../services/title.service';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import * as data from '../../../assets/madeEasy.json';
-import { SERVER_URL } from '../../../assets/constantsService';
+import * as data from '../../madeEasy.json';
+import { SERVER_URL } from '../../constantsService';
 import { debounceTime } from 'rxjs/operator/debounceTime';
 import { Subject } from 'rxjs/Subject';
 

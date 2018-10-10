@@ -106,7 +106,6 @@ export class CheckoutComponent implements OnInit {
   ePay = false;
   ePayFail = false;
   ePayNull = false;
-  responce;
   payHereUrl;
 
   constructor(

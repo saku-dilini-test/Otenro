@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SERVER_URL } from '../../../assets/constantsService';
-import * as data from '../../../assets/madeEasy.json';
+import { SERVER_URL } from '../../constantsService';
+import * as data from '../../madeEasy.json';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { TitleService } from '../../services/title.service';
@@ -21,7 +21,7 @@ export class PayhereSuccessComponent implements OnInit {
     this.title.changeTitle("Success");
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.route.queryParams.subscribe(params => {
        var orderId= params['orderId'];
        var appId= params['appId'];
@@ -35,10 +35,10 @@ export class PayhereSuccessComponent implements OnInit {
        });
 
     });
-     
+
   }
 
-  
+
 
   backToHome() {
     this.router.navigate(['']);

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SERVER_URL } from '../../../assets/constantsService';
-import * as data from '../../../assets/madeEasy.json';
+import { SERVER_URL } from '../../constantsService';
+import * as data from '../../madeEasy.json';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { TitleService } from '../../services/title.service';
@@ -22,12 +22,12 @@ export class PayhereCancelComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+
   }
 
   backToHome() {
     this.route.navigate(['']);
   }
 
- 
+
 }
