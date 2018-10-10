@@ -828,7 +828,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   payHere(note) {
-
+    let realHostUrl = encodeURIComponent(window.location.protocol+"//"+window.location.host+"/#/");
     if (note) {
       note = note.trim();
     }
@@ -857,7 +857,9 @@ export class CheckoutComponent implements OnInit {
         'puckupId': null,
         'promotionCode': this.payInfo.promotionCode,
         'note': note,
-        'paymentType': 'PayHere'
+        'paymentType': 'PayHere',
+        'realHostUrl': realHostUrl,
+        'payHereMerchantId': this.payHereMID
         };
 
     }
@@ -889,25 +891,8 @@ export class CheckoutComponent implements OnInit {
                   this.localStorageService.remove("cartUnknownUser");
                 }
 
-                let city = this.orderDetails.deliveryCity ? this.orderDetails.deliveryCity : "";
-                let streetNo = this.orderDetails.deliveryNo ? this.orderDetails.deliveryNo : "";
-                let streetName = this.orderDetails.deliveryStreet ? this.orderDetails.deliveryStreet : "";
-
-
-                let realHostUrl = encodeURIComponent(window.location.protocol+"//"+window.location.host+"/#/");
-
-                this.http.get(
-                  SERVER_URL + '/mobile/getPayHereForm/?name=' +
-                  this.orderDetails.customerName + "&amount=" +
-                  this.orderDetails.amount + "&currency=" +
-                  this.currency.symbol + "&email=" +
-                  this.orderDetails.email + "&telNumber=" +
-                  this.orderDetails.telNumber + "&item=" +
-                  this.orderDetails.item[0].name + "&address=" +
-                  streetNo + " " + streetName + "&city=" +
-                  city + "&appId=" + orderRes.appId +
-                  "&orderId=" + orderRes.id + "&payHereMerchantId=" + this.payHereMID +
-                  "&realHostUrl=" + realHostUrl, {responseType: 'text'})
+                this.http.post(
+                  SERVER_URL + '/mobile/getPayHereForm/', this.orderDetails, {responseType: 'text'})
                 .subscribe((res) => {
                   this.payHereUrl = res;
                   $('#payhereProcessModal').modal({backdrop: 'static', keyboard: false});
