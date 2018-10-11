@@ -63,7 +63,9 @@ module.exports = {
 
                     //Check whether the service is available for the operator for the subscribed msisdn.
                     if(appUser && appUser.msisdn){
-                        response.subscriptionStatus = appUser.subscriptionStatus;
+                        if(appUser.subscriptionStatus) {
+                            response.subscriptionStatus = appUser.subscriptionStatus;
+                        }
 
                         utilsService.getOperator(appUser.msisdn, function (operatorFor_msisdn,err) {
                             if(err){
@@ -146,7 +148,7 @@ module.exports = {
                                                     }
                                                 });
                                             }else{
-                                                sails.log.debug('IdeabizController: Unsubscribed from the service msisdn: ' + appUser.msisdn);
+                                                sails.log.debug('IdeabizController: Unsubscribed from the service msisdn:' + appUser.msisdn);
                                                 thisCtrl.sendUnsubscribedResponse(res,response,appUser.msisdn,appId);
                                             }
                                         }else{
@@ -169,6 +171,7 @@ module.exports = {
                     }else{
                         sails.log.error('IdeabizController: AppUser or msisdn does not exists for the query:' + JSON.stringify(query));
                         response.isError = false;
+                        response.subscriptionStatus = config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code;
                         return res.ok(response);
                     }
                 });
@@ -475,7 +478,7 @@ module.exports = {
                     }
 
                     //Check whether the service is available for the operator for the subscribed msisdn.
-                    if(appUser && appUser.msisdn){
+                    if(appUser && appUser.msisdn && appUser.subscriptionStatus){
                         response.subscriptionStatus = appUser.subscriptionStatus;
                     }else{
                         sails.log.error('IdeabizController: AppUser or msisdn does not exists for the query:' + JSON.stringify(query));

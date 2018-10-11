@@ -112,15 +112,15 @@ export class HomepageComponent implements OnInit {
       var uuid = localStorage.getItem("UUID");
       let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn"),uuId: uuid }
       this.subscription.getSubscribedData(data).subscribe(data => {
+        this.subscriptionStatus = data.subscriptionStatus;
+        this.dataService.subscriptionStatus = data.subscriptionStatus;
+
         if(data.isError){
           this.dataService.displayMessage = data.displayMessage;
           $(() => {
             $('#appStatusModel').modal('show');
           });
-        } else {
-          this.subscriptionStatus = data.subscriptionStatus;
-          if (this.subscriptionStatus === this.dataService.STATUS_SUBSCRIBED) {
-
+        } else if (this.subscriptionStatus === this.dataService.STATUS_SUBSCRIBED) {
               if (data.isPaymentSuccess){
                 this.dataService.displayMessage = "Successfully renewed your service";
                 $(() => {
@@ -132,13 +132,12 @@ export class HomepageComponent implements OnInit {
 
             this.dataService.catId = id;
             this.router.navigate(['/' + val, id, name,image]);
-          } else {
-            this.dataService.subUserArticleData.id = id;
-            this.dataService.subUserArticleData.name = name;
-            this.dataService.subUserArticleData.image = image;
-            this.isSubscribing = false;
-            $('#registerModelhome').modal('show')
-          }
+        } else {
+          this.dataService.subUserArticleData.id = id;
+          this.dataService.subUserArticleData.name = name;
+          this.dataService.subUserArticleData.image = image;
+          this.isSubscribing = false;
+          $('#registerModelhome').modal('show');
         }
       });
 
