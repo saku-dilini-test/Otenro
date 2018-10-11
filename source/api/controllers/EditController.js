@@ -98,7 +98,7 @@ module.exports = {
                                     "<br><br>This email is to notify that the app creator with the user name " +
                                     userData[0].firstName + " " + userData[0].lastName + " has deleted the app " + app[0].appName + " with the App ID" + app[0].id + "." +
                                     "<br><br>"+
-                                    "Regards,<br>Appmaker Team</html>";
+                                    "Regards,<br>Ideadroid Team</html>";
 
                                      mailOptions = {
                                         from: app[0].email, // sender address

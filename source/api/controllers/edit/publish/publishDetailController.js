@@ -324,7 +324,7 @@ module.exports = {
                                             "<br>SMS Notify URL: https://developer.appmaker.lk/sms/report" +
                                             "<br><br>Regards," +
 
-                                            "<br><br>Appmaker Support" +
+                                            "<br><br>Ideadroid Support" +
 
                                             "<br><br>Email : support@appmaker.lk" +
 
@@ -566,7 +566,6 @@ module.exports = {
     },
 
     getApkPath : function(req,res){
-
         var path = require('path');
         var mime = require('mime');
 
