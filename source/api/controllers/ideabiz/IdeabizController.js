@@ -5,7 +5,7 @@ var SIMPLE_DATE_FORMAT = 'yyyy-mm-dd';
 var IdeabizAdminapiController = require('../../controllers/ideabiz/IdeabizAdminapiController');
 var chargingAPICallLogService = require('../../services/IdeabizChargingAPICallLogService');
 var moment = require('moment');
-
+var STATUS_CODE_SERVER_ERROR = '500';
 var DATE_FORMAT = "YYYY-MM-DD";
 
 /**
@@ -234,8 +234,13 @@ module.exports = {
                         IdeabizAdminapiController.chargeUserAPiCall(msisdn, appId, function (paymentData, err) {
                             chargingAPICallLogService.removeFromChargingMap(appId,msisdn);
                             if (err) {
-                                sails.log.debug("IdeabizController: (No Payment record) Charging failed since no sufficient balance in the acc, just after complete the Charging call, for msisdn: %s appID: %s ", msisdn, appId);
-                                response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                                if(err === STATUS_CODE_SERVER_ERROR){
+                                    sails.log.debug("IdeabizController: (No Payment record) Charging failed since there was a response which doesn't seems to be ok for msisdn: %s appID: %s ", msisdn, appId);
+                                    response.displayMessage = config.END_USER_MESSAGES.SERVER_ERROR;
+                                }else {
+                                    sails.log.debug("IdeabizController: (No Payment record) Charging failed since no sufficient balance in the acc, just after complete the Charging call, for msisdn: %s appID: %s ", msisdn, appId);
+                                    response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                                }
                                 return res.ok(response);
                             } else if (paymentData.payment == "ok") {
                                 sails.log.debug("IdeabizController: (No Payment record) Charging successfully Renewed just after complete the Charging call, for msisdn: %s appID: %s ", msisdn, appId);
@@ -311,8 +316,13 @@ module.exports = {
                         IdeabizAdminapiController.chargeUserAPiCall(msisdn, appId, function (paymentData, err) {
                             chargingAPICallLogService.removeFromChargingMap(appId,msisdn);
                             if (err) {
-                                sails.log.debug("IdeabizController: (No Payment record) Charging failed since no sufficient balance in the acc, just after complete the Charging call, for msisdn: %s appID: %s ", msisdn, appId);
-                                response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                                if(err === STATUS_CODE_SERVER_ERROR){
+                                    sails.log.debug("IdeabizController: (No Payment record) Charging failed since there was a response which doesn't seems to be ok for msisdn: %s appID: %s ", msisdn, appId);
+                                    response.displayMessage = config.END_USER_MESSAGES.SERVER_ERROR;
+                                }else {
+                                    sails.log.debug("IdeabizController: (No Payment record) Charging failed since no sufficient balance in the acc, just after complete the Charging call, for msisdn: %s appID: %s ", msisdn, appId);
+                                    response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                                }
                                 return res.ok(response);
                             } else if (paymentData.payment == "ok") {
                                 sails.log.debug("IdeabizController: (No Payment record) Charging successfully Renewed just after complete the Charging call, for msisdn: %s appID: %s ", msisdn, appId);
