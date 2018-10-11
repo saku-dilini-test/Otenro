@@ -15,7 +15,7 @@ import { debounceTime } from 'rxjs/operator/debounceTime';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit{
   // data = {};
   passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
   public appId = (<any>data).appId;
@@ -124,7 +124,7 @@ export class RegisterComponent implements OnInit {
         appId: this.appId,
         url: this.domainUrl
       };
-      console.log(data);
+
       this.http.post(SERVER_URL + "/templatesAuth/register", data)
         .subscribe((res) => {
           console.log(res);
@@ -134,10 +134,56 @@ export class RegisterComponent implements OnInit {
             debounceTime.call(this._success, 4000)
               .subscribe(() => this.successMessage = null);
             this._success.next('Verify your email address to complete registration.');
-            setTimeout(() => {
 
-              this.route.navigate(['home']);
-            }, 3100);
+
+            this.http.post(SERVER_URL + '/templatesAuth/authenticateForApp', data)
+            .subscribe((res) => {
+                if (res.message === 'email not verified') {
+                  console.log(res);
+                } else {
+                  let requestParams = {
+                    'token': res.token,
+                    'email': data.email,
+                    'name': res.user.name,
+                    'lname': res.user.lname,
+                    'phone': res.user.phone,
+                    'streetNumber': res.user.streetNumber,
+                    'streetName': res.user.streetName,
+                    'country': res.user.country,
+                    'city': res.user.city,
+                    'zip': res.user.zip,
+                    'type': 'internal',
+                    'appId': res.user.appId,
+                    'registeredUser': res.user.sub
+                  };
+                  this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
+
+                  if (this.localStorageService.get('cartUnknownUser')) {
+                    this.localStorageService.set('cart' + requestParams.registeredUser, this.localStorageService.get('cartUnknownUser'));
+                    this.localStorageService.remove('cartUnknownUser');
+                  }
+                  this.dataService.appUserId = requestParams.registeredUser;
+                  this.dataService.isUserLoggedIn.check = true;
+                  this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
+
+                  if (this.navigate == 'home') {
+                    this.route.navigate(['home']);
+                  } else if (this.navigate == 'cart') {
+                    this.route.navigate(['cart']);
+                  } else if (this.navigate == 'delivery') {
+                    this.route.navigate(['checkout', 'delivery']);
+                  } else {
+                    this.route.navigate(['checkout', 'pickup']);
+                  }
+                }
+              },
+              (err) => {
+                console.log(err);
+              });
+
+            // setTimeout(() => {
+            //   this.route.navigate(['home']);
+            // }, 3100);
           }
 
         }, err => {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PagebodyServiceModule } from '../../page-body/page-body.service'
+import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { TitleService } from '../../services/title.service';
@@ -28,10 +28,10 @@ export class LoginComponent implements OnInit {
 
   private static EMAIL_PATTERN = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  name; pass;domainUrl; gate: boolean; navigate;
+  name; pass; domainUrl; gate: boolean; navigate;
   ifInvalidUserPassword: boolean;
-  constructor(private localStorageService: LocalStorageService, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private http: HttpClient,
-    private title: TitleService) {
+  constructor(private localStorageService: LocalStorageService, private dataService: PagebodyServiceModule,
+              private router: ActivatedRoute, private route: Router, private http: HttpClient, private title: TitleService) {
     this.title.changeTitle("Login");
     this.ifInvalidUserPassword = false;
   }
@@ -52,46 +52,45 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  login = function (myForm) {
+  login = function(myForm) {
 
     this.loginclicked = true;
     this.name = myForm.userEmail
-    this.password = myForm.password;
 
-    var data = {
+    let data = {
       email: this.name,
-      password: this.password,
+      password:  myForm.password,
       appId: this.appId
     };
 
     let requestParams;
     let keepThis = this;
     this.ifInvalidUserPassword = false;
-    this.http.post(SERVER_URL + "/templatesAuth/authenticateForApp", data)
+    this.http.post(SERVER_URL + '/templatesAuth/authenticateForApp', data)
       .subscribe((res) => {
         if (res.message === 'email not verified'){
           console.log(res);
         } else {
           requestParams = {
-            "token": res.token,
-            "email": data.email,
-            "name": res.user.name,
-            "lname": res.user.lname,
-            "phone": res.user.phone,
-            "streetNumber": res.user.streetNumber,
-            "streetName": res.user.streetName,
-            "country": res.user.country,
-            "city": res.user.city,
-            "zip": res.user.zip,
-            "type": 'internal',
-            "appId": res.user.appId,
-            "registeredUser": res.user.sub
+            'token': res.token,
+            'email': data.email,
+            'name': res.user.name,
+            'lname': res.user.lname,
+            'phone': res.user.phone,
+            'streetNumber': res.user.streetNumber,
+            'streetName': res.user.streetName,
+            'country': res.user.country,
+            'city': res.user.city,
+            'zip': res.user.zip,
+            'type': 'internal',
+            'appId': res.user.appId,
+            'registeredUser': res.user.sub
           };
           this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
 
-          if (this.localStorageService.get("cartUnknownUser")) {
-            this.localStorageService.set("cart" + requestParams.registeredUser, this.localStorageService.get("cartUnknownUser"));
-            this.localStorageService.remove("cartUnknownUser");
+          if (this.localStorageService.get('cartUnknownUser')) {
+            this.localStorageService.set('cart' + requestParams.registeredUser, this.localStorageService.get('cartUnknownUser'));
+            this.localStorageService.remove('cartUnknownUser');
           }
           this.dataService.appUserId = requestParams.registeredUser;
           this.dataService.isUserLoggedIn.check = true;
@@ -108,10 +107,10 @@ export class LoginComponent implements OnInit {
           }
         }
       },
-      function (err) {
+      (err) => {
         keepThis.ifInvalidUserPassword = true;
         console.log(err);
-      })
+      });
 
   }
 
