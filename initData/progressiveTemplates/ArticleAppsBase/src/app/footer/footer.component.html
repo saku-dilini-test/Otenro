@@ -11,7 +11,7 @@
     <a type="button" class="main-footer-header" aria-label="Contact" (click)="navigate('contact')">
       <i class="fa fa-phone fa-lg"></i>
     </a>
-    <a *ngIf="subscriptionStatus" type="button" class="main-footer-header" aria-label="My Account"  data-toggle="modal" (click) = "openFooterMyAccount()">
+    <a *ngIf="subscriptionStatus === 'SUBSCRIBED'" type="button" class="main-footer-header" aria-label="My Account"  data-toggle="modal" (click) = "openFooterMyAccount()">
       <i class="fa fa-user fa-lg"></i>
     </a>
   </div>

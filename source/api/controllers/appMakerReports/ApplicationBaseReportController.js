@@ -306,7 +306,7 @@ module.exports = {
             }
         }
 
-        if (appName == "All"){
+        if (appName == "all"&&reqData.appNamesArray.length > 0){
             query.appName = { '$in': reqData.appNamesArray};
         }
 
@@ -334,17 +334,20 @@ module.exports = {
         var appName = reqData.appName;
         var operator = reqData.operator.toLowerCase();
 
+
+
+
         var query = "";
 
-        if (appName == "All" && operator == "all") {
+        if (appName == "all" && operator == "all") {
 
             query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}}
 
-        } else if (appName == "All" && operator !== "all") {
+        } else if (appName == "all" && operator !== "all") {
 
             query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}, operator: operator}
 
-        } else if (appName !== "All" && operator == "all") {
+        } else if (appName !== "all" && operator == "all") {
 
             query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}, appName: appName}
 
@@ -353,10 +356,10 @@ module.exports = {
             query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}, appName: appName, operator: operator}
         }
 
-        if (appName == "All"){
-            query.appName = { '$in': reqData.appNamesArray};
-        }
+        if (appName == "all"&&reqData.appNamesArray.length > 0){
+            query.appName = {'$in': reqData.appNamesArray};
 
+        }
         ApplicationBaseMonthlySummary.find(query,
             {
                 groupBy: ['appName', 'operator', 'year', 'month', 'type', 'caaTaxable'],
@@ -401,7 +404,7 @@ module.exports = {
             query = {year: {'>=': yearFrom, '<=': yearTo}, appName: appName, operator: operator}
         }
 
-        if (appName == "All"){
+        if (appName == "all"&&reqData.appNamesArray.length > 0){
             query.appName = { '$in': reqData.appNamesArray};
         }
 

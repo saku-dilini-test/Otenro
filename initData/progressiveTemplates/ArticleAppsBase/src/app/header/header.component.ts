@@ -13,6 +13,7 @@ import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
 import { SERVER_URL } from '../../assets/constantsService';
+import {MessageService} from "../services/message.service";
 declare let $:any;
 var headerCmp;
 
@@ -47,6 +48,7 @@ export class HeaderComponent implements OnInit {
     private sms: SMSService,
     private device: CordovaPluginDeviceService,
     private appDataService: AppDataService,
+    private messageService: MessageService,
     private spinner: Ng4LoadingSpinnerService) {
     this.cartNo = this.dataService.cart.cartItems.length;
     this.title = 'Your Horoscope';
@@ -83,13 +85,14 @@ export class HeaderComponent implements OnInit {
     this.isSubscribing = false;
     this.isUnsubscribing = false;
 
-    var msisdn = localStorage.getItem(this.appId + "msisdn");
-    let data = { appId: this.appId, msisdn: msisdn }
-    this.subscription.getSubscribedData(data).subscribe(data => {
-      this.subscriptionStatus = data.isSubscribed;
-      this.dataService.subscriptionStatus = data.isSubscribed;
+    const msisdn = localStorage.getItem(this.appId + "msisdn");
+    const uuid = localStorage.getItem("UUID");
+    const data = { appId: this.appId, msisdn: msisdn, uuId: uuid }
+    console.log("HeaderComp.oninit.getSubscribedData data: ", data);
+    this.subscription.getSubscribedData(data).subscribe(results => {
+      this.subscriptionStatus = results.subscriptionStatus;
+      this.dataService.subscriptionStatus = results.subscriptionStatus;
     });
-
 
     this.appDataService.getPublishDetails().subscribe(data => {
       this.appPublishDetails = data;
@@ -112,6 +115,16 @@ export class HeaderComponent implements OnInit {
     $(".navbar-2").on('hide.bs.collapse', function () {
       $('.mobileTitle').addClass('visible-xs');
       $('.mobileTitle').removeClass('hidden');
+    });
+
+    this.messageService.getMessage().subscribe(data => {
+      console.log('messageService.getMessage in Header Component =>', data);
+      if (data.subscription) {
+        this.dataService.subscriptionStatus = data.subscription.subscriptionStatus;
+      } else {
+        this.dataService.subscriptionStatus = null;
+      }
+      this.subscriptionStatus = this.dataService.subscriptionStatus;
     });
   }
 
@@ -162,37 +175,15 @@ export class HeaderComponent implements OnInit {
   }
 
   openRegisterModel() {
-    var uuid = localStorage.getItem("UUID");
-    let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn"),uuId: uuid }
-    this.subscription.getSubscribedData(data).subscribe(data => {
-      if(data.isError){
-        this.dataService.displayMessage = data.displayMessage;
-        $(() => {
-          $('#appStatusModel').modal('show');
-        });
-      } else {
-        $(() => {
-          $('#registerModel').modal('show');
-        });
-      }
-    });
+      $(() => {
+        $('#registerModel').modal('show');
+      });
   }
 
   openMyAccountModel(){
-    var uuid = localStorage.getItem("UUID");
-    let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn"),uuId: uuid }
-    this.subscription.getSubscribedData(data).subscribe(data => {
-      if(data.isError){
-        this.dataService.displayMessage = data.displayMessage;
-        $(() => {
-          $('#appStatusModel').modal('show');
-        });
-      } else {
-        $(() => {
-          $('#myAccountModel').modal('show');
-        });
-      }
-    });
+      $(() => {
+        $('#myAccountModel').modal('show');
+      });
   }
 
   onSubscribe() {
@@ -218,8 +209,8 @@ export class HeaderComponent implements OnInit {
           this.dataService.numberOfTries++;
 
           this.subscription.getSubscribedData(data).subscribe(data => {
-            this.subscriptionStatus = data.isSubscribed;
-            this.dataService.subscriptionStatus = data.isSubscribed;
+            this.subscriptionStatus = data.subscriptionStatus;
+            this.dataService.subscriptionStatus = data.subscriptionStatus;
 
             if(data.isError){
               this.alive = false;
@@ -231,7 +222,7 @@ export class HeaderComponent implements OnInit {
               document.getElementById("mySidenav").style.width = "0";
               document.getElementById("header").style.height = "initial";
 
-            }else if (this.subscriptionStatus) {
+            }else if (this.subscriptionStatus === this.dataService.STATUS_SUBSCRIBED) {
               this.isSubscribing = false;
               localStorage.setItem(this.appId + "msisdn", data.msisdn)
               this.alive = false;
@@ -274,10 +265,10 @@ export class HeaderComponent implements OnInit {
           this.dataService.numberOfTries++;
 
           this.subscription.getSubscribedData(data).subscribe(data => {
-            this.subscriptionStatus = data.isSubscribed;
-            this.dataService.subscriptionStatus = data.isSubscribed;
+            this.subscriptionStatus = data.subscriptionStatus;
+            this.dataService.subscriptionStatus = data.subscriptionStatus;
 
-            if (!this.subscriptionStatus) {
+            if (this.subscriptionStatus === this.dataService.STATUS_UNSUBSCRIBED) {
               this.isUnsubscribing = false;
               localStorage.removeItem(this.appId + "msisdn")
               this.alive = false;
