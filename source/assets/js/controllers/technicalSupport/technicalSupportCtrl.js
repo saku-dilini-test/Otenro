@@ -821,7 +821,7 @@
               //get subscription payment details
                 getSubscriptionPayments();
               // If user selected tab is equals to reports hide the search field
-              if (tabName === 'reports') {
+              if (tabName === 'reports' || tabName==='register_users') {
                   $scope.showSearchField = false;
               } else {
                   $scope.showSearchField = true;

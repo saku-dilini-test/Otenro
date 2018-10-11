@@ -26,11 +26,11 @@
 
 
     <div class="padding margin-bottom clearfix">
-        <fieldset ng-style="myObj" id = "searchBar">
+        <fieldset ng-if="showSearchField" ng-style="myObj" id = "searchBar">
             <input type="text" placeholder="Search by app name" ng-model="searchPublishApps.appName" id="search" name="search">
             <input type="submit" class="me-search-button">
         </fieldset>
-        <fieldset ng-if="user.userRole[0] == 'ADMIN' || user.userRole[0] == 'SUPER_ADMIN' ">
+        <fieldset ng-if="(user.userRole[0] == 'ADMIN' || user.userRole[0] == 'SUPER_ADMIN')&&showSearchField">
             <md-select id="searchStatus" placeholder="All" ng-model="searchPublishApps.publishedStatus" ng-change="all(searchPublishApps.publishedStatus)" style="margin-left: 20px;width: 398px;">
                 <md-option ng-value="status" ng-repeat="status in searchStatuses">{{status}}</md-option>
             </md-select>
