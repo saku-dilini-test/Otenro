@@ -866,6 +866,7 @@
 
         $scope.getReconciliation = function(data){
                 $scope.reconciliationResponseData = [];
+                var sdate ,edate = null;
 
                 if(data.report == "Daily"){
 
@@ -873,11 +874,11 @@
                    // var sdate = $filter('date')(data.sdate, "yyyy-MM-dd");
                    // var edate = $filter('date')(data.edate, "yyyy-MM-dd");
 
-                    var sdate = data.sdate,
+                        sdate = data.sdate,
                         edate = data.edate;
 
 
-                    if(edate >= sdate) {
+                    if((sdate&&edate)&&(edate >= sdate)) {
                         if (data.operator){
 
                             var dates = {dateFrom: sdate, dateTo: edate,operator:data.operator};
@@ -899,7 +900,7 @@
                         }
                     }
                     else{
-                        toastr.error('From Date should less than To Date', 'Warning', {closeButton: true});
+                        toastr.error('Invalid date range', 'Warning', {closeButton: true});
                     }
                 }
 
@@ -978,18 +979,18 @@
         $scope.applicationBaseReportData = function(data){
 
             $scope.applicationBaseReportResponseData = [];
-
+            var sdate ,edate = null;
 
             if(data.report == "Daily"){
 
 
                 // var sdate = $filter('date')(data.sdate, "yyyy-MM-dd");
                 // var edate = $filter('date')(data.edate, "yyyy-MM-dd");
-                var sdate = data.sdate,
+                    sdate = data.sdate,
                     edate = data.edate;
 
 
-                if(edate >= sdate) {
+                if((sdate&&edate)&&(edate >= sdate)) {
 
                     if (data.appName){
 
@@ -1116,18 +1117,18 @@
 
 
         $scope.revenueAndTrafficReportData = function(data){
-
+            var sdate ,edate = null;
             $scope.revenueAndTrafficReportResponseData = [];
             if(data.report == "Daily"){
 
-                var sdate = data.sdate,
-                    edate = data.edate;
+                 sdate = data.sdate,
+                 edate = data.edate;
                // var sdate = $filter('date')(data.sdate, "yyyy-MM-dd"),
                //  edate = $filter('date')(data.edate, "yyyy-MM-dd");
 
                 var reqData ="";
 
-                if(edate >= sdate) {
+                if((edate&&sdate)&&(edate >= sdate)) {
                     if (data.operator){
                         if ($scope.user.userRole=="APP_CREATOR"){
                             if (data.appName){
@@ -1160,7 +1161,7 @@
                     }
                 }
                 else{
-                    toastr.error('From Date should less than To Date', 'Warning', {closeButton: true});
+                    toastr.error('Invalid date range', 'Warning', {closeButton: true});
                 }
             }
 
@@ -1258,17 +1259,17 @@
 
         $scope.getFailedTransactionData = function(data){
             $scope.responseData = [];
-
+            var fromDate ,toDate = null;
             if(data.report == "Daily"){
 
 
                 // var fromDate = $filter('date')(data.fromDate, "yyyy-MM-dd");
                 // var toDate = $filter('date')(data.toDate, "yyyy-MM-dd");
 
-                var fromDate = data.fromDate,
+                    fromDate = data.fromDate,
                     toDate = data.toDate;
 
-                if(toDate >= fromDate) {
+                if((fromDate&&toDate)&&(toDate >= fromDate)) {
 
                     if (data.operator){
 
@@ -1298,16 +1299,14 @@
         $scope.getCustomerCareReportData = function(pramData){
             $scope.customerCareReportData = [];
 
-
+            var fromDate,toDate = null;
                 // var fromDate = $filter('date')(pramData.fromDate, "yyyy-MM-dd");
                 // var toDate = $filter('date')(pramData.toDate, "yyyy-MM-dd");
 
-                var fromDate = pramData.fromDate,
+                    fromDate = pramData.fromDate,
                     toDate = pramData.toDate;
 
-                if (fromDate&&toDate){
-
-                    if (toDate >= fromDate) {
+                    if ((fromDate&&toDate)&&(toDate >= fromDate)) {
 
                         var mobile = pramData.msisdn;
                         var pattern = /^\d{11}$/;
@@ -1370,9 +1369,6 @@
                         toastr.error('Invalid date range', 'Warning', {closeButton: true});
                     }
 
-                }else {
-                    toastr.error('Invalid date range', 'Warning', {closeButton: true});
-                }
         }
 
 
