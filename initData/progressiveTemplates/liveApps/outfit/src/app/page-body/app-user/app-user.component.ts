@@ -43,7 +43,7 @@ export class AppUserComponent implements OnInit {
       'lName': new FormControl(this.userData.lname, Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
       'email': new FormControl(this.userData.email, Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
       'emailRe': new FormControl('', Validators.compose([ Validators.pattern(this.emailPattern)])),
-      'phone': new FormControl(this.userData.phone, Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/)])),
+      'phone': new FormControl(this.userData.phone, Validators.compose([Validators.required])),
       'streetNo': new FormControl(this.userData.streetNumber, Validators.compose([Validators.required])),
       'streetName': new FormControl(this.userData.streetName, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/)])),
       'city': new FormControl(this.userData.city, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)])),
