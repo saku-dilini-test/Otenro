@@ -79,7 +79,7 @@ module.exports = {
                         "<li class=\"list-group-item\">" +
                         "<input class=\"form-control\" type=\"hidden\" name=\"items\" value=\""+"Order with tax"+"\"  [(ngModel)]=\""+items[0].name+"\" style=\"width:44%;display:inline;margin:0 5px\">" +
                         "<label>Total Amount (LKR)</label>" +
-                        "<input readonly class=\"form-control\" style=\"width:38%;display:inline;margin:0 5px;\" type=\"text\" name=\"amount\" value=\""+this.showTwoDecimals(req.body.amount)+"\" [(ngModel)]=\""+this.showTwoDecimals(req.body.amount)+"\"></li> " +
+                        "<input readonly class=\"form-control\" style=\"width:79%;display:inline;margin:0 5px;\" type=\"text\" name=\"amount\" value=\""+this.showTwoDecimals(req.body.amount)+"\" [(ngModel)]=\""+this.showTwoDecimals(req.body.amount)+"\"></li> " +
                         "</ul> " +
                         "<input type=\"hidden\" name=\"custom_1\" value=\""+req.body.appId+"\" [(ngModel)]=\""+req.body.appId+"\">   " +
                         "<input type=\"hidden\" name=\"merchant_id\" value=\""+req.body.payHereMerchantId+"\" [(ngModel)]=\""+req.body.payHereMerchantId+"\">" +
@@ -94,7 +94,7 @@ module.exports = {
                         "<input type=\"text\" name=\"first_name\" class=\"form-control\"  value=\""+req.body.customerName+"\"  [(ngModel)]=\""+req.body.customerName+"\"> " +
                         " </div> " +
                         "<div class=\"form-group\"> <label for=\"lastName\">Last Name</label>" +
-                        " <input type=\"text\" name=\"last_name\" class=\"form-control\" id=\"lastName\" placeholder=\"Last Name\"  value=\"-\"  [(ngModel)]=\"-\"> " +
+                        " <input type=\"text\" name=\"last_name\" class=\"form-control\" id=\"lastName\" placeholder=\"Last Name\"  value=\""+req.body.lastName+"\"  [(ngModel)]=\"-\"> " +
                         "</div> " +
                         "<div class=\"form-group\"> <label for=\"email\">Email</label>" +
                         " <input type=\"text\" name=\"email\" class=\"form-control\"  value=\""+req.body.email+"\"  [(ngModel)]=\""+req.body.email+"\"> " +

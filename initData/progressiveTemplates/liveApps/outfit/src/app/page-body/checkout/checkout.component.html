@@ -234,6 +234,21 @@
                         </div>
                       </div>
                     </div>
+                    <div class="col-sm-6">
+                          <label for="lname" class="sub-header-text-h2">
+                              LAST NAME
+                          </label>
+                        <input class="form-control" name="name" id="name" placeholder="Williams" [formControl]="pickupForm.controls['lname']">
+                          <div *ngIf="pickupForm.controls['lname'].dirty || pickupForm.controls['lname'].touched">
+                              <div *ngIf="pickupForm.controls['lname'].hasError('required')
+                                && pickupForm.controls['lname'].touched" class="alert alert-danger">
+                                  You must include a Last Name.
+                              </div>
+                              <div *ngIf="!pickupForm.controls['lname'].valid" class="alert alert-danger">
+                                  Last name must only include Alphabetic character
+                              </div>
+                          </div>
+                    </div>
 
                     <div class="col-sm-6">
                       <label class="sub-header-text-h2">

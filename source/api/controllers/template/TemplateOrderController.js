@@ -27,14 +27,14 @@ module.exports = {
         }
         else{
             ShippingDetails.find({id:data.pickupId,appId:data.appId}).exec(function(err,pickUp){
-                if(err) res.send(err);
+                if(err) return res.send(err);
                 data.pickUp = pickUp[0];
                 data.deliveryCountry = pickUp[0].country;
                 data.shippingOpt = pickUp[0].shippingOption;
                 data.option = 'pickUp';
                 ApplicationOrder.create(data).exec(function (err, order) {
 
-                    if (err) res.send(err);
+                    if (err) return res.send(err);
                     var searchApp = { id: order.appId };
     
                     Application.findOne(searchApp).exec(function (err, app) {
@@ -43,23 +43,23 @@ module.exports = {
                         order.isNew = data.isNew;
                         //Find user email settings
                         UserEmail.findOne({ appId: order.appId }).exec((err, userEmail) => {
-                    
                             if (err) {
                                 sails.log.error('Error occurred in finding User email Settings : TemplateOrderController.saveOrder , error : ' + err);
+                                return res.send(order);
                             }
                     
                             if (userEmail) {
                                 order.fromEmail = userEmail.fromEmail;
                             }
                             sentMails.sendOrderEmail(order, function (err, msg) {
-                                sails.log.info(err);
                                 if (err) {
-                                    return res.send(500);
+                                    sails.log.error('Error occurred , error : ' + err);
+                                    return res.send(order);
                                 }
+                                return res.send(order);
                             });
                         });
                     });
-                    res.send(order);
                 });
             });
         }
@@ -243,7 +243,7 @@ module.exports = {
         // Remaining quantity of the updating product
         var pQuantity;
         ThirdNavigation.find({id: data.id}).exec(function(err, app){
-            if(err) res.send(err);
+            if(err) return res.send(err);
             for(var i =0; i<app[0].variants.length; i++){
                 if(app[0].variants[i].sku == data.sku){
                     if(app[0].variants[i].unlimited == true){

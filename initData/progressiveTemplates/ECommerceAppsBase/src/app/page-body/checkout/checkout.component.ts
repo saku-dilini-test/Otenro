@@ -187,8 +187,9 @@ export class CheckoutComponent implements OnInit {
 
     this.pickupForm = fb.group({
       'name': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[A-z ]+$/)])),
+      'lname': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[A-z ]+$/)])),
       'email': new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
-      'phone': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/), Validators.minLength(12)])),
+      'phone': new FormControl('', Validators.compose([Validators.required])),
 
     });
   }
@@ -557,7 +558,7 @@ export class CheckoutComponent implements OnInit {
       country: data.country,
       pickupId: data.id,
       pickupCost: data.cost,
-      deliverDetails: { name: details.name, email: details.email, number: details.phone },
+      deliverDetails: { name: details.name, lname: details.lname, email: details.email, number: details.phone },
 
     }
     this.chk(this.pickupData, "pickup");
@@ -1327,7 +1328,7 @@ export class CheckoutComponent implements OnInit {
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.user.name,
-          'deliverName': this.fname + ' ' + this.lname,
+          'lastName':  this.lname,
           'deliveryNo': this.streetNumber ? this.streetNumber : '',
           'deliveryStreet': this.streetName ? this.streetName : '',
           'deliveryCity': this.city ? this.city : '',
@@ -1355,7 +1356,7 @@ export class CheckoutComponent implements OnInit {
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.fname,
-          'deliverName': this.fname + ' ' + this.lname,
+          'lastName':  this.lname,
           'deliveryNo': this.streetNumber ? this.streetNumber : '',
           'deliveryStreet': this.streetName ? this.streetName : '',
           'deliveryCity': this.city ? this.city : '',
@@ -1384,6 +1385,7 @@ export class CheckoutComponent implements OnInit {
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.payInfo.item.deliverDetails.name,
+          'lastName':  this.payInfo.item.deliverDetails.lname,
           'deliveryNo':  '',
           'deliveryStreet': '',
           'deliveryCity': '',
@@ -1406,6 +1408,7 @@ export class CheckoutComponent implements OnInit {
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.payInfo.item.deliverDetails.name,
+          'lastName':  this.payInfo.item.deliverDetails.lname,
           'deliveryNo':  '',
           'deliveryStreet': '',
           'deliveryCity': '',
@@ -1423,7 +1426,6 @@ export class CheckoutComponent implements OnInit {
         };
       }
     }
-
     this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails, { responseType: 'json' })
       .subscribe((orderRes: any) => {
         this.responce = orderRes.name;

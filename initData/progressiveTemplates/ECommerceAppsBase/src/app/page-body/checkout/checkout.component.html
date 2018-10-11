@@ -36,17 +36,33 @@
                     <div class="col-sm-6">
                          <form [formGroup]="pickupForm" (ngSubmit)="submitForm(pickupForm.value)">
                               <div class="form-group">
-                                <label for="name" class="col-2 col-form-label">Name</label>
+                                <label for="name" class="col-2 col-form-label">First Name</label>
                                 <div class="col-10">
                                   <input class="form-control" name="name" id="name" placeholder="Arstina" [formControl]="pickupForm.controls['name']">
                                 </div>
                                 <div *ngIf="pickupForm.controls['name'].dirty || pickupForm.controls['name'].touched">
                                   <div *ngIf="pickupForm.controls['name'].hasError('required')
                                 && pickupForm.controls['name'].touched" class="alert alert-danger">
-                                    You must include a Name.
+                                    You must include a First Name.
                                   </div>
                                   <div *ngIf="!pickupForm.controls['name'].valid" class="alert alert-danger">
-                                    Name must only include Alphabetic character
+                                    First name must only include Alphabetic character
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <label for="lname" class="col-2 col-form-label">Last Name</label>
+                                <div class="col-10">
+                                  <input class="form-control" name="name" id="name" placeholder="Williams" [formControl]="pickupForm.controls['lname']">
+                                </div>
+                                <div *ngIf="pickupForm.controls['lname'].dirty || pickupForm.controls['lname'].touched">
+                                  <div *ngIf="pickupForm.controls['lname'].hasError('required')
+                                && pickupForm.controls['lname'].touched" class="alert alert-danger">
+                                    You must include a Last Name.
+                                  </div>
+                                  <div *ngIf="!pickupForm.controls['lname'].valid" class="alert alert-danger">
+                                    Last name must only include Alphabetic character
                                   </div>
                                 </div>
                               </div>
@@ -69,7 +85,7 @@
                               <div class="form-group">
                                 <label for="pkPhone" class="col-2 col-form-label">Phone</label>
                                 <div class="col-10">
-                                  <input class="form-control" type="text" maxlength="16" placeholder="+94712345678" [formControl]="pickupForm.controls['phone']">
+                                  <input class="form-control" type="text" maxlength="16" placeholder="0712345678" [formControl]="pickupForm.controls['phone']">
                                 </div>
                                 <div *ngIf="pickupForm.controls['phone'].dirty || pickupForm.controls['phone'].touched">
                                   <div *ngIf="pickupForm.controls['phone'].hasError('required')

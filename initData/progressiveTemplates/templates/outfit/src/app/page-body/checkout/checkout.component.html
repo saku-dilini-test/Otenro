@@ -221,18 +221,33 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <label class="sub-header-text-h2">
-                        NAME
+                        FIRST NAME
                       </label>
                       <input class="form-control" name="name" id="name" placeholder="Arstina" [formControl]="pickupForm.controls['name']">
                       <div *ngIf="pickupForm.controls['name'].dirty || pickupForm.controls['name'].touched">
                         <div *ngIf="pickupForm.controls['name'].hasError('required')
                         && pickupForm.controls['name'].touched" class="alert alert-danger">
-                          You must include a Name.
+                          You must include a First name.
                         </div>
                         <div *ngIf="!pickupForm.controls['name'].valid" class="alert alert-danger">
-                          Name must only include Alphabetic character
+                          First Name must only include Alphabetic character
                         </div>
                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                          <label for="lname" class="sub-header-text-h2">
+                              LAST NAME
+                          </label>
+                        <input class="form-control" name="name" id="name" placeholder="Williams" [formControl]="pickupForm.controls['lname']">
+                          <div *ngIf="pickupForm.controls['lname'].dirty || pickupForm.controls['lname'].touched">
+                              <div *ngIf="pickupForm.controls['lname'].hasError('required')
+                                && pickupForm.controls['lname'].touched" class="alert alert-danger">
+                                  You must include a Last Name.
+                              </div>
+                              <div *ngIf="!pickupForm.controls['lname'].valid" class="alert alert-danger">
+                                  Last name must only include Alphabetic character
+                              </div>
+                          </div>
                     </div>
 
                     <div class="col-sm-6">
@@ -251,7 +266,7 @@
                       </div>
                     </div>
 
-                    <div class="col-sm-12">
+                    <div class="col-sm-6">
                       <label class="sub-header-text-h2">
                         TELEPHONE
                       </label>

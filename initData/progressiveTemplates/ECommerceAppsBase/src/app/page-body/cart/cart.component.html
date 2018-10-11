@@ -147,10 +147,17 @@
       </div>
 
       <div class="row voffset" >
-          <div class="col-sm-9">
+          <div class="col-sm-6">
           </div>
-          <div class="col-sm-3">
-            <a *ngIf="cartItems.length > 0" (click)="delivery(cartItems)" class="btn btn-d btn-lg main-button btn-block">Proceed</a>
+          <div class="col-md-3 col-xs-6">
+            <a *ngIf="cartItems.length > 0" class="btn btn-d btn-lg main-button btn-block" (click)="delivery(cartItems)">
+              Delivery
+            </a>
+          </div>
+          <div class="col-md-3 col-xs-6">
+            <a *ngIf="cartItems.length > 0" class="btn btn-d btn-lg main-button btn-block" (click)='pickupDetails(cartItems)'>
+              pickup
+            </a>
           </div>
         </div>
     </div>
@@ -216,12 +223,20 @@
     </div>
 
     <div class="row hidden-sm hidden-lg hidden-md">
-        <div class="col-sm-12">
-          <div class="col-xs-12">
-              <a *ngIf="cartItems.length > 0" (click)="delivery(cartItems)" class="btn btn-d btn-lg main-button btn-block">Proceed</a>
+        <div class="col-sm-12 margin-top">
+
+          <div class="col-md-6 col-xs-6">
+            <a *ngIf="cartItems.length > 0" class="btn btn-d btn-lg main-button btn-block" (click)="delivery(cartItems)">
+              Delivery
+            </a>
+          </div>
+          <div class="col-md-6 col-xs-6">
+            <a *ngIf="cartItems.length > 0" class="btn btn-d btn-lg main-button btn-block" (click)='pickupDetails(cartItems)'>
+              pickup
+            </a>
           </div>
         </div>
-      </div>
+    </div>
 
   <!-- bloc-13 END -->
 
