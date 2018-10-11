@@ -125,8 +125,11 @@
                                     $scope.apps =[];
                                     $scope.appIdsArray = $scope.getAppIdsArray(result);
                                     $scope.appNamesArray = $scope.getAppNamesArray(result);
-                                    $scope.apps = result;
-
+                                    $scope.apps.push({appName:"all"});
+                                    //var count = 0;
+                                    result.forEach(function (app) {
+                                        $scope.apps.push(app);
+                                    })
                                 }).error(function (error) {
                                 toastr.error('Loading Error', 'Warning', {
                                     closeButton: true
@@ -1135,7 +1138,7 @@
                             if (data.appName){
                                 reqData = {dateFrom: sdate, dateTo: edate,operator:data.operator,appId:data.appName};
 
-                                if(data.appName==='all'){
+                                if(data.appName==='All'){
                                     reqData.allAppIds = $scope.appIdsArray;
                                 }
                             }else {
@@ -1182,7 +1185,7 @@
                                 if (data.appName){
                                   reqData = {monthFrom: fromMonth, yearFrom: fromYear, monthTo: toMonth, yearTo: toYear, operator: data.operator,appId:data.appName}
 
-                                  if(data.appName==='all'){
+                                  if(data.appName==='All'){
                                     reqData.allAppIds = $scope.appIdsArray;
                                   }
                                 }else {
@@ -1225,7 +1228,7 @@
                             if (data.appName){
                                 var reqData = {yearFrom:fromYear, yearTo:toYear,operator:data.operator,appId:data.appName};
 
-                                if(data.appName==='all'){
+                                if(data.appName==='All'){
                                     reqData.allAppIds = $scope.appIdsArray;
                                 }
                             }else {
@@ -1437,7 +1440,7 @@
                 });
             }else if (args.reportType=="revenueAndTrafficReportData"){
 
-                dataArray.push(range + "," +"Operator" + ","
+                dataArray.push(range + "," +"Operator" + "," +"Application" + ","
                     + "Revenue" + "," +"Traffic"+','+'Total Revenue'+","+'Total Revenue'+'\r\n');
 
 
@@ -1452,7 +1455,7 @@
                         rangeValue = obj.year;
                     }
 
-                    var str = rangeValue + "," + obj.operator +"," + obj.revenue + "," + obj.viewCount +"," + obj.revenue +"," + obj.viewCount+'\r\n';
+                    var str = rangeValue + "," + obj.operator+","+obj.appId +"," + obj.revenue + "," + obj.viewCount +"," + obj.revenue +"," + obj.viewCount+'\r\n';
 
                     dataArray.push(str);
                 });
