@@ -11820,7 +11820,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _this.loadImageFromFile(file).then(function () {
 						exitCropOnAction();
 						// added by .sanira
-						console.log("add crop here too");
 						document.getElementById("tie-btn-crop").click();
 
 	                    _this.clearUndoStack();
@@ -14163,11 +14162,11 @@ return /******/ (function(modules) { // webpackBootstrap
 			 * added by .sanira (26.09.2018)
 			 * 
 			 * Set the cropzone dimensions for responce to the API call
-			 * @param {width;number, height:number} 
+			 * @param {width;number, height:number}
 			 * @return {Object} with properties {width:number, height:number}
 			 */
 
-		}, { 
+		}, {
 			key: 'setCropRect',
 			value: function setCropRect(width, height){
 				this.getComponent(components.CROPPER).setCropRect(width, height);
@@ -15617,7 +15616,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _cropper2 = _interopRequireDefault(_cropper);
 
 	// added by .sanira
-	var acceptRatio = 2;
+	var acceptRatio = 1; //was 2
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

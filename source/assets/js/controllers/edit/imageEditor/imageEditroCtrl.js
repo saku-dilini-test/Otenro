@@ -1,20 +1,20 @@
 /**
- * Created by Sanira on (11/10/2018)
+ * Created by Sanira on (5/10/2018)
  */
 
 (function() {
     'use strict';
-    angular.module("appEdit").controller("imageEditorCtrl","width","height", [imageEditorCtrl]);
+    angular.module("appEdit").controller("imageEditorCtrl" , ['fileUrl','width','height',imageEditorCtrl]);
 
 
-    function imageEditorCtrl(width,height) {
+    function imageEditorCtrl(fileUrl,width,height) {
         setTimeout(
             () => {
-                console.log(width+','+height);
                 var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
                     includeUI: {
                         loadImage: {
-                            path: './images/imageEditor/test.png',
+                            // path: './images/imageEditor/test.png',
+                            path: fileUrl,
                             name: 'SampleImage'
                         },
                         theme: blackTheme, // or whiteTheme
@@ -24,8 +24,8 @@
                     cssMaxWidth: 700,
                     cssMaxHeight: 300
                 });
-                // console.log(imageEditor.ui.initMenu);
-                imageEditor.setCropRect(500,300);
+
+                imageEditor.setCropRect(width,height);
 
                 window.onresize = function () {
                     imageEditor.ui.resizeEditor();

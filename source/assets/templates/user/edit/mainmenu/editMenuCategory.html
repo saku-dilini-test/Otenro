@@ -50,12 +50,16 @@
                                 </img-crop>
                             </div>
 
-                            <md-button ng-click="openDialog(500,300)">Open</md-button>
-                            <md-button>Test</md-button>
+                            <!--<md-button ng-click="openImageEditorDialog(400,200)">Open</md-button>-->
+
                             <div class="inputField btn-material img-up">
                                 <span >{{buttonName}}</span>
                                 <div class="img-up1" ng-if="imageSelected">
-                                    <input type="file" value="file" ng-click = "cropImage(); change()" id="fileInput" >
+                                    <input id="imgUp" ng-model="photo"
+                                           onchange="angular.element(this).scope().openImageEditorDialog(this,100,100)"
+                                           type="file"
+                                           accept="image/*" />
+                                    <!--<input type="file" value="file" ng-click = "cropImage(); change()" id="fileInput" >-->
                                 </div>
                                 <div  ng-if="!imageSelected" class="img-up1" ng-disabled="picFile == null" ng-click="addImage(picFile)"></div>
 

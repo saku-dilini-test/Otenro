@@ -62,8 +62,9 @@ $scope.filesSortConfig = {
         $scope.buttonName = "Browse Image";
 
         // open image editor function (added by .sanira)
-        $scope.openDialog = function (width, height) {
-            imageEditorService.showImageEditorDialog(width, height);
+        $scope.openImageEditorDialog = function (element,width,height) {
+            var file = element.files[0];
+            imageEditorService.callImageEditor(file,width,height);
         };
 
         // image crop function
