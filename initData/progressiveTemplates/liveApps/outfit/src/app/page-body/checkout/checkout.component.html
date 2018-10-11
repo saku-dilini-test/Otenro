@@ -183,7 +183,7 @@
                         <label class="sub-header-text-h2">
                           TELEPHONE
                         </label>
-                        <input class="form-control" type="text" placeholder="+94712345678" maxlength="16" [formControl]="complexForm.controls['phone']">
+                        <input class="form-control" type="text" placeholder="0712345678" maxlength="16" [formControl]="complexForm.controls['phone']">
 
                         <div *ngIf="complexForm.controls['phone'].hasError('required')
                       && complexForm.controls['phone'].touched && complexForm.controls['phone'].dirty" class="alert alert-danger">
