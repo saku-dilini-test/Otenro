@@ -429,7 +429,7 @@
 
                 console.log(data);
                 $scope.searchStatuses = [];
-                $scope.searchStatuses.push('All');
+                $scope.searchStatuses.push('all');
                 data.PUBLISH_STATUSES.forEach(function(ele){
                     $scope.searchStatuses.push(ele.description);
                 });
@@ -978,6 +978,7 @@
 
         $scope.applicationBaseReportData = function(data){
 
+
             $scope.applicationBaseReportResponseData = [];
             var sdate ,edate = null;
 
@@ -998,7 +999,7 @@
 
                             var reqData = {dateFrom: sdate, dateTo: edate,appName:data.appName,operator:data.operator};
 
-                            if(data.appName==='All'){
+                            if(data.appName==='all'){
                                 reqData.appNamesArray = $scope.appNamesArray;
                             }
 
@@ -1043,7 +1044,7 @@
 
                                 var reqData = {monthFrom: fromMonth, yearFrom: fromYear, monthTo: toMonth, yearTo: toYear, appName: data.appName,operator:data.operator}
 
-                                if(data.appName==='All'){
+                                if(data.appName==='all'){
                                     reqData.appNamesArray = $scope.appNamesArray;
                                 }
 
@@ -1084,7 +1085,7 @@
 
                             var reqData = {yearFrom:fromYear, yearTo:toYear,appName:data.appName,operator:data.operator};
 
-                            if(data.appName==='All'){
+                            if(data.appName==='all'){
                                 reqData.appNamesArray = $scope.appNamesArray;
                             }
 
@@ -1134,7 +1135,7 @@
                             if (data.appName){
                                 reqData = {dateFrom: sdate, dateTo: edate,operator:data.operator,appId:data.appName};
 
-                                if(data.appName==='All'){
+                                if(data.appName==='all'){
                                     reqData.allAppIds = $scope.appIdsArray;
                                 }
                             }else {
@@ -1181,7 +1182,7 @@
                                 if (data.appName){
                                   reqData = {monthFrom: fromMonth, yearFrom: fromYear, monthTo: toMonth, yearTo: toYear, operator: data.operator,appId:data.appName}
 
-                                  if(data.appName==='All'){
+                                  if(data.appName==='all'){
                                     reqData.allAppIds = $scope.appIdsArray;
                                   }
                                 }else {
@@ -1224,7 +1225,7 @@
                             if (data.appName){
                                 var reqData = {yearFrom:fromYear, yearTo:toYear,operator:data.operator,appId:data.appName};
 
-                                if(data.appName==='All'){
+                                if(data.appName==='all'){
                                     reqData.allAppIds = $scope.appIdsArray;
                                 }
                             }else {
