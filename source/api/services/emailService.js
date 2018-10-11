@@ -1136,7 +1136,7 @@ module.exports = {
                                         '								<img src="cid:regHeader"/></td>'+
                                         '								</tr><td style="padding: 0 40px">'+
                                         ' <h2 class = "ql-align-center">Successfully Registered</h2><br><br><br>'+
-                                        ' hi ' + data.userName + ',<br><br>' +
+                                        ' <div>Hi <span style="text-transform:capitalize">' + data.userName + '</span>,<br><div>' +
                                         ' Thank you for registering with ' + app[0].appName + ',<br><br>' +
                                         ' To complete the registration process click on the confirmation<br> link: <a target="_blank" href='+ data.link +'><u>click here</u></a>' +
                                         ' <br><br>Thank you <br><br><br>';
