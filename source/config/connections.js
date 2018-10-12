@@ -71,7 +71,7 @@ module.exports.connections = {
     port: 27017,
     // user: 'username',
     // password: 'password',
-    database: 'otenroTest'
+    database: 'otenroStagin'
   },
   productionMongodbServer: {
     adapter: 'sails-mongo',
@@ -79,7 +79,7 @@ module.exports.connections = {
     port: 27017,
     // user: 'username',
     // password: 'password',
-    database: 'otenro'
+    database: 'otenroTest'
   },
 
   /***************************************************************************
