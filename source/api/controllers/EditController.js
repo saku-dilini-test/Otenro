@@ -101,7 +101,7 @@ module.exports = {
                                     "Regards,<br>Ideadroid Team</html>";
 
                                      mailOptions = {
-                                        from: app[0].email, // sender address
+                                        from: "admin@ideamart.io", // sender address
                                         to: config.IDEABIZ_EMAIL, // list of receivers
                                         subject: 'App has been Deleted!', // Subject line
                                         html:emailBody
@@ -109,6 +109,8 @@ module.exports = {
 
                                     };
                                 console.log(emailBody);
+                                console.log(app[0].email);
+                                console.log(config.IDEABIZ_EMAIL);
                                         // send mail with defined transport object
                                         transporter.sendMail(mailOptions, (error, info) => {
                                             if (error) {
