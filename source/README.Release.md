@@ -16,9 +16,9 @@ Test/QA/stage(192.168.8.115 - http://appmaker.ddns.net) Server Release
     out log path - /root/.pm2/logs/ideadroid-out.log 
 
 (4)	Release Procedure
-    1.cd /home/projects/appmaker/Otenro/source/
+    1.cd /home/projects/appmaker/Otenro/
     2.Do a "git pull" (There may be conflicts which need to be stash.Use command 'git stash --patch' carefully.See the section "git stashing" for more information)
-    3.npm install
+    3.cd /home/projects/appmaker/Otenro/source/ and do npm install / bower install
     4.cd /home/projects/appmaker/Otenro/initData/previewData/
     5.run ./importData.sh
     6.cd /home/projects/appmaker/Otenro/source/
@@ -48,7 +48,7 @@ Production(AWS - https://ideadroid.ideamart.io) Server Release
     2.cd /home/projects/ideadroid/Otenro/
     3.Do a "git pull" (There may be conflicts which need to be stash.Use command 'git stash --patch' carefully.See the section "git stashing" for more information)
     4.cd /home/projects/ideadroid/Otenro/source/
-    5.npm install
+    5.npm install / bower install
     6.cd /home/projects/ideadroid/Otenro/initData/previewData/
     7.run ./importData.sh
     8.cd /home/projects/ideadroid/Otenro/source/
