@@ -134,7 +134,12 @@
             updateCategoryName : function (data) {
                  return $http.post( SERVER_URL + 'edit/updateCategoryName', data );
             },
-
+            updateNonFeaturedCategoryLabel: function (data) {
+                return $http.post(SERVER_URL + 'edit/commerce/updateFeaturedDropdownLabel', data);
+            },
+            getAppHeaderData: function (appId) {
+                return $http.get(SERVER_URL + 'edit/commerce/getAppHeaderData?appId=' + appId);
+            }
         };
     }
 })();

@@ -36,6 +36,7 @@ export class HeaderComponent implements OnInit {
   showOnWebsiteContact:boolean;
   featuredCategories = [];
   nonFeaturedCategories = [];
+  nonFeaturedDropdownLabel;
   constructor(private location: Location,private localStorageService: LocalStorageService,
               private categoryService: CategoriesService, private router: Router,
               private dataService: PagebodyServiceModule, private titleServ: TitleService,
@@ -76,6 +77,19 @@ export class HeaderComponent implements OnInit {
           alert('warning!' + " Unable to get contact us info\n Please check your connection.");
       });
 
+    // Get app header details
+    this.appdataService.getAppHeaderdata()
+      .subscribe(res => {
+
+        if (res.status === 'SUCCESS') {
+
+          this.nonFeaturedDropdownLabel = res.data.nonFeaturedDropdownLabel;
+          if (!this.nonFeaturedDropdownLabel) {
+            
+            this.nonFeaturedDropdownLabel = 'other';
+          }
+        }
+      });
   }
 
   ngOnInit() {

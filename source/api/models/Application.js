@@ -53,7 +53,8 @@ module.exports = {
         },
         appUpdateLocationSetting : {
             type : 'json'
-        }
+        },
+        isRankingStarted:{ type: 'boolean' }
     }
 };
 

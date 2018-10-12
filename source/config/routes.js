@@ -147,6 +147,8 @@ module.exports.routes = {
     'POST /edit/commerce/updateCategoryOrder': 'edit/commerce/MainCategoryController.updateCategoryOrder',
     'POST /edit/commerce/updateFeaturedCategory': 'edit/commerce/MainCategoryController.updateFeaturedCategory',
     'POST /edit/commerce/checkAppHeaderEligibility': 'edit/commerce/MainCategoryController.checkAppHeaderEligibility',
+    'POST /edit/commerce/updateFeaturedDropdownLabel': 'edit/commerce/MainCategoryController.updateFeaturedDropdownLabel',
+    'GET /edit/commerce/getAppHeaderData': 'edit/commerce/MainCategoryController.getAppHeaderData',
     //'POST /edit/updateProductImage': '',
     //'POST /edit/updateCategoryImage': '',
     //'POST /edit/addProducts': '

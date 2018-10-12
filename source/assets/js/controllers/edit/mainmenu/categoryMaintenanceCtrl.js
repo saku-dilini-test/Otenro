@@ -26,6 +26,18 @@
             });
         });
 
+        // Get application header data
+        categoryMaintenanceService.getAppHeaderData($rootScope.appId)
+            .success(function (res) {
+
+                if (res.status === 'SUCCESS') {
+
+                    $scope.nonFeaturedDropdownLabel = res.data.nonFeaturedDropdownLabel;
+                }
+            }).error(function (err) {
+
+            });
+
         // Add New Category
         $scope.goToAddNewMenuItemView = function () {
             categoryMaintenanceService.showAddOrEditCategoryDialog();
@@ -117,22 +129,17 @@
 
         $scope.treeOptions = {
 
-            // accept: function (sourceNodeScope, destNodesScope, destIndex) {
+            beforeDrop: function (event) {
 
-            //     // console.log('sourceNodeScope => ', sourceNodeScope.$id);
-            //     // console.log('destNodesScope => ', destNodesScope.$id);
+                if (event.source.nodesScope === event.dest.nodesScope)
+                    return true;
+                else
+                    return false;
+            },
+            dragStop: function (event) {
 
-            //     // if (sourceNodeScope.$parent.$id === destNodesScope.$parent.$id)
-            //     //     return true;
-            //     // else
-            //     //     return false;
-
-            // },
-            accept: function (sourceNode, destNodes, destIndex) {
-                var data = sourceNode.$modelValue; 
-                var destType = destNodes.$element.attr('data-type'); 
-                // return (data.type === destType);
-                return false;
+                let socketBody = { payload: $scope.createCategoriesArrayAfterDragStop($scope.menuItems) };
+                $scope.updateCategoryOrder(socketBody);
             }
         };
 
@@ -156,8 +163,8 @@
                     $scope.menuItems.splice(currentIndex - 1, 0, currentCategory[0]);
 
                     let associatedCategory = $scope.menuItems[currentIndex];
-                    let socketBody = { payload : $scope.createUpdatedCategoriesArray(currentCategory[0], associatedCategory, currentIndex, 'MOVE_UP') };
-                    
+                    let socketBody = { payload: $scope.createUpdatedCategoriesArray(currentCategory[0], associatedCategory, currentIndex, 'MOVE_UP') };
+
                     $scope.updateCategoryOrder(socketBody);
                 }
 
@@ -173,8 +180,8 @@
                                 item.childNodes.splice(currentIndex - 1, 0, currentCategory[0]);
 
                                 let associatedCategory = item.childNodes[currentIndex];
-                                let socketBody = { payload : $scope.createUpdatedCategoriesArray(currentCategory[0], associatedCategory, currentIndex, 'MOVE_UP') };
-                    
+                                let socketBody = { payload: $scope.createUpdatedCategoriesArray(currentCategory[0], associatedCategory, currentIndex, 'MOVE_UP') };
+
                                 $scope.updateCategoryOrder(socketBody);
                             }
 
@@ -187,8 +194,7 @@
                     loopArr($scope.menuItems);
                 }
             }
-
-        }
+        };
 
         /**
          * Responsible for moving categories downside
@@ -208,8 +214,8 @@
                     $scope.menuItems.splice(currentIndex + 1, 0, currentCategory[0]);
 
                     let associatedCategory = $scope.menuItems[currentIndex];
-                    let socketBody = { payload : $scope.createUpdatedCategoriesArray(currentCategory[0], associatedCategory, currentIndex, 'MOVE_DOWN') };
-                    
+                    let socketBody = { payload: $scope.createUpdatedCategoriesArray(currentCategory[0], associatedCategory, currentIndex, 'MOVE_DOWN') };
+
                     $scope.updateCategoryOrder(socketBody);
                 }
 
@@ -239,7 +245,7 @@
                     loopArr($scope.menuItems);
                 }
             }
-        }
+        };
 
         /**
          * Update index value of categories
@@ -249,8 +255,9 @@
         **/
         $scope.updateCategoryOrder = function (socketBody) {
 
+            socketBody.appId = $rootScope.appId;
             io.socket.post('/edit/commerce/updateCategoryOrder', socketBody);
-        }
+        };
 
         /**
          * Responsible for creating updated categories array
@@ -263,7 +270,7 @@
          * @return updatedCategories {Array}
          * 
          **/
-        $scope.createUpdatedCategoriesArray = function(currentCategory, associatedCategory, currentIndex, type) {
+        $scope.createUpdatedCategoriesArray = function (currentCategory, associatedCategory, currentIndex, type) {
 
             let updatedCategories = [];
 
@@ -272,17 +279,17 @@
             else
                 updatedCategories.push({ id: currentCategory.id, index: currentIndex + 1 });
 
-            updatedCategories.push({ id : associatedCategory.id, index : currentIndex });
+            updatedCategories.push({ id: associatedCategory.id, index: currentIndex });
 
             return updatedCategories;
-        }
+        };
 
         /**
          * Responsible for updating featured category
          * 
          * @param node :: category
          **/
-        $scope.onCheckboxChange = function(node) {
+        $scope.onCheckboxChange = function (node) {
 
             if (node.isFeaturedCategory && $scope.featuredCategoryArr.length < 4) {
 
@@ -315,7 +322,7 @@
 
             if (!node.isFeaturedCategory) {
 
-                let socketBody = { id: node.id , isFeaturedCategory: node.isFeaturedCategory };
+                let socketBody = { id: node.id, isFeaturedCategory: node.isFeaturedCategory };
                 io.socket.post('/edit/commerce/updateFeaturedCategory', socketBody, (res) => {
 
                     if (res.status === 'SUCCESS') {
@@ -329,7 +336,6 @@
                     }
                     else
                         toastr.error('Failed to removed from featured categories!', 'Error!', { closeButton: true });
-
                 });
             }
 
@@ -338,14 +344,14 @@
                 toastr.warning('Maximum four categories are allowed for featured!', 'Warning!', { closeButton: true });
                 node.isFeaturedCategory = false;
             }
-        }
+        };
 
         /**
          * Create featured category array
          * 
          * @param menuItems :: Category list
          **/
-        $scope.createFeaturedCategoryArray = function(menuItems) {
+        $scope.createFeaturedCategoryArray = function (menuItems) {
 
             $scope.featuredCategoryArr = [];
             menuItems.forEach(category => {
@@ -354,6 +360,55 @@
                     $scope.featuredCategoryArr.push(category);
                 }
             });
-        }
+        };
+
+        /**
+         *  Responsible for creating payload for updateCategoryOrder after DragStop
+         * 
+         *  @param {Array} :: menuItems with current positions
+         *  
+         *  @return payload {Array}
+         **/
+        $scope.createCategoriesArrayAfterDragStop = function (currentMenuItems) {
+
+            let payload = [];
+            let tempPayloadItem;
+
+            currentMenuItems.forEach(category => {
+
+                tempPayloadItem = { id: category.id, index: $scope.menuItems.indexOf(category) };
+                payload.push(tempPayloadItem);
+            });
+            return payload;
+        };
+
+        $scope.ok = function () {
+
+            if ($scope.nonFeaturedDropdownLabel) {
+
+                $scope.updateNonFeaturedDropdownLabel();
+                $mdDialog.hide();
+            } else {
+
+                toastr.warning('Fill the menu bar button value for non featured categories!', 'Warning', { closeButton: true });
+            }
+        };
+
+        $scope.updateNonFeaturedDropdownLabel = function () {
+
+            let postBody = { appId: $rootScope.appId, nonFeaturedDropdownLabel: $scope.nonFeaturedDropdownLabel };
+            categoryMaintenanceService.updateNonFeaturedCategoryLabel(postBody)
+                .success(function (res) {
+
+                    if (res.status === 'SUCCESS') {
+
+                        toastr.success('Successfully updated!', 'Success!', { closeButton: true });
+                    }
+                })
+                .error(function (error) {
+
+                    toastr.error('Error occurred!', 'Error!', { closeButton: true });
+                })
+        };
     }
 })();

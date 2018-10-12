@@ -9,5 +9,6 @@ module.exports = {
         isPoliciesChecked : { type: 'boolean', defaultsTo : false },
         isContactUsChecked : { type: 'boolean', defaultsTo : false },
         isAboutUsChecked : { type: 'boolean', defaultsTo : false },
+        nonFeaturedDropdownLabel: { type: 'string' }
     }
 }
