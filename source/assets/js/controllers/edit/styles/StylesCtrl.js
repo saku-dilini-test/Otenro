@@ -41,7 +41,7 @@
 
                     });
                 }else{
-                    toastr.error('Please upload an Icon', 'Warning', {
+                    toastr.error('Please upload favicon in 100x100px resolution .ico format', 'Warning', {
                           closeButton: true
                     });
                         $scope.splash = null;
