@@ -5,11 +5,6 @@
   border-top:1px solid #ccc;
 }
 
-
-.cat-image{
-  padding-top: 56px;
-}
-
 .name{
   padding: 10px;
     text-transform: uppercase;
@@ -49,9 +44,11 @@
 .row-size{
   margin-right:-31px;
   margin-left:-31px;
-}
-
-.col-size{
   position: relative;
   text-align: center;
+  margin-bottom: 1px;
+}
+
+.bloc-size:first-child{
+  margin-top: 42px;
 }
