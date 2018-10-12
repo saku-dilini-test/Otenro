@@ -326,7 +326,7 @@ module.exports = {
 
                                             "<br><br>Ideadroid Support" +
 
-                                            "<br><br>Email : support@appmaker.lk" +
+                                            "<br><br>Email : admin@ideamart.io" +
 
                                             "<br>Contact : " + userData[0].mobile + "</html>";
 

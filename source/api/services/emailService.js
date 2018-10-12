@@ -182,7 +182,7 @@ module.exports = {
 
 
         var mailOptions = {
-            from: "support@appmaker.lk",
+            from: "admin@ideamart.io",
             to: data.email,
             subject: "Welcome to Ideadroid",
             html: emailBody,
@@ -710,7 +710,7 @@ module.exports = {
                                 "<a href='"+serverOrg+"/#/resetPassword/"+token+"'>Click to here for  verify your email address</a></html>"
 
                             var mailOptions = {
-                                from: 'support@appmaker.lk', // sender address
+                                from: 'admin@ideamart.io', // sender address
                                 to: data.email, // list of receivers
                                 subject: data.type, // Subject line
                                 html: emailBody
