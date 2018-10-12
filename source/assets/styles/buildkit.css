@@ -3034,3 +3034,13 @@ table.md-calendar-day-header{
     right: 0 !important;
 }
 /* .End of .quill text editor override classes and syles */
+
+/*------CategoryMaintenance CSS----*/
+
+.md-dialog-header span.menu-bar-label{
+    background: #E9E8E9;
+    padding: 0 5px 0 5px;
+    font-family: 'Open Sans', sans-serif;
+    color: #666;
+    font-size: 12px;
+}
