@@ -386,13 +386,13 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                     }
                     $scope.ordersList = result;
                     for (var i = 0; i < $scope.ordersList.length; i++) {
-                        if ($scope.ordersList[i].paymentStatus == "Refunded") {
+                        if ($scope.ordersList[i].fulfillmentStatus == "Refund") {
                             $scope.refund.push($scope.ordersList[i]);
                         }
-                        else if ($scope.ordersList[i].paymentStatus == "Pending") {
+                        else if ($scope.ordersList[i].fulfillmentStatus == "Pending") {
                             $scope.unfulfilled.push($scope.ordersList[i]);
                         }
-                        else if ($scope.ordersList[i].paymentStatus == "Successful") {
+                        else if ($scope.ordersList[i].fulfillmentStatus == "Successful") {
                             $scope.fulfill.push($scope.ordersList[i]);
                         }
                     }
@@ -1334,7 +1334,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
 
             var status = null;
             for (var i = 0; i < $scope.selectedRow.length; i++) {
-                status =$scope.selectedRow[i].paymentStatus;
+                status =$scope.selectedRow[i].fulfillmentStatus;
 
                  }
 
@@ -1406,8 +1406,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
 
             var status = null;
             for (var i = 0; i < $scope.row.length; i++) {
-                status = $scope.row[i].paymentStatus;
-
+                status = $scope.row[i].fulfillmentStatus;
             }
             if($scope.row.length == 0){
                 toastr.error('Please Select a row', 'Warning', {
