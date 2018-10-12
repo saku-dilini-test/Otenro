@@ -1,8 +1,9 @@
 # Ideadroid
 
-Test/QA/stage(192.168.8.115) Server Release
+Test/QA/stage(192.168.8.115 - http://appmaker.ddns.net) Server Release
 ===================================================================================================================
 (1)	Server Info
+    IMPORTANT - You should be in Bell4G network
     SSH - ssh root@192.168.8.115
     PW - root@123
 
@@ -16,24 +17,26 @@ Test/QA/stage(192.168.8.115) Server Release
 
 (4)	Release Procedure
     1.cd /home/projects/appmaker/Otenro/source/
-    2.npm install
-    3.cd /home/projects/appmaker/Otenro/initData/previewData/
-    4.run ./importData.sh  
-    5.cd /home/projects/appmaker/Otenro/source/
-    6.Run Relavant PM2 command (Please check the pm2.ideadroid.config.js has the NODE_ENV property set as "stage" > NODE_ENV : "stage", "ID": "0")
+    2.Do a "git pull" (There may be conflicts which need to be stash.Use command 'git stash --patch' carefully.See the section "git stashing" for more information)
+    3.npm install
+    4.cd /home/projects/appmaker/Otenro/initData/previewData/
+    5.run ./importData.sh
+    6.cd /home/projects/appmaker/Otenro/source/
+    7.Run Relavant PM2 command (Please check the pm2.ideadroid.config.js has the NODE_ENV property set as "stage" > NODE_ENV : "stage", "ID": "0")
         restart: pm2 restart pm2.ideadroid.config.js
         start: pm2 start pm2.ideadroid.config.js
         delete: pm2 delete pm2.ideadroid.config.js
         stop: pm2 stop pm2.ideadroid.config.js
-    7.Check PM2 logs whether the System is up and running using "pm2 logs 0" (See "PM2 Commands" section below for more info)
+    8.Check PM2 logs whether the System is up and running using "pm2 logs 0" (See "PM2 Commands" section below for more info)
 
         
-Production(AWS) Server Release
+Production(AWS - https://ideadroid.ideamart.io) Server Release
 ===================================================================================================================
 (1)	Login: Have a look at the the Section below "AWS ssh login steps for Live Server(ideadroid.ideamart.io) and Live DB Server"
             
 (2)	Project Info
     Path - /home/projects/ideadroid/Otenro/
+    Production Branch: Ideadroid
 
 (3)	Logs
     entire log path - /home/projects/ideadroid/Otenro/source/combined.outerr.log
@@ -42,17 +45,19 @@ Production(AWS) Server Release
 
 (4)	Release Procedure
     1.sudo su
-    2.cd /home/projects/ideadroid/Otenro/source/
-    3.npm install
-    4.cd /home/projects/ideadroid/Otenro/initData/previewData/
-    5.run ./importData.sh  
-    6.cd /home/projects/ideadroid/Otenro/source/
-    7.Run Relavant PM2 command (Please check the pm2.ideadroid.config.js has the NODE_ENV property set as "production" > NODE_ENV : "production", "ID": "0")
+    2.cd /home/projects/ideadroid/Otenro/
+    3.Do a "git pull" (There may be conflicts which need to be stash.Use command 'git stash --patch' carefully.See the section "git stashing" for more information)
+    4.cd /home/projects/ideadroid/Otenro/source/
+    5.npm install
+    6.cd /home/projects/ideadroid/Otenro/initData/previewData/
+    7.run ./importData.sh
+    8.cd /home/projects/ideadroid/Otenro/source/
+    9.Run Relavant PM2 command (Please check the pm2.ideadroid.config.js has the NODE_ENV property set as "production" > NODE_ENV : "production", "ID": "0")
         restart: pm2 restart pm2.ideadroid.config.js
         start: pm2 start pm2.ideadroid.config.js
         delete: pm2 delete pm2.ideadroid.config.js
         stop: pm2 stop pm2.ideadroid.config.js
-    8.Check PM2 logs whether the System is up and running using "pm2 logs 0" (See "PM2 Commands" section below for more info)
+    10.Check PM2 logs whether the System is up and running using "pm2 logs 0" (See "PM2 Commands" section below for more info)
 
 
 PM2 Commands
@@ -183,3 +188,8 @@ Test Server(appmaker.ddns.net) Proxy information
 5.Log fie path(Catelina.out)?
     #cd /root/apache-tomcat-improxy-7.0.88/logs
 
+git stashing
+===============
+Select "a" to add(stash) the file
+select "d" to declare(do not add) the file
+"q" to quit and leave the remaining hunks unstashed
