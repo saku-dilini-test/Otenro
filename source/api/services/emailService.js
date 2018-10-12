@@ -1044,11 +1044,7 @@ module.exports = {
 
     },
 
-        sendApkEmail : function(data,callback){
-
-        console.log("inside send apk email " + data.email);
-        console.log(config.server.host);
-        console.log(data);
+    sendApkEmail : function(data,callback){
 
         var status = data.operator.status;
         var subject,emailBody,operator;
@@ -1062,7 +1058,7 @@ module.exports = {
             }
          });
 
-        var apkFile = config.server.host +'/getApk';
+        var apkFile = config.server.host + '/getApkPath' +'/?userId=' + data.uid + '&appId=' + data.id + '&appName='+ data.appName;
             var emailBody,subject;
 
             var email = data.email;
