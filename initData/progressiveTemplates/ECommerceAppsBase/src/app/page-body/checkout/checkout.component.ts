@@ -13,7 +13,7 @@ import { OrdersService } from '../../services/orders/orders.service';
 import { TitleService } from '../../services/title.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-declare let $: any;
+declare var $:any;
 declare let paypal: any;
 
 @Component({
@@ -107,14 +107,21 @@ export class CheckoutComponent implements OnInit {
   ePay = false;
   ePayFail = false;
   ePayNull = false;
+  payHereUrl;
 
-  constructor(fb: FormBuilder, private ordersService: OrdersService,
+  constructor(
+    fb: FormBuilder,
+    private ordersService: OrdersService,
     private shippingService: ShippingService,
     private currencyService: CurrencyService,
     private localStorageService: LocalStorageService,
-    private http: HttpClient, private route: ActivatedRoute,
-    private router: Router, private dataService: PagebodyServiceModule, private title: TitleService,
-    private spinner: Ng4LoadingSpinnerService) {
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private router: Router,
+    private dataService: PagebodyServiceModule,
+    private title: TitleService,
+    private spinner: Ng4LoadingSpinnerService
+  ) {
 
     this.title.changeTitle("Checkout");
 
@@ -180,8 +187,9 @@ export class CheckoutComponent implements OnInit {
 
     this.pickupForm = fb.group({
       'name': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[A-z ]+$/)])),
+      'lname': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[A-z ]+$/)])),
       'email': new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
-      'phone': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/), Validators.minLength(12)])),
+      'phone': new FormControl('', Validators.compose([Validators.required])),
 
     });
   }
@@ -550,7 +558,7 @@ export class CheckoutComponent implements OnInit {
       country: data.country,
       pickupId: data.id,
       pickupCost: data.cost,
-      deliverDetails: { name: details.name, email: details.email, number: details.phone },
+      deliverDetails: { name: details.name, lname: details.lname, email: details.email, number: details.phone },
 
     }
     this.chk(this.pickupData, "pickup");
@@ -754,14 +762,14 @@ export class CheckoutComponent implements OnInit {
   submit(data, type, note) {
 
     if (type == 'creditcard') {
-      this.makeStripePaymentMethod(data, note);
+      this.makeStripePaymentMethod(data, note, type);
     } else {
-      this.authorizeCreditCardMethod(data, note);
+      this.authorizeCreditCardMethod(data, note, type);
     }
 
   }
 
-  makeStripePaymentMethod(cardInformation, note) {
+  makeStripePaymentMethod(cardInformation, note, type) {
 
     this.showSpinner = true;
 
@@ -775,7 +783,7 @@ export class CheckoutComponent implements OnInit {
         this.showSpinner = false;
 
         if (res.status == 'succeeded') {
-          this.orderProcess(note);
+          this.orderProcess(note, type);
         } else {
           this.ePay = false;
           this.ePayNull = false;
@@ -800,7 +808,7 @@ export class CheckoutComponent implements OnInit {
 
   };
 
-  authorizeCreditCardMethod(cardInformation, note) {
+  authorizeCreditCardMethod(cardInformation, note, type) {
 
     this.showSpinner = true;
 
@@ -813,7 +821,7 @@ export class CheckoutComponent implements OnInit {
         this.showSpinner = false;
 
         if (res.status == 'ok') {
-          this.orderProcess(note);
+          this.orderProcess(note, type);
         } else if (res.data == "Null Response") {
           this.ePay = false;
           this.ePayFail = false;
@@ -853,7 +861,7 @@ export class CheckoutComponent implements OnInit {
       })
   }
 
-  orderProcess(note) {
+  orderProcess(note, type) {
 
     if (note) {
       note = note.trim();
@@ -881,7 +889,8 @@ export class CheckoutComponent implements OnInit {
           'currency': this.dataService.currency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': type
         };
 
       } else {
@@ -905,7 +914,8 @@ export class CheckoutComponent implements OnInit {
           'currency': this.dataService.currency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': type
         };
       }
     } else {
@@ -923,7 +933,8 @@ export class CheckoutComponent implements OnInit {
           "email": this.payInfo.userEmail,
           "currency": this.dataService.paypalCurrency,
           "promotionCode": this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': type
         }
       } else {
         this.orderDetails = {
@@ -939,7 +950,8 @@ export class CheckoutComponent implements OnInit {
           "email": this.payInfo.item.deliverDetails.email,
           "currency": this.dataService.paypalCurrency,
           "promotionCode": this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': type
         }
       }
 
@@ -1042,7 +1054,8 @@ export class CheckoutComponent implements OnInit {
           'currency': this.dataService.currency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'Cash on delivery'
         };
 
       } else {
@@ -1066,7 +1079,8 @@ export class CheckoutComponent implements OnInit {
           'currency': this.dataService.currency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'Cash on delivery'
         };
       }
 
@@ -1087,7 +1101,8 @@ export class CheckoutComponent implements OnInit {
           "email": this.payInfo.userEmail,
           "currency": this.dataService.currency,
           "promotionCode": this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'Cash on pickup'
         }
       } else {
         this.orderDetails = {
@@ -1103,7 +1118,8 @@ export class CheckoutComponent implements OnInit {
           "email": this.payInfo.item.deliverDetails.email,
           "currency": this.dataService.currency,
           "promotionCode": this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'Cash on pickup'
         }
       }
     }
@@ -1224,7 +1240,8 @@ export class CheckoutComponent implements OnInit {
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'PayPal'
         };
 
       } else {
@@ -1249,7 +1266,8 @@ export class CheckoutComponent implements OnInit {
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'PayPal'
         };
       }
 
@@ -1268,7 +1286,8 @@ export class CheckoutComponent implements OnInit {
           "email": this.payInfo.userEmail,
           "currency": this.dataService.paypalCurrency,
           "promotionCode": this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'PayPal'
         }
       } else {
         this.orderDetails = {
@@ -1284,7 +1303,8 @@ export class CheckoutComponent implements OnInit {
           "email": this.payInfo.item.deliverDetails.email,
           "currency": this.dataService.paypalCurrency,
           "promotionCode": this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'PayPal'
         }
       }
     }
@@ -1294,7 +1314,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   payHere(note) {
-
+    let realHostUrl = encodeURIComponent(window.location.protocol+"//"+window.location.host+"/#/");
     if (note) {
       note = note.trim();
     }
@@ -1308,10 +1328,10 @@ export class CheckoutComponent implements OnInit {
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.user.name,
-          'deliverName': this.fname + " " + this.lname,
-          'deliveryNo': this.streetNumber,
-          'deliveryStreet': this.streetName,
-          'deliveryCity': this.city,
+          'lastName':  this.lname,
+          'deliveryNo': this.streetNumber ? this.streetNumber : '',
+          'deliveryStreet': this.streetName ? this.streetName : '',
+          'deliveryCity': this.city ? this.city : '',
           'deliveryCountry': this.country,
           'deliveryZip': this.zip,
           'telNumber': this.phone,
@@ -1322,21 +1342,24 @@ export class CheckoutComponent implements OnInit {
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'PayHere',
+          'realHostUrl': realHostUrl,
+          'payHereMerchantId': this.payHereMID
         };
 
       } else {
         this.orderDetails = {
 
           'appId': this.appId,
-          'registeredUser': "Unknown User",
+          'registeredUser': 'Unknown User',
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.fname,
-          'deliverName': this.fname + " " + this.lname,
-          'deliveryNo': this.streetNumber,
-          'deliveryStreet': this.streetName,
-          'deliveryCity': this.city,
+          'lastName':  this.lname,
+          'deliveryNo': this.streetNumber ? this.streetNumber : '',
+          'deliveryStreet': this.streetName ? this.streetName : '',
+          'deliveryCity': this.city ? this.city : '',
           'deliveryCountry': this.country,
           'deliveryZip': this.zip,
           'telNumber': this.phone,
@@ -1347,105 +1370,112 @@ export class CheckoutComponent implements OnInit {
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
-          'note': note
+          'note': note,
+          'paymentType': 'PayHere',
+          'realHostUrl': realHostUrl,
+          'payHereMerchantId': this.payHereMID
         };
       }
     }
     else {
       if (this.user) {
         this.orderDetails = {
-          "appId": this.appId,
-          "registeredUser": this.user.registeredUser,
-          "item": this.payInfo.cart,
-          "amount": this.payInfo.amount,
-          "customerName": this.payInfo.item.deliverDetails.name,
-          "telNumber": this.payInfo.item.deliverDetails.number,
-          "tax": this.payInfo.taxTotal,
-          "pickupId": this.payInfo.item.pickupId,
-          "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.userEmail,
-          "currency": this.dataService.paypalCurrency,
-          "promotionCode": this.payInfo.promotionCode,
-          'note': note
-        }
+          'appId': this.appId,
+          'registeredUser': this.user.registeredUser,
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.payInfo.item.deliverDetails.name,
+          'lastName':  this.payInfo.item.deliverDetails.lname,
+          'deliveryNo':  '',
+          'deliveryStreet': '',
+          'deliveryCity': '',
+          'telNumber': this.payInfo.item.deliverDetails.number,
+          'tax': this.payInfo.taxTotal,
+          'pickupId': this.payInfo.item.pickupId,
+          'pickupCost': this.chkPickupCost,
+          'email': this.payInfo.userEmail,
+          'currency': this.dataService.paypalCurrency,
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note,
+          'paymentType': 'PayHere',
+          'realHostUrl': realHostUrl,
+          'payHereMerchantId': this.payHereMID
+        };
       } else {
         this.orderDetails = {
-          "appId": this.appId,
-          "registeredUser": 'Unknown User',
-          "item": this.payInfo.cart,
-          "amount": this.payInfo.amount,
-          "customerName": this.payInfo.item.deliverDetails.name,
-          "telNumber": this.payInfo.item.deliverDetails.number,
-          "tax": this.payInfo.taxTotal,
-          "pickupId": this.payInfo.item.pickupId,
-          "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.item.deliverDetails.email,
-          "currency": this.dataService.paypalCurrency,
-          "promotionCode": this.payInfo.promotionCode,
-          'note': note
-        }
+          'appId': this.appId,
+          'registeredUser': 'Unknown User',
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.payInfo.item.deliverDetails.name,
+          'lastName':  this.payInfo.item.deliverDetails.lname,
+          'deliveryNo':  '',
+          'deliveryStreet': '',
+          'deliveryCity': '',
+          'telNumber': this.payInfo.item.deliverDetails.number,
+          'tax': this.payInfo.taxTotal,
+          'pickupId': this.payInfo.item.pickupId,
+          'pickupCost': this.chkPickupCost,
+          'email': this.payInfo.item.deliverDetails.email,
+          'currency': this.dataService.paypalCurrency,
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note,
+          'paymentType': 'PayHere',
+          'realHostUrl': realHostUrl,
+          'payHereMerchantId': this.payHereMID
+        };
       }
     }
-
     this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails, { responseType: 'json' })
       .subscribe((orderRes: any) => {
-        this.responce = JSON.parse(orderRes).name;
-        console.log(this.responce);
-        if (JSON.parse(orderRes).status == 404) {
+        this.responce = orderRes.name;
+        this.orderDetails['orderId'] = orderRes.id;
+        this.orderDetails['appId'] = orderRes.appId;
+
+        if (orderRes.status == 404) {
           this.showSpinner = false;
-          $('#myModal').modal('show')
+          $('#myModal').modal('show');
         } else {
-        this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
-          .subscribe((res) => {
-            this.dataService.cart.cartItems = [];
-            this.dataService.cart.cartSize = 0;
-            this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
-            this.dataService.cart.totalPrice = 0;
-            this.dataService.cart.totalQuantity = 0;
+          this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, {responseType: 'text'})
+            .subscribe((res) => {
+                this.dataService.cart.cartItems = [];
+                this.dataService.cart.cartSize = 0;
+                this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
+                this.dataService.cart.totalPrice = 0;
+                this.dataService.cart.totalQuantity = 0;
 
-            //Pushing into order purchase history
-            let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+                //Pushing into order purchase history
+                let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
 
-            if (appUser) {
-              if (this.localStorageService.get("cart" + appUser.registeredUser)) {
-                this.localStorageService.remove("cart" + appUser.registeredUser);
-              }
-            } else {
-              this.localStorageService.remove("cartUnknownUser");
-            }
+                if (appUser) {
+                  if (this.localStorageService.get("cart" + appUser.registeredUser)) {
+                    this.localStorageService.remove("cart" + appUser.registeredUser);
+                  }
+                } else {
+                  this.localStorageService.remove("cartUnknownUser");
+                }
 
-            let city = this.orderDetails.deliveryCity ? this.orderDetails.deliveryCity : "";
-            let streetNo = this.orderDetails.deliveryNo ? this.orderDetails.deliveryNo : "";
-            let streetName = this.orderDetails.deliveryStreet ? this.orderDetails.deliveryStreet : "";
+                this.http.post(
+                  SERVER_URL + '/mobile/getPayHereForm/', this.orderDetails, {responseType: 'text'})
+                .subscribe((res) => {
+                  this.payHereUrl = res;
+                  $('#payhereProcessModal').modal({backdrop: 'static', keyboard: false});
+                 },
+                 (err) => {
+                    console.log(err);
+                 });
 
-
-            window.location.href = (SERVER_URL + '/mobile/getPayHereForm/?name=' +
-              this.orderDetails.customerName + "&amount=" +
-              this.orderDetails.amount + "&currency=" +
-              this.currency.symbol + "&email=" +
-              this.orderDetails.email + "&telNumber=" +
-              this.orderDetails.telNumber + "&item=" +
-              this.orderDetails.item[0].name + "&address=" +
-              streetNo + " " + streetName + "&city=" +
-              city + "&appId=" + orderRes.appId +
-              "&orderId=" + orderRes.id + "&payHereMerchantId=" + this.payHereMID);
-          },
-          (err) => {
-            console.log(err);
-          });
+              },
+              (err) => {
+                console.log(err);
+              });
         }
-
-
       },
       (err) => {
         console.log(err);
       });
-
-
-
-
-
-
   }
+
+
 
 }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-
+import { RouterModule, Routes } from '@angular/router';
 import { PageBodyRoutingModule } from './page-body-routing.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { PageBodyComponent } from './page-body.component';
@@ -19,8 +19,13 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { RegisterComponent } from './register/register.component';
 import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.component';
+import { PayhereCancelComponent } from './payhere-cancel/payhere-cancel.component';
+import { PayhereSuccessComponent } from './payhere-success/payhere-success.component';
 import { AppUserComponent } from './app-user/app-user.component';
 import { SearchPipe } from '../pipes/search.pipe';
+import { SafeHtmlPipe } from '../pipes/safeHtml.pipe';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { SafeUrlPipe } from '../pipes/safeUrl.pipe';
 
 @NgModule({
   imports: [
@@ -31,27 +36,33 @@ import { SearchPipe } from '../pipes/search.pipe';
     OwlModule,
     AgmCoreModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
 
   ],
    exports:[
     PageBodyComponent
   ],
   declarations: [
-     HomepageComponent,
-     PageBodyComponent,
-     AboutusComponent, 
-     PoliciesComponent,
-     TermsComponent, 
-     ContactComponent, 
-     ShopComponent, 
-     ProductComponent, 
-     CartComponent, 
-     CheckoutComponent, 
-     RegisterComponent,
-     PaypalPaymentComponent, 
-     AppUserComponent, 
-     SearchPipe
-    ]
+    HomepageComponent,
+    PageBodyComponent,
+    AboutusComponent,
+    PoliciesComponent,
+    TermsComponent,
+    ContactComponent,
+    ShopComponent,
+    ProductComponent,
+    CartComponent,
+    CheckoutComponent,
+    RegisterComponent,
+    PaypalPaymentComponent,
+    AppUserComponent,
+    SearchPipe,
+    SafeHtmlPipe,
+    PasswordResetComponent,
+    SafeUrlPipe,
+    PayhereCancelComponent,
+    PayhereSuccessComponent
+  ]
 })
 export class PageBodyModule { }

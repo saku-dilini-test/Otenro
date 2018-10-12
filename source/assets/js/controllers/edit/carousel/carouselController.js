@@ -220,10 +220,10 @@
                 toastr.error('Please upload an image', 'Warning', { closeButton: true });
                 return;
             }
-            if (cat && !prod) {
-                toastr.error('Please select a Product', 'Warning', { closeButton: true });
-                return;
-            }
+            // if (cat && !prod) {
+            //     toastr.error('Please select a Product', 'Warning', { closeButton: true });
+            //     return;
+            // }
 
             if ($scope.initialData.menu == "addNewSlider") {
 

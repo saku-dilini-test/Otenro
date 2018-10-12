@@ -94,12 +94,14 @@ export class HomepageComponent implements OnInit {
 
     }
   navigateSliderProd(val, item) {
-    if (item.optionals.length == 2 && item.optionals[0]) {
+    if (item.optionals.length == 2 && item.optionals[0] &&  item.optionals[1] != null) {
       this.catName = item.optionals[0].name;
       this.dataService.data = item.optionals[1];
       localStorage.setItem(this.appId + ":dataServiceData", JSON.stringify(this.dataService.data))
       this.router.navigate([val, this.catName]);
-    }
-  }
+    }else if(item.optionals.length == 2 && item.optionals[0] &&  item.optionals[1] == null){
+		 this.router.navigate([''], { queryParams: { id:item.optionals[0].id} });
+	}
 
+  }
 }

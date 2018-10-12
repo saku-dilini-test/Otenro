@@ -926,7 +926,10 @@ button{
         padding-right: 0;
     }
     .bloc-xxl,.bloc-xl,.bloc-lg{
-        padding: 40px 10px !important;
+        padding: 0 10px 40px 10px !important;
+    }
+    .bloc-md{
+      padding: 0 50px 50px 50px ;
     }
     .bloc-sm,.bloc-md{
         padding-left: 0;

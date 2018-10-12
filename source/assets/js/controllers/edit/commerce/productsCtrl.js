@@ -680,8 +680,8 @@
             $scope.child = newChild;
         };
 
-        $scope.buttonName = "Select Image";
-        $scope.bannerButtonName = "Select Image";
+        $scope.buttonName = "Browse Image";
+        $scope.bannerButtonName = "Browse Image";
 
         $scope.cropImage = function () {
             $scope.myImage = null;
@@ -773,7 +773,7 @@
             }
 
 
-           $scope.buttonName = "Select Image";
+           $scope.buttonName = "Browse Image";
         };
 
         $scope.addBannerImage = function (img) {
@@ -789,7 +789,7 @@
 
 
 
-           $scope.bannerButtonName = "Select Image";
+           $scope.bannerButtonName = "Browse Image";
         };
 
         $scope.deleteBanner = function(){

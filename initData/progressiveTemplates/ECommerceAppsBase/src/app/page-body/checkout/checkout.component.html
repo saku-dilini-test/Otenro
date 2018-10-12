@@ -36,17 +36,33 @@
                     <div class="col-sm-6">
                          <form [formGroup]="pickupForm" (ngSubmit)="submitForm(pickupForm.value)">
                               <div class="form-group">
-                                <label for="name" class="col-2 col-form-label">Name</label>
+                                <label for="name" class="col-2 col-form-label">First Name</label>
                                 <div class="col-10">
                                   <input class="form-control" name="name" id="name" placeholder="Arstina" [formControl]="pickupForm.controls['name']">
                                 </div>
                                 <div *ngIf="pickupForm.controls['name'].dirty || pickupForm.controls['name'].touched">
                                   <div *ngIf="pickupForm.controls['name'].hasError('required')
                                 && pickupForm.controls['name'].touched" class="alert alert-danger">
-                                    You must include a Name.
+                                    You must include a First Name.
                                   </div>
                                   <div *ngIf="!pickupForm.controls['name'].valid" class="alert alert-danger">
-                                    Name must only include Alphabetic character
+                                    First name must only include Alphabetic character
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <label for="lname" class="col-2 col-form-label">Last Name</label>
+                                <div class="col-10">
+                                  <input class="form-control" name="name" id="name" placeholder="Williams" [formControl]="pickupForm.controls['lname']">
+                                </div>
+                                <div *ngIf="pickupForm.controls['lname'].dirty || pickupForm.controls['lname'].touched">
+                                  <div *ngIf="pickupForm.controls['lname'].hasError('required')
+                                && pickupForm.controls['lname'].touched" class="alert alert-danger">
+                                    You must include a Last Name.
+                                  </div>
+                                  <div *ngIf="!pickupForm.controls['lname'].valid" class="alert alert-danger">
+                                    Last name must only include Alphabetic character
                                   </div>
                                 </div>
                               </div>
@@ -69,7 +85,7 @@
                               <div class="form-group">
                                 <label for="pkPhone" class="col-2 col-form-label">Phone</label>
                                 <div class="col-10">
-                                  <input class="form-control" type="text" maxlength="16" placeholder="+94712345678" [formControl]="pickupForm.controls['phone']">
+                                  <input class="form-control" type="text" maxlength="16" placeholder="0712345678" [formControl]="pickupForm.controls['phone']">
                                 </div>
                                 <div *ngIf="pickupForm.controls['phone'].dirty || pickupForm.controls['phone'].touched">
                                   <div *ngIf="pickupForm.controls['phone'].hasError('required')
@@ -537,7 +553,7 @@
 
                     <form name="payHereFrom" *ngIf="paymentType == 'payhere'" novalidate>
                       <div class="col-sm-12 margin-left" >
-                        <span class="col input-label" *ngIf="paymentType == 'payhere'">Confirm payment by payHere</span>
+                        <span class="col input-label" *ngIf="paymentType == 'payhere'">Confirm payment by PayHere</span>
                         <div class="row cart-buttons">
                           <div class="col-sm-12"></div>
                           <button class="btn main-button btn-lg col-xs-12 col-sm-3" (click)="payHere(noteDes)">Confirm</button>
@@ -641,21 +657,36 @@
 <!-- ScrollToTop Button -->
 <a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1')"><span class="fa fa-chevron-up"></span></a>
 <!-- ScrollToTop Button END-->
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Product Unavailable</h4>
-                </div>
-                <div class="modal-body">
-                    Your selected "{{responce}}" is no longer available!
-                    please remove item from the cart.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Product Unavailable</h4>
+            </div>
+            <div class="modal-body">
+                Your selected "{{responce}}" is no longer available!
+                please remove item from the cart.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
+
+
+<!-- payhere modal -->
+<div class="modal fade" id="payhereProcessModal" tabindex="-1" role="dialog" aria-labelledby="payhereProcessModalLabel">
+    <div class="modal-dialog  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="text-right padding"><span class="modal-close padding"  data-dismiss="modal" aria-label="Close">X</span></div>
+              <form #payHereSubmitform class="padding main-content-font" method="post" action="https://www.payhere.lk/pay/checkout" >
+                <div [innerHTML] = "payHereUrl | safeHtml"></div>
+                <button type="submit" value="Submit"  class="btn btn-default main-button btn-lg btn-block" (click)="payHereSubmitform.submit()">Next</button>
+              </form>
+        </div>
+    </div>
+</div>

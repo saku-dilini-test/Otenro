@@ -177,19 +177,19 @@
             </p>
           </div>
         </div>
-        <div class="row voffset">
-          <div class="col-xs-4">
-            <p  *ngFor="let item of cartItems">
+        <div class="row voffset" *ngFor="let item of cartItems">
+          <div class="col-xs-5">
+            <p >
               {{item.name}}
             </p>
           </div>
-          <div class="col-xs-4">
-            <p class="text-right" *ngFor="let item of cartItems">
+          <div class="col-xs-2">
+            <p class="text-right">
               {{item.qty}}
             </p>
           </div>
-          <div class="col-xs-4">
-            <p class="text-right text-right-xs"  *ngFor="let item of cartItems">
+          <div class="col-xs-5">
+            <p class="text-right text-right-xs">
               {{currency}} {{itemPriceCal(item.total,item.qty)| number: '.2'}}
             </p>
           </div>
@@ -200,12 +200,12 @@
               <strong>TOTAL</strong>
             </p>
           </div>
-          <div class="col-xs-4">
+          <div class="col-xs-2">
             <p class="text-right">
               <br>
             </p>
           </div>
-          <div class="col-xs-4">
+          <div class="col-xs-6">
             <p class="text-right">
               <strong>{{currency}} {{getTotal()| number: '.2'}}</strong>
             </p>

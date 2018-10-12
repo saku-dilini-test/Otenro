@@ -197,7 +197,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <md-input-container style="width: 80px;">
+                                        <md-input-container>
                                             <input ng-blur="checkValidity(data.sku, $index)"  maxlength="10"
                                                    required
                                                    aria-label="SKU"
@@ -228,7 +228,7 @@
                                     <!--</md-input-container>-->
                                     <!--</td>-->
                                     <td>
-                                        <md-input-container class="md-container-modify">
+                                        <md-input-container>
                                             <input type="text"
                                                    aria-label="Price"
                                                    name="price_{{$index}}" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" ng-model="data.price" required ignore-mouse-wheel>

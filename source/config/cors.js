@@ -46,6 +46,6 @@ module.exports.cors = {
   // Which headers should be allowed for CORS requests?  This is only used
   // in response to preflight requests.
  // headers: 'content-type'
-     headers: 'content-type,Authorization,Access-Control-Allow-Origin'
+     headers: 'content-type,Authorization,Access-Control-Allow-Origin,If-Modified-Since'
 
 };

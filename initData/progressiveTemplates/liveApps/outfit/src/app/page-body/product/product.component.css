@@ -112,3 +112,7 @@
 /deep/ .ug-videoplayer .ug-videoplayer-button-close {
            display: none !important;
        }
+
+.modal-footer button{
+  margin-bottom:0;
+}

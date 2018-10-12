@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { HomepageComponent } from './homepage/homepage.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { PoliciesComponent } from './policies/policies.component';
@@ -16,6 +15,9 @@ import { OrderHistoryComponent } from './order-history/order-history.component'
 import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.component'
 import { AppUserComponent } from './app-user/app-user.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { PayhereCancelComponent } from './payhere-cancel/payhere-cancel.component';
+import { PayhereSuccessComponent } from './payhere-success/payhere-success.component';
 
 const routes: Routes = [
  { path: '',
@@ -89,8 +91,20 @@ const routes: Routes = [
   },
   {
     path: 'paypal/rest/execute',
-  component: PaypalPaymentComponent
-},
+    component: PaypalPaymentComponent
+  },
+  {
+    path: 'passwordReset',
+    component: PasswordResetComponent
+  },
+  {
+    path: 'payhereCancel',
+    component: PayhereCancelComponent
+  },
+  {
+    path: 'payhereSuccess',
+    component: PayhereSuccessComponent
+  },
 // {
 //   path: 'paypal',
 // component: PaypalPaymentComponent

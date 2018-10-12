@@ -17,13 +17,16 @@ import { CartComponent } from './cart/cart.component';
 import { ProductComponent } from './product/product.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component'
-import { OrderHistoryComponent } from './order-history/order-history.component'
-import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.component'
+import { RegisterComponent } from './register/register.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
+import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.component';
 import { AppUserComponent } from './app-user/app-user.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BlogsComponent } from './blogs/blogs.component';
 import { BlogViewComponent } from './blog-view/blog-view.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { PayhereCancelComponent } from './payhere-cancel/payhere-cancel.component';
+import { PayhereSuccessComponent } from './payhere-success/payhere-success.component';
 
 const routes: Routes = [
  { path: '',
@@ -49,17 +52,17 @@ const routes: Routes = [
     path: 'policies',
     component: PoliciesComponent,
     data:{title:'Policies Page'}
-  },  
+  },
   {
     path: 'return-policy',
     component: ReturnPolicyComponent,
     data:{title:'Return Policy Page'}
-  },  
+  },
   {
     path: 'delivery-policy',
     component: DeliveryPolicyComponent,
     data:{title:'Delivery Policy Page'}
-  },  
+  },
   {
     path: 'warranty-conditions',
     component: WarrantyConditionsComponent,
@@ -137,8 +140,20 @@ const routes: Routes = [
   },
   {
     path: 'paypal/rest/execute',
-  component: PaypalPaymentComponent
-},
+    component: PaypalPaymentComponent
+  },
+  {
+    path: 'passwordReset',
+    component: PasswordResetComponent
+  },
+  {
+    path: 'payhereCancel',
+    component: PayhereCancelComponent
+  },
+  {
+    path: 'payhereSuccess',
+    component: PayhereSuccessComponent
+  },
 // {
 //   path: 'paypal',
 // component: PaypalPaymentComponent

@@ -12,10 +12,47 @@
         $scope.myImage='';
         $scope.myCroppedImage='';
         $scope.picFile='';
-        $scope.buttonName = "Select Image";
+        $scope.buttonName = "Browse Image";
         $scope.tmpImage = [];
         $scope.tmpLogo= [];
         $scope.path = ME_APP_SERVER+"temp/";
+        $scope.splash;
+        $scope.saveFAV = false;
+
+        $scope.imageUrlFAV = SERVER_URL + "templates/viewFAVIcon?userId=" + $auth.getPayload().id + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/favicon.ico";
+        $scope.splash = $scope.imageUrlFAV;
+
+        console.log($scope.imageUrlFAV);
+        $scope.validateIcon = function(splash,x,v){
+
+            $scope.saveFAV = true;
+        }
+
+        $scope.saveFAVIcon = function (){
+                console.log($scope.splash);
+                if($scope.splash && $scope.splash.type == "image/vnd.microsoft.icon" || $scope.splash.type == "image/x-icon"){
+                    $scope.saveFAV = false;
+                    stylesService.uploadFAVIcon($scope.splash)
+                        .success(function (data, status, headers, config) {
+                    toastr.success('FAV Icon uploaded Successfully!', 'Successful', {
+                          closeButton: true
+                    });
+                        }).error(function (data, status, headers, config) {
+
+                    });
+                }else{
+                    toastr.error('Please upload favicon in 100x100px resolution .ico format', 'Warning', {
+                          closeButton: true
+                    });
+                        $scope.splash = null;
+                        $scope.saveFAV = false;
+                }
+
+        }
+
+        $scope.deleteFAV = function (){
+            $scope.splash = null;
+        }
 
 
         $scope.cropImage = function () {

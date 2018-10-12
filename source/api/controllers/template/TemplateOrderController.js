@@ -18,31 +18,48 @@ module.exports = {
         sails.log.info(data);
         if(data.pickupId == null){
             ApplicationOrder.create(data).exec(function (err, order) {
-                sails.log.info(order);
 
-                if (err) res.send(err);
-                var searchApp = {
-                    appId: order.appId,
-                    orderId:order.id
-                };
-                sails.log.info(searchApp);
-                res.send(order);
+                if (err)
+                    return res.send(err);
+                else
+                    return res.send(order);
             });
         }
         else{
             ShippingDetails.find({id:data.pickupId,appId:data.appId}).exec(function(err,pickUp){
-                if(err) res.send(err);
+                if(err) return res.send(err);
                 data.pickUp = pickUp[0];
                 data.deliveryCountry = pickUp[0].country;
                 data.shippingOpt = pickUp[0].shippingOption;
                 data.option = 'pickUp';
                 ApplicationOrder.create(data).exec(function (err, order) {
-                    if (err) res.send(err);
-                    var searchApp = {
-                        id: order.appId
-                    };
-                    sails.log.info(searchApp);
-                    res.send(order);
+
+                    if (err) return res.send(err);
+                    var searchApp = { id: order.appId };
+    
+                    Application.findOne(searchApp).exec(function (err, app) {
+    
+                        order['userId'] = app.userId;
+                        order.isNew = data.isNew;
+                        //Find user email settings
+                        UserEmail.findOne({ appId: order.appId }).exec((err, userEmail) => {
+                            if (err) {
+                                sails.log.error('Error occurred in finding User email Settings : TemplateOrderController.saveOrder , error : ' + err);
+                                return res.send(order);
+                            }
+                    
+                            if (userEmail) {
+                                order.fromEmail = userEmail.fromEmail;
+                            }
+                            sentMails.sendOrderEmail(order, function (err, msg) {
+                                if (err) {
+                                    sails.log.error('Error occurred , error : ' + err);
+                                    return res.send(order);
+                                }
+                                return res.send(order);
+                            });
+                        });
+                    });
                 });
             });
         }
@@ -55,7 +72,13 @@ module.exports = {
         var name;
         var count = 0;
 
-        data['paymentStatus'] = 'Pending';
+        if(data.paymentType == 'Cash on delivery' || data.paymentType == 'Cash on pickup'){
+            data['paymentStatus'] = 'Successful';
+        }else{
+            data['paymentStatus'] = 'Pending';
+        }
+
+
         data['fulfillmentStatus'] = 'Pending';
         if(data.pickupId == null){
             for(var i = 0;i < data.item.length;i++){
@@ -99,14 +122,26 @@ module.exports = {
                             };
                             sails.log.info(searchApp);
                             Application.findOne(searchApp).exec(function (err, app) {
+
                                 order['userId'] = app.userId;
                                 order.isNew = data.isNew;
-                            sentMails.sendOrderEmail(order,function (err,msg) {
-                                sails.log.info(err);
-                                if (err) {
-                                    return  res.send(500);
-                                }
-                            });
+                                //Find user email settings
+                                UserEmail.findOne({ appId: order.appId }).exec(function(err, userEmail) {
+
+                                    if (err) {
+                                        sails.log.error('Error occurred in finding User email Settings : TemplateOrderController.saveOrder , error : ' + err);
+                                    }
+
+                                    if (userEmail) {
+                                        order.fromEmail = userEmail.fromEmail;
+                                    }
+                                    sentMails.sendOrderEmail(order, function (err, msg) {
+                                        sails.log.info(err);
+                                        if (err) {
+                                            return res.send(500);
+                                        }
+                                    });
+                                });
                             });
 
                             return res.send({status:200});
@@ -170,12 +205,23 @@ module.exports = {
                             Application.findOne(searchApp).exec(function (err, app) {
                                 order['userId'] = app.userId;
                                 order.isNew = data.isNew;
-                            sentMails.sendOrderEmail(order,function (err,msg) {
-                                sails.log.info(err);
-                                if (err) {
-                                    return  res.send(500);
-                                }
-                            });
+                                //Find user email settings
+                                UserEmail.findOne({ appId: order.appId }).exec(function(err, userEmail) {
+
+                                    if (err) {
+                                        sails.log.error('Error occurred in finding User email Settings : TemplateOrderController.saveOrder , error : ' + err);
+                                    }
+
+                                    if (userEmail) {
+                                        order.fromEmail = userEmail.fromEmail;
+                                    }
+                                    sentMails.sendOrderEmail(order, function (err, msg) {
+                                        sails.log.info(err);
+                                        if (err) {
+                                            return res.send(500);
+                                        }
+                                    });
+                                });
                             });
 
                             return res.send({status:200});
@@ -197,7 +243,7 @@ module.exports = {
         // Remaining quantity of the updating product
         var pQuantity;
         ThirdNavigation.find({id: data.id}).exec(function(err, app){
-            if(err) res.send(err);
+            if(err) return res.send(err);
             for(var i =0; i<app[0].variants.length; i++){
                 if(app[0].variants[i].sku == data.sku){
                     if(app[0].variants[i].unlimited == true){
@@ -205,6 +251,7 @@ module.exports = {
                     }
                     else {
                         app[0].variants[i].quantity = app[0].variants[i].quantity - data.qty;
+                        app[0].variants[i].orderedQuantity = data.qty;
                         pQuantity = app[0].variants[i].quantity;
                         UserEmail.find({appId: app[0].appId}).exec(function (err, email) {
                             if (err) {

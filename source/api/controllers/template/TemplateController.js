@@ -411,6 +411,14 @@ module.exports = {
     viewWebImages : function(req,res){
         res.sendfile(config.APP_FILE_SERVER + req.param('userId') + '/progressiveTemplates/' + req.param('appId') + '/assets/images/'+ req.param('images'));
     },
+    viewFAVIcon : function(req,res){
+    console.log(config.ME_SERVER);
+    console.log(config.ME_SERVER_URL);
+    console.log(req.param('userId'));
+    console.log(req.param('appId'));
+
+        res.sendfile(config.ME_SERVER + req.param('userId') + '/progressiveTemplates/' + req.param('appId') + '/favicon.ico');
+    },
 
     /**
      * return template url for given userID & appID & img ( template path )

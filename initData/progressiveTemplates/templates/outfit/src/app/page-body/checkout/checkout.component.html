@@ -221,18 +221,33 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <label class="sub-header-text-h2">
-                        NAME
+                        FIRST NAME
                       </label>
                       <input class="form-control" name="name" id="name" placeholder="Arstina" [formControl]="pickupForm.controls['name']">
                       <div *ngIf="pickupForm.controls['name'].dirty || pickupForm.controls['name'].touched">
                         <div *ngIf="pickupForm.controls['name'].hasError('required')
                         && pickupForm.controls['name'].touched" class="alert alert-danger">
-                          You must include a Name.
+                          You must include a First name.
                         </div>
                         <div *ngIf="!pickupForm.controls['name'].valid" class="alert alert-danger">
-                          Name must only include Alphabetic character
+                          First Name must only include Alphabetic character
                         </div>
                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                          <label for="lname" class="sub-header-text-h2">
+                              LAST NAME
+                          </label>
+                        <input class="form-control" name="name" id="name" placeholder="Williams" [formControl]="pickupForm.controls['lname']">
+                          <div *ngIf="pickupForm.controls['lname'].dirty || pickupForm.controls['lname'].touched">
+                              <div *ngIf="pickupForm.controls['lname'].hasError('required')
+                                && pickupForm.controls['lname'].touched" class="alert alert-danger">
+                                  You must include a Last Name.
+                              </div>
+                              <div *ngIf="!pickupForm.controls['lname'].valid" class="alert alert-danger">
+                                  Last name must only include Alphabetic character
+                              </div>
+                          </div>
                     </div>
 
                     <div class="col-sm-6">
@@ -251,7 +266,7 @@
                       </div>
                     </div>
 
-                    <div class="col-sm-12">
+                    <div class="col-sm-6">
                       <label class="sub-header-text-h2">
                         TELEPHONE
                       </label>
@@ -430,7 +445,7 @@
 
                     <form name="payHereFrom" *ngIf="paymentType == 'payhere'" novalidate>
                       <div class="col-sm-12 margin-left" >
-                        <span class="col input-label" *ngIf="paymentType == 'payhere'">Confirm payment by payHere</span>
+                        <span class="col input-label" *ngIf="paymentType == 'payhere'">Confirm payment by PayHere</span>
                         <div class="row cart-buttons">
                           <div class="col-sm-12"></div>
                           <button class="btn main-button btn-lg col-xs-12 col-sm-3" (click)="payHere(noteDes)">Confirm</button>
@@ -539,21 +554,16 @@
     </div>
   </div>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+
+<!-- payhere modal -->
+<div class="modal fade" id="payhereProcessModal" tabindex="-1" role="dialog" aria-labelledby="payhereProcessModalLabel">
+    <div class="modal-dialog  modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Product Unavailable</h4>
-            </div>
-            <div class="modal-body">
-                Your selected "{{responce}}" is no longer available!
-                please remove item from the cart.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            <div class="text-right padding"><span class="modal-close padding"  data-dismiss="modal" aria-label="Close">X</span></div>
+              <form #payHereSubmitform class="padding main-content-font" method="post" action="https://www.payhere.lk/pay/checkout" >
+                <div [innerHTML] = "payHereUrl | safeHtml"></div>
+                <button type="submit" value="Submit"  class="btn btn-default main-button btn-lg btn-block" (click)="payHereSubmitform.submit()">Next</button>
+              </form>
         </div>
     </div>
 </div>

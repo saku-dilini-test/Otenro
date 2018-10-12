@@ -105,6 +105,7 @@ module.exports.routes = {
     'POST /edit/addStyleImage/addLogoImage': 'edit/style/StyleController.addLogoImage',
     'POST /edit/addStyleColor': 'edit/style/StyleController.addStyleColor',
     'POST /edit/addWebStyleColor': 'edit/style/webStyleController.addWebStyleColor',
+    'POST /edit/uploadFAVIcon': 'edit/style/StyleController.uploadFAVIcon',
 
     /*  'POST /edit/addLogoImage': 'edit/style/StyleController.addLogoImage',*/
     // 'POST /edit/addBackgroundColor' : 'style/StyleController.addBackgroundColor',
@@ -313,6 +314,7 @@ module.exports.routes = {
     'GET /templates/getCurrency': 'template/TemplateController.getCurrency',
     'GET /templates/viewImages': 'template/TemplateController.viewImages',
     'GET /templates/viewWebImages': 'template/TemplateController.viewWebImages',
+    'GET /templates/viewFAVIcon': 'template/TemplateController.viewFAVIcon',
 
     'GET /templates/getProductsByCatId': 'template/TemplateController.getThirdBySecondId',
     'GET /templates/getProductsByAppId': 'template/TemplateController.getAllThirdByAppId',
@@ -380,7 +382,7 @@ module.exports.routes = {
     'GET /mobile/allApps': 'mobileViewer/MobileController.allApps',
     'GET /mobile/meServerUrl': 'mobileViewer/MobileController.meServerUrl',
     'GET /mobile/fileServerUrl': 'mobileViewer/MobileController.fileServerUrl',
-    'GET /mobile/getPayHereForm': 'mobileViewer/MobileController.sendPayHereForm',
+    'POST /mobile/getPayHereForm': 'mobileViewer/MobileController.sendPayHereForm',
     'GET /mobile/payHereSuccess': 'mobileViewer/MobileController.payHereSuccess',
     'POST /mobile/notifyUrl': 'mobileViewer/MobileController.notifyUrl',
     'GET /mobile/cancelUrl': 'mobileViewer/MobileController.cancelUrl',

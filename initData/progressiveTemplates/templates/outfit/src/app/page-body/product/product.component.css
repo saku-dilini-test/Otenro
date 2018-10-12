@@ -102,3 +102,6 @@
 /deep/ .ug-theme-panel .ug-strip-panel{
            background-color: rgba(0, 0, 0, 0) !important;
        }
+/deep/ .ug-videoplayer .ug-videoplayer-button-close {
+           display: none !important;
+       }

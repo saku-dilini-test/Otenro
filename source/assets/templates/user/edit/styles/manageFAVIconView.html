@@ -1,0 +1,44 @@
+<md-dialog style="width:350px;" aria-label="Background Image">
+
+    <!--Google Analytics-->
+    <script>
+        ga('set', 'page', 'select-background-image');
+        ga('send', 'pageview');
+    </script>
+
+    <md-dialog-content>
+
+                    <div class="md-dialog-header" style="background: #F5F5F5;height: 66px;">
+                        <h1 style="text-align: center;">UPLOAD FAV ICON</h1>
+                    </div>
+                    <div class="md-dialog-main">
+
+                        <fieldset class="col-md-3" style="padding-left:80px;width: 100%;">
+                            <div class="uploaded-old-images">
+                                <p style="margin: 0 0px 16px 14px;color: #747474 !important;">Uploaded FAV icon</p>
+                                <div class="old-images clearfix">
+                                    <div class="old-image">
+                                    <input type="button" ng-click="deleteFAV()" value='delete'
+                                           class="image-delete-button"/>
+                                <img ng-if="splash != null" ngf-src="splash"  style="width:120px; height:120px;" />
+                                <img ng-if="splash == null" src="../../../images/small-placeholder.png" width="120" height="120 "/>                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" style="width: 100px;padding-left: 20px;margin-left: 16px;" class="inputField btn-material img-up" ngf-select name="splash1"
+                                   ng-model="splash" ngf-accept="image/*" ngf-change="validateIcon(splash,'512','512')" value="UPLOAD" />
+                            <!--ngf-validate="{width: {min: 512, max:512}, height: {min: 512, max: 512}}"-->
+                        </fieldset>
+                        <fieldset>
+                            <div class = "favDescription">
+                                <p style="width: 220px;color: #747474 !important;">Note:You can only upload a ".ico" file.&nbsp  No gif,png,jpeg are allowed.</p>
+                            </div>
+                        </fieldset>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button ng-disabled = "!saveFAV" class="me-default-button" ng-click="saveFAVIcon()">Save</md-button>
+                            <md-button class="me-default-button" ng-click="hide()">Close</md-button>
+                        </div>
+                    </div>
+    </md-dialog-content>
+</md-dialog>
+

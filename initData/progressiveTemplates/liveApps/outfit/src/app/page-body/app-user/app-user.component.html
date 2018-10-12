@@ -1,11 +1,11 @@
 <div class="bloc bgc-white l-bloc" id="bloc-15">
   <div class="container bloc-md">
     <div class="row">
-      <div class="col-sm-3">
+      <div class="col-sm-2">
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-8">
         <div class="padding">
-          <form [formGroup]="userEditForm">
+          <form [formGroup]="userEditForm" class=" main-content-font">
 
             <h2 class="mg-md about-us">
               Edit My Details
@@ -69,9 +69,9 @@
               && userEditForm.controls['phone'].touched" class="alert alert-danger">
                 You must include a Phone Number.
               </div>
-              <div *ngIf="!userEditForm.controls['phone'].valid" class="alert alert-danger">
-                Enter a valid Phone Number (ex: +94123456789)
-              </div>
+              <!--<div *ngIf="!userEditForm.controls['phone'].valid" class="alert alert-danger">-->
+                <!--Enter a valid Phone Number (ex: +94123456789)-->
+              <!--</div>-->
             </div>
 
             <!-- ***************************   Address    **************************** -->
@@ -220,6 +220,8 @@
 
           </form>
         </div>
+      </div>
+      <div class="col-sm-2">
       </div>
     </div>
     <app-accepted-payment-type></app-accepted-payment-type>

@@ -2,21 +2,6 @@
 echo  'start....'
 
 #leave and comment other env
-#local
-MESERVER='c:/xampp/htdocs/meServer/temp/';
-NODE='c:/xampp/htdocs/meServer/node_modules/';
-APPFILESERVER='c:/xampp/htdocs/meServer/temp/';
-
-#stag
-#MESERVER='/home/admin/web/testcdn.otenro.com/public_html/temp/';
-#NODE='/home/admin/web/testcdn.otenro.com/public_html/node_modules/';
-#APPFILESERVER='/home/otenro/OtenroTest/appFileServer/';
-
-#prod
-#MESERVER='/home/admin/web/cdn.otenro.com/public_html/temp/';
-#NODE='/home/admin/web/cdn.otenro.com/public_html/node_modules/';
-#APPFILESERVER='/home/otenro/appFileServer/';
-
 ENV='dev'   #this is for development
 #ENV='pro'  #this is for production
 #ENV='stag'  #this is for staging
@@ -24,15 +9,21 @@ DB=''
 
 if [ $ENV == 'dev' ]
 then
-	DB='appmaker'
+	DB='appBuilder'
 	serverUrl='http://localhost:1337'
+    MESERVER='c:/xampp/htdocs/meServer/temp/';
+    APPFILESERVER='c:/xampp/htdocs/meServer/temp/';
 elif [ $ENV == 'stag' ]
 then
+	DB='otenroStagin'
+	serverUrl='http://192.168.8.117:1339'
+	MESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/';
+    APPFILESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/';
+else
 	DB='otenroTest'
 	serverUrl='https://dashboard.otenro.com'
-else
-	DB='otenro'
-	serverUrl='https://dashboard.otenro.com'
+	MESERVER='/home/admin/web/cdn.otenro.com/public_html/temp/';
+    APPFILESERVER='/home/otenro/appFileServer/';
 fi
 echo $DB
 echo $serverUrl
@@ -86,7 +77,6 @@ mongoimport --db $DB --collection slider --file dataFiles/slider.json
 #mongoimport --db $DB --collection slider --out slider.json
 
 echo $MESERVER
-echo $NODE
 
 cd meServerFiles/unknownUser/templates/
    for d in ./*;do

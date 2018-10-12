@@ -1218,6 +1218,9 @@ md-dialog{
 
 .md-dialog-header{
     background-color: #fff;
+    padding: 10px 20px 20px;
+}
+.md-dialog-main  .md-dialog-header{
     padding: 10px 0px 20px;
 }
 
@@ -3032,6 +3035,10 @@ table.md-calendar-day-header{
     bottom: auto !important;
     left: auto !important;
     right: 0 !important;
+}
+.favDescription{
+    text-align: center;
+    padding-left: 40px;
 }
 /* .End of .quill text editor override classes and syles */
 

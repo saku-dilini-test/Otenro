@@ -45,14 +45,14 @@ module.exports = {
   // HOST URL 
   HOST_URL : 'https://dashboard.otenro.com',
   // ME SERVER Config
-  ME_SERVER_URL : 'https://cdn.otenro.com/temp/',
-  ME_SERVER : '/home/admin/web/cdn.otenro.com/public_html/temp/',
+  ME_SERVER_URL : 'https://testcdn.otenro.com/temp/',
+  ME_SERVER : '/home/admin/web/testcdn.otenro.com/public_html/temp/',
   ME_SERVER_PORT : 8081,
   // APP FILE SERVER Config
-  APP_FILE_SERVER : '/home/otenro/appFileServer/',
+  APP_FILE_SERVER : '/home/otenro/OtenroTest/appFileServer/',
   CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789',
-  TEMPLATES_PATH : '/home/otenro/sslOtenro3/Otenro/initData/templates/',
-  PROGRESSIVE_TEMPLATES_PATH : '/home/otenro/sslOtenro3/Otenro/initData/distribution/',
+  TEMPLATES_PATH : '/home/otenro/OtenroTest/Otenro/initData/templates/',
+  PROGRESSIVE_TEMPLATES_PATH : '/home/otenro/OtenroTest/Otenro/initData/distribution/',
   REDIRECT_URL : 'https://dashboard.otenro.com'
 
 };
