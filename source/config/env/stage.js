@@ -53,7 +53,8 @@ module.exports = {
     IDEABIZ_GROUP_EMAIL: 'appmakeruser@gmail.com', //To email for dialog super user, when sending approval email for the app configured with the serviceID by Admin.
     IDEABIZ_ADMIN_EMAIL: 'appmakeruser@gmail.com', //From email address of Admin to send serviceID approval email to dialog super user.
     SUPPORT_USER_EMAIL: 'appmakeruser@gmail.com',//'support@appmaker.lk' //Simato Support user
-    /**
+      SIMATO_SUPPORT: 'appmakeruser@gmail.com',
+/**
      * The ADMIN api and MO callbacks will call these
      */
     IDEABIZ_ADMIN_MO_CALLBACK_FORWARD_URLS : ['http://192.168.8.112:1337']

@@ -128,7 +128,6 @@ module.exports = {
                              '                               <td class="hero-subheader__content" style="font-size: 16px; line-height: 27px; color: #969696; padding: 0 0 50px 0;" align="justify">' +
                                                               '<p>Hi '+ data.fName + " " + data.lName + ' Welcome Aboard!</p>'+
                               '                                      <p>Thank you for registering for Ideadroid, the platform that enables you to create mobile applications without any coding. The service is currently in beta, and some features of the platform are currently not enabled.</p>' +
-                               '                                     <p>As the service is in beta you may encounter bugs or errors. Please report these to support@appmaker.lk so that we can ensure they are addressed at launch.</p>' +
                                 '                                    <p>Good luck on your app creation journey!</p>' +
                                  '                                   <p style="padding: 15px 0 0 0; font-weight:700; ">The Ideamart Team<br/>' +
                                   '                                      </p>' +
@@ -182,7 +181,7 @@ module.exports = {
 
 
         var mailOptions = {
-            from: "admin@ideamart.io",
+            from: config.IDEABIZ_EMAIL,
             to: data.email,
             subject: "Welcome to Ideadroid",
             html: emailBody,
@@ -710,7 +709,7 @@ module.exports = {
                                 "<a href='"+serverOrg+"/#/resetPassword/"+token+"'>Click to here for  verify your email address</a></html>"
 
                             var mailOptions = {
-                                from: 'admin@ideamart.io', // sender address
+                                from: config.IDEABIZ_EMAIL, // sender address
                                 to: data.email, // list of receivers
                                 subject: data.type, // Subject line
                                 html: emailBody

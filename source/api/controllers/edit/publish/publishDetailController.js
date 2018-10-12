@@ -326,7 +326,7 @@ module.exports = {
 
                                             "<br><br>Ideadroid Support" +
 
-                                            "<br><br>Email : admin@ideamart.io" +
+                                            "<br><br>Email : " + config.SIMATO_SUPPORT +
 
                                             "<br>Contact : " + userData[0].mobile + "</html>";
 
