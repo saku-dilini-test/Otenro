@@ -84,7 +84,7 @@ export class FooterComponent implements OnInit{
 
     var uuid = localStorage.getItem("UUID");
 
-    let data = {appId:this.appId,uuId:uuid}
+    let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn"),uuId: uuid };
     this.isUnsubscribing = true;
 
     IntervalObservable.create(5000)

@@ -186,7 +186,7 @@ module.exports = {
 
     //END_USER_MESSAGES are the messages which we will show to the end user(in the mobile app itself)
     END_USER_MESSAGES: {
-        'SERVER_ERROR': 'Could not provide the service, please contact support.',
+        'SERVER_ERROR': 'Sorry, we can not process your request at this time. Please try again after some time.',
         'OPERATOR_NOT_FOUND': 'Service not available for your network operator.',
         'APP_TERMINATED': 'The service is no longer available on the network.',
         'APP_SUSPENDED': 'The service is temporarily unavailable on the network.',
