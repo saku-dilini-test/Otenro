@@ -127,7 +127,7 @@
                             $scope.apps = [];
                             $scope.appIdsArray = $scope.getAppIdsArray(result);
                             $scope.appNamesArray = $scope.getAppNamesArray(result);
-                            $scope.apps.push({appName: "all"});
+                            /*$scope.apps.push({appName: "all"});*/
                             //var count = 0;
                             result.forEach(function (app) {
                                 $scope.apps.push(app);
@@ -150,7 +150,7 @@
                     technicalSupportService.getAllApps()
                         .success(function (technicalData) {
                             $scope.apps = [];
-                            $scope.apps.push({appName: "all"});
+                            /*$scope.apps.push({appName: "all"});*/
                             //var count = 0;
                             technicalData.forEach(function (app) {
                                 $scope.apps.push(app[0]);
@@ -241,7 +241,7 @@
             var returnArray = [];
 
             $scope.sortApps = $filter('orderBy')(applications, 'appName');
-            if ($scope.sortApps) {
+            /*if ($scope.sortApps) {
                 for (var i = 0; i < $scope.sortApps.length; i++) {
                     if ($scope.sortApps[i].appName == "all") {
                         returnArray = $scope.sortApps;
@@ -251,7 +251,8 @@
                         break;
                     }
                 }
-            }
+            }*/
+            returnArray = $scope.sortApps;
             return returnArray;
         }
 
@@ -1009,7 +1010,9 @@
                                 operator: data.operator
                             };
 
-                            if (data.appName === 'all') {
+
+                            if (data.appName.toLowerCase() === 'all') {
+
                                 reqData.appNamesArray = $scope.appNamesArray;
                             }
 
@@ -1061,7 +1064,8 @@
                                     operator: data.operator
                                 }
 
-                                if (data.appName === 'all') {
+
+                                if (data.appName.toLowerCase() === 'all') {
                                     reqData.appNamesArray = $scope.appNamesArray;
                                 }
 
@@ -1107,7 +1111,7 @@
                                 operator: data.operator
                             };
 
-                            if (data.appName === 'all') {
+                            if (data.appName.toLowerCase() === 'all') {
                                 reqData.appNamesArray = $scope.appNamesArray;
                             }
 
