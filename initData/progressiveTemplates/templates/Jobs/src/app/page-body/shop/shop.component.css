@@ -11,8 +11,8 @@
 }
 
 .name{
-  padding: 10px;
-    text-transform: uppercase;
+  padding: 10px 5px 10px 5px;
+  text-transform: uppercase;
 }
 
 
@@ -44,3 +44,4 @@
 .btn-style{
   margin-bottom:5px !important;
 }
+

@@ -3,13 +3,10 @@
     <div class="page-container padding">
         <div class="remove-margin row"*ngFor="let article of results">
             <div class="col" >
-                <div class="card-size clean-card text-center">
+                <div class="card-size clean-card text-center" (click)="navigateProd('product',article)" >
                     <img src="{{imageUrl}}/{{article.tempImageArray[0].img}}" class="card-img-top w-100 d-block" width="100%" />
                     <div class="card-color card-body info">
-                        <div class="main-header-font">{{article.title}}</div>
-                        <div class="icons">
-                            <button class="btn-style btn btn-outline-primary btn-lg" type="button"  (click)="navigateProd('product',article)">View Job</button>
-                        </div>
+                        <div class="main-header-font name">{{article.title}}</div>
                     </div>
                 </div>
             </div>
