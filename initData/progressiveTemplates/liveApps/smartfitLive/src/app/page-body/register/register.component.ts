@@ -43,6 +43,7 @@ export class RegisterComponent implements OnInit {
   cityArr = [];
   newCity;
   private selectedProvinces = null;
+  fullUrl; domainUrl;
 
   constructor(private localStorageService: LocalStorageService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
     private title: TitleService,
@@ -97,13 +98,11 @@ export class RegisterComponent implements OnInit {
       });
     });
 
-
     this.router.params.subscribe(params => {
       this.navigate = params['type'];
     });
 
-
-
+    this.generateDomainUrl();
   }
 
   modelChanged(e) {
@@ -194,4 +193,11 @@ export class RegisterComponent implements OnInit {
     this.route.navigate(['login', this.navigate]);
   }
 
+  generateDomainUrl() {
+
+    this.fullUrl = window.location.toString();
+    let index = this.fullUrl.indexOf('#');
+    this.domainUrl = this.fullUrl.substring(0, index + 2);
+    this.localStorageService.set('domainUrl', this.domainUrl);
+  }
 }

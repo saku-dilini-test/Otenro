@@ -11,13 +11,13 @@
 
         $scope.authSignUp = function (user) {
             user.cap = angular.element('#recaptcha_response_field').val();
-
-            if($stateParams.data && $stateParams.data.addname) {
-                // user.adagent = $stateParams.data.addname;
-                // user.affid = $stateParams.data.affid;
+            
+            if (!user.cap) {
+                toastr.error('Please use reCAPTCHA..!', 'Warning', {
+                    closeButton: true
+                });
+                return;
             }
-            console.log(user);
-
             Auth.register(user).success(function (data) {
 
                 if($stateParams.data && $stateParams.data.addname) {
