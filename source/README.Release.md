@@ -4,8 +4,8 @@ Test/QA/stage(192.168.8.115 - http://appmaker.ddns.net) Server Release
 ===================================================================================================================
 (1)	Server Info
     IMPORTANT - You should be in Bell4G network
-    SSH - ssh root@192.168.8.115
-    PW - root@123
+    SSH - ssh root@192.168.8.115 / ssh root@appmaker.ddns.net (Outside)
+    PW - Simat02008@!!!
 
 (2)	Project Info
     Path - /home/projects/appmaker/Otenro/
