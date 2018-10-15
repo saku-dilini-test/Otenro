@@ -21,7 +21,7 @@
 
         // Characters length config
         $scope.maxLengthNextOrderNumber = 8; // max characters length of NextOrderNumber in product
-        $scope.maxLengthAppName = 20;
+        $scope.maxLengthAppName = 26;
         // Policy
         $scope.maxReturnPolicy = 500;
         $scope.maxTermsAndCondition = 500;
