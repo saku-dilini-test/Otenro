@@ -305,7 +305,7 @@ export class ProductComponent implements OnInit {
             this.selection3.push({ 'vType': 'Select ' + this.name4 });
         }
 
-        variant1 = variant1.replace(/\s/g, '');
+        // variant1 = variant1.replace(/\s/g, '');
 
         if (variant1) {
             this.selectedVariant1 = variant1;
@@ -399,7 +399,7 @@ export class ProductComponent implements OnInit {
             this.selection3.push({ 'vType': 'Select ' + this.name4 });
         }
         //for IE specific issue
-        variant2 = variant2.replace(/\s/g, '');
+        // variant2 = variant2.replace(/\s/g, '');
 
         if (variant2) {
             this.selectedVariant2 = variant2;
@@ -476,7 +476,7 @@ export class ProductComponent implements OnInit {
         this.lockBuyButton = false;
         this.discountAvailable = false;
         // for IE specific issue
-        variant3 = variant3.replace(/\s/g, '');
+        // variant3 = variant3.replace(/\s/g, '');
         this.selection3 = [];
         if (this.Data.selection.length == 2) {
             // this.selection1.push({ 'vType': 'Select '+this.name2 });
@@ -559,7 +559,7 @@ export class ProductComponent implements OnInit {
         this.lockBuyButton = false;
         this.discountAvailable = false;
         //for IE specific issue
-        variant4 = variant4.replace(/\s/g, '');
+        // variant4 = variant4.replace(/\s/g, '');
 
         if (variant4) {
             this.selectedVariant4 = variant4;
