@@ -119,8 +119,8 @@ a:hover{text-decoration: none; cursor:pointer;}
   margin-left:0;
 }
 .row.row-no-gutters > [class^="col-"],.row.row-no-gutters > [class*=" col-"] {
-  padding-right: 0;
-  padding-left: 0;
+  padding:5px;
+ 
 }
 
 /* Bloc text custom styling */

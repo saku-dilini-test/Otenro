@@ -147,19 +147,19 @@
 .main-header-font{
   /*font-size: 6vh;*/
   letter-spacing: 0em;
-  color:#000;
+  color:#000 !important;;
   font-family: Arial;
   font-weight: bold;
 }
 .main-content-font{
   /*font-size: 12px;*/
   letter-spacing: 0.1em;
-  color: #757575;
+  color: #757575 !important;
   font-family: Arial;
   font-weight: 400;
 }
 .main-background{
-  background-color: #e6e8ea !important;
+  background-color: #FFF !important;
   overflow-x: hidden;
 }
 .made-easy-background-image{
@@ -169,7 +169,7 @@
 }
 .main-navigation{
   background-color: purple !important;
-  color: #fff;
+  color: #fff !important;
 }
 .main-navigation a{
   color: inherit !important;
