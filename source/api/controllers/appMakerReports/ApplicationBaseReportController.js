@@ -277,20 +277,22 @@ module.exports = {
         var appName = reqData.appName;
         var operator = reqData.operator.toLowerCase();
 
+
+
         var query = "";
 
-        if (appName == "all" && operator == "all") {
+        if (appName == "All" && operator == "all") {
 
             query = {date: {'>=': dateFormat(dateFrom, "yyyy-mm-dd"), '<=': dateFormat(dateTo, "yyyy-mm-dd")}}
 
-        } else if (appName == "all" && operator !== "all") {
+        } else if (appName == "All" && operator !== "all") {
 
             query = {
                 date: {'>=': dateFormat(dateFrom, "yyyy-mm-dd"), '<=': dateFormat(dateTo, "yyyy-mm-dd")},
                 operator: operator
             }
 
-        } else if (appName !== "all" && operator == "all") {
+        } else if (appName !== "All" && operator == "all") {
 
             query = {
                 date: {'>=': dateFormat(dateFrom, "yyyy-mm-dd"), '<=': dateFormat(dateTo, "yyyy-mm-dd")},
@@ -306,7 +308,7 @@ module.exports = {
             }
         }
 
-        if (appName == "all"&&reqData.appNamesArray.length > 0){
+        if (appName == "All"&&reqData.appNamesArray.length > 0){
             query.appName = { '$in': reqData.appNamesArray};
         }
 
@@ -339,15 +341,15 @@ module.exports = {
 
         var query = "";
 
-        if (appName == "all" && operator == "all") {
+        if (appName == "All" && operator == "all") {
 
             query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}}
 
-        } else if (appName == "all" && operator !== "all") {
+        } else if (appName == "All" && operator !== "all") {
 
             query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}, operator: operator}
 
-        } else if (appName !== "all" && operator == "all") {
+        } else if (appName !== "All" && operator == "all") {
 
             query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}, appName: appName}
 
@@ -356,7 +358,7 @@ module.exports = {
             query = {month: {'>=': monthFrom, '<=': monthTo}, year: {'>=': yearFrom, '<=': yearTo}, appName: appName, operator: operator}
         }
 
-        if (appName == "all"&&reqData.appNamesArray.length > 0){
+        if (appName == "All"&&reqData.appNamesArray.length > 0){
             query.appName = {'$in': reqData.appNamesArray};
 
         }
@@ -387,15 +389,15 @@ module.exports = {
 
         var query = "";
 
-        if (appName == "all" && operator == "all") {
+        if (appName == "All" && operator == "all") {
 
             query = {year: {'>=': yearFrom, '<=': yearTo}}
 
-        } else if (appName == "all" && operator !== "all") {
+        } else if (appName == "All" && operator !== "all") {
 
             query = {year: {'>=': yearFrom, '<=': yearTo}, operator: operator}
 
-        } else if (appName !== "all" && operator == "all") {
+        } else if (appName !== "All" && operator == "all") {
 
             query = {year: {'>=': yearFrom, '<=': yearTo}, appName: appName}
 
@@ -404,7 +406,7 @@ module.exports = {
             query = {year: {'>=': yearFrom, '<=': yearTo}, appName: appName, operator: operator}
         }
 
-        if (appName == "all"&&reqData.appNamesArray.length > 0){
+        if (appName == "All"&&reqData.appNamesArray.length > 0){
             query.appName = { '$in': reqData.appNamesArray};
         }
 
