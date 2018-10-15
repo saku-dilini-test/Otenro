@@ -148,7 +148,7 @@
     font-weight: bold;
     font-family: "Josefin Sans";
     background-color: transparent;
-    color: #5E5E5E!important;
+    color: #000!important;
     /*font-size: 20px;*/
   }
   .main-content-font{
@@ -169,7 +169,7 @@
   }
   .main-navigation{
     background-color: #ffffff !important;
-    color: rgba(0, 0, 0, 0.6);
+    color:#000;
   }
   .main-navigation a{
     color: inherit !important;
@@ -180,7 +180,7 @@
   .main-button{
     background-color: transparent !important;
     border-color: #424242 !important;
-    color: rgba(0,0,0,0.6) !important;
+    color: #000 !important;
     border-radius: 0px;
     border-width: 2px !important;
     border: solid;
