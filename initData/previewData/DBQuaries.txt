@@ -8,3 +8,6 @@ mongoimport --db $DB --collection templatemetadata --file dataFiles/templatemeta
 
 db.template.drop()
 mongoimport --db $DB --collection template --file dataFiles/template.json
+
+//otenroStaging - sudarshana
+Added "isMainCategory" : true, to dataFiles/appinitialdata.json
