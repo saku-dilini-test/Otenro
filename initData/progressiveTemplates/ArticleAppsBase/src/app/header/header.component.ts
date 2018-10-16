@@ -26,6 +26,7 @@ var headerCmp;
 export class HeaderComponent implements OnInit {
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
+  private templateName = (<any>data).templateName;
   private cartNo: number;
   public title: string;
   public hideBackOnHome: boolean;
@@ -160,13 +161,27 @@ export class HeaderComponent implements OnInit {
   }
 
   openNav() {
-    document.getElementById("mySidenav").style.width = "100%";
-    document.getElementById("header").style.height = "100%";
+    if(this.templateName == "News" || this.templateName == "Magazine" ){
+      document.getElementById("mySidenav").style.height = "100%";
+      document.getElementById("header").style.height = "100%";
+    }
+    else{
+      document.getElementById("mySidenav").style.width = "100%";
+      document.getElementById("header").style.height = "100%";
+    }
+
   }
 
   closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("header").style.height = "initial";
+    if(this.templateName == "News" || this.templateName == "Magazine" ){
+      document.getElementById("mySidenav").style.height = "0";
+      document.getElementById("header").style.height = "initial";
+    }
+    else{
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("header").style.height = "initial";
+    }
+
   }
 
   close() {
@@ -219,8 +234,7 @@ export class HeaderComponent implements OnInit {
                 $('#registerModel').modal('toggle');
                 $('#appStatusModel').modal('show');
               });
-              document.getElementById("mySidenav").style.width = "0";
-              document.getElementById("header").style.height = "initial";
+              this.closeNav();
 
             }else if (this.subscriptionStatus === this.dataService.STATUS_SUBSCRIBED) {
               this.isSubscribing = false;
@@ -231,8 +245,7 @@ export class HeaderComponent implements OnInit {
                 $('#registerModel').modal('toggle');
               });
               //close the nav bar
-              document.getElementById("mySidenav").style.width = "0";
-              document.getElementById("header").style.height = "initial";
+              this.closeNav();
 
             }
           });
@@ -276,8 +289,7 @@ export class HeaderComponent implements OnInit {
               $(() => {
                 this.unSubscribedSuccessPopup();
               });
-              document.getElementById("mySidenav").style.width = "0";
-              document.getElementById("header").style.height = "initial";
+              this.closeNav();
 
             }
           });

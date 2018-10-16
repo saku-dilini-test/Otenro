@@ -18,8 +18,8 @@ var transporter = nodemailer.createTransport({
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
-        user: 'support@appmaker.lk', // generated ethereal user
-        pass: 'Jza12BTL36' // generated ethereal password
+        user: 'no_reply_ideadroid@appmaker.lk', // generated ethereal user
+        pass: 'FoRH7DAyKG' // generated ethereal password
     },
     tls:{
         rejectUnauthorized: false
@@ -32,8 +32,8 @@ var transporter = nodemailer.createTransport({
 
 
 var server  = email.server.connect({
-    user:    "support@appmaker.lk",
-    password:"7hJvsYiU",
+    user:    "no_reply_ideadroid@appmaker.lk",
+    password:"FoRH7DAyKG",
     host:    "appmaker.lk",
     tls:false,
     port: 25

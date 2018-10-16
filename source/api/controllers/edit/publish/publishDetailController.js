@@ -320,8 +320,8 @@ module.exports = {
                                             "<br>Subscription SMS: You have subscribed to the " + result[0].title + " service. Type STOP " + result[0].keyword  + " and send to 87757 to unsubscribe." +
                                             "<br>Un-subscription SMS: You have been unsubscribed from the " + result[0].title + " service." +
                                             "<br>SMS Mask : Ideadroid" +
-                                            "<br>Admin notify URL: https://developer.appmaker.lk/adminapi/index" +
-                                            "<br>SMS Notify URL: https://developer.appmaker.lk/sms/report" +
+                                            "<br>Admin notify URL: " + config.server.host + "/adminapi/index" +
+                                            "<br>SMS Notify URL: " + config.server.host + "/sms/report" +
                                             "<br><br>Regards," +
 
                                             "<br><br>Ideadroid Support" +
