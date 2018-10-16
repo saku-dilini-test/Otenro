@@ -126,6 +126,7 @@ module.exports = {
     },
 
     addNewCategory : function (req,res) {
+
         var isNew = req.body.isNew;
         var tmpImage  = req.body.file[0];
         var randomstring = require("randomstring");
@@ -141,15 +142,16 @@ module.exports = {
         }else {
             dePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/';
         }
-
+console.log(searchApp)
         ArticleCategory.find(searchApp, function (err, found) {
             if (err) return res.send(err);
-
+                    console.log(found)
             if(found.length != 0) {
                 return res.send(409, {message: 'Category name already exists!'});
 
             }else {
                     if (!tmpImage.match("http")) {
+                        console.log("inside the http");
                         var imgeFileName = randomstring.generate() + ".png";
                         var data = tmpImage.replace(/^data:image\/\w+;base64,/, "");
                         var buf = new Buffer(data, 'base64');
@@ -164,11 +166,13 @@ module.exports = {
 
                         ArticleCategory.find({appId: req.body.appId}).exec(function(err, categories){
                             if(err) res.send(err);
-
+                            console.log("ArticleCategory.find");
+                            console.log(categories.length);
                             if(categories.length == 0){
-                                orderNo = 0
-                                  var articleCategoryattribute = {name:req.body.name,imageUrl:imgeFileName,isNew:req.body.isNew,appId:req.body.appId,orderNo:orderNo}
+                                orderNo = 0;
+                                  var articleCategoryattribute = {name:req.body.name,imageUrl:imgeFileName,isNew:req.body.isNew,appId:req.body.appId,orderNo:orderNo};
                                     ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
+                                        console.log(err,articleCategory);
                                         if (err){
                                             res.send(err);
                                         }else{
@@ -177,12 +181,19 @@ module.exports = {
                                     });
 
                             }else{
-                                ArticleCategory.find({appId: req.body.appId}).max('orderNo').exec(function(err, categories){
-
+                                ArticleCategory.find({appId: req.body.appId}).sort({orderNo:-1}).limit(1).exec(function(err, categories){
+                                    console.log('err:',err);
+                                    if (err) {
+                                        return res.send(err);
+                                    }
+                                    console.log("ArticleCategory.find.max");
+                                    console.log(err,categories);
+                                    console.log("ArticleCategory.find.max");
                                     orderNo = categories[0].orderNo + 1;
 
                                     var articleCategoryattribute = {name:req.body.name,imageUrl:imgeFileName,isNew:req.body.isNew,appId:req.body.appId,orderNo:orderNo}
                                     ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
+                                        console.log(err,categories);
                                         if (err){
                                             res.send(err);
                                         }else{

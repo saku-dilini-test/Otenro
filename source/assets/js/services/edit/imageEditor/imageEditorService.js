@@ -11,20 +11,27 @@
     ]);
     function imageEditorService($mdDialog) {
 
-        function showImageEditorDialog(_fileUrl,_width,_height) {
+        var initialData = {image:''};
+        function showImageEditorDialog(_fileUrl,_width,_height,menuName, menu) {
             return $mdDialog.show({
                 controller: 'imageEditorCtrl',
                 templateUrl: 'user/edit/imageEditor/imageEditor.html',
-                clickOutsideToClose: false,
+                clickOutsideToClose: true,
                 locals: {
                     fileUrl: _fileUrl,
                     width: _width,
-                    height: _height
+                    height: _height,
+                    initialData : menuName,
+                    menu : menu,
                 },
             });
         };
         return {
-            callImageEditor: function (_file,_width,_height){
+            getImage : function(){
+                return initialData;
+            },
+            callImageEditor: function (_file,_width,_height,menuName,menu){
+                console.log(menu);
                 var reader = new FileReader();
                 var fileUrl;
 
@@ -33,7 +40,7 @@
                 }
                 reader.onload = function(){
                     fileUrl = reader.result;
-                    showImageEditorDialog(fileUrl, _width, _height);
+                    showImageEditorDialog(fileUrl, _width, _height,menuName,menu);
                 }
             },
         };

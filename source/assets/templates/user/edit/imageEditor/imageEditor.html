@@ -1,6 +1,30 @@
-
+<style>
+    .img-editor-button-container{
+        display:flex;
+        width:100%;
+        flex-direction: row-reverse;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 5px;
+    }
+    .img-editor-button-container .custom-btn{
+        display:flex;
+        width:120px;
+        height: 30px;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 5px 10px;
+        margin: 0 5px;
+        background-color: #aaa;
+    }
+</style>
 <div>
     <div style="width:100%; height:90vh">
+        <div class="img-editor-button-container">
+            <div class="custom-btn" ng-click="imageEditorSave()">Save</div>
+            <div class="custom-btn" ng-click="imageEditorCancle()">Cancel</div>
+        </div>
         <div id="tui-image-editor-container"></div>
     </div>
 </div>

@@ -33,6 +33,7 @@ body > textarea {
 }
 .tui-image-editor-container .tui-image-editor-header {
 /* BUTTON AND LOGO */
+  display: none; /* added by .sanira */
   min-width: 533px;
   position: absolute;
   background-color: #151515;

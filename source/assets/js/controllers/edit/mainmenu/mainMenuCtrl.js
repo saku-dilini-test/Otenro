@@ -13,7 +13,7 @@
         $scope.newSortArr;
 
         $scope.tempplayer = "";
-
+        console.log( initialData);
 $scope.filesSortConfig = {
         animation: 150,
         ghostClass: 'ghost',
@@ -53,7 +53,6 @@ $scope.filesSortConfig = {
         // max character length defined
         $scope.maxMenuNavigation = 20;
         $scope.maxMenuCategory = 20;
-
         $scope.myImage='';
         $scope.myCroppedImage='';
 
@@ -61,26 +60,34 @@ $scope.filesSortConfig = {
         $scope.imageSelected = true;
         $scope.buttonName = "Browse Image";
 
+        function view(){
+            if($scope.templateCategory == tempCatBusiness){
+                mainMenuService.showEditMenuNavigationDialog(item,$scope.templateCategory);
+            }else if($scope.templateCategory == tempCatMedia){
+                mainMenuService.showEditMenuCategoryDialog(item,$scope.templateCategory);
+            }
+        }
         // open image editor function (added by .sanira)
-        $scope.openImageEditorDialog = function (element,width,height) {
+        $scope.openImageEditorDialog = function (element,width,height,menuName) {
             var file = element.files[0];
-            imageEditorService.callImageEditor(file,width,height);
+            console.log(initialData);
+            imageEditorService.callImageEditor(file,width,height,menuName,initialData.menu);
         };
+
+
 
         // image crop function
         $scope.cropImage = function () {
+            console.log("inside cropImage");
+            let name;
+            if($scope.menu){
+                name = $scope.menu.name;
+            }else{
+                name = '';
+            }
             var handleFileSelect=function(evt) {
                 var file=evt.currentTarget.files[0];
-                var reader = new FileReader();
-                reader.onload = function (evt) {
-                    $scope.$apply(function($scope){
-                        $scope.myImage=evt.target.result;
-                        $scope.picFile =  $scope.myImage;
-                    });
-                };
-                reader.readAsDataURL(file);
-                $scope.imageSelected =false;
-                $scope.buttonName = "Upload";
+                imageEditorService.callImageEditor(file,100,100, name, initialData.menu);
             };
             angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
         };
@@ -125,18 +132,20 @@ $scope.filesSortConfig = {
                 }
         }
 
-        $scope.addImage = function(img){
+        function addImage(img){
+            console.log(img)
                     if(angular.element('#fileInput').val() == ''){
                         toastr.error('Please choose an image to upload', 'Warning', {
                             closeButton: true
                         });
                     }
                     else{
-                        var im = $scope.tmpImage;
-                        im[0] = $scope.picFile;
-                        $scope.tmpImage = im;
+                        $scope.tmpImage = [];
+                        $scope.tmpImage[0] = img;
+                        console.log($scope.tmpImage);
                         $scope.mainImg = img;
                         $scope.myImage = null;
+
                         toastr.success('Image has been uploaded successfully', 'message', {
                            closeButton: true
                         });
@@ -144,7 +153,7 @@ $scope.filesSortConfig = {
 
                      $scope.imageSelected = true;
                      $scope.buttonName = "Browse Image";
-                };
+        };
 
         // Main Menu view
         if($scope.initialData == null ) {
@@ -179,53 +188,65 @@ $scope.filesSortConfig = {
                 });
         }   // Menu-Navigation or Menu-Category (Article Category) -> Add / Update
         else if($scope.initialData){
-            if(initialData.from && initialData.from.from == 'fromPublishArticle' || initialData.menu == 'addNewMenuCategory'){
-                $scope.heading = "Add Category";
+            console.dir($scope.initialData);
+
+            if($scope.initialData.from === 'imageEditorCtrl'){
+                 $scope.menu = $scope.initialData.details;
+                 // console.log($scope.initialData.menu.image);
+                 addImage($scope.initialData.details.image);
+                // $scope.tmpImage = [];
+                // $scope.tmpImage =  $scope.initialData.menu.image;
 
             }else{
-                $scope.heading = "Edit Category";
-            }
-            // Config
-            $scope.templateCategory = $scope.initialData.templateCategory;
-            // Add new Menu Navigation
-            if($scope.initialData.menu == 'addNewMenuNavigation'){
+                if(initialData.from && initialData.from.from == 'fromPublishArticle' || initialData.menu == 'addNewMenuCategory'){
+                    $scope.heading = "Add Category";
 
-            }  // Add New Menu Category
-            else if($scope.initialData.menu == 'addNewMenuCategory'){
-
-            }  // Update Menu-Navigation or Menu-Category
-            else if($scope.initialData.menu){
-                var imgLocation = '';
-                if($scope.templateCategory == tempCatBusiness){
-                    imgLocation = "secondNavi";
-                }
-                if($scope.templateCategory == tempCatMedia){
-                    imgLocation = "category";
-                }
-                if(($scope.templateCategory == tempCatMedia && $scope.initialData.menu.isNew == 'true') || ($scope.templateCategory == tempCatMedia && $scope.initialData.menu.isNew == true)){
-                    imgLocation = "secondNavi";
-                }
-                $scope.menu = $scope.initialData.menu;
-                $scope.serverImage = $scope.menu.imageUrl;
-                $scope.mainImg = $scope.menu.imageUrl;
-
-                // defined Navigation or Article Category image path
-                var imageURL;
-                if($rootScope.tempNew == 'true' || $rootScope.tempNew == true){
-                imageURL= SERVER_URL +"templates/viewWebImages?" +
-                                    "userId="+ $auth.getPayload().id +
-                                    "&appId="+$rootScope.appId+"&"+new Date().getTime()+
-                                    "&images="+imgLocation+"/"+$scope.menu.imageUrl;
                 }else{
-
-                 imageURL= SERVER_URL +"templates/viewImages?" +
-                    "userId="+ $auth.getPayload().id +
-                    "&appId="+$rootScope.appId+"&"+new Date().getTime()+
-                    "&img="+imgLocation+"/"+$scope.menu.imageUrl;
+                    $scope.heading = "Edit Category";
                 }
-                $scope.tmpImage[0] = imageURL;
-                $scope.picFile     = imageURL;
+                // Config
+                $scope.templateCategory = $scope.initialData.templateCategory;
+                // Add new Menu Navigation
+                if($scope.initialData.menu == 'addNewMenuNavigation'){
+
+                }  // Add New Menu Category
+                else if($scope.initialData.menu == 'addNewMenuCategory'){
+
+                }  // Update Menu-Navigation or Menu-Category
+                else if($scope.initialData.menu){
+                    var imgLocation = '';
+                    if($scope.templateCategory == tempCatBusiness){
+                        imgLocation = "secondNavi";
+                    }
+                    if($scope.templateCategory == tempCatMedia){
+                        imgLocation = "category";
+                    }
+                    if(($scope.templateCategory == tempCatMedia && $scope.initialData.menu.isNew == 'true') || ($scope.templateCategory == tempCatMedia && $scope.initialData.menu.isNew == true)){
+                        imgLocation = "secondNavi";
+                    }
+                    $scope.menu = $scope.initialData.menu;
+                    $scope.serverImage = $scope.menu.imageUrl;
+                    $scope.mainImg = $scope.menu.imageUrl;
+
+                    // defined Navigation or Article Category image path
+                    var imageURL;
+                    if($rootScope.tempNew == 'true' || $rootScope.tempNew == true){
+                        imageURL= SERVER_URL +"templates/viewWebImages?" +
+                            "userId="+ $auth.getPayload().id +
+                            "&appId="+$rootScope.appId+"&"+new Date().getTime()+
+                            "&images="+imgLocation+"/"+$scope.menu.imageUrl;
+                    }else{
+
+                        imageURL= SERVER_URL +"templates/viewImages?" +
+                            "userId="+ $auth.getPayload().id +
+                            "&appId="+$rootScope.appId+"&"+new Date().getTime()+
+                            "&img="+imgLocation+"/"+$scope.menu.imageUrl;
+                    }
+                    $scope.tmpImage[0] = imageURL;
+                    $scope.picFile     = imageURL;
+                }
             }
+
         }
 
         //Delete Categories related
@@ -282,8 +303,12 @@ $scope.filesSortConfig = {
         // Edit Menu
         $scope.goToEditMenuItemView = function(item){
             if($scope.templateCategory == tempCatBusiness){
+                console.log(1);
+
                 mainMenuService.showEditMenuNavigationDialog(item,$scope.templateCategory);
             }else if($scope.templateCategory == tempCatMedia){
+                console.log(2);
+
                 mainMenuService.showEditMenuCategoryDialog(item,$scope.templateCategory);
             }
         };
@@ -607,6 +632,8 @@ $scope.filesSortConfig = {
         };
         // Add menu category
         $scope.addNewCategory = function(file,menu){
+            console.log($scope.initialData,file,menu)
+
             if($scope.tmpImage[0] == null){
                 toastr.error('Please upload an image', 'Warning', {closeButton: true});
                 return;
@@ -657,7 +684,7 @@ $scope.filesSortConfig = {
                                        mainMenuService.showMainMenuDialog();
                                    }
                     }).error(function (err) {
-                        toastr.error(err.message, 'Warning', {
+                        toastr.error(err, 'Warning', {
                             closeButton: true
                         });
                     });
@@ -690,15 +717,16 @@ $scope.filesSortConfig = {
                     });
             }
             if($scope.mainImg != $scope.serverImage && !($scope.initialData.menu == 'addNewMenuCategory')){
+                console.log('image update');
                 $log.debug('imageUpdate true');
-                articleService.updateCategoryImage(file,menu.imageUrl,$rootScope.appId,$rootScope.tempNew).progress(function(evt) {
+                articleService.updateCategoryImage(file,$scope.initialData.menu.imageUrl,$rootScope.appId,$rootScope.tempNew).progress(function(evt) {
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                     $log.debug('progress: ' + progressPercentage + '% ' + evt.config.file.name);
                 }).success(function(data, status, headers, config) {
                     // update image name set to imageUrl in menu collection
-                    menu.imageUrl = data.imageUrl;
-                    $log.debug(menu);
-                    articleService.editCategory(menu)
+                    $scope.initialData.menu.imageUrl = data.imageUrl;
+                    $log.debug($scope.initialData.menu);
+                    articleService.editCategory($scope.initialData.menu)
                         .success(function (data) {
 
                             var urlPath;

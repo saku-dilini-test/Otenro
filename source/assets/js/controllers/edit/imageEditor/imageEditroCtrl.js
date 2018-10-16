@@ -4,12 +4,14 @@
 
 (function() {
     'use strict';
-    angular.module("appEdit").controller("imageEditorCtrl" , ['fileUrl','width','height',imageEditorCtrl]);
+    angular.module("appEdit").controller("imageEditorCtrl" , ['$scope','$mdDialog','fileUrl','width','height','initialData','mainMenuService','menu',imageEditorCtrl]);
 
 
-    function imageEditorCtrl(fileUrl,width,height) {
+    function imageEditorCtrl($scope,$mdDialog,fileUrl,width,height,initialData,mainMenuService,menu) {
         setTimeout(
             () => {
+                console.log(initialData);
+                $scope.menu = menu;
                 var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
                     includeUI: {
                         loadImage: {
@@ -17,7 +19,7 @@
                             path: fileUrl,
                             name: 'SampleImage'
                         },
-                        theme: blackTheme, // or whiteTheme
+                        theme: whiteTheme, // or whiteTheme
                         initMenu: 'crop',
                         menuBarPosition: 'bottom'
                     },
@@ -29,7 +31,27 @@
 
                 window.onresize = function () {
                     imageEditor.ui.resizeEditor();
-                }
+                };
+
+                /**
+                 * catch the edited image(base 64) from the image editor
+                 */
+                $scope.imageEditorSave = function() {
+
+                    var details = {
+                        name:initialData,
+                        image :imageEditor.toDataURL()
+                    };
+                    console.log(menu);
+                    if(menu === 'addNewMenuCategory'){
+                        mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory','3','imageEditorCtrl', details);
+                    }else{
+                        mainMenuService.showEditMenuCategoryDialog($scope.menu,'3','imageEditorCtrl', details);
+                    }
+
+                    // $mdDialog.hide();
+
+                };
 
             }
             , 1000)
