@@ -17,8 +17,8 @@ elif [ $ENV == 'stag' ]
 then
 	DB='otenroStagin'
 	serverUrl='http://192.168.8.117:1339'
-	MESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/';
-    APPFILESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/';
+	MESERVER='/var/www/html/developer/meServer/temp/';
+    APPFILESERVER='/var/www/html/developer/appFileServer/';
 else
 	DB='otenroTest'
 	serverUrl='https://dashboard.otenro.com'

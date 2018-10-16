@@ -46,10 +46,10 @@ module.exports = {
   HOST_URL : 'http://192.168.8.117:1339',
   // ME SERVER Config
   ME_SERVER_URL : 'http://192.168.8.117:8082/developer/meServer/temp/',
-  ME_SERVER : '/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/',
+  ME_SERVER : '/var/www/html/developer/meServer/temp/',
   ME_SERVER_PORT : 8082,
   // APP FILE SERVER Config
-  APP_FILE_SERVER : '/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/',
+  APP_FILE_SERVER : '/var/www/html/developer/appFileServer/',
   CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789',
   TEMPLATES_PATH : '/home/projects/appmaker/Otenro/initData/templates/',
   PROGRESSIVE_TEMPLATES_PATH : '/home/projects/appmaker/Otenro/initData/distribution/',
