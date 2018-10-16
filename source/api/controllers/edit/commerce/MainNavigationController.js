@@ -142,16 +142,16 @@ module.exports = {
         }else {
             dePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/';
         }
-console.log(searchApp)
+// console.log(searchApp)
         ArticleCategory.find(searchApp, function (err, found) {
             if (err) return res.send(err);
-                    console.log(found)
+                    // console.log(found)
             if(found.length != 0) {
                 return res.send(409, {message: 'Category name already exists!'});
 
             }else {
                     if (!tmpImage.match("http")) {
-                        console.log("inside the http");
+                        // console.log("inside the http");
                         var imgeFileName = randomstring.generate() + ".png";
                         var data = tmpImage.replace(/^data:image\/\w+;base64,/, "");
                         var buf = new Buffer(data, 'base64');
@@ -166,13 +166,13 @@ console.log(searchApp)
 
                         ArticleCategory.find({appId: req.body.appId}).exec(function(err, categories){
                             if(err) res.send(err);
-                            console.log("ArticleCategory.find");
-                            console.log(categories.length);
+                            // console.log("ArticleCategory.find");
+                            // console.log(categories.length);
                             if(categories.length == 0){
                                 orderNo = 0;
                                   var articleCategoryattribute = {name:req.body.name,imageUrl:imgeFileName,isNew:req.body.isNew,appId:req.body.appId,orderNo:orderNo};
                                     ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
-                                        console.log(err,articleCategory);
+                                        // console.log(err,articleCategory);
                                         if (err){
                                             res.send(err);
                                         }else{
@@ -182,18 +182,18 @@ console.log(searchApp)
 
                             }else{
                                 ArticleCategory.find({appId: req.body.appId}).sort({orderNo:-1}).limit(1).exec(function(err, categories){
-                                    console.log('err:',err);
+                                    // console.log('err:',err);
                                     if (err) {
                                         return res.send(err);
                                     }
-                                    console.log("ArticleCategory.find.max");
-                                    console.log(err,categories);
-                                    console.log("ArticleCategory.find.max");
+                                    // console.log("ArticleCategory.find.max");
+                                    // console.log(err,categories);
+                                    // console.log("ArticleCategory.find.max");
                                     orderNo = categories[0].orderNo + 1;
 
                                     var articleCategoryattribute = {name:req.body.name,imageUrl:imgeFileName,isNew:req.body.isNew,appId:req.body.appId,orderNo:orderNo}
                                     ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
-                                        console.log(err,categories);
+                                        // console.log(err,categories);
                                         if (err){
                                             res.send(err);
                                         }else{
@@ -241,7 +241,7 @@ console.log(searchApp)
                     });
                 });
 
-                console.log(second);
+                // console.log(second);
                 if (second != ""){
                     SecondNavigation.destroy({ id : itemIds}).exec(function (err) {
                         if (err) return callback("Error while deleting " + err.message);
@@ -275,13 +275,13 @@ console.log(searchApp)
     },
 
     deleteItem : function (req,res) {
-        console.log("Executing deleteItem");
+        // console.log("Executing deleteItem");
         return this.deleteItems(req,res,[req.body.id]);
     },
 
     deleteCategories : function (req,res) {
-        console.log("Executing deleteCategories");
-        console.log(req.body);
+        // console.log("Executing deleteCategories");
+        // console.log(req.body);
         var categoryIds = req.body;
         return this.deleteItems(req,res,categoryIds);
     }
