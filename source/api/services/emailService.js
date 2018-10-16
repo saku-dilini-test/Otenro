@@ -18,8 +18,8 @@ var transporter = nodemailer.createTransport({
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
-        user: 'support@appmaker.lk', // generated ethereal user
-        pass: 'Jza12BTL36' // generated ethereal password
+        user: 'no_reply_ideadroid@appmaker.lk', // generated ethereal user
+        pass: 'FoRH7DAyKG' // generated ethereal password
     },
     tls:{
         rejectUnauthorized: false
@@ -32,8 +32,8 @@ var transporter = nodemailer.createTransport({
 
 
 var server  = email.server.connect({
-    user:    "support@appmaker.lk",
-    password:"7hJvsYiU",
+    user:    "no_reply_ideadroid@appmaker.lk",
+    password:"FoRH7DAyKG",
     host:    "appmaker.lk",
     tls:false,
     port: 25
@@ -128,7 +128,6 @@ module.exports = {
                              '                               <td class="hero-subheader__content" style="font-size: 16px; line-height: 27px; color: #969696; padding: 0 0 50px 0;" align="justify">' +
                                                               '<p>Hi '+ data.fName + " " + data.lName + ' Welcome Aboard!</p>'+
                               '                                      <p>Thank you for registering for Ideadroid, the platform that enables you to create mobile applications without any coding. The service is currently in beta, and some features of the platform are currently not enabled.</p>' +
-                               '                                     <p>As the service is in beta you may encounter bugs or errors. Please report these to support@appmaker.lk so that we can ensure they are addressed at launch.</p>' +
                                 '                                    <p>Good luck on your app creation journey!</p>' +
                                  '                                   <p style="padding: 15px 0 0 0; font-weight:700; ">The Ideamart Team<br/>' +
                                   '                                      </p>' +
@@ -182,9 +181,9 @@ module.exports = {
 
 
         var mailOptions = {
-            from: "support@appmaker.lk",
+            from: config.IDEABIZ_EMAIL,
             to: data.email,
-            subject: "Welcome to AppMaker ",
+            subject: "Welcome to Ideadroid",
             html: emailBody,
             attachments: [
                 {
@@ -710,7 +709,7 @@ module.exports = {
                                 "<a href='"+serverOrg+"/#/resetPassword/"+token+"'>Click to here for  verify your email address</a></html>"
 
                             var mailOptions = {
-                                from: 'support@appmaker.lk', // sender address
+                                from: config.IDEABIZ_EMAIL, // sender address
                                 to: data.email, // list of receivers
                                 subject: data.type, // Subject line
                                 html: emailBody
@@ -724,7 +723,7 @@ module.exports = {
                                 }
                                 console.log('Message sent: %s', info.messageId);
 
-                                return res({msg:'Check your email for get the verification link'})
+                                return res({type:'Success',msg:'Check your email for get the verification link'})
 
                             });
 
@@ -733,7 +732,7 @@ module.exports = {
                 });
             }
             else{
-                return res({msg:'Email does not exist'})
+                return res({type:'Error',msg:'Email does not exist'})
             }
         });
     },
@@ -1044,11 +1043,7 @@ module.exports = {
 
     },
 
-        sendApkEmail : function(data,callback){
-
-        console.log("inside send apk email " + data.email);
-        console.log(config.server.host);
-        console.log(data);
+    sendApkEmail : function(data,callback){
 
         var status = data.operator.status;
         var subject,emailBody,operator;
@@ -1062,7 +1057,7 @@ module.exports = {
             }
          });
 
-        var apkFile = config.server.host +'/getApk';
+        var apkFile = config.server.host + '/getApkPath' +'/?userId=' + data.uid + '&appId=' + data.id + '&appName='+ data.appName;
             var emailBody,subject;
 
             var email = data.email;

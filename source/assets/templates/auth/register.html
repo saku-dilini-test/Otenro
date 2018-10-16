@@ -198,18 +198,6 @@ chosen link or button. -->
           Enter a valid bank code
         </span>
       </fieldset>
-      <fieldset ng-if = "user.country == 'Malaysia'">
-        <label> SWIFT BIC code </label>
-        <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
-        <input class="input-shadow-border" name="swiftCode" type="text" ng-pattern="/^[1-9A-z]\d*$/"
-               style="float:left;" ng-model="user.swiftCode" ng-enter ="authSignUp(user);" required/>
-        <span class="error help-block" ng-show="register.swiftCode.$error.required">
-          *
-        </span>
-        <span class="error help-block" ng-show="register.swiftCode.$dirty && register.swiftCode.$invalid">
-          Enter a valid swift code
-        </span>
-      </fieldset>
       <!--Bank Branch Code-->
       <fieldset>
         <label> Bank Branch Code </label>
@@ -255,7 +243,7 @@ chosen link or button. -->
 
       <fieldset>
         <md-checkbox ng-model="user.terms" aria-label="Terms & Conditions" required>
-          I agree to Ideadroid <a target="_blank" href="http://ideadroid.ideamart.io/appmakerterms.pdf" style="font-size: 12px;">Terms & Conditions</a>
+          I agree to Ideadroid <a target="_blank" href="https://ideadroid.ideamart.io/ideadroidterms.pdf" style="font-size: 12px;">Terms & Conditions</a>
         </md-checkbox>
       </fieldset>
       <div ng-show="isPinReqSuccess">

@@ -22,14 +22,14 @@ then
 elif [ $ENV == 'stag' ]
 then
     echo '++++++++++++++++Running importData.sh for Staging+++++++++++++++++++'
-    MESERVER='/home/admin/web/testcdn.otenro.com/public_html/temp/';
-    APPFILESERVER='/home/otenro/OtenroTest/appFileServer/';
+    MESERVER='/var/www/html/developer/meServer/temp/';
+    APPFILESERVER='/var/www/html/developer/appFileServer/';
 	DB='appmaker'
 	serverUrl='http://appmaker.ddns.net'
 else
     echo '++++++++++++++++Running importData.sh for Production+++++++++++++++++++'
-    MESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/meServer/temp/';
-    APPFILESERVER='/home/admin/web/cdn.appmaker.lk/public_html/developer/appFileServer/';
+    MESERVER='/home/admin/web/ideadroidcdn.ideamart.io/public_html/temp/';
+    APPFILESERVER='/home/admin/web/ideadroidcdn.ideamart.io/public_html/developer/appFileServer/';
     DB='ideadroid'
     serverUrl='https://ideadroid.ideamart.io'
     MONGO_PARAMS='--host 13.229.197.90:27017 --username ideadroid --password SUperman123';

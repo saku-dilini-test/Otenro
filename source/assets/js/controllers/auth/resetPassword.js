@@ -19,7 +19,7 @@
             Auth.forgotPassword(verify).success(function(data){
             //reset the password with the new password
             userProfileResource.resetPassword(reset).success(function () {
-                toastr.success('Password successfully changed ', {closeButton: true});
+                toastr.success('Password successfully changed ', 'Success', {closeButton: true});
                   $state.go('anon.welcome');
 
             }).catch(function onError() {

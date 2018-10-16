@@ -26,11 +26,11 @@
 
 
     <div class="padding margin-bottom clearfix">
-        <fieldset ng-style="myObj" id = "searchBar">
+        <fieldset ng-if="showSearchField" ng-style="myObj" id = "searchBar">
             <input type="text" placeholder="Search by app name" ng-model="searchPublishApps.appName" id="search" name="search">
             <input type="submit" class="me-search-button">
         </fieldset>
-        <fieldset>
+        <fieldset ng-if="(user.userRole[0] == 'ADMIN' || user.userRole[0] == 'SUPER_ADMIN')&&showSearchField">
             <md-select id="searchStatus" placeholder="All" ng-model="searchPublishApps.publishedStatus" ng-change="all(searchPublishApps.publishedStatus)" style="margin-left: 20px;width: 398px;">
                 <md-option ng-value="status" ng-repeat="status in searchStatuses">{{status}}</md-option>
             </md-select>
@@ -297,7 +297,8 @@
                                                 <h6 flex="100">Select Application</h6>
                                                 <select placeholder="Select Report Type"  aria-label="Country Name"
                                                         ng-model="revenueAndTrafficReport.appName" required >
-                                                    <option ng-value="app.id" ng-repeat="app in applicationArrSort(apps) track by $index">{{app.appName}}</option>
+                                                    <option ng-value="All" >All</option>
+                                                    <option ng-value="app.id" ng-repeat="app in applicationArrSort(apps) ">{{app.appName | titleCase}}</option>
                                                 </select>
 
                                             </div>
@@ -309,10 +310,9 @@
                                     <div class="reports-period-container">
 
                                         <div class="reports-container">
-                                            <h6>Select period</h6>
-
                                             <form name="revenueAndTrafficReportForm">
                                                 <div ng-if="revenueAndTrafficReport.report == 'Daily'">
+                                                    <h6>Select period</h6>
                                                     <div class="row margin-bottom">
                                                         <div class="col-xs-4">
                                                             <adm-dtp ng-model='revenueAndTrafficReport.sdate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
@@ -327,7 +327,7 @@
                                                     <Button type="button" class="me-default-button" ng-click="revenueAndTrafficReportData(revenueAndTrafficReport)">Search</Button>
                                                 </div>
                                                 <div ng-if="revenueAndTrafficReport.report == 'Monthly'" >
-
+                                                    <h6>Select period</h6>
                                                         <label>From</label>
                                                         <br>
                                                                 <select ng-model="revenueAndTrafficReport.fromYear" required>
@@ -355,6 +355,7 @@
                                                     <Button type="button" class="me-default-button" ng-click="revenueAndTrafficReportData(revenueAndTrafficReport)">Search</Button>
                                                 </div>
                                                 <div ng-if="revenueAndTrafficReport.report == 'Yearly'">
+                                                    <h6>Select period</h6>
                                                     <select placeholder="From Year" ng-model="revenueAndTrafficReport.fromYear" required>
                                                         <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
                                                     </select>
@@ -388,8 +389,8 @@
                                             <th ng-if="revenueAndTrafficReport.report == 'Monthly'">Month</th>
                                             <th >Operator</th>
                                             <th ng-if="user.userRole=='APP_CREATOR'">Application</th>
-                                            <th>AppMaker Revenue</th>
-                                            <th>AppMaker Traffic</th>
+                                            <th>Revenue</th>
+                                            <th>Traffic</th>
                                             <th>Total Revenue</th>
                                             <th>Total Traffic</th>
                                         </tr>
@@ -433,7 +434,8 @@
                                             <h6 flex="100">Select Application</h6>
                                             <select placeholder="Select Report Type"  aria-label="Country Name"
                                                     ng-model="applicationBaseReport.appName" required >
-                                                <option ng-value="app.appName" ng-repeat="app in applicationArrSort(apps) track by $index">{{app.appName}}</option>
+                                                <option ng-value="all" >All</option>
+                                                <option ng-value="app.appName" ng-repeat="app in applicationArrSort(apps)">{{app.appName | titleCase}}</option>
                                             </select>
 
                                             <h6 flex="100">Select operator</h6>
@@ -448,10 +450,10 @@
                                     <div class="reports-period-container">
 
                                         <div class="reports-container">
-                                            <h6>Select period</h6>
 
                                             <form name="applicationBaseReportReportForm">
                                                 <div ng-if="applicationBaseReport.report == 'Daily'">
+                                                    <h6>Select period</h6>
                                                     <div class="row margin-bottom">
                                                         <div class="col-xs-4">
                                                             <adm-dtp ng-model='applicationBaseReport.sdate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
@@ -465,11 +467,14 @@
                                                     <Button type="button" class="me-default-button" ng-click="applicationBaseReportData(applicationBaseReport)">Search</Button>
                                                 </div>
                                                 <div ng-if="applicationBaseReport.report == 'Monthly'" >
+                                                    <h6>Select period</h6>
                                                     <label>From</label>
                                                     <br>
                                                     <select ng-model="applicationBaseReport.fromYear" required>
                                                         <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
                                                     </select>
+
+
 
                                                     <select ng-model="applicationBaseReport.fromMonth" required>
                                                         <option  ng-repeat="oneMonth in months" ng-value="{{oneMonth.month}}">{{oneMonth.desc}}</option>
@@ -492,6 +497,7 @@
 
                                                 </div>
                                                 <div ng-if="applicationBaseReport.report == 'Yearly'">
+                                                    <h6>Select period</h6>
                                                     <select placeholder="From Year" ng-model="applicationBaseReport.fromYear" required>
                                                         <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
                                                     </select>
@@ -581,7 +587,7 @@
                                             <h6 flex="100">Select operator</h6>
                                             <select placeholder="Select operator"  aria-label="Country Name"
                                                     ng-model="failedTransactionReport.operator" required >
-                                                <option ng-value="operator.operator" ng-repeat="operator in operatorArrSort(operators)">{{operator.operator}}</option>
+                                                <option ng-value="operator.operator" ng-repeat="operator in operatorArrSort(operators)">{{operator.operator | titleCase}}</option>
                                             </select>
                                         </div>
 
@@ -592,10 +598,9 @@
                                     <div class="reports-period-container">
 
                                         <div class="reports-container">
-                                            <h6>Select period</h6>
-
                                             <form name="reconciliationForm">
                                                 <div ng-if="failedTransactionReport.report == 'Daily'">
+                                                    <h6>Select period</h6>
                                                     <div class="row margin-bottom">
                                                         <div class="col-xs-4">
                                                             <adm-dtp ng-model='failedTransactionReport.fromDate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
@@ -735,7 +740,7 @@
                                             <h6 flex="100">Select operator</h6>
                                             <select placeholder="Select operator"  aria-label="Country Name"
                                                     ng-model="reconciliationReports.operator" required >
-                                                <option ng-value="operator.operator" ng-repeat="operator in operatorArrSort(operators)">{{operator.operator}}</option>
+                                                <option ng-value="operator.operator" ng-repeat="operator in operatorArrSort(operators)">{{operator.operator | titleCase}}</option>
                                             </select>
 
                                         </div>
@@ -745,10 +750,9 @@
                                 <div class="reports-period-container">
 
                                 <div class="reports-container">
-                                        <h6>Select period</h6>
-
                                         <form name="reconciliationForm">
                                             <div ng-if="reconciliationReports.report == 'Daily'">
+                                                <h6>Select period</h6>
                                                 <div class="row margin-bottom">
                                                     <div class="col-xs-4">
                                                         <adm-dtp ng-model='reconciliationReports.sdate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
@@ -762,6 +766,7 @@
                                                 <Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>
                                             </div>
                                             <div ng-if="reconciliationReports.report == 'Monthly'" >
+                                                <h6>Select period</h6>
                                                 <label>From</label>
                                                 <br>
                                                 <select ng-model="reconciliationReports.fromYear" required>
@@ -789,6 +794,7 @@
                                                 <Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>
                                             </div>
                                             <div ng-if="reconciliationReports.report == 'Yearly'">
+                                                <h6>Select period</h6>
                                                 <select placeholder="From Year" ng-model="reconciliationReports.fromYear" required>
                                                     <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
                                                 </select>

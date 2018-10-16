@@ -141,7 +141,10 @@ module.exports = {
 
         var query = {id:req.userId};
         User.findOne(query, function(err, user) {
-            if (err) return done(err);
+            if (err) {
+                sails.log.error('Error when searching for User in getUserProfile for userId: %s Error: $s ', req.userId, err );
+                return res.serverError(err);
+            }
             res.send(user);
         });
     },

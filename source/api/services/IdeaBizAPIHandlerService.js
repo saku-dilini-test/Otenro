@@ -73,7 +73,6 @@ module.exports = {
     },
 
     requestCallbackContinue: function(err, response, body, callback) {
-        sails.log.debug('IdeaBizAPIHandlerService: In requestCallbackContinue err:',err);
         if (err) {
             sails.log.error('IdeaBizAPIHandlerService: Error while requesting the IdeaBiz api: ' + this.requestObj.url  + " err: " + err);
             return callback(null,err);

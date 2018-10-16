@@ -85,9 +85,12 @@ module.exports = {
 
             if(result[0]){
                 console.log('Push message update');
+                var prevDate = result[0].date;
                 PushMessage.update(criteria,req.body).exec(function(err,data){
                     if(err) return res.send(err);
-                    thisCtrl.scheduleJobForPushMessages(res,data[0].date,data[0]);
+                    if(prevDate!==data[0].date) {
+                        thisCtrl.scheduleJobForPushMessages(res, data[0].date, data[0]);
+                    }
                     return res.send(data);
                 });
 

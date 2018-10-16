@@ -5,7 +5,7 @@ var SIMPLE_DATE_FORMAT = 'yyyy-mm-dd';
 var IdeabizAdminapiController = require('../../controllers/ideabiz/IdeabizAdminapiController');
 var chargingAPICallLogService = require('../../services/IdeabizChargingAPICallLogService');
 var moment = require('moment');
-
+var STATUS_CODE_SERVER_ERROR = '500';
 var DATE_FORMAT = "YYYY-MM-DD";
 
 /**
@@ -31,7 +31,8 @@ module.exports = {
             'displayMessage': '', //Will show to the end user.
             'errorMessage': '', //This is the actual error message to use in our debugging purposes, will not show to the end user.
             'date': new Date().toLocaleString(),
-            'isPaymentSuccess': false
+            'isPaymentSuccess': false,
+            'subscriptionStatus': null //Will tell thet the user SUBSCRIBED/UNSUBSCRIBED/null
         };
 
         Application.findOne({id:appId}).exec(function(err, app){
@@ -62,6 +63,10 @@ module.exports = {
 
                     //Check whether the service is available for the operator for the subscribed msisdn.
                     if(appUser && appUser.msisdn){
+                        if(appUser.subscriptionStatus) {
+                            response.subscriptionStatus = appUser.subscriptionStatus;
+                        }
+
                         utilsService.getOperator(appUser.msisdn, function (operatorFor_msisdn,err) {
                             if(err){
                                 sails.log.error('IdeabizController: Error getting the operator for the msisdn: ' + appUser.msisdn + ' Error: ' + err);
@@ -143,7 +148,7 @@ module.exports = {
                                                     }
                                                 });
                                             }else{
-                                                sails.log.debug('IdeabizController: Unsubscribed from the service msisdn: ' + appUser.msisdn);
+                                                sails.log.debug('IdeabizController: Unsubscribed from the service msisdn:' + appUser.msisdn);
                                                 thisCtrl.sendUnsubscribedResponse(res,response,appUser.msisdn,appId);
                                             }
                                         }else{
@@ -166,6 +171,7 @@ module.exports = {
                     }else{
                         sails.log.error('IdeabizController: AppUser or msisdn does not exists for the query:' + JSON.stringify(query));
                         response.isError = false;
+                        response.subscriptionStatus = config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code;
                         return res.ok(response);
                     }
                 });
@@ -231,8 +237,13 @@ module.exports = {
                         IdeabizAdminapiController.chargeUserAPiCall(msisdn, appId, function (paymentData, err) {
                             chargingAPICallLogService.removeFromChargingMap(appId,msisdn);
                             if (err) {
-                                sails.log.debug("IdeabizController: (No Payment record) Charging failed since no sufficient balance in the acc, just after complete the Charging call, for msisdn: %s appID: %s ", msisdn, appId);
-                                response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                                if(err === STATUS_CODE_SERVER_ERROR){
+                                    sails.log.debug("IdeabizController: (No Payment record) Charging failed since there was a response which doesn't seems to be ok for msisdn: %s appID: %s ", msisdn, appId);
+                                    response.displayMessage = config.END_USER_MESSAGES.SERVER_ERROR;
+                                }else {
+                                    sails.log.debug("IdeabizController: (No Payment record) Charging failed since no sufficient balance in the acc, just after complete the Charging call, for msisdn: %s appID: %s ", msisdn, appId);
+                                    response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                                }
                                 return res.ok(response);
                             } else if (paymentData.payment == "ok") {
                                 sails.log.debug("IdeabizController: (No Payment record) Charging successfully Renewed just after complete the Charging call, for msisdn: %s appID: %s ", msisdn, appId);
@@ -308,8 +319,13 @@ module.exports = {
                         IdeabizAdminapiController.chargeUserAPiCall(msisdn, appId, function (paymentData, err) {
                             chargingAPICallLogService.removeFromChargingMap(appId,msisdn);
                             if (err) {
-                                sails.log.debug("IdeabizController: (No Payment record) Charging failed since no sufficient balance in the acc, just after complete the Charging call, for msisdn: %s appID: %s ", msisdn, appId);
-                                response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                                if(err === STATUS_CODE_SERVER_ERROR){
+                                    sails.log.debug("IdeabizController: (No Payment record) Charging failed since there was a response which doesn't seems to be ok for msisdn: %s appID: %s ", msisdn, appId);
+                                    response.displayMessage = config.END_USER_MESSAGES.SERVER_ERROR;
+                                }else {
+                                    sails.log.debug("IdeabizController: (No Payment record) Charging failed since no sufficient balance in the acc, just after complete the Charging call, for msisdn: %s appID: %s ", msisdn, appId);
+                                    response.displayMessage = config.END_USER_MESSAGES.INSUFFICIENT_BALANCE;
+                                }
                                 return res.ok(response);
                             } else if (paymentData.payment == "ok") {
                                 sails.log.debug("IdeabizController: (No Payment record) Charging successfully Renewed just after complete the Charging call, for msisdn: %s appID: %s ", msisdn, appId);
@@ -419,5 +435,62 @@ module.exports = {
         var appId = req.param("appId");
         IdeabizChargingAPICallLogService.removeFromChargingMap(appId,msisdn);
         res.ok('Removed from Charging map');
+    },
+
+    /**
+     * This will give you the End User Subascription Status whether SUBSCRIBE/UNSUBSCRIBE/null(If msisdn does not registered yet)
+     * @param req
+     * @param res
+     */
+    getSubscriptionStatus: function(req,res){
+        var msisdn = req.param("msisdn");
+        var uuId = req.param("uuId");
+        var appId = req.param("appId");
+
+        sails.log.debug("IdeabizController: Get Subscription Status for the  appId: " + appId + ' UUID: ' + uuId + ' msisdn:' + msisdn);
+
+        var response = {
+            'subscriptionStatus': null //Will tell thet the user SUBSCRIBED/UNSUBSCRIBED/null
+        };
+
+        Application.findOne({id:appId}).exec(function(err, app){
+            if(err){
+                sails.log.error("IdeabizController: Error while getting the Application for the  appId: " + appId + ' error: ' + err);
+                return res.ok(response);
+            }
+
+            if(app && app.isActive){
+                console.log(uuId);
+                var query = {
+                    'appId': appId
+                };
+
+                if(uuId){
+                    query.deviceUUID = uuId;
+                }else{
+                    query.msisdn = msisdn;
+                }
+
+                AppUser.findOne(query).exec(function(err, appUser){
+                    if(err){
+                        sails.log.error("Error while checking App User Status, error: " + err);
+                        return res.ok(response);
+                    }
+
+                    //Check whether the service is available for the operator for the subscribed msisdn.
+                    if(appUser && appUser.msisdn && appUser.subscriptionStatus){
+                        response.subscriptionStatus = appUser.subscriptionStatus;
+                    }else{
+                        sails.log.error('IdeabizController: AppUser or msisdn does not exists for the query:' + JSON.stringify(query));
+                    }
+                    return res.ok(response);
+                });
+            } else{
+                sails.log.error("IdeabizController: Application has been deleted for the appId: " + appId);
+                return res.ok(response);
+            }
+        });
     }
+
+
 };

@@ -473,6 +473,7 @@ module.exports.routes = {
      */
 
     'POST /ideabiz/isSubscribed': 'ideabiz/IdeabizController.isSubscribed',
+    'POST /ideabiz/getSubscriptionStatus': 'ideabiz/IdeabizController.getSubscriptionStatus',
 
     /**
      * IdeabizSMSController (ideaDroid)

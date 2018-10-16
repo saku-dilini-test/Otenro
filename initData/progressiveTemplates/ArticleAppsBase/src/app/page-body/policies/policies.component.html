@@ -22,9 +22,9 @@
 
     <!-- <hr class="featurette-divider"> -->
 
-    <div class="row">
+    <div class="row" *ngIf="defaultTerms">
       <div class="col-sm-12">
-        <h3 class="padding-vertical main-header-font">App Maker Terms and Conditions</h3>
+        <h3 class="padding-vertical main-header-font">Ideadroid Terms and Conditions</h3>
       </div>
       <div class="main-content-font" [innerHTML]="defaultTerms"></div>
     </div>

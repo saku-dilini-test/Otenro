@@ -49,8 +49,8 @@
   <div id="mySidenav" class="sidenav  main-navigation">
     <div class="closebtn" (click)="closeNav()">&times;</div>
     <a (click)="navigate('','')">Home</a>
-    <a *ngIf="!subscriptionStatus" data-toggle="modal" (click) = "openRegisterModel()">Register</a>
-    <a *ngIf="subscriptionStatus" data-toggle="modal" (click) = "openMyAccountModel()">My Account</a>
+    <a *ngIf="subscriptionStatus === null || subscriptionStatus === 'UNSUBSCRIBED'" data-toggle="modal" (click) = "openRegisterModel()">Register</a>
+    <a *ngIf="subscriptionStatus === 'SUBSCRIBED'" data-toggle="modal" (click) = "openMyAccountModel()">My Account</a>
     <a (click)="navigate('contact','Contact us')">Contact Us</a>
     <a (click)="navigate('policies','Privacy Policy')">Privacy Policy</a>
     <div class="navbar-brand text-center" (click)="navigate('','')">

@@ -112,10 +112,20 @@ module.exports = {
 
         var query, groupBy = "";
 
-        groupBy = {
-            groupBy: ['operator', 'date'],
-            sum: ['revenue', 'viewCount']
+        if (typeof appId==='undefined'){
+            groupBy = {
+                groupBy: ['operator', 'date'],
+                sum: ['revenue', 'viewCount']
+            }
+        }else {
+
+            groupBy = {
+                groupBy: ['operator', 'date','appId'],
+                sum: ['revenue', 'viewCount']
+            }
         }
+
+
 
         if (operator == "all") {
 
@@ -172,10 +182,21 @@ module.exports = {
 
         var appId = reqData.appId;
 
-        groupBy = {
-            groupBy: ['operator', 'month', 'year'],
-            sum: ['revenue', 'viewCount']
+        if (typeof appId==='undefined'){
+            groupBy = {
+                groupBy: ['operator', 'month', 'year'],
+                sum: ['revenue', 'viewCount']
+            }
+
+        }else {
+
+            groupBy = {
+                groupBy: ['operator', 'month', 'year','appId'],
+                sum: ['revenue', 'viewCount']
+            }
+
         }
+
 
         var query = "";
 
@@ -221,10 +242,21 @@ module.exports = {
 
         var query, groupBy = "";
 
-        groupBy = {
-            groupBy: ['operator', 'year'],
-            sum: ['revenue', 'viewCount']
+        if (typeof appId==='undefined'){
+            groupBy = {
+                groupBy: ['operator', 'year'],
+                sum: ['revenue', 'viewCount']
+            }
+        }else {
+            groupBy = {
+                groupBy: ['operator', 'year','appId'],
+                sum: ['revenue', 'viewCount']
+            }
         }
+
+
+        console.log("appId " + appId);
+        console.log("reqData.allAppIds " + reqData.allAppIds);
 
         if (operator == "all") {
             if (appId) {
@@ -249,6 +281,7 @@ module.exports = {
 
         }
 
+          console.log("query " + JSON.stringify(query));
 
         RevenueAndTrafficYearlySummary.find(query, groupBy).exec(function (err, data) {
             if (err) return done(err);

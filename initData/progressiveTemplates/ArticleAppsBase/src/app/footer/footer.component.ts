@@ -8,6 +8,7 @@ import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
 import { PagebodyServiceModule } from '../page-body/page-body.service'
 import {SMSService} from "../services/cordova-plugin-services/sms.service";
+import {MessageService} from "../services/message.service";
 declare let $:any;
 var footerCmp;
 
@@ -30,7 +31,8 @@ export class FooterComponent implements OnInit{
   constructor(private subscription:SubscribedDataService,
               private router: Router,
               private sms: SMSService,
-              private dataService:PagebodyServiceModule) {
+              private messageService: MessageService,
+              private dataService: PagebodyServiceModule) {
     footerCmp = this;
   }
 
@@ -42,6 +44,16 @@ export class FooterComponent implements OnInit{
       console.log("model footer close " + this.alive);
       this.isUnsubscribing = false;
     });
+
+    this.messageService.getMessage().subscribe(data => {
+      console.log('messageService.getMessage Footer component=>', data);
+      if (data.subscription) {
+        this.dataService.subscriptionStatus = data.subscription.subscriptionStatus;
+      } else {
+        this.dataService.subscriptionStatus = null;
+      }
+      this.subscriptionStatus = this.dataService.subscriptionStatus;
+    });
   }
 
   ngDoCheck(){
@@ -51,20 +63,9 @@ export class FooterComponent implements OnInit{
   }
 
   openFooterMyAccount(){
-    var uuid = localStorage.getItem("UUID");
-    let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn"),uuId: uuid };
-    this.subscription.getSubscribedData(data).subscribe(data => {
-      if(data.isError){
-        this.dataService.displayMessage = data.displayMessage;
-        $(() => {
-          $('#appStatusModel').modal('show');
-        });
-      } else {
-        $(() => {
-          $('#myAccountModelfooter').modal('show');
-        });
-      }
-    });
+      $(() => {
+        $('#myAccountModelfooter').modal('show');
+      });
   }
 
   navigate(val: string) {
@@ -83,7 +84,7 @@ export class FooterComponent implements OnInit{
 
     var uuid = localStorage.getItem("UUID");
 
-    let data = {appId:this.appId,uuId:uuid}
+    let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn"),uuId: uuid };
     this.isUnsubscribing = true;
 
     IntervalObservable.create(5000)
@@ -97,9 +98,9 @@ export class FooterComponent implements OnInit{
         this.dataService.numberOfTries++;
 
         this.subscription.getSubscribedData(data).subscribe(data =>{
-          this.subscriptionStatus = data.isSubscribed;
-          this.dataService.subscriptionStatus = data.isSubscribed;
-          if(!this.subscriptionStatus){
+          this.subscriptionStatus = data.subscriptionStatus;
+          this.dataService.subscriptionStatus = data.subscriptionStatus;
+          if(this.subscriptionStatus === this.dataService.STATUS_UNSUBSCRIBED){
             this.isUnsubscribing = false;
             localStorage.removeItem(this.appId+"msisdn")
              this.alive = false;

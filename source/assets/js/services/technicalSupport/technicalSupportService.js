@@ -221,6 +221,7 @@
                                         }
 
                                         var emailData = {
+                                            uid:user.id,
                                             id:app.id,
                                             email:user.email,
                                             fName:user.firstName,

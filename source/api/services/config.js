@@ -68,23 +68,6 @@ module.exports = {
     },
     IDEABIZ_USER_ACTIONS:{'states':["APPROVED,REJECTED"]},
     IDEABIZ_USER_NETWORK_CLIENTS:{
-
-        'Mobitel': {
-            'code': 'MOBITEL',
-            'desc': 'Mobitel',
-            'shareSplit': '60',
-            'email': 'supportTest@mobitel.com',
-            'priceRange': {
-                'daily': {
-                    'min': 1,
-                    'max': 10
-                },
-                'monthly': {
-                    'min': 1,
-                    'max': 1000
-                }
-            }
-        },
         'Dialog': {
             'code': 'DIALOG',
             'desc': 'Dialog',
@@ -100,40 +83,7 @@ module.exports = {
                     'max': 1000
                 }
             }
-        },
-        'Hutch': {
-            'code': 'HUTCH',
-            'desc': 'Hutch',
-            'shareSplit': '60',
-            'email': 'supportTest@hutch.com',
-            'priceRange': {
-                'daily': {
-                    'min': 1,
-                    'max': 10
-                },
-                'monthly': {
-                    'min': 1,
-                    'max': 1000
-                }
-            }
-        },
-        'Airtel': {
-            'code': 'AIRTEL',
-            'desc': 'Airtel',
-            'shareSplit': '60',
-            'email': 'supportTest@airtel.com',
-            'priceRange': {
-                'daily': {
-                    'min': 1,
-                    'max': 10
-                },
-                'monthly': {
-                    'min': 1,
-                    'max': 1000
-                }
-            }
         }
-
     },
      IDEABIZ_ADMIN_APP_STATUS:{
 
@@ -217,6 +167,7 @@ module.exports = {
     IDEABIZ_EMAIL : sails.config.IDEABIZ_EMAIL,
     IDEABIZ_GROUP_EMAIL : sails.config.IDEABIZ_GROUP_EMAIL,
     IDEABIZ_ADMIN_EMAIL : sails.config.IDEABIZ_ADMIN_EMAIL,
+    SIMATO_SUPPORT : sails.config.SIMATO_SUPPORT,
 
     //APK_BUILD_STATUS use to check the apk generation process is in which stage.This will set in Application.apkStatus
     APK_BUILD_STATUS: {
@@ -236,7 +187,7 @@ module.exports = {
 
     //END_USER_MESSAGES are the messages which we will show to the end user(in the mobile app itself)
     END_USER_MESSAGES: {
-        'SERVER_ERROR': 'Could not provide the service, please contact support.',
+        'SERVER_ERROR': 'Sorry, we can not process your request at this time. Please try again after some time.',
         'OPERATOR_NOT_FOUND': 'Service not available for your network operator.',
         'APP_TERMINATED': 'The service is no longer available on the network.',
         'APP_SUSPENDED': 'The service is temporarily unavailable on the network.',

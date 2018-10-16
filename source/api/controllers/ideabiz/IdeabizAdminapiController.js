@@ -5,7 +5,7 @@ var pushService = require('../../services/pushNotificationsService');
 var dateFormat = require('dateformat');
 var IdeaBizPINVerificationAPIService = require('../../services/IdeaBizPINVerificationAPIService');
 var request = require('request');
-
+var STATUS_CODE_SERVER_ERROR = '500';
 
 /**
  * IdeabizAdminapiController
@@ -423,6 +423,7 @@ module.exports = {
                                                     }else {
                                                         sails.log.debug('IdeabizAdminapiController: Charging success for msisdn: %s appId:%s',msisdn,user.appID);
                                                     }
+                                                    chargingAPICallLogService.removeFromChargingMap(user.appID,msisdn);
                                                 });
                                             }
                                         });
@@ -476,6 +477,7 @@ module.exports = {
                                         }else {
                                             sails.log.debug('IdeabizAdminapiController: (New user created) Charging success for msisdn: %s appId:%s',msisdn,appID);
                                         }
+                                        chargingAPICallLogService.removeFromChargingMap(appID,msisdn);
                                     });
                                     return res.created(user);
                                 });
@@ -529,9 +531,11 @@ module.exports = {
             }else {
                 sails.log.debug("IdeabizAdminapiController: Found publishDetails. Calling sendForCharging");
                 chargeUserAPiCallInstance.sendForCharging(msisdn,publishDetailsData.serviceID, publishDetailsData,appId,function(data,err){
-                    if (err&&data==null){
+                    if (err && data==null){
+                        if(err === STATUS_CODE_SERVER_ERROR){
+                            return callback(null, STATUS_CODE_SERVER_ERROR);
+                        }
                         return callback(null, "error");
-
                     } else if (data){
                        return callback({payment:data.payment}, null);
                     }
@@ -597,7 +601,7 @@ module.exports = {
                                 if(!(response && response.body)){
                                     sails.log.debug("IdeabizAdminapiController: Response received in charge request seems not valid response: " + JSON.stringify(response));
                                     chargingAPICallLogService.setInProgress(appID,msisdn,false);
-                                    return callback(null, "error");
+                                    return callback(null, STATUS_CODE_SERVER_ERROR);
                                 }
 
                                 var responseBody = JSON.parse(response.body);
@@ -606,7 +610,7 @@ module.exports = {
 
                                     sails.log.debug("IdeabizAdminapiController: Error while requesting the charge, err:  " + responseBody.message);
                                     chargingAPICallLogService.setInProgress(appID,msisdn,false);
-                                    return callback(null, "error");
+                                    return callback(null, STATUS_CODE_SERVER_ERROR);
 
                                 }else if (responseBody && (response.statusCode === 200 || response.statusCode === 201)){
 
@@ -657,13 +661,13 @@ module.exports = {
 
                                     });
                                 }else {
-                                    sails.log.debug("IdeabizAdminapiController: Error while requesting the charge, err: %s  for msisdn: %s serviceID: %s appID: %s ",responseBody.message,msisdn,serviceID,appID);
+                                    sails.log.debug("IdeabizAdminapiController: Error while requesting the charge, err: %s  for msisdn: %s serviceID: %s appID: %s ",responseBody.statusCode,msisdn,serviceID,appID);
+                                    chargingAPICallLogService.setInProgress(appID,msisdn,false);
                                     sendForChargingIntance.getOperator(msisdn,function(operator, err){
 
                                         if (err) {
                                             sails.log.error("IdeabizAdminapiController: Operator find Error");
-                                            chargingAPICallLogService.setInProgress(appID,msisdn,false);
-                                            return callback(null, "error");
+                                            return callback(null, STATUS_CODE_SERVER_ERROR);
                                         }else {
 
                                             var data= {appId:publishDetailsData.appId,date:dateFormat(new Date(), "yyyy-mm-dd"),
@@ -673,11 +677,9 @@ module.exports = {
 
                                                 if (err) {
                                                     sails.log.error("IdeabizAdminapiController: FailedTransactionLog Create Error");
-                                                    chargingAPICallLogService.setInProgress(appID,msisdn,false);
-                                                    return callback(null, "error");
+                                                    return callback(null, STATUS_CODE_SERVER_ERROR);
                                                 }
-                                                chargingAPICallLogService.setInProgress(appID,msisdn,false);
-                                                return callback(null, "error");
+                                                return callback(null, STATUS_CODE_SERVER_ERROR);
                                             });
                                         }
 
