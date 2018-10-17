@@ -1039,6 +1039,12 @@ button{
 }
 
 
+@media (max-width: 1260px){
+	.bloc-lg{
+		padding: 0px 10px 280px 10px;
+	}
+}
+
 /*changing from 767 to 991*/
 @media (max-width: 991px)
 {

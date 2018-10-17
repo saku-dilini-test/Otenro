@@ -172,7 +172,6 @@ export class LoginComponent implements OnInit {
       .subscribe((res: any) => {
 
         if (res.message === 'success') {
-          console.log(res);
 
           let requestParams = {
             "token": res.token,
