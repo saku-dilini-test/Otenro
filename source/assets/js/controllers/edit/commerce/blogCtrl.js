@@ -223,13 +223,14 @@
                     }
 
                     if(blog.desc == null){
+
                         toastr.error('Blog description required', 'Warning', {
                             closeButton: true
                         });
                         return;
                     }
                     else {
-
+                        blog.desc = blog.desc.replace(/\t/g, '&#09;');
                         var isImageUpdate = true;
                         if($scope.mainImg == $scope.serverImg){
                             isImageUpdate = false;

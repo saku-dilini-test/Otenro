@@ -702,7 +702,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                     if(file){
                         commerceService.uploadFile({"file":$scope.tmpImage,"appId":storeSettings.appId,"userId":storeSettings.userId}).success(function(data) {
                             storeSettings.aboutUsImageName = $scope.aboutUsImageName;
-
+                            storeSettings.content = storeSettings.content.replace(/\t/g, '&#09;');
                             commerceService.saveStoreSettings(storeSettings)
                                 .success(function (data, status, headers, config) {
                                     toastr.success('About Us has been added successfully', 'Awesome', {
@@ -841,6 +841,9 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                 return;
             }
             else {
+                    storeSettings.returnPolicy = storeSettings.returnPolicy.replace(/\t/g, '&#09;');
+                    storeSettings.termsAndCondition = storeSettings.termsAndCondition.replace(/\t/g, '&#09;');
+                    storeSettings.privacyPolicy = storeSettings.privacyPolicy.replace(/\t/g, '&#09;');
                     storeSettings.userId = $scope.userId;
                     storeSettings.appId = $rootScope.appId;
                     commerceService.savePolicies(storeSettings).success(function (data) {

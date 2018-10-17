@@ -254,13 +254,16 @@
          * @param current
          */
         $scope.generalDetails = function (product, current, skuFieldEnable) {
+            if(product.detailedDesc){
+                product.detailedDesc = product.detailedDesc.replace(/\t/g, '&#09;');
+            }
             if(skuFieldEnable === false){
                 //When new product is adding to the system
                 $scope.checkValidity(product.sku).then(function (result) {
                     if(result === false){
                         if(!$scope.product.variants){
                             $scope.product.variants = [];
-                            $scope.product.variants.push({"sku":product.sku,"name":product.name})
+                            $scope.product.variants.push({"sku":product.sku,"name":product.name});
                         }
                         if(product.childId == 'Create New Category') {
                             toastr.error('Please select a category continue ', 'Warning', {
