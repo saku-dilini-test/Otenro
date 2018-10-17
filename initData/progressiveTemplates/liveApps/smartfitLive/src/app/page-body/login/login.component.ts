@@ -22,10 +22,10 @@ export class LoginComponent implements OnInit {
   private userId = (<any>data).userId;
   private params = [];
   loginclicked;
-  loading:any;
+  loading: any;
   successMessage; errorMessage;
 
-  name; pass; gate: boolean; navigate; domainUrl; 
+  name; pass; gate: boolean; navigate; domainUrl;
   ifInvalidUserPassword:boolean;
   private static EMAIL_PATTERN = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -41,6 +41,15 @@ export class LoginComponent implements OnInit {
     this.router.params.subscribe(params => {
       this.navigate = params['type'];
     });
+    // Get encrypted email from url query string
+    this.router.queryParams
+      .subscribe(params => {
+
+        if (params['emailID']) {
+
+          this.verifyEmailAddress(params['emailID']);
+        }
+      });
   }
 
   login = function (myForm) {
@@ -96,10 +105,10 @@ export class LoginComponent implements OnInit {
           this.route.navigate(['checkout','pickup']);
         }
       },
-      function (err) {
-        keepThis.ifInvalidUserPassword =true;
+      (err) => {
+        keepThis.ifInvalidUserPassword = true;
         console.log(err);
-      })
+      });
 
   }
 
@@ -154,4 +163,60 @@ export class LoginComponent implements OnInit {
       return false;
     }
   }
+
+  verifyEmailAddress(email) {
+
+    let data = { appId: this.appId, emailID: email };
+
+    this.http.post(SERVER_URL + "/templatesAuth/verifyAppUserEmail", data)
+      .subscribe((res: any) => {
+
+        if (res.message === 'success') {
+          console.log(res);
+
+          let requestParams = {
+            "token": res.token,
+            "email": data.email,
+            "name": res.user.name,
+            "lname": res.user.lname,
+            "phone": res.user.phone,
+            "streetNumber": res.user.streetNumber,
+            "streetName": res.user.streetName,
+            "country": res.user.country,
+            "province": res.user.province,
+            "city": res.user.city,
+            "zip": res.user.zip,
+            "type": 'internal',
+            "appId": res.user.appId,
+            "registeredUser": res.user.sub
+          };
+
+          this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
+          if (this.localStorageService.get("cartUnknownUser")) {
+            this.localStorageService.set("cart" + requestParams.registeredUser, this.localStorageService.get("cartUnknownUser"));
+            this.localStorageService.remove("cartUnknownUser");
+          }
+          this.dataService.appUserId = requestParams.registeredUser;
+          this.dataService.isUserLoggedIn.check = true;
+          this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
+
+          if (this.navigate == 'home') {
+            this.route.navigate(['home']);
+          } else if (this.navigate == 'cart') {
+            this.route.navigate(['cart']);
+          } else if (this.navigate == 'delivery') {
+            this.route.navigate(['checkout', 'delivery']);
+          } else {
+            this.route.navigate(['checkout', 'pickup']);
+          }
+        } else {
+
+          this._success.subscribe((message) => this.errorMessage = message);
+          debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+          this._success.next('Failed to verify your email address');
+          setTimeout(() => { }, 3100);
+        }
+      });
+  }
+
 }

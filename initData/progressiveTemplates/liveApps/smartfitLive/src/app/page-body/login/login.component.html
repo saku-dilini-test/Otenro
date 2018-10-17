@@ -43,7 +43,9 @@
 						                <div *ngIf="password.hasError('required')">Password is required</div>
 						             </div>
 								</div>
-
+                <a>
+                  <div data-toggle="modal" data-target="#myModal">Forgot Password?</div>
+                </a>
 								<div class="row header-spacing-top">
 									 <div  *ngIf="ifInvalidUserPassword"  class="alert alert-danger row padding text-center">
 								      <div><i class="fa fa-exclamation-triangle"></i> Email or password is not correct. Please try again.</div>
@@ -55,11 +57,6 @@
 									</div>
 									<div class="col-sm-4">
 										<a  (click)='register()' class="btn btn-d btn-lg main-button btn-block">Register</a>
-									</div>
-									<div class="col-sm-4">
-										<div class="row padding" style="text-align: center;">
-											<span data-toggle="modal" data-target="#myModal">Forgot Password?</span>
-										</div>
 									</div>
 								</div>
 							</form>

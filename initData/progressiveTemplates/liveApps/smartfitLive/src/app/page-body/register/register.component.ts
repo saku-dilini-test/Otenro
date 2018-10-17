@@ -139,7 +139,8 @@ export class RegisterComponent implements OnInit {
       zip: this.zip,
       country: this.selectedCountry,
       phone: this.phone,
-      appId: this.appId
+      appId: this.appId,
+      url: this.domainUrl
     };
 
     this.http.post(SERVER_URL + "/templatesAuth/register", data)
@@ -200,4 +201,5 @@ export class RegisterComponent implements OnInit {
     this.domainUrl = this.fullUrl.substring(0, index + 2);
     this.localStorageService.set('domainUrl', this.domainUrl);
   }
+
 }
