@@ -2,10 +2,12 @@
     position: relative;
     background: url(../../../../images/tablet.png) no-repeat;
     background-size: 100% 100%;
-    width: 700px;
-    height: 545px;
+    width: 854px;
+    height: 1102px;
     border-radius: 1em;
     float: none;
+    margin: -16px -18px;
+    background-position-y: -53px;
 }
 
 .tabPower {
@@ -69,11 +71,13 @@
 
 .tabScreen {
     animation: 5s ease 0s alternate none infinite running lighten;
-    height: 70.7%;
-    left: 8.5%;
+    height: 1024px;
+    left: 13%;
     position: absolute;
-    top: 14.1%;
-    width: 81.8%;
+    top: 3.1%;
+    width: 768px;
+    transform: scale(0.85);
+    transform-origin: top left;
 }
 
 .screen iframe{
@@ -81,14 +85,13 @@
 }
 
 .tabappViewClass{
-    height: 104%;
-    width: 89%;
-    margin-top: -14px;
-    margin-left: 30px;
+    height: 100%;
+    width: 100%;
 }
 
 .tabappViewClass iframe{
     border: #e6e6e6 2px inset;
+    border-radius: 10px;
 }
 
 .tabButton {
