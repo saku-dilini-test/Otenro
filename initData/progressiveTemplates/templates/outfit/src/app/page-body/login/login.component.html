@@ -30,6 +30,9 @@
                 <div *ngIf="password.hasError('required')">Password is required</div>
               </div>
             </div>
+             <a>
+              <div class="form-group" data-toggle="modal" data-target="#myModal">Forgot Password?</div>
+            </a>
             <!-- <div class="row">
               <div class="col-sm-6">
                 <div class="radio">
@@ -55,11 +58,6 @@
             <div class="col-xs-6  text-center">
               <button (click)='register()' class="btn btn-d btn-lg main-button btn-block">Register</button>
             </div>
-
-            <div class="row padding" style="text-align: center;">
-              <span data-toggle="modal" data-target="#myModal">Forgot Password?</span>
-            </div>
-
           </form>
         </div>
       </div>

@@ -68,9 +68,7 @@ export class LoginComponent implements OnInit {
     this.ifInvalidUserPassword = false;
     this.http.post(SERVER_URL + '/templatesAuth/authenticateForApp', data)
       .subscribe((res) => {
-        if (res.message === 'email not verified'){
-          console.log(res);
-        } else {
+console.log(res)
           requestParams = {
             'token': res.token,
             'email': data.email,
@@ -105,7 +103,6 @@ export class LoginComponent implements OnInit {
           } else {
             this.route.navigate(['checkout', 'pickup']);
           }
-        }
       },
       (err) => {
         keepThis.ifInvalidUserPassword = true;

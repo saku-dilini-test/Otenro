@@ -31,7 +31,7 @@ module.exports = {
 
                 return res.notFound();
             }
-            if (user.isEmailVerified === true || user.isEmailVerified === false) {
+            // if (user.isEmailVerified === true || user.isEmailVerified === false) {
 
                 Passwords.checkPassword({
                     passwordAttempt: req.body.password,
@@ -68,9 +68,9 @@ module.exports = {
                         });
                     }
                 });
-            } else {
-                return res.json({ message : 'email not verified'});
-            }
+            // } else {
+            //     return res.json({ message : 'email not verified'});
+            // }
         });
     },
 
