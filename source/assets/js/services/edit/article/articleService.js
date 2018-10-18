@@ -24,8 +24,8 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
-            showPublishArticleDialog: function(data,type,imageData) {
-                console.log(data,type);
+            showPublishArticleDialog: function(data,type,articleDetails) {
+                console.log(data,type,articleDetails);
                 return $mdDialog.show({
                     controller: 'ArticleCtrl',
                     templateUrl: 'user/edit/article/publishArticleView.html',
@@ -33,7 +33,7 @@
                     locals : {
                         initialData : data,
                         type:type,
-                        imageData : imageData
+                        articleDetails : articleDetails
                     }
                 });
             },
@@ -45,7 +45,7 @@
                     locals : {
                         initialData : data,
                         type:"showPreviewArticslesDilog",
-                        imageData : null
+                        articleDetails : null
                     }
                 });
             },
@@ -57,7 +57,7 @@
                     locals : {
                         initialData : data,
                         type:"showCategoriesDialog",
-                        imageData: null
+                        articleDetails: null
                     }
                 });
             },
@@ -68,7 +68,8 @@
                     clickOutsideToClose: true,
                     locals : {
                         initialData : data,
-                        type:"addCategoryDialog"
+                        type:"addCategoryDialog",
+                        articleDetails: null
                     }
                 });
             },
@@ -79,7 +80,8 @@
                     clickOutsideToClose: true,
                     locals : {
                         initialData : data,
-                        type:"editCategoryDialog"
+                        type:"editCategoryDialog",
+                        articleDetails : null
                     }
                 });
             },

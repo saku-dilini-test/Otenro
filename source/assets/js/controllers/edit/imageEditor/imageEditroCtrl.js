@@ -34,7 +34,7 @@
                 };
 
                 /**
-                 * find the caller module and pass the image data with the initial data to the edit page dialog
+                 * find the caller module and pass the image data with the initial data to the previously working dialog
                  */
                 $scope.imageEditorSave = function() {
                     var editedImg = imageEditor.toDataURL();
@@ -45,23 +45,41 @@
 
                     console.log(initialData);
                     console.log(callFrom);
-                    // console.log("details.initialData"+details.name);
 
                     if(callFrom === 'addNewMenuCategory'){
                         mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory','3','imageEditorCtrl', categoryDetails);
                     }else if(callFrom === 'addNewArticle'){
-                        // var arrPosition = initialData.tempImageArray.length;
-                        // console.log(initialData.tempImageArray[arrPossition-1]);
-                        // initialData.tempImageArray[arrPosition] = {'img': editedImg};
+                        var articleDetails = {
+                            img : editedImg,
+                            tempImage : initialData.tempImage,
+                            deleteImages : initialData.deleteImages,
+                            articleCat : initialData.articleCat
+                        };
                         console.log(initialData);
-                        articleService.showPublishArticleDialog(initialData,'fromImageEditorCtrl',editedImg);
+                        articleService.showPublishArticleDialog(initialData.initData,'fromImageEditorCtrlSave',articleDetails);
                     }
                     else{
                         mainMenuService.showEditMenuCategoryDialog($scope.callFrom,'3','imageEditorCtrl',categoryDetails);
                     }
-
                     // $mdDialog.hide();
+                };
 
+                $scope.imageEditorCancel = function() {
+                    if(callFrom === 'addNewMenuCategory'){
+                        mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory','3','imageEditorCtrlCancel', categoryDetails);
+                    }else if(callFrom === 'addNewArticle'){
+                        var articleDetails = {
+                            img : null,
+                            tempImage : initialData.tempImage,
+                            deleteImages : initialData.deleteImages,
+                            articleCat : initialData.articleCat
+                        };
+                        console.log(initialData);
+                        articleService.showPublishArticleDialog(initialData.initData,'fromImageEditorCtrlCancel',articleDetails);
+                    }
+                    else{
+                        mainMenuService.showEditMenuCategoryDialog($scope.callFrom,'3','imageEditorCtrlCancel',categoryDetails);
+                    }
                 };
 
             }

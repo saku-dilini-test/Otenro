@@ -9,9 +9,9 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("ArticleCtrl", [
-        '$scope', '$mdDialog', '$auth', '$rootScope', 'articleService', 'toastr', 'SERVER_URL', 'ME_APP_SERVER', 'mySharedService', 'initialData', '$log', 'mainMenuService', '$timeout','type','imageEditorService','imageData', ArticleCtrl]);
+        '$scope', '$mdDialog', '$auth', '$rootScope', 'articleService', 'toastr', 'SERVER_URL', 'ME_APP_SERVER', 'mySharedService', 'initialData', '$log', 'mainMenuService', '$timeout','type','imageEditorService','articleDetails', ArticleCtrl]);
 
-    function ArticleCtrl($scope, $mdDialog, $auth, $rootScope, articleService, toastr, SERVER_URL, ME_APP_SERVER, mySharedService, initialData, $log, mainMenuService, $timeout,type,imageEditorService,imageData) {
+    function ArticleCtrl($scope, $mdDialog, $auth, $rootScope, articleService, toastr, SERVER_URL, ME_APP_SERVER, mySharedService, initialData, $log, mainMenuService, $timeout,type,imageEditorService,articleDetails) {
 
         $scope.appId = $rootScope.appId;
         $scope.tmpImage = [];
@@ -38,33 +38,23 @@
         $scope.buttonName = "Select Image";
 
         $scope.cropImage = function () {
-            // $scope.setAspectRatio();
-            // $scope.myImage = null;
-            var articleData;
-            console.log($scope.article);
+            var articleData = {};
             if($scope.article){
-                articleData = $scope.article;
+                articleData = {
+                    initData : $scope.article,
+                    tempImage : $scope.tmpImage,
+                    deleteImages : $scope.deleteImages,
+                    articleCat : $scope.articleCat
+                }
             }
             else{
-                articleData = '';
+                articleData = {};
             }
+            console.log(articleData);
+
             var handleFileSelect = function (evt) {
-            //
                 var file=evt.currentTarget.files[0];
-                imageEditorService.callImageEditor(file,400,200, articleData, 'addNewArticle');
-            //     var file = evt.currentTarget.files[0];
-            //     var reader = new FileReader();
-            //     console.log("test");
-            //
-            //     reader.onload = function (evt) {
-            //         $scope.$apply(function ($scope) {
-            //             $scope.myImage = evt.target.result;
-            //             $scope.picFile = $scope.myImage;
-            //         });
-            //     };
-            //     reader.readAsDataURL(file);
-            //     $scope.imageSelected = false;
-            //     $scope.buttonName = "Add Image";
+                imageEditorService.callImageEditor(file,400,200,articleData, 'addNewArticle');
             };
             angular.element(document.querySelector('#fileInput')).on('change', handleFileSelect);
         };
@@ -269,8 +259,12 @@
             }
 
             // added by .sanira
-            if(type == 'fromImageEditorCtrl' && imageData != null){
-                addImage(imageData);
+            if(type === 'fromImageEditorCtrlSave' && articleDetails.img != null){
+                console.log(articleDetails);
+                $scope.tmpImage = articleDetails.tempImage;
+                addImage(articleDetails.img);
+            }else if(type === 'fromImageEditorCtrlCancel'){
+                $scope.tmpImage = articleDetails.tempImage;
             }
 
             $scope.dummyCat = [];
