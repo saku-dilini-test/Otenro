@@ -138,12 +138,12 @@
                           </div>
                         </div>
                         <div class="modal-footer">
-                          <div class="col-sm-4">
+                          <div class="col-md-4">
                           </div>
-                          <div class="col-sm-4">
+                          <div class="col-md-4">
                             <button (click)="close();goToHome();" class="btn btn-d btn-sq btn-lg main-button btn-block">Continue Shopping</button>
                           </div>
-                          <div class="col-sm-4">
+                          <div class="col-md-4">
                             <button (click)="close();goToCart();" class="btn btn-d btn-sq btn-lg  main-button btn-block">Checkout</button>
                           </div>
                         </div>
@@ -161,12 +161,12 @@
 
 
                   <div class="voffset padding-mobile" *ngIf="!(Data.variants.length >= 1 && selectedVariant.quantity == 0 && lockBuyButton)">
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                       <button (click)='addToCart("buyNowCart")' class="btn btn-d btn-sq btn-lg main-button btn-block">BUY NOW</button>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                       <button (click)="addToCart('');open(this.selectedVariant.selection);" class="btn btn-d btn-sq btn-lg main-button btn-block">
                         <span _ngcontent-c7="" class="feather-icon icon-bag icon-spacer"></span>
                             ADD TO CART

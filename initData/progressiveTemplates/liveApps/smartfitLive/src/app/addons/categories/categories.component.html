@@ -15,7 +15,7 @@
 </div> -->
 
 <!-- bloc-4 -->
-<div class="bloc hidden-xs bloc-lg l-bloc" id="bloc-4" *ngIf="products && products[0] && products[0].length != 0">
+<div class="bloc hidden-xs hidden-sm bloc-lg l-bloc" id="bloc-4" *ngIf="products && products[0] && products[0].length != 0">
 	<div class="container" *ngFor="let node of products;">
 		<div class="row content-row">
 			<div class="col-sm-12">
@@ -82,7 +82,7 @@
 
 <!-- bloc-5 -->
 <!-- Mobile view -->
-<div class="bloc hidden-sm hidden-lg hidden-md l-bloc" id="bloc-5"  *ngIf="products && this.products[0] && products[0].length != 0">
+<div class="bloc hidden-lg hidden-md l-bloc" id="bloc-5"  *ngIf="products && this.products[0] && products[0].length != 0">
 	<div class="container bloc-sm"  *ngFor="let node of products;">
 		<div class="row content-row voffset">
 			<div class="col-sm-4" *ngFor="let prod of node;">

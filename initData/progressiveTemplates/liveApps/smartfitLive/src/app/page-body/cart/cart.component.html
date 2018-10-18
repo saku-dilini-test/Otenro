@@ -2,7 +2,7 @@
 <div class="page-container bloc-md">
 
   <!-- bloc-10 -->
-  <div class="bloc bgc-white l-bloc hidden-xs" id="bloc-10">
+  <div class="bloc bgc-white l-bloc hidden-xs hidden-sm" id="bloc-10">
     <div class="container">
       <div class="row content-row">
         <div class="col-sm-12">
@@ -75,9 +75,7 @@
                   <strong>{{currency}} {{itemPriceCal(item.total,item.qty)| number: '.2'}}</strong>
                 </p>
                 <div class="row">
-                  <div class="col-sm-6">
-                  </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-12">
                     <div class="text-center">
                       <a  (click)="removeItem(i)"  class="btn btn-d btn-lg main-button btn-block spacing-3"><span class="feather-icon icon-trash icon-spacer"></span>Remove</a>
                     </div>
@@ -92,7 +90,7 @@
   <!-- bloc-11 END -->
 
   <!-- bloc-12 -->
-  <div class="bloc hidden-xs bgc-white l-bloc main-content-font" id="bloc-12" *ngIf="cartItems.length != 0">
+  <div class="bloc hidden-sm hidden-xs bgc-white l-bloc main-content-font" id="bloc-12" *ngIf="cartItems.length != 0">
     <div class="container bloc-sm">
       <div class="row form-names-row-">
         <div class="col-sm-8">
@@ -147,7 +145,7 @@
       </div>
 
       <div class="row voffset" >
-          <div class="col-sm-6">
+          <div class="col-sm-9">
           </div>
           <div class="col-sm-3">
             <a *ngIf="cartItems.length > 0" (click)="delivery(cartItems)" class="btn btn-d btn-lg main-button btn-block">Proceed</a>
@@ -158,7 +156,7 @@
   <!-- bloc-12 END -->
 
     <!-- bloc-13 -->
-    <div class="bloc bgc-white l-bloc hidden-sm hidden-lg hidden-md" id="bloc-13">
+    <div class="bloc bgc-white l-bloc hidden-lg hidden-md" id="bloc-13">
       <div class="container bloc-lg">
         <div class="row form-names-row-">
           <div class="col-xs-4">
@@ -215,7 +213,7 @@
       </div>
     </div>
 
-    <div class="row hidden-sm hidden-lg hidden-md">
+    <div class="row hidden-lg hidden-md">
         <div class="col-sm-12">
           <div class="col-xs-6">
               <a *ngIf="cartItems.length > 0" (click)="delivery(cartItems)" class="btn btn-d btn-lg main-button btn-block">Proceed</a>

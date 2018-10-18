@@ -10,7 +10,7 @@ app-header{
   width: 100%;
 }
 
-@media (max-width: 767px){
+@media (max-width: 991px){
 	app-page-body{
 	  min-height: calc(100vh - 139px);
 	  display: block;

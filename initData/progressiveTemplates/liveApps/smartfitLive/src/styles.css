@@ -813,9 +813,16 @@ button{
 	padding-left:44%;
 }
 
+
+@media (max-width: 1300px){
+  .bloc-md{
+    padding: 50px 0px;
+  }
+}
+
 /* = Mobile adjustments
 -------------------------------------------------------------- */
-@media (max-width: 1024px)
+@media (max-width: 991px)
 {
     .bloc{
         padding-left: 20px;
@@ -846,7 +853,7 @@ button{
     .bloc-group, .bloc-group .bloc{display:block;width:100%;}
     .bloc-fill-screen .fill-bloc-top-edge, .bloc-fill-screen .fill-bloc-bottom-edge{padding:0 20px;padding-left: constant(safe-area-inset-left);padding-right: constant(safe-area-inset-right);}
 }
-@media (max-width: 767px)
+@media (max-width: 991px)
 {
     .page-container{
         overflow-x: hidden;
@@ -1021,7 +1028,7 @@ button{
 	color: rgba(0,0,0,.6)!important;
 }
  }
-@media (max-width: 767px){
+@media (max-width: 991px){
   .navbar-toggle{
     width:26px;
     margin-top:-5px;

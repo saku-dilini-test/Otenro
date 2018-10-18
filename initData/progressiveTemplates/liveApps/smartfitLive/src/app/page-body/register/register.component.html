@@ -4,15 +4,15 @@
   <div class="bloc bgc-white l-bloc" id="bloc-16">
     <div class="container bloc-lg">
       <div class="row">
-        <div class="col-sm-3">
-          <p class="links hidden-xs" (click)="singIn()">
+        <div class="col-md-3">
+          <p class="links hidden-xs hidden-sm" (click)="singIn()">
             LOGIN
           </p>
-          <p class="links hidden-xs">
+          <p class="links hidden-xs hidden-sm">
             REGISTRATION
           </p>
         </div>
-        <div class="col-sm-9">
+        <div class="col-md-9">
           <div class="row">
             <div class="col-sm-12">
               <form class="main-content-font" #myForm="ngForm" (ngSubmit)="signUp(myForm.value)" novalidate>
