@@ -3159,8 +3159,8 @@ table.md-calendar-day-header{
     height: 250px !important;
 }
 .ql-editor  h1,h2,h3,h4,h5,h6,p {
-    color: #000 !important;
-    text-transform: none !important;
+    color: #000;
+    text-transform: none;
 }
 .ql-snow .ql-tooltip{
     top: auto !important;
