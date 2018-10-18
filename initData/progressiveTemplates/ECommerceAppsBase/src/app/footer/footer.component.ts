@@ -5,6 +5,7 @@ import { AppDataService } from '../services/appdata-info/appdata-info.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { SERVER_URL } from '../../assets/constantsService';
 import { OrdersService } from '../services/orders/orders.service';
+import { AppDataService } from '../services/appdata-info/appdata-info.service';
 
 @Component({
   selector: 'app-footer',
@@ -21,9 +22,10 @@ export class FooterComponent {
   imageUrl;
   dummy: any;
   ipgInfo: any = null;
+  appName;
 
   constructor(private router: Router, private appDataService: AppDataService,
-    private localStorageService: LocalStorageService, private ordersService: OrdersService) {
+    private localStorageService: LocalStorageService, private ordersService: OrdersService, private appdataService: AppDataService) {
     this.appDataService.getContactUs().subscribe((data: any) => {
       this.webInfo = data.contactInfo;
       this.dummy = new Date().getTime();
@@ -35,8 +37,13 @@ export class FooterComponent {
 
     this.ordersService.getIPGinfo().subscribe(data => {
       this.ipgInfo = data;
-      console.log(data);
     });
+   this.appdataService.getAboutUs()
+      .subscribe((data: any) => {
+       this.appName = data.appName + ' ' + new Date().getFullYear();
+   }, (err) => {
+        console.log(err);
+   });
   }
 
 

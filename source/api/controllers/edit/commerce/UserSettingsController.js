@@ -14,46 +14,55 @@ module.exports = {
         var appId = req.body.appId;
         var query = { appId: appId };
 
-        Application.update({ id: appId }, { appName: data.appName }).exec(function (err, updatedApp) {
+        Application.find({appName:data.appName}).exec(function (err, found) {
+            if(err) return res.send(err);
 
-            if (err) {
+            if(found.length !== 0){
+                res.status(409).send("App name already exists");
+            }else{
+                Application.update({ id: appId }, { appName: data.appName }).exec(function (err, updatedApp) {
 
-                sails.log.error('UserSettingsController => saveStoreSettings => ' + err);
-                return res.serverError(err);
-            }
-            data.appName = updatedApp[0].appName;
+                    if (err) {
 
-            ApplicationStoreSettings.update(query, data).exec(function (err, user) {
+                        sails.log.error('UserSettingsController => saveStoreSettings => ' + err);
+                        return res.serverError(err);
+                    }
+                    data.appName = updatedApp[0].appName;
 
-                if (err) {
-
-                    sails.log.error('UserSettingsController => saveStoreSettings => ' + err);
-                    return res.serverError(err);
-                }
-                if (user.length == 0) {
-
-                    ApplicationStoreSettings.create(data).exec(function (err, app) {
+                    ApplicationStoreSettings.update(query, data).exec(function (err, user) {
 
                         if (err) {
 
                             sails.log.error('UserSettingsController => saveStoreSettings => ' + err);
                             return res.serverError(err);
                         }
+                        if (user.length == 0) {
 
-                        res.send({
-                            app: app,
-                            message: "New Store Settings Record successfully Created"
-                        });
-                    });
-                } else {
+                            ApplicationStoreSettings.create(data).exec(function (err, app) {
 
-                    res.send({
-                        app: user,
-                        message: "New Store Settings Record  Successfully updated"
+                                if (err) {
+
+                                    sails.log.error('UserSettingsController => saveStoreSettings => ' + err);
+                                    return res.serverError(err);
+                                }
+
+                                res.send({
+                                    app: app,
+                                    message: "New Store Settings Record successfully Created"
+                                });
+                            });
+                        } else {
+
+                            res.send({
+                                app: user,
+                                message: "New Store Settings Record  Successfully updated"
+                            });
+                        }
                     });
-                }
-            });
+                });
+            }
         });
+
     },
     showStoreSettings: function (req, res) {
 

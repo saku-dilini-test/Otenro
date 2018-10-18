@@ -580,7 +580,11 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                     $rootScope.currency = $scope.options.sign;
                     $scope.currencyPlaceHolder = $scope.options.currency;
                 }).error(function (err) {
-                    toastr.error(' warning', "Unable to get templates", {closeButton: true});
+                    if(err == 'App name already exists'){
+                        toastr.error(' warning', err, {closeButton: true});
+                    }else{
+                        toastr.error(' warning', "Unable update store settings", {closeButton: true});
+                    }
                 })
                 $scope.selectedTab = current;
             }
