@@ -9,9 +9,9 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("ArticleCtrl", [
-        '$scope', '$mdDialog', '$auth', '$rootScope', 'articleService', 'toastr', 'SERVER_URL', 'ME_APP_SERVER', 'mySharedService', 'initialData', '$log', 'mainMenuService', '$timeout','type', ArticleCtrl]);
+        '$scope', '$mdDialog', '$auth', '$rootScope', 'articleService', 'toastr', 'SERVER_URL', 'ME_APP_SERVER', 'mySharedService', 'initialData', '$log', 'mainMenuService', '$timeout','type','imageEditorService','imageData', ArticleCtrl]);
 
-    function ArticleCtrl($scope, $mdDialog, $auth, $rootScope, articleService, toastr, SERVER_URL, ME_APP_SERVER, mySharedService, initialData, $log, mainMenuService, $timeout,type) {
+    function ArticleCtrl($scope, $mdDialog, $auth, $rootScope, articleService, toastr, SERVER_URL, ME_APP_SERVER, mySharedService, initialData, $log, mainMenuService, $timeout,type,imageEditorService,imageData) {
 
         $scope.appId = $rootScope.appId;
         $scope.tmpImage = [];
@@ -29,6 +29,7 @@
         // Characters length config (Article)
         // $scope.maxArticleTitle = 40;
         $scope.maxArticleDesc = 200;
+        // console.log(initialData);
 
         $scope.myImage = '';
         $scope.myCroppedImage = '';
@@ -37,22 +38,33 @@
         $scope.buttonName = "Select Image";
 
         $scope.cropImage = function () {
-            $scope.setAspectRatio();
-            $scope.myImage = null;
+            // $scope.setAspectRatio();
+            // $scope.myImage = null;
+            var articleData;
+            console.log($scope.article);
+            if($scope.article){
+                articleData = $scope.article;
+            }
+            else{
+                articleData = '';
+            }
             var handleFileSelect = function (evt) {
-
-                var file = evt.currentTarget.files[0];
-                var reader = new FileReader();
-
-                reader.onload = function (evt) {
-                    $scope.$apply(function ($scope) {
-                        $scope.myImage = evt.target.result;
-                        $scope.picFile = $scope.myImage;
-                    });
-                };
-                reader.readAsDataURL(file);
-                $scope.imageSelected = false;
-                $scope.buttonName = "Crop Image";
+            //
+                var file=evt.currentTarget.files[0];
+                imageEditorService.callImageEditor(file,400,200, articleData, 'addNewArticle');
+            //     var file = evt.currentTarget.files[0];
+            //     var reader = new FileReader();
+            //     console.log("test");
+            //
+            //     reader.onload = function (evt) {
+            //         $scope.$apply(function ($scope) {
+            //             $scope.myImage = evt.target.result;
+            //             $scope.picFile = $scope.myImage;
+            //         });
+            //     };
+            //     reader.readAsDataURL(file);
+            //     $scope.imageSelected = false;
+            //     $scope.buttonName = "Add Image";
             };
             angular.element(document.querySelector('#fileInput')).on('change', handleFileSelect);
         };
@@ -70,32 +82,39 @@
 
         }
 
-        $scope.addImage = function (img) {
-            $scope.addNew = true
+        function addImage(img){
+            console.log($scope.tmpImage);
+            $scope.addNew = true;
             if ($scope.tmpImage.length < 6  && angular.element('#fileInput').val() != '' || $scope.tmpImage[0].img == null) {
                 for(var i =0;i<$scope.tmpImage.length;i++){
 
                     if($scope.tmpImage[0].img == null){
-                        $scope.tmpImage[0].img = img
+                        console.log("temp[0] ");
+                        $scope.tmpImage[0].img = img;
                         $scope.addNew = false;
                         break
                     }else if($scope.tmpImage.length >= 1 && $scope.tmpImage[0].img == null){
-                        $scope.tmpImage[0].img = img
+                        console.log("temp[1] ");
+                        $scope.tmpImage[0].img = img;
                         $scope.addNew = false;
                         break
                     }
                     if($scope.tmpImage[i].url && !$scope.tmpImage[i].img){
-                        $scope.tmpImage[i].img = img
+                        console.log("temp[2] ");
+                        $scope.tmpImage[i].img = img;
                         $scope.addNew = false;
                         break;
                     }
                     else{
+                        console.log("temp[3] ");
                         $scope.addNew = true;
                     }
                 }
                 if($scope.addNew == true){
+                    console.log("temp[] addNew true");
                     if($scope.tmpImage.length <= 6){
                         $scope.tmpImage.push({'img': img});
+                        console.log($scope.tmpImage);
                     }
 
                 }
@@ -146,7 +165,9 @@
                     closeButton: true
                 });
             });
+
         if (initialData == 'publishArticle') {
+            // console.log(initialData);
             $scope.isNewArticle = true;
             $scope.dummyCat = [];
 
@@ -174,8 +195,8 @@
 
 
         } else if (initialData == 'previewArticles')  {
-                    $scope.dialogTitle = 'Edit Page';
-
+            // console.log('previewArticles '+initialData);
+            $scope.dialogTitle = 'Edit Page';
             articleService.getArticleList($scope.appId)
                 .success(function (responseData) {
 
@@ -223,6 +244,7 @@
                         }else{
                             tempImageUrl = SERVER_URL + "templates/viewWebImages?userId=" + $auth.getPayload().id
                                           + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "&images=thirdNavi/" + initialData.tempImageArray[i].img;
+                            // console.log("initialData.tempImageArray else "+ tempImageUrl);
                         }
                     }else{
                         tempImageUrl = null;
@@ -231,7 +253,8 @@
 
                     $scope.tmpImage.push({"img": tempImageUrl,"videoUrl": initialData.tempImageArray[i].videoUrl,"url":initialData.tempImageArray[i].url});
 
-                    $scope.tempImageDel.push(initialData.tempImageArray[i].img)
+                    $scope.tempImageDel.push(initialData.tempImageArray[i].img);
+
                 }
             } else {
                 if (initialData.isNew == 'true' || initialData.isNew == true) {
@@ -244,6 +267,12 @@
                     $scope.tempImageDel[0] = initialData.imageUrl;
                 }
             }
+
+            // added by .sanira
+            if(type == 'fromImageEditorCtrl' && imageData != null){
+                addImage(imageData);
+            }
+
             $scope.dummyCat = [];
 
             $scope.seletedCategoryId = initialData.categoryId;
@@ -495,8 +524,7 @@
         }
 
         $scope.editArticle = function (article) {
-            articleService.showPublishArticleDialog(article);
-
+            articleService.showPublishArticleDialog(article,'','articleCtrl');
         }
         $scope.deleteArticle = function (index, article) {
             article.isNew = $rootScope.tempNew;

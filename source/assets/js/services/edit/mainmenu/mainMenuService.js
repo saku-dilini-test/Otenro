@@ -90,8 +90,8 @@
 
                 });
             },
-            showEditMenuCategoryDialog: function(data,id,from,details){
-                console.log(data,id,from,details);
+            showEditMenuCategoryDialog: function(data,id,from,categoryDetails){
+                console.log(data,id,from,categoryDetails);
                 return $mdDialog.show({
                     controller: 'MainMenuCtrl',
                     templateUrl: 'user/edit/mainmenu/editMenuCategory.html',
@@ -101,7 +101,7 @@
                             menu : data,
                             templateCategory : id,
                             from: from,
-                            details: details
+                            categoryDetails: categoryDetails
                         }
                     }
                 }).then(function(answer) {

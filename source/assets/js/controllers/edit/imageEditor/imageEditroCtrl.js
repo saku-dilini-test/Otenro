@@ -4,14 +4,14 @@
 
 (function() {
     'use strict';
-    angular.module("appEdit").controller("imageEditorCtrl" , ['$scope','$mdDialog','fileUrl','width','height','initialData','mainMenuService','menu',imageEditorCtrl]);
+    angular.module("appEdit").controller("imageEditorCtrl" , ['$scope','$mdDialog','fileUrl','width','height','initialData','callFrom','mainMenuService','articleService',imageEditorCtrl]);
 
 
-    function imageEditorCtrl($scope,$mdDialog,fileUrl,width,height,initialData,mainMenuService,menu) {
+    function imageEditorCtrl($scope,$mdDialog,fileUrl,width,height,initialData,callFrom,mainMenuService,articleService) {
         setTimeout(
             () => {
                 console.log(initialData);
-                $scope.menu = menu;
+                $scope.callFrom = callFrom;
                 var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
                     includeUI: {
                         loadImage: {
@@ -34,19 +34,30 @@
                 };
 
                 /**
-                 * catch the edited image(base 64) from the image editor
+                 * find the caller module and pass the image data with the initial data to the edit page dialog
                  */
                 $scope.imageEditorSave = function() {
-
-                    var details = {
+                    var editedImg = imageEditor.toDataURL();
+                    var categoryDetails = {
                         name:initialData,
-                        image :imageEditor.toDataURL()
+                        image : editedImg
                     };
-                    console.log(menu);
-                    if(menu === 'addNewMenuCategory'){
-                        mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory','3','imageEditorCtrl', details);
-                    }else{
-                        mainMenuService.showEditMenuCategoryDialog($scope.menu,'3','imageEditorCtrl', details);
+
+                    console.log(initialData);
+                    console.log(callFrom);
+                    // console.log("details.initialData"+details.name);
+
+                    if(callFrom === 'addNewMenuCategory'){
+                        mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory','3','imageEditorCtrl', categoryDetails);
+                    }else if(callFrom === 'addNewArticle'){
+                        // var arrPosition = initialData.tempImageArray.length;
+                        // console.log(initialData.tempImageArray[arrPossition-1]);
+                        // initialData.tempImageArray[arrPosition] = {'img': editedImg};
+                        console.log(initialData);
+                        articleService.showPublishArticleDialog(initialData,'fromImageEditorCtrl',editedImg);
+                    }
+                    else{
+                        mainMenuService.showEditMenuCategoryDialog($scope.callFrom,'3','imageEditorCtrl',categoryDetails);
                     }
 
                     // $mdDialog.hide();

@@ -11,8 +11,7 @@
     ]);
     function imageEditorService($mdDialog) {
 
-        var initialData = {image:''};
-        function showImageEditorDialog(_fileUrl,_width,_height,menuName, menu) {
+        function showImageEditorDialog(_fileUrl,_width,_height,_data, _callFrom) {
             return $mdDialog.show({
                 controller: 'imageEditorCtrl',
                 templateUrl: 'user/edit/imageEditor/imageEditor.html',
@@ -21,26 +20,24 @@
                     fileUrl: _fileUrl,
                     width: _width,
                     height: _height,
-                    initialData : menuName,
-                    menu : menu,
+                    initialData : _data,
+                    callFrom : _callFrom,
                 },
             });
         };
+
         return {
-            getImage : function(){
-                return initialData;
-            },
-            callImageEditor: function (_file,_width,_height,menuName,menu){
-                console.log(menu);
+            callImageEditor: function (_file,_width,_height,_menuName,_callFrom){
+                console.log(_callFrom);
                 var reader = new FileReader();
-                var fileUrl;
+                var fileUrl= './images/imageEditor/test.png';
 
                 if (_file) {
                     reader.readAsDataURL(_file);
                 }
                 reader.onload = function(){
                     fileUrl = reader.result;
-                    showImageEditorDialog(fileUrl, _width, _height,menuName,menu);
+                    showImageEditorDialog(fileUrl, _width, _height,_menuName,_callFrom);
                 }
             },
         };

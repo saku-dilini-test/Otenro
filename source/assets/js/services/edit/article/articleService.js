@@ -24,14 +24,16 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
-            showPublishArticleDialog: function(data,type) {
+            showPublishArticleDialog: function(data,type,imageData) {
+                console.log(data,type);
                 return $mdDialog.show({
                     controller: 'ArticleCtrl',
                     templateUrl: 'user/edit/article/publishArticleView.html',
                     clickOutsideToClose: false,
                     locals : {
                         initialData : data,
-                        type:type
+                        type:type,
+                        imageData : imageData
                     }
                 });
             },
@@ -42,7 +44,8 @@
                     clickOutsideToClose: true,
                     locals : {
                         initialData : data,
-                        type:"showPreviewArticslesDilog"
+                        type:"showPreviewArticslesDilog",
+                        imageData : null
                     }
                 });
             },
@@ -53,7 +56,8 @@
                     clickOutsideToClose: true,
                     locals : {
                         initialData : data,
-                        type:"showCategoriesDialog"
+                        type:"showCategoriesDialog",
+                        imageData: null
                     }
                 });
             },

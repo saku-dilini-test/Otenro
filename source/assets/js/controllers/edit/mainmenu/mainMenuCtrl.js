@@ -14,10 +14,10 @@
 
         $scope.tempplayer = "";
         console.log( initialData);
-$scope.filesSortConfig = {
-        animation: 150,
-        ghostClass: 'ghost',
-        onAdd: function (evt) {
+        $scope.filesSortConfig = {
+            animation: 150,
+            ghostClass: 'ghost',
+            onAdd: function (evt) {
         },
         onUpdate: function (evt) {
             console.log(evt);
@@ -67,12 +67,13 @@ $scope.filesSortConfig = {
                 mainMenuService.showEditMenuCategoryDialog(item,$scope.templateCategory);
             }
         }
-        // open image editor function (added by .sanira)
-        $scope.openImageEditorDialog = function (element,width,height,menuName) {
-            var file = element.files[0];
-            console.log(initialData);
-            imageEditorService.callImageEditor(file,width,height,menuName,initialData.menu);
-        };
+
+        // // open image editor function (added by .sanira)
+        // $scope.openImageEditorDialog = function (element,width,height,menuName) {
+        //     var file = element.files[0];
+        //     console.log(initialData);
+        //     imageEditorService.callImageEditor(file,width,height,menuName,initialData.menu);
+        // };
 
 
 
@@ -82,6 +83,7 @@ $scope.filesSortConfig = {
             let name;
             if($scope.menu){
                 name = $scope.menu.name;
+                console.log($scope.menu.name);
             }else{
                 name = '';
             }
@@ -133,7 +135,7 @@ $scope.filesSortConfig = {
         }
 
         function addImage(img){
-            console.log(img)
+            // console.log(img)
                     if(angular.element('#fileInput').val() == ''){
                         toastr.error('Please choose an image to upload', 'Warning', {
                             closeButton: true
@@ -152,7 +154,7 @@ $scope.filesSortConfig = {
                     }
 
                      $scope.imageSelected = true;
-                     $scope.buttonName = "Browse Image";
+                     $scope.buttonName = "Browse Image" ;
         };
 
         // Main Menu view
@@ -191,9 +193,9 @@ $scope.filesSortConfig = {
             console.dir($scope.initialData);
 
             if($scope.initialData.from === 'imageEditorCtrl'){
-                 $scope.menu = $scope.initialData.details;
+                 $scope.menu = $scope.initialData.categoryDetails;
                  // console.log($scope.initialData.menu.image);
-                 addImage($scope.initialData.details.image);
+                 addImage($scope.menu.image);
                 // $scope.tmpImage = [];
                 // $scope.tmpImage =  $scope.initialData.menu.image;
 
@@ -632,7 +634,7 @@ $scope.filesSortConfig = {
         };
         // Add menu category
         $scope.addNewCategory = function(file,menu){
-            console.log($scope.initialData,file,menu)
+            console.log($scope.initialData,file,menu);
 
             if($scope.tmpImage[0] == null){
                 toastr.error('Please upload an image', 'Warning', {closeButton: true});
