@@ -166,7 +166,10 @@ export class LoginComponent implements OnInit {
 
   verifyEmailAddress(email) {
 
-    let data = { appId: this.appId, emailID: email };
+    let data = {
+      appId: this.appId,
+      emailID: email
+    };
 
     this.http.post(SERVER_URL + "/templatesAuth/verifyAppUserEmail", data)
       .subscribe((res: any) => {
@@ -175,7 +178,7 @@ export class LoginComponent implements OnInit {
 
           let requestParams = {
             "token": res.token,
-            "email": data.email,
+            "email": data.emailID,
             "name": res.user.name,
             "lname": res.user.lname,
             "phone": res.user.phone,

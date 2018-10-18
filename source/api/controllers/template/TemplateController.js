@@ -269,9 +269,9 @@ module.exports = {
         var searchApp = {
             appId: appId,
         };
-        Blogs.find().where(searchApp).exec(function(err, app) {
+        Blogs.find().where(searchApp).sort({createdAt: -1}).exec(function(err, blogs) {
             if (err) return done(err);
-            return res.send(app);
+            return res.send(blogs);
         });
 
 
