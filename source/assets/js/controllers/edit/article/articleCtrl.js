@@ -37,10 +37,11 @@
         $scope.imageSelected = true;
         $scope.buttonName = "Select Image";
 
+        $scope.articleData = {};
+
         $scope.cropImage = function () {
-            var articleData = {};
             if($scope.article){
-                articleData = {
+                $scope.articleData = {
                     initData : $scope.article,
                     tempImage : $scope.tmpImage,
                     deleteImages : $scope.deleteImages,
@@ -48,13 +49,13 @@
                 }
             }
             else{
-                articleData = {};
+                $scope.articleData = {};
             }
-            console.log(articleData);
+            console.log($scope.articleData);
 
             var handleFileSelect = function (evt) {
                 var file=evt.currentTarget.files[0];
-                imageEditorService.callImageEditor(file,400,200,articleData, 'addNewArticle');
+                imageEditorService.callImageEditor(file,400,200,$scope.articleData, 'addNewArticle');
             };
             angular.element(document.querySelector('#fileInput')).on('change', handleFileSelect);
         };

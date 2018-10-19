@@ -80,16 +80,16 @@
         // image crop function
         $scope.cropImage = function () {
             console.log("inside cropImage");
-            let name;
+            $scope.name;
             if($scope.menu){
-                name = $scope.menu.name;
+                $scope.name = $scope.menu.name;
                 console.log($scope.menu.name);
             }else{
-                name = '';
+                $scope.name = '';
             }
             var handleFileSelect=function(evt) {
                 var file=evt.currentTarget.files[0];
-                imageEditorService.callImageEditor(file,100,100, name, initialData.menu);
+                imageEditorService.callImageEditor(file,100,100, $scope.name, initialData.menu);
             };
             angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
         };
