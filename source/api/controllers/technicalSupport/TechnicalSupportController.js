@@ -553,8 +553,8 @@ module.exports = {
     setServiceId : function(req, res){
         var Query = {appId: req.body.id};
         var operators;
-        var toEmail = config.IDEABIZ_GROUP_EMAIL;
-        var fromEmail = config.IDEABIZ_ADMIN_EMAIL;
+        var toEmail = config.IDEABIZ_SUPER_ADMIN_EMAIL;
+        var fromEmail = config.IDEABIZ_SUPPORT_EMAIL;
 
         PublishDetails.findOne(Query).exec(function(err, findApp){
             if(err){ res.send(err);}

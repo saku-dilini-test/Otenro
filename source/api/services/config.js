@@ -168,6 +168,9 @@ module.exports = {
     IDEABIZ_GROUP_EMAIL : sails.config.IDEABIZ_GROUP_EMAIL,
     IDEABIZ_ADMIN_EMAIL : sails.config.IDEABIZ_ADMIN_EMAIL,
     SIMATO_SUPPORT : sails.config.SIMATO_SUPPORT,
+    IDEABIZ_SUPER_ADMIN_EMAIL : sails.config.IDEABIZ_SUPER_ADMIN_EMAIL,
+    IDEABIZ_SUPPORT_EMAIL : sails.config.IDEABIZ_SUPPORT_EMAIL,
+    IDEABIZ_APP_GENERATOR_EMAIL : sails.config.IDEABIZ_APP_GENERATOR_EMAIL,
 
     //APK_BUILD_STATUS use to check the apk generation process is in which stage.This will set in Application.apkStatus
     APK_BUILD_STATUS: {
