@@ -634,7 +634,7 @@
         };
         // Add menu category
         $scope.addNewCategory = function(file,menu){
-            console.log($scope.initialData,file,menu);
+            // console.log($scope.initialData,file,menu);
 
             if($scope.tmpImage[0] == null){
                 toastr.error('Please upload an image', 'Warning', {closeButton: true});

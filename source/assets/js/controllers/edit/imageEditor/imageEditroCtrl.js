@@ -10,24 +10,37 @@
     function imageEditorCtrl($scope,$mdDialog,fileUrl,width,height,initialData,callFrom,mainMenuService,articleService) {
         setTimeout(
             () => {
-                console.log(initialData);
+                var categoryDetails = {
+                    name: '',
+                    image : null
+                };
+                var articleDetails = {
+                    img : null,
+                    tempImage : initialData.tempImage,
+                    deleteImages : initialData.deleteImages,
+                    articleCat : initialData.articleCat
+                };
+
                 $scope.callFrom = callFrom;
+
                 var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
                     includeUI: {
                         loadImage: {
                             // path: './images/imageEditor/test.png',
-                            path: fileUrl,
+                            path: fileUrl, // file for the image editor to edit
                             name: 'SampleImage'
                         },
-                        theme: whiteTheme, // or whiteTheme
+                        theme: whiteTheme, // or blackTheme
                         initMenu: 'crop',
-                        menuBarPosition: 'bottom'
+                        menuBarPosition: 'top'
                     },
                     cssMaxWidth: 700,
                     cssMaxHeight: 300
                 });
 
-                imageEditor.setCropRect(width,height);
+                if(width && height){
+                    imageEditor.setCropRect(width,height);
+                }
 
                 window.onresize = function () {
                     imageEditor.ui.resizeEditor();
@@ -38,24 +51,20 @@
                  */
                 $scope.imageEditorSave = function() {
                     var editedImg = imageEditor.toDataURL();
-                    var categoryDetails = {
-                        name:initialData,
+
+                    categoryDetails = {
+                        name: initialData,
                         image : editedImg
                     };
-
-                    console.log(initialData);
-                    console.log(callFrom);
-
                     if(callFrom === 'addNewMenuCategory'){
                         mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory','3','imageEditorCtrl', categoryDetails);
                     }else if(callFrom === 'addNewArticle'){
-                        var articleDetails = {
+                        articleDetails = {
                             img : editedImg,
                             tempImage : initialData.tempImage,
                             deleteImages : initialData.deleteImages,
                             articleCat : initialData.articleCat
                         };
-                        console.log(initialData);
                         articleService.showPublishArticleDialog(initialData.initData,'fromImageEditorCtrlSave',articleDetails);
                     }
                     else{
@@ -64,17 +73,23 @@
                     // $mdDialog.hide();
                 };
 
+                /**
+                 * go back to the page where image editor initiated
+                 */
                 $scope.imageEditorCancel = function() {
+                    categoryDetails = {
+                        name: initialData,
+                        image : null
+                    };
                     if(callFrom === 'addNewMenuCategory'){
                         mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory','3','imageEditorCtrlCancel', categoryDetails);
                     }else if(callFrom === 'addNewArticle'){
-                        var articleDetails = {
+                        articleDetails = {
                             img : null,
                             tempImage : initialData.tempImage,
                             deleteImages : initialData.deleteImages,
                             articleCat : initialData.articleCat
                         };
-                        console.log(initialData);
                         articleService.showPublishArticleDialog(initialData.initData,'fromImageEditorCtrlCancel',articleDetails);
                     }
                     else{

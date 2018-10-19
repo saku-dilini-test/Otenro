@@ -11,11 +11,20 @@
     ]);
     function imageEditorService($mdDialog) {
 
+        /**
+         * initiate the image editor dialog.
+         * @param _fileUrl - file to be edited in the image editor(jpg,png)
+         * @param _width - width of the crop area (if this passed, the height should be passed)
+         * @param _height - height of the crop area (if this passed, the width should be passed)
+         * @param _data - initial data from where the image editor called from
+         * @param _callFrom - 'string' what is the place image editor has been called
+         * @returns {*}
+         */
         function showImageEditorDialog(_fileUrl,_width,_height,_data, _callFrom) {
             return $mdDialog.show({
                 controller: 'imageEditorCtrl',
                 templateUrl: 'user/edit/imageEditor/imageEditor.html',
-                clickOutsideToClose: true,
+                clickOutsideToClose: false,
                 locals: {
                     fileUrl: _fileUrl,
                     width: _width,
