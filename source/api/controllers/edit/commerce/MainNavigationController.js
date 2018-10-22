@@ -125,9 +125,9 @@ module.exports = {
 
     },
 
-    addNewCategory : function (req,res) {
+    addNewCategory: function (req, res) {
         var isNew = req.body.isNew;
-        var tmpImage  = req.body.file[0];
+        var tmpImage = req.body.file[0];
         var randomstring = require("randomstring");
         var searchApp = {
             appId: req.body.appId,
@@ -136,73 +136,69 @@ module.exports = {
         var dePath;
         var orderNo;
 
-        if(isNew == 'true' || isNew == true){
+        if (isNew == 'true' || isNew == true) {
             dePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/secondNavi/';
-        }else {
-            dePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/';
+        } else {
+            dePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId + '/img/category/';
         }
 
         ArticleCategory.find(searchApp, function (err, found) {
-            if (err) return res.send(err);
+            if (err) return res.serverError({ status: 'ERROR' });
 
-            if(found.length != 0) {
-                return res.send(409, {message: 'Category name already exists!'});
+            if (found.length != 0) {
+                return res.send(409, { message: 'Category name already exists!' });
 
-            }else {
-                    if (!tmpImage.match("http")) {
-                        var imgeFileName = randomstring.generate() + ".png";
-                        var data = tmpImage.replace(/^data:image\/\w+;base64,/, "");
-                        var buf = new Buffer(data, 'base64');
+            } else {
+                if (!tmpImage.match("http")) {
+                    var imgeFileName = randomstring.generate() + ".png";
+                    var data = tmpImage.replace(/^data:image\/\w+;base64,/, "");
+                    var buf = new Buffer(data, 'base64');
 
-                        // product images copy to app file server
-                        fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
-                                req.body.appId + '/assets/images/secondNavi/' + imgeFileName, buf, function (err) {
-                                if (err) {
-                                    return res.send(err);
-                                }
-                        });
+                    // product images copy to app file server
+                    fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
+                        req.body.appId + '/assets/images/secondNavi/' + imgeFileName, buf, function (err) {
 
-                        ArticleCategory.find({appId: req.body.appId}).exec(function(err, categories){
-                            if(err) res.send(err);
+                            if (err) {
 
-                            if(categories.length == 0){
-                                orderNo = 0
-                                  var articleCategoryattribute = {name:req.body.name,imageUrl:imgeFileName,isNew:req.body.isNew,appId:req.body.appId,orderNo:orderNo}
-                                    ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
-                                        if (err){
-                                            res.send(err);
-                                        }else{
-                                            res.json(articleCategory);
-                                        }
-                                    });
+                                return res.send({ status: 'ERROR', message: 'App id is not matching with current user' });
+                            } else {
 
-                            }else{
-                                ArticleCategory.find({appId: req.body.appId}).max('orderNo').exec(function(err, categories){
+                                ArticleCategory.find({ appId: req.body.appId }).exec(function (err, categories) {
+                                    if (err) return res.serverError({ status: 'ERROR' });
 
-                                    orderNo = categories[0].orderNo + 1;
+                                    if (categories.length == 0) {
+                                        orderNo = 0
+                                        var articleCategoryattribute = { name: req.body.name, imageUrl: imgeFileName, isNew: req.body.isNew, appId: req.body.appId, orderNo: orderNo }
+                                        ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
+                                            if (err) {
+                                                return res.serverError({ status: 'ERROR' });
+                                            } else {
+                                                return res.json(articleCategory);
+                                            }
+                                        });
 
-                                    var articleCategoryattribute = {name:req.body.name,imageUrl:imgeFileName,isNew:req.body.isNew,appId:req.body.appId,orderNo:orderNo}
-                                    ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
-                                        if (err){
-                                            res.send(err);
-                                        }else{
-                                            res.json(articleCategory);
-                                        }
+                                    } else {
+                                        ArticleCategory.find({ appId: req.body.appId }).max('orderNo').exec(function (err, categories) {
 
-                                    });
+                                            orderNo = categories[0].orderNo + 1;
+
+                                            var articleCategoryattribute = { name: req.body.name, imageUrl: imgeFileName, isNew: req.body.isNew, appId: req.body.appId, orderNo: orderNo }
+                                            ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
+                                                if (err) {
+
+                                                    return res.serverError({ status: 'ERROR' });
+                                                } else {
+                                                    return res.json(articleCategory);
+                                                }
+                                            });
+                                        });
+                                    }
                                 });
-
                             }
-
                         });
-
-
-
-                    }
-
+                }
             }
         })
-
     },
 
     deleteItems : function (req,res,itemIds) {
