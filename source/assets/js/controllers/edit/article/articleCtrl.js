@@ -204,7 +204,6 @@
                         $scope.dialogTitle = 'Edit Page';
 
         $scope.article = initialData;
-
 //            $scope.serverImg = initialData.imageUrl;
 //            $scope.mainImg = initialData.imageUrl;
 //            $scope.picFile = ME_APP_SERVER + 'temp/' + $auth.getPayload().id + '/templates/' + $rootScope.appId + '/img/article/' + initialData.imageUrl;
@@ -457,6 +456,8 @@
                         return ;
                     }
                 }
+                article.desc = article.desc.replace(/\t/g, '&#09;');
+
 
                 articleService.publishArticle({
                     'articleImages': $scope.tmpImage, 'id': article.id, 'categoryId': $scope.seletedCategoryId, 'title': article.title, 'desc': article.desc,

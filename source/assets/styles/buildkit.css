@@ -152,6 +152,7 @@ p{
     font-weight: 300;
     text-shadow: 0 0 0 #999;
     text-transform: capitalize;
+    white-space: pre-wrap;
 }
 .desc{
     border: medium none;
@@ -3182,6 +3183,7 @@ table.md-calendar-day-header{
     position: absolute;
     top: 87px;
     z-index: 10;
+    height: 0;
 }
 .md-menu.paste-options .paste-button{
     visibility: hidden;
