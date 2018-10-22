@@ -503,9 +503,6 @@ button{
 /* = Custom Styling
 -------------------------------------------------------------- */
 
-h1,h2,h3,h4,h5,h6,p,label,.btn,a{
-  font-family:"Helvetica";
-}
 .container{
   max-width:1170px;
 }
@@ -515,18 +512,7 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 .hero-bloc-text-sub{
   font-size:36px;
 }
-.blocs-green-button{
-  background-color:#1abc9c;
-}
-.blocs-green-button:hover{
-  background-color:#1aae91;
-}
-.blocs-blue-button{
-  background-color:#4B96DE;
-}
-.blocs-blue-button:hover{
-  background-color:#448BCE;
-}
+
 .sub-header-text{
   font-size:44px;
   letter-spacing:5px;
