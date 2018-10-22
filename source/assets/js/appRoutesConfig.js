@@ -61,6 +61,11 @@ angular.module('app')
               controller: 'WelcomeTemplatesCtrl',
               templateUrl : 'user/welcome/welcomeTemplatesView.html'
 
+          }).state('anon.help',{
+              url :'/help',
+              controller : 'helpCtrl',
+              templateUrl : 'user/help/helpPage.html'
+
           }).state('anon.addNetwork',{
               url :'/fromAddNetwork?clickid&affid',
               params: {
@@ -192,18 +197,6 @@ angular.module('app')
                   appCreatorId:null
               },
               templateUrl : 'user/technicalSupport/TechnicalSupport.html'
-
-          }).state('user.help',{
-              url :'/help',
-              controller : 'helpCtrl',
-              data : {
-                  permissions: {
-                      only: ['Support'],
-                      redirectTo: 'anon.login'
-                  },
-                  appCreatorId:null
-              },
-              templateUrl : 'user/help/helpPage.html'
 
           }).state('user.viewAdNetworks',{
               url :'/viewAdNetworks/:adname',
