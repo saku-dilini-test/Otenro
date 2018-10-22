@@ -2,7 +2,7 @@
   <div class="bloc-size bloc bgc-white l-bloc" id="bloc-2">
     <div class="row-size row" *ngFor="let article of results" (click)="navigateProd('product',article)">
       <img class="cat-image" src="{{imageUrl}}/{{article.tempImageArray[0].img}}" width="100%">
-      <div class="main-header-font name">{{article.title}}</div>
+      <div class="name-size main-header-font name">{{article.title}}</div>
 
     </div>
   </div>
