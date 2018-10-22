@@ -1,0 +1,10 @@
+{
+  "name": "Jobs Sample",
+  "appId": "587f2fc69cca49641ff664ea",
+  "userId": "unknownUser",
+  "serviceApi": {
+    "host": "http://localhost:1337",
+    "port": 1337
+  },
+  "templateName": "Jobs"
+}

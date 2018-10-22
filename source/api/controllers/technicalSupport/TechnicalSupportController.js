@@ -553,8 +553,8 @@ module.exports = {
     setServiceId : function(req, res){
         var Query = {appId: req.body.id};
         var operators;
-        var toEmail = config.IDEABIZ_GROUP_EMAIL;
-        var fromEmail = config.IDEABIZ_ADMIN_EMAIL;
+        var toEmail = config.IDEABIZ_SUPER_ADMIN_EMAIL;
+        var fromEmail = config.IDEABIZ_SUPPORT_EMAIL;
 
         PublishDetails.findOne(Query).exec(function(err, findApp){
             if(err){ res.send(err);}
@@ -587,7 +587,7 @@ module.exports = {
                             else{
                                 var emailBody = "<html>" + req.body.appName + " is pending approval.<br><br>" +
                                     req.body.appName +  " with App ID " + req.body.id + " has been configured, and is pending approval.<br><br>" +
-                                    "The Appmaker Team" +
+                                    "The Ideadroid Team" +
                                     "</html>";
 
                                 mailOptions = {

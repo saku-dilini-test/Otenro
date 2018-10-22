@@ -19,7 +19,6 @@ var name = "chamil";
 module.exports = {
 
     createNewtoken: function(callback){
-        sails.log.debug("IdeaBizAuthenticatorService: Call createNewtoken");
         var thisCtrl = this;
         var headers = this.getHeaders();
 
@@ -58,8 +57,6 @@ module.exports = {
     },
 
     renewToken: function(callback){
-        sails.log.debug("Call renewToken");
-
         if(this.getAccessToken()===null){
             sails.log.debug("IdeaBizAuthenticatorService: Create new Token since there is no Access Token");
             this.createNewtoken(function(data,err){

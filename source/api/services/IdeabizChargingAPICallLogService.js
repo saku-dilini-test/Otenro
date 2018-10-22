@@ -76,7 +76,7 @@ module.exports = {
      */
     getChargingRequestByAppIdMSISDN: function(appId,msisdn){
         if(IDEABIZ_PAYMENT_CALLS_MAP.hasOwnProperty(appId + '_' + msisdn)){
-            return IDEABIZ_PAYMENT_CALLS_MAP.hasOwnProperty(appId + '_' + msisdn);
+            return IDEABIZ_PAYMENT_CALLS_MAP[appId + '_' + msisdn];
         }
         return null;
     },

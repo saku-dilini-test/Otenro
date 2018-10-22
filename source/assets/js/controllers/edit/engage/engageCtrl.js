@@ -21,21 +21,21 @@
             }
         }
 
-        io.socket.get('/edit/pushMessage/subscribe', (data) => {
+        io.socket.get('/edit/pushMessage/subscribe', function(data){
 
             console.log('Subscribe Data => ' + JSON.stringify(data, null, 2))
         });
 
-        io.socket.on('pushmessage', (socketData) => {
+        io.socket.on('pushmessage', function(socketData){
 
             if (socketData.verb === 'updated') {
 
-                let updatedMessage = $scope.pushedMessages.filter(message => {
+                var updatedMessage = $scope.pushedMessages.filter(function(message){
 
                     return message.id === socketData.data.id;
                 });
 
-                let updateMessageIndex = $scope.pushedMessages.indexOf(updatedMessage[0]);
+                var updateMessageIndex = $scope.pushedMessages.indexOf(updatedMessage[0]);
 
                 if (updateMessageIndex > -1) {
 

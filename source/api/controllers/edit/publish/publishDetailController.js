@@ -320,19 +320,19 @@ module.exports = {
                                             "<br>Subscription SMS: You have subscribed to the " + result[0].title + " service. Type STOP " + result[0].keyword  + " and send to 87757 to unsubscribe." +
                                             "<br>Un-subscription SMS: You have been unsubscribed from the " + result[0].title + " service." +
                                             "<br>SMS Mask : Ideadroid" +
-                                            "<br>Admin notify URL: https://developer.appmaker.lk/adminapi/index" +
-                                            "<br>SMS Notify URL: https://developer.appmaker.lk/sms/report" +
+                                            "<br>Admin notify URL: " + config.server.host + "/adminapi/index" +
+                                            "<br>SMS Notify URL: " + config.server.host + "/sms/report" +
                                             "<br><br>Regards," +
 
-                                            "<br><br>Appmaker Support" +
+                                            "<br><br>Ideadroid Support" +
 
-                                            "<br><br>Email : support@appmaker.lk" +
+                                            "<br><br>Email : " + config.SIMATO_SUPPORT +
 
                                             "<br>Contact : " + userData[0].mobile + "</html>";
 
                                      mailOptions = {
                                         from: userData[0].email, // sender address
-                                        to: config.IDEABIZ_GROUP_EMAIL, // list of receivers
+                                        to: config.IDEABIZ_SUPPORT_EMAIL, // list of receivers
                                         subject: 'App Publish', // Subject line
                                         html:emailBody
 
@@ -566,7 +566,6 @@ module.exports = {
     },
 
     getApkPath : function(req,res){
-
         var path = require('path');
         var mime = require('mime');
 

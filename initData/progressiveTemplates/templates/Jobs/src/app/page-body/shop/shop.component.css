@@ -1,0 +1,47 @@
+
+.container{
+  height: 100vh;
+  background: #fff;
+  border-top:1px solid #ccc;
+}
+
+
+.cat-image{
+  padding-top: 56px;
+}
+
+.name{
+  padding: 10px 5px 10px 5px;
+  text-transform: uppercase;
+}
+
+
+.prod{
+  border-radius: 5px 5px 2px 2px;
+  box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.31);
+}
+.prod img{
+  border-radius: 5px 5px 0px 0px ;
+}
+
+.prod:last-child{
+  margin-bottom: 76px !important;
+}
+
+.grey{
+  color:#717171;
+  letter-spacing: 0.5px;
+}
+
+.margin-l{
+  margin:8px 5px;
+}
+
+.margin-size{
+  margin-top:15%;
+}
+
+.btn-style{
+  margin-bottom:5px !important;
+}
+

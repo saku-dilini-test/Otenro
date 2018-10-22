@@ -2,7 +2,8 @@ import { Injectable, OnInit } from '@angular/core';
 
 @Injectable()
 export class PagebodyServiceModule {
-
+  STATUS_SUBSCRIBED = 'SUBSCRIBED';
+  STATUS_UNSUBSCRIBED = 'UNSUBSCRIBED';
   data: object;
   displayMessage: string;
   pushMessage: string;

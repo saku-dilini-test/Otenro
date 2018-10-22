@@ -98,17 +98,18 @@ module.exports = {
                                     "<br><br>This email is to notify that the app creator with the user name " +
                                     userData[0].firstName + " " + userData[0].lastName + " has deleted the app " + app[0].appName + " with the App ID" + app[0].id + "." +
                                     "<br><br>"+
-                                    "Regards,<br>Appmaker Team</html>";
+                                    "Regards,<br>Ideadroid Team</html>";
 
                                      mailOptions = {
-                                        from: app[0].email, // sender address
-                                        to: config.IDEABIZ_EMAIL, // list of receivers
+                                        from: config.IDEABIZ_SUPPORT_EMAIL, // sender address
+                                        to: config.IDEABIZ_SUPER_ADMIN_EMAIL, // list of receivers
                                         subject: 'App has been Deleted!', // Subject line
                                         html:emailBody
 
 
                                     };
                                 console.log(emailBody);
+                                console.log(mailOptions);
                                         // send mail with defined transport object
                                         transporter.sendMail(mailOptions, (error, info) => {
                                             if (error) {
@@ -1009,7 +1010,7 @@ module.exports = {
                         '<br><strong>Date:</strong> ' + time +
                         '<br><strong>Time Taken(seconds):</strong> ' + timeTaken;
 
-                    emailService.send(config.SUPPORT_USER_EMAIL,config.SUPPORT_USER_EMAIL,subject,htmlBody,function(err,info){});
+                    emailService.send(config.IDEABIZ_APP_GENERATOR_EMAIL,config.IDEABIZ_SUPPORT_EMAIL,subject,htmlBody,function(err,info){});
                 });
             }
         });
@@ -1082,7 +1083,7 @@ module.exports = {
                         '<br><strong>Date:</strong> ' +  new Date().toLocaleString() +
                         '<br><strong>Error log [' + errorTime + ']:</strong><br>' + body;
 
-                    emailService.send(config.SUPPORT_USER_EMAIL,config.SUPPORT_USER_EMAIL,subject,htmlBody,function(err,info){});
+                    emailService.send(config.IDEABIZ_APP_GENERATOR_EMAIL,config.IDEABIZ_SUPPORT_EMAIL,subject,htmlBody,function(err,info){});
                 });
             }
         });
