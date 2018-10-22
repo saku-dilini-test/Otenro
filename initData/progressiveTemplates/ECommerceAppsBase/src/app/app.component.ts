@@ -17,7 +17,7 @@ export class AppComponent {
   private pushSubData;
   template:any;
   
-  constructor(private pushService: PushNotificationService,private appdataService: AppDataService,private titleService: Title) {
+  constructor(private pushService: PushNotificationService, private appdataService: AppDataService, private titleService: Title) {
 
     this.pushSubData = localStorage.getItem('sub');
     // console.log('pushSubData : ' + this.pushSubData)

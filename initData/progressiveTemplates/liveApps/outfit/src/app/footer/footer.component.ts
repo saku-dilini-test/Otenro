@@ -17,9 +17,11 @@ export class FooterComponent {
   private userId = (<any>data).userId;
   public loginStatus;
   webInfo: any;
+  title: any;
   imageUrl;
   dummy: any;
   ipgInfo: any = null;
+  appName;
 
   constructor(private router: Router, private appDataService: AppDataService,
     private localStorageService: LocalStorageService, private ordersService: OrdersService) {
@@ -35,7 +37,12 @@ export class FooterComponent {
     this.ordersService.getIPGinfo().subscribe(data => {
       this.ipgInfo = data;
     });
-
+   this.appDataService.getAboutUs()
+      .subscribe((data: any) => {
+       this.appName = data.appName + ' ' + new Date().getFullYear();
+   }, (err) => {
+        console.log(err);
+   });
   }
 
 
@@ -50,7 +57,7 @@ export class FooterComponent {
   }
 
   navigate(val: string,data) {
-    this.router.navigate([val])
+    this.router.navigate([val]);
   }
 
   getTwitterUrl(): string {
