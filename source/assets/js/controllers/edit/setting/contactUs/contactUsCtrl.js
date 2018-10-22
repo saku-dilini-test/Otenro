@@ -163,12 +163,12 @@
                  storeSettings.userId = $scope.userId;
                  storeSettings.appId = $rootScope.appId;
                  commerceService.savePolicies(storeSettings).success(function (data) {
-                     toastr.success('Policies and Terms successfully updated  ', {
+                     toastr.success('Policies and Terms successfully updated.', 'Success!', {
                          closeButton: true
                      });
                      disableTabs(tab,false,false,false);
                  }).error(function (err) {
-                     toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
+                     toastr.error("Unable to get Store Settings", 'Error!',{closeButton: true});
                  })
              }
          };
@@ -206,7 +206,7 @@
                     storeSettings.userId = $scope.userId;
                     commerceService.saveStoreSettings(storeSettings)
                         .success(function (data, status, headers, config) {
-                            toastr.success('About us updated', 'Awesome!', {
+                            toastr.success('About us updated', 'Success!', {
                                 closeButton: true
                             });
 
