@@ -1,5 +1,5 @@
 var blackTheme = {
-    // 'common.bi.image': 'https://uicdn.toast.com/toastui/img/tui-image-editor-bi.png',
+    'common.bi.image': 'https://uicdn.toast.com/toastui/img/tui-image-editor-bi.png',
     'common.bisize.width': '251px',
     'common.bisize.height': '21px',
     'common.backgroundImage': 'none',
@@ -26,9 +26,9 @@ var blackTheme = {
     'downloadButton.fontSize': '12px',
 
     // main icons
-    'menu.normalIcon.path': './images/imageEditor/svg/icon-b.svg',
+    'menu.normalIcon.path': '../dist/svg/icon-b.svg',
     'menu.normalIcon.name': 'icon-b',
-    'menu.activeIcon.path': './images/imageEditor/svg/icon-a.svg',
+    'menu.activeIcon.path': '../dist/svg/icon-a.svg',
     'menu.activeIcon.name': 'icon-a',
     'menu.iconSize.width': '24px',
     'menu.iconSize.height': '24px',
@@ -38,9 +38,9 @@ var blackTheme = {
     'submenu.partition.color': '#858585',
 
     // submenu icons
-    'submenu.normalIcon.path': './images/imageEditor/svg/icon-a.svg',
+    'submenu.normalIcon.path': '../dist/svg/icon-a.svg',
     'submenu.normalIcon.name': 'icon-a',
-    'submenu.activeIcon.path': './images/imageEditor/svg/icon-c.svg',
+    'submenu.activeIcon.path': '../dist/svg/icon-c.svg',
     'submenu.activeIcon.name': 'icon-c',
     'submenu.iconSize.width': '32px',
     'submenu.iconSize.height': '32px',
