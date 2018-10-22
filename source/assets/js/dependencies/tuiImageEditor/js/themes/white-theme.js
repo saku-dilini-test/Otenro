@@ -3,8 +3,8 @@ var whiteTheme = {
     'common.bisize.width': '251px',
     'common.bisize.height': '21px',
     // 'common.backgroundImage': './img/bg.png',
-    'common.backgroundColor': '#eee',
-    'common.border': '1px solid #c1c1c1',
+    'common.backgroundColor': '#555',
+    // 'common.border': '1px solid #c1c1c1',
 
     // header
     'header.backgroundImage': 'none',

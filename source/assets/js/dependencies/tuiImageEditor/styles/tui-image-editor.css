@@ -168,7 +168,7 @@ body > textarea {
   min-width: 24px;
 }
 .tui-image-editor-container .tui-image-editor-menu > .tui-image-editor-item.active {
-  background-color: #fff;
+  background-color: #222;
   transition: all 0.3s ease;
 }
 .tui-image-editor-container .tui-image-editor-wrap {
@@ -228,8 +228,11 @@ body > textarea {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 150px;
+  height: auto;
   white-space: nowrap;
+  z-index: 1;
+  opacity:0.8;
+    padding: 10px 0;
 }
 .tui-image-editor-container .tui-image-editor-submenu .tui-image-editor-button:hover svg > use.active {
   display: block;
@@ -278,7 +281,7 @@ body > textarea {
 }
 .tui-image-editor-container .tui-image-editor-submenu-align {
   text-align: left;
-  margin-right: 30px;
+  margin-right: 10px;
 }
 .tui-image-editor-container .tui-image-editor-submenu-align label {
   width: 55px;
@@ -323,12 +326,12 @@ body > textarea {
   text-align: left;
 }
 .tui-image-editor-container .tui-image-editor-checkbox-wrap.fixed-width {
-  width: 187px;
+  width: 210px;
   white-space: normal;
 }
 .tui-image-editor-container .tui-image-editor-checkbox {
   display: inline-block;
-  margin: 1px 0 1px 0;
+  margin: 0 0 0 15px;
 }
 .tui-image-editor-container .tui-image-editor-checkbox input {
   width: 14px;
@@ -394,10 +397,11 @@ body > textarea {
 }
 .tui-image-editor-container .tui-image-editor-range {
   position: relative;
-  top: 7px;
+  top: 4px;
   width: 166px;
   height: 17px;
   display: inline-block;
+  margin-left: 20px;
 }
 .tui-image-editor-container .tui-image-editor-virtual-range-bar {
   top: 7px;
@@ -443,7 +447,7 @@ body > textarea {
 }
 .tui-image-editor-container .tui-image-editor-range-wrap.tui-image-editor-newline.short {
   margin-top: 0;
-  margin-left: 17px;
+  margin-left: 20px;
 }
 .tui-image-editor-container .tui-image-editor-range-wrap.tui-image-editor-newline.short label {
   color: #8e8e8e;
@@ -473,7 +477,7 @@ body > textarea {
 }
 .tui-image-editor-container .tui-image-editor-controls {
   position: absolute;
-  background-color: #151515;
+  background-color: #fff;
   width: 100%;
   height: 64px;
   display: table;
@@ -645,14 +649,14 @@ body > textarea {
   bottom: inherit;
 }
 .tui-image-editor-container.top .tui-image-editor-submenu > div {
-  padding-top: 24px;
+  padding-top: 10px;
   vertical-align: top;
 }
 .tui-image-editor-container.top .tui-image-editor-controls-logo {
   display: table-cell;
 }
 .tui-image-editor-container.top .tui-image-editor-controls-buttons {
-  display: table-cell;
+  display: none; /* changed by .sanira */
 }
 .tui-image-editor-container.top .tui-image-editor-main {
   top: 64px;
@@ -847,7 +851,7 @@ body > textarea {
   top: 0;
 }
 .tui-image-editor-container.top.tui-image-editor-top-optimization .tui-image-editor-controls ul {
-  text-align: right;
+  text-align: center;
 }
 .tui-image-editor-container.top.tui-image-editor-top-optimization .tui-image-editor-controls-logo {
   display: none;

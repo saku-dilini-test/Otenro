@@ -5575,7 +5575,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        bottom += 150; // changed value (150)
 	                        break;
 	                    case 'top':
-	                        top += 150;
+	                        top += 100;
 	                        break;
 	                    case 'left':
 	                        left += 248;
