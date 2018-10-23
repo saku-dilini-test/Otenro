@@ -39,11 +39,9 @@ module.exports = {
     REDIRECT_URL: 'http://appmaker.ddns.net',
     ANDROID_APK_BUILD_ZIPALIGN_PATH: '/opt/android-sdk/build-tools/26.0.2/zipalign',
     ANDROID_VERSION : 26,
-
-    /**
-     * change isBeta to 0 after beta period
-     **/
-    isBeta: 0,
+    isBeta: 0,//change isBeta to 0 after beta period
+    USE_SENDMAIL: false,//This is use to send emails via Sendmail transporter or configured SMTP server.If true, will use the Sendmail.
+    
     //IdeaBiz
     IDEABIZ_AUTH_CONSUMER_KEY: 'LHCsrPxeOqQKHbO767LIz9AuAgoa',
     IDEABIZ_AUTH_CONSUMER_SECRET: 'pS5yR6OcfNrdb70R7LMLaaV4cfMa',

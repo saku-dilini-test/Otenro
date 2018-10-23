@@ -56,11 +56,9 @@ module.exports = {
     REDIRECT_URL: 'https://ideadroid.ideamart.io',
     ANDROID_APK_BUILD_ZIPALIGN_PATH: '/opt/android-sdk/build-tools/26.0.2/zipalign',//Use to do the zipalign when building android apk.
     ANDROID_VERSION : 26,
+    isBeta: 0,//change isBeta to 0 after beta period
+    USE_SENDMAIL: true,//This is use to send emails via Sendmail transporter or configured SMTP server.If true, will use the Sendmail.
 
-    /**
-     * change isBeta to 0 after beta period
-     **/
-    isBeta: 0,
     //IdeaBiz
     IDEABIZ_AUTH_CONSUMER_KEY: 'fmqgPhGyJ6KFvsLe6cpgxPzlXcca',
     IDEABIZ_AUTH_CONSUMER_SECRET: 'NZ7OQjZ2yCqsin7kxjbGpUlBsska',

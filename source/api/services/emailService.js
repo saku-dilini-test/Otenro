@@ -1,3 +1,5 @@
+var config = require('./config');
+
 /**
  * Created by root on 2/2/16.
  */
@@ -13,23 +15,28 @@ var transporter = null;
 var ERROR = { message: 'ERROR'};
 
 
-var transporter = nodemailer.createTransport({
-    host: 'appmaker.lk',
-    port: 465,
-    secure: true, // true for 465, false for other ports
-    auth: {
-        user: 'no_reply_ideadroid@appmaker.lk', // generated ethereal user
-        pass: 'FoRH7DAyKG' // generated ethereal password
-    },
-    tls:{
-        rejectUnauthorized: false
-    }
-});
+var transporter = null;
 
-
-
-
-
+if(config.USE_SENDMAIL){
+    transporter = nodemailer.createTransport({
+        sendmail: true,
+        newline: 'unix',
+        path: '/usr/sbin/sendmail'
+    });
+}else{
+    transporter = nodemailer.createTransport({
+        host: 'appmaker.lk',
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+            user: 'no_reply_ideadroid@appmaker.lk', // generated ethereal user
+            pass: 'FoRH7DAyKG' // generated ethereal password
+        },
+        tls:{
+            rejectUnauthorized: false
+        }
+    });    
+}
 
 var server  = email.server.connect({
     user:    "no_reply_ideadroid@appmaker.lk",
