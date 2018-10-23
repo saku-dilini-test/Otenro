@@ -388,6 +388,7 @@
                                             app.serviceId = detail.serviceID;
                                             app.keyword = detail.keyword;
                                             $scope.appList.push(app);
+                                            $scope.searchPublishApps = undefined;
                                         }
                                     });
                                 });
@@ -444,10 +445,8 @@
         });
 
         $scope.all = function (status) {
-            if (status == "All") {
-                $scope.searchPublishApps = undefined;
-//                    $scope.searchPublishApps.publishedStatus = "All";
-            }
+            
+            $scope.searchPublishApps = status !== "all" ? status : undefined;
         }
 
         $scope.checkStatus = function (appId) {

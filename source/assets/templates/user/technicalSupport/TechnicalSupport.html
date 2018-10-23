@@ -59,7 +59,7 @@
                 </thead>
 
                 <tbody>
-                <tr ng-repeat="app in appList | filter : searchPublishApps | orderBy:sortType:sortReverse">
+                <tr ng-repeat="app in appList | filter: { publishedStatus : searchPublishApps } | orderBy: { sortType: sortReverse }">
                     <td ng-click="showAppView(app.id,app.userId)"  style="color:blue;">
                     <!--<a href="{{serverURL}}templates/viewWebTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">-->
                         <u>{{app.uniqueAppId}}</u>
