@@ -1066,7 +1066,7 @@ module.exports = {
             }
          });
 
-        var apkFile = config.server.host + '/getApkPath' +'/?userId=' + data.uid + '&appId=' + data.id + '&appName='+ data.appName;
+        var apkFile = config.server.host + '/getApkPath' +'/?userId=' + data.uid + '&appId=' + data.id + '&appName='+ data.appName.replace(/\s/g, '');
             var emailBody,subject;
 
             var email = data.email;
