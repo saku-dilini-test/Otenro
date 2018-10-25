@@ -89,14 +89,14 @@ module.exports = {
                         'appId': appID
                     }
 
-                    AppUser.findOne(queryUser).exec(function (err, user) {
+                    AppUser.findOrCreate(queryUser, queryUser).exec(function (err, user) {
                         //Will update the user statuses while receiving a status change call
                         if (user) {
                             var setFields = {};
                             var isDeviceChangedByUser = false;
 
                             if(isRegistration) {
-                                sails.log.debug("IdeabizSMSController: In Registration: User exists for the msisdn: " + msisdn + " and for the appID: " + appID);
+                                sails.log.debug("IdeabizSMSController: In Registration: msisdn: " + msisdn + " and for the appID: " + appID);
 
                                 setFields.status = config.APP_USER_STATUS.ACTIVE;
 
@@ -108,7 +108,7 @@ module.exports = {
                                     isDeviceChangedByUser = user.deviceUUID && user.deviceUUID !== deviceUUID;//Check whether the User has changed the Device
                                 }
                             }else{
-                                sails.log.debug("IdeabizSMSController: In Un-Registration: User exists for the msisdn: " + msisdn + " and for the appID: " + appID);
+                                sails.log.debug("IdeabizSMSController: In Un-Registration: msisdn: " + msisdn + " and for the appID: " + appID);
 
                                 setFields.status = config.APP_USER_STATUS.INACTIVE;
                                 setFields.unsubscribeDate = dateFormat(new Date(), "yyyy-mm-dd");
@@ -122,7 +122,7 @@ module.exports = {
                                     return res.serverError("Error when update the msisdn: " + msisdn + " error: " + err);
                                 }
 
-                                if(isRegistration && users[0].deviceUUID) {
+                                if(isRegistration && users[0].deviceUUID && users[0].subscriptionStatus===config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code) {
                                     var message = "";
                                     if(isDeviceChangedByUser){
                                         message = "Successfully updated your device details." ;
@@ -132,39 +132,9 @@ module.exports = {
 
                                     sails.log.debug('IdeabizSMSController: Sent Push Notification message"%s" for msisdn: %s appId:%s AppUser ID:%s',message,msisdn,appID,users[0].id);
                                     adminAPI.notifyUsers(req, res, users[0], message);
-                                }else{
-                                    sails.log.error('IdeabizSMSController: User does not have a UUID attached. msisdn: %s appId:%s AppUser ID:%s',msisdn,appID,users[0].id);
                                 }
 
                                 return res.ok("ok");
-                            });
-                        }else {
-                            if(!isRegistration){
-                                sails.log.debug("IdeabizSMSController: In Un-Registration: User does not exists in the System for the msisdn: " + msisdn + " and for the appID: " + appID);
-                                return res.badRequest("In Un-Registration: User is not registered in the System for the msisdn: " + msisdn);
-                            }
-
-                            //Will create new User if him self is not a subscribed user in the system before
-                            var newAppUser = {
-                                'msisdn': msisdn,
-                                'appId': appID,
-                                'status': config.APP_USER_STATUS.ACTIVE,
-                                'serviceID': app.serviceID
-                            };
-
-                            if(deviceUUID){
-                                newAppUser.deviceUUID = deviceUUID;
-                            }
-
-                            AppUser.create(newAppUser).exec(function (err, user) {
-                                if (err) {
-                                    return res.serverError(err);
-                                }
-
-                                sails.log.debug("IdeabizSMSController: New user created for the msisdn: " + msisdn + " serviceID=" + app.serviceID);
-                                // thisController.subscribeUser(req,res,msisdn,app.serviceID);
-
-                                return res.created(user);
                             });
                         }
                     });
