@@ -86,6 +86,8 @@ module.exports = {
             if(result[0]){
                 console.log('Push message update');
                 var prevDate = result[0].date;
+                var pushMessage = req.body;
+                pushMessage.status = config.PUSH_MESSAGE_STATUS.PENDING.code;
                 PushMessage.update(criteria,req.body).exec(function(err,data){
                     if(err) return res.send(err);
                     if(prevDate!==data[0].date) {
