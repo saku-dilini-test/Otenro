@@ -65,11 +65,18 @@ export class ProductComponent implements OnInit {
               }
 
               if (article) {
-                this.dataService.data = article;
-                this.catName = article.title;
-                this.title.changeTitle(this.catName);
-                this.Data = article;
-                // this.route.navigate(['product', article.title]);
+                  this.dataService.data = article;
+                  this.catName = article.title;
+                  this.title.changeTitle(this.catName);
+                  this.Data = article;
+                  this.productService.createArticleViewDataInfo(this.catName).subscribe(data => {
+                      // Read the result field from the JSON response.
+                      this.results = data;
+                  },
+                      error => {
+                          console.log('Error on create record');
+                      });
+                
               } else {
                 console.log("Article not found for the catId: " + catId + " articleId: " + articleId);
               }
@@ -95,17 +102,7 @@ export class ProductComponent implements OnInit {
             this.catId = params['catId'];
 
             this.loadArticle(this.catId,this.articleId);
-            if (this.catName) {
-                this.productService.createArticleViewDataInfo(this.catName).subscribe(data => {
-                    // Read the result field from the JSON response.
-                    this.results = data;
-                },
-                    error => {
-                        console.log('Error on create record');
-                    });
-            }
         });
-
     }
 
     checkUrl(url) {
