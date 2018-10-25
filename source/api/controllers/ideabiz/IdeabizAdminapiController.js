@@ -466,20 +466,33 @@ module.exports = {
 
                                 };
 
-                                AppUser.create(newAppUser).exec(function (err, user) {
+                                AppUser.findOrCreate(queryUser, queryUser).exec(function (err, user) {
                                     if (err) {
                                         return res.serverError(err);
                                     }
-                                    sails.log.debug("IdeabizAdminapiController: New user created for the msisdn: " + msisdn + " serviceID=" + publishDetailsData.serviceID);
-                                    actionStateChangeInstance.sendForCharging(msisdn,serviceID,publishDetailsData,appID,function(data,err){
-                                        if(err){
-                                            sails.log.error('IdeabizAdminapiController: (New user created) Issue when send for charging for msisdn: %s appId:%s err:%s',msisdn,appID,err);
-                                        }else {
-                                            sails.log.debug('IdeabizAdminapiController: (New user created) Charging success for msisdn: %s appId:%s',msisdn,appID);
-                                        }
-                                        chargingAPICallLogService.removeFromChargingMap(appID,msisdn);
-                                    });
-                                    return res.created(user);
+                                    sails.log.debug("IdeabizAdminapiController: New user created/updated for the msisdn: " + msisdn + " serviceID=" + publishDetailsData.serviceID);
+
+                                    if(user){
+                                        AppUser.update(queryUser, newAppUser).exec(function (err, users) {
+                                            if (err) {
+                                                sails.log.error('IdeabizAdminapiController: Error when updating msisdn: %s appId:%s err:%s',msisdn,appID,err);
+                                                return res.serverError(err);
+                                            } 
+                                            
+                                            actionStateChangeInstance.sendForCharging(msisdn,serviceID,publishDetailsData,appID,function(data,err){
+                                                if(err){
+                                                    sails.log.error('IdeabizAdminapiController: (New user created/updated) Issue when send for charging for msisdn: %s appId:%s err:%s',msisdn,appID,err);
+                                                }else {
+                                                    sails.log.debug('IdeabizAdminapiController: (New user created/updated) Charging success for msisdn: %s appId:%s',msisdn,appID);
+                                                }
+                                                chargingAPICallLogService.removeFromChargingMap(appID,msisdn);
+                                            });
+                                            return res.created(user);                                            
+                                        });
+                                    }else{
+                                        sails.log.error('IdeabizAdminapiController: Could not find an User for msisdn: %s appId:%s err:%s',msisdn,appID,err);
+                                        return res.serverError('Could not find an User');
+                                    }
                                 });
                             }
                         });
