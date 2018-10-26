@@ -35,6 +35,7 @@ export class ProductComponent implements OnInit {
         private router: ActivatedRoute, private route: Router, private title: TitleService) {
 
         this.Data = this.dataService.data;
+        this.title.setLocation('product');
     }
 
 

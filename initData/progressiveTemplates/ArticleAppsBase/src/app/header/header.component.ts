@@ -29,6 +29,8 @@ export class HeaderComponent implements OnInit {
   private templateName = (<any>data).templateName;
   private cartNo: number;
   public title: string;
+  public articleSize: number = 20;
+  public tempName: string;
   public hideBackOnHome: boolean;
   subscriptionStatus;
   pushMessage;
@@ -64,6 +66,10 @@ export class HeaderComponent implements OnInit {
     });
 
     headerCmp = this;
+    this.titleServ.getLocation().subscribe(
+      source =>
+        this.tempName = source
+    );
 
   }
 
@@ -142,8 +148,7 @@ export class HeaderComponent implements OnInit {
       this.title = name;
     }
     this.router.navigate([route]);
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("header").style.height = "initial";
+    this.closeNav();
 
   }
 

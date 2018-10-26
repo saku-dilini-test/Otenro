@@ -51,6 +51,7 @@ export class HomepageComponent implements OnInit {
 
     this.title.changeTitle((<any>data).name);
     homePageCmp = this;
+    this.title.setLocation('home');
   }
 
   ngOnInit() {

@@ -33,6 +33,7 @@ export class ShopComponent implements OnInit {
         this.title.changeTitle("Store");
       }
     });
+    this.title.setLocation('shop');
 
   }
 
