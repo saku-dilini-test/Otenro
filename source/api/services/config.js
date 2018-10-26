@@ -80,8 +80,8 @@ module.exports = {
                     'max': 10
                 },
                 'monthly': {
-                    'min': 1,
-                    'max': 1000
+                    'min': 30,
+                    'max': 500
                 }
             }
         }
