@@ -26,7 +26,7 @@
         console.log(splitParams);
 
       $scope.deviceView = "mobile";
-      $scope.appTemplateUrl = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + splitParams[0]
+      $scope.appTemplateUrl = SERVER_URL + "progressiveTemplates/viewProgUrl?isFromCMSAppView=1&userId=" + splitParams[0]
                                 + "&appId=" + splitParams[1] + "&" + new Date().toISOString() + "/";
 
 
