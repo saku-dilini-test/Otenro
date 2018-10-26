@@ -15,7 +15,7 @@ body > textarea {
   height: 100%;
   position: relative;
   background-color: #282828;
-  overflow: hidden;
+  overflow: auto; /* added by .sanira */
 }
 .tui-image-editor-container div,
 .tui-image-editor-container ul,
@@ -90,7 +90,7 @@ body > textarea {
 .tui-image-editor-container .tui-image-editor-main-container {
   position: absolute;
   width: 100%;
-  top: 0;
+  top: -30%; /* added by .sanira */
   bottom: 64px;
 }
 .tui-image-editor-container .tui-image-editor-main {
@@ -148,7 +148,6 @@ body > textarea {
   border-right: 7px solid transparent;
   border-top: 7px solid #2f2f2f;
   border-left: 7px solid transparent;
-  position: absolute;
   left: 13px;
   top: -2px;
 }
@@ -630,7 +629,7 @@ body > textarea {
   border-bottom: 12px solid #fff;
 }
 .tui-image-editor-container.top .tui-image-editor-size-wrap {
-  height: calc(100% - 64px);
+  /*height: auto; !* changed by .sanira (was - calc(100% - 64px); )*!*/
 }
 .tui-image-editor-container.top .tui-image-editor-main-container {
   bottom: 0;
@@ -660,11 +659,15 @@ body > textarea {
 }
 .tui-image-editor-container.top .tui-image-editor-main {
   top: 64px;
-  height: 100%;
+  /*height: 100%;*/
 }
 .tui-image-editor-container.top .tui-image-editor-controls {
   top: 0;
   bottom: inherit;
+  /* added by .sanira */
+  opacity: 0;
+  -webkit-transition: opacity 2s; /* For Safari 3.1 to 6.0 */
+  transition: opacity 2s;
 }
 .tui-image-editor-container .svg_ic-menu {
   width: 24px;
@@ -854,5 +857,15 @@ body > textarea {
   text-align: center;
 }
 .tui-image-editor-container.top.tui-image-editor-top-optimization .tui-image-editor-controls-logo {
+  display: none;
+}
+/* added by .sanira */
+.tui-image-editor-container .tui-image-editor-main.tui-image-editor-menu-crop .tui-image-editor-submenu {
+  display: none;
+}
+#tie-btn-crop{
+  display: none;
+}
+#tie-btn-reset{
   display: none;
 }

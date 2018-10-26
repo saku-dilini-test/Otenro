@@ -45,14 +45,13 @@
                     initData : $scope.article,
                     tempImage : $scope.tmpImage,
                     deleteImages : $scope.deleteImages,
-                    articleCat : $scope.articleCat
+                    articleCat : $scope.dummyCat.id //$scope.articleCat
                 }
             }
             else{
                 $scope.articleData = {};
             }
             console.log($scope.articleData);
-
             var handleFileSelect = function (evt) {
                 var file=evt.currentTarget.files[0];
                 imageEditorService.callImageEditor(file,400,200,$scope.articleData, 'addNewArticle');
@@ -80,29 +79,24 @@
                 for(var i =0;i<$scope.tmpImage.length;i++){
 
                     if($scope.tmpImage[0].img == null){
-                        console.log("temp[0] ");
                         $scope.tmpImage[0].img = img;
                         $scope.addNew = false;
                         break
                     }else if($scope.tmpImage.length >= 1 && $scope.tmpImage[0].img == null){
-                        console.log("temp[1] ");
                         $scope.tmpImage[0].img = img;
                         $scope.addNew = false;
                         break
                     }
                     if($scope.tmpImage[i].url && !$scope.tmpImage[i].img){
-                        console.log("temp[2] ");
                         $scope.tmpImage[i].img = img;
                         $scope.addNew = false;
                         break;
                     }
                     else{
-                        console.log("temp[3] ");
                         $scope.addNew = true;
                     }
                 }
                 if($scope.addNew == true){
-                    console.log("temp[] addNew true");
                     if($scope.tmpImage.length <= 6){
                         $scope.tmpImage.push({'img': img});
                         console.log($scope.tmpImage);
@@ -297,7 +291,6 @@
                     });
                 })
         }
-
 
         $scope.changeArticleCat = function (catId) {
             if (catId.id == 1) {

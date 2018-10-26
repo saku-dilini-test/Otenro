@@ -5079,7 +5079,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                bottom = _getEditorPosition2.bottom,
 	                left = _getEditorPosition2.left,
 	                right = _getEditorPosition2.right;
-
 	            this._editorElementWrap.style.bottom = bottom + 'px';
 	            this._editorElementWrap.style.top = top + 'px';
 	            this._editorElementWrap.style.left = left + 'px';
@@ -5363,8 +5362,6 @@ return /******/ (function(modules) { // webpackBootstrap
 				
 				// added by .sanira
 				console.log("lela");
-				console.log(_this4);
-
 	            _tuiCodeSnippet2.default.forEach(this._els.load, function (element) {
 	                element.addEventListener('change', function (event) {
 	                    _this4._actions.main.load(event.target.files[0]);
@@ -5504,6 +5501,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (this.submenu === menuName && toggle) {
 	                this.submenu = null;
 	            } else {
+	            	// comment added by .sanira (sub menu call)
 	                this._els[menuName].classList.add('active');
 	                this._mainElement.classList.add('tui-image-editor-menu-' + menuName);
 	                this.submenu = menuName;
@@ -5519,7 +5517,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	         */
 
 	    }, {
-			// added by .sanira _initMenu
+			// comment added by .sanira _initMenu
 	        key: '_initMenu',
 	        value: function _initMenu() {
 	            if (this.options.initMenu) {
@@ -5575,7 +5573,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        bottom += 150; // changed value (150)
 	                        break;
 	                    case 'top':
-	                        top += 100;
+	                        top += 150;
 	                        break;
 	                    case 'left':
 	                        left += 248;
@@ -11772,7 +11770,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return _this.loadImageFromURL(imagePath, imageName).then(function (sizeValue) {
 	                    exitCropOnAction();
 						_this.ui.initializeImgUrl = imagePath;
+						// added by .saira
 						console.log("loadImage");
+                        console.log(sizeValue);
 	                    _this.ui.resizeEditor({ imageSize: sizeValue });
 	                    _this.clearUndoStack();
 	                });
@@ -12064,6 +12064,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var _this8 = this;
 	        return (0, _tuiCodeSnippet.extend)({
 	            crop: function crop() {
+	            	console.log("$$$ Crop");
 					var cropRect = _this8.getCropzoneRect();
 	                if (cropRect) {
 	                    _this8.crop(cropRect).then(function () {
@@ -15192,6 +15193,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _util = __webpack_require__(72);
 
+	// added by .sanira
 	var cropRectangle = {
 		width:1,
 		height:1,
@@ -15410,7 +15412,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						width: width,
 						height: height,
 						acceptRatio: width / height
-					}
+					};
 					
 					console.log(cropRectangle);
 				}
