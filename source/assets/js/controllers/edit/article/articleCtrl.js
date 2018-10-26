@@ -39,6 +39,10 @@
 
         $scope.articleData = {};
 
+        /**
+         * added by .sanira on (2018.10.12)
+         * Changed the entire existing function body for call to the new image editor
+         */
         $scope.cropImage = function () {
             if($scope.article){
                 $scope.articleData = {
@@ -51,7 +55,7 @@
             else{
                 $scope.articleData = {};
             }
-            console.log($scope.articleData);
+            // console.log($scope.articleData);
             var handleFileSelect = function (evt) {
                 var file=evt.currentTarget.files[0];
                 imageEditorService.callImageEditor(file,400,200,$scope.articleData, 'addNewArticle');

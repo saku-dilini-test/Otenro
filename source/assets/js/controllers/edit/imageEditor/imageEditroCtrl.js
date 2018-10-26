@@ -8,21 +8,22 @@
 
 
     function imageEditorCtrl($scope,$mdDialog,toastr,fileUrl,width,height,initialData,callFrom,mainMenuService,articleService) {
+        var categoryDetails = {
+            name: '',
+            image : null
+        };
+        var articleDetails = {
+            img : null,
+            tempImage : initialData.tempImage,
+            deleteImages : initialData.deleteImages,
+            articleCat : initialData.articleCat
+        };
+
+        $scope.callFrom = callFrom;
+        $scope.isCropped = false;
+        $scope.saveButton = 'Crop & Save';
         setTimeout(
             () => {
-                var categoryDetails = {
-                    name: '',
-                    image : null
-                };
-                var articleDetails = {
-                    img : null,
-                    tempImage : initialData.tempImage,
-                    deleteImages : initialData.deleteImages,
-                    articleCat : initialData.articleCat
-                };
-
-                $scope.callFrom = callFrom;
-
                 var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
                     includeUI: {
                         loadImage: {
@@ -49,9 +50,11 @@
                 /**
                  * find the caller module and pass the image data with the initial data to the previously working dialog
                  */
-                $scope.imageEditorCropAndSave = function() {
+                $scope.imageEditorSave = function() {
                     var editedImg = null;
-                    applyCrop();
+                    if(!$scope.isCropped){
+                        applyCrop();
+                    }
                     setTimeout(()=>{
                         editedImg = imageEditor.toDataURL();
                         if(callFrom === 'addNewMenuCategory'){
@@ -79,17 +82,21 @@
                  * crop the image and redirect to image editor for edit cropped image
                  */
                 $scope.imageEditorCropAndEdit = function(){
-                    applyCrop();
-                    setTimeout(()=>{
-                        var controls = document.getElementsByClassName('tui-image-editor-controls');
-                        var container = document.getElementsByClassName('tui-image-editor-main-container');
-                        var wrapper = document.getElementsByClassName('tui-image-editor-wrap');
-                        wrapper[0].style.top = 0+'px';
-                        controls[0].style.opacity = 1;
-                        container[0].style.top = 0;
+                    var cropped = applyCrop();
+                    if(cropped){
+                        $scope.isCropped = true;
+                        $scope.saveButton = 'Save';
+                        setTimeout(()=>{
+                            var controls = document.getElementsByClassName('tui-image-editor-controls');
+                            var container = document.getElementsByClassName('tui-image-editor-main-container');
+                            var wrapper = document.getElementsByClassName('tui-image-editor-wrap');
+                            wrapper[0].style.top = 0+'px';
+                            controls[0].style.opacity = 1;
+                            container[0].style.top = 0;
 
-                        imageEditor.clearUndoStack();
-                    },100);
+                            imageEditor.clearUndoStack();
+                        },100);
+                    }
                 };
 
                 /**
@@ -117,7 +124,7 @@
                 };
 
                 /**
-                 *
+                 * apply the crop to image
                  */
                 function applyCrop(){
                     var cropZoneRect = imageEditor.getCropzoneRect();
