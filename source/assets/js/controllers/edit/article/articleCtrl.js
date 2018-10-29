@@ -439,14 +439,30 @@
 
             else {
                 var isImageUpdate = true;
+                var currentDate = new Date();
                 if ($scope.mainImg == $scope.serverImg) {
                     isImageUpdate = false;
                 }
 
-                if (article.expiryDate&&article.publishDate){
+                if (article.expiryDate && article.publishDate){
 
                     var expiryDate = new Date(article.expiryDate);
                     var publishDate = new Date(article.publishDate);
+
+                    if (publishDate < currentDate) {
+
+                        toastr.error('Publish date is not valid!', 'Warning', {
+                            closeButton: true
+                        });
+                        return ;
+                    }
+                    if (expiryDate < currentDate) {
+    
+                        toastr.error('Expiry date is not valid!', 'Warning', {
+                            closeButton: true
+                        });
+                        return ;
+                    }
 
                     if (expiryDate <= publishDate){
 
