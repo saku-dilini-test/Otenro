@@ -168,8 +168,8 @@
     background-size: cover;
   }
   .main-navigation{
-    background-color: #ffffff !important;
-    color:#000;
+    background-color: #000 !important;
+    color:#ffff;
   }
   .main-navigation a{
     color: inherit !important;
