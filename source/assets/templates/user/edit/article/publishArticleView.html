@@ -19,7 +19,7 @@
                     <div class="select-container-long select-container width-100">
                         <select class="input-shadow-border"
                                 ng-model="dummyCat.id"
-                                ng-options="v.name for v in dummyCat"
+                                ng-options="v.name for v in dummyCat | orderBy:'name'"
                                 ng-change="changeArticleCat(dummyCat.id)"
                                 required>
                         </select>
