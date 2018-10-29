@@ -207,7 +207,7 @@
                 <md-button class="me-default-button" ng-if="cancelButton_chk == 'publishArticle' && callType != 'subPopUp'   " ng-click="ok()">Cancel</md-button>
                 <md-button class="me-default-button" ng-if="cancelButton_chk != 'publishArticle' && callType != 'subPopUp' " ng-click="answer('cancel')">Cancel</md-button>
                 <md-button class="me-default-button" ng-disabled="!dummyCat.id || !article.title || !tmpImage[0] || !article.desc || articleForm.videoUrl5.$error.pattern || articleForm.videoUrl6.$error.pattern
-                            || articleForm.videoUrl4.$error.pattern || articleForm.videoUrl3.$error.pattern || articleForm.videoUrl2.$error.pattern"
+                            || articleForm.videoUrl4.$error.pattern || articleForm.videoUrl3.$error.pattern || articleForm.videoUrl2.$error.pattern || !article.publishDate || !article.expiryDate"
                            ng-click="publishArticle(mainImg,article)">Publish</md-button>
             </div>
         </div>
