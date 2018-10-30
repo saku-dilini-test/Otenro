@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
     this.ifInvalidUserPassword = false;
     this.http.post(SERVER_URL + '/templatesAuth/authenticateForApp', data)
       .subscribe((res) => {
-console.log(res)
+          console.log(res)
           requestParams = {
             'token': res.token,
             'email': data.email,

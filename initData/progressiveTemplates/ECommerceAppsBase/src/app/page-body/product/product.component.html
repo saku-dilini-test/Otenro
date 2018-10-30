@@ -3,14 +3,14 @@
     <!-- bloc-9 -->
     <div class="bloc bgc-white l-bloc" id="bloc-9">
 
-        <div *ngIf = "Data.bannerImage">
+        <div *ngIf = "Data && Data.bannerImage">
             <img  src="{{bannerImageUrl}}/{{Data.bannerImage}}" width="100%" />
         </div>
       <div class="container bloc-lg  padding-top-0">
         <div class="row content-row">
 
           <div class="col-sm-6 no-padding">
-              <div id="gallery" style="display:none;">
+              <div id="gallery" style="display:none;" *ngIf="Data.tempImageArray">
                     <ng-template *ngFor="let item of Data.tempImageArray" [ngIf]="item">
                       <img  *ngIf="item.videoUrl == null" alt="{{item.name}}"
                          src="{{imageUrl}}/{{item.img}}"

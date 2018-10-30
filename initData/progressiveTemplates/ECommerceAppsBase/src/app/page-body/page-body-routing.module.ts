@@ -93,7 +93,7 @@ const routes: Routes = [
     data:{title:'Edit User Details'}
   },
   {
-    path: 'product/:catName',
+    path: 'product/:catName/:prodId',
     component: ProductComponent,
     data:{title:'Product Page'}
   },

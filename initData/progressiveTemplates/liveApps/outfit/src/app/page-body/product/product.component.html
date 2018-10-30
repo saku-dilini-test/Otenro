@@ -1,13 +1,13 @@
 <div class="bloc bgc-white b-parallax animDelay04 " id="bloc-11">
 
   <div class="container  bloc-xl">
-    <div *ngIf="Data.bannerImage">
+    <div *ngIf="Data && Data.bannerImage">
       <img src="{{bannerImageUrl}}/{{Data.bannerImage}}" width="100%" />
     </div>
     <div class="row padding-top" id="product">
       <div class="col-sm-6">
-        <div id="gallery" style="display:none;">
-          <ng-template *ngFor="let item of Data.tempImageArray" [ngIf]="item">
+        <div id="gallery" style="display:none;" *ngIf="Data.tempImageArray">
+          <ng-template  *ngFor="let item of Data.tempImageArray" [ngIf]="item">
             <img *ngIf="item.videoUrl == null" alt="{{item.name}}" src="{{imageUrl}}/{{item.img}}" [attr.data-image]="imageUrl/item.img">
 
             <img *ngIf="item.videoUrl != null" alt="{{item.name}}" data-type="youtube" src="{{imageUrl}}/{{item.img}}" [attr.data-image]="imageUrl/item.img"

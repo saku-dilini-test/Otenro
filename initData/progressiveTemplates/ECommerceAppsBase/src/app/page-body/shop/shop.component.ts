@@ -59,7 +59,7 @@ export class ShopComponent implements OnInit {
     this.catName = catName;
     this.dataService.data = item;
     localStorage.setItem(this.appId+":dataServiceData",JSON.stringify(this.dataService.data))
-    this.router.navigate([val, this.catName]);
+    this.router.navigate([val, this.catName, item.id]);
   }
 
 

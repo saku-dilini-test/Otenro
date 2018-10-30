@@ -31,10 +31,10 @@ export class ShopComponent implements OnInit {
 
         data.forEach(element => {
           element.selectedProduct.forEach(variants => {
-  
+
             variants.fromDate = element.dateFrom;
             variants.toDate = element.dateTo;
-  
+
             if (element.discountType == 'discountValue') {
               variants.discountType = element.discountType;
               variants.discount = element.discount
@@ -42,11 +42,10 @@ export class ShopComponent implements OnInit {
               variants.discountType = element.discountType;
               variants.discount = element.discountPercent
             }
-  
+
             this.promoData.push(variants);
           });
         });
-        console.log(this.promoData);
       });
 
      this.title.changeTitle("Search");
@@ -86,7 +85,7 @@ export class ShopComponent implements OnInit {
     this.catName = catName;
     this.dataService.data = item;
     localStorage.setItem(this.appId+":dataServiceData",JSON.stringify(this.dataService.data))
-    this.router.navigate([val, this.catName]);
+    this.router.navigate([val, this.catName, item.id]);
   }
 
 

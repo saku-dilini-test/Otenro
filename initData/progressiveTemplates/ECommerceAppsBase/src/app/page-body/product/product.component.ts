@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -17,7 +17,7 @@ declare var $: any;
     templateUrl: './product.component.html',
     styleUrls: ['./product.component.css'],
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, AfterViewInit {
 
     private catName;
     private foodInfo;
@@ -58,15 +58,31 @@ export class ProductComponent implements OnInit {
     ifNotSelectedVariantOrQuantity: boolean;
     availableFirstVariPromo = false;
     private player: Player;
-    constructor(private localStorageService: LocalStorageService, private CurrencyService: CurrencyService,
+    private prodId;
+    constructor(private localStorageService: LocalStorageService, private currencyService: CurrencyService,
         private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute,
         private route: Router, private title: TitleService, private productsService: ProductsService) {
 
-        this.Data = JSON.parse(localStorage.getItem(this.appId + ":dataServiceData"));
+        this.router.params.subscribe(params => {
+            this.catName = params['catName'];
+            this.prodId = params['prodId'];
+        });
+        if (JSON.parse(localStorage.getItem(this.appId + ':dataServiceData'))) {
+            this.Data = JSON.parse(localStorage.getItem(this.appId + ':dataServiceData'));
+            this.init();
+        } else {
+            this.productsService.getAllProducts().subscribe(products => {
+                this.Data = products.filter(product => product.id === this.prodId)[0];
+                localStorage.setItem(this.appId + ':dataServiceData', JSON.stringify(this.Data));
+                this.init();
+            }, error => {
+                console.log('Error retrieving products' + error);
+            });
+        }
 
-        if(this.templateName == "smartfit"){
+        if (this.templateName == 'smartfit'){
             this.zoomRatio = 1.5;
-        }else{
+        } else {
             this.zoomRatio = 1;
         }
         this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
@@ -79,10 +95,10 @@ export class ProductComponent implements OnInit {
 
                     if (element.discountType == 'discountValue') {
                         variants.discountType = element.discountType;
-                        variants.discount = element.discount
+                        variants.discount = element.discount;
                     } else {
                         variants.discountType = element.discountType;
-                        variants.discount = element.discountPercent
+                        variants.discount = element.discountPercent;
                     }
 
                     this.promoData.push(variants);
@@ -90,23 +106,11 @@ export class ProductComponent implements OnInit {
             });
 
             this.dataService.promoData = this.promoData;
-            this.init();
         });
 
-
-        this.isBuyBtnDisable = true;
-        if (this.Data.detailedDesc.length > 400) {
-            this.desPart2 = this.Data.detailedDesc.slice(400, this.Data.detailedDesc.length);
-            this.desPart1 = this.Data.detailedDesc.slice(0, 400) + "...";
-            this.desPart1_demo = this.Data.detailedDesc.slice(0, 400);
-            this.readMore = true;
-
-        } else {
-            this.desPart1 = this.Data.detailedDesc;
-        }
         window.scrollTo(0, 0);
-        this.title.changeTitle('Details');
 
+        this.title.changeTitle('Details');
     }
 
     currency: string;
@@ -145,40 +149,48 @@ export class ProductComponent implements OnInit {
             this.dataService.appUserId = appUser.registeredUser;
         }
 
-        this.CurrencyService.getCurrencies().subscribe(data => {
+        this.currencyService.getCurrencies().subscribe(data => {
             this.currency = data.sign;
         }, error => {
             console.log('Error retrieving currency');
-        });
-
-        this.router.params.subscribe(params => {
-            this.catName = params['catName'];
         });
 
 
     }
 
     ngAfterViewInit() {
-        var api;
-        api = $("#gallery").unitegallery({
-            theme_enable_text_panel: false,
-            gallery_background_color: "rgba(0,0,0,0)",
-            slider_scale_mode: "fit",
-            slider_textpanel_bg_color: "#000000",
-            slider_textpanel_bg_opacity: 0,
-            gallery_autoplay: true,
-            theme_hide_panel_under_width: null,
-            slider_zoom_max_ratio: this.zoomRatio
-        });
-        $('#gallery').on({
-            'touchstart': function () {
-                api.stop();
-            }
-        });
+        if(this.Data) {
+            var api;
+            api = $("#gallery").unitegallery({
+                theme_enable_text_panel: false,
+                gallery_background_color: "rgba(0,0,0,0)",
+                slider_scale_mode: "fit",
+                slider_textpanel_bg_color: "#000000",
+                slider_textpanel_bg_opacity: 0,
+                gallery_autoplay: true,
+                theme_hide_panel_under_width: null,
+                slider_zoom_max_ratio: this.zoomRatio
+            });
+            $('#gallery').on({
+                'touchstart': function () {
+                    api.stop();
+                }
+            });
+        }
     }
 
 
     init() {
+        this.isBuyBtnDisable = true;
+        if (this.Data.detailedDesc.length > 400) {
+            this.desPart2 = this.Data.detailedDesc.slice(400, this.Data.detailedDesc.length);
+            this.desPart1 = this.Data.detailedDesc.slice(0, 400) + "...";
+            this.desPart1_demo = this.Data.detailedDesc.slice(0, 400);
+            this.readMore = true;
+
+        } else {
+            this.desPart1 = this.Data.detailedDesc;
+        }
 
         var d = new Date();
         var str = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
@@ -187,22 +199,22 @@ export class ProductComponent implements OnInit {
 
 
         if (this.Data.selection.length == 1) {
-            this.name1 = this.Data.selection[0].name
+            this.name1 = this.Data.selection[0].name;
         }
         if (this.Data.selection.length == 2) {
-            this.name1 = this.Data.selection[0].name
-            this.name2 = this.Data.selection[1].name
+            this.name1 = this.Data.selection[0].name;
+            this.name2 = this.Data.selection[1].name;
         }
         if (this.Data.selection.length == 3) {
-            this.name1 = this.Data.selection[0].name
-            this.name2 = this.Data.selection[1].name
-            this.name3 = this.Data.selection[2].name
+            this.name1 = this.Data.selection[0].name;
+            this.name2 = this.Data.selection[1].name;
+            this.name3 = this.Data.selection[2].name;
         }
         if (this.Data.selection.length == 4) {
-            this.name1 = this.Data.selection[0].name
-            this.name2 = this.Data.selection[1].name
-            this.name3 = this.Data.selection[2].name
-            this.name4 = this.Data.selection[3].name
+            this.name1 = this.Data.selection[0].name;
+            this.name2 = this.Data.selection[1].name;
+            this.name3 = this.Data.selection[2].name;
+            this.name4 = this.Data.selection[3].name;
         }
 
         if (this.Data) {

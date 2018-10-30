@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from "@angular/http";
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from "rxjs/Rx";
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
-import { PagebodyServiceModule } from '../../page-body/page-body.service'
+import { PagebodyServiceModule } from '../../page-body/page-body.service';
 
 @Injectable()
 export class ProductsService {
