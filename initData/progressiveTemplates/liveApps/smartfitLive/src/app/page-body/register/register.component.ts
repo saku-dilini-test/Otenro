@@ -68,8 +68,8 @@ export class RegisterComponent implements OnInit {
   }
 
   selectedProvince(data) {
-    console.log("selected province");
-    console.log(data);
+    // console.log("selected province");
+    // console.log(data);
     this.selectedProvinces = data;
     this.provinceData.forEach(ele => {
       if (ele.name == data) {
@@ -77,7 +77,7 @@ export class RegisterComponent implements OnInit {
       }
     });
     this.newCity = this.cityArr[0];
-    console.log(this.cityArr);
+    // console.log(this.cityArr);
 
   }
 
