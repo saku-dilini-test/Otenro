@@ -43,8 +43,8 @@ module.exports = {
     USE_SENDMAIL: false,//This is use to send emails via Sendmail transporter or configured SMTP server.If true, will use the Sendmail.
     
     //IdeaBiz
-    IDEABIZ_AUTH_CONSUMER_KEY: 'LHCsrPxeOqQKHbO767LIz9AuAgoa',
-    IDEABIZ_AUTH_CONSUMER_SECRET: 'pS5yR6OcfNrdb70R7LMLaaV4cfMa',
+    IDEABIZ_AUTH_CONSUMER_KEY: 'fmqgPhGyJ6KFvsLe6cpgxPzlXcca',
+    IDEABIZ_AUTH_CONSUMER_SECRET: 'NZ7OQjZ2yCqsin7kxjbGpUlBsska',
     IDEABIZ_AUTH_USERNAME: 'Appmaker',
     IDEABIZ_AUTH_PASSWORD: 'SUperman123',
     IDEABIZ_EMAIL: 'support@appmaker.lk',
