@@ -1,7 +1,6 @@
 <div class="page-container">
   <div class="bloc bgc-white l-bloc" id="bloc-0">
       <img class="cat-image" src="{{imageUrl1}}/{{catImage}}" width="100%">
-      <div class="text-center grey margin-l"  *ngIf="results">{{results.length}} Magazine</div>
 
       <div class="margin prod" *ngFor="let article of results" (click)="navigateProd('product',article)">
           <img src="{{imageUrl}}/{{article.tempImageArray[0].img}}" width="100%">

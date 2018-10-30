@@ -147,19 +147,19 @@
 .main-header-font{
   /*font-size: 6vh;*/
   letter-spacing: 0em;
-  color:#000 !important;;
+  color:#fff !important;;
   font-family: Arial;
   font-weight: bold;
 }
 .main-content-font{
   /*font-size: 12px;*/
   letter-spacing: 0.1em;
-  color: #757575 !important;
+  color: #fff !important;
   font-family: Arial;
   font-weight: 400;
 }
 .main-background{
-  background-color: #FFF !important;
+  background-color: purple !important;
   overflow-x: hidden;
 }
 .made-easy-background-image{
