@@ -5,6 +5,7 @@
 .flex-row{
   border-radius: 8px;
   display: flex;
+  align-items: center;
   border: 0;
   padding: 10px;
   margin:1%;
@@ -16,7 +17,6 @@
   object-fit: cover;
   width: 80px;
   height: 100px;
-  object-fit: cover;
   color: #a5a5a5;
   min-width: 80px;
 }
@@ -48,4 +48,11 @@
   padding: 2%;
   align-items: center;
 }
-
+.list-group-decs{
+  display:flex;
+  margin-left: 10px;
+  flex-direction: column;
+}
+.set-line-height{
+  line-height: 1.5em;
+}
