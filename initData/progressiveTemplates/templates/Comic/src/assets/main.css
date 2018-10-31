@@ -162,7 +162,6 @@
   overflow-x: hidden;
 }
 .made-easy-background-image{
-  /* background: null; */ /* edited by .sanira */
   background-repeat: repeat;
   background-size: cover;
 }
@@ -196,7 +195,7 @@
   color:#FFFFFF;
 }
 .main-footer-font{
-  color:#FFFFFF;
+  color:#04261F;
 }
 
  .banner-cat{
