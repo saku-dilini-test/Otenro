@@ -73,7 +73,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
         } else {
             this.productsService.getAllProducts().subscribe(products => {
                 this.Data = products.filter(product => product.id === this.prodId)[0];
-                localStorage.setItem(this.appId + ':dataServiceData', JSON.stringify(this.Data));
                 this.init();
             }, error => {
                 console.log('Error retrieving products' + error);
