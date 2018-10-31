@@ -165,3 +165,8 @@ div .row:last-child{
 .name-size{
   padding:0px;
 }
+
+.header-fix{
+  position: relative;
+  text-align: center;
+}
