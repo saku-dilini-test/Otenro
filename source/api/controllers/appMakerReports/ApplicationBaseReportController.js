@@ -156,7 +156,7 @@ module.exports = {
 
                                                                             var data = {
                                                                                 appName: applicationData.appName,
-                                                                                type: "Ideadroid",
+                                                                                type: "Appmaker",
                                                                                 caaTaxable: true,
                                                                                 date: dateFormat(date, "yyyy-mm-dd"),
                                                                                 operator: operators.operator.toLowerCase(),
