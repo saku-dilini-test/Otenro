@@ -146,7 +146,7 @@
 .main-header-font{
   /*font-size: 6vh;*/
   letter-spacing: 0em;
-  color:#000;
+  color:#42bdff;
   font-family: Arial;
   font-weight: bold;
 }
@@ -158,7 +158,7 @@
   font-weight: 400;
 }
 .main-background{
-  background-color: rgba(87,87,87,1) !important; /* edited by .sanira */
+  background-color: #04261F !important; /* edited by .sanira */
   overflow-x: hidden;
 }
 .made-easy-background-image{
@@ -167,8 +167,8 @@
   background-size: cover;
 }
 .main-navigation{
-  background-color: rgba(0,137,255,1) !important;
-  color: rgba(255,255,255,1);
+  background-color: #04261F !important;
+  color: #42bdff;
 }
 .main-navigation a{
   color: inherit !important;
