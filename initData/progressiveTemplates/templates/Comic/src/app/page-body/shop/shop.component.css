@@ -1,6 +1,5 @@
 .container{
   height: 100vh;
-  background-color: #47454B; /* edited by .sanira */
 }
 .flex-row{
   border-radius: 8px;
@@ -17,6 +16,7 @@
   object-fit: cover;
   width: 80px;
   height: 100px;
+  object-fit: cover;
   color: #a5a5a5;
   min-width: 80px;
 }
