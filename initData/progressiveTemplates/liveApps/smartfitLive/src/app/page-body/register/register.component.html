@@ -114,7 +114,7 @@
                           </select>
                         </div>
                       </div>
-                      <div class="col-sm-6">
+                      <div class="col-sm-6" *ngIf="selectedProvinces">
                         <div class="form-group">
                           <label class="sub-header-text-h2">
                             City
@@ -122,9 +122,6 @@
                           <select name="city" class="form-control" id="selectedCity" (change)="selectedCity($event.target.value)" >
                             <option *ngFor="let city of cityArr" [ngValue]="city">{{city}} </option>
                           </select>
-                          <div *ngIf="!selectedProvinces" class="alert alert-danger">
-                            <div>Please select a province first</div>
-                          </div>
                         </div>
                       </div>
                     </div>
