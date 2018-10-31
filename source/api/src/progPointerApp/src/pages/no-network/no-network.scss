@@ -73,6 +73,11 @@ div {
   font-weight:600;
 }
 
+.footer-basic .copyright .link {
+
+  color: rgb(0, 119, 255);
+}
+
 .hero .get-it .btn {
   margin-left:10px;
   margin-bottom:10px;
@@ -84,5 +89,17 @@ body {
 
 .container {
   width:100%;
+}
+
+.container h2 {
+
+  color: rgb(122,124,126);
+}
+
+.container p {
+
+  font-size: 12px;
+  font-weight: 500;
+  color: rgb(119,121,123);
 }
 

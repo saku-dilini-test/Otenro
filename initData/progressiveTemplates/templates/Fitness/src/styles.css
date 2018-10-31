@@ -957,7 +957,7 @@ label{
 }
 
 body::-webkit-scrollbar {
-  width: 5px;
+  width: 0px;
 }
 body::-webkit-scrollbar-track {
   background: #ddd;
