@@ -288,6 +288,11 @@
 
         $scope.save = function(message){
 
+        if (!$scope.linkArticle && message.article) {
+
+            message.article = null;
+        }
+
         if($scope.linkArticle && !$scope.pushMessage.article){
                 toastr.error('Please select an article before save.', 'Warning', {
                     closeButton: true
