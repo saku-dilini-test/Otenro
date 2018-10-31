@@ -154,12 +154,12 @@
 .main-content-font{
   /*font-size: 12px;*/
   letter-spacing: 0.1em;
-  color: #757575;
+  color: #000;
   font-family: Arial;
   font-weight: 400;
 }
 .main-background{
-  background-color: #e6e8ea !important;
+  background-color: #fff !important;
   overflow-x: hidden;
 }
 .made-easy-background-image{
@@ -168,7 +168,7 @@
   background-size: cover;
 }
 .main-navigation{
-  background-color: #FF4C1D !important;
+  background-color: #c50300 !important;
   color: #fff;
 }
 .main-navigation a{
@@ -191,7 +191,7 @@
   box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.5);
 }
 .main-footer-back{
-  background-color: rgb(255, 75, 30) !important;
+  background-color: #c50300 !important;
 }
 .main-footer-header{
   color:#fff;
