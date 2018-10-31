@@ -21,6 +21,12 @@
 .ql-align-right {
   text-align: right;
 }
+.ql-font-monospace {
+  font-family: Monaco, Courier New, monospace;
+}
+.ql-font-serif {
+  font-family: Georgia, Times New Roman, serif;
+}
 /* end of quill.core.css overrides classes */
 
 .no-padding{
