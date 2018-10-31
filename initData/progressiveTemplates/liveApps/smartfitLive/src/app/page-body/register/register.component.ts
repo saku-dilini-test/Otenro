@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
   private provinceData;
   cityArr = [];
   newCity;
-  private selectedProvinces = null;
+  selectedProvinces = null;
   fullUrl; domainUrl;
 
   constructor(private localStorageService: LocalStorageService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
