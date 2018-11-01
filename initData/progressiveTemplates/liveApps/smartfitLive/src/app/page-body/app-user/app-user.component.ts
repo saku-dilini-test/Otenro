@@ -46,10 +46,10 @@ export class AppUserComponent implements OnInit {
     this.countries.push("Sri Lanka");
 
     this.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
-    console.log(this.userData)
+
     this.newCity = this.userData.city;
     this.selectedProvinces = this.userData.province;
-    console.log(this.newCity)
+
     this.userEditForm = fb.group({
       // We can set default values by passing in the corresponding value or leave blank if we wish to not set the value. For our example, we’ll default the gender to female.
       'fName': new FormControl(this.userData.name, Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
@@ -95,7 +95,6 @@ checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
         this.provinces.push(ele.name);
         if (ele.name == this.userData.province) {
           this.cityArr = ele.cities;
-          console.log(this.cityArr);
         }
       });
     });
