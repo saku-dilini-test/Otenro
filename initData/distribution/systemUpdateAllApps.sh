@@ -27,6 +27,14 @@ echo "${red}red text ${green}green text ${yellow}yellow text ${cyan}cyan text${r
 # list (APPS) is exhausted
 # access each element
 # as $app
+echo "$(date) ${cyan}Starting Old apps backup .... ${reset}"
+cd $MESERVER
+if [ backupUpdatedApps.zip ]
+then
+    rm -rf backupUpdatedApps.zip
+fi
+zip -r backupUpdatedApps.zip ./*
+
 echo "$(date) ${cyan}Starting All App Update .... ${reset}"
 i=0
 for app in "${APPS[@]}"
@@ -69,9 +77,16 @@ do
         #rename the old app as appId_old
         zip -r ${APPS[i]}_old.zip ${APPS[i]}
         #delete the old app
-        rm -rf ${APPS[i]}
-        #rename the new app as appId
-        mv $templateName ${APPS[i]}
+        rm ${APPS[i]}/*
+        #rename the remaning old app with assets folder to temp
+        mv -f ${APPS[i]} temp
+        #remove the assets folder from new updated app
+        rm -rf $templateName/assets
+        #rename the updated new app as old_appId
+        mv -f $templateName ${APPS[i]}
+        #copy and replace the asset folder from temp and remove temp folder and we are done
+        yes | cp -rf temp/assets ${APPS[i]}/
+        rm -rf temp
         echo "$(date) ${cyan}Update finished of ${reset}user=${green}${USERS[i]} ${reset}app=${green}${APPS[i]}${reset}"
     else
         echo "$(date) ${yellow}Found deleted or custom app ${reset}user=${green}${USERS[i]} ${reset}app=${green}${APPS[i]}${reset}"
