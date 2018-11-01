@@ -69,16 +69,18 @@ export class RegisterComponent implements OnInit {
 
   selectedProvince(data) {
     // console.log("selected province");
-    // console.log(data);
-    this.selectedProvinces = data;
-    this.provinceData.forEach(ele => {
-      if (ele.name == data) {
-        this.cityArr = ele.cities;
-      }
-    });
-    this.newCity = this.cityArr[0];
-    // console.log(this.cityArr);
-
+    if (data === 'select a province'){
+      this.selectedProvinces = null;
+      this.newCity = null;
+    } else {
+      this.selectedProvinces = data;
+      this.provinceData.forEach(ele => {
+        if (ele.name == data) {
+          this.cityArr = ele.cities;
+        }
+      });
+      this.newCity = this.cityArr[0];
+    }
   }
 
   selectedCity(city) {

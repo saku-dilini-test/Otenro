@@ -46,7 +46,10 @@ export class AppUserComponent implements OnInit {
     this.countries.push("Sri Lanka");
 
     this.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
-
+    console.log(this.userData)
+    this.newCity = this.userData.city;
+    this.selectedProvinces = this.userData.province;
+    console.log(this.newCity)
     this.userEditForm = fb.group({
       // We can set default values by passing in the corresponding value or leave blank if we wish to not set the value. For our example, we’ll default the gender to female.
       'fName': new FormControl(this.userData.name, Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
@@ -66,6 +69,7 @@ export class AppUserComponent implements OnInit {
 
     },{validator: this.checkIfMatchingPasswords('passwordNew', 'passwordConfirm')});
     this.userEditForm.controls['country'].setValue(this.userData.country, { onlySelf: true });
+    this.userEditForm.controls['city'].setValue(this.newCity, {onlySelf: true});
 
   }
 
@@ -106,17 +110,22 @@ checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
   }
 
   selectedProvince(data) {
-    console.log("selected province");
-    console.log(data);
-    this.selectedProvinces = data;
-    this.provinceData.forEach(ele => {
-      if (ele.name == data) {
-        this.cityArr = ele.cities;
-      }
-    });
-    this.newCity = this.cityArr[0];
-    this.userEditForm.controls['city'].setValue(this.newCity, { onlySelf: true });
-    console.log(this.cityArr);
+    // console.log("selected province");
+    // console.log(data);
+    if (data === 'select a province') {
+      this.selectedProvinces = null;
+      this.newCity = null;
+    } else {
+      this.selectedProvinces = data;
+      this.provinceData.forEach(ele => {
+        if (ele.name == data) {
+          this.cityArr = ele.cities;
+        }
+      });
+      this.newCity = this.cityArr[0];
+      this.userEditForm.controls['city'].setValue(this.newCity, {onlySelf: true});
+    }
+    // console.log(this.cityArr);
   }
 
   selectedCity(city) {
