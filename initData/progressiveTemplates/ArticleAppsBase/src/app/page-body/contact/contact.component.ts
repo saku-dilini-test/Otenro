@@ -27,7 +27,7 @@ export class ContactComponent {
     });
 
     this.title.changeTitle("Contact Us");
-
+    this.title.setLocation('contactUs');
   }
 
   contactInfo = this.CONTACNTINFO;
