@@ -1008,6 +1008,7 @@ module.exports = {
 
                                 from: userEmail.fromEmail,
                                 to: data.email, // list of receivers
+                                bcc: data.fromEmail,
                                 subject: subject, // Subject line
                                 html: mBody
 

@@ -63,7 +63,7 @@ module.exports = {
                             },
                             // OK.
                             success: function (result){
-                                res.status(200).json({user : { appId: user.appId, email : user.email , sub : user.id, streetNumber : user.streetNumber,streetName : user.streetName,city : user.city, country : user.country, phone: user.phone, name: user.firstName,lname:user.lastName, zip: user.zip },token : result });
+                                res.status(200).json({user : { appId: user.appId, email : user.email , sub : user.id, streetNumber : user.streetNumber,streetName : user.streetName,city : user.city, country : user.country, phone: user.phone, name: user.firstName,lname:user.lastName, zip: user.zip, province: user.province },token : result });
                             }
                         });
                     }
