@@ -69,8 +69,8 @@ module.exports = {
     IDEABIZ_ADMIN_EMAIL: 'appmakeruser@gmail.com', //From email address of Admin to send serviceID approval email to dialog super user.
     SUPPORT_USER_EMAIL: 'appmakeruser@gmail.com',//'support@appmaker.lk' //Simato Support user
     SIMATO_SUPPORT: 'appmakeruser@gmail.com',
-    IDEABIZ_SUPER_ADMIN_EMAIL: 'support@appmaker.lk',// should be changed to admin@ideamart.io
-    IDEABIZ_SUPPORT_EMAIL : 'ideadroidsupport@simatosolutions.com',// publish app TO email
+    IDEABIZ_SUPER_ADMIN_EMAIL: 'admin@ideamart.io',// should be changed to admin@ideamart.io
+    IDEABIZ_SUPPORT_EMAIL : 'appmakersupport@simatosolutions.com',// publish app TO email
     IDEABIZ_APP_GENERATOR_EMAIL : 'apkgenerator@simatosolutions.com',// Build success/failed FROM email
 /**
      * The ADMIN api and MO callbacks will call these

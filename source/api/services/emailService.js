@@ -56,7 +56,7 @@ module.exports = {
         var emailBody = '<!DOCTYPE>' +
                         '<html>' +
                            '<head>' +
-                              '<title>Ideadroid - Responsive Email Template</title>' +
+                              '<title>Appmaker - Responsive Email Template</title>' +
                             '<style type="text/css">' +
                                '/* ----- Custom Font Import ----- */' +
                                '/* ----- Text Styles ----- */' +
@@ -191,7 +191,7 @@ module.exports = {
         var mailOptions = {
             from: config.IDEABIZ_SUPER_ADMIN_EMAIL,
             to: data.email,
-            subject: "Welcome to Ideadroid",
+            subject: "Welcome to Appmaker",
             html: emailBody,
             attachments: [
                 {
@@ -713,9 +713,9 @@ module.exports = {
                             var serverOrg=config.server.host;
 
                             var emailBody = "<html>Hello "+app[0].firstName+",<br />"+
-                                "<p>You have requested to reset your password. Please click the verify your email address to proceed.</p> <br/>"+
-                                "<a href='"+serverOrg+"/#/resetPassword/"+token+"'>Click to here for  verify your email address</a><br/>" +
-                                '<p style="padding: 15px 0 0 0; font-weight:700; ">The Ideadroid Team<br/></p></html>'
+                                "<p>You have requested to reset your password. Please click the link to verify your email address to proceed.</p> <br/>"+
+                                "<a href='"+serverOrg+"/#/resetPassword/"+token+"'>Click here to verify your email link.</a><br/>" +
+                                '<p style="padding: 15px 0 0 0; font-weight:700; ">The Appmaker Team<br/></p></html>'
 
                             var mailOptions = {
                                 from: config.IDEABIZ_SUPER_ADMIN_EMAIL, // sender address
