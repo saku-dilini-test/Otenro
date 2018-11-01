@@ -987,7 +987,10 @@ module.exports = {
 
 
                     let  mailOptions;
-                       console.log(userEmail.replyToEmail);
+                       console.log('990');
+                       console.log(userEmail);
+                       console.log(userEmail.bccEmail);
+                       console.log('992');
                        console.log(data.email);
 
                         // setup email data with unicode symbols
@@ -996,7 +999,7 @@ module.exports = {
                             mailOptions = {
                                 from: userEmail.fromEmail,
                                 to: data.email, // list of receivers
-                                bcc: data.fromEmail,
+                                bcc: userEmail.bccEmail,
                                 subject: subject, // Subject line
                                 html: mBody ,
                                 attachments : test
@@ -1008,7 +1011,7 @@ module.exports = {
 
                                 from: userEmail.fromEmail,
                                 to: data.email, // list of receivers
-                                bcc: data.fromEmail,
+                                bcc: userEmail.bccEmail,
                                 subject: subject, // Subject line
                                 html: mBody
 

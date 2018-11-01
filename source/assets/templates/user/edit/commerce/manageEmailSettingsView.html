@@ -43,6 +43,17 @@
                                 </div>
                             </md-input-container>
                             <md-input-container class="md-block" flex="50">
+                                <label>BCC email</label>
+                                <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
+                                <input   ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                        name="bccEmail"  md-maxlength="50"  ng-required="true" ng-model="emailDel.bccEmail"/>
+                                <div ng-messages="emailDeliveryForm.bccEmail.$error" ng-show="emailDeliveryForm.bccEmail.$dirty">
+                                    <div ng-message="required">Email is required.</div>
+                                    <div ng-message="md-maxlength">The email must be less than 50 characters long.</div>
+                                    <div ng-message="pattern"> Invalid Email Address</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex="50">
                                 <label>alert email</label>
                                 <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
                                 <input   ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"

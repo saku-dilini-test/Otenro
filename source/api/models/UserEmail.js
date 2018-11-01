@@ -16,6 +16,9 @@ module.exports = {
         replyToEmail:{
             type: 'string'
         },
+        bccEmail:{
+            type: 'string'
+        },
         alertEmail:{
             type: 'string'
         },

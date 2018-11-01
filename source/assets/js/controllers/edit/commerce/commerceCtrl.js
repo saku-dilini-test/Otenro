@@ -916,7 +916,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
 
         $scope.saveEmailDeliInfo = function (email, type) {
             if(email == undefined || email.fromEmail == undefined || email.replyToEmail == undefined
-             || email.alertEmail == undefined || email.alertAt == undefined){
+             || email.alertEmail == undefined || email.alertAt == undefined|| email.bccEmail == undefined){
                 toastr.error('Please fill the all fields','Warning',{
                     closeButton: true
                 });
@@ -1234,6 +1234,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                     $scope.emailDel = {
                         fromEmail: $scope.email.fromEmail,
                         replyToEmail: $scope.email.replyToEmail,
+                        bccEmail: $scope.email.bccEmail,
                         alertEmail: $scope.email.alertEmail,
                         alertAt: $scope.email.alertAt
                     };
