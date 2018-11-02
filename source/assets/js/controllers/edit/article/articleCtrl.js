@@ -513,8 +513,16 @@
 
         $scope.editArticle = function (article) {
             articleService.showPublishArticleDialog(article);
-
+            $timeout(function(){
+                // Click event on hyper link button
+                var hyperLinkButton = document.querySelector('.ql-link');
+                hyperLinkButton.addEventListener('click', function () {
+                    var linkClicked = document.querySelector('#linkClicked');
+                    linkClicked.value = 1;
+                });
+            },3000);
         }
+
         $scope.deleteArticle = function (index, article) {
             article.isNew = $rootScope.tempNew;
             return $mdDialog.show({
@@ -576,7 +584,15 @@
 
         $scope.showPublishArticleDialog = function () {
             $mdDialog.hide();
-            return articleService.showPublishArticleDialog('publishArticle',"subPopUp");
+            articleService.showPublishArticleDialog('publishArticle',"subPopUp");
+            $timeout(function(){
+                // Click event on hyper link button
+                var hyperLinkButton = document.querySelector('.ql-link');
+                hyperLinkButton.addEventListener('click', function () {
+                    var linkClicked = document.querySelector('#linkClicked');
+                    linkClicked.value = 1;
+                });
+            },3000);
         };
 
         $scope.hide = function () {
@@ -694,12 +710,21 @@
             $mdMenu.open(ev);
         };
         $scope.pastedText = function (oldTextContent, event) {
+
+            var linkClicked = document.querySelector('#linkClicked');
             $scope.pastingContent = event.originalEvent.clipboardData.getData('text');
             $scope.oldTextContent = oldTextContent;
-            $timeout(function(){
-                var ele=document.getElementById('pasteMenu');
-                angular.element(ele).triggerHandler('click');
-            },0);
+
+            if (linkClicked.value != 1) {
+
+                $timeout(function(){
+                    var ele=document.getElementById('pasteMenu');
+                    angular.element(ele).triggerHandler('click');
+                },0);
+            } else {
+
+                linkClicked.value = 0;
+            }
         };
         $scope.stripHtml = function () {
             if($scope.oldTextContent){
@@ -707,7 +732,6 @@
             }else{
                 $scope.article.desc =  $scope.pastingContent;
             }
-        }
-
+        };
     }
 })();
