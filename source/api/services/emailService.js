@@ -136,7 +136,7 @@ module.exports = {
                                                               '<p>Hi '+ data.fName + " " + data.lName + ' Welcome Aboard!</p>'+
                               '                                      <p>Thank you for registering for Appmaker, the platform that enables you to create mobile applications without any coding. The service is currently in beta, and some features of the platform are currently not enabled.</p>' +
                                 '                                    <p>Good luck on your app creation journey!</p>' +
-                                 '                                   <p style="padding: 15px 0 0 0; font-weight:700; ">The Ideamart Team<br/>' +
+                                 '                                   <p style="padding: 15px 0 0 0; font-weight:700; ">The AppMaker Team<br/>' +
                                   '                                      </p>' +
                                    '                     </td>' +
                                  '                 </tr>' +
@@ -156,7 +156,7 @@ module.exports = {
                                  '<table class="container" border="0" cellpadding="0" cellspacing="0" width="620" align="center" style="border-top: 1px solid #eeeeee; width: 620px;">' +
                                  '<tr>' +
                                  '<td style="text-align: center; padding: 10px 0 10px 0;">' +
-                                 '<a href="#" style="font-size: 28px; text-decoration: none; color: #d5d5d5;">ideamart.io</a>' +
+                                 '<a href="#" style="font-size: 28px; text-decoration: none; color: #d5d5d5;">appmaker.lk</a>' +
                                  '</td>' +
                                  '</tr>' +
                                  '<tr>' +
@@ -169,7 +169,7 @@ module.exports = {
                                  '</td>' +
                                  '</tr>' +
                                  '<tr>' +
-                                 '<td style="color: #d5d5d5; text-align: center; font-size: 15px; padding: 10px 0 60px 0; line-height: 22px;">Copyright &copy; 2018 <a href="https://ideamart.io/" target="_blank" style="text-decoration: none; border-bottom: 1px solid #d5d5d5; color: #d5d5d5;">ideamart.io</a>. <br />All rights reserved.</td>' +
+                                 '<td style="color: #d5d5d5; text-align: center; font-size: 15px; padding: 10px 0 60px 0; line-height: 22px;">Copyright &copy; 2018 <a href="https://ideamart.io/" target="_blank" style="text-decoration: none; border-bottom: 1px solid #d5d5d5; color: #d5d5d5;">appmaker.lk</a>. <br />All rights reserved.</td>' +
                                  '</tr>' +
                                  '</table>' +
                                  '</td>' +
