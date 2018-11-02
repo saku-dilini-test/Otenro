@@ -18,43 +18,45 @@
             <span class="divider"></span>
         </div>
         <div class="row hidden-xs">
-          <div class="col-sm-4" *ngFor="let prod of results | filter:searchTerm; let i = index">
-            <img src="{{imageUrl}}/{{prod.tempImageArray[prod.defaultImage].img}}" (click)="navigateProd('product',prod, prod.name )" class="img-responsive lazyload" />
-            <p class="text-center product-name">
+          <a [routerLink]="['/product', prod.name, prod.id]" class="col-sm-4" *ngFor="let prod of results | filter:searchTerm; let i = index">
+            <img src="{{imageUrl}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
+            <p class="text-center main-content-font">
               {{prod.name}}
             </p>
-            <p class="text-center product-content">
+            <p class="text-center main-content-font">
               <strong>{{currency}} {{prod.variants[0].price| number: '.2'}}</strong>
             </p>
             <div class="row">
               <div class="col-sm-12">
                 <div class="text-center" *ngIf="!checkSoldOut(prod)">
-                  <a (click)="navigateProd('product',prod, prod.name )" class="btn btn-d btn-lg main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span> Details</a>
+                  <a [routerLink]="['/product', prod.name, prod.id]" class="btn btn-d btn-lg main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span> Details</a>
                 </div>
                 <div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
                   <h4 href="#" class="text-warning">Sold Out!</h4>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
         <div class="list-group hidden-sm hidden-lg hidden-md">
           <a class="list-group-item" *ngFor="let prod of results | filter:searchTerm">
-            <div class="row">
+            <a class="row" [routerLink]="['/product', prod.name, prod.id]">
               <div class="col-xs-4">
-               <img src="{{imageUrl}}/{{prod.tempImageArray[prod.defaultImage].img}}" (click)="navigateProd('product',prod, prod.name )" class="img-responsive lazyload" />
+               <img src="{{imageUrl}}/{{prod.tempImageArray[prod.defaultImage].img}}"  class="img-responsive lazyload" />
               </div>
               <div class="col-xs-8">
                 <span class="main-content-font"><strong>{{prod.name}}</strong></span>
                 <div class="main-content-font price-margin"> {{currency}} {{prod.variants[0].price| number: '.2'}}</div>
                 <div class="text-center" *ngIf="!checkSoldOut(prod)">
-                  <a (click)="navigateProd('product',prod, prod.name )" class="btn btn-d main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span> Details</a>
+                  <a [routerLink]="['/product', prod.name, prod.id]" class="btn btn-d main-button btn-block">
+                    <span class="feather-icon icon-paper icon-spacer"></span>
+                    Details</a>
                 </div>
                 <div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
                   <h4 href="#" class="text-warning">Sold Out!</h4>
                 </div>
               </div>
-            </div>
+            </a>
           </a>
         </div>
       </div>

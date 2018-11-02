@@ -65,23 +65,13 @@ export class ProductComponent implements OnInit, AfterViewInit {
     constructor(private localStorageService: LocalStorageService, private currencyService: CurrencyService,
         private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute,
         private route: Router, private title: TitleService, private productsService: ProductsService) {
-
+      this.Data = {
+        tempImageArray : []
+      }
       this.router.params.subscribe(params => {
         this.catName = params['catName'];
         this.prodId = params['prodId'];
       });
-      if (JSON.parse(localStorage.getItem(this.appId + ':dataServiceData'))) {
-        this.Data = JSON.parse(localStorage.getItem(this.appId + ':dataServiceData'));
-        this.init();
-      } else {
-        this.productsService.getAllProducts().subscribe(products => {
-          this.Data = products.filter(product => product.id === this.prodId)[0];
-          this.init();
-        }, error => {
-          console.log('Error retrieving products' + error);
-        });
-      }
-
 
       if(this.templateName == "smartfit"){
             this.zoomRatio = 1.5;
@@ -161,23 +151,30 @@ export class ProductComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-      if(this.Data) {
-        this.api = $("#gallery").unitegallery({
-          theme_enable_text_panel: false,
-          gallery_background_color: "rgba(0,0,0,0)",
-          slider_scale_mode: "fit",
-          slider_textpanel_bg_color: "#000000",
-          slider_textpanel_bg_opacity: 0,
-          gallery_autoplay: true,
-          theme_hide_panel_under_width: null,
-          slider_zoom_max_ratio: this.zoomRatio
-        });
-        $('#gallery').on({
-          'touchstart': function () {
-            this.api.stop();
-          }
-        });
-      }
+      this.productsService.getProductById(this.prodId).subscribe(product => {
+        this.Data = product;
+        this.init();
+        setTimeout(function(){
+          this.api = $("#gallery").unitegallery({
+            theme_enable_text_panel: false,
+            gallery_background_color: "rgba(0,0,0,0)",
+            slider_scale_mode: "fit",
+            slider_textpanel_bg_color:"#000000",
+            slider_textpanel_bg_opacity: 0,
+            gallery_autoplay:true,
+            theme_hide_panel_under_width: null,
+            slider_zoom_max_ratio: this.zoomRatio
+          });
+          $('#gallery').on({
+            'touchstart' : function(){
+              this.api.stop();
+            }
+          });
+        }, 0);
+
+      }, error => {
+        console.log('Error retrieving products' + error);
+      });
     }
 
 

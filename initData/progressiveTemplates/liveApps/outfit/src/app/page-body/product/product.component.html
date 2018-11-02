@@ -6,7 +6,7 @@
     </div>
     <div class="row padding-top" id="product">
       <div class="col-sm-6">
-        <div id="gallery" style="display:none;" *ngIf="Data.tempImageArray">
+        <div id="gallery" style="display:none;" >
           <ng-template  *ngFor="let item of Data.tempImageArray" [ngIf]="item">
             <img *ngIf="item.videoUrl == null" alt="{{item.name}}" src="{{imageUrl}}/{{item.img}}" [attr.data-image]="imageUrl/item.img">
 

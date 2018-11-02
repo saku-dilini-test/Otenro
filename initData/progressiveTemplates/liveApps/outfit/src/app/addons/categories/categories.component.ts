@@ -96,16 +96,7 @@ export class CategoriesComponent implements OnInit {
         items: 4
       }
     }
-  }
-
-  navigateProd(val: String, item: any, catName: String) {
-    if(!this.checkSoldOut(item)){
-      this.catName = catName;
-      this.dataService.data = item;
-      localStorage.setItem(this.appId + ":dataServiceData", JSON.stringify(this.dataService.data));
-      this.router.navigate([val, this.catName, item.id]);
-    }
-  }
+  };
 
 }
 

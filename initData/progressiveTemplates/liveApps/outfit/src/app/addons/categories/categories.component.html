@@ -26,7 +26,7 @@
 			</div>
 			<div class="row  bloc-xl-mobile" *ngIf="categories.length == 0">
 				<div class="col-xs-6 col-sm-3" *ngFor="let prod of node;" >
-					<div class="cursor-p"  (click)="navigateProd('product',prod, prod.name )">
+					<a class="cursor-p"  [routerLink]="['/product', prod.name, prod.id]" >
 						<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
 						<h2 class="mg-md header-text-h2 text-center main-content-font">
 							{{prod.name}}
@@ -35,18 +35,18 @@
 							<strong>{{currency}} {{prod.variants[0].price| number: '.2'}}</strong>
 						</h2>
 						<div class="text-center">
-							<a class="btn btn-d btn-lg main-button" *ngIf="!checkSoldOut(prod)"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
+							<a class="btn btn-d btn-lg main-button" *ngIf="!checkSoldOut(prod)"   [routerLink]="['/product', prod.name, prod.id]">Buy now</a>
 						</div>
 						<div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
 							<h4 class="text-warning">Sold Out!</h4>
 						</div>
-					</div>
+					</a>
 				</div>
 			</div>
 
 			<div class="row voffset" *ngIf="categories.length != 0">
 				<owl-carousel [options]="owlOptions" [carouselClasses]="['owl-carousel', 'owl-theme', 'voffset']">
-					<div class="cursor-p" *ngFor="let prod of node;" (click)="navigateProd('product',prod, prod.name )">
+					<a class="cursor-p" *ngFor="let prod of node;"  [routerLink]="['/product', prod.name, prod.id]">
 						<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
 						<h2 class="mg-md header-text-h2 text-center main-content-font">
 							{{prod.name}}
@@ -55,12 +55,12 @@
 							<strong>{{currency}} {{prod.variants[0].price| number: '.2'}}</strong>
 						</h2>
 						<div class="text-center">
-							<a class="btn btn-d btn-lg main-button" *ngIf="!checkSoldOut(prod)"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
+							<a class="btn btn-d btn-lg main-button" *ngIf="!checkSoldOut(prod)"   [routerLink]="['/product', prod.name, prod.id]">Buy now</a>
 						</div>
 						<div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
 							<h4 class="text-warning">Sold Out!</h4>
 						</div>
-					</div>
+					</a>
 				</owl-carousel>
 			</div>
 		</div>
@@ -82,7 +82,7 @@
 			<div class="row voffset">
 				<owl-carousel *ngIf="node.products.length != 0" [options]="owlOptions" [carouselClasses]="['owl-carousel', 'owl-theme']">
 					<div *ngFor="let prod of node.products;">
-						<div class="cursor-p"  (click)="navigateProd('product',prod, prod.name )">
+						<a class="cursor-p"   [routerLink]="['/product', prod.name, prod.id]">
 							<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}"  class="img-responsive lazyload" />
 							<h2 class="mg-md header-text-h2 text-center main-content-font">
 								{{prod.name}}
@@ -91,12 +91,12 @@
 								<strong>{{currency}} {{prod.variants[0].price | number: '.2'}}</strong>
 							</h2>
 							<div class="text-center">
-								<a class="btn btn-d btn-lg main-button" *ngIf="!checkSoldOut(prod)"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
+								<a class="btn btn-d btn-lg main-button" *ngIf="!checkSoldOut(prod)"   [routerLink]="['/product', prod.name, prod.id]">Buy now</a>
 							</div>
 							<div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
 								<h4 class="text-warning">Sold Out!</h4>
 							</div>
-						</div>
+						</a>
 					</div>
 				</owl-carousel>
 			</div>

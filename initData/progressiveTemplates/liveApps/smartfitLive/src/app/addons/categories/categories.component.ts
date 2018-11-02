@@ -145,7 +145,6 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-
   owlOptions = {
     loop: false,
     margin: 15,
@@ -163,15 +162,6 @@ export class CategoriesComponent implements OnInit {
       1000: {
         items: 3
       }
-    }
-  }
-
-  navigateProd(val: String, item: any, catName: String) {
-    if (!this.checkSoldOut(item)) {
-      this.catName = catName;
-      this.dataService.data = item;
-      localStorage.setItem(this.appId + ":dataServiceData", JSON.stringify(this.dataService.data));
-      this.router.navigate([val, this.catName, item.id]);
     }
   }
 

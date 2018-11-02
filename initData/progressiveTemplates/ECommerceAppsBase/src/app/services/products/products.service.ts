@@ -24,6 +24,13 @@ export class ProductsService {
       .map(res => res.text() ? res.json() : null);
   }
 
+  getProductById(id) {
+    return this.http.get(SERVER_URL + '/templates/getProductById?productId=' + id)
+      .map(res => res.text() ? res.json() : null);
+  }
+
+
+
   getCategoryData(id:any){
     return this.http.get(SERVER_URL+'/templates/getCategoryByProdId?id='+id)
       .map(res => res.text() ? res.json() : null);

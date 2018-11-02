@@ -53,17 +53,6 @@ export class ShopComponent implements OnInit {
   }
 
 
-
-
-  navigateProd(val: String, item: any, catName: String) {
-    this.catName = catName;
-    this.dataService.data = item;
-    localStorage.setItem(this.appId+":dataServiceData",JSON.stringify(this.dataService.data))
-    this.router.navigate([val, this.catName, item.id]);
-  }
-
-
-
   checkSoldOut(product) {
 
     let count = 0;
