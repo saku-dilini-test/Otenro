@@ -52,6 +52,8 @@
         $scope.showWelComeMessage = true;
         $scope.appIdsArray = [];
         $scope.appNamesArray = [];
+        $scope.searchByAppName = null;
+        $scope.filterObject = null;
 
         $scope.sortType = "appName"
 
@@ -389,6 +391,7 @@
                                             app.keyword = detail.keyword;
                                             $scope.appList.push(app);
                                             $scope.searchPublishApps = undefined;
+                                            $scope.filterObject = { 'publishedStatus' : $scope.searchPublishApps };
                                         }
                                     });
                                 });
@@ -447,6 +450,7 @@
         $scope.all = function (status) {
             
             $scope.searchPublishApps = status !== "all" ? status : undefined;
+            $scope.filterObject = { 'publishedStatus' : $scope.searchPublishApps };
         }
 
         $scope.checkStatus = function (appId) {
@@ -1648,10 +1652,18 @@
                 console.log(err)
                 toastr.error('Failed to load all the users', 'Warning', {closeButton: true});
             });
+        };
 
+        /**
+         * Filter apps by appName
+         * 
+         * @param searchByAppName :: search filed value
+         * 
+         **/
+        $scope.filterAppsByName = function (searchByAppName) {
 
-        }
-
+            $scope.filterObject = { 'appName': searchByAppName };
+        };
     }
 
 })();

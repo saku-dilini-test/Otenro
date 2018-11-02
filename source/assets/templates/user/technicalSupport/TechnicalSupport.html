@@ -27,7 +27,7 @@
 
     <div class="padding margin-bottom clearfix">
         <fieldset ng-if="showSearchField" ng-style="myObj" id = "searchBar">
-            <input type="text" placeholder="Search by app name" ng-model="searchPublishApps.appName" id="search" name="search">
+            <input type="text" ng-model="searchByAppName" ng-change="filterAppsByName(searchByAppName)" placeholder="Search by app name" id="search" name="search">
             <input type="submit" class="me-search-button">
         </fieldset>
         <fieldset ng-if="(user.userRole[0] == 'ADMIN' || user.userRole[0] == 'SUPER_ADMIN' || user.userRole[0] == 'OPERATOR')&&showSearchField">
@@ -59,7 +59,7 @@
                 </thead>
 
                 <tbody>
-                <tr ng-repeat="app in appList | filter: { publishedStatus : searchPublishApps } | orderBy: { sortType: sortReverse }">
+                <tr ng-repeat="app in appList | filter: filterObject | orderBy: { sortType: sortReverse }">
                     <td ng-click="showAppView(app.id,app.userId)"  style="color:blue;">
                     <!--<a href="{{serverURL}}templates/viewWebTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">-->
                         <u>{{app.uniqueAppId}}</u>
