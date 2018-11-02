@@ -61,11 +61,6 @@ angular.module('app')
               controller: 'WelcomeTemplatesCtrl',
               templateUrl : 'user/welcome/welcomeTemplatesView.html'
 
-          }).state('anon.help',{
-              url :'/help',
-              controller : 'helpCtrl',
-              templateUrl : 'user/help/helpPage.html'
-
           }).state('anon.addNetwork',{
               url :'/fromAddNetwork?clickid&affid',
               params: {

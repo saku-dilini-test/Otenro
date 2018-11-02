@@ -288,7 +288,7 @@ module.exports = {
                             var email = req.body.email;
                             var emailBody = "<html><br>Hi,<br><br>" +
 
-                                           "Please create and revert with the service ID for the below service created through <br> Ideadroid. Details are as follows:" +
+                                           "Please create and revert with the service ID for the below service created through <br> Appmaker. Details are as follows:" +
 
                                             "<br><br><br>Service Name: " +  result[0].title +
                                             "<br>Company Name: " +  userData[0].firstName + " " + userData[0].lastName +
@@ -319,12 +319,12 @@ module.exports = {
                                             "<br>Un-subscription Keyword: STOP " + result[0].keyword +
                                             "<br>Subscription SMS: You have subscribed to the " + result[0].title + " service. Type STOP " + result[0].keyword  + " and send to 87757 to unsubscribe." +
                                             "<br>Un-subscription SMS: You have been unsubscribed from the " + result[0].title + " service." +
-                                            "<br>SMS Mask : Ideadroid" +
+                                            "<br>SMS Mask : Appmaker" +
                                             "<br>Admin notify URL: " + config.server.host + "/adminapi/index" +
                                             "<br>SMS Notify URL: " + config.server.host + "/sms/report" +
                                             "<br><br>Regards," +
 
-                                            "<br><br>Ideadroid Support" +
+                                            "<br><br>Appmaker Support" +
 
                                             "<br><br>Email : " + config.SIMATO_SUPPORT +
 

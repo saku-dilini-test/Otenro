@@ -56,7 +56,7 @@ module.exports = {
         var emailBody = '<!DOCTYPE>' +
                         '<html>' +
                            '<head>' +
-                              '<title>Ideadroid - Responsive Email Template</title>' +
+                              '<title>Appmaker - Responsive Email Template</title>' +
                             '<style type="text/css">' +
                                '/* ----- Custom Font Import ----- */' +
                                '/* ----- Text Styles ----- */' +
@@ -121,7 +121,7 @@ module.exports = {
                            '                    <table class="container header" border="0" cellpadding="0" cellspacing="0" width="620" style="width: 620px;">' +
                            '                       <tr>' +
                            '                          <td style="padding: 30px 0 30px 0; border-bottom: solid 1px #eeeeee;" align="left">' +
-                           '                             <a href="#" style="font-size: 30px; text-decoration: none; color: #000000;"><img src="cid:ideadroid" width="120px"></a>' +
+                           '                             <a href="#" style="font-size: 30px; text-decoration: none; color: #000000;"><img src="cid:appmaker" width="120px"></a>' +
                            '                          </td>' +
                            '                       </tr>' +
                            '                    </table>' +
@@ -134,8 +134,7 @@ module.exports = {
                            '                       <tr>' +
                              '                               <td class="hero-subheader__content" style="font-size: 16px; line-height: 27px; color: #969696; padding: 0 0 50px 0;" align="justify">' +
                                                               '<p>Hi '+ data.fName + " " + data.lName + ' Welcome Aboard!</p>'+
-                              '                                      <p>Thank you for registering for Ideadroid, the platform that enables you to create mobile applications without any coding. The service is currently in beta, and some features of the platform are currently not enabled.</p>' +
-                                '                                    <p>As the service is in beta you may encounter bugs or errors. Please report these to support@appmaker.lk so that we can ensure they are addressed at launch.</p>' +
+                              '                                      <p>Thank you for registering for Appmaker, the platform that enables you to create mobile applications without any coding. The service is currently in beta, and some features of the platform are currently not enabled.</p>' +
                                 '                                    <p>Good luck on your app creation journey!</p>' +
                                  '                                   <p style="padding: 15px 0 0 0; font-weight:700; ">The Ideamart Team<br/>' +
                                   '                                      </p>' +
@@ -191,13 +190,13 @@ module.exports = {
         var mailOptions = {
             from: config.IDEABIZ_SUPER_ADMIN_EMAIL,
             to: data.email,
-            subject: "Welcome to Ideadroid",
+            subject: "Welcome to Appmaker",
             html: emailBody,
             attachments: [
                 {
-                    filename: 'ideadroid.png',
-                    path: imgPath + 'ideadroid.png',
-                    cid: 'ideadroid'
+                    filename: 'appmaker.png',
+                    path: imgPath + 'appmaker.png',
+                    cid: 'appmaker'
                 },
                 {
                     filename: 'img16.jpg',
@@ -715,7 +714,7 @@ module.exports = {
                             var emailBody = "<html>Hello "+app[0].firstName+",<br />"+
                                 "<p>You have requested to reset your password. Please click the verify your email address to proceed.</p> <br/>"+
                                 "<a href='"+serverOrg+"/#/resetPassword/"+token+"'>Click to here for  verify your email address</a><br/>" +
-                                '<p style="padding: 15px 0 0 0; font-weight:700; ">The Ideadroid Team<br/></p></html>'
+                                '<p style="padding: 15px 0 0 0; font-weight:700; ">The Appmaker Team<br/></p></html>'
 
                             var mailOptions = {
                                 from: config.IDEABIZ_SUPER_ADMIN_EMAIL, // sender address
