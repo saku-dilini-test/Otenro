@@ -3170,6 +3170,10 @@ table.md-calendar-day-header{
     right: 0 !important;
 }
 [ng-quill-editor] { display: block; }
+
+.ql-editor p a {
+    color: #1b78c4 !important;
+}
 /* .End of quill editor over-ride classes and styles */
 
 /* ADM date picker over-ride classes and styles */
