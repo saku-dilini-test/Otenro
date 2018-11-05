@@ -197,17 +197,21 @@
         $scope.uploadFile = function(){
 
             var file = $scope.myFile;
-            console.log('file is '  + file);
-            console.dir(file);
-
             var uploadUrl = SERVER_URL+"edit/saveSchedulePushMassageFile";
-            console.log(uploadUrl);
-
-
             var fd = new FormData();
+            
             fd.append("appId",$rootScope.appId);
             fd.append('file', file);
             fd.append('type', $scope.scheduleType);
+
+            // If not a valid csv file
+            if ($scope.getFileExtension(file.name) !== 'csv') {
+
+                toastr.error('File is not a valid. Please upload a valid csv file!', 'Error', {
+                    closeButton: true
+                });
+                return;
+            }
 
             if (file){
                 $http.post(uploadUrl, fd, {
@@ -421,6 +425,21 @@
                 console.log(date.year);
                 console.log(date.month);
             // }
+        };
+
+        /**
+         *  Get file extension
+         * 
+         *  @param file :: filename
+         * 
+         **/
+        $scope.getFileExtension = function (file) {
+
+            var filename = file.trim();
+            var lastIndexOfDot = filename.lastIndexOf('.');
+            var strLength = filename.length;
+            var extension = filename.slice(lastIndexOfDot + 1, strLength);
+            return extension;
         };
     }
 
