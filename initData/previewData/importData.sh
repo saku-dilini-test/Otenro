@@ -31,7 +31,7 @@ else
     MESERVER='/home/admin/web/ideadroidcdn.ideamart.io/public_html/temp/';
     APPFILESERVER='/home/admin/web/ideadroidcdn.ideamart.io/public_html/developer/appFileServer/';
     DB='ideadroid'
-    serverUrl='https://ideadroid.ideamart.io'
+    serverUrl='https://appmaker.ideamart.io'
     MONGO_PARAMS='--host 13.229.197.90:27017 --username ideadroid --password SUperman123';
 fi
 echo $DB

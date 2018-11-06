@@ -43,7 +43,7 @@ module.exports = {
 
     /** ****** Custom Config ****** **/
     // HOST URL
-    HOST_URL: 'https://ideadroid.ideamart.io',
+    HOST_URL: 'https://appmaker.ideamart.io',
     // ME SERVER Config
     ME_SERVER_URL: 'https://ideadroidcdn.ideamart.io/developer/meServer/temp/',
     ME_SERVER: '/home/admin/web/ideadroidcdn.ideamart.io/public_html/developer/meServer/temp/',
@@ -53,7 +53,7 @@ module.exports = {
     CLIENT_SECRET: 'pro44f4f3be572ec33711a40a5b8b4789',
     TEMPLATES_PATH: '/home/projects/ideadroid/Otenro/initData/templates/',
     PROGRESSIVE_TEMPLATES_PATH: '/home/projects/ideadroid/Otenro/initData/distribution/',
-    REDIRECT_URL: 'https://ideadroid.ideamart.io',
+    REDIRECT_URL: 'https://appmaker.ideamart.io',
     ANDROID_APK_BUILD_ZIPALIGN_PATH: '/opt/android-sdk/build-tools/26.0.2/zipalign',//Use to do the zipalign when building android apk.
     ANDROID_VERSION : 26,
     isBeta: 0,//change isBeta to 0 after beta period
