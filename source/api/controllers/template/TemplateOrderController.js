@@ -72,6 +72,7 @@ module.exports = {
         var name;
         var count = 0;
 
+
         if(data.paymentType == 'Cash on delivery' || data.paymentType == 'Cash on pickup'){
             data['paymentStatus'] = 'Successful';
         }else{
@@ -94,11 +95,10 @@ module.exports = {
                     var newCount = 0;
                         for(var j = 0; j < prod[0].variants.length; j++){
                             newCount ++;
-                        console.log(prod[0].variants[j].sku);
-                        console.log(data.item[count-1].sku);
+                        console.log('inside deilivery');
                              if(prod[0].variants[j].sku == data.item[count-1].sku){
                                  found ++;
-                                 if(prod[0].variants[j].quantity == 0 || prod[0].variants[j].quantity < data.item[count-1].qty){
+                                 if(prod[0].variants[j].quantity == 0 || prod[0].variants[j].quantity < data.item[count-1].qty &&  data.item[count-1].unlimited == false){
                                      save = false;
                                      name = data.item[count-1].name;
                                  }
@@ -109,8 +109,7 @@ module.exports = {
                                  name = data.item[count-1].name;
                              }
 
-                        };
-
+                        }
                     }
                     if(count == data.item.length && save == true){
                         ApplicationOrder.create(data).exec(function (err, order) {
@@ -175,11 +174,10 @@ module.exports = {
                     var newCount = 0;
                         for(var j = 0; j < prod[0].variants.length; j++){
                             newCount ++;
-                        console.log(prod[0].variants[j].sku);
-                        console.log(data.item[count-1].sku);
+                        console.log('inside pickup');
                              if(prod[0].variants[j].sku == data.item[count-1].sku){
                                  found ++;
-                                 if(prod[0].variants[j].quantity == 0 || prod[0].variants[j].quantity < data.item[count-1].qty){
+                                 if(prod[0].variants[j].quantity == 0 || prod[0].variants[j].quantity < data.item[count-1].qty &&  data.item[count-1].unlimited == false){
                                      save = false;
                                      name = data.item[count-1].name;
                                  }
