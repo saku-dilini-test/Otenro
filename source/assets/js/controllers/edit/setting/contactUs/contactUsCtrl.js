@@ -95,6 +95,31 @@
 
             // If defined basic information address , Check length
 
+            if (basicInfo.webSite && !$scope.protocolValidator(basicInfo.webSite)) {
+                toastr.error('Web site should contain with http/https!', 'Warning', { closeButton: true });
+                return false;
+            }
+            if (basicInfo.twitter && !$scope.protocolValidator(basicInfo.twitter)) {
+                toastr.error('Twitter url should contain with http/https!', 'Warning', { closeButton: true });
+                return false;
+            }
+            if (basicInfo.facebook && !$scope.protocolValidator(basicInfo.facebook)) {
+                toastr.error('Facebook url should contain with http/https!', 'Warning', { closeButton: true });
+                return false;
+            }
+            if (basicInfo.instagram && !$scope.protocolValidator(basicInfo.instagram)) {
+                toastr.error('Instagram url should contain with http/https!', 'Warning', { closeButton: true });
+                return false;
+            }
+            if (basicInfo.linkedin && !$scope.protocolValidator(basicInfo.linkedin)) {
+                toastr.error('Linkedin url should contain with http/https!', 'Warning', { closeButton: true });
+                return false;
+            }
+            if (basicInfo.pinterest && !$scope.protocolValidator(basicInfo.pinterest)) {
+                toastr.error('Pinterest url site should contain with http/https!', 'Warning', { closeButton: true });
+                return false;
+            }
+
             if(typeof webInfo.email != 'undefined'){
                 var basicInfoResponse = {
                     'appId': $rootScope.appId,
@@ -249,8 +274,23 @@
         $scope.cancel = function() {
             $mdDialog.cancel();
         };
-//        $scope.answer = function() {
-//            $mdDialog.hide();
-//        };
+        /**
+         *  HTTP/HTTPS validator for urls
+         *  
+         *  @param url 
+         * 
+         *  @return boolean
+         * 
+        **/
+        $scope.protocolValidator = function (url) {
+
+            var firstIndexOfColon = url.indexOf(':');
+            var protocol = url.slice(0, firstIndexOfColon);
+
+            if (protocol === 'https' || protocol === 'http')
+                return true;
+            else
+                return false;
+        };
     }
 })();
