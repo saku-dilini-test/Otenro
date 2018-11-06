@@ -439,7 +439,7 @@
 
             console.log(data);
             $scope.searchStatuses = [];
-            $scope.searchStatuses.push('all');
+            $scope.searchStatuses.push('All');
             data.PUBLISH_STATUSES.forEach(function (ele) {
                 $scope.searchStatuses.push(ele.description);
             });
@@ -449,7 +449,7 @@
 
         $scope.all = function (status) {
             
-            $scope.searchPublishApps = status !== "all" ? status : undefined;
+            $scope.searchPublishApps = status !== "All" ? status : undefined;
             $scope.filterObject = { 'publishedStatus' : $scope.searchPublishApps };
         }
 
