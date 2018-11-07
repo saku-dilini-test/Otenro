@@ -12,7 +12,7 @@
         $scope.myImage='';
         $scope.myCroppedImage='';
         $scope.picFile='';
-        $scope.buttonName = "Select Image";
+        $scope.buttonName = "Browse Image";
         $scope.tmpImage = [];
         $scope.tmpLogo= [];
         $scope.path = ME_APP_SERVER+"temp/";

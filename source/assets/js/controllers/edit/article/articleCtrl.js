@@ -34,7 +34,7 @@
         $scope.myCroppedImage = '';
 
         $scope.imageSelected = true;
-        $scope.buttonName = "Select Image";
+        $scope.buttonName = "Browse Image";
 
         $scope.cropImage = function () {
             $scope.setAspectRatio();
@@ -118,7 +118,7 @@
                 });
             }
 
-            $scope.buttonName = "Select Image";
+            $scope.buttonName = "Browse Image";
         };
 
        $scope.deleteImg = function (index) {
