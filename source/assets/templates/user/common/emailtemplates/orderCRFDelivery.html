@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+	<head>
+		<meta name="viewport" content="width=device-width" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Billing invoices and receipts</title>
+
+	</head>
+
+	<body itemscope itemtype="http://schema.org/EmailMessage" style="box-sizing:border-box;max-width:800px;margin:0 auto;">
+
+			<table width="100%" cellpadding="0" cellspacing="0" style="border-radius:3px;background-color:#fff;border:1px solid #e9e9e9;padding: 20px;" bgcolor="#fff">
+				<thead>
+					<tr>
+						<td colspan="2" style="text-align: center; padding: 20px auto;margin: 0 auto">
+							<img src="cid:header" alt="header image" style="width: 800px">
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr>
+						<td colspan="2">
+							<p>emailHeader</p>
+						</td>
+
+					</tr>
+
+					<tr>
+						<td align="center" valign="top">
+
+								<!--******************shipping and delivery details*****************-->
+								<tr style="display: isShippingDetails">
+									<td>
+										<b>Deliver to</b>
+										<br>deliverName
+										<br>deliveryNo
+										<br>deliveryStreet
+										<br>deliveryCity
+										<br>deliveryCountry
+									</td>
+									<td valign="top">
+										<b>Shipping Details</b>
+										<br>shippingOpt
+									</td>
+								</tr>
+								<!--******************shipping and delivery details*****************-->
+
+								<!--******************order details*****************-->
+								<tr style="display: isOrderDetails">
+									<td valign="top" style="padding: 20px 0 0 0;">
+										What you ordered:
+										<br>
+										Order number: orderNumber
+										<br>
+									</td>
+								</tr>
+
+
+								<tr style="display: isOrderDetails">
+									orderDetails
+									<!--<td style="border-top-width:1px;border-top-color:#eee;border-top-style:solid;padding:5px 0;" valign="top">-->
+										<!--<div style="display:inline-block;padding:5px">-->
+											<!--<img src="https://mail.google.com/mail/u/0?ui=2&amp;ik=53424f133c&amp;attid=0.3&amp;permmsgid=msg-f:1616375238140919913&amp;th=166e84b715208069&amp;view=fimg&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ9QIgxIHVKIUzRArkJw6I4bica5rD3e1lzesRIoxTTg07mTCfZKHGoNPujVu5WDkFMhDfiCOJ53fRa-8dWXa9lBc5UC2PpBNQ6y8GPwQzmSXW1A1NpKyzOmg7Y&amp;disp=emb" width="60" height="60" data-image-whitelisted="" class="CToWUd">-->
+										<!--</div>-->
+										<!--<div style="display:inline-block;padding:5px">-->
+											<!--Women wear style 4-->
+											<!--<br>QTY: 1-->
+											<!--<br>Product Code: 5bcd5932b1f69b3413fc6d4d-->
+										<!--</div>-->
+									<!--</td>-->
+									<!--<td style="text-align:right;border-top-width:1px;border-top-color:#eee;border-top-style:solid;padding:5px 0" align="right" valign="top">-->
+										<!--<br>-->
+										<!--<div> $&nbsp;250.00</div>-->
+									<!--</td>-->
+								</tr>
+
+								<tr style="display: isOrderDetails">
+									<td width="70%" style="text-align:right;border-top-width:2px;border-top-color:#333;border-top-style:solid;font-weight:700;padding:5px 0" align="right" valign="top"></td>
+									<td style="text-align:right;border-top-width:2px;border-top-color:#333;border-top-style:solid;font-weight:700;padding:5px 0" align="right" valign="top"></td>
+								</tr>
+								<tr style="display: isOrderDetails">
+									<td width="70%" style="text-align:right;font-weight:700;margin:0;padding:5px 0" align="right" valign="top">Sub Total</td>
+									<td style="text-align:right;font-weight:700;margin:0;padding:5px 0" align="right" valign="top">currency&nbsp;subTotal</td>
+								</tr>
+								<tr style="display: isOrderDetails">
+									<td width="70%" style="text-align:right;font-weight:700;margin:0;padding:5px 0" align="right" valign="top">Delivery</td>
+									<td style="text-align:right;font-weight:700;margin:0;padding:5px 0" align="right" valign="top">currency&nbsp;shippingCost</td>
+								</tr>
+								<tr style="display: isOrderDetails">
+									<td width="70%" style="text-align:right;font-weight:700;margin:0;padding:5px 0" align="right" valign="top">Tax</td>
+									<td style="text-align:right;font-weight:700;margin:0;padding:5px 0" align="right" valign="top">currency&nbsp;orderTax</td>
+								</tr>
+								<tr style="display: isOrderDetails">
+									<td width="70%" style="ftext-align:right;font-weight:700;padding:5px 0" align="right" valign="top">Total</td>
+									<td  style="text-align:right;font-weight:700;padding:5px 0" align="right" valign="top">currency&nbsp;orderTotal</td>
+								</tr>
+								<tr style="display: isOrderDetails">
+									<td width="70%" style="text-align:right;border-bottom-color:#333;border-bottom-width:2px;border-bottom-style:solid;font-weight:700;padding:5px 0" align="right" valign="top">Payment Method</td>
+									<td style="text-align:right;border-bottom-color:#333;border-bottom-width:2px;border-bottom-style:solid;font-weight:700;padding:5px 0" align="right" valign="top">payementMethod</td>
+								</tr>
+
+								<!--******************order details*****************-->
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="2" style="text-align: center; padding: 20px 0;">
+							<img src="cid:logo" alt="logo" width="100px" style="width: 100px">
+							<br>Powered by
+							<a href="https://www.otenro.com" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.otenro.com&amp;source=gmail&amp;ust=1541652182528000&amp;usg=AFQjCNFnBYiaSU7dGEdYDCP1lwzOW68bUg"> www.otenro.com </a>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+	</body>
+</html>
