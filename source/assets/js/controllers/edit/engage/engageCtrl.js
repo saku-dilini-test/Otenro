@@ -192,8 +192,19 @@
                 return false;
             }
 
-         }
+         };
 
+        $scope.catchFileName = function() {
+            var handleFileSelect = function (evt) {
+                var csvFile = document.getElementById('csvInput');
+                var file = evt.currentTarget.files[0];
+
+                if(csvFile.files.length !== 0){
+                    document.getElementById('fileName').innerHTML = file.name;
+                }
+            };
+            angular.element(document.querySelector('#csvInput')).on('change', handleFileSelect);
+        };
 
         $scope.uploadFile = function(){
 
