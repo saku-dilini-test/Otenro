@@ -17,7 +17,13 @@
                     <table>
                         <tr>
                             <td style="vertical-align:bottom">
-                                <input class="edit-display-prop custom-file-input pull-left" style="width:100%; display:inherit !important; font-size:9pt;" ng-model="data.file" type = "file" accept=".csv" file-model = "myFile"/>
+                                <div class="inputField btn-material img-up" style="margin: 5% 10px">
+                                    <span>{{buttonName}}</span>
+                                    <div class="img-up1">
+                                        <input style="width:100%; height:100%; opacity:0" ng-model="data.file" type="file" accept=".csv" file-model="myFile" ng-click="catchFileName()" id="csvInput">
+                                    </div>
+                                    <div><span id="fileName" style="color:#212121; font-size:10px; cursor:text">no file selected</span></div>
+                                </div>
                             </td>
                             <td>
                                 <!--<input class="custom-file-input  pull-left" ng-model="data.file" type = "file" accept=".csv" file-model = "myFile"/>-->

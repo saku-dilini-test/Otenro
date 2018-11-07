@@ -12,6 +12,7 @@
         $scope.pushMessage = {};
         $scope.pushMessage.type = "A";
         $scope.scheduleType = "A";
+        $scope.buttonName = 'Select CSV File';
         const SEND_NOW = 'send_now';
         const SCHEDULED = 'scheduled';
         if (initialData){
