@@ -1,4 +1,4 @@
-<md-dialog aria-label="Menu Tree">
+<md-dialog aria-label="Menu Tree" style="width:60vw">
     <md-dialog-content>
         <form novalidate>
             <div class="md-dialog-header">
@@ -16,10 +16,10 @@
                 <table class="me-simple-table" >
                     <thead>
                         <tr>
-                            <th width="30%">Name</th>
-                            <th width="20%">Move up/Down</th>
-                            <th width="10%">Edit</th>
-                            <th width="10%">
+                            <th width="40%">Name</th>
+                            <th width="10%" style="text-align: center;">Move up/Down</th>
+                            <th width="10%" style="text-align: center;">Edit</th>
+                            <th width="10%" style="text-align: center;">
                                 <md-checkbox aria-label="Checkbox Delete" ng-checked="isChecked()" ng-click="toggleAll()"> Delete </md-checkbox>                                 
                             </th>
                         </tr>
@@ -27,9 +27,9 @@
                     <tbody ng-sortable = "filesSortConfig" >
                     <tr id ="listArr" ng-repeat="item in menuItems | orderBy: 'orderNo'">
                         <td class="sortable" >{{item.name}}</td>
-                        <td><img width="15%" style="margin-right:3%;" src="../../../images/up-arrow.svg" ng-click="moveUp(menuItems,$index)"><img width="15%" src="../../../images/down-arrow.svg" ng-click="moveDown(menuItems,$index)"></td>
-                        <td><img width="32%" src="../../../images/edit-icon.svg" ng-click="goToEditMenuItemView(item)"></td>
-                       <td>
+                        <td style="text-align: center; padding:15px 0;"><img style="width:20px" src="../../../images/up-arrow.svg" ng-click="moveUp(menuItems,$index)"><img style="width:20px" src="../../../images/down-arrow.svg" ng-click="moveDown(menuItems,$index)"></td>
+                        <td style="text-align: center; padding:15px 0;"><img style="width:20px" src="../../../images/edit-icon.svg" ng-click="goToEditMenuItemView(item)"></td>
+                       <td style="text-align: center; padding:15px 0;">
                             <md-checkbox aria-label="{{item.id}}" ng-checked="exists(item.id, selected)" ng-click="toggleDelete(item.id, selected)"></md-checkbox>
                        </td>
                     </tr>
