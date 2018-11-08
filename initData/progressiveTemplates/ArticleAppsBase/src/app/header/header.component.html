@@ -13,7 +13,19 @@
           <button aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle" (click)="openNav()">
             <i class="fa fa-bars lg"></i>
           </button>
-          <div class="mobile-title visible-xs mobileTitle">{{title}}</div>
+          <div *ngIf= "tempName == 'product'; else notProduct">
+              <div *ngIf= "title.length > articleSize; else noAnimation" >
+                  <div class="mobile-title visible-xs mobileTitle"><marquee class="mar-size">{{title}}</marquee></div>
+              </div>
+              <ng-template #noAnimation>
+                  <div class="mobile-title visible-xs mobileTitle">{{title}}</div>
+              </ng-template>
+          </div>
+          <ng-template #notProduct>
+            <div class="mobile-title visible-xs mobileTitle">{{title}}</div>
+          </ng-template>
+          
+         
 
         </div>
         <div class="navbar-1">

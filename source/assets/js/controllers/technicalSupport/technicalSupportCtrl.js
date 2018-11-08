@@ -52,6 +52,8 @@
         $scope.showWelComeMessage = true;
         $scope.appIdsArray = [];
         $scope.appNamesArray = [];
+        $scope.searchByAppName = null;
+        $scope.filterObject = null;
 
         $scope.sortType = "appName"
 
@@ -388,6 +390,8 @@
                                             app.serviceId = detail.serviceID;
                                             app.keyword = detail.keyword;
                                             $scope.appList.push(app);
+                                            $scope.searchPublishApps = undefined;
+                                            $scope.filterObject = { 'publishedStatus' : $scope.searchPublishApps };
                                         }
                                     });
                                 });
@@ -435,7 +439,7 @@
 
             console.log(data);
             $scope.searchStatuses = [];
-            $scope.searchStatuses.push('all');
+            $scope.searchStatuses.push('All');
             data.PUBLISH_STATUSES.forEach(function (ele) {
                 $scope.searchStatuses.push(ele.description);
             });
@@ -444,10 +448,9 @@
         });
 
         $scope.all = function (status) {
-            if (status == "All") {
-                $scope.searchPublishApps = undefined;
-//                    $scope.searchPublishApps.publishedStatus = "All";
-            }
+            
+            $scope.searchPublishApps = status !== "All" ? status : undefined;
+            $scope.filterObject = { 'publishedStatus' : $scope.searchPublishApps };
         }
 
         $scope.checkStatus = function (appId) {
@@ -1649,10 +1652,18 @@
                 console.log(err)
                 toastr.error('Failed to load all the users', 'Warning', {closeButton: true});
             });
+        };
 
+        /**
+         * Filter apps by appName
+         * 
+         * @param searchByAppName :: search filed value
+         * 
+         **/
+        $scope.filterAppsByName = function (searchByAppName) {
 
-        }
-
+            $scope.filterObject = { 'appName': searchByAppName };
+        };
     }
 
 })();

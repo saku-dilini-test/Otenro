@@ -22,3 +22,6 @@ menuFunction changes in App Details--file dataFiles/templatemetadata.json
 // appmaker_SimatoSprint5(17/09/2018) - dilakshan
 new collection renewalIntervals --file dataFiles/renewalIntervals.json
 mongoimport --db $DB --collection renewalIntervals --file dataFiles/renewalIntervals.json
+
+// appmaker_SimatoSprint5(22/10/2018) - sudarshana
+added new attribute 'orderNo' --file dataFiles/appinitialdata.json

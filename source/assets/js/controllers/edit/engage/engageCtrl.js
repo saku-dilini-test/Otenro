@@ -12,6 +12,7 @@
         $scope.pushMessage = {};
         $scope.pushMessage.type = "A";
         $scope.scheduleType = "A";
+        $scope.buttonName = 'Select CSV File';
         const SEND_NOW = 'send_now';
         const SCHEDULED = 'scheduled';
         if (initialData){
@@ -191,23 +192,38 @@
                 return false;
             }
 
-         }
+         };
 
+        $scope.catchFileName = function() {
+            var handleFileSelect = function (evt) {
+                var csvFile = document.getElementById('csvInput');
+                var file = evt.currentTarget.files[0];
+
+                if(csvFile.files.length !== 0){
+                    document.getElementById('fileName').innerHTML = file.name;
+                }
+            };
+            angular.element(document.querySelector('#csvInput')).on('change', handleFileSelect);
+        };
 
         $scope.uploadFile = function(){
 
             var file = $scope.myFile;
-            console.log('file is '  + file);
-            console.dir(file);
-
             var uploadUrl = SERVER_URL+"edit/saveSchedulePushMassageFile";
-            console.log(uploadUrl);
-
-
             var fd = new FormData();
+            
             fd.append("appId",$rootScope.appId);
             fd.append('file', file);
             fd.append('type', $scope.scheduleType);
+
+            // If not a valid csv file
+            if ($scope.getFileExtension(file.name) !== 'csv') {
+
+                toastr.error('File is not a valid. Please upload a valid csv file!', 'Error', {
+                    closeButton: true
+                });
+                return;
+            }
 
             if (file){
                 $http.post(uploadUrl, fd, {
@@ -287,6 +303,11 @@
         };
 
         $scope.save = function(message){
+
+        if (!$scope.linkArticle && message.article) {
+
+            message.article = null;
+        }
 
         if($scope.linkArticle && !$scope.pushMessage.article){
                 toastr.error('Please select an article before save.', 'Warning', {
@@ -416,6 +437,21 @@
                 console.log(date.year);
                 console.log(date.month);
             // }
+        };
+
+        /**
+         *  Get file extension
+         * 
+         *  @param file :: filename
+         * 
+         **/
+        $scope.getFileExtension = function (file) {
+
+            var filename = file.trim();
+            var lastIndexOfDot = filename.lastIndexOf('.');
+            var strLength = filename.length;
+            var extension = filename.slice(lastIndexOfDot + 1, strLength);
+            return extension;
         };
     }
 

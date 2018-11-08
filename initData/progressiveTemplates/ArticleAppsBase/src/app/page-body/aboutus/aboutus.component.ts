@@ -23,6 +23,7 @@ export class AboutusComponent implements OnInit {
   aboutUsUrl:any;
   constructor(private http: HttpClient, private appdataService: AppDataService,private title: TitleService) {
     this.title.changeTitle("About Us");
+    this.title.setLocation('aboutUs');
   }
 
   ngOnInit() {

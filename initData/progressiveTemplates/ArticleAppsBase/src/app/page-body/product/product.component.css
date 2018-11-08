@@ -1,11 +1,6 @@
 .desc{
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  flex-wrap: wrap;
+  white-space: pre-wrap;
+  margin-bottom: 64px;
 }
 .carousel-control{
   height: 86%;

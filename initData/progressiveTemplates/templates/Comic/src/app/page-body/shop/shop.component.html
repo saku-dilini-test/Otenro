@@ -1,12 +1,12 @@
 <div class="bloc bgc-gray l-bloc" id="bloc-0">
   <div class="container bloc-sm">
 
-    <div class="list-edited">
+    <div class="list-group edited">
       <a class="list-group-item flex-row" *ngFor="let article of results;let i = index" (click)="navigateProd('product',article)">
         <img src="{{imageUrl}}/{{article.tempImageArray[0].img}}">
-        <div>
-          <h5 class="list-group-item-heading main-header-font">{{article.title}}</h5>
-          <p class="list-group-item-text">{{description[i]}}</p>
+        <div class="list-group-decs">
+          <h5 class="list-group-item-heading main-header-font set-line-height">{{article.title}}</h5>
+          <p class="list-group-item-text main-content-font">{{description[i]}}</p>
         </div>
       </a>
     </div>

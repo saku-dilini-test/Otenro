@@ -103,7 +103,6 @@
                 if($scope.addNew == true){
                     if($scope.tmpImage.length <= 6){
                         $scope.tmpImage.push({'img': img});
-                        console.log($scope.tmpImage);
                     }
 
                 }
@@ -156,7 +155,6 @@
             });
 
         if (initialData == 'publishArticle') {
-            // console.log(initialData);
             $scope.isNewArticle = true;
             $scope.dummyCat = [];
 
@@ -184,8 +182,8 @@
 
 
         } else if (initialData == 'previewArticles')  {
-            // console.log('previewArticles '+initialData);
-            $scope.dialogTitle = 'Edit Page';
+                    $scope.dialogTitle = 'Edit Page';
+
             articleService.getArticleList($scope.appId)
                 .success(function (responseData) {
 
@@ -233,7 +231,6 @@
                         }else{
                             tempImageUrl = SERVER_URL + "templates/viewWebImages?userId=" + $auth.getPayload().id
                                           + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "&images=thirdNavi/" + initialData.tempImageArray[i].img;
-                            // console.log("initialData.tempImageArray else "+ tempImageUrl);
                         }
                     }else{
                         tempImageUrl = null;
@@ -461,14 +458,30 @@
 
             else {
                 var isImageUpdate = true;
+                var currentDate = new Date();
                 if ($scope.mainImg == $scope.serverImg) {
                     isImageUpdate = false;
                 }
 
-                if (article.expiryDate&&article.publishDate){
+                if (article.expiryDate && article.publishDate){
 
                     var expiryDate = new Date(article.expiryDate);
                     var publishDate = new Date(article.publishDate);
+
+                    if (publishDate < currentDate) {
+
+                        toastr.error('Publish date is not valid!', 'Warning', {
+                            closeButton: true
+                        });
+                        return ;
+                    }
+                    if (expiryDate < currentDate) {
+
+                        toastr.error('Expiry date is not valid!', 'Warning', {
+                            closeButton: true
+                        });
+                        return ;
+                    }
 
                     if (expiryDate <= publishDate){
 
@@ -478,6 +491,8 @@
                         return ;
                     }
                 }
+                article.desc = article.desc.replace(/\t/g, '&#09;');
+
 
                 articleService.publishArticle({
                     'articleImages': $scope.tmpImage, 'id': article.id, 'categoryId': $scope.seletedCategoryId, 'title': article.title, 'desc': article.desc,
@@ -517,7 +532,16 @@
 
         $scope.editArticle = function (article) {
             articleService.showPublishArticleDialog(article,'','articleCtrl');
+            $timeout(function(){
+                // Click event on hyper link button
+                var hyperLinkButton = document.querySelector('.ql-link');
+                hyperLinkButton.addEventListener('click', function () {
+                    var linkClicked = document.querySelector('#linkClicked');
+                    linkClicked.value = 1;
+                });
+            },3000);
         }
+
         $scope.deleteArticle = function (index, article) {
             article.isNew = $rootScope.tempNew;
             return $mdDialog.show({
@@ -579,7 +603,15 @@
 
         $scope.showPublishArticleDialog = function () {
             $mdDialog.hide();
-            return articleService.showPublishArticleDialog('publishArticle',"subPopUp");
+            articleService.showPublishArticleDialog('publishArticle',"subPopUp");
+            $timeout(function(){
+                // Click event on hyper link button
+                var hyperLinkButton = document.querySelector('.ql-link');
+                hyperLinkButton.addEventListener('click', function () {
+                    var linkClicked = document.querySelector('#linkClicked');
+                    linkClicked.value = 1;
+                });
+            },3000);
         };
 
         $scope.hide = function () {
@@ -697,12 +729,21 @@
             $mdMenu.open(ev);
         };
         $scope.pastedText = function (oldTextContent, event) {
+
+            var linkClicked = document.querySelector('#linkClicked');
             $scope.pastingContent = event.originalEvent.clipboardData.getData('text');
             $scope.oldTextContent = oldTextContent;
-            $timeout(function(){
-                var ele=document.getElementById('pasteMenu');
-                angular.element(ele).triggerHandler('click');
-            },0);
+
+            if (linkClicked.value != 1) {
+
+                $timeout(function(){
+                    var ele=document.getElementById('pasteMenu');
+                    angular.element(ele).triggerHandler('click');
+                },0);
+            } else {
+
+                linkClicked.value = 0;
+            }
         };
         $scope.stripHtml = function () {
             if($scope.oldTextContent){
@@ -710,7 +751,6 @@
             }else{
                 $scope.article.desc =  $scope.pastingContent;
             }
-        }
-
+        };
     }
 })();

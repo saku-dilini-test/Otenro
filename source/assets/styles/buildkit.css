@@ -152,6 +152,7 @@ p{
     font-weight: 300;
     text-shadow: 0 0 0 #999;
     text-transform: capitalize;
+    white-space: pre-wrap;
 }
 .desc{
     border: medium none;
@@ -3163,12 +3164,16 @@ table.md-calendar-day-header{
     text-transform: none;
 }
 .ql-snow .ql-tooltip{
-    top: auto !important;
-    bottom: 15px !important;
+    top: -5% !important;
+    /*bottom: 15px !important;*/
     left: auto !important;
     right: 0 !important;
 }
 [ng-quill-editor] { display: block; }
+
+.ql-editor p a {
+    color: #1b78c4 !important;
+}
 /* .End of quill editor over-ride classes and styles */
 
 /* ADM date picker over-ride classes and styles */
@@ -3182,6 +3187,7 @@ table.md-calendar-day-header{
     position: absolute;
     top: 87px;
     z-index: 10;
+    height: 0;
 }
 .md-menu.paste-options .paste-button{
     visibility: hidden;

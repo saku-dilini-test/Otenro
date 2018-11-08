@@ -309,7 +309,7 @@ module.exports = {
             });
 
             Application.find(appQuery, function(err, app) { 
-                  if (err) res.negotiate(err);
+                  if (err) return res.negotiate(err);
                   if(app.length > 0){
                       res.send({
                           appId: "-1",
@@ -333,7 +333,7 @@ module.exports = {
                       Template.find(
                       {"template_name":req.body.templateName}
                       ).exec(function (err, template) {
-                      if (err) res.negotiate(err);
+                      if (err) return res.negotiate(err);
                       isApplyStyle =  template[0].appStyle;
 
 
@@ -383,7 +383,7 @@ module.exports = {
                       };
 
                       Application.create(application).exec(function(err,app) {
-                          if (err) res.negotiate(err);
+                          if (err) return res.negotiate(err);
 
 
                           // fs.copy(appBasePath, tempAppDirPath + app.id, function(err) {
@@ -401,6 +401,7 @@ module.exports = {
                               fs.copy(templatePath, tempAppDirPath + app.id, function(err) {
                                   if (err) {
                                       console.error("Nothing to override in: " + templatePath);
+                                      return res.negotiate(err);
                                   }
 
                                   console.log("copyied the template");

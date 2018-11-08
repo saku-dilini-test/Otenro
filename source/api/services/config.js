@@ -13,6 +13,7 @@ module.exports = {
     CLIENT_SECRET:sails.config.CLIENT_SECRET,
     TEMPLATES_PATH :sails.config.TEMPLATES_PATH,
     PROGRESSIVE_TEMPLATES_PATH :sails.config.PROGRESSIVE_TEMPLATES_PATH,
+    USE_SENDMAIL :sails.config.USE_SENDMAIL,
 
     ANDROID_APK_BUILD_ZIPALIGN_PATH : sails.config.ANDROID_APK_BUILD_ZIPALIGN_PATH,
     ANDROID_VERSION : sails.config.ANDROID_VERSION,
@@ -79,8 +80,8 @@ module.exports = {
                     'max': 10
                 },
                 'monthly': {
-                    'min': 1,
-                    'max': 1000
+                    'min': 30,
+                    'max': 500
                 }
             }
         }

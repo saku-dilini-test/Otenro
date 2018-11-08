@@ -29,7 +29,9 @@ export class HeaderComponent implements OnInit {
   private templateName = (<any>data).templateName;
   private cartNo: number;
   public title: string;
-  public hideBackOnHome: boolean;
+  public articleSize: number = 20;
+  public tempName: string;
+  public hideBackOnHome = true;
   subscriptionStatus;
   pushMessage;
   logoUrl;
@@ -54,19 +56,18 @@ export class HeaderComponent implements OnInit {
     this.cartNo = this.dataService.cart.cartItems.length;
     this.title = 'Your Horoscope';
 
-    router.events.subscribe((val) => {
-      console.log(val['url']);
-      if (val['url'] == '/'  || val['url'] === '/?isFromCMSAppView=1' ) {
-        this.hideBackOnHome = false;
-      } else {
-        this.hideBackOnHome = true;
-      }
+    this.titleServ.getLocation().subscribe( (data) => {
+      console.log('title service getLocation: ',data);
+      this.hideBackOnHome = !data.includes('home');
     });
 
     headerCmp = this;
+    this.titleServ.getLocation().subscribe(
+      source =>
+        this.tempName = source
+    );
 
   }
-
   ngOnInit() {
     this.logoUrl = SERVER_URL + "/templates/viewWebImages?userId="
           + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images='
@@ -142,8 +143,7 @@ export class HeaderComponent implements OnInit {
       this.title = name;
     }
     this.router.navigate([route]);
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("header").style.height = "initial";
+    this.closeNav();
 
   }
 

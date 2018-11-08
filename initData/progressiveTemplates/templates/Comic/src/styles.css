@@ -504,9 +504,6 @@ button{
 /* = Custom Styling
 -------------------------------------------------------------- */
 
-h1,h2,h3,h4,h5,h6,p,label,.btn,a{
-  font-family:"Helvetica";
-}
 .container{
   max-width:1170px;
 }
@@ -871,7 +868,7 @@ label{
     box-shadow: none;
   }
   .navbar-brand img{
-    width:auto;
+    width: 100%;
     margin: auto;
   }
   .nav-invert .navbar-header{
@@ -964,7 +961,7 @@ label{
 }
 
 body::-webkit-scrollbar {
-  width: 5px;
+  width: 0px;
 }
 body::-webkit-scrollbar-track {
   background: #ddd;

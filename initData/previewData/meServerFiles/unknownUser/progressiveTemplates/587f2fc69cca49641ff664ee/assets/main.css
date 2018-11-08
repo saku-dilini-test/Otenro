@@ -148,19 +148,19 @@
     font-weight: bold;
     font-family: "Josefin Sans";
     background-color: transparent;
-    color: #000!important;
+    color: #fff !important;
     /*font-size: 20px;*/
   }
   .main-content-font{
     letter-spacing: 0em;
-    color: #7f7f7f!important;
+    color: #fff !important;
     font-weight: 400;
     font-family: "Helvetica";
     text-transform: initial;
     /*font-size: 14px;*/
   }
   .main-background{
-    background-color: #FFFFFF !important;
+    background-color: #000 !important;
     overflow-x: hidden;
   }
   .made-easy-background-image{
@@ -168,8 +168,8 @@
     background-size: cover;
   }
   .main-navigation{
-    background-color: #ffffff !important;
-    color:#000;
+    background-color: #000 !important;
+    color:#fff;
   }
   .main-navigation a{
     color: inherit !important;
@@ -197,17 +197,17 @@
     box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.5);
   }
   .main-footer-back{
-    background-color: #fff !important;
+    background-color: #482626 !important;
   }
   .main-footer-header{
-    color:#000;
+    color:#fff;
   }
   .main-footer-font{
     color:#000;
   }
 
   .main-footer-header:hover{
-    color:#ccc;
+    color:#000;
   }
  .banner-cat{
     height: 35vh;

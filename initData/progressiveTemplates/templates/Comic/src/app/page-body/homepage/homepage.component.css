@@ -3,10 +3,13 @@
   justify-content: space-between;
   margin: 20px 0;
 }
-
-.flex-row .flex-col img{
+.flex-row .flex-col{
   width: calc(100vw / 2);
-  padding: 5px 20px;
+  margin: 5px 20px;
+}
+.flex-row .flex-col img{
+  width: 100%;
+  box-shadow: 1px 1px 15px black;
 }
 
 .flex-row .flex-col div{
@@ -149,11 +152,4 @@
   50% {
     opacity: 0.95;
   }
-}
-
-
-/* New CSS by Sanira. */
-.category-title{
-  color: #ccc;
-  font-weight:100;
 }

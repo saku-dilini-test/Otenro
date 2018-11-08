@@ -35,17 +35,30 @@ export class ProductComponent implements OnInit {
         private router: ActivatedRoute, private route: Router, private title: TitleService) {
 
         this.Data = this.dataService.data;
+        this.title.setLocation('product');
     }
 
 
     ngAfterViewInit() {
-
-      $("#gallery").unitegallery({
+      let api = $("#gallery").unitegallery({
         theme_enable_text_panel: false,
         gallery_background_color: "rgba(0,0,0,0)",
         slider_textpanel_bg_color:"#000000",
         slider_textpanel_bg_opacity: 0,
       });
+
+      this.setCarousalControlls();
+
+      api.on("item_change",(num, data) => {
+        this.setCarousalControlls();
+      });
+    }
+
+    setCarousalControlls() {
+        $(".ug-zoompanel").css('display', 'none');
+        $(".ug-default-button-hidepanel").css('display', 'none');
+        $(".ug-default-button-fullscreen-single").css('display', 'none');
+        $(".ug-default-button-play-single").css({'right': '2px', 'left': 'unset'});
     }
 
     loadArticle(catId,articleId){
@@ -65,11 +78,18 @@ export class ProductComponent implements OnInit {
               }
 
               if (article) {
-                this.dataService.data = article;
-                this.catName = article.title;
-                this.title.changeTitle(this.catName);
-                this.Data = article;
-                // this.route.navigate(['product', article.title]);
+                  this.dataService.data = article;
+                  this.catName = article.title;
+                  this.title.changeTitle(this.catName);
+                  this.Data = article;
+                  this.productService.createArticleViewDataInfo(this.catName).subscribe(data => {
+                      // Read the result field from the JSON response.
+                      this.results = data;
+                  },
+                      error => {
+                          console.log('Error on create record');
+                      });
+
               } else {
                 console.log("Article not found for the catId: " + catId + " articleId: " + articleId);
               }
@@ -95,17 +115,7 @@ export class ProductComponent implements OnInit {
             this.catId = params['catId'];
 
             this.loadArticle(this.catId,this.articleId);
-            if (this.catName) {
-                this.productService.createArticleViewDataInfo(this.catName).subscribe(data => {
-                    // Read the result field from the JSON response.
-                    this.results = data;
-                },
-                    error => {
-                        console.log('Error on create record');
-                    });
-            }
         });
-
     }
 
     checkUrl(url) {

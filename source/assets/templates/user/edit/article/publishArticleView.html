@@ -19,7 +19,7 @@
                     <div class="select-container-long select-container width-100">
                         <select class="input-shadow-border"
                                 ng-model="dummyCat.id"
-                                ng-options="v.name for v in dummyCat"
+                                ng-options="v.name for v in dummyCat | orderBy:'name'"
                                 ng-change="changeArticleCat(dummyCat.id)"
                                 required>
                         </select>
@@ -172,8 +172,9 @@
                 </fieldset>
 
                 <fieldset style="clear:both">
-                    <label>Add Page Details</label>
+                    <label>Add Page Details - {{isHyperlinkButtonClicked}}</label>
                     <br>
+                    <input type="hidden" name="linkClicked" value="0" id="linkClicked">
                     <div>
                         <md-menu class="paste-options">
                             <!-- Trigger element is a md-button with an icon -->
@@ -204,7 +205,7 @@
                 <md-button class="me-default-button" ng-if="cancelButton_chk == 'publishArticle' && callType != 'subPopUp'   " ng-click="ok()">Cancel</md-button>
                 <md-button class="me-default-button" ng-if="cancelButton_chk != 'publishArticle' && callType != 'subPopUp' " ng-click="answer('cancel')">Cancel</md-button>
                 <md-button class="me-default-button" ng-disabled="!dummyCat.id || !article.title || !tmpImage[0] || !article.desc || articleForm.videoUrl5.$error.pattern || articleForm.videoUrl6.$error.pattern
-                            || articleForm.videoUrl4.$error.pattern || articleForm.videoUrl3.$error.pattern || articleForm.videoUrl2.$error.pattern"
+                            || articleForm.videoUrl4.$error.pattern || articleForm.videoUrl3.$error.pattern || articleForm.videoUrl2.$error.pattern || !article.publishDate || !article.expiryDate"
                            ng-click="publishArticle(mainImg,article)">Publish</md-button>
             </div>
         </div>

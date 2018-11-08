@@ -1,3 +1,5 @@
+var config = require('./config');
+
 /**
  * Created by root on 2/2/16.
  */
@@ -13,23 +15,28 @@ var transporter = null;
 var ERROR = { message: 'ERROR'};
 
 
-var transporter = nodemailer.createTransport({
-    host: 'appmaker.lk',
-    port: 465,
-    secure: true, // true for 465, false for other ports
-    auth: {
-        user: 'no_reply_ideadroid@appmaker.lk', // generated ethereal user
-        pass: 'FoRH7DAyKG' // generated ethereal password
-    },
-    tls:{
-        rejectUnauthorized: false
-    }
-});
+var transporter = null;
 
-
-
-
-
+if(config.USE_SENDMAIL){
+    transporter = nodemailer.createTransport({
+        sendmail: true,
+        newline: 'unix',
+        path: '/usr/sbin/sendmail'
+    });
+}else{
+    transporter = nodemailer.createTransport({
+        host: 'appmaker.lk',
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+            user: 'no_reply_ideadroid@appmaker.lk', // generated ethereal user
+            pass: 'FoRH7DAyKG' // generated ethereal password
+        },
+        tls:{
+            rejectUnauthorized: false
+        }
+    });    
+}
 
 var server  = email.server.connect({
     user:    "no_reply_ideadroid@appmaker.lk",
@@ -49,7 +56,7 @@ module.exports = {
         var emailBody = '<!DOCTYPE>' +
                         '<html>' +
                            '<head>' +
-                              '<title>Ideadroid - Responsive Email Template</title>' +
+                              '<title>Appmaker - Responsive Email Template</title>' +
                             '<style type="text/css">' +
                                '/* ----- Custom Font Import ----- */' +
                                '/* ----- Text Styles ----- */' +
@@ -114,7 +121,7 @@ module.exports = {
                            '                    <table class="container header" border="0" cellpadding="0" cellspacing="0" width="620" style="width: 620px;">' +
                            '                       <tr>' +
                            '                          <td style="padding: 30px 0 30px 0; border-bottom: solid 1px #eeeeee;" align="left">' +
-                           '                             <a href="#" style="font-size: 30px; text-decoration: none; color: #000000;"><img src="cid:ideadroid" width="120px"></a>' +
+                           '                             <a href="#" style="font-size: 30px; text-decoration: none; color: #000000;"><img src="cid:appmaker" width="120px"></a>' +
                            '                          </td>' +
                            '                       </tr>' +
                            '                    </table>' +
@@ -127,10 +134,9 @@ module.exports = {
                            '                       <tr>' +
                              '                               <td class="hero-subheader__content" style="font-size: 16px; line-height: 27px; color: #969696; padding: 0 0 50px 0;" align="justify">' +
                                                               '<p>Hi '+ data.fName + " " + data.lName + ' Welcome Aboard!</p>'+
-                              '                                      <p>Thank you for registering for Ideadroid, the platform that enables you to create mobile applications without any coding. The service is currently in beta, and some features of the platform are currently not enabled.</p>' +
-                                '                                    <p>As the service is in beta you may encounter bugs or errors. Please report these to support@appmaker.lk so that we can ensure they are addressed at launch.</p>' +
+                              '                                      <p>Thank you for registering for Appmaker, the platform that enables you to create mobile applications without any coding. The service is currently in beta, and some features of the platform are currently not enabled.</p>' +
                                 '                                    <p>Good luck on your app creation journey!</p>' +
-                                 '                                   <p style="padding: 15px 0 0 0; font-weight:700; ">The Ideamart Team<br/>' +
+                                 '                                   <p style="padding: 15px 0 0 0; font-weight:700; ">The AppMaker Team<br/>' +
                                   '                                      </p>' +
                                    '                     </td>' +
                                  '                 </tr>' +
@@ -150,7 +156,7 @@ module.exports = {
                                  '<table class="container" border="0" cellpadding="0" cellspacing="0" width="620" align="center" style="border-top: 1px solid #eeeeee; width: 620px;">' +
                                  '<tr>' +
                                  '<td style="text-align: center; padding: 10px 0 10px 0;">' +
-                                 '<a href="#" style="font-size: 28px; text-decoration: none; color: #d5d5d5;">ideamart.io</a>' +
+                                 '<a href="#" style="font-size: 28px; text-decoration: none; color: #d5d5d5;">appmaker.lk</a>' +
                                  '</td>' +
                                  '</tr>' +
                                  '<tr>' +
@@ -163,7 +169,7 @@ module.exports = {
                                  '</td>' +
                                  '</tr>' +
                                  '<tr>' +
-                                 '<td style="color: #d5d5d5; text-align: center; font-size: 15px; padding: 10px 0 60px 0; line-height: 22px;">Copyright &copy; 2018 <a href="https://ideamart.io/" target="_blank" style="text-decoration: none; border-bottom: 1px solid #d5d5d5; color: #d5d5d5;">ideamart.io</a>. <br />All rights reserved.</td>' +
+                                 '<td style="color: #d5d5d5; text-align: center; font-size: 15px; padding: 10px 0 60px 0; line-height: 22px;">Copyright &copy; 2018 <a href="https://ideamart.io/" target="_blank" style="text-decoration: none; border-bottom: 1px solid #d5d5d5; color: #d5d5d5;">appmaker.lk</a>. <br />All rights reserved.</td>' +
                                  '</tr>' +
                                  '</table>' +
                                  '</td>' +
@@ -184,13 +190,13 @@ module.exports = {
         var mailOptions = {
             from: config.IDEABIZ_SUPER_ADMIN_EMAIL,
             to: data.email,
-            subject: "Welcome to Ideadroid",
+            subject: "Welcome to Appmaker",
             html: emailBody,
             attachments: [
                 {
-                    filename: 'ideadroid.png',
-                    path: imgPath + 'ideadroid.png',
-                    cid: 'ideadroid'
+                    filename: 'appmaker.png',
+                    path: imgPath + 'appmaker.png',
+                    cid: 'appmaker'
                 },
                 {
                     filename: 'img16.jpg',
@@ -708,7 +714,7 @@ module.exports = {
                             var emailBody = "<html>Hello "+app[0].firstName+",<br />"+
                                 "<p>You have requested to reset your password. Please click the verify your email address to proceed.</p> <br/>"+
                                 "<a href='"+serverOrg+"/#/resetPassword/"+token+"'>Click to here for  verify your email address</a><br/>" +
-                                '<p style="padding: 15px 0 0 0; font-weight:700; ">The Ideadroid Team<br/></p></html>'
+                                '<p style="padding: 15px 0 0 0; font-weight:700; ">The Appmaker Team<br/></p></html>'
 
                             var mailOptions = {
                                 from: config.IDEABIZ_SUPER_ADMIN_EMAIL, // sender address
@@ -1059,7 +1065,7 @@ module.exports = {
             }
          });
 
-        var apkFile = config.server.host + '/getApkPath' +'/?userId=' + data.uid + '&appId=' + data.id + '&appName='+ data.appName;
+        var apkFile = config.server.host + '/getApkPath' +'/?userId=' + data.uid + '&appId=' + data.id + '&appName='+ data.appName.replace(/\s/g, '');
             var emailBody,subject;
 
             var email = data.email;

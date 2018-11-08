@@ -125,10 +125,9 @@ module.exports = {
 
     },
 
-    addNewCategory : function (req,res) {
-
+    addNewCategory: function (req, res) {
         var isNew = req.body.isNew;
-        var tmpImage  = req.body.file[0];
+        var tmpImage = req.body.file[0];
         var randomstring = require("randomstring");
         var searchApp = {
             appId: req.body.appId,
@@ -137,83 +136,69 @@ module.exports = {
         var dePath;
         var orderNo;
 
-        if(isNew == 'true' || isNew == true){
+        if (isNew == 'true' || isNew == true) {
             dePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/secondNavi/';
-        }else {
-            dePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/';
+        } else {
+            dePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId + '/img/category/';
         }
-// console.log(searchApp)
+
         ArticleCategory.find(searchApp, function (err, found) {
-            if (err) return res.send(err);
-                    // console.log(found)
-            if(found.length != 0) {
-                return res.send(409, {message: 'Category name already exists!'});
+            if (err) return res.serverError({ status: 'ERROR' });
 
-            }else {
-                    if (!tmpImage.match("http")) {
-                        // console.log("inside the http");
-                        var imgeFileName = randomstring.generate() + ".png";
-                        var data = tmpImage.replace(/^data:image\/\w+;base64,/, "");
-                        var buf = new Buffer(data, 'base64');
+            if (found.length != 0) {
+                return res.send(409, { message: 'Category name already exists!' });
 
-                        // product images copy to app file server
-                        fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
-                                req.body.appId + '/assets/images/secondNavi/' + imgeFileName, buf, function (err) {
-                                if (err) {
-                                    return res.send(err);
-                                }
-                        });
+            } else {
+                if (!tmpImage.match("http")) {
+                    var imgeFileName = randomstring.generate() + ".png";
+                    var data = tmpImage.replace(/^data:image\/\w+;base64,/, "");
+                    var buf = new Buffer(data, 'base64');
 
-                        ArticleCategory.find({appId: req.body.appId}).exec(function(err, categories){
-                            if(err) res.send(err);
-                            // console.log("ArticleCategory.find");
-                            // console.log(categories.length);
-                            if(categories.length == 0){
-                                orderNo = 0;
-                                  var articleCategoryattribute = {name:req.body.name,imageUrl:imgeFileName,isNew:req.body.isNew,appId:req.body.appId,orderNo:orderNo};
-                                    ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
-                                        // console.log(err,articleCategory);
-                                        if (err){
-                                            res.send(err);
-                                        }else{
-                                            res.json(articleCategory);
-                                        }
-                                    });
+                    // product images copy to app file server
+                    fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
+                        req.body.appId + '/assets/images/secondNavi/' + imgeFileName, buf, function (err) {
 
-                            }else{
-                                ArticleCategory.find({appId: req.body.appId}).sort({orderNo:-1}).limit(1).exec(function(err, categories){
-                                    // console.log('err:',err);
-                                    if (err) {
-                                        return res.send(err);
+                            if (err) {
+
+                                return res.send({ status: 'ERROR', message: 'App id is not matching with current user' });
+                            } else {
+
+                                ArticleCategory.find({ appId: req.body.appId }).exec(function (err, categories) {
+                                    if (err) return res.serverError({ status: 'ERROR' });
+
+                                    if (categories.length == 0) {
+                                        orderNo = 0
+                                        var articleCategoryattribute = { name: req.body.name, imageUrl: imgeFileName, isNew: req.body.isNew, appId: req.body.appId, orderNo: orderNo }
+                                        ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
+                                            if (err) {
+                                                return res.serverError({ status: 'ERROR' });
+                                            } else {
+                                                return res.json(articleCategory);
+                                            }
+                                        });
+
+                                    } else {
+                                        ArticleCategory.find({ appId: req.body.appId }).max('orderNo').exec(function (err, categories) {
+
+                                            orderNo = categories[0].orderNo + 1;
+
+                                            var articleCategoryattribute = { name: req.body.name, imageUrl: imgeFileName, isNew: req.body.isNew, appId: req.body.appId, orderNo: orderNo }
+                                            ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
+                                                if (err) {
+
+                                                    return res.serverError({ status: 'ERROR' });
+                                                } else {
+                                                    return res.json(articleCategory);
+                                                }
+                                            });
+                                        });
                                     }
-                                    // console.log("ArticleCategory.find.max");
-                                    // console.log(err,categories);
-                                    // console.log("ArticleCategory.find.max");
-                                    orderNo = categories[0].orderNo + 1;
-
-                                    var articleCategoryattribute = {name:req.body.name,imageUrl:imgeFileName,isNew:req.body.isNew,appId:req.body.appId,orderNo:orderNo}
-                                    ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
-                                        // console.log(err,categories);
-                                        if (err){
-                                            res.send(err);
-                                        }else{
-                                            res.json(articleCategory);
-                                        }
-
-                                    });
                                 });
-
                             }
-
                         });
-
-
-
-                    }
-
+                }
             }
         })
-
     },
 
     deleteItems : function (req,res,itemIds) {

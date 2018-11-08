@@ -286,7 +286,7 @@ $scope.data = {
 
     $scope.openTerms = function () {
       console.log("Opening Terms...");
-      var ref =  cordova.ThemeableBrowser.open('https://ideadroid.ideamart.io/appmakerterms.pdf', '_system');
+      var ref =  cordova.ThemeableBrowser.open('https://appmaker.ideamart.io/appmakerterms.pdf', '_system');
     }
 
 

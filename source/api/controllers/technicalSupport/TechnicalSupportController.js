@@ -587,7 +587,7 @@ module.exports = {
                             else{
                                 var emailBody = "<html>" + req.body.appName + " is pending approval.<br><br>" +
                                     req.body.appName +  " with App ID " + req.body.id + " has been configured, and is pending approval.<br><br>" +
-                                    "The Ideadroid Team" +
+                                    "The Appmaker Team" +
                                     "</html>";
 
                                 mailOptions = {

@@ -43,7 +43,7 @@ module.exports = {
 
     /** ****** Custom Config ****** **/
     // HOST URL
-    HOST_URL: 'https://ideadroid.ideamart.io',
+    HOST_URL: 'https://appmaker.ideamart.io',
     // ME SERVER Config
     ME_SERVER_URL: 'https://ideadroidcdn.ideamart.io/developer/meServer/temp/',
     ME_SERVER: '/home/admin/web/ideadroidcdn.ideamart.io/public_html/developer/meServer/temp/',
@@ -53,27 +53,25 @@ module.exports = {
     CLIENT_SECRET: 'pro44f4f3be572ec33711a40a5b8b4789',
     TEMPLATES_PATH: '/home/projects/ideadroid/Otenro/initData/templates/',
     PROGRESSIVE_TEMPLATES_PATH: '/home/projects/ideadroid/Otenro/initData/distribution/',
-    REDIRECT_URL: 'https://ideadroid.ideamart.io',
+    REDIRECT_URL: 'https://appmaker.ideamart.io',
     ANDROID_APK_BUILD_ZIPALIGN_PATH: '/opt/android-sdk/build-tools/26.0.2/zipalign',//Use to do the zipalign when building android apk.
     ANDROID_VERSION : 26,
+    isBeta: 0,//change isBeta to 0 after beta period
+    USE_SENDMAIL: true,//This is use to send emails via Sendmail transporter or configured SMTP server.If true, will use the Sendmail.
 
-    /**
-     * change isBeta to 0 after beta period
-     **/
-    isBeta: 0,
     //IdeaBiz
     IDEABIZ_AUTH_CONSUMER_KEY: 'fmqgPhGyJ6KFvsLe6cpgxPzlXcca',
     IDEABIZ_AUTH_CONSUMER_SECRET: 'NZ7OQjZ2yCqsin7kxjbGpUlBsska',
     IDEABIZ_AUTH_USERNAME: 'Appmaker',
     IDEABIZ_AUTH_PASSWORD: 'SUperman123',
-    IDEABIZ_EMAIL: 'support@appmaker.lk',
-    IDEABIZ_GROUP_EMAIL: 'appmakeruser@gmail.com', //To email for dialog super user, when sending approval email for the app configured with the serviceID by Admin.
+    IDEABIZ_EMAIL: 'no_reply_ideadroid@appmaker.lk',
+    IDEABIZ_GROUP_EMAIL: 'supermakeruser@gmail.com', //To email for dialog super user, when sending approval email for the app configured with the serviceID by Admin.
     IDEABIZ_ADMIN_EMAIL: 'appmakeruser@gmail.com', //From email address of Admin to send serviceID approval email to dialog super user.
     SUPPORT_USER_EMAIL: 'appmakeruser@gmail.com',//'support@appmaker.lk' //Simato Support user
     SIMATO_SUPPORT: 'appmakeruser@gmail.com',
-    IDEABIZ_SUPER_ADMIN_EMAIL: 'support@appmaker.lk',// should be changed to admin@ideamart.io
-    IDEABIZ_SUPPORT_EMAIL : 'ideadroidsupport@simatosolutions.com',// publish app TO email 
-    IDEABIZ_APP_GENERATOR_EMAIL : 'apkgenerator@simatosolutions.com',// Build success/failed FROM email 
+    IDEABIZ_SUPER_ADMIN_EMAIL: 'admin@ideamart.io',// should be changed to admin@ideamart.io
+    IDEABIZ_SUPPORT_EMAIL : 'appmakersupport@simatosolutions.com',// publish app TO email
+    IDEABIZ_APP_GENERATOR_EMAIL : 'apkgenerator@simatosolutions.com',// Build success/failed FROM email
 /**
      * The ADMIN api and MO callbacks will call these
      */

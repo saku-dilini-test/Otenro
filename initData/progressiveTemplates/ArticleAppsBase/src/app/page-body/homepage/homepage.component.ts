@@ -51,6 +51,7 @@ export class HomepageComponent implements OnInit {
 
     this.title.changeTitle((<any>data).name);
     homePageCmp = this;
+    this.title.setLocation('home');
   }
 
   ngOnInit() {
@@ -179,6 +180,7 @@ export class HomepageComponent implements OnInit {
       $(() => {
         $('#appStatusModel').modal('hide');
         $('#appPushNotificationModel').modal('show');
+        $('#appPushNotificationModel').off('hidden.bs.modal');
 
         if(notification.categoryId && notification.articleId) {
           console.log("binded appPushNotificationModel");

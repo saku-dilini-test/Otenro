@@ -86,11 +86,19 @@ module.exports = {
             if(result[0]){
                 console.log('Push message update');
                 var prevDate = result[0].date;
+                var pushMessage = req.body;
+                pushMessage.status = config.PUSH_MESSAGE_STATUS.PENDING.code;
                 PushMessage.update(criteria,req.body).exec(function(err,data){
+
                     if(err) return res.send(err);
-                    if(prevDate!==data[0].date) {
-                        thisCtrl.scheduleJobForPushMessages(res, data[0].date, data[0]);
+
+                    // If there is a already scheduled job on same push message cancel it
+                    var earlyScheduledJob = schedule.scheduledJobs[data[0].id];
+                    if (earlyScheduledJob) {
+
+                        earlyScheduledJob.cancel();
                     }
+                    thisCtrl.scheduleJobForPushMessages(res, data[0].date, data[0]);
                     return res.send(data);
                 });
 
@@ -100,16 +108,21 @@ module.exports = {
                 pushMessage.status = config.PUSH_MESSAGE_STATUS.PENDING.code;
                 pushMessage.isScheduled = true;
                 PushMessage.create(pushMessage).exec(function(err,data){
+
                     if(err) return res.send(err);
-                    thisCtrl.scheduleJobForPushMessages(res,data.date,data);
+
+                    thisCtrl.scheduleJobForPushMessages(res, data.date, data);
                     return res.send(data);
                 });
             }
         });
     },
 
-    scheduleJobForPushMessages : function(res,dateString,data){
+    scheduleJobForPushMessages : function(res, dateString, data){
+
         var thisCtrl = this;
+        // Push message id is used as a unique identifier of scheduled job
+        var uniqueJobName = data.id;
 
         sails.log.debug('in scheduleJobForPushMessages');
         if (!moment(dateString, CSV_DATE_TIME_FORMAT, true).isValid()) {
@@ -120,7 +133,7 @@ module.exports = {
         var date = moment(dateString,CSV_DATE_TIME_FORMAT).toDate();
         console.log("scheduleJobForPushMessages->date " + date);
 
-        schedule.scheduleJob(date, function(){
+        schedule.scheduleJob(uniqueJobName, date, function(){
             PushMessage.find({id: data.id}).exec(function(err, pushMessage) {
                 if (err) {
                     sails.log.error("scheduleJobForPushMessages=> Error in PushMessage.find for id %s",pushId);

@@ -661,30 +661,40 @@
             if($scope.initialData.menu == 'addNewMenuCategory') {
                 mainMenuService.addNewCategory({"file":$scope.tmpImage,"appId":$rootScope.appId,"name": menu.name,"isNew":$rootScope.tempNew})
                     .success(function (data) {
-                        var urlPath;
-                        if($rootScope.tempNew == 'true' || $rootScope.tempNew == true){
-                            urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
-                        $scope.appTemplateUrl = urlPath +
-                            'src' + data.id + '?' + new Date().getTime();
-                        }else {
+                        if (data.status !== 'ERROR') {
 
-                            urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
-                                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
-
-                        $scope.appTemplateUrl = urlPath + '' +
-                            '#/app/home/' + data.id + '?' + new Date().getTime();
+                            var urlPath;
+                            if($rootScope.tempNew == 'true' || $rootScope.tempNew == true){
+                                urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                                    + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+    
+                            $scope.appTemplateUrl = urlPath +
+                                'src' + data.id + '?' + new Date().getTime();
+                            }else {
+    
+                                urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                                    + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+    
+                            $scope.appTemplateUrl = urlPath + '' +
+                                '#/app/home/' + data.id + '?' + new Date().getTime();
+                            }
+    
+                            mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                            toastr.success("New category has been added successfully", 'Message', {closeButton: true});
+                            $mdDialog.hide();
+                             if(initialData.from && initialData.from.from == 'fromPublishArticle'){
+                                           articleService.showPublishArticleDialog(initialData.from.article);
+                                       }else {
+                                           mainMenuService.showMainMenuDialog();
+                                       }
                         }
 
-                        mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                        toastr.success("New category has been added successfully", 'Message', {closeButton: true});
-                        $mdDialog.hide();
-                         if(initialData.from && initialData.from.from == 'fromPublishArticle'){
-                                       articleService.showPublishArticleDialog(initialData.from.article);
-                                   }else {
-                                       mainMenuService.showMainMenuDialog();
-                                   }
+                        if (data.status === 'ERROR') {
+
+                            var errorMessage = data.message ? data.message : 'Failed to create a new category';
+                            toastr.error(errorMessage, 'Error!', { closeButton: true });
+                        }
                     }).error(function (err) {
                         toastr.error(err, 'Warning', {
                             closeButton: true

@@ -148,19 +148,19 @@
     font-weight: bold;
     font-family: "Josefin Sans";
     background-color: transparent;
-    color: #5E5E5E!important;
+    color: #fff!important;
     font-size: 16px;
   }
   .main-content-font{
     letter-spacing: 0em;
-    color: #7f7f7f!important;
+    color: #fff!important;
     font-weight: 400;
     font-family: "Helvetica";
     text-transform: initial;
     /*font-size: 14px;*/
   }
   .main-background{
-    background-color: rgb(179, 171, 171) !important;
+    background-color: rgb(17, 8, 119)  !important;
     overflow-x: hidden;
   }
   .made-easy-background-image{
@@ -168,8 +168,8 @@
     background-size: cover;
   }
   .main-navigation{
-    background-color: #ffffff !important;
-    color: rgba(0, 0, 0, 0.6);
+    background-color: rgb(17, 8, 119) !important;
+    color: #fff;
   }
   .main-navigation a{
     color: inherit !important;
