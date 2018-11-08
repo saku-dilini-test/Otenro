@@ -35,6 +35,9 @@
             });
         };
 
+        /**
+         * catch the image from the input field and  call to showImageEditorDialog with the uploaded image
+         */
         return {
             callImageEditor: function (_file,_width,_height,_menuName,_callFrom){
                 console.log(_callFrom);

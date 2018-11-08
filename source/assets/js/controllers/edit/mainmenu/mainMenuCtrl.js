@@ -13,7 +13,6 @@
         $scope.newSortArr;
 
         $scope.tempplayer = "";
-        console.log( initialData);
         $scope.filesSortConfig = {
             animation: 150,
             ghostClass: 'ghost',
@@ -80,16 +79,22 @@
         // image crop function
         $scope.cropImage = function () {
             console.log("inside cropImage");
-            $scope.name;
-            if($scope.menu){
-                $scope.name = $scope.menu.name;
-                console.log($scope.menu.name);
-            }else{
-                $scope.name = '';
-            }
+            // $scope.initState = {
+            //     name: '',
+            //     tempImage: null
+            // };
+            // console.log('$scope.menu: ',$scope.menu);
+            // if($scope.menu){
+            //     $scope.initState.name = $scope.menu.name;
+            //     $scope.initState.tempImage = $scope.menu.image;
+            // }else{
+            //     $scope.initState.name = '';
+            // }
+
             var handleFileSelect=function(evt) {
                 var file=evt.currentTarget.files[0];
-                imageEditorService.callImageEditor(file,100,100, $scope.name, initialData.menu);
+                console.log('initialData: ',initialData.menu);
+                imageEditorService.callImageEditor(file,100,100, $scope.menu, initialData.menu);
             };
             angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
         };
@@ -144,7 +149,6 @@
                     else{
                         $scope.tmpImage = [];
                         $scope.tmpImage[0] = img;
-                        console.log($scope.tmpImage);
                         $scope.mainImg = img;
                         $scope.myImage = null;
 
@@ -154,7 +158,7 @@
                     }
 
                      $scope.imageSelected = true;
-                     $scope.buttonName = "Browse Image" ;
+                     $scope.buttonName = "Select Image" ;
         };
 
         // Main Menu view
@@ -190,16 +194,15 @@
                 });
         }   // Menu-Navigation or Menu-Category (Article Category) -> Add / Update
         else if($scope.initialData){
-            console.dir($scope.initialData);
-
             if($scope.initialData.from === 'imageEditorCtrl'){
                  $scope.menu = $scope.initialData.categoryDetails;
-                 // console.log($scope.initialData.menu.image);
                  addImage($scope.menu.image);
-                // $scope.tmpImage = [];
-                // $scope.tmpImage =  $scope.initialData.menu.image;
-
-            }else{
+            }
+            else if($scope.initialData.from === 'imageEditorCtrlCancel'){
+                $scope.menu = $scope.initialData.categoryDetails;
+                $scope.tmpImage[0] = $scope.menu.image;
+            }
+            else{
                 if(initialData.from && initialData.from.from == 'fromPublishArticle' || initialData.menu == 'addNewMenuCategory'){
                     $scope.heading = "Add Category";
 

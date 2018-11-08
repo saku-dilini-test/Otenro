@@ -18,7 +18,6 @@
             deleteImages : initialData.deleteImages,
             articleCat : initialData.articleCat
         };
-
         $scope.callFrom = callFrom;
         $scope.isCropped = false;
         $scope.saveButton = 'Crop & Save';
@@ -59,7 +58,7 @@
                         editedImg = imageEditor.toDataURL();
                         if(callFrom === 'addNewMenuCategory'){
                             categoryDetails = {
-                                name: initialData,
+                                name: initialData.name,
                                 image : editedImg
                             };
                             mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory','3','imageEditorCtrl', categoryDetails);
@@ -73,6 +72,10 @@
                             articleService.showPublishArticleDialog(initialData.initData,'fromImageEditorCtrlSave',articleDetails);
                         }
                         else{
+                            categoryDetails = {
+                                name: initialData.name,
+                                image : editedImg
+                            };
                             mainMenuService.showEditMenuCategoryDialog($scope.callFrom,'3','imageEditorCtrl',categoryDetails);
                         }
                     },300);
@@ -103,9 +106,10 @@
                  * go back to the page where image editor initiated
                  */
                 $scope.imageEditorCancel = function() {
+                    console.log(initialData);
                     categoryDetails = {
-                        name: initialData,
-                        image : null
+                        name: initialData.name,
+                        image: initialData.image
                     };
                     if(callFrom === 'addNewMenuCategory'){
                         mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory','3','imageEditorCtrlCancel', categoryDetails);

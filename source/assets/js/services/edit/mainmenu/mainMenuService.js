@@ -91,7 +91,7 @@
                 });
             },
             showEditMenuCategoryDialog: function(data,id,from,categoryDetails){
-                console.log(data,id,from,categoryDetails);
+                // console.log('data: ',data,'id: ',id,'from: ',from,'catDetails: ',categoryDetails);
                 return $mdDialog.show({
                     controller: 'MainMenuCtrl',
                     templateUrl: 'user/edit/mainmenu/editMenuCategory.html',
