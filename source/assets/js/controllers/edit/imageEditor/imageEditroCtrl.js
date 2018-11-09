@@ -14,11 +14,11 @@
         };
         var articleDetails = {
             img : null,
-            tempImage : initialData.tempImage,
-            deleteImages : initialData.deleteImages,
-            articleCat : initialData.articleCat
+            tempImage : null,
+            deleteImages : null,
+            articleCat : null
         };
-        $scope.callFrom = callFrom;
+        var callFrom = callFrom;
         $scope.isCropped = false;
         $scope.saveButton = 'Crop & Save';
         setTimeout(
@@ -76,7 +76,7 @@
                                 name: initialData.name,
                                 image : editedImg
                             };
-                            mainMenuService.showEditMenuCategoryDialog($scope.callFrom,'3','imageEditorCtrl',categoryDetails);
+                            mainMenuService.showEditMenuCategoryDialog(callFrom,'3','imageEditorCtrl',categoryDetails);
                         }
                     },300);
                 };
@@ -106,12 +106,12 @@
                  * go back to the page where image editor initiated
                  */
                 $scope.imageEditorCancel = function() {
-                    console.log(initialData);
                     categoryDetails = {
                         name: initialData.name,
-                        image: initialData.image
+                        image: initialData.tempImage
                     };
                     if(callFrom === 'addNewMenuCategory'){
+
                         mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory','3','imageEditorCtrlCancel', categoryDetails);
                     }else if(callFrom === 'addNewArticle'){
                         articleDetails = {
@@ -123,7 +123,7 @@
                         articleService.showPublishArticleDialog(initialData.initData,'fromImageEditorCtrlCancel',articleDetails);
                     }
                     else{
-                        mainMenuService.showEditMenuCategoryDialog($scope.callFrom,'3','imageEditorCtrlCancel',categoryDetails);
+                        mainMenuService.showEditMenuCategoryDialog(callFrom,'3','imageEditorCtrlCancel',categoryDetails);
                     }
                 };
 

@@ -79,22 +79,24 @@
         // image crop function
         $scope.cropImage = function () {
             console.log("inside cropImage");
-            // $scope.initState = {
-            //     name: '',
-            //     tempImage: null
-            // };
-            // console.log('$scope.menu: ',$scope.menu);
-            // if($scope.menu){
-            //     $scope.initState.name = $scope.menu.name;
-            //     $scope.initState.tempImage = $scope.menu.image;
-            // }else{
-            //     $scope.initState.name = '';
-            // }
+            var initState = {
+                name: '',
+                tempImage: null
+            };
+            console.log('$scope.menu: ',$scope.menu);
+            if($scope.menu){
+                initState = {
+                    name: $scope.menu.name,
+                    tempImage: $scope.menu.image
+                }
+            }else{
+                initState.name = '';
+            }
 
             var handleFileSelect=function(evt) {
                 var file=evt.currentTarget.files[0];
                 console.log('initialData: ',initialData.menu);
-                imageEditorService.callImageEditor(file,100,100, $scope.menu, initialData.menu);
+                imageEditorService.callImageEditor(file,100,100,initState, initialData.menu);
             };
             angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
         };
@@ -200,7 +202,10 @@
             }
             else if($scope.initialData.from === 'imageEditorCtrlCancel'){
                 $scope.menu = $scope.initialData.categoryDetails;
-                $scope.tmpImage[0] = $scope.menu.image;
+                console.log($scope.menu);
+
+                if($scope.menu)
+                    $scope.tmpImage[0] = $scope.menu.image;
             }
             else{
                 if(initialData.from && initialData.from.from == 'fromPublishArticle' || initialData.menu == 'addNewMenuCategory'){
