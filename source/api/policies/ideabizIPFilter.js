@@ -7,10 +7,18 @@
  *
  */
 
+const config = require('../services/config');
 const ipPool = ['192.168.8.112','127.0.0.1','202.69.200.34'];
 const prefixIPv4 = '::ffff:';
 
 module.exports = function(req, res, next) {
+
+  sails.log.debug('ideabizIPFilter:Incoming ip:%s url:%s',req.ip,req.url);
+
+  // User is allowed, proceed to the next policy or controller if IDEABIZ_IP_POOL_ENABLED is false
+  if (!config.IDEABIZ_IP_POOL_ENABLED) {
+    return next();
+  }
 
   // User is allowed, proceed to the next policy or controller if the ip is in the pool,
   if (isExists(req.ip)) {
@@ -29,6 +37,7 @@ const isExists = (ipString) => {
     return true;
   }else if(ipString.indexOf(prefixIPv4) > -1){//IPv4
     ip = ipString.substring(ipString.indexOf(prefixIPv4) + prefixIPv4.length)
+    sails.log.debug('ideabizIPFilter:ip:%s',ip);
     return ipPool.indexOf(ip) > -1;
   }
   //IPv6
