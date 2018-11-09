@@ -58,7 +58,7 @@ module.exports = {
     ANDROID_VERSION : 26,
     isBeta: 0,//change isBeta to 0 after beta period
     USE_SENDMAIL: true,//This is use to send emails via Sendmail transporter or configured SMTP server.If true, will use the Sendmail.
-    IDEABIZ_IP_POOL_ENABLED: false,//This will enable the Idabiz MO and Admin api's to access only the ip addresses in the ip pool 
+    IDEABIZ_IP_POOL_ENABLED: true,//This will enable the Idabiz MO and Admin api's to access only the ip addresses in the ip pool
 
     //IdeaBiz
     IDEABIZ_AUTH_CONSUMER_KEY: 'fmqgPhGyJ6KFvsLe6cpgxPzlXcca',
