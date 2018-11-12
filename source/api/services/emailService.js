@@ -1302,7 +1302,7 @@ module.exports = {
                                         '							<table width="100%" cellpadding="0" cellspacing="0" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
                                         '                              <tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
                                         '                                  <td class="content-block" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">'+
-                                        '								<img src="cid:regHeader"/></td>'+
+                                        '								<img src="cid:regHeader" width="716" style="width:716px"/></td>'+
                                         '								</tr><td style="padding: 0 40px">'+
                                         ' <h2 class = "ql-align-center">Successfully Registered</h2><br><br><br>'+
                                         ' <div>Hi <span style="text-transform:capitalize">' + data.userName + '</span>,<br><div>' +
@@ -1317,7 +1317,7 @@ module.exports = {
                                                               path: logoPath + "appUserRegister/location.png",
                                                               cid: 'address'
                                                              });
-                                                mBody += '<img class="line" src="cid:address" width = "13px" height = "16px"> &nbsp;Address: ' + contact[0].address + "<br>";
+                                                mBody += '<img class="line" src="cid:address" width = "13" height = "16" style="width: 16px;height: 16px"> &nbsp;Address: ' + contact[0].address + "<br>";
                                             }
                                             if(contact[0].telPhone){
                                                 imageArr.push({
@@ -1325,7 +1325,7 @@ module.exports = {
                                                               path: logoPath + "appUserRegister/phone.png",
                                                               cid: 'phone'
                                                              });
-                                                mBody += '<img class="line" src="cid:phone" width = "13px" height = "16px"> &nbsp;Phone: ' + contact[0].telPhone + "<br>";
+                                                mBody += '<img class="line" src="cid:phone" width = "13" height = "16" style="width: 16px;height: 16px"> &nbsp;Phone: ' + contact[0].telPhone + "<br>";
                                             }
                                             if(contact[0].email){
                                                 imageArr.push({
@@ -1333,7 +1333,7 @@ module.exports = {
                                                               path: logoPath + "appUserRegister/email.png",
                                                               cid: 'email'
                                                              });
-                                                mBody += '<img class="line" src="cid:email" width = "13px" height = "16px"> &nbsp;Email: ' + contact[0].email + "<br>";
+                                                mBody += '<img class="line" src="cid:email" width = "13" height = "16" style="width: 16px;height: 16px"> &nbsp;Email: ' + contact[0].email + "<br>";
                                             }
                                             if(contact[0].webSite){
                                                 imageArr.push({
@@ -1341,7 +1341,7 @@ module.exports = {
                                                               path: logoPath + "appUserRegister/web.png",
                                                               cid: 'web'
                                                              });
-                                                mBody += '<img class="line" src="cid:web" width = "13px" height = "16px"> &nbsp;WebSite: ' + contact[0].webSite + "<br>";
+                                                mBody += '<img class="line" src="cid:web" width = "13" height = "16" style="width: 16px;height: 16px"> &nbsp;WebSite: ' + contact[0].webSite + "<br>";
                                             }
                                             if(contact[0].facebook){
                                                 imageArr.push({
@@ -1349,7 +1349,7 @@ module.exports = {
                                                               path: logoPath + "appUserRegister/facebook.png",
                                                               cid: 'facebook'
                                                              });
-                                                mBody += '<img class="line" src="cid:facebook" width = "13px" height = "16px"> &nbsp;' + contact[0].facebook + "<br>";
+                                                mBody += '<img class="line" src="cid:facebook" width = "13" height = "16" style="width: 16px;height: 16px"> &nbsp;' + contact[0].facebook + "<br>";
                                             }
                                             if(contact[0].instagram){
                                                 imageArr.push({
@@ -1357,7 +1357,7 @@ module.exports = {
                                                               path: logoPath + "appUserRegister/insta.png",
                                                               cid: 'insta'
                                                              });
-                                                mBody += '<img class="line" src="cid:insta" width = "13px" height = "16px"> &nbsp;' + contact[0].instagram + "<br>";
+                                                mBody += '<img class="line" src="cid:insta" width = "13" height = "16" style="width: 16px;height: 16px"> &nbsp;' + contact[0].instagram + "<br>";
                                             }
                                             if(contact[0].linkedin){
                                                 imageArr.push({
@@ -1365,7 +1365,7 @@ module.exports = {
                                                               path: logoPath + "appUserRegister/linkedin.png",
                                                               cid: 'linkedin'
                                                              });
-                                                mBody += '<img class="line" src="cid:linkedin" width = "13px" height = "16px"> &nbsp;' + contact[0].linkedin + "<br>";
+                                                mBody += '<img class="line" src="cid:linkedin" width = "13" height = "16" style="width: 16px;height: 16px"> &nbsp;' + contact[0].linkedin + "<br>";
                                             }
                                             if(contact[0].pinterest){
                                                 imageArr.push({
@@ -1373,7 +1373,7 @@ module.exports = {
                                                               path: logoPath + "appUserRegister/pinterest.png",
                                                               cid: 'pinterest'
                                                              });
-                                                mBody += '<img class="line" src="cid:pinterest" width = "13px" height = "16px"> &nbsp;' + contact[0].pinterest + "<br>";
+                                                mBody += '<img class="line" src="cid:pinterest" width = "13" height = "16" style="width: 16px;height: 16px"> &nbsp;' + contact[0].pinterest + "<br>";
                                             }
                                             if(contact[0].twitter){
                                                 imageArr.push({
@@ -1381,13 +1381,13 @@ module.exports = {
                                                               path: logoPath + "appUserRegister/twitter.png",
                                                               cid: 'twitter'
                                                              });
-                                                mBody += '<img class="line" src="cid:twitter" width = "13px" height = "16px"> &nbsp;' + contact[0].twitter + "<br>";
+                                                mBody += '<img class="line" src="cid:twitter" width = "13" height = "16" style="width: 16px;height: 16px"> &nbsp;' + contact[0].twitter + "<br>";
                                             }
                                         }
 
 
                                     mBody +='	<br><br><br><br><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
-                                                                        '									<img src="cid:logo" alt="" class="CToWUd"  width="100" > <br>Powered by <a target="_blank" href="https://www.otenro.com"> www.otenro.com </a></td>'+
+                                                                        '									<img src="cid:logo" alt="" class="CToWUd"  width="100" style="width: 100px"> <br>Powered by <a target="_blank" href="https://www.otenro.com"> www.otenro.com </a></td>'+
                                                                         '								</tr>				</tr></table><div class="footer" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; clear: both; color: #999; margin: 0; padding: 20px;"> '+
                                         '					<table width="100%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> ' +
                                         '						</tr></table></div></div>'+
