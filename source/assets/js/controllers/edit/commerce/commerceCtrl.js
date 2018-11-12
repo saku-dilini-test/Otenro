@@ -213,6 +213,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
             enableGridMenu: true,
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
+            rowTemplate: rowTemplate(),
             columnDefs: [
                 // {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate'},
@@ -249,6 +250,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
             enableGridMenu: true,
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
+            rowTemplate: rowTemplate(),
             columnDefs: [
                 // {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate'},
@@ -286,6 +288,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
             enableGridMenu: true,
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
+            rowTemplate: rowTemplate(),
             columnDefs: [
                 // {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate'},
