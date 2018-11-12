@@ -695,6 +695,9 @@ module.exports = {
                     var  testPath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/assets/images/thirdNavi/';
 
                     var test = [];
+                    console.log('data.item')
+                    console.log(data.item)
+                    console.log(data.item.length)
                     test.push({
                            filename: headerFileName,
                            path: headerImagePath,
@@ -723,18 +726,19 @@ module.exports = {
                     }
 
 
-
+                    mapObj['orderDetails'] = '';
                     for (var j = 0; j < data.item.length; j++) {
                         console.log('variant ---------------')
-                        console.log(data.item[j].variant.length)
+                        console.log(data.item[j].variant)
                         var variantsHtml = '';
-                        for(var k = 0; k < data.item.length; k++){
+                        for(var k = 0; k < data.item[j].variant.length; k++){
                             variantsHtml +=  data.item[j].variant[k].name+' : '+ data.item[j].variant[k].vType+'<br>';
                         }
-                        mapObj['orderDetails'] =
-                            '<td>'+
+
+                        mapObj['orderDetails'] +=
+                            '<tr><td>'+
                                 '<div style="display: inline-block;padding: 5px">' +
-                                    '<img src="cid:'+test[j+2].cid+'" style="width: 60px;height:60px" width="60px" height="60px">' +
+                                    '<img src="cid:'+test[j+2].cid+'" style="width: 60px;height:60px" width="60" height="60">' +
                                 '</div>' +
                                 '<div style="display: inline-block;padding: 5px;">'+
                                 'Product ID: '+data.item[j].id+'<br/>'+
@@ -746,7 +750,7 @@ module.exports = {
                             '</td>'+
                             '<td class="alignright" style="text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" align="right" valign="top">'+
                             '<br><div> '+ data.currency + '&nbsp;' + formatNumber(data.item[j].total)+'</div>' +
-                            '</td>';
+                            '</td></tr>';
                     }
 
                     if(typeof userEmail.orderConfirmedEmailImage !=='undefined'){

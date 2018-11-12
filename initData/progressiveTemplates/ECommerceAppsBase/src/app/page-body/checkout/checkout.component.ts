@@ -867,50 +867,48 @@ export class CheckoutComponent implements OnInit {
       note = note.trim();
     }
     if (this.formType == "delivery") {
-
-      if (this.user) {
+      if (this.complexForm.valid) {
+        this.orderDetails = {
+          'appId': this.appId,
+          'registeredUser': 'Unknown User',
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.complexForm.value.fName,
+          'deliverName': this.complexForm.value.fName + " " + this.complexForm.value.lName,
+          'deliveryNo': this.complexForm.value.streetNo,
+          'deliveryStreet': this.complexForm.value.streetName,
+          'deliveryCity': this.complexForm.value.city,
+          'deliveryCountry': this.complexForm.value.country,
+          'deliveryZip': this.complexForm.value.zip,
+          'telNumber': this.complexForm.value.phone,
+          'tax': this.payInfo.taxTotal,
+          'shippingCost': this.chkShippingCost,
+          'shippingOpt': this.payInfo.item.shippingOption,
+          'email': this.complexForm.value.email,
+          'currency': this.dataService.currency,
+          'puckupId': null,
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note,
+          'paymentType': type
+        };
+      } else if(this.user){
         this.orderDetails = {
           'appId': this.appId,
           'registeredUser': this.user.registeredUser,
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.user.name,
-          'deliverName': this.fname + " " + this.lname,
-          'deliveryNo': this.streetNumber,
-          'deliveryStreet': this.streetName,
-          'deliveryCity': this.city,
-          'deliveryCountry': this.country,
-          'deliveryZip': this.zip,
-          'telNumber': this.phone,
+          'deliverName': this.user.name + " " + this.user.lname,
+          'deliveryNo': this.user.streetNumber,
+          'deliveryStreet': this.user.streetName,
+          'deliveryCity': this.user.city,
+          'deliveryCountry': this.user.country,
+          'deliveryZip': this.user.zip,
+          'telNumber': this.user.phone,
           'tax': this.payInfo.taxTotal,
           'shippingCost': this.chkShippingCost,
           'shippingOpt': this.payInfo.item.shippingOption,
-          'email': this.payInfo.userEmail,
-          'currency': this.dataService.currency,
-          'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
-          'note': note,
-          'paymentType': type
-        };
-
-      } else {
-        this.orderDetails = {
-          'appId': this.appId,
-          'registeredUser': 'Unknown User',
-          'item': this.payInfo.cart,
-          'amount': this.payInfo.amount,
-          'customerName': this.fname,
-          'deliverName': this.fname + " " + this.lname,
-          'deliveryNo': this.streetNumber,
-          'deliveryStreet': this.streetName,
-          'deliveryCity': this.city,
-          'deliveryCountry': this.country,
-          'deliveryZip': this.zip,
-          'telNumber': this.phone,
-          'tax': this.payInfo.taxTotal,
-          'shippingCost': this.chkShippingCost,
-          'shippingOpt': this.payInfo.item.shippingOption,
-          'email': this.payInfo.userEmail,
+          'email': this.user.email,
           'currency': this.dataService.currency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
@@ -918,43 +916,45 @@ export class CheckoutComponent implements OnInit {
           'paymentType': type
         };
       }
+
+
     } else {
-      if (this.user) {
-        this.orderDetails = {
-          "appId": this.appId,
-          "registeredUser": this.user.registeredUser,
-          "item": this.payInfo.cart,
-          "amount": this.payInfo.amount,
-          "customerName": this.payInfo.item.deliverDetails.name,
-          "telNumber": this.payInfo.item.deliverDetails.number,
-          "tax": this.payInfo.taxTotal,
-          "pickupId": this.payInfo.item.pickupId,
-          "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.userEmail,
-          "currency": this.dataService.paypalCurrency,
-          "promotionCode": this.payInfo.promotionCode,
-          'note': note,
-          'paymentType': type
-        }
-      } else {
+      if (this.pickupForm.valid) {
         this.orderDetails = {
           "appId": this.appId,
           "registeredUser": 'Unknown User',
           "item": this.payInfo.cart,
           "amount": this.payInfo.amount,
-          "customerName": this.payInfo.item.deliverDetails.name,
-          "telNumber": this.payInfo.item.deliverDetails.number,
+          "customerName": this.pickupForm.value.name+" "+this.pickupForm.value.lname,
+          "telNumber": this.pickupForm.value.phone,
           "tax": this.payInfo.taxTotal,
           "pickupId": this.payInfo.item.pickupId,
           "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.item.deliverDetails.email,
+          "email": this.pickupForm.value.email,
           "currency": this.dataService.paypalCurrency,
           "promotionCode": this.payInfo.promotionCode,
           'note': note,
           'paymentType': type
         }
       }
-
+      //  else if(this.user){
+      //   this.orderDetails = {
+      //     "appId": this.appId,
+      //     "registeredUser": 'Unknown User',
+      //     "item": this.payInfo.cart,
+      //     "amount": this.payInfo.amount,
+      //     "customerName": this.payInfo.item.deliverDetails.name,
+      //     "telNumber": this.payInfo.item.deliverDetails.number,
+      //     "tax": this.payInfo.taxTotal,
+      //     "pickupId": this.payInfo.item.pickupId,
+      //     "pickupCost": this.chkPickupCost,
+      //     "email": this.payInfo.item.deliverDetails.email,
+      //     "currency": this.dataService.currency,
+      //     "promotionCode": this.payInfo.promotionCode,
+      //     'note': note,
+      //     'paymentType': 'Cash on pickup'
+      //   }
+      // }
     }
 
     this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.orderDetails, { responseType: 'text' })
@@ -1033,49 +1033,48 @@ export class CheckoutComponent implements OnInit {
     }
 
     if (this.formType == "delivery") {
-      if (this.user) {
+      if (this.complexForm.valid) {
         this.orderDetails = {
           'appId': this.appId,
-          'registeredUser': this.user.registeredUser,
+          'registeredUser': 'Unknown User',
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
-          'customerName': this.user.name,
-          'deliverName': this.fname + " " + this.lname,
-          'deliveryNo': this.streetNumber,
-          'deliveryStreet': this.streetName,
-          'deliveryCity': this.city,
-          'deliveryCountry': this.country,
-          'deliveryZip': this.zip,
-          'telNumber': this.phone,
+          'customerName': this.complexForm.value.fName,
+          'deliverName': this.complexForm.value.fName + " " + this.complexForm.value.lName,
+          'deliveryNo': this.complexForm.value.streetNo,
+          'deliveryStreet': this.complexForm.value.streetName,
+          'deliveryCity': this.complexForm.value.city,
+          'deliveryCountry': this.complexForm.value.country,
+          'deliveryZip': this.complexForm.value.zip,
+          'telNumber': this.complexForm.value.phone,
           'tax': this.payInfo.taxTotal,
           'shippingCost': this.chkShippingCost,
           'shippingOpt': this.payInfo.item.shippingOption,
-          'email': this.payInfo.userEmail,
+          'email': this.complexForm.value.email,
           'currency': this.dataService.currency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
           'note': note,
           'paymentType': 'Cash on delivery'
         };
-
-      } else {
+      } else if(this.user){
         this.orderDetails = {
           'appId': this.appId,
-          'registeredUser': 'Unknown User',
+          'registeredUser': this.user.registeredUser,
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
-          'customerName': this.fname,
-          'deliverName': this.fname + " " + this.lname,
-          'deliveryNo': this.streetNumber,
-          'deliveryStreet': this.streetName,
-          'deliveryCity': this.city,
-          'deliveryCountry': this.country,
-          'deliveryZip': this.zip,
-          'telNumber': this.phone,
+          'customerName': this.user.name,
+          'deliverName': this.user.name + " " + this.user.lname,
+          'deliveryNo': this.user.streetNumber,
+          'deliveryStreet': this.user.streetName,
+          'deliveryCity': this.user.city,
+          'deliveryCountry': this.user.country,
+          'deliveryZip': this.user.zip,
+          'telNumber': this.user.phone,
           'tax': this.payInfo.taxTotal,
           'shippingCost': this.chkShippingCost,
           'shippingOpt': this.payInfo.item.shippingOption,
-          'email': this.payInfo.userEmail,
+          'email': this.user.email,
           'currency': this.dataService.currency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
@@ -1086,44 +1085,43 @@ export class CheckoutComponent implements OnInit {
 
 
     } else {
-      if (this.user) {
-        this.orderDetails = {
-
-          "appId": this.appId,
-          "registeredUser": this.user.registeredUser,
-          "item": this.payInfo.cart,
-          "amount": this.payInfo.amount,
-          "customerName": this.payInfo.item.deliverDetails.name,
-          "telNumber": this.payInfo.item.deliverDetails.number,
-          "tax": this.payInfo.taxTotal,
-          "pickupId": this.payInfo.item.pickupId,
-          "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.userEmail,
-          "currency": this.dataService.currency,
-          "promotionCode": this.payInfo.promotionCode,
-          'note': note,
-          'paymentType': 'Cash on pickup'
-        }
-      } else {
+      if (this.pickupForm.valid) {
         this.orderDetails = {
           "appId": this.appId,
           "registeredUser": 'Unknown User',
           "item": this.payInfo.cart,
           "amount": this.payInfo.amount,
-          "customerName": this.payInfo.item.deliverDetails.name,
-          "telNumber": this.payInfo.item.deliverDetails.number,
+          "customerName": this.pickupForm.value.name+" "+this.pickupForm.value.lname,
+          "telNumber": this.pickupForm.value.phone,
           "tax": this.payInfo.taxTotal,
           "pickupId": this.payInfo.item.pickupId,
           "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.item.deliverDetails.email,
+          "email": this.pickupForm.value.email,
           "currency": this.dataService.currency,
           "promotionCode": this.payInfo.promotionCode,
           'note': note,
           'paymentType': 'Cash on pickup'
         }
       }
+      //  else if(this.user){
+      //   this.orderDetails = {
+      //     "appId": this.appId,
+      //     "registeredUser": 'Unknown User',
+      //     "item": this.payInfo.cart,
+      //     "amount": this.payInfo.amount,
+      //     "customerName": this.payInfo.item.deliverDetails.name,
+      //     "telNumber": this.payInfo.item.deliverDetails.number,
+      //     "tax": this.payInfo.taxTotal,
+      //     "pickupId": this.payInfo.item.pickupId,
+      //     "pickupCost": this.chkPickupCost,
+      //     "email": this.payInfo.item.deliverDetails.email,
+      //     "currency": this.dataService.currency,
+      //     "promotionCode": this.payInfo.promotionCode,
+      //     'note': note,
+      //     'paymentType': 'Cash on pickup'
+      //   }
+      // }
     }
-    // console.log(note);
     this.http.post(SERVER_URL + "/templatesOrder/saveOrder", (this.orderDetails), { responseType: 'text' })
       .subscribe((res) => {
         this.responce = JSON.parse(res).name;
@@ -1218,51 +1216,48 @@ export class CheckoutComponent implements OnInit {
       note = note.trim();
     }
     if (this.formType == "delivery") {
-      if (this.user) {
+      if (this.complexForm.valid) {
         this.orderDetails = {
-
+          'appId': this.appId,
+          'registeredUser': 'Unknown User',
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.complexForm.value.fName,
+          'deliverName': this.complexForm.value.fName + " " + this.complexForm.value.lName,
+          'deliveryNo': this.complexForm.value.streetNo,
+          'deliveryStreet': this.complexForm.value.streetName,
+          'deliveryCity': this.complexForm.value.city,
+          'deliveryCountry': this.complexForm.value.country,
+          'deliveryZip': this.complexForm.value.zip,
+          'telNumber': this.complexForm.value.phone,
+          'tax': this.payInfo.taxTotal,
+          'shippingCost': this.chkShippingCost,
+          'shippingOpt': this.payInfo.item.shippingOption,
+          'email': this.complexForm.value.email,
+          'currency': this.dataService.paypalCurrency,
+          'puckupId': null,
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note,
+          'paymentType': 'PayPal'
+        };
+      } else if(this.user){
+        this.orderDetails = {
           'appId': this.appId,
           'registeredUser': this.user.registeredUser,
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.user.name,
-          'deliverName': this.fname + " " + this.lname,
-          'deliveryNo': this.streetNumber,
-          'deliveryStreet': this.streetName,
-          'deliveryCity': this.city,
-          'deliveryCountry': this.country,
-          'deliveryZip': this.zip,
-          'telNumber': this.phone,
+          'deliverName': this.user.name + " " + this.user.lname,
+          'deliveryNo': this.user.streetNumber,
+          'deliveryStreet': this.user.streetName,
+          'deliveryCity': this.user.city,
+          'deliveryCountry': this.user.country,
+          'deliveryZip': this.user.zip,
+          'telNumber': this.user.phone,
           'tax': this.payInfo.taxTotal,
           'shippingCost': this.chkShippingCost,
           'shippingOpt': this.payInfo.item.shippingOption,
-          'email': this.payInfo.userEmail,
-          'currency': this.dataService.paypalCurrency,
-          'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
-          'note': note,
-          'paymentType': 'PayPal'
-        };
-
-      } else {
-        this.orderDetails = {
-
-          'appId': this.appId,
-          'registeredUser': "Unknown User",
-          'item': this.payInfo.cart,
-          'amount': this.payInfo.amount,
-          'customerName': this.fname,
-          'deliverName': this.fname + " " + this.lname,
-          'deliveryNo': this.streetNumber,
-          'deliveryStreet': this.streetName,
-          'deliveryCity': this.city,
-          'deliveryCountry': this.country,
-          'deliveryZip': this.zip,
-          'telNumber': this.phone,
-          'tax': this.payInfo.taxTotal,
-          'shippingCost': this.chkShippingCost,
-          'shippingOpt': this.payInfo.item.shippingOption,
-          'email': this.payInfo.userEmail,
+          'email': this.user.email,
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
@@ -1271,42 +1266,44 @@ export class CheckoutComponent implements OnInit {
         };
       }
 
+
     } else {
-      if (this.user) {
-        this.orderDetails = {
-          "appId": this.appId,
-          "registeredUser": this.user.registeredUser,
-          "item": this.payInfo.cart,
-          "amount": this.payInfo.amount,
-          "customerName": this.payInfo.item.deliverDetails.name,
-          "telNumber": this.payInfo.item.deliverDetails.number,
-          "tax": this.payInfo.taxTotal,
-          "pickupId": this.payInfo.item.pickupId,
-          "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.userEmail,
-          "currency": this.dataService.paypalCurrency,
-          "promotionCode": this.payInfo.promotionCode,
-          'note': note,
-          'paymentType': 'PayPal'
-        }
-      } else {
+      if (this.pickupForm.valid) {
         this.orderDetails = {
           "appId": this.appId,
           "registeredUser": 'Unknown User',
           "item": this.payInfo.cart,
           "amount": this.payInfo.amount,
-          "customerName": this.payInfo.item.deliverDetails.name,
-          "telNumber": this.payInfo.item.deliverDetails.number,
+          "customerName": this.pickupForm.value.name+" "+this.pickupForm.value.lname,
+          "telNumber": this.pickupForm.value.phone,
           "tax": this.payInfo.taxTotal,
           "pickupId": this.payInfo.item.pickupId,
           "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.item.deliverDetails.email,
+          "email": this.pickupForm.value.email,
           "currency": this.dataService.paypalCurrency,
           "promotionCode": this.payInfo.promotionCode,
           'note': note,
           'paymentType': 'PayPal'
         }
       }
+      //  else if(this.user){
+      //   this.orderDetails = {
+      //     "appId": this.appId,
+      //     "registeredUser": 'Unknown User',
+      //     "item": this.payInfo.cart,
+      //     "amount": this.payInfo.amount,
+      //     "customerName": this.payInfo.item.deliverDetails.name,
+      //     "telNumber": this.payInfo.item.deliverDetails.number,
+      //     "tax": this.payInfo.taxTotal,
+      //     "pickupId": this.payInfo.item.pickupId,
+      //     "pickupCost": this.chkPickupCost,
+      //     "email": this.payInfo.item.deliverDetails.email,
+      //     "currency": this.dataService.currency,
+      //     "promotionCode": this.payInfo.promotionCode,
+      //     'note': note,
+      //     'paymentType': 'Cash on pickup'
+      //   }
+      // }
     }
 
     this.dataService.payPalDetails = this.orderDetails;
@@ -1320,53 +1317,50 @@ export class CheckoutComponent implements OnInit {
     }
 
     if (this.formType == "delivery") {
-      if (this.user) {
+      if (this.complexForm.valid) {
         this.orderDetails = {
-
+          'appId': this.appId,
+          'registeredUser': 'Unknown User',
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.complexForm.value.fName,
+          'lastName':  this.lname,
+          'deliveryNo': this.complexForm.value.streetNo,
+          'deliveryStreet': this.complexForm.value.streetName,
+          'deliveryCity': this.complexForm.value.city,
+          'deliveryCountry': this.complexForm.value.country,
+          'deliveryZip': this.complexForm.value.zip,
+          'telNumber': this.complexForm.value.phone,
+          'tax': this.payInfo.taxTotal,
+          'shippingCost': this.chkShippingCost,
+          'shippingOpt': this.payInfo.item.shippingOption,
+          'email': this.complexForm.value.email,
+          'currency': this.dataService.paypalCurrency,
+          'puckupId': null,
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note,
+          'paymentType': 'PayHere',
+          'realHostUrl': realHostUrl,
+          'payHereMerchantId': this.payHereMID
+        };
+      } else if(this.user){
+        this.orderDetails = {
           'appId': this.appId,
           'registeredUser': this.user.registeredUser,
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName': this.user.name,
           'lastName':  this.lname,
-          'deliveryNo': this.streetNumber ? this.streetNumber : '',
-          'deliveryStreet': this.streetName ? this.streetName : '',
-          'deliveryCity': this.city ? this.city : '',
-          'deliveryCountry': this.country,
-          'deliveryZip': this.zip,
-          'telNumber': this.phone,
+          'deliveryNo': this.user.streetNumber,
+          'deliveryStreet': this.user.streetName,
+          'deliveryCity': this.user.city,
+          'deliveryCountry': this.user.country,
+          'deliveryZip': this.user.zip,
+          'telNumber': this.user.phone,
           'tax': this.payInfo.taxTotal,
           'shippingCost': this.chkShippingCost,
           'shippingOpt': this.payInfo.item.shippingOption,
-          'email': this.payInfo.userEmail,
-          'currency': this.dataService.paypalCurrency,
-          'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
-          'note': note,
-          'paymentType': 'PayHere',
-          'realHostUrl': realHostUrl,
-          'payHereMerchantId': this.payHereMID
-        };
-
-      } else {
-        this.orderDetails = {
-
-          'appId': this.appId,
-          'registeredUser': 'Unknown User',
-          'item': this.payInfo.cart,
-          'amount': this.payInfo.amount,
-          'customerName': this.fname,
-          'lastName':  this.lname,
-          'deliveryNo': this.streetNumber ? this.streetNumber : '',
-          'deliveryStreet': this.streetName ? this.streetName : '',
-          'deliveryCity': this.city ? this.city : '',
-          'deliveryCountry': this.country,
-          'deliveryZip': this.zip,
-          'telNumber': this.phone,
-          'tax': this.payInfo.taxTotal,
-          'shippingCost': this.chkShippingCost,
-          'shippingOpt': this.payInfo.item.shippingOption,
-          'email': this.payInfo.userEmail,
+          'email': this.user.email,
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
           'promotionCode': this.payInfo.promotionCode,
@@ -1376,47 +1370,25 @@ export class CheckoutComponent implements OnInit {
           'payHereMerchantId': this.payHereMID
         };
       }
-    }
-    else {
-      if (this.user) {
-        this.orderDetails = {
-          'appId': this.appId,
-          'registeredUser': this.user.registeredUser,
-          'item': this.payInfo.cart,
-          'amount': this.payInfo.amount,
-          'customerName': this.payInfo.item.deliverDetails.name,
-          'lastName':  this.payInfo.item.deliverDetails.lname,
-          'deliveryNo':  '',
-          'deliveryStreet': '',
-          'deliveryCity': '',
-          'telNumber': this.payInfo.item.deliverDetails.number,
-          'tax': this.payInfo.taxTotal,
-          'pickupId': this.payInfo.item.pickupId,
-          'pickupCost': this.chkPickupCost,
-          'email': this.payInfo.userEmail,
-          'currency': this.dataService.paypalCurrency,
-          'promotionCode': this.payInfo.promotionCode,
-          'note': note,
-          'paymentType': 'PayHere',
-          'realHostUrl': realHostUrl,
-          'payHereMerchantId': this.payHereMID
-        };
-      } else {
+
+
+    } else {
+      if (this.pickupForm.valid) {
         this.orderDetails = {
           'appId': this.appId,
           'registeredUser': 'Unknown User',
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
-          'customerName': this.payInfo.item.deliverDetails.name,
+          'customerName':  this.pickupForm.value.name+" "+this.pickupForm.value.lname,
           'lastName':  this.payInfo.item.deliverDetails.lname,
           'deliveryNo':  '',
           'deliveryStreet': '',
           'deliveryCity': '',
-          'telNumber': this.payInfo.item.deliverDetails.number,
+          'telNumber': this.pickupForm.value.phone,
           'tax': this.payInfo.taxTotal,
           'pickupId': this.payInfo.item.pickupId,
           'pickupCost': this.chkPickupCost,
-          'email': this.payInfo.item.deliverDetails.email,
+          'email': this.pickupForm.value.email,
           'currency': this.dataService.paypalCurrency,
           'promotionCode': this.payInfo.promotionCode,
           'note': note,
@@ -1425,6 +1397,24 @@ export class CheckoutComponent implements OnInit {
           'payHereMerchantId': this.payHereMID
         };
       }
+      //  else if(this.user){
+      //   this.orderDetails = {
+      //     "appId": this.appId,
+      //     "registeredUser": 'Unknown User',
+      //     "item": this.payInfo.cart,
+      //     "amount": this.payInfo.amount,
+      //     "customerName": this.payInfo.item.deliverDetails.name,
+      //     "telNumber": this.payInfo.item.deliverDetails.number,
+      //     "tax": this.payInfo.taxTotal,
+      //     "pickupId": this.payInfo.item.pickupId,
+      //     "pickupCost": this.chkPickupCost,
+      //     "email": this.payInfo.item.deliverDetails.email,
+      //     "currency": this.dataService.currency,
+      //     "promotionCode": this.payInfo.promotionCode,
+      //     'note': note,
+      //     'paymentType': 'Cash on pickup'
+      //   }
+      // }
     }
     this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails, { responseType: 'json' })
       .subscribe((orderRes: any) => {
