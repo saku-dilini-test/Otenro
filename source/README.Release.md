@@ -82,7 +82,7 @@ Step 1 - copy the key file from Otenro/source/ into local desktop change the per
 Step 2 - open the terminal and run below ssh command
 
 #ssh -i idearoiddb.pem centos@13.229.197.90
-#ssh -i liveidearoid.pem centos@18.136.104.112
+#ssh -p 22758 -i liveidearoid.pem centos@18.136.104.112
 
 AWS ssh login steps for windows users
 ------------------------------------
