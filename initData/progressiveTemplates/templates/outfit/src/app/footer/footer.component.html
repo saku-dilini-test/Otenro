@@ -67,11 +67,11 @@
           <h4 class="main-footer-header">CUSTOMER CARE HOTLINE</h4>
           <div *ngIf="webInfo?.telPhone" class="c-pad main-footer-font">Phone: {{webInfo?.telPhone}}</div>
           <div *ngIf="webInfo?.email" class="c-pad main-footer-font">Email: {{webInfo?.email}}</div>
-          <a *ngIf="isFacebookUrlExists()"  href="{{ getFacebookUrl() }}" ><span class="fa fa-facebook icons icon-sm mobile-icons main-footer-font"></span></a>
-          <a  *ngIf="isTwitterUrlExists()" href="{{ getTwitterUrl() }}"><span class="fa fa-twitter icons icon-sm mobile-icons main-footer-font"></span></a>
-          <a  *ngIf="isInstagramUrlExists()" href="{{ getInstagramrUrl() }}"><span class="fa fa-instagram icons icon-sm mobile-icons main-footer-font"></span></a>
-          <a  *ngIf="isPinterestUrlExists()"  href="{{ getPinterestrUrl() }}"><span class="fa fa-pinterest-p icons icon-sm mobile-icons main-footer-font"></span></a>
-          <a *ngIf="isLinkedInUrlExists()" href="{{ getLinkedInUrl() }}"><span class="fa fa-linkedin icons icon-sm mobile-icons main-footer-font"></span></a>
+          <a *ngIf="isFacebookUrlExists()" target="_blank"  href="{{ getFacebookUrl() }}" ><span class="fa fa-facebook icons icon-sm mobile-icons main-footer-font"></span></a>
+          <a  *ngIf="isTwitterUrlExists()" target="_blank" href="{{ getTwitterUrl() }}"><span class="fa fa-twitter icons icon-sm mobile-icons main-footer-font"></span></a>
+          <a  *ngIf="isInstagramUrlExists()" target="_blank" href="{{ getInstagramrUrl() }}"><span class="fa fa-instagram icons icon-sm mobile-icons main-footer-font"></span></a>
+          <a  *ngIf="isPinterestUrlExists()" target="_blank"  href="{{ getPinterestrUrl() }}"><span class="fa fa-pinterest-p icons icon-sm mobile-icons main-footer-font"></span></a>
+          <a *ngIf="isLinkedInUrlExists()" target="_blank" href="{{ getLinkedInUrl() }}"><span class="fa fa-linkedin icons icon-sm mobile-icons main-footer-font"></span></a>
         </div>
       </div>
     </div>
