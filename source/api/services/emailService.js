@@ -652,6 +652,40 @@ module.exports = {
                     mapObj['payementMethod'] =  data.paymentType;
                     mapObj['isShippingDetails'] = 'none';
                     mapObj['isOrderDetails'] = 'none';
+                    mapObj['isStoreDetails'] = 'none';
+                    mapObj['isFacebook'] = 'none';
+                    mapObj['isInstagram'] = 'none';
+                    mapObj['isTwitter'] = 'none';
+                    mapObj['isLinkedin'] = 'none';
+                    mapObj['isPinterest'] = 'none';
+
+                    if(data.storeDetails){
+                        mapObj['storeAddress'] = data.storeDetails.address;
+                        mapObj['storePhone'] = data.storeDetails.telPhone;
+                        mapObj['storeEmail'] = data.storeDetails.email;
+                        mapObj['storeWebsite'] = data.storeDetails.webSite;
+                        if(data.storeDetails.facebook){
+                            mapObj['storeFacebook'] = data.storeDetails.facebook;
+                            mapObj['isFacebook'] = 'initial';
+                        }
+                        if(data.storeDetails.instagram){
+                            mapObj['storeInstagram'] = data.storeDetails.instagram;
+                            mapObj['issInstagram'] = 'initial';
+                        }
+                        if(data.storeDetails.twitter){
+                            mapObj['storeTwitter'] = data.storeDetails.twitter;
+                            mapObj['isTwitter'] = 'initial';
+                        }
+                        if(data.storeDetails.linkedin){
+                            mapObj['storeLinkedin'] = data.storeDetails.linkedin;
+                            mapObj['isLinkedin'] = 'initial';
+                        }
+                        if(data.storeDetails.pinterest){
+                            mapObj['storePinterest'] = data.storeDetails.pinterest;
+                            mapObj['isPinterest'] = 'initial';
+                        }
+                    }
+
 
 
                     if(data.fulfillmentStatus == 'Successful'){
@@ -666,6 +700,9 @@ module.exports = {
                         if(userEmail.orderFulfilledEmail.order){
                             mapObj['isOrderDetails'] = 'table-row';
                         }
+                        if(userEmail.orderFulfilledEmail.storeDetails && data.storeDetails){
+                            mapObj['isStoreDetails'] = 'table-row';
+                        }
                     }else if(data.fulfillmentStatus == 'Refund'){
                         console.log("data.fulfillmentStatus == 'Refunded'")
                         headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/assets/images/email/'+userEmail.orderRefundedEmailImage;
@@ -677,6 +714,9 @@ module.exports = {
                         }
                         if(userEmail.orderRefundEmail.order){
                             mapObj['isOrderDetails'] = 'table-row';
+                        }
+                        if(userEmail.orderRefundEmail.storeDetails && data.storeDetails){
+                            mapObj['isStoreDetails'] = 'table-row';
                         }
                     }else if(data.paymentStatus == 'Successful'){
                         console.log("data.paymentStatus == 'Successful'")
@@ -690,14 +730,19 @@ module.exports = {
                         if(userEmail.orderConfirmedEmail.order){
                             mapObj['isOrderDetails'] = 'table-row';
                         }
+                        console.log("userEmail.orderConfirmedEmail.storeDetails && data.storeDetails")
+
+                        if(userEmail.orderConfirmedEmail.storeDetails && data.storeDetails){
+                            mapObj['isStoreDetails'] = 'table-row';
+                        }
                     }
 
                     var  testPath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/assets/images/thirdNavi/';
 
                     var test = [];
                     console.log('data.item')
-                    console.log(data.item)
-                    console.log(data.item.length)
+                    // console.log(data.item)
+                    // console.log(data.item.length)
                     test.push({
                            filename: headerFileName,
                            path: headerImagePath,
@@ -707,6 +752,51 @@ module.exports = {
                            filename: "otenro.png",
                            path: logoPath,
                            cid: 'logo' // should be as unique as possible
+                          },
+                          {
+                           filename: "address.png",
+                           path:  approot + '/assets/images/address.png',
+                           cid: 'address' // should be as unique as possible
+                          },
+                          {
+                           filename: "phone.png",
+                           path:  approot + '/assets/images/phone.png',
+                           cid: 'phone' // should be as unique as possible
+                          },
+                          {
+                           filename: "email.png",
+                           path:  approot + '/assets/images/email.png',
+                           cid: 'email' // should be as unique as possible
+                          },
+                          {
+                           filename: "website.png",
+                           path:  approot + '/assets/images/website.png',
+                           cid: 'website' // should be as unique as possible
+                          },
+                          {
+                           filename: "facebook.png",
+                           path:  approot + '/assets/images/facebook.png',
+                           cid: 'facebook' // should be as unique as possible
+                          },
+                          {
+                           filename: "instagram.png",
+                           path:  approot + '/assets/images/instagram.png',
+                           cid: 'instagram' // should be as unique as possible
+                          },
+                          {
+                           filename: "twitter.png",
+                           path:  approot + '/assets/images/twitter.png',
+                           cid: 'twitter' // should be as unique as possible
+                          },
+                          {
+                           filename: "linkedin.png",
+                           path:  approot + '/assets/images/linkedin.png',
+                           cid: 'linkedin' // should be as unique as possible
+                          },
+                          {
+                           filename: "pinterest.png",
+                           path:  approot + '/assets/images/pinterest.png',
+                           cid: 'pinterest' // should be as unique as possible
                           });
 
                     for(var i =0;i<data.item.length;i++){
@@ -726,10 +816,11 @@ module.exports = {
                     }
 
 
+
                     mapObj['orderDetails'] = '';
                     for (var j = 0; j < data.item.length; j++) {
                         console.log('variant ---------------')
-                        console.log(data.item[j].variant)
+                        // console.log(data.item[j].variant)
                         var variantsHtml = '';
                         for(var k = 0; k < data.item[j].variant.length; k++){
                             variantsHtml +=  data.item[j].variant[k].name+' : '+ data.item[j].variant[k].vType+'<br>';
@@ -738,7 +829,7 @@ module.exports = {
                         mapObj['orderDetails'] +=
                             '<tr><td>'+
                                 '<div style="display: inline-block;padding: 5px">' +
-                                    '<img src="cid:'+test[j+2].cid+'" style="width: 60px;height:60px" width="60" height="60">' +
+                                    '<img src="cid:'+test[j+11].cid+'" style="width: 60px;height:60px" width="60" height="60">' +
                                 '</div>' +
                                 '<div style="display: inline-block;padding: 5px;">'+
                                 'Product ID: '+data.item[j].id+'<br/>'+
@@ -755,7 +846,7 @@ module.exports = {
 
                     if(typeof userEmail.orderConfirmedEmailImage !=='undefined'){
                         console.log('User email ------------------------------------')
-                        console.log(userEmail)
+                        // console.log(userEmail)
                         var  headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderConfirmedEmailImage;
 
                         var emailBody = "";
@@ -771,7 +862,7 @@ module.exports = {
                             console.log("mapObj **************************************** ")
                             console.log(mapObj)
 
-                            var replaceMailBody = mailbody.replace(/emailHeader|deliverName|deliveryNo|deliveryStreet|deliveryCity|deliveryCountry|shippingOpt|shippingCost|orderNumber|subTotal|currency|orderTax|orderTotal|payementMethod|orderDetails|pickupLocationName|pickupNumber|pickupStreetAddress|pickupCity|pickupCountry|pickupPostalCode|pickupCost|isShippingDetails|isOrderDetails/g, function(matched){
+                            var replaceMailBody = mailbody.replace(/emailHeader|deliverName|deliveryNo|deliveryStreet|deliveryCity|deliveryCountry|shippingOpt|shippingCost|orderNumber|subTotal|currency|orderTax|orderTotal|payementMethod|orderDetails|pickupLocationName|pickupNumber|pickupStreetAddress|pickupCity|pickupCountry|pickupPostalCode|pickupCost|isShippingDetails|isOrderDetails|storeAddress|storePhone|storeEmail|storeWebsite|storeFacebook|storeInstagram|storeTwitter|storeLinkedin|storePinterest|isStoreDetails|isFacebook|isInstagram|isTwitter|isLinkedin|isPinterest/g, function(matched){
                                 return mapObj[matched];
                             });
 

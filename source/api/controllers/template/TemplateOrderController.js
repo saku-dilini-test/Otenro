@@ -66,6 +66,8 @@ module.exports = {
     },
 
     saveOrder : function(req,res) {
+        console.log("save order")
+        // console.log(req.body)
         var execute = this;
         var data = req.body;
         var save = true;
@@ -134,12 +136,21 @@ module.exports = {
                                     if (userEmail) {
                                         order.fromEmail = userEmail.fromEmail;
                                     }
-                                    sentMails.sendOrderEmail(order, function (err, msg) {
-                                        sails.log.info(err);
+                                    ApplicationContactUs.findOne({ appId: order.appId }).exec(function (err, storeDetails) {
                                         if (err) {
                                             return res.send(500);
                                         }
-                                    });
+                                        console.log("storedetails ...............................")
+                                        // console.log(storeDetails)
+                                        order['storeDetails'] = storeDetails;
+                                        sentMails.sendOrderEmail(order, function (err, msg) {
+                                            sails.log.info(err);
+                                            if (err) {
+                                                return res.send(500);
+                                            }
+                                        });
+                                    })
+
                                 });
                             });
 
