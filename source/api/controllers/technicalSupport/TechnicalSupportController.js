@@ -17,19 +17,26 @@ var server  = email.server.connect({
     ssl:     true
 });
 
-    // create reusable transporter object using the default SMTP transport
- var transporter = nodemailer.createTransport({
+if(config.USE_SENDMAIL){
+    transporter = nodemailer.createTransport({
+        sendmail: true,
+        newline: 'unix',
+        path: '/usr/sbin/sendmail'
+    });
+}else{
+    transporter = nodemailer.createTransport({
         host: 'appmaker.lk',
         port: 465,
         secure: true, // true for 465, false for other ports
         auth: {
-            user: 'support@appmaker.lk', // generated ethereal user
-            pass: 'Jza12BTL36'  // generated ethereal password
+            user: 'no_reply_ideadroid@appmaker.lk', // generated ethereal user
+            pass: 'FoRH7DAyKG' // generated ethereal password
         },
         tls:{
-                rejectUnauthorized: false
-            }
+            rejectUnauthorized: false
+        }
     });
+}
 
  // Response messages
  var ERROR = { message: 'ERROR'},
@@ -475,14 +482,18 @@ module.exports = {
     setComments : function(req,res){
 
         var operator = null;
+        var userCode="";
         var commentData;
 
-            User.find({id:req.userId}).exec(function(err, user){
+            User.findOne({id:req.userId}).exec(function(err, user){
                 if(err) res.send(err);
                 else{
                     console.log(config.USER_ROLES.OPERATOR.code);
-                    if(user[0].userRole[0] == config.USER_ROLES.OPERATOR.code){
-                        operator = user[0].operator;
+                    if(user.userRole.includes(config.USER_ROLES.OPERATOR.code)){
+                        operator = user.operator;
+                        userCode = user.operator;
+                    }else if(user.userRole.includes(config.USER_ROLES.SUPER_ADMIN.code)){
+                        userCode = "Admin";
                     }
 
                     commentData = {
@@ -495,6 +506,45 @@ module.exports = {
                     Comments.create(commentData).exec(function(err,result){
                         if (err) res.send(err);
                         else{
+                        Application.findOne({id:result.appId}).exec(function (err, application) {
+                            if(err){
+                                res.send(err);
+                            }
+                                User.findOne({id:application.userId}).exec(function (err, userData) {
+                                    if (err) {
+                                        res.send(err);
+                                    }
+                                    var checkName = "";
+                                    if(user.firstName && user.lastName){
+                                        checkName = user.firstName + " " + user.lastName;
+                                    }
+                                    else{
+                                        if(user.firstName){
+                                            checkName = user.firstName;
+                                        }
+                                        else if(user.lastName){
+                                            checkName = user.lastName;
+                                        }
+                                    }
+                                    var emailSubject = "Comment from: " + userCode;
+                                    var emailBody = "<html>Content : " + checkName + " has posted the following comment on " + application.appName + ":<br>" + 
+                                                    result.comment + "<html>"
+
+                                    mailOptions = {
+                                            from :  config.IDEABIZ_SUPER_ADMIN_EMAIL,
+                                            to   :  userData.email,
+                                            subject : emailSubject,
+                                            html : emailBody
+                                    }
+                                    transporter.sendMail(mailOptions, (error, info) => {
+                                        if (error) {
+                                            console.log(error);
+                                        }
+                                        console.log('Message sent: %s',  userData.email);
+                                 });
+                            });
+
+                        })
                             res.send("ok");
                         }
                     });
