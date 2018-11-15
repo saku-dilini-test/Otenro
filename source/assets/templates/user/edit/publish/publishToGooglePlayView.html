@@ -110,11 +110,14 @@
                                 <input class="input-shadow-border"
                                        type="text"
                                        ng-pattern="/^[a-zA-Z]*$/"
-                                       name="keyword" maxlength="{{keywordLength}}"  ng-model="playStoreData.keyword" required ng-disabled="playStoreData.isAppSubmitted"/>
+                                       name="keyword" minlength="2" maxlength="{{keywordLength}}"  ng-model="playStoreData.keyword" required ng-disabled="playStoreData.isAppSubmitted"/>
                                     <br>
                                 <span class="information">Characters left: {{keywordLength - playStoreData.keyword.length}} </span>
-                                <span class="error help-block" ng-show="generalForm.keyword.$dirty && generalForm.keyword.$invalid">
-                                        Only letters are allowed
+                                <span class="error help-block" ng-show="generalForm.keyword.$error.minlength">
+                                    The keyword should contain at least two characters.
+                                </span>
+                                <span class="error help-block" ng-show=" !(generalForm.keyword.$error.minlength) && (generalForm.keyword.$dirty && generalForm.keyword.$invalid)">
+                                     Only letters are allowed
                                 </span>
                                 </fieldset>
                         </div>
