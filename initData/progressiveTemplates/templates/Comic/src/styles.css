@@ -984,3 +984,9 @@ p img{
 .desc p:last-child{
   margin-bottom: 15% !important;
 }
+
+.header-size{
+  margin-botton: 2px;
+  overflow: hidden;
+  height : 24px; 
+}
