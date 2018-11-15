@@ -82,7 +82,7 @@ module.exports.cron = {
      * Use to Stop the buildAPKs cron for Apps
      */
     stopBuildAPKs:{
-        schedule: '0 0 2 * * *',
+        schedule: '0 0 3 * * *',
         onTick: function () {
             if(sails){
                 sails.log.debug('cron: Stopped buildAPKs job @ %s', dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"));
@@ -94,7 +94,7 @@ module.exports.cron = {
      * Use to Start the buildAPKs cron for Apps
      */
     startBuildAPKs:{
-        schedule: '0 0 1 * * *',
+        schedule: '0 0 2 * * *',
         onTick: function () {
             if(sails){
                 sails.log.debug('cron: Started buildAPKs job @ %s', dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"));
