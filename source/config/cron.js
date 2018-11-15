@@ -1,6 +1,9 @@
 /**
  * Created by Praveen on 5/15/17.
+ * ['seconds', 'minutes', 'hours', 'dayOfMonth', 'month', 'dayOfWeek']
+ * schedule: '* * * * * *'
  */
+var dateFormat = require('dateformat');
 
 module.exports.cron = {
 
@@ -60,6 +63,43 @@ module.exports.cron = {
 
             }
         }
+    },
+    /**
+     * Use to build APKs for Apps
+     * Will run this each and every 5 mins
+     */
+    buildAPKs:{
+        schedule: '0 */5 * * * *',
+        onTick: function () {
+            if(sails){
+                var editCtrl = require('../api/controllers/EditController.js');
+                editCtrl.buildNextApk();
+            }
+        },
+        start: false
+    },
+    /**
+     * Use to Stop the buildAPKs cron for Apps
+     */
+    stopBuildAPKs:{
+        schedule: '0 0 14 * * *',
+        onTick: function () {
+            if(sails){
+                sails.log.debug('cron: Stopped buildAPKs job @ %s', dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"));
+                sails.hooks.cron.jobs.buildAPKs.stop();
+            }
+        }
+    },
+    /**
+     * Use to Start the buildAPKs cron for Apps
+     */
+    startBuildAPKs:{
+        schedule: '0 0 13 * * *',
+        onTick: function () {
+            if(sails){
+                sails.log.debug('cron: Started buildAPKs job @ %s', dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"));
+                sails.hooks.cron.jobs.buildAPKs.start();
+            }
+        }
     }
-
 };
