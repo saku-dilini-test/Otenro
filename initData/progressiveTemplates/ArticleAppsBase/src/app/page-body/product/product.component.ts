@@ -53,22 +53,6 @@ export class ProductComponent implements OnInit {
         this.dataService.initialImageCount =  arr?  arr.length : 0;
     }
 
-
-    ngAfterViewInit() {
-      let api = $("#gallery").unitegallery({
-        theme_enable_text_panel: false,
-        gallery_background_color: "rgba(0,0,0,0)",
-        slider_textpanel_bg_color:"#000000",
-        slider_textpanel_bg_opacity: 0,
-      });
-
-      this.setCarousalControlls();
-
-      api.on("item_change",(num, data) => {
-        this.setCarousalControlls();
-      });
-    }
-
     setCarousalControlls() {
         $(".ug-zoompanel").css('display', 'none');
         $(".ug-default-button-hidepanel").css('display', 'none');
