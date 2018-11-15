@@ -23,6 +23,7 @@ export class ProductComponent implements OnInit {
     private appId = (<any>data).appId;
     private userId = (<any>data).userId;
     Data;
+    api;
     private isBuyBtnDisable: boolean;
     private parentobj = { cartItems: [], cartSize: 0, totalPrice: 0 };
     private lockBuyButton = false;
@@ -82,6 +83,7 @@ export class ProductComponent implements OnInit {
                   this.catName = article.title;
                   this.title.changeTitle(this.catName);
                   this.Data = article;
+ 		          this.initializeGallery();
                   this.productService.createArticleViewDataInfo(this.catName).subscribe(data => {
                       // Read the result field from the JSON response.
                       this.results = data;
@@ -130,7 +132,23 @@ export class ProductComponent implements OnInit {
         }
         return id;
     }
+    initializeGallery = () => {
+        $('#gallery div').remove();
+
+        setTimeout(() => {
+            this.setGallery();
+        }, 1);
+    }
+
+    setGallery = () => {
+        //remove all the rendered div tags and just keep the img tags for angular
+        this.api = $("#gallery").unitegallery({
+            theme_enable_text_panel: false,
+            gallery_background_color: "rgba(0,0,0,0)",
+            slider_textpanel_bg_color:"#000000",
+            slider_textpanel_bg_opacity: 0,
+        });
+    }
 
 
 }
-

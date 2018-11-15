@@ -73,9 +73,9 @@ export class HomepageComponent implements OnInit {
 
     this.isSubscribing = false;
 
-    if (!this.isFromCMSAppView) {
+     if (!this.isFromCMSAppView) {
       this.getDeviceUUID();
-    }
+     }
 
     this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
