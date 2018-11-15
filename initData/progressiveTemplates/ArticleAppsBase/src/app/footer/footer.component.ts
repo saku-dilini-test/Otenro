@@ -46,7 +46,7 @@ export class FooterComponent implements OnInit{
     });
 
     this.messageService.getMessage().subscribe(data => {
-      console.log('messageService.getMessage Footer component=>', data);
+      // console.log('messageService.getMessage Footer component=>', data);
       if (data.subscription) {
         this.dataService.subscriptionStatus = data.subscription.subscriptionStatus;
       } else {

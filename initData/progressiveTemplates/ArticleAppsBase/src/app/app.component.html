@@ -1,4 +1,9 @@
-<app-header></app-header>
-<app-page-body></app-page-body>
-<app-footer></app-footer>
-<ng4-loading-spinner [threshold]="2000"  [loadingText]="'Loading...'" [zIndex]="9999"> </ng4-loading-spinner>
+<span  [ngStyle]="{'display': isImagesLoaded ? 'block' : (!isImagesLoaded ? 'none' : null) }">
+	<app-header></app-header>
+	<app-page-body></app-page-body>
+	<app-footer></app-footer>
+	<ng4-loading-spinner [threshold]="2000"  [loadingText]="'Loading...'" [zIndex]="9999"> </ng4-loading-spinner>
+</span>
+<div class="spinnerSplashParent" [ngStyle]="{'display':!isImagesLoaded ? 'block' : (isImagesLoaded ? 'none' : null) }">
+	<img class="spinnerSplash" src="./assets/images/loader-white1.gif">
+</div>

@@ -27,7 +27,8 @@ import {SMSService} from "./services/cordova-plugin-services/sms.service";
 import {CordovaPluginFirebaseService} from "./services/cordova-plugin-services/cordova-plugin-firebase.service";
 import {CordovaPluginDeviceService} from "./services/cordova-plugin-services/cordova-plugin-device.service";
 import {MessageService} from "./services/message.service";
-
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,8 @@ import {MessageService} from "./services/message.service";
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBanVJ_9ViC-HeJruJzhetGXUERg1eYXag'
     }),
-    Ng4LoadingSpinnerModule.forRoot()
+    Ng4LoadingSpinnerModule.forRoot(),
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [PagebodyServiceModule,
     CategoriesService,

@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 import { TitleService } from '../../services/title.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ProductsService } from '../../services/products/products.service';
+import {MessageService} from "../../services/message.service";
 declare let $:any;
 @Component({
     selector: 'app-product',
@@ -32,11 +33,24 @@ export class ProductComponent implements OnInit {
     private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
     results:any;
-    constructor(private productService: ProductsService, private sanitizer: DomSanitizer, private dataService: PagebodyServiceModule,
-        private router: ActivatedRoute, private route: Router, private title: TitleService) {
+    private loadImageCount:number = 0;
+    constructor(private productService: ProductsService,
+                private sanitizer: DomSanitizer,
+                private dataService: PagebodyServiceModule,
+                private router: ActivatedRoute,
+                private route: Router,
+                private title: TitleService,
+                private messageService: MessageService) {
 
         this.Data = this.dataService.data;
+        const arr = this.Data.tempImageArray.filter(arr =>{
+              if(arr.img != null){
+                return arr
+              }
+          });
         this.title.setLocation('product');
+        this.messageService.sendMessage({loadImageCount:-1});
+        this.dataService.initialImageCount =  arr?  arr.length : 0;
     }
 
 
@@ -69,7 +83,7 @@ export class ProductComponent implements OnInit {
           this.dataService.catId = catId;
           this.productService.getProducts().subscribe(articles => {
               console.log("<<<<<<<<Articles>>>>>>>>>");
-              console.log(articles);
+              // console.log(articles);
               var article = null;
               for (let i = 0; i < articles.length; i++) {
                 console.log("articles[i].id=>" + articles[i].id)
@@ -83,6 +97,12 @@ export class ProductComponent implements OnInit {
                   this.catName = article.title;
                   this.title.changeTitle(this.catName);
                   this.Data = article;
+                  const arr = this.Data.tempImageArray.filter(arr =>{
+                      if(arr.img != null){
+                        return arr
+                      }
+                  });
+                  this.dataService.initialImageCount =  arr?  arr.length : 0;
  		          this.initializeGallery();
                   this.productService.createArticleViewDataInfo(this.catName).subscribe(data => {
                       // Read the result field from the JSON response.
@@ -94,10 +114,12 @@ export class ProductComponent implements OnInit {
 
               } else {
                 console.log("Article not found for the catId: " + catId + " articleId: " + articleId);
+                this.Data.tempImageArray = 0;
               }
             },
             error => {
               console.log('Error shop service');
+               this.Data.tempImageArray = 0;
             });
         }
     }
@@ -150,5 +172,8 @@ export class ProductComponent implements OnInit {
         });
     }
 
-
+    imageLoaded(e){
+      this.loadImageCount += 1;
+      this.messageService.sendMessage({loadImageCount:this.loadImageCount});
+    }
 }

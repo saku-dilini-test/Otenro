@@ -6,7 +6,7 @@
                     <div class="col-xs-6 header-fix" (click)="navigateShop('shop',results[i].id,results[i].name,results[i].imageUrl)"
                         *ngIf="results[i]">
                         <div class="img-focus">
-                            <img src="{{imageUrl}}/{{results[i].imageUrl}}">
+                            <img src="{{imageUrl}}/{{results[i].imageUrl}}" (load)="imageLoaded($event)">
                         </div>
                         <div class="name-size main-header-font name">
                             {{results[i].name}}
@@ -15,7 +15,7 @@
                     <div class="col-xs-6 header-fix" (click)="navigateShop('shop',results[i+1].id,results[i+1].name,results[i+1].imageUrl)"
                         *ngIf="results[i+1]">
                         <div class="img-focus">
-                            <img src="{{imageUrl}}/{{results[i+1].imageUrl}}">
+                            <img src="{{imageUrl}}/{{results[i+1].imageUrl}}" (load)="imageLoaded($event)">
                         </div>
                         <div class="name-size main-header-font name">
                             {{results[i+1].name}}

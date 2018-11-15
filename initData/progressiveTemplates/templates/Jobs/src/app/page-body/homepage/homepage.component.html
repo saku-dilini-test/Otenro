@@ -4,7 +4,7 @@
             <div class="remove-margin row" *ngFor="let category of results">
                 <div class="col" >
                     <div class="card-size clean-card text-center" (click)="navigateShop('shop',category.id,category.name,category.imageUrl)" >
-                        <img src="{{imageUrl}}/{{category.imageUrl}}" class="img-size card-img-top w-100 d-block" width=100%/>
+                        <img src="{{imageUrl}}/{{category.imageUrl}}" class="img-size card-img-top w-100 d-block" width=100% (load)="imageLoaded($event)"/>
                         <div class="card-color card-body info">
                             <div class="main-header-font name">{{category.name}} </div>
                         </div>

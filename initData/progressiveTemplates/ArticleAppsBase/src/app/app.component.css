@@ -2,3 +2,18 @@ app-page-body{
   min-height: calc(100vh - 382px);
   display: block;
 }
+ .spinnerSplash{
+      position: absolute;
+      top: calc(50% - 12px);
+      left: calc(50% - 12px);
+          /*width: 100%;*/
+}
+
+.spinnerSplashParent{
+    width: 100vw;
+    background: #fff;
+    height: 100vh;
+    position: absolute;
+    z-index: 1041;
+    opacity: 1;
+}

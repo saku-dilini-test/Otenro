@@ -120,7 +120,7 @@ export class HeaderComponent implements OnInit {
     });
 
     this.messageService.getMessage().subscribe(data => {
-      console.log('messageService.getMessage in Header Component =>', data);
+      // console.log('messageService.getMessage in Header Component =>', data);
       if (data.subscription) {
         this.dataService.subscriptionStatus = data.subscription.subscriptionStatus;
       } else {

@@ -39,4 +39,8 @@ export class PagebodyServiceModule {
 
   };
 
+
+  initialImageCount:number = 0;
+  isImagesLoaded:boolean = false;
+
 }

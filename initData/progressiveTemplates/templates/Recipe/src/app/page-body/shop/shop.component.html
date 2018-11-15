@@ -1,10 +1,10 @@
 <div class="page-container">
   <div class="bloc bgc-white l-bloc" id="bloc-0">
-      <img class="cat-image" src="{{imageUrl1}}/{{catImage}}" width="100%">
+      <img class="cat-image" src="{{imageUrl1}}/{{catImage}}" width="100%" (load)="imageLoaded($event)">
       <div class="text-center grey margin-l main-content-font"  *ngIf="results">{{results.length}} Pages</div>
 
       <div class="margin prod" *ngFor="let article of results" (click)="navigateProd('product',article)">
-          <img src="{{imageUrl}}/{{article.tempImageArray[0].img}}" width="100%">
+          <img src="{{imageUrl}}/{{article.tempImageArray[0].img}}" width="100%" (load)="imageLoaded($event)">
           <div class="main-header-font name">{{article.title}}</div>
       </div>
   </div>

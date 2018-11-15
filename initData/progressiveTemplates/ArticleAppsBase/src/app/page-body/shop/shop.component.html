@@ -3,7 +3,7 @@
 
     <div class="list-group">
       <a class="list-group-item flex-row" *ngFor="let article of results;let i = index" (click)="navigateProd('product',article)">
-        <img src="{{imageUrl}}/{{article.tempImageArray[0].img}}">
+        <img src="{{imageUrl}}/{{article.tempImageArray[0].img}}" (load)="imageLoaded($event)">
         <div>
           <h5 class="list-group-item-heading main-header-font">{{article.title}}</h5>
           <p class="list-group-item-text main-content-font">{{description[i]}}</p>

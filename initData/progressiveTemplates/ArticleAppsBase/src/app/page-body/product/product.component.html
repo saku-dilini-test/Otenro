@@ -1,15 +1,15 @@
 <div class="page-container">
   <div id="gallery" style="display:none;">
     <ng-template *ngFor="let item of Data.tempImageArray" [ngIf]="item">
-      <img  *ngIf="item.videoUrl == null" alt="{{item.name}}"
+      <img  *ngIf="item.videoUrl == null" alt="{{item.name}}" style="display: none"
             src="{{imageUrl}}/{{item.img}}"
-            [attr.data-image]="imageUrl/item.img">
+            [attr.data-image]="imageUrl/item.img" (load)="imageLoaded($event)">
 
-      <img  *ngIf="item.videoUrl != null" alt="{{item.name}}"
+      <img  *ngIf="item.videoUrl != null" alt="{{item.name}}"  style="display: none"
             data-type="youtube"
             [src]="item.img ? imageUrl+'/'+item.img : ''"
             [attr.data-image]="item.img ? imageUrl+'/'+item.img : ''"
-            [attr.data-videoid]="checkUrl(item.videoUrl)">
+            [attr.data-videoid]="checkUrl(item.videoUrl)" (load)="imageLoaded($event)">
     </ng-template>
   </div>
 
