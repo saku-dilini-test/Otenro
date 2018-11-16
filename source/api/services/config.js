@@ -202,7 +202,7 @@ module.exports = {
         'APP_NOT_SUBMITTED': 'The service is currently not available on the network.',
         'APP_DELETED': 'The service is no longer available.',
         'USER_UNSUBSCRIBED': 'You got unsubscribed from this service',
-        'INSUFFICIENT_BALANCE': 'You have no sufficient balance.Please recharge and try again.',
+        'INSUFFICIENT_BALANCE': 'Sorry, your subscription is currently inactive due to insufficient balance. Please reload and try again.',
         'SUCCESSFULLY_RENEWED': 'Successfully renewed your service.'
     },
 

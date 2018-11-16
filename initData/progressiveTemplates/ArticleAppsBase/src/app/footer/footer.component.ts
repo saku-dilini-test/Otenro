@@ -121,7 +121,7 @@ export class FooterComponent implements OnInit{
 
   smsErrorUnRegistrationCallback(error: any) {
     console.log("smsErrorUnRegistrationCallback in Footer Component: " + error);
-    footerCmp.dataService.displayMessage = 'Sorry, you do not have enough credit to send the sms to unsubscribe from the service';
+    footerCmp.dataService.displayMessage = 'Sorry, you could not be unsubscribe from the service at this time. Please try again after some time.';
     $(() => {
       $('#myAccountModelfooter').modal('hide');
       $('#appStatusModel').modal('show');

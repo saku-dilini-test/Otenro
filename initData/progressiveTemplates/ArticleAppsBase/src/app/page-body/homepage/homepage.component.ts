@@ -298,7 +298,7 @@ export class HomepageComponent implements OnInit {
 
   smsErrorRegistrationCallback(error: any) {
     console.log("smsErrorRegistrationCallback in homepage Component: " + error);
-    homePageCmp.dataService.displayMessage = 'Sorry, you do not have enough credit to subscribe to the service';
+    homePageCmp.dataService.displayMessage = 'You have insufficient balance. Please reload and try again.';
     $(() => {
       $('#registerModelhome').modal('hide');
       $('#appStatusModel').modal('show');
