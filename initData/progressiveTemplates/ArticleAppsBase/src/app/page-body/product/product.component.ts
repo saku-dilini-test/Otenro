@@ -43,11 +43,7 @@ export class ProductComponent implements OnInit {
                 private messageService: MessageService) {
 
         this.Data = this.dataService.data;
-        const arr = this.Data.tempImageArray.filter(arr =>{
-              if(arr.img != null){
-                return arr
-              }
-          });
+        const arr = this.Data.tempImageArray;
         this.title.setLocation('product');
         this.messageService.sendMessage({loadImageCount:-1});
         this.dataService.initialImageCount =  arr?  arr.length : 0;
@@ -81,11 +77,7 @@ export class ProductComponent implements OnInit {
                   this.catName = article.title;
                   this.title.changeTitle(this.catName);
                   this.Data = article;
-                  const arr = this.Data.tempImageArray.filter(arr =>{
-                      if(arr.img != null){
-                        return arr
-                      }
-                  });
+                  const arr = this.Data.tempImageArray;
                   this.dataService.initialImageCount =  arr?  arr.length : 0;
  		          this.initializeGallery();
                   this.productService.createArticleViewDataInfo(this.catName).subscribe(data => {
@@ -157,6 +149,7 @@ export class ProductComponent implements OnInit {
     }
 
     imageLoaded(e){
+      // console.log(e);
       this.loadImageCount += 1;
       this.messageService.sendMessage({loadImageCount:this.loadImageCount});
     }

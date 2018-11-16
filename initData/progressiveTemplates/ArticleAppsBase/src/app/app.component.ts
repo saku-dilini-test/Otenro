@@ -35,7 +35,7 @@ export class AppComponent {
       });
 
       this.messageService.getMessage().subscribe(value =>{
-        if(this.dataService.initialImageCount === value.loadImageCount){
+        if(this.dataService.initialImageCount <= value.loadImageCount){
           this.dataService.isImagesLoaded = true;
           this.isImagesLoaded = this.dataService.isImagesLoaded;
         }else if(value.loadImageCount){
