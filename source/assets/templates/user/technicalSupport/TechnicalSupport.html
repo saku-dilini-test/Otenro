@@ -180,8 +180,8 @@
                     <form class="allItems" novalidate>
                     <table class="table">
                         <thead class="obl-dashboard-apps">
-                        <th>ID</th>
                         <th>Name</th>
+                        <th>Contact Number</th>
                         <th>Email</th>
                         <th>Created Date</th>
                         <th>Last login</th>
@@ -189,8 +189,8 @@
                         </thead>
                            <tbody>
                            <tr ng-repeat="app in userList">
-                            <td> {{app.id}} </td>
-                            <td>{{app.firstName}} {{app.lastName}}</td>
+                               <td>{{app.firstName}} {{app.lastName}}</td>
+                               <td> {{app.mobile}} </td>
                                <td> {{app.email}} </td>
                                <td> {{app.createdAt | date:'yyyy-MM-dd HH:mm:ss' }} </td>
                                <td> {{app.lastLoginTime | date:'yyyy-MM-dd HH:mm:ss'}} </td>
