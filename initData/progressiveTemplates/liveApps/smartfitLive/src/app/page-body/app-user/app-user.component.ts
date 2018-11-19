@@ -63,8 +63,8 @@ export class AppUserComponent implements OnInit {
       'city': new FormControl(this.userData.city),
       'zip': new FormControl(this.userData.zip, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9\-]+\s)*[a-zA-Z0-9\-]+$/)])),
       'password': new FormControl('',Validators.compose([Validators.required])),
-      'passwordNew': new FormControl('',Validators.compose([Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)])),
-      'passwordConfirm': new FormControl('',Validators.compose([Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)])),
+      'passwordNew': new FormControl('',Validators.compose([Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/)])),
+      'passwordConfirm': new FormControl('',Validators.compose([Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/)])),
       'country': new FormControl(this.userData.country)
 
     },{validator: this.checkIfMatchingPasswords('passwordNew', 'passwordConfirm')});

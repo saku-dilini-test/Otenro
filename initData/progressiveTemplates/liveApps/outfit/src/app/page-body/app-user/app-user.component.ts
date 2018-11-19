@@ -23,7 +23,7 @@ export class AppUserComponent implements OnInit {
 
   private selectedCountry;
   private country = [];
-  countries;
+  countries = [];
   passwordEditable;
   private userData;
   isEmailDuplicate:boolean =false;
@@ -49,8 +49,8 @@ export class AppUserComponent implements OnInit {
       'city': new FormControl(this.userData.city, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)])),
       'zip': new FormControl(this.userData.zip, Validators.compose([Validators.pattern(/^([a-zA-Z0-9\-]+\s)*[a-zA-Z0-9\-]+$/)])),
       'password': new FormControl('',Validators.compose([Validators.required])),
-      'passwordNew': new FormControl('',Validators.compose([Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)])),
-      'passwordConfirm': new FormControl('',Validators.compose([Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)])),
+      'passwordNew': new FormControl('',Validators.compose([Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/)])),
+      'passwordConfirm': new FormControl('',Validators.compose([Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/)])),
       'country': new FormControl(null)
 
     },{validator: this.checkIfMatchingPasswords('passwordNew', 'passwordConfirm')});
@@ -90,7 +90,6 @@ checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
 
 
   editUserDetails(user) {
-    console.log("im in");
     let userData = {
       'firstName': user.fName,
       'lastName': user.lName,
