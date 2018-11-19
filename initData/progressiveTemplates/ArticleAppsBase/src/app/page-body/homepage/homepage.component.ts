@@ -89,7 +89,11 @@ export class HomepageComponent implements OnInit {
     this.categoryService.getCategories().subscribe(data => {
       if (data.length > 0) {
         // Read the result field from the JSON response.
+
+        data.sort(function(a, b){return a.orderNo - b.orderNo});
+        // console.log(data);
         this.results = data;
+
         this.dataService.initialImageCount = data.length;
         this.dataService.searchArray = [];
         data.forEach(element => {

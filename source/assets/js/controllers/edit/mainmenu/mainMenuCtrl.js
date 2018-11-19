@@ -38,7 +38,11 @@ $scope.filesSortConfig = {
 
         $scope.saveCategoryOrder = function(arr){
             mainMenuService.updateCategoryOrder(arr).success(function(data){
-                console.log(data);
+                console.log("moved",data);
+                var urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                    + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+                mySharedService.prepForBroadcast(urlPath    );
             }).error(function(err) {
                 console.log("error update cat")
             });
@@ -661,7 +665,8 @@ $scope.filesSortConfig = {
                             toastr.error(errorMessage, 'Error!', { closeButton: true });
                         }
                     }).error(function (err) {
-                        toastr.error(err.message, 'Warning', {
+                        console.log(err)
+                        toastr.error('error', 'Warning', {
                             closeButton: true
                         });
                     });

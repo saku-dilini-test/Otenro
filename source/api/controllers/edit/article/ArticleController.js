@@ -467,7 +467,7 @@ module.exports = {
 	    });
                 res.send("success")
 
-	    console.log(categories);
+	    // console.log(categories);
 	}
 };
 

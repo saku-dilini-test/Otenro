@@ -27,8 +27,8 @@
                     <tbody ng-sortable = "filesSortConfig" >
                     <tr id ="listArr" ng-repeat="item in menuItems | orderBy: 'orderNo'">
                         <td class="sortable" >{{item.name}}</td>
-                        <td style="text-align: center; padding:15px 0;"><img style="width:20px" src="../../../images/up-arrow.svg" ng-click="moveUp(menuItems,$index)"><img style="width:20px" src="../../../images/down-arrow.svg" ng-click="moveDown(menuItems,$index)"></td>
-                        <td style="text-align: center; padding:15px 0;"><img style="width:20px" src="../../../images/edit-icon.svg" ng-click="goToEditMenuItemView(item)"></td>
+                        <td style="text-align: center; padding:15px 0;"><img style="width:20px;cursor:pointer" src="../../../images/up-arrow.svg" ng-click="moveUp(menuItems,$index)"><img style="width:20px" src="../../../images/down-arrow.svg" ng-click="moveDown(menuItems,$index)"></td>
+                        <td style="text-align: center; padding:15px 0;"><img style="width:20px;cursor:pointer" src="../../../images/edit-icon.svg" ng-click="goToEditMenuItemView(item)"></td>
                        <td style="text-align: center; padding:15px 0;">
                             <md-checkbox aria-label="{{item.id}}" ng-checked="exists(item.id, selected)" ng-click="toggleDelete(item.id, selected)"></md-checkbox>
                        </td>
