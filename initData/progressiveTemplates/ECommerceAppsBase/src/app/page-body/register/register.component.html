@@ -223,3 +223,17 @@
 <div class="col-sm-12" style="margin: 10px 0">
 	<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
  </div>
+
+<!-- Modal -->
+<div class="modal fade" id="thankyouModal" tabindex="-1" role="dialog" aria-labelledby="Thank you label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title text-center main-header-font" id="thank you title">Thank you !</h3>
+        <div class="text-center main-content-font margin-vertical">You have Successfully registered.</div>
+        <button type="button" class="btn main-button" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

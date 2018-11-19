@@ -9,13 +9,14 @@ import { FormGroup, FormControl, FormArray, NgForm } from '@angular/forms';
 import { TitleService } from '../../services/title.service';
 import { Subject } from 'rxjs/Subject';
 import { debounceTime } from 'rxjs/operator/debounceTime';
-
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+declare var $: any;
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit{
+export class RegisterComponent implements OnInit {
   // data = {};
   passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
   public appId = (<any>data).appId;
@@ -41,8 +42,13 @@ export class RegisterComponent implements OnInit{
   private _success = new Subject<string>();
   fullUrl; domainUrl;
 
-  constructor(private localStorageService: LocalStorageService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
-    private title: TitleService) {
+  constructor(private localStorageService: LocalStorageService,
+			  private http: HttpClient,
+			  private dataService: PagebodyServiceModule,
+			  private router: ActivatedRoute,
+			  private route: Router,
+			  private spinnerService: Ng4LoadingSpinnerService,
+			  private title: TitleService) {
     this.title.changeTitle("Register");
 
   }
@@ -52,6 +58,7 @@ export class RegisterComponent implements OnInit{
   }
 
   ngOnInit() {
+
     this.country.push('select a country')
     this.router.params.subscribe(params => {
       this.navigate = params['type'];
@@ -67,7 +74,6 @@ export class RegisterComponent implements OnInit{
 
 
       });
-
       this.generateDomainUrl();
   }
 
@@ -88,7 +94,7 @@ export class RegisterComponent implements OnInit{
   }
 
   signUp = function (myForm) {
-
+	this.spinnerService.show();
     if (this.selectedCountry == null || this.selectedCountry == 'select a country') {
 
       this._success.subscribe((message) => this.errorMessage = message);
@@ -96,7 +102,7 @@ export class RegisterComponent implements OnInit{
       this._success.next("Please select a country!");
       setTimeout(() => { }, 3100);
 
-    } else {
+    }else {
 
       this.fname = myForm.fname;
       this.lname = myForm.lname;
@@ -127,7 +133,8 @@ export class RegisterComponent implements OnInit{
 
       this.http.post(SERVER_URL + "/templatesAuth/register", data)
         .subscribe((res) => {
-          console.log(res);
+          // console.log(res);
+		  this.spinnerService.hide();
           if (res.message === 'success') {
 
             this._success.subscribe((message) => this.successMessage = message);
@@ -166,15 +173,20 @@ export class RegisterComponent implements OnInit{
                   this.dataService.isUserLoggedIn.check = true;
                   this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
 
-                  if (this.navigate == 'home') {
-                    this.route.navigate(['home']);
-                  } else if (this.navigate == 'cart') {
-                    this.route.navigate(['cart']);
-                  } else if (this.navigate == 'delivery') {
-                    this.route.navigate(['checkout', 'delivery']);
-                  } else {
-                    this.route.navigate(['checkout', 'pickup']);
-                  }
+					$('#thankyouModal').modal('show');
+
+					$('#thankyouModal').on('hidden.bs.modal', (e) => {
+						 if (this.navigate == 'home') {
+							this.route.navigate(['home']);
+						  } else if (this.navigate == 'cart') {
+							this.route.navigate(['cart']);
+						  } else if (this.navigate == 'delivery') {
+							this.route.navigate(['checkout', 'delivery']);
+						  } else {
+							this.route.navigate(['checkout', 'pickup']);
+						  }
+					})
+
                 }
               },
               (err) => {
