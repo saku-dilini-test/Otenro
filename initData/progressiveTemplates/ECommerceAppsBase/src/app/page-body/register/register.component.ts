@@ -201,7 +201,7 @@ export class RegisterComponent implements OnInit {
           }
 
         }, err => {
-
+          this.spinnerService.hide();
           if (err.status == 409) {
             this.isEmailDuplicate = true;
           }

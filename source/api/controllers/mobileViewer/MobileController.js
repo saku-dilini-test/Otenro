@@ -212,32 +212,35 @@ module.exports = {
     },
 
     sendOrderConfirmationEmail: function (app, order) {
+        if(app){
+            order['userId'] = app.userId;
+            UserEmail.findOne({appId: order.appId}).exec(function (err, userEmail) {
 
-        order['userId'] = app.userId;
-        UserEmail.findOne({ appId: order.appId }).exec(function (err, userEmail) {
+                if (err) {
+                    sails.log.error('Error occurred in finding User email Settings : TemplateOrderController.saveOrder , error : ' + err);
+                }
 
-            if (err) {
-                sails.log.error('Error occurred in finding User email Settings : TemplateOrderController.saveOrder , error : ' + err);
-            }
+                if (userEmail) {
 
-            if (userEmail) {
+                    order.fromEmail = userEmail.fromEmail;
+                    order.userId = app.userId;
+                    // console.log("-----------------------------------------------------")
+                    // console.log(order)
+                    emailService.sendOrderEmail(order, function (err, msg) {
 
-                order.fromEmail = userEmail.fromEmail;
-                order.userId = app.userId;
-                // console.log("-----------------------------------------------------")
-                // console.log(order)
-                emailService.sendOrderEmail(order, function (err, msg) {
-
-                    if (err) {
-                        if(err == 'error processing order, no email sent'){
-                            sails.log.error('Error processing order, no email sent');
-                        }else{
-                            sails.log.error('Error occurred in finding User email Settings : TemplateOrderController.saveOrder , error : ' + err);
+                        if (err) {
+                            if (err == 'error processing order, no email sent') {
+                                sails.log.error('Error processing order, no email sent');
+                            } else {
+                                sails.log.error('Error occurred in finding User email Settings : TemplateOrderController.saveOrder , error : ' + err);
+                            }
                         }
-                    }
-                });
-            }
-        });
+                    });
+                }
+            });
+        }else {
+            sails.log.error('Not from payhere, no email sent with regarding payhere');
+        }
     },
 
     updateInventory: function (status, applicationOrder) {

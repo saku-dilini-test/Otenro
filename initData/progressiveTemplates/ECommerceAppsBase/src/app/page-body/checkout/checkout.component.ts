@@ -994,7 +994,7 @@ export class CheckoutComponent implements OnInit {
               $(".alert").fadeTo(500, 0).slideUp(500, () => {
                 $(this).remove();
                 this.ePay = false;
-                this.router.navigate(['home']);
+                this.router.navigate(['payhereSuccess']);
               });
             }, 2000);
 
@@ -1151,13 +1151,14 @@ export class CheckoutComponent implements OnInit {
               } else {
                 this.localStorageService.remove("cartUnknownUser");
               }
+			  this.router.navigate(['payhereSuccess']);
 
-              this._success.next('Your Order has been successfully processed');
+              // this._success.next('Your Order has been successfully processed');
 
-              this._success.subscribe((message) => this.successMessage = message);
-              debounceTime.call(this._success, 3000).subscribe(() => this.successMessage = null);
-              this._success.next("Thank You, Your order has been successfully processed");
-              setTimeout(() => { this.router.navigate(['home']); }, 3100)
+              // this._success.subscribe((message) => this.successMessage = message);
+              // debounceTime.call(this._success, 3000).subscribe(() => this.successMessage = null);
+              // this._success.next("Thank You, Your order has been successfully processed");
+              // setTimeout(() => { this.router.navigate(['home']); }, 3100)
 
             }, (err: HttpErrorResponse) => {
 
