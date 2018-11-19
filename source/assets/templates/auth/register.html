@@ -118,7 +118,7 @@ chosen link or button. -->
           </div>
           <div ng-if="user.country == 'Sri Lanka'"  class="col-sm-6">
             <input class="input-shadow-border" ng-disabled = "!user.country" name="mobile" type="text" ng-pattern="/^[1-9][0-9]*$/"
-                   style="float:left;margin-left:-20px" ng-model="user.mobile" ng-enter ="authSignUp(user);" maxlength="{{phoneNoLength}}" required/>
+                   style="float:left;margin-left:-20px" ng-model="user.mobile" ng-enter ="authSignUp(user);" maxlength="{{phoneNoLength}}" minlength="9" required/>
             <span class="error help-block" ng-show="register.mobile.$error.required">
           *
         </span>
