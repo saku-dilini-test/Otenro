@@ -686,7 +686,7 @@ $scope.filesSortConfig = {
                         }
 
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                        toastr.success("New category has been added successfully", 'Message', {closeButton: true});
+                        toastr.success("Successfully edited category", 'Message', {closeButton: true});
                         $mdDialog.hide();
                         mainMenuService.showMainMenuDialog();
                     }).error(function (err) {
