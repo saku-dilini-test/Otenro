@@ -700,10 +700,12 @@ $scope.filesSortConfig = {
             }
             if($scope.mainImg != $scope.serverImage && !($scope.initialData.menu == 'addNewMenuCategory')){
                 $log.debug('imageUpdate true');
-                articleService.updateCategoryImage(file,menu.imageUrl,$rootScope.appId,$rootScope.tempNew).progress(function(evt) {
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    $log.debug('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-                }).success(function(data, status, headers, config) {
+                articleService.updateCategoryImage({"file":$scope.tmpImage,"appId":$rootScope.appId})
+                // .progress(function(evt) {
+                //     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                //     $log.debug('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+                // })
+                .success(function(data, status, headers, config) {
                     // update image name set to imageUrl in menu collection
                     menu.imageUrl = data.imageUrl;
                     $log.debug(menu);
