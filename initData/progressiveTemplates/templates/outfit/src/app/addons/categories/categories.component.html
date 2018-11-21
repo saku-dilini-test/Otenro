@@ -31,9 +31,13 @@
                         <h2 class="mg-md header-text-h2 text-center main-content-font">
                             {{prod.name}}
                         </h2>
-                        <h2 class="mg-md sub-header-text-h2 text-center main-content-font">
+                        <h2 *ngIf = "!checkForPromo(prod)" class="mg-md sub-header-text-h2 text-center main-content-font">
                             <strong>{{currency}} {{prod.variants[0].price| number: '.2'}}</strong>
                         </h2>
+						<div *ngIf = "checkForPromo(prod)" class="text-center main-content-font">
+							<h6 style ="margin-top:0px;margin-bottom:5px">Regular Price - <strong style="text-decoration: line-through">{{currency}} {{prod.variants[0].price| number: '.2'}}</strong></h6>
+							<h5 style ="margin-top:0px;margin-bottom:5px">Discounted Price - <strong>{{currency}} {{getDiscountPrice(prod.variants[0].sku,prod.variants[0].price)| number: '.2'}}</strong></h5>
+						</div>
                         <div class="text-center">
                             <a class="btn btn-d btn-lg main-button" *ngIf="!checkSoldOut(prod)" [routerLink]="['/product', prod.name, prod.id]">Buy now</a>
                         </div>
@@ -51,9 +55,13 @@
 						<h2 class="mg-md header-text-h2 text-center main-content-font">
 							{{prod.name}}
 						</h2>
-						<h2 class="mg-md sub-header-text-h2 text-center main-content-font">
+						<h2 *ngIf = "!checkForPromo(prod)" class="mg-md sub-header-text-h2 text-center main-content-font">
 							<strong>{{currency}} {{prod.variants[0].price| number: '.2'}}</strong>
 						</h2>
+						<div *ngIf = "checkForPromo(prod)" class="text-center main-content-font">
+							<h6 style ="margin-top:0px;margin-bottom:5px">Regular Price - <strong style="text-decoration: line-through">{{currency}} {{prod.variants[0].price| number: '.2'}}</strong></h6>
+							<h5 style ="margin-top:0px;margin-bottom:5px">Discounted Price - <strong>{{currency}} {{getDiscountPrice(prod.variants[0].sku,prod.variants[0].price)| number: '.2'}}</strong></h5>
+						</div>
 						<div class="text-center">
 							<a class="btn btn-d btn-lg main-button" *ngIf="!checkSoldOut(prod)"  [routerLink]="['/product', prod.name, prod.id]">Buy now</a>
 						</div>
@@ -87,9 +95,13 @@
                                 <h2 class="mg-md header-text-h2 text-center main-content-font">
                                     {{prod.name}}
                                 </h2>
-                                <h2 class="mg-md sub-header-text-h2 text-center main-content-font">
+                                <h2 *ngIf = "!checkForPromo(prod)" class="mg-md sub-header-text-h2 text-center main-content-font">
                                     <strong>{{currency}} {{prod.variants[0].price | number: '.2'}}</strong>
                                 </h2>
+								<div *ngIf = "checkForPromo(prod)" class="text-center main-content-font">
+									<h6 style ="margin-top:0px;margin-bottom:5px">Regular Price - <strong style="text-decoration: line-through">{{currency}} {{prod.variants[0].price| number: '.2'}}</strong></h6>
+									<h5 style ="margin-top:0px;margin-bottom:5px">Discounted Price - <strong>{{currency}} {{getDiscountPrice(prod.variants[0].sku,prod.variants[0].price)| number: '.2'}}</strong></h5>
+								</div>
                                 <div class="text-center">
                                     <a class="btn btn-d btn-lg main-button" *ngIf="!checkSoldOut(prod)"  [routerLink]="['/product', prod.name, prod.id]">Buy now</a>
                                 </div>

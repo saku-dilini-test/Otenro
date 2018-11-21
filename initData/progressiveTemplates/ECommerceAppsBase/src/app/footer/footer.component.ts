@@ -58,7 +58,7 @@ export class FooterComponent {
 
   navigate(route: string, name: string) {
     this.title = name;
-    if (name == "Contact Us") {
+    if (name == "Contact Us" || name == 'Search' || name == 'Edit Profile') {
       this.router.navigate([route]);
     } else {
       this.router.navigate([route, name]);

@@ -31,9 +31,13 @@
 					<p class="main-content-font text-center product-name">
 						{{prod.name}}
 					</p>
-					<p class="main-content-font text-center product-content">
+					<div *ngIf = "!checkForPromo(prod)" class="text-center main-content-font">
 						Price - {{currency}} {{prod.variants[0].price| number: '.2'}}
-					</p>
+					</div>
+					<div *ngIf = "checkForPromo(prod)" class="text-center  main-content-font">
+						<h6 style ="margin-top:0px;margin-bottom:5px">Regular Price - <strong style="text-decoration: line-through">{{currency}} {{prod.variants[0].price| number: '.2'}}</strong></h6>
+						<h5 style ="margin-top:0px;margin-bottom:5px">Discounted Price - <strong>{{currency}} {{getDiscountPrice(prod.variants[0].sku,prod.variants[0].price)| number: '.2'}}</strong></h5>
+					</div>
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="text-center"  *ngIf="!checkSoldOut(prod)">
@@ -53,9 +57,13 @@
 				<p class="text-center product-name main-content-font">
 					{{prod.name}}
 				</p>
-				<p class="text-center product-content">
+				<div *ngIf = "!checkForPromo(prod)" class="text-center main-content-font">
 					Price - {{currency}} {{prod.variants[0].price| number: '.2'}}
-				</p>
+				</div>
+				<div *ngIf = "checkForPromo(prod)" class="text-center  main-content-font">
+					<h6 style ="margin-top:0px;margin-bottom:5px">Regular Price - <strong style="text-decoration: line-through">{{currency}} {{prod.variants[0].price| number: '.2'}}</strong></h6>
+					<h5 style ="margin-top:0px;margin-bottom:5px">Discounted Price - <strong>{{currency}} {{getDiscountPrice(prod.variants[0].sku,prod.variants[0].price)| number: '.2'}}</strong></h5>
+				</div>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="text-center" *ngIf="!checkSoldOut(prod)">
@@ -82,9 +90,13 @@
 					<p class="text-center product-name main-content-font">
 						{{prod.name}}
 					</p>
-					<p class="text-center product-content main-content-font">
+					<div *ngIf = "!checkForPromo(prod)" class="text-center main-content-font">
 						Price - {{currency}} {{prod.variants[0].price| number: '.2'}}
-					</p>
+					</div>
+					<div *ngIf = "checkForPromo(prod)" class="text-center  main-content-font">
+						<h6 style ="margin-top:0px;margin-bottom:5px">Regular Price - <strong style="text-decoration: line-through">{{currency}} {{prod.variants[0].price| number: '.2'}}</strong></h6>
+						<h5 style ="margin-top:0px;margin-bottom:5px">Discounted Price - <strong>{{currency}} {{getDiscountPrice(prod.variants[0].sku,prod.variants[0].price)| number: '.2'}}</strong></h5>
+					</div>
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="text-center" *ngIf="!checkSoldOut(prod)">

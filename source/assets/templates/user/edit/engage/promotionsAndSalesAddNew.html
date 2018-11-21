@@ -69,7 +69,7 @@
                                     <md-radio-group ng-model="storeWide.discountType">
 
                                         <md-radio-button value="discountValue" class="md-primary">Discount Value</md-radio-button>
-                                        <md-radio-button value="discountPercentage" class="md-primary">Discount %</md-radio-button>
+                                        <md-radio-button value="discount" class="md-primary">Discount %</md-radio-button>
                                         <md-radio-button value="freeShipping" class="md-primary">Free Shipping</md-radio-button>
 
                                     </md-radio-group>
@@ -83,7 +83,7 @@
                                         </div>
                                     </md-input-container>
 
-                                    <md-input-container class="md-block" flex="50">
+                                    <md-input-container class="md-block" flex="50" ng-if = "storeWide.discountType == 'discountValue'">
                                         <label>Discount</label>
                                         <input md-maxlength="15"  ng-required="true" name="discount" ng-model="storeWide.discount">
                                         <div ng-messages="storeWideForm.discount.$error" ng-show="storeWideForm.discount.$dirty">
@@ -91,7 +91,14 @@
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
                                         </div>
                                     </md-input-container>
-
+                                    <md-input-container class="md-block" flex="50" ng-if = "storeWide.discountType == 'discount'">
+                                        <label>Discount</label>
+                                        <input md-maxlength="5" maxlength ="5" ng-pattern="/^100$|^\d{0,2}(\.\d{1,2})? *%?$/"  ng-required="true" name="discountPercent" ng-model="storeWide.discountPercent">
+                                        <div ng-messages="storeWideForm.discountPercent.$error" ng-show="storeWideForm.discount.$dirty">
+                                            <div ng-message="required">Name is required.</div>
+                                        </div>
+                                        <span class="error" ng-show="storeWideForm.discountPercent.$error.pattern">Enter a valid value</span>
+                                    </md-input-container>
                                     <fieldset>
                                         <label>Date</label>
                                     </fieldset>

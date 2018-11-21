@@ -149,7 +149,7 @@ export class HomepageComponent implements OnInit {
 				this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
 				$('#verificationEmailModal').modal('show');
 			} else {
-				console.log(meessage);
+				console.log(res.message);
 			}
 		});
 	}

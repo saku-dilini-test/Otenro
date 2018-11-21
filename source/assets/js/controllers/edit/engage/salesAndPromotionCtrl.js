@@ -24,12 +24,15 @@
             salesAndPromotionService.getListOfSalesAndPromotions($rootScope.appId)
                 .success(function (data) {
                     $scope.salesAndPromotionList = data;
-                    $scope.salesAndPromotionList.forEach(function(data){
-                        data.selectedProduct.forEach(function(ele){
-                            $scope.allVariants.push(ele);
-                        });
-                    });
                     console.log(data);
+                        $scope.salesAndPromotionList.forEach(function(data){
+                            if(data.salesAndPromotionType !=  'storeWide'){
+                                data.selectedProduct.forEach(function(ele){
+                                    $scope.allVariants.push(ele);
+                                });
+                            }
+                        });
+
                 }).error(function (error) {
                 toastr.error('Sales And Promotion Adding Error', 'Message', {
                     closeButton: true
@@ -66,9 +69,9 @@
                         });
                     });
 
-                        if($scope.item){
-                        console.log("inside Item main");
-                        console.log($scope.item);
+                    console.log("inside Item main");
+                    console.log($scope.item);
+                        if($scope.item && $scope.item.salesAndPromotionType == 'singleProduct' ){
                         console.log("selected prods");
                         console.log($scope.item.selectedProduct);
                           $scope.array = [];
@@ -100,6 +103,9 @@
                                 $scope.singleProduct.limitUsers = item.limitUsers;
                             }
 
+                        }else if($scope.item && $scope.item.salesAndPromotionType == 'storeWide'){
+                            $scope.storeWide = item;
+                            console.log($scope.storeWide)
                         }else{
                             $scope.array = [];
                         }
@@ -112,11 +118,15 @@
 
                                     if(item.salesAndPromotionType == "singleProduct"){
                                         $scope.selectedTab = 4;
+                                    }else if(item.salesAndPromotionType == "storeWide"){
+                                        $scope.selectedTab = 1;
                                     }
 
-                                 $scope.item.selectedProduct.forEach(function(ele){
-                                    $scope.array.push(ele);
-                                 });
+                                 if( $scope.item.salesAndPromotionType != 'storeWide'){
+                                      $scope.item.selectedProduct.forEach(function(ele){
+                                         $scope.array.push(ele);
+                                     });
+                                 }
 
                                     $scope.allProds.forEach(function(prod){
                                      var found = false;
@@ -137,11 +147,13 @@
 
                                                 if($scope.salesAndPromotionList){
 
-                                                $scope.salesAndPromotionList.forEach(function(data){
-                                                    data.selectedProduct.forEach(function(ele){
-                                                        $scope.availableProducts.push(ele);
+                                                    $scope.salesAndPromotionList.forEach(function(data){
+                                                        if(data.salesAndPromotionType !=  'storeWide') {
+                                                            data.selectedProduct.forEach(function (ele) {
+                                                                $scope.availableProducts.push(ele);
+                                                            });
+                                                        }
                                                     });
-                                                });
 
                                                     $scope.found = false;
                                                     $scope.availableProducts.forEach(function(selectedProduct){
@@ -212,11 +224,13 @@
                     if (item){
                     console.log("available prods");
                     console.log(item.selectedProduct);
-                        item.selectedProduct.forEach(function(element) {
-                            $scope.exists(element , $scope.selected);
-                            $scope.toggle(element , $scope.selected);
+                        if(item.salesAndPromotionType !=  'storeWide') {
+                            item.selectedProduct.forEach(function (element) {
+                                $scope.exists(element, $scope.selected);
+                                $scope.toggle(element, $scope.selected);
 
-                        });
+                            });
+                        }
                     }
 
                 }).error(function (error) {
@@ -229,6 +243,9 @@
      
 
         $scope.saveSalesAndPromotion =function(salesAndPromotion,type,selected){
+            console.log(salesAndPromotion,type,selected);
+            var price,index;
+            var variantSelection = "\n";
 
             if (type =='storeWide'){
                 salesAndPromotion.salesAndPromotionType = 'storeWide';
@@ -240,77 +257,82 @@
                 salesAndPromotion.salesAndPromotionType = 'singleProduct';
                 salesAndPromotion.selectedProduct = selected;
             }
-
+            console.log(salesAndPromotion);
 //            salesAndPromotion.dateTo = new Date(salesAndPromotion.dateTo);
 //            salesAndPromotion.dateFrom = new Date(salesAndPromotion.dateFrom);
+            if(salesAndPromotion.salesAndPromotionType == 'singleProduct'){
+                if(salesAndPromotion.selectedProduct && salesAndPromotion.selectedProduct.length > 0){
 
-            if(salesAndPromotion.selectedProduct.length > 0){
+                    price = salesAndPromotion.selectedProduct[0].price;
 
-                var price = salesAndPromotion.selectedProduct[0].price;
-                var index;var variantSelection = "\n";
+                    salesAndPromotion.selectedProduct.forEach(function(ele,idx){
 
-                salesAndPromotion.selectedProduct.forEach(function(ele,idx){
+                        if(ele.price <= price){
+                            price = parseFloat(ele.price);
+                            index = idx;
+                        }
 
-                    if(ele.price <= price){
-                        price = parseFloat(ele.price);
-                        index = idx;
-                    }
+                    });
 
-                });
+                    salesAndPromotion.selectedProduct[index].selection.forEach(function(ele){
+                        variantSelection += ele.name + "-" + ele.vType + "\n";
+                    });
 
-                salesAndPromotion.selectedProduct[index].selection.forEach(function(ele){
-                    variantSelection += ele.name + "-" + ele.vType + "\n";
-                });
-
-            }
+                }
 
 
-            var fromDate = new Date(salesAndPromotion.dateFrom);
-            var toDate = new Date(salesAndPromotion.dateTo);
+                var fromDate = new Date(salesAndPromotion.dateFrom);
+                var toDate = new Date(salesAndPromotion.dateTo);
 
-        if(salesAndPromotion.selectedProduct.length === undefined || salesAndPromotion.selectedProduct.length == 0){
-            return toastr.error('Please select a product ', 'Warning', {
-                closeButton: true
-            });
-
-        }if(toDate < fromDate){
-
-                toastr.error('Invalid date range', 'Warning', {
-                    closeButton: true
-                });
-                return ;
-        }
-        if(salesAndPromotion.discountType == "discountValue" && salesAndPromotion.discount > price){
-        console.log(salesAndPromotion.discount);
-        console.log(price);
-
-            toastr.error('Invalid discount value for \n\n' + salesAndPromotion.selectedProduct[index].name + variantSelection, 'Warning', {
-                closeButton: true
-            });
-            return ;
-
-        }
-        else{
-
-            salesAndPromotion.appId = $rootScope.appId;
-            console.log("sales promo");
-            console.log(salesAndPromotion);
-            salesAndPromotionService.saveSalesAndPromotion(salesAndPromotion)
-                .success(function (data) {
-                    toastr.success('Sales And Promotion Data successfully Added ', 'Message', {
+                if(salesAndPromotion.selectedProduct.length === undefined || salesAndPromotion.selectedProduct.length == 0){
+                    return toastr.error('Please select a product ', 'Warning', {
                         closeButton: true
                     });
 
-                    $mdDialog.hide();
+                }if(toDate < fromDate){
 
-                    salesAndPromotionService.showPromotionsAndSalesDialog();
+                    toastr.error('Invalid date range', 'Warning', {
+                        closeButton: true
+                    });
+                    return ;
+                }
+                if(salesAndPromotion.discountType == "discountValue" && salesAndPromotion.discount > price){
+                    // console.log(salesAndPromotion.discount);
+                    // console.log(price);
 
-                }).error(function (error) {
-                toastr.error('Sales And Promotion Adding Error', 'Message', {
-                    closeButton: true
-                });
-            })
-        }
+                    toastr.error('Invalid discount value for \n\n' + salesAndPromotion.selectedProduct[index].name + variantSelection, 'Warning', {
+                        closeButton: true
+                    });
+
+                }else{
+                    createSalesAndPromo();
+                }
+            }else if(salesAndPromotion.salesAndPromotionType == 'storeWide'){
+                createSalesAndPromo();
+            }
+
+
+
+             function createSalesAndPromo(){
+                salesAndPromotion.appId = $rootScope.appId;
+                console.log("sales promo");
+                console.log(salesAndPromotion);
+                salesAndPromotionService.saveSalesAndPromotion(salesAndPromotion)
+                    .success(function (data) {
+                        toastr.success('Sales And Promotion Data successfully Added ', 'Message', {
+                            closeButton: true
+                        });
+
+                        $mdDialog.hide();
+
+                        salesAndPromotionService.showPromotionsAndSalesDialog();
+
+                    }).error(function (error) {
+                    toastr.error('Sales And Promotion Adding Error', 'Message', {
+                        closeButton: true
+                    });
+                })
+            }
 
         }
 
