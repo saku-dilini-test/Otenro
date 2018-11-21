@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SERVER_URL } from '../../../assets/constantsService';
 import * as data from '../../../assets/madeEasy.json';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PagebodyServiceModule } from '../../page-body/page-body.service'
+import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { TitleService } from '../../services/title.service';
@@ -42,15 +42,6 @@ export class LoginComponent implements OnInit {
       this.navigate = params['type'];
     });
 
-    // Get encrypted email from url query string
-    this.router.queryParams
-      .subscribe(params => {
-
-      if (params['emailID']) {
-
-        this.verifyEmailAddress(params['emailID']);
-      }
-      });
   }
 
   login = function (myForm) {
@@ -163,56 +154,5 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  verifyEmailAddress(email) {
 
-    let data = { appId: this.appId, emailID: email };
-
-    this.http.post(SERVER_URL+"/templatesAuth/verifyAppUserEmail", data)
-      .subscribe((res: any)=> {
-
-        if (res.message === 'success') {
-
-          let requestParams = {
-            "token": res.token,
-            "email": res.data.email,
-            "name": res.data.firstName,
-            "lname": res.data.lastName,
-            "phone": res.data.phone,
-            "streetNumber": res.data.streetNumber,
-            "streetName": res.data.streetName,
-            "country": res.data.country,
-            "city": res.data.city,
-            "zip": res.data.zip,
-            "type": 'internal',
-            "appId": res.data.appId,
-            "registeredUser": res.user.sub
-          };
-
-          this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
-          if(this.localStorageService.get("cartUnknownUser")){
-            this.localStorageService.set("cart"+requestParams.registeredUser,this.localStorageService.get("cartUnknownUser"));
-            this.localStorageService.remove("cartUnknownUser");
-          }
-          this.dataService.appUserId = requestParams.registeredUser;
-          this.dataService.isUserLoggedIn.check = true;
-          this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
-
-          if (this.navigate == 'home') {
-            this.route.navigate(['home']);
-          } else if(this.navigate == 'cart'){
-            this.route.navigate(['cart']);
-          }else if(this.navigate == 'delivery'){
-            this.route.navigate(['checkout','delivery']);
-          }else{
-            this.route.navigate(['checkout','pickup']);
-          }
-        } else {
-
-          this._success.subscribe((message) => this.errorMessage = message);
-          debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
-          this._success.next('Failed to verify your email address');
-          setTimeout(() => {}, 3100);
-        }
-      });
-  }
 }

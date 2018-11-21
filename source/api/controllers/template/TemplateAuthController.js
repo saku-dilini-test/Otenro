@@ -148,7 +148,7 @@ module.exports = {
 
                     // Encrypt the email
                     var encryptedEmail = cryptr.encrypt(user.email);
-                    var url = domainUrl + 'login/home';
+                    var url = domainUrl + '';
                     var data = {
                         email: user.email,
                         title: 'Click the link below to Verify your email!',
