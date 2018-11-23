@@ -63,7 +63,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
                 private currencyService: CurrencyService,
                 private http: HttpClient,
                 private dataService: PagebodyServiceModule,
-                router: ActivatedRoute,
+                private router: ActivatedRoute,
                 private route: Router,
                 private title: TitleService,
                 private productsService: ProductsService) {
@@ -103,8 +103,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
 					});
 				}
             });
-
-            this.dataService.promoData = this.promoData;
         });
 
         this.isBuyBtnDisable = true;
