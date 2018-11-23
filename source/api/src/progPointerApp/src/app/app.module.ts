@@ -10,6 +10,7 @@ import {NoNetworkPage} from "../pages/no-network/no-network";
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { HttpModule } from '@angular/http';
 import { WebpageNotAvailablePage } from '../pages/webpage-not-available/webpage-not-available';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { WebpageNotAvailablePage } from '../pages/webpage-not-available/webpage-
     WebpageNotAvailablePage
   ],
   providers: [
+    ScreenOrientation,
     StatusBar,
     SplashScreen,
     Network,
