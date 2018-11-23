@@ -302,7 +302,13 @@
           </div>
           <div class="col-sm-9 main-content-font" *ngIf='isSelected && complexForm.valid && sign && totalPrice || isSelected && pickupForm.valid && sign && totalPrice'>
               <div class="padding-vertical">
-                <h3 class="main-header-font">Your order</h3>
+			  <div class="col-md-12 no-padding">
+					<h4>Select a promocode</h4>
+					<select class="form-control margin-bottom" (change)="changePromocode($event.target.value)">
+						<option *ngFor="let promo of promos" [ngValue]="promo.promoCode"> {{promo.promoCode}} </option>
+					</select>
+			  </div>
+               <h3 class="main-header-font">Your order</h3>
                 <table class="table table-responsive">
                   <thead class="main-header-font">
                     <tr>
@@ -321,6 +327,16 @@
                     </tr>
                   </tbody>
                   <tfoot>
+				  <tr>
+                      <th style="text-align: left">Sub Total</th>
+                      <td></td>
+                      <td style="text-align: right"><strong>{{sign}} {{subTotal | number: '.2'}}</strong></td>
+                    </tr>
+					<tr *ngIf="discountedTotal">
+                      <th style="text-align: left">Discounted Total</th>
+                      <td></td>
+                      <td style="text-align: right">{{sign}} {{discountedTotal| number: '.2'}}</td>
+                    </tr>
                     <tr *ngIf='!hideShipping'>
                       <th style="text-align: left">Shipping</th>
                       <td></td>
@@ -337,7 +353,7 @@
                       <td style="text-align: right">{{sign}} {{taxTotal| number: '.2'}}</td>
                     </tr>
                     <tr class="order-total">
-                      <th style="text-align: left" class="main-header-font">Total</th>
+                      <th style="text-align: left">Total</th>
                       <td style="text-align: center">
                         <strong>
                           <span class="main-header-font">{{totalQuantity}}</span>
@@ -345,7 +361,7 @@
                       </td>
                       <td style="text-align: right">
                         <strong>
-                          <span class="main-header-font">{{sign}} {{totalPrice| number: '.2'}}</span>
+                          <span class="main-header-font"><strong>{{sign}} {{totalPrice| number: '.2'}}</strong></span>
                         </strong>
                       </td>
                     </tr>

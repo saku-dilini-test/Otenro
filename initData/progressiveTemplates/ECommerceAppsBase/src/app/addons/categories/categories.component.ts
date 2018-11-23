@@ -4,6 +4,7 @@ import * as data from '../../../assets/madeEasy.json';
 import { SERVER_URL } from '../../../assets/constantsService';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { CurrencyService } from '../../services/currency/currency.service';
+declare var $:any;
 import { ProductsService } from '../../services/products/products.service';
 @Component({
   selector: 'app-categories',
@@ -32,21 +33,23 @@ export class CategoriesComponent implements OnInit {
     this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
 
       data.forEach(element => {
-        element.selectedProduct.forEach(variants => {
+		if(element.salesAndPromotionType != 'storeWide'){
+			element.selectedProduct.forEach(variants => {
 
-          variants.fromDate = element.dateFrom;
-          variants.toDate = element.dateTo;
+			  variants.fromDate = element.dateFrom;
+			  variants.toDate = element.dateTo;
 
-          if (element.discountType == 'discountValue') {
-            variants.discountType = element.discountType;
-            variants.discount = element.discount
-          } else {
-            variants.discountType = element.discountType;
-            variants.discount = element.discountPercent
-          }
+			  if (element.discountType == 'discountValue') {
+				variants.discountType = element.discountType;
+				variants.discount = element.discount
+			  } else {
+				variants.discountType = element.discountType;
+				variants.discount = element.discountPercent
+			  }
 
-          this.promoData.push(variants);
-        });
+			  this.promoData.push(variants);
+			});
+		}
       });
     });
   }

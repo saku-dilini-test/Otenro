@@ -59,9 +59,14 @@ export class ProductComponent implements OnInit, AfterViewInit {
     availableFirstVariPromo = false;
     private player: Player;
     private prodId;
-    constructor(private localStorageService: LocalStorageService, private currencyService: CurrencyService,
-        private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute,
-        private route: Router, private title: TitleService, private productsService: ProductsService) {
+    constructor(private localStorageService: LocalStorageService,
+				private currencyService: CurrencyService,
+				private http: HttpClient,
+				private dataService: PagebodyServiceModule,
+				private router: ActivatedRoute,
+				private route: Router,
+				private title: TitleService,
+				private productsService: ProductsService) {
         this.Data = {
             tempImageArray : []
         }
@@ -78,21 +83,23 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
 
             data.forEach(element => {
-                element.selectedProduct.forEach(variants => {
+				if(element.salesAndPromotionType != 'storeWide'){
+					element.selectedProduct.forEach(variants => {
 
-                    variants.fromDate = element.dateFrom;
-                    variants.toDate = element.dateTo;
+						variants.fromDate = element.dateFrom;
+						variants.toDate = element.dateTo;
 
-                    if (element.discountType == 'discountValue') {
-                        variants.discountType = element.discountType;
-                        variants.discount = element.discount;
-                    } else {
-                        variants.discountType = element.discountType;
-                        variants.discount = element.discountPercent;
-                    }
+						if (element.discountType == 'discountValue') {
+							variants.discountType = element.discountType;
+							variants.discount = element.discount;
+						} else {
+							variants.discountType = element.discountType;
+							variants.discount = element.discountPercent;
+						}
 
-                    this.promoData.push(variants);
-                });
+						this.promoData.push(variants);
+					});
+				}
             });
 
             this.dataService.promoData = this.promoData;

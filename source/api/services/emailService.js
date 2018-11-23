@@ -643,7 +643,7 @@ module.exports = {
                     mapObj['orderNumber'] =  data.id;
                     var subTotal = 0;
                     data.item.forEach(function(element) {
-                        subTotal += element.price;
+                        subTotal += element.price * element.qty;
                     });
                     mapObj['subTotal'] =  subTotal;
                     mapObj['currency'] =  data.currency;

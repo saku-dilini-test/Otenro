@@ -27,7 +27,7 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <h3 class="text-center header header-spacing-top main-header-font">
-                      PicK-UP Details
+                      Pick-up Details
                     </h3>
                   </div>
                 </div>
@@ -352,6 +352,12 @@
            <div class="padding-vertical main-content-font" *ngIf='isSelected && complexForm.valid && sign && totalPrice || isSelected && pickupForm.valid && sign && totalPrice'>
                  <form id="form_33031" novalidate>
                     <div class="row">
+                        <div class="col-md-12">
+                            <h4>Select a promocode</h4>
+                            <select class="form-control margin-bottom" (change)="changePromocode($event.target.value)">
+                                <option *ngFor="let promo of promos" [ngValue]="promo.promoCode"> {{promo.promoCode}} </option>
+                            </select>
+                        </div>
                       <div class="col-sm-12">
                         <h3 class="text-center header main-header-font">
                           YOUR ORDER DETAILS
@@ -390,7 +396,41 @@
                             </p>
                           </div>
                         </div>
-                        <div class="row voffset" *ngIf='chkPickupCost > 0 || hideShipping'>
+                                            <div class="row voffset">
+                          <div class="col-xs-6 col-sm-8">
+                            <p>
+                              <strong>Sub Total</strong>
+                            </p>
+                          </div>
+                          <div class="col-xs-3 col-sm-2">
+                            <p class="text-right">
+                              <br>
+                            </p>
+                          </div>
+                          <div class="col-xs-3 col-sm-2">
+                            <p class="text-right">
+                              <strong>{{sign}} {{subTotal | number: '.2'}}</strong>
+                            </p>
+                          </div>
+                        </div>
+                        <div class="row voffset" *ngIf="discountedTotal">
+                          <div class="col-xs-6 col-sm-8">
+                            <p>
+                              <strong>Discounted Total</strong>
+                            </p>
+                          </div>
+                          <div class="col-xs-3 col-sm-2">
+                            <p class="text-right">
+                              <br>
+                            </p>
+                          </div>
+                          <div class="col-xs-3 col-sm-2">
+                            <p class="text-right">
+                              <strong>{{sign}} {{discountedTotal| number: '.2'}}</strong>
+                            </p>
+                          </div>
+                        </div>
+<div class="row voffset" *ngIf='chkPickupCost > 0 || !hideShipping'>
                           <div class="col-xs-6 col-sm-8">
                             <p *ngIf='chkPickupCost > 0'>
                               <strong >Pick up cost</strong>
