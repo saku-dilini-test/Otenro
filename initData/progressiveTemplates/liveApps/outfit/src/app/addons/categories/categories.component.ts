@@ -32,21 +32,23 @@ export class CategoriesComponent implements OnInit {
     this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
 
       data.forEach(element => {
-        element.selectedProduct.forEach(variants => {
+		if(element.salesAndPromotionType != 'storeWide'){
+			element.selectedProduct.forEach(variants => {
 
-          variants.fromDate = element.dateFrom;
-          variants.toDate = element.dateTo;
+			  variants.fromDate = element.dateFrom;
+			  variants.toDate = element.dateTo;
 
-          if (element.discountType == 'discountValue') {
-            variants.discountType = element.discountType;
-            variants.discount = element.discount
-          } else {
-            variants.discountType = element.discountType;
-            variants.discount = element.discountPercent
-          }
+			  if (element.discountType == 'discountValue') {
+				variants.discountType = element.discountType;
+				variants.discount = element.discount
+			  } else {
+				variants.discountType = element.discountType;
+				variants.discount = element.discountPercent
+			  }
 
-          this.promoData.push(variants);
-        });
+			  this.promoData.push(variants);
+			});
+		}
       });
     });
   }

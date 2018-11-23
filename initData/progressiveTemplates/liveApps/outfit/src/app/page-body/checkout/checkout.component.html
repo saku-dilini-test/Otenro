@@ -12,7 +12,7 @@
                 SHIPPING ADDRESS
               </h2>
 
-              <div class="row">
+              <div class="row main-content-font">
                 <div class="col-sm-6" *ngIf="showUser">
                   <div class="radio">
                     <label>
@@ -37,14 +37,14 @@
                 </div>
               </div>
 
-              <div class="radio">
+              <div class="radio main-content-font">
                 <label>
                   <input type="radio" name="radioNew" value="newUser" id="showNewUser" (change)="check('newUser')"
                     [checked]="!oldUser" />Enter a new address
                 </label>
               </div>
 
-              <form [formGroup]="complexForm" *ngIf="!oldUser" (ngSubmit)="submitForm(complexForm.value)" id="form_28872" novalidate class="spacing-form animated fadeInUp animDelay04">
+              <form [formGroup]="complexForm" *ngIf="!oldUser" (ngSubmit)="submitForm(complexForm.value)" id="form_28872" novalidate class="spacing-form animated fadeInUp animDelay04 main-content-font">
                   <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -221,16 +221,16 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <label class="sub-header-text-h2">
-                        NAME
+                        FIRST NAME
                       </label>
                       <input class="form-control" name="name" id="name" placeholder="Arstina" [formControl]="pickupForm.controls['name']">
                       <div *ngIf="pickupForm.controls['name'].dirty || pickupForm.controls['name'].touched">
                         <div *ngIf="pickupForm.controls['name'].hasError('required')
                         && pickupForm.controls['name'].touched" class="alert alert-danger">
-                          You must include a Name.
+                          You must include a First name.
                         </div>
                         <div *ngIf="!pickupForm.controls['name'].valid" class="alert alert-danger">
-                          Name must only include Alphabetic character
+                          First Name must only include Alphabetic character
                         </div>
                       </div>
                     </div>
@@ -300,10 +300,15 @@
 
           <div class="col-sm-3" *ngIf='isSelected && complexForm.valid && sign && totalPrice || isSelected && pickupForm.valid && sign && totalPrice'>
           </div>
-          <div class="col-sm-9" *ngIf='isSelected && complexForm.valid && sign && totalPrice || isSelected && pickupForm.valid && sign && totalPrice'>
-              <hr class="featurette-divider">
+          <div class="col-sm-9 main-content-font" *ngIf='isSelected && complexForm.valid && sign && totalPrice || isSelected && pickupForm.valid && sign && totalPrice'>
               <div class="padding-vertical">
-                <h3 class="main-header-font">Your order</h3>
+			  <div class="col-md-12 no-padding"  *ngIf="promos.length > 1">
+					<h4>Select a promocode</h4>
+					<select class="form-control margin-bottom" (change)="changePromocode($event.target.value)">
+						<option *ngFor="let promo of promos" [ngValue]="promo.promoCode"> {{promo.promoCode}} </option>
+					</select>
+			  </div>
+               <h3 class="main-header-font">Your order</h3>
                 <table class="table table-responsive">
                   <thead class="main-header-font">
                     <tr>
@@ -322,6 +327,16 @@
                     </tr>
                   </tbody>
                   <tfoot>
+				  <tr>
+                      <th style="text-align: left">Sub Total</th>
+                      <td></td>
+                      <td style="text-align: right"><strong>{{sign}} {{subTotal | number: '.2'}}</strong></td>
+                    </tr>
+					<tr *ngIf="discountedTotal">
+                      <th style="text-align: left">Discounted Total</th>
+                      <td></td>
+                      <td style="text-align: right">{{sign}} {{discountedTotal| number: '.2'}}</td>
+                    </tr>
                     <tr *ngIf='!hideShipping'>
                       <th style="text-align: left">Shipping</th>
                       <td></td>
@@ -338,7 +353,7 @@
                       <td style="text-align: right">{{sign}} {{taxTotal| number: '.2'}}</td>
                     </tr>
                     <tr class="order-total">
-                      <th style="text-align: left" class="main-header-font">Total</th>
+                      <th style="text-align: left">Total</th>
                       <td style="text-align: center">
                         <strong>
                           <span class="main-header-font">{{totalQuantity}}</span>
@@ -346,7 +361,7 @@
                       </td>
                       <td style="text-align: right">
                         <strong>
-                          <span class="main-header-font">{{sign}} {{totalPrice| number: '.2'}}</span>
+                          <span class="main-header-font"><strong>{{sign}} {{totalPrice| number: '.2'}}</strong></span>
                         </strong>
                       </td>
                     </tr>

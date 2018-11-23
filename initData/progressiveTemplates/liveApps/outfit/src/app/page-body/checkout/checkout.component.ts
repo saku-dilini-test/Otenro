@@ -13,6 +13,7 @@ import { OrdersService } from '../../services/orders/orders.service';
 import { TitleService } from '../../services/title.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { ProductsService } from '../../services/products/products.service';
 declare var $:any;
 declare let paypal: any;
 
@@ -107,20 +108,23 @@ export class CheckoutComponent implements OnInit {
   ePayFail = false;
   ePayNull = false;
   payHereUrl;
-
-  constructor(
-    fb: FormBuilder,
-    private ordersService: OrdersService,
-    private shippingService: ShippingService,
-    private currencyService: CurrencyService,
-    private localStorageService: LocalStorageService,
-    private http: HttpClient,
-    private route: ActivatedRoute,
-    private router: Router,
-    private dataService: PagebodyServiceModule,
-    private title: TitleService,
-    private spinner: Ng4LoadingSpinnerService
-  ) {
+  promos = [{promoCode:'Select a promocode'}];
+  selectedPromo;
+  discountedTotal;
+  subTotal;
+  totalQuantity = 0;
+  constructor(	fb: FormBuilder,
+				private ordersService: OrdersService,
+				private shippingService: ShippingService,
+				private currencyService: CurrencyService,
+				private localStorageService: LocalStorageService,
+				private http: HttpClient,
+				private route: ActivatedRoute,
+				private router: Router,
+				private dataService: PagebodyServiceModule,
+				private title: TitleService,
+				private spinner: Ng4LoadingSpinnerService,
+				private productsService: ProductsService) {
 
     this.title.changeTitle("Checkout");
     let d = new Date();
@@ -190,6 +194,17 @@ export class CheckoutComponent implements OnInit {
       'phone': new FormControl('', Validators.compose([Validators.required])),
 
     });
+
+
+
+		this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
+			data.forEach(element => {
+				if(element.salesAndPromotionType == 'storeWide'){
+					// console.log(element);
+					this.promos.push(element);
+				}
+            });
+        });
   }
 
   ngOnInit() {
@@ -372,23 +387,17 @@ export class CheckoutComponent implements OnInit {
   getTotal() {
     var total = 0;
     var amount = 0;
-    var tax = 0;
     for (var i = 0; i < this.cartItems.length; i++) {
+
       var product = this.cartItems[i];
-      amount = product.total;
-      total += (amount);
+
+	   amount = product.total;
+	   this.totalQuantity += product.qty;
+       total += (amount * product.qty);
     }
-    tax = total * this.tax / 100;
-    this.taxTotal = total * this.tax / 100;
-    this.taxTotal = (Math.round(this.taxTotal * 100) / 100);
-    if (tax > 0) {
-      total = total + tax;
-      this.dataService.cart.totalPrice = total;
+	  this.subTotal = total;
       return total;
-    } else {
-      this.dataService.cart.totalPrice = total;
-      return total;
-    }
+
   };
 
 
@@ -576,8 +585,7 @@ export class CheckoutComponent implements OnInit {
         this.chkCountry = this.country;
       } else {
         if (final.country) {
-          this.chkCountry = final.country
-          console.log(this.chkCountry);
+          this.chkCountry = final.country;
         }
       }
     }
@@ -603,78 +611,13 @@ export class CheckoutComponent implements OnInit {
           this.isApplyShippingCharge = data[0].isApplyShippingCharge;
           this.chkHide = false;
         }
-        var total = 0;
-        var amount = 0;
-        var tax = 0;
-        for (var i = 0; i < this.cartItems.length; i++) {
-          var product = this.cartItems[i];
-          amount = product.total;
-          total += (amount * product.qty);
-        }
-        // $log.debug($scope.isApplyShippingCharge);
-        if (this.isApplyShippingCharge == true && this.formType != 'pickup') {
-          // $log.debug($scope.shippingCost);
-          var shipping = parseFloat(this.chkShippingCost);
-          total = total + shipping;
-          tax = total * this.chkTax / 100;
-          this.taxTotal = total * this.chkTax / 100;
-          this.taxTotal = (Math.round(this.taxTotal * 100) / 100);
-          if (tax > 0) {
-            total = total + tax;
-            this.totalPrice = total;
-            this.totalPrice = Math.round(this.totalPrice * 100) / 100;
-          } else {
-            this.cart.totalPrice = Math.round(total * 100) / 100;
-          }
-        } else {
-          tax = total * this.chkTax / 100;
-          this.taxTotal = total * this.chkTax / 100;
-          this.taxTotal = (Math.round(this.taxTotal * 100) / 100);
 
-          if (!this.finalDetails.pickupCost || this.finalDetails.pickupCost == 0) {
-            this.chkPickupCost = 0;
-          } else {
-            this.chkPickupCost = parseFloat(this.finalDetails.pickupCost);
-          }
-          if (tax > 0) {
-            total = total + tax;
-            if (this.chkPickupCost == 0) {
-              if (this.chkShippingCost) {
-                this.totalPrice = total + parseFloat(this.chkShippingCost);
-                this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
-              } else {
-                this.totalPrice = total;
-                this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
-              }
-            } else {
-              this.totalPrice = total + parseFloat(this.chkPickupCost);
-              this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
-            }
-          } else {
-            if (this.chkPickupCost == 0) {
-              if (this.chkShippingCost) {
-                this.totalPrice = total + parseFloat(this.chkShippingCost);
-                this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
-              } else {
-                this.totalPrice = total;
-                this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
-              }
-            } else {
-              this.totalPrice = total + parseFloat(this.chkPickupCost);
-              this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
-            }
-          }
-        }
-        this.pay("001");
+		this.calculateTotalOrderCost();
+
       }, err => {
         this.spinner.hide();
         console.log("Error retrieving TaxInfo!,\n Please check Your connection");
       });
-
-
-
-
-
   }
 
   pay(promotionCode) {
@@ -732,7 +675,6 @@ export class CheckoutComponent implements OnInit {
         this.authorizeNet = this.paymentData.authorizeNetEnable;
         this.payhere = this.paymentData.payHereEnable;
         this.payHereMID = this.paymentData.payHereMerchantId;
-
       }), (err) => {
         alert('warning!\n Unable to get Products Selected Category,\n Please check your connection!');
       };
@@ -942,6 +884,10 @@ export class CheckoutComponent implements OnInit {
         this.orderDetails.id = this.dataService.cart.cartItems[0].id;
         this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
           .subscribe((res) => {
+
+            this.ePayFail = false;
+            this.ePayNull = false;
+            this.ePay = true;
 
             this.dataService.cart.cartItems = [];
             this.dataService.cart.cartSize = 0;
@@ -1435,6 +1381,93 @@ export class CheckoutComponent implements OnInit {
       });
   }
 
+	changePromocode(selectedPromo){
+		this.amount = this.subTotal;
 
+		this.discountedTotal = 0;
+		this.selectedPromo = this.promos.filter(
+		  promo => promo.promoCode === selectedPromo);
+
+		// console.log(this.selectedPromo[0]);
+		if(this.selectedPromo[0].discountType === 'discountValue'){
+			this.discountedTotal = this.amount - this.selectedPromo[0].discount;
+			this.amount = this.discountedTotal;
+		}else if(this.selectedPromo[0].discountType === 'discount'){
+			this.discountedTotal = this.amount - (this.amount * this.selectedPromo[0].discountPercent / 100);
+			this.amount = this.discountedTotal;
+		}else if(selectedPromo != 'Select a promocode'){
+			this.discountedTotal = 0;
+			this.amount = this.subTotal;
+		}
+
+		this.calculateTotalOrderCost();
+
+	}
+
+	calculateTotalOrderCost(){
+		var total = this.amount;
+        // var amount = 0;
+        var tax = 0;
+        // for (var i = 0; i < this.cartItems.length; i++) {
+          // var product = this.cartItems[i];
+          // amount = product.total;
+          // total += (amount * product.qty);
+        // }
+        // $log.debug($scope.isApplyShippingCharge);
+        if (this.isApplyShippingCharge == true && this.formType != 'pickup') {
+          // $log.debug($scope.shippingCost);
+          var shipping = parseFloat(this.chkShippingCost);
+          total = total + shipping;
+          tax = total * this.chkTax / 100;
+          this.taxTotal = total * this.chkTax / 100;
+          this.taxTotal = (Math.round(this.taxTotal * 100) / 100);
+          if (tax > 0) {
+            total = total + tax;
+            this.totalPrice = total;
+            this.totalPrice = Math.round(this.totalPrice * 100) / 100;
+          } else {
+            this.cart.totalPrice = Math.round(total * 100) / 100;
+          }
+        } else {
+          tax = total * this.chkTax / 100;
+          this.taxTotal = total * this.chkTax / 100;
+          this.taxTotal = (Math.round(this.taxTotal * 100) / 100);
+
+          if (!this.finalDetails.pickupCost || this.finalDetails.pickupCost == 0) {
+            this.chkPickupCost = 0;
+          } else {
+            this.chkPickupCost = parseFloat(this.finalDetails.pickupCost);
+          }
+          if (tax > 0) {
+            total = total + tax;
+            if (this.chkPickupCost == 0) {
+              if (this.chkShippingCost) {
+                this.totalPrice = total + parseFloat(this.chkShippingCost);
+                this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
+              } else {
+                this.totalPrice = total;
+                this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
+              }
+            } else {
+              this.totalPrice = total + parseFloat(this.chkPickupCost);
+              this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
+            }
+          } else {
+            if (this.chkPickupCost == 0) {
+              if (this.chkShippingCost) {
+                this.totalPrice = total + parseFloat(this.chkShippingCost);
+                this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
+              } else {
+                this.totalPrice = total;
+                this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
+              }
+            } else {
+              this.totalPrice = total + parseFloat(this.chkPickupCost);
+              this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
+            }
+          }
+        }
+        this.pay("001");
+	}
 
 }

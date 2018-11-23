@@ -10,7 +10,6 @@ import { TitleService } from '../../services/title.service';
 import * as Player from '@vimeo/player';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { ProductsService } from '../../services/products/products.service';
-
 declare var $: any;
 
 @Component({
@@ -32,18 +31,10 @@ export class ProductComponent implements OnInit, AfterViewInit {
     private appId = (<any>data).appId;
     private userId = (<any>data).userId;
     private templateName = (<any>data).templateName;
-
     selection = [];
     selection1 = [];
     selection2 = [];
     selection3 = [];
-    // Data = {
-    //     tempImageArray: [{
-    //         img: "vh32u1oY99dhoBXDcG3idRe5SR6lJ4IB.png",
-    //         sku: null,
-    //         videoUrl: null
-    //     }]
-    // };
     Data;
     isBuyBtnDisable: boolean;
     private parentobj = { cartItems: [], cartSize: 0, totalPrice: 0 };
@@ -68,9 +59,14 @@ export class ProductComponent implements OnInit, AfterViewInit {
     zoomRatio;
     responce;
     private prodId;
-    constructor(private localStorageService: LocalStorageService, private currencyService: CurrencyService,
-        private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute,
-        private route: Router, private title: TitleService, private productsService: ProductsService) {
+    constructor(private localStorageService: LocalStorageService,
+                private currencyService: CurrencyService,
+                private http: HttpClient,
+                private dataService: PagebodyServiceModule,
+                router: ActivatedRoute,
+                private route: Router,
+                private title: TitleService,
+                private productsService: ProductsService) {
         this.Data = {
             tempImageArray : []
         }
@@ -89,22 +85,26 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
 
             data.forEach(element => {
-                element.selectedProduct.forEach(variants => {
+				if(element.salesAndPromotionType != 'storeWide'){
+					element.selectedProduct.forEach(variants => {
 
-                    variants.fromDate = element.dateFrom;
-                    variants.toDate = element.dateTo;
+						variants.fromDate = element.dateFrom;
+						variants.toDate = element.dateTo;
 
-                    if (element.discountType == 'discountValue') {
-                        variants.discountType = element.discountType;
-                        variants.discount = element.discount;
-                    } else {
-                        variants.discountType = element.discountType;
-                        variants.discount = element.discountPercent;
-                    }
+						if (element.discountType == 'discountValue') {
+							variants.discountType = element.discountType;
+							variants.discount = element.discount;
+						} else {
+							variants.discountType = element.discountType;
+							variants.discount = element.discountPercent;
+						}
 
-                    this.promoData.push(variants);
-                });
+						this.promoData.push(variants);
+					});
+				}
             });
+
+            this.dataService.promoData = this.promoData;
         });
 
         this.isBuyBtnDisable = true;
