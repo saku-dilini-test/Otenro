@@ -1354,8 +1354,10 @@
 
             fromDate = pramData.fromDate,
                 toDate = pramData.toDate;
-
-            if ((fromDate && toDate) && (toDate >= fromDate)) {
+            if (pramData.msisdn == undefined) {
+                toastr.error('Please enter MSISDN', 'Warning', {closeButton: true});
+            }
+            else if ((fromDate && toDate) && (toDate >= fromDate)) {
 
                 var mobile = pramData.msisdn;
                 var pattern = /^\d{11}$/;
