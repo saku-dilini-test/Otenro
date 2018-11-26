@@ -1564,7 +1564,7 @@
                     }
 
                     if ($scope.user.userRole == "APP_CREATOR") {
-                        var str = rangeValue + "," + obj.operator + "," + obj.appId + "," + obj.revenue + "," + obj.viewCount + "," + obj.revenue + "," + obj.viewCount + '\r\n';
+                        var str = rangeValue + "," + obj.operator + "," + obj.appName + "," + obj.revenue + "," + obj.viewCount + "," + obj.revenue + "," + obj.viewCount + '\r\n';
                     } else {
                         var str = rangeValue + "," + obj.operator + "," + obj.revenue + "," + obj.viewCount + "," + obj.revenue + "," + obj.viewCount + '\r\n';
                     }
