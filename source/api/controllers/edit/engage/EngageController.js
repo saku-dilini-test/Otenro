@@ -54,7 +54,7 @@ module.exports = {
                     var count = date_diff_indays(dateFormat(new Date(),"m/d/yy"),dateFormat(deviceArray[i].lastAccessTime,"m/d/yy"));
                     console.log("count " + count);
 
-                    if(count>7){
+                    if(count>=7){
                         sails.log.info("my deviceArray " + deviceArray[i].deviceId);
                         thisCtrl.sendPushNotification(deviceArray[i].deviceId,null,req.body.message,null);
                     }
