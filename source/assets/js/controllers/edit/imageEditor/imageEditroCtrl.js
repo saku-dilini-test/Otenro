@@ -55,7 +55,7 @@
                     if(!$scope.isCropped){
                         cropped = applyCrop();
                     }
-                    if(cropped) {
+                    if(cropped || $scope.saveButton === 'Save') {
                         setTimeout(() => {
                             editedImg = imageEditor.toDataURL();
                             if (callFrom === 'addNewMenuCategory') {
