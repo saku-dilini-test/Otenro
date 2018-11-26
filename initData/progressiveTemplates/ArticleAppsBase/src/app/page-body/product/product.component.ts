@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 import { TitleService } from '../../services/title.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ProductsService } from '../../services/products/products.service';
+import {MessageService} from "../../services/message.service";
 declare let $:any;
 @Component({
     selector: 'app-product',
@@ -23,6 +24,7 @@ export class ProductComponent implements OnInit {
     private appId = (<any>data).appId;
     private userId = (<any>data).userId;
     Data;
+    api;
     private isBuyBtnDisable: boolean;
     private parentobj = { cartItems: [], cartSize: 0, totalPrice: 0 };
     private lockBuyButton = false;
@@ -31,27 +33,20 @@ export class ProductComponent implements OnInit {
     private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
     results:any;
-    constructor(private productService: ProductsService, private sanitizer: DomSanitizer, private dataService: PagebodyServiceModule,
-        private router: ActivatedRoute, private route: Router, private title: TitleService) {
+    private loadImageCount:number = 0;
+    constructor(private productService: ProductsService,
+                private sanitizer: DomSanitizer,
+                private dataService: PagebodyServiceModule,
+                private router: ActivatedRoute,
+                private route: Router,
+                private title: TitleService,
+                private messageService: MessageService) {
 
         this.Data = this.dataService.data;
+        const arr = this.Data.tempImageArray;
         this.title.setLocation('product');
-    }
-
-
-    ngAfterViewInit() {
-      let api = $("#gallery").unitegallery({
-        theme_enable_text_panel: false,
-        gallery_background_color: "rgba(0,0,0,0)",
-        slider_textpanel_bg_color:"#000000",
-        slider_textpanel_bg_opacity: 0,
-      });
-
-      this.setCarousalControlls();
-
-      api.on("item_change",(num, data) => {
-        this.setCarousalControlls();
-      });
+        this.messageService.sendMessage({loadImageCount:-1});
+        this.dataService.initialImageCount =  arr?  arr.length : 0;
     }
 
     setCarousalControlls() {
@@ -68,7 +63,7 @@ export class ProductComponent implements OnInit {
           this.dataService.catId = catId;
           this.productService.getProducts().subscribe(articles => {
               console.log("<<<<<<<<Articles>>>>>>>>>");
-              console.log(articles);
+              // console.log(articles);
               var article = null;
               for (let i = 0; i < articles.length; i++) {
                 console.log("articles[i].id=>" + articles[i].id)
@@ -82,6 +77,9 @@ export class ProductComponent implements OnInit {
                   this.catName = article.title;
                   this.title.changeTitle(this.catName);
                   this.Data = article;
+                  const arr = this.Data.tempImageArray;
+                  this.dataService.initialImageCount =  arr?  arr.length : 0;
+ 		          this.initializeGallery();
                   this.productService.createArticleViewDataInfo(this.catName).subscribe(data => {
                       // Read the result field from the JSON response.
                       this.results = data;
@@ -92,10 +90,12 @@ export class ProductComponent implements OnInit {
 
               } else {
                 console.log("Article not found for the catId: " + catId + " articleId: " + articleId);
+                this.Data.tempImageArray = 0;
               }
             },
             error => {
               console.log('Error shop service');
+               this.Data.tempImageArray = 0;
             });
         }
     }
@@ -130,7 +130,27 @@ export class ProductComponent implements OnInit {
         }
         return id;
     }
+    initializeGallery = () => {
+        $('#gallery div').remove();
 
+        setTimeout(() => {
+            this.setGallery();
+        }, 1);
+    }
 
+    setGallery = () => {
+        //remove all the rendered div tags and just keep the img tags for angular
+        this.api = $("#gallery").unitegallery({
+            theme_enable_text_panel: false,
+            gallery_background_color: "rgba(0,0,0,0)",
+            slider_textpanel_bg_color:"#000000",
+            slider_textpanel_bg_opacity: 0,
+        });
+    }
+
+    imageLoaded(e){
+      // console.log(e);
+      this.loadImageCount += 1;
+      this.messageService.sendMessage({loadImageCount:this.loadImageCount});
+    }
 }
-

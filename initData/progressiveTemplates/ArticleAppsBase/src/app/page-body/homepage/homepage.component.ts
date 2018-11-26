@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { SERVER_URL } from '../../../assets/constantsService';
 import * as data from '../../../assets/madeEasy.json';
-import { CategoriesService } from '../../services/categories/categories.service'
-import { PagebodyServiceModule } from '../../page-body/page-body.service'
+import { CategoriesService } from '../../services/categories/categories.service';
+import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { TitleService } from '../../services/title.service';
 import { CordovaPluginFirebaseService } from "../../services/cordova-plugin-services/cordova-plugin-firebase.service";
 import { IntervalObservable } from "rxjs/observable/IntervalObservable";
+import {Observable} from 'rxjs/Observable';
 import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
 import { SubscribedDataService } from '../../services/subscribed-data/subscribed-data.service'
@@ -14,6 +15,7 @@ import {CordovaPluginDeviceService} from "../../services/cordova-plugin-services
 import {SMSService} from "../../services/cordova-plugin-services/sms.service";
 import { AppDataService } from "../../services/appdata-info/appdata-info.service";
 import {ProductsService} from "../../services/products/products.service";
+import {MessageService} from "../../services/message.service";
 declare let $:any;
 var homePageCmp;
 
@@ -36,6 +38,7 @@ export class HomepageComponent implements OnInit {
   private alive = true;
   isSubscribing = false;
   renewalIntervals = [];
+  private loadImageCount:number = 0;
   private isFromCMSAppView: boolean = false;
   constructor(private route: Router,
               private dataService: PagebodyServiceModule,
@@ -47,11 +50,14 @@ export class HomepageComponent implements OnInit {
               private push: CordovaPluginFirebaseService,
               private subscription: SubscribedDataService,
               private productService: ProductsService,
-              private appDataService: AppDataService) {
+              private appDataService: AppDataService,
+              private messageService: MessageService) {
 
     this.title.changeTitle((<any>data).name);
     homePageCmp = this;
     this.title.setLocation('home');
+    this.messageService.sendMessage({loadImageCount:-1});
+
   }
 
   ngOnInit() {
@@ -83,19 +89,26 @@ export class HomepageComponent implements OnInit {
     this.categoryService.getCategories().subscribe(data => {
       if (data.length > 0) {
         // Read the result field from the JSON response.
+
+        data.sort(function(a, b){return a.orderNo - b.orderNo});
+        // console.log(data);
         this.results = data;
+
+        this.dataService.initialImageCount = data.length;
         this.dataService.searchArray = [];
         data.forEach(element => {
           this.dataService.searchArray.push({ 'name': element.name, 'id': element.id });
         });
       } else {
         this.results = null;
+        this.dataService.initialImageCount = 0;
       }
 
 
     },
       error => {
         console.log('Error retrieving categories');
+          this.dataService.initialImageCount = 0;
       });
   }
 
@@ -289,7 +302,7 @@ export class HomepageComponent implements OnInit {
 
   smsErrorRegistrationCallback(error: any) {
     console.log("smsErrorRegistrationCallback in homepage Component: " + error);
-    homePageCmp.dataService.displayMessage = 'Sorry, you do not have enough credit to subscribe to the service';
+    homePageCmp.dataService.displayMessage = 'You have insufficient balance. Please reload and try again.';
     $(() => {
       $('#registerModelhome').modal('hide');
       $('#appStatusModel').modal('show');
@@ -307,4 +320,10 @@ export class HomepageComponent implements OnInit {
   getRenewalIntervalNumberOfDaysByIntervalCode(code: string){
     return this.appDataService.getRenewalIntervalNumberOfDaysByIntervalCode(code);
   }
+
+  imageLoaded(e){
+    this.loadImageCount += 1;
+    this.messageService.sendMessage({loadImageCount:this.loadImageCount});
+  }
+
 }

@@ -14,6 +14,7 @@ module.exports = {
     TEMPLATES_PATH :sails.config.TEMPLATES_PATH,
     PROGRESSIVE_TEMPLATES_PATH :sails.config.PROGRESSIVE_TEMPLATES_PATH,
     USE_SENDMAIL :sails.config.USE_SENDMAIL,
+    IDEABIZ_IP_POOL_ENABLED :sails.config.IDEABIZ_IP_POOL_ENABLED,
 
     ANDROID_APK_BUILD_ZIPALIGN_PATH : sails.config.ANDROID_APK_BUILD_ZIPALIGN_PATH,
     ANDROID_VERSION : sails.config.ANDROID_VERSION,
@@ -201,7 +202,7 @@ module.exports = {
         'APP_NOT_SUBMITTED': 'The service is currently not available on the network.',
         'APP_DELETED': 'The service is no longer available.',
         'USER_UNSUBSCRIBED': 'You got unsubscribed from this service',
-        'INSUFFICIENT_BALANCE': 'You have no sufficient balance.Please recharge and try again.',
+        'INSUFFICIENT_BALANCE': 'Sorry, your subscription is currently inactive due to insufficient balance. Please reload and try again.',
         'SUCCESSFULLY_RENEWED': 'Successfully renewed your service.'
     },
 

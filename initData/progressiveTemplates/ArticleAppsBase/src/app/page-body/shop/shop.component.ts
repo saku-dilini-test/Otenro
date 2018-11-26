@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { ProductsService } from '../../services/products/products.service';
 import { TitleService } from '../../services/title.service';
+import {MessageService} from "../../services/message.service";
 
 @Component({
   selector: 'app-shop',
@@ -15,14 +16,19 @@ import { TitleService } from '../../services/title.service';
 export class ShopComponent implements OnInit {
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
+  private templateName = (<any>data).templateName;
   results: {};
   private catId: any;
   private catName: any;
   catImage: any;
   private description:string[] = [];
-
-  constructor( private productService: ProductsService, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
-               private title: TitleService) {
+  private loadImageCount:number = 0;
+  constructor( private productService: ProductsService,
+               private dataService: PagebodyServiceModule,
+               private router: ActivatedRoute,
+               private route: Router,
+               private title: TitleService,
+               private messageService: MessageService) {
 
     this.router.params.subscribe(params => {
       let catName = params['name'];
@@ -34,6 +40,7 @@ export class ShopComponent implements OnInit {
       }
     });
     this.title.setLocation('shop');
+    this.messageService.sendMessage({loadImageCount:-1});
 
   }
 
@@ -60,17 +67,29 @@ export class ShopComponent implements OnInit {
             this.description.push(this.htmlToPlaintext(data[i].desc));
           }
           this.results = data;
+          if(this.templateName == "Recipe" || this.templateName == "Magazine" || this.templateName == "News"){
+            this.dataService.initialImageCount = data? data.length+1 : 0;
+          }else{
+            this.dataService.initialImageCount = data? data.length : 0;
+          }
         },
         error => {
           console.log('Error shop service');
+          this.dataService.initialImageCount = 0;
         });
     } else {
       this.productService.getAllProducts().subscribe(data => {
           // Read the result field from the JSON response.
           this.results = data;
+          if(this.templateName == "Recipe" || this.templateName == "Magazine" || this.templateName == "News"){
+            this.dataService.initialImageCount = data? data.length+1 : 0;
+          }else{
+            this.dataService.initialImageCount = data? data.length : 0;
+          }
         },
         error => {
           console.log('Error shop service all');
+          this.dataService.initialImageCount = 0;
         });
     }
 
@@ -83,6 +102,11 @@ export class ShopComponent implements OnInit {
   navigateProd(val: String, item: any) {
     this.dataService.data = item;
     this.route.navigate([val, this.catName, item.categoryId, item.id]);
+  }
+
+   imageLoaded(e){
+    this.loadImageCount += 1;
+    this.messageService.sendMessage({loadImageCount:this.loadImageCount});
   }
 
 }

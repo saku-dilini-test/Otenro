@@ -6,6 +6,7 @@ import { Network } from '@ionic-native/network';
 import { NoNetworkPage } from "../no-network/no-network";
 import { AlertController } from 'ionic-angular';
 import {DataServiceProvider} from "../../providers/data-service/data-service";
+import { WebpageNotAvailablePage } from '../webpage-not-available/webpage-not-available';
 let networkAlert = null;
 
 @Component({
@@ -50,6 +51,10 @@ export class HomePage {
 
     this.dataService.makeRequest(this.url + "?" + new Date().getTime()).subscribe(response => {
       this.dataService.wasOnlineBefore = (response.status && response.status===200);
+    }, err => {
+      // If web page not available
+      // Show the WebPageNotAvailabele page
+      this.navCtrl.setRoot(WebpageNotAvailablePage);
     });
 
     // watch network for a disconnect

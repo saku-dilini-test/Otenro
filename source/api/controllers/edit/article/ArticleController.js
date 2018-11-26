@@ -184,43 +184,22 @@ module.exports = {
 	 * @param res
 	 */
 	updateCategoryImage: function (req, res) {
-
-		var isNew = req.body.isNew;
-
-		var filePath;
-		var fileDir;
-
-		if (isNew == 'true' || isNew == true) {
-			filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/secondNavi/' + req.body.imageUrl;
-			fileDir = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/secondNavi/';
-		} else {
-			filePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId + '/img/category/' + req.body.imageUrl;
-			fileDir = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId + '/img/category/';
+		var tmpImage = req.body.file[0];
+		if(!tmpImage.match("http")){
+			var imageFileName = Date.now() + '.png';
+			var data = tmpImage.replace(/^data:image\/\w+;base64,/, "");
+			var buf = new Buffer(data, 'base64');
+				  // product images copy to app file server
+				  fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
+				  req.body.appId + '/assets/images/secondNavi/' + imageFileName, buf, function (err) {
+				  if (err) {
+					  return res.send(err);
+				  }
+				  else{
+					res.json({ ok: true, imageUrl: imageFileName });
+				  }
+		  });
 		}
-
-		req.file('file').upload({
-			dirname: require('path').resolve(fileDir)
-		}, function (err, uploadedFiles) {
-			if (err) return res.send(500, err);
-
-			fs.unlink(filePath, function (err) {
-				if (err) return console.error(err);
-			});
-
-			if (typeof req.body.imageUrl != "undefined") {
-				// Create new img file name using date.now()
-				var fileName = Date.now() + '.png';
-				fs.rename(uploadedFiles[0].fd, fileDir + fileName, function (err) {
-					if (err) return res.send(err);
-					// New img file name send back to update to menu collection
-					res.json({ ok: true, imageUrl: fileName });
-				});
-			} else {
-				res.json({ ok: true });
-			}
-
-
-		});
 	},
 
 	/**
@@ -467,7 +446,7 @@ module.exports = {
 	    });
                 res.send("success")
 
-	    console.log(categories);
+	    // console.log(categories);
 	}
 };
 

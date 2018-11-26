@@ -21,7 +21,6 @@
     "angular-dynamic-locale": "https://github.com/lgalfaso/angular-dynamic-locale.git#543954af49872d937c1baca44722cc406f49a6e8",
     "angular-gridster": "https://github.com/ManifestWebDesign/angular-gridster.git#d0618b39348be7f7fc46ec96e351a328c74c382b",
     "angular-hammer": "https://github.com/monospaced/angular-hammer.git#04288129f54c1cb9094d7d89e363a9566379a936",
-    "angular-loading-bar": "https://github.com/chieffancypants/angular-loading-bar.git#d734873e52ded18fa27d67f52272ae43267dfd63",
     "angular-material": "https://github.com/angular/bower-material.git#ec9b476051eef167c9b1522e1943f10545119bbe",
     "angular-messages": "https://github.com/angular/bower-angular-messages.git#9a864f875eb2717df78af166ea57639dfc0e5d02",
     "angular-permission": "https://github.com/Narzerus/angular-permission.git#a1768176cf009e1220bd4611fb8c3eeeffef1bf8",

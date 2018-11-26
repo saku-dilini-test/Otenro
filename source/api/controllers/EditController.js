@@ -711,67 +711,84 @@ module.exports = {
                          return;
                      }
                  } else {
-                     fs.copy(srcDirPath + zipFileSources, copyDirPath + zipFileSources, function (err) {
-                         if (err) {
-                             thisCtrl.logApkGenerationError('Error while copying zip file from ' + srcDirPath + zipFileSources + ' to ' + copyDirPath + ' for the appId:' + appId + ' in Application. Error: ' + err, userId, appId);
-                             return;
-                         }
+                     var files;
+                     var prevCopyDirPath = copyDirPath + pointerAppDirName;
+                     var prevZipFileSources = copyDirPath + zipFileSources;
+                     files = [prevCopyDirPath, prevZipFileSources];
+                     thisCtrl.deleteFilesIfExist(files, function (data) {
 
-                         sails.log.debug("Source zip file copied ");
-                         sails.log.debug("Started to Extract the files...");
+                        // If there is an error in deleting files
+                        if (data.message === 'error') {
 
-                         shell.cd(copyDirPath);
-                         shell.exec('unzip ' + zipFileSources + ' -d ./', {async: true}, function (codeunzip, stdoutunzip, stderrunzip) {
-                             if (codeunzip == 0) {
-                                 sails.log.debug("Unzipped " + zipFileSources);
+                            thisCtrl.logApkGenerationError('Error while deleting existing files in ' + copyDirPath + ' for the appId:' + appId + ' in Application. Error: ' + err, userId, appId);
+                            return;
+                        }
+                        // If files are deleted successfully
+                        if (data.message === 'success') {
 
-                                 //Move all the files in the progPointerApp(Which unzipped using above shell command) to ./
-                                 shell.exec('mv ' + pointerAppDirName + '/* ./', {async: true}, function (codemv, stdoutmv, stderrmv) {
-                                     if (codemv == 0) {
-                                         sails.log.debug("Files moved from " + pointerAppDirName + " to ./");
-
-                                         //Delete the directory progPointerApp in ./ which we don't need any more
-                                         shell.exec('rm -rf ' + pointerAppDirName, {async: true}, function (coderm, stdoutrm, stderrrm) {
-                                             if (codemv == 0) {
-                                                 sails.log.debug("Directory removed  " + pointerAppDirName + " from ./");
-                                                 sails.log.debug("ionic files are ready in " + copyDirPath + " in " + Math.floor((new Date().getTime() - startTime) / 1000) + " seconds");
-
-                                                 var searchApp = {
-                                                     id: appId
-                                                 };
-
-                                                 Application.findOne(searchApp).exec(function (err, app) {
-                                                     if (err) {
-                                                         thisCtrl.logApkGenerationError('Error while searching the appId:' + appId + ' in Application. Error: ' + err, userId, appId);
-                                                         return;
-                                                     }
-                                                     replaceAppNameNIcon(app.appName, appIconFileRES, appSplashFileRES);
-                                                 });
-                                             }else{
-                                                 thisCtrl.printShellError('Error while Executing: rm -rf ' + pointerAppDirName,coderm, stdoutrm, stderrrm, userId, appId);
-                                                 if (stderrrm){
-                                                     shell.exit(1);
-                                                     return;
-                                                 }
-                                             }
-                                         });
-                                     }else{
-                                         thisCtrl.printShellError('Error while Executing: mv ' + zipFileSources + '/* ./',codemv, stdoutmv, stderrmv, userId, appId);
-                                         if (stderrmv){
-                                             shell.exit(1);
-                                             return;
-                                         }
-                                     }
-                                 });
-                             }else{
-                                 thisCtrl.printShellError('Error while Executing: unzip ' + zipFileSources + ' -d ./',codeunzip, stdoutunzip, stderrunzip, userId, appId);
-                                 if (stderrunzip){
-                                     shell.exit(1);
-                                     return;
-                                 }
-                             }
-                         });
-                     });
+                            fs.copy(srcDirPath + zipFileSources, copyDirPath + zipFileSources, function (err) {
+                                if (err) {
+                                    thisCtrl.logApkGenerationError('Error while copying zip file from ' + srcDirPath + zipFileSources + ' to ' + copyDirPath + ' for the appId:' + appId + ' in Application. Error: ' + err, userId, appId);
+                                    return;
+                                }
+       
+                                sails.log.debug("Source zip file copied ");
+                                sails.log.debug("Started to Extract the files...");
+       
+                                shell.cd(copyDirPath);
+                                shell.exec('unzip ' + zipFileSources + ' -d ./', {async: true}, function (codeunzip, stdoutunzip, stderrunzip) {
+                                    if (codeunzip == 0) {
+                                        sails.log.debug("Unzipped " + zipFileSources);
+       
+                                        //Move all the files in the progPointerApp(Which unzipped using above shell command) to ./
+                                        shell.exec('mv ' + pointerAppDirName + '/* ./', {async: true}, function (codemv, stdoutmv, stderrmv) {
+                                            if (codemv == 0) {
+                                                sails.log.debug("Files moved from " + pointerAppDirName + " to ./");
+       
+                                                //Delete the directory progPointerApp in ./ which we don't need any more
+                                                shell.exec('rm -rf ' + pointerAppDirName, {async: true}, function (coderm, stdoutrm, stderrrm) {
+                                                    if (codemv == 0) {
+                                                        sails.log.debug("Directory removed  " + pointerAppDirName + " from ./");
+                                                        sails.log.debug("ionic files are ready in " + copyDirPath + " in " + Math.floor((new Date().getTime() - startTime) / 1000) + " seconds");
+       
+                                                        var searchApp = {
+                                                            id: appId
+                                                        };
+       
+                                                        Application.findOne(searchApp).exec(function (err, app) {
+                                                            if (err) {
+                                                                thisCtrl.logApkGenerationError('Error while searching the appId:' + appId + ' in Application. Error: ' + err, userId, appId);
+                                                                return;
+                                                            }
+                                                            replaceAppNameNIcon(app.appName, appIconFileRES, appSplashFileRES);
+                                                        });
+                                                    }else{
+                                                        thisCtrl.printShellError('Error while Executing: rm -rf ' + pointerAppDirName,coderm, stdoutrm, stderrrm, userId, appId);
+                                                        if (stderrrm){
+                                                            shell.exit(1);
+                                                            return;
+                                                        }
+                                                    }
+                                                });
+                                            }else{
+                                                thisCtrl.printShellError('Error while Executing: mv ' + zipFileSources + '/* ./',codemv, stdoutmv, stderrmv, userId, appId);
+                                                if (stderrmv){
+                                                    shell.exit(1);
+                                                    return;
+                                                }
+                                            }
+                                        });
+                                    }else{
+                                        thisCtrl.printShellError('Error while Executing: unzip ' + zipFileSources + ' -d ./',codeunzip, stdoutunzip, stderrunzip, userId, appId);
+                                        if (stderrunzip){
+                                            shell.exit(1);
+                                            return;
+                                        }
+                                    }
+                                });
+                            });
+                        }
+                    });
                  }
              });
              //     }
@@ -1087,6 +1104,31 @@ module.exports = {
                 });
             }
         });
+    },
+    /**
+     * Delete files
+     * @param files[] :: Array
+     * @param cb :: callback function
+     **/
+    deleteFilesIfExist: function (files, cb) {
+
+        var filesLength = files.length;
+
+        for (var i = 0; i < filesLength; i++) {
+            if (fs.existsSync(files[i])) {
+
+                fs.remove(files[i], function (err) {
+                    if (err) {
+
+                        sails.log.error('error occurred in file deleting, file dir : ' + files[i]);
+                        cb({ message: 'error' });
+                        return;
+                    }
+                    sails.log.debug('file deleted successully , file dir : ' + files[i]);
+                })
+            }
+        }
+        cb({ message: 'success' });
     }
 };
 

@@ -3,7 +3,7 @@
       <img class="cat-image" src="{{imageUrl1}}/{{catImage}}" width="100%">
 
       <div class="margin prod" *ngFor="let article of results" (click)="navigateProd('product',article)">
-          <img src="{{imageUrl}}/{{article.tempImageArray[0].img}}" width="100%">
+          <img src="{{imageUrl}}/{{article.tempImageArray[0].img}}" width="100%" (load)="imageLoaded($event)">
           <div class="main-header-font name">{{article.title}}</div>
       </div>
   </div>

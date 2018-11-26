@@ -642,8 +642,6 @@
         };
         // Add menu category
         $scope.addNewCategory = function(file,menu){
-            // console.log($scope.initialData,file,menu);
-
             if($scope.tmpImage[0] == null){
                 toastr.error('Please upload an image', 'Warning', {closeButton: true});
                 return;
@@ -704,7 +702,8 @@
                             toastr.error(errorMessage, 'Error!', { closeButton: true });
                         }
                     }).error(function (err) {
-                        toastr.error(err, 'Warning', {
+                        console.log(err)
+                        toastr.error('error', 'Warning', {
                             closeButton: true
                         });
                     });
@@ -729,7 +728,7 @@
                         }
 
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                        toastr.success("New category has been added successfully", 'Message', {closeButton: true});
+                        toastr.success("Successfully edited category", 'Message', {closeButton: true});
                         $mdDialog.hide();
                         mainMenuService.showMainMenuDialog();
                     }).error(function (err) {
@@ -739,10 +738,12 @@
             if($scope.mainImg != $scope.serverImage && !($scope.initialData.menu == 'addNewMenuCategory')){
                 console.log('image update');
                 $log.debug('imageUpdate true');
-                articleService.updateCategoryImage(file,$scope.initialData.menu.imageUrl,$rootScope.appId,$rootScope.tempNew).progress(function(evt) {
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    $log.debug('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-                }).success(function(data, status, headers, config) {
+                articleService.updateCategoryImage({"file":$scope.tmpImage,"appId":$rootScope.appId})
+                // .progress(function(evt) {
+                //     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                //     $log.debug('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+                // })
+                .success(function(data, status, headers, config) {
                     // update image name set to imageUrl in menu collection
                     $scope.initialData.menu.imageUrl = data.imageUrl;
                     $log.debug($scope.initialData.menu);

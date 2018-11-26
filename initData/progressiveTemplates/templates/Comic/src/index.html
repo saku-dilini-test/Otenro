@@ -7,13 +7,27 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="manifest" href="./assets/manifest.json">
+  <meta name="theme-color" content="#1976d2">
   <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="./assets/css/animate.min.css">
   <link rel="stylesheet" type="text/css" href="./assets/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="./assets/css/feather.min.css">
+  <style>
+    .spinner{
+      position: absolute;
+      top: calc(50% - 12px);
+      left: calc(50% - 12px);
+          /*width: 100%;*/
+    }
+  </style>
   </head>
-<body  class="main-background made-easy-background-image">
-  <app-root></app-root>
+<body class="main-background made-easy-background-image">
+
+  <app-root>
+    <img class="spinner" src="./assets/images/loader-white1.gif">
+  </app-root>
+
   <script src="./assets/js/jquery-2.1.0.min.js"></script>
   <script src="./assets/js/bootstrap.min.js"></script>
   <script src="./assets/js/blocs.min.js"></script>
@@ -40,5 +54,7 @@
     var x = './assets/main.css?dummy='+dummy;
     addCss(x);
   </script>
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
+
 </body>
 </html>

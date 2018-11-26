@@ -546,6 +546,15 @@ trix-editor {
         top: 42%;
         left: 44%;
 }
+
+.test{
+            position:absolute;
+            top: 42%;
+            left: 39%;
+            color: #29d;
+            font-size: 22px;
+}
+
 /*
 overriding pull-left changes other styles too therefor commented
 .pull-left {

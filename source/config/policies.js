@@ -143,10 +143,14 @@ module.exports.policies = {
         registerUser:true
     },
 
-    'IdeabizAdminapiController':{
-        '*': true
+    'ideabiz/IdeabizAdminapiController':{
+      '*': ['ideabizIPFilter']
     },
 
+    'ideabiz/IdeabizSMSController':{
+      '*': ['ideabizIPFilter']
+    },
+    
     'UpdateAllAppsController':{
         '*': true
     },

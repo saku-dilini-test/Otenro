@@ -46,7 +46,7 @@ export class FooterComponent implements OnInit{
     });
 
     this.messageService.getMessage().subscribe(data => {
-      console.log('messageService.getMessage Footer component=>', data);
+      // console.log('messageService.getMessage Footer component=>', data);
       if (data.subscription) {
         this.dataService.subscriptionStatus = data.subscription.subscriptionStatus;
       } else {
@@ -121,7 +121,7 @@ export class FooterComponent implements OnInit{
 
   smsErrorUnRegistrationCallback(error: any) {
     console.log("smsErrorUnRegistrationCallback in Footer Component: " + error);
-    footerCmp.dataService.displayMessage = 'Sorry, you do not have enough credit to send the sms to unsubscribe from the service';
+    footerCmp.dataService.displayMessage = 'Sorry, you could not be unsubscribe from the service at this time. Please try again after some time.';
     $(() => {
       $('#myAccountModelfooter').modal('hide');
       $('#appStatusModel').modal('show');
