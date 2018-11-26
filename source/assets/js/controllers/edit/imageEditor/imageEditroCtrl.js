@@ -51,34 +51,37 @@
                  */
                 $scope.imageEditorSave = function() {
                     var editedImg = null;
+                    var cropped = false;
                     if(!$scope.isCropped){
-                        applyCrop();
+                        cropped = applyCrop();
                     }
-                    setTimeout(()=>{
-                        editedImg = imageEditor.toDataURL();
-                        if(callFrom === 'addNewMenuCategory'){
-                            categoryDetails = {
-                                name: initialData.name,
-                                image : editedImg
-                            };
-                            mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory','3','imageEditorCtrl', categoryDetails);
-                        }else if(callFrom === 'addNewArticle'){
-                            articleDetails = {
-                                img : editedImg,
-                                tempImage : initialData.tempImage,
-                                deleteImages : initialData.deleteImages,
-                                articleCat : initialData.articleCat
-                            };
-                            articleService.showPublishArticleDialog(initialData.initData,'fromImageEditorCtrlSave',articleDetails);
-                        }
-                        else{
-                            categoryDetails = {
-                                name: initialData.name,
-                                image : editedImg
-                            };
-                            mainMenuService.showEditMenuCategoryDialog(callFrom,'3','imageEditorCtrl',categoryDetails);
-                        }
-                    },300);
+                    if(cropped) {
+                        setTimeout(() => {
+                            editedImg = imageEditor.toDataURL();
+                            if (callFrom === 'addNewMenuCategory') {
+                                categoryDetails = {
+                                    name: initialData.name,
+                                    image: editedImg
+                                };
+                                mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory', '3', 'imageEditorCtrl', categoryDetails);
+                            } else if (callFrom === 'addNewArticle') {
+                                articleDetails = {
+                                    img: editedImg,
+                                    tempImage: initialData.tempImage,
+                                    deleteImages: initialData.deleteImages,
+                                    articleCat: initialData.articleCat
+                                };
+                                articleService.showPublishArticleDialog(initialData.initData, 'fromImageEditorCtrlSave', articleDetails);
+                            }
+                            else {
+                                categoryDetails = {
+                                    name: initialData.name,
+                                    image: editedImg
+                                };
+                                mainMenuService.showEditMenuCategoryDialog(callFrom, '3', 'imageEditorCtrl', categoryDetails);
+                            }
+                        }, 300);
+                    }
                 };
 
                 /**
