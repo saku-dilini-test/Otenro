@@ -1,60 +1,120 @@
 <md-dialog aria-label="Menu Tree">
     <md-dialog-content>
-        <form novalidate>
-            <div class="md-dialog-header">
-                <h1>Categories</h1>
-                <ul class="md-dialog-header-nav clearfix">
-                    <li>
-                        <a class="add-new-item"  ng-click="goToAddNewMenuItemView()">Add new category</a>
-                    </li>
-                    <li>
-                        <a class="add-new-item"  ng-click="clearDefaultData()">Clear default data</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="md-dialog-main">
-                <table class="me-simple-table">
+
+            <div class="md-dialog-header" style="padding: 10px;">
+                    <h1>Categories</h1>
+                    <ul class="md-dialog-header-nav clearfix">
+                        <li>
+                            <a class="add-new-item" ng-click="goToAddNewMenuItemView()">Add new category</a>
+                        </li>
+                        <li>
+                            <a class="add-new-item" ng-click="clearDefaultData()">Clear default data</a>
+                        </li>
+                    </ul>
+                    <div style="margin: 10px 0 0 0;">
+                        <span class="menu-bar-label">Menu bar button</span>
+                    </div>
+                    <div style="padding: 0;">
+                        <md-input-container style="margin: 0;">
+                            <input md-maxlength="15" maxlength="15" ng-required="true" name="name" ng-model="nonFeaturedDropdownLabel">
+                        </md-input-container>
+                    </div>
+                </div>
+
+        <div class="md-dialog-main" style="padding-top: 0; max-height: 300px;">
+
+            <form novalidate>
+                <table ui-tree id="tree-root" class="me-simple-table">
                     <thead>
-                    <tr>
-                        <th width="100%">Name</th>
-                    </tr>
+                        <tr>
+                            <th width="30%">name</th>
+                            <th width="20%">move up/down</th>
+                            <th width="10%">featured</th>
+                            <th width="10%" style="text-align: center">edit</th>
+                            <th width="20%">sub-category</th>
+                            <th width="10%">delete</th>
+                        </tr>
                     </thead>
                 </table>
-                <div ui-tree id="tree-root" data-drag-enabled="false">
+                <div ui-tree="treeOptions" id="tree-root" data-drag-enabled="true">
                     <ol ui-tree-nodes ng-model="menuItems">
-                        <li ng-repeat="node in menuItems"  ui-tree-node ng-include="'nodes_renderer.html'"></li>
+                        <li ng-repeat="node in menuItems" ui-tree-node ng-include="'nodes_renderer.html'"></li>
                     </ol>
                 </div>
+            </form>
+        </div>
+        <div class="md-dialog-buttons">
+            <div class="inner-section">
+                <!--<md-button class="me-default-button" ng-click="deleteCategories(selected)">Delete</md-button>-->
+                <md-button class="me-default-button" ng-click="cancel()">close</md-button>
+                <md-button class="me-default-button" ng-click="ok()">ok</md-button>
             </div>
+        </div>
 
-            <!-- TODO : Later, ui-tree may be use -->
-            <script type="text/ng-template" id="nodes_renderer.html">
-                <div ui-tree-handle class="tree-node tree-node-content">
-                    <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)">
-                        <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
-                    </a>
-                    {{node.name}}
-                    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="deleteNodes(node)"><span
-                            class="glyphicon glyphicon-remove"></span></a>
-                    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="goToAddNewNode(node.id)" style="margin-right: 8px;"><span
-                            class="glyphicon glyphicon-plus"></span></a>
-                    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="goToEditMenuItemView(node)" style="margin-right: 8px;"><span
-                            class="glyphicon glyphicon-pencil"></span></a>
-                </div>
-                <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
-                    <li ng-repeat="node in node.childNodes" ui-tree-node ng-include="'nodes_renderer.html'">
-                    </li>
-                </ol>
-
-            </script>
-
-            <div class="md-dialog-buttons">
-                <div class="inner-section">
-                    <!--<md-button class="me-default-button" ng-click="deleteCategories(selected)">Delete</md-button>-->
-                    <md-button class="me-default-button" ng-click="cancel()">Close</md-button>
-                    <!--<md-button class="me-default-button" ng-click="hide()">OK</md-button>-->
-                </div>
-            </div>
-        </form>
     </md-dialog-content>
 </md-dialog>
+
+<!-- TODO : Later, ui-tree may be use -->
+<!-- <script type="text/ng-template" id="nodes_renderer.html">
+    <div ui-tree-handle class="tree-node tree-node-content">
+        <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)">
+            <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+        </a>
+        {{node.name}}
+        <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="deleteNodes(node)"><span
+                class="glyphicon glyphicon-remove"></span></a>
+        <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="goToAddNewNode(node.id)" style="margin-right: 8px;"><span
+                class="glyphicon glyphicon-plus"></span></a>
+        <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="goToEditMenuItemView(node)" style="margin-right: 8px;"><span
+                class="glyphicon glyphicon-pencil"></span></a>
+    </div>
+    <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+        <li ng-repeat="node in node.childNodes" ui-tree-node ng-include="'nodes_renderer.html'">
+        </li>
+    </ol>
+</script> -->
+<script type="text/ng-template" id="nodes_renderer.html">
+
+    <div ui-tree-handle class="tree-node tree-node-content" style="background: none; border: none; font-family: 'Open Sans', sans-serif; font-weight: 600; color: #7b7878; font-size: 12px;">
+        <a ng-if="!node.isMainCategory && !(node.nodes.length > 0)" >
+            <img style="margin-left:-15px;" height="10px" src="../../../images/subcategory-icon.svg">
+        </a>
+        <a ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)">
+            <img style="margin:0 0 5px -15px; cursor: pointer;" ng-if="!collapsed" height="25px" src="../../../images/collaps-up.svg">
+            <img style="margin:0 0 5px -15px; cursor: pointer;" ng-if="collapsed" height="25px" src="../../../images/collaps-down.svg">
+        </a>
+            {{node.name}}
+            <a class="pull-right" style="margin-right: 30px;" data-nodrag ng-click="deleteNodes(node)">
+                <img height="20px" style="cursor: pointer;" src="../../../images/delete.svg">
+            </a>
+
+            <a class="pull-right" style="margin-right: 80px;" data-nodrag ng-click="goToAddNewNode(node.id)">
+                <img height="20px" style="cursor: pointer;" src="../../../images/sub-category.svg">
+            </a>
+
+            <a class="pull-right" style="margin-right: 65px;" data-nodrag ng-click="goToEditMenuItemView(node)">
+                <img height="20px" style="cursor: pointer;" src="../../../images/category-edit.svg">
+            </a>
+
+            <input class="pull-right" 
+                ng-model="node.isFeaturedCategory" 
+                ng-change="onCheckboxChange(node)" 
+                ng-if="node.isMainCategory" data-nodrag style="margin-right: 60px; cursor: pointer;" type="checkbox">
+
+            <a class="pull-right" ng-style="{ 'margin-right': node.isMainCategory ? '60px' : '130px'}" data-nodrag ng-click="moveDown($index, $last, node)">
+                <img height="20px" ng-if="!$last" style="cursor: s-resize;" src="../../../images/down-arrow-active.svg">
+                <img height="20px" ng-if="$last" style="cursor: not-allowed;" src="../../../images/down-arrow-disable.svg">
+            </a>
+
+            <a class="pull-right" data-nodrag ng-click="moveUp($index, $first, node)">
+                <img height="20px" ng-if="!$first" style="cursor: n-resize;" src="../../../images/up-arrow-active.svg">
+                <img height="20px" ng-if="$first" style="cursor: not-allowed;" src="../../../images/up-arrow-disable.svg">
+            </a>
+        
+    </div>
+
+    <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+        <li ng-repeat="node in node.childNodes" ui-tree-node ng-include="'nodes_renderer.html'">
+        </li>
+    </ol>
+</script>

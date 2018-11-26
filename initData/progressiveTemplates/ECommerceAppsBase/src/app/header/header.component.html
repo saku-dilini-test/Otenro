@@ -29,14 +29,27 @@
 					<a class="padding-horizontal"  (click)="navigate('','Home')"><img src="{{imageUrl}}/logo.png&dummy={{dummy}}" alt="logo" height="70px" /></a>
 				</div>
 					<ul class="site-navigation nav navbar-nav">
+
+						<li *ngFor="let featuredCategory of featuredCategories">
+							<a (click)="navigate('shop','Search')">{{featuredCategory.name}}</a>
+						</li>
 						<li>
-							<a (click)="navigate('','Home')">Home</a>
+							<div class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span>{{nonFeaturedDropdownLabel}}</span>
+									<span class="caret"></span></a>
+								<ul class="dropdown-menu  main-navigation" role="menu">
+									<li *ngFor="let nonFeaturedCategory of nonFeaturedCategories">
+										<a (click)="navigate('shop','Search')">{{nonFeaturedCategory.name}}</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li *ngIf="showOnWebsitePolicies">
+							<a (click)="navigate('aboutus','About Us')">policies</a>
 						</li>
 						<li *ngIf="showOnWebsiteAbout">
-							<a (click)="navigate('aboutus','About Us')">About-us</a>
-						</li>
-						<li>
-						  <a (click)="navigate('shop','Search')">Products</a>
+							<a (click)="navigate('aboutus','About Us')">About us</a>
 						</li>
 						<li *ngIf="showOnWebsiteContact">
 							<a  (click)="navigate('contact', 'Contact Us')">Contact us</a>

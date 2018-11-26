@@ -13,9 +13,11 @@
                 $scope.templateCategory = data.templateCategory;
                 categoryMaintenanceService.getCategoryList()
                     .success(function (secondNaviList) {
-                        $scope.menuItems = secondNaviList;
 
+                        $scope.menuItems = secondNaviList;
+                        $scope.createFeaturedCategoryArray($scope.menuItems);
                     }).error(function (error) {
+
                     toastr.error('Menu Loading Error', 'Warning', {closeButton: true});
                 });
             }).error(function (err) {
@@ -23,6 +25,18 @@
                 closeButton: true
             });
         });
+
+        // Get application header data
+        categoryMaintenanceService.getAppHeaderData($rootScope.appId)
+            .success(function (res) {
+
+                if (res.status === 'SUCCESS') {
+
+                    $scope.nonFeaturedDropdownLabel = res.data.nonFeaturedDropdownLabel;
+                }
+            }).error(function (err) {
+
+            });
 
         // Add New Category
         $scope.goToAddNewMenuItemView = function () {
@@ -113,5 +127,288 @@
             $mdDialog.hide();
         };
 
+        $scope.treeOptions = {
+
+            beforeDrop: function (event) {
+
+                if (event.source.nodesScope === event.dest.nodesScope)
+                    return true;
+                else
+                    return false;
+            },
+            dragStop: function (event) {
+
+                let socketBody = { payload: $scope.createCategoriesArrayAfterDragStop($scope.menuItems) };
+                $scope.updateCategoryOrder(socketBody);
+            }
+        };
+
+        /**
+         * Responsible for moving categories upside
+         * 
+         * @param currentIndex {Integer} :: $index of the clicked category
+         * @param isFirstElement {Boolean} :: Equals to true, if category is first element in the list else false
+         * @param node :: clicked category
+         * 
+         **/
+        $scope.moveUp = function (currentIndex, isFirstElement, node) {
+
+            if (!isFirstElement) {
+
+                if (!node.parentId) {
+
+                    let updatedCategories = [];
+
+                    let currentCategory = $scope.menuItems.splice(currentIndex, 1);
+                    $scope.menuItems.splice(currentIndex - 1, 0, currentCategory[0]);
+
+                    let associatedCategory = $scope.menuItems[currentIndex];
+                    let socketBody = { payload: $scope.createUpdatedCategoriesArray(currentCategory[0], associatedCategory, currentIndex, 'MOVE_UP') };
+
+                    $scope.updateCategoryOrder(socketBody);
+                }
+
+                if (node.parentId) {
+
+                    function loopArr(arr) {
+
+                        arr.forEach(item => {
+
+                            if (item.id === node.parentId) {
+
+                                let currentCategory = item.childNodes.splice(currentIndex, 1);
+                                item.childNodes.splice(currentIndex - 1, 0, currentCategory[0]);
+
+                                let associatedCategory = item.childNodes[currentIndex];
+                                let socketBody = { payload: $scope.createUpdatedCategoriesArray(currentCategory[0], associatedCategory, currentIndex, 'MOVE_UP') };
+
+                                $scope.updateCategoryOrder(socketBody);
+                            }
+
+                            else if (item.nodes.length > 0) {
+
+                                loopArr(item.childNodes);
+                            }
+                        });
+                    }
+                    loopArr($scope.menuItems);
+                }
+            }
+        };
+
+        /**
+         * Responsible for moving categories downside
+         * 
+         * @param currentIndex {Integer} :: $index of the clicked category
+         * @param isLastElement {Boolean} :: Equals to true, if category is last element in the list else false
+         * @param node :: clicked category
+         * 
+         **/
+        $scope.moveDown = function (currentIndex, isLastElement, node) {
+
+            if (!isLastElement) {
+
+                if (!node.parentId) {
+
+                    let currentCategory = $scope.menuItems.splice(currentIndex, 1);
+                    $scope.menuItems.splice(currentIndex + 1, 0, currentCategory[0]);
+
+                    let associatedCategory = $scope.menuItems[currentIndex];
+                    let socketBody = { payload: $scope.createUpdatedCategoriesArray(currentCategory[0], associatedCategory, currentIndex, 'MOVE_DOWN') };
+
+                    $scope.updateCategoryOrder(socketBody);
+                }
+
+                if (node.parentId) {
+
+                    function loopArr(arr) {
+
+                        arr.forEach(item => {
+
+                            if (item.id === node.parentId) {
+
+                                let currentCategory = item.childNodes.splice(currentIndex, 1);
+                                item.childNodes.splice(currentIndex + 1, 0, currentCategory[0]);
+
+                                let associatedCategory = item.childNodes[currentIndex];
+                                let socketBody = { payload: $scope.createUpdatedCategoriesArray(currentCategory[0], associatedCategory, currentIndex, 'MOVE_DOWN') };
+
+                                $scope.updateCategoryOrder(socketBody);
+                            }
+
+                            else if (item.nodes.length > 0) {
+
+                                loopArr(item.childNodes);
+                            }
+                        });
+                    }
+                    loopArr($scope.menuItems);
+                }
+            }
+        };
+
+        /**
+         * Update index value of categories
+         * 
+         * @param socketBody  :: updated categories
+         * 
+        **/
+        $scope.updateCategoryOrder = function (socketBody) {
+
+            socketBody.appId = $rootScope.appId;
+            io.socket.post('/edit/commerce/updateCategoryOrder', socketBody);
+        };
+
+        /**
+         * Responsible for creating updated categories array
+         * 
+         * @param currentCategory :: category which moved up or moved down
+         * @param associatedCategory :: category which automatically affeced by moving particular category
+         * @param currentIndex {Integer} :: index of the moved category
+         * @param type {String} :: flag MOVE_UP or MOVE_DOWN
+         * 
+         * @return updatedCategories {Array}
+         * 
+         **/
+        $scope.createUpdatedCategoriesArray = function (currentCategory, associatedCategory, currentIndex, type) {
+
+            let updatedCategories = [];
+
+            if (type === 'MOVE_UP')
+                updatedCategories.push({ id: currentCategory.id, index: currentIndex - 1 });
+            else
+                updatedCategories.push({ id: currentCategory.id, index: currentIndex + 1 });
+
+            updatedCategories.push({ id: associatedCategory.id, index: currentIndex });
+
+            return updatedCategories;
+        };
+
+        /**
+         * Responsible for updating featured category
+         * 
+         * @param node :: category
+         **/
+        $scope.onCheckboxChange = function (node) {
+
+            if (node.isFeaturedCategory && $scope.featuredCategoryArr.length < 4) {
+
+                let body = { appId: $rootScope.appId, characterLength: node.name.length };
+                io.socket.post('/edit/commerce/checkAppHeaderEligibility', body, (res) => {
+
+                    if (res.status === 'ELIGIBLE') {
+
+                        let socketBody = { id: node.id, isFeaturedCategory: node.isFeaturedCategory };
+                        io.socket.post('/edit/commerce/updateFeaturedCategory', socketBody, (res) => {
+
+                            if (res.status === 'SUCCESS') {
+
+                                $scope.featuredCategoryArr.push(node);
+                                toastr.success('Successfully added to featured categories!', 'Success!', { closeButton: true });
+                            }
+                            else
+                                toastr.error('Error in adding to featured categories', 'Error!', { closeButton: true });
+
+                        });
+                    }
+
+                    if (res.status === 'NOT_ELIGIBLE') {
+
+                        node.isFeaturedCategory = false;
+                        toastr.warning('Only ' + $scope.featuredCategoryArr.length + ' categories can be shown due to limited space!', 'Warning!', { closeButton: true });
+                    }
+                });
+            }
+
+            if (!node.isFeaturedCategory) {
+
+                let socketBody = { id: node.id, isFeaturedCategory: node.isFeaturedCategory };
+                io.socket.post('/edit/commerce/updateFeaturedCategory', socketBody, (res) => {
+
+                    if (res.status === 'SUCCESS') {
+
+                        let checkedCategoryIndex = $scope.featuredCategoryArr.indexOf(node);
+                        if (checkedCategoryIndex > -1) {
+
+                            $scope.featuredCategoryArr.splice(checkedCategoryIndex, 1);
+                            toastr.success('Successfully removed from featured categories!', 'Success!', { closeButton: true });
+                        }
+                    }
+                    else
+                        toastr.error('Failed to removed from featured categories!', 'Error!', { closeButton: true });
+                });
+            }
+
+            if (node.isFeaturedCategory && $scope.featuredCategoryArr.length === 4) {
+
+                toastr.warning('Maximum four categories are allowed for featured!', 'Warning!', { closeButton: true });
+                node.isFeaturedCategory = false;
+            }
+        };
+
+        /**
+         * Create featured category array
+         * 
+         * @param menuItems :: Category list
+         **/
+        $scope.createFeaturedCategoryArray = function (menuItems) {
+
+            $scope.featuredCategoryArr = [];
+            menuItems.forEach(category => {
+
+                if (category.isFeaturedCategory) {
+                    $scope.featuredCategoryArr.push(category);
+                }
+            });
+        };
+
+        /**
+         *  Responsible for creating payload for updateCategoryOrder after DragStop
+         * 
+         *  @param {Array} :: menuItems with current positions
+         *  
+         *  @return payload {Array}
+         **/
+        $scope.createCategoriesArrayAfterDragStop = function (currentMenuItems) {
+
+            let payload = [];
+            let tempPayloadItem;
+
+            currentMenuItems.forEach(category => {
+
+                tempPayloadItem = { id: category.id, index: $scope.menuItems.indexOf(category) };
+                payload.push(tempPayloadItem);
+            });
+            return payload;
+        };
+
+        $scope.ok = function () {
+
+            if ($scope.nonFeaturedDropdownLabel) {
+
+                $scope.updateNonFeaturedDropdownLabel();
+                $mdDialog.hide();
+            } else {
+
+                toastr.warning('Fill the menu bar button value for non featured categories!', 'Warning', { closeButton: true });
+            }
+        };
+
+        $scope.updateNonFeaturedDropdownLabel = function () {
+
+            let postBody = { appId: $rootScope.appId, nonFeaturedDropdownLabel: $scope.nonFeaturedDropdownLabel };
+            categoryMaintenanceService.updateNonFeaturedCategoryLabel(postBody)
+                .success(function (res) {
+
+                    if (res.status === 'SUCCESS') {
+
+                        toastr.success('Successfully updated!', 'Success!', { closeButton: true });
+                    }
+                })
+                .error(function (error) {
+
+                    toastr.error('Error occurred!', 'Error!', { closeButton: true });
+                })
+        };
     }
 })();

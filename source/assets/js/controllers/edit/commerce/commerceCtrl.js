@@ -1676,5 +1676,46 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
             }
         };
 
+        $scope.onCheckBoxChange = function(field) {
+
+            let isSelected, characterLength;
+
+            if (field === 'policies') {
+
+                isSelected = $scope.storeSettings.showOnWebsitePolicies;
+                characterLength = 8;
+            }
+            if (field === 'about_us') {
+
+                isSelected = $scope.storeSettings.showOnWebsiteAbout;
+                characterLength = 8;
+            }
+            if (field === 'contact_us') {
+
+                isSelected = $scope.basicInfo.showOnWebsiteContact;
+                characterLength = 10;
+            }
+
+            if (isSelected) {
+
+                let socketBody = { appId: $rootScope.appId, characterLength: characterLength };
+                io.socket.post('/edit/commerce/checkAppHeaderEligibility', socketBody, (res) => {
+
+                    if (res.status === 'NOT_ELIGIBLE') {
+
+                        if (field === 'policies') {
+                            $scope.storeSettings.showOnWebsitePolicies = false;
+                        }
+                        if (field === 'about_us') {
+                            $scope.storeSettings.showOnWebsiteAbout = false;
+                        }
+                        if (field === 'contact_us') {
+                            $scope.basicInfo.showOnWebsiteContact = false;
+                        }
+                        toastr.warning('Selection in not allowed due to limited space on app header. Deselect some featured categories before selecting this.', 'Warning!', { closeButton: true });
+                    }
+                });
+            }
+        };
     }
 })();

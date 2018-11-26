@@ -4,6 +4,8 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
+var config = require('../../../services/config');
+
 module.exports = {
 
     addContactUs: function (req, res) {
@@ -42,13 +44,20 @@ module.exports = {
         var searchApp = {
             appId: req.body.appId
         };
+        var contactUsController = this;
                 data.telPhone = "+" + data.telPhone;
         ApplicationContactUs.update(searchApp, data).exec(function (err, app) {
             if(err) return err;
 
+            if (app.length > 0) {
+                contactUsController.updateAppHeaderData(app[0].appId, app[0].showOnWebsiteContact);
+            }
+
             if (app.length == 0) {
                 ApplicationContactUs.create(data).exec(function (err, appContactUs) {
-                    if (err) res.send(err);
+                    if (err) return res.send(err);
+
+                    contactUsController.updateAppHeaderData(appContactUs.appId, appContactUs.showOnWebsiteContact);
 
                     res.send({
                         appId: appContactUs.appId,
@@ -205,6 +214,42 @@ module.exports = {
             }
             else {
                 res.send(200,{message:' Branch deleted'});
+            }
+        });
+    },
+
+    updateAppHeaderData: function (appId, isContactUsShown) {
+
+        var contactUsCharacterLength = config.APP_HEADER_INITIAL_DATA.CONTACT_US_CHARACTER_COUNT;
+
+        AppHeaderData.findOne({ appId: appId }).exec(function (err, appHeaderData) {
+
+            if (err) {
+
+                sails.log.error('Error occurred at ContactUsController.updateAppHeaderData , error : ' + err);
+            }
+            if (appHeaderData) {
+
+                if (isContactUsShown && !appHeaderData.isContactUsChecked) {
+
+                    appHeaderData.usedCategoryCharacterLength = appHeaderData.usedCategoryCharacterLength + contactUsCharacterLength;
+                    appHeaderData.isContactUsChecked = true;
+                }
+                if (!isContactUsShown && appHeaderData.isContactUsChecked) {
+
+                    appHeaderData.usedCategoryCharacterLength = appHeaderData.usedCategoryCharacterLength - contactUsCharacterLength;
+                    appHeaderData.isContactUsChecked = false;
+                }
+                appHeaderData.save(function (err) {
+
+                    if (err) {
+
+                        sails.log.error('Error occurred in updating AppHeaderData , error : ' + err);
+                    } else {
+
+                        sails.log.debug('Successfully updated AppHeaderData.');
+                    }
+                });
             }
         });
     }

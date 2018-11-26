@@ -381,6 +381,7 @@ module.exports = {
                                   serviceApi: config.server,
                                   templateName: templateName
                               };
+                              appCtrl.createAppHeaderData(app.id, templateName);
                               fs.copy(templatePath, tempAppDirPath + app.id, function(err) {
                                   if (err) {
                                       console.error("Nothing to override in: " + templatePath);
@@ -533,6 +534,25 @@ module.exports = {
               });
           }
       );
+    },
+
+    createAppHeaderData: function(appId, templateName) {
+
+        var values = { appId: appId };
+
+        if (templateName === 'smartfit') {
+            values.maxCategoryCharacterLength = config.APP_HEADER_INITIAL_DATA.MAX_CHARACTER_COUNT.POWER_HOUSE;
+            values.usedCategoryCharacterLength = 0;
+        }
+        if (templateName === 'outfit') {
+            values.maxCategoryCharacterLength = config.APP_HEADER_INITIAL_DATA.MAX_CHARACTER_COUNT.STYLE_TO_SHOP;
+            values.usedCategoryCharacterLength = 0;
+        }
+
+        AppHeaderData.create(values).exec(function(err) {
+
+            if (err) sails.log.error('Error occurred while creating AppHeaderData of appId : ' + appId); 
+        });
     },
 
     getApplicationData :function(req,res){

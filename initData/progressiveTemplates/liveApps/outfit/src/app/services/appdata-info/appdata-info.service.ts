@@ -35,4 +35,11 @@ export class AppDataService {
             .map(res => res.text() ? res.json() : res);
     }
 
+    /**
+     * Api call to get application header details
+     **/
+    getAppHeaderdata() {
+        return this.http.get(SERVER_URL + "/edit/commerce/getAppHeaderData?appId=" + this.appId)
+            .map(res => res.json());
+    }
 }

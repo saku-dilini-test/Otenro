@@ -240,7 +240,7 @@
                     <div class="md-dialog-main">
                         <div class="md-dialog-header">
                             <h1>policies</h1>
-                            <md-checkbox aria-label="Show Map"  ng-model="storeSettings.showOnWebsitePolicies">
+                            <md-checkbox aria-label="Show Map"  ng-model="storeSettings.showOnWebsitePolicies" ng-change="onCheckBoxChange('policies')">
                                 Show on the Website Menu Bar
                             </md-checkbox>
                         </div>
@@ -415,7 +415,7 @@
                                 <span class="information">Characters left: </span> <span class="information"> {{maxAboutUsHeader - storeSettings.header.length}} </span>
                             </div>
                         </fieldset>
-                        <md-checkbox aria-label="Show Map"  ng-model="storeSettings.showOnWebsiteAbout">
+                        <md-checkbox aria-label="Show Map"  ng-model="storeSettings.showOnWebsiteAbout" ng-change="onCheckBoxChange('about_us')">
                             Show on the Website Menu Bar
                         </md-checkbox>
                         <fieldset>
@@ -467,7 +467,7 @@
                         <div class="md-dialog-main">
                             <div class="md-dialog-header">
                                 <h1>Contact Us</h1>
-                                <md-checkbox aria-label="Show Map"  ng-model="basicInfo.showOnWebsiteContact">
+                                <md-checkbox aria-label="Show Map"  ng-model="basicInfo.showOnWebsiteContact" ng-change="onCheckBoxChange('contact_us')">
                                     Show on the Website Menu Bar
                                 </md-checkbox>
                             </div>

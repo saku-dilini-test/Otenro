@@ -27,107 +27,210 @@ module.exports = {
 
 
                     if (req.body.parentId) {
-                        var secondSubNavi = req.body;
-                        secondSubNavi.imageUrl = newFileName;
-                        secondSubNavi.nodes = [];
-                        MainCategory.create(secondSubNavi).exec(function (err, newMenu) {
-                            if (err) res.send(err);
 
-                            if (newMenu) {
-                                MainCategory.find({id: req.body.parentId}).exec(function (err, parent) {
-                                    if (err) res.send(err);
-                                    if (parent) {
-                                        var newParent = {};
-                                        newParent.nodes = [];
-                                        console.log(parent)
-                                        if (parent[0].nodes) {
-                                            newParent.nodes = parent[0].nodes;
-                                        }
-                                        newParent.nodes.push(newMenu.id);
-                                        MainCategory.update({id: req.body.parentId}, newParent).exec(function (err) {
-                                            if (err) {
-                                                res.send(err);
-                                            } else {
-                                                res.send('ok');
-                                            }
-                                        });
+                        MainCategory.find({ select: ['nodes'], where: { appId: req.body.appId, parentId: req.body.parentId } })
+                            .exec(function (err, nodes) {
+
+                                if (err) {
+
+                                    sails.log.error('Error Occurred : In MainCategoryController.addNewCategory() : Error => ' + err);
+                                    return res.serverError(err);
+                                }
+
+                                var secondSubNavi = req.body;
+                                secondSubNavi.index = nodes.length === 0 ? 0 : nodes.length;
+                                secondSubNavi.imageUrl = newFileName;
+                                secondSubNavi.nodes = [];
+
+                                MainCategory.create(secondSubNavi).exec(function (err, newMenu) {
+
+                                    if (err) {
+
+                                        sails.log.error('Error Occurred : In MainCategoryController.addNewCategory() : Error => ' + err);
+                                        return res.serverError(err);
                                     }
 
+                                    if (newMenu) {
+                                        MainCategory.find({ id: req.body.parentId }).exec(function (err, parent) {
+
+                                            if (err) {
+
+                                                sails.log.error('Error Occurred : In MainCategoryController.addNewCategory() : Error => ' + err);
+                                                return res.serverError(err);
+                                            }
+                                            if (parent) {
+                                                var newParent = {};
+                                                newParent.nodes = [];
+                                                console.log(parent)
+                                                if (parent[0].nodes) {
+                                                    newParent.nodes = parent[0].nodes;
+                                                }
+                                                newParent.nodes.push(newMenu.id);
+                                                MainCategory.update({ id: req.body.parentId }, newParent).exec(function (err) {
+                                                    if (err) {
+
+                                                        sails.log.error('Error Occurred : In MainCategoryController.addNewCategory() : Error => ' + err);
+                                                        return res.serverError(err);
+                                                    } else {
+                                                        res.send('ok');
+                                                    }
+                                                });
+                                            }
+
+                                        });
+                                    }
                                 });
-                            }
-                        });
+                            });
 
                     } else {
-                        var secondNavi = req.body;
-                        secondNavi.imageUrl = newFileName;
-                        secondNavi.nodes = [];
-                        MainCategory.create(secondNavi).exec(function (err, newMenu) {
-                            if (err) res.send(err);
-                            res.json(newMenu);
-                        });
+                        MainCategory.count({ where: { appId: req.body.appId, parentId: { $exists: false } } })
+                            .exec(function (err, count) {
+
+                                if (err) {
+
+                                    sails.log.error('Error Occurred : In MainCategoryController.addNewCategory() : Error => ' + err);
+                                    return res.serverError(err);
+                                }
+                                var secondNavi = req.body;
+                                secondNavi.index = count === 0 ? 0 : count;
+                                secondNavi.isMainCategory = true;
+                                secondNavi.imageUrl = newFileName;
+                                secondNavi.nodes = [];
+
+                                MainCategory.create(secondNavi).exec(function (err, newMenu) {
+
+                                    if (err) {
+
+                                        sails.log.error('Error Occurred : In MainCategoryController.addNewCategory() : Error => ' + err);
+                                        return res.serverError(err);
+                                    }
+                                    return res.json(newMenu);
+                                });
+                            });
                     }
                 });
-            }else{
-                res.status(409).send("Category name already exists");
+            } else {
+
+                return res.status(409).send("Category name already exists");
             }
         });
     },
 
-    getCategoryList : function(req,res){
+    getCategoryList: function (req, res) {
+
         var mainCatCtrl = this;
+        var isRankingStarted = false;
         var appId = req.param('appId');
         var searchApp = {
             appId: appId
         };
-        MainCategory.find(searchApp).sort({ updatedAt: 'DESC' }).exec(function(err, list) {
+
+        Application.findOne({ id: appId }).exec(function (err, app) {
+
+            if (err) {
+                sails.log.error('Error occurred: MainCategoryController.getCategoryList : error => ' + err);
+            }
+
+            if (app) {
+
+                if (app.isRankingStarted) {
+                    isRankingStarted = true;
+                }
+            }
+        });
+
+        MainCategory.find(searchApp).sort({ updatedAt: 'DESC' }).exec(function (err, list) {
             if (err) throw err;
 
-            if(list){
-                ThirdNavigation.find(searchApp).sort({ updatedAt:'DESC' }).exec(function(err, products) {
+            if (list) {
+                ThirdNavigation.find(searchApp).sort({ updatedAt: 'DESC' }).exec(function (err, products) {
                     if (err) return done(err);
 
-                    if(products){
-                        var parentMenuItems =[];
-                        for(var i = 0; i < list.length; i++){
-                            var relatedProducts = products.filter(products =>  products.childId == list[i].id);
+                    if (products) {
+                        var parentMenuItems = [];
+                        for (var i = 0; i < list.length; i++) {
+                            var relatedProducts = products.filter(products => products.childId == list[i].id);
                             list[i].products = relatedProducts;
-                            if(!list[i].parentId){
+                            if (!list[i].parentId) {
                                 parentMenuItems.push(list[i]);
                             }
                         }
 
+                        if (isRankingStarted) {
+
+                            parentMenuItems.sort((currentItem, nextItem) => {
+
+                                if (currentItem.index > nextItem.index) {
+
+                                    return 1;
+                                }
+
+                                if (currentItem.index < nextItem.index) {
+
+                                    return -1;
+                                }
+                                return 0;
+                            });
+                        }
                         var arr = mainCatCtrl.makeCategoryArray(parentMenuItems, list, products);
 
-                        arr.forEach(function(cat){
-                            // if(cat.childNodes.length > 0 && cat.childNodes.updatedAt){
-                            //     var childNodesArr=cat.childNodes;
-                            //      var childNodesArrSorted = childNodesArr.sort(function(a,b){
-                            //          return b.updatedAt - a.updatedAt;
-                            //      });
-                            //      cat.childNodes = childNodesArrSorted;
-                            // }
-                            if(cat.childNodes.length > 0){
-                                var childNodesArr=cat.childNodes;
+                        if (isRankingStarted) {
 
-                                //Child categories sort by
-                                var predicateBy = 'name';
+                            arr.forEach((cat) => {
 
-                                //Sort child categories
-                                var childNodesArrSorted = childNodesArr.sort(function (a,b) {
-                                    if( a[predicateBy] > b[predicateBy]){
-                                        return 1;
-                                    }else if( a[predicateBy] < b[predicateBy] ){
-                                        return -1;
-                                    }
-                                    return 0;
-                                });
-                                cat.childNodes = childNodesArrSorted;
-                            }
-                        });
+                                if (cat.childNodes.length > 0) {
+                                    var childNodesArr = cat.childNodes;
 
+                                    //Child categories sort by
+                                    var predicateBy = 'index';
 
+                                    //Sort child categories
+                                    var childNodesArrSorted = childNodesArr.sort((a, b) => {
 
+                                        if (a[predicateBy] > b[predicateBy]) {
 
+                                            return 1;
+                                        }
+
+                                        if (a[predicateBy] < b[predicateBy]) {
+
+                                            return -1;
+                                        }
+                                        return 0;
+                                    });
+                                    cat.childNodes = childNodesArrSorted;
+                                }
+                            });
+                        }
+
+                        if (!isRankingStarted) {
+
+                            arr.forEach((cat) => {
+
+                                if (cat.childNodes.length > 0) {
+                                    var childNodesArr = cat.childNodes;
+
+                                    //Child categories sort by
+                                    var predicateBy = 'updatedAt';
+
+                                    //Sort child categories
+                                    var childNodesArrSorted = childNodesArr.sort((a, b) => {
+
+                                        if (a[predicateBy] < b[predicateBy]) {
+
+                                            return 1;
+                                        }
+
+                                        if (a[predicateBy] > b[predicateBy]) {
+
+                                            return -1;
+                                        }
+                                        return 0;
+                                    });
+                                    cat.childNodes = childNodesArrSorted;
+                                }
+                            });
+                        }
                         res.send(arr);
                     }
                 });
@@ -313,4 +416,190 @@ module.exports = {
         }
         return node.id;
     },
+
+    /**
+     * Responsible for updating category index which is moved up or moved down
+     **/
+    updateCategoryOrder: function (req, res) {
+
+        var updatedCategories = req.body.payload;
+        var appId = req.body.appId;
+
+        if (!req.isSocket) {
+
+            sails.log.debug('Not a socket request ' + ' MainCategoryController.updateCategoryOrder');
+            return res.badRequest({ status: 'NOT_SOCKET_REQUEST' });
+        }
+
+        var isError = false;
+        var loopCount = 0;
+
+        Application.update({ id: appId}, { isRankingStarted: true }).exec(function (err) {
+
+            if (err) {
+
+                sails.log.error('Error occurred: MainCategoryController.updateCategoryOrder : error => ' + err);
+            }
+        });
+
+        updatedCategories.forEach((category) => {
+
+            MainCategory.update({ id: category.id }, { index: category.index })
+                .exec(function (err, updatedCategory) {
+
+                    loopCount++;
+
+                    if (err) {
+
+                        isError = true;
+                        sails.log.error('In MainCategoryController.updateCategoryOrder, error => ' + err);
+                    }
+
+                    if (updatedCategories.length === loopCount) {
+
+                        if (isError)
+                            return res.serverError({ status: 'SERVER_ERROR' });
+                        else
+                            return res.send({ status: 'SUCCESS' });
+                    }
+                });
+        });
+    },
+
+    /**
+     * Responsible for updating featured category
+     **/
+    updateFeaturedCategory: function (req, res) {
+
+        var mainCategoryController = this;
+
+        if (!req.isSocket) {
+
+            sails.log.debug('Not a socket request ' + ' MainCategoryController.updateFeaturedCategory');
+            return res.badRequest({ status: 'NOT_SOCKET_REQUEST' });
+        }
+
+        var id = req.body.id;
+        var isFeaturedCategory = req.body.isFeaturedCategory;
+
+        MainCategory.update({ id: id }, { isFeaturedCategory: isFeaturedCategory })
+            .exec(function (err, category) {
+
+                if (err) {
+
+                    sails.log.error('In MainCategoryController.updateFeaturedCategory, error => ' + err);
+                    return res.serverError({ status: 'SERVER_ERROR' });
+                }
+
+                if (category.length > 0) {
+
+                    mainCategoryController.updateAppHeaderData(category[0]);
+                    return res.send({ status: 'SUCCESS' });
+                }
+            });
+    },
+
+    checkAppHeaderEligibility: function (req, res) {
+
+        if (!req.isSocket) {
+
+            sails.log.debug('Not a socket request ' + ' MainCategoryController.updateFeaturedCategory');
+            return res.badRequest({ status: 'NOT_SOCKET_REQUEST' });
+        }
+
+        var appId = req.body.appId;
+        var characterLength = req.body.characterLength;
+
+        AppHeaderData.findOne({ appId: appId }).exec(function (err, appHeaderData) {
+
+            if (err) {
+
+                sails.log.error('In MainCategoryController.checkAppHeaderEligibility, error => ' + err);
+                return res.serverError({ status: 'SERVER_ERROR' });
+            }
+
+            if (appHeaderData) {
+
+                var remainingCharacterCount = appHeaderData.maxCategoryCharacterLength - appHeaderData.usedCategoryCharacterLength;
+
+                if (remainingCharacterCount >= characterLength) {
+
+                    return res.send({ status: 'ELIGIBLE' });
+                } else
+                    return res.send({ status: 'NOT_ELIGIBLE' });
+            }
+        });
+    },
+
+    updateAppHeaderData: function (category) {
+
+        AppHeaderData.findOne({ appId: category.appId }).exec(function (err, appHeaderData) {
+
+            if (err) {
+
+                sails.log.error('Error occurred in MainCategoryController.updateAppHeaderData , error ' + err);
+            }
+
+            if (appHeaderData) {
+
+                var charLength = category.name.length;
+                if (category.isFeaturedCategory) {
+
+                    appHeaderData.usedCategoryCharacterLength = appHeaderData.usedCategoryCharacterLength + charLength;
+                }
+                else
+                    appHeaderData.usedCategoryCharacterLength = appHeaderData.usedCategoryCharacterLength - charLength;
+
+                appHeaderData.save(function (err) {
+
+                    if (!err) {
+
+                        sails.log.debug('AppHeaderData is updated successfully.');
+                    }
+                });
+            }
+        });
+    },
+
+    updateFeaturedDropdownLabel: function (req, res) {
+
+        var appId = req.body.appId;
+        var nonFeaturedDropdownLabel = req.body.nonFeaturedDropdownLabel;
+
+        AppHeaderData.update({ appId: appId }, { nonFeaturedDropdownLabel: nonFeaturedDropdownLabel })
+            .exec(function (err, appHeaderData) {
+
+                if (err) {
+
+                    sails.log.error('Error occurred: MainCategoryController.updateFeaturedDropdownLabel : error => ' + err);
+                    return res.serverError({ status: 'ERROR' });
+                }
+                if (appHeaderData && appHeaderData.length > 0) {
+
+                    return res.send({ status: 'SUCCESS', data: appHeaderData[0] });
+                }
+            });
+    },
+
+    getAppHeaderData: function (req, res) {
+
+        var appId = req.param('appId');
+
+        AppHeaderData.findOne({ appId: appId }).exec(function (err, appHeaderData) {
+
+            if (err) {
+
+                sails.log.error('Error occurred: MainCategoryController.getAppHeaderData : error => ' + err);
+                return res.serverError({ status: 'ERROR' });
+            }
+            if (appHeaderData) {
+
+                return res.send({ status: 'SUCCESS', data: appHeaderData });
+            }
+            if (!appHeaderData) {
+
+                return res.send({ status: 'NOT_FOUND' });
+            }
+        });
+    }
 };

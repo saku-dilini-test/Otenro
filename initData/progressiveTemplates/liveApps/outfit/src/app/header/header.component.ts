@@ -34,6 +34,9 @@ export class HeaderComponent implements OnInit {
   showOnWebsitePolicies:boolean;
   showOnWebsiteAbout:boolean;
   showOnWebsiteContact:boolean;
+  featuredCategories = [];
+  nonFeaturedCategories = [];
+  nonFeaturedDropdownLabel;
   constructor(private location: Location,private localStorageService: LocalStorageService,
               private categoryService: CategoriesService, private router: Router,
               private dataService: PagebodyServiceModule, private titleServ: TitleService,
@@ -43,10 +46,15 @@ export class HeaderComponent implements OnInit {
     this.dummy = new Date().getTime();
 
     this.categoryService.getCategories().subscribe(data => {
-        this.categories =data;
-      }, err => {
-        console.log(err);
+      this.categories = data;
+      this.categories.forEach(category => {
+
+        category.isFeaturedCategory ?
+          this.featuredCategories.push(category) : this.nonFeaturedCategories.push(category);
       });
+    }, err => {
+      console.log(err);
+    });
 
       this.appdataService.getAboutUs()
           .subscribe((data: any) => {
@@ -69,6 +77,19 @@ export class HeaderComponent implements OnInit {
           alert('warning!' + " Unable to get contact us info\n Please check your connection.");
       });
 
+    // Get app header details
+    this.appdataService.getAppHeaderdata()
+      .subscribe(res => {
+
+        if (res.status === 'SUCCESS') {
+
+          this.nonFeaturedDropdownLabel = res.data.nonFeaturedDropdownLabel;
+          if (!this.nonFeaturedDropdownLabel) {
+            
+            this.nonFeaturedDropdownLabel = 'other';
+          }
+        }
+      });
   }
 
   ngOnInit() {
