@@ -253,6 +253,7 @@ module.exports = {
 
     saveSchedulePushMassageFile : function (req,res) {
         var engageCtrl = this;
+        var isCSVFileError = false;
         var dePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId;
 
         console.log("dePath " + dePath);
@@ -324,37 +325,43 @@ module.exports = {
 
                     rowNumber++;
                 }).on('done',()=>{
-                    console.log("Looping done");
+                    sails.log.debug("Looping done");
 
-                        if(errorsInCsv!=null){
-                            res.badRequest(errorsInCsv);
-                            return;
-                        }
+                    if(isCSVFileError){
+                        sails.log.error('Error in uploaded csv file!');
+                        return;
+                    }
 
-                        if(csvRows.length == 0){
-                            res.badRequest("No push messages uploaded!");
-                            return;
-                        }
+                    if(errorsInCsv!=null){
+                        res.badRequest(errorsInCsv);
+                        return;
+                    }
 
-                        //Insert the Push Messages read from csv
-                        csvRows.forEach(function(rowObj){
-                            engageCtrl.persistCSVPushMessages(req,res,rowObj);
-                        });
+                    if(csvRows.length == 0){
+                        res.badRequest("No push messages uploaded!");
+                        return;
+                    }
 
-                        var searchApp ={
-                            appId: req.body.appId,
-                            userId:req.userId
-                        }
+                    //Insert the Push Messages read from csv
+                    csvRows.forEach(function(rowObj){
+                        engageCtrl.persistCSVPushMessages(req,res,rowObj);
+                    });
 
-                        PushMessage.find(searchApp).exec(function(err, app) {
+                    var searchApp ={
+                        appId: req.body.appId,
+                        userId:req.userId
+                    }
+
+                    PushMessage.find(searchApp).exec(function(err, app) {
                         if (err) return res.send(err);
 
                         sails.log.debug("Success upload");
-                        res.send(app);
+                        return res.send(app);
                     });
                 }).on('error',(err)=>{
-                    console.log("Error when uploading push messages Error: " + err);
-                    res.serverError("Error when uploading push messages");
+                    sails.log.error("Error when uploading push messages Error: " + err);
+                    isCSVFileError = true;
+                    return res.badRequest("Error in uploaded csv file, please check the csv template for the content format.");
                 })
                 }
             });

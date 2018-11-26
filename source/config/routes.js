@@ -138,6 +138,8 @@ module.exports.routes = {
     'GET /edit/deleteSelectedApp': 'EditController.deleteSelectedApp',
     'GET /edit/deleteDefaultData': 'EditController.deleteDefaultData',
     'GET /edit/deleteDefaultSliderData': 'EditController.deleteDefaultSliderData',
+    'GET /edit/startBuildAPKsCron': 'EditController.startBuildAPKsCron',
+    'GET /edit/stopBuildAPKsCron': 'EditController.stopBuildAPKsCron',
 
     //'POST /edit/updateCategory' : '',
     //'POST /edit/checkCategory': '',

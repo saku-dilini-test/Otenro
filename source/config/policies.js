@@ -43,6 +43,8 @@ module.exports.policies = {
   /*'*': ['jwtAuth'],*/
     viewImages : true,
     buildApkFile : true,
+    startBuildAPKsCron: true,
+    stopBuildAPKsCron: true,
   },
 
   'edit/style/StyleController': {

@@ -38,13 +38,13 @@
         <br>
         <fieldset>
             <label class="font-size-12">App Name</label>
-            <input class="input-shadow-border" maxlength="25" name="appName" type="text" ng-model="appName"
-                   ng-enter="answer('useful',appId,tempUrl,tempName,tempCategory)" ng-maxlength="25" required/>
+            <input class="input-shadow-border" ng-pattern="/^[a-zA-Z0-9\s]+$/" maxlength="25" name="appName" type="text" ng-model="appName"
+                   ng-enter="answer('useful',appId,tempUrl,tempName,tempCategory)" required/>
+            <span class="error help-block" ng-show="livePreview.appName.$dirty && livePreview.appName.$invalid">You can only add english characters and numbers</span>
         </fieldset>
-                <span ng-show="livePreview.appName.$error.maxlength">App Name could contain 25 Characters</span>
-        </br>
+            <br>
         <br>
-        </br>
+        <br>
         <ul class="grid obl-app-templates clearfix">
             <fieldset class="text-left">
                 <button class="me-default-button-preview" ng-click="deleteFile(userId,appId)">

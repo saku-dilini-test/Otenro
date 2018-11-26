@@ -12,6 +12,8 @@ var fs = require('fs-extra'),
     AdmZip = require('adm-zip'),
     emailService = require('../services/emailService');
 const nodemailer = require('nodemailer');
+var dateFormat = require('dateformat');
+var request = require('request');
 
 gracefulFs.gracefulify(fs);
 var rimraf = require('rimraf');
@@ -633,6 +635,7 @@ module.exports = {
         var userId = req.param('userId'),
             appId = req.param('appId'),
             isFromTechnicalSupportScreen = req.param('fromscreen')=='ts',
+            isFromBuildNextApkCron = req.param('fromscreen')=='buildNextApkCron',
             copyDirPath = config.ME_SERVER + userId + '/buildProg/' + appId + '/',
             configFile = copyDirPath + 'config.xml',
             homets_File = copyDirPath + 'src/pages/home/home.ts',
@@ -731,30 +734,30 @@ module.exports = {
                                     thisCtrl.logApkGenerationError('Error while copying zip file from ' + srcDirPath + zipFileSources + ' to ' + copyDirPath + ' for the appId:' + appId + ' in Application. Error: ' + err, userId, appId);
                                     return;
                                 }
-       
+
                                 sails.log.debug("Source zip file copied ");
                                 sails.log.debug("Started to Extract the files...");
-       
+
                                 shell.cd(copyDirPath);
                                 shell.exec('unzip ' + zipFileSources + ' -d ./', {async: true}, function (codeunzip, stdoutunzip, stderrunzip) {
                                     if (codeunzip == 0) {
                                         sails.log.debug("Unzipped " + zipFileSources);
-       
+
                                         //Move all the files in the progPointerApp(Which unzipped using above shell command) to ./
                                         shell.exec('mv ' + pointerAppDirName + '/* ./', {async: true}, function (codemv, stdoutmv, stderrmv) {
                                             if (codemv == 0) {
                                                 sails.log.debug("Files moved from " + pointerAppDirName + " to ./");
-       
+
                                                 //Delete the directory progPointerApp in ./ which we don't need any more
                                                 shell.exec('rm -rf ' + pointerAppDirName, {async: true}, function (coderm, stdoutrm, stderrrm) {
                                                     if (codemv == 0) {
                                                         sails.log.debug("Directory removed  " + pointerAppDirName + " from ./");
                                                         sails.log.debug("ionic files are ready in " + copyDirPath + " in " + Math.floor((new Date().getTime() - startTime) / 1000) + " seconds");
-       
+
                                                         var searchApp = {
                                                             id: appId
                                                         };
-       
+
                                                         Application.findOne(searchApp).exec(function (err, app) {
                                                             if (err) {
                                                                 thisCtrl.logApkGenerationError('Error while searching the appId:' + appId + ' in Application. Error: ' + err, userId, appId);
@@ -960,7 +963,7 @@ module.exports = {
             }
             sails.log.debug("apk generation in progress or user:" + req.param('userId') + " appId:" + req.param('appId'));
 
-            if(isFromTechnicalSupportScreen) {
+            if(isFromTechnicalSupportScreen || isFromBuildNextApkCron) {
                 res.send('apk generation in progress....');
             }
         });
@@ -1129,6 +1132,75 @@ module.exports = {
             }
         }
         cb({ message: 'success' });
+    },
+
+    buildNextApk: function(){
+        sails.log.debug('EditController: Exec buildNextApk @ %s', dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"));
+
+        var search = {
+            where: {'operators.status': 'APPROVED'},
+            sort: 'createdAt'
+        };
+
+        PublishDetails.find(search).populate('appId').exec(function (err, apps) {
+            if (err) {
+                sails.log.error('EditController: buildNextApk failed. Error while searching for PublishDetails for query:', search);
+            }
+
+            const pendingApps = apps.filter((app) => {
+                return app.appId.apkStatus===config.APK_BUILD_STATUS.PENDING.code;
+            });
+
+            if(pendingApps.length>0){
+                sails.log.debug('EditController: Pending App Exists: appdId:%s appName:%s', pendingApps[0].appId.id, pendingApps[0].appId.appName);
+                return;
+            }
+
+            const appsToBeBuild = apps.filter((app) => {
+                return !app.appId.apkStatus;
+            });
+
+            if(appsToBeBuild.length===0){
+                sails.log.debug('EditController: No Apps to build APKs');
+                sails.hooks.cron.jobs.buildAPKs.stop();
+                return;
+            }
+
+            var nextApp = appsToBeBuild[0];
+
+            var requestObj = {
+                'url': config.server.host + '/edit/buildSourceProg?fromscreen=buildNextApkCron&userId=' + nextApp.appId.userId + '&appId=' + nextApp.appId.id,
+                'method': 'GET'
+            };
+
+            request(requestObj, function(err, response, body) {
+                if(err){
+                    sails.log.error('EditController: Error when requesting to build the apk for the request:%s and Error:%s',requestObj.url,err);
+                    return;
+                }
+
+                if(response){
+                    sails.log.debug('EditController: Response for the request:%s Respose is:',requestObj.url,body);
+                    return;
+                }
+            });
+        });
+    },
+    /**
+     * Use to manually start buildAPKs cron
+     */
+    startBuildAPKsCron: function(req,res){
+        sails.log.debug('EditController: Manually started the buildAPKs cron');
+        sails.hooks.cron.jobs.buildAPKs.start();
+        res.ok('Started');
+    },
+    /**
+     * Use to manually stop buildAPKs cron
+     */
+    stopBuildAPKsCron: function(req,res){
+        sails.log.debug('EditController: Manually stoped the buildAPKs cron');
+        sails.hooks.cron.jobs.buildAPKs.stop();
+        res.ok('Stopped');
     }
 };
 

@@ -333,7 +333,7 @@ module.exports = {
                                      mailOptions = {
                                         from: userData[0].email, // sender address
                                         to: config.IDEABIZ_SUPPORT_EMAIL, // list of receivers
-                                        subject: 'App Publish', // Subject line
+                                        subject: 'Appmaker : Create Service ID for ' + result[0].title , // Subject line
                                         html:emailBody
 
 
