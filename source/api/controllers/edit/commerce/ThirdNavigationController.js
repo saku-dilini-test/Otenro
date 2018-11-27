@@ -429,10 +429,10 @@ module.exports = {
             if (err) return done(err);
             for(var i=0; i<app.length; i++){
                 for(var j=0; j<app[i].sku.length; j++){
-                if(app[i].sku[j].toUpperCase() == req.body.sku.toUpperCase()){
-                    return res.send('true');
-                    break;
-                }
+                    if(app[i].sku[j].toUpperCase() == req.body.sku.toUpperCase()){
+                        return res.send('true');
+                        break;
+                    }
                 }
             }
             res.send('false');

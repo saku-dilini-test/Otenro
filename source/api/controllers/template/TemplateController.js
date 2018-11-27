@@ -174,9 +174,10 @@ module.exports = {
             id: appId
         };
         Application.findOne(searchApp).exec(function(err, app) {
-            if (err) return done(err);
+            console.log("get Curreny and app")
+             if (err) return res.send(err);
              var currency = app.appSettings.appCurrency;
-             res.send(currency);
+             return res.send(currency);
         });
 
     },
