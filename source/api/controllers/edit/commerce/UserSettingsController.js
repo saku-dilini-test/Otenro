@@ -16,54 +16,48 @@ module.exports = {
         var userSettingsController = this;
 
         userSettingsController.updateAppHeaderData(appId, data.showOnWebsiteAbout, 'about_us');
+        console.log(data.appName)
 
-        Application.find({appName:data.appName}).exec(function (err, found) {
-            if(err) return res.send(err);
+        Application.update({ id: appId }, { appName: data.appName }).exec(function (err, updatedApp) {
 
-            if(found.length !== 0){
-                res.status(409).send("App name already exists");
-            }else{
-                Application.update({ id: appId }, { appName: data.appName }).exec(function (err, updatedApp) {
+            if (err) {
 
-                    if (err) {
+                sails.log.error('UserSettingsController => saveStoreSettings => ' + err);
+                return res.serverError(err);
+            }
+            // console.log(updatedApp[0]);
+            data.appName = updatedApp[0].appName;
 
-                        sails.log.error('UserSettingsController => saveStoreSettings => ' + err);
-                        return res.serverError(err);
-                    }
-                    data.appName = updatedApp[0].appName;
+            ApplicationStoreSettings.update(query, data).exec(function (err, user) {
 
-                    ApplicationStoreSettings.update(query, data).exec(function (err, user) {
+                if (err) {
+
+                    sails.log.error('UserSettingsController => saveStoreSettings => ' + err);
+                    return res.serverError(err);
+                }
+                if (user.length == 0) {
+
+                    ApplicationStoreSettings.create(data).exec(function (err, app) {
 
                         if (err) {
 
                             sails.log.error('UserSettingsController => saveStoreSettings => ' + err);
                             return res.serverError(err);
                         }
-                        if (user.length == 0) {
 
-                            ApplicationStoreSettings.create(data).exec(function (err, app) {
-
-                                if (err) {
-
-                                    sails.log.error('UserSettingsController => saveStoreSettings => ' + err);
-                                    return res.serverError(err);
-                                }
-
-                                res.send({
-                                    app: app,
-                                    message: "New Store Settings Record successfully Created"
-                                });
-                            });
-                        } else {
-
-                            res.send({
-                                app: user,
-                                message: "New Store Settings Record  Successfully updated"
-                            });
-                        }
+                        res.send({
+                            app: app,
+                            message: "New Store Settings Record successfully Created"
+                        });
                     });
-                });
-            }
+                } else {
+
+                    res.send({
+                        app: user,
+                        message: "New Store Settings Record  Successfully updated"
+                    });
+                }
+            });
         });
 
     },
@@ -164,7 +158,7 @@ module.exports = {
 
 
         var tmpImage = req.body.file;
-        console.log(tmpImage);
+
         var data = tmpImage[0].replace(/^data:image\/\w+;base64,/, "");
         var buf = new Buffer(data, 'base64');
 
@@ -176,6 +170,7 @@ module.exports = {
                         if (err) {
                             return res.send(err);
                         }
+                        console.log("image uploaded")
                         res.send('ok');
                     });
 

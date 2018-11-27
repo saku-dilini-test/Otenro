@@ -7,11 +7,10 @@ import * as data from '../../../assets/madeEasy.json';
 import * as _ from 'lodash';
 import { CurrencyService } from '../../services/currency/currency.service';
 import { TitleService } from '../../services/title.service';
-import * as Player from '@vimeo/player';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { ProductsService } from '../../services/products/products.service';
 declare var $: any;
-
+var gallaryThis;
 @Component({
     selector: 'app-product',
     templateUrl: './product.component.html',
@@ -32,9 +31,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
     private userId = (<any>data).userId;
     private templateName = (<any>data).templateName;
     selection = [];
-    private selection1 = [];
-    private selection2 = [];
-    private selection3 = [];
+    selection1 = [];
+    selection2 = [];
+    selection3 = [];
     Data;
     isBuyBtnDisable: boolean;
     private parentobj = { cartItems: [], cartSize: 0, totalPrice: 0 };
@@ -43,37 +42,40 @@ export class ProductComponent implements OnInit, AfterViewInit {
     discountAvailable = false;
     oldPrice; newPrice;
     promoData = [];
-    todayDate;
-    errBuy = false;
-    message;
-    zoomRatio;responce;
+    api;
+    private imageArray = [];
     imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
-
     bannerImageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=banner';
     readMore: boolean;
     desPart1; desPart2; desPart1_demo;
     name1; name2; name3; name4;
+    todayDate;
+    errBuy = false;
+    message;
+    zoomRatio;
+    responce;
     ifNotSelectedVariantOrQuantity: boolean;
     availableFirstVariPromo = false;
-    private player: Player;
     private prodId;
     constructor(private localStorageService: LocalStorageService,
-				private currencyService: CurrencyService,
-				private http: HttpClient,
-				private dataService: PagebodyServiceModule,
-				private router: ActivatedRoute,
-				private route: Router,
-				private title: TitleService,
-				private productsService: ProductsService) {
+                private currencyService: CurrencyService,
+                private http: HttpClient,
+                private dataService: PagebodyServiceModule,
+                private router: ActivatedRoute,
+                private route: Router,
+                private title: TitleService,
+                private productsService: ProductsService) {
         this.Data = {
             tempImageArray : []
         }
         this.router.params.subscribe(params => {
             this.catName = params['catName'];
             this.prodId = params['prodId'];
+
         });
+
 
         if (this.templateName == 'smartfit'){
             this.zoomRatio = 1.5;
@@ -101,7 +103,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
 					});
 				}
             });
-
             this.dataService.promoData = this.promoData;
         });
 
@@ -113,18 +114,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
     currency: string;
     tests;
 
-    readLessFunct() {
-      this.desPart2 = this.Data.detailedDesc.slice(400, this.Data.detailedDesc.length);
-      this.desPart1 = this.Data.detailedDesc.slice(0, 400) + "...";
-      this.desPart1_demo = this.Data.detailedDesc.slice(0, 400);
-      this.readMore = true;
-    }
-
-    readMoreFunct() {
-        this.desPart1 = this.desPart1_demo.concat(this.desPart2);
-        this.readMore = false;
-
-    }
     checkUrl(url) {
 
         let id,URL;
@@ -136,6 +125,18 @@ export class ProductComponent implements OnInit, AfterViewInit {
             id = res2[1];
         }
         return id;
+    }
+
+    readLessFunct() {
+      this.desPart2 = this.Data.detailedDesc.slice(400, this.Data.detailedDesc.length);
+      this.desPart1 = this.Data.detailedDesc.slice(0, 400) + "...";
+      this.desPart1_demo = this.Data.detailedDesc.slice(0, 400);
+      this.readMore = true;
+    }
+
+    readMoreFunct() {
+        this.desPart1 = this.desPart1_demo.concat(this.desPart2);
+        this.readMore = false;
     }
 
     ngOnInit() {
@@ -170,6 +171,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
                     theme_hide_panel_under_width: null,
                     slider_zoom_max_ratio: this.zoomRatio
                 });
+                gallaryThis = this;
                 $('#gallery').on({
                     'touchstart' : function(){
                         this.api.stop();
@@ -180,7 +182,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
         }, error => {
             console.log('Error retrieving products' + error);
         });
-
     }
 
 
@@ -367,6 +368,14 @@ export class ProductComponent implements OnInit, AfterViewInit {
                 if (e !== BreakException) throw e;
             }
 
+            if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
+              gallaryThis.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
+              gallaryThis.api.stop();
+            }else{
+              gallaryThis.api.selectItem(this.Data.defaultImage);
+              gallaryThis.api.stop();
+            }
+
             this.lockBuyButton = true;
 
         } else {
@@ -451,6 +460,14 @@ export class ProductComponent implements OnInit, AfterViewInit {
                 if (e !== BreakException) throw e;
             }
 
+            if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
+              gallaryThis.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
+              gallaryThis.api.stop();
+            }else{
+              gallaryThis.api.selectItem(this.Data.defaultImage);
+              gallaryThis.api.stop();
+            }
+
             this.lockBuyButton = true;
 
         } else {
@@ -529,6 +546,14 @@ export class ProductComponent implements OnInit, AfterViewInit {
                 if (e !== BreakException) throw e;
             }
 
+            if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
+              gallaryThis.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
+              gallaryThis.api.stop();
+            }else{
+              gallaryThis.api.selectItem(this.Data.defaultImage);
+              gallaryThis.api.stop();
+            }
+
             this.lockBuyButton = true;
 
         } else {
@@ -597,6 +622,14 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
             } catch (e) {
                 if (e !== BreakException) throw e;
+            }
+
+            if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
+              gallaryThis.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
+              gallaryThis.api.stop();
+            }else{
+              gallaryThis.api.selectItem(this.Data.defaultImage);
+              gallaryThis.api.stop();
             }
 
             this.lockBuyButton = true;

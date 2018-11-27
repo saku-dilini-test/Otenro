@@ -11,7 +11,7 @@ import * as Player from '@vimeo/player';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { ProductsService } from '../../services/products/products.service';
 declare var $: any;
-
+var gallaryThis;
 @Component({
     selector: 'app-product',
     templateUrl: './product.component.html',
@@ -176,6 +176,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
                     theme_hide_panel_under_width: null,
                     slider_zoom_max_ratio: this.zoomRatio
                 });
+                gallaryThis = this;
                 $('#gallery').on({
                     'touchstart' : function(){
                         this.api.stop();
@@ -365,11 +366,11 @@ export class ProductComponent implements OnInit, AfterViewInit {
             }
 
             if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
-                this.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
-                this.api.stop();
+              gallaryThis.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
+              gallaryThis.api.stop();
             }else{
-                this.api.selectItem(this.Data.defaultImage);
-                this.api.stop();
+              gallaryThis.api.selectItem(this.Data.defaultImage);
+              gallaryThis.api.stop();
             }
 
             this.lockBuyButton = true;
@@ -457,11 +458,11 @@ export class ProductComponent implements OnInit, AfterViewInit {
             }
 
             if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
-                this.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
-                this.api.stop();
+              gallaryThis.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
+              gallaryThis.api.stop();
             }else{
-                this.api.selectItem(this.Data.defaultImage);
-                this.api.stop();
+              gallaryThis.api.selectItem(this.Data.defaultImage);
+              gallaryThis.api.stop();
             }
 
             this.lockBuyButton = true;
@@ -543,11 +544,11 @@ export class ProductComponent implements OnInit, AfterViewInit {
             }
 
             if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
-                this.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
-                this.api.stop();
+              gallaryThis.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
+              gallaryThis.api.stop();
             }else{
-                this.api.selectItem(this.Data.defaultImage);
-                this.api.stop();
+              gallaryThis.api.selectItem(this.Data.defaultImage);
+              gallaryThis.api.stop();
             }
 
             this.lockBuyButton = true;
@@ -621,11 +622,11 @@ export class ProductComponent implements OnInit, AfterViewInit {
             }
 
             if(this.imageArray.indexOf(this.selectedVariant.imageUrl) != -1){
-                this.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
-                this.api.stop();
+              gallaryThis.api.selectItem(this.imageArray.indexOf(this.selectedVariant.imageUrl));
+              gallaryThis.api.stop();
             }else{
-                this.api.selectItem(this.Data.defaultImage);
-                this.api.stop();
+              gallaryThis.api.selectItem(this.Data.defaultImage);
+              gallaryThis.api.stop();
             }
 
             this.lockBuyButton = true;
