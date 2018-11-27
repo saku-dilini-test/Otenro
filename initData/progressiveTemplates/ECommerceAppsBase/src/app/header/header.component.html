@@ -31,7 +31,7 @@
 					<ul class="site-navigation nav navbar-nav">
 
 						<li *ngFor="let featuredCategory of featuredCategories">
-							<a (click)="navigate('shop','Search')">{{featuredCategory.name}}</a>
+							<a [routerLink]="['']" [queryParams]="{ id: featuredCategory.id}">{{featuredCategory.name}}</a>
 						</li>
 						<li>
 							<div class="dropdown">
@@ -40,7 +40,7 @@
 									<span class="caret"></span></a>
 								<ul class="dropdown-menu  main-navigation" role="menu">
 									<li *ngFor="let nonFeaturedCategory of nonFeaturedCategories">
-										<a (click)="navigate('shop','Search')">{{nonFeaturedCategory.name}}</a>
+										<a [routerLink]="['']" [queryParams]="{ id: nonFeaturedCategory.id}">{{nonFeaturedCategory.name}}</a>
 									</li>
 								</ul>
 							</div>

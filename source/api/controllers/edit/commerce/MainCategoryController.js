@@ -51,6 +51,13 @@ module.exports = {
                                     }
 
                                     if (newMenu) {
+
+                                        Application.update({ id: req.body.appId }, { isNewCategoryAdded: true }).exec(function (err) {
+
+                                            if (err) {
+                                                sails.log.error('Error Occurred :  Updating isNewCategoryAdded in Application: Error => ' + err);
+                                            }
+                                        });
                                         MainCategory.find({ id: req.body.parentId }).exec(function (err, parent) {
 
                                             if (err) {
@@ -104,6 +111,11 @@ module.exports = {
                                         sails.log.error('Error Occurred : In MainCategoryController.addNewCategory() : Error => ' + err);
                                         return res.serverError(err);
                                     }
+                                    Application.update({ id: req.body.appId }, { isNewCategoryAdded: true }).exec(function (err) {
+                                        if (err) {
+                                            sails.log.error('Error Occurred :  Updating isNewCategoryAdded in Application: Error => ' + err);
+                                        }
+                                    });
                                     return res.json(newMenu);
                                 });
                             });
@@ -120,6 +132,7 @@ module.exports = {
 
         var mainCatCtrl = this;
         var isRankingStarted = false;
+        var isNewCategoryAdded = false;
         var appId = req.param('appId');
         var searchApp = {
             appId: appId
@@ -135,6 +148,9 @@ module.exports = {
 
                 if (app.isRankingStarted) {
                     isRankingStarted = true;
+                }
+                if (app.isNewCategoryAdded) {
+                    isNewCategoryAdded = true;
                 }
             }
         });
@@ -171,6 +187,40 @@ module.exports = {
                                 }
                                 return 0;
                             });
+                        }
+                        if (!isRankingStarted) {
+                            if (!isNewCategoryAdded) {
+
+                                parentMenuItems.sort((currentItem, nextItem) => {
+
+                                    if (currentItem.name > nextItem.name) {
+    
+                                        return 1;
+                                    }
+    
+                                    if (currentItem.name < nextItem.name) {
+    
+                                        return -1;
+                                    }
+                                    return 0;
+                                });
+                            }
+                            if (isNewCategoryAdded) {
+
+                                parentMenuItems.sort((currentItem, nextItem) => {
+
+                                    if (currentItem.updatedAt < nextItem.updatedAt) {
+    
+                                        return 1;
+                                    }
+    
+                                    if (currentItem.updatedAt > nextItem.updatedAt) {
+    
+                                        return -1;
+                                    }
+                                    return 0;
+                                });
+                            }
                         }
                         var arr = mainCatCtrl.makeCategoryArray(parentMenuItems, list, products);
 

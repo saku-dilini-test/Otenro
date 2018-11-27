@@ -54,7 +54,8 @@ module.exports = {
         appUpdateLocationSetting : {
             type : 'json'
         },
-        isRankingStarted:{ type: 'boolean' }
+        isRankingStarted:{ type: 'boolean' },
+        isNewCategoryAdded: { type: 'boolean' }
     }
 };
 
