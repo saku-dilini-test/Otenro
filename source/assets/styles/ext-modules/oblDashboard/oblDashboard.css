@@ -264,6 +264,7 @@
 	padding:30px 0 30px 30px;
     position:relative;
     top:-100px;
+    z-index: 3;
 }
 /*.obl-dashboard-apps-livePreview{
     width: 35%;

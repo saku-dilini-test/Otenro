@@ -18,6 +18,9 @@ module.exports = {
         },
         appId:{
             type: 'String'
+        },
+        appName :{
+            type:'string'
         }
 
     }

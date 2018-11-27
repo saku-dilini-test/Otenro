@@ -77,7 +77,8 @@ module.exports = {
                                             "revenue": subscriptionPaymentData[0] ? subscriptionPaymentData[0].amount : 0,
                                             "viewCount": appVisitDataLog[0] ? appVisitDataLog[0].count : 0,
                                             "date": dateFormat(date, "yyyy-mm-dd"),
-                                            "appId": publishDetailsData.appId
+                                            "appId": publishDetailsData.appId,
+                                            "appName" : publishDetailsData.title
                                         };
 
                                         console.log(data);
@@ -120,7 +121,7 @@ module.exports = {
         }else {
 
             groupBy = {
-                groupBy: ['operator', 'date','appId'],
+                groupBy: ['operator', 'date','appId','appName'],
                 sum: ['revenue', 'viewCount']
             }
         }
@@ -164,6 +165,7 @@ module.exports = {
 
         RevenueAndTrafficDailySummary.find(query, groupBy).exec(function (err, revenueAndTrafficDailySummary) {
             if (err) return res.serverError();
+            console.log("revenueAndTrafficDailySummary " + JSON.stringify(revenueAndTrafficDailySummary));
             res.send(revenueAndTrafficDailySummary);
         });
 
@@ -191,7 +193,7 @@ module.exports = {
         }else {
 
             groupBy = {
-                groupBy: ['operator', 'month', 'year','appId'],
+                groupBy: ['operator', 'month', 'year','appId','appName'],
                 sum: ['revenue', 'viewCount']
             }
 
@@ -249,7 +251,7 @@ module.exports = {
             }
         }else {
             groupBy = {
-                groupBy: ['operator', 'year','appId'],
+                groupBy: ['operator', 'year','appId','appName'],
                 sum: ['revenue', 'viewCount']
             }
         }
@@ -319,7 +321,7 @@ module.exports = {
                     },
                     {
                         "$group": {
-                            "_id": {"operator": "$operator", "appId": "$appId"},
+                            "_id": {"operator": "$operator", "appId": "$appId","appName":"$appName"},
                             "viewCount": {"$sum": "$viewCount"},
                             "revenue": {"$sum": "$revenue"}
                         }
@@ -333,6 +335,7 @@ module.exports = {
 
                         var data = {
                             "appId": dailySummary._id.appId,
+                            "appName": dailySummary._id.appName,
                             "operator": dailySummary._id.operator,
                             "revenue": dailySummary.revenue,
                             "viewCount": dailySummary.viewCount,
@@ -376,7 +379,7 @@ module.exports = {
                     },
                     {
                         "$group": {
-                            "_id": {"operator": "$operator", "appId": "$appId"},
+                            "_id": {"operator": "$operator", "appId": "$appId","appName":"$appName"},
                             "viewCount": {"$sum": "$viewCount"},
                             "revenue": {"$sum": "$revenue"}
                         }
@@ -389,6 +392,7 @@ module.exports = {
                     monthlySummaryData.forEach(function (monthlySummary) {
 
                         var data = {
+                            "appName": monthlySummary._id.appName,
                             "appId": monthlySummary._id.appId,
                             "operator": monthlySummary._id.operator,
                             "revenue": monthlySummary.revenue,
