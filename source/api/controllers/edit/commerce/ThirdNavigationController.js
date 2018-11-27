@@ -426,7 +426,7 @@ module.exports = {
             appId: req.body.appId
         }
         Sku.find(searchApp, function(err, app){
-            if (err) return done(err);
+            if (err) return res.send(err);
             for(var i=0; i<app.length; i++){
                 for(var j=0; j<app[i].sku.length; j++){
                     if(app[i].sku[j].toUpperCase() == req.body.sku.toUpperCase()){
@@ -435,7 +435,7 @@ module.exports = {
                     }
                 }
             }
-            res.send('false');
+            return res.send('false');
 
         })
 
