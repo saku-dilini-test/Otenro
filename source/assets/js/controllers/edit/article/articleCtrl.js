@@ -44,6 +44,7 @@
          * Changed the entire existing function body for call to the new image editor
          */
         $scope.cropImage = function () {
+            setAspectRatio();
             if($scope.article){
                 $scope.articleData = {
                     initData : $scope.article,
@@ -58,7 +59,7 @@
             // console.log($scope.articleData);
             var handleFileSelect = function (evt) {
                 var file=evt.currentTarget.files[0];
-                imageEditorService.callImageEditor(file,400,200,$scope.articleData, 'addNewArticle');
+                imageEditorService.callImageEditor(file,$scope.iSizeThird.w,$scope.iSizeThird.h,$scope.articleData, 'addNewArticle');
             };
             angular.element(document.querySelector('#fileInput')).on('change', handleFileSelect);
         };
@@ -692,7 +693,7 @@
         /**
          * set articles' images crop aspect ratios to $scope
          **/
-        $scope.setAspectRatio = function () {
+        function setAspectRatio() {
             mainMenuService.getApplicationData($rootScope.appId)
                 .success(function (data) {
                     if (data.templateId) {
@@ -716,7 +717,7 @@
                     });
                 });
         };
-        $scope.setAspectRatio();
+        // $scope.setAspectRatio();
 
         /**
          * options if pasting text form another source
