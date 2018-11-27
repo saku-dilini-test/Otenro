@@ -79,11 +79,11 @@
         // image crop function
         $scope.cropImage = function () {
             console.log("inside cropImage");
+            setAspectRatio();
             var initState = {
                 name: '',
                 tempImage: null
             };
-            console.log('$scope.menu: ',$scope.menu);
             if($scope.menu){
                 initState = {
                     name: $scope.menu.name,
@@ -95,8 +95,9 @@
 
             var handleFileSelect=function(evt) {
                 var file=evt.currentTarget.files[0];
+                console.log(file);
                 console.log('initialData: ',initialData.menu);
-                imageEditorService.callImageEditor(file,100,100,initState, initialData.menu);
+                imageEditorService.callImageEditor(file,$scope.iSizeSecond.w,$scope.iSizeSecond.h,initState, initialData.menu);
             };
             angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
         };
@@ -983,7 +984,7 @@
         /**
          * set second navigation aspect ratios to $scope
          **/
-        $scope.setAspectRatio = function () {
+        function setAspectRatio () {
             mainMenuService.getApplicationData($rootScope.appId)
                 .success(function (data) {
                     if (data.templateId){
@@ -991,9 +992,11 @@
                             .success(function (templateData) {
                                 if(templateData.secondNaviAspectRatio){
                                     $scope.secondNaviAspectRatio = parseFloat(templateData.secondNaviAspectRatio);
+                                    console.log('secondNaviAR: ',$scope.secondNaviAspectRatio);
                                 }
                                 if(templateData.iSizeSecond){
                                     $scope.iSizeSecond={w:templateData.iSizeSecond.w,h:templateData.iSizeSecond.h};
+                                    console.log('iSizeSecond: ',$scope.iSizeSecond);
                                 }
                             }).error(function (err) {
                             toastr.error(err.message, 'Warning', {
@@ -1007,6 +1010,6 @@
                 });
             });
         };
-        $scope.setAspectRatio();
+        // $scope.setAspectRatio();
     }
 })();

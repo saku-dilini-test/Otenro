@@ -12153,8 +12153,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _this11.ui.changeDeleteAllButtonEnabled(true);
 
 	                if (obj.type === 'cropzone') {
-						// added by .sanira
-						console.log("lol");
 	                    _this11.ui.crop.changeApplyButtonStatus(true);
 	                } else if (['rect', 'circle', 'triangle'].indexOf(obj.type) > -1) {
 	                    _this11.stopDrawingMode();
@@ -15408,10 +15406,26 @@ return /******/ (function(modules) { // webpackBootstrap
 				key: 'setCropRect',
 				value: function setCropRect(width, height) {
 
+                    var canvas = this.getCanvas();
+                    var canvasWidth = canvas.getWidth();
+                    var canvasHeight = canvas.getHeight();
+                    var newWidth = width;
+                    var newHeight = height;
+                    var ar = width/height;
+                    if(canvasWidth<width || canvasHeight<height){
+                        if(width > height){
+                            newWidth = canvasWidth/2;
+                            newHeight = newWidth/ar;
+                        }else{
+                            newHeight = canvasHeight/2;
+                            newWidth = ar * newHeight;
+                        }
+                    }
+
 					cropRectangle = {
-						width: width,
-						height: height,
-						acceptRatio: width / height
+						width: newWidth,
+						height: newHeight,
+						acceptRatio: newWidth / newHeight
 					};
 					
 					console.log(cropRectangle);
