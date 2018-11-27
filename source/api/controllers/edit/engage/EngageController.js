@@ -15,6 +15,7 @@ var CSV_DATE_TIME_FORMAT = "DD/MM/YY HH:mm";
 var DATE_TIME_FORMAT = "DD/MM/YY";
 var CSV_SEND_TO_ALL = "all";
 var CSV_SEND_TO_INACTIVE = "inactive";
+const numDays = 7;
 
 module.exports = {
 
@@ -54,7 +55,7 @@ module.exports = {
                     var count = date_diff_indays(dateFormat(new Date(),"m/d/yy"),dateFormat(deviceArray[i].lastAccessTime,"m/d/yy"));
                     console.log("count " + count);
 
-                    if(count>=7){
+                    if(count >= numDays){
                         sails.log.info("my deviceArray " + deviceArray[i].deviceId);
                         thisCtrl.sendPushNotification(deviceArray[i].deviceId,null,req.body.message,null);
                     }
@@ -484,7 +485,7 @@ module.exports = {
                                         sails.log.info(" deviceArray " + deviceArray[i].deviceId);
                                         if (type === "I"){
                                             var count = date_diff_indays(dateFormat(new Date(),"m/d/yy"),dateFormat(deviceArray[i].lastAccessTime,"m/d/yy"));
-                                            if (count > 7) {
+                                            if (count >= numDays) {
                                                 thisCtrl.sendPushNotification(deviceArray[i].deviceId,article,message,data.id);
                                             }
                                         } else {
