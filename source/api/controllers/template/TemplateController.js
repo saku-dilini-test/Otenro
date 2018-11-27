@@ -394,6 +394,10 @@ module.exports = {
             };
 
             Slider.find(searchApp, function (err, app) {
+                app.sort(function(a, b){
+                    return new Date(b.createdAt) - new Date(a.createdAt);
+                });
+
                 if (err) return done(err);
                 res.send(app);
             });
