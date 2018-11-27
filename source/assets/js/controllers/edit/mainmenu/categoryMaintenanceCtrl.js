@@ -315,7 +315,7 @@
                     if (res.status === 'NOT_ELIGIBLE') {
 
                         node.isFeaturedCategory = false;
-                        toastr.warning('Only ' + $scope.featuredCategoryArr.length + ' categories can be shown due to limited space!', 'Warning!', { closeButton: true });
+                        toastr.warning('Maximum possible characters for the main navigation bar exceeded!', 'Warning!', { closeButton: true });
                     }
                 });
             }

@@ -331,6 +331,7 @@ module.exports = {
                           status : "DRAFT",
                           displayImage: req.body.templateUrl,
                           templateCategory : templateCategory,
+                          isNewCategoryAdded: false,
                           appSettings:{
                               appCurrency:{
                                   sign : "$",
@@ -543,10 +544,12 @@ module.exports = {
         if (templateName === 'smartfit') {
             values.maxCategoryCharacterLength = config.APP_HEADER_INITIAL_DATA.MAX_CHARACTER_COUNT.POWER_HOUSE;
             values.usedCategoryCharacterLength = 0;
+            values.nonFeaturedDropdownLabel = config.APP_HEADER_INITIAL_DATA.NON_FEATURED_DROPDOWN_LABEL.POWER_HOUSE;
         }
         if (templateName === 'outfit') {
             values.maxCategoryCharacterLength = config.APP_HEADER_INITIAL_DATA.MAX_CHARACTER_COUNT.STYLE_TO_SHOP;
             values.usedCategoryCharacterLength = 0;
+            values.nonFeaturedDropdownLabel = config.APP_HEADER_INITIAL_DATA.NON_FEATURED_DROPDOWN_LABEL.STYLE_TO_SHOP;
         }
 
         AppHeaderData.create(values).exec(function(err) {

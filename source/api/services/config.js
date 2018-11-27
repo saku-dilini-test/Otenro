@@ -24,5 +24,9 @@ module.exports = {
         POLICIES_CHARACTER_COUNT: 8,
         ABOUT_US_CHARACTER_COUNT: 8,
         CONTACT_US_CHARACTER_COUNT: 10,
+        NON_FEATURED_DROPDOWN_LABEL: {
+            POWER_HOUSE: 'Other',
+            STYLE_TO_SHOP: 'Other'
+        }
     }
 };

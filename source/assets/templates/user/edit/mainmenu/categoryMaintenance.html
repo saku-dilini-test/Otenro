@@ -11,11 +11,12 @@
                             <a class="add-new-item" ng-click="clearDefaultData()">Clear default data</a>
                         </li>
                     </ul>
-                    <div style="margin: 10px 0 0 0;">
+                    <!-- <div style="margin: 10px 0 0 0;">
                         <span class="menu-bar-label">Menu bar button</span>
-                    </div>
-                    <div style="padding: 0;">
-                        <md-input-container style="margin: 0;">
+                    </div> -->
+                    <div style="padding: 0; margin: 25px 0">
+                        <md-input-container style="margin: 0; width: 300px">
+                            <label for="input-title">non featured dropdown title</label>
                             <input md-maxlength="15" maxlength="15" ng-required="true" name="name" ng-model="nonFeaturedDropdownLabel">
                         </md-input-container>
                     </div>
@@ -83,7 +84,8 @@
             <img style="margin:0 0 5px -15px; cursor: pointer;" ng-if="!collapsed" height="25px" src="../../../images/collaps-up.svg">
             <img style="margin:0 0 5px -15px; cursor: pointer;" ng-if="collapsed" height="25px" src="../../../images/collaps-down.svg">
         </a>
-            {{node.name}}
+            <span ng-if="node.nodes && node.nodes.length > 0">{{node.name}}</span>
+            <span ng-if="!(node.nodes && node.nodes.length > 0)" style="margin-left: 16px;">{{node.name}}</span>
             <a class="pull-right" style="margin-right: 30px;" data-nodrag ng-click="deleteNodes(node)">
                 <img height="20px" style="cursor: pointer;" src="../../../images/delete.svg">
             </a>
