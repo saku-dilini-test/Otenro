@@ -3051,3 +3051,11 @@ table.md-calendar-day-header{
     color: #666;
     font-size: 12px;
 }
+
+.text-decoration-underline{
+    text-decoration: underline;
+}
+.special-note{
+    padding: 5px;
+    margin: 5px 0 15px;
+}

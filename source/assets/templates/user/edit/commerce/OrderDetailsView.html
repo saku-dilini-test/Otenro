@@ -35,11 +35,8 @@
                     <h7>Payement Type</h7><br>
                     <label>{{oderData.entity.paymentType}}</label>
                 </div>
-                <div class="col-md-4" ng-if="oderData.entity.option !== 'pickUp'">
-                    <h7>Deliver to:</h7>
-                    <div class="row">
-                        <div class="col-md-4"><h7>Address</h7></div>
-                    </div>
+                <div class="col-md-5" ng-if="oderData.entity.option !== 'pickUp'">
+                    <h7  class="text-decoration-underline">Deliver to:</h7>
                     <div class="row">
                         <div class="col-md-4"><h7>Name</h7></div>
                         <div class="col-md-8"><h7>: {{oderData.entity.deliverName}}</h7></div>
@@ -55,13 +52,12 @@
                         <div class="col-md-8"><h7>: {{oderData.entity.deliveryZip}}</h7></div>
                         <div class="col-md-4"><h7>Mobile</h7></div>
                         <div class="col-md-8"><h7>: {{oderData.entity.telNumber}}</h7></div>
+                        <div class="col-md-4"><h7>Email</h7></div>
+                        <div class="col-md-8"><h7>: {{oderData.entity.email}}</h7></div>
                     </div>
                 </div>
-                <div class="col-md-4" ng-if="oderData.entity.option == 'pickUp'">
-                    <h7>Pick Up from:</h7>
-                    <div class="row">
-                        <div class="col-md-4"><h7>Location</h7></div>
-                    </div>
+                <div class="col-md-5" ng-if="oderData.entity.option == 'pickUp'">
+                    <h7 class="text-decoration-underline">Pick Up from:</h7>
                     <div class="row">
                         <div class="col-md-4"><h7>No</h7></div>
                         <div class="col-md-8"><h7>: {{oderData.entity.pickUp.number}}</h7></div>
@@ -75,11 +71,19 @@
                         <div class="col-md-8"><h7>: {{oderData.entity.pickUp.postalCode}}</h7></div>
                         <div class="col-md-4"><h7>Mobile</h7></div>
                         <div class="col-md-8"><h7>: {{oderData.entity.telNumber}}</h7></div>
+                        <div class="col-md-4"><h7>Email</h7></div>
+                        <div class="col-md-8"><h7>: {{oderData.entity.email}}</h7></div>
                     </div>
                 </div>
-                <div class="col-md-4" ng-if="oderData.entity.shippingOpt">
+                <div class="col-md-3" ng-if="oderData.entity.shippingOpt">
                     <h7>Shipping Type:</h7><br>
                     <label>Name : {{oderData.entity.shippingOpt}}</label>
+                </div>
+                <div class="col-md-12">
+                    <h7>Special Note</h7>
+                    <div class="input-shadow-border special-note">
+                        <h7>{{oderData.entity.note || 'No comments'}}</h7>
+                    </div>
                 </div>
             </div>
             <!--<fieldset>-->
@@ -142,10 +146,6 @@
                 </tr>
                 </tbody>
             </table>
-
-            <div ng-if="oderData.entity.note">
-                </p><p>*note : {{oderData.entity.note}}</p>
-            </div>
 
         </div>
 
