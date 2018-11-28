@@ -950,7 +950,7 @@
                         toastr.error('Invalid month range', 'Warning', {closeButton: true});
                     }
                 } else {
-                    toastr.error('Invalid year range', 'Warning', {closeButton: true});
+                    toastr.error('Invalid month range', 'Warning', {closeButton: true});
                 }
             }
             else {
@@ -1093,7 +1093,7 @@
                         toastr.error('Invalid month range', 'Warning', {closeButton: true});
                     }
                 } else {
-                    toastr.error('Invalid year range', 'Warning', {closeButton: true});
+                    toastr.error('Invalid month range', 'Warning', {closeButton: true});
                 }
             }
             else {
@@ -1256,7 +1256,7 @@
                         toastr.error('Invalid month range', 'Warning', {closeButton: true});
                     }
                 } else {
-                    toastr.error('Invalid year range', 'Warning', {closeButton: true});
+                    toastr.error('Invalid month range', 'Warning', {closeButton: true});
                 }
             }
             else {
