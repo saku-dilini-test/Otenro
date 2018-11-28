@@ -59,6 +59,12 @@
               <button (click)='register()' type="button" class="btn btn-d btn-lg main-button btn-block">Register</button>
             </div>
 
+            <div class="col-sm-12" style="margin: 10px 0">
+              <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+            </div>
+            <div class="col-sm-12" style="margin: 10px 0">
+              <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
+            </div>
 
           </form>
         </div>
@@ -95,11 +101,4 @@
     </div>
 
   </div>
-</div>
-
-<div class="col-sm-12" style="margin: 10px 0">
-  <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-</div>
-<div class="col-sm-12" style="margin: 10px 0">
-  <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
 </div>
