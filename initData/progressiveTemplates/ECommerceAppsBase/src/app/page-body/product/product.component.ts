@@ -169,7 +169,9 @@ export class ProductComponent implements OnInit, AfterViewInit {
                     slider_textpanel_bg_opacity: 0,
                     gallery_autoplay:true,
                     theme_hide_panel_under_width: null,
-                    slider_zoom_max_ratio: this.zoomRatio
+                    slider_zoom_max_ratio: this.zoomRatio,
+                    slider_scale_mode_media: 'fit',
+                    slider_scale_mode_fullscreen: 'down',
                 });
                 gallaryThis = this;
                 $('#gallery').on({
