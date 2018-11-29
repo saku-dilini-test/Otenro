@@ -10,7 +10,7 @@ module.exports = function(user,callback){
     var payload =  {
         id :  user.appId,
         msisdn:  user.msisdn,
-        exp: moment().add(2,'m').unix()
+        exp: moment().add(1,'day').unix()
     };
 
     JWT.sign(
