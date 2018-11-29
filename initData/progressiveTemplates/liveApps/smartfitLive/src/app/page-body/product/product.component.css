@@ -49,44 +49,6 @@
     text-transform: uppercase;
 }
 
-
-#gallery{
-    margin:auto;
-    width: 550px !important;
-    height: 618px !important;
-}
-
-@media (max-width: 768px){
-    #gallery{
-        width: 450px !important;
-        height: 518px !important;
-    }
-}
-
-
-@media (max-width: 768px){
-    #gallery{
-        width: 550px !important;
-        height: 618px !important;
-    }
-}
-
-
-@media (max-width: 1200px){
-    #gallery{
-        width: 450px !important;
-        height: 518px !important;
-    }
-}
-
-@media (max-width: 992px){
-    #gallery{
-        width: 100% !important;
-        height: 60vh !important;
-    }
-}
-
-
 /deep/ .ug-gallery-wrapper .ug-slider-wrapper{
            background-color: rgba(0,0,0,0) !important;
        }

@@ -167,6 +167,11 @@ export class ProductComponent implements OnInit, AfterViewInit {
             slider_zoom_max_ratio: this.zoomRatio,
             slider_scale_mode_media: 'fit',
             slider_scale_mode_fullscreen: 'down',
+            gallery_width:900,							//gallery width
+            gallery_height:600,							//gallery height
+            gallery_max_width: 900,						//gallery minimal width when resizing
+            gallery_min_width: 150,
+            gallery_min_height: 600,
           });
           gallaryThis = this;
           $('#gallery').on({
