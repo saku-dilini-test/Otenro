@@ -16029,59 +16029,141 @@ return /******/ (function(modules) { // webpackBootstrap
 
 			//added by .sanira
 			if (acceptRatio != undefined){
-				switch (this.__corner) {
-					case CORNER_TYPE_TOP_LEFT:
-						settings = {
-							height: tlHeight,
-							width: tlHeight * acceptRatio,
-							top: tlTop,
-							left: tlLeft,
-						};
-						break;
-					case CORNER_TYPE_TOP_RIGHT:
-						settings = {
-							width: brWidth,
-							height: brWidth / acceptRatio,
-							// top: tlTop
-						};
-						break;
-					case CORNER_TYPE_BOTTOM_LEFT:
-						settings = {
-							width: tlWidth,
-							height: tlWidth / acceptRatio,
-							left: tlLeft
-						};
-						break;
-					case CORNER_TYPE_BOTTOM_RIGHT:
-						settings = {
-							width: brWidth,
-							height: brWidth / acceptRatio
-						};
-						break;
-					case CORNER_TYPE_MIDDLE_LEFT:
-						settings = {
-							width: tlWidth,
-							height: tlWidth / acceptRatio,
-						};
+                var _canvas = this.canvas,
+                    maxX = _canvas.width,
+                    maxY = _canvas.height;
 
-						break;
-					case CORNER_TYPE_MIDDLE_TOP:
-						settings = {
-							height: tlHeight,
-							width: tlHeight * acceptRatio,
-						};
-						break;
-					case CORNER_TYPE_MIDDLE_RIGHT:
-						settings = {
-							width: brWidth,
-							height: brWidth / acceptRatio
-						};
-						break;
-					case CORNER_TYPE_MIDDLE_BOTTOM:
-						settings = {
-							height: brHeight,
-							width: brHeight * acceptRatio
-						};
+                var bottom = this.getHeight() + this.top;
+                var right = this.getWidth() + this.left;
+                var top = (0, _util.clamp)(this.top, 0, bottom - 1);
+                var left = (0, _util.clamp)(this.left, 0, right - 1);
+                var maxWidthCanGrow = maxX - left;
+                var maxHeightCanGrow = maxY - top;
+
+				switch (this.__corner) {
+                    case CORNER_TYPE_TOP_LEFT:
+                        if(top <= 0){
+                            settings = {
+                                top: 0
+                            };
+                        }else{
+                            settings = {
+                                width: (right - left),
+                                height: ((right - left) / acceptRatio),
+                                top: top,
+                                left: left
+                            };
+                        }
+                        break;
+                    case CORNER_TYPE_TOP_RIGHT:
+                        if ((maxX - right) <= 0){
+                            settings = {
+                                width: maxWidthCanGrow,
+                                top: top
+                            };
+                        }else{
+                            settings = {
+                                width: (bottom - top) * acceptRatio,
+                                height: (bottom - top),
+                                top: top
+                            };
+                        }
+                        break;
+                    case CORNER_TYPE_BOTTOM_LEFT:
+                        if((maxY - bottom) <= 0){
+                            settings = {
+                                width: maxHeightCanGrow * acceptRatio,
+                                height: maxHeightCanGrow,
+                                left: left
+                            };
+                        }else{
+                            settings = {
+                                width: right - left,
+                                height: (right - left) / acceptRatio,
+                                left: left
+                            };
+                        }
+                        break;
+                    case CORNER_TYPE_BOTTOM_RIGHT:
+                        if ((maxY - bottom) <= 0){
+                            settings = {
+                                height: maxHeightCanGrow
+                            };
+                        } else if ((maxX - right) <= 0){
+                            settings = {
+                                width: maxWidthCanGrow,
+                                height: maxWidthCanGrow/acceptRatio
+                            };
+                        }else{
+                            settings = {
+                                width: (bottom - top) * acceptRatio,
+                                height: (bottom - top),
+                            };
+                        }
+                        break;
+                    case CORNER_TYPE_MIDDLE_LEFT:
+                        if ((maxY - bottom) <= 0){
+                            settings = {
+                                height: maxHeightCanGrow
+                            };
+                        } else {
+                            settings = {
+                                width: (right - left),
+                                height: ((right - left) / acceptRatio),
+                                left: left
+                            };
+                        }
+
+                        break;
+                    case CORNER_TYPE_MIDDLE_TOP:
+                        if(top <= 0){
+                            settings = {
+                                top: 0
+                            };
+                        }else if ((maxX - right) <= 0) {
+                            settings = {
+                                width: maxWidthCanGrow,
+                                top: top
+                            };
+                        } else {
+                            settings = {
+                                width: (bottom - top) * acceptRatio,
+                                height: (bottom - top),
+                                top: top
+                            };
+                        }
+                        break;
+                    case CORNER_TYPE_MIDDLE_RIGHT:
+                        if ((maxY - bottom) <= 0) {
+                            settings = {
+                                height: maxHeightCanGrow
+                            };
+                        } else if ((maxX - right) <= 0) {
+                            settings = {
+                                width: maxWidthCanGrow
+                            };
+                        } else {
+                            settings = {
+                                width: brWidth,
+                                height: brWidth/acceptRatio,
+                            };
+                        }
+                        break;
+                    case CORNER_TYPE_MIDDLE_BOTTOM:
+                        if ((maxY - bottom) <= 0) {
+                            settings = {
+                                height: maxHeightCanGrow
+                            };
+                        } else if ((maxX - right) <= 0) {
+                            settings = {
+                                width: maxWidthCanGrow
+                            };
+                        } else {
+                            settings = {
+                                width: brHeight * acceptRatio,
+                                height: brHeight
+                            };
+                        }
 						break;
 					default:
 						break;

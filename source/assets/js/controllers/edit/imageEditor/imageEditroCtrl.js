@@ -27,7 +27,7 @@
                     includeUI: {
                         loadImage: {
                             // path: './images/imageEditor/test.png',
-                            path: fileUrl, // file for the image editor to edit
+                            path: fileUrl, // file for the image editor to edit, can pass a url also (without this image editor won't initiate correctly)
                             name: 'SampleImage'
                         },
                         theme: whiteTheme, // or blackTheme
@@ -148,54 +148,6 @@
                     }
                     return false;
                 }
-
-                /**
-                 *
-                 */
-                function isAppropriateSize(){
-                    var canvasSize = imageEditor.getCanvasSize();
-                    console.log(canvasSize);
-                    const expectedAR = width/height;
-                    var acctualAR = canvasSize.width/canvasSize.height;
-
-                    console.log('expected:'+expectedAR+','+'acctual:'+acctualAR);
-                    return expectedAR === parseInt(acctualAR);
-                }
-
-
-                // /**
-                //  * check the uploaded image is in correct correct size
-                //  */
-                // function setCropZoneRectToMatchTheImageSize(){
-                //     const acceptRatio = width/height;
-                //     var canvasSize = imageEditor.getCanvasSize();
-                //     console.log(canvasSize);
-                //
-                //     if(canvasSize.width<width && canvasSize.height>=height){
-                //         width = canvasSize.width;
-                //         height = width/acceptRatio;
-                //     }
-                //     if(canvasSize.height<height && canvasSize.width>=width){
-                //         height = canvasSize.height;
-                //         width = acceptRatio*height;
-                //     }
-                //     if(canvasSize.width<width && canvasSize.height<height){
-                //         if(canvasSize.width<canvasSize.height){
-                //             width = canvasSize.width;
-                //             height = width/acceptRatio;
-                //         }
-                //         else{
-                //             height = canvasSize.height;
-                //             width = acceptRatio*height;
-                //         }
-                //     }
-                //     console.log(width+','+height);
-                //
-                //     return {
-                //         newWidth: width,
-                //         newHeight : height
-                //     }
-                // }
             }
             , 1000)
     };
