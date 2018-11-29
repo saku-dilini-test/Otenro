@@ -52,7 +52,7 @@
 			</owl-carousel>
 		</div>
 		<div class="row" *ngIf="categories.length == 0">
-			<a class="col-sm-4" *ngFor="let prod of node;" [routerLink]="['/product', prod.name, prod.id]">
+			<a class="col-md-4 col-sm-6 col-xs-12" *ngFor="let prod of node;" [routerLink]="['/product', prod.name, prod.id]">
 				<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
 				<p class="text-center product-name">
 					{{prod.name}}
@@ -85,7 +85,7 @@
 <div class="bloc hidden-lg hidden-md l-bloc" id="bloc-5"  *ngIf="products && this.products[0] && products[0].length != 0">
 	<div class="container bloc-sm"  *ngFor="let node of products;">
 		<div class="row content-row voffset">
-			<a class="col-sm-4" *ngFor="let prod of node;" [routerLink]="['/product', prod.name, prod.id]">
+			<a class="col-md-4 col-sm-6 col-xs-12" *ngFor="let prod of node;" [routerLink]="['/product', prod.name, prod.id]">
 				<div class="content-cards">
 					<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
 					<p class="text-center product-name main-header-font">
@@ -121,14 +121,14 @@
 		<ng-template *ngFor="let node of categories | slice:1;let i = index;" [ngIf]="i % 2 === 0">
 			<div class="row row-no-gutters">
 
-				<a [routerLink]="['']" [queryParams]="{ id:categories[i].id}" class="col-xs-6"  *ngIf="categories[i]">
+				<a [routerLink]="['']" [queryParams]="{ id:categories[i].id}" class="col-sm-6 col-xs-12"  *ngIf="categories[i]">
 					<div class="text-center">
 						<a class="btn btn-d btn-lg button-category orbitrack" [ngStyle]="{'background-image': 'url(' + imageUrl+'/'+categories[i].imageUrl + ')'}">
 							<!-- {{categories[i].name}} -->
 						</a>
 					</div>
 				</a>
-				<a [routerLink]="['']" [queryParams]="{ id:categories[i+1].id}" class="col-xs-6" *ngIf="categories[i+1]">
+				<a [routerLink]="['']" [queryParams]="{ id:categories[i+1].id}" class="col-sm-6 col-xs-12" *ngIf="categories[i+1]">
 					<div class="text-center">
 						<a class="btn btn-d btn-lg button-category orbitrack" [ngStyle]="{'background-image': 'url(' + imageUrl+'/'+categories[i+1].imageUrl + ')'}">
 							<!-- {{categories[i+1].name}} -->

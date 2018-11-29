@@ -35,7 +35,7 @@ a:hover{text-decoration: none; cursor:pointer;}
 /* Sizes */
 
 .bloc-lg{
-	padding:50px 50px;
+	padding:50px 0px;
 }
 .bloc-md{
 	padding:50px;

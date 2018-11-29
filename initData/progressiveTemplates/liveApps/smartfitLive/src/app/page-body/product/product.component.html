@@ -9,7 +9,7 @@
       <div class="container bloc-lg  padding-top-0">
         <div class="row content-row">
 
-          <div class="col-sm-6 no-padding">
+          <div class="col-md-6 col-sm-12 no-padding">
               <div id="gallery" style="display:none;" *ngIf="Data.tempImageArray">
                     <ng-template *ngFor="let item of Data.tempImageArray" [ngIf]="item">
                       <img  *ngIf="item.videoUrl == null" alt="{{item.name}}"
@@ -26,7 +26,7 @@
               </div>
           </div>
 
-          <div class="col-sm-6 padding-top margin-top" *ngIf = "selectedVariant">
+          <div class="col-md-6 col-sm-12 padding-top margin-top" *ngIf = "selectedVariant">
             <div>
               <p class="text-center product-name main-header-font">
                     {{Data.name}}<br>

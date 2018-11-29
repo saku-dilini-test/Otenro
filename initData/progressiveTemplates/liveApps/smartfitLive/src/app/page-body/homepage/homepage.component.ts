@@ -36,7 +36,6 @@ export class HomepageComponent implements OnInit {
    private categoryService: CategoriesService, private title: TitleService,private appdataService: AppDataService,
    private route:ActivatedRoute, sliderService: SliderService) {
 
-    this.title.changeTitle("Home");
 
     sliderService.retrieveSliderData().subscribe(data => {
       if (data.length > 0) {
@@ -74,7 +73,7 @@ export class HomepageComponent implements OnInit {
           this.primaryCategories = data;
 
           if(this.primaryCategories && this.primaryCategories.length != 0){
-            for(let i=0;i<this.primaryCategories.length;i++){
+            for(let i = 0; i < this.primaryCategories.length; i++){
               if(this.primaryCategories[i].name == 'New Arrivals'){
                  this.primaryCategories.splice(i, 1);
                 break;
@@ -83,12 +82,42 @@ export class HomepageComponent implements OnInit {
               }
             }
           }
-          // console.log(this.primaryCategories,params.id)
-              categoryService.getNodeById(this.primaryCategories,params.id).subscribe((result)=>{
+          // console.log(this.primaryCategories)
+          var selectedCatName;
+          const selectedCat = this.primaryCategories.filter(
+            cat => cat.id === params.id);
+          // console.log(selectedCat)
+          if (selectedCat && selectedCat.length != 0){
+            this.title.changeTitle(selectedCat[0].name);
+          } else {
+             this.primaryCategories.filter(
+              cat => {
+                cat.childNodes.filter(
+                  child => {
+                    if (child.id === params.id){
+                      selectedCatName = child.name;
+                    }
+                  }
+                );
+              }
+            );
+            // console.log(this.primaryCategories)
+            // console.log(selectedCatName);
+            if (selectedCatName){
+              this.title.changeTitle(selectedCatName);
+            } else {
+              this.title.changeTitle('Home');
+            }
+          }
+
+
+              categoryService.getNodeById(this.primaryCategories, params.id).subscribe((result)=>{
 
                     this.currentCategoryImage = this.dataService.currentCategoryImage;
                     this.categories = this.dataService.categories;
+
                     this.products = this.dataService.products;
+
               });
         });
     });

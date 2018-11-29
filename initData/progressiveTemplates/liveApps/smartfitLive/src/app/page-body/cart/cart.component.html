@@ -23,7 +23,7 @@
           <div>
 
             <h1 class="main-header-font text-center bloc-md" *ngIf="cartItems.length == 0">There are no products added to the cart</h1>
-            <div class="row content-cards" *ngFor="let item of cartItems ; let i = index">
+            <div class="row m-padding" *ngFor="let item of cartItems ; let i = index">
               <div class="col-sm-3">
                   <img *ngIf="item.imgURL" src="{{imageUrl}}/{{item.imgURL}}" class="center-block img-responsive lazyload" >
                   <img *ngIf="!item.imgURL" src="{{imageUrl}}/{{item.imgDefault}}" class="center-block img-responsive lazyload" >
@@ -92,19 +92,19 @@
   <!-- bloc-12 -->
   <div class="bloc hidden-sm hidden-xs bgc-white l-bloc main-content-font" id="bloc-12" *ngIf="cartItems.length != 0">
     <div class="container bloc-sm">
-      <div class="row form-names-row-">
+      <div class="row">
         <div class="col-sm-8">
-          <p>
+          <p class="form-names-row-">
             <strong>ITEM</strong>
           </p>
         </div>
         <div class="col-sm-2">
-          <p class="text-right">
+          <p class="text-right form-names-row-">
             <strong>QTY</strong>
           </p>
         </div>
         <div class="col-sm-2">
-          <p class="text-right">
+          <p class="text-right form-names-row-">
             <strong>PRICE</strong>
           </p>
         </div>

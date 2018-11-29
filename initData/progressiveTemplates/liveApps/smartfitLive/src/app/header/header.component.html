@@ -4,17 +4,16 @@
 			<div class="row">
 				<div class="col-sm-12">
 						<nav class="navbar nav-invert row mini-nav">
-							        <div class="navbar-header">
-
-							          <button  aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle" (click)="openNav()">
-							            <i class="ion ion-android-menu"></i>
-							          </button>
-										<button *ngIf="title != 'Home'" aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle main-navigation" (click)="goBack()">
-											<i class="ion-android-arrow-back"></i>
-										</button>
-							          <div class="mobile-title visible-sm mobileTitle" >{{title}}</div>
-							          <div class="mobile-cart visible-sm" ><i class="ion-android-cart"  (click)="navigate('cart','Shopping Cart');manualToggle()"></i> <span class="badge main-navigation"  (click)="navigate('cart','Shopping Cart');manualToggle()">{{cartNo}}</span></div>
-							        </div>
+                <div class="navbar-header">
+                  <button  aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle" (click)="openNav()">
+                    <i class="ion ion-android-menu"></i>
+                  </button>
+                  <button *ngIf="title != 'Home'" aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle main-navigation" (click)="goBack()">
+                    <i class="ion-android-arrow-back"></i>
+                  </button>
+                  <div class="mobile-title visible-sm visible-xs mobileTitle" >{{title}}</div>
+                  <div class="mobile-cart visible-sm visible-xs" ><i class="ion-android-cart"  (click)="navigate('cart','Shopping Cart');manualToggle()"></i> <span class="badge main-navigation"  (click)="navigate('cart','Shopping Cart');manualToggle()">{{cartNo}}</span></div>
+                </div>
 						</nav>
 				</div>
 			</div>
