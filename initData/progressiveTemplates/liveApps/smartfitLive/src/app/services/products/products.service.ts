@@ -36,6 +36,10 @@ export class ProductsService {
     return this.http.get(SERVER_URL+'/templates/getBlogData?appId=' + this.appId)
                     .map(res => res.text() ? res.json() : null);
   }
+  isBlogsAvailable() {
+    return this.http.get(SERVER_URL+'/templates/isBlogAvailable?appId=' + this.appId)
+                    .map(res => res ? res.text() : null);
+  }
   getBlogsById(id) {
     return this.http.get(SERVER_URL+'/templates/getBlogDataById?id=' + id)
                     .map(res => res.text() ? res.json() : null);

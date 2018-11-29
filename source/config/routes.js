@@ -320,6 +320,7 @@ module.exports.routes = {
     'GET /templates/getProductsByAppId': 'template/TemplateController.getAllThirdByAppId',
     'GET /templates/getBlogData': 'template/TemplateController.getBlogData',
     'GET /templates/getBlogDataById': 'template/TemplateController.getBlogDataById',
+    'GET /templates/isBlogAvailable': 'template/TemplateController.isBlogAvailable',
     'GET /templates/getCategoryByProdId': 'template/TemplateController.getSecondByThirdId',
     'GET /templates/getSliderData': 'template/TemplateController.getSliderData',
 

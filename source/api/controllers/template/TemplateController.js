@@ -295,6 +295,27 @@ module.exports = {
         });
     },
 
+    isBlogAvailable : function(req,res){
+        var appId = req.param('appId');
+        var searchApp = {
+            appId: appId,
+        };
+
+        Blogs.findOne(searchApp).exec(function(err,result) {
+            if (err) {
+                sails.log.error("Blog Collection find Error for given Object Id : " + id);
+                return res.send(err);
+            }
+
+            if(result && result.length != 0){
+                res.send(true);
+            }else{
+                res.send(false);
+            }
+
+        });
+    },
+
     getSecondByThirdId: function(req,res){
             var Id = req.param('id');
 

@@ -30,7 +30,9 @@ export class HeaderComponent implements OnInit {
   categories: any
   private catName: any;
   imageUrl: any;
-  user; localCart; blogData;userUkn;
+  user;
+  localCart;
+  userUkn;
   enableBlog = false;
   showOnWebsitePolicies:boolean;
   showOnWebsiteAbout:boolean;
@@ -89,10 +91,8 @@ export class HeaderComponent implements OnInit {
         this.cartNo = this.dataService.cart.cartSize;
 
 
-    this.productsService.getBlogs().subscribe(res => {
-
-      this.blogData = res;
-      if (this.blogData.length > 0) {
+    this.productsService.isBlogsAvailable().subscribe(res => {
+      if (res == 'true') {
         this.enableBlog = true;
       }
     });
