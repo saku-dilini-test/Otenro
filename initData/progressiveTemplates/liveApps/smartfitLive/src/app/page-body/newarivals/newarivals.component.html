@@ -14,7 +14,7 @@
 		</div>
 		<div class="row voffset row-bottom- row-mobile none animDelay02">
 			<div *ngIf = "categories">
-				<div  class="col-sm-4" *ngFor="let prod of categories.products;">
+				<a  class="col-sm-4" *ngFor="let prod of categories.products;" [routerLink]="['/product', prod.name, prod.id]">
 					<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
 					<h3 class="mg-md product-name text-center main-content-font">
 						<strong>{{prod.name}}</strong>
@@ -22,21 +22,21 @@
 					<div *ngIf = "!checkForPromo(prod)" class="text-center product-content productPromo">
 						Price - {{currency}} {{prod.variants[0].price| number: '.2'}}
 					</div>
-					<div *ngIf = "checkForPromo(prod)" class="text-center product-content productPromo">
+					<div *ngIf = "checkForPromo(prod)" class="text-center product-content productPromo main-content-font">
 						<h6 style ="margin-top:0px;margin-bottom:5px">Regular Price - <strong style="text-decoration: line-through">{{currency}} {{prod.variants[0].price| number: '.2'}}</strong></h6>
 						<h5 style ="margin-top:0px;margin-bottom:5px">Cash Price - <strong >{{currency}} {{getDiscountPrice(prod.variants[0].sku,prod.variants[0].price)| number: '.2'}}</strong></h5>
 					</div>
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="text-center" *ngIf="!checkSoldOut(prod)">
-								<a (click)="navigateProd('product',prod, prod.name )" class="btn btn-d btn-lg main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span>Details</a>
+								<a [routerLink]="['/product', prod.name, prod.id]" class="btn btn-d btn-lg main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span>Details</a>
 							</div>
 							<div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
 								<h4 href="#" class="text-warning">Sold Out!</h4>
 							</div>
 						</div>
 					</div>
-				</div>
+				</a>
 			</div>
 			<div *ngIf = "showComingSoon">
 				<h1 style="text-align: center;">COMING SOON!</h1>
