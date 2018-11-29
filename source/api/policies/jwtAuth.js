@@ -8,11 +8,13 @@ module.exports = function(req,res,next){
   var token = req.headers.authorization.split(' ')[1];
   JWT.verify(token, config.CLIENT_SECRET, function(err, decoded) {
     if(err){
-      err = {
-        name: 'TokenExpiredError',
-        message: 'Session is expired',
+      console.log('jwtAuth: Error: name=%s message=%s', err.name, err.message);
+      var response = {
+        name: err.name,
+        message: err.message,
       };
-      return handleError(res,err);
+
+      return handleError(res,response);
     }
     req.userId = decoded.id;
     next();

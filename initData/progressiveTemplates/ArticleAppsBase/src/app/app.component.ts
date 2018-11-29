@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import {Router, ActivatedRoute, Params, NavigationCancel} from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { SERVER_URL } from '../assets/constantsService';
+import { Router } from '@angular/router';
 import * as data from '../assets/madeEasy.json';
 import { URLSearchParams, } from '@angular/http';
 import { PagebodyServiceModule } from './page-body/page-body.service';
@@ -35,7 +33,7 @@ export class AppComponent {
       });
 
       this.messageService.getMessage().subscribe(value =>{
-        if(this.dataService.initialImageCount <= value.loadImageCount){
+        if(this.dataService.initialImageCount <= value.loadImageCount || value.loadImageCount === -1) {
           this.dataService.isImagesLoaded = true;
           this.isImagesLoaded = this.dataService.isImagesLoaded;
         }else if(value.loadImageCount){

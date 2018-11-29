@@ -12,7 +12,6 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
-import { SERVER_URL } from '../../assets/constantsService';
 import {MessageService} from "../services/message.service";
 declare let $:any;
 var headerCmp;
@@ -69,8 +68,10 @@ export class HeaderComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.logoUrl = SERVER_URL + "/templates/viewWebImages?userId="
-          + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images='
+    this.dataService.isFromMobile = window.navigator.userAgent.includes(this.dataService.USER_AGENT_TEXT_MOBILE);
+
+    this.logoUrl = this.dataService.getServerURL() + "/templates/viewWebImages?userId="
+          + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=';
 
     this.isFromCMSAppView = localStorage.getItem(this.appId + "_isFromCMSAppView") == '1';
 
@@ -120,7 +121,7 @@ export class HeaderComponent implements OnInit {
     });
 
     this.messageService.getMessage().subscribe(data => {
-      // console.log('messageService.getMessage in Header Component =>', data);
+      console.log('messageService.getMessage in Header Component =>', data);
       if (data.subscription) {
         this.dataService.subscriptionStatus = data.subscription.subscriptionStatus;
       } else {
@@ -303,7 +304,7 @@ export class HeaderComponent implements OnInit {
 
   smsErrorRegistrationCallback(error: any) {
     console.log("smsErrorRegistrationCallback in Header Component: " + error);
-    headerCmp.dataService.displayMessage = 'You have insufficient balance. Please reload and try again.';
+    headerCmp.dataService.displayMessage = 'Sorry, you do not have enough credit to subscribe to the service';
     $(() => {
       $('#registerModel').modal('hide');
       $('#appStatusModel').modal('show');
@@ -316,7 +317,7 @@ export class HeaderComponent implements OnInit {
 
   smsErrorUnRegistrationCallback(error: any) {
     console.log("smsErrorUnRegistrationCallback in Header Component: " + error);
-    headerCmp.dataService.displayMessage = 'Sorry, you could not be unsubscribe from the service at this time. Please try again after some time.';
+    headerCmp.dataService.displayMessage = 'Sorry, you do not have enough credit to send the sms to unsubscribe from the service';
     $(() => {
       $('#myAccountModel').modal('toggle');
       $('#appStatusModel').modal('show');

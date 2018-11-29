@@ -20,6 +20,7 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="7000" />
     <preference name="loadUrlTimeoutValue" value="700000" />
+    <preference name="AppendUserAgent" value="from mobile app" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />

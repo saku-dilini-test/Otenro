@@ -93,7 +93,7 @@ module.exports.policies = {
     getAboutUs: true,
     getPolicies: true,
     getTermsAndConditions: true,
-    getArticles : true,
+    getArticles: 'jwtAuth',
     getArticleByCategoryId : true,
     getArticleById : true,
     getArticleCategoryByAppId : true,
@@ -102,8 +102,9 @@ module.exports.policies = {
     getSliderData : true,
     getCategory : true,
     createAppVisitDataInfo:true,
-    createArticleViewDataInfo:true,
-      postDeviceId:true
+    createArticleViewDataInfo: 'jwtAuth',
+    getSubChildsByAppId: 'jwtAuth',
+    postDeviceId:true
 
   },
 

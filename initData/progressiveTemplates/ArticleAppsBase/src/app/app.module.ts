@@ -27,8 +27,12 @@ import {SMSService} from "./services/cordova-plugin-services/sms.service";
 import {CordovaPluginFirebaseService} from "./services/cordova-plugin-services/cordova-plugin-firebase.service";
 import {CordovaPluginDeviceService} from "./services/cordova-plugin-services/cordova-plugin-device.service";
 import {MessageService} from "./services/message.service";
+import { ParentJWTService } from './services/parent.jwt.service';
+import { APIHandlerService } from './services/auth/api.handler.service';
+import { AuthenticatorService } from './services/auth/authenticator.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +61,10 @@ import { environment } from '../environments/environment';
     SMSService,
     CordovaPluginFirebaseService,
     CordovaPluginDeviceService,
-    MessageService
+    MessageService,
+    ParentJWTService,
+    APIHandlerService,
+    AuthenticatorService
     ],
   bootstrap: [AppComponent]
 })

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { SERVER_URL } from '../../../assets/constantsService';
 import * as data from '../../../assets/madeEasy.json';
 import { HttpClient } from '@angular/common/http';
 import { AppDataService } from '../../services/appdata-info/appdata-info.service';
 import { TitleService } from '../../services/title.service';
+import { PagebodyServiceModule } from '../page-body.service';
 
 @Component({
   selector: 'app-aboutus',
@@ -21,7 +21,10 @@ export class AboutusComponent implements OnInit {
   openSunday = "we are closed";
   openSaturday = "we are closed";
   aboutUsUrl:any;
-  constructor(private http: HttpClient, private appdataService: AppDataService,private title: TitleService) {
+  constructor(private http: HttpClient, 
+              private appdataService: AppDataService,
+              private dataService: PagebodyServiceModule,
+              private title: TitleService) {
     this.title.changeTitle("About Us");
     this.title.setLocation('aboutUs');
   }
@@ -84,7 +87,7 @@ export class AboutusComponent implements OnInit {
         // }
 
 
-        this.aboutUsUrl = SERVER_URL + "/templates/viewWebImages?userId="
+        this.aboutUsUrl = this.dataService.getServerURL() + "/templates/viewWebImages?userId="
           + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=';
 
       }, (err) => {

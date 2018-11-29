@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { SERVER_URL } from '../../../assets/constantsService';
 import * as data from '../../../assets/madeEasy.json';
 import * as _ from 'lodash';
 import { TitleService } from '../../services/title.service';
@@ -30,7 +29,7 @@ export class ProductComponent implements OnInit {
     private lockBuyButton = false;
     private dialogVariants;
     private player: any;
-    private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
+    private imageUrl = this.dataService.getServerURL() + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
     results:any;
     private loadImageCount:number = 0;

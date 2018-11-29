@@ -1,13 +1,11 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { SERVER_URL } from '../../../assets/constantsService';
 import * as data from '../../../assets/madeEasy.json';
 import { CategoriesService } from '../../services/categories/categories.service';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { TitleService } from '../../services/title.service';
 import { CordovaPluginFirebaseService } from "../../services/cordova-plugin-services/cordova-plugin-firebase.service";
 import { IntervalObservable } from "rxjs/observable/IntervalObservable";
-import {Observable} from 'rxjs/Observable';
 import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
 import { SubscribedDataService } from '../../services/subscribed-data/subscribed-data.service'
@@ -83,7 +81,7 @@ export class HomepageComponent implements OnInit {
       this.getDeviceUUID();
     }
 
-    this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
+    this.imageUrl = this.dataService.getServerURL() + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
 
     this.categoryService.getCategories().subscribe(data => {
@@ -302,7 +300,7 @@ export class HomepageComponent implements OnInit {
 
   smsErrorRegistrationCallback(error: any) {
     console.log("smsErrorRegistrationCallback in homepage Component: " + error);
-    homePageCmp.dataService.displayMessage = 'You have insufficient balance. Please reload and try again.';
+    homePageCmp.dataService.displayMessage = 'Sorry, you do not have enough credit to subscribe to the service';
     $(() => {
       $('#registerModelhome').modal('hide');
       $('#appStatusModel').modal('show');

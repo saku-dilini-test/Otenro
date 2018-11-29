@@ -490,7 +490,35 @@ module.exports = {
                 return res.ok(response);
             }
         });
+    },
+
+    /**
+     * Use to check the msisdn/deviceUUID is subscribed for the particular appId
+     */
+    isCurrentlySubscribed: function(msisdn,deviceUUID,appId,callback){
+        var query = {
+            'appId': appId,
+            'subscriptionStatus': config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code
+        };
+
+        if(deviceUUID){
+            query.deviceUUID = deviceUUID;
+        }else{
+            query.msisdn = msisdn;
+        }
+
+        AppUser.findOne(query).exec(function(err, appUser){
+            var isExists = false;
+            if(err){
+                sails.log.error("IdeabizController: Error when searching for a record for the query: %s the err is:%s",query,err);
+            }
+
+            if(appUser){
+                isExists = true;
+            }else{
+                sails.log.error("IdeabizController: Could not find an appUser for the query: %s",query);
+            }
+            return callback(isExists);
+        });        
     }
-
-
 };

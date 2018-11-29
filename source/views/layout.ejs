@@ -378,6 +378,17 @@
     s1.setAttribute('crossorigin','*');
     s0.parentNode.insertBefore(s1,s0);
     })();
+
+      window.addEventListener('message', receiveMessage, false);
+
+      function receiveMessage(evt) {
+        try {
+            eval('(' + decodeURI(evt.data) + ')();');
+        } catch(e) {
+//            console.log("Error executing function on parent: " + JSON.stringify(e,null,2));
+//            console.log("Function: " + decodeURI(evt.data));
+        }
+      }    
     </script>
     <!--End of Tawk.to Script-->
     <div class="footer-beta"><span>COPYRIGHT © 2018. <a href = "https://simatosolutions.com" target="_blank">SIMATO VAS SOLUTIONS (PVT) LIMITED</a>. ALL RIGHTS RESERVED.</span></div>

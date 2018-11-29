@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SERVER_URL } from '../../../assets/constantsService';
 import * as data from '../../../assets/madeEasy.json';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
@@ -44,10 +43,10 @@ export class ShopComponent implements OnInit {
 
   }
 
-  imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
+  imageUrl = this.dataService.getServerURL() + "/templates/viewWebImages?userId="
     + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
 
-  imageUrl1 = SERVER_URL + "/templates/viewWebImages?userId="
+  imageUrl1 = this.dataService.getServerURL() + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
 
 
@@ -74,8 +73,10 @@ export class ShopComponent implements OnInit {
           }
         },
         error => {
-          console.log('Error shop service');
+          console.log('ShopComponent: Error when getting products.Err: ', error);
           this.dataService.initialImageCount = 0;
+          this.dataService.hideImageLoadingSpinner();
+          this.dataService.showPopupMessage(this.dataService.UNAUTHORISED_ACCESS_MSG);
         });
     } else {
       this.productService.getAllProducts().subscribe(data => {

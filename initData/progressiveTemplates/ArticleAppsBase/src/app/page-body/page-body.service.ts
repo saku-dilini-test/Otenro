@@ -1,10 +1,22 @@
 import { Injectable, OnInit } from '@angular/core';
+import * as madeEasy from '../../assets/madeEasy.json';
+import { SERVER_URL } from '../../assets/constantsService';
+import { MessageService } from '../services/message.service';
+
+declare let $: any;
 
 @Injectable()
 export class PagebodyServiceModule {
+  public UNAUTHORISED_ACCESS_MSG = 'You are not authorized to access the contents.';
+  public USER_AGENT_TEXT_MOBILE = 'from mobile app';
+  private SERVER_URL_ = SERVER_URL;
+
+  public appId = (<any>madeEasy).appId;
+  public userId = (<any>madeEasy).userId;
   STATUS_SUBSCRIBED = 'SUBSCRIBED';
   STATUS_UNSUBSCRIBED = 'UNSUBSCRIBED';
   data: object;
+  isFromMobile = false;
   displayMessage: string;
   pushMessage: string;
   userData: any;
@@ -32,15 +44,57 @@ export class PagebodyServiceModule {
   subUserArticleData = {id:null,name:null,image:null};
   defaultNumberOfTries = 12;
   numberOfTries;
-  constructor() {
-
-    this.parentobj.cartSize = this.cart.cartSize;
-    this.parentobj.userLog = this.isUserLoggedIn.check;
-
-  };
-
-
   initialImageCount:number = 0;
   isImagesLoaded:boolean = false;
 
+  constructor(private messageService: MessageService) {
+    this.parentobj.cartSize = this.cart.cartSize;
+    this.parentobj.userLog = this.isUserLoggedIn.check;
+  }
+
+  getLocalStorageItem(item: string) {
+    return localStorage.getItem(item);
+  }
+
+  setLocalStorageItem(key: string, value: string) {
+    return localStorage.setItem(key, value);
+  }
+
+  getLocalStorageUUID() {
+    return this.getLocalStorageItem('UUID');
+  }
+
+  getLocalStorageMSISDN() {
+    return this.getLocalStorageItem(this.appId + 'msisdn');
+  }
+
+  getLocalStorageToken() {
+    return this.getLocalStorageItem('token');
+  }
+
+  setLocalStorageToken(token) {
+    return localStorage.setItem('token', token);
+  }
+
+  // this model is in the Header componenet, so you can only use this in pages which has the header componenet
+  showPopupMessage(message) {
+    this.displayMessage = message;
+    $(() => {
+        $('#appStatusModel').modal('show');
+    });
+  }
+
+  /**
+   * Use to get the Server URL from constantservice
+   */
+  getServerURL() {
+    return this.SERVER_URL_;
+  }
+
+  /**
+   * Here passing -1 will course to close the spinner and will show the screen without checking whethe the images have loaded or not
+   */
+  hideImageLoadingSpinner() {
+    this.messageService.sendMessage({loadImageCount: -1});
+  }  
 }

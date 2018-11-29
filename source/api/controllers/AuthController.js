@@ -10,7 +10,9 @@ var Passwords = require('machinepack-passwords'),
     request = require('request'),
     config = require('../services/config'),
     moment = require('moment'),
+    ideabizCtrl = require('./ideabiz/IdeabizController'),
     createToken = require('../services/jwt');
+    createMobileToken = require('../services/jwt.mobile');
 var sentMails = require('./../services/emailService');
 var ideaBizPinVerificationAPI = require('./../services/IdeaBizPINVerificationAPIService');
 fs = require('fs-extra');
@@ -560,6 +562,27 @@ module.exports = {
             var ports = JSON.parse(data);
            res.send(ports);
        });
+    },
+    getTokenForMobileUser: function(req,res){
+        var user = {
+            msisdn: req.body.msisdn,
+            appId: req.body.appId,
+            uuId: req.body.uuId
+        };
+
+        ideabizCtrl.isCurrentlySubscribed(user.msisdn,user.uuId,user.appId,function(isSubscribed){
+            if(isSubscribed){
+                createMobileToken(user,function(token){
+                    if(token){
+                        return res.send(token);
+                    }else{
+                        return res.forbidden('Access denied.');
+                    }  
+                });              
+            }else{
+                return res.forbidden('Access denied.');
+            }
+        });
     }
 
 };
