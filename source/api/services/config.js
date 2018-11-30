@@ -233,6 +233,18 @@ module.exports = {
             'desc': 'Error'
         }
     },
+
+    //Will keep the user status in user Registration 
+    USER_REGISTRATION_STATUS: {
+        'PENDING': {
+            'code': 'PENDING',
+            'desc': 'Pending'
+        },
+        'VERIFIED': {
+            'code': 'VERIFIED',
+            'desc': 'Verified'
+        }
+    },
     IDEABIZ_ADMIN_MO_CALLBACK_FORWARD_URLS : sails.config.IDEABIZ_ADMIN_MO_CALLBACK_FORWARD_URLS
 
 };

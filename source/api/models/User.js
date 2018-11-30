@@ -122,6 +122,9 @@ module.exports = {
     ideaBizPinServerRef: {
         type: 'string'
     },
+    registrationStatus: {
+      type: 'string'
+    },    
     operator: {
         type: 'string' //This is the operator from config.IDEABIZ_USER_NETWORK_CLIENTS eg. config.IDEABIZ_USER_NETWORK_CLIENTS.Dialog.code
     },

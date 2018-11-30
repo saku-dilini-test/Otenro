@@ -29,6 +29,11 @@ module.exports = {
                 if (err) return res.negotiate(err);
                 if (!user) return res.notFound();
 
+                if (user && user.registrationStatus && user.registrationStatus === config.USER_REGISTRATION_STATUS.PENDING.code) {
+                    sails.log.error('AuthController: User status is Pending for email:%s', req.body.email);
+                    return res.notFound();
+                }
+
                 Passwords.checkPassword({
                     passwordAttempt: req.body.password,
                     encryptedPassword: user.password
@@ -69,6 +74,11 @@ module.exports = {
 
             User.findOne(criteria).exec(function (err, user) {
                 if (err) return res.serverError({ message: 'error' });
+
+                if (user && user.registrationStatus && user.registrationStatus === config.USER_REGISTRATION_STATUS.PENDING.code) {
+                    sails.log.error('AuthController: User status is Pending for email:%s', req.body.email);
+                    return res.badRequest({ message: 'User not found' });
+                }
 
                 if (user) {
                     ideaBizPinVerificationAPI.verificationRequest(msisdn,function(response,err){
@@ -134,95 +144,83 @@ module.exports = {
         });
   },
 
-  register: function(req, res) {
-      var findCriteria = {or: [{ email: req.body.email }, {mobile: { 'contains' : req.body.mobile.slice(-9) }}]};
-      var countryCode;
-                  User.findOne( findCriteria, function foundUser(err, user) {
-                      if (err) return res.negotiate(err);
-                      if (user) return res.status(409).json({error: 'already exists'});
+    register: function (req, res) {
+        var findCriteria = { or: [{ email: req.body.email }, { mobile: { 'contains': req.body.mobile.slice(-9) } }] };
+        var countryCode;
+        User.findOne(findCriteria, function foundUser(err, user) {
+            if (err) return res.negotiate(err);
+            if (user && (!user.registrationStatus || (user.registrationStatus && user.registrationStatus === config.USER_REGISTRATION_STATUS.VERIFIED.code))) {
+                return res.status(409).json({ error: 'already exists' })
+            };
 
-                      countryCode = req.body.countryCode.substring(1, req.body.countryCode.length);
-                      var msisdn = countryCode + req.body.mobile;
+            countryCode = req.body.countryCode.substring(1, req.body.countryCode.length);
+            var msisdn = countryCode + req.body.mobile;
 
-                      ideaBizPinVerificationAPI.verificationRequest(msisdn,function(response,err){
-                          if(err){
-                              sails.log.debug("register failed while requesting the Pin for the mobile: " + req.body.mobile + " err:" + JSON.stringify(err));
-                              return res.serverError({ error: 'error' });
-                          }
+            ideaBizPinVerificationAPI.verificationRequest(msisdn, function (response, err) {
+                if (err) {
+                    sails.log.debug("register failed while requesting the Pin for the mobile: " + req.body.mobile + " err:" + JSON.stringify(err));
+                    return res.serverError({ error: 'error' });
+                }
 
+                if (!(response && response.body)) {
+                    sails.log.debug("Response received in pin request seems not valid response: " + JSON.stringify(response));
+                    return res.serverError({ error: 'error' });
+                }
 
-                          if(!(response && response.body)){
-                              sails.log.debug("Response received in pin request seems not valid response: " + JSON.stringify(response));
-                              return res.serverError({ error: 'error' });
-                          }
+                var responseBody = JSON.parse(response.body);
 
-                          var responseBody = JSON.parse(response.body);
+                if (responseBody && responseBody.statusCode === "ERROR") {
+                    sails.log.debug("Error while requesting the pin, err:  " + responseBody.message);
+                    return res.serverError({ error: responseBody.message });
+                }
 
-                          if(responseBody && responseBody.statusCode === "ERROR"){
-                              sails.log.debug("Error while requesting the pin, err:  " + responseBody.message);
-                              return res.serverError({ error: responseBody.message });
-                          }
+                var newUserDetails = {
+                    firstName: req.body.fname,
+                    lastName: req.body.lname,
+                    email: req.body.email,
+                    password: req.body.password,
+                    yourselfReason: req.body.yourselfReason,
+                    lastLoginTime: new Date(),
+                    mobile: req.body.countryCode + req.body.mobile,
+                    country: req.body.country,
+                    beneficiaryName: req.body.beneficiaryName,
+                    bankCode: req.body.bankCode,
+                    swiftCode: req.body.swiftCode,
+                    branchCode: req.body.branchCode,
+                    branchName: req.body.branchName,
+                    accountNumber: req.body.accountNumber,
+                    isMobileVerified: false,
+                    registrationStatus: config.USER_REGISTRATION_STATUS.PENDING.code,
+                    ideaBizPinServerRef: responseBody.data.serverRef
+                };
 
-                          var newUserDetails = {
-                              firstName : req.body.fname,
-                              lastName  : req.body.lname,
-                              email     : req.body.email,
-                              password  : req.body.password,
-                              yourselfReason : req.body.yourselfReason,
-                              lastLoginTime : new Date(),
-                              mobile: req.body.countryCode + req.body.mobile,
-                              country: req.body.country,
-                              beneficiaryName: req.body.beneficiaryName,
-                              bankCode: req.body.bankCode,
-                              swiftCode: req.body.swiftCode,
-                              branchCode: req.body.branchCode,
-                              branchName: req.body.branchName,
-                              accountNumber: req.body.accountNumber,
-                              isMobileVerified: false,
-                              ideaBizPinServerRef: responseBody.data.serverRef
-                          };
+                if (req.body.adagent) {
+                    newUserDetails.adagent = req.body.adagent;
+                    newUserDetails.affid = req.body.affid;
+                }
 
-                          if(req.body.adagent){
-                              newUserDetails.adagent = req.body.adagent;
-                              newUserDetails.affid = req.body.affid;
-                          }
+                if(user) {
+                    User.update({ id: user.id }, newUserDetails).exec(function (err) {
+                        if (err) {
+                            sails.log.error('Update Failed => for the user: email:%s mobile:%s error:', user.email, user.mobile, err);
+                            return res.serverError({ error: 'error ehrn update the user' });
+                        }
+                        return res.send({ message: 'success', id: user.id });
+                    });                     
+                } else {
+                    User.create(newUserDetails).exec(function (err, user) {
+                        if (err) {
+                            return res.negotiate(err);
+                        }
+                        if (user) {
+                            return res.send({ message: 'success', id: user.id });
+                        }
+                    });
+                }
+            });
 
-                          User.create(newUserDetails).exec(function(err, user) {
-                              if (err) {
-                                  return res.negotiate(err);
-                              }
-                              if (user) {
-                                  var data = {
-                                      email: user.email,
-                                      fName: user.firstName,
-                                      lName: user.lastName
-                                  };
-
-                                  var msg = sentMails.sendRegisterConfirmation(data, function (err, info) {
-                                      if (err) {
-                                          sails.config.logging.custom.error({message:'Failed sending register confirmation email to ' + req.body.email});
-                                      }
-
-                                      if (info) {
-                                          sails.config.logging.custom.info({message:'Register confirmation email successfully sent to ' + req.body.email});
-                                      }
-                                  });
-                                  return res.send({ message: 'success', id: user.id });
-                                  // createToken(user,res);
-                              }
-                          });
-                      });
-
-                  });
-//              }else {
-//                  sails.config.logging.custom.warn({message:'Registration Error'});
-//                  return res.status(409).json({error: 'Registration Error'})
-//              }
-//          });
-
-
-
-  },
+        });
+    },
     /**
      * Verify mobile number
      * @param req - userId and mobileVerificationPin in req.body
@@ -244,7 +242,6 @@ module.exports = {
                             return res.serverError({ error: 'error' });
                         }
 
-
                         if(!(response && response.body)){
                             sails.log.debug("Error received in pin request for the pin: " + pin + " ref: " + ideaBizPinServerRef);
                             return res.badRequest({ error: "Error" });
@@ -257,9 +254,27 @@ module.exports = {
                             return res.badRequest({ error: responseBody.message });
                         }
 
-                        User.update({ id: id }, { isMobileVerified: true }).exec(function (err) {
+                        User.update({ id: id }, { isMobileVerified: true, registrationStatus: config.USER_REGISTRATION_STATUS.VERIFIED.code }).exec(function (err) {
                             if (err) sails.log.error('Update Failed => mobilePinVerificationPin is Correct => In verifyMobileNumber => AuthController.js');
                             console.log("call createToken");
+
+                            if (user) {
+                                var data = {
+                                    email: user.email,
+                                    fName: user.firstName,
+                                    lName: user.lastName
+                                };
+    
+                                var msg = sentMails.sendRegisterConfirmation(data, function (err, info) {
+                                    if (err) {
+                                        sails.config.logging.custom.error({ message: 'Failed sending register confirmation email to ' + req.body.email });
+                                    }
+    
+                                    if (info) {
+                                        sails.config.logging.custom.info({ message: 'Register confirmation email successfully sent to ' + req.body.email });
+                                    }
+                                });
+                            }                            
                             createToken(user,res);
                         });
                     });
