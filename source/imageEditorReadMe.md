@@ -57,8 +57,8 @@
 There are some libraries(bower components) which the tui-image-editor is depend on, those are,<br>
 1.`"tui-code-snippet": "^1.4.0"`<br>
 2.`"tui-color-picker": "^2.2.0"`<br>
-3.`"fabric": "~1.6.7"`
-these versions are very important to tui-image-editor to work perfectly.
+3.`"fabric": "~1.6.7"`<br>
+these versions are very important to tui-image-editor work properly.
 
 <h4>Original Library URLs</h4>
     https://nhnent.github.io/tui.image-editor/latest/tutorial-example01-includeUi.html <br>
