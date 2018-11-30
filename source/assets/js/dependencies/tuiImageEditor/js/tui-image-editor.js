@@ -5188,7 +5188,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                },
 					menuIconPath: '',
 					// This is where menu initialize (added by .sanira)
-	                menu: ['crop','flip', 'rotate', 'draw', 'shape', 'icon', 'text', 'mask', 'filter'],
+                    // menu: ['crop','flip', 'rotate', 'draw', 'shape', 'icon', 'text', 'mask', 'filter'],
+	                menu: ['crop','flip', 'rotate', 'draw', 'shape', 'icon', 'text', 'filter'],
 	                initMenu: false,
 	                uiSize: {
 	                    width: '100%',
