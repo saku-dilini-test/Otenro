@@ -27,6 +27,12 @@
 .ql-font-serif {
   font-family: Georgia, Times New Roman, serif;
 }
+#article-body-content p {
+  color: #000000;
+}
+#article-body-content h1,h2,h3,h4,h5,h6 {
+  color: #000000;
+}
 /* end of quill.core.css overrides classes */
 
 .no-padding{
