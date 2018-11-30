@@ -33,7 +33,7 @@ export class AppComponent {
       });
 
       this.messageService.getMessage().subscribe(value =>{
-        if(this.dataService.initialImageCount <= value.loadImageCount || value.loadImageCount === -1) {
+        if(this.dataService.initialImageCount <= value.loadImageCount || value.loadImageCount === -2) {
           this.dataService.isImagesLoaded = true;
           this.isImagesLoaded = this.dataService.isImagesLoaded;
         }else if(value.loadImageCount){

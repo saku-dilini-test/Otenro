@@ -12,8 +12,8 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { takeWhile } from 'rxjs/operators';
 import 'rxjs/add/operator/takeWhile';
-import {MessageService} from "../services/message.service";
-declare let $:any;
+import { MessageService } from "../services/message.service";
+declare let $: any;
 var headerCmp;
 
 @Component({
@@ -55,8 +55,8 @@ export class HeaderComponent implements OnInit {
     this.cartNo = this.dataService.cart.cartItems.length;
     this.title = 'Your Horoscope';
 
-    this.titleServ.getLocation().subscribe( (data) => {
-      console.log('title service getLocation: ',data);
+    this.titleServ.getLocation().subscribe((data) => {
+      console.log('title service getLocation: ', data);
       this.hideBackOnHome = !data.includes('home');
     });
 
@@ -71,7 +71,7 @@ export class HeaderComponent implements OnInit {
     this.dataService.isFromMobile = window.navigator.userAgent.includes(this.dataService.USER_AGENT_TEXT_MOBILE);
 
     this.logoUrl = this.dataService.getServerURL() + "/templates/viewWebImages?userId="
-          + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=';
+      + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=';
 
     this.isFromCMSAppView = localStorage.getItem(this.appId + "_isFromCMSAppView") == '1';
 
@@ -100,11 +100,11 @@ export class HeaderComponent implements OnInit {
     this.appDataService.getPublishDetails().subscribe(data => {
       this.appPublishDetails = data;
       //Set the keyword and port to localstorage
-      localStorage.setItem(this.sms.LOCALSTORAGE_KEYWORD_STRING,data.keyword);
-      localStorage.setItem(this.sms.LOCALSTORAGE_PORT_STRING,data.port);
+      localStorage.setItem(this.sms.LOCALSTORAGE_KEYWORD_STRING, data.keyword);
+      localStorage.setItem(this.sms.LOCALSTORAGE_PORT_STRING, data.port);
     });
 
-    if(this.dataService.renewalIntervals.length>0) {
+    if (this.dataService.renewalIntervals.length > 0) {
       this.renewalIntervals = this.dataService.renewalIntervals;
     }
 
@@ -122,12 +122,13 @@ export class HeaderComponent implements OnInit {
 
     this.messageService.getMessage().subscribe(data => {
       console.log('messageService.getMessage in Header Component =>', data);
-      if (data.subscription) {
+      if (data.subscription && data.subscription !== null) {
         this.dataService.subscriptionStatus = data.subscription.subscriptionStatus;
-      } else {
+        this.subscriptionStatus = this.dataService.subscriptionStatus;
+      } else if (data.subscription && data.subscription === null) {
         this.dataService.subscriptionStatus = null;
+        this.subscriptionStatus = this.dataService.subscriptionStatus;
       }
-      this.subscriptionStatus = this.dataService.subscriptionStatus;
     });
   }
 
@@ -162,11 +163,11 @@ export class HeaderComponent implements OnInit {
   }
 
   openNav() {
-    if(this.templateName == "News" || this.templateName == "Magazine" ){
+    if (this.templateName == "News" || this.templateName == "Magazine") {
       document.getElementById("mySidenav").style.height = "100%";
       document.getElementById("header").style.height = "100%";
     }
-    else{
+    else {
       document.getElementById("mySidenav").style.width = "100%";
       document.getElementById("header").style.height = "100%";
     }
@@ -174,11 +175,11 @@ export class HeaderComponent implements OnInit {
   }
 
   closeNav() {
-    if(this.templateName == "News" || this.templateName == "Magazine" ){
+    if (this.templateName == "News" || this.templateName == "Magazine") {
       document.getElementById("mySidenav").style.height = "0";
       document.getElementById("header").style.height = "initial";
     }
-    else{
+    else {
       document.getElementById("mySidenav").style.width = "0";
       document.getElementById("header").style.height = "initial";
     }
@@ -191,15 +192,28 @@ export class HeaderComponent implements OnInit {
   }
 
   openRegisterModel() {
-      $(() => {
-        $('#registerModel').modal('show');
-      });
+    $(() => {
+      $('#registerModel').modal('show');
+    });
   }
 
-  openMyAccountModel(){
-      $(() => {
-        $('#myAccountModel').modal('show');
-      });
+  openMyAccountModel() {
+    const params = { appId: this.appId, msisdn: this.dataService.getLocalStorageMSISDN(), uuId: this.dataService.getLocalStorageUUID() };
+
+    // Chek whether the user already unsubscribed using SMS or any other method, then continue
+    const subStatus = this.subscription.getSubscriptionStatus(params).subscribe(status => {
+      subStatus.unsubscribe();
+      if (status.subscriptionStatus === this.dataService.STATUS_SUBSCRIBED) {
+        $(() => {
+          $('#myAccountModel').modal('show');
+        });
+      } else {
+        this.dataService.displayMessage = this.dataService.ALREADY_UNSUBSCRIBED_MSG;
+        $(() => {
+          $('#appStatusModel').modal('show');
+        });
+      }
+    });
   }
 
   onSubscribe() {
@@ -217,7 +231,7 @@ export class HeaderComponent implements OnInit {
       IntervalObservable.create(5000)
         .takeWhile(() => this.alive) // only fires when component is alive
         .subscribe(() => {
-          if(this.dataService.numberOfTries==this.dataService.defaultNumberOfTries) {
+          if (this.dataService.numberOfTries == this.dataService.defaultNumberOfTries) {
             this.alive = false;
             this.timeoutSubscriptionPopup();
             return;
@@ -228,7 +242,7 @@ export class HeaderComponent implements OnInit {
             this.subscriptionStatus = data.subscriptionStatus;
             this.dataService.subscriptionStatus = data.subscriptionStatus;
 
-            if(data.isError){
+            if (data.isError) {
               this.alive = false;
               this.dataService.displayMessage = data.displayMessage;
               $(() => {
@@ -237,7 +251,7 @@ export class HeaderComponent implements OnInit {
               });
               this.closeNav();
 
-            }else if (this.subscriptionStatus === this.dataService.STATUS_SUBSCRIBED) {
+            } else if (this.subscriptionStatus === this.dataService.STATUS_SUBSCRIBED) {
               this.isSubscribing = false;
               localStorage.setItem(this.appId + "msisdn", data.msisdn)
               this.alive = false;
@@ -256,42 +270,39 @@ export class HeaderComponent implements OnInit {
 
   onUnsubscribe() {
     if (!this.isFromCMSAppView) {
+      const params = { appId: this.appId, msisdn: this.dataService.getLocalStorageMSISDN(), uuId: this.dataService.getLocalStorageUUID() };
       this.alive = true;
 
       this.dataService.numberOfTries = 1;
 
-      //Send Un-Registration SMS
+      // Send Un-Registration SMS
       headerCmp.sms.sendUnRegistrationSMS(headerCmp.smsSuccessUnRegistrationCallback, headerCmp.smsErrorUnRegistrationCallback);
 
-      var uuid = localStorage.getItem("UUID");
-
-      let data = { appId: this.appId, msisdn: localStorage.getItem(this.appId + "msisdn"),uuId: uuid };
       this.isUnsubscribing = true;
 
       IntervalObservable.create(5000)
         .takeWhile(() => this.alive) // only fires when component is alive
         .subscribe(() => {
-          if(this.dataService.numberOfTries==this.dataService.defaultNumberOfTries) {
+          if (this.dataService.numberOfTries === this.dataService.defaultNumberOfTries) {
             this.alive = false;
             this.timeoutUnubscriptionPopup();
             return;
           }
           this.dataService.numberOfTries++;
 
-          this.subscription.getSubscribedData(data).subscribe(data => {
-            this.subscriptionStatus = data.subscriptionStatus;
-            this.dataService.subscriptionStatus = data.subscriptionStatus;
+          this.subscription.getSubscribedData(params).subscribe(results => {
+            this.subscriptionStatus = results.subscriptionStatus;
+            this.dataService.subscriptionStatus = results.subscriptionStatus;
 
             if (this.subscriptionStatus === this.dataService.STATUS_UNSUBSCRIBED) {
               this.isUnsubscribing = false;
-              localStorage.removeItem(this.appId + "msisdn")
+              localStorage.removeItem(this.appId + 'msisdn');
               this.alive = false;
               this.router.navigate(['']);
               $(() => {
                 this.unSubscribedSuccessPopup();
               });
               this.closeNav();
-
             }
           });
         });
@@ -324,7 +335,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  timeoutSubscriptionPopup(){
+  timeoutSubscriptionPopup() {
     this.dataService.displayMessage = 'The subscription process timed out. We are unable to subscribe you to the service at this time.';
     $(() => {
       $('#registerModel').modal('hide');
@@ -332,7 +343,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  timeoutUnubscriptionPopup(){
+  timeoutUnubscriptionPopup() {
     this.dataService.displayMessage = 'The unsubscription process timed out, Please try again.';
     $(() => {
       $('#myAccountModel').modal('toggle');
@@ -340,7 +351,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  unSubscribedSuccessPopup(){
+  unSubscribedSuccessPopup() {
     this.dataService.displayMessage = 'You got unsubscribed from the service';
     $(() => {
       $('#myAccountModel').modal('toggle');
@@ -348,7 +359,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  getRenewalIntervalNumberOfDaysByIntervalCode(code: string){
+  getRenewalIntervalNumberOfDaysByIntervalCode(code: string) {
     return this.appDataService.getRenewalIntervalNumberOfDaysByIntervalCode(code);
   }
 }

@@ -8,6 +8,7 @@ declare let $: any;
 @Injectable()
 export class PagebodyServiceModule {
   public UNAUTHORISED_ACCESS_MSG = 'You are not authorized to access the contents.';
+  public ALREADY_UNSUBSCRIBED_MSG = 'You got already unsubscribed from this service.';
   public USER_AGENT_TEXT_MOBILE = 'from mobile app';
   private SERVER_URL_ = SERVER_URL;
 
@@ -92,9 +93,9 @@ export class PagebodyServiceModule {
   }
 
   /**
-   * Here passing -1 will course to close the spinner and will show the screen without checking whethe the images have loaded or not
+   * Here passing -2 will course to close the spinner and will show the screen without checking whethe the images have loaded or not
    */
   hideImageLoadingSpinner() {
-    this.messageService.sendMessage({loadImageCount: -1});
+    this.messageService.sendMessage({loadImageCount: -2});
   }  
 }
