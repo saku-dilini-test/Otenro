@@ -68,7 +68,7 @@ module.exports = {
                                             if (parent) {
                                                 var newParent = {};
                                                 newParent.nodes = [];
-                                                console.log(parent)
+                                                // console.log(parent)
                                                 if (parent[0].nodes) {
                                                     newParent.nodes = parent[0].nodes;
                                                 }
@@ -165,7 +165,25 @@ module.exports = {
                     if (products) {
                         var parentMenuItems = [];
                         for (var i = 0; i < list.length; i++) {
-                            var relatedProducts = products.filter(products => products.childId == list[i].id);
+                            var relatedProducts = [];
+
+                            products.forEach(product => {
+                                if(product.selectedCat){
+                                    for(var j=0; j<product.selectedCat.length; j++){
+                                        // console.log("start")
+                                        // console.log(product.selectedCat[j])
+                                        // console.log(list[i].id)
+                                        // console.log(product.selectedCat[j] == list[i].id)
+                                        // console.log("end")
+                                        if( product.selectedCat[j] == list[i].id){
+                                            relatedProducts.push(product);
+                                        }
+
+                                    }
+                                }
+                            });
+                            // console.log("relatedProducts");
+                            // console.log(relatedProducts.length);
                             list[i].products = relatedProducts;
                             if (!list[i].parentId) {
                                 parentMenuItems.push(list[i]);

@@ -1524,7 +1524,7 @@
 
 
         $scope.toggleCheck = function (item, list) {
-            console.log(item,list)
+            // console.log(item,list)
             var idx = list.indexOf(item);
             if (idx > -1) {
                 list.splice(idx, 1);
