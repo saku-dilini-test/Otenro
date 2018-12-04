@@ -23,6 +23,9 @@ module.exports = {
             type : 'string',
 //            required: true
         },
+        selectedCat: {
+            type : 'json',
+        },
         name : {
             type: 'string'
         },

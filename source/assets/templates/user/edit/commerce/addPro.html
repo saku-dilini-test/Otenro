@@ -116,20 +116,47 @@
                                     </md-input-container>
 
 
-                                    <md-input-container class="md-block" flex="50">
-                                        <label>Sub Category</label>
-                                        <md-select class="" placeholder="Sub Category" ng-model="product.childId"
-                                                   required>
-                                            <md-option ng-value="ch.id" ng-repeat="ch in child ">{{ch.name}}
-                                            </md-option>
+                                    <!--<md-input-container class="md-block" flex="50">-->
+                                        <!--<label>Sub Category</label>-->
+                                        <!--<md-select class="" placeholder="Sub Category" ng-model="product.childId"-->
+                                                   <!--required>-->
+                                            <!--<md-option ng-value="ch.id" ng-repeat="ch in child ">{{ch.name}}-->
+                                            <!--</md-option>-->
 
-                                            <md-option ng-click="newcategory ()">Create New Category</md-option>
-
-
-                                        </md-select>
+                                            <!--<md-option ng-click="newcategory ()">Create New Category</md-option>-->
 
 
-                                    </md-input-container>
+                                        <!--</md-select>-->
+
+
+                                    <!--</md-input-container>-->
+
+                                    <fieldset class="row">
+                                        <div class="col-md-6 country-list">
+                                            <label>Category List</label>
+                                            <form novalidate>
+                                                <div ui-tree="treeOptions" id="tree-root" data-drag-enabled="false">
+                                                    <ol ui-tree-nodes ng-model="menuItems">
+                                                        <li ng-repeat="node in menuItems" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+                                                    </ol>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-6 country-list">
+                                            <label>Selected Categories</label>
+                                            <div  class="md-label" ng-repeat="ch in selected">
+                                                <!--<span>{{country.countryName}}</span>-->
+                                                <md-checkbox style="margin: 4px 0;" ng-checked="exists(ch, selected)"
+                                                             ng-click="toggle(ch, selected)"
+                                                             aria-label="ch.name" >{{ch.name}}
+                                                </md-checkbox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <br>
+                                            <button class="btn btn-material" ng-click="newcategory()">Create new category</button>
+                                        </div>
+                                    </fieldset>
 
                                     <md-input-container class="md-block" flex="50" ng-if = "liveApps == true" >
                                         <md-select class="" placeholder="Product type" ng-model="product.mainType" required>
@@ -532,3 +559,34 @@
     </div>
     -->
 </md-dialog>
+
+
+<script type="text/ng-template" id="nodes_renderer.html">
+
+    <div ui-tree-handle class="tree-node tree-node-content" style="background: none; border: none; font-family: 'Open Sans', sans-serif; font-weight: 600; color: #7b7878; font-size: 12px;">
+        <a ng-if="!node.isMainCategory && !(node.nodes.length > 0)" >
+            <md-checkbox style="display: initial;" ng-checked="exists(node.id)"
+            ng-click="toggleCheck(node,selected)"
+            aria-label="node.name" >
+            </md-checkbox>
+        </a>
+        <a ng-if="node.nodes && node.nodes.length > 0" data-nodrag >
+            <md-checkbox style="display: initial;" ng-checked="exists(node.id)"
+            ng-click="toggleCheck(node,selected)"
+            aria-label="node.name" >
+            </md-checkbox>
+        </a>
+        <span ng-if="node.nodes && node.nodes.length > 0">{{node.name}}</span>
+        <span ng-if="!(node.nodes && node.nodes.length > 0)">{{node.name}}</span>
+
+        <a ng-if="node.nodes && node.nodes.length > 0">
+            <img  height="15px" src="../../../images/collaps-down.svg">
+        </a>
+
+    </div>
+
+    <ol ui-tree-nodes="" ng-model="node.nodes" >
+        <li ng-repeat="node in node.childNodes" ui-tree-node ng-include="'nodes_renderer.html'">
+        </li>
+    </ol>
+</script>

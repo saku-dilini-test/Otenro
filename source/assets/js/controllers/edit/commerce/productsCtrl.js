@@ -24,6 +24,11 @@
         $scope.originalSku = [];
         $scope.liveApps = $rootScope.liveApps;
         var selectedSku = $scope.product.selectedSku;
+        $scope.selected = [];
+        $scope.child = [];
+
+
+
 
         $scope.selectedSku = [];
         if(!selectedSku){
@@ -254,6 +259,13 @@
          * @param current
          */
         $scope.generalDetails = function (product, current, skuFieldEnable) {
+            $scope.product.selectedCat = [];
+            $scope.selected.forEach(obj => {
+                $scope.product.selectedCat.push(obj.id);
+            });
+
+            console.log(product,$scope.product.selectedCat);
+
             if(product.detailedDesc){
                 product.detailedDesc = product.detailedDesc.replace(/\t/g, '&#09;');
             }
@@ -265,8 +277,8 @@
                             $scope.product.variants = [];
                             $scope.product.variants.push({"sku":product.sku,"name":product.name});
                         }
-                        if(product.childId == 'Create New Category') {
-                            toastr.error('Please select a category continue ', 'Warning', {
+                        if($scope.selected.length === 0) {
+                            toastr.error('Please select at least one category continue ', 'Warning', {
                                 closeButton: true
                             });
                         }else {
@@ -283,7 +295,7 @@
                     $scope.product.variants = [];
                     $scope.product.variants.push({"sku":product.sku,"name":product.name})
                 }
-                if(product.childId == 'Create New Category') {
+                if($scope.selected.length === 0) {
                     toastr.error('Please select a category continue ', 'Warning', {
                         closeButton: true
                     });
@@ -923,8 +935,7 @@
         *
         */
         $scope.checkValidity = function(sku, position){
-        console.log(sku);
-
+            // console.log(sku,position)
             return $q(function(resolve, reject) {
                     $scope.exist = false;
                     var skuData = {
@@ -934,7 +945,7 @@
                     }
                     commerceService.checkUniqueSku(skuData)
                     .success(function(result){
-                    console.log(result);
+                        // console.log(result)
                         if(result == 'true' || result == true){
                              $scope.exist = true;
                              $scope.position = position;
@@ -947,6 +958,7 @@
                             });
                              reject($scope.exist);
                         }else if($scope.product.variants){
+                            // console.log($scope.product.variants)
                             var count = 0;
                             for(var i=0; i<$scope.product.variants.length; i++){
                                 if($scope.product.variants[i].sku && sku && $scope.product.variants[i].sku.toUpperCase() == sku.toUpperCase()){
@@ -960,6 +972,9 @@
                                         });
 
                                         reject($scope.exist);
+                                    }else{
+                                        $scope.exist = false;
+                                        resolve($scope.exist);
                                     }
                                 }
                             }
@@ -968,6 +983,7 @@
                             resolve($scope.exist);
                         }
                     }).error(function (error) {
+                        console.log(error)
                         $log.debug(error);
                     })
              });
@@ -1433,6 +1449,18 @@
                             });
                         });
                     }
+
+                    //initial data categories
+
+                    $scope.templateCategory = data.templateCategory;
+                    categoryMaintenanceService.getCategoryList()
+                        .success(function (secondNaviList) {
+                            $scope.menuItems = secondNaviList;
+                        }).error(function (error) {
+
+                        toastr.error('Menu Loading Error', 'Warning', {closeButton: true});
+                    });
+
                 }).error(function (err) {
                 toastr.error(err.message, 'Warning', {
                     closeButton: true
@@ -1464,6 +1492,45 @@
                 $scope.product.detailedDesc = $scope.oldTextContent +$scope.pastingContent ;
             }else{
                 $scope.product.detailedDesc =  $scope.pastingContent;
+            }
+        };
+
+        $scope.isChecked = function () {
+            return $scope.selected.length === $scope.child.length;
+        };
+        //select all categories
+        $scope.isIndeterminate = function () {
+            return ($scope.selected.length !== 0 &&
+            $scope.selected.length !== $scope.child.length);
+        };
+        $scope.toggleAll = function () {
+            if ($scope.selected.length === $scope.child.length) {
+                $scope.selected = [];
+            } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
+                $scope.selected = $scope.child.slice(0);
+            }
+        };
+
+        $scope.exists = function (catId) {
+            if($scope.product.selectedCat){
+                for (var i = 0; i <  $scope.product.selectedCat.length; i++) {
+                    if ($scope.product.selectedCat[i] == catId) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        };
+
+
+        $scope.toggleCheck = function (item, list) {
+            console.log(item,list)
+            var idx = list.indexOf(item);
+            if (idx > -1) {
+                list.splice(idx, 1);
+            }
+            else {
+                list.push(item);
             }
         };
 
