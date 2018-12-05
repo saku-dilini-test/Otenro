@@ -48,10 +48,11 @@
 									 <div  *ngIf="ifInvalidUserPassword"  class="alert alert-danger row padding text-center">
 								      <div><i class="fa fa-exclamation-triangle"></i> Email or password is not correct. Please try again.</div>
 								    </div>
-									<div class="col-sm-4">
-										<div class="row padding" style="text-align: center;">
+								    <div class="col-sm-12">
 											<span data-toggle="modal" data-target="#myModal">Forgot Password?</span>
-										</div>
+								    </div>
+									<div class="col-sm-4">
+										&nbsp;
 									</div>
 									<div class="col-sm-4">
 										<button [disabled]="loading || userEmail.invalid || password.invalid" type="submit" class="btn btn-d btn-lg main-button btn-block">Login</button>
