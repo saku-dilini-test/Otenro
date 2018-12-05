@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit {
   featuredCategories = [];
   nonFeaturedCategories = [];
   nonFeaturedDropdownLabel;
+  curExpMainCategoryId; currentCatId;
   constructor(private location: Location,private localStorageService: LocalStorageService,
               private categoryService: CategoriesService, private router: Router,
               private dataService: PagebodyServiceModule, private titleServ: TitleService,
@@ -186,5 +187,81 @@ export class HeaderComponent implements OnInit {
     this.dataService.data = item;
     localStorage.setItem(this.appId + ":dataServiceData", JSON.stringify(this.dataService.data))
     this.router.navigate([val, this.catName]);
+  }
+
+  /**
+   * Add or Remove sub categories to the DOM
+   * @param catId :: Id of the category that mouse cursor pointing
+   * @param mainCatId :: Id of the Main Category of the cursor pointing category
+   */
+  appendChildAfter(catId, mainCatId) {
+
+    // Collapse category if expanded
+    if (this.curExpMainCategoryId && this.currentCatId) {
+
+      const currentExpandedMainCategory = this.categories.filter(cat => cat.id === this.curExpMainCategoryId);
+      const currentExpandedMainCategorySlice = { ...currentExpandedMainCategory[0] };
+      const currentExpandedChildCategories = this.getChildCategories(this.currentCatId, currentExpandedMainCategorySlice);
+      // Remove from the DOM
+      for (let i = 0; i < currentExpandedChildCategories.length; i++) {
+        $('#' + currentExpandedChildCategories[i].id).remove();
+      }
+    }
+    const mainCategory = this.categories.filter(cat => cat.id === mainCatId);
+    const mainCategorySlice = { ...mainCategory[0] };
+    const childCategories = this.getChildCategories(catId, mainCategorySlice);
+    // Add to the DOM
+    for (let i = 0; i < childCategories.length; i++) {
+      let hasChildNodes = (childCategories[i].childNodes.length > 0) ? true : false;
+      let html = this.createHtmlContent(childCategories[i].id, mainCatId, hasChildNodes, childCategories[i].name);
+      $('#' + catId).after(html);
+    }
+    this.curExpMainCategoryId = mainCatId;
+    this.currentCatId = catId;
+  }
+
+  /**
+   * Generate html content
+   * @param catId :: Id of the category
+   * @param mainCatId :: Id of the Main category
+   * @param hasChildNodes{boolean} :: Are there child categories
+   * @param catName :: Name of the category
+   */
+  createHtmlContent(catId, mainCatId, hasChildNodes, catName) {
+
+    let html;
+    // If there are child categories
+    if (hasChildNodes) {
+
+      html = '<a href="#/?id=' + catId + '" style="margin-left: 10px;" id="' + catId + '"' +
+        '(mouseenter)="appendChildAfter(' + catId + ',' + mainCatId + ',' + catId + ')"' +
+        '[routerLink]="[""]" [queryParams]="{ id:' + catId + '}">' +
+        '<span>' + catName + '</span>' +
+        '<span class="caret"></span></a>';
+    } else {
+
+      html = '<a href="#/?id=' + catId + '" style="margin-left: 10px;" id="' + catId + '"' +
+        '(mouseenter)="appendChildAfter(' + catId + ',' + mainCatId + ',' + catId + ')"' +
+        '[routerLink]="[""]" [queryParams]="{ id:' + catId + '}">' +
+        '<span>' + catName + '</span></a>';
+    }
+    return html;
+  }
+  
+  /**
+   * Get childnodes of a specific category
+   * @param catId :: Id of the category
+   * @param mainCategory :: Main category data
+   */
+  getChildCategories(catId, mainCategory) {
+    
+    for(let i = 0; i < mainCategory.childNodes.length; i++) {
+
+      if (mainCategory.childNodes[i].id === catId) {
+        return mainCategory.childNodes[i].childNodes;
+      }
+      let found = this.getChildCategories(catId, mainCategory.childNodes[i]);
+      if (found) return found;
+    }
   }
 }
