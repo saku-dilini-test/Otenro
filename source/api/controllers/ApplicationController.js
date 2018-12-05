@@ -424,8 +424,9 @@ module.exports = {
                                            * Add Third Navigation
                                            */
                                           for (var j = 0; j < thirdNaviList.length; j++) {
+                                              thirdNaviList[j].selectedCategories = [];
                                               thirdNaviList[j].appId = app.id;
-                                              thirdNaviList[j].childId = secondN.id;
+                                              thirdNaviList[j].selectedCategories.push(secondN.id);
 
                                               ThirdNavigation.create(thirdNaviList[j]).exec(function (err, thirdN) {
                                                   if (err) return err;

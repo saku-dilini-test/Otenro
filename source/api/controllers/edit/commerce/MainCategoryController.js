@@ -168,14 +168,14 @@ module.exports = {
                             var relatedProducts = [];
 
                             products.forEach(product => {
-                                if(product.selectedCat){
-                                    for(var j=0; j<product.selectedCat.length; j++){
+                                if(product.selectedCategories){
+                                    for(var j=0; j<product.selectedCategories.length; j++){
                                         // console.log("start")
-                                        // console.log(product.selectedCat[j])
+                                        // console.log(product.selectedCategories[j])
                                         // console.log(list[i].id)
-                                        // console.log(product.selectedCat[j] == list[i].id)
+                                        // console.log(product.selectedCategories[j] == list[i].id)
                                         // console.log("end")
-                                        if( product.selectedCat[j] == list[i].id){
+                                        if( product.selectedCategories[j] == list[i].id){
                                             relatedProducts.push(product);
                                         }
 
@@ -667,6 +667,44 @@ module.exports = {
             if (!appHeaderData) {
 
                 return res.send({ status: 'NOT_FOUND' });
+            }
+        });
+    },
+
+
+    //temporally created method for add multiple categories for product. when removing remove from route policies and this method
+    findAndModify: function (req,res){
+        var appId = req.param('appId');
+        console.log("came here")
+        ThirdNavigation.find({appId:appId}).exec(function (err, products){
+            if(err){
+                return res.serverError(err)
+            }
+
+            if(products){
+                console.log(products.length)
+                var count = 0;
+                products.forEach(product =>{
+                    if(!product.selectedCategories){
+                        product.selectedCategories = [];
+                    }
+                        product.selectedCategories.push(product.childId);
+                    ThirdNavigation.update({ id: product.id }, {selectedCategories:product.selectedCategories})
+                        .exec(function (err, prod) {
+
+                            count++;
+                            if (err) {
+                                return res.serverError({ status: 'ERROR' });
+                            }
+                            console.log(count == products.length - 1)
+                            console.log(products.length-1)
+                            console.log(count)
+                            if (count == products.length - 1) {
+                                console.log("success")
+                                return res.send({ status: 'SUCCESS'});
+                            }
+                     });
+                 });
             }
         });
     }

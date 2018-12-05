@@ -259,12 +259,12 @@
          * @param current
          */
         $scope.generalDetails = function (product, current, skuFieldEnable) {
-            $scope.product.selectedCat = [];
+            $scope.product.selectedCategories = [];
             $scope.selected.forEach(obj => {
-                $scope.product.selectedCat.push(obj.id);
+                $scope.product.selectedCategories.push(obj.id);
             });
 
-            console.log(product,$scope.product.selectedCat);
+            // console.log(product,$scope.product.selectedCategories);
 
             if(product.detailedDesc){
                 product.detailedDesc = product.detailedDesc.replace(/\t/g, '&#09;');
@@ -1512,9 +1512,9 @@
         };
 
         $scope.exists = function (catId) {
-            if($scope.product.selectedCat){
-                for (var i = 0; i <  $scope.product.selectedCat.length; i++) {
-                    if ($scope.product.selectedCat[i] == catId) {
+            if($scope.product.selectedCategories){
+                for (var i = 0; i <  $scope.product.selectedCategories.length; i++) {
+                    if ($scope.product.selectedCategories[i] == catId) {
                         return true;
                     }
                 }

@@ -56,7 +56,8 @@ module.exports.policies = {
       updateCategoryOrder: true,
       updateFeaturedCategory: true,
       checkAppHeaderEligibility: true,
-      getAppHeaderData: true
+      getAppHeaderData: true,
+      findAndModify: true
   },
 
   'edit/commerce/SecondNavigationController': {
