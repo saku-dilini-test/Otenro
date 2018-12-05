@@ -783,31 +783,7 @@ export class CheckoutComponent implements OnInit {
       note = note.trim();
     }
     if (this.formType == "delivery") {
-      if (this.complexForm.valid) {
-        this.orderDetails = {
-          'appId': this.appId,
-          'registeredUser': 'Unknown User',
-          'item': this.payInfo.cart,
-          'amount': this.payInfo.amount,
-          'customerName': this.complexForm.value.fName,
-          'deliverName': this.complexForm.value.fName + " " + this.complexForm.value.lName,
-          'deliveryNo': this.complexForm.value.streetNo,
-          'deliveryStreet': this.complexForm.value.streetName,
-          'deliveryCity': this.complexForm.value.city,
-          'deliveryCountry': this.complexForm.value.country,
-          'deliveryZip': this.complexForm.value.zip,
-          'telNumber': this.complexForm.value.phone,
-          'tax': this.payInfo.taxTotal,
-          'shippingCost': this.chkShippingCost,
-          'shippingOpt': this.payInfo.item.shippingOption,
-          'email': this.complexForm.value.email,
-          'currency': this.dataService.currency,
-          'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
-          'note': note,
-          'paymentType': type
-        };
-      } else if(this.user){
+      if (this.oldUser) {
         this.orderDetails = {
           'appId': this.appId,
           'registeredUser': this.user.registeredUser,
@@ -831,6 +807,30 @@ export class CheckoutComponent implements OnInit {
           'note': note,
           'paymentType': type
         };
+      } else{
+        this.orderDetails = {
+          'appId': this.appId,
+          'registeredUser': (this.user ? this.user.registeredUser:"Unknown User" ),
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.complexForm.value.fName,
+          'deliverName': this.complexForm.value.fName + " " + this.complexForm.value.lName,
+          'deliveryNo': this.complexForm.value.streetNo,
+          'deliveryStreet': this.complexForm.value.streetName,
+          'deliveryCity': this.complexForm.value.city,
+          'deliveryCountry': this.complexForm.value.country,
+          'deliveryZip': this.complexForm.value.zip,
+          'telNumber': this.complexForm.value.phone,
+          'tax': this.payInfo.taxTotal,
+          'shippingCost': this.chkShippingCost,
+          'shippingOpt': this.payInfo.item.shippingOption,
+          'email': this.complexForm.value.email,
+          'currency': this.dataService.currency,
+          'puckupId': null,
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note,
+          'paymentType': type
+        };
       }
 
 
@@ -838,7 +838,7 @@ export class CheckoutComponent implements OnInit {
       if (this.pickupForm.valid) {
         this.orderDetails = {
           "appId": this.appId,
-          "registeredUser": 'Unknown User',
+          "registeredUser": (this.user ? this.user.registeredUser:"Unknown User" ),
           "item": this.payInfo.cart,
           "amount": this.payInfo.amount,
           "customerName": this.pickupForm.value.name+" "+this.pickupForm.value.lname,
@@ -949,31 +949,8 @@ export class CheckoutComponent implements OnInit {
     }
 
     if (this.formType == "delivery") {
-      if (this.complexForm.valid) {
-        this.orderDetails = {
-          'appId': this.appId,
-          'registeredUser': 'Unknown User',
-          'item': this.payInfo.cart,
-          'amount': this.payInfo.amount,
-          'customerName': this.complexForm.value.fName,
-          'deliverName': this.complexForm.value.fName + " " + this.complexForm.value.lName,
-          'deliveryNo': this.complexForm.value.streetNo,
-          'deliveryStreet': this.complexForm.value.streetName,
-          'deliveryCity': this.complexForm.value.city,
-          'deliveryCountry': this.complexForm.value.country,
-          'deliveryZip': this.complexForm.value.zip,
-          'telNumber': this.complexForm.value.phone,
-          'tax': this.payInfo.taxTotal,
-          'shippingCost': this.chkShippingCost,
-          'shippingOpt': this.payInfo.item.shippingOption,
-          'email': this.complexForm.value.email,
-          'currency': this.dataService.currency,
-          'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
-          'note': note,
-          'paymentType': 'Cash on delivery'
-        };
-      } else if(this.user){
+      if (this.oldUser) {
+        // console.log("from registered user only")
         this.orderDetails = {
           'appId': this.appId,
           'registeredUser': this.user.registeredUser,
@@ -997,14 +974,43 @@ export class CheckoutComponent implements OnInit {
           'note': note,
           'paymentType': 'Cash on delivery'
         };
+      } else{
+
+        // console.log("from registered users that choose form or unknown users")
+        this.orderDetails = {
+          'appId': this.appId,
+          'registeredUser':(this.user ? this.user.registeredUser:"Unknown User" ),
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.complexForm.value.fName,
+          'deliverName': this.complexForm.value.fName + " " + this.complexForm.value.lName,
+          'deliveryNo': this.complexForm.value.streetNo,
+          'deliveryStreet': this.complexForm.value.streetName,
+          'deliveryCity': this.complexForm.value.city,
+          'deliveryCountry': this.complexForm.value.country,
+          'deliveryZip': this.complexForm.value.zip,
+          'telNumber': this.complexForm.value.phone,
+          'tax': this.payInfo.taxTotal,
+          'shippingCost': this.chkShippingCost,
+          'shippingOpt': this.payInfo.item.shippingOption,
+          'email': this.complexForm.value.email,
+          'currency': this.dataService.currency,
+          'puckupId': null,
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note,
+          'paymentType': 'Cash on delivery'
+        };
+
+
       }
 
 
     } else {
       if (this.pickupForm.valid) {
+        // console.log("from pickup users only")
         this.orderDetails = {
           "appId": this.appId,
-          "registeredUser": 'Unknown User',
+          "registeredUser": (this.user.registeredUser ? this.user.registeredUser:"Unknown User" ),
           "item": this.payInfo.cart,
           "amount": this.payInfo.amount,
           "customerName": this.pickupForm.value.name+" "+this.pickupForm.value.lname,
@@ -1131,31 +1137,7 @@ export class CheckoutComponent implements OnInit {
       note = note.trim();
     }
     if (this.formType == "delivery") {
-      if (this.complexForm.valid) {
-        this.orderDetails = {
-          'appId': this.appId,
-          'registeredUser': 'Unknown User',
-          'item': this.payInfo.cart,
-          'amount': this.payInfo.amount,
-          'customerName': this.complexForm.value.fName,
-          'deliverName': this.complexForm.value.fName + " " + this.complexForm.value.lName,
-          'deliveryNo': this.complexForm.value.streetNo,
-          'deliveryStreet': this.complexForm.value.streetName,
-          'deliveryCity': this.complexForm.value.city,
-          'deliveryCountry': this.complexForm.value.country,
-          'deliveryZip': this.complexForm.value.zip,
-          'telNumber': this.complexForm.value.phone,
-          'tax': this.payInfo.taxTotal,
-          'shippingCost': this.chkShippingCost,
-          'shippingOpt': this.payInfo.item.shippingOption,
-          'email': this.complexForm.value.email,
-          'currency': this.dataService.paypalCurrency,
-          'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
-          'note': note,
-          'paymentType': 'PayPal'
-        };
-      } else if(this.user){
+      if (this.oldUser) {
         this.orderDetails = {
           'appId': this.appId,
           'registeredUser': this.user.registeredUser,
@@ -1179,6 +1161,31 @@ export class CheckoutComponent implements OnInit {
           'note': note,
           'paymentType': 'PayPal'
         };
+
+      } else{
+        this.orderDetails = {
+          'appId': this.appId,
+          'registeredUser': (this.user ? this.user.registeredUser:"Unknown User" ),
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.complexForm.value.fName,
+          'deliverName': this.complexForm.value.fName + " " + this.complexForm.value.lName,
+          'deliveryNo': this.complexForm.value.streetNo,
+          'deliveryStreet': this.complexForm.value.streetName,
+          'deliveryCity': this.complexForm.value.city,
+          'deliveryCountry': this.complexForm.value.country,
+          'deliveryZip': this.complexForm.value.zip,
+          'telNumber': this.complexForm.value.phone,
+          'tax': this.payInfo.taxTotal,
+          'shippingCost': this.chkShippingCost,
+          'shippingOpt': this.payInfo.item.shippingOption,
+          'email': this.complexForm.value.email,
+          'currency': this.dataService.paypalCurrency,
+          'puckupId': null,
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note,
+          'paymentType': 'PayPal'
+        };
       }
 
 
@@ -1186,7 +1193,7 @@ export class CheckoutComponent implements OnInit {
       if (this.pickupForm.valid) {
         this.orderDetails = {
           "appId": this.appId,
-          "registeredUser": 'Unknown User',
+          "registeredUser": (this.user ? this.user.registeredUser:"Unknown User" ),
           "item": this.payInfo.cart,
           "amount": this.payInfo.amount,
           "customerName": this.pickupForm.value.name+" "+this.pickupForm.value.lname,
@@ -1232,33 +1239,8 @@ export class CheckoutComponent implements OnInit {
     }
 
     if (this.formType == "delivery") {
-      if (this.complexForm.valid) {
-        this.orderDetails = {
-          'appId': this.appId,
-          'registeredUser': 'Unknown User',
-          'item': this.payInfo.cart,
-          'amount': this.payInfo.amount,
-          'customerName': this.complexForm.value.fName,
-          'lastName':  this.lname,
-          'deliveryNo': this.complexForm.value.streetNo,
-          'deliveryStreet': this.complexForm.value.streetName,
-          'deliveryCity': this.complexForm.value.city,
-          'deliveryCountry': this.complexForm.value.country,
-          'deliveryZip': this.complexForm.value.zip,
-          'telNumber': this.complexForm.value.phone,
-          'tax': this.payInfo.taxTotal,
-          'shippingCost': this.chkShippingCost,
-          'shippingOpt': this.payInfo.item.shippingOption,
-          'email': this.complexForm.value.email,
-          'currency': this.dataService.paypalCurrency,
-          'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
-          'note': note,
-          'paymentType': 'PayHere',
-          'realHostUrl': realHostUrl,
-          'payHereMerchantId': this.payHereMID
-        };
-      } else if(this.user){
+      if (this.oldUser) {
+
         this.orderDetails = {
           'appId': this.appId,
           'registeredUser': this.user.registeredUser,
@@ -1284,6 +1266,32 @@ export class CheckoutComponent implements OnInit {
           'realHostUrl': realHostUrl,
           'payHereMerchantId': this.payHereMID
         };
+      } else{
+        this.orderDetails = {
+          'appId': this.appId,
+          'registeredUser': (this.user ? this.user.registeredUser:"Unknown User" ),
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.complexForm.value.fName,
+          'lastName':  this.lname,
+          'deliveryNo': this.complexForm.value.streetNo,
+          'deliveryStreet': this.complexForm.value.streetName,
+          'deliveryCity': this.complexForm.value.city,
+          'deliveryCountry': this.complexForm.value.country,
+          'deliveryZip': this.complexForm.value.zip,
+          'telNumber': this.complexForm.value.phone,
+          'tax': this.payInfo.taxTotal,
+          'shippingCost': this.chkShippingCost,
+          'shippingOpt': this.payInfo.item.shippingOption,
+          'email': this.complexForm.value.email,
+          'currency': this.dataService.paypalCurrency,
+          'puckupId': null,
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note,
+          'paymentType': 'PayHere',
+          'realHostUrl': realHostUrl,
+          'payHereMerchantId': this.payHereMID
+        };
       }
 
 
@@ -1291,7 +1299,7 @@ export class CheckoutComponent implements OnInit {
       if (this.pickupForm.valid) {
         this.orderDetails = {
           'appId': this.appId,
-          'registeredUser': 'Unknown User',
+          'registeredUser': (this.user ? this.user.registeredUser:"Unknown User" ),
           'item': this.payInfo.cart,
           'amount': this.payInfo.amount,
           'customerName':  this.pickupForm.value.name+" "+this.pickupForm.value.lname,
