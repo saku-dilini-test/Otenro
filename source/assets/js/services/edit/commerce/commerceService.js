@@ -154,7 +154,7 @@
                 return $mdDialog.show({
                     controller: 'CommerceCtrl',
                     templateUrl: 'user/edit/commerce/manageEmailSettingsView.html',
-                    clickOutsideToClose: true,
+                    clickOutsideToClose: false,
                     locals: {
                         selectedTab: 0
                     }

@@ -988,17 +988,18 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                 });
             }
             else {
-                var im = $scope.tmpImage;
-                im[0] = $scope.confirmPic;
-                $scope.tmpImage = im;
-                $scope.mainImg = img;
+                // var im = $scope.tmpImage;
+                // im[0] = $scope.confirmPic;
+                // $scope.tmpImage = im;
+                // $scope.mainImg = img;
                 $scope.myImageHeaderConfirm = null;
                 toastr.success('Image has been uploaded successfully', 'message', {
                     closeButton: true
                 });
             }
-            $scope.picFileHeader = $scope.tmpImage;
-            console.log($scope.tmpImage);
+            console.log("confirm");
+
+            $scope.picFileHeader[0] = $scope.confirmPic;
             $scope.confirmPicImageSelected = true;
             $scope.buttonNameHeader = "Browse Image";
         };
@@ -1031,17 +1032,18 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                 });
             }
             else {
-                var im = $scope.tmpImage;
-                im[0] = $scope.fulfillPic;
-                $scope.tmpImage = im;
-                $scope.mainImg = img;
+                // var im = $scope.tmpImage;
+                // im[0] = $scope.fulfillPic;
+                // $scope.tmpImage = im;
+                // $scope.mainImg = img;
                 $scope.myImageHeaderFulfill = null;
                 toastr.success('Image has been uploaded successfully', 'message', {
                     closeButton: true
                 });
             }
-            $scope.picFileHeader2 = $scope.tmpImage;
-            console.log($scope.tmpImage);
+            console.log("fuilfil");
+
+            $scope.picFileHeader2[0] = $scope.fulfillPic;
             $scope.fulfillPicImageSelected = true;
             $scope.buttonNameFulfill = "Browse Image";
         };
@@ -1074,17 +1076,17 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                 });
             }
             else {
-                var im = $scope.tmpImage;
-                im[0] = $scope.refundPic;
-                $scope.tmpImage = im;
-                $scope.mainImg = img;
+                // var im = $scope.tmpImage;
+                // im[0] = $scope.refundPic;
+                // $scope.tmpImage = im;
+                // $scope.mainImg = img;
                 $scope.myImageHeaderRefund = null;
                 toastr.success('Image has been uploaded successfully', 'message', {
                     closeButton: true
                 });
             }
-            $scope.picFileHeader3 = $scope.tmpImage;
-            console.log($scope.tmpImage);
+            console.log("refund");
+            $scope.picFileHeader3[0] = $scope.refundPic;
             $scope.refundPicImageSelected = true;
             $scope.buttonNameRefund = "Browse Image";
         };
