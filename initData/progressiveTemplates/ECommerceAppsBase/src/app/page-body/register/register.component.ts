@@ -101,7 +101,7 @@ export class RegisterComponent implements OnInit {
       debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
       this._success.next("Please select a country!");
       setTimeout(() => { }, 3100);
-
+      this.spinnerService.hide();
     }else {
 
       this.fname = myForm.fname;
@@ -191,6 +191,7 @@ export class RegisterComponent implements OnInit {
                 }
               },
               (err) => {
+                this.spinnerService.hide();
                 keepThis.ifInvalidUserPassword = true;
                 console.log(err);
               });
