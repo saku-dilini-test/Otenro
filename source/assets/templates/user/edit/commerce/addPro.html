@@ -519,6 +519,7 @@
                                 <div class="old-images clearfix">
                                     <div class="old-image" ng-repeat="n in [].constructor(8) track by $index">
                                        <div ng-class="{special: defaultImage ==  $index}">
+                                           {{$index}}
                                             <input type="button" ng-click="deleteImg( $index)" value='delete'
                                                    class="image-delete-button"/>
                                             <img ng-click="setImage()" ng-if="tmpImage[ $index].img == null"
@@ -526,8 +527,9 @@
                                             <img id="1"  ng-click="defImg($index,tmpImage[$index].videoUrl)" ng-if="tmpImage[$index].img !== null" ngf-src="tmpImage[$index].img"/>
                                        </div>
                                         <md-input-container>
-                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[$index].img|| (originalSku.length == selectedSku.length && (tmpImage[$index].sku.length == $index || !tmpImage[$index].sku))" ng-change = "onChange(tmpImage[$index].sku, $index)" ng-model="tmpImage[$index].sku" placeholder="Select sku" multiple="">
-                                                <md-option ng-value="variants" ng-repeat="variants in getSku(0)">{{ variants }}</md-option>
+                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[$index].img|| (originalSku.length == selectedSku.length && (tmpImage[$index].sku.length == $index || !tmpImage[$index].sku))"
+                                                       ng-change = "onChange(tmpImage[$index].sku, $index)" ng-model="tmpImage[$index].sku" placeholder="Select sku" multiple="">
+                                                <md-option ng-value="variants" ng-repeat="variants in getSku($index)">{{ variants }}</md-option>
                                             </md-select>
                                             <div class="padding-vertical">
                                                 <span ng-if = "tmpImage[$index].videoUrl">{{checkUrl(tmpImage[$index].videoUrl)}}</span>
