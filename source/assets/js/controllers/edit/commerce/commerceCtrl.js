@@ -1169,7 +1169,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                                 toastr.success('Email Settings has been changed ', 'Success', {
                                     closeButton: true
                                 });
-                                if(emailType=="orderRefundEmail"){
+                                if(emailType=="orderRefundEmail" && type === 'finish'){
                                     $mdDialog.hide();
                                 }
 
