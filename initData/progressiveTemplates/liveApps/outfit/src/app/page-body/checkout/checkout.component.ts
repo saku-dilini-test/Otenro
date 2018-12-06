@@ -1010,7 +1010,7 @@ export class CheckoutComponent implements OnInit {
         // console.log("from pickup users only")
         this.orderDetails = {
           "appId": this.appId,
-          "registeredUser": (this.user.registeredUser ? this.user.registeredUser:"Unknown User" ),
+          "registeredUser": (this.user ? this.user.registeredUser:"Unknown User" ),
           "item": this.payInfo.cart,
           "amount": this.payInfo.amount,
           "customerName": this.pickupForm.value.name+" "+this.pickupForm.value.lname,
