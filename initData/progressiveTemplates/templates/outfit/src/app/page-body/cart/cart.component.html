@@ -74,7 +74,7 @@
       <h4 class="text-center  main-header-font" *ngIf="cartItems.length == 0">There are no products added to the cart</h4>
     </div>
     <div class="col-sm-12" style="margin: 10px 0" *ngIf="successMessage">
-      <ngb-alert  type="warning" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+      <ngb-alert  type="danger" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
     </div>
 
     <app-accepted-payment-type></app-accepted-payment-type>
