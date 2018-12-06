@@ -227,12 +227,12 @@ module.exports = {
 
                                 parentMenuItems.sort((currentItem, nextItem) => {
 
-                                    if (currentItem.updatedAt < nextItem.updatedAt) {
+                                    if (currentItem.createdAt < nextItem.createdAt) {
     
                                         return 1;
                                     }
     
-                                    if (currentItem.updatedAt > nextItem.updatedAt) {
+                                    if (currentItem.createdAt > nextItem.createdAt) {
     
                                         return -1;
                                     }
@@ -298,6 +298,7 @@ module.exports = {
                                     cat.childNodes = childNodesArrSorted;
                                 }
                             });
+                            mainCatCtrl.updateCategoryOrderIndex(arr)
                         }
                         res.send(arr);
                     }
@@ -707,5 +708,23 @@ module.exports = {
                  });
             }
         });
+    },
+
+    /**
+     * Update Categorys' ordering index before user set ranking
+     * @param {Array} categories :: List of categories 
+     */
+    updateCategoryOrderIndex: function (categories) {
+        var mainCategoryController = this;
+        for (var i = 0; i < categories.length; i++) {
+            // Update category index 
+            MainCategory.update({ id: categories[i].id }, { index: i }).exec(function (err, val) {
+
+                if (err) {
+                    sails.log.error("Error Occurred in Updating Category index : error => " + err);
+                }
+            });
+            mainCategoryController.updateCategoryOrderIndex(categories[i].childNodes);
+        }
     }
 };
