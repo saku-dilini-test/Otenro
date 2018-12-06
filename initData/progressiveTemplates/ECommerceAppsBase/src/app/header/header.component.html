@@ -32,13 +32,16 @@
 
 						<li *ngFor="let featuredCategory of featuredCategories">
 							<div class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
+									(click)="setStyle(featuredCategory.id)"
+								 id="{{featuredCategory.id}}">
 									<span>{{featuredCategory.name}}</span>
 									<span class="caret"></span>
 								</a>
 								<ul *ngIf="featuredCategory.childNodes.length > 0" class="dropdown-menu  main-navigation" role="menu">
-									<a *ngFor="let childNode of featuredCategory.childNodes" id="{{childNode.id}}" (mouseenter)="appendChildAfter(childNode.id, featuredCategory.id)"
-									 [routerLink]="['']" [queryParams]="{ id: childNode.id }">
+									<a *ngFor="let childNode of featuredCategory.childNodes" id="{{childNode.id}}" 
+										(mouseenter)="appendChildAfter(childNode.id, featuredCategory.id)"
+										[routerLink]="['']" [queryParams]="{ id: childNode.id }">
 										<span>{{childNode.name}}</span>
 										<span *ngIf="childNode.childNodes.length > 0" class="caret"></span>
 									</a>

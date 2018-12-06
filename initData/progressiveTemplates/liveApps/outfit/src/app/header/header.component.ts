@@ -38,6 +38,7 @@ export class HeaderComponent implements OnInit {
   nonFeaturedCategories = [];
   nonFeaturedDropdownLabel;
   curExpMainCategoryId; currentCatId;
+  txtDecoratedCatId;
   constructor(private location: Location,private localStorageService: LocalStorageService,
               private categoryService: CategoriesService, private router: Router,
               private dataService: PagebodyServiceModule, private titleServ: TitleService,
@@ -190,72 +191,111 @@ export class HeaderComponent implements OnInit {
   }
 
   /**
-   * Add or Remove sub categories to the DOM
-   * @param catId :: Id of the category that mouse cursor pointing
-   * @param mainCatId :: Id of the Main Category of the cursor pointing category
+   * Responsible for Adding and Removing Categories to the DOM Dynamically
+   * @param catId :: Id of the mouse pointed Category
+   * @param mainCatId :: Id of the main category
    */
   appendChildAfter(catId, mainCatId) {
 
-    // Collapse category if expanded
-    if (this.curExpMainCategoryId && this.currentCatId) {
-
-      const currentExpandedMainCategory = this.categories.filter(cat => cat.id === this.curExpMainCategoryId);
-      const currentExpandedMainCategorySlice = { ...currentExpandedMainCategory[0] };
-      const currentExpandedChildCategories = this.getChildCategories(this.currentCatId, currentExpandedMainCategorySlice);
-      // Remove from the DOM
-      for (let i = 0; i < currentExpandedChildCategories.length; i++) {
-        $('#' + currentExpandedChildCategories[i].id).remove();
-      }
-    }
     const mainCategory = this.categories.filter(cat => cat.id === mainCatId);
     const mainCategorySlice = { ...mainCategory[0] };
-    const childCategories = this.getChildCategories(catId, mainCategorySlice);
-    // Add to the DOM
-    for (let i = 0; i < childCategories.length; i++) {
-      let hasChildNodes = (childCategories[i].childNodes.length > 0) ? true : false;
-      let html = this.createHtmlContent(childCategories[i].id, mainCatId, hasChildNodes, childCategories[i].name);
-      $('#' + catId).after(html);
+
+    const parentCategory = this.getParentCategory(catId, mainCategorySlice);
+    const siblingCategories = parentCategory.childNodes.filter(cat => cat.id !== catId);
+    let siblingCategoriesSubCatIds = [];
+
+    for (let i = 0; i < siblingCategories.length; i++) {
+      this.getSubCategoriesOfSiblingCategories(siblingCategories[i].childNodes, siblingCategoriesSubCatIds);
     }
-    this.curExpMainCategoryId = mainCatId;
-    this.currentCatId = catId;
+    this.removeSubCategorisOfSiblingCategories(siblingCategoriesSubCatIds);
+    const childCategories = this.getChildCategories(catId, mainCategorySlice);
+
+    // If mouse pointing category has child categories
+    if (childCategories.length > 0) {
+      // Remove style from previous category 
+      if (this.txtDecoratedCatId) {
+        $('#' + this.txtDecoratedCatId).css({ 'text-decoration': 'none' });
+      }
+      // Set style to current category
+      $('#' + catId).css({ 'text-decoration': 'underline' });
+      this.txtDecoratedCatId = catId;
+    }
+
+    for (let i = 0; i < childCategories.length; i++) {
+
+      // If not in the DOM
+      if ($('#' + childCategories[i].id).length === 0) {
+        let hasChildNodes = (childCategories[i].childNodes.length > 0) ? true : false;
+        let html = this.createHtmlContent(childCategories[i].id, mainCatId, hasChildNodes, childCategories[i].name);
+
+        $('#' + catId).after(html);
+        // Register mouseenter event on newly rendrered category
+        $('#' + childCategories[i].id).on("mouseenter", () => {
+          this.appendChildAfter(childCategories[i].id, mainCatId);
+        });
+      }
+    }
   }
 
   /**
-   * Generate html content
-   * @param catId :: Id of the category
-   * @param mainCatId :: Id of the Main category
-   * @param hasChildNodes{boolean} :: Are there child categories
-   * @param catName :: Name of the category
+   * Return sub categories' Ids of Sibling categories of mouse pointed category
+   * @param childNodes 
+   * @param siblingCategoriesSubCatIds 
+   * 
+   * @return siblingCategoriesSubCatIds{Array}
+   */
+  getSubCategoriesOfSiblingCategories(childNodes, siblingCategoriesSubCatIds) {
+
+    const recursiveFunc = (nodes) => {
+
+      if (nodes.length !== 0) {
+        for (let i = 0; i < nodes.length; i++) {
+
+          siblingCategoriesSubCatIds.push(nodes[i].id);
+          recursiveFunc(nodes[i].childNodes)
+        }
+      }
+    }
+    recursiveFunc(childNodes)
+    return siblingCategoriesSubCatIds;
+  }
+
+  /**
+   * Create html content of sub category
+   * This html content is rendered to DOM dynamically
+   * @param catId :: Id of the parent category 
+   * @param mainCatId :: Id of the main category
+   * @param hasChildNodes{boolean} :: Has sub category children categories
+   * @param catName :: Category name
    */
   createHtmlContent(catId, mainCatId, hasChildNodes, catName) {
 
     let html;
-    // If there are child categories
     if (hasChildNodes) {
 
-      html = '<a href="#/?id=' + catId + '" style="margin-left: 10px;" id="' + catId + '"' +
-        '(mouseenter)="appendChildAfter(' + catId + ',' + mainCatId + ',' + catId + ')"' +
-        '[routerLink]="[""]" [queryParams]="{ id:' + catId + '}">' +
-        '<span>' + catName + '</span>' +
-        '<span class="caret"></span></a>';
+      html = `<a href="#/?id=${catId}" style="margin-left: 10px;" id="${catId}"` +
+        `(mouseenter)="appendChildAfter(${catId},${mainCatId})"` +
+        `[routerLink]="['']" [queryParams]="{ id:${catId}}">` +
+        `<span>${catName}</span>` +
+        `<span class="caret"></span></a>`;
     } else {
 
-      html = '<a href="#/?id=' + catId + '" style="margin-left: 10px;" id="' + catId + '"' +
-        '(mouseenter)="appendChildAfter(' + catId + ',' + mainCatId + ',' + catId + ')"' +
-        '[routerLink]="[""]" [queryParams]="{ id:' + catId + '}">' +
-        '<span>' + catName + '</span></a>';
+      html = `<a href="#/?id=${catId}" style="margin-left: 10px;" id="${catId}"` +
+        `(mouseenter)="appendChildAfter(${catId},${mainCatId})"` +
+        `[routerLink]="['']" [queryParams]="{ id:${catId}}">` +
+        `<span>${catName}</span></a>`;
     }
     return html;
   }
-  
+
   /**
-   * Get childnodes of a specific category
+   * Get child nodes of a specific category
    * @param catId :: Id of the category
    * @param mainCategory :: Main category data
    */
   getChildCategories(catId, mainCategory) {
-    
-    for(let i = 0; i < mainCategory.childNodes.length; i++) {
+
+    for (let i = 0; i < mainCategory.childNodes.length; i++) {
 
       if (mainCategory.childNodes[i].id === catId) {
         return mainCategory.childNodes[i].childNodes;
@@ -263,5 +303,45 @@ export class HeaderComponent implements OnInit {
       let found = this.getChildCategories(catId, mainCategory.childNodes[i]);
       if (found) return found;
     }
+  }
+
+  /**
+   * Return parent category of specific child category
+   * @param catId :: Id of the child category
+   * @param mainCategory :: Category list
+   */
+  getParentCategory(catId, mainCategory) {
+
+    for (let i = 0; i < mainCategory.childNodes.length; i++) {
+
+      if (mainCategory.childNodes[i].id === catId) {
+        return mainCategory;
+      }
+      let found = this.getParentCategory(catId, mainCategory.childNodes[i]);
+      if (found) return found;;
+    }
+  }
+
+  /**
+   * Remove sub categories of sibling categories of mouse pointed category from the DOM
+   * @param categoryIds{Array} :: Ids of the sub categories of sibling categories of mouse pointed category
+   **/
+  removeSubCategorisOfSiblingCategories(categoryIds) {
+
+    // Remove sub categories from DOM using ids which is the IDs of the categories
+    categoryIds.forEach(categoryId => {
+
+      $('#' + categoryId).remove();
+    });
+  }
+
+  // Set style to the main header category
+  setStyle(catId) {
+
+    if (this.txtDecoratedCatId) {
+      $('#' + this.txtDecoratedCatId).css({ 'text-decoration': 'none' });
+    }
+    this.txtDecoratedCatId = catId;
+    $('#' + this.txtDecoratedCatId).css({ 'text-decoration': 'underline' });
   }
 }
