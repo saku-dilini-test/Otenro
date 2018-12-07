@@ -77,20 +77,10 @@ mongoimport --db $DB --collection slider --file dataFiles/slider.json
 #mongoimport --db $DB --collection slider --out slider.json
 
 echo $MESERVER
-
-cd meServerFiles/unknownUser/templates/
-   for d in ./*;do
-       cd $d/js/
-       ls
-       sed -i "s@serverUrl@$serverUrl@" constantsService.js
-       cd -
-    done
-
-cd ../
 pwd
 echo 'starting progressive apps'
 echo $serverUrl
-cd progressiveTemplates/
+cd meServerFiles/unknownUser/progressiveTemplates//
    for d in ./*;do
        cd $d/assets/
        sed -i "s@serverUrl@$serverUrl@" constantsService.ts
