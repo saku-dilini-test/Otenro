@@ -37,7 +37,7 @@ export class FooterComponent {
     this.ordersService.getIPGinfo().subscribe(data => {
       this.ipgInfo = data;
     });
-   this.appDataService.getAboutUs()
+   this.appDataService.getApplicationData()
       .subscribe((data: any) => {
        this.appName = data.appName + ' ' + new Date().getFullYear();
    }, (err) => {

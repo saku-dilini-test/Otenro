@@ -42,4 +42,8 @@ export class AppDataService {
         return this.http.get(SERVER_URL + "/edit/commerce/getAppHeaderData?appId=" + this.appId)
             .map(res => res.json());
     }
+     getApplicationData() {
+        return this.http.get(SERVER_URL + "/edit/getApplicationData?appId=" + this.appId)
+            .map(res => res.json());
+    }
 }
