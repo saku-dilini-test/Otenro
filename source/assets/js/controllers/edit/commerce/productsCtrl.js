@@ -86,12 +86,20 @@
             var newSku = [];
            $scope.originalSku.forEach(function(sku){
 
-               var skus = $filter('filter')($scope.selectedSku, {'sku':sku});
-
-                if(skus.length == 0){
+               // var skus = $filter('filter')($scope.selectedSku, {'sku':sku});
+               var skus = [];
+               $scope.selectedSku.forEach(function(sk){
+                   // console.log(sk)
+                   if(sk.sku == sku ){
+                       skus.push(sk);
+                    }
+                });
+                // console.log(skus)
+                // console.log(index)
+                if(skus && skus.length == 0){
                     newSku.push(sku);
                 }else{
-                    if(skus[0].index == index){
+                    if(skus && skus[0].index == index){
                         newSku.push(sku);
                     }
                 }
@@ -101,16 +109,20 @@
         }
 
         $scope.onChange = function(sku,index){
-        console.log("Index: " + index + " sku: " + sku);
+        // console.log("Index: " + index + " sku: " + sku);
 
             var mySku = $scope.selectedSku;
 
             for(i=mySku.length-1; i>=0;i--){
-                console.log("skuMy index: " + i);
+                // console.log("skuMy index: " + i);
                 if(mySku[i].index == index){
+                    // console.log(i);
                     mySku.splice(i,1);
                 }
+                // console.log(mySku);
+
             }
+
 
             sku.forEach(function(sku){
                 mySku.push({'sku':sku,'index':index});
