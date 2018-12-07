@@ -1,9 +1,0 @@
-{
-  "name": "gf",
-  "appId": "587f2fc69cca49641ff664e4",
-  "userId": "unknownUser",
-  "serviceApi": {
-    "host": "http://localhost",
-    "port": 1337
-  }
-}
