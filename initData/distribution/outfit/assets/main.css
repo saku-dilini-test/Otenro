@@ -388,7 +388,6 @@
     color: #5E5E5E!important;
     font-weight: 500;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  
     /*font-size: 20px;*/
   }
   .main-content-font{
@@ -399,7 +398,7 @@
     /*font-size: 14px;*/
   }
   .main-background{
-    background-color: #FFFFFF !important;
+    background-color: rgba(240,240,240,1) !important;
     overflow-x: hidden;
   }
   .made-easy-background-image{
@@ -407,8 +406,8 @@
     background-size: cover;
   }
   .main-navigation{
-    background-color: #46454A !important;
-    color: rgba(255,255,255,.6);
+    background-color: rgba(255,255,255,1) !important;
+    color: rgba(2,2,2,1) !important;
   }
   .main-navigation a{
     color: inherit !important;
@@ -417,13 +416,12 @@
   }
 
   .main-button{
-    background-color: #FF9300 !important;
-    border-color: rgba(66, 66, 66, 0) !important;
-    color: rgb(255, 255, 255) !important;
+    background-color: rgba(255,255,255,1) !important;
+    border-color: rgba(198,198,198,1) !important;
+    color: rgba(0,0,0,1) !important;
     border-radius: 6px;
-    border-width: 1px !important;
+    border-width: 0px !important;
     border: solid;
-
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: bold;
     text-transform: uppercase;
@@ -437,13 +435,13 @@
     box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.5);
   }
   .main-footer-back{
-    background-color:#47454b !important;
+    background-color: rgba(255,255,255,1) !important;
   }
   .main-footer-header{
-    color:#fff;
+    color: rgba(0,0,0,1) !important;
   }
   .main-footer-font{
-    color:#fff;
+    color: rgba(116,116,116,1) !important;
   }
 
   .cursor-p{
