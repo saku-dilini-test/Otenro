@@ -114,6 +114,7 @@ export class CheckoutComponent implements OnInit {
   discountedTotal;
   subTotal;
   totalQuantity = 0;
+  promoCodeWarningMessage:string;
   constructor(	fb: FormBuilder,
 				private ordersService: OrdersService,
 				private shippingService: ShippingService,
@@ -829,7 +830,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.user.email,
           'currency': this.dataService.currency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
+          'promotionCode':  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': type
         };
@@ -853,7 +854,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.complexForm.value.email,
           'currency': this.dataService.currency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
+          'promotionCode':  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': type
         };
@@ -874,7 +875,7 @@ export class CheckoutComponent implements OnInit {
           "pickupCost": this.chkPickupCost,
           "email": this.pickupForm.value.email,
           "currency": this.dataService.paypalCurrency,
-          "promotionCode": this.payInfo.promotionCode,
+          "promotionCode":  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': type
         }
@@ -967,7 +968,6 @@ export class CheckoutComponent implements OnInit {
 
 
   confirmCashPayment(note) {
-
     this.showSpinner = true;
 
     if (note) {
@@ -996,7 +996,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.user.email,
           'currency': this.dataService.currency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
+          'promotionCode': this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'Cash on delivery'
         };
@@ -1022,7 +1022,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.complexForm.value.email,
           'currency': this.dataService.currency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
+          'promotionCode':  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'Cash on delivery'
         };
@@ -1046,7 +1046,7 @@ export class CheckoutComponent implements OnInit {
           "pickupCost": this.chkPickupCost,
           "email": this.pickupForm.value.email,
           "currency": this.dataService.currency,
-          "promotionCode": this.payInfo.promotionCode,
+          "promotionCode":  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'Cash on pickup'
         }
@@ -1185,7 +1185,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.user.email,
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
+          'promotionCode': this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'PayPal'
         };
@@ -1210,7 +1210,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.complexForm.value.email,
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
+          'promotionCode':  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'PayPal'
         };
@@ -1231,7 +1231,7 @@ export class CheckoutComponent implements OnInit {
           "pickupCost": this.chkPickupCost,
           "email": this.pickupForm.value.email,
           "currency": this.dataService.paypalCurrency,
-          "promotionCode": this.payInfo.promotionCode,
+          "promotionCode":  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'PayPal'
         }
@@ -1288,7 +1288,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.user.email,
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
+          'promotionCode':  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'PayHere',
           'realHostUrl': realHostUrl,
@@ -1314,7 +1314,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.complexForm.value.email,
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
+          'promotionCode':  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'PayHere',
           'realHostUrl': realHostUrl,
@@ -1341,7 +1341,7 @@ export class CheckoutComponent implements OnInit {
           'pickupCost': this.chkPickupCost,
           'email': this.pickupForm.value.email,
           'currency': this.dataService.paypalCurrency,
-          'promotionCode': this.payInfo.promotionCode,
+          'promotionCode':  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'PayHere',
           'realHostUrl': realHostUrl,
@@ -1424,19 +1424,36 @@ export class CheckoutComponent implements OnInit {
 		this.selectedPromo = this.promos.filter(
 		  promo => promo.promoCode === selectedPromo);
 
-		// console.log(this.selectedPromo[0]);
-		if(this.selectedPromo[0].discountType === 'discountValue'){
-			this.discountedTotal = this.amount - this.selectedPromo[0].discount;
-			this.amount = this.discountedTotal;
-		}else if(this.selectedPromo[0].discountType === 'discount'){
-			this.discountedTotal = this.amount - (this.amount * this.selectedPromo[0].discountPercent / 100);
-			this.amount = this.discountedTotal;
-		}else if(selectedPromo != 'Select a promocode'){
-			this.discountedTotal = 0;
-			this.amount = this.subTotal;
-		}
+		console.log(this.selectedPromo[0]);
 
-		this.calculateTotalOrderCost();
+    if(this.selectedPromo[0].minimumOderValue > this.subTotal){
+        this._success.subscribe((message) => this.promoCodeWarningMessage = message);
+        debounceTime.call(this._success, 4000).subscribe(() => this.promoCodeWarningMessage = null);
+        this._success.next('minimum order value should be more than '+this.sign+' '+ this.selectedPromo[0].minimumOderValue);
+        setTimeout(() => { }, 3100);
+    }else{
+      if(this.selectedPromo[0].discountType === 'discountValue'){
+      if(this.amount < this.selectedPromo[0].discount){
+        console.log("came here");
+          this.discountedTotal = 1;
+          this.amount = this.discountedTotal;
+      }else{
+        console.log("no here");
+        this.discountedTotal = this.amount - this.selectedPromo[0].discount;
+        this.amount = this.discountedTotal;
+      }
+
+      }else if(this.selectedPromo[0].discountType === 'discount'){
+        this.discountedTotal = this.amount - (this.amount * this.selectedPromo[0].discountPercent / 100);
+        this.amount = this.discountedTotal;
+      }else if(selectedPromo != 'Select a promocode'){
+        this.discountedTotal = 0;
+        this.amount = this.subTotal;
+      }
+
+      this.calculateTotalOrderCost();
+    }
+
 
 	}
 

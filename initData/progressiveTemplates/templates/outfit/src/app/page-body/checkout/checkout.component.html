@@ -307,6 +307,7 @@
 					<select class="form-control margin-bottom" (change)="changePromocode($event.target.value)">
 						<option *ngFor="let promo of promos" [ngValue]="promo.promoCode"> {{promo.promoCode}} </option>
 					</select>
+          <ngb-alert *ngIf="promoCodeWarningMessage" type="warning" (close)="promoCodeWarningMessage = null">{{ promoCodeWarningMessage }}</ngb-alert>
 			  </div>
                <h3 class="main-header-font">Your order</h3>
                 <table class="table table-responsive">

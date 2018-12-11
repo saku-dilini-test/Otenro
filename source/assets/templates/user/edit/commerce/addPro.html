@@ -519,7 +519,6 @@
                                 <div class="old-images clearfix">
                                     <div class="old-image" ng-repeat="n in [].constructor(8) track by $index">
                                        <div ng-class="{special: defaultImage ==  $index}">
-                                           {{$index}}
                                             <input type="button" ng-click="deleteImg( $index)" value='delete'
                                                    class="image-delete-button"/>
                                             <img ng-click="setImage()" ng-if="tmpImage[ $index].img == null"
