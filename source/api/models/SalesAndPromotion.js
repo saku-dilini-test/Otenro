@@ -57,7 +57,7 @@ module.exports = {
             type:'string'
         },
         minimumOderValue : {
-            type:'string'
+            type:'float'
         },
         category : {
             type:'string'

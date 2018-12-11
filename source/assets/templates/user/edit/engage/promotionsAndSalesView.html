@@ -21,6 +21,8 @@
                 <thead>
                 <th class="simple-column">Name</th>
                 <th class="simple-column">Order type</th>
+                <th class="simple-column">Status</th>
+                <th class="simple-column">Used</th>
                 <th class="simple-column">Discount</th>
                 <th class="simple-column">Date</th>
                 <th class="simple-column">edit</th>
@@ -30,6 +32,8 @@
                 <tr ng-repeat="salesAndPromotion in salesAndPromotionList">
                     <td>{{salesAndPromotion.name}}</td>
                     <td>{{salesAndPromotion.salesAndPromotionType}}</td>
+                    <td>Active</td>
+                    <td>0</td>
                     <td ng-if = "salesAndPromotion.discountType == 'discount'">{{salesAndPromotion.discountPercent}} %</td>
                     <td ng-if = "salesAndPromotion.discountType == 'discountValue'">{{salesAndPromotion.discount}}</td>
                     <td ng-if="salesAndPromotion.dateFrom">{{salesAndPromotion.dateFrom | date : "dd.MM.y"}} to  {{salesAndPromotion.dateTo | date : "dd.MM.y"}}</td>

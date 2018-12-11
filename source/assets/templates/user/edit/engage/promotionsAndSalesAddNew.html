@@ -83,6 +83,11 @@
                                         </div>
                                     </md-input-container>
 
+                                    <md-input-container class="md-block" flex="50">
+                                        <label>Minimum Order Value</label>
+                                        <input md-maxlength="15" name="minimumOrderValue" ng-model="storeWide.minimumOderValue">
+                                    </md-input-container>
+
                                     <md-input-container class="md-block" flex="50" ng-if = "storeWide.discountType == 'discountValue'">
                                         <label>Discount</label>
                                         <input md-maxlength="15"  ng-required="true" name="discount" ng-model="storeWide.discount">
