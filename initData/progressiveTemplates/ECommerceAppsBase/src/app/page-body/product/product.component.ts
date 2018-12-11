@@ -702,7 +702,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         }else if(this.selectedVariant.buyQuantity == null){
 
             this.errBuy = true;
-            this.message = "Please select a buyQuantity";
+            this.message = "Please select a quantity";
             window.setTimeout(() => {
                 $(".alert-warning").fadeTo(500, 0).slideUp(500, ()=>{
                     $(this).remove();
@@ -764,7 +764,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
                 }else if(this.selectedVariant.buyQuantity == null){
 
                     this.errBuy = true;
-                    this.message = "Please select a buyQuantity";
+                    this.message = "Please select a quantity";
                     window.setTimeout(() => {
                         $(".alert-danger").fadeTo(500, 0).slideUp(500, ()=>{
                             $(this).remove();

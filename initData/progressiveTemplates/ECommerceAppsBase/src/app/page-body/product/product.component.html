@@ -104,7 +104,7 @@
 
               <div>
                 <div class="row">
-                 <div class="col-xs-12 text-center text-warning" *ngIf="selectedVariant.buyQuantity > selectedVariant.quantity">
+                 <div class="col-xs-12 text-center text-warning" *ngIf="selectedVariant.buyQuantity > selectedVariant.quantity  && selectedVariant.quantity > 1">
                     <div  class="alert alert-danger row padding text-center">
                       <div><i class="fa fa-exclamation-triangle"></i> Please enter a quantity of {{selectedVariant.quantity}} or less.</div>
                     </div>
