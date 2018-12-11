@@ -830,7 +830,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.user.email,
           'currency': this.dataService.currency,
           'puckupId': null,
-          'promotionCode':  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
+          'promotionCode':  this.selectedPromo? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': type
         };
@@ -854,7 +854,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.complexForm.value.email,
           'currency': this.dataService.currency,
           'puckupId': null,
-          'promotionCode':  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
+          'promotionCode':  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': type
         };
@@ -875,7 +875,7 @@ export class CheckoutComponent implements OnInit {
           "pickupCost": this.chkPickupCost,
           "email": this.pickupForm.value.email,
           "currency": this.dataService.paypalCurrency,
-          "promotionCode":  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
+          "promotionCode":  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': type
         }
@@ -996,7 +996,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.user.email,
           'currency': this.dataService.currency,
           'puckupId': null,
-          'promotionCode': this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
+          'promotionCode': this.selectedPromo? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'Cash on delivery'
         };
@@ -1022,7 +1022,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.complexForm.value.email,
           'currency': this.dataService.currency,
           'puckupId': null,
-          'promotionCode':  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
+          'promotionCode':  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'Cash on delivery'
         };
@@ -1046,7 +1046,7 @@ export class CheckoutComponent implements OnInit {
           "pickupCost": this.chkPickupCost,
           "email": this.pickupForm.value.email,
           "currency": this.dataService.currency,
-          "promotionCode":  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
+          "promotionCode":  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'Cash on pickup'
         }
@@ -1185,7 +1185,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.user.email,
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
-          'promotionCode': this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
+          'promotionCode': this.selectedPromo? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'PayPal'
         };
@@ -1210,7 +1210,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.complexForm.value.email,
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
-          'promotionCode':  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
+          'promotionCode':  this.selectedPromo? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'PayPal'
         };
@@ -1231,7 +1231,7 @@ export class CheckoutComponent implements OnInit {
           "pickupCost": this.chkPickupCost,
           "email": this.pickupForm.value.email,
           "currency": this.dataService.paypalCurrency,
-          "promotionCode":  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
+          "promotionCode":  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'PayPal'
         }
@@ -1288,7 +1288,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.user.email,
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
-          'promotionCode':  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
+          'promotionCode':  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'PayHere',
           'realHostUrl': realHostUrl,
@@ -1314,7 +1314,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.complexForm.value.email,
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
-          'promotionCode':  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
+          'promotionCode':  this.selectedPromo? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'PayHere',
           'realHostUrl': realHostUrl,
@@ -1341,7 +1341,7 @@ export class CheckoutComponent implements OnInit {
           'pickupCost': this.chkPickupCost,
           'email': this.pickupForm.value.email,
           'currency': this.dataService.paypalCurrency,
-          'promotionCode':  this.selectedPromo[0].promoCode ? this.selectedPromo[0].promoCode : null,
+          'promotionCode':  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'PayHere',
           'realHostUrl': realHostUrl,
