@@ -22,17 +22,30 @@ export class FooterComponent {
   dummy: any;
   ipgInfo: any = null;
   appName;
+  phone;
+  email;
+  isApplogoExists = false;
 
   constructor(private router: Router, private appDataService: AppDataService,
     private localStorageService: LocalStorageService, private ordersService: OrdersService) {
     this.appDataService.getContactUs().subscribe((data: any) => {
       this.webInfo = data.contactInfo;
       this.dummy = new Date().getTime();
+      if (this.webInfo.telPhone) {
+        this.phone = this.webInfo.telPhone;
+      }
+      if (this.webInfo.email) {
+        this.email = this.webInfo.email;
+      }
     }), ((err) => {
       console.log("Error when fetching ContactUsInfo: " + JSON.stringify(err));
     });
     this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=";
+
+    if (this.imageUrl) {
+      this.isApplogoExists = true;
+    }
 
     this.ordersService.getIPGinfo().subscribe(data => {
       this.ipgInfo = data;
@@ -121,7 +134,7 @@ export class FooterComponent {
         this.ipgInfo.cashOnPickupEnable ||
         this.ipgInfo.payHereEnable ||
         this.ipgInfo.authorizeNetEnable ||
-        this.ipgInfo.stripeEnable ) > 0
+        this.ipgInfo.stripeEnable )
     );
   }
 }
