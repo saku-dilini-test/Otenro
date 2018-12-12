@@ -22,7 +22,7 @@
         <p class="text-center product-name">
           {{prod.name}}
         </p>
-				<div *ngIf = "!checkForPromo(prod)" class="text-center product-content productPromo">
+				<div *ngIf = "!checkForPromo(prod)" class="text-center product-content productPromo main-content-font">
 					Price - {{currency}} {{prod.variants[0].price| number: '.2'}}
 				</div>
 				<div *ngIf = "checkForPromo(prod)" class="text-center product-content productPromo main-content-font">
@@ -49,7 +49,7 @@
           </div>
           <div class="col-xs-8">
             <span class="main-content-font"><strong>{{prod.name}}</strong></span>
-            <div *ngIf = "!checkForPromo(prod)" class="main-content-font price-margin productPromo">
+            <div *ngIf = "!checkForPromo(prod)" class="main-content-font price-margin productPromo main-content-font">
               Price - {{currency}} {{prod.variants[0].price| number: '.2'}}
             </div>
             <div *ngIf = "checkForPromo(prod)" class="main-content-font price-margin productPromo main-content-font">

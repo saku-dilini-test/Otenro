@@ -19,7 +19,7 @@
 					<h3 class="mg-md product-name text-center main-content-font">
 						<strong>{{prod.name}}</strong>
 					</h3>
-					<div *ngIf = "!checkForPromo(prod)" class="text-center product-content productPromo">
+					<div *ngIf = "!checkForPromo(prod)" class="text-center product-content productPromo main-content-font">
 						Price - {{currency}} {{prod.variants[0].price| number: '.2'}}
 					</div>
 					<div *ngIf = "checkForPromo(prod)" class="text-center product-content productPromo main-content-font">
