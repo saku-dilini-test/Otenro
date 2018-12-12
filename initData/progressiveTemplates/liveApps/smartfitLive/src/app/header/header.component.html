@@ -41,7 +41,7 @@
 							<a  (click)="navigate('contact', 'Contact Us')">Contact us</a>
 						</li>
 						<li>
-							<a (click)="navigate('warranty', 'Warranty')">Warranty</a>
+							<a (click)="navigate('warranty', 'Warranty')">Warranty Registration</a>
 						</li>
 						<li *ngIf = "enableBlog" >
 							<a (click)="navigate('blogs', 'blogs')">Blog</a>
@@ -114,7 +114,7 @@
     <a (click)="navigate('shop','Search');closeNav()">Products</a>
 		<!-- <a (click)="navigate('aboutus','About Us');closeNav()">About-us</a> -->
 		<a (click)="navigate('contact', 'Contact Us');closeNav()">Contact us</a>
-		<a (click)="navigate('warranty', 'Warranty');closeNav()">Warranty</a>
+		<a (click)="navigate('warranty', 'Warranty');closeNav()">Warranty Registration</a>
 		<a *ngIf = "enableBlog" (click)="navigate('blogs', 'blogs');closeNav()">Blog</a>
 		<a (click)="navigate('newarivals', 'New Arivals');closeNav()">New Arrivals</a>
 		<a (click)="navigate('complaints', 'Complaints');closeNav()">Service Request</a>
