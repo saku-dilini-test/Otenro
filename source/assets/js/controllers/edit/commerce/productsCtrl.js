@@ -37,6 +37,8 @@
             $scope.selectedSku = selectedSku;
         }
 
+
+
         if(initialData.product.variants){
 
                 for(var i = 0;i < initialData.product.variants.length;i++){
@@ -516,6 +518,16 @@
 
         categoryMaintenanceService.getAllCategoryWithoutMakingCommerce($rootScope.appId).success(function (results) {
             $scope.child = results;
+            console.log(results)
+            console.log($scope.product.selectedCategories)
+            $scope.child.forEach(obj => {
+                    $scope.product.selectedCategories.forEach(item =>{
+                    console.log(obj.id, item)
+                        if(obj.id == item){
+                            $scope.selected.push(obj);
+                        }
+                    });
+            });
         }).error(function (error) {
             toastr.error('Category loading error', 'Warning', {
                 closeButton: true
@@ -1472,7 +1484,6 @@
 
                         toastr.error('Menu Loading Error', 'Warning', {closeButton: true});
                     });
-
                 }).error(function (err) {
                 toastr.error(err.message, 'Warning', {
                     closeButton: true
@@ -1507,21 +1518,21 @@
             }
         };
 
-        $scope.isChecked = function () {
-            return $scope.selected.length === $scope.child.length;
-        };
-        //select all categories
-        $scope.isIndeterminate = function () {
-            return ($scope.selected.length !== 0 &&
-            $scope.selected.length !== $scope.child.length);
-        };
-        $scope.toggleAll = function () {
-            if ($scope.selected.length === $scope.child.length) {
-                $scope.selected = [];
-            } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
-                $scope.selected = $scope.child.slice(0);
-            }
-        };
+        // $scope.isChecked = function () {
+        //     return $scope.selected.length === $scope.child.length;
+        // };
+        // //select all categories
+        // $scope.isIndeterminate = function () {
+        //     return ($scope.selected.length !== 0 &&
+        //     $scope.selected.length !== $scope.child.length);
+        // };
+        // $scope.toggleAll = function () {
+        //     if ($scope.selected.length === $scope.child.length) {
+        //         $scope.selected = [];
+        //     } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
+        //         $scope.selected = $scope.child.slice(0);
+        //     }
+        // };
 
         $scope.exists = function (catId) {
             if($scope.product.selectedCategories){
@@ -1530,19 +1541,29 @@
                         return true;
                     }
                 }
+            }else{
+                return false;
             }
-            return false;
+
         };
 
 
-        $scope.toggleCheck = function (item, list) {
-            // console.log(item,list)
-            var idx = list.indexOf(item);
-            if (idx > -1) {
-                list.splice(idx, 1);
+        $scope.toggleCheck = function (item) {
+            // console.log(item,$scope.selected)
+
+            // console.log($scope.product.selectedCategories)
+            if(!$scope.product.selectedCategories){
+                $scope.product.selectedCategories = [];
             }
-            else {
-                list.push(item);
+            var idx = $scope.product.selectedCategories.indexOf(item.id);
+            console.log(idx)
+
+            if (idx > -1) {
+                $scope.product.selectedCategories.splice(idx, 1);
+                $scope.selected.splice(idx, 1);
+            }else {
+                $scope.product.selectedCategories.push(item.id);
+                $scope.selected.push(item);
             }
         };
 

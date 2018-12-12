@@ -146,8 +146,8 @@
                                             <label>Selected Categories</label>
                                             <div  class="md-label" ng-repeat="ch in selected">
                                                 <!--<span>{{country.countryName}}</span>-->
-                                                <md-checkbox style="margin: 4px 0;" ng-checked="exists(ch, selected)"
-                                                             ng-click="toggle(ch, selected)"
+                                                <md-checkbox style="margin: 4px 0;" ng-checked="exists(ch.id)"
+                                                             ng-click="toggleCheck(ch)"
                                                              aria-label="ch.name" >{{ch.name}}
                                                 </md-checkbox>
                                             </div>
@@ -565,18 +565,25 @@
 <script type="text/ng-template" id="nodes_renderer.html">
 
     <div ui-tree-handle class="tree-node tree-node-content" style="background: none; border: none; font-family: 'Open Sans', sans-serif; font-weight: 600; color: #7b7878; font-size: 12px;">
+        <a ng-if="node.isMainCategory && !(node.nodes.length > 0)" >
+            <md-checkbox style="display: initial;" ng-checked="exists(node.id)"
+            ng-click="toggleCheck(node)"
+            aria-label="node.name" >
+            </md-checkbox>
+        </a>
         <a ng-if="!node.isMainCategory && !(node.nodes.length > 0)" >
             <md-checkbox style="display: initial;" ng-checked="exists(node.id)"
-            ng-click="toggleCheck(node,selected)"
+            ng-click="toggleCheck(node)"
             aria-label="node.name" >
             </md-checkbox>
         </a>
         <a ng-if="node.nodes && node.nodes.length > 0" data-nodrag >
             <md-checkbox style="display: initial;" ng-checked="exists(node.id)"
-            ng-click="toggleCheck(node,selected)"
+            ng-click="toggleCheck(node)"
             aria-label="node.name" >
             </md-checkbox>
         </a>
+
         <span ng-if="node.nodes && node.nodes.length > 0">{{node.name}}</span>
         <span ng-if="!(node.nodes && node.nodes.length > 0)">{{node.name}}</span>
 
