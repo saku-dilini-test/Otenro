@@ -6,14 +6,15 @@
  *
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-
+var config = require('../../../services/config');
 module.exports = {
 
     saveSalesAndPromotion : function(req,res){
         var salesAndPromotionData   = req.body;
-        sails.log.info("salesAndPromotionData.appId "+salesAndPromotionData.appId);
+        var thisController = this;
+    
+        salesAndPromotionData.status = thisController.setSalesAndPromotionStatus(salesAndPromotionData);
 
-        console.log(salesAndPromotionData);
         if(salesAndPromotionData.id){
 
             var searchQuery = {
@@ -84,5 +85,22 @@ module.exports = {
             res.send("success");
         })
 
+    },
+
+    setSalesAndPromotionStatus: function (promo) {
+
+        var currentDate = new Date();
+        var dateFrom = new Date(promo.dateFrom);
+        var dateTo = new Date(promo.dateTo);
+
+        if (currentDate >= dateFrom && currentDate <= dateTo) {
+            return config.SALES_AND_PROMOTIONS_STATUS.ACTIVE;
+        }
+        if (currentDate < dateFrom) {
+            return config.SALES_AND_PROMOTIONS_STATUS.SCHEDULED;
+        }
+        if (currentDate > dateTo) {
+            return config.SALES_AND_PROMOTIONS_STATUS.EXPIRED;
+        }
     }
 };

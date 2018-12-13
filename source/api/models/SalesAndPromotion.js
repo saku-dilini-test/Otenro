@@ -64,6 +64,25 @@ module.exports = {
         },
         selectedProduct : {
             type : 'json'
+        },
+        status: {
+            type: 'string'
+        },
+        // Related to limitUsers
+        usedUsers: {
+            type: 'array'
+        },
+        // Related to limitUsers
+        usedUserCount: {
+            type: 'integer'
+        },
+        // Related to limitNumberOfTime
+        noOfUses: {
+            type: 'integer'
+        },
+        // Related to both limitNumberOfTime and limitUsers
+        used: {
+            type: 'integer'
         }
     }
 };

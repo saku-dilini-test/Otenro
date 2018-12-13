@@ -32,8 +32,8 @@
                 <tr ng-repeat="salesAndPromotion in salesAndPromotionList">
                     <td>{{salesAndPromotion.name}}</td>
                     <td>{{salesAndPromotion.salesAndPromotionType}}</td>
-                    <td>Active</td>
-                    <td>0</td>
+                    <td>{{salesAndPromotion.status}}</td>
+                    <td>{{salesAndPromotion.used}}</td>
                     <td ng-if = "salesAndPromotion.discountType == 'discount'">{{salesAndPromotion.discountPercent}} %</td>
                     <td ng-if = "salesAndPromotion.discountType == 'discountValue'">{{salesAndPromotion.discount}}</td>
                     <td ng-if="salesAndPromotion.dateFrom">{{salesAndPromotion.dateFrom | date : "dd.MM.y"}} to  {{salesAndPromotion.dateTo | date : "dd.MM.y"}}</td>

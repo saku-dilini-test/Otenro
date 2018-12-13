@@ -601,7 +601,12 @@
                           <button class="btn main-button btn-lg col-xs-12 col-sm-3" (click)="payHere(noteDes)">Confirm</button>
                         </div>
                       </div>
-
+                      <div class="col-sm-12" style="margin: 10px 0">
+                        <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                      </div>
+                      <div class="col-sm-12" style="margin: 10px 0">
+                        <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
+                      </div>
                     </form>
 
     <form name="cashPaymentFrom" novalidate class="row my-4" *ngIf="paymentType == 'paypal'">

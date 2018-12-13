@@ -28,5 +28,10 @@ module.exports = {
             POWER_HOUSE: 'Other',
             STYLE_TO_SHOP: 'Other'
         }
+    },
+    SALES_AND_PROMOTIONS_STATUS: {
+        ACTIVE: 'ACTIVE',
+        EXPIRED: 'EXPIRED', 
+        SCHEDULED: 'SCHEDULED'
     }
 };

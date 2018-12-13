@@ -1071,12 +1071,27 @@ export class CheckoutComponent implements OnInit {
       // }
     }
     this.http.post(SERVER_URL + "/templatesOrder/saveOrder", (this.orderDetails), { responseType: 'text' })
-      .subscribe((res) => {
+      .subscribe((res:any) => {
+
         this.responce = JSON.parse(res).name;
-        console.log(this.responce);
+        let response = JSON.parse(res);
         if (JSON.parse(res).status == 404) {
           this.showSpinner = false;
           $('#myModal').modal('show')
+        } else if (response.message === 'EMAIL_EXISTS') {
+
+          this.showSpinner = false;
+          this._success.subscribe((message) => this.errorMessage = message);
+          debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+          this._success.next(response.description);
+          setTimeout(() => { }, 3100);
+        } else if (response.message === 'EXPIRED') {
+
+          this.showSpinner = false;
+          this._success.subscribe((message) => this.errorMessage = message);
+          debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+          this._success.next(response.description);
+          setTimeout(() => { }, 3100);
         } else {
           this.orderDetails.id = this.dataService.cart.cartItems[0].id;
           this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
@@ -1376,6 +1391,27 @@ export class CheckoutComponent implements OnInit {
         if (orderRes.status == 404) {
           this.showSpinner = false;
           $('#myModal').modal('show');
+        } else if (orderRes.message === 'INTERNAL_SERVER_ERROR') {
+
+          this.showSpinner = false;
+          this._success.subscribe((message) => this.errorMessage = message);
+          debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+          this._success.next(orderRes.description);
+          setTimeout(() => { }, 3100);
+        }  else if (orderRes.message === 'NOT_FOUND') {
+
+          this.showSpinner = false;
+          this._success.subscribe((message) => this.errorMessage = message);
+          debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+          this._success.next(orderRes.description);
+          setTimeout(() => { }, 3100);
+        } else if (orderRes.message === 'EMAIL_EXISTS') {
+
+          this.showSpinner = false;
+          this._success.subscribe((message) => this.errorMessage = message);
+          debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+          this._success.next(orderRes.description);
+          setTimeout(() => { }, 3100);
         } else {
           this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, {responseType: 'text'})
             .subscribe((res) => {

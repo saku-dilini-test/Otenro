@@ -121,7 +121,6 @@ module.exports = {
 
     payHereSuccess : function (req,res) {
 
-        console.log("payhere success");
         var oderId = req.param("orderId");
         var appId = req.param("appId");
         var userId = req.param("userId");
@@ -129,23 +128,24 @@ module.exports = {
 
         var searchOrder = {id:oderId};
 
-        ApplicationOrder.find(searchOrder, function(err, order) {
-            if (err) return done(err);
-
-            var searchQry ={'id': appId}
-            Application.find(searchQry, function(err, app){
-
-                mobileCtrl.sendOrderConfirmationEmail(app[0], order[0]);    
-
-                // res.set('Content-Type', 'text/html');
-                res.send('ok');
-
+        if (oderId !== 'undefined') {
+            ApplicationOrder.find(searchOrder, function(err, order) {
+                if (err) return done(err);
+    
+                var searchQry ={'id': appId}
+                Application.find(searchQry, function(err, app){
+    
+                    mobileCtrl.sendOrderConfirmationEmail(app[0], order[0]);  
+                    if (order[0].promotionCode !== null) {
+                        mobileCtrl.processPromoCode(order[0]);
+                    }  
+                    // res.set('Content-Type', 'text/html');
+                    res.send('ok');
+    
+                });
+    
             });
-
-        });
-
-
-
+        }
     },
 
     notifyUrl : function (req,res) {
@@ -280,6 +280,94 @@ module.exports = {
                         });
                     }
                 });
+            });
+        }
+    },
+
+    processPromoCode: function(applicationOrder) {
+
+        var mobileCtrl = this;
+        var appId = applicationOrder.appId;
+        var promoCode = applicationOrder.promotionCode;
+        var orderEmail = applicationOrder.email;
+        var findQuery = { appId: appId, promoCode: promoCode };
+
+        SalesAndPromotion.findOne(findQuery).exec(function (err, salesAndPromotion) {
+
+            if (err) {
+                sails.log.error('error occurred while processing promotion , error : ' + err);
+            }
+            if (salesAndPromotion) {
+    
+                if (salesAndPromotion.status === config.SALES_AND_PROMOTIONS_STATUS.ACTIVE) {
+
+                    salesAndPromotion.used = (salesAndPromotion.used) ? salesAndPromotion.used + 1 : 1;
+                } 
+
+                if (salesAndPromotion.isLimitUsers) {
+                    mobileCtrl.limitOneUsePerCustomer(salesAndPromotion, orderEmail);
+                }
+
+                if (salesAndPromotion.isLimitNumberOfTime) {
+                    mobileCtrl.limitNoOfTimesPromo(salesAndPromotion);
+                }
+            }
+        });
+    },
+    limitOneUsePerCustomer: function (salesAndPromotion, email) {
+
+        if (!salesAndPromotion.usedUsers) {
+
+            salesAndPromotion.usedUsers = [email];
+            salesAndPromotion.usedUserCount = 1;
+            salesAndPromotion.save(function (error) {
+
+                if (error) {
+                    sails.log.error('error occurred while processing promotion , error : ' + error);
+                }
+            });
+        }
+        else if (salesAndPromotion.usedUserCount && salesAndPromotion.usedUserCount < salesAndPromotion.limitUsers) {
+
+            salesAndPromotion.usedUsers.push(email);
+            salesAndPromotion.usedUserCount = salesAndPromotion.usedUserCount + 1;
+
+            if (salesAndPromotion.usedUserCount === salesAndPromotion.limitUsers) {
+                salesAndPromotion.status = config.SALES_AND_PROMOTIONS_STATUS.EXPIRED;
+            }
+            salesAndPromotion.save(function (error) {
+
+                if (error) {
+                    sails.log.error('error occurred while processing promotion , error : ' + error);
+                }
+            });
+        }
+    },
+
+    limitNoOfTimesPromo: function (salesAndPromotion) {
+
+        if (!salesAndPromotion.noOfUses) {
+
+            salesAndPromotion.noOfUses = 1;
+            salesAndPromotion.save(function (error) {
+
+                if (error) {
+                    sails.log.error('error occurred while processing promotion , error : ' + error);
+                }
+            });
+        }
+        else if (salesAndPromotion.noOfUses && salesAndPromotion.noOfUses < salesAndPromotion.limitNumberOfTime) {
+
+            salesAndPromotion.noOfUses = salesAndPromotion.noOfUses + 1;
+
+            if (salesAndPromotion.noOfUses === salesAndPromotion.limitNumberOfTime) {
+                salesAndPromotion.status = config.SALES_AND_PROMOTIONS_STATUS.EXPIRED;
+            }
+            salesAndPromotion.save(function (error) {
+
+                if (error) {
+                    sails.log.error('error occurred while processing promotion , error : ' + error);
+                }
             });
         }
     }
