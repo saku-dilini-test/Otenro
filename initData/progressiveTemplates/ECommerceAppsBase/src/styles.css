@@ -513,6 +513,7 @@ button{
 .form-control{
 	border-color:rgba(0,0,0,.1);
 	box-shadow:none;
+	background-color: rgba(255, 255, 255, 0.5);
 }
 
 /* = Carousel

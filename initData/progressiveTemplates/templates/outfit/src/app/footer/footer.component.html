@@ -7,33 +7,33 @@
       <div class="row row-no-gutters">
         <div class="col-xs-3" (click)="navigate('','Home')">
           <div class="text-center">
-            <span class="fa fa-home icon-sm"></span>
+            <span class="fa fa-home icon-sm main-footer-font"></span>
           </div>
-          <h6 class="mg-md text-center-xs"  >
+          <h6 class="mg-md text-center-xs main-footer-font"  >
             Home
           </h6>
         </div>
         <div class="col-xs-3" (click)="navigate('appUser','Edit Profile')" *ngIf="loginStatus">
           <div class="text-center">
-            <span class="fa fa-user icon-sm"></span>
+            <span class="fa fa-user icon-sm main-footer-font"></span>
           </div>
-          <h6 class="mg-md text-center-xs" >
+          <h6 class="mg-md text-center-xs main-footer-font" >
             Profile
           </h6>
         </div>
         <div class="col-xs-3" (click)="navigate('shop','Search')">
           <div class="text-center">
-            <span class="fa fa-search icon-sm"></span>
+            <span class="fa fa-search icon-sm main-footer-font"></span>
           </div>
-          <h6 class="mg-md text-center-xs">
+          <h6 class="mg-md text-center-xs main-footer-font">
             Search<br>
           </h6>
         </div>
         <div class="col-xs-3" (click)="navigate('contact','Contact Us')">
           <div class="text-center">
-            <span class="fa fa-phone icon-sm"></span>
+            <span class="fa fa-phone icon-sm main-footer-font"></span>
           </div>
-          <h6 class="mg-md text-center-xs">
+          <h6 class="mg-md text-center-xs main-footer-font">
             Contact
           </h6>
         </div>
@@ -50,9 +50,9 @@
       <!-- App logo and subscribe content -->
       <div class="inline" *ngIf="isApplogoExists">
         <div id="subscribe-container">
-          <input id="subscribe-mail" type="text" placeholder="name@mail.com">
-          <input id="subscribe-button" type="button" value="Subscribe">
-          <span>Subscribe for {{appName?.slice(0, appName?.length - 4)}} newsletters.</span>
+          <input id="subscribe-mail" class="main-footer-font"  type="text" placeholder="name@mail.com">
+          <input id="subscribe-button" type="button" class="btn btn-d btn-lg main-button" value="Subscribe">
+          <span class="main-footer-font">Subscribe for {{appName?.slice(0, appName?.length - 4)}} newsletters.</span>
         </div>
         <div id="logo-image-container">
           <img src="{{imageUrl}}/logo.png&dummy={{dummy}}" alt="logo" />
@@ -60,16 +60,16 @@
       </div>
       <!-- Quick links content -->
       <div id="quick-links" class="inline" [ngStyle]="{ 'margin-left': !isApplogoExists ? '10vw': '0px' }">
-        <span>quick links</span>
-        <a [routerLink]="['/aboutus']">About us</a>
-        <a [routerLink]="['/policies']">Policies</a>
-        <a [routerLink]="['/policies']">Terms & conditions</a>
+        <span class="main-footer-header">quick links</span>
+        <a class="main-footer-font" [routerLink]="['/aboutus']">About us</a>
+        <a class="main-footer-font"  [routerLink]="['/policies']">Policies</a>
+        <a class="main-footer-font"  [routerLink]="['/policies']">Terms & conditions</a>
       </div>
       <!-- Customer care content -->
       <div id="cutomer-care" class="inline" [ngStyle]="{ 'margin-left': !isApplogoExists ? '10vw': '0px' }">
-        <span id="customer-care-header">customer care hotline</span>
-        <label>Phone: {{phone}}</label>
-        <label>Email: {{email}}</label>
+        <span id="customer-care-header" class="main-footer-header">customer care hotline</span>
+        <label class="main-footer-font" >Phone: {{phone}}</label>
+        <label class="main-footer-font" >Email: {{email}}</label>
         <a *ngIf="isFacebookUrlExists()" target="_blank" href="{{ getFacebookUrl() }}">
           <span class="fa fa-facebook icons icon-sm mobile-icons main-footer-font"></span>
         </a>
@@ -90,7 +90,7 @@
 
     <div id="footer-bottom">
       <div id="app-name" [ngClass]="{ 'appname-if-ipg': isIpgInfoExists(), 'appname-if-not-ipg': !isIpgInfoExists() }">
-        <span>{{appName}}</span>
+        <span class="main-footer-font">{{appName}}</span>
       </div>
       <!-- Accepted payment types -->
       <div id="accepted-payments" *ngIf="isIpgInfoExists()">
