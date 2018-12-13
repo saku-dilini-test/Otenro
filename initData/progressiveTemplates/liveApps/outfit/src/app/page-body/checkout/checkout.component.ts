@@ -113,6 +113,7 @@ export class CheckoutComponent implements OnInit {
   discountedTotal;
   subTotal;
   totalQuantity = 0;
+  promoCodeWarningMessage:string;
   constructor(	fb: FormBuilder,
 				private ordersService: OrdersService,
 				private shippingService: ShippingService,
@@ -199,12 +200,12 @@ export class CheckoutComponent implements OnInit {
 
 		this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
 			data.forEach(element => {
-				if(element.salesAndPromotionType == 'storeWide'){
-					// console.log(element);
-					this.promos.push(element);
-				}
-            });
-        });
+    				if(element.salesAndPromotionType == 'storeWide' && element.status == 'ACTIVE'){
+    					// console.log(element);
+    					this.promos.push(element);
+    				}
+      });
+    });
   }
 
   ngOnInit() {
@@ -803,7 +804,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.user.email,
           'currency': this.dataService.currency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
+          'promotionCode':  this.selectedPromo? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': type
         };
@@ -827,7 +828,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.complexForm.value.email,
           'currency': this.dataService.currency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
+          'promotionCode':  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': type
         };
@@ -848,7 +849,7 @@ export class CheckoutComponent implements OnInit {
           "pickupCost": this.chkPickupCost,
           "email": this.pickupForm.value.email,
           "currency": this.dataService.paypalCurrency,
-          "promotionCode": this.payInfo.promotionCode,
+          "promotionCode":  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': type
         }
@@ -941,7 +942,6 @@ export class CheckoutComponent implements OnInit {
 
 
   confirmCashPayment(note) {
-
     this.showSpinner = true;
 
     if (note) {
@@ -970,7 +970,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.user.email,
           'currency': this.dataService.currency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
+          'promotionCode': this.selectedPromo? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'Cash on delivery'
         };
@@ -996,7 +996,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.complexForm.value.email,
           'currency': this.dataService.currency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
+          'promotionCode':  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'Cash on delivery'
         };
@@ -1020,7 +1020,7 @@ export class CheckoutComponent implements OnInit {
           "pickupCost": this.chkPickupCost,
           "email": this.pickupForm.value.email,
           "currency": this.dataService.currency,
-          "promotionCode": this.payInfo.promotionCode,
+          "promotionCode":  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'Cash on pickup'
         }
@@ -1045,34 +1045,51 @@ export class CheckoutComponent implements OnInit {
       // }
     }
     this.http.post(SERVER_URL + "/templatesOrder/saveOrder", (this.orderDetails), { responseType: 'text' })
-      .subscribe((res) => {
+      .subscribe((res:any) => {
+
         this.responce = JSON.parse(res).name;
+        let response = JSON.parse(res);
         if (JSON.parse(res).status == 404) {
           this.showSpinner = false;
-          $('#myModal').modal('show');
+          $('#myModal').modal('show')
+        } else if (response.message === 'EMAIL_EXISTS') {
+
+          this.showSpinner = false;
+          this._success.subscribe((message) => this.errorMessage = message);
+          debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+          this._success.next(response.description);
+          setTimeout(() => { }, 3100);
+        } else if (response.message === 'EXPIRED') {
+
+          this.showSpinner = false;
+          this._success.subscribe((message) => this.errorMessage = message);
+          debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+          this._success.next(response.description);
+          setTimeout(() => { }, 3100);
         } else {
-        this.orderDetails.id = this.dataService.cart.cartItems[0].id;
-        this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
-          .subscribe(res => {
+          this.orderDetails.id = this.dataService.cart.cartItems[0].id;
+          this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
+            .subscribe(res => {
 
-            this.showSpinner = false;
+              this.showSpinner = false;
 
-            this.dataService.cart.cartItems = [];
-            this.dataService.cart.cartSize = 0;
-            this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
-            this.dataService.cart.totalPrice = 0;
-            this.dataService.cart.totalQuantity = 0;
+              this.dataService.cart.cartItems = [];
+              this.dataService.cart.cartSize = 0;
+              this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
+              this.dataService.cart.totalPrice = 0;
+              this.dataService.cart.totalQuantity = 0;
 
-            let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+              let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
 
-            if (appUser) {
-              if (this.localStorageService.get("cart" + appUser.registeredUser)) {
-                this.localStorageService.remove("cart" + appUser.registeredUser);
+              if (appUser) {
+                if (this.localStorageService.get("cart" + appUser.registeredUser)) {
+                  this.localStorageService.remove("cart" + appUser.registeredUser);
+                }
+              } else {
+                this.localStorageService.remove("cartUnknownUser");
               }
-            }else{
-              this.localStorageService.remove("cartUnknownUser");
-            }
-            this.router.navigate(['payhereSuccess']);
+			  this.router.navigate(['payhereSuccess']);
+
               // this._success.next('Your Order has been successfully processed');
 
               // this._success.subscribe((message) => this.successMessage = message);
@@ -1080,28 +1097,28 @@ export class CheckoutComponent implements OnInit {
               // this._success.next("Thank You, Your order has been successfully processed");
               // setTimeout(() => { this.router.navigate(['home']); }, 3100)
 
-          }, (err: HttpErrorResponse) => {
+            }, (err: HttpErrorResponse) => {
 
-            this.showSpinner = false;
+              this.showSpinner = false;
 
-            if (err.error instanceof Error) {
+              if (err.error instanceof Error) {
 
-              console.log("Error Updating Inventory!\n Please check your connection.");
+                console.log("Error Updating Inventory!\n Please check your connection.");
 
-              this._success.subscribe((message) => this.errorMessage = message);
-              debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
-              this._success.next("Error Updating Inventory!\n Please check your connection.");
-              setTimeout(() => { }, 3100);
+                this._success.subscribe((message) => this.errorMessage = message);
+                debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+                this._success.next("Error Updating Inventory!\n Please check your connection.");
+                setTimeout(() => { }, 3100);
 
-            } else {
-              console.log("Server-side error occured.");
-              this._success.subscribe((message) => this.errorMessage = message);
-              debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
-              this._success.next("Server-side error occured.");
-              setTimeout(() => { }, 3100);
-            }
-            console.log(err);
-          });
+              } else {
+                console.log("Server-side error occured.");
+                this._success.subscribe((message) => this.errorMessage = message);
+                debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+                this._success.next("Server-side error occured.");
+                setTimeout(() => { }, 3100);
+              }
+              console.log(err);
+            });
         }
       },
       (err: HttpErrorResponse) => {
@@ -1157,7 +1174,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.user.email,
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
+          'promotionCode': this.selectedPromo? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'PayPal'
         };
@@ -1182,7 +1199,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.complexForm.value.email,
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
+          'promotionCode':  this.selectedPromo? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'PayPal'
         };
@@ -1203,7 +1220,7 @@ export class CheckoutComponent implements OnInit {
           "pickupCost": this.chkPickupCost,
           "email": this.pickupForm.value.email,
           "currency": this.dataService.paypalCurrency,
-          "promotionCode": this.payInfo.promotionCode,
+          "promotionCode":  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'PayPal'
         }
@@ -1260,7 +1277,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.user.email,
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
+          'promotionCode':  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'PayHere',
           'realHostUrl': realHostUrl,
@@ -1286,7 +1303,7 @@ export class CheckoutComponent implements OnInit {
           'email': this.complexForm.value.email,
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode,
+          'promotionCode':  this.selectedPromo? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'PayHere',
           'realHostUrl': realHostUrl,
@@ -1313,7 +1330,7 @@ export class CheckoutComponent implements OnInit {
           'pickupCost': this.chkPickupCost,
           'email': this.pickupForm.value.email,
           'currency': this.dataService.paypalCurrency,
-          'promotionCode': this.payInfo.promotionCode,
+          'promotionCode':  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
           'paymentType': 'PayHere',
           'realHostUrl': realHostUrl,
@@ -1348,6 +1365,27 @@ export class CheckoutComponent implements OnInit {
         if (orderRes.status == 404) {
           this.showSpinner = false;
           $('#myModal').modal('show');
+        } else if (orderRes.message === 'INTERNAL_SERVER_ERROR') {
+
+          this.showSpinner = false;
+          this._success.subscribe((message) => this.errorMessage = message);
+          debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+          this._success.next(orderRes.description);
+          setTimeout(() => { }, 3100);
+        }  else if (orderRes.message === 'NOT_FOUND') {
+
+          this.showSpinner = false;
+          this._success.subscribe((message) => this.errorMessage = message);
+          debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+          this._success.next(orderRes.description);
+          setTimeout(() => { }, 3100);
+        } else if (orderRes.message === 'EMAIL_EXISTS') {
+
+          this.showSpinner = false;
+          this._success.subscribe((message) => this.errorMessage = message);
+          debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+          this._success.next(orderRes.description);
+          setTimeout(() => { }, 3100);
         } else {
           this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, {responseType: 'text'})
             .subscribe((res) => {
@@ -1389,7 +1427,13 @@ export class CheckoutComponent implements OnInit {
       });
   }
 
+  onPromoTypeSelect(e){
+    //don't remove this function
+  }
+
 	changePromocode(selectedPromo){
+    // console.log(selectedPromo)
+
 		this.amount = this.subTotal;
 
 		this.discountedTotal = 0;
@@ -1397,23 +1441,52 @@ export class CheckoutComponent implements OnInit {
 		  promo => promo.promoCode === selectedPromo);
 
 		// console.log(this.selectedPromo[0]);
-		if(this.selectedPromo[0].discountType === 'discountValue'){
-			this.discountedTotal = this.amount - this.selectedPromo[0].discount;
-			this.amount = this.discountedTotal;
-		}else if(this.selectedPromo[0].discountType === 'discount'){
-			this.discountedTotal = this.amount - (this.amount * this.selectedPromo[0].discountPercent / 100);
-			this.amount = this.discountedTotal;
-		}else if(selectedPromo != 'Select a promocode'){
-			this.discountedTotal = 0;
-			this.amount = this.subTotal;
-		}
 
-		this.calculateTotalOrderCost();
+    if(!this.selectedPromo[0]){
+       this._success.subscribe((message) => this.promoCodeWarningMessage = message);
+        debounceTime.call(this._success, 4000).subscribe(() => this.promoCodeWarningMessage = null);
+        this._success.next('Invalid promocode');
+        setTimeout(() => { }, 3100);
+    }else{
+      if(this.selectedPromo[0].minimumOderValue && this.selectedPromo[0].minimumOderValue > this.subTotal){
+        this._success.subscribe((message) => this.promoCodeWarningMessage = message);
+        debounceTime.call(this._success, 4000).subscribe(() => this.promoCodeWarningMessage = null);
+        this._success.next('minimum order value should be more than '+this.sign+' '+ this.selectedPromo[0].minimumOderValue+ ' to activate this promocode');
+        setTimeout(() => { }, 3100);
+        this.selectedPromo = null;
+        if(document.getElementById("promoSelect")){
+          document.getElementById("promoSelect").selectedIndex = 0;
+        }
+      }else{
+        if(selectedPromo == 'Select a promocode'){
+          this.discountedTotal = null;
+          this.amount = this.subTotal;
+          this.selectedPromo = null;
+        }else if(this.selectedPromo[0].discountType === 'discountValue'){
+            if(this.amount < this.selectedPromo[0].discount){
+                this.discountedTotal = 0;
+                this.amount = this.discountedTotal;
+            }else{
+              this.discountedTotal = this.amount - this.selectedPromo[0].discount;
+              this.amount = this.discountedTotal;
+            }
+        }else if(this.selectedPromo[0].discountType === 'discount'){
+          this.discountedTotal = this.amount - (this.amount * this.selectedPromo[0].discountPercent / 100);
+          this.amount = this.discountedTotal;
+        }
+
+        this.calculateTotalOrderCost();
+      }
+    }
+
+
+
 
 	}
 
 	calculateTotalOrderCost(){
-		var total = this.amount;
+
+		    var total = this.amount;
         // var amount = 0;
         var tax = 0;
         // for (var i = 0; i < this.cartItems.length; i++) {
@@ -1425,10 +1498,16 @@ export class CheckoutComponent implements OnInit {
         if (this.isApplyShippingCharge == true && this.formType != 'pickup') {
           // $log.debug($scope.shippingCost);
           var shipping = parseFloat(this.chkShippingCost);
+          if(total == 0){
+            total = this.subTotal;
+          }
           total = total + shipping;
           tax = total * this.chkTax / 100;
           this.taxTotal = total * this.chkTax / 100;
           this.taxTotal = (Math.round(this.taxTotal * 100) / 100);
+           if(this.selectedPromo != null && this.discountedTotal == 0){
+            total = this.discountedTotal + shipping;
+          }
           if (tax > 0) {
             total = total + tax;
             this.totalPrice = total;
@@ -1437,6 +1516,9 @@ export class CheckoutComponent implements OnInit {
             this.cart.totalPrice = Math.round(total * 100) / 100;
           }
         } else {
+          if(total == 0){
+            total = this.subTotal;
+          }
           tax = total * this.chkTax / 100;
           this.taxTotal = total * this.chkTax / 100;
           this.taxTotal = (Math.round(this.taxTotal * 100) / 100);
@@ -1445,6 +1527,9 @@ export class CheckoutComponent implements OnInit {
             this.chkPickupCost = 0;
           } else {
             this.chkPickupCost = parseFloat(this.finalDetails.pickupCost);
+          }
+          if(this.selectedPromo != null &&  this.discountedTotal == 0){
+            total = this.discountedTotal;
           }
           if (tax > 0) {
             total = total + tax;

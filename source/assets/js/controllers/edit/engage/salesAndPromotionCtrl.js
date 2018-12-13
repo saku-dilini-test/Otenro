@@ -69,11 +69,11 @@
                         });
                     });
 
-                    console.log("inside Item main");
-                    console.log($scope.item);
+                    // console.log("inside Item main");
+                    // console.log($scope.item);
                         if($scope.item && $scope.item.salesAndPromotionType == 'singleProduct' ){
-                        console.log("selected prods");
-                        console.log($scope.item.selectedProduct);
+                        // console.log("selected prods");
+                        // console.log($scope.item.selectedProduct);
                           $scope.array = [];
                             $scope.availableProducts = $scope.item.selectedProduct;
 
@@ -315,8 +315,8 @@
 
              function createSalesAndPromo(){
                 salesAndPromotion.appId = $rootScope.appId;
-                console.log("sales promo");
-                console.log(salesAndPromotion);
+                // console.log("sales promo");
+                // console.log(salesAndPromotion);
                 salesAndPromotionService.saveSalesAndPromotion(salesAndPromotion)
                     .success(function (data) {
                         toastr.success('Sales And Promotion Data successfully Added ', 'Message', {

@@ -23,7 +23,6 @@
 .checkout-padding{
   padding:0 10px;
 }
-
 .modal-close{
   font-weight: 800;
   font-family: sans-serif;
@@ -34,4 +33,17 @@
   width: 100%;
   height: 80vh;
   border: 0;
+}
+
+.d-inline{
+  display: inline;
+}
+
+.w-80{
+  width:75%;
+}
+
+.promo-button{
+  width:20%;
+  margin: 0 0 0 5%;
 }

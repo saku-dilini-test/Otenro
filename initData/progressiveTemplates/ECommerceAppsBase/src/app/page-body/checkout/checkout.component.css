@@ -34,3 +34,16 @@
   height: 80vh;
   border: 0;
 }
+
+.d-inline{
+  display: inline;
+}
+
+.w-80{
+  width:75%;
+}
+
+.promo-button{
+  width:20%;
+  margin: 0 0 0 5%;
+}

@@ -13,7 +13,7 @@
             var appId = $rootScope.appId;
         // --/-- Configuration Data --/--
         $scope.initialData = initialData;
-        console.log($scope.initialData);
+        // console.log($scope.initialData);
         $scope.selected = [];
         $scope.countryList = [];
         $scope.maxTax = 20;

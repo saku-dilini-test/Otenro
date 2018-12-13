@@ -200,12 +200,12 @@ export class CheckoutComponent implements OnInit {
 
 		this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
 			data.forEach(element => {
-				if(element.salesAndPromotionType == 'storeWide'){
-					// console.log(element);
-					this.promos.push(element);
-				}
-            });
-        });
+    				if(element.salesAndPromotionType == 'storeWide' && element.status == 'ACTIVE'){
+    					// console.log(element);
+    					this.promos.push(element);
+    				}
+      });
+    });
   }
 
   ngOnInit() {
@@ -1453,48 +1453,66 @@ export class CheckoutComponent implements OnInit {
       });
   }
 
+  onPromoTypeSelect(e){
+    //don't remove this function
+  }
+
 	changePromocode(selectedPromo){
+    // console.log(selectedPromo)
+
 		this.amount = this.subTotal;
 
 		this.discountedTotal = 0;
 		this.selectedPromo = this.promos.filter(
 		  promo => promo.promoCode === selectedPromo);
 
-		console.log(this.selectedPromo[0]);
+		// console.log(this.selectedPromo[0]);
 
-    if(this.selectedPromo[0].minimumOderValue > this.subTotal){
-        this._success.subscribe((message) => this.promoCodeWarningMessage = message);
+    if(!this.selectedPromo[0]){
+       this._success.subscribe((message) => this.promoCodeWarningMessage = message);
         debounceTime.call(this._success, 4000).subscribe(() => this.promoCodeWarningMessage = null);
-        this._success.next('minimum order value should be more than '+this.sign+' '+ this.selectedPromo[0].minimumOderValue);
+        this._success.next('Invalid promocode');
         setTimeout(() => { }, 3100);
     }else{
-      if(this.selectedPromo[0].discountType === 'discountValue'){
-      if(this.amount < this.selectedPromo[0].discount){
-        console.log("came here");
-          this.discountedTotal = 1;
-          this.amount = this.discountedTotal;
+      if(this.selectedPromo[0].minimumOderValue && this.selectedPromo[0].minimumOderValue > this.subTotal){
+        this._success.subscribe((message) => this.promoCodeWarningMessage = message);
+        debounceTime.call(this._success, 4000).subscribe(() => this.promoCodeWarningMessage = null);
+        this._success.next('minimum order value should be more than '+this.sign+' '+ this.selectedPromo[0].minimumOderValue+ ' to activate this promocode');
+        setTimeout(() => { }, 3100);
+        this.selectedPromo = null;
+        if(document.getElementById("promoSelect")){
+          document.getElementById("promoSelect").selectedIndex = 0;
+        }
       }else{
-        console.log("no here");
-        this.discountedTotal = this.amount - this.selectedPromo[0].discount;
-        this.amount = this.discountedTotal;
-      }
+        if(selectedPromo == 'Select a promocode'){
+          this.discountedTotal = null;
+          this.amount = this.subTotal;
+          this.selectedPromo = null;
+        }else if(this.selectedPromo[0].discountType === 'discountValue'){
+            if(this.amount < this.selectedPromo[0].discount){
+                this.discountedTotal = 0;
+                this.amount = this.discountedTotal;
+            }else{
+              this.discountedTotal = this.amount - this.selectedPromo[0].discount;
+              this.amount = this.discountedTotal;
+            }
+        }else if(this.selectedPromo[0].discountType === 'discount'){
+          this.discountedTotal = this.amount - (this.amount * this.selectedPromo[0].discountPercent / 100);
+          this.amount = this.discountedTotal;
+        }
 
-      }else if(this.selectedPromo[0].discountType === 'discount'){
-        this.discountedTotal = this.amount - (this.amount * this.selectedPromo[0].discountPercent / 100);
-        this.amount = this.discountedTotal;
-      }else if(selectedPromo != 'Select a promocode'){
-        this.discountedTotal = 0;
-        this.amount = this.subTotal;
+        this.calculateTotalOrderCost();
       }
-
-      this.calculateTotalOrderCost();
     }
+
+
 
 
 	}
 
 	calculateTotalOrderCost(){
-		var total = this.amount;
+
+		    var total = this.amount;
         // var amount = 0;
         var tax = 0;
         // for (var i = 0; i < this.cartItems.length; i++) {
@@ -1506,10 +1524,16 @@ export class CheckoutComponent implements OnInit {
         if (this.isApplyShippingCharge == true && this.formType != 'pickup') {
           // $log.debug($scope.shippingCost);
           var shipping = parseFloat(this.chkShippingCost);
+          if(total == 0){
+            total = this.subTotal;
+          }
           total = total + shipping;
           tax = total * this.chkTax / 100;
           this.taxTotal = total * this.chkTax / 100;
           this.taxTotal = (Math.round(this.taxTotal * 100) / 100);
+           if(this.selectedPromo != null && this.discountedTotal == 0){
+            total = this.discountedTotal + shipping;
+          }
           if (tax > 0) {
             total = total + tax;
             this.totalPrice = total;
@@ -1518,6 +1542,9 @@ export class CheckoutComponent implements OnInit {
             this.cart.totalPrice = Math.round(total * 100) / 100;
           }
         } else {
+          if(total == 0){
+            total = this.subTotal;
+          }
           tax = total * this.chkTax / 100;
           this.taxTotal = total * this.chkTax / 100;
           this.taxTotal = (Math.round(this.taxTotal * 100) / 100);
@@ -1526,6 +1553,9 @@ export class CheckoutComponent implements OnInit {
             this.chkPickupCost = 0;
           } else {
             this.chkPickupCost = parseFloat(this.finalDetails.pickupCost);
+          }
+          if(this.selectedPromo != null &&  this.discountedTotal == 0){
+            total = this.discountedTotal;
           }
           if (tax > 0) {
             total = total + tax;

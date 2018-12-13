@@ -11,7 +11,7 @@
 
         // --/-- Configuration Data --/--
         $scope.initialData = initialData;
-        console.log(initialData);
+        // console.log(initialData);
         $scope.maxFlatRate = 20;
         $scope.maxWeightRate = 20;
         $scope.maxPickup = 50;
