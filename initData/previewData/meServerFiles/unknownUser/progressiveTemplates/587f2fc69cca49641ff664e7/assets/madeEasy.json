@@ -1,10 +1,10 @@
 {
-  "name": "Aloola",
-  "appId": "587f2fc69cca49641ff664e7",
-  "userId": "unknownUser",
+  "name": "unknownName",
+  "appId": "unknownAppId",
+  "userId": "unknownUserName",
   "serviceApi": {
     "host": "serverUrl",
     "port": 1337
   },
-  "templateName": "outfit"
+  "templateName": "unknownTemplateName"
 }

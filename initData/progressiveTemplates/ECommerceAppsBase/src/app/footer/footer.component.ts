@@ -31,10 +31,10 @@ export class FooterComponent {
     this.appDataService.getContactUs().subscribe((data: any) => {
       this.webInfo = data.contactInfo;
       this.dummy = new Date().getTime();
-      if (this.webInfo.telPhone) {
+      if (this.webInfo && this.webInfo.telPhone) {
         this.phone = this.webInfo.telPhone;
       }
-      if (this.webInfo.email) {
+      if (this.webInfo && this.webInfo.email) {
         this.email = this.webInfo.email;
       }
     }), ((err) => {

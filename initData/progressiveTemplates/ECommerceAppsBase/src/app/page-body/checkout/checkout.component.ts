@@ -1480,8 +1480,9 @@ export class CheckoutComponent implements OnInit {
         this._success.next('minimum order value should be more than '+this.sign+' '+ this.selectedPromo[0].minimumOderValue+ ' to activate this promocode');
         setTimeout(() => { }, 3100);
         this.selectedPromo = null;
-        if(document.getElementById("promoSelect")){
-          document.getElementById("promoSelect").selectedIndex = 0;
+        var promoSelect = document.getElementById("promoSelect") as HTMLSelectElement;
+        if(promoSelect){
+          promoSelect.selectedIndex = 0;
         }
       }else{
         if(selectedPromo == 'Select a promocode'){

@@ -1,10 +1,10 @@
 {
-  "name": "Ruby",
-  "appId": "587f2fc69cca49641ff664e8",
-  "userId": "unknownUser",
+  "name": "unknownName",
+  "appId": "unknownAppId",
+  "userId": "unknownUserName",
   "serviceApi": {
     "host": "serverUrl",
     "port": 1337
   },
-  "templateName": "smartfit"
+  "templateName": "unknownTemplateName"
 }
