@@ -103,7 +103,7 @@ module.exports = {
         
                                 var found = 0;
                         ThirdNavigation.find({id:data.item[i].id}).exec(function(err,prod){
-                            console.log(i);
+                            // console.log(i);
                             count ++;
                             if(!prod[0]){
                                 save = false;
@@ -112,7 +112,7 @@ module.exports = {
                             var newCount = 0;
                                 for(var j = 0; j < prod[0].variants.length; j++){
                                     newCount ++;
-                                     if(prod[0].variants[j].sku == data.item[count-1].sku){
+                                     if(data.item[count-1] && prod[0].variants[j].sku == data.item[count-1].sku){
                                          found ++;
                                          if(prod[0].variants[j].quantity == 0 || prod[0].variants[j].quantity < data.item[count-1].qty &&  data.item[count-1].unlimited == false){
                                              save = false;
@@ -120,7 +120,7 @@ module.exports = {
                                          }
                                      }
         
-                                     if(newCount == prod[0].variants.length && found == 0){
+                                     if(data.item[count-1] && newCount == prod[0].variants.length && found == 0){
                                          save = false;
                                          name = data.item[count-1].name;
                                      }
