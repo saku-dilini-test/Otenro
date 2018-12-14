@@ -361,8 +361,12 @@
             salesAndPromotionService.deleteSalesAndPromotions(item);
         }
 
-        $scope.cancel = function(){
-            $mdDialog.hide();
+        $scope.cancel = function(from){
+            if(from === 'manage view'){
+                $mdDialog.hide();
+            }else{
+                salesAndPromotionService.showPromotionsAndSalesDialog();
+            }
         }
 
     }
