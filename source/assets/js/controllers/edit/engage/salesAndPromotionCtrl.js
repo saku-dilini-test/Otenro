@@ -313,11 +313,15 @@
                     return toastr.error('Please select a discount type ', 'Warning', {
                         closeButton: true
                     });
-                }if(!$scope.storeWide.dateFrom || !$scope.storeWide.dateTo){
+                }else if(!$scope.storeWide.dateFrom || !$scope.storeWide.dateTo){
                     return toastr.error('Please select a date range', 'Warning', {
                         closeButton: true
                     });
-                }else{
+                }else if($scope.storeWide.dateFrom >= $scope.storeWide.dateTo){
+                    return toastr.error('Please select valid date range', 'Warning', {
+                        closeButton: true
+                    });
+                } else{
                     createSalesAndPromo();
                 }
             }
