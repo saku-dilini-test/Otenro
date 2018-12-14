@@ -109,7 +109,7 @@
                                             });
                                         },
                                             this.cancel = function click(){
-                                                $mdDialog.hide();
+                                                salesAndPromotionService.showPromotionsAndSalesDialog();
                                             }
                                     },
                                     template:'<md-dialog aria-label="Edit Child Menu">'+
