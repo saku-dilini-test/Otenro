@@ -465,12 +465,6 @@
                         <div *ngIf="showSpinner" class="loader"></div>
                         <p *ngIf="showSpinner">Processing...</p>
                       </div>
-                      <div class="col-sm-12" style="margin: 10px 0">
-                        <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-                      </div>
-                      <div class="col-sm-12" style="margin: 10px 0">
-                        <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
-                      </div>
                     </form>
 
                     <form name="payHereFrom" *ngIf="paymentType == 'payhere'" novalidate>
@@ -565,6 +559,12 @@
                             </div>
                         </div>
                     </form>
+                  <div *ngIf="successMessage"  class="col-sm-12" style="margin: 10px 0">
+                      <ngb-alert type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                  </div>
+                  <div *ngIf="errorMessage" class="col-sm-12" style="margin: 10px 0">
+                      <ngb-alert type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
+                  </div>
               </div>
           </div>
 

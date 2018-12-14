@@ -518,15 +518,17 @@
 
         categoryMaintenanceService.getAllCategoryWithoutMakingCommerce($rootScope.appId).success(function (results) {
             $scope.child = results;
-            console.log(results)
-            console.log($scope.product.selectedCategories)
+            // console.log(results)
+            // console.log($scope.product.selectedCategories)
             $scope.child.forEach(obj => {
+                if($scope.product.selectedCategories){
                     $scope.product.selectedCategories.forEach(item =>{
-                    console.log(obj.id, item)
+                            console.log(obj.id, item)
                         if(obj.id == item){
                             $scope.selected.push(obj);
                         }
                     });
+                }
             });
         }).error(function (error) {
             toastr.error('Category loading error', 'Warning', {

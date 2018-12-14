@@ -23,7 +23,7 @@ module.exports = {
         var thisController = this;
         thisController.checkOneTimePromoCodeIsUsed(data, function (response) {
 
-            if (response.message === PROMOTION_STATUSES.OK) {
+            if (response.message === PROMOTION_STATUSES.OK || response.message === PROMOTION_STATUSES.PROMO_CODE_NOT_EXISTS) {
                 data['paymentStatus'] = 'Pending';
                 data['fulfillmentStatus'] = 'Pending';
         
@@ -499,34 +499,46 @@ module.exports = {
     },
 
     checkOneTimePromoCodeIsUsed: function (data, cb) {
+        if (data.promotionCode !== null) {
+            var findQuery = {appId: data.appId, promoCode: data.promotionCode};
+            SalesAndPromotion.findOne(findQuery).exec(function (err, salesAndPromotion) {
 
-        var findQuery = { appId: data.appId, promoCode: data.promotionCode };
-        SalesAndPromotion.findOne(findQuery).exec(function (err, salesAndPromotion) {
-
-            if (err) {
-                sails.log.error('error occurred while finding sales and promotion code. error , ' + err);
-                return cb({ message: PROMOTION_STATUSES.INTERNAL_SERVER_ERROR, description: `Internal server error occurred while processing ${data.promotionCode} promotion code.` });
-            }
-            if (!salesAndPromotion) {
-
-                return cb({ message: PROMOTION_STATUSES.NOT_FOUND, description: `${data.promotionCode} could not be found.` });
-            }
-            if (salesAndPromotion) {
-                if (salesAndPromotion.isLimitUsers && salesAndPromotion.usedUsers) {
-
-                    var usedEmails = salesAndPromotion.usedUsers.filter(function (userEmail) {
-                        return userEmail === data.email;
+                if (err) {
+                    sails.log.error('error occurred while finding sales and promotion code. error , ' + err);
+                    return cb({
+                        message: PROMOTION_STATUSES.INTERNAL_SERVER_ERROR,
+                        description: `Internal server error occurred while processing ${data.promotionCode} promotion code.`
                     });
-                    if (usedEmails.length === 0) {
-                        return cb({ message: PROMOTION_STATUSES.OK });
-                    } else {
-                        return cb({ message: PROMOTION_STATUSES.EMAIL_EXISTS, description: `${salesAndPromotion.promoCode} promocode is already used by ${data.email}` });
-                    }
-                } else {
-                    return cb({ message: PROMOTION_STATUSES.OK });
                 }
-            }
-        });
+                if (!salesAndPromotion) {
+
+                    return cb({
+                        message: PROMOTION_STATUSES.NOT_FOUND,
+                        description: `${data.promotionCode} could not be found.`
+                    });
+                }
+                if (salesAndPromotion) {
+                    if (salesAndPromotion.isLimitUsers && salesAndPromotion.usedUsers) {
+
+                        var usedEmails = salesAndPromotion.usedUsers.filter(function (userEmail) {
+                            return userEmail === data.email;
+                        });
+                        if (usedEmails.length === 0) {
+                            return cb({message: PROMOTION_STATUSES.OK});
+                        } else {
+                            return cb({
+                                message: PROMOTION_STATUSES.EMAIL_EXISTS,
+                                description: `${salesAndPromotion.promoCode} promocode is already used by ${data.email}`
+                            });
+                        }
+                    } else {
+                        return cb({message: PROMOTION_STATUSES.OK});
+                    }
+                }
+            });
+        }else{
+            return cb({message: PROMOTION_STATUSES.PROMO_CODE_NOT_EXISTS});
+        }
     }
 };
 
