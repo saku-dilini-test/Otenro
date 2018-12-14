@@ -308,7 +308,14 @@
                     createSalesAndPromo();
                 }
             }else if(salesAndPromotion.salesAndPromotionType == 'storeWide'){
-                createSalesAndPromo();
+
+                if(!$scope.storeWide.discountType){
+                    return toastr.error('Please select a discount type ', 'Warning', {
+                        closeButton: true
+                    });
+                }else{
+                    createSalesAndPromo();
+                }
             }
 
 
