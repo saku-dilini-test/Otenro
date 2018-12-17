@@ -90,7 +90,7 @@ module.exports = {
         execute.processPromoCode(data, function (promoStatus) {
 
             if (promoStatus === PROMOTION_STATUSES.OK || promoStatus === PROMOTION_STATUSES.PROMO_CODE_NOT_EXISTS) {
-                
+                console.log("came to promotion status ok")
                 if(data.paymentType == 'Cash on delivery' || data.paymentType == 'Cash on pickup'){
                     data['paymentStatus'] = 'Successful';
                 }else{
@@ -368,13 +368,15 @@ module.exports = {
             var findQuery = { appId: appId, promoCode: promoCode };
     
             SalesAndPromotion.findOne(findQuery).exec(function (err, salesAndPromotion) {
-    
+                console.log("came here s&p find query")
+                // console.log(salesAndPromotion)
+                // console.log(err)
                 if (err) {
                     sails.log.error('error occurred while processing promotion , error : ' + err);
                     promotionStatus = PROMOTION_STATUSES.INTERNAL_SERVER_ERROR;
                     return promotionStatus;
                 }
-    
+
                 if (salesAndPromotion) {
     
                     if (salesAndPromotion.status === config.SALES_AND_PROMOTIONS_STATUS.ACTIVE) {
@@ -396,6 +398,10 @@ module.exports = {
 
                             return cb(promotionStatus);
                         });
+                    }
+
+                    if(!salesAndPromotion.isLimitUsers && !salesAndPromotion.isLimitNumberOfTime){
+                        return cb(PROMOTION_STATUSES.OK);
                     }
                 }
             });
