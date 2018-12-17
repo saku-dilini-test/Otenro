@@ -2354,7 +2354,7 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     position: fixed;
     left: 0;
     bottom: 0;
-
+    z-index: 10;
 }
 
 .add-quantity .md-container-modify{
