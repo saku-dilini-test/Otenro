@@ -17,7 +17,7 @@ module.exports = {
         };
 
 
-        Blogs.find(searchQuery).exec(function(err,result) {
+        Blogs.find(searchQuery).sort({ updatedAt: 'DESC' }).exec(function(err,result) {
             if (err) {
                 sails.log.error("Blog Collection find Error for given appId : "+appId);
                 return done(err);
