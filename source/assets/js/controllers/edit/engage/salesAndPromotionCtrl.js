@@ -243,9 +243,11 @@
      
 
         $scope.saveSalesAndPromotion =function(salesAndPromotion,type,selected){
-            console.log(salesAndPromotion,type,selected);
             var price,index;
+            var currentDate = new Date();
             var variantSelection = "\n";
+            var fromDate = new Date(salesAndPromotion.dateFrom);
+            var toDate = new Date(salesAndPromotion.dateTo);
 
             if (type =='storeWide'){
                 salesAndPromotion.salesAndPromotionType = 'storeWide';
@@ -257,7 +259,6 @@
                 salesAndPromotion.salesAndPromotionType = 'singleProduct';
                 salesAndPromotion.selectedProduct = selected;
             }
-            console.log(salesAndPromotion);
 //            salesAndPromotion.dateTo = new Date(salesAndPromotion.dateTo);
 //            salesAndPromotion.dateFrom = new Date(salesAndPromotion.dateFrom);
             if(salesAndPromotion.salesAndPromotionType == 'singleProduct'){
@@ -280,18 +281,22 @@
 
                 }
 
-
-                var fromDate = new Date(salesAndPromotion.dateFrom);
-                var toDate = new Date(salesAndPromotion.dateTo);
-
                 if(salesAndPromotion.selectedProduct.length === undefined || salesAndPromotion.selectedProduct.length == 0){
                     return toastr.error('Please select a product ', 'Warning', {
                         closeButton: true
                     });
 
-                }if(toDate < fromDate){
+                }
+                if(toDate < fromDate){
 
                     toastr.error('Invalid date range', 'Warning', {
+                        closeButton: true
+                    });
+                    return ;
+                }
+                if (fromDate < currentDate) {
+
+                    toastr.error('Past date and time are not allowed. Please select valid date and time.', 'Warning', {
                         closeButton: true
                     });
                     return ;
@@ -321,6 +326,12 @@
                     return toastr.error('Please select valid date range', 'Warning', {
                         closeButton: true
                     });
+                } else if (fromDate < currentDate) {
+
+                    toastr.error('Past date and time are not allowed. Please select valid date and time.', 'Warning', {
+                        closeButton: true
+                    });
+                    return ;
                 } else{
                     createSalesAndPromo();
                 }
