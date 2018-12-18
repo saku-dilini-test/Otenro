@@ -125,10 +125,10 @@ module.exports = {
         userSettingsController.updateAppHeaderData(req.body.appId, data.showOnWebsitePolicies, 'policies');
 
         ApplicationStoreSettings.update(query,data).exec(function(err,user) {
-               if (err) res.send(err);
+               if (err) res.serverError(err);
                if (user.length == 0) {
                    ApplicationStoreSettings.create(data).exec(function (err, app) {
-                       if (err) res.send(err);
+                       if (err) res.serverError(err);
 
                        res.send({
                            app: app,

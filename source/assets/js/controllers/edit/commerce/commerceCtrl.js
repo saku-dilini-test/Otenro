@@ -859,9 +859,8 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                         });
                         $scope.selectedTab = current;
                     }).error(function (err) {
-                        toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
+                        toastr.error('Failed to save Policies and Terms.', 'Error', {closeButton: true});
                     })
-
 
                     $scope.selectedTab = current;
             }
