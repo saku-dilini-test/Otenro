@@ -641,7 +641,8 @@ module.exports = {
         var registeredUser = req.param('userId');
         var searchApp = {
             appId : appId,
-            registeredUser : registeredUser
+            registeredUser : registeredUser,
+            paymentStatus : "Successful"
 
         };
         ApplicationOrder.find().where(searchApp).exec(function (err, result) {
