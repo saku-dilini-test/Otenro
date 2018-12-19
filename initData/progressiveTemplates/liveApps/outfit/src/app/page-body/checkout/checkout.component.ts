@@ -570,7 +570,9 @@ export class CheckoutComponent implements OnInit {
     this.overWeight = this.finalDetails.overWeight;
 
 
-    if (typeof this.chkShippingCost == 'undefined') {
+    if (typeof this.chkShippingCost === 'undefined' || this.chkShippingCost === null ) {
+      this.hideShipping = true;
+    } else {
       this.hideShipping = false;
     }
 
