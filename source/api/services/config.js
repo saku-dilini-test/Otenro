@@ -32,6 +32,6 @@ module.exports = {
     SALES_AND_PROMOTIONS_STATUS: {
         ACTIVE: 'ACTIVE',
         EXPIRED: 'EXPIRED', 
-        SCHEDULED: 'SCHEDULED'
+        SCHEDULED: 'ACTIVE'
     }
 };
