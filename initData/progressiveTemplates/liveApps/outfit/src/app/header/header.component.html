@@ -36,16 +36,16 @@
 									</ul>
 								</div>
               </li>
-              <li>
-                  <div class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{nonFeaturedDropdownLabel}}
-                          <span class="caret"></span></a>
-                      <ul class="dropdown-menu  main-navigation"  role="menu">
-                          <li *ngFor="let nonFeaturedCategory of nonFeaturedCategories">
-                              <a class="nav-link"  [routerLink]="['']" [queryParams]="{ id: nonFeaturedCategory.id }">{{ nonFeaturedCategory.name }}</a>
-                          </li>
-                      </ul>
-                  </div>
+              <li *ngIf="nonFeaturedCategories && nonFeaturedCategories.length > 0">
+                <div class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{nonFeaturedDropdownLabel}}
+                    <span class="caret"></span></a>
+                  <ul class="dropdown-menu  main-navigation" role="menu">
+                    <li *ngFor="let nonFeaturedCategory of nonFeaturedCategories">
+                      <a class="nav-link" [routerLink]="['']" [queryParams]="{ id: nonFeaturedCategory.id }">{{nonFeaturedCategory.name }}</a>
+                    </li>
+                  </ul>
+                </div>
               </li>
              <li *ngIf="showOnWebsiteContact">
               <a (click)="navigate('contact', 'Contact Us')">Contact Us
