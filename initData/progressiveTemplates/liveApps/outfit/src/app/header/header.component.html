@@ -22,7 +22,7 @@
                 <div class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
 									(click)="setStyle(featuredCategory.id)" id="{{featuredCategory.id}}">
-										<span>{{featuredCategory.name}}</span>
+										<span [routerLink]="['']" [queryParams]="{ id: featuredCategory.id }">{{featuredCategory.name}}</span>
 										<span class="caret"></span>
 									</a>
 									<ul *ngIf="featuredCategory.childNodes.length > 0" class="dropdown-menu  main-navigation" role="menu">
