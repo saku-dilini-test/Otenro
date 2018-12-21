@@ -36,6 +36,7 @@
                     <td ng-if="salesAndPromotion.isLimitNumberOfTime && !salesAndPromotion.isLimitUsers">{{salesAndPromotion.used || '0'}}/{{salesAndPromotion.limitNumberOfTime || '0'}}</td>
                     <td ng-if="!salesAndPromotion.isLimitNumberOfTime && salesAndPromotion.isLimitUsers">{{salesAndPromotion.used || '0'}}/{{salesAndPromotion.limitUsers || '0'}}</td>
                     <td ng-if="salesAndPromotion.isLimitNumberOfTime && salesAndPromotion.isLimitUsers">{{salesAndPromotion.used || '0'}}/{{salesAndPromotion.limitNumberOfTime || '0'}}</td>
+                    <td ng-if="!salesAndPromotion.isLimitNumberOfTime && !salesAndPromotion.isLimitUsers">{{salesAndPromotion.used || '0'}}</td>
                     <td ng-if = "salesAndPromotion.discountType == 'discount'">{{salesAndPromotion.discountPercent}} %</td>
                     <td ng-if = "salesAndPromotion.discountType == 'discountValue'">{{salesAndPromotion.discount}}</td>
                     <td ng-if="salesAndPromotion.dateFrom">{{salesAndPromotion.dateFrom | date : "dd.MM.y"}} to  {{salesAndPromotion.dateTo | date : "dd.MM.y"}}</td>
