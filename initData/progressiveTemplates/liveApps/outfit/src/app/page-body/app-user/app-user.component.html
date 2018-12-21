@@ -64,7 +64,7 @@
               <label for="username" class="sub-header-text-h2">
                 Phone
               </label>
-              <input class="form-control" type="text" placeholder="+94712345678" maxlength="16" [formControl]="userEditForm.controls['phone']">
+              <input class="form-control" (keypress)="numberOnly($event)" type="text" placeholder="0712345678" maxlength="16" [formControl]="userEditForm.controls['phone']">
               <div *ngIf="userEditForm.controls['phone'].hasError('required')
               && userEditForm.controls['phone'].touched" class="alert alert-danger">
                 You must include a Phone Number.

@@ -156,5 +156,13 @@ checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
         }, 3000);
     })
   }
+  
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
 
+  }
 }

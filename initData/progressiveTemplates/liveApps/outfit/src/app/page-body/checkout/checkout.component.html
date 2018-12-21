@@ -183,7 +183,7 @@
                         <label class="sub-header-text-h2">
                           TELEPHONE
                         </label>
-                        <input class="form-control" type="text" placeholder="0712345678" maxlength="16" [formControl]="complexForm.controls['phone']">
+                        <input (keypress)="numberOnly($event)" class="form-control" type="text" placeholder="0712345678" maxlength="16" [formControl]="complexForm.controls['phone']">
 
                         <div *ngIf="complexForm.controls['phone'].hasError('required')
                       && complexForm.controls['phone'].touched && complexForm.controls['phone'].dirty" class="alert alert-danger">
@@ -600,7 +600,7 @@
     <div class="modal-dialog  modal-lg" role="document">
         <div class="modal-content">
             <div class="text-right padding"><span class="modal-close padding"  data-dismiss="modal" aria-label="Close">X</span></div>
-              <form #payHereSubmitform class="padding main-content-font" method="post" action="https://www.payhere.lk/pay/checkout" >
+              <form #payHereSubmitform class="padding main-content-font" method="post" action="https://sandbox.payhere.lk/pay/checkout" >
                 <div [innerHTML] = "payHereUrl | safeHtml"></div>
                 <button type="submit" value="Submit"  class="btn btn-default main-button btn-lg btn-block" (click)="payHereSubmitform.submit()">Next</button>
               </form>
