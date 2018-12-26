@@ -282,30 +282,28 @@
                 }
 
                 if(salesAndPromotion.selectedProduct.length === undefined || salesAndPromotion.selectedProduct.length == 0){
-                    return toastr.error('Please select a product ', 'Warning', {
+                    return toastr.warning('Please select a product ', 'Warning', {
                         closeButton: true
                     });
 
                 }
                 if(toDate < fromDate){
 
-                    toastr.error('Invalid date range', 'Warning', {
+                    toastr.warning('Invalid date range', 'Warning', {
                         closeButton: true
                     });
                     return ;
                 }
                 if (fromDate < currentDate) {
 
-                    toastr.error('Past date and time are not allowed. Please select valid date and time.', 'Warning', {
+                    toastr.warning('Past date and time are not allowed. Please select valid date and time.', 'Warning', {
                         closeButton: true
                     });
                     return ;
                 }
                 if(salesAndPromotion.discountType == "discountValue" && salesAndPromotion.discount > price){
-                    // console.log(salesAndPromotion.discount);
-                    // console.log(price);
-
-                    toastr.error('Invalid discount value for \n\n' + salesAndPromotion.selectedProduct[index].name + variantSelection, 'Warning', {
+                    
+                    toastr.warning('Invalid discount value for \n\n' + salesAndPromotion.selectedProduct[index].name + variantSelection, 'Warning', {
                         closeButton: true
                     });
 
@@ -315,20 +313,20 @@
             }else if(salesAndPromotion.salesAndPromotionType == 'storeWide'){
 
                 if(!$scope.storeWide.discountType){
-                    return toastr.error('Please select a discount type ', 'Warning', {
+                    return toastr.warning('Please select a discount type ', 'Warning', {
                         closeButton: true
                     });
                 }else if(!$scope.storeWide.dateFrom || !$scope.storeWide.dateTo){
-                    return toastr.error('Please select a date range', 'Warning', {
+                    return toastr.warning('Please select a date range', 'Warning', {
                         closeButton: true
                     });
                 }else if($scope.storeWide.dateFrom >= $scope.storeWide.dateTo){
-                    return toastr.error('Please select valid date range', 'Warning', {
+                    return toastr.warning('Please select valid date range', 'Warning', {
                         closeButton: true
                     });
                 } else if (fromDate < currentDate) {
 
-                    toastr.error('Past date and time are not allowed. Please select valid date and time.', 'Warning', {
+                    toastr.warning('Past date and time are not allowed. Please select valid date and time.', 'Warning', {
                         closeButton: true
                     });
                     return ;
