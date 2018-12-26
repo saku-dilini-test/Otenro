@@ -17,12 +17,7 @@
         $scope.maxMenuSlider = 20;
         $scope.isDataEdit = false;
         $scope.initialData = initialData;
-
-        //if($scope.initialData){
-        //        $scope.catModel = $scope.initialData.menu.optionals[0].name;
-        //        $scope.prodModel = $scope.initialData.menu.optionals[1].name;
-        //}
-
+        
         // --- add carousel image --- //
         $scope.addCarouselBanner = function () {
             carouselService.showEditSliderDialog("addNewSlider")
@@ -75,12 +70,11 @@
 
         //category on select
         $scope.changeCat = function (category) {
+
             $scope.selectedCategory = category;
-//            $scope.catModel = category;
 
             $http.get(SERVER_URL + 'templates/getProductsByCatId?appId=' + $rootScope.appId + '&childId=' + category.id).success(function (data) {
                 $scope.products = data;
-
             });
             $scope.isSelectCat = true;
         }
@@ -186,13 +180,9 @@
                 $scope.tmpImage[0] = imageURL;
                 $scope.picFile = imageURL;
             }
-
-
-
         }
 
-
-           //setting selected image
+        //setting selected image
         $scope.setImage = function (img) {
             if (img == undefined) {
                 toastr.error('Please choose an image to upload', 'Warning', {
@@ -212,19 +202,13 @@
             $scope.mainImg = img;
         };
 
-
-
-        $scope.addSliderImage = function (file,menu, cat, prod) {
+        $scope.addSliderImage = function (file, menu, cat, prod) {
 
             if ($scope.tmpImage[0] == null) {
                 toastr.error('Please upload an image', 'Warning', { closeButton: true });
                 return;
             }
-            // if (cat && !prod) {
-            //     toastr.error('Please select a Product', 'Warning', { closeButton: true });
-            //     return;
-            // }
-
+           
             if ($scope.initialData.menu == "addNewSlider") {
 
                 var tempOptArr = [];
@@ -262,7 +246,7 @@
 
             } else {
 
-
+                // If slider image is changed
                 if (file.length > 50) {
 
                     var tempOptArr = [];
@@ -270,15 +254,15 @@
                     tempOptArr[0] = (cat);
                     tempOptArr[1] = (prod);
 
-
                     if( !menu.name){
-                      toastr.error("Please enter a name", 'Message', { closeButton: true });
-                    }else{carouselService.updateSliderImage({"file":$scope.tmpImage, "imageUrl":$scope.menu.imageUrl, "name": menu.name, "id":$scope.menu.id, "appId":$rootScope.appId, "optionals":tempOptArr}).success(function (data) {
 
+                      toastr.error("Please enter a name", 'Message', { closeButton: true });
+                    } else {
+
+                        carouselService.updateSliderImage({"file":$scope.tmpImage, "imageUrl":$scope.menu.imageUrl, "name": menu.name, "id":$scope.menu.id, "appId":$rootScope.appId, "optionals":tempOptArr}).success(function (data) {
 
                             var urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
                                 + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
-
 
                             $scope.appTemplateUrl = urlPath + '' +
                                 '#/app/home/' + data.id + '?' + new Date().getTime();
@@ -295,8 +279,6 @@
                             });
                         });
                     }
-
-
                 } else {
 
                     var tempOptArr = [];
@@ -310,15 +292,15 @@
                         'optArr': tempOptArr
                     }
 
-
                     if( !menu.name){
+
                       toastr.error("Please enter a name", 'Message', { closeButton: true });
-                    }else{
+                    } else {
+
                         carouselService.updateSliderData(updateData).success(function (data) {
 
                             var urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
                                 + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
-
 
                             $scope.appTemplateUrl = urlPath + '' +
                                 '#/app/home/' + data.id + '?' + new Date().getTime();
@@ -338,8 +320,6 @@
                 }
 
             }
-
-
         };
         // Delete slider
         $scope.deleteSlider = function (item) {

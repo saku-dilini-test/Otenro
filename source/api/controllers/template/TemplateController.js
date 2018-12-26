@@ -193,7 +193,7 @@ module.exports = {
         var childId = req.param('childId');
         var searchApp = {
             appId: appId,
-            childId : childId,
+            selectedCategories : [childId],
             published : 'YES'
         };
         var thirdNavi = [];

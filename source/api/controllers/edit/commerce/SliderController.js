@@ -43,8 +43,6 @@ module.exports = {
         var filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/slider/' + req.body.imageUrl;
         var desPath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/assets/images/slider/';
 
-
-
             fs.unlink(filePath, function (err) {
                 if (err) return console.error(err);
             });
@@ -56,16 +54,20 @@ module.exports = {
                 }
             });
 
-
             var query = {
                 'appId': req.body.appId,
                 'name': req.body.name,
                 'optionals': req.body.optionals,
             }
             query.imageUrl = imgeFileName;
-            Slider.update({ _id: req.body.id }, query).exec(function (err) {
-                if (err) res.send(err);
-                res.send('ok');
+
+            Slider.update({ _id: req.body.id }, query).exec(function (err, data) {
+                if (err) {
+
+                    sails.log.error("error occurred while updating slider image, error => " + err);
+                    return res.serverError(err);
+                }
+                return res.send('ok');
             });
 
     },
