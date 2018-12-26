@@ -16,6 +16,7 @@
         $scope.refund = [];
         $scope.unfulfilled = [];
         $scope.fulfill = [];
+        $scope.isAboutUsImageChanged = false;
 
         $scope.selectedTab = selectedTab;
 
@@ -625,6 +626,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
             }
             else {
                 var im = $scope.tmpImage;
+                $scope.isAboutUsImageChanged = true;
                 im[0] = $scope.picFile;
                 $scope.tmpImage = im;
                 $scope.mainImg = img;
@@ -704,9 +706,10 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                     storeSettings.appId = $rootScope.appId;
 
                     var file = $scope.tmpImage;
+
                     var uploadedFileType = $scope.uploadedFileType;
 
-                    if(file){
+                    if(file && $scope.isAboutUsImageChanged){
                         commerceService.uploadFile({"file":$scope.tmpImage,"appId":storeSettings.appId,"userId":storeSettings.userId}).success(function(data) {
                             storeSettings.aboutUsImageName = $scope.aboutUsImageName;
                             storeSettings.content = storeSettings.content.replace(/\t/g, '&#09;');

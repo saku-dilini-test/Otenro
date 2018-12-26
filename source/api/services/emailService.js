@@ -597,12 +597,9 @@ module.exports = {
 
     sendOrderEmail:function (data,res) {
         var attachment = false;
-       console.log("sendOrderEmail data-------------------------------");
-       console.log(data);
-       // console.log(data.paymentStatus);
-                var searchApp = {
-                    appId: data.appId
-                };
+        var searchApp = {
+            appId: data.appId
+        };
         if(data.fulfillmentStatus == 'Successful' || data.fulfillmentStatus == 'Refund' || data.paymentStatus == 'Successful'){
             UserEmail.findOne(searchApp).exec(function (err, userEmail) {
 
@@ -740,9 +737,6 @@ module.exports = {
                     var  testPath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/assets/images/thirdNavi/';
 
                     var test = [];
-                    console.log('data.item')
-                    // console.log(data.item)
-                    // console.log(data.item.length)
                     test.push({
                            filename: headerFileName,
                            path: headerImagePath,
@@ -819,8 +813,7 @@ module.exports = {
 
                     mapObj['orderDetails'] = '';
                     for (var j = 0; j < data.item.length; j++) {
-                        console.log('variant ---------------')
-                        // console.log(data.item[j].variant)
+
                         var variantsHtml = '';
                         for(var k = 0; k < data.item[j].variant.length; k++){
                             variantsHtml +=  data.item[j].variant[k].name+' : '+ data.item[j].variant[k].vType+'<br>';
@@ -845,8 +838,7 @@ module.exports = {
                     }
 
                     if(typeof userEmail.orderConfirmedEmailImage !=='undefined'){
-                        console.log('User email ------------------------------------')
-                        // console.log(userEmail)
+                        
                         var  headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderConfirmedEmailImage;
 
                         var emailBody = "";
@@ -859,9 +851,7 @@ module.exports = {
                         }
 
                         fs.readFile(approot + emailTemplate,'utf8',function (err, mailbody) {
-                            console.log("mapObj **************************************** ")
-                            console.log(mapObj)
-
+                            
                             var replaceMailBody = mailbody.replace(/emailHeader|deliverName|deliveryNo|deliveryStreet|deliveryCity|deliveryCountry|shippingOpt|shippingCost|orderNumber|subTotal|currency|orderTax|orderTotal|payementMethod|orderDetails|pickupLocationName|pickupNumber|pickupStreetAddress|pickupCity|pickupCountry|pickupPostalCode|pickupCost|isShippingDetails|isOrderDetails|storeAddress|storePhone|storeEmail|storeWebsite|storeFacebook|storeInstagram|storeTwitter|storeLinkedin|storePinterest|isStoreDetails|isFacebook|isInstagram|isTwitter|isLinkedin|isPinterest/g, function(matched){
                                 return mapObj[matched];
                             });
@@ -886,6 +876,7 @@ module.exports = {
                                 };
 
                             }else{
+                               
                                 mailOptions = {
                                     from: userEmail.fromEmail,
                                     to: data.email, // list of receivers
