@@ -113,6 +113,8 @@
                     return stylesService.showStyleEditBackgorundImageDialog(clickTitle);
                 if ('styleAddLogoImage' == clickTitle)
                     return stylesService.showStyleAddLogoImageDialog(clickTitle);
+                if ('addFooterImage' == clickTitle)
+                    return stylesService.showStyleAddFooterImageDialog(clickTitle);
                 if ('styleAddFAVIcon' == clickTitle)
                     return stylesService.showStyleAddFAVIconDialog(clickTitle);
                 if ('publishArticle' == clickTitle)

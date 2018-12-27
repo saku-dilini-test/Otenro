@@ -13,11 +13,13 @@
         $scope.myCroppedImage='';
         $scope.picFile='';
         $scope.buttonName = "Browse Image";
+        $scope.footerButtonName = "Select Image";
         $scope.tmpImage = [];
         $scope.tmpLogo= [];
         $scope.path = ME_APP_SERVER+"temp/";
         $scope.splash;
         $scope.saveFAV = false;
+        $scope.footerImage = null;
 
         $scope.imageUrlFAV = SERVER_URL + "templates/viewFAVIcon?userId=" + $auth.getPayload().id + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/favicon.ico";
         $scope.splash = $scope.imageUrlFAV;
@@ -86,6 +88,7 @@
             }
 
             $scope.buttonName = "Browse Image";
+            $scope.footerButtonName = "Select Image";
         };
 
 
@@ -189,8 +192,10 @@
             if($rootScope.tempNew === 'true' || $rootScope.tempNew === true){
 
                 $scope.tmpLogo[0] = SERVER_URL + "templates/viewWebImages?" + "userId=" + $auth.getPayload().id + "&appId=" + $rootScope.appId + "&" + new Date().getTime() +"&images="+"logo.png&dummy="+new Date().toISOString();
+                $scope.footerImage = SERVER_URL + "templates/viewWebImages?" + "userId=" + $auth.getPayload().id + "&appId=" + $rootScope.appId + "&" + new Date().getTime() +"&images="+"footer.png&dummy="+new Date().toISOString();
             }else {
                 $scope.tmpLogo[0] = $scope.path+data.userId+"/templates/"+data.id+"/img/logo.png";
+                $scope.footerImage = $scope.path+data.userId+"/templates/"+data.id+"/img/footer.png";
             }
         }).error(function (err) {
             toastr.error(err.error, 'Error', {
@@ -514,9 +519,8 @@
                         $scope.myImage = file;
                     });
                 $scope.buttonName = "Upload Logo";
-
+                $scope.footerButtonName = "Upload Image";
             }
-
         };
 
         $scope.uploadLogoToArea = function() {
@@ -532,7 +536,6 @@
                     reader.readAsDataURL(file);
             };
             angular.element(document.querySelector('#fileInput')).on('change', handleFileSelect);
-
         }
 
         $scope.deleteImg = function (index) {
@@ -586,5 +589,55 @@
 
         };
 
+        // Upload footer image to server
+        $scope.uploadFooterImage = function (fImange) {
+            if (angular.element('#fileInput').val() == '') {
+                toastr.error('Please choose a footer image to upload', 'Warning', {
+                    closeButton: true
+                });
+            }
+            else {
+                $scope.myImage = null;
+                $scope.footerImageData = {
+                    appId: appId,
+                    footerImage: fImange,
+                    tempNew: $rootScope.tempNew
+                };
+                stylesService.addFooterImage($scope.footerImageData)
+                    .success(function (res) {
+                        if (res.message === 'SUCCESS') {
+                            var urlPath;
+                            if ($rootScope.tempNew) {
+
+                                urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                                    + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
+                            } else {
+
+                                urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                                    + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
+                            }
+                            $scope.appTemplateUrl = urlPath;
+                            mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                            $scope.picFile = null;
+                            $scope.myImage = null;
+                            $scope.footerImage = fImange;
+                            toastr.success('Footer image has been uploaded successfully!', 'Success', {
+                                closeButton: true
+                            });
+
+                            $scope.footerButtonName = "Select Image";
+                        } else if (res.message === 'ERROR') {
+                            toastr.error('Error occurred while uploading footer image!', 'Error', {
+                                closeButton: true
+                            });
+                        }
+                    })
+                    .error(function (res) {
+                        toastr.error('Error occurred while uploading footer image!', 'Error', {
+                            closeButton: true
+                        });
+                    });
+            }
+        };
     }
 })();

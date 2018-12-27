@@ -1158,6 +1158,33 @@ module.exports = {
         }
     },
 
+    // Responsible for saving footer image
+    addFooterImage : function(req,res){
+
+        var userId = req.userId;
+        var appId = req.body.appId;
+        var footerImage = req.body.footerImage;
+        var data = footerImage;
+        var data = footerImage.replace(/^data:image\/\w+;base64,/, "");
+        var buf = new Buffer(data, 'base64');
+
+        if (req.body.tempNew) {
+            fs.writeFile(config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/assets/images/' + 'footer.png', buf, function (err) {
+                if (err) {
+                   return res.send({ message: 'ERROR'});
+                }
+                return res.send({ message: 'SUCCESS'});
+            });
+        } else {
+            fs.writeFile(config.APP_FILE_SERVER + userId + '/templates/' + appId + '/img/' + 'footer.png', buf, function (err) {
+                if (err) {
+                    return res.send({ message: 'ERROR'});
+                }
+                return res.send({ message: 'SUCCESS'});
+            });
+        }
+    },
+
     /*addLogoImage: function(req,res) {
 
 

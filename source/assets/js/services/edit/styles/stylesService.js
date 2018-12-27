@@ -111,6 +111,17 @@
             getAppSettings:function(Data){
                 return $http.post(SERVER_URL+ 'edit/getAppSettings',Data);
             },
+            addFooterImage: function(Data){
+                return $http.post(SERVER_URL + 'edit/addStyleImage/addFooterImage', Data);
+            },
+            // Show add footer image dialog
+            showStyleAddFooterImageDialog: function(){
+                return $mdDialog.show({
+                    controller: 'StylesCtrl',
+                    templateUrl: 'user/edit/styles/manageFooterImageView.html',
+                    clickOutsideToClose:true
+                });
+            },
         };
     }
 })();
