@@ -219,5 +219,9 @@ div.c-pad{
   .appname-if-not-ipg {
 	width: 100%;
 	text-align: center;
-  }
+	}
+	
+	.pointer {
+    cursor: pointer;
+}
 /* Web app footer styles - END */
