@@ -49,11 +49,11 @@
 		<div class="flex">
 			<!-- App logo and subscribe content -->
 			<div class="inline" *ngIf="isApplogoExists">
-				<div id="subscribe-container">
-					<input id="subscribe-mail" type="text" placeholder="name@mail.com">
-					<input id="subscribe-button" type="button" value="Subscribe">
-					<span>Subscribe for {{appName?.slice(0, appName?.length - 4)}} newsletters.</span>
-				</div>
+				<!--<div id="subscribe-container">-->
+					<!--<input id="subscribe-mail" type="text" placeholder="name@mail.com">-->
+					<!--<input id="subscribe-button" type="button" value="Subscribe">-->
+					<!--<span>Subscribe for {{appName?.slice(0, appName?.length - 4)}} newsletters.</span>-->
+				<!--</div>-->
 				<div id="logo-image-container">
 					<img src="{{imageUrl}}/footer.png&dummy={{dummy}}" alt="footer" />
 				</div>
@@ -63,7 +63,7 @@
 				<span>quick links</span>
 				<a [routerLink]="['/aboutus']">About us</a>
 				<a [routerLink]="['/policies']">Policies</a>
-				<a [routerLink]="['/policies']">Terms & conditions</a>
+				<a [routerLink]="['/terms']">Terms & conditions</a>
 			</div>
 			<!-- Customer care content -->
       <div id="cutomer-care" class="inline" [ngStyle]="{ 'margin-left': !isApplogoExists ? '10vw': '0px' }">
