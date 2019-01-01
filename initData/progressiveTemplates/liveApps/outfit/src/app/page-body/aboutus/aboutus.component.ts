@@ -25,6 +25,8 @@ export class AboutusComponent implements OnInit {
 
   constructor(private http: HttpClient, private appdataService: AppDataService, private title: TitleService) {
     this.title.changeTitle("About Us");
+
+    window.scrollTo(0, 0);
   }
 
   ngOnInit() {

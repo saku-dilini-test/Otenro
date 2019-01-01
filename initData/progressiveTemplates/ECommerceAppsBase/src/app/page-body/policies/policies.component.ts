@@ -18,6 +18,8 @@ export class PoliciesComponent implements OnInit {
   returnPolicy;
   constructor(private http: HttpClient, private appdataService: AppDataService, private title: TitleService) {
     this.title.changeTitle("Policies");
+
+    window.scrollTo(0, 0);
   }
 
   ngOnInit() {

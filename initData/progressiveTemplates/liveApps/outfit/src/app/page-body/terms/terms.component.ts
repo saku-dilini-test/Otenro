@@ -17,6 +17,8 @@ export class TermsComponent implements OnInit {
   terms;
   constructor(private http: HttpClient, private appdataService: AppDataService, private title: TitleService) {
     this.title.changeTitle("Terms & Conditions");
+
+    window.scrollTo(0, 0);
   }
 
   ngOnInit() {
