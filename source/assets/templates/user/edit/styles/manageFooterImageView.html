@@ -1,0 +1,67 @@
+<md-dialog aria-label="Background Image">
+
+    <!--Google Analytics-->
+    <script>
+        ga('set', 'page', 'select-footer-image');
+        ga('send', 'pageview');
+    </script>
+
+    <md-dialog-content>
+        <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
+            <md-tab>
+                <md-tab-body>
+                    <div class="md-dialog-main">
+                        <div class="md-dialog-header">
+                            <h1>UPLOAD FOOTER IMAGE</h1>
+                        </div>
+                       <div class="file-upload-wrapper clearfix text-center">
+                           <div class="cropArea" style="display: flex">
+                               <img ng-src="{{myImage}}" style="margin: auto">
+                           </div>
+                           <label>Recommended footer image max size: 250x150px</label>
+                           <div class="inputField btn-material img-up">
+                                   <span>{{footerButtonName}}</span>
+                                   <div class="img-up1" ng-if="!myImage">
+                                       <input   ngf-select
+                                                ng-model="logo"  ngf-change="validateSize(logo,'250','150')"
+                                                ngf-validate="{width: {min: 10, max:250}, height: {min: 10, max: 150}}"
+                                                type="file" value="file" id="fileInput" ng-click="uploadLogoToArea()"/>
+                                   </div>
+                                   <div  ng-if="myImage" class="img-up1" ng-click="uploadFooterImage(picFile)"></div>
+                            </div>
+                        </div>
+
+                        <div class="uploaded-section image-upload clearfix" style="width: 35%;">
+                            <div class="uploaded-new-image2">
+                                <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
+                                     height="150" style="display:none" />
+                                <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" style="display:none" />
+                            </div>
+                            <div class="uploaded-old-images">
+                                <p>Uploaded footer image</p>
+                                <div class="old-images clearfix">
+                                    <div class="old-image">
+                                        <input type="button" ng-click="deleteImg(0)" value='delete'
+                                               class="image-delete-button"/>
+                                        <img ng-if="footerImage === null"
+                                             src="../../../images/small-placeholder.png" width="80" height="80"/>
+                                        <img ng-if="footerImage !== null" ngf-src="footerImage"
+                                             width="80" height="80"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button" ng-click="hide()">Close</md-button>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+    </md-dialog-content>
+</md-dialog>
+
