@@ -642,7 +642,12 @@ module.exports = {
                     data.item.forEach(function(element) {
                         subTotal += element.price * element.qty;
                     });
-                    mapObj['subTotal'] =  subTotal;
+                    mapObj['subTotal'] =  formatNumber(subTotal);
+                    mapObj['isDiscountedTotal'] = 'none';
+                    if( data.discountedTotal){
+                        mapObj['isDiscountedTotal'] = 'table-row';
+                    }
+                    mapObj['discountedTotal'] =  formatNumber(data.discountedTotal);
                     mapObj['currency'] =  data.currency;
                     mapObj['orderTax'] =  formatNumber(data.tax);
                     mapObj['orderTotal'] =  formatNumber(data.amount);
@@ -852,7 +857,7 @@ module.exports = {
 
                         fs.readFile(approot + emailTemplate,'utf8',function (err, mailbody) {
                             
-                            var replaceMailBody = mailbody.replace(/emailHeader|deliverName|deliveryNo|deliveryStreet|deliveryCity|deliveryCountry|shippingOpt|shippingCost|orderNumber|subTotal|currency|orderTax|orderTotal|payementMethod|orderDetails|pickupLocationName|pickupNumber|pickupStreetAddress|pickupCity|pickupCountry|pickupPostalCode|pickupCost|isShippingDetails|isOrderDetails|storeAddress|storePhone|storeEmail|storeWebsite|storeFacebook|storeInstagram|storeTwitter|storeLinkedin|storePinterest|isStoreDetails|isFacebook|isInstagram|isTwitter|isLinkedin|isPinterest/g, function(matched){
+                            var replaceMailBody = mailbody.replace(/emailHeader|deliverName|deliveryNo|deliveryStreet|deliveryCity|deliveryCountry|shippingOpt|shippingCost|orderNumber|subTotal|isDiscountedTotal|discountedTotal|currency|orderTax|orderTotal|payementMethod|orderDetails|pickupLocationName|pickupNumber|pickupStreetAddress|pickupCity|pickupCountry|pickupPostalCode|pickupCost|isShippingDetails|isOrderDetails|storeAddress|storePhone|storeEmail|storeWebsite|storeFacebook|storeInstagram|storeTwitter|storeLinkedin|storePinterest|isStoreDetails|isFacebook|isInstagram|isTwitter|isLinkedin|isPinterest/g, function(matched){
                                 return mapObj[matched];
                             });
 

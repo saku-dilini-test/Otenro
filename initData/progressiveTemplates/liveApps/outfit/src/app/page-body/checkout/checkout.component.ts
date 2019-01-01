@@ -806,9 +806,10 @@ export class CheckoutComponent implements OnInit {
           'email': this.user.email,
           'currency': this.dataService.currency,
           'puckupId': null,
-          'promotionCode':  this.selectedPromo? this.selectedPromo[0].promoCode : null,
+          'promotionCode':  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
-          'paymentType': type
+          'paymentType': type,
+          'discountedTotal' : this.discountedTotal ? this.discountedTotal : null
         };
       } else{
         this.orderDetails = {
@@ -832,7 +833,8 @@ export class CheckoutComponent implements OnInit {
           'puckupId': null,
           'promotionCode':  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
-          'paymentType': type
+          'paymentType': type,
+          'discountedTotal' : this.discountedTotal ? this.discountedTotal : null
         };
       }
 
@@ -853,7 +855,8 @@ export class CheckoutComponent implements OnInit {
           "currency": this.dataService.paypalCurrency,
           "promotionCode":  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
-          'paymentType': type
+          'paymentType': type,
+          'discountedTotal' : this.discountedTotal ? this.discountedTotal : null
         }
       }
       //  else if(this.user){
@@ -974,7 +977,8 @@ export class CheckoutComponent implements OnInit {
           'puckupId': null,
           'promotionCode': this.selectedPromo? this.selectedPromo[0].promoCode : null,
           'note': note,
-          'paymentType': 'Cash on delivery'
+          'paymentType': 'Cash on delivery',
+          'discountedTotal' : this.discountedTotal ? this.discountedTotal : null
         };
       } else{
 
@@ -1000,7 +1004,8 @@ export class CheckoutComponent implements OnInit {
           'puckupId': null,
           'promotionCode':  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
-          'paymentType': 'Cash on delivery'
+          'paymentType': 'Cash on delivery',
+          'discountedTotal' : this.discountedTotal ? this.discountedTotal : null
         };
 
 
@@ -1024,7 +1029,8 @@ export class CheckoutComponent implements OnInit {
           "currency": this.dataService.currency,
           "promotionCode":  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
-          'paymentType': 'Cash on pickup'
+          'paymentType': 'Cash on pickup',
+          'discountedTotal' : this.discountedTotal ? this.discountedTotal : null
         }
       }
       //  else if(this.user){
@@ -1178,7 +1184,8 @@ export class CheckoutComponent implements OnInit {
           'puckupId': null,
           'promotionCode': this.selectedPromo? this.selectedPromo[0].promoCode : null,
           'note': note,
-          'paymentType': 'PayPal'
+          'paymentType': 'PayPal',
+          'discountedTotal' : this.discountedTotal ? this.discountedTotal : null
         };
 
       } else{
@@ -1203,7 +1210,8 @@ export class CheckoutComponent implements OnInit {
           'puckupId': null,
           'promotionCode':  this.selectedPromo? this.selectedPromo[0].promoCode : null,
           'note': note,
-          'paymentType': 'PayPal'
+          'paymentType': 'PayPal',
+          'discountedTotal' : this.discountedTotal ? this.discountedTotal : null
         };
       }
 
@@ -1224,7 +1232,8 @@ export class CheckoutComponent implements OnInit {
           "currency": this.dataService.paypalCurrency,
           "promotionCode":  this.selectedPromo ? this.selectedPromo[0].promoCode : null,
           'note': note,
-          'paymentType': 'PayPal'
+          'paymentType': 'PayPal',
+          'discountedTotal' : this.discountedTotal ? this.discountedTotal : null
         }
       }
       //  else if(this.user){
@@ -1283,7 +1292,8 @@ export class CheckoutComponent implements OnInit {
           'note': note,
           'paymentType': 'PayHere',
           'realHostUrl': realHostUrl,
-          'payHereMerchantId': this.payHereMID
+          'payHereMerchantId': this.payHereMID,
+          'discountedTotal' : this.discountedTotal ? this.discountedTotal : null
         };
       } else{
         this.orderDetails = {
@@ -1309,7 +1319,8 @@ export class CheckoutComponent implements OnInit {
           'note': note,
           'paymentType': 'PayHere',
           'realHostUrl': realHostUrl,
-          'payHereMerchantId': this.payHereMID
+          'payHereMerchantId': this.payHereMID,
+          'discountedTotal' : this.discountedTotal ? this.discountedTotal : null
         };
       }
 
@@ -1336,7 +1347,8 @@ export class CheckoutComponent implements OnInit {
           'note': note,
           'paymentType': 'PayHere',
           'realHostUrl': realHostUrl,
-          'payHereMerchantId': this.payHereMID
+          'payHereMerchantId': this.payHereMID,
+          'discountedTotal' : this.discountedTotal ? this.discountedTotal : null
         };
       }
       //  else if(this.user){

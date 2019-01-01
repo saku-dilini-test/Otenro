@@ -110,6 +110,9 @@ module.exports = {
         },
         note:{
             type: 'string'
+        },
+        discountedTotal:{
+            type: 'float'
         }
     }
 };
