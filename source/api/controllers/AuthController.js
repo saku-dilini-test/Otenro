@@ -31,7 +31,7 @@ module.exports = {
 
           error: function (err){
 //            sails.config.logging.custom.error(err);
-            logger.error();
+//             logger.error();
             return res.negotiate(err);
           },
 
