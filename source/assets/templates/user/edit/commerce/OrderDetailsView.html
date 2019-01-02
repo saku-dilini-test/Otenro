@@ -116,6 +116,13 @@
                     <td>{{orders.price*orders.qty}} </td>
                 </tr>
 
+                <tr ng-if="oderData.entity.discountedTotal">
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>discountedTotal</td>
+                    <td>{{oderData.entity.discountedTotal}}</td>
+                </tr>
                 <tr>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
