@@ -476,7 +476,9 @@
                                                  ng-model="product"  >
                                                 <md-checkbox ng-checked="exists(oneProduct, selected)"
                                                              ng-click="toggle(oneProduct, selected)"
-                                                             aria-label="oneProduct.name" >{{oneProduct.name}}<br>
+                                                             aria-label="oneProduct name" >
+                                                    {{oneProduct.name}}<br>
+                                                    {{oneProduct.sku}}<br>
                                                     <div ng-repeat="select in oneProduct.selection">
                                                         {{select.name}} - {{select.vType}}
                                                     </div>
@@ -489,7 +491,9 @@
                                                 <!--<span>{{product.name}}</span>-->
                                                 <md-checkbox ng-checked="exists(product, selected)"
                                                              ng-click="toggle(product, selected)"
-                                                             aria-label="oneProduct.name" >{{product.name}}<br>
+                                                             aria-label="product name" >
+                                                    {{product.name}}<br>
+                                                    {{product.sku}}<br>
                                                     <div ng-repeat="select in product.selection">
                                                         {{select.name}} - {{select.vType}}
                                                     </div>
@@ -499,7 +503,9 @@
                                                <!-- <span>{{product.name}}</span>-->
                                                 <md-checkbox ng-checked="exists(product, selected)"
                                                              ng-click="toggle(product, selected)"
-                                                             aria-label="oneProduct.name" >{{product.name}}<br>
+                                                             aria-label="oneProduct.name" >
+                                                    {{product.name}}<br>
+                                                    {{product.sku}}<br>
                                                     <div ng-repeat="select in product.selection">
                                                         {{select.name}} - {{select.vType}}
                                                     </div>
