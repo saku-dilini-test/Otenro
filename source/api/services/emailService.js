@@ -646,8 +646,8 @@ module.exports = {
                     mapObj['isDiscountedTotal'] = 'none';
                     if( data.discountedTotal){
                         mapObj['isDiscountedTotal'] = 'table-row';
+                        mapObj['discountedTotal'] =  formatNumber(data.discountedTotal);
                     }
-                    mapObj['discountedTotal'] =  formatNumber(data.discountedTotal);
                     mapObj['currency'] =  data.currency;
                     mapObj['orderTax'] =  formatNumber(data.tax);
                     mapObj['orderTotal'] =  formatNumber(data.amount);
