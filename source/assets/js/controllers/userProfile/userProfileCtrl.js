@@ -31,7 +31,7 @@
             });*/
         });
 
-        $scope.accountType = "Beta";
+        $scope.accountType = "Free";
         $scope.activeTabIndex = 0;
         $scope.viewProfile = "Profile";
         $scope.viewBilling = "Billing Details";
