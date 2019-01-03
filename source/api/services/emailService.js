@@ -596,6 +596,7 @@ module.exports = {
 
 
     sendOrderEmail:function (data,res) {
+        // console.log(data)
         var attachment = false;
         var searchApp = {
             appId: data.appId
@@ -605,7 +606,7 @@ module.exports = {
 
                 if( typeof userEmail==='undefined'){
                     console.log("Please Update Email Setting ");
-
+                    return res('Please Update Email Setting ',null);
                 }else {
 
                     var headerImagePath;
@@ -800,13 +801,13 @@ module.exports = {
 
                     for(var i =0;i<data.item.length;i++){
 
-                    var image;
+                        var image;
 
-                    if(data.item[i].imgUrl != null){
-                        image = data.item[i].imgUrl
-                    }else{
-                        image = data.item[i].imgDefault
-                    }
+                        if(data.item[i].imgUrl != null){
+                            image = data.item[i].imgUrl
+                        }else{
+                            image = data.item[i].imgDefault
+                        }
                         test.push({
                                 filename: image,
                                 path: testPath + image,
@@ -818,7 +819,7 @@ module.exports = {
 
                     mapObj['orderDetails'] = '';
                     for (var j = 0; j < data.item.length; j++) {
-
+                            console.log(data.item[j].variant)
                         var variantsHtml = '';
                         for(var k = 0; k < data.item[j].variant.length; k++){
                             variantsHtml +=  data.item[j].variant[k].name+' : '+ data.item[j].variant[k].vType+'<br>';

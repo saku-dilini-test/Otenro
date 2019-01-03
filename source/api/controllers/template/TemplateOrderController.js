@@ -155,6 +155,7 @@ module.exports = {
                                                     return res.send(500);
                                                 }
                                                 order['storeDetails'] = storeDetails;
+                                                // console.log(order)
                                                 sentMails.sendOrderEmail(order, function (err, msg) {
                                                     sails.log.info(err);
                                                     if (err) {
