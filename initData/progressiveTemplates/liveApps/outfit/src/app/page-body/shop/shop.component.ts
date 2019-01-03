@@ -49,7 +49,8 @@ export class ShopComponent implements OnInit {
     error => {
       console.log('Error shop service all');
     });
-
+    // Scroll to top of the page
+    window.scrollTo(0, 0)
   }
 
 
