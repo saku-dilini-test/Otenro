@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import * as data from '../../../assets/madeEasy.json';
 import { SERVER_URL } from '../../../assets/constantsService';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
@@ -19,7 +19,9 @@ export class CategoriesComponent implements OnInit {
   private catName: any;
   private currentViewName: string;
   private currency: string;
-  promoData = []; todayDate;
+  promoData = [];
+  todayDate;
+  currentCategoryName;
 
   @Input('categories') categories: CategoriesModel;
   @Input('products') products: any;
@@ -27,29 +29,30 @@ export class CategoriesComponent implements OnInit {
   constructor(private router: Router,
               private dataService: PagebodyServiceModule,
               private currencyService: CurrencyService,
-              private productsService: ProductsService) {
+              private productsService: ProductsService,
+              private route: ActivatedRoute) {
     this.currentViewName = 'Home';
 
     this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
 
       data.forEach(element => {
-		if(element.salesAndPromotionType != 'storeWide'){
-			element.selectedProduct.forEach(variants => {
+    		if(element.salesAndPromotionType != 'storeWide'){
+    			element.selectedProduct.forEach(variants => {
 
-			  variants.fromDate = element.dateFrom;
-			  variants.toDate = element.dateTo;
+    			  variants.fromDate = element.dateFrom;
+    			  variants.toDate = element.dateTo;
 
-			  if (element.discountType == 'discountValue') {
-				variants.discountType = element.discountType;
-				variants.discount = element.discount
-			  } else {
-				variants.discountType = element.discountType;
-				variants.discount = element.discountPercent
-			  }
+    			  if (element.discountType == 'discountValue') {
+    				variants.discountType = element.discountType;
+    				variants.discount = element.discount
+    			  } else {
+    				variants.discountType = element.discountType;
+    				variants.discount = element.discountPercent
+    			  }
 
-			  this.promoData.push(variants);
-			});
-		}
+    			  this.promoData.push(variants);
+    			});
+    		}
       });
     });
   }
@@ -70,6 +73,12 @@ export class CategoriesComponent implements OnInit {
       this.currency = data.sign;
     }, error => {
       console.log('Error retrieving currency');
+    });
+
+    this.route.queryParams.subscribe( params =>{
+       if(params && params.name){
+         this.currentCategoryName = params.name;
+       }
     });
 
   }

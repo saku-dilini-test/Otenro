@@ -20,7 +20,7 @@
 			<div class="row voffset animated fadeInUp">
 				<div class="col-sm-12">
 					<h1 class="mg-md text-center about-us ">
-						<span class="main-header-font" >PRODUCTS</span><br>
+						<span class="main-header-font" >{{currentCategoryName}}</span><br>
 					</h1>
 				</div>
 			</div>
@@ -79,10 +79,10 @@
 			<div class="row">
 				<div class="col-sm-12 text-center">
 					<h1 class="text-center about-us  voffset cursor-p">
-						<a [routerLink]="['']" [queryParams]="{ id:node.id}" class=" main-header-font" >{{node.name}}</a><br>
+						<a [routerLink]="['']" [queryParams]="{ id:node.id,name:node.name}" class=" main-header-font" >{{node.name}}</a><br>
 					</h1>
-					<a [routerLink]="['']" [queryParams]="{ id:node.id}" >
-						<img class="cursor-p"  *ngIf="node.products.length == 0" src="{{imageUrl}}/{{node.imageUrl}}" width="100%" />
+					<a [routerLink]="['']" [queryParams]="{ id:node.id,name:node.name}" *ngIf="node.products.length == 0">
+						<img class="cursor-p" src="{{imageUrl}}/{{node.imageUrl}}" width="100%" />
 					</a>
 
 				</div>
