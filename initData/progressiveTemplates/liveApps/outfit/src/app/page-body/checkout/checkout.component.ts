@@ -1403,22 +1403,22 @@ export class CheckoutComponent implements OnInit {
         } else {
           this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, {responseType: 'text'})
             .subscribe((res) => {
-                this.dataService.cart.cartItems = [];
-                this.dataService.cart.cartSize = 0;
-                this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
-                this.dataService.cart.totalPrice = 0;
-                this.dataService.cart.totalQuantity = 0;
+                // this.dataService.cart.cartItems = [];
+                // this.dataService.cart.cartSize = 0;
+                // this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
+                // this.dataService.cart.totalPrice = 0;
+                // this.dataService.cart.totalQuantity = 0;
 
-                //Pushing into order purchase history
-                let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+                // //Pushing into order purchase history
+                // let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
 
-                if (appUser) {
-                  if (this.localStorageService.get("cart" + appUser.registeredUser)) {
-                    this.localStorageService.remove("cart" + appUser.registeredUser);
-                  }
-                } else {
-                  this.localStorageService.remove("cartUnknownUser");
-                }
+                // if (appUser) {
+                //   if (this.localStorageService.get("cart" + appUser.registeredUser)) {
+                //     this.localStorageService.remove("cart" + appUser.registeredUser);
+                //   }
+                // } else {
+                //   this.localStorageService.remove("cartUnknownUser");
+                // }
 
                 this.http.post(
                   SERVER_URL + '/mobile/getPayHereForm/', this.orderDetails, {responseType: 'text'})
@@ -1585,5 +1585,28 @@ export class CheckoutComponent implements OnInit {
     }
     return true;
 
+  }
+
+  /**
+   * Remove products from cart after submiting payhere success form
+   */
+  removeItemFromCart() {
+
+    this.dataService.cart.cartItems = [];
+    this.dataService.cart.cartSize = 0;
+    this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
+    this.dataService.cart.totalPrice = 0;
+    this.dataService.cart.totalQuantity = 0;
+
+    //Pushing into order purchase history
+    let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+
+    if (appUser) {
+      if (this.localStorageService.get("cart" + appUser.registeredUser)) {
+        this.localStorageService.remove("cart" + appUser.registeredUser);
+      }
+    } else {
+      this.localStorageService.remove("cartUnknownUser");
+    }
   }
 }

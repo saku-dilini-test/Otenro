@@ -47,3 +47,19 @@
   width:20%;
   margin: 0 0 0 5%;
 }
+
+.flex {
+	display: flex;
+}
+  
+.inline {
+  flex: 1;
+}
+
+.btn-payhere-submit {
+  margin: 0 0 0 10px;
+}
+
+.btn-payhere-cancel {
+  margin: 0 10px 0 0;
+}
