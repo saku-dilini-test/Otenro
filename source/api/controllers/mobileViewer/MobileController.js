@@ -91,26 +91,26 @@ module.exports = {
                         " <h3 class=\"main-header-font\">Personal Details</h3>" +
                         " <div class=\"form-group\"> " +
                         " <label for=\"firstName\">First Name</label> " +
-                        "<input type=\"text\" name=\"first_name\" class=\"form-control\"  value=\""+req.body.customerName+"\"  [(ngModel)]=\""+req.body.customerName+"\"> " +
+                        "<input readonly type=\"text\" name=\"first_name\" class=\"form-control\"  value=\""+req.body.customerName+"\"  [(ngModel)]=\""+req.body.customerName+"\"> " +
                         " </div> " +
                         "<div class=\"form-group\"> <label for=\"lastName\">Last Name</label>" +
-                        " <input type=\"text\" name=\"last_name\" class=\"form-control\" id=\"lastName\" placeholder=\"Last Name\"  value=\""+req.body.lastName+"\"  [(ngModel)]=\"-\"> " +
+                        " <input readonly type=\"text\" name=\"last_name\" class=\"form-control\" id=\"lastName\" placeholder=\"Last Name\"  value=\""+req.body.lastName+"\"  [(ngModel)]=\"-\"> " +
                         "</div> " +
                         "<div class=\"form-group\"> <label for=\"email\">Email</label>" +
-                        " <input type=\"text\" name=\"email\" class=\"form-control\"  value=\""+req.body.email+"\"  [(ngModel)]=\""+req.body.email+"\"> " +
+                        " <input readonly type=\"text\" name=\"email\" class=\"form-control\"  value=\""+req.body.email+"\"  [(ngModel)]=\""+req.body.email+"\"> " +
                         "</div> " +
                         "<div class=\"form-group\"> <label for=\"phone\">Phone</label> " +
-                        "<input  type=\"text\" name=\"phone\" value=\""+req.body.telNumber+"\" [(ngModel)]=\""+req.body.telNumber+"\" class=\"form-control\" id=\"phone\" placeholder=\"Phone No.\" > " +
+                        "<input readonly  type=\"text\" name=\"phone\" value=\""+req.body.telNumber+"\" [(ngModel)]=\""+req.body.telNumber+"\" class=\"form-control\" id=\"phone\" placeholder=\"Phone No.\" > " +
                         "</div>" +
                         " <h3 class=\"main-header-font\">Address</h3>" +
                         " <div class=\"form-group\"> <label for=\"address\">Address</label> " +
-                        "<input type=\"text\" name=\"address\" value=\""+req.body.deliveryNo+" "+req.body.deliveryStreet+"\" [(ngModel)]=\""+req.body.deliveryNo+" "+req.body.deliveryStreet+"\" class=\"form-control\" id=\"address\" placeholder=\"Address\" > " +
+                        "<input readonly type=\"text\" name=\"address\" value=\""+req.body.deliveryNo+" "+req.body.deliveryStreet+"\" [(ngModel)]=\""+req.body.deliveryNo+" "+req.body.deliveryStreet+"\" class=\"form-control\" id=\"address\" placeholder=\"Address\" > " +
                         "</div>" +
                         " <div class=\"form-group\"> <label for=\"city\">City</label> " +
-                        "<input type=\"text\" name=\"city\" value=\""+req.body.deliveryCity+"\" [(ngModel)]=\""+req.body.deliveryCity+"\" class=\"form-control\" id=\"city\" placeholder=\"City\" >" +
+                        "<input readonly type=\"text\" name=\"city\" value=\""+req.body.deliveryCity+"\" [(ngModel)]=\""+req.body.deliveryCity+"\" class=\"form-control\" id=\"city\" placeholder=\"City\" >" +
                         " </div>" +
                         " <div class=\"form-group\"> <label for=\"country\">Country</label>" +
-                        " <input id=\"country\"  type=\"text\" name=\"country\" value=\"Sri Lanka\" [(ngModel)]=\"Sri Lanka\" class=\"form-control\" placeholder=\"Country\" >" +
+                        " <input readonly id=\"country\"  type=\"text\" name=\"country\" value=\"Sri Lanka\" [(ngModel)]=\"Sri Lanka\" class=\"form-control\" placeholder=\"Country\" >" +
                         " </div>" +
                         " <hr>";
         res.set('Content-Type', 'text/html');
