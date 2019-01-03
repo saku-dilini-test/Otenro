@@ -86,7 +86,8 @@ export class CartComponent implements OnInit {
 
 
     this.amount = this.getTotal();
-
+    // scroll to top of the page
+    window.scrollTo(0, 0);
   }
 
   itemPriceCal(price, qty) {
