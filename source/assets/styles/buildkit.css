@@ -3192,3 +3192,7 @@ table.md-calendar-day-header{
 .md-menu.paste-options .paste-button{
     visibility: hidden;
 }
+
+.validation-box-color {
+    border: solid 1px red;
+}

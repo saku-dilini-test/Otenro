@@ -21,13 +21,13 @@
         })
         .controller('technicalSupportCtrl',
             ['$scope', '$mdDialog', '$auth', 'toastr', '$state', '$stateParams', 'SERVER_URL', 'ME_SERVER', '$filter',
-                '$window', 'userProfileResource', 'technicalSupportService',
+                '$window', 'userProfileResource', 'technicalSupportService', '$timeout',
                 technicalSupportCtrl
             ]);
 
 
     function technicalSupportCtrl($scope, $mdDialog, $auth, toastr, $state, $stateParams, SERVER_URL, ME_SERVER, $filter,
-                                  $window, userProfileResource, technicalSupportService) {
+                                  $window, userProfileResource, technicalSupportService,$timeout) {
 
         $scope.splash = [];
         $scope.publishSplash = [];
@@ -1354,8 +1354,13 @@
 
             fromDate = pramData.fromDate,
                 toDate = pramData.toDate;
-            if (pramData.msisdn == undefined) {
+
+            if ((!pramData.msisdn) || (pramData.msisdn.length === 0)) {
+                $scope.borderColor = true;
                 toastr.error('Please enter MSISDN', 'Warning', {closeButton: true});
+                $timeout(function() {
+                   $scope.borderColor  = false;
+               }, 5000);
             }
             else if ((fromDate && toDate) && (toDate >= fromDate)) {
 
