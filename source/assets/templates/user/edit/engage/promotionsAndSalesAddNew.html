@@ -98,7 +98,7 @@
                                     </md-input-container>
                                     <md-input-container class="md-block" flex="50" ng-if = "storeWide.discountType == 'discount'">
                                         <label>Discount</label>
-                                        <input md-maxlength="2" maxlength ="2" ng-pattern="/^100$|^\d{0,2}(\.\d{1,2})? *%?$/"  ng-required="true" name="discountPercent" ng-model="storeWide.discountPercent">
+                                        <input md-maxlength="4" maxlength ="4" ng-pattern="/^100$|^\d{0,2}(\.\d{1,2})? *%?$/"  ng-required="true" name="discountPercent" ng-model="storeWide.discountPercent">
                                         <div ng-messages="storeWideForm.discountPercent.$error" ng-show="storeWideForm.discount.$dirty">
                                             <div ng-message="required">Name is required.</div>
                                         </div>
