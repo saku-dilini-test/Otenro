@@ -7,7 +7,7 @@
 
           <!--</div>-->
             <ng-template  *ngFor="let branch of contact.branches;let i = index" [ngIf]="i % 3 == 0">
-              <div class="row voffset row-space-top spacing-top">
+              <div class="row voffset row-space-top spacing-top no-margin">
                 <a class="col-md-4" *ngIf="contact.branches[i]"  href="https://www.google.com/maps/?q={{contact.branches[i].branch.latitude}},{{contact.branches[i].branch.longitude}}" target="_blank">
                   <p class="main-header-font text-center-xs">
                     {{ contact.branches[i].name}}
