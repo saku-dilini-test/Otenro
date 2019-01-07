@@ -3168,6 +3168,7 @@ table.md-calendar-day-header{
     /*bottom: 15px !important;*/
     left: auto !important;
     right: 0 !important;
+    margin-top : 0 !important;
 }
 [ng-quill-editor] { display: block; }
 
