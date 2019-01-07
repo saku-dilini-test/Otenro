@@ -40,3 +40,6 @@ span{
 	}
 
 }
+a {
+    overflow-wrap: break-word;
+}

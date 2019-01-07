@@ -33,9 +33,9 @@ export class PayhereSuccessComponent implements OnInit {
        (err) => {
           console.log(err);
        });
-
     });
-     
+    // scroll to top of the page
+    window.scrollTo(0, 0);
   }
 
   

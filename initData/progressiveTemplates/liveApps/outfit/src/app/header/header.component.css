@@ -38,3 +38,14 @@
 ul li a i{
   font-size: 18px;
 }
+
+#mobile-title-content {
+  width: 55%; 
+  display: inline-block; 
+  font-size: 15px;
+  font-weight: bold;
+}
+#mobile-cart-content {
+  width: 45%; 
+  display: inline-block;
+}

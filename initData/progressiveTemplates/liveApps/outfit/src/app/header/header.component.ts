@@ -344,4 +344,15 @@ export class HeaderComponent implements OnInit {
     this.txtDecoratedCatId = catId;
     $('#' + this.txtDecoratedCatId).css({ 'text-decoration': 'underline' });
   }
+
+  /**
+   * Handle header/toolbar title click event
+   * @param title :: header title
+   */
+  onTitleClickHandler(title) {
+    
+    if (title === "Search") {
+      window.scrollTo(0, 0);
+    }
+  }
 }
