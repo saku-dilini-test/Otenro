@@ -3197,3 +3197,7 @@ table.md-calendar-day-header{
 .validation-box-color {
     border: solid 1px red;
 }
+
+.reports-technical  md-tab-content{
+    display: initial;
+}
