@@ -1,3 +1,7 @@
 .breadcrumb {
     background-color: rgba(245, 245, 245, 0);
 }
+
+.sold-out{
+    height:55px;
+}

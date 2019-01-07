@@ -14,3 +14,7 @@
 .price-margin{
    margin: 5px 0;
 }
+
+.sold-out{
+    height: 55px;
+}
