@@ -22,6 +22,7 @@ export class ProductComponent implements OnInit {
     private foodInfo;
     private appId = (<any>data).appId;
     private userId = (<any>data).userId;
+    private templateName = (<any>data).templateName;
     Data;
     api;
     private isBuyBtnDisable: boolean;
@@ -44,7 +45,13 @@ export class ProductComponent implements OnInit {
         this.Data = this.dataService.data;
         const arr = this.Data.tempImageArray;
         this.title.setLocation('product');
-        this.messageService.sendMessage({loadImageCount:-1});
+
+        if(this.templateName != "Comic") {
+          this.messageService.sendMessage({loadImageCount: -1});
+        }else{
+            this.messageService.sendMessage({loadImageCount: -2});
+        }
+
         this.dataService.initialImageCount =  arr?  arr.length : 0;
     }
 
