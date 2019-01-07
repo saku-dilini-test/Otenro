@@ -363,7 +363,8 @@
 	right:20px;
 	opacity: 0;
 	z-index: 500;
-	transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+  margin: 0 0 50px 0;
 }
 .scrollToTop span{
 	margin-top: 6px;
