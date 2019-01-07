@@ -3035,6 +3035,7 @@ table.md-calendar-day-header{
     bottom: auto !important;
     left: auto !important;
     right: 0 !important;
+    margin-top : 0 !important;
 }
 .favDescription{
     text-align: center;
