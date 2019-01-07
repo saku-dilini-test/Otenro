@@ -336,7 +336,7 @@
                                                                 </select>
 
                                                                 <select ng-model="revenueAndTrafficReport.fromMonth" required>
-                                                                    <option  ng-repeat="oneMonth in months" ng-value="{{oneMonth.month}}">{{oneMonth.desc}}</option>
+                                                                    <option  ng-repeat="oneMonth in months" value="{{oneMonth.month}}">{{oneMonth.desc}}</option>
                                                                 </select>
                                                                 <br>
                                                                 <br>
@@ -347,8 +347,10 @@
                                                                     <option ng-repeat="oneYear in years">{{oneYear.year}}</option>
                                                                 </select>
 
+
+
                                                                 <select ng-model="revenueAndTrafficReport.toMonth" required>
-                                                                    <option  ng-repeat="oneMonth in months" ng-value="{{oneMonth.month}}">{{oneMonth.desc}}</option>
+                                                                    <option  ng-repeat="oneMonth in months" value="{{oneMonth.month}}">{{oneMonth.desc}}</option>
                                                                 </select>
                                                         <Button type="button" class="me-default-button" ng-click="revenueAndTrafficReportData(revenueAndTrafficReport)">Search</Button>
                                                         <br>
@@ -479,7 +481,7 @@
 
 
                                                     <select ng-model="applicationBaseReport.fromMonth" required>
-                                                        <option  ng-repeat="oneMonth in months" ng-value="{{oneMonth.month}}">{{oneMonth.desc}}</option>
+                                                        <option  ng-repeat="oneMonth in months" value="{{oneMonth.month}}">{{oneMonth.desc}}</option>
                                                     </select>
                                                     <br>
                                                     <br>
@@ -491,7 +493,7 @@
                                                     </select>
 
                                                     <select ng-model="applicationBaseReport.toMonth" required>
-                                                        <option  ng-repeat="oneMonth in months" ng-value="{{oneMonth.month}}">{{oneMonth.desc}}</option>
+                                                        <option  ng-repeat="oneMonth in months" value="{{oneMonth.month}}">{{oneMonth.desc}}</option>
                                                     </select>
                                                     <Button type="button" class="me-default-button" ng-click="applicationBaseReportData(applicationBaseReport)">Search</Button>
                                                     <br>
@@ -775,7 +777,7 @@
                                                 </select>
 
                                                 <select ng-model="reconciliationReports.fromMonth" required>
-                                                    <option  ng-repeat="oneMonth in months" ng-value="{{oneMonth.month}}">{{oneMonth.desc}}</option>
+                                                    <option  ng-repeat="oneMonth in months" value="{{oneMonth.month}}">{{oneMonth.desc}}</option>
                                                 </select>
                                                 <br>
                                                 <br>
@@ -787,7 +789,7 @@
                                                 </select>
 
                                                 <select ng-model="reconciliationReports.toMonth" required>
-                                                    <option  ng-repeat="oneMonth in months" ng-value="{{oneMonth.month}}">{{oneMonth.desc}}</option>
+                                                    <option  ng-repeat="oneMonth in months" value="{{oneMonth.month}}">{{oneMonth.desc}}</option>
                                                 </select>
                                                 <Button type="button" class="me-default-button" ng-click="getReconciliation(reconciliationReports)">Search</Button>
                                                 <br>

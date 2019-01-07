@@ -1155,6 +1155,8 @@
 
                 var reqData = "";
 
+
+
                 if ((edate && sdate) && (edate >= sdate)) {
                     if (data.operator) {
                         if ($scope.user.userRole == "APP_CREATOR") {
@@ -1198,6 +1200,7 @@
             }
 
             else if (data.report == "Monthly") {
+
 
                 var fromMonth = parseInt(data.fromMonth);
                 var toMonth = parseInt(data.toMonth);
