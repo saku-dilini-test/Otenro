@@ -823,12 +823,10 @@
             angular.element('#fileInput').val(null);
             $scope.picFile = null;
             $scope.myImage=null;
-            $scope.product.videoUrl = null;
+            $scope.myBannerImage = null;
             toastr.success('Image has been uploaded successfully', 'Awesome', {
                 closeButton: true
             });
-
-
 
            $scope.bannerButtonName = "Browse Image";
         };
