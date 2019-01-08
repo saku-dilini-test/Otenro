@@ -1107,8 +1107,19 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                 toastr.error('Please fill the all fields','Warning',{
                     closeButton: true
                 });
-            }
-            else {
+            }else if(emailType=="orderConfirmedEmail" && !$scope.picFileHeader[0]){
+                toastr.error('Please upload an header image','Warning',{
+                    closeButton: true
+                });
+            }else if(emailType=="orderFulfilledEmail" && !$scope.picFileHeader2[0]){
+                toastr.error('Please upload an header image','Warning',{
+                    closeButton: true
+                });
+            }else if(emailType=="orderRefundEmail" && !$scope.picFileHeader3[0]){
+                toastr.error('Please upload an header image','Warning',{
+                    closeButton: true
+                });
+            }else {
                 email.appId = $rootScope.appId;
                 commerceService.updateEmailSettings(email)
                     .success(function (data) {
@@ -1124,12 +1135,9 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                             imageData = $scope.picFileHeader3;
                         }else {
                             isUpdateHImg = false;
-
                         }
 
-
-
-                        if ((emailType=="orderConfirmedEmail" && $scope.picFileHeader[0].length >500) || (emailType=="orderFulfilledEmail" && $scope.picFileHeader2[0].length > 500) || (emailType=="orderRefundEmail" && $scope.picFileHeader3[0].length > 500)) {
+                        if ((emailType=="orderConfirmedEmail") || (emailType=="orderFulfilledEmail") || (emailType=="orderRefundEmail")) {
 
                             commerceService.updateHeaderFooterSettings({"file":imageData,"data":data,"oldImage":oldImage,"isNew":$rootScope.tempNew}).success(function (data) {
 
@@ -1268,9 +1276,16 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                     }
 
                     //$scope.picFileFooter =  imagePath + $scope.email.imageFooter;
-                    $scope.picFileHeader[0] =  imagePath + $scope.email.orderConfirmedEmailImage;
-                    $scope.picFileHeader2[0] =  imagePath + $scope.email.orderFulfilledEmailImage;
-                    $scope.picFileHeader3[0] =  imagePath + $scope.email.orderRefundedEmailImage;
+                    if($scope.email.orderConfirmedEmailImage){
+                        $scope.picFileHeader[0] =  imagePath + $scope.email.orderConfirmedEmailImage;
+                    }
+                    if($scope.email.orderFulfilledEmailImage){
+                        $scope.picFileHeader2[0] =  imagePath + $scope.email.orderFulfilledEmailImage;
+                    }
+                    if($scope.email.orderRefundedEmailImag){
+                        $scope.picFileHeader3[0] =  imagePath + $scope.email.orderRefundedEmailImage;
+                    }
+
 
                     $scope.oldImage1 = $scope.email.orderConfirmedEmailImage;
                     $scope.oldImage2 = $scope.email.orderFulfilledEmailImage;
