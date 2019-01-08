@@ -59,7 +59,7 @@
                             </thead>
 
                             <tbody>
-                            <tr ng-repeat="app in appList | filter: filterObject | orderBy: { sortType: sortReverse }">
+                            <tr ng-repeat="app in filteredlist = (appList | filter: filterObject) | orderBy: { sortType: sortReverse } | pagination: pagination.currentPage : pagination.numPerPage track by $index">
                                 <td ng-click="showAppView(app.id,app.userId)"  style="color:blue;">
                                 <!--<a href="{{serverURL}}templates/viewWebTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">-->
                                     <u>{{app.uniqueAppId}}</u>
@@ -104,6 +104,17 @@
                             </tr>
                             </tbody>
                         </table>
+                        <pagination
+			          		ng-model="pagination.currentPage"
+			          		total-items="filteredlist.length"
+			          		max-size="5"
+			          		items-per-page="pagination.numPerPage"
+			          		boundary-links="true"
+			          		class="pagination-sm pull-right top-buffer"
+			          		previous-text="&lsaquo;"
+			          		next-text="&rsaquo;"
+			          		first-text="&laquo;"
+			          		last-text="&raquo;"></pagination>
                     </form>
                 </md-tab-body>
             </md-tab>

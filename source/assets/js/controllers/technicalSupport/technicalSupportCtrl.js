@@ -23,8 +23,15 @@
             ['$scope', '$mdDialog', '$auth', 'toastr', '$state', '$stateParams', 'SERVER_URL', 'ME_SERVER', '$filter',
                 '$window', 'userProfileResource', 'technicalSupportService', '$timeout',
                 technicalSupportCtrl
-            ]);
-
+            ]).filter('pagination', function() {
+                return function(input, currentPage, pageSize) {
+                  if(angular.isArray(input)) {
+                    var start = (currentPage - 1) * pageSize;
+                    var end = currentPage * pageSize;
+                    return input.slice(start, end);
+                  }
+                };
+              });
 
     function technicalSupportCtrl($scope, $mdDialog, $auth, toastr, $state, $stateParams, SERVER_URL, ME_SERVER, $filter,
                                   $window, userProfileResource, technicalSupportService,$timeout) {
@@ -55,6 +62,11 @@
         $scope.searchByAppName = null;
         $scope.filterObject = null;
         $scope.subscriptionPaymentsReport = {};
+
+        $scope.pagination = {
+            currentPage:  1,
+            numPerPage: 10
+          };
 
         $scope.sortType = "appName"
 
@@ -396,6 +408,7 @@
                                         }
                                     });
                                 });
+                                $scope.filteredlist = $scope.appList;
 
                                 if ($scope.user) {
                                     if ($scope.user.userRole != "ADMIN") {
@@ -1690,6 +1703,14 @@
 
             $scope.filterObject = { 'appName': searchByAppName };
         };
+
+        // document.addEventListener("wheel", function (e) {
+        //     $scope.onScrollHandler();
+        //   }, true);
+
+        // $scope.onScrollHandler = function () {
+        //     console.log("ON scroll by sudarshana");
+        // }
     }
 
 })();
