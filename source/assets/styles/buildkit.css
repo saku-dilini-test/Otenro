@@ -3060,3 +3060,8 @@ table.md-calendar-day-header{
     padding: 5px;
     margin: 5px 0 15px;
 }
+
+md-input-container.md-input-focused:not([md-no-float]) .md-select-placeholder span:first-child {
+    -webkit-transform: none;
+    transform: none;
+}
