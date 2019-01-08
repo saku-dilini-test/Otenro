@@ -17,7 +17,7 @@
             </div>
           </div>
         </div>
-        <p *ngIf="content" class="content-about text-justify main-content-font text-editor" [innerHTML]="content"> </p>
+        <p *ngIf="content" class="content-about text-justify main-content-font text-editor" [innerHTML]="content | safeHtml"> </p>
       </div>
     </div>
     <app-accepted-payment-type></app-accepted-payment-type>
