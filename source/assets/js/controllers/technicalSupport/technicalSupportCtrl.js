@@ -54,6 +54,7 @@
         $scope.appNamesArray = [];
         $scope.searchByAppName = null;
         $scope.filterObject = null;
+        $scope.subscriptionPaymentsReport = {};
 
         $scope.sortType = "appName"
 
@@ -827,8 +828,6 @@
          **/
         $scope.showHideSearchField = function (tabName) {
 
-            //get subscription payment details
-            getSubscriptionPayments();
             // If user selected tab is equals to reports hide the search field
             if (tabName === 'reports' || tabName === 'register_users') {
                 $scope.showSearchField = false;
@@ -837,19 +836,36 @@
             }
         };
 
-        /*
-         Subuscription Payments
-         */
-
         $scope.sortType = "name";
         $scope.sortReverse = true;
-        var getSubscriptionPayments = function () {
-            technicalSupportService.getSubscriptionPayments()
+
+        //get subscription payment details
+        $scope.getSubscriptionPayments = function () {
+
+            if (!$scope.subscriptionPaymentsReport.fromDate) {
+                toastr.error('Please select from date!', 'Warning', { closeButton: true });
+                return;
+            } 
+            else if (!$scope.subscriptionPaymentsReport.toDate) {
+                toastr.error('Please select to date!', 'Warning', { closeButton: true });
+                return;
+            }
+            else if ($scope.subscriptionPaymentsReport.fromDate >= $scope.subscriptionPaymentsReport.toDate) {
+                toastr.error('Please select a valid date range!', 'Warning', { closeButton: true });
+                return;
+            }
+            else {
+                var data = {
+                    from: $scope.subscriptionPaymentsReport.fromDate,
+                    to: $scope.subscriptionPaymentsReport.toDate
+                };
+                technicalSupportService.getSubscriptionPayments(data)
                 .success(function (result) {
                     $scope.subPayments = result;
                 }).error(function (error) {
-
+                    toastr.error('Error occurred while searching subscription payments!', 'Warning', { closeButton: true });
             });
+            }
         }
 
 

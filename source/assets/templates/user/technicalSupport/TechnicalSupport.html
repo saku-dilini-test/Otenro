@@ -239,41 +239,6 @@
                         <md-tabs md-center-tabs="false" md-no-ink="true" md-autoselect="false"
                              md-dynamic-height="true">
 
-
-
-                        <md-tab ng-if="showPayment">
-                            <md-tab-label>Payments</md-tab-label>
-                            <md-tab-body>
-                                   
-                                <form class="allItems" novalidate>
-                                    <table class="table" >
-                                        <thead class="obl-dashboard-apps">
-                                            <tr>
-                                                <th>Msisdn</th>
-                                                <th>Operator</th>
-                                                <th>Status</th>
-                                                <th>Amount</th>
-                                                <th>App Name</th>
-                                                <th data-ng-click="sortType = name; sortReverse = !sortReverse;">Date</th>
-                                               
-                                            </tr>
-                                        </thead>  
-                                        
-                                        <tbody>
-                                            <tr ng-repeat="payment in subPayments | orderBy:sortType:sortReverse"> 
-                                                <td>{{payment.msisdn}}</td>
-                                                <td>{{payment.operator}}</td>
-                                                <td>{{payment.status}}</td>
-                                                <td>{{payment.amount}}</td>
-                                                <td>{{payment.appName}}</td>
-                                                <td>{{payment.date | date:"yyyy-MM-dd"}}</td>
-                                       
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </form>
-                            </md-tab-body>
-                        </md-tab>
                         <md-tab ng-if="showRevenueAndTrafficReport">
                             <md-tab-label>Revenue And Traffic Report</md-tab-label>
                             <md-tab-body>
@@ -856,6 +821,59 @@
                                                 <td>{{reconciliation.branchName}}</td>
                                                 <td>{{reconciliation.bankAccountNumber}}</td>
                                                 <td>Rs :{{reconciliation.revenue}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </md-tab-body>
+                        </md-tab>
+
+                        <md-tab ng-if="showPayment">
+                            <md-tab-label>Payments</md-tab-label>
+                            <md-tab-body>
+
+                                <div class="reports-container">
+                                    <div class="reports-period-container">
+                                        <div class="reports-container">
+                                            <h6>Select period</h6>
+                                            <div>
+                                                <div class="row margin-bottom">
+                                                    <div class="col-xs-4">
+                                                        <adm-dtp ng-model='subscriptionPaymentsReport.fromDate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <adm-dtp ng-model='subscriptionPaymentsReport.toDate' options='{multiple:false,default: today,format: "YYYY-MM-DD"}'></adm-dtp>
+                                                    </div>
+                                                </div>
+                                                <Button type="button" class="me-default-button" ng-click="getSubscriptionPayments()">Search</Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                   
+                                <form class="allItems" novalidate>
+                                    <table class="table" >
+                                        <thead class="obl-dashboard-apps">
+                                            <tr>
+                                                <th>Msisdn</th>
+                                                <th>Operator</th>
+                                                <th>Status</th>
+                                                <th>Amount</th>
+                                                <th>App Name</th>
+                                                <th data-ng-click="sortType = name; sortReverse = !sortReverse;">Date</th>
+                                               
+                                            </tr>
+                                        </thead>  
+                                        
+                                        <tbody>
+                                            <tr ng-repeat="payment in subPayments | orderBy:sortType:sortReverse"> 
+                                                <td>{{payment.msisdn}}</td>
+                                                <td>{{payment.operator}}</td>
+                                                <td>{{payment.status}}</td>
+                                                <td>{{payment.amount}}</td>
+                                                <td>{{payment.appName}}</td>
+                                                <td>{{payment.date | date:"yyyy-MM-dd"}}</td>
+                                       
                                             </tr>
                                         </tbody>
                                     </table>

@@ -469,7 +469,12 @@ module.exports = {
 
     getSubscriptionPayments: function (req, res) {
 
-        SubscriptionPayment.find().exec(function (errOne, payments) {
+        var from = req.param('from');
+        var to = req.param('to');
+        var searchQuery = {
+            date : { '>=': dateFormat(from, "yyyy-mm-dd"), '<=': dateFormat(to, "yyyy-mm-dd") }
+        };
+        SubscriptionPayment.find(searchQuery).exec(function (errOne, payments) {
             var paymnt = [];
             if (errOne) {
                 return res.send(errOne);

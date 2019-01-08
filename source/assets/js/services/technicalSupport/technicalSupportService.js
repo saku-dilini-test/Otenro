@@ -312,8 +312,8 @@
             *Subscription Payments
             */
   
-            getSubscriptionPayments: function(){
-                return $http.get(SERVER_URL + 'appMakerReports/getSubscriptionPayments');
+            getSubscriptionPayments: function(data){
+                return $http.get(SERVER_URL + 'appMakerReports/getSubscriptionPayments?from=' + data.from + '&to=' + data.to);
             },
 
             getReconciliationDataForYearly: function(dates){
