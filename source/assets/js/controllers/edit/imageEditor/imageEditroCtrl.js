@@ -55,7 +55,22 @@
                     if(!$scope.isCropped){
                         cropped = applyCrop();
                     }
-                    if(cropped || $scope.saveButton === 'Save') {
+
+                    if(cropped.status || $scope.saveButton === 'Save') {
+                        if( $scope.saveButton === 'Save') {
+                            if ($scope.cropedEditcoordinates.width < width && $scope.cropedEditcoordinates.height < height) {
+                                toastr.error('The uploaded image does not meet minimum recommended resolution, proceeding could lead to degraded user experience.', 'Warning', {
+                                    closeButton: true
+                                });
+                            }
+                        }
+                        else {
+                            if (cropped.cropZoneRect.width < width && cropped.cropZoneRect.height < height) {
+                                toastr.error('The uploaded image does not meet minimum recommended resolution, proceeding could lead to degraded user experience.', 'Warning', {
+                                    closeButton: true
+                                });
+                            }
+                        }
                         setTimeout(() => {
                             editedImg = imageEditor.toDataURL();
                             if (callFrom === 'addNewMenuCategory') {
@@ -89,9 +104,10 @@
                  */
                 $scope.imageEditorCropAndEdit = function(){
                     var cropped = applyCrop();
-                    if(cropped){
+                    if(cropped.status){
                         $scope.isCropped = true;
                         $scope.saveButton = 'Save';
+                        $scope.cropedEditcoordinates = cropped.cropZoneRect;
                         setTimeout(()=>{
                             var controls = document.getElementsByClassName('tui-image-editor-controls');
                             var container = document.getElementsByClassName('tui-image-editor-main-container');
@@ -114,7 +130,6 @@
                         image: initialData.tempImage
                     };
                     if(callFrom === 'addNewMenuCategory'){
-
                         mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory','3','imageEditorCtrlCancel', categoryDetails);
                     }else if(callFrom === 'addNewArticle'){
                         articleDetails = {
@@ -140,13 +155,13 @@
                         var applyBtn = document.getElementById('tie-crop-button');
                         $scope.apply = applyBtn.getElementsByClassName('apply');
                         $scope.apply[0].click();
-                        return true;
+                        return {status:true,cropZoneRect:cropZoneRect};
                     }else{
                         toastr.error('Mouse drag to draw the crop zone to crop', 'Warning', {
                             closeButton: true
                         });
                     }
-                    return false;
+                    return {status:false};
                 }
             }
             , 1000)

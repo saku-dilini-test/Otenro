@@ -1010,6 +1010,6 @@
                 });
             });
         };
-        // $scope.setAspectRatio();
+        setAspectRatio();
     }
 })();

@@ -717,7 +717,7 @@
                     });
                 });
         };
-        // $scope.setAspectRatio();
+        setAspectRatio();
 
         /**
          * options if pasting text form another source
