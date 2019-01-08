@@ -7,7 +7,9 @@ import { NoNetworkPage } from "../no-network/no-network";
 import { AlertController } from 'ionic-angular';
 import {DataServiceProvider} from "../../providers/data-service/data-service";
 import { WebpageNotAvailablePage } from '../webpage-not-available/webpage-not-available';
+import { Device } from '@ionic-native/device';
 let networkAlert = null;
+let androidVersionAlert = null;
 
 @Component({
   selector: 'page-home',
@@ -27,13 +29,31 @@ export class HomePage {
               public navParams: NavParams,
               public menu: MenuController,
               public alertCtrl: AlertController,
-              private network: Network) {
+              private network: Network,
+              private device: Device) {
     this.sanitizer = sanitizer;
     this.iframeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(this.url + "?" + new Date().getTime());
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need
+
+      console.log('Device version is: ' + this.device.version);
+      var v = this.device.version;
+      var mjourVersion = parseInt(v.substring(0,v.indexOf(".")));
+
+      if(mjourVersion<5){
+        if(!androidVersionAlert) {
+          androidVersionAlert = this.alertCtrl.create({
+            title: 'Incompatible OS Version',
+            subTitle: 'This app is only compatible with android devices that run Android OS version 5.0 or higher.',
+            enableBackdropDismiss: false
+          });
+          androidVersionAlert.present();
+          return;
+        }        
+      }
+
 
       platform.registerBackButtonAction(() => {
         if(this.menu.isOpen()){

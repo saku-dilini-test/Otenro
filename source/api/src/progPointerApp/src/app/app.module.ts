@@ -11,6 +11,7 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
 import { HttpModule } from '@angular/http';
 import { WebpageNotAvailablePage } from '../pages/webpage-not-available/webpage-not-available';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { Device } from '@ionic-native/device';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     ScreenOrientation,
     StatusBar,
     SplashScreen,
+    Device,
     Network,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DataServiceProvider
