@@ -76,7 +76,7 @@
 
                                     <md-input-container class="md-block">
                                         <label>Name</label>
-                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="storeWide.name">
+                                        <input md-maxlength="15" maxlength="15"  ng-required="true" name="name" ng-model="storeWide.name">
                                         <div ng-messages="storeWideForm.name.$error" ng-show="storeWideForm.name.$dirty">
                                             <div ng-message="required">Name is required.</div>
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
@@ -85,12 +85,12 @@
 
                                     <md-input-container class="md-block" flex="50">
                                         <label>Minimum Order Value</label>
-                                        <input md-maxlength="15" name="minimumOrderValue" ng-model="storeWide.minimumOderValue">
+                                        <input md-maxlength="15" maxlength="15" name="minimumOrderValue" ng-model="storeWide.minimumOderValue">
                                     </md-input-container>
 
                                     <md-input-container class="md-block" flex="50" ng-if = "storeWide.discountType == 'discountValue'">
                                         <label>Discount</label>
-                                        <input md-maxlength="15"  ng-required="true" name="discount" ng-model="storeWide.discount">
+                                        <input md-maxlength="15" maxlength="15"  ng-required="true" name="discount" ng-model="storeWide.discount">
                                         <div ng-messages="storeWideForm.discount.$error" ng-show="storeWideForm.discount.$dirty">
                                             <div ng-message="required">Discount is required.</div>
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
@@ -121,7 +121,7 @@
                                                 <label>Limit users</label>
                                             </md-checkbox>
                                         <md-input-container  ng-if ="storeWide.isLimitUsers" class="md-block" flex="50">
-                                            <input  md-maxlength="15"  ng-required="true" name="Limit users" ng-model="storeWide.limitUsers">
+                                            <input  md-maxlength="15" maxlength="15"  ng-required="true" name="Limit users" ng-model="storeWide.limitUsers">
                                             <div ng-messages="storeWideForm.limitUsers.$error" ng-show="storeWideForm.limitUsers.$dirty">
                                                 <div ng-message="required">Limit Users is required.</div>
                                                 <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
@@ -135,7 +135,7 @@
                                             <label>Limit number of times code can be used</label>
                                         </md-checkbox>
                                         <md-input-container ng-if ="storeWide.isLimitNumberOfTime" class="md-block" flex="50">
-                                            <input md-maxlength="15"  ng-required="true" name="Limit users" ng-model="storeWide.limitNumberOfTime">
+                                            <input md-maxlength="15" maxlength="15"  ng-required="true" name="Limit users" ng-model="storeWide.limitNumberOfTime">
                                             <div ng-messages="storeWideForm.limitNumberOfTime.$error" ng-show="storeWideForm.limitNumberOfTime.$dirty">
                                                 <div ng-message="required">Limit Users is required.</div>
                                                 <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
@@ -156,7 +156,7 @@
                                         <div class="col-md-5">
                                             <md-input-container class="md-block">
                                                 <label>Promo Code</label>
-                                                <input md-maxlength="15"  ng-required="true" name="promoCode" ng-model="storeWide.promoCode">
+                                                <input md-maxlength="15" maxlength="15"  ng-required="true" name="promoCode" ng-model="storeWide.promoCode">
                                                 <div ng-messages="storeWideForm.promoCode.$error" ng-show="storeWideForm.promoCode.$dirty">
                                                     <div ng-message="required">promoCode is required.</div>
                                                     <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
@@ -249,7 +249,7 @@
                                                 <label>Limit users</label>
                                             </md-checkbox>
                                             <md-input-container ng-if="minimumOrderValue.isLimitUsers" class="md-block" flex="50">
-                                                <input md-maxlength="15"  ng-required="true" name="Limit users" ng-model="minimumOrderValue.limitUsers">
+                                                <input md-maxlength="15" maxlength="15"  ng-required="true" name="Limit users" ng-model="minimumOrderValue.limitUsers">
                                                 <div ng-messages="minimumOrderValueForm.limitUsers.$error" ng-show="minimumOrderValueForm.limitUsers.$dirty">
                                                     <div ng-message="required">Limit Users is required.</div>
                                                     <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
@@ -261,7 +261,7 @@
                                             <label>Limit number of times code can be used</label>
                                         </md-checkbox>
                                         <md-input-container ng-if="minimumOrderValue.isLimitNumberOfTime" class="md-block" flex="50">
-                                            <input md-maxlength="15"  ng-required="true" name="Limit users" ng-model="minimumOrderValue.limitNumberOfTime">
+                                            <input md-maxlength="15" maxlength="15"  ng-required="true" name="Limit users" ng-model="minimumOrderValue.limitNumberOfTime">
                                             <div ng-messages="minimumOrderValueForm.limitNumberOfTime.$error" ng-show="minimumOrderValueForm.limitUsers.$dirty">
                                                 <div ng-message="required">Limit Users is required.</div>
                                                 <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
@@ -281,7 +281,7 @@
                                         <div class="col-md-5">
                                             <md-input-container class="md-block">
                                                 <label>Promo Code</label>
-                                                <input md-maxlength="15"  ng-required="true" name="name" ng-model="minimumOrderValue.promoCode">
+                                                <input md-maxlength="15" maxlength="15"  ng-required="true" name="name" ng-model="minimumOrderValue.promoCode">
                                                 <div ng-messages="minimumOrderValueForm.promoCode.$error" ng-show="minimumOrderValueForm.promoCode.$dirty">
                                                     <div ng-message="required">promoCode is required.</div>
                                                     <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
@@ -329,7 +329,7 @@
 
                                     <md-input-container class="md-block">
                                         <label>Name</label>
-                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="categoryWide.name">
+                                        <input md-maxlength="15"  maxlength="15" ng-required="true" name="name" ng-model="categoryWide.name">
                                         <div ng-messages="categoryWideForm.name.$error" ng-show="categoryWideForm.name.$dirty">
                                             <div ng-message="required">Name is required.</div>
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
@@ -348,7 +348,7 @@
 
                                     <md-input-container class="md-block" flex="50">
                                         <label>Discount</label>
-                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="categoryWide.discount">
+                                        <input md-maxlength="15" maxlength="15"  ng-required="true" name="name" ng-model="categoryWide.discount">
                                         <div ng-messages="categoryWideForm.discount.$error" ng-show="categoryWideForm.discount.$dirty">
                                             <div ng-message="required">Name is required.</div>
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
@@ -371,7 +371,7 @@
                                                 <label>Limit users</label>
                                             </md-checkbox>
                                             <md-input-container ng-if="categoryWide.isLimitUsers" class="md-block" flex="50">
-                                                <input md-maxlength="15"  ng-required="true" name="Limit users" ng-model="categoryWide.limitUsers">
+                                                <input md-maxlength="15"  maxlength="15" ng-required="true" name="Limit users" ng-model="categoryWide.limitUsers">
                                                 <div ng-messages="categoryWideForm.limitUsers.$error" ng-show="categoryWideForm.limitUsers.$dirty">
                                                     <div ng-message="required">Limit Users is required.</div>
                                                     <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
@@ -383,7 +383,7 @@
                                             <label>Limit number of times code can be used</label>
                                         </md-checkbox>
                                         <md-input-container  ng-if="categoryWide.isLimitNumberOfTime" class="md-block" flex="50">
-                                            <input md-maxlength="15"  ng-required="true" name="Limit users" ng-model="categoryWide.limitNumberOfTime">
+                                            <input md-maxlength="15" maxlength="15"  ng-required="true" name="Limit users" ng-model="categoryWide.limitNumberOfTime">
                                             <div ng-messages="categoryWideForm.limitNumberOfTime.$error" ng-show="categoryWideForm.limitNumberOfTime.$dirty">
                                                 <div ng-message="required">Limit Users is required.</div>
                                                 <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
@@ -402,7 +402,7 @@
                                         <div class="col-md-5">
                                             <md-input-container class="md-block">
                                                 <label>Promo Code</label>
-                                                <input md-maxlength="15"  ng-required="true" name="name" ng-model="categoryWide.promoCode">
+                                                <input md-maxlength="15" maxlength="15"  ng-required="true" name="name" ng-model="categoryWide.promoCode">
                                                 <div ng-messages="categoryWideForm.promoCode.$error" ng-show="categoryWideForm.promoCode.$dirty">
                                                     <div ng-message="required">promoCode is required.</div>
                                                     <div ng-message="md-maxlength">The promoCode must be less than 15 characters long.</div>
@@ -453,7 +453,7 @@
 
                                     <md-input-container class="md-block">
                                         <label>Name</label>
-                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="singleProduct.name">
+                                        <input md-maxlength="15" maxlength="15" ng-required="true" name="name" ng-model="singleProduct.name">
                                         <div ng-messages="singleProductForm.name.$error" ng-show="singleProductForm.name.$dirty">
                                             <div ng-message="required">Name is required.</div>
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
@@ -519,7 +519,7 @@
 
                                     <md-input-container class="md-block" flex="50" ng-if = "singleProduct.discountType == 'discountValue'">
                                         <label>Discount</label>
-                                        <input  md-maxlength="15"  ng-required="true" name="discount" ng-model="singleProduct.discount">
+                                        <input  md-maxlength="15" maxlength="15"  ng-required="true" name="discount" ng-model="singleProduct.discount">
                                         <div ng-messages="singleProductForm.discount.$error" ng-show="singleProductForm.discount.$dirty">
                                             <div ng-message="required">Name is required.</div>
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
@@ -550,7 +550,7 @@
                                                 <label>Limit users</label>
                                             </md-checkbox>
                                             <md-input-container ng-if="singleProduct.isLimitUsers" class="md-block" flex="50">
-                                                <input md-maxlength="15"  ng-required="true" name="Limit users" ng-model="singleProduct.limitUsers">
+                                                <input md-maxlength="15" maxlength="15"  ng-required="true" name="Limit users" ng-model="singleProduct.limitUsers">
                                                 <div ng-messages="singleProductForm.limitUsers.$error" ng-show="singleProductForm.limitUsers.$dirty">
                                                     <div ng-message="required">Limit Users is required.</div>
                                                     <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
@@ -562,7 +562,7 @@
                                             <label>Limit number of times code can be used</label>
                                         </md-checkbox>
                                         <md-input-container ng-if="singleProduct.isLimitNumberOfTime" class="md-block" flex="50">
-                                            <input md-maxlength="15"  ng-required="true" name="Limit users" ng-model="singleProduct.limitNumberOfTime">
+                                            <input md-maxlength="15" maxlength="15"  ng-required="true" name="Limit users" ng-model="singleProduct.limitNumberOfTime">
                                             <div ng-messages="singleProductForm.limitNumberOfTime.$error" ng-show="singleProductForm.limitNumberOfTime.$dirty">
                                                 <div ng-message="required">Limit Users is required.</div>
                                                 <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
@@ -583,10 +583,9 @@
                                         <div class="col-md-5">
                                             <md-input-container class="md-block">
                                                 <label>Promo Code</label>
-                                                <input md-maxlength="15"  ng-required="true" name="name" ng-model="singleProduct.promoCode">
+                                                <input md-maxlength="15" maxlength="15" ng-required="true" name="name" ng-model="singleProduct.promoCode">
                                                 <div ng-messages="singleProductForm.promoCode.$error" ng-show="singleProductForm.promoCode.$dirty">
                                                     <div ng-message="required">promoCode is required.</div>
-                                                    <div ng-message="md-maxlength">The promoCode must be less than 15 characters long.</div>
                                                 </div>
                                             </md-input-container>
                                         </div>

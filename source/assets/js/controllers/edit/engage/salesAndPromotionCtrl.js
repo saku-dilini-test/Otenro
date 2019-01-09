@@ -24,21 +24,22 @@
             salesAndPromotionService.getListOfSalesAndPromotions($rootScope.appId)
                 .success(function (data) {
                     $scope.salesAndPromotionList = data;
-                    console.log(data);
-                        $scope.salesAndPromotionList.forEach(function(data){
-                            if(data.salesAndPromotionType !=  'storeWide'){
-                                data.selectedProduct.forEach(function(ele){
-                                    $scope.allVariants.push(ele);
-                                });
-                            }
-                        });
+                    // console.log(data);
+                        if(data){
+                            $scope.salesAndPromotionList.forEach(function(data){
+                                if(data.salesAndPromotionType !=  'storeWide'){
+                                    data.selectedProduct.forEach(function(ele){
+                                        $scope.allVariants.push(ele);
+                                    });
+                                }
+                            });
+                        }
 
                 }).error(function (error) {
-                toastr.error('Sales And Promotion Adding Error', 'Message', {
-                    closeButton: true
+                    toastr.error('Sales And Promotion Adding Error', 'Message', {
+                        closeButton: true
+                    });
                 });
-            })
-
         }
 
         $scope.navigatePromoType = function(tab){
