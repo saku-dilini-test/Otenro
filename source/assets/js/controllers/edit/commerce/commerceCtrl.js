@@ -915,7 +915,11 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
             $mdDialog.cancel();
         };
 
-        $scope.answer = function () {
+        $scope.answer = function (type) {
+            
+            if (type === 'finish') {
+                toastr.success('Successfully finished adding map locations!','Awesome',{ closeButton: true }); 
+            }
             $mdDialog.hide();
         };
 
