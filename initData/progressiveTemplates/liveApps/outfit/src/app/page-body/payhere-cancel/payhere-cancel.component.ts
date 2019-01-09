@@ -17,12 +17,22 @@ export class PayhereCancelComponent implements OnInit {
   private userId = (<any>data).userId;
 
 
-  constructor(private http: HttpClient, private title: TitleService, private route: Router,) {
+  constructor(private http: HttpClient, private title: TitleService, private route: Router, private activateRouter: ActivatedRoute) {
        this.title.changeTitle("Canceled");
   }
 
   ngOnInit() {
-   
+    this.activateRouter.queryParams.subscribe(params => {
+
+      let orderId = params['orderId'];
+      this.http.get(SERVER_URL + '/mobile/payHereCancel/?orderId=' + orderId, { responseType: 'text' })
+        .subscribe((res) => {
+          // console.log(res);
+        },
+          (err) => {
+            console.log(err);
+          });
+    });
   }
 
   backToHome() {

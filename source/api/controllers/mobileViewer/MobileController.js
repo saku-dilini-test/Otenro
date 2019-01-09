@@ -9,6 +9,8 @@
 var config = require('../../services/config');
 var md5 = require('md5');
 var emailService = require('../../services/emailService');
+var ERROR = { status: 'ERROR' };
+var SUCCESS = { status: 'SUCCESS' };
 
 module.exports = {
 
@@ -148,8 +150,30 @@ module.exports = {
         }
     },
 
-    notifyUrl : function (req,res) {
+    /**
+     * Responsible managing payment canceled payhere application orders
+     */
+    payHereCancel: function (req, res) {
 
+        var oderId = req.param("orderId");
+        var mobileCtrl = this;
+        var paymentStatus = "Canceled";
+
+        ApplicationOrder.update({ id: oderId }, { paymentStatus: paymentStatus })
+            .exec(function (err, order) {
+
+                if (err) {
+                    sails.log.error("error occurred while updating ApplicationOrder at MobileController.payHereCancel => " + err);
+                    return res.serverError(ERROR);
+                }
+                if (order && order.length > 0) {
+                    mobileCtrl.updateInventory(paymentStatus, order[0]);
+                    return res.send(SUCCESS);
+                }
+            });
+    },
+
+    notifyUrl : function (req,res) {
 
         var notification   = req.body;
         var md5sig = notification.md5sig.toUpperCase();

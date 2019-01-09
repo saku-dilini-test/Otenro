@@ -128,6 +128,7 @@ module.exports.policies = {
       sendPayHereForm:true,
       notifyUrl:true,
       payHereSuccess:true,
+      payHereCancel:true,
       cancelUrl:true
   },
   'reports/StoreAnalyticsController' :{
