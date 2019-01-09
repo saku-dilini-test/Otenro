@@ -1,0 +1,40 @@
+.details-content{
+    margin: 15px 15px 15px 0;
+    padding: 23px 0px 48px 0;
+    background:#FFFFFF;
+    box-shadow:0 2px 6px 0 rgba(47,83,151,0.10);
+    text-align:center;
+}
+
+.details-img{
+    text-align:center;
+    padding-top:10px;
+}
+
+.details-name{
+    font-size:14px;
+    padding-bottom:5px;
+    padding-top:6px;
+}
+
+.details-card{
+    padding:10px;
+    border-radius:3px;
+    margin:12px;
+    margin-top:15px;
+    padding-right:20px;
+    padding-left:20px;
+}
+
+.border-orange{
+    border-bottom:1pt solid rgb(255,95,44);
+    height:34px;
+    border-top:0px;
+    border-right:0px;
+    margin-bottom:21px;
+    width:100%;
+    border-left:0px;
+    margin-top:7px;
+    padding:-1px;
+    margin-right:21px;
+}

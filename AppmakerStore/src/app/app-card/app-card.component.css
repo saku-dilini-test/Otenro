@@ -1,0 +1,28 @@
+.outer-card{
+    padding:10px 20px;
+    background:#FFFFFF;
+    box-shadow:0 2px 6px 0 rgba(47,83,151,0.10);
+    border-radius:3px;
+    margin-top:15px;
+}
+
+.btn-left-pos{
+    position: relative;
+    left: 12px;
+    z-index: 1;
+}
+
+.btn-right-pos{
+    position: relative;
+    right: 12px;
+}
+
+.card-img{
+    padding-top:10px;
+}
+
+.card-name{
+    font-size:14px;
+    padding-bottom:5px;
+    padding-top:6px;
+}

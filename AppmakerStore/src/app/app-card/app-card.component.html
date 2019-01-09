@@ -1,0 +1,31 @@
+<div class="outer-card">
+  <div class="row">
+    <div class="col card-img text-center">
+      <img src="assets/img/Play.svg" width="105px"></div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p class="text-center card-name">Addie Barton</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 px-0">
+      <button class="btn btn-primary p-2 mr-2 mb-2 left-button btn-left-pos" type="button">
+         Download
+      </button>
+    </div>
+    <div class="col-6 px-0">
+      <button class="btn btn-light right-button btn-right-pos" type="button" data-toggle="modal" data-target="#appDetailsModal">
+        Details
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="appDetailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <app-app-details></app-app-details>
+  </div>
+</div>

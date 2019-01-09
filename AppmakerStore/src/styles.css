@@ -1,1 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+   height:100%;
+   padding-bottom:42px;
+   background-color:rgb(245,247,250);
+}
+
+.modal-dialog{
+   max-width:calc(100vw - 5%);
+   pointer-events: all;
+}
+
+.bgc-white{
+   background-color: #fff;
+}
+.bgc-light{
+   background-color:#f4f4f7;
+}
+.cursor-p{
+   cursor: pointer;
+}
+.border-1{
+   border:1px solid #ddd;
+}
+
+.mx-5p{
+   margin-left: 5%;
+   margin-right: 5%;
+}
+
+.left-button{
+   border-radius: 30px;
+   width: 100%;
+   border: 1px solid rgb(255,95,44);
+   background-color: rgb(255,95,44);
+   box-shadow: 0 10px 20px 0 rgba(255,95,44,0.50);
+   font-size: 1.2vh;
+}
+
+.right-button{
+   border-radius: 30px;
+   width: 100%;
+   border: 1pt solid rgb(222,225,230);
+   background-color: rgba(72,204,255,0) !important;
+   color: rgb(148,150,154) !important;
+   font-size: 1.2vh;
+   padding-left:calc(1.25rem + 12px);
+}
+
+.w-50{
+   width: 50%;
+}
+
+@media (max-width: 768px) {
+   .modal-dialog {
+      margin: 0 auto;
+   }
+}
