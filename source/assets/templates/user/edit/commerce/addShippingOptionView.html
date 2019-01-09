@@ -246,7 +246,7 @@
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Cost(optional)({{currency}})</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input class="input-shadow-border"  type="number" name="cost" ng-maxlength="8" ng-pattern="/^\d{1,5}(?:\.\d{2})?$/" ng-model="pickup.cost" />
+                                <input class="input-shadow-border"  type="number" name="cost" ng-maxlength="8" ng-pattern="/^\d{1,5}(?:\.\d{0,2})?$/" ng-model="pickup.cost" />
                                 <br />
                                 <span class="error" ng-show="pickUp.cost.$error.pattern">Maximum two decimal places only</span>
                                 <br />
