@@ -38,3 +38,20 @@
     padding:-1px;
     margin-right:21px;
 }
+
+.border-orange div{
+    width:50%;
+    text-align:center;
+    padding-top:4px;
+}
+
+.border-orange p{
+    font-size:12px;
+    margin-top:5px;
+    color:rgba(33,37,41,0.61);
+}
+
+.details-description{
+    font-size:12px;
+    color:rgba(33,37,41,0.58);
+}
