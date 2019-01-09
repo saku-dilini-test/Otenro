@@ -438,7 +438,7 @@
                                         <input type="file" value="" ng-click = "cropBannerImage();"  id="fileInputbanner" class="file" size="100">
 
                                     </div>
-                                    <div  ng-if="picFileBanner" class="img-up1" ng-click="addBannerImage(picFile)"></div>
+                                    <div  ng-if="picFile" class="img-up1" ng-click="addBannerImage(picFile)"></div>
                                 </div>
                             </div>
                         <div class="uploaded-section image-upload clearfix" style="width:35%">
@@ -526,7 +526,7 @@
                                             <img id="1"  ng-click="defImg($index,tmpImage[$index].videoUrl)" ng-if="tmpImage[$index].img !== null" ngf-src="tmpImage[$index].img"/>
                                        </div>
                                         <md-input-container>
-                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[$index].img|| (originalSku.length == selectedSku.length && (tmpImage[$index].sku.length == $index || !tmpImage[$index].sku))"
+                                            <md-select class="img-sku-w md-no-underline" ng-disabled="!tmpImage[$index].img|| (originalSku.length == selectedSku.length && (tmpImage[$index].sku.length == $index || !tmpImage[$index].sku))"
                                                        ng-change = "onChange(tmpImage[$index].sku, $index)" ng-model="tmpImage[$index].sku" placeholder="Select sku" multiple="">
                                                 <md-option ng-value="variants" ng-repeat="variants in getSku($index)">{{ variants }}</md-option>
                                             </md-select>

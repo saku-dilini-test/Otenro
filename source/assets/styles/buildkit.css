@@ -3035,6 +3035,7 @@ table.md-calendar-day-header{
     bottom: auto !important;
     left: auto !important;
     right: 0 !important;
+    margin-top : 0 !important;
 }
 .favDescription{
     text-align: center;
@@ -3058,4 +3059,9 @@ table.md-calendar-day-header{
 .special-note{
     padding: 5px;
     margin: 5px 0 15px;
+}
+
+md-input-container.md-input-focused:not([md-no-float]) .md-select-placeholder span:first-child {
+    -webkit-transform: none;
+    transform: none;
 }
