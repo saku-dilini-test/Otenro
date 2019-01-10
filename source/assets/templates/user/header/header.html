@@ -1,9 +1,8 @@
 
 <div class="obl-dashboard-wrapper" ng-controller="HeaderController" ng-show="auth.isAuthenticated()">
     <div class="obl-dashboard-header clearfix">
-        <h2 ng-hide="welcome"> MY APPS</h2>
-        <p  ng-hide="welcome">Select the app you would like to work on</p>
-        <h2 ng-show="welcome">select a app</h2>
+        <h2><span ng-hide="welcome">MY APPS</span></h2>
+        <p>Select the app you would like to work on</p>
 
         <div class="obl-dashboard-settings">
             <button class="user-settings-button" ng-click="profileView()" type="button">

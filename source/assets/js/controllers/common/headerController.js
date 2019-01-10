@@ -9,12 +9,14 @@
 
 
 
-      $scope.welcome=false;
+      $scope.welcome = true;
       $scope.livePreview=false;
 
       var location=$location.url();
-      if(location == "/") {
-        $log.debug("welcome");
+      if(location == "/dashboard") {
+          $scope.welcome = false;
+      }else{
+          $scope.welcome = true;
       }
 
       $scope.auth = Auth;
