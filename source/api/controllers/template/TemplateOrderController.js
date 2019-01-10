@@ -86,7 +86,7 @@ module.exports = {
         var save = true;
         var name;
         var count = 0;
-
+        console.log(req.body)
         execute.processPromoCode(data, function (promoStatus) {
 
             if (promoStatus === PROMOTION_STATUSES.OK || promoStatus === PROMOTION_STATUSES.PROMO_CODE_NOT_EXISTS) {
@@ -270,6 +270,9 @@ module.exports = {
 
                 return res.send({ message: PROMOTION_STATUSES.EXPIRED, description: `${data.promotionCode} promotion code is expired.` });
             }
+            else if (promoStatus === PROMOTION_STATUSES.NOT_FOUND) {
+                return res.send({message: PROMOTION_STATUSES.NOT_FOUND, description: `Sorry the entered discount code could not be found or is no longer valid.`});
+            }
         });
     },
     updateInventory : function(req,res){
@@ -404,6 +407,8 @@ module.exports = {
                     if(!salesAndPromotion.isLimitUsers && !salesAndPromotion.isLimitNumberOfTime){
                         return cb(PROMOTION_STATUSES.OK);
                     }
+                }else{
+                    return cb(PROMOTION_STATUSES.NOT_FOUND);
                 }
             });
         } else {
@@ -521,7 +526,7 @@ module.exports = {
 
                     return cb({
                         message: PROMOTION_STATUSES.NOT_FOUND,
-                        description: `${data.promotionCode} could not be found.`
+                        description: `Sorry the entered discount code could not be found or is no longer valid.`
                     });
                 }
                 if (salesAndPromotion) {

@@ -301,27 +301,29 @@
           <div class="col-sm-3" *ngIf='isSelected && complexForm.valid && sign && totalPrice || isSelected && pickupForm.valid && sign && totalPrice'>
           </div>
           <div class="col-sm-9 main-content-font" *ngIf='isSelected && complexForm.valid && sign && totalPrice || isSelected && pickupForm.valid && sign && totalPrice'>
-              <div class="padding-vertical">
-        		<div class="col-md-12 no-padding"  *ngIf="promos.length > 1">
-                    <div class="radio padding-vertical">
-                          <label><input type="radio" name="promo" value="selectPromo" #promoType (click)="onPromoTypeSelect(promoType)" checked>Select a promocode</label><br>
-                          <label><input type="radio" name="promo" value="typePromo" (click)="onPromoTypeSelect(promoType)">Enter a promocode</label>
-                    </div>
-        			<div *ngIf="promoType.checked">
-                            <h4>Select a promocode</h4>
-                            <select id="promoSelect" class="form-control margin-bottom" (change)="changePromocode($event.target.value)">
-                                <option *ngFor="let promo of promos" [ngValue]="promo.promoCode"> {{promo.promoCode}} </option>
-                            </select>
-                    </div>
-                      <div class="form-group" *ngIf="!promoType.checked">
+            <div class="padding-vertical">
+              		<div class="col-md-12 no-padding"  *ngIf="promos.length > 1">
+                      <!--  <div class="radio padding-vertical">
+                                <label><input type="radio" name="promo" value="selectPromo" #promoType (click)="onPromoTypeSelect(promoType)" checked>Select a promocode</label><br>
+                                <label><input type="radio" name="promo" value="typePromo" (click)="onPromoTypeSelect(promoType)">Enter a promocode</label>
+                          </div> -->
+              			  <!-- <div *ngIf="promoType.checked">
+                          <h4>Select a promocode</h4>
+                          <select id="promoSelect" class="form-control margin-bottom" (change)="changePromocode($event.target.value)">
+                              <option *ngFor="let promo of promos" [ngValue]="promo.promoCode"> {{promo.promoCode}} </option>
+                          </select>
+                      </div> -->
+                      <div class="form-group">
                           <h4>Enter a promocode</h4>
                           <input id=promocode #promocode class="form-control d-inline w-80" placeholder="Enter a promocode" type="text">
                           <button class="btn btn-d btn-lg main-button d-inline promo-button" (click)="changePromocode(promocode.value)">
                             Apply
                           </button>
                       </div>
-                      <ngb-alert *ngIf="promoCodeWarningMessage" type="warning" (close)="promoCodeWarningMessage = null">{{ promoCodeWarningMessage }}</ngb-alert>
-                     </div>
+                      <ngb-alert *ngIf="promoCodeWarningMessage" type="warning" (close)="promoCodeWarningMessage = null">
+                          {{ promoCodeWarningMessage }}
+                      </ngb-alert>
+                  </div>
                <h3 class="main-header-font">Your order</h3>
                 <table class="table table-responsive">
                   <thead class="main-header-font">
@@ -600,7 +602,7 @@
     <div class="modal-dialog  modal-lg" role="document">
         <div class="modal-content">
             <div class="text-right padding"><span class="modal-close padding"  data-dismiss="modal" aria-label="Close">X</span></div>
-              <form #payHereSubmitform class="padding main-content-font" (ngSubmit)="removeItemFromCart()" method="post" action="https://sandbox.payhere.lk/pay/checkout" >
+              <form #payHereSubmitform class="padding main-content-font" (ngSubmit)="removeItemFromCart()" method="post" action="https://www.payhere.lk/pay/checkout" >
                 <div [innerHTML] = "payHereUrl | safeHtml"></div>
                 <div class="flex">
                   <button class="btn btn-default main-button btn-lg inline btn-payhere-cancel" data-dismiss="modal">Cancel</button>
