@@ -81,12 +81,16 @@ export class HomepageComponent implements OnInit {
 		if (params['emailID']) {
 			this.verifyEmailAddress(params['emailID']);
 		}
+
+        window.scrollTo(0, 0);
     });
 
      this.imageUrlSlider = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=slider";
      this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
+
+      window.scrollTo(0, 0);
   }
 
    ngOnInit() {

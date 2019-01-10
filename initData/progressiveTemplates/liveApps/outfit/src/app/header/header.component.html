@@ -29,14 +29,14 @@
                 <div class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
 									(click)="setStyle(featuredCategory.id)" id="{{featuredCategory.id}}">
-										<span [routerLink]="['']" [queryParams]="{ id: featuredCategory.id }">{{featuredCategory.name}}</span>
-										<span *ngIf="featuredCategory.childNodes.length > 0" class="caret"></span>
+										<span [routerLink]="['']" [queryParams]="{ id: featuredCategory.id, name:featuredCategory.name }">{{featuredCategory.name}}</span>
+										<span class="caret"></span>
 									</a>
 									<ul *ngIf="featuredCategory.childNodes.length > 0" class="dropdown-menu  main-navigation" role="menu">
 											<a *ngFor="let childNode of featuredCategory.childNodes"
 												id="{{childNode.id}}" 
 												(mouseenter)="appendChildAfter(childNode.id, featuredCategory.id)"
-												[routerLink]="['']" [queryParams]="{ id: childNode.id }">
+												[routerLink]="['']" [queryParams]="{ id: childNode.id, name:childNode.name }">
 													<span>{{childNode.name}}</span>
 													<span *ngIf="childNode.childNodes.length > 0" class="caret"></span>
 											</a>
@@ -49,7 +49,7 @@
                     <span class="caret"></span></a>
                   <ul class="dropdown-menu  main-navigation" role="menu">
                     <li *ngFor="let nonFeaturedCategory of nonFeaturedCategories">
-                      <a class="nav-link" [routerLink]="['']" [queryParams]="{ id: nonFeaturedCategory.id }">{{nonFeaturedCategory.name }}</a>
+                      <a class="nav-link" [routerLink]="['']" [queryParams]="{ id: nonFeaturedCategory.id,  name:nonFeaturedCategory.name }">{{nonFeaturedCategory.name }}</a>
                     </li>
                   </ul>
                 </div>
