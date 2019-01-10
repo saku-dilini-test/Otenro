@@ -91,68 +91,68 @@
                     </form>
                 </md-tab-body>
             </md-tab>
-            <md-tab ng-disabled="enableTab">
+            <!--<md-tab ng-disabled="enableTab">-->
 
-                <md-tab-label>Account Settings</md-tab-label>
-                <md-tab-body>
+                <!--<md-tab-label>Account Settings</md-tab-label>-->
+                <!--<md-tab-body>-->
 
-                    <div class="md-dialog-header">
-                        <h1>Account Settings</h1>
-                    </div>
-                    <md-content layout-padding>
-                        <form name="emailSettingsForm">
-                            <div class="md-dialog-main">
-                                <div class="clearfix">
+                    <!--<div class="md-dialog-header">-->
+                        <!--<h1>Account Settings</h1>-->
+                    <!--</div>-->
+                    <!--<md-content layout-padding>-->
+                        <!--<form name="emailSettingsForm">-->
+                            <!--<div class="md-dialog-main">-->
+                                <!--<div class="clearfix">-->
 
-                                    <md-input-container class="md-block" flex="50">
-                                        <label>Domain name</label>
-                                        <input required md-maxlength="50"  name="domainName" ng-model="emailSettings.domainName">
-                                        <div ng-messages="emailSettingsForm.domainName.$error" ng-show="emailSettingsForm.domainName.$dirty">
-                                            <div ng-message="required">Domain Name is required.</div>
-                                            <div ng-message="md-maxlength">The name must be less than 50 characters long.</div>
-                                        </div>
-                                    </md-input-container>
+                                    <!--<md-input-container class="md-block" flex="50">-->
+                                        <!--<label>Domain name</label>-->
+                                        <!--<input required md-maxlength="50"  name="domainName" ng-model="emailSettings.domainName">-->
+                                        <!--<div ng-messages="emailSettingsForm.domainName.$error" ng-show="emailSettingsForm.domainName.$dirty">-->
+                                            <!--<div ng-message="required">Domain Name is required.</div>-->
+                                            <!--<div ng-message="md-maxlength">The name must be less than 50 characters long.</div>-->
+                                        <!--</div>-->
+                                    <!--</md-input-container>-->
 
-                                    <md-input-container class="md-block" flex="50">
-                                        <label>Username</label>
-                                        <input required md-maxlength="50"  name="emailUsername" ng-model="emailSettings.emailUsername">
+                                    <!--<md-input-container class="md-block" flex="50">-->
+                                        <!--<label>Username</label>-->
+                                        <!--<input required md-maxlength="50"  name="emailUsername" ng-model="emailSettings.emailUsername">-->
 
-                                        <div ng-messages="emailSettingsForm.emailUsername.$error" ng-show="emailSettingsForm.emailUsername.$dirty">
-                                            <div ng-message="required">Email Username is required.</div>
-                                        </div>
-                                    </md-input-container>
+                                        <!--<div ng-messages="emailSettingsForm.emailUsername.$error" ng-show="emailSettingsForm.emailUsername.$dirty">-->
+                                            <!--<div ng-message="required">Email Username is required.</div>-->
+                                        <!--</div>-->
+                                    <!--</md-input-container>-->
 
 
-                                    <md-input-container class="md-block" flex="50">
-                                        <label>password</label>
-                                        <input required name="emailPassword" ng-model="emailSettings.emailPassword">
-                                        <!--<md-checkbox ng-model="isShow" aria-label="Show Password">-->
-                                            <!--Show-->
+                                    <!--<md-input-container class="md-block" flex="50">-->
+                                        <!--<label>password</label>-->
+                                        <!--<input required name="emailPassword" ng-model="emailSettings.emailPassword">-->
+                                        <!--&lt;!&ndash;<md-checkbox ng-model="isShow" aria-label="Show Password">&ndash;&gt;-->
+                                            <!--&lt;!&ndash;Show&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</md-checkbox>&ndash;&gt;-->
+                                        <!--<div ng-messages="emailSettingsForm.emailPassword.$error" ng-show="emailSettingsForm.emailPassword.$dirty">-->
+                                            <!--<div ng-message="required">Password is required.</div>-->
+                                        <!--</div>-->
+                                    <!--</md-input-container>-->
+
+                                    <!--<md-input-container class="md-block">-->
+                                        <!--<md-checkbox ng-model="emailSettings.sslEnabled" aria-label="Finished?">-->
+                                            <!--SSL enabled-->
                                         <!--</md-checkbox>-->
-                                        <div ng-messages="emailSettingsForm.emailPassword.$error" ng-show="emailSettingsForm.emailPassword.$dirty">
-                                            <div ng-message="required">Password is required.</div>
-                                        </div>
-                                    </md-input-container>
-
-                                    <md-input-container class="md-block">
-                                        <md-checkbox ng-model="emailSettings.sslEnabled" aria-label="Finished?">
-                                            SSL enabled
-                                        </md-checkbox>
-                                    </md-input-container>
-                                </div>
-                            </div>
-                            <div class="md-dialog-buttons">
-                                <div class="inner-section">
-                                    <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                                    <md-button class="me-default-button" ng-click="updateEmailSettings(emailSettings,'save','emailSettings')">Save
-                                    </md-button>
-                                    <md-button class="me-default-button" ng-disabled="emailSettingsForm.$invalid"  ng-click="updateEmailSettings(emailSettings,'next','emailSettings')">Next</md-button>
-                                </div>
-                            </div>
-                        </form>
-                    </md-content>
-                </md-tab-body>
-            </md-tab>
+                                    <!--</md-input-container>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="md-dialog-buttons">-->
+                                <!--<div class="inner-section">-->
+                                    <!--<md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>-->
+                                    <!--<md-button class="me-default-button" ng-click="updateEmailSettings(emailSettings,'save','emailSettings')">Save-->
+                                    <!--</md-button>-->
+                                    <!--<md-button class="me-default-button" ng-disabled="emailSettingsForm.$invalid"  ng-click="updateEmailSettings(emailSettings,'next','emailSettings')">Next</md-button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</form>-->
+                    <!--</md-content>-->
+                <!--</md-tab-body>-->
+            <!--</md-tab>-->
 
             <md-tab ng-disabled=enableTab>
                 <md-tab-label>Order Confirmation</md-tab-label>
