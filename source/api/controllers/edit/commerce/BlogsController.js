@@ -1,5 +1,7 @@
 var fs = require('fs-extra'),
     config = require('../../../services/config');
+    const jsdom = require("jsdom");
+    const { JSDOM } = jsdom;
 
 module.exports = {
 
@@ -27,9 +29,33 @@ module.exports = {
     },
 
     publishBlog : function(req,res){
-
+        var randomstring = require("randomstring");
         var blog = req.body;
+        var data = "";
         var fileDir = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId+ '/assets/images/blogs/';
+
+        const dom = new JSDOM(blog.desc);
+        for (var i = 0; i < dom.window.document.querySelectorAll('img').length; i++) {
+            var imgeFileName = randomstring.generate()+ ".png";
+
+
+            if (!dom.window.document.querySelectorAll('img')[i].getAttribute("src").match("http")) {
+                data = dom.window.document.querySelectorAll('img')[i].getAttribute("src").replace(/^data:image\/\w+;base64,/, "");
+                var buf = new Buffer(data, 'base64');
+
+                fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
+                    req.body.appId + '/assets/images/blogs/' + imgeFileName, buf, function (err) {
+                    if (err) {
+                        return res.send(err);
+                    }
+                });
+                dom.window.document.querySelectorAll('img')[i].setAttribute("src",config.server.host
+                    +"/templates/viewWebImages?userId="+req.userId+"&appId="+req.body.appId+"&1547029702693&images=blogs/"+imgeFileName);
+
+            }
+        }
+
+        req.body.desc =dom.window.document.documentElement.outerHTML;
         console.log(fileDir);
         if(blog.isNewBlog == 'true'){
             req.file('file').upload({
