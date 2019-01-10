@@ -157,4 +157,8 @@ module.exports.policies = {
     'UpdateAllAppsController':{
         '*': true
     },
+
+    'appmakerStore/AppmakerStoreController': {
+      '*': true
+    },
 };
