@@ -547,5 +547,9 @@ module.exports.routes = {
     'GET /appMakerReports/getSubscriptionPayments': 'appMakerReports/ApplicationBaseReportController.getSubscriptionPayments',
     'GET /appMakerReports/appBaseReport/insertFiledTransactionDailySummary': 'appMakerReports/FailedTransactionReportController.insertFiledTransactionDailySummary',
 
-
+    /**
+     * AppmakerStoreController
+     **/
+    'GET /appmakerStore/getAllApps': 'appmakerStore/AppmakerStoreController.getAllApps',
+    'POST /appmakerStore/sendAPKFile': 'appmakerStore/AppmakerStoreController.sendAPKFile',
 };

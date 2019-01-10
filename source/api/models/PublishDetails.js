@@ -146,6 +146,9 @@ module.exports = {
             type: 'boolean',
             defaultsTo : false
         },
+        playstoreLink:{
+            type: 'string'
+        },
 
         toJSON: function() {
           var obj = this.toObject();
