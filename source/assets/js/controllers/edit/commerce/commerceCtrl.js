@@ -70,6 +70,7 @@
             enableGridMenu: true,
             gridMenuTitleFilter: fakeI18n,
             rowTemplate: rowTemplate(),
+            exporterMenuVisibleData : false,
             isRowSelectable: function(row) {
                 if(row.entity.paymentStatus === "successful" || row.entity.paymentStatus === "refunded")  {
                     return false;
@@ -85,15 +86,6 @@
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
                 {name: 'fulfillmentStatus'}
-            ],
-            gridMenuCustomItems: [
-                {
-                    title: 'Rotate Grid',
-                    action: function ($event) {
-                        this.grid.element.toggleClass('rotated');
-                    },
-                    order: 210
-                }
             ],
             //data : [{"createdDate": "2016/10/16","customerName":"ABC","paymentStatus": "pending","fulfillmentStatus": "Enersol"}],
             onRegisterApi: function (gridApi1) {
@@ -147,8 +139,8 @@
 //                   }
 
 
-console.log("$scope.variantArray1 : " + JSON.stringify($scope.variantArray1));
-console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0].name));
+// console.log("$scope.variantArray1 : " + JSON.stringify($scope.variantArray1));
+// console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0].name));
 
                     //$scope.curruntDate = new Date();
                     //var sDate = $scope.oderData.entity.fulfilledDate;
@@ -215,6 +207,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             rowTemplate: rowTemplate(),
+            exporterMenuVisibleData : false,
             columnDefs: [
                 // {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate'},
@@ -222,22 +215,22 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                 {name: 'paymentStatus'},
                 {name: 'fulfillmentStatus'}
             ],
-            gridMenuCustomItems: [
-                {
-                    title: 'Rotate Grid',
-                    action: function ($event) {
-                        this.grid.element.toggleClass('rotated');
-                    },
-                    order: 210
-                }
-            ],
+            // gridMenuCustomItems: [
+            //     {
+            //         title: 'Rotate Grid',
+            //         action: function ($event) {
+            //             this.grid.element.toggleClass('rotated');
+            //         },
+            //         order: 210
+            //     }
+            // ],
             onRegisterApi: function (gridsApi2) {
                 $scope.gridsApi2 = gridsApi2;
 
                 // interval of zero just to allow the directive to have initialized
-                $interval(function () {
-                    gridsApi2.core.addToGridMenu(gridsApi2.grid, [{title: 'Dynamic item', order: 100}]);
-                }, 0, 1);
+                // $interval(function () {
+                //     gridsApi2.core.addToGridMenu(gridsApi2.grid, [{title: 'Dynamic item', order: 100}]);
+                // }, 0, 1);
 
                 gridsApi2.core.on.columnVisibilityChanged($scope, function (changedColumn) {
                     $scope.columnChanged = {name: changedColumn.colDef.name, visible: changedColumn.colDef.visible};
@@ -250,6 +243,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
             exporterMenuCsv: true,
             enableGridMenu: true,
             enableSorting: true,
+            exporterMenuVisibleData : false,
             gridMenuTitleFilter: fakeI18n,
             rowTemplate: rowTemplate(),
             columnDefs: [
@@ -259,22 +253,22 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                 {name: 'paymentStatus'},
                 {name: 'fulfillmentStatus'}
             ],
-            gridMenuCustomItems: [
-                {
-                    title: 'Rotate Grid',
-                    action: function ($event) {
-                        this.grid.element.toggleClass('rotated');
-                    },
-                    order: 210
-                }
-            ],
+            // gridMenuCustomItems: [
+            //     {
+            //         title: 'Rotate Grid',
+            //         action: function ($event) {
+            //             this.grid.element.toggleClass('rotated');
+            //         },
+            //         order: 210
+            //     }
+            // ],
             onRegisterApi: function (gridsApi3) {
                 $scope.gridsApi3 = gridsApi3;
 
                 // interval of zero just to allow the directive to have initialized
-                $interval(function () {
-                    gridsApi3.core.addToGridMenu(gridsApi3.grid, [{title: 'Dynamic item', order: 100}]);
-                }, 0, 1);
+                // $interval(function () {
+                //     gridsApi3.core.addToGridMenu(gridsApi3.grid, [{title: 'Dynamic item', order: 100}]);
+                // }, 0, 1);
 
                 gridsApi3.core.on.columnVisibilityChanged($scope, function (changedColumn) {
                     $scope.columnChanged = {name: changedColumn.colDef.name, visible: changedColumn.colDef.visible};
@@ -288,6 +282,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
             exporterMenuCsv: true,
             enableGridMenu: true,
             enableSorting: true,
+            exporterMenuVisibleData : false,
             gridMenuTitleFilter: fakeI18n,
             rowTemplate: rowTemplate(),
             columnDefs: [
@@ -297,22 +292,22 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                 {name: 'paymentStatus'},
                 {name: 'fulfillmentStatus'}
             ],
-            gridMenuCustomItems: [
-                {
-                    title: 'Rotate Grid',
-                    action: function ($event) {
-                        this.grid.element.toggleClass('rotated');
-                    },
-                    order: 210
-                }
-            ],
+            // gridMenuCustomItems: [
+            //     {
+            //         title: 'Rotate Grid',
+            //         action: function ($event) {
+            //             this.grid.element.toggleClass('rotated');
+            //         },
+            //         order: 210
+            //     }
+            // ],
             onRegisterApi: function (gridsApi4) {
                 $scope.gridsApi4 = gridsApi4;
 
                 // interval of zero just to allow the directive to have initialized
-                $interval(function () {
-                    gridsApi4.core.addToGridMenu(gridsApi4.grid, [{title: 'Dynamic item', order: 100}]);
-                }, 0, 1);
+                // $interval(function () {
+                //     gridsApi4.core.addToGridMenu(gridsApi4.grid, [{title: 'Dynamic item', order: 100}]);
+                // }, 0, 1);
 
                 gridsApi4.core.on.columnVisibilityChanged($scope, function (changedColumn) {
                     $scope.columnChanged = {name: changedColumn.colDef.name, visible: changedColumn.colDef.visible};
