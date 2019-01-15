@@ -36,6 +36,7 @@
         $scope.allowPlayStore;
         $scope.successPublish = false;
         $scope.isApkAvailable =  false;
+        var enabledCount = 0;
 
         carouselService.getApplicationData($rootScope.appId).success(function(res){
             $scope.appData = res;
@@ -319,7 +320,7 @@
         }
 
         $scope.save = function(data){
-
+            enabledCount = 0;    
             var isRequestUpdate = false;
             var showSavedMsg = true;
             for(var i=0; i<data.length;i++){
@@ -384,11 +385,20 @@
                 }else{
                     if(data[i].status == "REJECTED"){
                         isRequestUpdate = true;
+                    }else if(data[i].status == "NOT_SUBMITTED"){
+                        enabledCount++;
                     }
                 }
 
             };
 
+            if(enabledCount === data.length){                
+                showSavedMsg = false;
+                toastr.error('Please select and enter the relevant operator details.', 'Error', {
+                    closeButton: true
+                });   
+                return;             
+            }
 
             if(isRequestUpdate){
                 showSavedMsg = false;
