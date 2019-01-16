@@ -106,7 +106,6 @@
 
                         }else if($scope.item && $scope.item.salesAndPromotionType == 'storeWide'){
                             $scope.storeWide = item;
-                            console.log($scope.storeWide)
                         }else{
                             $scope.array = [];
                         }
@@ -353,10 +352,17 @@
                         salesAndPromotionService.showPromotionsAndSalesDialog();
 
                     }).error(function (error) {
-                    toastr.error('Sales And Promotion Adding Error', 'Message', {
-                        closeButton: true
+                        if(error == 'Conflict'){
+                            toastr.error('Entered promo code already exists. Please try again with a different promo code', 'Error', {
+                                closeButton: true
+                            });
+                        }else{
+                            toastr.error('Sales And Promotion Adding Error', 'Message', {
+                                closeButton: true
+                            });
+                        }
+
                     });
-                })
             }
 
         }

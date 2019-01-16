@@ -13,6 +13,7 @@ var nodeSchedule = require('node-schedule');
 module.exports = {
 
     saveSalesAndPromotion : function(req,res){
+        // console.log(req.body)
         var salesAndPromotionData   = req.body;
         var thisController = this;
     
@@ -23,23 +24,41 @@ module.exports = {
             var searchQuery = {
                 id : salesAndPromotionData.id,
             };
-
-            SalesAndPromotion.update(searchQuery,salesAndPromotionData).exec(function(err,updateResult) {
-                if (err) {
-
-                    sails.log.error('Error occurred while updating sales and promotions : ' + err);
+            SalesAndPromotion.find({appId:salesAndPromotionData.appId,id:{'!' : salesAndPromotionData.id},promoCode: salesAndPromotionData.promoCode}).exec(function (err, found) {
+                if(err){
                     return res.serverError(err);
-                }
-                else {
+                }else if(found.length > 0){
+                    // console.log("found")
+                    // console.log(found)
+                    return res.send(409);
+                }else {
+                    SalesAndPromotion.update(searchQuery, salesAndPromotionData).exec(function (err, updateResult) {
+                        if (err) {
 
-                    sails.log.info('Successfully Update Sales And Promotion');
-                    thisController.chageSalesAndPromotionsStatus(updateResult[0]);
-                    return res.send(200, updateResult);
+                            sails.log.error('Error occurred while updating sales and promotions : ' + err);
+                            return res.serverError(err);
+                        }
+                        else {
+
+                            sails.log.info('Successfully Update Sales And Promotion');
+                            thisController.chageSalesAndPromotionsStatus(updateResult[0]);
+                            return res.send(200, updateResult);
+                        }
+                    });
                 }
             });
+
         } else {
                 // if not update
                     // create new Sales And  Promotion Collection
+            SalesAndPromotion.find({appId:salesAndPromotionData.appId,promoCode: salesAndPromotionData.promoCode}).exec(function (err, found) {
+                if(err){
+                    return res.serverError(err);
+                }else if(found.length > 0){
+                    // console.log("found when create")
+                    // console.log(found)
+                    return res.send(409);
+                }else{
                     SalesAndPromotion.create(salesAndPromotionData).exec(function (err, createResult) {
                         if (err) {
 
@@ -52,6 +71,10 @@ module.exports = {
                             return res.send(200, createResult);
                         }
                     });
+                }
+
+            });
+
 
         }
         // update Sales And  Promotion for given appId and salesAndPromotionType
