@@ -403,7 +403,7 @@ module.exports = {
         MainCategory.find({appId:appId}).exec(function(err,found) {
             if (err) res.send(err);
             if(found) {
-                console.log(found)
+                // console.log(found)
                 res.send(found);
             }
         });

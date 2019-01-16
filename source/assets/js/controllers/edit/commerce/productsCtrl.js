@@ -523,7 +523,7 @@
             $scope.child.forEach(obj => {
                 if($scope.product.selectedCategories){
                     $scope.product.selectedCategories.forEach(item =>{
-                            console.log(obj.id, item)
+                            // console.log(obj.id, item)
                         if(obj.id == item){
                             $scope.selected.push(obj);
                         }
@@ -1535,6 +1535,8 @@
         // };
 
         $scope.exists = function (catId) {
+            // console.log($scope.product.selectedCategories)
+            // console.log(catId)
             if($scope.product.selectedCategories){
                 for (var i = 0; i <  $scope.product.selectedCategories.length; i++) {
                     if ($scope.product.selectedCategories[i] == catId) {
@@ -1549,22 +1551,36 @@
 
 
         $scope.toggleCheck = function (item) {
-            // console.log(item,$scope.selected)
+            // console.log(item)
 
             // console.log($scope.product.selectedCategories)
             if(!$scope.product.selectedCategories){
                 $scope.product.selectedCategories = [];
             }
-            var idx = $scope.product.selectedCategories.indexOf(item.id);
-            console.log(idx)
+            // var idx = $scope.product.selectedCategories.indexOf(item.id);
+            // console.log($scope.product.selectedCategories)
+            // console.log($scope.selected)
 
-            if (idx > -1) {
-                $scope.product.selectedCategories.splice(idx, 1);
-                $scope.selected.splice(idx, 1);
-            }else {
-                $scope.product.selectedCategories.push(item.id);
-                $scope.selected.push(item);
+            for(var i = 0; i<$scope.product.selectedCategories.length; i++){
+                if ($scope.product.selectedCategories[i] == item.id) {
+                    $scope.product.selectedCategories.splice(i, 1);
+                    break;
+                }else if(i == $scope.product.selectedCategories.length - 1){
+                    $scope.product.selectedCategories.push(item.id);
+                    break;
+                }
             }
+
+            for(var i = 0; i<$scope.selected.length; i++){
+                if ($scope.selected[i].id == item.id) {
+                    $scope.selected.splice(i, 1);
+                    break;
+                }else if(i == $scope.selected.length - 1){
+                    $scope.selected.push(item);
+                    break;
+                }
+            }
+
         };
 
     }
