@@ -125,7 +125,7 @@
                                                class="input-shadow-border" type="text" name="weightField_{{$index}}" ng-pattern="/^\d*[0-9\.]\d*$/"
                                                ng-model="data.startWeight" maxlength="10" required>
                                         <br />
-                                        <span ng-show="weightBased['weightField_'+$index].$error.pattern">
+                                        <span class="error" ng-show="weightBased['weightField_'+$index].$error.pattern">
                                             Positive Numbers Only
                                         </span>
                                         <br />
@@ -134,7 +134,7 @@
                                                class="input-shadow-border" type="text" name="endWeight_{{$index}}" ng-pattern="/^\d*[0-9\.]\d*$/"
                                                ng-model="data.endWeight" maxlength="10" required>
                                         <br />
-                                        <span ng-show="weightBased['endWeight_'+$index].$error.pattern">
+                                        <span class="error"  ng-show="weightBased['endWeight_'+$index].$error.pattern">
                                             Positive Number Only
                                         </span>
                                     </td>
@@ -142,7 +142,7 @@
                                         <input class="input-shadow-border" type="text" name="cost_{{$index}}" ng-pattern="/^\d+(.\d{1,2})?$/"
                                                ng-model="data.cost" maxlength="10" required>
                                         <br />
-                                        <span ng-show="weightBased['cost_'+$index].$error.pattern">
+                                        <span class="error"  ng-show="weightBased['cost_'+$index].$error.pattern">
                                             Only Positive numbers and Maximum two decimal places only
                                         </span>
                                     </td>
