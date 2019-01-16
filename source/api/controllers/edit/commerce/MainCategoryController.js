@@ -101,6 +101,7 @@ module.exports = {
                                 var secondNavi = req.body;
                                 secondNavi.index = count === 0 ? 0 : count;
                                 secondNavi.isMainCategory = true;
+                                secondNavi.treeLevel = 1;
                                 secondNavi.imageUrl = newFileName;
                                 secondNavi.nodes = [];
 
@@ -408,9 +409,8 @@ module.exports = {
         });
     },
     deleteNodes : function(req,res) {
-        var mainCatCtrl = this;
-        console.log(req.body.data);
 
+        var mainCatCtrl = this;
         var categoryArray = [];
         var productArray = [];
 
@@ -419,6 +419,13 @@ module.exports = {
         MainCategory.destroy({id:{'$in':categoryArray}}).exec(function (err, deletedNode) {
             if (err) res.send(err);
 
+            // Check and update isRankigStarted of a specific application if all the categories are deleted
+            // The reason for this is, this is needed to category ordering function to work as needed
+            mainCatCtrl.isAllCategoryDeleted(deletedNode[0].appId, function (isAllCatsDeleted) {
+                if (isAllCatsDeleted) {
+                    mainCatCtrl.updateIsRankingStarted(deletedNode[0].appId);
+                }
+            });
             // If parentId is not undefined of deleted category
             if (deletedNode[0].parentId) {
                 //Find parent category of deleted category
@@ -726,5 +733,42 @@ module.exports = {
             });
             mainCategoryController.updateCategoryOrderIndex(categories[i].childNodes);
         }
+    },
+
+    /**
+     * Check all the categories are deleted in a specific app id
+     * @param appId 
+     * @param cb
+     **/
+    isAllCategoryDeleted: function (appId, cb) {
+
+        MainCategory.find({ appId: appId}).exec(function (err, cats) {
+
+            if (err) {
+
+                sails.log.error("Error occurred: MainCategoryController.isAllCategoryDeleted => " + err);
+                return cb(false);
+            }
+            if (cats.length === 0) {
+                return cb(true);
+            }
+            if (cats.length > 0) {
+                return cb(false);
+            }
+        });
+    },
+
+    /**
+     * Update isRankingStarted of the application
+     * @param appId 
+     */
+    updateIsRankingStarted: function (appId) {
+
+        Application.update({ id: appId }, { isRankingStarted: false }).exec(function (err, app) {
+
+            if (err) {
+                sails.log.error("Error occurred : MainCategoryController.updateIsRankingStarted : error => " + err);
+            }
+        });
     }
 };
