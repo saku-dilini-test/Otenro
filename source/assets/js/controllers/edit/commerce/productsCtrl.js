@@ -539,7 +539,7 @@
 
 
 
-        
+
         $scope.nextStep3Digital = function (current, product, variants) {
             if (variants.price == null) {
                 toastr.error('Please fill all fields', 'Warning', {
@@ -556,7 +556,7 @@
             }
         };
 
-        
+
 
         $scope.typeUpdateHandler = function (newValue) {
             $scope.variants[0].type = newValue;
@@ -685,7 +685,7 @@
             $scope.defaultImage = img;
 //            $scope.product.videoUrl = id;
         }
-        
+
         $scope.setImage = function (img) {
 
             if (img == undefined) {
@@ -1122,7 +1122,7 @@
 
                 }
 
-        
+
                 /**
                  * @description
                  * validation of duplicate sku and size/weight
@@ -1170,7 +1170,7 @@
         $scope.answer = function () {
             $mdDialog.hide();
         };
-        
+
         $scope.back = function(){
             if(initialData.product.name){
                 return commerceService.showInventoryDialog();
@@ -1228,7 +1228,7 @@
         }
 
         $scope.newcategory = function(){
-            categoryMaintenanceService.showAddOrEditCategoryDialog();
+            categoryMaintenanceService.showAddOrEditCategoryDialog(null,'fromAddProduct',$scope.product);
 //            mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2,$scope.product)
         }
 
@@ -1553,33 +1553,31 @@
         $scope.toggleCheck = function (item) {
             // console.log(item)
 
-            // console.log($scope.product.selectedCategories)
+
             if(!$scope.product.selectedCategories){
                 $scope.product.selectedCategories = [];
             }
-            // var idx = $scope.product.selectedCategories.indexOf(item.id);
+            var idx = $scope.product.selectedCategories.indexOf(item.id);
+            var idxx = $scope.selected.map(item => item.id).indexOf(item.id);
+            // console.log(idx)
+            // console.log(idxx)
+
+            if (idx > -1) {
+                $scope.product.selectedCategories.splice(idx, 1);
+            }else {
+                $scope.product.selectedCategories.push(item.id);
+            }
+
+            if (idxx > -1) {
+                $scope.selected.splice(idxx, 1);
+            }else {
+                $scope.selected.push(item);
+            }
+
+
             // console.log($scope.product.selectedCategories)
             // console.log($scope.selected)
 
-            for(var i = 0; i<$scope.product.selectedCategories.length; i++){
-                if ($scope.product.selectedCategories[i] == item.id) {
-                    $scope.product.selectedCategories.splice(i, 1);
-                    break;
-                }else if(i == $scope.product.selectedCategories.length - 1){
-                    $scope.product.selectedCategories.push(item.id);
-                    break;
-                }
-            }
-
-            for(var i = 0; i<$scope.selected.length; i++){
-                if ($scope.selected[i].id == item.id) {
-                    $scope.selected.splice(i, 1);
-                    break;
-                }else if(i == $scope.selected.length - 1){
-                    $scope.selected.push(item);
-                    break;
-                }
-            }
 
         };
 

@@ -25,14 +25,16 @@
                 });
             },
 
-            showAddOrEditCategoryDialog: function(data){
+            showAddOrEditCategoryDialog: function(data, from, productItem){
                 return $mdDialog.show({
                     controller: 'addCatToMaintenanaceCtrl',
                     templateUrl: 'user/edit/mainmenu/addNewCategoryToMaintenance.html',
                     clickOutsideToClose: true,
                     locals : {
                         initialData : {
-                            menu: data
+                            menu: data,
+                            from : from,
+                            prodItem: productItem == null ? null : productItem
                         }
                     }
                 }).then(function(answer) {

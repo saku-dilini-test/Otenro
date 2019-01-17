@@ -206,15 +206,9 @@
         };
 
         $scope.cancelEdit = function() {
-            $scope.data = oblMenuService.parseData();
-            // console.log($scope.data);
-            if($scope.data == true){
+            if(initialData.from == 'fromAddProduct'){
                 $mdDialog.hide();
-                return commerceService.showAddProductsDialog(initialData.prodItem,true, null,'0', false)
-            }else if($rootScope.hasCurrentProduct){
-                $rootScope.hasCurrentProduct = false;
-                $mdDialog.hide();
-                return commerceService.showAddProductsDialog($rootScope.currentProduct);
+                return commerceService.showAddProductsDialog(initialData.prodItem,true, null,'0', false);
             }else{
                 $mdDialog.hide();
                 categoryMaintenanceService.showCategoryMaintenanceDialog();
