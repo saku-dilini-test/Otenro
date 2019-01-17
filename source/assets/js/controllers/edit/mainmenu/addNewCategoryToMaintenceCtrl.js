@@ -89,7 +89,7 @@
 
 
         // save added category
-        $scope.saveCategory = function(file,menu,parentId){
+        $scope.saveCategory = function(file,menu,parentId,parentTreeLevel){
 
             $scope.disableSave = true;
 
@@ -107,7 +107,7 @@
 
             //adding new category
             if(!$scope.menu.id){
-                categoryMaintenanceService.saveAddedCategory(file,$rootScope.appId,menu.name,parentId,$rootScope.tempNew).success(function(data) {
+                categoryMaintenanceService.saveAddedCategory(file,$rootScope.appId,menu.name,parentId,$rootScope.tempNew,parentTreeLevel).success(function(data) {
                     var urlPath;
                     $scope.disableSave = false;
                     if($rootScope.tempNew == 'true'){

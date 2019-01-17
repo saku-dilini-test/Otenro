@@ -44,8 +44,8 @@
         };
 
         // Add New node
-        $scope.goToAddNewNode = function (id) {
-            categoryMaintenanceService.showAddOrEditCategoryNodeDialog(id);
+        $scope.goToAddNewNode = function (id, parentTreeLevel) {
+            categoryMaintenanceService.showAddOrEditCategoryNodeDialog(id, parentTreeLevel);
         };
 
 
@@ -140,6 +140,11 @@
 
                 let socketBody = { payload: $scope.createCategoriesArrayAfterDragStop($scope.menuItems) };
                 $scope.updateCategoryOrder(socketBody);
+            },
+            depth: function (event) {
+                console.log("$$$$$$$$$$$$$$$$$$$$$$$");
+                console.log("$$$$$$$$$$$$$$$$$$$$$$$");
+                console.log(JSON.stringify(event, null, 2));
             }
         };
 

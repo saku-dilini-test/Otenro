@@ -44,14 +44,15 @@
                 });
             },
 
-            showAddOrEditCategoryNodeDialog: function(parentId){
+            showAddOrEditCategoryNodeDialog: function(parentId, parentTreeLevel){
                     return $mdDialog.show({
                         controller: 'addCatToMaintenanaceCtrl',
                         templateUrl: 'user/edit/mainmenu/addNewCategoryToMaintenance.html',
                         clickOutsideToClose: true,
                         locals : {
                             initialData : {
-                                parentId: parentId
+                                parentId: parentId,
+                                parentTreeLevel: parentTreeLevel
                             }
                         }
                     }).then(function(answer) {
@@ -60,7 +61,7 @@
                 });
             },
 
-            saveAddedCategory: function(file,appId,name,parentId,isNew){
+            saveAddedCategory: function(file,appId,name,parentId,isNew, parentTreeLevel){
                 var dataURItoBlob = function(dataURI) {
                     var binary = atob(dataURI.split(',')[1]);
                     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -93,10 +94,11 @@
                 return Upload.upload({
                     url: SERVER_URL + 'edit/addNewCategoryToMaintenance',
                     fields: {
-                        'appId' : appId,
-                        'name' : name,
-                        'parentId' : parentId,
-                        'isNew' :isNew
+                        'appId': appId,
+                        'name': name,
+                        'parentId': parentId,
+                        'isNew': isNew,
+                        'treeLevel': parentTreeLevel + 1
                     },
                     file: UploadFile
                 });

@@ -46,6 +46,9 @@ module.exports = {
         index: {
             type: 'integer'
         },
+        treeLevel: {
+            type: 'integer'
+        },
         isMainCategory: {
             type: 'boolean',
             defaultsTo: false
