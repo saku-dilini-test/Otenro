@@ -47,37 +47,33 @@ export class CategoriesService {
 
           if(value){
             return Observable.of(this.dataService.categories,this.dataService.products);
-            // console.log(value)
+          } else {
+            return Observable.of([]);
           }
-
         }
       }
     }
 
   }
 
-  iterate(current,id) {
+  iterate(current, id) {
     var children = current.childNodes;
     if (children){
       //handle text nodes
       for (var i = 0; i < children.length; i++) {
-        // console.log(id,children[i].id)
-
 
         if(id == children[i].id){
 
-          // this.categories= children[i].childNodes;
           if( !this.dataService.products){
             this.dataService.products = [];
           }
-          // this.products[0] = children[i].products;
           this.dataService.currentCategoryImage = children[i].imageUrl;
           this.dataService.categories = children[i].childNodes;
           this.dataService.products[0] = children[i].products;
           return Observable.of(this.dataService.categories,this.dataService.products);
+        } else {
 
-        }else {
-          this.iterate(children[i],id);
+          this.iterate(children[i], id);
         }
 
       }
