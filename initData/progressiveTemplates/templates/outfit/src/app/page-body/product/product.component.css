@@ -105,3 +105,12 @@
 /deep/ .ug-videoplayer .ug-videoplayer-button-close {
            display: none !important;
        }
+
+#recomended-products {
+    text-transform: uppercase;
+    text-align: center;
+}
+
+#recomended-products-content {
+    padding: 25px 0;
+}

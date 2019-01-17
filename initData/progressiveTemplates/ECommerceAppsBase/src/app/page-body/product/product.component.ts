@@ -6,11 +6,13 @@ import { SERVER_URL } from '../../../assets/constantsService';
 import * as data from '../../../assets/madeEasy.json';
 import * as _ from 'lodash';
 import { CurrencyService } from '../../services/currency/currency.service';
+import { CategoriesService } from '../../services/categories/categories.service';
 import { TitleService } from '../../services/title.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { ProductsService } from '../../services/products/products.service';
 declare var $: any;
 var gallaryThis;
+
 @Component({
     selector: 'app-product',
     templateUrl: './product.component.html',
@@ -58,6 +60,14 @@ export class ProductComponent implements OnInit, AfterViewInit {
     responce;
     ifNotSelectedVariantOrQuantity: boolean;
     availableFirstVariPromo = false;
+    // products with same category Id
+    siblingProducts: any = [];
+    allProducts: any = [];
+    allProductsSlice: any = [];
+    imageUrl1: any;
+    owlOptions;
+    isSiblingCategoryClicked: boolean = false;
+    categories: any = null;
     private prodId;
     constructor(private localStorageService: LocalStorageService,
                 private currencyService: CurrencyService,
@@ -66,13 +76,17 @@ export class ProductComponent implements OnInit, AfterViewInit {
                 private router: ActivatedRoute,
                 private route: Router,
                 private title: TitleService,
-                private productsService: ProductsService) {
+                private productsService: ProductsService,
+                private categoryService: CategoriesService) {
         this.Data = {
             tempImageArray : []
         }
         this.router.params.subscribe(params => {
             this.catName = params['catName'];
             this.prodId = params['prodId'];
+            if (this.isSiblingCategoryClicked) {
+                this.ngAfterViewInit();
+            }
 
         });
 
@@ -141,6 +155,29 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
 
+        this.imageUrl1 = SERVER_URL + "/templates/viewWebImages?userId="
+        + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=thirdNavi";
+
+        this.owlOptions = {
+            loop: false,
+            margin: 5,
+            stagePadding: 0,
+            nav: true,
+            dots: false,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 3
+                },
+                600: {
+                    items: 8
+                },
+                1000: {
+                    items: 8
+                }
+            }
+        }
+
         let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
 
         if (appUser) {
@@ -152,8 +189,12 @@ export class ProductComponent implements OnInit, AfterViewInit {
         }, error => {
             console.log('Error retrieving currency');
         });
-
-
+        this.categoryService.getCategories().subscribe(data => {
+            this.categoryService.getNodeById(data,'Home').subscribe(()=>{
+                this.categories = this.dataService.categories;
+                this.siblingProductsHandler();
+              });
+        });
     }
 
     ngAfterViewInit() {
@@ -868,5 +909,20 @@ export class ProductComponent implements OnInit, AfterViewInit {
         });
 
     };
+    siblingProductsHandler() {
+
+        let product = this.Data;
+        let prodCatId = product.selectedCategories[0];
+        if (this.categories !== null) {
+            let prodCategory = this.dataService.categories.filter(cat => {
+                return cat.id === prodCatId;
+            });
+        this.siblingProducts = prodCategory[0].products;
+        }
+    }
+
+    onRecomendedProductClickHandler() {
+        this.isSiblingCategoryClicked = true;
+    }
 }
 

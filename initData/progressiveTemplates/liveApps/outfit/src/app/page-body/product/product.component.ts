@@ -10,6 +10,7 @@ import { TitleService } from '../../services/title.service';
 import * as Player from '@vimeo/player';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { ProductsService } from '../../services/products/products.service';
+import { CategoriesService } from '../../services/categories/categories.service';
 declare var $: any;
 var gallaryThis;
 @Component({
@@ -58,6 +59,14 @@ export class ProductComponent implements OnInit, AfterViewInit {
     message;
     zoomRatio;
     responce;
+    // products with same category Id
+    siblingProducts: any = [];
+    allProducts: any = [];
+    allProductsSlice: any = [];
+    imageUrl1: any;
+    owlOptions;
+    isSiblingCategoryClicked: boolean = false;
+    categories: any = null;
     private prodId;
     constructor(private localStorageService: LocalStorageService,
                 private currencyService: CurrencyService,
@@ -66,14 +75,17 @@ export class ProductComponent implements OnInit, AfterViewInit {
                 private router: ActivatedRoute,
                 private route: Router,
                 private title: TitleService,
-                private productsService: ProductsService) {
+                private productsService: ProductsService,
+                private categoryService: CategoriesService) {
         this.Data = {
             tempImageArray : []
         }
         this.router.params.subscribe(params => {
             this.catName = params['catName'];
             this.prodId = params['prodId'];
-
+            if (this.isSiblingCategoryClicked) {
+                this.ngAfterViewInit();
+            }
         });
 
 
@@ -146,6 +158,29 @@ export class ProductComponent implements OnInit, AfterViewInit {
         var str = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
         this.todayDate = new Date(str);
 
+        this.imageUrl1 = SERVER_URL + "/templates/viewWebImages?userId="
+        + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=thirdNavi";
+
+        this.owlOptions = {
+            loop: false,
+            margin: 5,
+            stagePadding: 0,
+            nav: true,
+            dots: false,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 3
+                },
+                600: {
+                    items: 8
+                },
+                1000: {
+                    items: 8
+                }
+            }
+        }
+
         let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
 
         if (appUser) {
@@ -157,8 +192,12 @@ export class ProductComponent implements OnInit, AfterViewInit {
         }, error => {
             console.log('Error retrieving currency');
         });
-
-
+        this.categoryService.getCategories().subscribe(data => {
+            this.categoryService.getNodeById(data,'Home').subscribe(()=>{
+                this.categories = this.dataService.categories;
+                this.siblingProductsHandler();
+              });
+        });
     }
 
     ngAfterViewInit() {
@@ -852,5 +891,21 @@ export class ProductComponent implements OnInit, AfterViewInit {
             }
         });
     };
+    siblingProductsHandler() {
+
+        let product = this.Data;
+        let prodCatId = product.selectedCategories[0];
+        if (this.categories !== null) {
+            let prodCategory = this.dataService.categories.filter(cat => {
+                return cat.id === prodCatId;
+            });
+        
+        this.siblingProducts = prodCategory[0].products;
+        }
+    }
+
+    onRecomendedProductClickHandler() {
+        this.isSiblingCategoryClicked = true;
+    }
 }
 

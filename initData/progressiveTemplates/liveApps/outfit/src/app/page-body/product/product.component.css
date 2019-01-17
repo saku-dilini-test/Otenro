@@ -116,3 +116,11 @@
 .modal-footer button{
   margin-bottom:0;
 }
+#recomended-products {
+    text-transform: uppercase;
+    text-align: center;
+}
+
+#recomended-products-content {
+    padding: 25px 0;
+}
