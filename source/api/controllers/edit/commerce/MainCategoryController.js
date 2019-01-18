@@ -245,29 +245,38 @@ module.exports = {
 
                         if (isRankingStarted) {
 
-                            arr.forEach((cat) => {
+                            arr.forEach(function (node) {
 
-                                if (cat.childNodes.length > 0) {
-                                    var childNodesArr = cat.childNodes;
-
-                                    //Child categories sort by
-                                    var predicateBy = 'index';
-
-                                    //Sort child categories
-                                    var childNodesArrSorted = childNodesArr.sort((a, b) => {
-
-                                        if (a[predicateBy] > b[predicateBy]) {
+                                var recursiveSort = function (nodes) {
+                                    nodes = nodes.sort(function (a, b) {
+                                        if (a.index > b.index) {
 
                                             return 1;
                                         }
-
-                                        if (a[predicateBy] < b[predicateBy]) {
-
+                        
+                                        if (a.index < b.index) {
+                        
                                             return -1;
                                         }
                                         return 0;
                                     });
-                                    cat.childNodes = childNodesArrSorted;
+                                }
+
+                                var recursiveLoop = function (nodes) {
+                                    
+                                    for(var i = 0; i < nodes.length; i++) {
+                                        if (nodes[i].childNodes.length > 0) {
+
+                                            recursiveLoop(nodes[i].childNodes);
+                                            recursiveSort(nodes[i].childNodes);
+                                        }
+                                    }
+                                }
+
+                                if (node.childNodes.length > 0){
+                                    
+                                    recursiveSort(node.childNodes);
+                                    recursiveLoop(node.childNodes);
                                 }
                             });
                         }
