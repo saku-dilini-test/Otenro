@@ -856,15 +856,18 @@
         $scope.getSubscriptionPayments = function () {
 
             if (!$scope.subscriptionPaymentsReport.fromDate) {
-                toastr.error('Please select from date!', 'Warning', { closeButton: true });
+                // TODO: Add meaningful error message
+                toastr.error('Invalid date range!', 'Warning', { closeButton: true });
                 return;
             } 
             else if (!$scope.subscriptionPaymentsReport.toDate) {
-                toastr.error('Please select to date!', 'Warning', { closeButton: true });
+                // TODO: Add meaningful error message
+                toastr.error('Invalid date range!', 'Warning', { closeButton: true });
                 return;
             }
             else if ($scope.subscriptionPaymentsReport.fromDate >= $scope.subscriptionPaymentsReport.toDate) {
-                toastr.error('Please select a valid date range!', 'Warning', { closeButton: true });
+                // TODO: Add meaningful error message
+                toastr.error('Invalid date range!', 'Warning', { closeButton: true });
                 return;
             }
             else {
