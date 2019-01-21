@@ -385,5 +385,14 @@
             }
         }
 
+        $scope.genaratePromoCode = function (promoType) {
+
+            var randomString = Math.random().toString(36).substr(2, 8);
+
+            if(promoType == 'storewide'){
+                $scope.storeWide.promoCode = randomString;
+            }
+        }
+
     }
 })();

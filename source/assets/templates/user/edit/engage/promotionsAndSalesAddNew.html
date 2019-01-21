@@ -58,13 +58,34 @@
              <md-tab >
                 <md-tab-label>Store Wide</md-tab-label>
                 <md-tab-body>
-                    <div class="md-dialog-header">
-                        <h1>Store Wide</h1>
-                    </div>
                     <md-content layout-padding>
                         <form name="storeWideForm">
+                            <div class="md-dialog-header">
+                                <h1>Adding Store Wide Promotion</h1>
+                            </div>
                             <div class="md-dialog-main">
                                 <div class="clearfix">
+                                    <div class="row">
+                                        <label class="col-md-12 padding-bottom">
+                                            Create discount code
+                                        </label>
+                                        <div class="col-md-5">
+                                            <md-input-container class="md-block">
+                                                <label>Promo Code</label>
+                                                <input md-maxlength="15" maxlength="15"  ng-required="true" name="promoCode" ng-model="storeWide.promoCode">
+                                                <div ng-messages="storeWideForm.promoCode.$error" ng-show="storeWideForm.promoCode.$dirty">
+                                                    <div ng-message="required">promoCode is required.</div>
+                                                    <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
+                                                </div>
+                                            </md-input-container>
+                                        </div>
+                                        <div class="col-md-2 text-center margin-top">
+                                        <label>or</label>
+                                        </div>
+                                        <div class="col-md-5 margin-top">
+                                        <button class="btn-material-2" ng-click="genaratePromoCode('storewide')">Generate Code</button>
+                                        </div>
+                                    </div>
 
                                     <md-radio-group ng-model="storeWide.discountType">
 
