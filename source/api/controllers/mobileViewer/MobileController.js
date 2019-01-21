@@ -147,6 +147,8 @@ module.exports = {
                 });
     
             });
+        }else{
+            res.send('ok');
         }
     },
 

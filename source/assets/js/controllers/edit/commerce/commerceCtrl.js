@@ -1097,7 +1097,6 @@
 
 
         $scope.updateEmailSettings = function (email, type, emailType) {
-
             var imageData ;
             var oldImage ;
             var isUpdateHImg = true;
@@ -1106,22 +1105,13 @@
                 toastr.error('Please fill the all fields','Warning',{
                     closeButton: true
                 });
-            }else if(emailType=="orderConfirmedEmail" && !$scope.picFileHeader[0]){
-                toastr.error('Please upload an header image','Warning',{
-                    closeButton: true
-                });
-            }else if(emailType=="orderFulfilledEmail" && !$scope.picFileHeader2[0]){
-                toastr.error('Please upload an header image','Warning',{
-                    closeButton: true
-                });
-            }else if(emailType=="orderRefundEmail" && !$scope.picFileHeader3[0]){
-                toastr.error('Please upload an header image','Warning',{
-                    closeButton: true
-                });
             }else {
                 email.appId = $rootScope.appId;
+
+
                 commerceService.updateEmailSettings(email)
                     .success(function (data) {
+                        // console.log(data)
                         var data = {"emailType" : emailType,"appId":$rootScope.appId,"userId":$auth.getPayload().id};
                         if (emailType=="orderConfirmedEmail"){
                             oldImage = $scope.oldImage1
@@ -1136,11 +1126,15 @@
                             isUpdateHImg = false;
                         }
 
-                        if ((emailType=="orderConfirmedEmail") || (emailType=="orderFulfilledEmail") || (emailType=="orderRefundEmail")) {
+                        // console.log(oldImage,imageData)
+                        // console.log(imageData[0].includes("data:image/jpeg;base64") && (emailType=="orderConfirmedEmail" || emailType=="orderFulfilledEmail" || emailType=="orderRefundEmail"))
+                        if (imageData[0].includes("data:image/jpeg;base64") && (emailType=="orderConfirmedEmail" || emailType=="orderFulfilledEmail" || emailType=="orderRefundEmail")) {
 
-                            commerceService.updateHeaderFooterSettings({"file":imageData,"data":data,"oldImage":oldImage,"isNew":$rootScope.tempNew}).success(function (data) {
-
-
+                            commerceService.updateHeaderFooterSettings({"file":imageData,"data":data,"oldImage":oldImage,"isNew":$rootScope.tempNew}).success(function (details) {
+                                // console.log(details);
+                                $scope.oldImage1 = details.data[0].orderConfirmedEmailImage;
+                                $scope.oldImage2 = details.data[0].orderFulfilledEmailImage;
+                                $scope.oldImage3 = details.data[0].orderRefundedEmailImage;
                                 if (type == "next") {
                                     var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
                                     $scope.selectedIndex = index;
@@ -1164,10 +1158,34 @@
                                     closeButton: true
                                 });
                             })
-                        }else {
+                        }
+                        else {
+                            // console.log($scope.oldImage1)
+                            if (emailType=="orderConfirmedEmail"){
+                                if($scope.oldImage1){
+                                    data['orderConfirmedEmailImage']  = $scope.oldImage1;
+                                }else{
+                                    data['orderConfirmedEmailImage']  = 'order-confirm.jpg';
+                                }
+
+                            }else if (emailType=="orderFulfilledEmail"){
+                                if($scope.oldImage2){
+                                    data['orderRefundedEmailImage']  = $scope.oldImage2;
+                                }else{
+                                    data['orderRefundedEmailImage']  = 'order-fulfilled.jpg';
+                                }
+
+                            }else if (emailType=="orderRefundEmail"){
+                                if($scope.oldImage3){
+                                    data['orderFulfilledEmailImage']  = $scope.oldImage3;
+                                }else{
+                                    data['orderFulfilledEmailImage']  = 'order-refunded.jpg';
+                                }
+
+                            }else {
+                                isUpdateHImg = false;
+                            }
                             commerceService.updateEmailSettings(data).success(function (data) {
-
-
                                 if (type == "next") {
                                     var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
                                     $scope.selectedIndex = index;
@@ -1177,13 +1195,14 @@
                                     $mdDialog.hide();
                                 }
 
-                                toastr.success('Email Settings has been changed ', 'Success', {
-                                    closeButton: true
-                                });
-                                if(emailType=="orderRefundEmail" && type === 'finish'){
+                                if ($scope.selectedIndex==6||type == "finish"){
+
                                     $mdDialog.hide();
                                 }
 
+                                toastr.success('Email Settings has been changed ', 'Success', {
+                                    closeButton: true
+                                });
                             }).error(function (err) {
                                 toastr.error('Unable to Create', 'Warning', {
                                     closeButton: true
@@ -1277,12 +1296,18 @@
                     //$scope.picFileFooter =  imagePath + $scope.email.imageFooter;
                     if($scope.email.orderConfirmedEmailImage){
                         $scope.picFileHeader[0] =  imagePath + $scope.email.orderConfirmedEmailImage;
+                    }else{
+                        $scope.picFileHeader[0] =  imagePath + 'order-confirm.jpg';
                     }
                     if($scope.email.orderFulfilledEmailImage){
                         $scope.picFileHeader2[0] =  imagePath + $scope.email.orderFulfilledEmailImage;
+                    }else{
+                        $scope.picFileHeader2[0] =  imagePath + 'order-fulfilled.jpg';
                     }
                     if($scope.email.orderRefundedEmailImag){
                         $scope.picFileHeader3[0] =  imagePath + $scope.email.orderRefundedEmailImage;
+                    }else{
+                        $scope.picFileHeader3[0] =  imagePath + 'order-refunded.jpg';
                     }
 
 

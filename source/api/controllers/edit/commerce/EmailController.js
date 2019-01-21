@@ -65,12 +65,12 @@ module.exports = {
     },
     updateEmailSettings : function(req,res){
 
-        //console.log(req.body);
+        console.log(req.body);
         var appId = req.body.appId;
         //sails.log.info(appId);
         var saveData = req.body;
 
-        console.log("saveData " + JSON.stringify(saveData));
+        // console.log("saveData " + JSON.stringify(saveData));
 
         UserEmail.update({ appId :appId }, saveData).exec(function(err,r){
             if (err){
@@ -87,7 +87,7 @@ module.exports = {
 
     updateHeaderFooterSettings : function(req,res){
 
-        console.log("updateHeaderFooterSettings " );
+        console.log(req.body);
 
         var randomstring = require("randomstring");
         var tmpImage = req.body.file;
@@ -96,7 +96,7 @@ module.exports = {
         var imgeFileName = randomstring.generate()+".png";
         var data = tmpImage[0].replace(/^data:image\/\w+;base64,/, "");
         var buf = new Buffer(data, 'base64');
-        console.log(buf);
+        // console.log(buf);
         var appRoot = path.resolve();
         //var dePath= appRoot + '/assets/images/';
         var appId = req.body.data.appId;
@@ -140,14 +140,15 @@ module.exports = {
 
                 console.log("saveData 2 "+ JSON.stringify(saveData));
 
-                UserEmail.update({ appId :appId }, saveData).exec(function(err,r){
+                UserEmail.update({ appId :appId }, saveData).exec(function(err, data){
                     if (err) {
                         console.log("error  " + err);
                         res.send(err);
 
                     }
                     res.send({
-                        message: "Email Settings has been successfully added"
+                        message: "Email Settings has been successfully added",
+                        data: data
                     });
                 });
 
