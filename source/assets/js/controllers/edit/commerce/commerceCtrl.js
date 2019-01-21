@@ -379,8 +379,8 @@
                         var date = new Date(result[i].createdAt);
                         $scope.displayDate = date.toLocaleString();
                         $scope.year = date.getFullYear();
-                        $scope.month = date.getMonth() + 1;
-                        $scope.date = date.getDate();
+                        $scope.month =  ('0' + (date.getMonth() + 1)).slice(-2);
+                        $scope.date = ('0' + date.getDate()).slice(-2);
                         result[i].createdDate = $scope.year + "-" + $scope.month + "-" + $scope.date;
                     }
                     $scope.ordersList = result;
