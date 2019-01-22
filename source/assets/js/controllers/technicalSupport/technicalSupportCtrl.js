@@ -62,6 +62,8 @@
         $scope.searchByAppName = null;
         $scope.filterObject = null;
         $scope.subscriptionPaymentsReport = {};
+        $scope.prevSearchByAppNameValue = '';
+        $scope.prevSearchByStatusValue = '';
 
         $scope.pagination = {
             currentPage:  1,
@@ -1700,9 +1702,21 @@
          * 
          **/
         $scope.filterAppsByName = function (searchByAppName) {
-
             $scope.filterObject = { 'appName': searchByAppName };
+            $scope.searchPublishApps = $scope.prevSearchByStatusValue !== "All" ? $scope.prevSearchByStatusValue : undefined;
+            $scope.filterObject.publishedStatus = $scope.searchPublishApps;
+            $scope.prevSearchByAppNameValue = searchByAppName;           
         };
+
+        $scope.filterApps = function (status) {
+            $scope.searchPublishApps = status !== "All" ? status : undefined;
+            $scope.filterObject = { 'publishedStatus' : $scope.searchPublishApps };                
+            $scope.prevSearchByStatusValue= status;
+            
+            if($scope.prevSearchByAppNameValue){
+                $scope.filterObject.appName = $scope.prevSearchByAppNameValue;
+            }     
+        }        
 
         // document.addEventListener("wheel", function (e) {
         //     $scope.onScrollHandler();
