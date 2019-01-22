@@ -49,8 +49,8 @@
         $scope.applicationBaseReportResponseData = null;
         $scope.showRegisterdusers = false;
         $scope.showAppDetails = false;
-        $scope.showPayment = true;
-        $scope.showRevenueAndTrafficReport = false;
+        $scope.showPayment = false;
+        $scope.showRevenueAndTrafficReport = true;
         $scope.showapplicationBaseReport = false;
         $scope.failedTanscationReport = false;
         $scope.showCustomerCareReport = false;
@@ -64,6 +64,7 @@
         $scope.subscriptionPaymentsReport = {};
         $scope.prevSearchByAppNameValue = '';
         $scope.prevSearchByStatusValue = '';
+        $scope.activeSelectedReportName = -1;
 
         $scope.pagination = {
             currentPage:  1,
@@ -176,6 +177,7 @@
                         toastr.error('Apps Loading Error', 'Warning', {closeButton: true});
                     });
 
+                    $scope.showPayment = true;
                     $scope.showRevenueAndTrafficReport = true;
                     $scope.showapplicationBaseReport = true;
                     $scope.failedTanscationReport = true;
@@ -203,6 +205,13 @@
             }
         }
 
+        $scope.onTabSelected = function (selectedReportName){
+            $scope.activeSelectedReportName = selectedReportName;
+        }
+
+        $scope.isShowDatePickers = function (reeportName){
+            return $scope.activeSelectedReportName === reeportName;
+        }
 
         $scope.getAppIdsArray = function (apps) {
             var arr = [];
