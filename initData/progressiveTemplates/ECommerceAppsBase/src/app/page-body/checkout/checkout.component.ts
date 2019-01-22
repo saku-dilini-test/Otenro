@@ -1501,10 +1501,20 @@ export class CheckoutComponent implements OnInit {
         this._success.next('Invalid promocode');
         setTimeout(() => { }, 3100);
     }else{
-      if(this.selectedPromo[0].minimumOderValue && this.selectedPromo[0].minimumOderValue > this.subTotal){
+      if(this.selectedPromo[0].minimumRequirements == 'minimumOrderValue' && this.selectedPromo[0].minimumOderValue > this.subTotal){
         this._success.subscribe((message) => this.promoCodeWarningMessage = message);
         debounceTime.call(this._success, 4000).subscribe(() => this.promoCodeWarningMessage = null);
         this._success.next('minimum order value should be more than '+this.sign+' '+ this.selectedPromo[0].minimumOderValue+ ' to activate this promocode');
+        setTimeout(() => { }, 3100);
+        this.selectedPromo = null;
+        var promoSelect = document.getElementById("promoSelect") as HTMLSelectElement;
+        if(promoSelect){
+          promoSelect.selectedIndex = 0;
+        }
+      }else if(this.selectedPromo[0].minimumRequirements == 'minimumOrderQuantity' && this.selectedPromo[0].minimumOrderQuantity > this.totalQuantity){
+        this._success.subscribe((message) => this.promoCodeWarningMessage = message);
+        debounceTime.call(this._success, 4000).subscribe(() => this.promoCodeWarningMessage = null);
+        this._success.next('minimum order quantity should be more than '+' '+ this.selectedPromo[0].minimumOrderQuantity+ ' to activate this promocode');
         setTimeout(() => { }, 3100);
         this.selectedPromo = null;
         var promoSelect = document.getElementById("promoSelect") as HTMLSelectElement;

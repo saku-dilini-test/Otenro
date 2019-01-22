@@ -56,7 +56,13 @@ module.exports = {
         promoCode : {
             type:'string'
         },
+        minimumRequirements : {
+            type:'string'
+        },
         minimumOderValue : {
+            type:'float'
+        },
+        minimumOrderQuantity : {
             type:'float'
         },
         category : {
