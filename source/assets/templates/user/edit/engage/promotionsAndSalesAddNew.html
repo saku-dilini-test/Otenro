@@ -151,15 +151,6 @@
                                         </md-radio-group>
                                     </fieldset>
 
-
-                                    <!--<md-input-container class="md-block">-->
-                                        <!--<label>Name</label>-->
-                                        <!--<input md-maxlength="15" maxlength="15"  ng-required="true" name="name" ng-model="storeWide.name">-->
-                                        <!--<div ng-messages="storeWideForm.name.$error" ng-show="storeWideForm.name.$dirty">-->
-                                            <!--<div ng-message="required">Name is required.</div>-->
-                                            <!--<div ng-message="md-maxlength">The name must be less than 15 characters long.</div>-->
-                                        <!--</div>-->
-                                    <!--</md-input-container>-->
                                     <fieldset>
                                         <label>Customer Eligibility</label>
                                         <md-radio-group class="no-margin" ng-model="storeWide.customerEligibility">
@@ -481,31 +472,73 @@
            <md-tab >
                 <md-tab-label>Single Product</md-tab-label>
                 <md-tab-body>
-                    <div class="md-dialog-header">
-                        <h1>Single Product</h1>
-                    </div>
-                    <md-content layout-padding>
+                   <md-content layout-padding>
                         <form name="singleProductForm">
+                            <div class="md-dialog-header">
+                                <h1>Addding Single Product Pormotion</h1>
+                            </div>
                             <div class="md-dialog-main">
                                 <div class="clearfix">
-
-                                    <md-radio-group ng-model="singleProduct.discountType" required >
-
-                                        <md-radio-button value="discountValue" class="md-primary">Discount Value</md-radio-button>
-                                        <md-radio-button value="discount" class="md-primary">Discount %</md-radio-button>
-
-                                    </md-radio-group>
-
-                                    <md-input-container class="md-block">
-                                        <label>Name</label>
-                                        <input md-maxlength="15" maxlength="15" ng-required="true" name="name" ng-model="singleProduct.name">
-                                        <div ng-messages="singleProductForm.name.$error" ng-show="singleProductForm.name.$dirty">
-                                            <div ng-message="required">Name is required.</div>
-                                            <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
+                                    <div class="row">
+                                        <label class="col-md-12 padding-bottom">
+                                            Create discount code
+                                        </label>
+                                        <div class="col-md-5">
+                                            <md-input-container class="md-block no-margin">
+                                                <label>Discount Code</label>
+                                                <input  maxlength="15"  ng-required="true" name="promoCode" ng-model="singleProduct.promoCode">
+                                                <div ng-messages="singleProductForm.promoCode.$error" ng-show="singleProductForm.promoCode.$dirty">
+                                                    <div ng-message="required">promoCode is required.</div>
+                                                    <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
+                                                </div>
+                                            </md-input-container>
                                         </div>
-                                    </md-input-container>
+                                        <div class="col-md-2 text-center margin-top">
+                                            <label>or</label>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <button class="btn-material-2" ng-click="genaratePromoCode('singleproduct')">Generate Code</button>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <md-checkbox class="no-margin"  aria-label="redeemable at checkout" ng-model="storeWide.isRedeemableAtCheckout">
+                                                <span>Enable code for redemption at check out only.<br>
+                                                    (Disabling this option will show the discounted value under each product)
+                                                </span>
+                                            </md-checkbox>
+                                        </div>
+                                    </div>
 
+
+                                    <div class="row padding-top">
+                                        <div class="col-xs-6 padding-top">
+                                            <md-select  ng-model="singleProduct.discountType">
+                                                <md-option  value="discount" ng-selected="true">Percentage</md-option>
+                                                <md-option  value="discountValue">Value</md-option>
+                                            </md-select>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <md-input-container class="md-block"  ng-if = "singleProduct.discountType == 'discountValue'">
+                                                <label>Discount</label>
+                                                <input md-maxlength="15" maxlength="15"  ng-required="true" name="discount" ng-model="singleProduct.discount" ng-pattern="/[0-9]/g">
+                                                <div ng-messages="singleProductForm.discount.$error" ng-show="singleProductForm.discount.$dirty">
+                                                    <div ng-message="required">Discount is required.</div>
+                                                </div>
+                                                <span class="error" ng-show="singleProductForm.discount.$error.pattern">Enter a valid value</span>
+                                            </md-input-container>
+                                            <md-input-container  class="md-block"  ng-if = "singleProduct.discountType == 'discount'">
+                                                <label>Discount</label>
+                                                <input md-maxlength="4" maxlength ="4" ng-pattern="/^100$|^\d{0,2}(\.\d{1,2})? *%?$/"  ng-required="true" name="discountPercent" ng-model="singleProduct.discountPercent">
+                                                <div ng-messages="singleProductForm.discountPercent.$error" ng-show="singleProductForm.discountPercent.$dirty">
+                                                    <div ng-message="required">Discount is required.</div>
+                                                </div>
+                                                <span class="error" ng-show="singleProductForm.discountPercent.$error.pattern">Enter a valid value</span>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+
+                                    <label class="padding-bottom">Product</label>
                                     <fieldset class="row" ng-if = "array.length > 0">
+
                                         <div class="col-md-6 country-list">
                                             <label>Select Products</label>
                                             <br>
@@ -522,62 +555,31 @@
                                                 <md-checkbox ng-checked="exists(oneProduct, selected)"
                                                              ng-click="toggle(oneProduct, selected)"
                                                              aria-label="oneProduct name" >
-                                                    {{oneProduct.name}}<br>
-                                                    {{oneProduct.sku}}<br>
-                                                    <div ng-repeat="select in oneProduct.selection">
-                                                        {{select.name}} - {{select.vType}}
-                                                    </div>
+                                                    SKU {{oneProduct.sku}} {{oneProduct.name}}
                                                 </md-checkbox>
                                             </div>
                                         </div>
                                         <div class="col-md-6 country-list">
-                                            <label>Selected</label>
-                                            <div ng-if ="IsSingleSelection === false" class="md-label" ng-repeat="product in selected">
-                                                <!--<span>{{product.name}}</span>-->
-                                                <md-checkbox ng-checked="exists(product, selected)"
-                                                             ng-click="toggle(product, selected)"
-                                                             aria-label="product name" >
-                                                    {{product.name}}<br>
-                                                    {{product.sku}}<br>
-                                                    <div ng-repeat="select in product.selection">
-                                                        {{select.name}} - {{select.vType}}
-                                                    </div>
-                                                </md-checkbox>
+                                            <div ng-if="selectedProduct && selectedProduct != {}">
+                                                <img class="pull-left margin-right" ng-src="{{imageURL}}/{{selectedProduct.imageUrl}}" width="150px">
+                                                {{selectedProduct.name}}<br>
+                                                SKU : {{selectedProduct.sku}}
+                                                <div ng-repeat="select in selectedProduct.selection">
+                                                    {{select.name}} : {{select.vType}}
+                                                </div>
+                                                Price : {{selectedProduct.price}}
                                             </div>
-                                            <div ng-if ="IsSingleSelection" class="md-label" ng-repeat="product in selected">
-                                               <!-- <span>{{product.name}}</span>-->
-                                                <md-checkbox ng-checked="exists(product, selected)"
-                                                             ng-click="toggle(product, selected)"
-                                                             aria-label="oneProduct.name" >
-                                                    {{product.name}}<br>
-                                                    {{product.sku}}<br>
-                                                    <div ng-repeat="select in product.selection">
-                                                        {{select.name}} - {{select.vType}}
-                                                    </div>
-                                                </md-checkbox>
-                                            </div>
+                                        </div>
+                                        <div class="col-md-12 border-top margin-vertical">
+                                            <span ng-repeat="product in selected" class="padding-right">
+                                                SKU {{product.sku}} {{product.name}}
+                                                <button style="position: relative" class="check-mark-button" ng-click="toggle(product, selected)">X</button>
+                                            </span>
                                         </div>
                                     </fieldset>
                                     <fieldset ng-if="array.length == 0">
                                         <label> There are no Products left.</label><br><br>
                                     </fieldset>
-
-                                    <md-input-container class="md-block" flex="50" ng-if = "singleProduct.discountType == 'discountValue'">
-                                        <label>Discount</label>
-                                        <input  md-maxlength="15" maxlength="15"  ng-required="true" name="discount" ng-model="singleProduct.discount">
-                                        <div ng-messages="singleProductForm.discount.$error" ng-show="singleProductForm.discount.$dirty">
-                                            <div ng-message="required">Name is required.</div>
-                                            <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
-                                        </div>
-                                    </md-input-container>
-                                    <md-input-container class="md-block" flex="50" ng-if = "singleProduct.discountType == 'discount'">
-                                        <label>Discount</label>
-                                        <input md-maxlength="2" maxlength ="2" ng-pattern="/^100$|^\d{0,2}(\.\d{1,2})? *%?$/"  ng-required="true" name="discountPercent" ng-model="singleProduct.discountPercent">
-                                        <div ng-messages="singleProductForm.discountPercent.$error" ng-show="singleProductForm.discount.$dirty">
-                                            <div ng-message="required">Name is required.</div>
-                                        </div>
-                                        <span class="error" ng-show="singleProductForm.discountPercent.$error.pattern">Enter a valid value</span>
-                                    </md-input-container>
 
                                     <fieldset>
                                         <label>Date</label>
@@ -589,58 +591,137 @@
 
                                         <adm-dtp ng-model='singleProduct.dateTo' options='{calType: "gregorian",format: "YYYY/MM/DD", default: today}' class="col-md-5"></adm-dtp>
                                     </div>
+                                    <!--<br>-->
+                                    <!--<fieldset >-->
+                                            <!--<md-checkbox  aria-label="Limit user" ng-model="singleProduct.isLimitUsers">-->
+                                                <!--<label>Limit users</label>-->
+                                            <!--</md-checkbox>-->
+                                            <!--<md-input-container ng-if="singleProduct.isLimitUsers" class="md-block" flex="50">-->
+                                                <!--<input md-maxlength="15" maxlength="15"  ng-required="true" name="Limit users" ng-model="singleProduct.limitUsers">-->
+                                                <!--<div ng-messages="singleProductForm.limitUsers.$error" ng-show="singleProductForm.limitUsers.$dirty">-->
+                                                    <!--<div ng-message="required">Limit Users is required.</div>-->
+                                                    <!--<div ng-message="md-maxlength">The name must be less than 15 characters long.</div>-->
+                                                <!--</div>-->
+                                            <!--</md-input-container>-->
+                                    <!--</fieldset>-->
+                                    <!--<fieldset  >-->
+                                        <!--<md-checkbox  aria-label="Limit code usage" ng-model="singleProduct.isLimitNumberOfTime">-->
+                                            <!--<label>Limit number of times code can be used</label>-->
+                                        <!--</md-checkbox>-->
+                                        <!--<md-input-container ng-if="singleProduct.isLimitNumberOfTime" class="md-block" flex="50">-->
+                                            <!--<input md-maxlength="15" maxlength="15"  ng-required="true" name="Limit users" ng-model="singleProduct.limitNumberOfTime">-->
+                                            <!--<div ng-messages="singleProductForm.limitNumberOfTime.$error" ng-show="singleProductForm.limitNumberOfTime.$dirty">-->
+                                                <!--<div ng-message="required">Limit Users is required.</div>-->
+                                                <!--<div ng-message="md-maxlength">The name must be less than 15 characters long.</div>-->
+                                            <!--</div>-->
+                                        <!--</md-input-container>-->
+                                    <!--</fieldset>-->
+                                    <!--<fieldset  >-->
+                                        <!--<md-checkbox  aria-label="TnC" ng-model="singleProduct.isTermsAndCondition">-->
+                                            <!--<label>Terms and conditions</label>-->
+                                        <!--</md-checkbox>-->
+                                        <!--<fieldset ng-if="singleProduct.isTermsAndCondition" >&lt;!&ndash;ng-if="data.cb5"&ndash;&gt;-->
+                                            <!--<textarea type="text" class="input-shadow-border" name="TnC" ng-model="singleProduct.termsAndCondition" required ></textarea>-->
+                                        <!--</fieldset>-->
+                                    <!--</fieldset>-->
+
+
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-md-5">-->
+                                            <!--<md-input-container class="md-block">-->
+                                                <!--<label>Promo Code</label>-->
+                                                <!--<input md-maxlength="15" maxlength="15" ng-required="true" name="name" ng-model="singleProduct.promoCode">-->
+                                                <!--<div ng-messages="singleProductForm.promoCode.$error" ng-show="singleProductForm.promoCode.$dirty">-->
+                                                    <!--<div ng-message="required">promoCode is required.</div>-->
+                                                <!--</div>-->
+                                            <!--</md-input-container>-->
+                                        <!--</div>-->
+                                        <!--&lt;!&ndash;<div class="col-md-2 text-center margin">&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<label>or</label>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<div class="col-md-5 margin">&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<button class="btn-material">Genarate Code</button>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                    <!--</div>-->
                                     <br>
-                                    <fieldset >
-                                            <md-checkbox  aria-label="Limit user" ng-model="singleProduct.isLimitUsers">
-                                                <label>Limit users</label>
-                                            </md-checkbox>
-                                            <md-input-container ng-if="singleProduct.isLimitUsers" class="md-block" flex="50">
-                                                <input md-maxlength="15" maxlength="15"  ng-required="true" name="Limit users" ng-model="singleProduct.limitUsers">
-                                                <div ng-messages="singleProductForm.limitUsers.$error" ng-show="singleProductForm.limitUsers.$dirty">
-                                                    <div ng-message="required">Limit Users is required.</div>
-                                                    <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
+                                    <fieldset>
+                                        <label>Minimum Requirement</label>
+                                        <md-radio-group ng-model="singleProduct.minimumRequirements">
+
+                                            <md-radio-button value="none" class="md-primary">None</md-radio-button>
+
+                                            <md-radio-button value="minimumOrderValue" class="md-primary">Minimum Purchase Amount</md-radio-button>
+                                            <md-input-container  placeholder="" class="md-no-float md-block" flex="50" ng-if = "singleProduct.minimumRequirements == 'minimumOrderValue'">
+                                                <input md-maxlength="15" maxlength="15" name="minimumOrderValue" ng-model="singleProduct.minimumOderValue"  ng-required="true">
+                                                <div ng-messages="singleProductForm.minimumOrderValue.$error" ng-show="singleProductForm.minimumOrderValue.$dirty" ng-if = "singleProduct.minimumRequirements == 'minimumOrderValue'">
+                                                    <div ng-message="required">Minimum order value is required.</div>
                                                 </div>
                                             </md-input-container>
+
+                                            <md-radio-button value="minimumOrderQuantity" class="md-primary">Minimum quantity of items</md-radio-button>
+                                            <md-input-container  placeholder="" class="md-no-float md-block" flex="50" ng-if = "singleProduct.minimumRequirements == 'minimumOrderQuantity'">
+                                                <input md-maxlength="15" maxlength="15" name="minimumOrderQuantity" ng-model="singleProduct.minimumOrderQuantity"  ng-required="true">
+                                                <div ng-messages="singleProductForm.minimumOrderQuantity.$error" ng-show="singleProductForm.minimumOrderQuantity.$dirty" ng-if = "singleProduct.minimumRequirements == 'minimumOrderQuantity'">
+                                                    <div ng-message="required">Minimum order quantity is required.</div>
+                                                </div>
+                                            </md-input-container>
+
+                                        </md-radio-group>
                                     </fieldset>
-                                    <fieldset  >
+
+                                    <fieldset>
+                                        <label>Customer Eligibility</label>
+                                        <md-radio-group class="no-margin" ng-model="singleProduct.customerEligibility">
+
+                                            <md-radio-button value="everyone" class="md-primary">Everyone</md-radio-button>
+
+                                            <md-radio-button value="specificCustomers" class="md-primary">Sepecific Customers</md-radio-button>
+                                            <md-input-container  placeholder="Enter email address" class="md-no-float md-block" flex="75" ng-if = "singleProduct.customerEligibility == 'specificCustomers'">
+                                                <input md-maxlength="30" maxlength="30" name="specificCustomersEmail" ng-model="singleProduct.specificCustomersEmail">
+                                                <button class="check-mark-button">&check;</button>
+                                            </md-input-container>
+                                        </md-radio-group>
+                                        <div  ng-if = "singleProduct.specificCustomersEmailList">
+                                            <span class="email-group">Rakitha@gmail.com <span>&cross;</span></span>
+                                        </div>
+                                    </fieldset>
+
+
+
+                                    <fieldset>
+                                        <label>Usage Limits</label><br>
                                         <md-checkbox  aria-label="Limit code usage" ng-model="singleProduct.isLimitNumberOfTime">
                                             <label>Limit number of times code can be used</label>
                                         </md-checkbox>
-                                        <md-input-container ng-if="singleProduct.isLimitNumberOfTime" class="md-block" flex="50">
-                                            <input md-maxlength="15" maxlength="15"  ng-required="true" name="Limit users" ng-model="singleProduct.limitNumberOfTime">
+                                        <md-input-container placeholder="Limit" ng-if ="singleProduct.isLimitNumberOfTime" class="md-no-float md-block" flex="75">
+                                            <input md-maxlength="15" maxlength="15"  ng-required="true" name="limitNumberOfTime" ng-model="singleProduct.limitNumberOfTime">
                                             <div ng-messages="singleProductForm.limitNumberOfTime.$error" ng-show="singleProductForm.limitNumberOfTime.$dirty">
-                                                <div ng-message="required">Limit Users is required.</div>
+                                                <div ng-message="required">Limit is required.</div>
                                                 <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
                                             </div>
                                         </md-input-container>
-                                    </fieldset>
-                                    <fieldset  >
-                                        <md-checkbox  aria-label="TnC" ng-model="singleProduct.isTermsAndCondition">
-                                            <label>Terms and conditions</label>
+                                        <md-checkbox  aria-label="Limit user" ng-model="singleProduct.isLimitUsers">
+                                            <label>Limit one use per customer</label>
                                         </md-checkbox>
-                                        <fieldset ng-if="singleProduct.isTermsAndCondition" ><!--ng-if="data.cb5"-->
-                                            <textarea type="text" class="input-shadow-border" name="TnC" ng-model="singleProduct.termsAndCondition" required ></textarea>
+                                        <!--<md-input-container  ng-if ="storeWide.isLimitUsers" class="md-block" flex="50">-->
+                                        <!--<input  md-maxlength="15" maxlength="15"  ng-required="true" name="Limit users" ng-model="storeWide.limitUsers">-->
+                                        <!--<div ng-messages="storeWideForm.limitUsers.$error" ng-show="storeWideForm.limitUsers.$dirty">-->
+                                        <!--<div ng-message="required">Limit Users is required.</div>-->
+                                        <!--<div ng-message="md-maxlength">The name must be less than 15 characters long.</div>-->
+                                        <!--</div>-->
+                                        <!--</md-input-container>-->
+                                    </fieldset>
+
+
+                                    <fieldset>
+                                        <!--<md-checkbox  aria-label="TnC" ng-model="storeWide.isTermsAndCondition">-->
+                                        <!--<label>Terms and conditions</label>-->
+                                        <!--</md-checkbox>-->
+                                        <label>Terms and conditions</label>
+                                        <fieldset>
+                                            <textarea type="text" class="input-shadow-border" name="TnC" ng-model="singleProduct.termsAndCondition" ></textarea>
                                         </fieldset>
                                     </fieldset>
-
-
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <md-input-container class="md-block">
-                                                <label>Promo Code</label>
-                                                <input md-maxlength="15" maxlength="15" ng-required="true" name="name" ng-model="singleProduct.promoCode">
-                                                <div ng-messages="singleProductForm.promoCode.$error" ng-show="singleProductForm.promoCode.$dirty">
-                                                    <div ng-message="required">promoCode is required.</div>
-                                                </div>
-                                            </md-input-container>
-                                        </div>
-                                        <!--<div class="col-md-2 text-center margin">-->
-                                            <!--<label>or</label>-->
-                                        <!--</div>-->
-                                        <!--<div class="col-md-5 margin">-->
-                                            <!--<button class="btn-material">Genarate Code</button>-->
-                                        <!--</div>-->
-                                    </div>
 
                                 </div>
                             </div>

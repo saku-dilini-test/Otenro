@@ -3034,6 +3034,11 @@ table.md-calendar-day-header{
 .margin{
     margin: 16px !important;
 }
+
+.border-top{
+    border-top: 1px solid #666666;
+}
+
 /* added by .sanira */
 .width-100{
     width: 100%;

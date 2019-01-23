@@ -10,12 +10,15 @@
     function SalesAndPromotionCtrl($scope, $mdDialog, $rootScope, $auth, toastr,
            salesAndPromotionService, $http, SERVER_URL,commerceService,item,$filter) {
 
-       $scope.item = item;
-       $scope.selectedProduct = {};
-       $scope.allVariants = [];
-       $scope.allProds = [];
-   $scope.availableProducts = [];
-
+        $scope.item = item;
+        $scope.selectedProduct = null;
+        $scope.allVariants = [];
+        $scope.allProds = [];
+        $scope.availableProducts = [];
+        $scope.imageURL = SERVER_URL +
+            "templates/viewWebImages?userId=" + $auth.getPayload().id
+            + "&appId=" + $rootScope.appId + '&'
+            + new Date().getTime()+"&images=thirdNavi";
         $scope.addNewSalesAndPromotions=function(){
             return salesAndPromotionService.showPromotionsAndSalesAddNewDialog();
         };
@@ -64,12 +67,17 @@
                 .success(function (result) {
                     $scope.productsList = result;
 
+                    console.log($scope.productsList)
+
                     $scope.productsList.forEach(function(prod){
                         prod.variants.forEach(function(variant){
+                            if(!variant.imageUrl){
+                                variant['imageUrl'] = prod.imageUrl;
+                            }
                            $scope.allProds.push(variant);
                         });
                     });
-
+                    console.log($scope.allProds)
                     // console.log("inside Item main");
                     // console.log($scope.item);
                         if($scope.item && $scope.item.salesAndPromotionType == 'singleProduct' ){
@@ -180,6 +188,7 @@
 
 
                           $scope.toggle = function (item, list) {
+                              $scope.selectedProduct = item;
                               var idx = list.indexOf(item);
                               if (idx > -1) {
                                 list.splice(idx, 1);
@@ -391,6 +400,8 @@
 
             if(promoType == 'storewide'){
                 $scope.storeWide.promoCode = randomString;
+            }else if(promoType == 'singleproduct'){
+                $scope.singleProduct.promoCode = randomString;
             }
         }
 

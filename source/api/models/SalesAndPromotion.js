@@ -89,6 +89,9 @@ module.exports = {
         // Related to both limitNumberOfTime and limitUsers
         used: {
             type: 'integer'
+        },
+        isRedeemableAtCheckout: {
+            type: 'boolean'
         }
     }
 };
