@@ -319,7 +319,16 @@
                           <button class="btn btn-d btn-lg main-button d-inline promo-button" (click)="changePromocode(promocode.value)">
                             Apply
                           </button>
+                          <a *ngIf="selectedPromo && selectedPromo[0] && selectedPromo[0].termsAndCondition" style="line-height: 3;" role="button"  data-toggle="collapse" href="#promoTermsCollapse" aria-expanded="false" aria-controls="promoTermsCollapse">
+                            Terms & Condition &#9660;
+                          </a>
+                          <div *ngIf="selectedPromo && selectedPromo[0] && selectedPromo[0].termsAndCondition"  class="collapse" id="promoTermsCollapse">
+                            <div class="well">
+                               {{selectedPromo[0].termsAndCondition}}
+                            </div>
+                          </div>
                       </div>
+
                       <ngb-alert *ngIf="promoCodeWarningMessage" type="warning" (close)="promoCodeWarningMessage = null">
                           {{ promoCodeWarningMessage }}
                       </ngb-alert>

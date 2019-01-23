@@ -353,22 +353,30 @@
                  <form id="form_33031" novalidate>
                     <div class="row">
                         <div class="col-md-12"  *ngIf="promos.length > 1">
-                            <div class="radio padding-vertical">
-                                <label><input type="radio" name="promo" value="selectPromo" #promoType (click)="onPromoTypeSelect(promoType)" checked>Select a promocode</label><br>
-                                <label><input type="radio" name="promo" value="typePromo" (click)="onPromoTypeSelect(promoType)">Enter a promocode</label>
-                            </div>
-                            <div *ngIf="promoType.checked">
-                                <h4>Select a promocode</h4>
-                                <select id="promoSelect" class="form-control margin-bottom" (change)="changePromocode($event.target.value)">
-                                    <option *ngFor="let promo of promos" [ngValue]="promo.promoCode"> {{promo.promoCode}} </option>
-                                </select>
-                            </div>
-                            <div class="form-group" *ngIf="!promoType.checked">
+                            <!--<div class="radio padding-vertical">-->
+                                <!--<label><input type="radio" name="promo" value="selectPromo" #promoType (click)="onPromoTypeSelect(promoType)" checked>Select a promocode</label><br>-->
+                                <!--<label><input type="radio" name="promo" value="typePromo" (click)="onPromoTypeSelect(promoType)">Enter a promocode</label>-->
+                            <!--</div>-->
+                            <!--<div *ngIf="promoType.checked">-->
+                                <!--<h4>Select a promocode</h4>-->
+                                <!--<select id="promoSelect" class="form-control margin-bottom" (change)="changePromocode($event.target.value)">-->
+                                    <!--<option *ngFor="let promo of promos" [ngValue]="promo.promoCode"> {{promo.promoCode}} </option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                            <div class="form-group">
                                 <h4>Enter a promocode</h4>
                                 <input id=promocode #promocode class="form-control d-inline w-80" placeholder="Enter a promocode" type="text">
                                 <button class="btn btn-d btn-lg main-button d-inline promo-button" (click)="changePromocode(promocode.value)">
                                     Apply
                                 </button>
+                                <a *ngIf="selectedPromo && selectedPromo[0] && selectedPromo[0].termsAndCondition" style="line-height: 3;" role="button"  data-toggle="collapse" href="#promoTermsCollapse" aria-expanded="false" aria-controls="promoTermsCollapse">
+                                    Terms & Condition &#9660;
+                                </a>
+                                <div *ngIf="selectedPromo && selectedPromo[0] && selectedPromo[0].termsAndCondition"  class="collapse" id="promoTermsCollapse">
+                                    <div class="well">
+                                        {{selectedPromo[0].termsAndCondition}}
+                                    </div>
+                                </div>
                             </div>
                             <ngb-alert *ngIf="promoCodeWarningMessage" type="warning" (close)="promoCodeWarningMessage = null">{{ promoCodeWarningMessage }}</ngb-alert>
                         </div>
