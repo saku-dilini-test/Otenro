@@ -549,7 +549,6 @@
                 });
             }
             else{
-                $scope.myImage = null;
                 $scope.logoImgData = {
                     appId: appId,
                     logo: logo,
@@ -577,7 +576,6 @@
                         toastr.success('Logo has been uploaded successfully', 'message', {
                             closeButton: true
                         });
-
                         $scope.buttonName = "Browse Image";
                      })
                     .error(function (res) {
@@ -617,9 +615,10 @@
                                     + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
                             }
                             $scope.appTemplateUrl = urlPath;
-                            mySharedService.prepForBroadcast($scope.appTemplateUrl);
                             $scope.picFile = null;
                             $scope.myImage = null;
+                            document.getElementById("footerImageArea").src = '';
+                            mySharedService.prepForBroadcast($scope.appTemplateUrl);
                             $scope.footerImage = fImange;
                             toastr.success('Footer image has been uploaded successfully!', 'Success', {
                                 closeButton: true
