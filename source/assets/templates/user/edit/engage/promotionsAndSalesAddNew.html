@@ -589,64 +589,13 @@
                                         <label>Date</label>
                                     </fieldset>
                                     <div class="row">
-                                        <adm-dtp ng-model='singleProduct.dateFrom' options="{default: today,format: 'YYYY/MM/DD',default: today}" class="col-md-5"></adm-dtp>
+                                        <adm-dtp ng-model='singleProduct.dateFrom' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
 
                                             <label class="col-md-2 text-center">To</label>
 
-                                        <adm-dtp ng-model='singleProduct.dateTo' options='{calType: "gregorian",format: "YYYY/MM/DD", default: today}' class="col-md-5"></adm-dtp>
+                                        <adm-dtp ng-model='singleProduct.dateTo' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
                                     </div>
-                                    <!--<br>-->
-                                    <!--<fieldset >-->
-                                            <!--<md-checkbox  aria-label="Limit user" ng-model="singleProduct.isLimitUsers">-->
-                                                <!--<label>Limit users</label>-->
-                                            <!--</md-checkbox>-->
-                                            <!--<md-input-container ng-if="singleProduct.isLimitUsers" class="md-block" flex="50">-->
-                                                <!--<input md-maxlength="15" maxlength="15"  ng-required="true" name="Limit users" ng-model="singleProduct.limitUsers">-->
-                                                <!--<div ng-messages="singleProductForm.limitUsers.$error" ng-show="singleProductForm.limitUsers.$dirty">-->
-                                                    <!--<div ng-message="required">Limit Users is required.</div>-->
-                                                    <!--<div ng-message="md-maxlength">The name must be less than 15 characters long.</div>-->
-                                                <!--</div>-->
-                                            <!--</md-input-container>-->
-                                    <!--</fieldset>-->
-                                    <!--<fieldset  >-->
-                                        <!--<md-checkbox  aria-label="Limit code usage" ng-model="singleProduct.isLimitNumberOfTime">-->
-                                            <!--<label>Limit number of times code can be used</label>-->
-                                        <!--</md-checkbox>-->
-                                        <!--<md-input-container ng-if="singleProduct.isLimitNumberOfTime" class="md-block" flex="50">-->
-                                            <!--<input md-maxlength="15" maxlength="15"  ng-required="true" name="Limit users" ng-model="singleProduct.limitNumberOfTime">-->
-                                            <!--<div ng-messages="singleProductForm.limitNumberOfTime.$error" ng-show="singleProductForm.limitNumberOfTime.$dirty">-->
-                                                <!--<div ng-message="required">Limit Users is required.</div>-->
-                                                <!--<div ng-message="md-maxlength">The name must be less than 15 characters long.</div>-->
-                                            <!--</div>-->
-                                        <!--</md-input-container>-->
-                                    <!--</fieldset>-->
-                                    <!--<fieldset  >-->
-                                        <!--<md-checkbox  aria-label="TnC" ng-model="singleProduct.isTermsAndCondition">-->
-                                            <!--<label>Terms and conditions</label>-->
-                                        <!--</md-checkbox>-->
-                                        <!--<fieldset ng-if="singleProduct.isTermsAndCondition" >&lt;!&ndash;ng-if="data.cb5"&ndash;&gt;-->
-                                            <!--<textarea type="text" class="input-shadow-border" name="TnC" ng-model="singleProduct.termsAndCondition" required ></textarea>-->
-                                        <!--</fieldset>-->
-                                    <!--</fieldset>-->
 
-
-                                    <!--<div class="row">-->
-                                        <!--<div class="col-md-5">-->
-                                            <!--<md-input-container class="md-block">-->
-                                                <!--<label>Promo Code</label>-->
-                                                <!--<input md-maxlength="15" maxlength="15" ng-required="true" name="name" ng-model="singleProduct.promoCode">-->
-                                                <!--<div ng-messages="singleProductForm.promoCode.$error" ng-show="singleProductForm.promoCode.$dirty">-->
-                                                    <!--<div ng-message="required">promoCode is required.</div>-->
-                                                <!--</div>-->
-                                            <!--</md-input-container>-->
-                                        <!--</div>-->
-                                        <!--&lt;!&ndash;<div class="col-md-2 text-center margin">&ndash;&gt;-->
-                                            <!--&lt;!&ndash;<label>or</label>&ndash;&gt;-->
-                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                                        <!--&lt;!&ndash;<div class="col-md-5 margin">&ndash;&gt;-->
-                                            <!--&lt;!&ndash;<button class="btn-material">Genarate Code</button>&ndash;&gt;-->
-                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                                    <!--</div>-->
                                     <br>
                                     <fieldset>
                                         <label>Minimum Requirement</label>

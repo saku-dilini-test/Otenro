@@ -357,7 +357,7 @@
                       <td></td>
                       <td style="text-align: right"><strong>{{sign}} {{subTotal | number: '.2'}}</strong></td>
                     </tr>
-				    <tr *ngIf="discountedTotal != null">
+				    <tr *ngIf="discountedTotal != null  && discountedTotal != 0">
                       <th style="text-align: left">Discounted Total</th>
                       <td></td>
                       <td style="text-align: right">{{sign}} {{discountedTotal| number: '.2'}}</td>

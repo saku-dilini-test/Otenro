@@ -200,7 +200,8 @@ export class CheckoutComponent implements OnInit {
 
 		this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
 			data.forEach(element => {
-    				if(element.salesAndPromotionType == 'storeWide' && element.status == 'ACTIVE'){
+    				if((element.salesAndPromotionType == 'storeWide' && element.status == 'ACTIVE')
+              || (element.salesAndPromotionType == 'singleProduct' && element.status == 'ACTIVE'  && element.isRedeemableAtCheckout == true)){
     					// console.log(element);
     					this.promos.push(element);
     				}
@@ -321,6 +322,18 @@ export class CheckoutComponent implements OnInit {
 
   }
 
+  getCvcLength(n) {
+    console.log(n);
+    let length;
+    if (n) {
+      if (n.length == 15 && n.charAt(0) == 3 && (n.charAt(1) == 4 || n.charAt(1) == 7)) {
+        length = 4
+      } else {
+        length = 3
+      }
+    }
+    return length;
+  }
   check(user, newUserCountry) {
     if (user == 'oldUser') {
       this.oldUser = true;
@@ -1476,6 +1489,10 @@ export class CheckoutComponent implements OnInit {
         debounceTime.call(this._success, 4000).subscribe(() => this.promoCodeWarningMessage = null);
         this._success.next('Invalid promocode');
         setTimeout(() => { }, 3100);
+      this.discountedTotal = null;
+      this.amount = this.subTotal;
+      this.selectedPromo = null;
+      this.calculateTotalOrderCost();
     }else{
       if(this.selectedPromo[0].minimumRequirements == 'minimumOrderValue' && this.selectedPromo[0].minimumOderValue > this.subTotal){
         this._success.subscribe((message) => this.promoCodeWarningMessage = message);
@@ -1497,6 +1514,28 @@ export class CheckoutComponent implements OnInit {
         if(promoSelect){
           promoSelect.selectedIndex = 0;
         }
+      }else if(this.selectedPromo[0].salesAndPromotionType == 'singleProduct'){
+          console.log(this.selectedPromo[0].selectedProduct)
+          console.log(this.cartItems)
+          this.selectedPromo[0].selectedProduct.forEach( pProd =>{
+              this.cartItems.forEach(cProd =>{
+                  if(pProd.id == cProd.id){
+                      if(this.selectedPromo[0].discountType === 'discountValue'){
+                          if(this.amount < this.selectedPromo[0].discount){
+                              this.discountedTotal = 0;
+                              this.amount = this.discountedTotal;
+                          }else{
+                            this.discountedTotal = this.amount - this.selectedPromo[0].discount * cProd.qty;
+                            this.amount = this.discountedTotal;
+                          }
+                      }else if(this.selectedPromo[0].discountType === 'discount'){
+                        this.discountedTotal = this.amount - (this.amount * this.selectedPromo[0].discountPercent / 100) * cProd.qty;
+                        this.amount = this.discountedTotal;
+                      }
+                     this.calculateTotalOrderCost();
+                  }
+              })
+          })
       }else{
         if(selectedPromo == 'Select a promocode'){
           this.discountedTotal = null;

@@ -74,7 +74,9 @@
                         prod.variants.forEach(function(variant){
                             if(!variant.imageUrl){
                                 variant['imageUrl'] = prod.imageUrl;
+
                             }
+                            variant['id'] = prod.id;
                            $scope.allProds.push(variant);
                         });
                     });
@@ -87,7 +89,7 @@
                           $scope.array = [];
                             $scope.availableProducts = $scope.item.selectedProduct;
 
-                            $scope.singleProduct.name = item.name;
+                            // $scope.singleProduct.name = item.name;
                             $scope.singleProduct.discount = item.discount;
                             $scope.singleProduct.discountPercent = item.discountPercent;
                             $scope.singleProduct.discountType = item.discountType;
