@@ -15,6 +15,7 @@
         $scope.allVariants = [];
         $scope.allProds = [];
         $scope.availableProducts = [];
+        $scope.backupArray = [];
         $scope.imageURL = SERVER_URL +
             "templates/viewWebImages?userId=" + $auth.getPayload().id
             + "&appId=" + $rootScope.appId + '&'
@@ -67,7 +68,7 @@
                 .success(function (result) {
                     $scope.productsList = result;
 
-                    console.log($scope.productsList)
+                    // console.log($scope.productsList)
 
                     $scope.productsList.forEach(function(prod){
                         prod.variants.forEach(function(variant){
@@ -77,7 +78,7 @@
                            $scope.allProds.push(variant);
                         });
                     });
-                    console.log($scope.allProds)
+                    // console.log($scope.allProds)
                     // console.log("inside Item main");
                     // console.log($scope.item);
                         if($scope.item && $scope.item.salesAndPromotionType == 'singleProduct' ){
@@ -135,6 +136,7 @@
                                       $scope.item.selectedProduct.forEach(function(ele){
                                          $scope.array.push(ele);
                                      });
+                                      // console.log($scope.array)
                                  }
 
                                     $scope.allProds.forEach(function(prod){
@@ -148,6 +150,8 @@
                                             $scope.array.push(prod);
                                         }
                                     });
+                                 // console.log('selected prods')
+                                 // console.log($scope.array)
 
                                     }else{
 
@@ -173,12 +177,17 @@
 
                                                     if($scope.found == false){
                                                         $scope.array.push(variant);
+                                                        $scope.backupArray.push(variant);
+
                                                     }
+
                                                 }else{
                                                     $scope.array.push(variant);
+                                                    $scope.backupArray.push(variant);
                                                 }
                                             });
                                         });
+                                        // console.log($scope.array)
 
                                     }
 
@@ -232,8 +241,8 @@
                             };
 
                     if (item){
-                    console.log("available prods");
-                    console.log(item.selectedProduct);
+                    // console.log("available prods");
+                    // console.log(item.selectedProduct);
                         if(item.salesAndPromotionType !=  'storeWide') {
                             item.selectedProduct.forEach(function (element) {
                                 $scope.exists(element, $scope.selected);
@@ -405,6 +414,20 @@
                 $scope.singleProduct.promoCode = randomString;
             }
         };
+        
+        $scope.toggleReedeem = function (redeemable) {
+            console.log($scope.allProds);
+            console.log(redeemable);
+            if(redeemable == true){
+                $scope.array = $scope.allProds;
+                console.log( $scope.array )
+            }else{
+                $scope.array =  $scope.backupArray;
+                console.log( $scope.array )
+
+            }
+        };
+        
 
 
     }

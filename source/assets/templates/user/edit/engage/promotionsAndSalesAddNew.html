@@ -504,7 +504,7 @@
                                             <button class="btn-material-2" ng-click="genaratePromoCode('singleproduct')">Generate Code</button>
                                         </div>
                                         <div class="col-md-12">
-                                            <md-checkbox class="no-margin"  aria-label="redeemable at checkout" ng-model="singleProduct.isRedeemableAtCheckout">
+                                            <md-checkbox class="no-margin"  aria-label="redeemable at checkout" ng-model="singleProduct.isRedeemableAtCheckout" ng-change="toggleReedeem(singleProduct.isRedeemableAtCheckout)">
                                                 <span>Enable code for redemption at check out only.<br>
                                                     (Disabling this option will show the discounted value under each product)
                                                 </span>
