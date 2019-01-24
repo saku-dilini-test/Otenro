@@ -93,6 +93,7 @@
                             $scope.singleProduct.promoCode = item.promoCode;
                             $scope.singleProduct.dateFrom = new Date (item.dateFrom);
                             $scope.singleProduct.dateTo = new Date (item.dateTo);
+                            $scope.singleProduct.isRedeemableAtCheckout =item.isRedeemableAtCheckout;
 
                             if(item.id){
                                 $scope.singleProduct.id = item.id;
@@ -403,7 +404,8 @@
             }else if(promoType == 'singleproduct'){
                 $scope.singleProduct.promoCode = randomString;
             }
-        }
+        };
+
 
     }
 })();

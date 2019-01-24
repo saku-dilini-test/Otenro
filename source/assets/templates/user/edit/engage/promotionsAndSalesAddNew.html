@@ -97,11 +97,12 @@
                                         <div class="col-xs-6">
                                             <md-input-container class="md-block"  ng-if = "storeWide.discountType == 'discountValue'">
                                                 <label>Discount</label>
-                                                <input md-maxlength="15" maxlength="15"  ng-required="true" name="discount" ng-model="storeWide.discount">
+                                                <input md-maxlength="15" maxlength="15"   ng-pattern="/^\d+$/"   ng-required="true" name="discount" ng-model="storeWide.discount">
                                                 <div ng-messages="storeWideForm.discount.$error" ng-show="storeWideForm.discount.$dirty">
                                                     <div ng-message="required">Discount is required.</div>
                                                     <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
                                                 </div>
+                                                <span class="error" ng-show="storeWideForm.discount.$error.pattern">Enter a valid value</span>
                                             </md-input-container>
                                             <md-input-container  class="md-block"  ng-if = "storeWide.discountType == 'discount'">
                                                 <label>Discount</label>
@@ -133,19 +134,21 @@
                                             <md-radio-button value="none" class="md-primary">None</md-radio-button>
 
                                             <md-radio-button value="minimumOrderValue" class="md-primary">Minimum Purchase Amount</md-radio-button>
-                                            <md-input-container  placeholder="" class="md-no-float md-block" flex="50" ng-if = "storeWide.minimumRequirements == 'minimumOrderValue'">
-                                                <input md-maxlength="15" maxlength="15" name="minimumOrderValue" ng-model="storeWide.minimumOderValue"  ng-required="true">
+                                            <md-input-container  placeholder="" class="md-no-float md-block" flex="50"    ng-if = "storeWide.minimumRequirements == 'minimumOrderValue'">
+                                                <input md-maxlength="15" maxlength="15" name="minimumOrderValue" ng-pattern="/^\d+$/" ng-model="storeWide.minimumOderValue"  ng-required="true">
                                                 <div ng-messages="storeWideForm.minimumOrderValue.$error" ng-show="storeWideForm.minimumOrderValue.$dirty" ng-if = "storeWide.minimumRequirements == 'minimumOrderValue'">
                                                     <div ng-message="required">Minimum order value is required.</div>
                                                 </div>
+                                                <span class="error" ng-show="storeWideForm.minimumOrderValue.$error.pattern">Enter a valid value</span>
                                             </md-input-container>
 
                                             <md-radio-button value="minimumOrderQuantity" class="md-primary">Minimum quantity of items</md-radio-button>
                                             <md-input-container  placeholder="" class="md-no-float md-block" flex="50" ng-if = "storeWide.minimumRequirements == 'minimumOrderQuantity'">
-                                                <input md-maxlength="15" maxlength="15" name="minimumOrderQuantity" ng-model="storeWide.minimumOrderQuantity"  ng-required="true">
+                                                <input md-maxlength="15" maxlength="15" name="minimumOrderQuantity"   ng-pattern="/^\d+$/"  ng-model="storeWide.minimumOrderQuantity"  ng-required="true">
                                                 <div ng-messages="storeWideForm.minimumOrderQuantity.$error" ng-show="storeWideForm.minimumOrderQuantity.$dirty" ng-if = "storeWide.minimumRequirements == 'minimumOrderQuantity'">
                                                     <div ng-message="required">Minimum order quantity is required.</div>
                                                 </div>
+                                                <span class="error" ng-show="storeWideForm.minimumOrderQuantity.$error.pattern">Enter a valid value</span>
                                             </md-input-container>
 
                                         </md-radio-group>
@@ -176,11 +179,12 @@
                                             <label>Limit number of times code can be used</label>
                                         </md-checkbox>
                                         <md-input-container placeholder="Limit" ng-if ="storeWide.isLimitNumberOfTime" class="md-no-float md-block" flex="75">
-                                            <input md-maxlength="15" maxlength="15"  ng-required="true" name="limitNumberOfTime" ng-model="storeWide.limitNumberOfTime">
+                                            <input md-maxlength="15" maxlength="15" ng-pattern="/^\d+$/"  ng-required="true" name="limitNumberOfTime" ng-model="storeWide.limitNumberOfTime">
                                             <div ng-messages="storeWideForm.limitNumberOfTime.$error" ng-show="storeWideForm.limitNumberOfTime.$dirty">
                                                 <div ng-message="required">Limit is required.</div>
                                                 <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
                                             </div>
+                                            <span class="error" ng-show="storeWideForm.limitNumberOfTime.$error.pattern">Enter a valid value</span>
                                         </md-input-container>
                                         <md-checkbox  aria-label="Limit user" ng-model="storeWide.isLimitUsers">
                                             <label>Limit one use per customer</label>
@@ -500,7 +504,7 @@
                                             <button class="btn-material-2" ng-click="genaratePromoCode('singleproduct')">Generate Code</button>
                                         </div>
                                         <div class="col-md-12">
-                                            <md-checkbox class="no-margin"  aria-label="redeemable at checkout" ng-model="storeWide.isRedeemableAtCheckout">
+                                            <md-checkbox class="no-margin"  aria-label="redeemable at checkout" ng-model="singleProduct.isRedeemableAtCheckout">
                                                 <span>Enable code for redemption at check out only.<br>
                                                     (Disabling this option will show the discounted value under each product)
                                                 </span>
@@ -519,7 +523,7 @@
                                         <div class="col-xs-6">
                                             <md-input-container class="md-block"  ng-if = "singleProduct.discountType == 'discountValue'">
                                                 <label>Discount</label>
-                                                <input md-maxlength="15" maxlength="15"  ng-required="true" name="discount" ng-model="singleProduct.discount" ng-pattern="/[0-9]/g">
+                                                <input md-maxlength="15" maxlength="15"  ng-required="true" name="discount" ng-model="singleProduct.discount" ng-pattern="/^\d+$/">
                                                 <div ng-messages="singleProductForm.discount.$error" ng-show="singleProductForm.discount.$dirty">
                                                     <div ng-message="required">Discount is required.</div>
                                                 </div>
@@ -652,18 +656,20 @@
 
                                             <md-radio-button value="minimumOrderValue" class="md-primary">Minimum Purchase Amount</md-radio-button>
                                             <md-input-container  placeholder="" class="md-no-float md-block" flex="50" ng-if = "singleProduct.minimumRequirements == 'minimumOrderValue'">
-                                                <input md-maxlength="15" maxlength="15" name="minimumOrderValue" ng-model="singleProduct.minimumOderValue"  ng-required="true">
+                                                <input md-maxlength="15" maxlength="15" name="minimumOrderValue" ng-pattern="/^\d+$/" ng-model="singleProduct.minimumOderValue"  ng-required="true">
                                                 <div ng-messages="singleProductForm.minimumOrderValue.$error" ng-show="singleProductForm.minimumOrderValue.$dirty" ng-if = "singleProduct.minimumRequirements == 'minimumOrderValue'">
                                                     <div ng-message="required">Minimum order value is required.</div>
                                                 </div>
+                                                <span class="error" ng-show="singleProductForm.minimumOrderValue.$error.pattern">Enter a valid value</span>
                                             </md-input-container>
 
                                             <md-radio-button value="minimumOrderQuantity" class="md-primary">Minimum quantity of items</md-radio-button>
                                             <md-input-container  placeholder="" class="md-no-float md-block" flex="50" ng-if = "singleProduct.minimumRequirements == 'minimumOrderQuantity'">
-                                                <input md-maxlength="15" maxlength="15" name="minimumOrderQuantity" ng-model="singleProduct.minimumOrderQuantity"  ng-required="true">
+                                                <input md-maxlength="15" maxlength="15" name="minimumOrderQuantity" ng-pattern="/^\d+$/"  ng-model="singleProduct.minimumOrderQuantity"  ng-required="true">
                                                 <div ng-messages="singleProductForm.minimumOrderQuantity.$error" ng-show="singleProductForm.minimumOrderQuantity.$dirty" ng-if = "singleProduct.minimumRequirements == 'minimumOrderQuantity'">
                                                     <div ng-message="required">Minimum order quantity is required.</div>
                                                 </div>
+                                                <span class="error" ng-show="singleProductForm.minimumOrderQuantity.$error.pattern">Enter a valid value</span>
                                             </md-input-container>
 
                                         </md-radio-group>
@@ -694,11 +700,12 @@
                                             <label>Limit number of times code can be used</label>
                                         </md-checkbox>
                                         <md-input-container placeholder="Limit" ng-if ="singleProduct.isLimitNumberOfTime" class="md-no-float md-block" flex="75">
-                                            <input md-maxlength="15" maxlength="15"  ng-required="true" name="limitNumberOfTime" ng-model="singleProduct.limitNumberOfTime">
+                                            <input md-maxlength="15" maxlength="15"  ng-required="true" ng-pattern="/^\d+$/" name="limitNumberOfTime" ng-model="singleProduct.limitNumberOfTime">
                                             <div ng-messages="singleProductForm.limitNumberOfTime.$error" ng-show="singleProductForm.limitNumberOfTime.$dirty">
                                                 <div ng-message="required">Limit is required.</div>
                                                 <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
                                             </div>
+                                            <span class="error" ng-show="singleProductForm.limitNumberOfTime.$error.pattern">Enter a valid value</span>
                                         </md-input-container>
                                         <md-checkbox  aria-label="Limit user" ng-model="singleProduct.isLimitUsers">
                                             <label>Limit one use per customer</label>

@@ -35,6 +35,9 @@ module.exports = {
         dateTo : {
             type: 'string'
         },
+        isRedeemableAtCheckout: {
+            type: 'boolean'
+        },
         isLimitUsers : {
             type: 'boolean'
         },
@@ -89,9 +92,6 @@ module.exports = {
         // Related to both limitNumberOfTime and limitUsers
         used: {
             type: 'integer'
-        },
-        isRedeemableAtCheckout: {
-            type: 'boolean'
         }
     }
 };
