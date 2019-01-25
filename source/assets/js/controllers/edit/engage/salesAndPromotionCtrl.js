@@ -111,9 +111,8 @@
                                 $scope.singleProduct.isTermsAndCondition = item.isTermsAndCondition;
                                 $scope.singleProduct.termsAndCondition = item.termsAndCondition;
                             }
-                            if(item.limitUsers){
+                            if(item.isLimitUsers){
                                 $scope.singleProduct.isLimitUsers = item.isLimitUsers;
-                                $scope.singleProduct.limitUsers = item.limitUsers;
                             }
 
                         }else if($scope.item && $scope.item.salesAndPromotionType == 'storeWide'){
