@@ -99,7 +99,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
         this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
 
             data.forEach(element => {
-				if(element.salesAndPromotionType != 'storeWide'){
+				if(element.salesAndPromotionType != 'storeWide' && element.isRedeemableAtCheckout != true){
 					element.selectedProduct.forEach(variants => {
 
 						variants.fromDate = element.dateFrom;

@@ -597,7 +597,7 @@
                                     </div>
 
                                     <br>
-                                    <fieldset>
+                                    <fieldset ng-if="singleProduct.isRedeemableAtCheckout">
                                         <label>Minimum Requirement</label>
                                         <md-radio-group ng-model="singleProduct.minimumRequirements">
 
@@ -624,7 +624,7 @@
                                         </md-radio-group>
                                     </fieldset>
 
-                                    <fieldset>
+                                    <fieldset  ng-if="singleProduct.isRedeemableAtCheckout">
                                         <label>Customer Eligibility</label>
                                         <md-radio-group class="no-margin" ng-model="singleProduct.customerEligibility">
 
@@ -643,7 +643,7 @@
 
 
 
-                                    <fieldset>
+                                    <fieldset  ng-if="singleProduct.isRedeemableAtCheckout">
                                         <label>Usage Limits</label><br>
                                         <md-checkbox  aria-label="Limit code usage" ng-model="singleProduct.isLimitNumberOfTime">
                                             <label>Limit number of times code can be used</label>
@@ -669,7 +669,7 @@
                                     </fieldset>
 
 
-                                    <fieldset>
+                                    <fieldset ng-if="singleProduct.isRedeemableAtCheckout">
                                         <!--<md-checkbox  aria-label="TnC" ng-model="storeWide.isTermsAndCondition">-->
                                         <!--<label>Terms and conditions</label>-->
                                         <!--</md-checkbox>-->
