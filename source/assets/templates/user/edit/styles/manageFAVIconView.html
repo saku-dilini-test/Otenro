@@ -24,8 +24,9 @@
                                 <img ng-if="splash == null" src="../../../images/small-placeholder.png" width="120" height="120 "/>                                    </div>
                                 </div>
                             </div>
-                            <input type="button" style="width: 100px;padding-left: 20px;margin-left: 16px;" class="inputField btn-material img-up" ngf-select name="splash1"
-                                   ng-model="splash" ngf-accept="image/*" ngf-change="validateIcon(splash,'512','512')" value="UPLOAD" />
+                            <input type="button" style="width: 100px;padding-left: 20px;margin-left: 16px;" class="inputField btn-material img-up" ngf-select name="splash"
+                                   ng-model="splash" ngf-accept="image/*" ngf-change="validateIcon(splash,'32','32')"
+                                   ngf-validate="{width: {min: 32, max:32}, height: {min: 32, max: 32}}" value="UPLOAD" />
                             <!--ngf-validate="{width: {min: 512, max:512}, height: {min: 512, max: 512}}"-->
                         </fieldset>
                         <fieldset>
