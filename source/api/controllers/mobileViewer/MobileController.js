@@ -324,43 +324,51 @@ module.exports = {
                 sails.log.error('error occurred while processing promotion , error : ' + err);
             }
             if (salesAndPromotion) {
-    
-                if (salesAndPromotion.status === config.SALES_AND_PROMOTIONS_STATUS.ACTIVE) {
-
-                    salesAndPromotion.used = (salesAndPromotion.used) ? salesAndPromotion.used + 1 : 1;
-                } 
 
                 if (salesAndPromotion.isLimitUsers) {
                     mobileCtrl.limitOneUsePerCustomer(salesAndPromotion, orderEmail);
-                }
-
-                if (salesAndPromotion.isLimitNumberOfTime) {
+                }else if (salesAndPromotion.isLimitNumberOfTime) {
                     mobileCtrl.limitNoOfTimesPromo(salesAndPromotion);
-                }
+                }else if(!salesAndPromotion.isLimitUsers && !salesAndPromotion.isLimitNumberOfTime){
+                    salesAndPromotion.used = (salesAndPromotion.used) ? salesAndPromotion.used + 1 : 1;
+                    salesAndPromotion.save(function (error) {
+                        if (error) {
+                                sails.log.error('error occurred while processing promotion , error : ' + error);
+                        }
+                    });
+               }
             }
         });
     },
+
     limitOneUsePerCustomer: function (salesAndPromotion, email) {
 
         if (!salesAndPromotion.usedUsers) {
+            salesAndPromotion.usedUsers = [];
+        }
 
-            salesAndPromotion.usedUsers = [email];
-            salesAndPromotion.usedUserCount = 1;
+        if (!salesAndPromotion.noOfUses) {
+            salesAndPromotion.usedUsers.push(email);
+            salesAndPromotion.noOfUses = 1;
+            if (salesAndPromotion.isLimitNumberOfTime && salesAndPromotion.noOfUses === salesAndPromotion.limitNumberOfTime) {
+                salesAndPromotion.status = config.SALES_AND_PROMOTIONS_STATUS.EXPIRED;
+            }
+            salesAndPromotion.used = (salesAndPromotion.used) ? salesAndPromotion.used + 1 : 1;
             salesAndPromotion.save(function (error) {
-
                 if (error) {
                     sails.log.error('error occurred while processing promotion , error : ' + error);
                 }
             });
-        }
-        else if (salesAndPromotion.usedUserCount && salesAndPromotion.usedUserCount < salesAndPromotion.limitUsers) {
+        }else if ((salesAndPromotion.noOfUses && salesAndPromotion.noOfUses < salesAndPromotion.limitNumberOfTime) || (!salesAndPromotion.isLimitNumberOfTime)) {
 
             salesAndPromotion.usedUsers.push(email);
-            salesAndPromotion.usedUserCount = salesAndPromotion.usedUserCount + 1;
+            salesAndPromotion.noOfUses = salesAndPromotion.noOfUses + 1;
 
-            if (salesAndPromotion.usedUserCount === salesAndPromotion.limitUsers) {
+            if (salesAndPromotion.isLimitNumberOfTime && salesAndPromotion.noOfUses === salesAndPromotion.limitNumberOfTime) {
                 salesAndPromotion.status = config.SALES_AND_PROMOTIONS_STATUS.EXPIRED;
             }
+            salesAndPromotion.used = (salesAndPromotion.used) ? salesAndPromotion.used + 1 : 1;
+
             salesAndPromotion.save(function (error) {
 
                 if (error) {
@@ -375,22 +383,23 @@ module.exports = {
         if (!salesAndPromotion.noOfUses) {
 
             salesAndPromotion.noOfUses = 1;
+            if (salesAndPromotion.noOfUses === salesAndPromotion.limitNumberOfTime) {
+                salesAndPromotion.status = config.SALES_AND_PROMOTIONS_STATUS.EXPIRED;
+            }
+             salesAndPromotion.used = (salesAndPromotion.used) ? salesAndPromotion.used + 1 : 1;
             salesAndPromotion.save(function (error) {
-
                 if (error) {
                     sails.log.error('error occurred while processing promotion , error : ' + error);
                 }
             });
         }
         else if (salesAndPromotion.noOfUses && salesAndPromotion.noOfUses < salesAndPromotion.limitNumberOfTime) {
-
             salesAndPromotion.noOfUses = salesAndPromotion.noOfUses + 1;
-
             if (salesAndPromotion.noOfUses === salesAndPromotion.limitNumberOfTime) {
                 salesAndPromotion.status = config.SALES_AND_PROMOTIONS_STATUS.EXPIRED;
             }
+            salesAndPromotion.used = (salesAndPromotion.used) ? salesAndPromotion.used + 1 : 1;
             salesAndPromotion.save(function (error) {
-
                 if (error) {
                     sails.log.error('error occurred while processing promotion , error : ' + error);
                 }
