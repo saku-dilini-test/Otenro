@@ -8,7 +8,7 @@
           TERMS &amp; Conditions
         </h1>
         
-        <p *ngIf="terms"  class=" cont lent-about main-content-font text-editor"   [innerHTML]="terms"> </p>
+        <p *ngIf="terms"  class=" cont lent-about main-content-font text-editor"   [innerHTML]="terms | safeHtml"> </p>
 
       </div>
     </div>
