@@ -169,24 +169,24 @@
     </div>
 
     <!-- Recomended Products Contents -->
-    <div class="row padding-top" id="product">
-      <h3 id="recomended-products" class="main-header-font">recomended products</h3>
-      <div id="recomended-products-content">
-        <owl-carousel *ngIf="siblingProducts.length != 0" [options]="owlOptions" [carouselClasses]="['owl-carousel', 'owl-theme']">
-          <div *ngFor="let prod of siblingProducts;">
-            <a class="cursor-p" [routerLink]="['/product', prod.name, prod.id]" (click)="onRecomendedProductClickHandler()">
-              <img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
-              <h2 class="mg-md header-text-h2 text-center main-content-font">
-                {{prod.name}}
-              </h2>
-              <h2 class="mg-md sub-header-text-h2 text-center main-content-font">
-                <strong>{{currency}} {{prod.variants[0].price | number: '.2'}}</strong>
-              </h2>
-            </a>
-          </div>
-        </owl-carousel>
-      </div>
-    </div>
+    <!--<div class="row padding-top" id="product">-->
+      <!--<h3 id="recomended-products" class="main-header-font">recomended products</h3>-->
+      <!--<div id="recomended-products-content">-->
+        <!--<owl-carousel *ngIf="siblingProducts.length != 0" [options]="owlOptions" [carouselClasses]="['owl-carousel', 'owl-theme']">-->
+          <!--<div *ngFor="let prod of siblingProducts;">-->
+            <!--<a class="cursor-p" [routerLink]="['/product', prod.name, prod.id]" (click)="onRecomendedProductClickHandler()">-->
+              <!--<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />-->
+              <!--<h2 class="mg-md header-text-h2 text-center main-content-font">-->
+                <!--{{prod.name}}-->
+              <!--</h2>-->
+              <!--<h2 class="mg-md sub-header-text-h2 text-center main-content-font">-->
+                <!--<strong>{{currency}} {{prod.variants[0].price | number: '.2'}}</strong>-->
+              <!--</h2>-->
+            <!--</a>-->
+          <!--</div>-->
+        <!--</owl-carousel>-->
+      <!--</div>-->
+    <!--</div>-->
     <app-accepted-payment-type></app-accepted-payment-type>
 
   </div>
