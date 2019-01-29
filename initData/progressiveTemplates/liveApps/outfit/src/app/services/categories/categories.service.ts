@@ -31,7 +31,7 @@ export class CategoriesService {
       return Observable.of(this.dataService.categories,this.dataService.products);
 
     }else{
-      for(let i=0;i<nodes.length;i++){
+      for(let i=0; i<nodes.length;i++){
         // console.log(id,nodes[i].id)
         if(id == nodes[i].id){
           // this.categories =  nodes[i].childNodes;
@@ -42,12 +42,12 @@ export class CategoriesService {
           this.dataService.categories = nodes[i].childNodes;
           this.dataService.products[0] = nodes[i].products;
           return Observable.of(this.dataService.categories,this.dataService.products);
+
         }else{
           let value = this.iterate(nodes[i],id);
-
           if(value){
             return Observable.of(this.dataService.categories,this.dataService.products);
-          } else {
+          } else if(i == nodes.length - 1){
             return Observable.of([]);
           }
         }
