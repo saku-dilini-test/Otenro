@@ -55,7 +55,7 @@
 					<!--<span>Subscribe for {{appName?.slice(0, appName?.length - 4)}} newsletters.</span>-->
 				<!--</div>-->
 				<div id="logo-image-container">
-					<img src="{{imageUrl}}/footer.png&dummy={{dummy}}" alt="footer logo" />
+					<img src="{{imageUrl}}/footer.png&dummy={{dummy}}" width="150px" alt="footer logo" />
 				</div>
 			</div>
 			<!-- Quick links content -->
@@ -94,7 +94,7 @@
 			</div>
 			<!-- Accepted payment types -->
 			<div id="accepted-payments" *ngIf="isIpgInfoExists()">
-					<span>accepted payment types</span>
+					<span class="main-footer-header">accepted payment types</span>
 					<img *ngIf = "ipgInfo && ipgInfo.paypalEnable" src="assets/images/Paypal.png">
 					<img *ngIf = "ipgInfo && ipgInfo.paypalEnable" src="assets/images/Visa.png">
 					<img *ngIf = "ipgInfo && ipgInfo.paypalEnable" src="assets/images/Master.png">
