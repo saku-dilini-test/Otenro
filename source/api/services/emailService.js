@@ -669,23 +669,23 @@ module.exports = {
                         mapObj['storeWebsite'] = data.storeDetails.webSite;
                         if(data.storeDetails.facebook){
                             mapObj['storeFacebook'] = data.storeDetails.facebook;
-                            mapObj['isFacebook'] = 'initial';
+                            mapObj['isFacebook'] = 'block';
                         }
                         if(data.storeDetails.instagram){
                             mapObj['storeInstagram'] = data.storeDetails.instagram;
-                            mapObj['issInstagram'] = 'initial';
+                            mapObj['isInstagram'] = 'block';
                         }
                         if(data.storeDetails.twitter){
                             mapObj['storeTwitter'] = data.storeDetails.twitter;
-                            mapObj['isTwitter'] = 'initial';
+                            mapObj['isTwitter'] = 'block';
                         }
                         if(data.storeDetails.linkedin){
                             mapObj['storeLinkedin'] = data.storeDetails.linkedin;
-                            mapObj['isLinkedin'] = 'initial';
+                            mapObj['isLinkedin'] = 'block';
                         }
                         if(data.storeDetails.pinterest){
                             mapObj['storePinterest'] = data.storeDetails.pinterest;
-                            mapObj['isPinterest'] = 'initial';
+                            mapObj['isPinterest'] = 'block';
                         }
                     }
 
@@ -865,7 +865,7 @@ module.exports = {
                             let  mailOptions;
                             console.log('userEmail');
                             console.log(userEmail);
-                            console.log('bccEmail');
+                            console.log('bccEmail 868');
                             console.log(userEmail.bccEmail);
 
                             // setup email data with unicode symbols
