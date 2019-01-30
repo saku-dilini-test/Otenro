@@ -144,7 +144,7 @@
                     toastr.error('Updating of basic information failed', { closeButton: true});
                 });
             }else{
-                toastr.error('Please enter email address', { closeButton: true});
+                toastr.error('Please enter email address', 'Error', { closeButton: true});
             }
         };
 
