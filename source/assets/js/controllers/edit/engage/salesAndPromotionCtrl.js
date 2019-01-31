@@ -31,7 +31,7 @@
                     // console.log(data);
                         if(data){
                             $scope.salesAndPromotionList.forEach(function(data){
-                                if(data.salesAndPromotionType !=  'storeWide'){
+                                if(data.salesAndPromotionType == 'singleProduct'){
                                     data.selectedProduct.forEach(function(ele){
                                         $scope.allVariants.push(ele);
                                     });
@@ -82,10 +82,10 @@
                     });
                     // console.log($scope.allProds)
                     // console.log("inside Item main");
-                    // console.log($scope.item);
                         if($scope.item && $scope.item.salesAndPromotionType == 'singleProduct' ){
                         // console.log("selected prods");
                         // console.log($scope.item.selectedProduct);
+                          $scope.singleProduct = item;
                           $scope.array = [];
                             $scope.availableProducts = $scope.item.selectedProduct;
 
@@ -117,6 +117,9 @@
 
                         }else if($scope.item && $scope.item.salesAndPromotionType == 'storeWide'){
                             $scope.storeWide = item;
+                        }else if($scope.item && $scope.item.salesAndPromotionType == 'categoryWide'){
+                            $scope.categoryWide = item;
+                            console.log(item)
                         }else{
                             $scope.array = [];
                         }
@@ -124,73 +127,74 @@
                         if($scope.productsList){
 
 
+                           if(item){
 
-                                    if(item){
+                                 if(item.salesAndPromotionType == "singleProduct"){
+                                    $scope.selectedTab = 3;
+                                 }else if(item.salesAndPromotionType == "storeWide"){
+                                    $scope.selectedTab = 1;
+                                 }else if(item.salesAndPromotionType == "categoryWide"){
+                                    $scope.selectedTab = 2;
+                                 }
 
-                                    if(item.salesAndPromotionType == "singleProduct"){
-                                        $scope.selectedTab = 4;
-                                    }else if(item.salesAndPromotionType == "storeWide"){
-                                        $scope.selectedTab = 1;
-                                    }
-
-                                 if( $scope.item.salesAndPromotionType != 'storeWide'){
+                                 if( $scope.item.salesAndPromotionType == 'singleProduct'){
                                       $scope.item.selectedProduct.forEach(function(ele){
                                          $scope.array.push(ele);
                                      });
                                       // console.log($scope.array)
                                  }
 
-                                    $scope.allProds.forEach(function(prod){
-                                     var found = false;
-                                        $scope.allVariants.forEach(function(vari){
-                                            if(prod.sku == vari.sku){
-                                                found = true;
-                                            }
-                                        });
-                                        if(found == false){
-                                            $scope.array.push(prod);
+                                $scope.allProds.forEach(function(prod){
+                                 var found = false;
+                                    $scope.allVariants.forEach(function(vari){
+                                        if(prod.sku == vari.sku){
+                                            found = true;
                                         }
                                     });
+                                    if(found == false){
+                                        $scope.array.push(prod);
+                                    }
+                                });
                                  // console.log('selected prods')
                                  // console.log($scope.array)
 
-                                    }else{
+                           }else{
 
-                                        $scope.productsList.forEach(function(prod){
-                                            prod.variants.forEach(function(variant){
+                                $scope.productsList.forEach(function(prod){
+                                    prod.variants.forEach(function(variant){
 
-                                                if($scope.salesAndPromotionList){
+                                        if($scope.salesAndPromotionList){
 
-                                                    $scope.salesAndPromotionList.forEach(function(data){
-                                                        if(data.salesAndPromotionType !=  'storeWide') {
-                                                            data.selectedProduct.forEach(function (ele) {
-                                                                $scope.availableProducts.push(ele);
-                                                            });
-                                                        }
+                                            $scope.salesAndPromotionList.forEach(function(data){
+                                                if(data.salesAndPromotionType == 'singleProduct') {
+                                                    data.selectedProduct.forEach(function (ele) {
+                                                        $scope.availableProducts.push(ele);
                                                     });
-
-                                                    $scope.found = false;
-                                                    $scope.availableProducts.forEach(function(selectedProduct){
-                                                        if(selectedProduct.sku == variant.sku){
-                                                            $scope.found = true;
-                                                        }
-                                                    });
-
-                                                    if($scope.found == false){
-                                                        $scope.array.push(variant);
-                                                        $scope.backupArray.push(variant);
-
-                                                    }
-
-                                                }else{
-                                                    $scope.array.push(variant);
-                                                    $scope.backupArray.push(variant);
                                                 }
                                             });
-                                        });
-                                        // console.log($scope.array)
 
-                                    }
+                                            $scope.found = false;
+                                            $scope.availableProducts.forEach(function(selectedProduct){
+                                                if(selectedProduct.sku == variant.sku){
+                                                    $scope.found = true;
+                                                }
+                                            });
+
+                                            if($scope.found == false){
+                                                $scope.array.push(variant);
+                                                $scope.backupArray.push(variant);
+
+                                            }
+
+                                        }else{
+                                            $scope.array.push(variant);
+                                            $scope.backupArray.push(variant);
+                                        }
+                                    });
+                                });
+                                // console.log($scope.array)
+
+                           }
 
                         }
 
@@ -244,7 +248,7 @@
                     if (item){
                     // console.log("available prods");
                     // console.log(item.selectedProduct);
-                        if(item.salesAndPromotionType !=  'storeWide') {
+                        if(item.salesAndPromotionType ==  'singleProduct') {
                             item.selectedProduct.forEach(function (element) {
                                 $scope.exists(element, $scope.selected);
                                 $scope.toggle(element, $scope.selected);
@@ -353,6 +357,28 @@
                 } else{
                     createSalesAndPromo();
                 }
+            }else if(salesAndPromotion.salesAndPromotionType == 'categoryWide'){
+                if(!$scope.categoryWide.discountType){
+                    return toastr.warning('Please select a discount type ', 'Warning', {
+                        closeButton: true
+                    });
+                }else if(!$scope.categoryWide.dateFrom || !$scope.categoryWide.dateTo){
+                    return toastr.warning('Please select a date range', 'Warning', {
+                        closeButton: true
+                    });
+                }else if($scope.categoryWide.dateFrom >= $scope.categoryWide.dateTo){
+                    return toastr.warning('Please select valid date range', 'Warning', {
+                        closeButton: true
+                    });
+                } else if (fromDate < currentDate) {
+
+                    toastr.warning('Past date and time are not allowed. Please select valid date and time.', 'Warning', {
+                        closeButton: true
+                    });
+                    return ;
+                } else{
+                    createSalesAndPromo();
+                }
             }
 
 
@@ -413,19 +439,20 @@
                 $scope.storeWide.promoCode = randomString;
             }else if(promoType == 'singleproduct'){
                 $scope.singleProduct.promoCode = randomString;
+            }else if(promoType == 'categorywide'){
+                $scope.categoryWide.promoCode = randomString;
             }
         };
         
         $scope.toggleReedeem = function (redeemable) {
-            console.log($scope.allProds);
-            console.log(redeemable);
+            // console.log($scope.allProds);
+            // console.log(redeemable);
             if(redeemable == true){
                 $scope.array = $scope.allProds;
-                console.log( $scope.array )
+                // console.log( $scope.array )
             }else{
                 $scope.array =  $scope.backupArray;
-                console.log( $scope.array )
-
+                // console.log( $scope.array )
             }
         };
         

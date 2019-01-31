@@ -13,7 +13,7 @@
                 return $mdDialog.show({
                     controller: 'SalesAndPromotionCtrl',
                     templateUrl: 'user/edit/engage/promotionsAndSalesView.html',
-                    clickOutsideToClose: true,
+                    clickOutsideToClose: false,
                     locals:{
                         item: null
                     }
@@ -27,7 +27,7 @@
                 return $mdDialog.show({
                     controller: 'SalesAndPromotionCtrl',
                     templateUrl: 'user/edit/engage/promotionsAndSalesAddNew.html',
-                    clickOutsideToClose: true,
+                    clickOutsideToClose: false,
                     locals: {
                         item: null
                     }
@@ -57,7 +57,7 @@
                 return $mdDialog.show({
                     controller: 'SalesAndPromotionCtrl',
                     templateUrl: 'user/edit/engage/promotionsAndSalesAddNew.html',
-                    clickOutsideToClose: true,
+                    clickOutsideToClose: false,
                     locals: {
                         item: data
                     }
