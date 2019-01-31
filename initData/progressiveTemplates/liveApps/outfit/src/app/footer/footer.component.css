@@ -223,5 +223,9 @@ div.c-pad{
 	
 	.pointer {
     cursor: pointer;
-}
+	}
+
+	.fit-content {
+		width: fit-content;
+	}
 /* Web app footer styles - END */
