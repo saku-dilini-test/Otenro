@@ -4,33 +4,33 @@
 		<div class="row row-no-gutters flex-center">
 			<a class="col-xs-3"  routerLink="home" routerLinkActive="active"  >
 				<div class="text-center">
-					<span class="feather-icon icon-air-play icon-sm main-footer-font"></span>
+					<span class="feather-icon icon-air-play icon-sm main-footer-header"></span>
 				</div>
-				<div class="text-center-xs mobile-footer-label main-footer-font">
+				<div class="text-center-xs mobile-footer-label main-footer-header">
 					Home
 				</div>
 			</a>
 			<a class="col-xs-3" *ngIf="loginStatus"   routerLink="/appUser" routerLinkActive="active">
 				<div class="text-center">
-					<span class="feather-icon icon-head icon-sm main-footer-font"></span>
+					<span class="feather-icon icon-head icon-sm main-footer-header"></span>
 				</div>
-				<div class="text-center-xs mobile-footer-label main-footer-font"  >
+				<div class="text-center-xs mobile-footer-label main-footer-header"  >
 					User
 				</div>
 			</a>
 			<div class="col-xs-3"  routerLink="/shop" routerLinkActive="active">
 				<div class="text-center">
-					<span class="feather-icon icon-search icon-sm main-footer-font"></span>
+					<span class="feather-icon icon-search icon-sm main-footer-header"></span>
 				</div>
-				<div class="text-center-xs mobile-footer-label main-footer-font">
+				<div class="text-center-xs mobile-footer-label main-footer-header">
 					Search
 				</div>
 			</div>
 			<div class="col-xs-3"  routerLink="/contact" routerLinkActive="active">
 				<div class="text-center">
-					<span class="feather-icon icon-speech-bubble icon-sm main-footer-font"></span>
+					<span class="feather-icon icon-speech-bubble icon-sm main-footer-header"></span>
 				</div>
-				<div class="text-center-xs mobile-footer-label main-footer-font">
+				<div class="text-center-xs mobile-footer-label main-footer-header">
 					Contact
 				</div>
 			</div>
@@ -51,7 +51,7 @@
 					<!--<span class="main-footer-font">Subscribe for {{appName?.slice(0, appName?.length - 4)}} newsletters.</span>-->
 				<!--</div>-->
 				<div id="logo-image-container">
-					<img src="{{imageUrl}}/logo.png&dummy={{dummy}}" alt="logo" />
+					<img src="{{imageUrl}}/footer.png&dummy={{dummy}}" alt="logo" width="150px" />
 				</div>
 			</div>
 			<!-- Quick links content -->
@@ -90,7 +90,7 @@
 			</div>
 			<!-- Accepted payment types -->
 			<div id="accepted-payments" *ngIf="isIpgInfoExists()">
-				<span>accepted payment types</span>
+				<span class="main-footer-header">accepted payment types</span>
 				<img *ngIf = "ipgInfo && ipgInfo.paypalEnable" src="assets/images/Paypal.png">
 				<img *ngIf = "ipgInfo && ipgInfo.paypalEnable" src="assets/images/Visa.png">
 				<img *ngIf = "ipgInfo && ipgInfo.paypalEnable" src="assets/images/Master.png">

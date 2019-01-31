@@ -7,33 +7,33 @@
       <div class="row row-no-gutters">
         <div class="col-xs-3" (click)="navigate('','Home')">
           <div class="text-center">
-            <span class="fa fa-home icon-sm main-footer-font"></span>
+            <span class="fa fa-home icon-sm main-footer-header"></span>
           </div>
-          <h6 class="mg-md text-center-xs main-footer-font"  >
+          <h6 class="mg-md text-center-xs main-footer-header"  >
             Home
           </h6>
         </div>
         <div class="col-xs-3" (click)="navigate('appUser','Edit Profile')" *ngIf="loginStatus">
           <div class="text-center">
-            <span class="fa fa-user icon-sm main-footer-font"></span>
+            <span class="fa fa-user icon-sm main-footer-header"></span>
           </div>
-          <h6 class="mg-md text-center-xs main-footer-font" >
+          <h6 class="mg-md text-center-xs main-footer-header" >
             Profile
           </h6>
         </div>
         <div class="col-xs-3" (click)="navigate('shop','Search')">
           <div class="text-center">
-            <span class="fa fa-search icon-sm main-footer-font"></span>
+            <span class="fa fa-search icon-sm main-footer-header"></span>
           </div>
-          <h6 class="mg-md text-center-xs main-footer-font">
+          <h6 class="mg-md text-center-xs main-footer-header">
             Search<br>
           </h6>
         </div>
         <div class="col-xs-3" (click)="navigate('contact','Contact Us')">
           <div class="text-center">
-            <span class="fa fa-phone icon-sm main-footer-font"></span>
+            <span class="fa fa-phone icon-sm main-footer-header"></span>
           </div>
-          <h6 class="mg-md text-center-xs main-footer-font">
+          <h6 class="mg-md text-center-xs main-footer-header">
             Contact
           </h6>
         </div>
@@ -55,7 +55,7 @@
 					<!--<span>Subscribe for {{appName?.slice(0, appName?.length - 4)}} newsletters.</span>-->
 				<!--</div>-->
 				<div id="logo-image-container">
-					<img src="{{imageUrl}}/footer.png&dummy={{dummy}}" alt="footer logo" />
+					<img src="{{imageUrl}}/footer.png&dummy={{dummy}}" width="150px" alt="footer logo" />
 				</div>
 			</div>
 			<!-- Quick links content -->
@@ -94,7 +94,7 @@
 			</div>
 			<!-- Accepted payment types -->
 			<div id="accepted-payments" *ngIf="isIpgInfoExists()">
-					<span>accepted payment types</span>
+					<span class="main-footer-header">accepted payment types</span>
 					<img *ngIf = "ipgInfo && ipgInfo.paypalEnable" src="assets/images/Paypal.png">
 					<img *ngIf = "ipgInfo && ipgInfo.paypalEnable" src="assets/images/Visa.png">
 					<img *ngIf = "ipgInfo && ipgInfo.paypalEnable" src="assets/images/Master.png">

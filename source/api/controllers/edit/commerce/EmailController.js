@@ -210,8 +210,9 @@ module.exports = {
 
     sendTestEmail : function(req,res){
 
-        console.log(req.body)
+        // console.log(req.body)
         var order = {
+            id: 12345,
             item:
                 [ { id: 'Sample Id',
                     name: 'Sample Product',
@@ -270,7 +271,7 @@ module.exports = {
                     return res.send(200);
                 }
             });
-        })
+        });
     },
     sendVerificationLinkEmail : function(req,res){
 

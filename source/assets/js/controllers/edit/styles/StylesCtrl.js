@@ -18,22 +18,35 @@
         $scope.tmpLogo= [];
         $scope.path = ME_APP_SERVER+"temp/";
         $scope.splash;
-        $scope.saveFAV = false;
+        $scope.saveFAV = true;
         $scope.footerImage = null;
 
         $scope.imageUrlFAV = SERVER_URL + "templates/viewFAVIcon?userId=" + $auth.getPayload().id + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/favicon.ico";
         $scope.splash = $scope.imageUrlFAV;
 
         console.log($scope.imageUrlFAV);
-        $scope.validateIcon = function(splash,x,v){
+        $scope.validateIcon = function(image,width,height){
 
-            $scope.saveFAV = true;
+            console.log(image,image.width,image.width)
+            if(image.width != width && image.height != height){
+                $scope.saveFAV = false;
+                toastr.error('Icon should be 32x32 pixel ico file', 'Warning', {
+                    closeButton: true
+                });
+            }else {
+                $scope.saveFAV = true;
+
+            }
+
+
         }
+
+
 
         $scope.saveFAVIcon = function (){
                 console.log($scope.splash);
                 if($scope.splash && $scope.splash.type == "image/vnd.microsoft.icon" || $scope.splash.type == "image/x-icon"){
-                    $scope.saveFAV = false;
+
                     stylesService.uploadFAVIcon($scope.splash)
                         .success(function (data, status, headers, config) {
                     toastr.success('FAV Icon uploaded Successfully!', 'Successful', {
@@ -43,11 +56,11 @@
 
                     });
                 }else{
-                    toastr.error('Please upload favicon in 100x100px resolution .ico format', 'Warning', {
+                    toastr.error('Please upload favicon in 32x32px resolution .ico format', 'Warning', {
                           closeButton: true
                     });
                         $scope.splash = null;
-                        $scope.saveFAV = false;
+                       /* $scope.saveFAV = false;*/
                 }
 
         }
@@ -549,7 +562,6 @@
                 });
             }
             else{
-                $scope.myImage = null;
                 $scope.logoImgData = {
                     appId: appId,
                     logo: logo,
@@ -577,7 +589,6 @@
                         toastr.success('Logo has been uploaded successfully', 'message', {
                             closeButton: true
                         });
-
                         $scope.buttonName = "Browse Image";
                      })
                     .error(function (res) {
@@ -617,9 +628,10 @@
                                     + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
                             }
                             $scope.appTemplateUrl = urlPath;
-                            mySharedService.prepForBroadcast($scope.appTemplateUrl);
                             $scope.picFile = null;
                             $scope.myImage = null;
+                            document.getElementById("footerImageArea").src = '';
+                            mySharedService.prepForBroadcast($scope.appTemplateUrl);
                             $scope.footerImage = fImange;
                             toastr.success('Footer image has been uploaded successfully!', 'Success', {
                                 closeButton: true

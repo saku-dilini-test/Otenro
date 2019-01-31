@@ -202,7 +202,12 @@
             $scope.mainImg = img;
         };
 
-        $scope.addSliderImage = function (file, menu, cat, prod) {
+        $scope.addSliderImage = function (file, menuData, cat, prod) {
+            var menu = {};
+
+            if (menuData){
+                menu = menuData;
+            }
 
             if ($scope.tmpImage[0] == null) {
                 toastr.error('Please upload an image', 'Warning', { closeButton: true });

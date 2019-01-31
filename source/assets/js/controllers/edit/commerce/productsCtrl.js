@@ -1581,5 +1581,12 @@
 
         };
 
+        $scope.visible = function (item) {
+            var name = item.name.toUpperCase();
+            return !($scope.searchCategories && $scope.searchCategories.length > 0
+            && name.indexOf($scope.searchCategories.toUpperCase()) == -1);
+        };
+
+
     }
 })();
