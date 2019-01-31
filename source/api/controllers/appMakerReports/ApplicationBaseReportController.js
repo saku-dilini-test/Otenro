@@ -62,7 +62,11 @@ module.exports = {
 
         PublishDetails.find().exec(function (err, publishDetailsData) {
 
-            if (err) return done(err);
+            if (err) {
+                console.log("error " + err);
+                return res.send(err);
+
+            }
 
             publishDetailsData.forEach(function (publishDetails) {
 
@@ -111,13 +115,11 @@ module.exports = {
                                                     AppUser.count(
                                                         {
                                                             appId: applicationData.id,
-                                                            subscriptionStatus: "UNSUBSCRIBED",
-                                                            msisdn: {$regex: new RegExp('^' + code, 'i')},
-                                                            registeredDate: dateFormat(date, "yyyy-mm-dd"),
-                                                            unsubscribeDate: dateFormat(date, "yyyy-mm-dd")
+                                                            subscriptionStatus: "SUBSCRIBED",
+                                                            msisdn: {$regex: new RegExp('^' + code, 'i')}
 
                                                         })
-                                                        .exec(function countCB(error, unsubcountDiff) {
+                                                        .exec(function countCB(error, totSubscribers) {
 
                                                             if (error) {
                                                                 return console.log(" appUser count find error " + error)
@@ -153,7 +155,6 @@ module.exports = {
 
                                                                         appBaseintance.getShareSplit(operators.operator, function (shareSplit, err) {
 
-
                                                                             var data = {
                                                                                 appName: applicationData.appName,
                                                                                 type: "Appmaker",
@@ -166,7 +167,8 @@ module.exports = {
                                                                                 appTrafficCount: appVisitCount,
                                                                                 subscriptionCount: subcount,
                                                                                 unSubscriptionCount: unsubcount,
-                                                                                totSubs: (subcount - unsubcountDiff)
+                                                                                totSubs: totSubscribers,
+                                                                                appId:applicationData.id
                                                                             };
 
 
@@ -214,7 +216,7 @@ module.exports = {
                     }
                 },
                 {
-                    groupBy: ['appName', 'operator', 'type'], sum: ['platformEarning', 'spEarning', 'appTotRevenue',
+                    groupBy: ['appName', 'operator', 'type','appId'], sum: ['platformEarning', 'spEarning', 'appTotRevenue',
                     'appTrafficCount', 'subscriptionCount', 'unSubscriptionCount', 'totSubs']
                 }).exec(function (error, applicationBaseDailySummaryData) {
 
@@ -225,19 +227,49 @@ module.exports = {
 
                 applicationBaseDailySummaryData.forEach(function (appBaseMonthlySummary) {
 
-                    appBaseMonthlySummary.year = date.getFullYear();
-                    appBaseMonthlySummary.month = date.getMonth() + 1;
+                    Operator.findOne({operator: appBaseMonthlySummary.operator.toLowerCase()}).exec(function (err, oprator_data) {
 
-                    ApplicationBaseMonthlySummary.create(appBaseMonthlySummary).exec(function (err, result) {
-                        if (err) console.log(err);
-                        console.log(result);
+                        if (err) {
+                            return console.log(" Operator find error " + err)
+                        }
+                        var ctr = 0;
+                        var totSubscribersCount = 0;
+                        oprator_data.operator_code.forEach(function (code) {
+
+                            AppUser.count({
+                                    appId: appBaseMonthlySummary.appId,
+                                    subscriptionStatus: "SUBSCRIBED",
+                                    msisdn: {$regex: new RegExp('^' + code, 'i')}})
+                                .exec(function countCB(error, subscribersCount) {
+
+                                    if (error) {
+                                        return console.log(" appUser count find error " + error)
+                                    }
+
+                                    totSubscribersCount = totSubscribersCount + subscribersCount;
+
+                                    ctr ++;
+                                    if (ctr === oprator_data.operator_code.length) {
+
+                                        appBaseMonthlySummary.year = date.getFullYear();
+                                        appBaseMonthlySummary.month = date.getMonth() + 1;
+                                        appBaseMonthlySummary.totSubs =totSubscribersCount;
+
+                                            ApplicationBaseMonthlySummary.create(appBaseMonthlySummary).exec(function (err, result) {
+                                            if (err) console.log(err);
+                                            console.log(result);
+                                        });
+                                    }
+                                });
+                        })
                     });
-
                 })
-
             })
         });
     },
+
+
+
 
     insertApplicationBaseYearlySummary: function () {
 
@@ -249,21 +281,48 @@ module.exports = {
 
             ApplicationBaseMonthlySummary.find({year: date.getFullYear()},
                 {
-                    groupBy: ['appName', 'operator', 'type'], sum: ['platformEarning', 'spEarning', 'appTotRevenue',
+                    groupBy: ['appName', 'operator', 'type','appId'], sum: ['platformEarning', 'spEarning', 'appTotRevenue',
                     'appTrafficCount', 'subscriptionCount', 'unSubscriptionCount', 'totSubs']
                 }).exec(function (error, applicationBaseMonthlySummaryData) {
 
                 applicationBaseMonthlySummaryData.forEach(function (appBaseYearlySummary) {
 
-                    appBaseYearlySummary.year = date.getFullYear();
+                        Operator.findOne({operator: appBaseYearlySummary.operator.toLowerCase()}).exec(function (err, oprator_data) {
 
-                    ApplicationBaseYearlySummary.create(appBaseYearlySummary).exec(function (err, result) {
-                        if (err) console.log(err);
-                        console.log(result);
-                    });
+                            if (err) {
+                                return console.log(" Operator find error " + err)
+                            }
+                            var ctr = 0;
+                            var totSubscribersCount = 0;
+                            oprator_data.operator_code.forEach(function (code) {
 
+                                AppUser.count({
+                                    appId: appBaseYearlySummary.appId,
+                                    subscriptionStatus: "SUBSCRIBED",
+                                    msisdn: {$regex: new RegExp('^' + code, 'i')}})
+                                    .exec(function countCB(error, subscribersCount) {
+
+                                        if (error) {
+                                            return console.log(" appUser count find error " + error)
+                                        }
+
+                                        totSubscribersCount = totSubscribersCount + subscribersCount;
+
+                                        ctr ++;
+                                        if (ctr === oprator_data.operator_code.length) {
+
+                                            appBaseYearlySummary.year = date.getFullYear();
+                                            appBaseYearlySummary.totSubs =totSubscribersCount;
+
+                                            ApplicationBaseYearlySummary.create(appBaseYearlySummary).exec(function (err, result) {
+                                                if (err) console.log(err);
+                                                console.log(result);
+                                            });
+                                        }
+                                    });
+                            })
+                        });
                 })
-
             })
         })
     },
