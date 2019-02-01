@@ -54,6 +54,7 @@
             commerceService.getCategoryList()
                 .success(function (result) {
                     $scope.categories = result;
+                    console.log($scope.categories)
                 }).error(function (error) {
                 toastr.error('Loading Error', 'Warning', {
                     closeButton: true
@@ -68,7 +69,6 @@
                 .success(function (result) {
                     $scope.productsList = result;
 
-                    // console.log($scope.productsList)
 
                     $scope.productsList.forEach(function(prod){
                         prod.variants.forEach(function(variant){
@@ -76,11 +76,12 @@
                                 variant['imageUrl'] = prod.imageUrl;
 
                             }
+                            variant['selectedCategories'] = prod.selectedCategories
                             variant['id'] = prod.id;
                            $scope.allProds.push(variant);
                         });
                     });
-                    // console.log($scope.allProds)
+                    console.log($scope.allProds)
                     // console.log("inside Item main");
                         if($scope.item && $scope.item.salesAndPromotionType == 'singleProduct' ){
                         // console.log("selected prods");
@@ -370,6 +371,10 @@
                     return toastr.warning('Please select valid date range', 'Warning', {
                         closeButton: true
                     });
+                }else if(!$scope.categoryWide.category){
+                    return toastr.warning('Please select a category', 'Warning', {
+                        closeButton: true
+                    });
                 } else if (fromDate < currentDate) {
 
                     toastr.warning('Past date and time are not allowed. Please select valid date and time.', 'Warning', {
@@ -377,6 +382,15 @@
                     });
                     return ;
                 } else{
+                    $scope.categoryWide.selectedProduct = [];
+                    $scope.allProds.forEach(prod => {
+                        prod.selectedCategories.forEach(catId => {
+                            if(catId == $scope.categoryWide.category){
+                                $scope.categoryWide.selectedProduct.push(prod);
+                            }
+                        });
+                    });
+                    console.log($scope.categoryWide)
                     createSalesAndPromo();
                 }
             }

@@ -201,7 +201,8 @@ export class CheckoutComponent implements OnInit {
 		this.productsService.getSalesAndPromoData(this.appId).subscribe(data => {
 			data.forEach(element => {
     				if((element.salesAndPromotionType == 'storeWide' && element.status == 'ACTIVE')
-              || (element.salesAndPromotionType == 'singleProduct' && element.status == 'ACTIVE'  && element.isRedeemableAtCheckout == true)){
+              || (element.salesAndPromotionType == 'singleProduct' && element.status == 'ACTIVE'  && element.isRedeemableAtCheckout == true)
+              || (element.salesAndPromotionType == 'categoryWide' && element.status == 'ACTIVE')){
     					// console.log(element);
     					this.promos.push(element);
     				}
@@ -1514,9 +1515,9 @@ export class CheckoutComponent implements OnInit {
         if(promoSelect){
           promoSelect.selectedIndex = 0;
         }
-      }else if(this.selectedPromo[0].salesAndPromotionType == 'singleProduct'){
-          console.log(this.selectedPromo[0].selectedProduct)
-          console.log(this.cartItems)
+      }else if(this.selectedPromo[0].salesAndPromotionType == 'singleProduct' || this.selectedPromo[0].salesAndPromotionType == 'storeWide'){
+          // console.log(this.selectedPromo[0].selectedProduct)
+          // console.log(this.cartItems)
           this.selectedPromo[0].selectedProduct.forEach( pProd =>{
               this.cartItems.forEach(cProd =>{
                   if(pProd.id == cProd.id){
