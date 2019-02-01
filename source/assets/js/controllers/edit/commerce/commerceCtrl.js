@@ -1570,13 +1570,19 @@
                     'address': basicInfo.address,
                     'telPhone': basicInfo.telPhone,
                     'email': webInfo.email,
-                    'webSite': webInfo.webSite,
-                    'showmap': webInfo.showmap,
-                    'twitter': webInfo.twitter,
-                    'facebook': webInfo.facebook,
-                    'instagram': webInfo.instagram,
-                    'linkedin': webInfo.linkedin,
-                    'pinterest': webInfo.pinterest,
+                    'webSite': (webInfo.webSite.substring(0, 4)==="www.") ?
+                        webInfo.webSite = "http://" +webInfo.webSite : webInfo.webSite,
+                    'showmap':  webInfo.showmap,
+                    'twitter': (webInfo.twitter.substring(0, 4)==="www.") ?
+                        webInfo.twitter = "http://" +webInfo.twitter : webInfo.twitter,
+                    'facebook': ( webInfo.facebook.substring(0, 4)==="www.") ?
+                        webInfo.facebook = "http://" +webInfo.facebook :webInfo.facebook,
+                    'instagram': ( webInfo.instagram.substring(0, 4)==="www.") ?
+                        webInfo.instagram = "http://" +webInfo.instagram :webInfo.instagram,
+                    'linkedin': ( webInfo.linkedin.substring(0, 4)==="www.") ?
+                        webInfo.linkedin = "http://" +webInfo.linkedin :webInfo.linkedin,
+                    'pinterest': ( webInfo.pinterest.substring(0, 4)==="www.") ?
+                        webInfo.pinterest = "http://" +webInfo.pinterest :webInfo.pinterest,
                     'showOnWebsiteContact' : basicInfo.showOnWebsiteContact || false
                 };
                 contactUsService.saveBasicInfo(basicInfoResponse)
