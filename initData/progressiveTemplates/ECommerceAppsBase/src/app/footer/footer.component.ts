@@ -22,8 +22,9 @@ export class FooterComponent {
   dummy: any;
   ipgInfo: any = null;
   appName;
-  phone;
-  email;
+  phone: string;
+  email: string;
+  webSite: string;
   isApplogoExists = false;
 
   constructor(private router: Router, private appDataService: AppDataService,
@@ -36,6 +37,9 @@ export class FooterComponent {
       }
       if (this.webInfo && this.webInfo.email) {
         this.email = this.webInfo.email;
+      }
+      if (this.webInfo && this.webInfo.webSite) {
+        this.webSite = this.webInfo.webSite
       }
     }), ((err) => {
       console.log("Error when fetching ContactUsInfo: " + JSON.stringify(err));

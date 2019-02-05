@@ -191,4 +191,8 @@ div.c-pad{
 	text-align: center;
 }
 
+.fit-content {
+	width: fit-content;
+}
+
 /**------ Footer styles - END ------**/

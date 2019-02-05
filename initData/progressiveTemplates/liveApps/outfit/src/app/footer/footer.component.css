@@ -223,5 +223,13 @@ div.c-pad{
 	
 	.pointer {
     cursor: pointer;
-}
+	}
+
+	.fit-content {
+		width: fit-content;
+	}
+
+	.color-white {
+		color: #e0e0e0;
+	}
 /* Web app footer styles - END */
