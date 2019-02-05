@@ -1721,7 +1721,7 @@
 
         $scope.onCheckBoxChange = function(field) {
 
-            let isSelected, characterLength;
+            var isSelected, characterLength;
 
             if (field === 'policies') {
 
@@ -1741,8 +1741,8 @@
 
             if (isSelected) {
 
-                let socketBody = { appId: $rootScope.appId, characterLength: characterLength };
-                io.socket.post('/edit/commerce/checkAppHeaderEligibility', socketBody, (res) => {
+                var socketBody = { appId: $rootScope.appId, characterLength: characterLength };
+                io.socket.post('/edit/commerce/checkAppHeaderEligibility', socketBody, function(res) {
 
                     if (res.status === 'NOT_ELIGIBLE') {
 
