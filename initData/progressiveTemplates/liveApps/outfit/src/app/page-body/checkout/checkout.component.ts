@@ -1515,7 +1515,7 @@ export class CheckoutComponent implements OnInit {
         if(promoSelect){
           promoSelect.selectedIndex = 0;
         }
-      }else if(this.selectedPromo[0].salesAndPromotionType == 'singleProduct' || this.selectedPromo[0].salesAndPromotionType == 'storeWide'){
+      }else if(this.selectedPromo[0].salesAndPromotionType == 'singleProduct' || this.selectedPromo[0].salesAndPromotionType == 'categoryWide'){
           // console.log(this.selectedPromo[0].selectedProduct)
           // console.log(this.cartItems)
           this.selectedPromo[0].selectedProduct.forEach( pProd =>{
