@@ -21,9 +21,9 @@
             {{contact.contactInfo.address}}
           </p>
           <p class="text-center contact-text">
-             {{contact.contactInfo.telPhone}} <br>
+              <a href="tel:{{contact.contactInfo.telPhone}}">{{contact.contactInfo.telPhone}}</a><br>
 
-            {{contact.contactInfo.email}}
+              <a href="mailto:{{contact.contactInfo.email}}">{{contact.contactInfo.email}}</a>
           </p>
           <p class="text-center">
             <a href="{{contact.contactInfo.webSite}}" target="_blank">{{contact.contactInfo.webSite}}</a>

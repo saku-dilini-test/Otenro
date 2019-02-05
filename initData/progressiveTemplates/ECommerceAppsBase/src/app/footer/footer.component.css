@@ -90,3 +90,7 @@
   width: 100%;
   text-align: center;
 }
+
+.fit-content {
+	width: fit-content;
+}
