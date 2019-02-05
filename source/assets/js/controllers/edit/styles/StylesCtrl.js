@@ -537,7 +537,6 @@
         };
 
         $scope.uploadLogoToArea = function() {
-
             var handleFileSelect = function (evt) {
                     var file = evt.currentTarget.files[0];
                     var reader = new FileReader();
@@ -551,11 +550,13 @@
             angular.element(document.querySelector('#fileInput')).on('change', handleFileSelect);
         }
 
-        $scope.deleteImg = function (index) {
+        $scope.deleteImg = function () {
             $scope.tmpLogo[0] = null;
+            $scope.footerImage = null;
         };
 
         $scope.uploadLogo = function(logo){
+
             if(angular.element('#fileInput').val() == ''){
                 toastr.error('Please choose an logo to upload', 'Warning', {
                     closeButton: true
@@ -602,6 +603,7 @@
 
         // Upload footer image to server
         $scope.uploadFooterImage = function (fImange) {
+
             if (angular.element('#fileInput').val() == '') {
                 toastr.error('Please choose a footer image to upload', 'Warning', {
                     closeButton: true
