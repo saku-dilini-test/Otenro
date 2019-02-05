@@ -32,6 +32,7 @@ import { APIHandlerService } from './services/auth/api.handler.service';
 import { AuthenticatorService } from './services/auth/authenticator.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { HttpConfigInterceptor } from './interceptor/httpconfig.interceptor';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { environment } from '../environments/environment';
     MessageService,
     ParentJWTService,
     APIHandlerService,
-    AuthenticatorService
+    AuthenticatorService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ],
   bootstrap: [AppComponent]
 })
