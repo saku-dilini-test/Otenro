@@ -40,11 +40,23 @@
 
             <!-- Add Product Tab 2 content -->
             <md-tab ng-disabled="addProductsOptionParams.secondLocked">
-                <md-tab-label>Add Details</md-tab-label>
+                <div ng-if="product.name!=null" >
+                    <md-tab-label>Edit Details</md-tab-label>
+                </div>
+                <div ng-if="product.name==null" >
+                    <md-tab-label>Add Details</md-tab-label>
+                </div>
+
                 <md-tab-body>
+
+
                     <div class="md-dialog-header">
-                        <h1>Add Product</h1>
+                        <h1 ng-if="product.name!=null">Edit Product</h1>
+                        <h1 ng-if="product.name==null">Add Product</h1>
                     </div>
+                    <!--<div class="md-dialog-header">
+                        <h1>Add Product</h1>
+                    </div>-->
                     <md-content layout-padding>
                         <form name="productForm">
                             <div class="md-dialog-main">
