@@ -48,14 +48,14 @@ module.exports = {
     IDEABIZ_AUTH_CONSUMER_SECRET: 'NZ7OQjZ2yCqsin7kxjbGpUlBsska',
     IDEABIZ_AUTH_USERNAME: 'Appmaker',
     IDEABIZ_AUTH_PASSWORD: 'SUperman123',
-    IDEABIZ_EMAIL: 'support@appmaker.lk',
+    IDEABIZ_EMAIL: 'supermakeruser@gmail.com',
     IDEABIZ_GROUP_EMAIL: 'supermakeruser@gmail.com', //To email for dialog super user, when sending approval email for the app configured with the serviceID by Admin.
     IDEABIZ_ADMIN_EMAIL: 'appmakeruser@gmail.com', //From email address of Admin to send serviceID approval email to dialog super user.
     SUPPORT_USER_EMAIL: 'appmakeruser@gmail.com',//'support@appmaker.lk' //Simato Support user
     SIMATO_SUPPORT: 'appmakeruser@gmail.com',
-    IDEABIZ_SUPER_ADMIN_EMAIL: 'support@appmaker.lk',// should be changed to admin@ideamart.io
-    IDEABIZ_SUPPORT_EMAIL : 'ideadroidsupport@simatosolutions.com',// publish app TO email 
-    IDEABIZ_APP_GENERATOR_EMAIL : 'apkgenerator@simatosolutions.com',// Build success/failed FROM email 
+    IDEABIZ_SUPER_ADMIN_EMAIL: 'supermakeruser@gmail.com',// should be changed to admin@ideamart.io
+    IDEABIZ_SUPPORT_EMAIL : 'testsimato@gmail.com',// publish app TO email 
+    IDEABIZ_APP_GENERATOR_EMAIL : 'appmakeruser@gmail.com',// Build success/failed FROM email 
 /**
      * The ADMIN api and MO callbacks will call these
      */

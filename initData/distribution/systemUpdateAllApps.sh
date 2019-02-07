@@ -29,11 +29,11 @@ echo "${red}red text ${green}green text ${yellow}yellow text ${cyan}cyan text${r
 # as $app
 echo "$(date) ${cyan}Starting Old apps backup .... ${reset}"
 cd $MESERVER
-if [ backupUpdatedApps.zip ]
-then
-    rm -rf backupUpdatedApps.zip
-fi
-zip -r backupUpdatedApps.zip ./*
+#if [ backupUpdatedApps.zip ]
+#then
+#    rm -rf backupUpdatedApps.zip
+#fi
+#zip -r backupUpdatedApps.zip ./*
 
 echo "$(date) ${cyan}Starting All App Update .... ${reset}"
 i=0

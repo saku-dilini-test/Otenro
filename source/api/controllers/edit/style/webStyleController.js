@@ -193,8 +193,15 @@ module.exports = {
                 colorTypeCss = ".main-footer-header";
             }
 
+            //Has to delete the id else there will be an error
+            delete app.id;
+
              Application.update(query,app).exec(function(err, appUpdate) {
-                 if (err) res.send(err);
+                if (err) 
+                {
+                    sails.log.error('webStyleController: Error when updating Application.Err: ', err);
+                    return res.send(err);
+                }
 
                 // here update color in Css class
                 if(type == 'buttonFontColor' || type == 'navigationBarFontColor' || type == 'headerFontColor' || type == 'contentFontColor' || type == 'footerFontColor' || type == 'footerHeaderFontColor'){

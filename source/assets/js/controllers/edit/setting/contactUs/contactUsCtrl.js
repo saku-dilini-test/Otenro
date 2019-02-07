@@ -143,6 +143,8 @@
                     }).error(function(data, status, headers, config) {
                     toastr.error('Updating of basic information failed', { closeButton: true});
                 });
+            }else{
+                toastr.error('Please enter email address', 'Error', { closeButton: true});
             }
         };
 
@@ -224,7 +226,11 @@
 
             if (storeSettings!=null){
                 if (!storeSettings.header  || !storeSettings.content) {
-                    toastr.error(' warning', "Please fill all fields", {closeButton: true});
+                    if ($scope.aboutUs.header.$error.pattern){
+                        toastr.error("Symbols should not be used in the heading.", 'Error', {closeButton: true});
+                    }else{
+                        toastr.error("Please fill all fields", 'Warning', {closeButton: true});
+                    }
                 }else{
 
                     storeSettings.appId = $rootScope.appId;

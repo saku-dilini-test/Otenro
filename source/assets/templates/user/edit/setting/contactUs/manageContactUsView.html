@@ -186,7 +186,7 @@
                                 <input maxlength="20" class="input-shadow-border" type="text" name="header" ng-pattern="/^[a-zA-Z0-9_ ]*$/"
                                        ng-model="storeSettings.header" required  />
                                 <br />
-                                <span ng-show="aboutUs.header.$error.pattern">No symbols</span>
+                                <span ng-show="aboutUs.header.$error.pattern" class="error">No symbols</span>
                                 <div ng-hide="storeSettings.header.length > maxAboutUsHeader">
                                     <span class="information">Characters left: {{maxAboutUsHeader - storeSettings.header.length}}</span>
                                 </div>

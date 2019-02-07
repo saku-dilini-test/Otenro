@@ -807,64 +807,80 @@ module.exports = {
                             return;
                         }
 
-                        parser.parseString(data, function (err, result) {
-                            result.widget.name = appName;
-                            result.widget['$'].id='io.ionic.prog'+appId;
-                            var preVersion=result.widget['$'].version;
-                            var version=increaseVersion(preVersion);
-                            result.widget['$'].version=version;
 
-                            var xml = xmlBuilder.buildObject(result);
+                        var version,preVersion;
 
-                            fs.writeFile(configFile, xml,'utf-8', function(err) {
+                        BuildVersion.find({appId: appId}).sort('createdAt DESC').exec(function (err, versions) {
+                            if (err) {
+                                thisCtrl.logApkGenerationError('Error while searching for the versions for the appId:' + appId + ' in BuildVersion. Error: ' + err, userId, appId);
+                                return;
+                            }
+                            
+                            if(versions.length>0){
+                                preVersion = versions[0].version;
+                                version=increaseVersion(preVersion);
+                            }else{
+                                version = '0.0.1';
+                                preVersion = version;
+                            }
 
-                                if(err){
-                                    thisCtrl.logApkGenerationError('Error while writing to the config file in replaceAppNameNIcon. Error: ' + err,userId,appId);
-                                    return;
-                                }
-                            });
-
-                            fs.copy(icon, appIconFileDES, 'base64', function(err) {
-                                if(err){
-                                    thisCtrl.logApkGenerationError('Error while copying the icon to the app icon destination dir. Error: ' + err,userId,appId);
-                                    return;
-                                }
-                            });
-                            fs.copy(splash, appSplashFileDES, 'base64', function(err) {
-                                if(err){
-                                    thisCtrl.logApkGenerationError('Error while copying the splash image to the splash destination dir. Error: ' + err,userId,appId);
-                                    return;
-                                }
-                            });
-                            BuildVersion.create({
-                                appId: appId,
-                                previousVersion:result.widget['$'].version,
-                                version : result.widget['$'].version
-                            }).exec(function(err,build){
-                                if(err){
-                                    thisCtrl.logApkGenerationError('Error while building the new build version in replaceAppNameNIcon. Error: ' + err,userId,appId);
-                                    return;
-                                }
-
-                                //Replacing app url in home.ts file for the appid and user id
-                                fs.readFile(homets_File,'utf8', function (err, data) {
+                            parser.parseString(data, function (err, result) {
+                                result.widget.name = appName;
+                                result.widget['$'].id='io.ionic.prog'+appId;
+                                result.widget['$'].version=version;
+    
+                                var xml = xmlBuilder.buildObject(result);
+    
+                                fs.writeFile(configFile, xml,'utf-8', function(err) {
+    
                                     if(err){
-                                        sails.log.error(err);
-                                    }
-                                    else{
-                                        var result = data.replace(/PointerAppLink/g, replacePointerAppLink);
-
-                                        fs.writeFile(homets_File, result, function (err) {
-                                            if(err){
-                                                sails.log.error(err);
-                                            }
-                                            else{
-                                                buildApkFile(copyDirPath,appName);
-                                            }
-                                        })
+                                        thisCtrl.logApkGenerationError('Error while writing to the config file in replaceAppNameNIcon. Error: ' + err,userId,appId);
+                                        return;
                                     }
                                 });
-                            });
+    
+                                fs.copy(icon, appIconFileDES, 'base64', function(err) {
+                                    if(err){
+                                        thisCtrl.logApkGenerationError('Error while copying the icon to the app icon destination dir. Error: ' + err,userId,appId);
+                                        return;
+                                    }
+                                });
+                                fs.copy(splash, appSplashFileDES, 'base64', function(err) {
+                                    if(err){
+                                        thisCtrl.logApkGenerationError('Error while copying the splash image to the splash destination dir. Error: ' + err,userId,appId);
+                                        return;
+                                    }
+                                });
+                                BuildVersion.create({
+                                    appId: appId,
+                                    previousVersion: preVersion,
+                                    version : version
+                                }).exec(function(err,build){
+                                    if(err){
+                                        thisCtrl.logApkGenerationError('Error while building the new build version in replaceAppNameNIcon. Error: ' + err,userId,appId);
+                                        return;
+                                    }
+    
+                                    //Replacing app url in home.ts file for the appid and user id
+                                    fs.readFile(homets_File,'utf8', function (err, data) {
+                                        if(err){
+                                            sails.log.error(err);
+                                        }
+                                        else{
+                                            var result = data.replace(/PointerAppLink/g, replacePointerAppLink);
+    
+                                            fs.writeFile(homets_File, result, function (err) {
+                                                if(err){
+                                                    sails.log.error(err);
+                                                }
+                                                else{
+                                                    buildApkFile(copyDirPath,appName);
+                                                }
+                                            })
+                                        }
+                                    });
+                                });
+                            });                            
                         });
                     }
                 );
