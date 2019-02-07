@@ -488,6 +488,7 @@ module.exports = {
 
                     var data = {
                         email: email,
+                        appId: appId,
                         title: 'Click the link below to set the password',
                         link: url + '?email=' + encryptedEmail
                     };

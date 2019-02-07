@@ -41,10 +41,6 @@ var transporter = nodemailer.createTransport({
 });
 
 
-
-
-
-
 var server  = email.server.connect({
     user:    "communications@otenro.com",
     password:"R&3%ee=r1",
@@ -1275,21 +1271,41 @@ module.exports = {
      * @param callback
      **/
     sendForgotPasswordEmail: function(data, callback) {
-        var emailDetails = {
-            text: data.title + '\n' + data.link,
-            from: 'communications@otenro.com',
-            to: data.email,
-            subject: 'Set New password'
-        };
-        server.send(emailDetails, function (err, message) {
-            if (err) {
+        var mailOptions;
+        UserEmail.findOne({appId:data.appId}).exec(function (err, userEmail) {
+            console.log(userEmail)
+            if(err){
                 return callback({ message: 'error' });
-            } else if (message) {
-                return callback({ message: 'success' });
-            } else {
-                return callback({ message: 'failed' });
+            }else if(userEmail){
+                mailOptions = {
+                    from: userEmail.fromEmail,
+                    to: data.email, // list of receivers
+                    subject: 'Set New password', // Subject line
+                    html: data.title + '\n' + data.link
+
+                };
+            }else{
+
+                mailOptions = {
+                    from: 'communications@otenro.com',
+                    to: data.email, // list of receivers
+                    subject: 'Set New password', // Subject line
+                    html: data.title + '\n' + data.link
+
+                };
             }
+
+            transporter.use('compile', inlineBase64());
+                // send mail with defined transport object
+            transporter.sendMail(mailOptions, function (error, info){
+                if (error) {
+                    return callback({ message: 'error' });
+                }
+                return callback({ message: 'success' });
+            });
+
         });
+
     },
 
     /**
