@@ -31,7 +31,7 @@
                 <div class="text-center" *ngIf="!checkSoldOut(prod)">
                   <a [routerLink]="['/product', prod.name, prod.id]" class="btn btn-d btn-lg main-button btn-block"><span class="feather-icon icon-paper icon-spacer"></span> Details</a>
                 </div>
-                <div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
+                <div *ngIf="checkSoldOut(prod)" class="sold-out text-center button-margin">
                   <h4 href="#" class="text-warning">Sold Out!</h4>
                 </div>
               </div>
@@ -52,7 +52,7 @@
                     <span class="feather-icon icon-paper icon-spacer"></span>
                     Details</a>
                 </div>
-                <div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
+                <div *ngIf="checkSoldOut(prod)" class="sold-out text-center button-margin">
                   <h4 href="#" class="text-warning">Sold Out!</h4>
                 </div>
               </div>

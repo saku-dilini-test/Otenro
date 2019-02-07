@@ -353,7 +353,7 @@
 
                     }).error(function (error) {
                         if(error == 'Conflict'){
-                            toastr.error('Entered promo code already exists. Please try again with a different promo code', 'Error', {
+                            toastr.error('Entered promo code already exists.', 'Error', {
                                 closeButton: true
                             });
                         }else{

@@ -49,9 +49,9 @@
           }
         }
       }).error(function(err) {
-        toastr.error('Please check your Email/Password', 'Error', {
-          closeButton: true
-        });
+          toastr.error('Please check your Email/Password ' , 'Error', {
+              closeButton: true
+          });
       });
     };
     $scope.cancel = function () {
@@ -88,10 +88,11 @@
               $state.go('user.dashboard');
           }
 
-      }).catch(function(error){
-      toastr.error('Please check your Email/Password', 'Error', {
-             closeButton: true
-      });
+      }).catch(function(errors){
+
+          toastr.error('Please check your Email/Password ' , 'Error', {
+              closeButton: true
+          });
       })
     };
 
