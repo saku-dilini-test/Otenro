@@ -159,10 +159,10 @@ module.exports = {
                                                 sentMails.sendOrderEmail(order, function (err, msg) {
                                                     sails.log.info(err);
                                                     if (err) {
-                                                        return res.send(500);
+                                                        console.log(err)
                                                     }
                                                 });
-                                            })
+                                            });
         
                                         });
                                     });
