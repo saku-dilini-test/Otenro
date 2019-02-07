@@ -1273,7 +1273,6 @@ module.exports = {
     sendForgotPasswordEmail: function(data, callback) {
         var mailOptions;
         UserEmail.findOne({appId:data.appId}).exec(function (err, userEmail) {
-            console.log(userEmail)
             if(err){
                 return callback({ message: 'error' });
             }else if(userEmail){
