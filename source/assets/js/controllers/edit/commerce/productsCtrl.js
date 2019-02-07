@@ -274,7 +274,7 @@
          */
         $scope.generalDetails = function (product, current, skuFieldEnable) {
             $scope.product.selectedCategories = [];
-            $scope.selected.forEach(obj => {
+            $scope.selected.forEach(function(obj) {
                 $scope.product.selectedCategories.push(obj.id);
             });
 
@@ -520,9 +520,9 @@
             $scope.child = results;
             // console.log(results)
             // console.log($scope.product.selectedCategories)
-            $scope.child.forEach(obj => {
+            $scope.child.forEach(function(obj) {
                 if($scope.product.selectedCategories){
-                    $scope.product.selectedCategories.forEach(item =>{
+                    $scope.product.selectedCategories.forEach(function(item){
                             // console.log(obj.id, item)
                         if(obj.id == item){
                             $scope.selected.push(obj);
@@ -1558,7 +1558,9 @@
                 $scope.product.selectedCategories = [];
             }
             var idx = $scope.product.selectedCategories.indexOf(item.id);
-            var idxx = $scope.selected.map(item => item.id).indexOf(item.id);
+            var idxx = $scope.selected.map(function(item) {
+                 return item.id;
+            }).indexOf(item.id);
             // console.log(idx)
             // console.log(idxx)
 

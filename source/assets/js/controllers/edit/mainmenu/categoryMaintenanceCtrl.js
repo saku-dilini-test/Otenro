@@ -138,7 +138,7 @@
             },
             dragStop: function (event) {
 
-                let socketBody = { payload: $scope.createCategoriesArrayAfterDragStop($scope.menuItems) };
+                var socketBody = { payload: $scope.createCategoriesArrayAfterDragStop($scope.menuItems) };
                 $scope.updateCategoryOrder(socketBody);
             },
             depth: function (event) {
@@ -162,13 +162,13 @@
 
                 if (!node.parentId) {
 
-                    let updatedCategories = [];
+                    var updatedCategories = [];
 
-                    let currentCategory = $scope.menuItems.splice(currentIndex, 1);
+                    var currentCategory = $scope.menuItems.splice(currentIndex, 1);
                     $scope.menuItems.splice(currentIndex - 1, 0, currentCategory[0]);
 
-                    let associatedCategory = $scope.menuItems[currentIndex];
-                    let socketBody = { payload: $scope.createUpdatedCategoriesArray(currentCategory[0], associatedCategory, currentIndex, 'MOVE_UP') };
+                    var associatedCategory = $scope.menuItems[currentIndex];
+                    var socketBody = { payload: $scope.createUpdatedCategoriesArray(currentCategory[0], associatedCategory, currentIndex, 'MOVE_UP') };
 
                     $scope.updateCategoryOrder(socketBody);
                 }
@@ -177,15 +177,15 @@
 
                     function loopArr(arr) {
 
-                        arr.forEach(item => {
+                        arr.forEach(function(item) {
 
                             if (item.id === node.parentId) {
 
-                                let currentCategory = item.childNodes.splice(currentIndex, 1);
+                                var currentCategory = item.childNodes.splice(currentIndex, 1);
                                 item.childNodes.splice(currentIndex - 1, 0, currentCategory[0]);
 
-                                let associatedCategory = item.childNodes[currentIndex];
-                                let socketBody = { payload: $scope.createUpdatedCategoriesArray(currentCategory[0], associatedCategory, currentIndex, 'MOVE_UP') };
+                                var associatedCategory = item.childNodes[currentIndex];
+                                var socketBody = { payload: $scope.createUpdatedCategoriesArray(currentCategory[0], associatedCategory, currentIndex, 'MOVE_UP') };
 
                                 $scope.updateCategoryOrder(socketBody);
                             }
@@ -215,11 +215,11 @@
 
                 if (!node.parentId) {
 
-                    let currentCategory = $scope.menuItems.splice(currentIndex, 1);
+                    var currentCategory = $scope.menuItems.splice(currentIndex, 1);
                     $scope.menuItems.splice(currentIndex + 1, 0, currentCategory[0]);
 
-                    let associatedCategory = $scope.menuItems[currentIndex];
-                    let socketBody = { payload: $scope.createUpdatedCategoriesArray(currentCategory[0], associatedCategory, currentIndex, 'MOVE_DOWN') };
+                    var associatedCategory = $scope.menuItems[currentIndex];
+                    var socketBody = { payload: $scope.createUpdatedCategoriesArray(currentCategory[0], associatedCategory, currentIndex, 'MOVE_DOWN') };
 
                     $scope.updateCategoryOrder(socketBody);
                 }
@@ -228,15 +228,15 @@
 
                     function loopArr(arr) {
 
-                        arr.forEach(item => {
+                        arr.forEach(function(item) {
 
                             if (item.id === node.parentId) {
 
-                                let currentCategory = item.childNodes.splice(currentIndex, 1);
+                                var currentCategory = item.childNodes.splice(currentIndex, 1);
                                 item.childNodes.splice(currentIndex + 1, 0, currentCategory[0]);
 
-                                let associatedCategory = item.childNodes[currentIndex];
-                                let socketBody = { payload: $scope.createUpdatedCategoriesArray(currentCategory[0], associatedCategory, currentIndex, 'MOVE_DOWN') };
+                                var associatedCategory = item.childNodes[currentIndex];
+                                var socketBody = { payload: $scope.createUpdatedCategoriesArray(currentCategory[0], associatedCategory, currentIndex, 'MOVE_DOWN') };
 
                                 $scope.updateCategoryOrder(socketBody);
                             }
@@ -277,7 +277,7 @@
          **/
         $scope.createUpdatedCategoriesArray = function (currentCategory, associatedCategory, currentIndex, type) {
 
-            let updatedCategories = [];
+            var updatedCategories = [];
 
             if (type === 'MOVE_UP')
                 updatedCategories.push({ id: currentCategory.id, index: currentIndex - 1 });
@@ -298,13 +298,13 @@
 
             if (node.isFeaturedCategory && $scope.featuredCategoryArr.length < 4) {
 
-                let body = { appId: $rootScope.appId, characterLength: node.name.length };
-                io.socket.post('/edit/commerce/checkAppHeaderEligibility', body, (res) => {
+                var body = { appId: $rootScope.appId, characterLength: node.name.length };
+                io.socket.post('/edit/commerce/checkAppHeaderEligibility', body, function(res) {
 
                     if (res.status === 'ELIGIBLE') {
 
-                        let socketBody = { id: node.id, isFeaturedCategory: node.isFeaturedCategory };
-                        io.socket.post('/edit/commerce/updateFeaturedCategory', socketBody, (res) => {
+                        var socketBody = { id: node.id, isFeaturedCategory: node.isFeaturedCategory };
+                        io.socket.post('/edit/commerce/updateFeaturedCategory', socketBody, function(res) {
 
                             if (res.status === 'SUCCESS') {
 
@@ -327,12 +327,12 @@
 
             if (!node.isFeaturedCategory) {
 
-                let socketBody = { id: node.id, isFeaturedCategory: node.isFeaturedCategory };
-                io.socket.post('/edit/commerce/updateFeaturedCategory', socketBody, (res) => {
+                var socketBody = { id: node.id, isFeaturedCategory: node.isFeaturedCategory };
+                io.socket.post('/edit/commerce/updateFeaturedCategory', socketBody, function(res) {
 
                     if (res.status === 'SUCCESS') {
 
-                        let checkedCategoryIndex = $scope.featuredCategoryArr.indexOf(node);
+                        var checkedCategoryIndex = $scope.featuredCategoryArr.indexOf(node);
                         if (checkedCategoryIndex > -1) {
 
                             $scope.featuredCategoryArr.splice(checkedCategoryIndex, 1);
@@ -359,7 +359,7 @@
         $scope.createFeaturedCategoryArray = function (menuItems) {
 
             $scope.featuredCategoryArr = [];
-            menuItems.forEach(category => {
+            menuItems.forEach(function(category) {
 
                 if (category.isFeaturedCategory) {
                     $scope.featuredCategoryArr.push(category);
@@ -376,10 +376,10 @@
          **/
         $scope.createCategoriesArrayAfterDragStop = function (currentMenuItems) {
 
-            let payload = [];
-            let tempPayloadItem;
+            var payload = [];
+            var tempPayloadItem;
 
-            currentMenuItems.forEach(category => {
+            currentMenuItems.forEach(function(category){
 
                 tempPayloadItem = { id: category.id, index: $scope.menuItems.indexOf(category) };
                 payload.push(tempPayloadItem);
@@ -401,7 +401,7 @@
 
         $scope.updateNonFeaturedDropdownLabel = function () {
 
-            let postBody = { appId: $rootScope.appId, nonFeaturedDropdownLabel: $scope.nonFeaturedDropdownLabel };
+            var postBody = { appId: $rootScope.appId, nonFeaturedDropdownLabel: $scope.nonFeaturedDropdownLabel };
             categoryMaintenanceService.updateNonFeaturedCategoryLabel(postBody)
                 .success(function (res) {
 
