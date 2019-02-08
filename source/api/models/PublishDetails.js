@@ -10,8 +10,7 @@ module.exports = {
         },
         appId: {
             type: 'string',
-            required: true,
-            model: 'Application'
+            required: true
         },
         category :{
             type: 'string'

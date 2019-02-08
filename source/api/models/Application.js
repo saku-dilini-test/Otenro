@@ -61,8 +61,7 @@ module.exports = {
         },
 
         id:{
-           type:'ObjectId',
-           primaryKey: true
+           type:'ObjectId'
         },
 
         uniqueAppId: {
