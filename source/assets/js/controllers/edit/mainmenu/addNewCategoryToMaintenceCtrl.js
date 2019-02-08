@@ -40,31 +40,40 @@
         $scope.cropImage = function () {
             var handleFileSelect=function(evt) {
                 var file=evt.currentTarget.files[0];
-                var reader = new FileReader();
-                reader.onload = function (evt) {
-                    $scope.$apply(function($scope){
-                        $scope.myImage=evt.target.result;
-                        $scope.picFile =  $scope.myImage;
-                        var img = new Image();
-                        img.src = window.URL.createObjectURL( file );
 
-                        img.onload = function() {
-                            var width = img.naturalWidth,
-                                height = img.naturalHeight;
-                            window.URL.revokeObjectURL( img.src );
-                            if($scope.iSizeSecond.w > width || $scope.iSizeSecond.h > height){
-                                toastr.warning('The uploaded image does not meet minimum required resolution, which could lead to a distorted image', 'Warning', {
-                                    closeButton: true
-                                });
-                            }
-                        };
-
-
+                var name = file.name.split('.')[1].toLowerCase();
+                if(name != 'png' && name != 'jpg' && name != 'jpeg' && name != 'bmp'){
+                    toastr.error('Please upload an image file to continue', 'Error', {
+                        closeButton: true
                     });
-                };
-                reader.readAsDataURL(file);
-                $scope.imageSelected =false;
-                $scope.buttonName = "Upload";
+                    angular.element( document.querySelector('#fileInput') ).scope().$destroy();
+                }else{
+                    var reader = new FileReader();
+                    reader.onload = function (evt) {
+                        $scope.$apply(function($scope){
+                            $scope.myImage=evt.target.result;
+                            $scope.picFile =  $scope.myImage;
+                            var img = new Image();
+                            img.src = window.URL.createObjectURL( file );
+    
+                            img.onload = function() {
+                                var width = img.naturalWidth,
+                                    height = img.naturalHeight;
+                                window.URL.revokeObjectURL( img.src );
+                                if($scope.iSizeSecond.w > width || $scope.iSizeSecond.h > height){
+                                    toastr.warning('The uploaded image does not meet minimum required resolution, which could lead to a distorted image', 'Warning', {
+                                        closeButton: true
+                                    });
+                                }
+                            };
+    
+    
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                    $scope.imageSelected =false;
+                    $scope.buttonName = "Upload";
+                }
             };
             angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
         }

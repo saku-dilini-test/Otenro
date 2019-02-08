@@ -27,7 +27,7 @@
                         <div class="inputField btn-material img-up">
                             <span >{{buttonName}}</span>
                             <div class="img-up1" ng-if="imageSelected">
-                                <input type="file" value="file"  ng-click = "cropImage()" id="fileInput" >
+                                <input type="file" value="file"  ng-click = "cropImage()" id="fileInput" accept=".jpg,.png,.jpeg,.bmp">
                             </div>
                             <div  ng-if="!imageSelected" class="img-up1" ng-click="addImage(picFile)"></div>
 
