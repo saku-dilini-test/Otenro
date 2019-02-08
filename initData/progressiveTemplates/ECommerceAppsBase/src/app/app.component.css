@@ -1,13 +1,13 @@
 app-page-body{
-  min-height: calc(100vh - 139px);
-  display: block;
-  padding-top: 112px;
+	min-height: calc(100vh - 227px);
+	display: block;
+	padding-top: 76px;
 }
 app-header{
-  position: fixed;
-  z-index: 10;
-  top: 0;
-  width: 100%;
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	width: 100%;
 }
 
 
@@ -17,7 +17,7 @@ app-header{
 	  min-height: calc(100vh - 139px);
 	  display: block;
 	  padding-top: 50px;
-      padding-bottom: 89px;
+	  padding-bottom: 89px;
 	}
 
 	app-footer{
