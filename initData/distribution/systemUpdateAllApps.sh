@@ -85,7 +85,7 @@ do
         #rename the updated new app as old_appId
         mv -f $templateName ${APPS[i]}
         #copy and replace the asset folder from temp and remove temp folder and we are done
-        yes | cp -rf temp/assets ${APPS[i]}/
+        cp -rf temp/assets ${APPS[i]}/
         rm -rf temp
         echo "$(date) ${cyan}Update finished of ${reset}user=${green}${USERS[i]} ${reset}app=${green}${APPS[i]}${reset}"
     else
