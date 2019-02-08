@@ -30,17 +30,23 @@ module.exports = {
         console.log("orders " + JSON.stringify(orders));
         ApplicationOrder.update({_id: orders.id},orders).exec(function(err,order){
             if (err) return done(err);
-            sentMails.sendOrderEmail(orders,function (err,msg) {
-                sails.log.info(err);
+            ApplicationContactUs.findOne({ appId: orders.appId }).exec(function (err, storeDetails) {
                 if (err) {
-                    console.log('update order email ' + err);
-                    return  res.send(500);
+                    return res.send(500);
                 }
+                orders['storeDetails'] = storeDetails;
+                // console.log(order)
+                sentMails.sendOrderEmail(orders, function (err, msg) {
+                    sails.log.info(err);
+                    if (err) {
+                        return res.send(500);
+                        console.log(err);
+                    }
+                });
             });
             obj.push(order);
-        })
-    })
-    console.log(obj);
+        });
+    });
         res.send(obj);
     }
 };

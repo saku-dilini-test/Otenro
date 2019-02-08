@@ -87,7 +87,7 @@ module.exports = {
 
     updateHeaderFooterSettings : function(req,res){
 
-        console.log(req.body);
+        // console.log(req.body);
 
         var randomstring = require("randomstring");
         var tmpImage = req.body.file;
@@ -118,12 +118,12 @@ module.exports = {
                 return res.send(err);
             }
 //            sails.config.logging.custom.info("file saved" + imgeFileName);
-                console.log("dePath " + dePath);
+//                 console.log("dePath " + dePath);
 
                 //var appId = req.param('appId');
                 var saveData ="";
 
-                console.log("newFileName " + imgeFileName);
+                // console.log("newFileName " + imgeFileName);
 
 
                 if( req.body.data.emailType=='orderConfirmedEmail'){
