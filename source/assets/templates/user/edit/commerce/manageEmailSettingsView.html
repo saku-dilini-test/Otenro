@@ -233,7 +233,7 @@
                                 ;"/><br>
                                 <img ng-if="picFileHeader && picFileHeader[0]" ngf-src="picFileHeader[0]" width="100%"   height="100px" style="display:block; margin: 16px auto 0 auto"> <br>
                                 <p>
-                                    <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="orderConfirmedEmail.orderConfirmedEmail.header" disabled></text-angular>
+                                    <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="orderConfirmedEmail.orderConfirmedEmail.header"  ng-bind-html="orderConfirmedEmail.orderConfirmedEmail.header"> </text-angular>disabled></text-angular>
                                 </p>
                                 <div class="row" ng-if="orderConfirmedEmail.orderConfirmedEmail.storeDetails">
                                     <div class="col-md-12">
@@ -427,6 +427,7 @@
                                     <text-angular style="height: 150px" rows="4" rows="1"
                                                   class="email-template input-shadow-border"
                                                   ng-model="orderFulfilledEmail.orderFulfilledEmail.header"
+                                                  ng-bind-html="orderFulfilledEmail.orderFulfilledEmail.header"
                                                   disabled></text-angular>
                                 </p>
                                 <p>
@@ -605,7 +606,7 @@
                                 <img ng-if="!picFileHeader3[0]" ng-src="images/order-fulfilled.jpg"  width="100%" height="120px" style="display: block;margin: 16px auto 0 auto"/><br>
                                 <img ng-if="picFileHeader3 && picFileHeader3[0]" ngf-src="picFileHeader3[0]" width="100%"   height="100px" style="display:block; margin: 16px auto 0 auto"> <br>
                                 <p>
-                                    <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="orderRefundEmail.orderRefundEmail.header" disabled></text-angular>
+                                    <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="orderRefundEmail.orderRefundEmail.header" ng-bind-html="orderRefundEmail.orderRefundEmail.header" disabled></text-angular>
                                 </p>
                                 <p>
                                     <div class="row" ng-if="orderRefundEmail.orderRefundEmail.storeDetails">
