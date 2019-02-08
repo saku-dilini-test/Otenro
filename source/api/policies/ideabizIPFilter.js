@@ -8,7 +8,7 @@
  */
 
 const config = require('../services/config');
-const ipPool = ['192.168.8.112','127.0.0.1','202.69.200.34'];
+const ipPool = ['192.168.8.112','127.0.0.1','202.69.200.34','172.31.30.204'];
 const prefixIPv4 = '::ffff:';
 
 module.exports = function(req, res, next) {
