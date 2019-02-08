@@ -2981,7 +2981,7 @@ table.md-calendar-day-header{
 }
 
 .margin-top{
-    margin-top: 16px;
+    margin-top: 16px !important;
 }
 
 .margin-bottom{
