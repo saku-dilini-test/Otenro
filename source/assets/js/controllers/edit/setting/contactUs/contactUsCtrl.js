@@ -126,12 +126,18 @@
                     'address': !(basicInfo.address) ? null: basicInfo.address,
                     'telPhone': !(basicInfo.telPhone) ? null: basicInfo.telPhone,
                     'email': webInfo.email,
-                    'webSite': !(basicInfo.webSite) ? null: basicInfo.webSite,
-                    'twitter': !(basicInfo.twitter) ? null: basicInfo.twitter,
-                    'facebook': !(basicInfo.facebook) ? null: basicInfo.facebook,
-                    'instagram': !(basicInfo.instagram) ? null: basicInfo.instagram,
-                    'linkedin': !(basicInfo.linkedin) ? null: basicInfo.linkedin,
-                    'pinterest': !(basicInfo.pinterest) ? null: basicInfo.pinterest,
+                    'webSite': (webInfo.webSite.substring(0, 4)==="www.") ?
+                        webInfo.webSite = "http://" +webInfo.webSite : webInfo.webSite,
+                    'twitter': (webInfo.twitter.substring(0, 4)==="www.") ?
+                        webInfo.twitter = "http://" +webInfo.twitter : webInfo.twitter,
+                    'facebook': ( webInfo.facebook.substring(0, 4)==="www.") ?
+                        webInfo.facebook = "http://" +webInfo.facebook :webInfo.facebook,
+                    'instagram': ( webInfo.instagram.substring(0, 4)==="www.") ?
+                        webInfo.instagram = "http://" +webInfo.instagram :webInfo.instagram,
+                    'linkedin': ( webInfo.linkedin.substring(0, 4)==="www.") ?
+                        webInfo.linkedin = "http://" +webInfo.linkedin :webInfo.linkedin,
+                    'pinterest': ( webInfo.pinterest.substring(0, 4)==="www.") ?
+                        webInfo.pinterest = "http://" +webInfo.pinterest :webInfo.pinterest,
                     'showMap': webInfo.showMap,
                     'coords': $scope.map.markers[0].coords
                 };
