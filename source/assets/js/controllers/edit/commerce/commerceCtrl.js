@@ -71,14 +71,14 @@
             gridMenuTitleFilter: fakeI18n,
             rowTemplate: rowTemplate(),
             exporterMenuVisibleData : false,
-            isRowSelectable: function(row) {
-                if(row.entity.paymentStatus === "successful" || row.entity.paymentStatus === "refunded")  {
-                    return false;
-                }
-                else{
-                    return true;
-                }
-            },
+            // isRowSelectable: function(row) {
+            //     if(row.entity.paymentStatus === "successful" || row.entity.paymentStatus === "refunded")  {
+            //         return false;
+            //     }
+            //     else{
+            //         return true;
+            //     }
+            // },
             columnDefs: [
                 /*{name: 'id'},*/
                 // {name: '#', width: '5%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
@@ -1401,6 +1401,7 @@
                     }
 
                     else {
+                console.log(status)
 
                         if(status == "Pending") {
 
@@ -1416,13 +1417,13 @@
                             $scope.refund.push($scope.selectedRow[i]);
                             $scope.unfulfilled.splice($scope.unfulfilled.indexOf($scope.selectedRow[i]), 1);
                         }
-                        $scope.gridOptions1.isRowSelectable = function (row) {
-                            if (row.entity.paymentStatus === "Refunded") {
-                                return false;
-                            } else {
-                                return true;
-                            }
-                        };
+                        // $scope.gridOptions1.isRowSelectable = function (row) {
+                        //     if (row.entity.paymentStatus === "Refunded") {
+                        //         return false;
+                        //     } else {
+                        //         return true;
+                        //     }
+                        // };
                         $scope.gridApi1.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
                         $scope.gridApi1.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
                         $scope.gridOptions3.data = $scope.unfulfilled;
@@ -1442,17 +1443,17 @@
                                     closeButton: true
                                 });
                             })
-                    } else if(status == "Refunded"){
+                    } else if(status == "Refund"){
                             toastr.error('This order already refunded ', 'Warning', {
                                 closeButton: true
                             });
 
-                        }else{
+                    }else{
 
                             toastr.error('Successful order cannot be changed ', 'Warning', {
                                 closeButton: true
                             });
-                            }
+                    }
                 }
         };
         $scope.fulfilled = function () {
@@ -1468,51 +1469,49 @@
                 });
             }
             else{
-                if(status == "Pending" || status == "Refunded" ) {
+                if(status == "Pending" || status == "Refund" ) {
+                        $scope.fulfilledDate = new Date();
+                        var fulfilledDate = $scope.fulfilledDate;
+                        //$state.go('PassOderDates', {fulfilledDate: fulfilledDate});
+                        for (var i = 0; i < $scope.row.length; i++) {
+                            $scope.row[i].paymentStatus = "Successful";
+                            $scope.row[i].fulfilledDate = fulfilledDate;
+                            $scope.row[i].fulfillmentStatus = "Successful";
+                            $scope.gridApi1.selection.clearSelectedRows();
+                            $scope.fulfill.push($scope.row[i]);
+                            $scope.unfulfilled.splice($scope.unfulfilled.indexOf($scope.row[i]), 1);
+                        }
+                        // $scope.gridOptions1.isRowSelectable = function(row){
+                        //     if(row.entity.paymentStatus === "Successful"){
+                        //         return false;
+                        //     } else {
+                        //         return true;
+                        //     }
+                        // };
+                        $scope.gridApi1.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
+                        $scope.gridApi1.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+                        $scope.gridOptions3.data = $scope.unfulfilled;
 
+                        for(var i =0;i<$scope.row.length;i++){
+                            $scope.row[i].userId = $auth.getPayload().id;
+                        }
 
-                $scope.fulfilledDate = new Date();
-                var fulfilledDate = $scope.fulfilledDate;
-                //$state.go('PassOderDates', {fulfilledDate: fulfilledDate});
-                for (var i = 0; i < $scope.row.length; i++) {
-                    $scope.row[i].paymentStatus = "Successful";
-                    $scope.row[i].fulfilledDate = fulfilledDate;
-                    $scope.row[i].fulfillmentStatus = "Successful";
-                    $scope.gridApi1.selection.clearSelectedRows();
-                    $scope.fulfill.push($scope.row[i]);
-                    $scope.unfulfilled.splice($scope.unfulfilled.indexOf($scope.row[i]), 1);
-                }
-                $scope.gridOptions1.isRowSelectable = function(row){
-                    if(row.entity.paymentStatus === "Successful"){
-                        return false;
-                    } else {
-                        return true;
-                    }
-                };
-                $scope.gridApi1.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
-                $scope.gridApi1.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
-                $scope.gridOptions3.data = $scope.unfulfilled;
-
-                for(var i =0;i<$scope.row.length;i++){
-                    $scope.row[i].userId = $auth.getPayload().id;
-                }
-
-                commerceService.updateOrders($scope.row)
-                .success(function (data) {
-                    toastr.success('Order status changed to fulfilled ', 'Success', {
-                        closeButton: true
-                    });
-                })
-                .error(function (err) {
-                    toastr.error('Could not change the status', 'Warning', {
-                        closeButton: true
-                    });
-                })
+                        commerceService.updateOrders($scope.row)
+                        .success(function (data) {
+                            toastr.success('Order status changed to fulfilled ', 'Success', {
+                                closeButton: true
+                            });
+                        })
+                        .error(function (err) {
+                            toastr.error('Could not change the status', 'Warning', {
+                                closeButton: true
+                            });
+                        })
                 }else{
 
-                    toastr.error('Already Successfully performed', 'Warning', {
-                        closeButton: true
-                    });
+                        toastr.error('Already Successfully performed', 'Warning', {
+                            closeButton: true
+                        });
                 }
             }
         };
