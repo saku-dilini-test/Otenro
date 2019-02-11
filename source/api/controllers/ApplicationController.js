@@ -13,6 +13,19 @@ var fs = require('fs-extra'),
 
 module.exports = {
 
+
+    getIpInfo:function (req,res) {
+
+        IpRangeService.getOperatorByIpRange(req, function (ipRangeData) {
+            if (ipRangeData.message === 'success') {
+                res.send(ipRangeData);
+            }else {
+                res.send(ipRangeData);
+            }
+        });
+
+    },
+
     designApps : function(req,res){
         Template.find().exec(function(err, template) {
             if (err) res.send(err);

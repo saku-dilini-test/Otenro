@@ -83,6 +83,7 @@ module.exports.routes = {
     'GET /app/getIconAllowance': 'ApplicationController.iconAllowance',
     'POST /app/createTempTemplates': 'ApplicationController.createTempTemplates',
     'POST /app/changeTemplatePermanent': 'ApplicationController.changeTemplatePermanent',
+    'GET /app/getIpInfo': 'ApplicationController.getIpInfo',
     /***
      * Store Settings Data
      *
