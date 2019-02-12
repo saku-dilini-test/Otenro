@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { environment as ENV } from '../../environments/environment';
 import { AppmakerStoreService } from '../providers/appmaker-store.service';
 import { saveAs } from 'file-saver'
+import { ToastrService } from 'ngx-toastr';
 declare const $: any;
 
 @Component({
@@ -13,7 +14,8 @@ export class AppCardComponent implements OnInit {
 
   @Input() app: any;
   appIcon: any;
-  constructor(private appmakerStoreService: AppmakerStoreService) {}
+  constructor(private appmakerStoreService: AppmakerStoreService,
+              private toastr: ToastrService) {}
 
   ngOnInit() {
     if (this.app) {
@@ -40,13 +42,24 @@ export class AppCardComponent implements OnInit {
         appName: app.appName
       }
 
-      this.appmakerStoreService.downloadApk(body).subscribe(res => {
+      this.appmakerStoreService.checkApkFileExists(body)
+        .subscribe((res: any) => {
 
-        saveAs(res)
-      });
+          if (res.status === 'NOT_FOUND') {
+
+            this.toastr.info('', 'app is not available to download.');
+          }
+          if (res.status === 'SUCCESS') {
+
+          this.appmakerStoreService.downloadApk(body).subscribe(file => {
+
+            saveAs(file, app.appName);
+          });
+          }
+        });
     } 
     else {
-      console.log("app is not available yet!");
+      this.toastr.info('', 'app is not available to download.');
     }
   }
 

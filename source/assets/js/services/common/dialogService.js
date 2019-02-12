@@ -67,6 +67,9 @@
                     return comingSoonService.showComingSoonDialog();
                 if ('help'==clickTitle)
                     window.open(SERVER_URL+'#/help');
+                if ('store'==clickTitle)
+                    window.open(SERVER_URL+'#/store');
+
 
 
 

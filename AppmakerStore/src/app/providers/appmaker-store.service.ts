@@ -48,7 +48,18 @@ export class AppmakerStoreService {
       .pipe(
         catchError(this.handleError('downloadApk', []))
       );
-  } 
+  }
+
+  /**
+   * Responsible for checking apk file is exists for download
+   **/
+  checkApkFileExists(app: any): Observable<any> {
+
+    return this.http.post(this.CMS_API + 'appmakerStore/checkApkFileExists', app, httpOptions)
+      .pipe(
+        catchError(this.handleError('checkApkFileExists', []))
+      );
+  }
 
   /**
    * Handle Http operation that failed.
