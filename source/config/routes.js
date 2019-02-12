@@ -553,4 +553,5 @@ module.exports.routes = {
      **/
     'GET /appmakerStore/getAllApps': 'appmakerStore/AppmakerStoreController.getAllApps',
     'POST /appmakerStore/sendAPKFile': 'appmakerStore/AppmakerStoreController.sendAPKFile',
+    'POST /appmakerStore/checkApkFileExists': 'appmakerStore/AppmakerStoreController.checkApkFileExists'
 };

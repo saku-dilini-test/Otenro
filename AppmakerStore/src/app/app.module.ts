@@ -10,6 +10,8 @@ import { AppCardComponent } from './app-card/app-card.component';
 import { AppDetailsComponent } from './app-details/app-details.component';
 import { AppmakerStoreService } from './providers/appmaker-store.service';
 import { PipeModule } from './shared/pipes/pipe.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { PipeModule } from './shared/pipes/pipe.module';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    PipeModule
+    PipeModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [AppmakerStoreService],
   bootstrap: [AppComponent]

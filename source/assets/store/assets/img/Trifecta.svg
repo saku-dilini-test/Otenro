@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="138px" height="138px" viewBox="0 0 138 138" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>Trifecta</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="100%" y1="100%" x2="0%" y2="0%" id="linearGradient-1">
+            <stop stop-color="#3023AE" offset="0%"></stop>
+            <stop stop-color="#C86DD7" offset="100%"></stop>
+        </linearGradient>
+        <path d="M48.1545333,0.5 L89.6267167,0.5 C103.380375,0.5 110.255492,0.5 117.6592,2.84041667 C125.7422,5.78249167 132.108133,12.148425 135.050208,20.231425 C137.390625,27.6339917 137.390625,34.5113917 137.390625,48.2639083 L137.390625,89.7360917 C137.390625,103.48975 137.390625,110.364867 135.050208,117.768575 C132.108133,125.851575 125.7422,132.217508 117.6592,135.158442 C110.255492,137.5 103.380375,137.5 89.6267167,137.5 L48.1545333,137.5 C34.400875,137.5 27.5246167,137.5 20.12205,135.158442 C12.03905,132.217508 5.67311667,125.851575 2.73104167,117.768575 C0.390625,110.364867 0.390625,103.48975 0.390625,89.7360917 L0.390625,48.2639083 C0.390625,34.5113917 0.390625,27.6339917 2.73104167,20.231425 C5.67311667,12.148425 12.03905,5.78249167 20.12205,2.84041667 C27.5246167,0.5 34.400875,0.5 48.1545333,0.5 L48.1545333,0.5" id="path-2"></path>
+        <path d="M258.27564,0 L276.766386,0 L313.747879,0 L276.766386,36.9794922 L258.27564,36.9794922 L221.294147,36.9794922 L258.27564,-1.42108547e-14 Z" id="path-4"></path>
+        <filter x="-1.1%" y="-2.7%" width="102.2%" height="105.4%" filterUnits="objectBoundingBox" id="filter-5">
+            <feGaussianBlur stdDeviation="1" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.3 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+        <path d="M36.9814927,0 L55.472239,0 L92.4537317,0 L55.472239,36.9794922 L36.9814927,36.9794922 L0,36.9794922 L36.9814927,-1.42108547e-14 Z" id="path-6"></path>
+        <filter x="-1.1%" y="-2.7%" width="102.2%" height="105.4%" filterUnits="objectBoundingBox" id="filter-7">
+            <feGaussianBlur stdDeviation="1" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.3 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="AppMaker-Store-Web" transform="translate(-819.000000, -178.000000)">
+            <g id="Group-9">
+                <g id="Group-6">
+                    <g id="Group-4" transform="translate(63.000000, 104.000000)">
+                        <g id="Trifecta" transform="translate(755.000000, 74.000000)">
+                            <g id="Icon-Shape" transform="translate(0.839844, 0.000000)">
+                                <mask id="mask-3" fill="white">
+                                    <use xlink:href="#path-2"></use>
+                                </mask>
+                                <use id="Purple-Icon" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                                <g id="Pattern" style="mix-blend-mode: darken;" mask="url(#mask-3)">
+                                    <g transform="translate(-125.109375, -5.000000)">
+                                        <g id="-4" transform="translate(36.690590, 110.938477)">
+                                            <g id="Rectangle-8">
+                                                <use fill="#BBBBBB" fill-rule="evenodd" xlink:href="#path-4"></use>
+                                                <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-4"></use>
+                                            </g>
+                                            <path d="M202.95252,0 L221.443266,0 L258.424759,0 L221.443266,36.9794922 L202.95252,36.9794922 L165.971027,36.9794922 L202.95252,-1.42108547e-14 Z" id="Rectangle-7" fill="#462EB4"></path>
+                                            <path d="M147.6294,0 L166.120146,0 L203.101639,0 L166.120146,36.9794922 L147.6294,36.9794922 L110.647907,36.9794922 L147.6294,-1.42108547e-14 Z" id="Rectangle-3" fill="#653DBC"></path>
+                                            <path d="M92.3062798,0 L110.797026,0 L147.778519,0 L110.797026,36.9794922 L92.3062798,36.9794922 L55.3247871,36.9794922 L92.3062798,-1.42108547e-14 Z" id="Rectangle-6" fill="#7D49C3"></path>
+                                            <g id="Rectangle-9">
+                                                <use fill="#8F51C7" fill-rule="evenodd" xlink:href="#path-6"></use>
+                                                <use fill="black" fill-opacity="1" filter="url(#filter-7)" xlink:href="#path-6"></use>
+                                            </g>
+                                        </g>
+                                        <g id="-3" transform="translate(73.670082, 73.958984)">
+                                            <path d="M202.95252,0 L221.443266,0 L258.424759,0 L221.443266,36.9794922 L202.95252,36.9794922 L165.971027,36.9794922 L202.95252,-7.10542736e-15 Z" id="Rectangle-7" fill="#5032B6"></path>
+                                            <path d="M147.6294,0 L166.120146,0 L203.101639,0 L166.120146,36.9794922 L147.6294,36.9794922 L110.647907,36.9794922 L147.6294,-7.10542736e-15 Z" id="Rectangle-3" fill="#633CBC"></path>
+                                            <path d="M92.3062798,0 L110.797026,0 L147.778519,0 L110.797026,36.9794922 L92.3062798,36.9794922 L55.3247871,36.9794922 L92.3062798,-7.10542736e-15 Z" id="Rectangle-6" fill="#7D49C3"></path>
+                                            <path d="M36.9814927,0 L55.472239,0 L92.4537317,0 L55.472239,36.9794922 L36.9814927,36.9794922 L0,36.9794922 L36.9814927,-7.10542736e-15 Z" id="Rectangle-9" fill="#9A57CB"></path>
+                                        </g>
+                                        <g id="-2" transform="translate(0.000000, 36.979492)">
+                                            <path d="M258.27564,0 L276.766386,0 L313.747879,0 L276.766386,36.9794922 L258.27564,36.9794922 L221.294147,36.9794922 L258.27564,-7.10542736e-15 Z" id="Rectangle-8" fill="#613BBB"></path>
+                                            <path d="M202.95252,0 L221.443266,0 L258.424759,0 L221.443266,36.9794922 L202.95252,36.9794922 L165.971027,36.9794922 L202.95252,-7.10542736e-15 Z" id="Rectangle-7" fill="#7C48C2"></path>
+                                            <path d="M147.6294,0 L166.120146,0 L203.101639,0 L166.120146,36.9794922 L147.6294,36.9794922 L110.647907,36.9794922 L147.6294,-7.10542736e-15 Z" id="Rectangle-3" fill="#9655C9"></path>
+                                            <path d="M92.3062798,0 L110.797026,0 L147.778519,0 L110.797026,36.9794922 L92.3062798,36.9794922 L55.3247871,36.9794922 L92.3062798,-7.10542736e-15 Z" id="Rectangle-6" fill="#AE61D1"></path>
+                                        </g>
+                                        <g id="1" transform="translate(36.979492, 0.000000)">
+                                            <path d="M258.27564,0 L276.766386,0 L313.747879,0 L276.766386,36.9794922 L258.27564,36.9794922 L221.294147,36.9794922 L258.27564,-7.10542736e-15 Z" id="Rectangle-8" fill="#7143C0"></path>
+                                            <path d="M202.95252,0 L221.443266,0 L258.424759,0 L221.443266,36.9794922 L202.95252,36.9794922 L165.971027,36.9794922 L202.95252,-7.10542736e-15 Z" id="Rectangle-7" fill="#804AC3"></path>
+                                            <path d="M147.6294,0 L166.120146,0 L203.101639,0 L166.120146,36.9794922 L147.6294,36.9794922 L110.647907,36.9794922 L147.6294,-7.10542736e-15 Z" id="Rectangle-3" fill="#9B57CB"></path>
+                                            <path d="M92.3062798,0 L110.797026,0 L147.778519,0 L110.797026,36.9794922 L92.3062798,36.9794922 L55.3247871,36.9794922 L92.3062798,-7.10542736e-15 Z" id="Rectangle-6" fill="#B263D1"></path>
+                                            <path d="M36.9814927,0 L55.472239,0 L92.4537317,0 L55.472239,36.9794922 L36.9814927,36.9794922 L0,36.9794922 L36.9814927,-7.10542736e-15 Z" id="Rectangle-9" fill="#BBBBBB"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                            <g id="Symbol" transform="translate(23.025391, 23.185547)" fill="#FFFFFF">
+                                <polygon id="Fill-1" points="46.8144531 26.0009303 28.0334543 58.2532833 65.5954519 58.2532833"></polygon>
+                                <path d="M46.7050781,91.6289063 C72.006568,91.6289063 92.5195313,71.115943 92.5195313,45.8144531 C92.5195313,20.5129632 72.006568,0 46.7050781,0 C21.4035882,0 0.890625,20.5129632 0.890625,45.8144531 C0.890625,71.115943 21.4035882,91.6289063 46.7050781,91.6289063 Z M23.0501597,57.3492875 L43.6061885,21.746876 C44.2432935,20.6409151 45.4244725,19.9572718 46.7058112,19.9572718 C47.9871498,19.9572718 49.168338,20.6409059 49.8054338,21.746876 L70.3614626,57.3492875 C70.9985676,58.4552484 70.9985676,59.8225349 70.3614626,60.9284958 C69.7243577,62.0344567 68.5431786,62.7181 67.26184,62.7181 L26.1506986,62.7181 C24.86936,62.7181 23.6881718,62.0344659 23.051076,60.9284958 C22.4103883,59.8225349 22.4103883,58.4588219 23.051076,57.3492875 L23.0501597,57.3492875 Z" id="Fill-2"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

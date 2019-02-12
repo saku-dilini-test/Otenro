@@ -160,11 +160,12 @@ module.exports = {
                     hasErrorOccurred = true;
                     sails.log.error("Error occurred while finding application at AppmakerStoreController.addApplicationDataToAppData : error => " + err);
                 }
-                data.firstName = user.firstName;
-                data.lastName = user.lastName;
-                data.email = user.email;
-                tempAppData.push(data);
-
+                if (user) {
+                    data.firstName = user.firstName;
+                    data.lastName = user.lastName;
+                    data.email = user.email;
+                    tempAppData.push(data);
+                }
                 if (hasErrorOccurred && count === appData.length) {
                     cb({ status: "ERROR", data: null });
                 }
@@ -185,16 +186,28 @@ module.exports = {
         var appName = req.body.appName;
         var file = CONFIG.ME_SERVER + userId + '/buildProg/' + appId
             + '/platforms/android/app/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk';
+        var filename = PATH.basename(file);
+        var mimetype = MIME.lookup(file);
+
+        res.setHeader('x-filename', filename);
+        res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+        res.setHeader('Content-type', mimetype);
+        var filestream = FS.createReadStream(file);
+        filestream.pipe(res);
+    },
+
+    /**
+     * Responsible for checking apk file is exists for downloading
+     **/
+    checkApkFileExists: function (req, res) {
+        var userId = req.body.userId;
+        var appId = req.body.appId;
+        var appName = req.body.appName;
+        var file = CONFIG.ME_SERVER + userId + '/buildProg/' + appId
+            + '/platforms/android/app/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk';
 
         if (FS.existsSync(file)) {
-            var filename = PATH.basename(file);
-            var mimetype = MIME.lookup(file);
-    
-            res.setHeader('x-filename', filename);
-            res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-            res.setHeader('Content-type', mimetype);
-            var filestream = FS.createReadStream(file);
-            filestream.pipe(res);
+            return res.send({ status: 'SUCCESS' });
         } else {
             return res.send(NOT_FOUND)
         }

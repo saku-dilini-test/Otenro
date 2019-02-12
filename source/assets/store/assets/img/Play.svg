@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="138px" height="138px" viewBox="0 0 138 138" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>Play</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="43.4895833%" y1="79.1355299%" x2="93.0536685%" y2="6.87468156%" id="linearGradient-1">
+            <stop stop-color="#0CADF2" offset="0%"></stop>
+            <stop stop-color="#0AF2B6" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="50%" x2="50%" y2="185.489572%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" stop-opacity="0.977524909" offset="0%"></stop>
+            <stop stop-color="#7FB6FF" offset="100%"></stop>
+        </linearGradient>
+        <path d="M0.889912935,59.0822996 C-0.260617019,63.1116548 0.743995427,67.2814218 3.76343614,70.1587106 C5.91857854,72.3166772 8.64612676,73.4687436 11.6656249,73.4687436 C12.6702374,73.4687436 13.8207673,73.3226349 14.825351,73.0360281 L34.5075482,67.2814505 C36.0902848,66.8487351 37.6672743,66.8487351 39.2500109,67.2814505 L58.9322081,73.0360281 C62.95629,74.1880658 67.1205998,73.1821369 69.994123,70.1587393 C72.8676462,67.2814505 74.0182049,63.1116836 72.8676462,59.0823284 L66.9802282,39.3743387 C66.548079,37.789528 66.548079,36.210472 66.9802282,34.6256613 L72.7272746,14.9176716 C73.8778045,10.8883164 72.8731921,6.71854947 69.8537514,3.84126067 C66.9802282,0.963971865 62.8159183,-0.188094571 58.7918365,0.963971865 L39.1096393,6.71854947 C37.5269027,7.15126493 35.9499132,7.15126493 34.3671766,6.71854947 L14.6849794,0.963971865 C10.6608975,-0.188065799 6.49658773,0.817863139 3.62306453,3.84126067 C0.749541327,6.71854947 -0.401017363,10.8883164 0.749541327,14.9176716 L6.49658773,34.6256613 C6.92873688,36.210472 6.92873688,37.789528 6.49658773,39.3743387 L0.889912935,59.0822996 Z" id="path-3"></path>
+        <filter x="-17.8%" y="-15.1%" width="135.6%" height="135.6%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.112007473 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <filter x="-12.3%" y="-9.6%" width="124.7%" height="124.7%" filterUnits="objectBoundingBox" id="filter-5">
+            <feGaussianBlur stdDeviation="1" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.642634737 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="AppMaker-Store-Web" transform="translate(-146.000000, -178.000000)">
+            <g id="Group-9">
+                <g id="Group-6">
+                    <g id="Group-4" transform="translate(63.000000, 104.000000)">
+                        <g id="Group-8">
+                            <g id="Group-7">
+                                <g id="Play" transform="translate(83.000000, 74.000000)">
+                                    <g id="Icon-Shape" fill="url(#linearGradient-1)">
+                                        <path d="M48.0725021,0.5 L89.5446854,0.5 C103.298344,0.5 110.17346,0.5 117.577169,2.84041667 C125.660169,5.78249167 132.026102,12.148425 134.968177,20.231425 C137.308594,27.6339917 137.308594,34.5113917 137.308594,48.2639083 L137.308594,89.7360917 C137.308594,103.48975 137.308594,110.364867 134.968177,117.768575 C132.026102,125.851575 125.660169,132.217508 117.577169,135.158442 C110.17346,137.5 103.298344,137.5 89.5446854,137.5 L48.0725021,137.5 C34.3188438,137.5 27.4425854,137.5 20.0400188,135.158442 C11.9570188,132.217508 5.59108542,125.851575 2.64901042,117.768575 C0.30859375,110.364867 0.30859375,103.48975 0.30859375,89.7360917 L0.30859375,48.2639083 C0.30859375,34.5113917 0.30859375,27.6339917 2.64901042,20.231425 C5.59108542,12.148425 11.9570187,5.78249167 20.0400188,2.84041667 C27.4425854,0.5 34.3188437,0.5 48.0725021,0.5 L48.0725021,0.5" id="Green-Blue-Icon"></path>
+                                    </g>
+                                    <g id="Symbol" transform="translate(32.000000, 32.000000)" opacity="0.92811334">
+                                        <g id="Page-1">
+                                            <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                                            <use fill="url(#linearGradient-2)" fill-rule="evenodd" xlink:href="#path-3"></use>
+                                            <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-3"></use>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
