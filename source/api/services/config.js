@@ -33,5 +33,6 @@ module.exports = {
         ACTIVE: 'ACTIVE',
         EXPIRED: 'EXPIRED', 
         SCHEDULED: 'SCHEDULED'
-    }
+    },
+    USE_SEND_MAIL:false
 };
