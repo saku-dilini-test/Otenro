@@ -27,8 +27,32 @@ var inlineBase64 = require('nodemailer-plugin-inline-base64');
 //    });
 //});
 
-var transporter = nodemailer.createTransport({
-    host: 'mail.appmaker.lk',
+
+var transporter = null;
+
+if(config.USE_SEND_MAIL){
+    transporter = nodemailer.createTransport({
+        sendmail: true,
+        newline: 'unix',
+        path: '/usr/sbin/sendmail'
+    });
+}else{
+    transporter = nodemailer.createTransport({
+        host: 'mail.appmaker.lk',
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+            user: 'support@appmaker.lk', // generated ethereal user
+            pass: 'Jza12BTL36' // generated ethereal password
+        },
+        tls:{
+            rejectUnauthorized: false
+        }
+    });
+}
+
+/*var transporter = nodemailer.createTransport({
+    host: 'appmaker.lk',
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
@@ -38,7 +62,7 @@ var transporter = nodemailer.createTransport({
     tls:{
         rejectUnauthorized: false
     }
-});
+});*/
 
 
 var server  = email.server.connect({
@@ -592,7 +616,7 @@ module.exports = {
 
 
     sendOrderEmail:function (data,res) {
-        console.log(data)
+
         var attachment = false;
         var searchApp = {
             appId: data.appId
@@ -635,7 +659,6 @@ module.exports = {
                     }
 
                     mapObj['orderNumber'] =  data.id;
-                    mapObj['orderDate'] =  new Date(data.updatedAt).toUTCString();
                     var subTotal = 0;
                     data.item.forEach(function(element) {
                         subTotal += element.price * element.qty;
@@ -645,11 +668,6 @@ module.exports = {
                     if( data.discountedTotal){
                         mapObj['isDiscountedTotal'] = 'table-row';
                         mapObj['discountedTotal'] =  formatNumber(data.discountedTotal);
-                    }
-                    mapObj['isNote'] = 'none';
-                    if( userEmail.orderFulfilledEmail.order && data.note){
-                        mapObj['isNote'] = 'table-row';
-                        mapObj['dataNote'] =  data.note;
                     }
                     mapObj['currency'] =  data.currency;
                     mapObj['orderTax'] =  formatNumber(data.tax);
@@ -846,7 +864,9 @@ module.exports = {
                     }
 
                     if(typeof userEmail.orderConfirmedEmailImage !=='undefined'){
-                        
+
+                        console.log("typeof userEmail.orderConfirmedEmailImage !=='undefined'");
+
                         var  headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderConfirmedEmailImage;
 
                         var emailBody = "";
@@ -898,6 +918,7 @@ module.exports = {
                             transporter.use('compile', inlineBase64());
                             // send mail with defined transport object
                             transporter.sendMail(mailOptions, (error, info) => {
+                                console.log("send mail start .....");
                                 if (error) {
                                         console.log("email send failed \n id: " + data.email +"\n order: " + data.paymentStatus + "\n error: " + error);
                                         return  res(error,null);

@@ -20,6 +20,30 @@
             return salesAndPromotionService.showPromotionsAndSalesAddNewDialog();
         };
 
+        // Subscribe to SalesAndPromotions data for real time updates which emitted by Socket Server
+        io.socket.get('/edit/salesAndPromotion/subscribe', function(data){});
+
+        // On real time model changes of SalesAndPromotions
+        io.socket.on('salesandpromotion', function(socketData){
+
+            if (socketData.verb === 'updated') {
+                if ($scope.salesAndPromotionList) {
+
+                    // Update promotion code
+                    var updatedPromo = $scope.salesAndPromotionList.filter(function (promo) {
+                        return promo.id === socketData.data.id;
+                    });
+                    // Index of the updated promo
+                    var updatedPromoIndex = $scope.salesAndPromotionList.indexOf(updatedPromo[0]);
+
+                    if (updatedPromoIndex > -1) {
+                        $scope.salesAndPromotionList[updatedPromoIndex].status = socketData.data.status;
+                        $scope.$apply();
+                    }
+                }
+            }
+        });
+
         if (typeof $scope.salesAndPromotionList === 'undefined') {
             salesAndPromotionService.getListOfSalesAndPromotions($rootScope.appId)
                 .success(function (data) {

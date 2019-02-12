@@ -177,7 +177,31 @@ module.exports = {
                 if (err) {
                     sails.log.error(`Error occourred updating promotion with id ${promotion.id} using node schedule!`);
                 }
+                //Notify connected socket clients about model update
+                SalesAndPromotion.publishUpdate(promotion[0].id, promotion[0]);
             });;
+        });
+    },
+    /**
+     * Responsible to subscribe real time model events of 
+     * SalesAndPromotion to connected socket client
+     **/
+    subscribe: function (req, res) {
+
+        if (!req.isSocket) {
+
+            sails.log.error('Not a socket request' + ' SailsAndPromotionController => subscribe');
+            return res.badRequest({ status: 'NOT_SOCKET_REQUEST' });
+        }
+        SalesAndPromotion.find().exec(function (err, salesAndPromotion) {
+
+            if (err) {
+
+                return res.serverError({ status: 'SERVER_ERROR' });
+            }
+            SalesAndPromotion.subscribe(req, _.pluck(salesAndPromotion, 'id'));
+
+            return res.ok({ status: 'SUBSCRIBED' });
         });
     }
 };
