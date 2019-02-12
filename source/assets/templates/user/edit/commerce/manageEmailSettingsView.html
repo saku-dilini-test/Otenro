@@ -228,97 +228,130 @@
                                     </md-checkbox>
                                 </p>
                             </div>
-                            <div class="col-lg-4 col-md-4" style="zoom:0.7; background: #ebebeb;">
-                                <img ng-if="!picFileHeader[0]" ng-src="images/order-confirm.jpg"  width="100%" height="120px" style="display: block;margin: 16px auto 0 auto
-                                ;"/><br>
-                                <img ng-if="picFileHeader && picFileHeader[0]" ngf-src="picFileHeader[0]" width="100%"   height="100px" style="display:block; margin: 16px auto 0 auto"> <br>
-                                <p>
-                                    <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="orderConfirmedEmail.orderConfirmedEmail.header"  ng-bind-html="orderConfirmedEmail.orderConfirmedEmail.header"> </text-angular>disabled></text-angular>
-                                </p>
-                                <div class="row" ng-if="orderConfirmedEmail.orderConfirmedEmail.storeDetails">
-                                    <div class="col-md-12">
-                                        <span><img src="./images/address.png" style="width: 30px;padding: 6px 6px 6px 0;">Address: Colombo</span><br>
-                                        <span><img src="./images/phone.png" style="width: 30px;padding: 6px 6px 6px 0;">Phone: +947123456789</span><br>
-                                        <span><img src="./images/email.png" style="width: 30px;padding: 6px 6px 6px 0;">Email: sample@sample.com</span><br>
-                                        <span><img src="./images/website.png" style="width: 30px;padding: 6px 6px 6px 0;">Website: https://sample.com</span><br>
-                                        <span><img src="./images/facebook.png" style="width: 30px;padding: 6px 6px 6px 0;">https://facebook.com</span><br>
-                                        <span><img src="./images/instagram.png" style="width: 30px;padding: 6px 6px 6px 0;">https://instagram.com</span><br>
-                                    </div>
-                                </div>
-                                <p>
-                                    <div class="row" ng-if="orderConfirmedEmail.orderConfirmedEmail.delivery">
-                                        <div class="col-md-6">
-                                            <span><b>Delivered to</b></span><br>
-                                <p>John Doe, 488, Kotte ROad, Pitakotte</p>
+                            <div class="col-lg-4 col-md-4 padding-vertical" style="zoom:0.7; background: #ebebeb;">
+                                <img ng-if="!picFileHeader[0]" ng-src="images/order-confirm.jpg"  width="100%" height="120px" style="display: block;"/>
+                                <img ng-if="picFileHeader && picFileHeader[0]" ngf-src="picFileHeader[0]" width="100%"   height="100px" style="display:block;">
+                                <div class="bgc-white padding">
+                                    <div class="margin">
+                                        <p>
+                                            <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="orderConfirmedEmail.orderConfirmedEmail.header"  ng-bind-html="orderConfirmedEmail.orderConfirmedEmail.header"> </text-angular>disabled></text-angular>
+                                        </p>
+                                        <div class="row" ng-if="orderConfirmedEmail.orderConfirmedEmail.storeDetails">
+                                            <div class="col-md-12">
+                                                <span><img src="./images/address.png" style="width: 30px;padding: 6px 6px 6px 0;">Address: Colombo</span><br>
+                                                <span><img src="./images/phone.png" style="width: 30px;padding: 6px 6px 6px 0;">Phone: +947123456789</span><br>
+                                                <span><img src="./images/email.png" style="width: 30px;padding: 6px 6px 6px 0;">Email: sample@sample.com</span><br>
+                                                <span><img src="./images/website.png" style="width: 30px;padding: 6px 6px 6px 0;">Website: https://sample.com</span><br>
+                                                <span><img src="./images/facebook.png" style="width: 30px;padding: 6px 6px 6px 0;">https://facebook.com</span><br>
+                                                <span><img src="./images/instagram.png" style="width: 30px;padding: 6px 6px 6px 0;">https://instagram.com</span><br>
+                                            </div>
+                                        </div>
+                                        <br>
+                                         <div class="row" ng-if="orderConfirmedEmail.orderConfirmedEmail.delivery">
+                                                <div class="col-md-6">
+                                                    <div style="color: #000; background: #ebebeb;"><b>Billing Information</b></div>
+                                                    <p>John Doe, 488, Kotte ROad, Pitakotte</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div style="color: #000; background: #ebebeb;"><b>Shipping Information</b></div>
+                                                    <p>Express Delivery</p>
+                                                </div>
+
+                                         </div>
+                                        <hr>
+
+                                        <div class="row" ng-if="orderConfirmedEmail.orderConfirmedEmail.delivery">
+                                                <div class="col-md-6">
+                                                        <div style="color: #000; background: #ebebeb;"><b>Payment Method</b></div>
+                                                        <p>Cash On Delivery</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                        <div style="color: #000; background: #ebebeb;"><b>Shipping Method</b></div>
+                                                        <p>Express Delivery</p>
+                                                </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row" ng-if="orderConfirmedEmail.orderConfirmedEmail.order">
+                                            <div class="col-md-12">
+                                                <span><b>Your Order</b></span><br>
+                                                <div>Order Number: 1234567890</div>
+                                                <p>Order Placed: December 28, 2018 12:38:36 AM -0530</p>
+                                            </div>
+                                        </div>
+                                        <div class="row"  ng-if="orderConfirmedEmail.orderConfirmedEmail.order">
+                                            <div class="col-md-7" style="padding-right: 0">
+                                                <div style="color: #000; background: #ebebeb;">
+                                                    <b>Item Description</b>
+                                                </div>
+                                                <br>
+                                                <p>
+                                                    <img src="./images/small-placeholder.png" class="pull-left" style="margin-right: 5px;">
+                                                    <span>Superman T-shir</span><br>
+                                                    <span>Blue- Blue/UK 9</span><br>
+                                                    <span>Qty : 1 product code: 12345</span>
+                                                </p>
+                                            </div>
+                                            <div class="col-md-5 text-right"  style="padding-left: 0">
+                                                <div style="color: #000; background: #ebebeb;">
+                                                    <b>Value LKR Rs.</b>
+                                                </div>
+                                                <br>
+                                                <br>
+                                                <p>560.00</p>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row"  ng-if="orderConfirmedEmail.orderConfirmedEmail.order">
+                                            <div class="col-md-7" style="padding-right: 0">
+                                                <p>
+                                                    <img src="./images/small-placeholder.png" class="pull-left" style="margin-right: 5px;">
+                                                    <span>Superman Shoes</span><br>
+                                                    <span>Black- Black/9</span><br>
+                                                    <span>Qty : 1 product code: 12345</span>
+                                                </p>
+                                            </div>
+                                            <div class="col-md-5 text-right" style="padding-left: 0">
+                                                <br>
+                                                <p>6000.00</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+
+                                        <div class="row text-right" ng-if="orderConfirmedEmail.orderConfirmedEmail.order" style="color:#000">
+                                            <div class="col-md-9 ">Sub Total</div>
+                                            <div class="col-md-3">6560.00</div>
+                                            <div class="col-md-9">Delivery</div>
+                                            <div class="col-md-3">0.00</div>
+                                            <div class="col-md-9">TAX</div>
+                                            <div class="col-md-3">200.00</div>
+                                        </div>
+                                        <div class="row text-right" ng-if="orderConfirmedEmail.orderConfirmedEmail.order" style="color:#000;">
+                                            <div class="col-md-9">
+                                                <div style="background: #ebebeb;">
+                                                    <b>Total</b>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3" style="padding-left: 0">
+                                                <div style="background: #ebebeb;">6760.00</div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                Note: <br>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="text-center" style="clear: both;padding-top: 16px">
+                                            <img width="20%" src="./images/logo.png">
+                                        </div>
+                                        <div  class="text-center" class="text-center"><span>Powered by www.Otenro.com</span> </div>
+                                     </div>
+                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <span><b>Shipping Details</b></span><br>
-                                <p>Express Delivery</p>
-                            </div>
-                        </div>
-                        <div class="row" ng-if="orderConfirmedEmail.orderConfirmedEmail.order">
-                            <div class="col-md-12">
-                                <span><b>Your Order</b></span><br>
-                                <p>Order Number:1234567890</p>
-                            </div>
-                        </div>
-                        <div class="row"  ng-if="orderConfirmedEmail.orderConfirmedEmail.order">
-                            <div class="col-md-7">
-                                <span><b>Item Description</b></span>
-                                <br>
-                                <br>
-                                <p>
-                                    <img src="./images/small-placeholder.png" class="pull-left" style="margin-right: 5px;">
-                                    <br>
-                                    <span>Superman T-shir</span><br>
-                                    <span>Blue- Blue/UK 9</span><br>
-                                    <span>Qty : 1 product code: 12345</span>
-                                </p>
-                            </div>
-                            <div class="col-md-5">
-                                <span><b>LKR Rs.</b></span>
-                                <br>
-                                <br>
-                                <br>
-                                <p>560.00</p>
-                            </div>
-                        </div>
-                        <div class="row"  ng-if="orderConfirmedEmail.orderConfirmedEmail.order">
-                            <div class="col-md-7">
-                                <p>
-                                    <img src="./images/small-placeholder.png" class="pull-left" style="margin-right: 5px;">
-                                    <br>
-                                    <span>Superman Shoes</span><br>
-                                    <span>Black- Black/9</span><br>
-                                    <span>Qty : 1 product code: 12345</span>
-                                </p>
-                            </div>
-                            <div class="col-md-5">
-                                <br>
-                                <p>6000.00</p>
-                            </div>
-                        </div>
-                        <div class="col-md-12"  ng-if="orderConfirmedEmail.orderConfirmedEmail.order">
-                            <div class="col-md-7 text-right">Sub Total</div>
-                            <div class="col-md-5">6560.00</div>
-                            <div class="col-md-7 text-right">Delivery</div>
-                            <div class="col-md-5">0.00</div>
-                            <div class="col-md-7 text-right">TAX</div>
-                            <div class="col-md-5">200.00</div>
-                            <div class="col-md-7 text-right"><b>Total</b></div>
-                            <div class="col-md-5">6760.00</div>
-                            <div class="col-md-7 text-right"><b>Payment Method</b></div>
-                            <div class="col-md-5">Paypal</div>
-                        </div>
-                        </p>
-                        <div class="text-center" style="clear: both;padding-top: 16px">
-                            <img width="20%" src="./images/logo.png">
-                        </div>
-                        <div  class="text-center" class="text-center"><span>Powered by www.Otenro.com</span> </div>
-                        <br>
-                        <br>
-                        <br>
-                    </div>
                         </div>
                         <md-button class="me-default-button col-1 pull-right margin-top" ng-click="testEmail('Order confirm')">send test email</md-button>
 

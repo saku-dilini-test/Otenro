@@ -28,7 +28,7 @@ var inlineBase64 = require('nodemailer-plugin-inline-base64');
 //});
 
 var transporter = nodemailer.createTransport({
-    host: 'appmaker.lk',
+    host: 'mail.appmaker.lk',
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
@@ -592,7 +592,7 @@ module.exports = {
 
 
     sendOrderEmail:function (data,res) {
-        // console.log(data)
+        console.log(data)
         var attachment = false;
         var searchApp = {
             appId: data.appId
@@ -635,6 +635,7 @@ module.exports = {
                     }
 
                     mapObj['orderNumber'] =  data.id;
+                    mapObj['orderDate'] =  new Date(data.updatedAt).toUTCString();
                     var subTotal = 0;
                     data.item.forEach(function(element) {
                         subTotal += element.price * element.qty;
@@ -644,6 +645,11 @@ module.exports = {
                     if( data.discountedTotal){
                         mapObj['isDiscountedTotal'] = 'table-row';
                         mapObj['discountedTotal'] =  formatNumber(data.discountedTotal);
+                    }
+                    mapObj['isNote'] = 'none';
+                    if( userEmail.orderFulfilledEmail.order && data.note){
+                        mapObj['isNote'] = 'table-row';
+                        mapObj['dataNote'] =  data.note;
                     }
                     mapObj['currency'] =  data.currency;
                     mapObj['orderTax'] =  formatNumber(data.tax);
@@ -854,7 +860,7 @@ module.exports = {
 
                         fs.readFile(approot + emailTemplate,'utf8',function (err, mailbody) {
                             
-                            var replaceMailBody = mailbody.replace(/emailHeader|deliverName|deliveryNo|deliveryStreet|deliveryCity|deliveryCountry|shippingOpt|shippingCost|orderNumber|subTotal|isDiscountedTotal|discountedTotal|currency|orderTax|orderTotal|payementMethod|orderDetails|pickupLocationName|pickupNumber|pickupStreetAddress|pickupCity|pickupCountry|pickupPostalCode|pickupCost|isShippingDetails|isOrderDetails|storeAddress|storePhone|storeEmail|storeWebsite|storeFacebook|storeInstagram|storeTwitter|storeLinkedin|storePinterest|isStoreDetails|isFacebook|isInstagram|isTwitter|isLinkedin|isPinterest/g, function(matched){
+                            var replaceMailBody = mailbody.replace(/emailHeader|deliverName|deliveryNo|deliveryStreet|deliveryCity|deliveryCountry|shippingOpt|shippingCost|orderNumber|subTotal|isDiscountedTotal|discountedTotal|currency|orderTax|orderTotal|payementMethod|orderDetails|pickupLocationName|pickupNumber|pickupStreetAddress|pickupCity|pickupCountry|pickupPostalCode|pickupCost|isShippingDetails|isOrderDetails|storeAddress|storePhone|storeEmail|storeWebsite|storeFacebook|storeInstagram|storeTwitter|storeLinkedin|storePinterest|isStoreDetails|isFacebook|isInstagram|isTwitter|isLinkedin|isPinterest|orderDate|isNote|dataNote/g, function(matched){
                                 return mapObj[matched];
                             });
 

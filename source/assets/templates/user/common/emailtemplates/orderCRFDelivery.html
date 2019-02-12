@@ -35,10 +35,9 @@
 			}
 
 			p{
-				margin:0;
+				margin:5px 0;
 			}
-		</style>
-		<style>
+
 			/*text editor extra css*/
 			/* quill.core.css overrides classes */
 			.ql-editor ol,
@@ -386,36 +385,72 @@
 					<tr>
 						<td align="center" valign="top">
 
-								<!--******************shipping and delivery details*****************-->
+								<!--******************shipping and Billing details*****************-->
 								<tr style="display: isShippingDetails">
-									<td>
-										<b>Delivered to</b>
+									<td style="padding-right: 10px">
+										<div style="color: #000; background: #ebebeb;padding-right: 10px;"><b>Shipping Information</b></div>
 										<br>deliverName
-										<br>deliveryNo
-										<br>deliveryStreet
-										<br>deliveryCity
-										<br>deliveryCountry
+										<br>deliveryNo, deliveryStreet,
+										<br>deliveryCity,
+										<br>deliveryCountry.
+										<hr>
 									</td>
 									<td valign="top">
-										<b>Shipping Details</b>
+										<div style="color: #000; background: #ebebeb;"><b>Billing Information</b></div>
+										<br>deliverName
+										<br>deliveryNo, deliveryStreet,
+										<br>deliveryCity,
+										<br>deliveryCountry.
+										<hr>
+									</td>
+								</tr>
+								<!--******************shipping and Billing details*****************-->
+
+								<!--******************Payment and Shipping Method*****************-->
+								<tr style="display: isShippingDetails">
+									<td style="padding-right: 10px">
+										<div style="color: #000; background: #ebebeb;padding-right: 10px;">
+											<b>Payment Method</b>
+										</div>
+										<br>payementMethod
+									</td>
+									<td valign="top">
+										<div style="color: #000; background: #ebebeb;"><b>Shipping Method</b></div>
 										<br>shippingOpt
 									</td>
 								</tr>
-								<!--******************shipping and delivery details*****************-->
+
+								<tr>
+									<td colspan="2">
+										<hr>
+									</td>
+								</tr>
+								<!--******************Payment and Shipping Method*****************-->
+
 
 								<!--******************order details*****************-->
 								<tr style="display: isOrderDetails">
 									<td valign="top" style="padding: 20px 0 0 0;">
-										Your order
+										<b>Your order</b>
 										<br>
-										Order number: orderNumber
+										<p>Order number: orderNumber</p>
+										Order Placed: orderDate
+										<br>
 										<br>
 									</td>
 								</tr>
 
-
+								<tr style="display: isOrderDetails">
+									<td style="color: #000; background: #ebebeb;" valign="top">
+										<b>Item Description</b>
+									</td>
+									<td style="text-align:right;color: #000; background: #ebebeb;" align="right" valign="top">
+										<b>Value currency</b>
+									</td>
+								</tr>
 								<tr style="display: isOrderDetails">
 									orderDetails
+
 									<!--<td style="border-top-width:1px;border-top-color:#eee;border-top-style:solid;padding:5px 0;" valign="top">-->
 										<!--<div style="display:inline-block;padding:5px">-->
 											<!--<img src="https://mail.google.com/mail/u/0?ui=2&amp;ik=53424f133c&amp;attid=0.3&amp;permmsgid=msg-f:1616375238140919913&amp;th=166e84b715208069&amp;view=fimg&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ9QIgxIHVKIUzRArkJw6I4bica5rD3e1lzesRIoxTTg07mTCfZKHGoNPujVu5WDkFMhDfiCOJ53fRa-8dWXa9lBc5UC2PpBNQ6y8GPwQzmSXW1A1NpKyzOmg7Y&amp;disp=emb" width="60" height="60" data-image-whitelisted="" class="CToWUd">-->
@@ -433,8 +468,7 @@
 								</tr>
 
 								<tr style="display: isOrderDetails">
-									<td width="70%" style="text-align:right;border-top-width:2px;border-top-color:#333;border-top-style:solid;font-weight:700;padding:5px 0" align="right" valign="top"></td>
-									<td style="text-align:right;border-top-width:2px;border-top-color:#333;border-top-style:solid;font-weight:700;padding:5px 0" align="right" valign="top"></td>
+									<td colspan="2"><hr></td>
 								</tr>
 								<tr style="display: isOrderDetails">
 									<td width="70%" style="text-align:right;font-weight:700;margin:0;padding:5px 0" align="right" valign="top">Sub Total</td>
@@ -452,13 +486,18 @@
 									<td width="70%" style="text-align:right;font-weight:700;margin:0;padding:5px 0" align="right" valign="top">Tax</td>
 									<td style="text-align:right;font-weight:700;margin:0;padding:5px 0" align="right" valign="top">currency&nbsp;orderTax</td>
 								</tr>
-								<tr style="display: isOrderDetails">
-									<td width="70%" style="ftext-align:right;font-weight:700;padding:5px 0" align="right" valign="top">Total</td>
+								<tr style="display: isOrderDetails;background: #ebebeb;">
+									<td width="70%" style="text-align:right;font-weight:700;padding:5px 0" align="right" valign="top">Total</td>
 									<td  style="text-align:right;font-weight:700;padding:5px 0" align="right" valign="top">currency&nbsp;orderTotal</td>
 								</tr>
 								<tr style="display: isOrderDetails">
-									<td width="70%" style="text-align:right;border-bottom-color:#333;border-bottom-width:2px;border-bottom-style:solid;font-weight:700;padding:5px 0" align="right" valign="top">Payment Method</td>
-									<td style="text-align:right;border-bottom-color:#333;border-bottom-width:2px;border-bottom-style:solid;font-weight:700;padding:5px 0" align="right" valign="top">payementMethod</td>
+									<td colspan="2"><hr></td>
+								</tr>
+								<tr style="display: isNote;">
+									<td colspan="2">
+										Note:<br>
+										<p>dataNote</p>
+									</td>
 								</tr>
 
 								<!--******************order details*****************-->
