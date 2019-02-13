@@ -351,6 +351,10 @@ module.exports = {
                 if (error) {
                     sails.log.error('error occurred while processing promotion , error : ' + error);
                 }
+                if (!error) {
+                    //  Notify model update for subscribed Socket Clients
+                    SalesAndPromotion.publishUpdate(salesAndPromotion.id, salesAndPromotion);
+                }
             });
         }
         else if (salesAndPromotion.usedUserCount && salesAndPromotion.usedUserCount < salesAndPromotion.limitUsers) {
@@ -366,6 +370,10 @@ module.exports = {
                 if (error) {
                     sails.log.error('error occurred while processing promotion , error : ' + error);
                 }
+                if (!error) {
+                    //  Notify model update for subscribed Socket Clients
+                    SalesAndPromotion.publishUpdate(salesAndPromotion.id, salesAndPromotion);
+                }
             });
         }
     },
@@ -380,6 +388,10 @@ module.exports = {
                 if (error) {
                     sails.log.error('error occurred while processing promotion , error : ' + error);
                 }
+                if (!error) {
+                    //  Notify model update for subscribed Socket Clients
+                    SalesAndPromotion.publishUpdate(salesAndPromotion.id, salesAndPromotion);
+                }
             });
         }
         else if (salesAndPromotion.noOfUses && salesAndPromotion.noOfUses < salesAndPromotion.limitNumberOfTime) {
@@ -393,6 +405,10 @@ module.exports = {
 
                 if (error) {
                     sails.log.error('error occurred while processing promotion , error : ' + error);
+                }
+                if (!error) {
+                    //  Notify model update for subscribed Socket Clients
+                    SalesAndPromotion.publishUpdate(salesAndPromotion.id, salesAndPromotion);
                 }
             });
         }

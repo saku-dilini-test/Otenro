@@ -429,6 +429,8 @@ module.exports = {
                     sails.log.error('error occurred while processing promotion , error : ' + error);
                     return cb(PROMOTION_STATUSES.INTERNAL_SERVER_ERROR);
                 } else {
+                    //  Notify model update for subscribed Socket Clients
+                    SalesAndPromotion.publishUpdate(salesAndPromotion.id, salesAndPromotion);
                     return cb(PROMOTION_STATUSES.OK);
                 }
             });
@@ -447,6 +449,8 @@ module.exports = {
                     sails.log.error('error occurred while processing promotion , error : ' + error);
                     return cb(PROMOTION_STATUSES.INTERNAL_SERVER_ERROR);
                 } else {
+                    //  Notify model update for subscribed Socket Clients
+                    SalesAndPromotion.publishUpdate(salesAndPromotion.id, salesAndPromotion);
                     return cb(PROMOTION_STATUSES.OK);
                 }
             });
@@ -470,7 +474,8 @@ module.exports = {
                     sails.log.error('error occurred while processing promotion , error : ' + error);
                     return cb(PROMOTION_STATUSES.INTERNAL_SERVER_ERROR);
                 } else {
-
+                    //  Notify model update for subscribed Socket Clients
+                    SalesAndPromotion.publishUpdate(salesAndPromotion.id, salesAndPromotion);
                     return cb(PROMOTION_STATUSES.OK);
                 }
             });
@@ -496,7 +501,8 @@ module.exports = {
                         sails.log.error('error occurred while processing promotion , error : ' + error);
                         return cb(PROMOTION_STATUSES.INTERNAL_SERVER_ERROR);
                     } else {
-
+                        //  Notify model update for subscribed Socket Clients
+                        SalesAndPromotion.publishUpdate(salesAndPromotion.id, salesAndPromotion);
                         return cb(PROMOTION_STATUSES.OK);
                     }
                 });

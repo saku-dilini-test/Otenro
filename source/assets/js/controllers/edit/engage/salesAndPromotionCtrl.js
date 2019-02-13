@@ -38,6 +38,7 @@
 
                     if (updatedPromoIndex > -1) {
                         $scope.salesAndPromotionList[updatedPromoIndex].status = socketData.data.status;
+                        $scope.salesAndPromotionList[updatedPromoIndex].used = socketData.data.used;
                         $scope.$apply();
                     }
                 }
