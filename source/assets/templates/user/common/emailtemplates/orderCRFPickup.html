@@ -33,6 +33,7 @@
 				-ms-interpolation-mode:bicubic;
 				display:block;
 			}
+
 			p{
 				margin:5px 0;
 			}
@@ -386,32 +387,64 @@
 
 								<!--******************shipping and delivery details*****************-->
 								<tr style="display: isShippingDetails">
-									<td>
-										<b>Pickup From</b>
+									<td width="50%">
+										<div style="color: #000; background: #ebebeb;padding-right: 10px;"><b>Pickup From</b></div>
 										<br>pickupLocationName
 										<br>pickupNumber
 										<br>pickupStreetAddress
 										<br>pickupCity
 										<br>pickupCountry
 										<br>pickupPostalCode
+										<hr style="margin-right: 10px;">
 									</td>
-									<td valign="top">
-										<b>Shipping Details</b>
-										<br>shippingOpt
+									<td width="50%" valign="top">
 									</td>
 								</tr>
 								<!--******************shipping and delivery details*****************-->
 
-								<!--******************order details*****************-->
-								<tr style="display: isOrderDetails">
-									<td valign="top" style="padding: 20px 0 0 0;">
-										Your order
-										<br>
-										Order number: orderNumber
-										<br>
-									</td>
-								</tr>
+                                <!--******************Payment and Shipping Method*****************-->
+                                <tr style="display: isShippingDetails">
+                                    <td width="50%" style="padding-right: 10px">
+                                        <div style="color: #000; background: #ebebeb;padding-right: 10px;">
+                                            <b>Payment Method</b>
+                                        </div>
+                                        <br>payementMethod
+                                    </td>
+                                    <td width="50%" valign="top">
+                                        <div style="color: #000; background: #ebebeb;"><b>Shipping Method</b></div>
+                                        <br>shippingOpt
+                                    </td>
+                                </tr>
 
+                                <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <!--******************Payment and Shipping Method*****************-->
+
+                                <!--******************order details*****************-->
+                                <tr style="display: isOrderDetails">
+                                    <td valign="top" style="padding: 20px 0 0 0;">
+                                        <b>Your order</b>
+                                        <br>
+                                        <p>Order number: orderNumber</p>
+                                        <div>Order Placed: orderDate</div>
+                                        <div style="display: isFulfillment">Order Delivered: orderFulfilledDate</div>
+                                        <div style="display: isRefund; color:red"><b>Order Refunded:</b> orderRefundedDate</div>
+                                        <br>
+                                        <br>
+                                    </td>
+                                </tr>
+
+                                <tr style="display: isOrderDetails">
+                                    <td style="color: #000; background: #ebebeb;" valign="top">
+                                        <b>Item Description</b>
+                                    </td>
+                                    <td style="text-align:right;color: #000; background: #ebebeb;" align="right" valign="top">
+                                        <b>Value currency</b>
+                                    </td>
+                                </tr>
                                 <tr style="display: isOrderDetails">
                                     orderDetails
                                     <!--<td style="border-top-width:1px;border-top-color:#eee;border-top-style:solid;padding:5px 0;" valign="top">-->
@@ -449,13 +482,19 @@
                                     <td width="70%" style="text-align:right;font-weight:700;margin:0;padding:5px 0" align="right" valign="top">Tax</td>
                                     <td style="text-align:right;font-weight:700;margin:0;padding:5px 0" align="right" valign="top">currency&nbsp;orderTax</td>
                                 </tr>
-                                <tr style="display: isOrderDetails">
-                                    <td width="70%" style="ftext-align:right;font-weight:700;padding:5px 0" align="right" valign="top">Total</td>
+                                <tr  style="display: isOrderDetails;background: #ebebeb;color:isDataColor">
+                                    <td width="70%" style="text-align:right;font-weight:700;padding:5px 0" align="right" valign="top">Total</td>
                                     <td  style="text-align:right;font-weight:700;padding:5px 0" align="right" valign="top">currency&nbsp;orderTotal</td>
                                 </tr>
+
                                 <tr style="display: isOrderDetails">
-                                    <td width="70%" style="text-align:right;border-bottom-color:#333;border-bottom-width:2px;border-bottom-style:solid;font-weight:700;padding:5px 0" align="right" valign="top">Payment Method</td>
-                                    <td style="text-align:right;border-bottom-color:#333;border-bottom-width:2px;border-bottom-style:solid;font-weight:700;padding:5px 0" align="right" valign="top">payementMethod</td>
+                                    <td colspan="2"><hr></td>
+                                </tr>
+                                <tr style="display: isNote;">
+                                    <td colspan="2">
+                                        Note:<br>
+                                        <p>dataNote</p>
+                                    </td>
                                 </tr>
 								<!--******************order details*****************-->
 						</td>

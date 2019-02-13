@@ -659,6 +659,9 @@ module.exports = {
                     }
 
                     mapObj['orderNumber'] =  data.id;
+                    mapObj['orderDate'] =  new Date(data.createdAt).toUTCString();
+                    mapObj['orderFulfilledDate'] =  new Date(data.updatedAt).toUTCString();
+                    mapObj['orderRefundedDate'] =  new Date(data.updatedAt).toUTCString();
                     var subTotal = 0;
                     data.item.forEach(function(element) {
                         subTotal += element.price * element.qty;
@@ -668,6 +671,11 @@ module.exports = {
                     if( data.discountedTotal){
                         mapObj['isDiscountedTotal'] = 'table-row';
                         mapObj['discountedTotal'] =  formatNumber(data.discountedTotal);
+                    }
+                    mapObj['isNote'] = 'none';
+                    if( userEmail.orderFulfilledEmail.order && data.note){
+                        mapObj['isNote'] = 'table-row';
+                        mapObj['dataNote'] =  data.note;
                     }
                     mapObj['currency'] =  data.currency;
                     mapObj['orderTax'] =  formatNumber(data.tax);
@@ -681,6 +689,9 @@ module.exports = {
                     mapObj['isTwitter'] = 'none';
                     mapObj['isLinkedin'] = 'none';
                     mapObj['isPinterest'] = 'none';
+                    mapObj['isFulfillment'] = 'none';
+                    mapObj['isRefund'] = 'none';
+                    mapObj['isDataColor'] = 'black';
 
                     if(data.storeDetails){
                         mapObj['storeAddress'] = data.storeDetails.address;
@@ -712,6 +723,7 @@ module.exports = {
 
 
                     if(data.fulfillmentStatus == 'Successful'){
+                        mapObj['isFulfillment'] = 'block';
                         console.log("data.fulfillmentStatus == 'Successful'")
                         headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/assets/images/email/'+userEmail.orderFulfilledEmailImage;
                         headerFileName = userEmail.orderFulfilledEmailImage;
@@ -727,6 +739,8 @@ module.exports = {
                             mapObj['isStoreDetails'] = 'table-row';
                         }
                     }else if(data.fulfillmentStatus == 'Refund'){
+                        mapObj['isDataColor'] = 'red';
+                        mapObj['isRefund'] = 'block';
                         console.log("data.fulfillmentStatus == 'Refunded'")
                         headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/assets/images/email/'+userEmail.orderRefundedEmailImage;
                         headerFileName = userEmail.orderRefundedEmailImage;
@@ -880,7 +894,7 @@ module.exports = {
 
                         fs.readFile(approot + emailTemplate,'utf8',function (err, mailbody) {
                             
-                            var replaceMailBody = mailbody.replace(/emailHeader|deliverName|deliveryNo|deliveryStreet|deliveryCity|deliveryCountry|shippingOpt|shippingCost|orderNumber|subTotal|isDiscountedTotal|discountedTotal|currency|orderTax|orderTotal|payementMethod|orderDetails|pickupLocationName|pickupNumber|pickupStreetAddress|pickupCity|pickupCountry|pickupPostalCode|pickupCost|isShippingDetails|isOrderDetails|storeAddress|storePhone|storeEmail|storeWebsite|storeFacebook|storeInstagram|storeTwitter|storeLinkedin|storePinterest|isStoreDetails|isFacebook|isInstagram|isTwitter|isLinkedin|isPinterest|orderDate|isNote|dataNote/g, function(matched){
+                            var replaceMailBody = mailbody.replace(/emailHeader|deliverName|deliveryNo|deliveryStreet|deliveryCity|deliveryCountry|shippingOpt|shippingCost|orderNumber|subTotal|isDiscountedTotal|discountedTotal|currency|orderTax|orderTotal|payementMethod|orderDetails|pickupLocationName|pickupNumber|pickupStreetAddress|pickupCity|pickupCountry|pickupPostalCode|pickupCost|isShippingDetails|isOrderDetails|storeAddress|storePhone|storeEmail|storeWebsite|storeFacebook|storeInstagram|storeTwitter|storeLinkedin|storePinterest|isStoreDetails|isFacebook|isInstagram|isTwitter|isLinkedin|isPinterest|orderDate|isNote|dataNote|isFulfillment|isRefund|orderFulfilledDate|orderRefundedDate|isRefundColor|isDataColor/g, function(matched){
                                 return mapObj[matched];
                             });
 

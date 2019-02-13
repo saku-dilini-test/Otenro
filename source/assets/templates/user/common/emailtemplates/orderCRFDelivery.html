@@ -387,7 +387,7 @@
 
 								<!--******************shipping and Billing details*****************-->
 								<tr style="display: isShippingDetails">
-									<td style="padding-right: 10px">
+									<td width="50%" style="padding-right: 10px">
 										<div style="color: #000; background: #ebebeb;padding-right: 10px;"><b>Shipping Information</b></div>
 										<br>deliverName
 										<br>deliveryNo, deliveryStreet,
@@ -395,7 +395,7 @@
 										<br>deliveryCountry.
 										<hr>
 									</td>
-									<td valign="top">
+									<td width="50%" valign="top">
 										<div style="color: #000; background: #ebebeb;"><b>Billing Information</b></div>
 										<br>deliverName
 										<br>deliveryNo, deliveryStreet,
@@ -408,13 +408,13 @@
 
 								<!--******************Payment and Shipping Method*****************-->
 								<tr style="display: isShippingDetails">
-									<td style="padding-right: 10px">
+									<td width="50%" style="padding-right: 10px">
 										<div style="color: #000; background: #ebebeb;padding-right: 10px;">
 											<b>Payment Method</b>
 										</div>
 										<br>payementMethod
 									</td>
-									<td valign="top">
+									<td width="50%" valign="top">
 										<div style="color: #000; background: #ebebeb;"><b>Shipping Method</b></div>
 										<br>shippingOpt
 									</td>
@@ -434,7 +434,9 @@
 										<b>Your order</b>
 										<br>
 										<p>Order number: orderNumber</p>
-										Order Placed: orderDate
+										<div>Order Placed: orderDate</div>
+										<div style="display: isFulfillment">Order Delivered: orderFulfilledDate</div>
+										<div style="display: isRefund; color:red"><b>Order Refunded:</b> orderRefundedDate</div>
 										<br>
 										<br>
 									</td>
@@ -486,10 +488,11 @@
 									<td width="70%" style="text-align:right;font-weight:700;margin:0;padding:5px 0" align="right" valign="top">Tax</td>
 									<td style="text-align:right;font-weight:700;margin:0;padding:5px 0" align="right" valign="top">currency&nbsp;orderTax</td>
 								</tr>
-								<tr style="display: isOrderDetails;background: #ebebeb;">
+								<tr style="display: isOrderDetails;background: #ebebeb;color:isDataColor">
 									<td width="70%" style="text-align:right;font-weight:700;padding:5px 0" align="right" valign="top">Total</td>
 									<td  style="text-align:right;font-weight:700;padding:5px 0" align="right" valign="top">currency&nbsp;orderTotal</td>
 								</tr>
+
 								<tr style="display: isOrderDetails">
 									<td colspan="2"><hr></td>
 								</tr>
