@@ -5,9 +5,13 @@ body{
    background-color:rgb(245,247,250);
 }
 
+.modal{
+    padding:0 !important;
+}
 .modal-dialog{
    max-width:calc(100vw - 5%);
    pointer-events: all;
+   justify-content: center;
 }
 
 .bgc-white{
