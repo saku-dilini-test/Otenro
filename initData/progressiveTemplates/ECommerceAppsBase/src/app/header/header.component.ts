@@ -235,12 +235,12 @@ export class HeaderComponent implements OnInit {
       this.txtDecoratedCatId = catId;
     }
 
-    for (let i = 0; i < childCategories.length; i++) {
+    for (let i = childCategories.length - 1; i >= 0; i--) {
 
       // If not in the DOM
       if ($('#' + childCategories[i].id).length === 0) {
         let hasChildNodes = (childCategories[i].childNodes.length > 0) ? true : false;
-        let html = this.createHtmlContent(childCategories[i].id, mainCatId, hasChildNodes, childCategories[i].name);
+        let html = this.createHtmlContent(childCategories[i].id, mainCatId, hasChildNodes, childCategories[i].name, childCategories[i].treeLevel);
 
         $('#' + catId).after(html);
         // Register mouseenter event on newly rendrered category
@@ -266,11 +266,11 @@ export class HeaderComponent implements OnInit {
         for (let i = 0; i < nodes.length; i++) {
 
           siblingCategoriesSubCatIds.push(nodes[i].id);
-          recursiveFunc(nodes[i].childNodes)
+          recursiveFunc(nodes[i].childNodes);
         }
       }
     }
-    recursiveFunc(childNodes)
+    recursiveFunc(childNodes);
     return siblingCategoriesSubCatIds;
   }
 
@@ -281,20 +281,22 @@ export class HeaderComponent implements OnInit {
    * @param mainCatId :: Id of the main category
    * @param hasChildNodes{boolean} :: Has sub category children categories
    * @param catName :: Category name
+   * @param treeLevel :: node depth in category tree
    */
-  createHtmlContent(catId, mainCatId, hasChildNodes, catName) {
+  createHtmlContent(catId, mainCatId, hasChildNodes, catName, treeLevel) {
 
     let html;
+    let leftMargin = ((treeLevel - 1) * 10) + 'px';
     if (hasChildNodes) {
 
-      html = `<a href="#/?id=${catId}" style="margin-left: 10px;" id="${catId}"` +
+      html = `<a href="#/?id=${catId}" style="margin-left: ${leftMargin};" id="${catId}"` +
         `(mouseenter)="appendChildAfter(${catId},${mainCatId})"` +
         `[routerLink]="['']" [queryParams]="{ id:${catId}}">` +
         `<span>${catName}</span>` +
         `<span class="caret"></span></a>`;
     } else {
 
-      html = `<a href="#/?id=${catId}" style="margin-left: 10px;" id="${catId}"` +
+      html = `<a href="#/?id=${catId}" style="margin-left: ${leftMargin};" id="${catId}"` +
         `(mouseenter)="appendChildAfter(${catId},${mainCatId})"` +
         `[routerLink]="['']" [queryParams]="{ id:${catId}}">` +
         `<span>${catName}</span></a>`;

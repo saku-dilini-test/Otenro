@@ -221,7 +221,7 @@ export class HeaderComponent implements OnInit {
       this.txtDecoratedCatId = catId;
     }
 
-    for (let i = 0; i < childCategories.length; i++) {
+    for (let i = childCategories.length - 1; i >= 0; i--) {
 
       // If not in the DOM
       if ($('#' + childCategories[i].id).length === 0) {
