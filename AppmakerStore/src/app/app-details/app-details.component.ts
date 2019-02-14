@@ -14,6 +14,8 @@ export class AppDetailsComponent implements OnInit {
   @Input()app: any;
   appIcon: any;
   featuredImage: any;
+  isReadMore: boolean;
+  customDescription: string;
   constructor(private appmakerStoreService: AppmakerStoreService,
               private toastr: ToastrService) {}
 
@@ -25,15 +27,19 @@ export class AppDetailsComponent implements OnInit {
       this.featuredImage = ENV.CMS_API + "templates/viewWebImages?userId=" + this.app.userId
       + "&appId=" + this.app.appId + "&" + new Date().getTime() + "&images=publish/1.png";
     }
+
+    if (this.app.fullDescription.length > 1000){
+        this.customDescription = this.app.fullDescription.slice(0, 1000) + "...";
+        this.isReadMore = true;
+    }
   }
 
   apkDownloadHandler(app: any) {
 
     if (app.publishStatus === 'APPROVED' && app.playstoreLink) {
       window.open(app.playstoreLink);
-    }
-    else if (app.apkStatus === 'SUCCESS') {
-      
+    } else if (app.apkStatus === 'SUCCESS') {
+
       const body = {
         appId: app.appId,
         userId: app.userId,
@@ -44,21 +50,28 @@ export class AppDetailsComponent implements OnInit {
         .subscribe((res: any) => {
 
           if (res.status === 'NOT_FOUND') {
-
             this.toastr.info('', 'app is not available to download.');
           }
           if (res.status === 'SUCCESS') {
-
-          this.appmakerStoreService.downloadApk(body).subscribe(file => {
-
-            saveAs(file, app.appName);
-          });
+            this.appmakerStoreService.downloadApk(body).subscribe(file => {
+                saveAs(file, app.appName);
+            });
           }
-        });
-    } 
-    else {
+
+      });
+    } else {
       this.toastr.info('', 'app is not available to download.');
     }
+  }
+
+  readLess(): void {
+    this.customDescription = this.app.fullDescription.slice(0, 1000) + "...";
+    this.isReadMore = true;
+  }
+
+  readMore(): void {
+    this.customDescription = this.app.fullDescription;
+    this.isReadMore = false;
   }
 
 }
