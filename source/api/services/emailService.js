@@ -625,7 +625,6 @@ module.exports = {
             UserEmail.findOne(searchApp).exec(function (err, userEmail) {
 
                 if( typeof userEmail==='undefined'){
-                    console.log("Please Update Email Setting ");
                     return res('Please Update Email Setting ',null);
                 }else {
 
@@ -724,7 +723,6 @@ module.exports = {
 
                     if(data.fulfillmentStatus == 'Successful'){
                         mapObj['isFulfillment'] = 'block';
-                        console.log("data.fulfillmentStatus == 'Successful'")
                         headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/assets/images/email/'+userEmail.orderFulfilledEmailImage;
                         headerFileName = userEmail.orderFulfilledEmailImage;
                         subject = 'Order fulfilled';
@@ -741,7 +739,6 @@ module.exports = {
                     }else if(data.fulfillmentStatus == 'Refund'){
                         mapObj['isDataColor'] = 'red';
                         mapObj['isRefund'] = 'block';
-                        console.log("data.fulfillmentStatus == 'Refunded'")
                         headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/assets/images/email/'+userEmail.orderRefundedEmailImage;
                         headerFileName = userEmail.orderRefundedEmailImage;
                         subject = 'Order Refunded';
@@ -756,7 +753,6 @@ module.exports = {
                             mapObj['isStoreDetails'] = 'table-row';
                         }
                     }else if(data.paymentStatus == 'Successful'){
-                        console.log("data.paymentStatus == 'Successful'")
                         headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/assets/images/email/'+userEmail.orderConfirmedEmailImage;
                         headerFileName = userEmail.orderConfirmedEmailImage;
                         subject = 'You have ordered';
@@ -767,7 +763,6 @@ module.exports = {
                         if(userEmail.orderConfirmedEmail.order){
                             mapObj['isOrderDetails'] = 'table-row';
                         }
-                        console.log("userEmail.orderConfirmedEmail.storeDetails && data.storeDetails")
 
                         if(userEmail.orderConfirmedEmail.storeDetails && data.storeDetails){
                             mapObj['isStoreDetails'] = 'table-row';
@@ -853,7 +848,6 @@ module.exports = {
 
                     mapObj['orderDetails'] = '';
                     for (var j = 0; j < data.item.length; j++) {
-                            console.log(data.item[j].variant)
                         var variantsHtml = '';
                         for(var k = 0; k < data.item[j].variant.length; k++){
                             variantsHtml +=  data.item[j].variant[k].name+' : '+ data.item[j].variant[k].vType+'<br>';
@@ -879,8 +873,6 @@ module.exports = {
 
                     if(typeof userEmail.orderConfirmedEmailImage !=='undefined'){
 
-                        console.log("typeof userEmail.orderConfirmedEmailImage !=='undefined'");
-
                         var  headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderConfirmedEmailImage;
 
                         var emailBody = "";
@@ -899,10 +891,6 @@ module.exports = {
                             });
 
                             let  mailOptions;
-                            console.log('userEmail');
-                            console.log(userEmail);
-                            console.log('bccEmail 868');
-                            console.log(userEmail.bccEmail);
 
                             // setup email data with unicode symbols
                             if(test && test.length > 0){
@@ -932,13 +920,10 @@ module.exports = {
                             transporter.use('compile', inlineBase64());
                             // send mail with defined transport object
                             transporter.sendMail(mailOptions, (error, info) => {
-                                console.log("send mail start .....");
                                 if (error) {
                                         console.log("email send failed \n id: " + data.email +"\n order: " + data.paymentStatus + "\n error: " + error);
                                         return  res(error,null);
                                 }
-                                console.log('Message sent: %s');
-                                console.log(info);
                                 return res(error, info);
                             });
 
@@ -1301,9 +1286,6 @@ module.exports = {
         }else{
             return res('error processing order, no email sent',null);
         }
-
-
-
     },
 
     /**

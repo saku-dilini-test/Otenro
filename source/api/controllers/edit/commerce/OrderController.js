@@ -16,37 +16,98 @@ module.exports = {
             res.send(app);
         });
     },
-    updateOrders : function(req,res){
+    updateOrders: function (req, res) {
 
-    // var ObjectId = require('mongodb').ObjectID;
-    console.log("req " + req);
-    console.log("--------------");
-    console.log(JSON.stringify(req.body));
-    var data = req.body;
-    var obj = [];
+        var orders = req.body;
+        var obj = [];
+        var orderController = this;
 
-    data.forEach(function(orders){
+        orders.forEach(function (order) {
 
-        console.log("orders " + JSON.stringify(orders));
-        ApplicationOrder.update({_id: orders.id},orders).exec(function(err,order){
-            if (err) return done(err);
-            ApplicationContactUs.findOne({ appId: orders.appId }).exec(function (err, storeDetails) {
+            ApplicationOrder.findOne({ id: order.id }).exec(function (err, orderBeforeUpdate) {
+
                 if (err) {
-                    return res.send(500);
+                    sails.log.error('Error occurred at OrderController.updateOrders , error : ' + err);
                 }
-                orders['storeDetails'] = storeDetails;
-                // console.log(order)
-                sentMails.sendOrderEmail(orders, function (err, msg) {
-                    sails.log.info(err);
-                    if (err) {
-                        return res.send(500);
-                        console.log(err);
+                if (orderBeforeUpdate) {
+
+                    // Add to products to inventory again
+                    var isQuantityDeduction = false
+                    // If app creator fulfill an refunded order
+                    if (orderBeforeUpdate.paymentStatus === 'Refunded' && order.paymentStatus === 'Successful') {
+                        isQuantityDeduction = true;
+                        orderController.updateInventory(order, isQuantityDeduction);
                     }
-                });
+                    // If app creator refunded an payment success order
+                    if (orderBeforeUpdate.paymentStatus === 'Successful' && order.paymentStatus === 'Refunded') {
+                        orderController.updateInventory(order, isQuantityDeduction);
+                    }
+                }
             });
-            obj.push(order);
+
+            ApplicationOrder.update({ _id: order.id }, order).exec(function (err, appOrder) {
+
+                if (err) {
+                    sails.log.error('Error occurred at OrderController.updateOrders , error : ' + err);
+                    return done(err);
+                }
+                ApplicationContactUs.findOne({ appId: order.appId }).exec(function (err, storeDetails) {
+
+                    if (err) {
+                        sails.log.error('Error occurred at OrderController.updateOrders , error : ' + err);
+                        return res.send(500);
+                    }
+                    order['storeDetails'] = storeDetails;
+                    sentMails.sendOrderEmail(order, function (err, msg) {
+
+                        if (err) {
+                            sails.log.error('Error occurred at OrderController.updateOrders , error : ' + err);
+                            return res.send(500);
+                        }
+                    });
+                });
+                obj.push(appOrder);
+            });
         });
-    });
         res.send(obj);
+    },
+
+    /**
+     * Update inventory according to update of application order
+     * @param order {object} :: application order
+     * @param isQuantityDeduction {boolean} :: deduction or addition of total quantity of thirdnavigation model variants 
+     */
+    updateInventory: function (order, isQuantityDeduction) {
+
+        order.item.forEach(function (item) {
+
+            ThirdNavigation.findOne({ id: item.id }).exec(function (err, thirdNavigation) {
+
+                if (err) {
+                    sails.log.error('Error occurred : OrderController.updateInventory , error : ' + err);
+                }
+                if (thirdNavigation) {
+
+                    for (var i = 0; i < thirdNavigation.variants.length; i++) {
+
+                        if (thirdNavigation.variants[i].sku === item.sku) {
+
+                            if (isQuantityDeduction) {
+                                thirdNavigation.variants[i].quantity = thirdNavigation.variants[i].quantity - thirdNavigation.variants[i].orderedQuantity;
+                            }
+                            if (!isQuantityDeduction) {
+                                thirdNavigation.variants[i].quantity = thirdNavigation.variants[i].quantity + thirdNavigation.variants[i].orderedQuantity;
+                            }
+                        }
+                    }
+                    ThirdNavigation.update({ id: item.id }, thirdNavigation).exec(function (err) {
+
+                        if (err) {
+                            sails.log.error('Error occurred : OrderController.updateInventory , error : ' + err);
+                        }
+                    });
+                }
+            });
+        });
     }
 };
