@@ -186,7 +186,7 @@ module.exports = {
         var appId = req.body.appId;
         var appName = req.body.appName;
         var file = CONFIG.ME_SERVER + userId + '/buildProg/' + appId
-            + '/platforms/android/app/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk';
+            + '/' + appName.replace(/\s/g, '') + '.apk';
         var filename = PATH.basename(file);
         var mimetype = MIME.lookup(file);
 
@@ -205,7 +205,7 @@ module.exports = {
         var appId = req.body.appId;
         var appName = req.body.appName;
         var file = CONFIG.ME_SERVER + userId + '/buildProg/' + appId
-            + '/platforms/android/app/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk';
+            + '/' + appName.replace(/\s/g, '') + '.apk';
 
         if (FS.existsSync(file)) {
             return res.send({ status: 'SUCCESS' });
