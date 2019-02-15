@@ -21,7 +21,7 @@ module.exports = {
         var appData = [];
         var appmakerStoreController = this;
 
-        PublishDetails.find().exec(function (pDetailsError, pDetailsData) {
+        PublishDetails.find({ operators: { $elemMatch: { status: "APPROVED" }}}).exec(function (pDetailsError, pDetailsData) {
 
             if (pDetailsError) {
                 
@@ -113,7 +113,7 @@ module.exports = {
 
         appData.forEach(function (data) {
 
-            Application.findOne({ id: data.appId }).exec(function (err, app) {
+            Application.findOne({ id: data.appId, apkStatus: 'SUCCESS' }).exec(function (err, app) {
 
                 count++;
 
@@ -121,14 +121,15 @@ module.exports = {
                     hasErrorOccurred = true;
                     sails.log.error("Error occurred while finding application at AppmakerStoreController.addApplicationDataToAppData : error => " + err);
                 }
-                data.appName = app.appName;
-                data.userId = app.userId;
-                data.publishStatus = app.publishStatus;
-                data.apkStatus = app.apkStatus;
-                data.createdAt = app.createdAt;
-                data.updatedAt = app.updatedAt;
-                tempAppData.push(data);
-
+                if (app) {
+                    data.appName = app.appName;
+                    data.userId = app.userId;
+                    data.publishStatus = app.publishStatus;
+                    data.apkStatus = app.apkStatus;
+                    data.createdAt = app.createdAt;
+                    data.updatedAt = app.updatedAt;
+                    tempAppData.push(data);
+                }
                 if (hasErrorOccurred && count === appData.length) {
                     cb({ status: "ERROR", data: null });
                 }
