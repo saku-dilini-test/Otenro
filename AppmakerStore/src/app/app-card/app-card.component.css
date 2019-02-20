@@ -25,4 +25,7 @@
     font-size:14px;
     padding-bottom:5px;
     padding-top:6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
