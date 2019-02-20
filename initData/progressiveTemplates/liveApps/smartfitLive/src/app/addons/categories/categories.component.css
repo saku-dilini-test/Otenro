@@ -19,3 +19,8 @@
 	margin:5px;
     margin-top: -7px;
 }
+
+
+.col-xs-12 .orbitrack, .col-xs-12 .treadmills{
+  height: calc(100vh / 6);
+}

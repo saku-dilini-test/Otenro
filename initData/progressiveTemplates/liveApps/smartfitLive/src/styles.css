@@ -682,7 +682,7 @@ button{
 }
 .treadmills{
 	color: #fff;
-	background-size:100% auto;
+	background-size:100% 100%;
 	background-position:center center;
 	background-repeat:no-repeat;
 }
