@@ -10,6 +10,7 @@ import { CurrencyService } from '../../services/currency/currency.service';
 import { TitleService } from '../../services/title.service';
 import { debounceTime } from 'rxjs/operator/debounceTime';
 import { Subject } from 'rxjs/Subject';
+import { SailsClient } from "ngx-sails";
 
 @Component({
   selector: 'app-cart',
@@ -33,7 +34,7 @@ export class CartComponent implements OnInit {
   successMessage: string;
 
   constructor(private currencyService: CurrencyService, private taxService: TaxService, private localStorageService: LocalStorageService,
-    private http: HttpClient, private router: Router, private dataService: PagebodyServiceModule, private title: TitleService) {
+    private http: HttpClient, private router: Router, private dataService: PagebodyServiceModule, private title: TitleService, private sailsClient: SailsClient) {
     this.title.changeTitle("Shopping Cart");
   }
 
@@ -88,6 +89,14 @@ export class CartComponent implements OnInit {
 
     this.amount = this.getTotal();
 
+    // Subscribe to the real time model events of ThirdNavigation Model
+    this.sailsClient.get('/edit/thirdNavigation/subscribe').subscribe((res: any) => {});
+    // On ThirdNavigation Model Update
+    this.sailsClient.on('thirdnavigation').subscribe((res: any) => {
+      if (res.verb === 'updated') {
+       this.onThirdNavigationModelUpdateHandler(res.data);
+      }
+    });
   }
 
   itemPriceCal(price, qty) {
@@ -259,4 +268,32 @@ export class CartComponent implements OnInit {
     this.router.navigate([val])
   }
 
+  /**
+   * Handle third navigation model update event
+   * @param product{ object } :: updated product
+   */
+  onThirdNavigationModelUpdateHandler(product: any): void {
+
+    let updatedProduct = { ...product };
+    let updatedCartItem = null;
+    let variant = null;
+    if (this.cartItems && this.cartItems.length > 0) {
+      updatedCartItem = this.cartItems.filter((item: any) => item.id === updatedProduct.id);
+    }
+    if (updatedCartItem.length > 0) {
+      if (updatedProduct.variants && updatedProduct.variants.length > 0) {
+
+        variant = updatedProduct.variants.filter((variant: any) => variant.sku === updatedCartItem[0].sku);
+        if (variant.length > 0) {
+          if (updatedCartItem[0].qty > variant[0].quantity) {
+
+            this._success.subscribe((message) => this.successMessage = message);
+            debounceTime.call(this._success, 5000).subscribe(() => this.successMessage = null);
+            this._success.next(`Selected quantity exceeds available stock of ${updatedCartItem[0].name}`);
+            setTimeout(() => { }, 3100)
+          }
+        }
+      }
+    }
+  }
 }
