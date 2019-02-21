@@ -17,13 +17,13 @@
 
       <div class="col-sm-12">
         <div *ngFor="let contact of contactInfo">
-          <p class="text-center contact-text" *ngIf="contact.contactInfo.address">
+          <p class="text-center contact-text main-content-font" *ngIf="contact.contactInfo.address">
             {{contact.contactInfo.address}}
           </p>
           <p class="text-center contact-text">
-              <a href="tel:{{contact.contactInfo.telPhone}}">{{contact.contactInfo.telPhone}}</a><br>
+              <a class="main-content-font" href="tel:{{contact.contactInfo.telPhone}}">{{contact.contactInfo.telPhone}}</a><br>
 
-              <a href="mailto:{{contact.contactInfo.email}}">{{contact.contactInfo.email}}</a>
+              <a class="main-content-font" href="mailto:{{contact.contactInfo.email}}">{{contact.contactInfo.email}}</a>
           </p>
           <p class="text-center">
             <a href="{{contact.contactInfo.webSite}}" target="_blank">{{contact.contactInfo.webSite}}</a>
@@ -36,7 +36,7 @@
         <div class="col-sm-12">
           <agm-map [latitude]="lat" [longitude]="lng" [zoom]="8" >
             <agm-marker *ngFor="let branch of googleMap" [latitude]="branch.branch.latitude" [longitude]="branch.branch.longitude">
-              <agm-info-window>
+              <agm-info-window class="main-content-font">
                 <h4><strong>{{branch.name}}</strong></h4>
                 <p>{{branch.address}}</p>
                 <a href="https://www.google.com/maps/?q={{branch.branch.latitude}},{{branch.branch.longitude}}" target="_blank">Show on google map</a>
@@ -47,7 +47,7 @@
       </div>
 
       <div class="row voffset" style="margin-top: 0px;">
-        <div class="col-sm-12">
+        <div class="col-sm-12 main-content-font">
           <app-contact-info [contacts]="contactInfo"></app-contact-info>
         </div>
       </div>

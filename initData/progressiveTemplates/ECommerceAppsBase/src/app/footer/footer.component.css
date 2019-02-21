@@ -36,7 +36,7 @@
 #quick-links a {
   display: block;
   font-family: sans-serif;
-  font-size: 12x;
+  font-size: 12px;
   margin: 0 0 5px 0;
 }
 
@@ -52,6 +52,7 @@
   display: block;
   font-size: 12px;
   margin: 0 0 10px 0;
+  font-weight: 500;
 }
 
 #cutomer-care a {
