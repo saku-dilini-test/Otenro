@@ -284,16 +284,44 @@ export class CartComponent implements OnInit {
       updatedCartItem = this.cartItems.filter((item: any) => item.id === updatedProduct.id);
     }
     if (updatedCartItem.length > 0) {
+
+      // If the product is deleted from CMS
+      if (updatedProduct.status && updatedProduct.status === 'DELETED') {
+
+        let index = this.cartItems.indexOf(updatedCartItem[0]);
+        if (index > -1) {
+          this.cartItems[index].isDeleted = true;
+          if (this.cartItems[index].isLimited) {
+            this.cartItems[index].isLimited = false;
+          }
+        }
+        return;
+      }
       if (updatedProduct.variants && updatedProduct.variants.length > 0) {
 
         variant = updatedProduct.variants.filter((variant: any) => variant.sku === updatedCartItem[0].sku);
         if (variant.length > 0) {
+
+          // If selected product variant is deleted from the CMS
+          if (variant[0].status && variant[0].status === 'DELETED') {
+            let index = this.cartItems.indexOf(updatedCartItem[0]);
+            if (index > -1) {
+              this.cartItems[index].isDeleted = true;
+              if (this.cartItems[index].isLimited) {
+                this.cartItems[index].isLimited = false;
+              }
+            }
+            return;
+          }
+          // If the product quantity is less than ordered quantity
           if (updatedCartItem[0].qty > variant[0].quantity) {
             let index = this.cartItems.indexOf(updatedCartItem[0]);
             if (index > -1) {
               this.cartItems[index].isLimited = true;
             }
+            return;
           }
+          // If the product quantity is less than ordered quantity
           if (updatedCartItem[0].qty < variant[0].quantity) {
             let index = this.cartItems.indexOf(updatedCartItem[0]);
             if (index > -1) {
@@ -327,12 +355,24 @@ export class CartComponent implements OnInit {
 
       let tempProduct = products.filter(product => product.id === item.id);
       if (tempProduct.length === 1) {
-        if (tempProduct[0].variants && tempProduct[0].variants.length > 0) {
+        // If product is deleted from CMS
+        if (tempProduct[0].status && tempProduct[0].status === 'DELETED') {
+
+          item.isDeleted = true;
+        }
+        else if (tempProduct[0].variants && tempProduct[0].variants.length > 0) {
 
           for (let i = 0; i < tempProduct[0].variants.length; i++) {
 
             if (tempProduct[0].variants[i].sku === item.sku) {
-              if (item.qty > tempProduct[0].variants[i].quantity) {
+              // If product sku is deleted from CMS
+              if (tempProduct[0].variants[i].status && tempProduct[0].variants[i].status === 'DELETED') {
+
+                item.isDeleted = true;
+              }
+              // If product quantity is less than ordered quantity
+              else if (item.qty > tempProduct[0].variants[i].quantity) {
+
                 item.isLimited = true;
               }
             }

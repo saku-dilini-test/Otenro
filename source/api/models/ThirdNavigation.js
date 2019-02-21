@@ -73,6 +73,9 @@ module.exports = {
         },
         bannerImage:{
             type : 'string'
+        },
+        status: {
+            type: 'string'
         }
     }
 };

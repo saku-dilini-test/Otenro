@@ -50,6 +50,11 @@
                     <span style="color:rgb(180, 30, 30)">
                       Limited quantity available.
                     </span>
+                  </div>
+                  <div class="col" *ngIf="item.isDeleted">
+                    <span style="color:rgb(180, 30, 30)">
+                      This item not available.
+                    </span>
                   </div><br>
                   <p class="sub-header-text-h2 text-justify  main-content-font">
                     {{currency}} {{itemPriceCal(item.total,item.qty) | number: '.2'}}
@@ -150,6 +155,11 @@
                 <div class="col" *ngIf="item.isLimited">
                   <span style="color:rgb(180, 30, 30)">
                     Limited quantity available.
+                  </span>
+                </div>
+                <div class="col" *ngIf="item.isDeleted">
+                  <span style="color:rgb(180, 30, 30)">
+                    This item not available.
                   </span>
                 </div>
                 <br>
