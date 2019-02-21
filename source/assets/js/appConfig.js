@@ -45,11 +45,11 @@
                 redirectUri : window.location.origin+'/auth/facebook'
             });
 
-            uiGmapGoogleMapApiProvider.configure({
-                key: 'AIzaSyB3zB_AXyBODCmnpBIsJ0xyg_xH9iBnsCk',
-                v: '3.17',
-                libraries: 'weather,geometry,visualization'
-            });
+            // uiGmapGoogleMapApiProvider.configure({
+            //     key: 'AIzaSyALHGyv2kzhMd4nd7GQOoQMR8_JM6EVmxc',
+            //     v: '3.17',
+            //     libraries: 'weather,geometry,visualization'
+            // });
 
             //disable cache for http get
             $httpProvider.defaults.cache = false;
