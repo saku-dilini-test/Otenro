@@ -10,6 +10,8 @@ import { CurrencyService } from '../../services/currency/currency.service';
 import { TitleService } from '../../services/title.service';
 import { debounceTime } from 'rxjs/operator/debounceTime';
 import { Subject } from 'rxjs/Subject';
+import { SailsClient } from "ngx-sails";
+import { ProductsService } from '../../services/products/products.service';
 
 @Component({
   selector: 'app-cart',
@@ -33,7 +35,8 @@ export class CartComponent implements OnInit {
   successMessage: string;
 
   constructor(private currencyService: CurrencyService, private taxService: TaxService, private localStorageService: LocalStorageService,
-    private http: HttpClient, private router: Router, private dataService: PagebodyServiceModule, private title: TitleService) {
+    private http: HttpClient, private router: Router, private dataService: PagebodyServiceModule, private title: TitleService,
+    private sailsClient: SailsClient, private productService: ProductsService) {
     this.title.changeTitle("Shopping Cart");
   }
   cartItems = this.dataService.cart.cartItems;
@@ -86,6 +89,16 @@ export class CartComponent implements OnInit {
 
 
     this.amount = this.getTotal();
+
+    // Subscribe to the real time model events of ThirdNavigation Model
+    this.sailsClient.get('/edit/thirdNavigation/subscribe').subscribe((res: any) => {});
+    // On ThirdNavigation Model Update
+    this.sailsClient.on('thirdnavigation').subscribe((res: any) => {
+      if (res.verb === 'updated') {
+        this.onThirdNavigationModelUpdateHandler(res.data);
+      }
+    });
+    this.getAllProducts();
     // scroll to top of the page
     window.scrollTo(0, 0);
   }
@@ -258,5 +271,74 @@ export class CartComponent implements OnInit {
   navigate(val: string) {
     this.router.navigate([val])
   }
+  /**
+   * Handle third navigation model update event
+   * @param product{ object } :: updated product
+   */
+  onThirdNavigationModelUpdateHandler(product: any): void {
 
+    let updatedProduct = { ...product };
+    let updatedCartItem = null;
+    let variant = null;
+    if (this.cartItems && this.cartItems.length > 0) {
+      updatedCartItem = this.cartItems.filter((item: any) => item.id === updatedProduct.id);
+    }
+    if (updatedCartItem.length > 0) {
+      if (updatedProduct.variants && updatedProduct.variants.length > 0) {
+
+        variant = updatedProduct.variants.filter((variant: any) => variant.sku === updatedCartItem[0].sku);
+        if (variant.length > 0) {
+          if (updatedCartItem[0].qty > variant[0].quantity) {
+            let index = this.cartItems.indexOf(updatedCartItem[0]);
+            if (index > -1) {
+              this.cartItems[index].isLimited = true;
+            }
+          }
+          if (updatedCartItem[0].qty < variant[0].quantity) {
+            let index = this.cartItems.indexOf(updatedCartItem[0]);
+            if (index > -1) {
+              this.cartItems[index].isLimited = false;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Responsible for getting all products of application
+  getAllProducts(): void {
+
+    this.productService.getAllProducts()
+      .subscribe((data: any) => {
+
+        if (data && data.length > 0) {
+          this.processCartItems(data);
+        }
+      });
+  }
+
+  /**
+   * Responsible for checking limited cart item quantity
+   * @param products {Array}:: products list of the app
+   */
+  processCartItems(products: any[]): void {
+
+    this.cartItems.forEach(item => {
+
+      let tempProduct = products.filter(product => product.id === item.id);
+      if (tempProduct.length === 1) {
+        if (tempProduct[0].variants && tempProduct[0].variants.length > 0) {
+
+          for (let i = 0; i < tempProduct[0].variants.length; i++) {
+
+            if (tempProduct[0].variants[i].sku === item.sku) {
+              if (item.qty > tempProduct[0].variants[i].quantity) {
+                item.isLimited = true;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
 }

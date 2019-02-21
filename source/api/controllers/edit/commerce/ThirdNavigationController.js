@@ -174,9 +174,7 @@ module.exports = {
         var sku =[];
         if(typeof req.body.product.id != 'undefined'){
             delete product["id"];
-            console.log("consoel.log at 175 %_%")
-            console.log(product)
-            ThirdNavigation.update(searchQuery,product,function(err,main) {
+            ThirdNavigation.update(searchQuery,product,function(err, thirdNavigation) {
                 if (err) {
                     return res.send(err);
                 }
@@ -189,6 +187,8 @@ module.exports = {
                     sku.push(product.variants[i].sku);
                 }
                 data.sku = sku;
+                //Notify connected socket clients about model update
+                ThirdNavigation.publishUpdate(thirdNavigation[0].id, thirdNavigation[0]);
                 Sku.update(skuSearchQuery,data,function(err,skuData){
                     if (err){
                         return res.send(err);
@@ -481,7 +481,26 @@ module.exports = {
                  res.send(data);
               });
 
+        },
+    /**
+    * Responsible to subscribe real time model events of 
+    * ThirdNavigation to connected socket client
+    **/
+    subscribe: function (req, res) {
+
+        if (!req.isSocket) {
+
+            sails.log.error(new Error('Not a socket request' + ' ThirdNavigationController => subscribe'));
+            return res.badRequest({ status: 'NOT_SOCKET_REQUEST' });
         }
+        ThirdNavigation.find().exec(function (err, thirdNavigation) {
 
+            if (err) {
 
+                return res.serverError({ status: 'SERVER_ERROR' });
+            }
+            ThirdNavigation.subscribe(req, _.pluck(thirdNavigation, 'id'));
+            return res.ok({ status: 'SUBSCRIBED' });
+        });
+    }
 };

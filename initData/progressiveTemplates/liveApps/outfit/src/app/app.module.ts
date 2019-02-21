@@ -37,6 +37,10 @@ import { OrdersService } from './services/orders/orders.service';
 import { SliderService } from './services/slider/slider.service';
 import { TitleService } from './services/title.service';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { ISailsClientConfig, SailsClientModule } from "ngx-sails";
+import { SERVER_URL } from './constantsService';
+
+const socketConfig: ISailsClientConfig = { uri: SERVER_URL };
 
 @NgModule({
   declarations: [
@@ -64,7 +68,8 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
     }),
     BrowserAnimationsModule,
     Ng4LoadingSpinnerModule.forRoot(),
-    RouterModule
+    RouterModule,
+    SailsClientModule.configureClient(socketConfig)
   ],
   providers: [PagebodyServiceModule,PushNotificationService,
     CategoriesService,

@@ -449,5 +449,8 @@ module.exports.routes = {
      */
     'GET /get/provinces' : 'edit/commerce/ThirdNavigationController.getProvinces',
     'GET /get/getMainProdTypes' : 'edit/commerce/ThirdNavigationController.getMainProdTypes',
-    'GET /get/getShippingRules' : 'edit/commerce/ThirdNavigationController.getShippingRules'
+    'GET /get/getShippingRules' : 'edit/commerce/ThirdNavigationController.getShippingRules',
+
+    // ThirdNavigationController Socket routes
+    'GET /edit/thirdNavigation/subscribe':'edit/commerce/ThirdNavigationController.subscribe',
 };
