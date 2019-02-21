@@ -14,6 +14,7 @@ import { TitleService } from '../../services/title.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { ProductsService } from '../../services/products/products.service';
+import { SailsClient } from 'ngx-sails';
 declare var $:any;
 declare let paypal: any;
 
@@ -125,7 +126,8 @@ export class CheckoutComponent implements OnInit {
 				private dataService: PagebodyServiceModule,
 				private title: TitleService,
 				private spinner: Ng4LoadingSpinnerService,
-				private productsService: ProductsService) {
+        private productsService: ProductsService,
+        private sailsClient: SailsClient) {
 
     this.title.changeTitle("Checkout");
     let d = new Date();
@@ -288,7 +290,14 @@ export class CheckoutComponent implements OnInit {
     }
 
     this.amount = this.getTotal();
-
+    // Subscribe to the real time model events of SailsAndPromotion Model
+    this.sailsClient.get('/edit/salesAndPromotion/subscribe').subscribe((res: any) => { });
+    // On SailsAndPromotion Model Update
+    this.sailsClient.on('salesandpromotion').subscribe((res: any) => {
+      if (res.verb === 'updated') {
+        this.onPromotionCodeUpdateHandler(res.data);
+      }
+    });
   }
 
   getShippingData(appId, Country) {
@@ -1460,47 +1469,54 @@ export class CheckoutComponent implements OnInit {
     //don't remove this function
   }
 
-	changePromocode(selectedPromo){
-    // console.log(selectedPromo)
+  changePromocode(selectedPromo) {
 
-		this.amount = this.subTotal;
+    this.amount = this.subTotal;
+    this.discountedTotal = 0;
+    this.selectedPromo = this.promos.filter(promo => promo.promoCode === selectedPromo);
 
-		this.discountedTotal = 0;
-		this.selectedPromo = this.promos.filter(
-		  promo => promo.promoCode === selectedPromo);
-
-		// console.log(this.selectedPromo[0]);
-
-    if(!this.selectedPromo[0]){
-       this._success.subscribe((message) => this.promoCodeWarningMessage = message);
-        debounceTime.call(this._success, 4000).subscribe(() => this.promoCodeWarningMessage = null);
-        this._success.next('Invalid promocode');
-        setTimeout(() => { }, 3100);
-    }else{
-      if(this.selectedPromo[0].minimumOderValue && this.selectedPromo[0].minimumOderValue > this.subTotal){
+    if (!this.selectedPromo[0]) {
+      this._success.subscribe((message) => this.promoCodeWarningMessage = message);
+      debounceTime.call(this._success, 4000).subscribe(() => this.promoCodeWarningMessage = null);
+      this._success.next('Invalid promocode');
+      setTimeout(() => { }, 3100);
+    } else {
+      if ((this.selectedPromo[0].limitNumberOfTime || this.selectedPromo[0].limitUsers) === this.selectedPromo[0].used) {
+        
         this._success.subscribe((message) => this.promoCodeWarningMessage = message);
         debounceTime.call(this._success, 4000).subscribe(() => this.promoCodeWarningMessage = null);
-        this._success.next('minimum order value should be more than '+this.sign+' '+ this.selectedPromo[0].minimumOderValue+ ' to activate this promocode');
+        this._success.next('Maximum redemption reached');
+        setTimeout(() => {}, 3100);
+        this.selectedPromo = null;
+        var promoSelect = document.getElementById("promoSelect") as HTMLSelectElement;
+        if (promoSelect) {
+          promoSelect.selectedIndex = 0;
+        }
+      }
+      else if (this.selectedPromo[0].minimumOderValue && this.selectedPromo[0].minimumOderValue > this.subTotal) {
+        this._success.subscribe((message) => this.promoCodeWarningMessage = message);
+        debounceTime.call(this._success, 4000).subscribe(() => this.promoCodeWarningMessage = null);
+        this._success.next('minimum order value should be more than ' + this.sign + ' ' + this.selectedPromo[0].minimumOderValue + ' to activate this promocode');
         setTimeout(() => { }, 3100);
         this.selectedPromo = null;
         var promoSelect = document.getElementById("promoSelect") as HTMLSelectElement;
-        if(promoSelect){
+        if (promoSelect) {
           promoSelect.selectedIndex = 0;
         }
-      }else{
-        if(selectedPromo == 'Select a promocode'){
+      } else {
+        if (selectedPromo == 'Select a promocode') {
           this.discountedTotal = null;
           this.amount = this.subTotal;
           this.selectedPromo = null;
-        }else if(this.selectedPromo[0].discountType === 'discountValue'){
-            if(this.amount < this.selectedPromo[0].discount){
-                this.discountedTotal = 0;
-                this.amount = this.discountedTotal;
-            }else{
-              this.discountedTotal = this.amount - this.selectedPromo[0].discount;
-              this.amount = this.discountedTotal;
-            }
-        }else if(this.selectedPromo[0].discountType === 'discount'){
+        } else if (this.selectedPromo[0].discountType === 'discountValue') {
+          if (this.amount < this.selectedPromo[0].discount) {
+            this.discountedTotal = 0;
+            this.amount = this.discountedTotal;
+          } else {
+            this.discountedTotal = this.amount - this.selectedPromo[0].discount;
+            this.amount = this.discountedTotal;
+          }
+        } else if (this.selectedPromo[0].discountType === 'discount') {
           this.discountedTotal = this.amount - (this.amount * this.selectedPromo[0].discountPercent / 100);
           this.amount = this.discountedTotal;
         }
@@ -1508,11 +1524,7 @@ export class CheckoutComponent implements OnInit {
         this.calculateTotalOrderCost();
       }
     }
-
-
-
-
-	}
+  }
 
 	calculateTotalOrderCost(){
 
@@ -1622,6 +1634,18 @@ export class CheckoutComponent implements OnInit {
       }
     } else {
       this.localStorageService.remove("cartUnknownUser");
+    }
+  }
+  /**
+   * Handle real time update of SailsAndPromotion Model
+   * @param promotionCode :: SailsAndPromotion Code
+   */
+  onPromotionCodeUpdateHandler(promotionCode: any) {
+
+    let updatedPromo = this.promos.filter(promo => promo.promoCode === promotionCode.promoCode);
+    let index = this.promos.indexOf(updatedPromo[0]);
+    if (index > -1) {
+      this.promos[index] = promotionCode;
     }
   }
 }
