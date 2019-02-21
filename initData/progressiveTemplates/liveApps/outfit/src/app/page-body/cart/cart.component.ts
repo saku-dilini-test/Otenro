@@ -11,6 +11,7 @@ import { TitleService } from '../../services/title.service';
 import { debounceTime } from 'rxjs/operator/debounceTime';
 import { Subject } from 'rxjs/Subject';
 import { SailsClient } from "ngx-sails";
+import { ProductsService } from '../../services/products/products.service';
 
 @Component({
   selector: 'app-cart',
@@ -34,7 +35,8 @@ export class CartComponent implements OnInit {
   successMessage: string;
 
   constructor(private currencyService: CurrencyService, private taxService: TaxService, private localStorageService: LocalStorageService,
-    private http: HttpClient, private router: Router, private dataService: PagebodyServiceModule, private title: TitleService, private sailsClient: SailsClient) {
+    private http: HttpClient, private router: Router, private dataService: PagebodyServiceModule, private title: TitleService,
+    private sailsClient: SailsClient, private productService: ProductsService) {
     this.title.changeTitle("Shopping Cart");
   }
   cartItems = this.dataService.cart.cartItems;
@@ -96,6 +98,7 @@ export class CartComponent implements OnInit {
         this.onThirdNavigationModelUpdateHandler(res.data);
       }
     });
+    this.getAllProducts();
     // scroll to top of the page
     window.scrollTo(0, 0);
   }
@@ -286,14 +289,56 @@ export class CartComponent implements OnInit {
         variant = updatedProduct.variants.filter((variant: any) => variant.sku === updatedCartItem[0].sku);
         if (variant.length > 0) {
           if (updatedCartItem[0].qty > variant[0].quantity) {
-
-            this._success.subscribe((message) => this.successMessage = message);
-            debounceTime.call(this._success, 5000).subscribe(() => this.successMessage = null);
-            this._success.next(`Selected quantity exceeds available stock of ${updatedCartItem[0].name}`);
-            setTimeout(() => { }, 3100)
+            let index = this.cartItems.indexOf(updatedCartItem[0]);
+            if (index > -1) {
+              this.cartItems[index].isLimited = true;
+            }
+          }
+          if (updatedCartItem[0].qty < variant[0].quantity) {
+            let index = this.cartItems.indexOf(updatedCartItem[0]);
+            if (index > -1) {
+              this.cartItems[index].isLimited = false;
+            }
           }
         }
       }
     }
+  }
+
+  // Responsible for getting all products of application
+  getAllProducts(): void {
+
+    this.productService.getAllProducts()
+      .subscribe((data: any) => {
+
+        if (data && data.length > 0) {
+          this.processCartItems(data);
+        }
+      });
+  }
+
+  /**
+   * Responsible for checking limited cart item quantity
+   * @param products {Array}:: products list of the app
+   */
+  processCartItems(products: any[]): void {
+
+    this.cartItems.forEach(item => {
+
+      let tempProduct = products.filter(product => product.id === item.id);
+      if (tempProduct.length === 1) {
+        if (tempProduct[0].variants && tempProduct[0].variants.length > 0) {
+
+          for (let i = 0; i < tempProduct[0].variants.length; i++) {
+
+            if (tempProduct[0].variants[i].sku === item.sku) {
+              if (item.qty > tempProduct[0].variants[i].quantity) {
+                item.isLimited = true;
+              }
+            }
+          }
+        }
+      }
+    });
   }
 }
