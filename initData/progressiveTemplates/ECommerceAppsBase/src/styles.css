@@ -30,10 +30,10 @@ a:hover{text-decoration: none; cursor:pointer;}
 /* Sizes */
 
 .bloc-lg{
-	padding:50px 50px;
+	padding:50px 50px 30px;
 }
 .bloc-md{
-	padding:50px;
+	padding:50px 50px 30px;
 }
 .bloc-sm{
 	padding:12px 50px;

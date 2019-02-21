@@ -13,11 +13,8 @@
             <button *ngIf="title != 'Home'" aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle main-navigation" (click)="goBack()">
               <i class="fa fa-arrow-left"></i>
             </button>
-            <!-- <div class="mobile-title visible-xs  visible-sm mobileTitle"><span id="header-title" (click)="onTitleClickHandler(title)">{{title}}</span></div> -->
+             <div class="mobile-title visible-xs  visible-sm mobileTitle"><span id="header-title" (click)="onTitleClickHandler(title)">{{title}}</span></div>
             <div class="mobile-cart visible-xs visible-sm" >
-              <div id="mobile-title-content">
-                  <span id="header-title" (click)="onTitleClickHandler(title)">{{title}}</span>
-              </div>
               <div id="mobile-cart-content">
                   <i class="fa fa-shopping-cart"  (click)="navigate('cart','Shopping Cart');manualToggle()"></i> <span class="badge main-navigation"  (click)="navigate('cart','Shopping Cart');manualToggle()">{{cartNo}}</span>
               </div>

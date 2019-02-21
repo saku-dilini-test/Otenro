@@ -1,10 +1,8 @@
 .mobile-title{
   margin-top: 9px;
-  margin-right: 0;
   padding: 5px 0px;
   width: 100%;
   text-align: center;
-  margin-left: 0;
   position: absolute;
   font-size: 15px;
   font-weight: bold;
@@ -12,11 +10,10 @@
 }
 .mobile-cart{
   margin-top: 8px;
-  margin-right: 0;
   padding: 5px 5px;
-  width: 100%;
+  width: 13%;
+  right: 0;
   text-align: right;
-  margin-left: 0;
   position: absolute;
   font-size: 15px;
 }
@@ -37,15 +34,4 @@
 
 ul li a i{
   font-size: 18px;
-}
-
-#mobile-title-content {
-  width: 55%; 
-  display: inline-block; 
-  font-size: 15px;
-  font-weight: bold;
-}
-#mobile-cart-content {
-  width: 45%; 
-  display: inline-block;
 }
