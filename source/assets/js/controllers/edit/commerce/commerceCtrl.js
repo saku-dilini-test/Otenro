@@ -1532,6 +1532,18 @@
         }).error(function (error) {
                 //alert("Contact Us information Loading Error : " + error);
         });
+
+        $scope.addMapShowHide = function (webInfo) {
+            contactUsService.saveBasicInfo({'appId': $rootScope.appId, 'showmap':  webInfo.showmap})
+                .success(function(data, status, headers, config) {
+                    toastr.success('Successfully updated. ', 'Awesome ', {closeButton: true});
+                        $mdDialog.hide();
+                }).error(function(data, status, headers, config) {
+                toastr.error('Updating failed','Warning', { closeButton: true});
+                $mdDialog.hide();
+            });
+        };
+
         // Save Contact Us Information and move to Web Information
         $scope.addContactUs = function(basicInfo,webInfo,googleMap,type) {
 
