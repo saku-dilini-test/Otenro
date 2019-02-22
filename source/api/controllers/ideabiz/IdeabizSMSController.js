@@ -38,6 +38,7 @@ module.exports = {
             var isRegistration = null;
             var prefix = '';
             var keyword = "";
+            var thisCtrl = this;
 
             message = message.toLowerCase();
 
@@ -83,61 +84,97 @@ module.exports = {
                         return res.badRequest("No app in the system for the keyword: " + keyword);
                     }
 
-                    var appID = app.appId;
-                    var queryUser = {
-                        'msisdn': msisdn,
-                        'appId': appID
-                    }
+                    thisCtrl.isDeviceIdValid(app.appId,deviceUUID,function(isDeviceIdValid) {
+                        if(isRegistration && !isDeviceIdValid && app.serviceID){
+                            sails.log.error("IdeabizSMSController: No deviceUUID hence fire the unsibscription for the msisdn: " + msisdn);
 
-                    AppUser.findOrCreate(queryUser, queryUser).exec(function (err, user) {
-                        //Will update the user statuses while receiving a status change call
-                        if (user) {
-                            var setFields = {};
-                            var isDeviceChangedByUser = false;
-
-                            if(isRegistration) {
-                                sails.log.debug("IdeabizSMSController: In Registration: msisdn: " + msisdn + " and for the appID: " + appID);
-
-                                setFields.status = config.APP_USER_STATUS.ACTIVE;
-
-                                if (!deviceUUID) {
-                                    sails.log.error("IdeabizSMSController: No deviceUUID returned from msisdn: " + msisdn);
-                                } else {
-                                    setFields.deviceUUID = deviceUUID;
-
-                                    isDeviceChangedByUser = user.deviceUUID && user.deviceUUID !== deviceUUID;//Check whether the User has changed the Device
-                                }
-                            }else{
-                                sails.log.debug("IdeabizSMSController: In Un-Registration: msisdn: " + msisdn + " and for the appID: " + appID);
-
-                                setFields.status = config.APP_USER_STATUS.INACTIVE;
-                                setFields.unsubscribeDate = dateFormat(new Date(), "yyyy-mm-dd");
-                                setFields.subscriptionStatus = config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code;
-                                setFields.deviceUUID = null;
-                            }
-
-                            AppUser.update(queryUser, setFields).exec(function (err, users) {
+                            var setFields = {
+                                'status': config.APP_USER_STATUS.INACTIVE,
+                                'unsubscribeDate':dateFormat(new Date(), "yyyy-mm-dd"),
+                                'subscriptionStatus':config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code,
+                                'deviceUUID': null
+                            };
+    
+                            sails.log.debug("IdeabizSMSController: AppUser updated as unsubscribed for msisdn: " + msisdn + " and for the appID: " + app.appId);
+    
+                            AppUser.update({'msisdn': msisdn,'appId': app.appId }, setFields).exec(function (err, users) {
                                 if (err) {
-                                    sails.log.error("IdeabizSMSController: Error when update the msisdn: " + msisdn + " error: " + err);
-                                    return res.serverError("Error when update the msisdn: " + msisdn + " error: " + err);
+                                    sails.log.error("IdeabizSMSController: Error when unsubscribing the msisdn: " + msisdn + " error: " + err);
                                 }
-
-                                if(isRegistration && users[0].deviceUUID && users[0].subscriptionStatus===config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code) {
-                                    var message = "";
-                                    if(isDeviceChangedByUser){
-                                        message = "Successfully updated your device details." ;
-                                    }else{
-                                        message = "Your subscription to " + app.title  + " has been success." ;
+    
+                                UserUnsubscriptionBySMSLog.create({msisdn: msisdn,message: message}).exec(function(err,log){
+                                    // sails.log.debug("log inserted");
+                                });                            
+                                
+                                IdeaBizSubscriptionAPIService.unsubscribe('WEB',msisdn,app.serviceID,function(responseBody,err){
+                                    if(err){
+                                        sails.log.error("IdeabizSMSController: Error in IdeaBizSubscriptionAPIService.unsubscribe for the msisdn:%s err:%s", msisdn, error);
+                                        return res.serverError("Error while calling the unsubscription api");
                                     }
-
-                                    sails.log.debug('IdeabizSMSController: Sent Push Notification message"%s" for msisdn: %s appId:%s AppUser ID:%s',message,msisdn,appID,users[0].id);
-                                    adminAPI.notifyUsers(req, res, users[0], message);
-                                }
-
-                                return res.ok("ok");
+                
+                                    sails.log.debug("responseBody of unsubscripition:%s", JSON.stringify(responseBody));
+                                });                            
                             });
+    
+                            return res.badRequest("SMS body does not contains required data");
+                        }else{
+                            var appID = app.appId;
+                            var queryUser = {
+                                'msisdn': msisdn,
+                                'appId': appID
+                            }
+        
+                            AppUser.findOrCreate(queryUser, queryUser).exec(function (err, user) {
+                                //Will update the user statuses while receiving a status change call
+                                if (user) {
+                                    var setFields = {};
+                                    var isDeviceChangedByUser = false;
+        
+                                    if(isRegistration) {
+                                        sails.log.debug("IdeabizSMSController: In Registration: msisdn: " + msisdn + " and for the appID: " + appID);
+        
+                                        setFields.status = config.APP_USER_STATUS.ACTIVE;
+        
+                                        if (!deviceUUID) {
+                                            sails.log.error("IdeabizSMSController: No deviceUUID returned from msisdn: " + msisdn);
+                                        } else {
+                                            setFields.deviceUUID = deviceUUID;
+        
+                                            isDeviceChangedByUser = user.deviceUUID && user.deviceUUID !== deviceUUID;//Check whether the User has changed the Device
+                                        }
+                                    }else{
+                                        sails.log.debug("IdeabizSMSController: In Un-Registration: msisdn: " + msisdn + " and for the appID: " + appID);
+        
+                                        setFields.status = config.APP_USER_STATUS.INACTIVE;
+                                        setFields.unsubscribeDate = dateFormat(new Date(), "yyyy-mm-dd");
+                                        setFields.subscriptionStatus = config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code;
+                                        setFields.deviceUUID = null;
+                                    }
+        
+                                    AppUser.update(queryUser, setFields).exec(function (err, users) {
+                                        if (err) {
+                                            sails.log.error("IdeabizSMSController: Error when update the msisdn: " + msisdn + " error: " + err);
+                                            return res.serverError("Error when update the msisdn: " + msisdn + " error: " + err);
+                                        }
+        
+                                        if(isRegistration && users[0].deviceUUID && users[0].subscriptionStatus===config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code) {
+                                            var message = "";
+                                            if(isDeviceChangedByUser){
+                                                message = "Successfully updated your device details." ;
+                                            }else{
+                                                message = "Your subscription to " + app.title  + " has been success." ;
+                                            }
+        
+                                            sails.log.debug('IdeabizSMSController: Sent Push Notification message"%s" for msisdn: %s appId:%s AppUser ID:%s',message,msisdn,appID,users[0].id);
+                                            adminAPI.notifyUsers(req, res, users[0], message);
+                                        }
+        
+                                        return res.ok("ok");
+                                    });
+                                }
+                            });                                
                         }
-                    });
+                    });             
                 });
             }catch(err){
                 sails.log.error("IdeabizSMSController: Exception in registerUser, error: " + err);
@@ -147,5 +184,21 @@ module.exports = {
             sails.log.error("IdeabizSMSController: " + err);
             res.serverError(err);
         }
+    },
+
+    isDeviceIdValid : function(appId,deviceUUID, callback){
+        if(!deviceUUID){
+            console.log("isDeviceIdValid: no deviceID");
+            return callback(false);
+        }
+        
+        DeviceId.findOne({'deviceUUID': deviceUUID, 'appId': appId}).exec(function(err,device){
+            if(device){
+                console.log("isDeviceIdValid: Device found!");
+                return callback(true);
+            }
+            console.log("isDeviceIdValid: Nooooo Device found!");
+            return callback(false);
+        });
     }
 };
