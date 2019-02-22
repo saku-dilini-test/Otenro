@@ -896,7 +896,12 @@
                                 </form>
                             </md-tab-body>
                         </md-tab>
-
+                        <md-tab ng-if="user.userRole == 'ADMIN'">
+                            <md-tab-label>Update all apps</md-tab-label>
+                            <md-tab-body>
+                                <button class="btn-material margin" ng-click="updateApps()">Update All Apps</button>
+                            </md-tab-body>
+                        </md-tab>
                     </md-tabs>
 
                 </md-tab-body>

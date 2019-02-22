@@ -431,6 +431,7 @@ module.exports.routes = {
     'POST /technicalSupport/notifyAppUsers' : 'technicalSupport/TechnicalSupportController.notifyAppUsers',
     'POST /edit/setServiceId' : 'technicalSupport/TechnicalSupportController.setServiceId',
 
+
     /**
      * IPG Controller
      */
@@ -522,6 +523,7 @@ module.exports.routes = {
      * Support user (ideaDroid)
      */
     'POST /appMakerSupport/updateAllApps': 'UpdateAllAppsController.updateAllApps',
+    'GET /appMakerSupport/notifyAppCreators' : 'UpdateAllAppsController.notifyAppCreators',
 
 
 
