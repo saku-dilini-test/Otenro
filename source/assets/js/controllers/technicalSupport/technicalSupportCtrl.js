@@ -1680,13 +1680,13 @@
         }
 
 
-        $scope.updateApps = function () {
+        $scope.notifyAppCreators = function () {
             $scope.users = [];
             // $scope.apps = [];
             //get all users
 
             technicalSupportService.notifyAppCreators().success(function (response) {
-                console.log(response)
+                toastr.success('Emails are being sent to app creators', 'Notifying Creators', {closeButton: true});
             }).error(function (err) {
                 console.log(err);
                 toastr.error('Failed send notification', 'Warning', {closeButton: true});

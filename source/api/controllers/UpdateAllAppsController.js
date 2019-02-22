@@ -67,14 +67,13 @@ module.exports = {
                 });
 
                 sentMails.sendNotifyAppCreatorsAboutUpdate(users, function (err, msg) {
-                    sails.log.info(err);
                     if (err) {
-                        console.log(err)
-                        return res.send(500);
+                        sails.log.error(err);
                     }else{
-                        return res.send(200);
+                        sails.log.debug('notifying app creators emails send successful');
                     }
                 });
+                return res.send(200);
             }
         });
 

@@ -1177,13 +1177,13 @@ module.exports = {
             // send mail with defined transport object
             transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
-                    console.log('email sent failed to:', user.email);
-                    console.log('error:',error);
+                    sails.log.error('email sent to:', user.email);
+                    sails.log.error('error:',error);
                 } else if (data.length - 1 == count) {
-                    console.log('email sent to:', user.email);
+                    sails.log.debug('email sent to:', user.email);
                     return callback(null, 'ok');
                 } else {
-                    console.log('email sent to:', user.email);
+                    sails.log.debug('email sent to:', user.email);
                     count++;
                 }
             });
