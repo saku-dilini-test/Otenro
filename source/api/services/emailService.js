@@ -1151,6 +1151,45 @@ module.exports = {
 
                         callback(null,"ok");
 
-        }
+        },
+
+    sendNotifyAppCreatorsAboutUpdate : function(data,callback){
+        var fromEmail = config.IDEABIZ_SUPPORT_EMAIL;
+        data.forEach(function (user) {
+            var count = 0;
+
+            var emailBody = `
+            Hi ` + user.firstName + ' ' + user.lastName + `,
+            <br><br>
+            We have updated Appmaker bringing new features and improvements. As part of this update, we have also updated the several app templates which will bring about performance improvements and new features.
+            <br><br>
+            To update your apps, please login to Appmaker and select the update app option. This will upgrade your app to the new version.
+            <br><br>
+            The Appmaker Team`;
+
+            var mailOptions = {
+                from: fromEmail, // sender address
+                to: user.email, // list of receivers
+                subject: 'Update existing app to the latest version', // Subject line
+                html: emailBody
+            };
+
+            // send mail with defined transport object
+            transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    console.log('email sent failed to:', user.email);
+                    console.log('error:',error);
+                } else if (data.length - 1 == count) {
+                    console.log('email sent to:', user.email);
+                    return callback(null, 'ok');
+                } else {
+                    console.log('email sent to:', user.email);
+                    count++;
+                }
+            });
+        });
+    }
+
 };
+
 

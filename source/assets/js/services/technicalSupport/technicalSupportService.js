@@ -356,21 +356,25 @@
             getApplicationBaseMonthlySummary :function (data) {
                 return $http.post(SERVER_URL + 'appMakerReports/appBaseReport/getApplicationBaseMonthlySummary', data);
             },
+
             getApplicationBaseYearlySummary :function (data) {
                 return $http.post(SERVER_URL + 'appMakerReports/appBaseReport/getApplicationBaseYearlySummary', data);
             },
+
             getAllApps :function () {
                 return $http.post(SERVER_URL + 'appMakerReports/appBaseReport/allApps', {});
             },
+
             getOperator:function(data){
-
                 return $http.post(SERVER_URL + 'appMakerReports/getOperator', data);
-
             },
+
             updateAllApps:function(data){
-
                 return $http.post(SERVER_URL + 'appMakerSupport/updateAllApps',data);
+            },
 
+            notifyAppCreators:function(){
+                return $http.get(SERVER_URL + 'appMakerSupport/notifyAppCreators');
             }
 
 

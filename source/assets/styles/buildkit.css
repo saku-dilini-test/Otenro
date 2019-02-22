@@ -3201,3 +3201,24 @@ table.md-calendar-day-header{
 .reports-technical  md-tab-content{
     display: initial;
 }
+
+.update-all-apps{
+    right: 0;
+    position: absolute;
+    top: 0;
+}
+
+.btn-primary{
+    color: #ffffff;
+    background-color: #7bb0ff;
+    border-color: #7bb0ff;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 4px 8px;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary{
+    color: #ffffff;
+    background-color: #7b97f0;
+    border-color: #7b97f0;
+}

@@ -7,7 +7,7 @@
 
 var shell = require('shelljs'),
     config = require('../services/config');
-
+var sentMails = require('../services/emailService');
 
 module.exports = {
 
@@ -55,6 +55,30 @@ module.exports = {
 
 
     },
+
+    notifyAppCreators: function (req, res) {
+
+        User.find().exec(function (err, users) {
+            if(err){
+                return res.send(err);
+            }else{
+                users = users.filter(function (user) {
+                   return user.userRole == 'APP_CREATOR';
+                });
+
+                sentMails.sendNotifyAppCreatorsAboutUpdate(users, function (err, msg) {
+                    sails.log.info(err);
+                    if (err) {
+                        console.log(err)
+                        return res.send(500);
+                    }else{
+                        return res.send(200);
+                    }
+                });
+            }
+        });
+
+    }
 
 
 }
