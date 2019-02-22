@@ -63,3 +63,6 @@ node_modules/
 gen/
 nohup.out
 transaction.log
+api/src/progPointerApp/node_modules
+api/src/progPointerApp/plugins
+api/src/progPointerApp/platforms
