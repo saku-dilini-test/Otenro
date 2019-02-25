@@ -15,10 +15,13 @@
 </div>
 
 <!-- home page content -->
-<div class="row mx-5p">
-  <div class="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2 px-0" *ngFor="let app of apps | searchPipe: { appName: searchePhrase } ">
+<div class="row mx-5p" *ngIf="hasSearchResults">
+  <div class="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2 px-0" *ngFor="let app of apps">
     <app-app-card [app]="app"></app-app-card>
   </div>
+</div>
+<div class="row mx-5p" *ngIf="!hasSearchResults">
+    <div class="full-width info padding-top">Sorry, we couldn't find any apps that matched your search term</div>
 </div>
 
 <div style="padding-top:21px;"></div>

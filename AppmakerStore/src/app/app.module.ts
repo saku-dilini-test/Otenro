@@ -12,6 +12,7 @@ import { AppmakerStoreService } from './providers/appmaker-store.service';
 import { PipeModule } from './shared/pipes/pipe.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { SearchPipePipe } from './shared/pipes/search-pipe/search-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [AppmakerStoreService],
+  providers: [AppmakerStoreService, SearchPipePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

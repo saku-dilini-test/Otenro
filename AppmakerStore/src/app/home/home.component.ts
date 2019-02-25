@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppmakerStoreService } from '../providers/appmaker-store.service';
+import { SearchPipePipe } from '../shared/pipes/search-pipe/search-pipe.pipe';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +9,13 @@ import { AppmakerStoreService } from '../providers/appmaker-store.service';
 })
 export class HomeComponent implements OnInit {
 
-  apps: any;
+  apps: any[];
+  allApps: any[];
   searchInput: string;
   searchePhrase: string = '';
+  hasSearchResults: boolean = true;
 
-  constructor(private appmakerStoreService: AppmakerStoreService) {}
+  constructor(private appmakerStoreService: AppmakerStoreService, private searchPipe: SearchPipePipe) {}
 
   ngOnInit() {
 
@@ -22,7 +25,11 @@ export class HomeComponent implements OnInit {
       
         if (res.status === "SUCCESS") {
 
-          this.apps = res.data;
+          this.allApps = res.data;
+          this.apps = this.allApps;
+          if (this.apps.length === 0) {
+            this.hasSearchResults = false;
+          }
         }
     }, err => {
 
@@ -31,12 +38,19 @@ export class HomeComponent implements OnInit {
 
   // Responsible for searching for apps
   searchHandler() {
-    
+
     if (this.searchInput) {
       this.searchePhrase = this.searchInput;
     } 
     else {
       this.searchePhrase = '';
+    }
+    this.apps = this.searchPipe.transform(this.allApps, { appName: this.searchePhrase });
+    if (this.apps.length === 0) {
+      this.hasSearchResults = false;
+    }
+    else {
+      this.hasSearchResults = true;
     }
   }
 
