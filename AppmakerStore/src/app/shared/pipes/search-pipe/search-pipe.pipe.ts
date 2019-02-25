@@ -20,7 +20,7 @@ export class SearchPipePipe implements PipeTransform {
     } else {
       pipeResults = value.filter(item => item.appName.toLocaleLowerCase().indexOf(args.appName) !== -1);
 
-      if (pipeResults.length === 0) {
+      if (value.length !== 0 && pipeResults.length === 0) {
         setTimeout(() => {
           this.toastr.error('', `Sorry, we couldn't find any apps that matched your search term`);
         }, 100);
